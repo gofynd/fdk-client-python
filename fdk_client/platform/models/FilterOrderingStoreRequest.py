@@ -12,6 +12,8 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 class FilterOrderingStoreRequest(BaseSchema):
     # Configuration swagger.json
 
@@ -21,5 +23,7 @@ class FilterOrderingStoreRequest(BaseSchema):
     deployed_stores = fields.List(fields.Int(required=False), required=False)
     
     q = fields.Str(required=False)
+    
+    only_deployed = fields.Boolean(required=False)
     
 

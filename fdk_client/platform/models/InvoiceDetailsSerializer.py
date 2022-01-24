@@ -14,8 +14,8 @@ class InvoiceDetailsSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    e_invoice = fields.Nested(InvoiceCredSerializer, required=False)
-    
     e_waybill = fields.Nested(InvoiceCredSerializer, required=False)
+    
+    e_invoice = fields.Nested(InvoiceCredSerializer, required=False)
     
 

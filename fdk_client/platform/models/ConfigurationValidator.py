@@ -297,15 +297,6 @@ class ConfigurationValidator:
         check_permission = fields.Boolean(required=False)
          
     
-    class updateLevelIntegration(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-        
-        level = fields.Str(required=False)
-         
-    
     class getIntegrationByLevelId(BaseSchema):
         
         company_id = fields.Str(required=False)
@@ -337,6 +328,15 @@ class ConfigurationValidator:
         level = fields.Str(required=False)
         
         uid = fields.Int(required=False)
+         
+    
+    class updateLevelIntegration(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+        
+        level = fields.Str(required=False)
          
     
     class getBrandsByCompany(BaseSchema):

@@ -258,3 +258,29 @@ class CatalogValidator:
         location_id = fields.Int(required=False)
          
     
+    class getProductPriceBySlugV2(BaseSchema):
+        
+        slug = fields.Str(required=False)
+        
+        size = fields.Str(required=False)
+        
+        store_id = fields.Int(required=False)
+        
+        pincode = fields.Str(required=False)
+         
+    
+    class getProductSellersBySlugV2(BaseSchema):
+        
+        slug = fields.Str(required=False)
+        
+        size = fields.Str(required=False)
+        
+        pincode = fields.Str(required=False)
+        
+        strategy = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+         
+    

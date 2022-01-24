@@ -14,8 +14,8 @@ class LocationIntegrationType(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    inventory = fields.Str(required=False)
-    
     order = fields.Str(required=False)
+    
+    inventory = fields.Str(required=False)
     
 

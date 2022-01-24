@@ -42,10 +42,10 @@ Application configuration apis
 * [getAvailableOptIns](#getavailableoptins)
 * [getSelectedOptIns](#getselectedoptins)
 * [getIntegrationLevelConfig](#getintegrationlevelconfig)
-* [updateLevelIntegration](#updatelevelintegration)
 * [getIntegrationByLevelId](#getintegrationbylevelid)
 * [updateLevelUidIntegration](#updateleveluidintegration)
 * [getLevelActiveIntegrations](#getlevelactiveintegrations)
+* [updateLevelIntegration](#updatelevelintegration)
 * [getBrandsByCompany](#getbrandsbycompany)
 * [getCompanyByBrands](#getcompanybybrands)
 * [getStoreByBrands](#getstorebybrands)
@@ -3965,81 +3965,6 @@ Success
 ---
 
 
-### updateLevelIntegration
-Update a store level opt-in for integration
-
-
-
-
-```python
-try:
-    result = await client.configuration.updateLevelIntegration(id=id, level=level, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String | yes | Integration id |   
-| level | String | yes | Integration level |  
-| body | [UpdateIntegrationLevelRequest](#UpdateIntegrationLevelRequest) | yes | Request body |
-
-
-Update a store level opt-in for integration
-
-*Returned Response:*
-
-
-
-
-[IntegrationLevel](#IntegrationLevel)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "opted": false,
-  "permissions": [],
-  "last_patch": [],
-  "_id": "5ec377f2848a0073feacb31b",
-  "integration": "5ec376ce848a005189acb312",
-  "level": "store",
-  "uid": 1,
-  "meta": [],
-  "token": "1RuGX0Fyp",
-  "created_at": "2020-05-19T06:08:50.199Z",
-  "modified_at": "2020-08-17T07:54:01.809Z",
-  "__v": 14,
-  "data": {
-    "location_id": "09876",
-    "ip_address": "1.2.3.4"
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
 ### getIntegrationByLevelId
 Get level data for integration
 
@@ -4226,6 +4151,81 @@ API checks if a store is already opted in any other integrations
 
 
 [OptedStoreIntegration](#OptedStoreIntegration)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "opted": false,
+  "permissions": [],
+  "last_patch": [],
+  "_id": "5ec377f2848a0073feacb31b",
+  "integration": "5ec376ce848a005189acb312",
+  "level": "store",
+  "uid": 1,
+  "meta": [],
+  "token": "1RuGX0Fyp",
+  "created_at": "2020-05-19T06:08:50.199Z",
+  "modified_at": "2020-08-17T07:54:01.809Z",
+  "__v": 14,
+  "data": {
+    "location_id": "09876",
+    "ip_address": "1.2.3.4"
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### updateLevelIntegration
+Update a store level opt-in for integration
+
+
+
+
+```python
+try:
+    result = await client.configuration.updateLevelIntegration(id=id, level=level, body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | Integration id |   
+| level | String | yes | Integration level |  
+| body | [UpdateIntegrationLevelRequest](#UpdateIntegrationLevelRequest) | yes | Request body |
+
+
+Update a store level opt-in for integration
+
+*Returned Response:*
+
+
+
+
+[IntegrationLevel](#IntegrationLevel)
 
 Success
 
@@ -5923,6 +5923,7 @@ Success
  | allStores | Boolean? |  yes  |  |
  | deployedStores | ArrayList<Int>? |  yes  |  |
  | q | String? |  yes  |  |
+ | onlyDeployed | Boolean? |  yes  |  |
 
 ---
 

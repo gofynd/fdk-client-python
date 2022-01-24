@@ -17,3 +17,8 @@ class FileStorageValidator:
         namespace = fields.Str(required=False)
          
     
+    class signUrls(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    
