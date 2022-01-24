@@ -26,8 +26,8 @@ class CreateAutocompleteKeyword(BaseSchema):
     
     is_active = fields.Boolean(required=False)
     
-    app_id = fields.Str(required=False)
-    
     _custom_json = fields.Dict(required=False)
+    
+    app_id = fields.Str(required=False)
     
 

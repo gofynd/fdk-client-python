@@ -29,22 +29,6 @@ class UserValidator:
         q = fields.Dict(required=False)
          
     
-    class createUser(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-    
-    class updateUser(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        user_id = fields.Str(required=False)
-         
-    
     class createUserSession(BaseSchema):
         
         company_id = fields.Str(required=False)

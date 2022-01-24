@@ -24,10 +24,10 @@ class GetAutocompleteWordsData(BaseSchema):
     
     results = fields.List(fields.Dict(required=False), required=False)
     
+    _custom_json = fields.Dict(required=False)
+    
     uid = fields.Str(required=False)
     
     app_id = fields.Str(required=False)
-    
-    _custom_json = fields.Dict(required=False)
     
 

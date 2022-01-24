@@ -4109,6 +4109,7 @@ Request body must contain an email ID. Refer `EditEmailRequestSchema` for more d
  | firstName | String? |  yes  |  |
  | lastName | String? |  yes  |  |
  | gender | String? |  yes  |  |
+ | externalId | String? |  yes  |  |
  | meta | HashMap<String,Any>? |  yes  |  |
 
 ---
