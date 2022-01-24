@@ -26,8 +26,8 @@ class CreateSearchKeyword(BaseSchema):
     
     result = fields.Nested(SearchKeywordResult, required=False)
     
-    _custom_json = fields.Dict(required=False)
-    
     app_id = fields.Str(required=False)
+    
+    _custom_json = fields.Dict(required=False)
     
 
