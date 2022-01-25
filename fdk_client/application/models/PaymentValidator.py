@@ -150,7 +150,7 @@ class PaymentValidator:
         aggregator = fields.Str(required=False)
          
     
-    class CheckCredit(BaseSchema):
+    class CustomerOnboard(BaseSchema):
         
         pass 
     

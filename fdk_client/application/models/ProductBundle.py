@@ -5,21 +5,13 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .GetGroupedProducts import GetGroupedProducts
 
 
-
-
-
-
-
-class ProductListingActionPage(BaseSchema):
+class ProductBundle(BaseSchema):
     # Catalog swagger.json
 
     
-    params = fields.Dict(required=False)
-    
-    query = fields.Dict(required=False)
-    
-    type = fields.Str(required=False)
+    items = fields.List(fields.Nested(GetGroupedProducts, required=False), required=False)
     
 

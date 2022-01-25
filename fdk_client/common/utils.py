@@ -68,7 +68,7 @@ async def create_query_string(**kwargs):
 async def get_headers_with_signature(domain: Text, method: Text, url: Text, query_string: Text, headers: Dict, body="",
                                      exclude_headers=[], sign_query=False):
     """Returns headers with signature."""
-    query_string = parse.unquote(query_string)
+    query_string = query_string.replace("%3A", ":").replace("%2F", "/").replace("%3F", "?").replace("%3D", "=").replace("%26", "&")
     fp_date = datetime.now().strftime("%Y%m%dT%H%M%SZ")
     headers_str = ""
     host = domain.replace("https://", "").replace("http://", "")

@@ -42,23 +42,25 @@ class Card(BaseSchema):
     # Payment swagger.json
 
     
-    aggregator_name = fields.Str(required=False)
-    
-    card_number = fields.Str(required=False)
-    
-    card_brand = fields.Str(required=False)
-    
     card_issuer = fields.Str(required=False)
+    
+    exp_year = fields.Int(required=False)
     
     card_name = fields.Str(required=False)
     
-    expired = fields.Boolean(required=False)
+    card_id = fields.Str(required=False)
     
-    card_fingerprint = fields.Str(required=False)
+    card_brand = fields.Str(required=False)
     
     card_token = fields.Str(required=False)
     
+    expired = fields.Boolean(required=False)
+    
+    nickname = fields.Str(required=False)
+    
     card_brand_image = fields.Str(required=False)
+    
+    card_fingerprint = fields.Str(required=False)
     
     card_reference = fields.Str(required=False)
     
@@ -66,12 +68,10 @@ class Card(BaseSchema):
     
     card_isin = fields.Str(required=False)
     
-    card_id = fields.Str(required=False)
+    aggregator_name = fields.Str(required=False)
+    
+    card_number = fields.Str(required=False)
     
     exp_month = fields.Int(required=False)
-    
-    exp_year = fields.Int(required=False)
-    
-    nickname = fields.Str(required=False)
     
 
