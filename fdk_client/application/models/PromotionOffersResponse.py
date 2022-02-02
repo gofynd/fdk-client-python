@@ -5,21 +5,13 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .PromotionOffer import PromotionOffer
 
 
-
-
-
-
-
-class ProductImage(BaseSchema):
+class PromotionOffersResponse(BaseSchema):
     # Cart swagger.json
 
     
-    aspect_ratio = fields.Str(required=False)
-    
-    url = fields.Str(required=False)
-    
-    secure_url = fields.Str(required=False)
+    available_promotions = fields.List(fields.Nested(PromotionOffer, required=False), required=False)
     
 

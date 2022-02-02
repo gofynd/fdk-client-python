@@ -111,14 +111,6 @@ class UserValidator:
         
         pass 
     
-    class setFreshchatRestoreId(BaseSchema):
-        
-        pass 
-    
-    class getUserStore(BaseSchema):
-        
-        pass 
-    
     class getPlatformConfig(BaseSchema):
         
         name = fields.Str(required=False)

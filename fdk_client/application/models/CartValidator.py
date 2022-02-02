@@ -192,3 +192,10 @@ class CartValidator:
         action = fields.Str(required=False)
          
     
+    class getPromotionOffers(BaseSchema):
+        
+        slug = fields.Str(required=False)
+        
+        page_size = fields.Int(required=False)
+         
+    

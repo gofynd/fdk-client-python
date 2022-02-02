@@ -8,10 +8,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class FreshchatRestoreIdRequestSchema(BaseSchema):
-    # User swagger.json
+
+
+class OperationErrorResponse(BaseSchema):
+    # Cart swagger.json
 
     
-    freshchat_restore_id = fields.Str(required=False)
+    success = fields.Boolean(required=False)
+    
+    message = fields.Str(required=False)
     
 

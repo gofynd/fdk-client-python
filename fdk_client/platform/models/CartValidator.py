@@ -81,6 +81,10 @@ class CartValidator:
         promo_group = fields.Str(required=False)
         
         promotion_type = fields.Str(required=False)
+        
+        fp_panel = fields.Str(required=False)
+        
+        promotion_id = fields.Str(required=False)
          
     
     class createPromotion(BaseSchema):
