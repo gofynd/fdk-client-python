@@ -8,18 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-from .Meta import Meta
-
-
-class Media(BaseSchema):
+class ResponsePage(BaseSchema):
     # Catalog swagger.json
 
     
-    type = fields.Str(required=False)
-    
-    url = fields.Str(required=False)
-    
-    meta = fields.Nested(Meta, required=False)
+    items = fields.List(fields.Str(required=False), required=False)
     
 
