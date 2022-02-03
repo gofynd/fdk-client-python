@@ -7,9 +7,9 @@ from ..models.BaseSchema import BaseSchema
 
 from .UserPersonalInfoInDetails import UserPersonalInfoInDetails
 
-from .BusinessDetails import BusinessDetails
-
 from .DeviceDetails import DeviceDetails
+
+from .BusinessDetails import BusinessDetails
 
 
 class CustomerOnboardingRequest(BaseSchema):
@@ -18,8 +18,8 @@ class CustomerOnboardingRequest(BaseSchema):
     
     personal_info = fields.List(fields.Nested(UserPersonalInfoInDetails, required=False), required=False)
     
-    business_info = fields.List(fields.Nested(BusinessDetails, required=False), required=False)
-    
     device = fields.List(fields.Nested(DeviceDetails, required=False), required=False)
+    
+    business_info = fields.List(fields.Nested(BusinessDetails, required=False), required=False)
     
 
