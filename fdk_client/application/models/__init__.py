@@ -1250,15 +1250,15 @@ from .PaymentStatusUpdateRequest import PaymentStatusUpdateRequest
     
 from .PaymentStatusUpdateResponse import PaymentStatusUpdateResponse
     
+from .AggregatorRoute import AggregatorRoute
+    
+from .PaymentFlow import PaymentFlow
+    
 from .PaymentModeLogo import PaymentModeLogo
     
 from .PaymentModeList import PaymentModeList
     
 from .RootPaymentMode import RootPaymentMode
-    
-from .AggregatorRoute import AggregatorRoute
-    
-from .PaymentFlow import PaymentFlow
     
 from .PaymentOptionAndFlow import PaymentOptionAndFlow
     
@@ -1330,13 +1330,15 @@ from .CreditDetail import CreditDetail
     
 from .CheckCreditResponse import CheckCreditResponse
     
-from .KYCAddress import KYCAddress
-    
-from .UserPersonalInfoInDetails import UserPersonalInfoInDetails
-    
 from .DeviceDetails import DeviceDetails
     
+from .MarketplaceInfo import MarketplaceInfo
+    
+from .KYCAddress import KYCAddress
+    
 from .BusinessDetails import BusinessDetails
+    
+from .UserPersonalInfoInDetails import UserPersonalInfoInDetails
     
 from .CustomerOnboardingRequest import CustomerOnboardingRequest
     
