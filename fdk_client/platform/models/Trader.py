@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
 class Trader(BaseSchema):
     # Catalog swagger.json
 
     
-    address = fields.List(fields.Str(required=False), required=False)
+    address = fields.Str(required=False)
     
     name = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
     
 

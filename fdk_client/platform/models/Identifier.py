@@ -26,7 +26,9 @@ class Identifier(BaseSchema):
     # Cart swagger.json
 
     
-    user_id = fields.List(fields.Str(required=False), required=False)
+    item_id = fields.List(fields.Int(required=False), required=False)
+    
+    category_id = fields.List(fields.Int(required=False), required=False)
     
     article_id = fields.List(fields.Str(required=False), required=False)
     
@@ -34,12 +36,10 @@ class Identifier(BaseSchema):
     
     store_id = fields.List(fields.Int(required=False), required=False)
     
-    item_id = fields.List(fields.Int(required=False), required=False)
-    
-    category_id = fields.List(fields.Int(required=False), required=False)
+    collection_id = fields.List(fields.Str(required=False), required=False)
     
     company_id = fields.List(fields.Int(required=False), required=False)
     
-    collection_id = fields.List(fields.Str(required=False), required=False)
+    user_id = fields.List(fields.Str(required=False), required=False)
     
 
