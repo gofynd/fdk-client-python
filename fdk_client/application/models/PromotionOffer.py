@@ -16,9 +16,9 @@ class PromotionOffer(BaseSchema):
     # Cart swagger.json
 
     
-    description = fields.Str(required=False)
-    
     id = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
     
     title = fields.Str(required=False)
     

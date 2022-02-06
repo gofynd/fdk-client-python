@@ -15,15 +15,15 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
-
-
-
-
 from .KYCAddress import KYCAddress
+
+
+
+
+
+
+
+
 
 
 
@@ -34,24 +34,24 @@ class BusinessDetails(BaseSchema):
     
     fda = fields.Str(required=False)
     
-    gstin = fields.Str(required=False)
+    shop_and_establishment = fields.Dict(required=False)
     
     business_ownership_type = fields.Str(required=False)
     
-    entity_type = fields.Str(required=False)
-    
-    shop_and_establishment = fields.Dict(required=False)
-    
-    pan = fields.Str(required=False)
+    vintage = fields.Str(required=False)
     
     business_type = fields.Str(required=False)
     
-    name = fields.Str(required=False)
+    address = fields.List(fields.Nested(KYCAddress, required=False), required=False)
+    
+    pan = fields.Str(required=False)
+    
+    entity_type = fields.Str(required=False)
     
     fssai = fields.Str(required=False)
     
-    address = fields.List(fields.Nested(KYCAddress, required=False), required=False)
+    name = fields.Str(required=False)
     
-    vintage = fields.Str(required=False)
+    gstin = fields.Str(required=False)
     
 
