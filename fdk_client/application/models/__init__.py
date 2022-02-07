@@ -1330,16 +1330,6 @@ from .CreditDetail import CreditDetail
     
 from .CheckCreditResponse import CheckCreditResponse
     
-from .DeviceDetails import DeviceDetails
-    
-from .KYCAddress import KYCAddress
-    
-from .UserPersonalInfoInDetails import UserPersonalInfoInDetails
-    
-from .BusinessDetails import BusinessDetails
-    
-from .MarketplaceInfo import MarketplaceInfo
-    
 from .CustomerOnboardingRequest import CustomerOnboardingRequest
     
 from .OnboardSummary import OnboardSummary
