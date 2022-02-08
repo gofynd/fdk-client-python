@@ -5,21 +5,13 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .LadderPriceOffer import LadderPriceOffer
 
 
-
-
-
-
-
-class PromotionOffer(BaseSchema):
+class LadderPriceOffers(BaseSchema):
     # Cart swagger.json
 
     
-    id = fields.Str(required=False)
-    
-    offer_text = fields.Str(required=False)
-    
-    description = fields.Str(required=False)
+    available_offers = fields.List(fields.Nested(LadderPriceOffer, required=False), required=False)
     
 

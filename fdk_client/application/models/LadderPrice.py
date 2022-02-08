@@ -16,21 +16,17 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class ProductPrice(BaseSchema):
+class LadderPrice(BaseSchema):
     # Cart swagger.json
 
     
     currency_code = fields.Str(required=False)
     
-    marked = fields.Float(required=False)
+    marked = fields.Int(required=False)
     
-    add_on = fields.Float(required=False)
+    offer_price = fields.Float(required=False)
     
-    effective = fields.Float(required=False)
-    
-    selling = fields.Float(required=False)
+    effective = fields.Int(required=False)
     
     currency_symbol = fields.Str(required=False)
     

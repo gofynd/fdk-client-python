@@ -199,3 +199,10 @@ class CartValidator:
         page_size = fields.Int(required=False)
          
     
+    class getLadderOffers(BaseSchema):
+        
+        slug = fields.Str(required=False)
+        
+        page_size = fields.Int(required=False)
+         
+    

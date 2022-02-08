@@ -5,6 +5,7 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .LadderPrice import LadderPrice
 
 
 
@@ -15,23 +16,18 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-class CouponBreakup(BaseSchema):
+class LadderOfferItem(BaseSchema):
     # Cart swagger.json
 
     
-    uid = fields.Str(required=False)
+    price = fields.Nested(LadderPrice, required=False)
     
-    message = fields.Str(required=False)
+    quantity = fields.Int(required=False)
     
-    code = fields.Str(required=False)
-    
-    value = fields.Float(required=False)
-    
-    is_applied = fields.Boolean(required=False)
+    total = fields.Float(required=False)
     
     type = fields.Str(required=False)
+    
+    margin = fields.Int(required=False)
     
 
