@@ -70,74 +70,6 @@ class Catalog:
         query_string = await create_query_string(slug=slug, store_id=store_id)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain("/service/application/catalog/v1.0/products/{slug}/sizes/", slug=slug, store_id=store_id), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
     
-    async def getProductPriceBySlug(self, slug=None, size=None, pincode=None, store_id=None, body=""):
-        """Prices may vary for different sizes of a product. Use this API to retrieve the price of a product size at all the selling locations near to a PIN Code.
-        :param slug : A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ : type string
-        :param size : A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes : type string
-        :param pincode : The PIN Code of the area near which the selling locations should be searched, e.g. 400059 : type string
-        :param store_id : The ID of the store that is selling the product, e.g. 1,2,3. : type integer
-        """
-        payload = {}
-        
-        if slug:
-            payload["slug"] = slug
-        
-        if size:
-            payload["size"] = size
-        
-        if pincode:
-            payload["pincode"] = pincode
-        
-        if store_id:
-            payload["store_id"] = store_id
-        
-        # Parameter validation
-        schema = CatalogValidator.getProductPriceBySlug()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, "/service/application/catalog/v1.0/products/{slug}/sizes/{size}/pincode/{pincode}/price/", """{"required":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/","schema":{"type":"string"},"required":true},{"in":"path","name":"size","description":"A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes","schema":{"type":"string"},"required":true},{"in":"path","name":"pincode","description":"The PIN Code of the area near which the selling locations should be searched, e.g. 400059","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"store_id","description":"The ID of the store that is selling the product, e.g. 1,2,3.","schema":{"type":"integer"},"required":false}],"query":[{"in":"query","name":"store_id","description":"The ID of the store that is selling the product, e.g. 1,2,3.","schema":{"type":"integer"},"required":false}],"headers":[],"path":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/","schema":{"type":"string"},"required":true},{"in":"path","name":"size","description":"A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes","schema":{"type":"string"},"required":true},{"in":"path","name":"pincode","description":"The PIN Code of the area near which the selling locations should be searched, e.g. 400059","schema":{"type":"string"},"required":true}]}""", slug=slug, size=size, pincode=pincode, store_id=store_id)
-        query_string = await create_query_string(slug=slug, size=size, pincode=pincode, store_id=store_id)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain("/service/application/catalog/v1.0/products/{slug}/sizes/{size}/pincode/{pincode}/price/", slug=slug, size=size, pincode=pincode, store_id=store_id), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
-    
-    async def getProductSellersBySlug(self, slug=None, size=None, pincode=None, strategy=None, page_no=None, page_size=None, body=""):
-        """A product of a particular size may be sold by multiple sellers. Use this API to fetch the sellers having the stock of a particular size at a given PIN Code.
-        :param slug : A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ : type string
-        :param size : A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes : type string
-        :param pincode : The 6-digit PIN Code of the area near which the selling locations should be searched, e.g. 400059 : type string
-        :param strategy : Sort stores on the basis of strategy. eg, fast-delivery, low-price, optimal. : type string
-        :param page_no : The page number to navigate through the given set of results. : type integer
-        :param page_size : The number of items to retrieve in each page. : type integer
-        """
-        payload = {}
-        
-        if slug:
-            payload["slug"] = slug
-        
-        if size:
-            payload["size"] = size
-        
-        if pincode:
-            payload["pincode"] = pincode
-        
-        if strategy:
-            payload["strategy"] = strategy
-        
-        if page_no:
-            payload["page_no"] = page_no
-        
-        if page_size:
-            payload["page_size"] = page_size
-        
-        # Parameter validation
-        schema = CatalogValidator.getProductSellersBySlug()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, "/service/application/catalog/v1.0/products/{slug}/sizes/{size}/pincode/{pincode}/sellers/", """{"required":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/","schema":{"type":"string"},"required":true},{"in":"path","name":"size","description":"A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes","schema":{"type":"string"},"required":true},{"in":"path","name":"pincode","description":"The 6-digit PIN Code of the area near which the selling locations should be searched, e.g. 400059","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"strategy","description":"Sort stores on the basis of strategy. eg, fast-delivery, low-price, optimal.","schema":{"type":"string"}},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false}],"query":[{"in":"query","name":"strategy","description":"Sort stores on the basis of strategy. eg, fast-delivery, low-price, optimal.","schema":{"type":"string"}},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false}],"headers":[],"path":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/","schema":{"type":"string"},"required":true},{"in":"path","name":"size","description":"A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes","schema":{"type":"string"},"required":true},{"in":"path","name":"pincode","description":"The 6-digit PIN Code of the area near which the selling locations should be searched, e.g. 400059","schema":{"type":"string"},"required":true}]}""", slug=slug, size=size, pincode=pincode, strategy=strategy, page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(slug=slug, size=size, pincode=pincode, strategy=strategy, page_no=page_no, page_size=page_size)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain("/service/application/catalog/v1.0/products/{slug}/sizes/{size}/pincode/{pincode}/sellers/", slug=slug, size=size, pincode=pincode, strategy=strategy, page_no=page_no, page_size=page_size), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
-    
     async def getProductComparisonBySlugs(self, slug=None, body=""):
         """Use this API to compare the features of products belonging to the same category. Note that at least one slug is mandatory in the request query.
         :param slug : A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/. : type array
@@ -584,28 +516,6 @@ class Catalog:
         query_string = await create_query_string(collection_type=collection_type, page_id=page_id, page_size=page_size)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain("/service/application/catalog/v1.0/follow/{collection_type}/", collection_type=collection_type, page_id=page_id, page_size=page_size), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
     
-    async def followById(self, collection_type=None, collection_id=None, body=""):
-        """Follow a particular entity such as product, brand, collection specified by its ID.
-        :param collection_type : Type of collection followed, i.e. products, brands, or collections. : type string
-        :param collection_id : The ID of the collection type. : type string
-        """
-        payload = {}
-        
-        if collection_type:
-            payload["collection_type"] = collection_type
-        
-        if collection_id:
-            payload["collection_id"] = collection_id
-        
-        # Parameter validation
-        schema = CatalogValidator.followById()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, "/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/", """{"required":[{"in":"path","name":"collection_type","description":"Type of collection followed, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true},{"in":"path","name":"collection_id","description":"The ID of the collection type.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"collection_type","description":"Type of collection followed, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true},{"in":"path","name":"collection_id","description":"The ID of the collection type.","schema":{"type":"string"},"required":true}]}""", collection_type=collection_type, collection_id=collection_id)
-        query_string = await create_query_string(collection_type=collection_type, collection_id=collection_id)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain("/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/", collection_type=collection_type, collection_id=collection_id), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
-    
     async def unfollowById(self, collection_type=None, collection_id=None, body=""):
         """You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
         :param collection_type : Type of collection followed, i.e. products, brands, or collections. : type string
@@ -627,6 +537,28 @@ class Catalog:
         url_with_params = await create_url_with_params(self._conf.domain, "/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/", """{"required":[{"in":"path","name":"collection_type","description":"Type of collection followed, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true},{"in":"path","name":"collection_id","description":"The ID of the collection type.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"collection_type","description":"Type of collection followed, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true},{"in":"path","name":"collection_id","description":"The ID of the collection type.","schema":{"type":"string"},"required":true}]}""", collection_type=collection_type, collection_id=collection_id)
         query_string = await create_query_string(collection_type=collection_type, collection_id=collection_id)
         return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain("/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/", collection_type=collection_type, collection_id=collection_id), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
+    
+    async def followById(self, collection_type=None, collection_id=None, body=""):
+        """Follow a particular entity such as product, brand, collection specified by its ID.
+        :param collection_type : Type of collection followed, i.e. products, brands, or collections. : type string
+        :param collection_id : The ID of the collection type. : type string
+        """
+        payload = {}
+        
+        if collection_type:
+            payload["collection_type"] = collection_type
+        
+        if collection_id:
+            payload["collection_id"] = collection_id
+        
+        # Parameter validation
+        schema = CatalogValidator.followById()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, "/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/", """{"required":[{"in":"path","name":"collection_type","description":"Type of collection followed, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true},{"in":"path","name":"collection_id","description":"The ID of the collection type.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"collection_type","description":"Type of collection followed, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true},{"in":"path","name":"collection_id","description":"The ID of the collection type.","schema":{"type":"string"},"required":true}]}""", collection_type=collection_type, collection_id=collection_id)
+        query_string = await create_query_string(collection_type=collection_type, collection_id=collection_id)
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain("/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/", collection_type=collection_type, collection_id=collection_id), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
     
     async def getFollowerCountById(self, collection_type=None, collection_id=None, body=""):
         """Get the total count of followers for a given collection type and collection ID.
@@ -770,7 +702,7 @@ class Catalog:
         query_string = await create_query_string(location_id=location_id)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain("/service/application/catalog/v1.0/locations/{location_id}/", location_id=location_id), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
     
-    async def getProductPriceBySlugV2(self, slug=None, size=None, store_id=None, pincode=None, body=""):
+    async def getProductPriceBySlug(self, slug=None, size=None, store_id=None, pincode=None, body=""):
         """Prices may vary for different sizes of a product. Use this API to retrieve the price of a product size at all the selling locations near to a PIN Code.
         :param slug : A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ : type string
         :param size : A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes : type string
@@ -792,7 +724,7 @@ class Catalog:
             payload["pincode"] = pincode
         
         # Parameter validation
-        schema = CatalogValidator.getProductPriceBySlugV2()
+        schema = CatalogValidator.getProductPriceBySlug()
         schema.dump(schema.load(payload))
         
 
@@ -800,7 +732,7 @@ class Catalog:
         query_string = await create_query_string(slug=slug, size=size, store_id=store_id, pincode=pincode)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain("/service/application/catalog/v2.0/products/{slug}/sizes/{size}/price/", slug=slug, size=size, store_id=store_id, pincode=pincode), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
     
-    async def getProductSellersBySlugV2(self, slug=None, size=None, pincode=None, strategy=None, page_no=None, page_size=None, body=""):
+    async def getProductSellersBySlug(self, slug=None, size=None, pincode=None, strategy=None, page_no=None, page_size=None, body=""):
         """A product of a particular size may be sold by multiple sellers. Use this API to fetch the sellers having the stock of a particular size at a given PIN Code.
         :param slug : A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ : type string
         :param size : A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes : type string
@@ -830,7 +762,7 @@ class Catalog:
             payload["page_size"] = page_size
         
         # Parameter validation
-        schema = CatalogValidator.getProductSellersBySlugV2()
+        schema = CatalogValidator.getProductSellersBySlug()
         schema.dump(schema.load(payload))
         
 

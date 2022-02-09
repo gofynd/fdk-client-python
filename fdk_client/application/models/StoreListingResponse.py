@@ -7,7 +7,7 @@ from ..models.BaseSchema import BaseSchema
 
 from .Page import Page
 
-from .Store1 import Store1
+from .Store import Store
 
 
 class StoreListingResponse(BaseSchema):
@@ -16,6 +16,6 @@ class StoreListingResponse(BaseSchema):
     
     page = fields.Nested(Page, required=False)
     
-    items = fields.List(fields.Nested(Store1, required=False), required=False)
+    items = fields.List(fields.Nested(Store, required=False), required=False)
     
 

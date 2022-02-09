@@ -7,21 +7,25 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .CartProductInfo import CartProductInfo
 
 
 
 
-
-
+from .ShipmentPromise import ShipmentPromise
 
 from .CartCurrency import CartCurrency
 
 
 
+
+
 from .PaymentSelectionLock import PaymentSelectionLock
 
-from .ShipmentPromise import ShipmentPromise
+
+
+
+
+
 
 
 
@@ -29,20 +33,12 @@ from .ShipmentPromise import ShipmentPromise
 
 from .CartBreakup import CartBreakup
 
-
-
-
-
-
+from .CartProductInfo import CartProductInfo
 
 
 class CartDetailResponse(BaseSchema):
     # Cart swagger.json
 
-    
-    coupon_text = fields.Str(required=False)
-    
-    items = fields.List(fields.Nested(CartProductInfo, required=False), required=False)
     
     message = fields.Str(required=False)
     
@@ -50,24 +46,28 @@ class CartDetailResponse(BaseSchema):
     
     restrict_checkout = fields.Boolean(required=False)
     
+    delivery_promise = fields.Nested(ShipmentPromise, required=False)
+    
     currency = fields.Nested(CartCurrency, required=False)
+    
+    coupon_text = fields.Str(required=False)
     
     is_valid = fields.Boolean(required=False)
     
     payment_selection_lock = fields.Nested(PaymentSelectionLock, required=False)
     
-    delivery_promise = fields.Nested(ShipmentPromise, required=False)
+    comment = fields.Str(required=False)
     
     last_modified = fields.Str(required=False)
     
-    comment = fields.Str(required=False)
-    
-    breakup_values = fields.Nested(CartBreakup, required=False)
+    gstin = fields.Str(required=False)
     
     delivery_charge_info = fields.Str(required=False)
     
-    gstin = fields.Str(required=False)
-    
     id = fields.Str(required=False)
+    
+    breakup_values = fields.Nested(CartBreakup, required=False)
+    
+    items = fields.List(fields.Nested(CartProductInfo, required=False), required=False)
     
 

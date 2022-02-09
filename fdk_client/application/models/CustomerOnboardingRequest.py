@@ -20,14 +20,14 @@ class CustomerOnboardingRequest(BaseSchema):
     # Payment swagger.json
 
     
+    marketplace_info = fields.Dict(required=False)
+    
     device = fields.Dict(required=False)
+    
+    aggregator = fields.Str(required=False)
     
     business_info = fields.Dict(required=False)
     
     personal_info = fields.Dict(required=False)
-    
-    marketplace_info = fields.Dict(required=False)
-    
-    aggregator = fields.Str(required=False)
     
 
