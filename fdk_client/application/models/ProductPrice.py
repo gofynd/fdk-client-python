@@ -22,6 +22,8 @@ class ProductPrice(BaseSchema):
     # Cart swagger.json
 
     
+    add_on = fields.Float(required=False)
+    
     selling = fields.Float(required=False)
     
     marked = fields.Float(required=False)
@@ -29,8 +31,6 @@ class ProductPrice(BaseSchema):
     effective = fields.Float(required=False)
     
     currency_code = fields.Str(required=False)
-    
-    add_on = fields.Float(required=False)
     
     currency_symbol = fields.Str(required=False)
     

@@ -9,13 +9,25 @@ from .CollectionImage import CollectionImage
 
 from .CollectionImage import CollectionImage
 
+from .CollectionImage import CollectionImage
+
+from .CollectionImage import CollectionImage
+
+from .CollectionImage import CollectionImage
+
 
 class CollectionBanner(BaseSchema):
     # Catalog swagger.json
 
     
-    portrait = fields.Nested(CollectionImage, required=False)
+    portrait_mobile = fields.Nested(CollectionImage, required=False)
     
-    landscape = fields.Nested(CollectionImage, required=False)
+    landscape_mobile = fields.Nested(CollectionImage, required=False)
+    
+    landscape_web = fields.Nested(CollectionImage, required=False)
+    
+    custombanner = fields.List(fields.Nested(CollectionImage, required=False), required=False)
+    
+    portrait_web = fields.Nested(CollectionImage, required=False)
     
 

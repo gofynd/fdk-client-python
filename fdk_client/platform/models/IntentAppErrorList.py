@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class CollectionImage(BaseSchema):
-    # Catalog swagger.json
+class IntentAppErrorList(BaseSchema):
+    # Payment swagger.json
 
     
-    url = fields.Str(required=False)
+    package_name = fields.Str(required=False)
     
-    aspect_ratio = fields.Str(required=False)
+    code = fields.Str(required=False)
     
 

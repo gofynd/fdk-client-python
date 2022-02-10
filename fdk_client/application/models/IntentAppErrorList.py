@@ -1,4 +1,4 @@
-"""Platform Models."""
+"""Application Models."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class ErrorCodeDescription(BaseSchema):
+class IntentAppErrorList(BaseSchema):
     # Payment swagger.json
 
     
-    description = fields.Str(required=False)
-    
     code = fields.Str(required=False)
     
-    success = fields.Boolean(required=False)
+    package_name = fields.Str(required=False)
     
 

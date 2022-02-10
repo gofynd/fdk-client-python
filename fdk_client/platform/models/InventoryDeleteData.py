@@ -16,9 +16,9 @@ class InventoryDeleteData(BaseSchema):
     # Catalog swagger.json
 
     
-    size = fields.Str(required=False)
-    
     item_id = fields.Int(required=False)
+    
+    size = fields.Str(required=False)
     
     location_id = fields.Int(required=False)
     
