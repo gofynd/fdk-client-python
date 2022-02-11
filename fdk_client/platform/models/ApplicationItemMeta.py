@@ -5,21 +5,13 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .MetaFields import MetaFields
 
 
-
-
-
-
-
-class CatalogInsightItem(BaseSchema):
+class ApplicationItemMeta(BaseSchema):
     # Catalog swagger.json
 
     
-    out_of_stock_count = fields.Int(required=False)
-    
-    sellable_count = fields.Int(required=False)
-    
-    count = fields.Int(required=False)
+    _custom_meta = fields.List(fields.Nested(MetaFields, required=False), required=False)
     
 

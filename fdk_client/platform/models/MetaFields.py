@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class Ownership(BaseSchema):
-    # Cart swagger.json
+class MetaFields(BaseSchema):
+    # Catalog swagger.json
 
     
-    payable_category = fields.Str(required=False)
+    value = fields.Str(required=False)
     
-    payable_by = fields.Str(required=False)
+    key = fields.Str(required=False)
     
 

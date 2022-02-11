@@ -203,6 +203,8 @@ class CartValidator:
         
         slug = fields.Str(required=False)
         
+        promotion_id = fields.Str(required=False)
+        
         page_size = fields.Int(required=False)
          
     

@@ -66,15 +66,6 @@ class FileStorageValidator:
         
         company_id = fields.Int(required=False)
         
-        page_no = fields.Int(required=False)
-         
-    
-    class browse(BaseSchema):
-        
-        namespace = fields.Str(required=False)
-        
-        company_id = fields.Int(required=False)
-        
         application_id = fields.Int(required=False)
         
         page_no = fields.Int(required=False)
