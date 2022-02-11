@@ -1,4 +1,4 @@
-"""Platform Models."""
+"""Application Models."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class Ownership(BaseSchema):
+class CurrencyInfo(BaseSchema):
     # Cart swagger.json
 
     
-    payable_category = fields.Str(required=False)
+    symbol = fields.Str(required=False)
     
-    payable_by = fields.Str(required=False)
+    code = fields.Str(required=False)
     
 
