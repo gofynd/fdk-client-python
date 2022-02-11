@@ -7,11 +7,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .ConfigurationProduct import ConfigurationProduct
-
 from .ConfigurationListing import ConfigurationListing
 
 
+
+from .ConfigurationProduct import ConfigurationProduct
 
 
 
@@ -22,11 +22,11 @@ class AppConfiguration(BaseSchema):
     
     config_id = fields.Str(required=False)
     
-    product = fields.Nested(ConfigurationProduct, required=False)
-    
     listing = fields.Nested(ConfigurationListing, required=False)
     
     config_type = fields.Str(required=False)
+    
+    product = fields.Nested(ConfigurationProduct, required=False)
     
     app_id = fields.Str(required=False)
     

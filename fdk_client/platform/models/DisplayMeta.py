@@ -5,26 +5,26 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .DisplayMetaDict import DisplayMetaDict
+
+from .DisplayMetaDict import DisplayMetaDict
+
+
+
 
 
 from .DisplayMetaDict import DisplayMetaDict
 
 
-
-
-
-from .DisplayMetaDict import DisplayMetaDict
-
-from .DisplayMetaDict import DisplayMetaDict
 
 
 class DisplayMeta(BaseSchema):
     # Cart swagger.json
 
     
-    subtitle = fields.Str(required=False)
-    
     remove = fields.Nested(DisplayMetaDict, required=False)
+    
+    apply = fields.Nested(DisplayMetaDict, required=False)
     
     title = fields.Str(required=False)
     
@@ -32,6 +32,6 @@ class DisplayMeta(BaseSchema):
     
     auto = fields.Nested(DisplayMetaDict, required=False)
     
-    apply = fields.Nested(DisplayMetaDict, required=False)
+    subtitle = fields.Str(required=False)
     
 
