@@ -10,12 +10,16 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class FilerList(BaseSchema):
+
+
+class CustomBanner(BaseSchema):
     # Catalog swagger.json
 
     
-    value = fields.Str(required=False)
+    banner_name = fields.Str(required=False)
     
-    display = fields.Str(required=False)
+    url = fields.Str(required=False)
+    
+    aspect_ratio = fields.Str(required=False)
     
 

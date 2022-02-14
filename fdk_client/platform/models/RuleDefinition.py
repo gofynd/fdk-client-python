@@ -28,17 +28,17 @@ class RuleDefinition(BaseSchema):
     
     value_type = fields.Str(required=False)
     
+    is_exact = fields.Boolean(required=False)
+    
     auto_apply = fields.Boolean(required=False)
     
     currency_code = fields.Str(required=False)
     
-    is_exact = fields.Boolean(required=False)
-    
-    calculate_on = fields.Str(required=False)
-    
     applicable_on = fields.Str(required=False)
     
     type = fields.Str(required=False)
+    
+    calculate_on = fields.Str(required=False)
     
     scope = fields.List(fields.Str(required=False), required=False)
     
