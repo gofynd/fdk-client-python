@@ -10,20 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
 class Logo(BaseSchema):
-    # Catalog swagger.json
+    # Payment swagger.json
 
     
-    secure_url = fields.Str(required=False)
+    large = fields.Str(required=False)
     
-    url = fields.Str(required=False)
-    
-    aspect_ratio = fields.Str(required=False)
-    
-    aspect_ratio_f = fields.Int(required=False)
+    small = fields.Str(required=False)
     
 

@@ -24,9 +24,9 @@ class ProductBundleItem(BaseSchema):
     
     max_quantity = fields.Int(required=False)
     
-    auto_select = fields.Boolean(required=False)
-    
     min_quantity = fields.Int(required=False)
+    
+    auto_select = fields.Boolean(required=False)
     
     allow_remove = fields.Boolean(required=False)
     
