@@ -17,15 +17,11 @@ from .TicketContent import TicketContent
 
 from .TicketCategory import TicketCategory
 
-from .TicketSubCategory import TicketSubCategory
-
 
 
 from .Status import Status
 
 from .Priority import Priority
-
-
 
 
 
@@ -58,9 +54,7 @@ class Ticket(BaseSchema):
     
     category = fields.Nested(TicketCategory, required=False)
     
-    sub_category = fields.Nested(TicketSubCategory, required=False)
-    
-    source = fields.Str(required=False, validate=OneOf([val.value for val in TicketSourceEnum.__members__.values()]))
+    source = fields.Str(required=False)
     
     status = fields.Nested(Status, required=False)
     
@@ -73,8 +67,6 @@ class Ticket(BaseSchema):
     tags = fields.List(fields.Str(required=False), required=False)
     
     _custom_json = fields.Dict(required=False)
-    
-    is_feedback_pending = fields.Boolean(required=False)
     
     _id = fields.Str(required=False)
     

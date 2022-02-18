@@ -81,8 +81,7 @@ class FeedbackValidator:
     
     class deleteMedia(BaseSchema):
         
-        ids = fields.List(fields.Str(required=False), required=False)
-         
+        pass 
     
     class createMedia(BaseSchema):
         

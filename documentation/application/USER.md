@@ -92,7 +92,27 @@ Success. Returns a JSON object with the user details. Check the example shown be
 
 ```json
 {
-  "$ref": "#/components/examples/AuthSuccess"
+  "value": {
+    "user_exists": false,
+    "user": {
+      "emails": [
+        {
+          "email": "www.akash24@gmail.com",
+          "verified": true,
+          "primary": true,
+          "active": true
+        }
+      ],
+      "phone_numbers": [],
+      "first_name": "Akash",
+      "last_name": "Mane",
+      "debug": {
+        "platform": "Fynd"
+      },
+      "active": true
+    },
+    "register_token": "d960c388-e286-43d9-b688-f6d1decc632d"
+  }
 }
 ```
 </details>
@@ -157,7 +177,27 @@ Success. Returns a JSON object with the user details. Check the example shown be
 
 ```json
 {
-  "$ref": "#/components/examples/AuthSuccess"
+  "value": {
+    "user_exists": false,
+    "user": {
+      "emails": [
+        {
+          "email": "www.akash24@gmail.com",
+          "verified": true,
+          "primary": true,
+          "active": true
+        }
+      ],
+      "phone_numbers": [],
+      "first_name": "Akash",
+      "last_name": "Mane",
+      "debug": {
+        "platform": "Fynd"
+      },
+      "active": true
+    },
+    "register_token": "d960c388-e286-43d9-b688-f6d1decc632d"
+  }
 }
 ```
 </details>
@@ -222,7 +262,27 @@ Success. Returns a JSON object with the user details. Check the example shown be
 
 ```json
 {
-  "$ref": "#/components/examples/AuthSuccess"
+  "value": {
+    "user_exists": false,
+    "user": {
+      "emails": [
+        {
+          "email": "www.akash24@gmail.com",
+          "verified": true,
+          "primary": true,
+          "active": true
+        }
+      ],
+      "phone_numbers": [],
+      "first_name": "Akash",
+      "last_name": "Mane",
+      "debug": {
+        "platform": "Fynd"
+      },
+      "active": true
+    },
+    "register_token": "d960c388-e286-43d9-b688-f6d1decc632d"
+  }
 }
 ```
 </details>
@@ -287,7 +347,27 @@ Success. Returns a JSON object with the user details. Check the example shown be
 
 ```json
 {
-  "$ref": "#/components/examples/AuthSuccess"
+  "value": {
+    "user_exists": false,
+    "user": {
+      "emails": [
+        {
+          "email": "www.akash24@gmail.com",
+          "verified": true,
+          "primary": true,
+          "active": true
+        }
+      ],
+      "phone_numbers": [],
+      "first_name": "Akash",
+      "last_name": "Mane",
+      "debug": {
+        "platform": "Fynd"
+      },
+      "active": true
+    },
+    "register_token": "d960c388-e286-43d9-b688-f6d1decc632d"
+  }
 }
 ```
 </details>
@@ -352,7 +432,27 @@ Success. Returns a JSON object with the user details. Check the example shown be
 
 ```json
 {
-  "$ref": "#/components/examples/AuthSuccess"
+  "value": {
+    "user_exists": false,
+    "user": {
+      "emails": [
+        {
+          "email": "www.akash24@gmail.com",
+          "verified": true,
+          "primary": true,
+          "active": true
+        }
+      ],
+      "phone_numbers": [],
+      "first_name": "Akash",
+      "last_name": "Mane",
+      "debug": {
+        "platform": "Fynd"
+      },
+      "active": true
+    },
+    "register_token": "d960c388-e286-43d9-b688-f6d1decc632d"
+  }
 }
 ```
 </details>
@@ -417,7 +517,15 @@ Success. Check the example shown below or refer `SendOtpResponse` for more detai
 
 ```json
 {
-  "$ref": "#/components/examples/SendOtpResponse"
+  "value": {
+    "success": true,
+    "request_id": "01503005aeab87cbed93d40f46cc2749",
+    "message": "OTP sent",
+    "mobile": "8652523958",
+    "country_code": "91",
+    "resend_timer": 30,
+    "resendToken": "58e72ca0-66ae-11eb-98b1-77d61363826e"
+  }
 }
 ```
 </details>
@@ -481,7 +589,57 @@ Success. Check the example shown below or refer `LoginSuccess` for more details.
 
 ```json
 {
-  "$ref": "#/components/examples/UserExampleObject"
+  "value": {
+    "user": {
+      "debug": {
+        "source": "deadlock",
+        "platform": "000000000000000000000001"
+      },
+      "gender": "male",
+      "account_type": "user",
+      "roles": [
+        "Test-Role"
+      ],
+      "active": true,
+      "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
+      "has_old_password_hash": false,
+      "_id": "5e68af49cfa09bf7233022f1",
+      "first_name": "Akash",
+      "last_name": "Mane",
+      "username": "akashmane_gofynd_com_10039",
+      "phone_numbers": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "phone": "8652523958",
+          "country_code": 91
+        }
+      ],
+      "emails": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "email": "akashmane@gofynd.com"
+        },
+        {
+          "active": true,
+          "primary": false,
+          "verified": true,
+          "email": "akashmane@fynd.com"
+        },
+        {
+          "active": true,
+          "primary": false,
+          "verified": true,
+          "email": "akashmane@uniket.store"
+        }
+      ],
+      "created_at": "2020-03-11T09:28:41.982Z",
+      "updated_at": "2021-02-04T10:10:44.981Z"
+    }
+  }
 }
 ```
 </details>
@@ -604,7 +762,57 @@ Success. Check the example shown below or refer `LoginSuccess` for more details.
 
 ```json
 {
-  "$ref": "#/components/examples/UserExampleObject"
+  "value": {
+    "user": {
+      "debug": {
+        "source": "deadlock",
+        "platform": "000000000000000000000001"
+      },
+      "gender": "male",
+      "account_type": "user",
+      "roles": [
+        "Test-Role"
+      ],
+      "active": true,
+      "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
+      "has_old_password_hash": false,
+      "_id": "5e68af49cfa09bf7233022f1",
+      "first_name": "Akash",
+      "last_name": "Mane",
+      "username": "akashmane_gofynd_com_10039",
+      "phone_numbers": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "phone": "8652523958",
+          "country_code": 91
+        }
+      ],
+      "emails": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "email": "akashmane@gofynd.com"
+        },
+        {
+          "active": true,
+          "primary": false,
+          "verified": true,
+          "email": "akashmane@fynd.com"
+        },
+        {
+          "active": true,
+          "primary": false,
+          "verified": true,
+          "email": "akashmane@uniket.store"
+        }
+      ],
+      "created_at": "2020-03-11T09:28:41.982Z",
+      "updated_at": "2021-02-04T10:10:44.981Z"
+    }
+  }
 }
 ```
 </details>
@@ -726,7 +934,57 @@ Success. Check the example shown below or refer `LoginSuccess` for more details.
 
 ```json
 {
-  "$ref": "#/components/examples/UserExampleObject"
+  "value": {
+    "user": {
+      "debug": {
+        "source": "deadlock",
+        "platform": "000000000000000000000001"
+      },
+      "gender": "male",
+      "account_type": "user",
+      "roles": [
+        "Test-Role"
+      ],
+      "active": true,
+      "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
+      "has_old_password_hash": false,
+      "_id": "5e68af49cfa09bf7233022f1",
+      "first_name": "Akash",
+      "last_name": "Mane",
+      "username": "akashmane_gofynd_com_10039",
+      "phone_numbers": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "phone": "8652523958",
+          "country_code": 91
+        }
+      ],
+      "emails": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "email": "akashmane@gofynd.com"
+        },
+        {
+          "active": true,
+          "primary": false,
+          "verified": true,
+          "email": "akashmane@fynd.com"
+        },
+        {
+          "active": true,
+          "primary": false,
+          "verified": true,
+          "email": "akashmane@uniket.store"
+        }
+      ],
+      "created_at": "2020-03-11T09:28:41.982Z",
+      "updated_at": "2021-02-04T10:10:44.981Z"
+    }
+  }
 }
 ```
 </details>
@@ -1202,7 +1460,58 @@ Success. Returns a JSON object as shown below. Refer `VerifyOtpSuccess` for more
 
 ```json
 {
-  "$ref": "#/components/examples/VerifyMobileOTP"
+  "value": {
+    "verify_mobile_link": true,
+    "user": {
+      "debug": {
+        "source": "deadlock",
+        "platform": "000000000000000000000001"
+      },
+      "gender": "male",
+      "account_type": "user",
+      "roles": [
+        "Test-Role"
+      ],
+      "active": true,
+      "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
+      "has_old_password_hash": false,
+      "_id": "5e68af49cfa09bf7233022f1",
+      "first_name": "Akash",
+      "last_name": "Mane",
+      "username": "akashmane_gofynd_com_10039",
+      "phone_numbers": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "phone": "8652523958",
+          "country_code": 91
+        }
+      ],
+      "emails": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "email": "akashmane@gofynd.com"
+        },
+        {
+          "active": true,
+          "primary": false,
+          "verified": true,
+          "email": "akashmane@fynd.com"
+        },
+        {
+          "active": true,
+          "primary": false,
+          "verified": true,
+          "email": "akashmane@uniket.store"
+        }
+      ],
+      "created_at": "2020-03-11T09:28:41.982Z",
+      "updated_at": "2021-02-04T10:10:44.981Z"
+    }
+  }
 }
 ```
 </details>
@@ -1326,7 +1635,58 @@ Success. Returns a JSON object as shown below. Refer `VerifyOtpSuccess` for more
 
 ```json
 {
-  "$ref": "#/components/examples/VerifyMobileOTP"
+  "value": {
+    "verify_mobile_link": true,
+    "user": {
+      "debug": {
+        "source": "deadlock",
+        "platform": "000000000000000000000001"
+      },
+      "gender": "male",
+      "account_type": "user",
+      "roles": [
+        "Test-Role"
+      ],
+      "active": true,
+      "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
+      "has_old_password_hash": false,
+      "_id": "5e68af49cfa09bf7233022f1",
+      "first_name": "Akash",
+      "last_name": "Mane",
+      "username": "akashmane_gofynd_com_10039",
+      "phone_numbers": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "phone": "8652523958",
+          "country_code": 91
+        }
+      ],
+      "emails": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "email": "akashmane@gofynd.com"
+        },
+        {
+          "active": true,
+          "primary": false,
+          "verified": true,
+          "email": "akashmane@fynd.com"
+        },
+        {
+          "active": true,
+          "primary": false,
+          "verified": true,
+          "email": "akashmane@uniket.store"
+        }
+      ],
+      "created_at": "2020-03-11T09:28:41.982Z",
+      "updated_at": "2021-02-04T10:10:44.981Z"
+    }
+  }
 }
 ```
 </details>
@@ -1386,7 +1746,57 @@ Success. Returns a JSON object with user details. Refer `UserObjectSchema` for m
 
 ```json
 {
-  "$ref": "#/components/examples/UserExampleObject"
+  "value": {
+    "user": {
+      "debug": {
+        "source": "deadlock",
+        "platform": "000000000000000000000001"
+      },
+      "gender": "male",
+      "account_type": "user",
+      "roles": [
+        "Test-Role"
+      ],
+      "active": true,
+      "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
+      "has_old_password_hash": false,
+      "_id": "5e68af49cfa09bf7233022f1",
+      "first_name": "Akash",
+      "last_name": "Mane",
+      "username": "akashmane_gofynd_com_10039",
+      "phone_numbers": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "phone": "8652523958",
+          "country_code": 91
+        }
+      ],
+      "emails": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "email": "akashmane@gofynd.com"
+        },
+        {
+          "active": true,
+          "primary": false,
+          "verified": true,
+          "email": "akashmane@fynd.com"
+        },
+        {
+          "active": true,
+          "primary": false,
+          "verified": true,
+          "email": "akashmane@uniket.store"
+        }
+      ],
+      "created_at": "2020-03-11T09:28:41.982Z",
+      "updated_at": "2021-02-04T10:10:44.981Z"
+    }
+  }
 }
 ```
 </details>
@@ -1630,7 +2040,57 @@ Success. Check the example shown below or refer `LoginSuccess` for more details.
 
 ```json
 {
-  "$ref": "#/components/examples/UserExampleObject"
+  "value": {
+    "user": {
+      "debug": {
+        "source": "deadlock",
+        "platform": "000000000000000000000001"
+      },
+      "gender": "male",
+      "account_type": "user",
+      "roles": [
+        "Test-Role"
+      ],
+      "active": true,
+      "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
+      "has_old_password_hash": false,
+      "_id": "5e68af49cfa09bf7233022f1",
+      "first_name": "Akash",
+      "last_name": "Mane",
+      "username": "akashmane_gofynd_com_10039",
+      "phone_numbers": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "phone": "8652523958",
+          "country_code": 91
+        }
+      ],
+      "emails": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "email": "akashmane@gofynd.com"
+        },
+        {
+          "active": true,
+          "primary": false,
+          "verified": true,
+          "email": "akashmane@fynd.com"
+        },
+        {
+          "active": true,
+          "primary": false,
+          "verified": true,
+          "email": "akashmane@uniket.store"
+        }
+      ],
+      "created_at": "2020-03-11T09:28:41.982Z",
+      "updated_at": "2021-02-04T10:10:44.981Z"
+    }
+  }
 }
 ```
 </details>
@@ -1695,7 +2155,58 @@ Success. Check the example shown below or refer `VerifyMobileOTPSuccess` for mor
 
 ```json
 {
-  "$ref": "#/components/examples/VerifyMobileOTP"
+  "value": {
+    "verify_mobile_link": true,
+    "user": {
+      "debug": {
+        "source": "deadlock",
+        "platform": "000000000000000000000001"
+      },
+      "gender": "male",
+      "account_type": "user",
+      "roles": [
+        "Test-Role"
+      ],
+      "active": true,
+      "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
+      "has_old_password_hash": false,
+      "_id": "5e68af49cfa09bf7233022f1",
+      "first_name": "Akash",
+      "last_name": "Mane",
+      "username": "akashmane_gofynd_com_10039",
+      "phone_numbers": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "phone": "8652523958",
+          "country_code": 91
+        }
+      ],
+      "emails": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "email": "akashmane@gofynd.com"
+        },
+        {
+          "active": true,
+          "primary": false,
+          "verified": true,
+          "email": "akashmane@fynd.com"
+        },
+        {
+          "active": true,
+          "primary": false,
+          "verified": true,
+          "email": "akashmane@uniket.store"
+        }
+      ],
+      "created_at": "2020-03-11T09:28:41.982Z",
+      "updated_at": "2021-02-04T10:10:44.981Z"
+    }
+  }
 }
 ```
 </details>
@@ -1765,7 +2276,57 @@ Success. Check the example shown below or refer `LoginSuccess` for more details.
 
 ```json
 {
-  "$ref": "#/components/examples/UserExampleObject"
+  "value": {
+    "user": {
+      "debug": {
+        "source": "deadlock",
+        "platform": "000000000000000000000001"
+      },
+      "gender": "male",
+      "account_type": "user",
+      "roles": [
+        "Test-Role"
+      ],
+      "active": true,
+      "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
+      "has_old_password_hash": false,
+      "_id": "5e68af49cfa09bf7233022f1",
+      "first_name": "Akash",
+      "last_name": "Mane",
+      "username": "akashmane_gofynd_com_10039",
+      "phone_numbers": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "phone": "8652523958",
+          "country_code": 91
+        }
+      ],
+      "emails": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "email": "akashmane@gofynd.com"
+        },
+        {
+          "active": true,
+          "primary": false,
+          "verified": true,
+          "email": "akashmane@fynd.com"
+        },
+        {
+          "active": true,
+          "primary": false,
+          "verified": true,
+          "email": "akashmane@uniket.store"
+        }
+      ],
+      "created_at": "2020-03-11T09:28:41.982Z",
+      "updated_at": "2021-02-04T10:10:44.981Z"
+    }
+  }
 }
 ```
 </details>
@@ -1829,7 +2390,57 @@ Success. Check the example shown below or refer `LoginSuccess` for more details.
 
 ```json
 {
-  "$ref": "#/components/examples/UserExampleObject"
+  "value": {
+    "user": {
+      "debug": {
+        "source": "deadlock",
+        "platform": "000000000000000000000001"
+      },
+      "gender": "male",
+      "account_type": "user",
+      "roles": [
+        "Test-Role"
+      ],
+      "active": true,
+      "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
+      "has_old_password_hash": false,
+      "_id": "5e68af49cfa09bf7233022f1",
+      "first_name": "Akash",
+      "last_name": "Mane",
+      "username": "akashmane_gofynd_com_10039",
+      "phone_numbers": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "phone": "8652523958",
+          "country_code": 91
+        }
+      ],
+      "emails": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "email": "akashmane@gofynd.com"
+        },
+        {
+          "active": true,
+          "primary": false,
+          "verified": true,
+          "email": "akashmane@fynd.com"
+        },
+        {
+          "active": true,
+          "primary": false,
+          "verified": true,
+          "email": "akashmane@uniket.store"
+        }
+      ],
+      "created_at": "2020-03-11T09:28:41.982Z",
+      "updated_at": "2021-02-04T10:10:44.981Z"
+    }
+  }
 }
 ```
 </details>
@@ -1894,7 +2505,58 @@ Success. Check the example shown below or refer `SendMobileVerifyLinkSuccess` fo
 
 ```json
 {
-  "$ref": "#/components/examples/VerifyMobileOTP"
+  "value": {
+    "verify_mobile_link": true,
+    "user": {
+      "debug": {
+        "source": "deadlock",
+        "platform": "000000000000000000000001"
+      },
+      "gender": "male",
+      "account_type": "user",
+      "roles": [
+        "Test-Role"
+      ],
+      "active": true,
+      "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
+      "has_old_password_hash": false,
+      "_id": "5e68af49cfa09bf7233022f1",
+      "first_name": "Akash",
+      "last_name": "Mane",
+      "username": "akashmane_gofynd_com_10039",
+      "phone_numbers": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "phone": "8652523958",
+          "country_code": 91
+        }
+      ],
+      "emails": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "email": "akashmane@gofynd.com"
+        },
+        {
+          "active": true,
+          "primary": false,
+          "verified": true,
+          "email": "akashmane@fynd.com"
+        },
+        {
+          "active": true,
+          "primary": false,
+          "verified": true,
+          "email": "akashmane@uniket.store"
+        }
+      ],
+      "created_at": "2020-03-11T09:28:41.982Z",
+      "updated_at": "2021-02-04T10:10:44.981Z"
+    }
+  }
 }
 ```
 </details>
@@ -1959,7 +2621,58 @@ Success. Returns a JSON object with user details. Refer `VerifyEmailOTPSuccess` 
 
 ```json
 {
-  "$ref": "#/components/examples/VerifyEmailOTP"
+  "value": {
+    "verify_email_link": true,
+    "user": {
+      "debug": {
+        "source": "deadlock",
+        "platform": "000000000000000000000001"
+      },
+      "gender": "male",
+      "account_type": "user",
+      "roles": [
+        "Test-Role"
+      ],
+      "active": true,
+      "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
+      "has_old_password_hash": false,
+      "_id": "5e68af49cfa09bf7233022f1",
+      "first_name": "Akash",
+      "last_name": "Mane",
+      "username": "akashmane_gofynd_com_10039",
+      "phone_numbers": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "phone": "8652523958",
+          "country_code": 91
+        }
+      ],
+      "emails": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "email": "akashmane@gofynd.com"
+        },
+        {
+          "active": true,
+          "primary": false,
+          "verified": true,
+          "email": "akashmane@fynd.com"
+        },
+        {
+          "active": true,
+          "primary": false,
+          "verified": true,
+          "email": "akashmane@uniket.store"
+        }
+      ],
+      "created_at": "2020-03-11T09:28:41.982Z",
+      "updated_at": "2021-02-04T10:10:44.981Z"
+    }
+  }
 }
 ```
 </details>
@@ -2028,7 +2741,57 @@ Success. Returns a JSON object with user details. Refer `LoginSuccess` for more 
 
 ```json
 {
-  "$ref": "#/components/examples/UserExampleObject"
+  "value": {
+    "user": {
+      "debug": {
+        "source": "deadlock",
+        "platform": "000000000000000000000001"
+      },
+      "gender": "male",
+      "account_type": "user",
+      "roles": [
+        "Test-Role"
+      ],
+      "active": true,
+      "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
+      "has_old_password_hash": false,
+      "_id": "5e68af49cfa09bf7233022f1",
+      "first_name": "Akash",
+      "last_name": "Mane",
+      "username": "akashmane_gofynd_com_10039",
+      "phone_numbers": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "phone": "8652523958",
+          "country_code": 91
+        }
+      ],
+      "emails": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "email": "akashmane@gofynd.com"
+        },
+        {
+          "active": true,
+          "primary": false,
+          "verified": true,
+          "email": "akashmane@fynd.com"
+        },
+        {
+          "active": true,
+          "primary": false,
+          "verified": true,
+          "email": "akashmane@uniket.store"
+        }
+      ],
+      "created_at": "2020-03-11T09:28:41.982Z",
+      "updated_at": "2021-02-04T10:10:44.981Z"
+    }
+  }
 }
 ```
 </details>
@@ -2092,7 +2855,57 @@ Success. Returns a JSON object with user details. Refer `LoginSuccess` for more 
 
 ```json
 {
-  "$ref": "#/components/examples/UserExampleObject"
+  "value": {
+    "user": {
+      "debug": {
+        "source": "deadlock",
+        "platform": "000000000000000000000001"
+      },
+      "gender": "male",
+      "account_type": "user",
+      "roles": [
+        "Test-Role"
+      ],
+      "active": true,
+      "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
+      "has_old_password_hash": false,
+      "_id": "5e68af49cfa09bf7233022f1",
+      "first_name": "Akash",
+      "last_name": "Mane",
+      "username": "akashmane_gofynd_com_10039",
+      "phone_numbers": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "phone": "8652523958",
+          "country_code": 91
+        }
+      ],
+      "emails": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "email": "akashmane@gofynd.com"
+        },
+        {
+          "active": true,
+          "primary": false,
+          "verified": true,
+          "email": "akashmane@fynd.com"
+        },
+        {
+          "active": true,
+          "primary": false,
+          "verified": true,
+          "email": "akashmane@uniket.store"
+        }
+      ],
+      "created_at": "2020-03-11T09:28:41.982Z",
+      "updated_at": "2021-02-04T10:10:44.981Z"
+    }
+  }
 }
 ```
 </details>
@@ -2169,6 +2982,19 @@ Request body must contain an email ID. Refer `EditEmailRequestSchema` for more d
 
 
 ### Schemas
+
+ 
+ 
+ #### [BlockUserRequestSchema](#BlockUserRequestSchema)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | status | Boolean? |  yes  |  |
+ | userId | ArrayList<String>? |  yes  |  |
+ | reason | String? |  yes  |  |
+
+---
+
 
  
  
@@ -2580,6 +3406,17 @@ Request body must contain an email ID. Refer `EditEmailRequestSchema` for more d
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | logout | Boolean? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [BlockUserSuccess](#BlockUserSuccess)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | success | Boolean? |  yes  |  |
 
 ---
 
@@ -3161,6 +3998,7 @@ Request body must contain an email ID. Refer `EditEmailRequestSchema` for more d
  | firstName | String? |  yes  |  |
  | lastName | String? |  yes  |  |
  | gender | String? |  yes  |  |
+ | externalId | String? |  yes  |  |
  | meta | HashMap<String,Any>? |  yes  |  |
 
 ---
@@ -3183,7 +4021,6 @@ Request body must contain an email ID. Refer `EditEmailRequestSchema` for more d
  | profilePicUrl | String? |  yes  |  |
  | username | String? |  yes  |  |
  | accountType | String? |  yes  |  |
- | uid | String? |  yes  |  |
  | debug | [Debug](#Debug)? |  yes  |  |
  | hasOldPasswordHash | Boolean? |  yes  |  |
  | id | String? |  yes  |  |

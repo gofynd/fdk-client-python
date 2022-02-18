@@ -15,8 +15,6 @@ from .TicketContent import TicketContent
 
 
 
-
-
 from .AgentChangePayload import AgentChangePayload
 
 
@@ -30,13 +28,11 @@ class EditTicketPayload(BaseSchema):
     
     category = fields.Str(required=False)
     
-    sub_category = fields.Str(required=False)
-    
     source = fields.Str(required=False)
     
     status = fields.Str(required=False)
     
-    priority = fields.Str(required=False, validate=OneOf([val.value for val in PriorityEnum.__members__.values()]))
+    priority = fields.Str(required=False)
     
     assigned_to = fields.Nested(AgentChangePayload, required=False)
     

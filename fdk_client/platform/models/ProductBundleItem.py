@@ -28,9 +28,9 @@ class ProductBundleItem(BaseSchema):
     
     auto_add_to_cart = fields.Boolean(required=False)
     
-    max_quantity = fields.Int(required=False)
-    
     min_quantity = fields.Int(required=False)
+    
+    max_quantity = fields.Int(required=False)
     
     product_uid = fields.Int(required=False)
     

@@ -7,15 +7,27 @@ from ..models.BaseSchema import BaseSchema
 
 from .CustomForm import CustomForm
 
-from .Page import Page
+
+
+
+
+
+
+
 
 
 class CustomFormList(BaseSchema):
     # Lead swagger.json
 
     
-    items = fields.List(fields.Nested(CustomForm, required=False), required=False)
+    docs = fields.List(fields.Nested(CustomForm, required=False), required=False)
     
-    page = fields.Nested(Page, required=False)
+    limit = fields.Int(required=False)
+    
+    page = fields.Int(required=False)
+    
+    pages = fields.Int(required=False)
+    
+    total = fields.Int(required=False)
     
 

@@ -16,6 +16,6 @@ class KeyValue(BaseSchema):
     
     key = fields.Str(required=False)
     
-    value = fields.Dict(required=False)
+    value = fields.Str(required=False)
     
 

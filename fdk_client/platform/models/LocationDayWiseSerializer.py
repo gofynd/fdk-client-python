@@ -15,12 +15,12 @@ from .LocationTimingSerializer import LocationTimingSerializer
 
 
 class LocationDayWiseSerializer(BaseSchema):
-    # CompanyProfile swagger.json
+    # Catalog swagger.json
 
     
-    opening = fields.Nested(LocationTimingSerializer, required=False)
-    
     closing = fields.Nested(LocationTimingSerializer, required=False)
+    
+    opening = fields.Nested(LocationTimingSerializer, required=False)
     
     weekday = fields.Str(required=False)
     

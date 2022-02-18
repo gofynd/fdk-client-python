@@ -11,7 +11,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class LocationTimingSerializer(BaseSchema):
-    # CompanyProfile swagger.json
+    # Catalog swagger.json
 
     
     hour = fields.Int(required=False)

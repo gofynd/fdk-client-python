@@ -17,17 +17,17 @@ from ..models.BaseSchema import BaseSchema
 
 
 class Document(BaseSchema):
-    # CompanyProfile swagger.json
+    # Catalog swagger.json
 
+    
+    url = fields.Str(required=False)
+    
+    legal_name = fields.Str(required=False)
     
     verified = fields.Boolean(required=False)
     
     type = fields.Str(required=False)
     
-    legal_name = fields.Str(required=False)
-    
     value = fields.Str(required=False)
-    
-    url = fields.Str(required=False)
     
 

@@ -36,6 +36,13 @@ class UserValidator:
         application_id = fields.Str(required=False)
          
     
+    class blockOrUnblockUsers(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+    
     class updateUser(BaseSchema):
         
         company_id = fields.Str(required=False)

@@ -14,7 +14,7 @@ class LeadValidator:
     
     class createHistory(BaseSchema):
         
-        id = fields.Str(required=False)
+        ticket_id = fields.Str(required=False)
          
     
     class createTicket(BaseSchema):

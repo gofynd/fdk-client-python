@@ -27,8 +27,6 @@ from .Email import Email
 
 
 
-
-
 from .Debug import Debug
 
 
@@ -65,8 +63,6 @@ class UserSchema(BaseSchema):
     username = fields.Str(required=False)
     
     account_type = fields.Str(required=False)
-    
-    uid = fields.Str(required=False)
     
     debug = fields.Nested(Debug, required=False)
     
