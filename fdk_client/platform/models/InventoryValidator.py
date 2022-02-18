@@ -26,6 +26,13 @@ class InventoryValidator:
         company_id = fields.Int(required=False)
          
     
+    class getJobSteps(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        job_id = fields.Int(required=False)
+         
+    
     class getJobByCompanyAndIntegration(BaseSchema):
         
         company_id = fields.Int(required=False)
@@ -35,6 +42,13 @@ class InventoryValidator:
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
+         
+    
+    class disable(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        integration_id = fields.Str(required=False)
          
     
     class getJobConfigDefaults(BaseSchema):
@@ -58,6 +72,10 @@ class InventoryValidator:
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
+        
+        status = fields.Str(required=False)
+        
+        date = fields.Str(required=False)
          
     
     class getJobCodesByCompanyAndIntegration(BaseSchema):
@@ -69,5 +87,26 @@ class InventoryValidator:
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
+         
+    
+    class getJobConfigByIntegrationType(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        integration_type = fields.Str(required=False)
+         
+    
+    class getJobCodesMetrics(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        daily_job = fields.Boolean(required=False)
+        
+        job_code = fields.Str(required=False)
+         
+    
+    class saveJobCodesMetrics(BaseSchema):
+        
+        company_id = fields.Int(required=False)
          
     

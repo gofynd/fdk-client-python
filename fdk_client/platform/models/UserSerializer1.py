@@ -13,7 +13,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class UserSerializer1(BaseSchema):
-    # CompanyProfile swagger.json
+    # Catalog swagger.json
 
     
     user_id = fields.Str(required=False)

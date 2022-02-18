@@ -5,13 +5,13 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .Application import Application
 
 
-
-class DataLoaderResetResponseSchema(BaseSchema):
-    # Content swagger.json
+class ApplicationResponse(BaseSchema):
+    # Common swagger.json
 
     
-    reset = fields.Str(required=False)
+    application = fields.Nested(Application, required=False)
     
 

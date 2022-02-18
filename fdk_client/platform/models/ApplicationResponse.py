@@ -5,17 +5,13 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .Application import Application
 
 
-
-
-
-class DataLoaderSourceSchema(BaseSchema):
-    # Content swagger.json
+class ApplicationResponse(BaseSchema):
+    # Common swagger.json
 
     
-    type = fields.Str(required=False)
-    
-    id = fields.Str(required=False)
+    application = fields.Nested(Application, required=False)
     
 

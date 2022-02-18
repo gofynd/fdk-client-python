@@ -5,17 +5,13 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .GetGroupedProducts import GetGroupedProducts
 
 
-from .Details import Details
-
-
-class MarketPlaceSttributes(BaseSchema):
+class ProductBundle(BaseSchema):
     # Catalog swagger.json
 
     
-    title = fields.Str(required=False)
-    
-    details = fields.List(fields.Nested(Details, required=False), required=False)
+    items = fields.List(fields.Nested(GetGroupedProducts, required=False), required=False)
     
 

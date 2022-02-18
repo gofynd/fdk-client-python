@@ -11,7 +11,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class LocationIntegrationType(BaseSchema):
-    # CompanyProfile swagger.json
+    # Catalog swagger.json
 
     
     order = fields.Str(required=False)

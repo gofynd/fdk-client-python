@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class DataLoaderSourceSchema(BaseSchema):
-    # Content swagger.json
+class IntentAppErrorList(BaseSchema):
+    # Payment swagger.json
 
     
-    type = fields.Str(required=False)
+    package_name = fields.Str(required=False)
     
-    id = fields.Str(required=False)
+    code = fields.Str(required=False)
     
 

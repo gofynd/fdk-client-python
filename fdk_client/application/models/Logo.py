@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ArticleAssignment(BaseSchema):
-    # Catalog swagger.json
+class Logo(BaseSchema):
+    # Payment swagger.json
 
     
-    level = fields.Str(required=False)
+    large = fields.Str(required=False)
     
-    strategy = fields.Str(required=False)
+    small = fields.Str(required=False)
     
 

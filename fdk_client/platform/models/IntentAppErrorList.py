@@ -8,10 +8,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class DataLoaderResetResponseSchema(BaseSchema):
-    # Content swagger.json
+
+
+class IntentAppErrorList(BaseSchema):
+    # Payment swagger.json
 
     
-    reset = fields.Str(required=False)
+    package_name = fields.Str(required=False)
+    
+    code = fields.Str(required=False)
     
 

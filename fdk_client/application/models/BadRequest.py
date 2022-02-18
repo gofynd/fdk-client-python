@@ -8,18 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
-class Details(BaseSchema):
-    # Catalog swagger.json
+class BadRequest(BaseSchema):
+    # Common swagger.json
 
     
-    value = fields.Str(required=False)
-    
-    key = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
+    message = fields.Str(required=False)
     
 

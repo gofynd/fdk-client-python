@@ -26,12 +26,12 @@ class GlobalValidation(BaseSchema):
     
     description = fields.Str(required=False)
     
-    definitions = fields.Dict(required=False)
-    
-    title = fields.Str(required=False)
+    required = fields.List(fields.Str(required=False), required=False)
     
     type = fields.Str(required=False)
     
-    required = fields.List(fields.Str(required=False), required=False)
+    definitions = fields.Dict(required=False)
+    
+    title = fields.Str(required=False)
     
 
