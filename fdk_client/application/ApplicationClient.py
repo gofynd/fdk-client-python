@@ -1463,6 +1463,28 @@ class Common:
         self._conf = config
     # async def ():
     
+    async def searchApplication(self, authorization=None, query=None, body=""):
+        """Search Application.
+        :param authorization :  : type string
+        :param query : Provide application name : type string
+        """
+        payload = {}
+        
+        if authorization:
+            payload["authorization"] = authorization
+        
+        if query:
+            payload["query"] = query
+        
+        # Parameter validation
+        schema = CommonValidator.searchApplication()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, "/service/common/configuration/v1.0/application/search-application", """{"required":[],"optional":[{"in":"header","name":"authorization","schema":{"type":"string"}},{"in":"query","name":"query","schema":{"type":"string"},"description":"Provide application name"}],"query":[{"in":"query","name":"query","schema":{"type":"string"},"description":"Provide application name"}],"headers":[{"in":"header","name":"authorization","schema":{"type":"string"}}],"path":[]}""", authorization=authorization, query=query)
+        query_string = await create_query_string(authorization=authorization, query=query)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain("/service/common/configuration/v1.0/application/search-application", authorization=authorization, query=query), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
+    
     async def getLocations(self, location_type=None, id=None, body=""):
         """
         :param location_type : Provide location type to query on. Possible values : country, state, city : type string

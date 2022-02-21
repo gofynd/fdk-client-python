@@ -5,17 +5,13 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .Application import Application
 
 
-
-
-
-class CollectionImage(BaseSchema):
-    # Catalog swagger.json
+class ApplicationResponse(BaseSchema):
+    # Common swagger.json
 
     
-    url = fields.Str(required=False)
-    
-    aspect_ratio = fields.Str(required=False)
+    application = fields.Nested(Application, required=False)
     
 

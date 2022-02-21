@@ -21,6 +21,8 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 from .DataLoaderSourceSchema import DataLoaderSourceSchema
 
 
@@ -29,6 +31,8 @@ class DataLoaderResponseSchema(BaseSchema):
 
     
     application = fields.Str(required=False)
+    
+    company = fields.Str(required=False)
     
     _id = fields.Str(required=False)
     
