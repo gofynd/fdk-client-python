@@ -16,9 +16,9 @@ class CustomBanner(BaseSchema):
     # Catalog swagger.json
 
     
-    aspect_ratio = fields.Str(required=False)
-    
     url = fields.Str(required=False)
+    
+    aspect_ratio = fields.Str(required=False)
     
     banner_name = fields.Str(required=False)
     

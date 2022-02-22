@@ -7,9 +7,9 @@ from ..models.BaseSchema import BaseSchema
 
 from .RawBreakup import RawBreakup
 
-from .CouponBreakup import CouponBreakup
-
 from .DisplayBreakup import DisplayBreakup
+
+from .CouponBreakup import CouponBreakup
 
 from .LoyaltyPoints import LoyaltyPoints
 
@@ -20,9 +20,9 @@ class CartBreakup(BaseSchema):
     
     raw = fields.Nested(RawBreakup, required=False)
     
-    coupon = fields.Nested(CouponBreakup, required=False)
-    
     display = fields.List(fields.Nested(DisplayBreakup, required=False), required=False)
+    
+    coupon = fields.Nested(CouponBreakup, required=False)
     
     loyalty_points = fields.Nested(LoyaltyPoints, required=False)
     
