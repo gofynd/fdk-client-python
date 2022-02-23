@@ -434,28 +434,6 @@ class Catalog:
         query_string = await create_query_string(collection_type=collection_type, page_id=page_id, page_size=page_size)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain("/service/application/catalog/v1.0/follow/{collection_type}/", collection_type=collection_type, page_id=page_id, page_size=page_size), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
     
-    async def unfollowById(self, collection_type=None, collection_id=None, body=""):
-        """You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
-        :param collection_type : Type of collection followed, i.e. products, brands, or collections. : type string
-        :param collection_id : The ID of the collection type. : type string
-        """
-        payload = {}
-        
-        if collection_type:
-            payload["collection_type"] = collection_type
-        
-        if collection_id:
-            payload["collection_id"] = collection_id
-        
-        # Parameter validation
-        schema = CatalogValidator.unfollowById()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, "/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/", """{"required":[{"in":"path","name":"collection_type","description":"Type of collection followed, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true},{"in":"path","name":"collection_id","description":"The ID of the collection type.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"collection_type","description":"Type of collection followed, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true},{"in":"path","name":"collection_id","description":"The ID of the collection type.","schema":{"type":"string"},"required":true}]}""", collection_type=collection_type, collection_id=collection_id)
-        query_string = await create_query_string(collection_type=collection_type, collection_id=collection_id)
-        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain("/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/", collection_type=collection_type, collection_id=collection_id), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
-    
     async def followById(self, collection_type=None, collection_id=None, body=""):
         """Follow a particular entity such as product, brand, collection specified by its ID.
         :param collection_type : Type of collection followed, i.e. products, brands, or collections. : type string
@@ -477,6 +455,28 @@ class Catalog:
         url_with_params = await create_url_with_params(self._conf.domain, "/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/", """{"required":[{"in":"path","name":"collection_type","description":"Type of collection followed, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true},{"in":"path","name":"collection_id","description":"The ID of the collection type.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"collection_type","description":"Type of collection followed, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true},{"in":"path","name":"collection_id","description":"The ID of the collection type.","schema":{"type":"string"},"required":true}]}""", collection_type=collection_type, collection_id=collection_id)
         query_string = await create_query_string(collection_type=collection_type, collection_id=collection_id)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain("/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/", collection_type=collection_type, collection_id=collection_id), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
+    
+    async def unfollowById(self, collection_type=None, collection_id=None, body=""):
+        """You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+        :param collection_type : Type of collection followed, i.e. products, brands, or collections. : type string
+        :param collection_id : The ID of the collection type. : type string
+        """
+        payload = {}
+        
+        if collection_type:
+            payload["collection_type"] = collection_type
+        
+        if collection_id:
+            payload["collection_id"] = collection_id
+        
+        # Parameter validation
+        schema = CatalogValidator.unfollowById()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, "/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/", """{"required":[{"in":"path","name":"collection_type","description":"Type of collection followed, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true},{"in":"path","name":"collection_id","description":"The ID of the collection type.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"collection_type","description":"Type of collection followed, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true},{"in":"path","name":"collection_id","description":"The ID of the collection type.","schema":{"type":"string"},"required":true}]}""", collection_type=collection_type, collection_id=collection_id)
+        query_string = await create_query_string(collection_type=collection_type, collection_id=collection_id)
+        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain("/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/", collection_type=collection_type, collection_id=collection_id), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
     
     async def getFollowerCountById(self, collection_type=None, collection_id=None, body=""):
         """Get the total count of followers for a given collection type and collection ID.
@@ -3801,7 +3801,7 @@ class Payment:
         query_string = await create_query_string()
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain("/service/application/payment/v1.0/refund/beneficiary/default", ), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
     
-    async def CustomerCreditSummary(self, aggregator=None, body=""):
+    async def customerCreditSummary(self, aggregator=None, body=""):
         """Use this API to fetch the customer credit summary.
         :param aggregator :  : type string
         """
@@ -3811,7 +3811,7 @@ class Payment:
             payload["aggregator"] = aggregator
         
         # Parameter validation
-        schema = PaymentValidator.CustomerCreditSummary()
+        schema = PaymentValidator.customerCreditSummary()
         schema.dump(schema.load(payload))
         
 
@@ -3819,7 +3819,7 @@ class Payment:
         query_string = await create_query_string(aggregator=aggregator)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain("/service/application/payment/v1.0/payment/credit-summary/", aggregator=aggregator), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
     
-    async def RedirectToAggregator(self, source=None, body=""):
+    async def redirectToAggregator(self, source=None, body=""):
         """Use this API to get the redirect url to redirect the user to aggregator's page
         :param source :  : type string
         """
@@ -3829,7 +3829,7 @@ class Payment:
             payload["source"] = source
         
         # Parameter validation
-        schema = PaymentValidator.RedirectToAggregator()
+        schema = PaymentValidator.redirectToAggregator()
         schema.dump(schema.load(payload))
         
 
@@ -3837,7 +3837,7 @@ class Payment:
         query_string = await create_query_string(source=source)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain("/service/application/payment/v1.0/payment/redirect-to-aggregator/", source=source), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
     
-    async def CheckCredit(self, aggregator=None, body=""):
+    async def checkCredit(self, aggregator=None, body=""):
         """Use this API to fetch the customer credit summary.
         :param aggregator :  : type string
         """
@@ -3847,7 +3847,7 @@ class Payment:
             payload["aggregator"] = aggregator
         
         # Parameter validation
-        schema = PaymentValidator.CheckCredit()
+        schema = PaymentValidator.checkCredit()
         schema.dump(schema.load(payload))
         
 
@@ -3855,13 +3855,13 @@ class Payment:
         query_string = await create_query_string(aggregator=aggregator)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain("/service/application/payment/v1.0/check-credits/", aggregator=aggregator), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
     
-    async def CustomerOnboard(self, body=""):
+    async def customerOnboard(self, body=""):
         """Use this API to fetch the customer credit summary.
         """
         payload = {}
         
         # Parameter validation
-        schema = PaymentValidator.CustomerOnboard()
+        schema = PaymentValidator.customerOnboard()
         schema.dump(schema.load(payload))
         
         # Body validation
