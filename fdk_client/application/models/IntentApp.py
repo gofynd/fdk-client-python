@@ -9,21 +9,21 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 from .Logo import Logo
-
-
 
 
 class IntentApp(BaseSchema):
     # Payment swagger.json
 
     
+    package_name = fields.Str(required=False)
+    
     code = fields.Str(required=False)
     
     display_name = fields.Str(required=False)
     
     logos = fields.Nested(Logo, required=False)
-    
-    package_name = fields.Str(required=False)
     
 

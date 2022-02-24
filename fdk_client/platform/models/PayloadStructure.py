@@ -5,7 +5,7 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .DataItems import DataItems
+
 
 from .PayloadEmailStructure import PayloadEmailStructure
 
@@ -18,7 +18,7 @@ class PayloadStructure(BaseSchema):
     # Communication swagger.json
 
     
-    data = fields.List(fields.Nested(DataItems, required=False), required=False)
+    data = fields.List(fields.Dict(required=False), required=False)
     
     email = fields.Nested(PayloadEmailStructure, required=False)
     

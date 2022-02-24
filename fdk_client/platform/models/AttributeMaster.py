@@ -11,9 +11,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
 from .AttributeSchemaRange import AttributeSchemaRange
+
+
 
 
 
@@ -21,8 +21,6 @@ from .AttributeSchemaRange import AttributeSchemaRange
 class AttributeMaster(BaseSchema):
     # Catalog swagger.json
 
-    
-    type = fields.Str(required=False)
     
     format = fields.Str(required=False)
     
@@ -33,5 +31,7 @@ class AttributeMaster(BaseSchema):
     range = fields.Nested(AttributeSchemaRange, required=False)
     
     allowed_values = fields.List(fields.Str(required=False), required=False)
+    
+    type = fields.Str(required=False)
     
 

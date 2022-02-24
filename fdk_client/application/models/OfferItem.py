@@ -24,13 +24,13 @@ class OfferItem(BaseSchema):
     # Cart swagger.json
 
     
-    type = fields.Str(required=False)
-    
     auto_applied = fields.Boolean(required=False)
     
-    quantity = fields.Int(required=False)
+    type = fields.Str(required=False)
     
     total = fields.Float(required=False)
+    
+    quantity = fields.Int(required=False)
     
     margin = fields.Int(required=False)
     
