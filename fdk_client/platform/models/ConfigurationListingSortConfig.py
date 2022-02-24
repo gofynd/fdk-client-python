@@ -20,9 +20,9 @@ class ConfigurationListingSortConfig(BaseSchema):
     # Catalog swagger.json
 
     
-    priority = fields.Int(required=False)
-    
     name = fields.Str(required=False)
+    
+    priority = fields.Int(required=False)
     
     is_active = fields.Boolean(required=False)
     

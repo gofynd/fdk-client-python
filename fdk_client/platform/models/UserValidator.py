@@ -59,6 +59,24 @@ class UserValidator:
         application_id = fields.Str(required=False)
          
     
+    class getActiveSessions(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+    
+    class deleteActiveSessions(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+    
     class getPlatformConfig(BaseSchema):
         
         company_id = fields.Str(required=False)

@@ -20,10 +20,10 @@ class PaymentConfirmationMode(BaseSchema):
     
     name = fields.Str(required=False)
     
+    meta = fields.Dict(required=False)
+    
     amount = fields.Float(required=False)
     
     mode = fields.Str(required=False)
-    
-    meta = fields.Dict(required=False)
     
 

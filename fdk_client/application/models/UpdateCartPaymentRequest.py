@@ -30,8 +30,8 @@ class UpdateCartPaymentRequest(BaseSchema):
     
     address_id = fields.Str(required=False)
     
-    merchant_code = fields.Str(required=False)
-    
     id = fields.Str(required=False)
+    
+    merchant_code = fields.Str(required=False)
     
 

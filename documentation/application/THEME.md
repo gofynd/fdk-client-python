@@ -1512,7 +1512,7 @@ Success. Returns a JSON object of the theme. Check the example shown below or   
       "list": [
         {
           "name": "default",
-          "global": {
+          "global_config": {
             "static": {
               "props": {
                 "colors": {
@@ -3711,7 +3711,7 @@ Success. Returns a JSON object of the theme. Check the example shown below or re
       "list": [
         {
           "name": "default",
-          "global": {
+          "global_config": {
             "static": {
               "props": {
                 "colors": {
@@ -5625,7 +5625,7 @@ Success. Returns a JSON object of the theme. Check the example shown below or re
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | global | HashMap<String,Any>? |  yes  |  |
+ | globalConfig | HashMap<String,Any>? |  yes  |  |
  | page | ArrayList<[ConfigPage](#ConfigPage)>? |  yes  |  |
  | name | String? |  yes  |  |
 

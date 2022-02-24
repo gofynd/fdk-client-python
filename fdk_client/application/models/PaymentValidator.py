@@ -135,22 +135,22 @@ class PaymentValidator:
         
         pass 
     
-    class CustomerCreditSummary(BaseSchema):
+    class customerCreditSummary(BaseSchema):
         
         aggregator = fields.Str(required=False)
          
     
-    class RedirectToAggregator(BaseSchema):
+    class redirectToAggregator(BaseSchema):
+        
+        source = fields.Str(required=False)
+         
+    
+    class checkCredit(BaseSchema):
         
         aggregator = fields.Str(required=False)
          
     
-    class CheckCredit(BaseSchema):
-        
-        aggregator = fields.Str(required=False)
-         
-    
-    class CustomerOnboard(BaseSchema):
+    class customerOnboard(BaseSchema):
         
         pass 
     
