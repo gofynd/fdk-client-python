@@ -34,15 +34,15 @@ class ProductFiltersValue(BaseSchema):
     # Catalog swagger.json
 
     
-    selected_min = fields.Int(required=False)
+    currency_symbol = fields.Str(required=False)
     
-    is_selected = fields.Boolean(required=False)
+    selected_min = fields.Int(required=False)
     
     value = fields.Str(required=False)
     
-    max = fields.Int(required=False)
+    min = fields.Int(required=False)
     
-    currency_symbol = fields.Str(required=False)
+    max = fields.Int(required=False)
     
     display = fields.Str(required=False)
     
@@ -50,7 +50,7 @@ class ProductFiltersValue(BaseSchema):
     
     selected_max = fields.Int(required=False)
     
-    min = fields.Int(required=False)
+    is_selected = fields.Boolean(required=False)
     
     currency_code = fields.Str(required=False)
     
