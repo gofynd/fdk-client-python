@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class CollectionImage(BaseSchema):
+class MetaFields(BaseSchema):
     # Catalog swagger.json
 
     
-    url = fields.Str(required=False)
+    key = fields.Str(required=False)
     
-    aspect_ratio = fields.Str(required=False)
+    value = fields.Str(required=False)
     
 

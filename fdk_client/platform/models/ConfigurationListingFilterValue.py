@@ -26,8 +26,8 @@ class ConfigurationListingFilterValue(BaseSchema):
     
     bucket_points = fields.List(fields.Nested(ConfigurationBucketPoints, required=False), required=False)
     
-    map = fields.Dict(required=False)
-    
     condition = fields.Str(required=False)
+    
+    map = fields.Dict(required=False)
     
 

@@ -5,17 +5,13 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .MetaFields import MetaFields
 
 
-
-
-
-class CollectionImage(BaseSchema):
+class ApplicationItemMeta(BaseSchema):
     # Catalog swagger.json
 
     
-    url = fields.Str(required=False)
-    
-    aspect_ratio = fields.Str(required=False)
+    _custom_meta = fields.List(fields.Nested(MetaFields, required=False), required=False)
     
 
