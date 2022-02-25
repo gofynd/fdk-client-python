@@ -10,12 +10,20 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ProductSetDistributionSizeV2(BaseSchema):
+
+
+
+
+class StrategyWiseListing(BaseSchema):
     # Catalog swagger.json
 
     
-    pieces = fields.Int(required=False)
+    distance = fields.Int(required=False)
     
-    size = fields.Str(required=False)
+    quantity = fields.Int(required=False)
+    
+    pincode = fields.Int(required=False)
+    
+    tat = fields.Int(required=False)
     
 

@@ -12,14 +12,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class StoreV2(BaseSchema):
+class Store1(BaseSchema):
     # Catalog swagger.json
 
     
     count = fields.Int(required=False)
     
-    uid = fields.Int(required=False)
-    
     name = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
     
 

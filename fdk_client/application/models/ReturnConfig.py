@@ -10,12 +10,16 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ArticleAssignmentV2(BaseSchema):
+
+
+class ReturnConfig(BaseSchema):
     # Catalog swagger.json
 
     
-    level = fields.Str(required=False)
+    time = fields.Int(required=False)
     
-    strategy = fields.Str(required=False)
+    unit = fields.Str(required=False)
+    
+    returnable = fields.Boolean(required=False)
     
 

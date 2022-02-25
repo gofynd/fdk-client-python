@@ -7,19 +7,15 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+from .ProductListingActionPage import ProductListingActionPage
 
 
-
-
-
-class ProductSizeSellerFilterSchemaV2(BaseSchema):
+class ProductListingAction(BaseSchema):
     # Catalog swagger.json
 
     
-    value = fields.Str(required=False)
+    type = fields.Str(required=False)
     
-    is_selected = fields.Boolean(required=False)
-    
-    name = fields.Str(required=False)
+    page = fields.Nested(ProductListingActionPage, required=False)
     
 

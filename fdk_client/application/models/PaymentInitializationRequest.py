@@ -34,17 +34,15 @@ class PaymentInitializationRequest(BaseSchema):
     # Payment swagger.json
 
     
+    order_id = fields.Str(required=False)
+    
+    customer_id = fields.Str(required=False)
+    
+    vpa = fields.Str(required=False)
+    
     amount = fields.Int(required=False)
     
     timeout = fields.Int(required=False)
-    
-    merchant_order_id = fields.Str(required=False)
-    
-    order_id = fields.Str(required=False)
-    
-    method = fields.Str(required=False)
-    
-    razorpay_payment_id = fields.Str(required=False)
     
     contact = fields.Str(required=False)
     
@@ -52,10 +50,12 @@ class PaymentInitializationRequest(BaseSchema):
     
     currency = fields.Str(required=False)
     
-    customer_id = fields.Str(required=False)
+    merchant_order_id = fields.Str(required=False)
+    
+    method = fields.Str(required=False)
     
     email = fields.Str(required=False)
     
-    vpa = fields.Str(required=False)
+    razorpay_payment_id = fields.Str(required=False)
     
 

@@ -20,7 +20,7 @@ class Price(BaseSchema):
     # Catalog swagger.json
 
     
-    min_effective = fields.Float(required=False)
+    min_marked = fields.Float(required=False)
     
     currency = fields.Str(required=False)
     
@@ -28,6 +28,6 @@ class Price(BaseSchema):
     
     max_effective = fields.Float(required=False)
     
-    min_marked = fields.Float(required=False)
+    min_effective = fields.Float(required=False)
     
 

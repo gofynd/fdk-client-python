@@ -7,19 +7,15 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+from .ProductSetDistribution import ProductSetDistribution
 
 
-
-
-
-class ReturnConfigSchemaV2(BaseSchema):
+class ProductSet(BaseSchema):
     # Catalog swagger.json
 
     
-    returnable = fields.Boolean(required=False)
+    quantity = fields.Int(required=False)
     
-    unit = fields.Str(required=False)
-    
-    time = fields.Int(required=False)
+    size_distribution = fields.Nested(ProductSetDistribution, required=False)
     
 

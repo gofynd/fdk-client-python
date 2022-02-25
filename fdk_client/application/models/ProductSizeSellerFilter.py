@@ -12,14 +12,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ProductStockPriceV2(BaseSchema):
+class ProductSizeSellerFilter(BaseSchema):
     # Catalog swagger.json
 
     
-    currency = fields.Str(required=False)
+    value = fields.Str(required=False)
     
-    marked = fields.Float(required=False)
+    name = fields.Str(required=False)
     
-    effective = fields.Float(required=False)
+    is_selected = fields.Boolean(required=False)
     
 

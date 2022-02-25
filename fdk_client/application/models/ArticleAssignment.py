@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class DetailsSchemaV2(BaseSchema):
+class ArticleAssignment(BaseSchema):
     # Catalog swagger.json
 
     
-    value = fields.Str(required=False)
+    strategy = fields.Str(required=False)
     
-    key = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
+    level = fields.Str(required=False)
     
 
