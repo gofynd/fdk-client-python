@@ -19,32 +19,6 @@ class CatalogValidator:
         store_id = fields.Int(required=False)
          
     
-    class getProductPriceBySlug(BaseSchema):
-        
-        slug = fields.Str(required=False)
-        
-        size = fields.Str(required=False)
-        
-        pincode = fields.Str(required=False)
-        
-        store_id = fields.Int(required=False)
-         
-    
-    class getProductSellersBySlug(BaseSchema):
-        
-        slug = fields.Str(required=False)
-        
-        size = fields.Str(required=False)
-        
-        pincode = fields.Str(required=False)
-        
-        strategy = fields.Str(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-         
-    
     class getProductComparisonBySlugs(BaseSchema):
         
         slug = fields.List(fields.Str(required=False), required=False)
@@ -193,14 +167,14 @@ class CatalogValidator:
         page_size = fields.Int(required=False)
          
     
-    class unfollowById(BaseSchema):
+    class followById(BaseSchema):
         
         collection_type = fields.Str(required=False)
         
         collection_id = fields.Str(required=False)
          
     
-    class followById(BaseSchema):
+    class unfollowById(BaseSchema):
         
         collection_type = fields.Str(required=False)
         
@@ -265,7 +239,7 @@ class CatalogValidator:
         id = fields.Str(required=False)
          
     
-    class getProductPriceBySlugV2(BaseSchema):
+    class getProductPriceBySlug(BaseSchema):
         
         slug = fields.Str(required=False)
         
@@ -276,7 +250,7 @@ class CatalogValidator:
         pincode = fields.Str(required=False)
          
     
-    class getProductSellersBySlugV2(BaseSchema):
+    class getProductSellersBySlug(BaseSchema):
         
         slug = fields.Str(required=False)
         
