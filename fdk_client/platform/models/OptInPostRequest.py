@@ -18,9 +18,9 @@ class OptInPostRequest(BaseSchema):
     # Catalog swagger.json
 
     
-    opt_level = fields.Str(required=False)
-    
     enabled = fields.Boolean(required=False)
+    
+    opt_level = fields.Str(required=False)
     
     brand_ids = fields.List(fields.Int(required=False), required=False)
     

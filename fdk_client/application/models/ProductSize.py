@@ -22,8 +22,8 @@ class ProductSize(BaseSchema):
     
     quantity = fields.Int(required=False)
     
-    is_available = fields.Boolean(required=False)
-    
     value = fields.Str(required=False)
+    
+    is_available = fields.Boolean(required=False)
     
 

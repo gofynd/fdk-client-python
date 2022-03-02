@@ -2,41 +2,37 @@
 
 
     
-from .ProductDetailAttribute import ProductDetailAttribute
-    
-from .ProductDetailGroupedAttribute import ProductDetailGroupedAttribute
-    
-from .ProductListingActionPage import ProductListingActionPage
-    
-from .ProductListingAction import ProductListingAction
-    
-from .Price import Price
-    
-from .ProductListingPrice import ProductListingPrice
-    
 from .Meta import Meta
     
 from .Media import Media
     
 from .ProductBrand import ProductBrand
     
+from .ProductDetailAttribute import ProductDetailAttribute
+    
+from .ProductDetailGroupedAttribute import ProductDetailGroupedAttribute
+    
 from .MetaFields import MetaFields
+    
+from .Price import Price
+    
+from .ProductListingPrice import ProductListingPrice
     
 from .ProductDetail import ProductDetail
     
 from .ErrorResponse import ErrorResponse
     
+from .ProductSize import ProductSize
+    
+from .SizeChartValues import SizeChartValues
+    
 from .ColumnHeader import ColumnHeader
     
 from .ColumnHeaders import ColumnHeaders
     
-from .SizeChartValues import SizeChartValues
-    
 from .SizeChart import SizeChart
     
 from .ProductSizeStores import ProductSizeStores
-    
-from .ProductSize import ProductSize
     
 from .ProductSizes import ProductSizes
     
@@ -60,13 +56,13 @@ from .ProductVariantResponse import ProductVariantResponse
     
 from .ProductVariantsResponse import ProductVariantsResponse
     
-from .Seller import Seller
-    
 from .ProductStockPrice import ProductStockPrice
+    
+from .StoreDetail import StoreDetail
     
 from .CompanyDetail import CompanyDetail
     
-from .StoreDetail import StoreDetail
+from .Seller import Seller
     
 from .ProductStockStatusItem import ProductStockStatusItem
     
@@ -74,15 +70,15 @@ from .ProductStockStatusResponse import ProductStockStatusResponse
     
 from .ProductStockPolling import ProductStockPolling
     
-from .ProductListingDetail import ProductListingDetail
-    
-from .ProductSortOn import ProductSortOn
-    
 from .ProductFiltersKey import ProductFiltersKey
     
 from .ProductFiltersValue import ProductFiltersValue
     
 from .ProductFilters import ProductFilters
+    
+from .ProductSortOn import ProductSortOn
+    
+from .ProductListingDetail import ProductListingDetail
     
 from .ProductListingResponse import ProductListingResponse
     
@@ -120,18 +116,6 @@ from .AutocompleteItem import AutocompleteItem
     
 from .AutoCompleteResponse import AutoCompleteResponse
     
-from .GetCollectionDetailNest import GetCollectionDetailNest
-    
-from .CollectionListingFilterType import CollectionListingFilterType
-    
-from .CollectionListingFilterTag import CollectionListingFilterTag
-    
-from .CollectionListingFilter import CollectionListingFilter
-    
-from .GetCollectionListingResponse import GetCollectionListingResponse
-    
-from .CollectionDetailResponse import CollectionDetailResponse
-    
 from .GetFollowListingResponse import GetFollowListingResponse
     
 from .FollowPostResponse import FollowPostResponse
@@ -148,15 +132,15 @@ from .Store import Store
     
 from .StoreListingResponse import StoreListingResponse
     
-from .StoreAddressSerializer import StoreAddressSerializer
-    
 from .StoreDepartments import StoreDepartments
-    
-from .CompanyStore import CompanyStore
     
 from .SellerPhoneNumber import SellerPhoneNumber
     
 from .StoreManagerSerializer import StoreManagerSerializer
+    
+from .StoreAddressSerializer import StoreAddressSerializer
+    
+from .CompanyStore import CompanyStore
     
 from .AppStore import AppStore
     
@@ -168,41 +152,53 @@ from .StoreTiming import StoreTiming
     
 from .StoreDetails import StoreDetails
     
-from .Price1 import Price1
-    
-from .ProductDetails import ProductDetails
-    
-from .Size import Size
-    
-from .Products import Products
-    
-from .GetGroupedProducts import GetGroupedProducts
-    
-from .ProductBundle import ProductBundle
-    
-from .ReturnConfig import ReturnConfig
-    
-from .ArticleAssignment import ArticleAssignment
-    
-from .Details import Details
-    
-from .MarketPlaceSttributes import MarketPlaceSttributes
-    
-from .StrategyWiseListing import StrategyWiseListing
-    
-from .Store1 import Store1
-    
 from .ProductSetDistributionSize import ProductSetDistributionSize
     
 from .ProductSetDistribution import ProductSetDistribution
     
 from .ProductSet import ProductSet
     
+from .Store1 import Store1
+    
+from .ArticleAssignment import ArticleAssignment
+    
+from .StrategyWiseListing import StrategyWiseListing
+    
+from .Details import Details
+    
+from .MarketPlaceSttributes import MarketPlaceSttributes
+    
+from .ReturnConfig import ReturnConfig
+    
 from .ProductSizePriceResponse import ProductSizePriceResponse
     
 from .ProductSizeSellerFilter import ProductSizeSellerFilter
     
 from .ProductSizeSellersResponse import ProductSizeSellersResponse
+    
+from .CollectionListingFilterType import CollectionListingFilterType
+    
+from .CollectionListingFilterTag import CollectionListingFilterTag
+    
+from .CollectionListingFilter import CollectionListingFilter
+    
+from .GetCollectionDetailNest import GetCollectionDetailNest
+    
+from .GetCollectionListingResponse import GetCollectionListingResponse
+    
+from .CollectionDetailResponse import CollectionDetailResponse
+    
+from .Size import Size
+    
+from .Price1 import Price1
+    
+from .ProductDetails import ProductDetails
+    
+from .Products import Products
+    
+from .GetGroupedProducts import GetGroupedProducts
+    
+from .ProductBundle import ProductBundle
     
 
     
@@ -1029,6 +1025,8 @@ from .SupportedLanguage import SupportedLanguage
 from .LanguageResponse import LanguageResponse
     
 from .AppStaffResponse import AppStaffResponse
+    
+from .AppStaffListResponse import AppStaffListResponse
     
 from .UpdateDialog import UpdateDialog
     
