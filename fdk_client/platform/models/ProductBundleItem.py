@@ -30,8 +30,8 @@ class ProductBundleItem(BaseSchema):
     
     allow_remove = fields.Boolean(required=False)
     
-    auto_add_to_cart = fields.Boolean(required=False)
-    
     max_quantity = fields.Int(required=False)
+    
+    auto_add_to_cart = fields.Boolean(required=False)
     
 
