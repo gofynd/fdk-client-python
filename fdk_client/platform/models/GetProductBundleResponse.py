@@ -21,9 +21,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
 from .GetProducts import GetProducts
+
+
 
 
 class GetProductBundleResponse(BaseSchema):
@@ -32,11 +32,9 @@ class GetProductBundleResponse(BaseSchema):
     
     page_visibility = fields.List(fields.Str(required=False), required=False)
     
-    same_store_assignment = fields.Boolean(required=False)
-    
     slug = fields.Str(required=False)
     
-    logo = fields.Str(required=False)
+    choice = fields.Str(required=False)
     
     is_active = fields.Boolean(required=False)
     
@@ -46,8 +44,10 @@ class GetProductBundleResponse(BaseSchema):
     
     name = fields.Str(required=False)
     
-    choice = fields.Str(required=False)
+    logo = fields.Str(required=False)
     
     products = fields.List(fields.Nested(GetProducts, required=False), required=False)
+    
+    same_store_assignment = fields.Boolean(required=False)
     
 
