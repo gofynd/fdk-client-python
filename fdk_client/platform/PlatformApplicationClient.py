@@ -17,8 +17,11 @@ from .models.CatalogValidator import CatalogValidator
 from .models.CompanyProfileValidator import CompanyProfileValidator
 from .models.FileStorageValidator import FileStorageValidator
 from .models.ShareValidator import ShareValidator
+from .models.InventoryValidator import InventoryValidator
 from .models.ConfigurationValidator import ConfigurationValidator
 from .models.CartValidator import CartValidator
+from .models.RewardsValidator import RewardsValidator
+from .models.AnalyticsValidator import AnalyticsValidator
 from .models.DiscountValidator import DiscountValidator
 from .models.PartnerValidator import PartnerValidator
 from .models.WebhookValidator import WebhookValidator
@@ -4898,6 +4901,12 @@ class Share:
         return await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/share/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/links/short-link/{id}/", id=id), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, body, exclude_headers=["Authorization"]), data=body)
     
 
+class Inventory:
+    def __init__(self, config, applicationId):
+        self._conf = config
+        self.applicationId = applicationId
+    
+
 class Configuration:
     def __init__(self, config, applicationId):
         self._conf = config
@@ -5779,6 +5788,405 @@ class Cart:
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/checkout", ), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, body, exclude_headers=["Authorization"]), data=body)
     
 
+class Rewards:
+    def __init__(self, config, applicationId):
+        self._conf = config
+        self.applicationId = applicationId
+    
+    async def getGiveaways(self, page_id=None, page_size=None):
+        """List of giveaways of the current application.
+        :param page_id : pagination page id : type string
+        :param page_size : pagination page size : type integer
+        """
+        payload = {}
+        
+        if page_id:
+            payload["page_id"] = page_id
+        
+        if page_size:
+            payload["page_size"] = page_size
+        
+
+        # Parameter validation
+        schema = RewardsValidator.getGiveaways()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/giveaways/", """{"required":[{"description":"company id","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"application id","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"pagination page id","in":"query","name":"page_id","schema":{"type":"string"}},{"description":"pagination page size","in":"query","name":"page_size","schema":{"type":"integer"}}],"query":[{"description":"pagination page id","in":"query","name":"page_id","schema":{"type":"string"}},{"description":"pagination page size","in":"query","name":"page_size","schema":{"type":"integer"}}],"headers":[],"path":[{"description":"company id","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"application id","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", page_id=page_id, page_size=page_size)
+        query_string = await create_query_string(page_id=page_id, page_size=page_size)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/giveaways/", page_id=page_id, page_size=page_size), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
+    
+    async def createGiveaway(self, body=""):
+        """Adds a new giveaway.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = RewardsValidator.createGiveaway()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models.Giveaway import Giveaway
+        schema = Giveaway()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/giveaways/", """{"required":[{"description":"company id","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"application id","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"company id","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"application id","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", )
+        query_string = await create_query_string()
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/giveaways/", ), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, body, exclude_headers=["Authorization"]), data=body)
+    
+    async def getGiveawayByID(self, id=None):
+        """Get giveaway by ID.
+        :param id : Giveaway ID : type string
+        """
+        payload = {}
+        
+        if id:
+            payload["id"] = id
+        
+
+        # Parameter validation
+        schema = RewardsValidator.getGiveawayByID()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/giveaways/{id}/", """{"required":[{"description":"company id","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"application id","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"Giveaway ID","in":"path","name":"id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"company id","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"application id","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"Giveaway ID","in":"path","name":"id","required":true,"schema":{"type":"string"}}]}""", id=id)
+        query_string = await create_query_string(id=id)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/giveaways/{id}/", id=id), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
+    
+    async def updateGiveaway(self, id=None, body=""):
+        """Updates the giveaway by it's ID.
+        :param id : Giveaway ID : type string
+        """
+        payload = {}
+        
+        if id:
+            payload["id"] = id
+        
+
+        # Parameter validation
+        schema = RewardsValidator.updateGiveaway()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models.Giveaway import Giveaway
+        schema = Giveaway()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/giveaways/{id}/", """{"required":[{"description":"company id","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"application id","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"Giveaway ID","in":"path","name":"id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"company id","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"application id","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"Giveaway ID","in":"path","name":"id","required":true,"schema":{"type":"string"}}]}""", id=id)
+        query_string = await create_query_string(id=id)
+        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/giveaways/{id}/", id=id), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, body, exclude_headers=["Authorization"]), data=body)
+    
+    async def getOffers(self, ):
+        """List of offer of the current application.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = RewardsValidator.getOffers()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/offers/", """{"required":[{"description":"company id","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"application id","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"company id","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"application id","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", )
+        query_string = await create_query_string()
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/offers/", ), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
+    
+    async def getOfferByName(self, cookie=None, name=None):
+        """Get offer by name.
+        :param cookie : User's session cookie. This cookie is set in browser cookie when logged-in to fynd's authentication system i.e. `Grimlock` or by using grimlock-backend SDK for backend implementation. : type string
+        :param name : Offer name : type string
+        """
+        payload = {}
+        
+        if cookie:
+            payload["cookie"] = cookie
+        
+        if name:
+            payload["name"] = name
+        
+
+        # Parameter validation
+        schema = RewardsValidator.getOfferByName()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/offers/{name}/", """{"required":[{"description":"company id","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"application id","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"User's session cookie. This cookie is set in browser cookie when logged-in to fynd's authentication system i.e. `Grimlock` or by using grimlock-backend SDK for backend implementation.","in":"header","name":"cookie","required":true,"schema":{"type":"string"}},{"description":"Offer name","in":"path","name":"name","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[{"description":"User's session cookie. This cookie is set in browser cookie when logged-in to fynd's authentication system i.e. `Grimlock` or by using grimlock-backend SDK for backend implementation.","in":"header","name":"cookie","required":true,"schema":{"type":"string"}}],"path":[{"description":"company id","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"application id","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"Offer name","in":"path","name":"name","required":true,"schema":{"type":"string"}}]}""", cookie=cookie, name=name)
+        query_string = await create_query_string(cookie=cookie, name=name)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/offers/{name}/", cookie=cookie, name=name), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
+    
+    async def updateOfferByName(self, name=None, body=""):
+        """Updates the offer by name.
+        :param name : Offer name : type string
+        """
+        payload = {}
+        
+        if name:
+            payload["name"] = name
+        
+
+        # Parameter validation
+        schema = RewardsValidator.updateOfferByName()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models.Offer import Offer
+        schema = Offer()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/offers/{name}/", """{"required":[{"description":"company id","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"application id","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"Offer name","in":"path","name":"name","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"company id","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"application id","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"Offer name","in":"path","name":"name","required":true,"schema":{"type":"string"}}]}""", name=name)
+        query_string = await create_query_string(name=name)
+        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/offers/{name}/", name=name), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, body, exclude_headers=["Authorization"]), data=body)
+    
+    async def getUserAvailablePoints(self, user_id=None):
+        """User's reward details.
+        :param user_id : user id : type string
+        """
+        payload = {}
+        
+        if user_id:
+            payload["user_id"] = user_id
+        
+
+        # Parameter validation
+        schema = RewardsValidator.getUserAvailablePoints()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/users/{user_id}/", """{"required":[{"description":"company id","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"application id","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"user id","in":"path","name":"user_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"company id","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"application id","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"user id","in":"path","name":"user_id","required":true,"schema":{"type":"string"}}]}""", user_id=user_id)
+        query_string = await create_query_string(user_id=user_id)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/users/{user_id}/", user_id=user_id), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
+    
+    async def updateUserStatus(self, user_id=None, body=""):
+        """Update user status, active/archive
+        :param user_id : user id : type string
+        """
+        payload = {}
+        
+        if user_id:
+            payload["user_id"] = user_id
+        
+
+        # Parameter validation
+        schema = RewardsValidator.updateUserStatus()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models.AppUser import AppUser
+        schema = AppUser()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/users/{user_id}/", """{"required":[{"description":"company id","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"application id","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"user id","in":"path","name":"user_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"company id","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"application id","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"user id","in":"path","name":"user_id","required":true,"schema":{"type":"string"}}]}""", user_id=user_id)
+        query_string = await create_query_string(user_id=user_id)
+        return await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/users/{user_id}/", user_id=user_id), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, body, exclude_headers=["Authorization"]), data=body)
+    
+    async def getUserPointsHistory(self, user_id=None, page_id=None, page_limit=None, page_size=None):
+        """Get list of points transactions.
+The list of points history is paginated.
+        :param user_id : user id : type string
+        :param page_id : PageID is the ID of the requested page. For first request it should be kept empty. : type string
+        :param page_limit : PageLimit is the number of requested items in response. : type integer
+        :param page_size : PageSize is the number of requested items in response. : type integer
+        """
+        payload = {}
+        
+        if user_id:
+            payload["user_id"] = user_id
+        
+        if page_id:
+            payload["page_id"] = page_id
+        
+        if page_limit:
+            payload["page_limit"] = page_limit
+        
+        if page_size:
+            payload["page_size"] = page_size
+        
+
+        # Parameter validation
+        schema = RewardsValidator.getUserPointsHistory()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/users/{user_id}/points/history/", """{"required":[{"description":"company id","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"application id","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"user id","in":"path","name":"user_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"PageID is the ID of the requested page. For first request it should be kept empty.","in":"query","name":"page_id","schema":{"type":"string"}},{"description":"PageLimit is the number of requested items in response.","in":"query","name":"page_limit","schema":{"type":"integer"}},{"description":"PageSize is the number of requested items in response.","in":"query","name":"page_size","schema":{"type":"integer"}}],"query":[{"description":"PageID is the ID of the requested page. For first request it should be kept empty.","in":"query","name":"page_id","schema":{"type":"string"}},{"description":"PageLimit is the number of requested items in response.","in":"query","name":"page_limit","schema":{"type":"integer"}},{"description":"PageSize is the number of requested items in response.","in":"query","name":"page_size","schema":{"type":"integer"}}],"headers":[],"path":[{"description":"company id","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"application id","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"user id","in":"path","name":"user_id","required":true,"schema":{"type":"string"}}]}""", user_id=user_id, page_id=page_id, page_limit=page_limit, page_size=page_size)
+        query_string = await create_query_string(user_id=user_id, page_id=page_id, page_limit=page_limit, page_size=page_size)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/users/{user_id}/points/history/", user_id=user_id, page_id=page_id, page_limit=page_limit, page_size=page_size), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
+    
+
+class Analytics:
+    def __init__(self, config, applicationId):
+        self._conf = config
+        self.applicationId = applicationId
+    
+    async def getStatiscticsGroups(self, ):
+        """Get statistics groups
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = AnalyticsValidator.getStatiscticsGroups()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/stats/group", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application Id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application Id","required":true,"schema":{"type":"string"}}]}""", )
+        query_string = await create_query_string()
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/stats/group", ), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
+    
+    async def getStatiscticsGroupComponents(self, group_name=None):
+        """Get statistics group components
+        :param group_name : Group name : type string
+        """
+        payload = {}
+        
+        if group_name:
+            payload["group_name"] = group_name
+        
+
+        # Parameter validation
+        schema = AnalyticsValidator.getStatiscticsGroupComponents()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/stats/group/{group_name}", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application Id","required":true,"schema":{"type":"string"}},{"name":"group_name","in":"path","description":"Group name","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application Id","required":true,"schema":{"type":"string"}},{"name":"group_name","in":"path","description":"Group name","required":true,"schema":{"type":"string"}}]}""", group_name=group_name)
+        query_string = await create_query_string(group_name=group_name)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/stats/group/{group_name}", group_name=group_name), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
+    
+    async def getComponentStatsCSV(self, component_name=None):
+        """Get component statistics csv
+        :param component_name : Component name : type string
+        """
+        payload = {}
+        
+        if component_name:
+            payload["component_name"] = component_name
+        
+
+        # Parameter validation
+        schema = AnalyticsValidator.getComponentStatsCSV()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/stats/component/{component_name}.csv", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application Id","required":true,"schema":{"type":"string"}},{"name":"component_name","in":"path","description":"Component name","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application Id","required":true,"schema":{"type":"string"}},{"name":"component_name","in":"path","description":"Component name","required":true,"schema":{"type":"string"}}]}""", component_name=component_name)
+        query_string = await create_query_string(component_name=component_name)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/stats/component/{component_name}.csv", component_name=component_name), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
+    
+    async def getComponentStatsPDF(self, component_name=None):
+        """Get component statistics pdf
+        :param component_name : Component name : type string
+        """
+        payload = {}
+        
+        if component_name:
+            payload["component_name"] = component_name
+        
+
+        # Parameter validation
+        schema = AnalyticsValidator.getComponentStatsPDF()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/stats/component/{component_name}.pdf", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application Id","required":true,"schema":{"type":"string"}},{"name":"component_name","in":"path","description":"Component name","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application Id","required":true,"schema":{"type":"string"}},{"name":"component_name","in":"path","description":"Component name","required":true,"schema":{"type":"string"}}]}""", component_name=component_name)
+        query_string = await create_query_string(component_name=component_name)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/stats/component/{component_name}.pdf", component_name=component_name), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
+    
+    async def getComponentStats(self, component_name=None):
+        """Get component statistics
+        :param component_name : Component name : type string
+        """
+        payload = {}
+        
+        if component_name:
+            payload["component_name"] = component_name
+        
+
+        # Parameter validation
+        schema = AnalyticsValidator.getComponentStats()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/stats/component/{component_name}", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application Id","required":true,"schema":{"type":"string"}},{"name":"component_name","in":"path","description":"Component name","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application Id","required":true,"schema":{"type":"string"}},{"name":"component_name","in":"path","description":"Component name","required":true,"schema":{"type":"string"}}]}""", component_name=component_name)
+        query_string = await create_query_string(component_name=component_name)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/stats/component/{component_name}", component_name=component_name), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
+    
+    async def getAbandonCartList(self, from_date=None, to_date=None, page_no=None, page_size=None):
+        """Get abandon carts list
+        :param from_date : From date : type string
+        :param to_date : To date : type string
+        :param page_no : Current page number : type integer
+        :param page_size : Current page size : type integer
+        """
+        payload = {}
+        
+        if from_date:
+            payload["from_date"] = from_date
+        
+        if to_date:
+            payload["to_date"] = to_date
+        
+        if page_no:
+            payload["page_no"] = page_no
+        
+        if page_size:
+            payload["page_size"] = page_size
+        
+
+        # Parameter validation
+        schema = AnalyticsValidator.getAbandonCartList()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/from/{from_date}/to/{to_date}/abandon-cart/", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application Id","required":true,"schema":{"type":"string"}},{"name":"from_date","in":"path","description":"From date","required":true,"schema":{"type":"string"}},{"name":"to_date","in":"path","description":"To date","required":true,"schema":{"type":"string"}}],"optional":[{"name":"page_no","in":"query","description":"Current page number","required":false,"schema":{"type":"integer","default":0}},{"name":"page_size","in":"query","description":"Current page size","required":false,"schema":{"type":"integer","default":10}}],"query":[{"name":"page_no","in":"query","description":"Current page number","required":false,"schema":{"type":"integer","default":0}},{"name":"page_size","in":"query","description":"Current page size","required":false,"schema":{"type":"integer","default":10}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application Id","required":true,"schema":{"type":"string"}},{"name":"from_date","in":"path","description":"From date","required":true,"schema":{"type":"string"}},{"name":"to_date","in":"path","description":"To date","required":true,"schema":{"type":"string"}}]}""", from_date=from_date, to_date=to_date, page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(from_date=from_date, to_date=to_date, page_no=page_no, page_size=page_size)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/from/{from_date}/to/{to_date}/abandon-cart/", from_date=from_date, to_date=to_date, page_no=page_no, page_size=page_size), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
+    
+    async def getAbandonCartsCSV(self, from_date=None, to_date=None):
+        """Get abandon carts csv
+        :param from_date : From date : type string
+        :param to_date : To date : type string
+        """
+        payload = {}
+        
+        if from_date:
+            payload["from_date"] = from_date
+        
+        if to_date:
+            payload["to_date"] = to_date
+        
+
+        # Parameter validation
+        schema = AnalyticsValidator.getAbandonCartsCSV()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/{from_date}/to/{to_date}/abandon-cart.csv", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application Id","required":true,"schema":{"type":"string"}},{"name":"from_date","in":"path","description":"From date","required":true,"schema":{"type":"string"}},{"name":"to_date","in":"path","description":"To date","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application Id","required":true,"schema":{"type":"string"}},{"name":"from_date","in":"path","description":"From date","required":true,"schema":{"type":"string"}},{"name":"to_date","in":"path","description":"To date","required":true,"schema":{"type":"string"}}]}""", from_date=from_date, to_date=to_date)
+        query_string = await create_query_string(from_date=from_date, to_date=to_date)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/{from_date}/to/{to_date}/abandon-cart.csv", from_date=from_date, to_date=to_date), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
+    
+    async def getAbandonCartDetail(self, cart_id=None):
+        """Get abandon cart details
+        :param cart_id : Cart Id : type string
+        """
+        payload = {}
+        
+        if cart_id:
+            payload["cart_id"] = cart_id
+        
+
+        # Parameter validation
+        schema = AnalyticsValidator.getAbandonCartDetail()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/abandon-cart/{cart_id}", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application Id","required":true,"schema":{"type":"string"}},{"name":"cart_id","in":"path","description":"Cart Id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application Id","required":true,"schema":{"type":"string"}},{"name":"cart_id","in":"path","description":"Cart Id","required":true,"schema":{"type":"string"}}]}""", cart_id=cart_id)
+        query_string = await create_query_string(cart_id=cart_id)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/abandon-cart/{cart_id}", cart_id=cart_id), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
+    
+
 class Discount:
     def __init__(self, config, applicationId):
         self._conf = config
@@ -5862,8 +6270,11 @@ class PlatformApplicationClient:
         self.companyProfile = CompanyProfile(config, applicationId)
         self.fileStorage = FileStorage(config, applicationId)
         self.share = Share(config, applicationId)
+        self.inventory = Inventory(config, applicationId)
         self.configuration = Configuration(config, applicationId)
         self.cart = Cart(config, applicationId)
+        self.rewards = Rewards(config, applicationId)
+        self.analytics = Analytics(config, applicationId)
         self.discount = Discount(config, applicationId)
         self.partner = Partner(config, applicationId)
         self.webhook = Webhook(config, applicationId)
