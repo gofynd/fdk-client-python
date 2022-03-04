@@ -1,4 +1,4 @@
-"""Application Models."""
+"""Platform Models."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class Logo(BaseSchema):
-    # Payment swagger.json
+class MetaFields(BaseSchema):
+    # Catalog swagger.json
 
     
-    large = fields.Str(required=False)
+    value = fields.Str(required=False)
     
-    small = fields.Str(required=False)
+    key = fields.Str(required=False)
     
 

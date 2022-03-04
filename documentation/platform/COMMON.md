@@ -39,7 +39,7 @@ except Exception as e:
 
 
 
-Search Application.
+Provide application name or domain url
 
 *Returned Response:*
 

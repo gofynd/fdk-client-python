@@ -1416,7 +1416,7 @@ class Common:
     # async def ():
     
     async def searchApplication(self, authorization=None, query=None, body=""):
-        """Search Application.
+        """Provide application name or domain url
         :param authorization :  : type string
         :param query : Provide application name : type string
         """
@@ -2991,14 +2991,10 @@ This operation will return the URL of the uploaded file.
         query_string = await create_query_string(namespace=namespace)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain("/service/application/assets/v1.0/namespaces/{namespace}/upload/complete/", namespace=namespace), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
     
-    async def signUrls(self, company_id=None, body=""):
+    async def signUrls(self, body=""):
         """Describe here
-        :param company_id : company_id : type integer
         """
         payload = {}
-        
-        if company_id:
-            payload["company_id"] = company_id
         
         # Parameter validation
         schema = FileStorageValidator.signUrls()
@@ -3010,9 +3006,9 @@ This operation will return the URL of the uploaded file.
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, "/service/application/assets/v1.0/company/{company_id}/sign-urls/", """{"required":[{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}}]}""", company_id=company_id)
-        query_string = await create_query_string(company_id=company_id)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain("/service/application/assets/v1.0/company/{company_id}/sign-urls/", company_id=company_id), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
+        url_with_params = await create_url_with_params(self._conf.domain, "/service/application/assets/v1.0/sign-urls/", """{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        query_string = await create_query_string()
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain("/service/application/assets/v1.0/sign-urls/", ), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
     
 
 class Configuration:

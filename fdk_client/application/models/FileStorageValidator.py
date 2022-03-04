@@ -19,6 +19,5 @@ class FileStorageValidator:
     
     class signUrls(BaseSchema):
         
-        company_id = fields.Int(required=False)
-         
+        pass 
     
