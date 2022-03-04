@@ -11,11 +11,11 @@ from .Child import Child
 
 
 
+from .ProductListingAction import ProductListingAction
+
 
 
 from .ImageUrls import ImageUrls
-
-from .ProductListingAction import ProductListingAction
 
 
 class CategoryItems(BaseSchema):
@@ -28,10 +28,10 @@ class CategoryItems(BaseSchema):
     
     uid = fields.Int(required=False)
     
+    action = fields.Nested(ProductListingAction, required=False)
+    
     name = fields.Str(required=False)
     
     banners = fields.Nested(ImageUrls, required=False)
-    
-    action = fields.Nested(ProductListingAction, required=False)
     
 

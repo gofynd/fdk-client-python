@@ -18,11 +18,8 @@ from .models.CatalogValidator import CatalogValidator
 from .models.CompanyProfileValidator import CompanyProfileValidator
 from .models.FileStorageValidator import FileStorageValidator
 from .models.ShareValidator import ShareValidator
-from .models.InventoryValidator import InventoryValidator
 from .models.ConfigurationValidator import ConfigurationValidator
 from .models.CartValidator import CartValidator
-from .models.RewardsValidator import RewardsValidator
-from .models.AnalyticsValidator import AnalyticsValidator
 from .models.DiscountValidator import DiscountValidator
 from .models.PartnerValidator import PartnerValidator
 from .models.WebhookValidator import WebhookValidator
@@ -1890,6 +1887,25 @@ class Catalog:
         query_string = await create_query_string(brand_ids=brand_ids, category_ids=category_ids, item_ids=item_ids, department_ids=department_ids, item_code=item_code, q=q, tags=tags, page_no=page_no, page_size=page_size)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/", brand_ids=brand_ids, category_ids=category_ids, item_ids=item_ids, department_ids=department_ids, item_code=item_code, q=q, tags=tags, page_no=page_no, page_size=page_size), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
     
+    async def deleteProduct(self, item_id=None):
+        """This API allows to delete product.
+        :param item_id : Id of the product to be updated. : type integer
+        """
+        payload = {}
+        
+        if item_id:
+            payload["item_id"] = item_id
+        
+
+        # Parameter validation
+        schema = CatalogValidator.deleteProduct()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/", """{"required":[{"in":"path","name":"company_id","description":"Company Id of the company associated to product that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Id of the product to be updated.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of the company associated to product that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Id of the product to be updated.","schema":{"type":"integer"},"required":true}]}""", item_id=item_id)
+        query_string = await create_query_string(item_id=item_id)
+        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
+    
     async def getProduct(self, item_code=None, item_id=None, brand_uid=None):
         """This API helps to get data associated to a particular product.
         :param item_code : Item code of the product. : type string
@@ -1916,25 +1932,6 @@ class Catalog:
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/", """{"required":[{"in":"path","name":"company_id","description":"Company Id of the product.","schema":{"type":"integer"},"required":true},{"in":"path","name":"item_id","description":"Item Id of the product.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"item_code","description":"Item code of the product.","schema":{"type":"string"},"required":false},{"in":"query","name":"brand_uid","description":"Brand Id of the product.","schema":{"type":"integer"},"required":false}],"query":[{"in":"query","name":"item_code","description":"Item code of the product.","schema":{"type":"string"},"required":false},{"in":"query","name":"brand_uid","description":"Brand Id of the product.","schema":{"type":"integer"},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of the product.","schema":{"type":"integer"},"required":true},{"in":"path","name":"item_id","description":"Item Id of the product.","schema":{"type":"integer"},"required":true}]}""", item_code=item_code, item_id=item_id, brand_uid=brand_uid)
         query_string = await create_query_string(item_code=item_code, item_id=item_id, brand_uid=brand_uid)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/", item_code=item_code, item_id=item_id, brand_uid=brand_uid), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
-    
-    async def deleteProduct(self, item_id=None):
-        """This API allows to delete product.
-        :param item_id : Id of the product to be updated. : type integer
-        """
-        payload = {}
-        
-        if item_id:
-            payload["item_id"] = item_id
-        
-
-        # Parameter validation
-        schema = CatalogValidator.deleteProduct()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/", """{"required":[{"in":"path","name":"company_id","description":"Company Id of the company associated to product that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Id of the product to be updated.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of the company associated to product that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Id of the product to be updated.","schema":{"type":"integer"},"required":true}]}""", item_id=item_id)
-        query_string = await create_query_string(item_id=item_id)
-        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
     
     async def editProduct(self, item_id=None, body=""):
         """This API allows to edit product.
@@ -2631,25 +2628,6 @@ class CompanyProfile:
         query_string = await create_query_string()
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/metrics", ), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
     
-    async def getBrand(self, brand_id=None):
-        """This API helps to get data associated to a particular brand.
-        :param brand_id : Id of the brand to be viewed. : type string
-        """
-        payload = {}
-        
-        if brand_id:
-            payload["brand_id"] = brand_id
-        
-
-        # Parameter validation
-        schema = CompanyProfileValidator.getBrand()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/brand/{brand_id}", """{"required":[{"in":"path","name":"company_id","description":"Id of the company associated to brand that is to be viewed.","schema":{"type":"string"},"required":true},{"in":"path","name":"brand_id","description":"Id of the brand to be viewed.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company associated to brand that is to be viewed.","schema":{"type":"string"},"required":true},{"in":"path","name":"brand_id","description":"Id of the brand to be viewed.","schema":{"type":"string"},"required":true}]}""", brand_id=brand_id)
-        query_string = await create_query_string(brand_id=brand_id)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/brand/{brand_id}", brand_id=brand_id), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
-    
     async def editBrand(self, brand_id=None, body=""):
         """This API allows to edit meta of a brand.
         :param brand_id : Id of the brand to be viewed. : type string
@@ -2673,6 +2651,25 @@ class CompanyProfile:
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/brand/{brand_id}", """{"required":[{"in":"path","name":"company_id","description":"Id of the company associated to brand that is to be viewed.","schema":{"type":"string"},"required":true},{"in":"path","name":"brand_id","description":"Id of the brand to be viewed.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company associated to brand that is to be viewed.","schema":{"type":"string"},"required":true},{"in":"path","name":"brand_id","description":"Id of the brand to be viewed.","schema":{"type":"string"},"required":true}]}""", brand_id=brand_id)
         query_string = await create_query_string(brand_id=brand_id)
         return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/brand/{brand_id}", brand_id=brand_id), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, body, exclude_headers=["Authorization"]), data=body)
+    
+    async def getBrand(self, brand_id=None):
+        """This API helps to get data associated to a particular brand.
+        :param brand_id : Id of the brand to be viewed. : type string
+        """
+        payload = {}
+        
+        if brand_id:
+            payload["brand_id"] = brand_id
+        
+
+        # Parameter validation
+        schema = CompanyProfileValidator.getBrand()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/brand/{brand_id}", """{"required":[{"in":"path","name":"company_id","description":"Id of the company associated to brand that is to be viewed.","schema":{"type":"string"},"required":true},{"in":"path","name":"brand_id","description":"Id of the brand to be viewed.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company associated to brand that is to be viewed.","schema":{"type":"string"},"required":true},{"in":"path","name":"brand_id","description":"Id of the brand to be viewed.","schema":{"type":"string"},"required":true}]}""", brand_id=brand_id)
+        query_string = await create_query_string(brand_id=brand_id)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/brand/{brand_id}", brand_id=brand_id), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
     
     async def createBrand(self, body=""):
         """This API allows to create a brand associated to a company.
@@ -2796,25 +2793,6 @@ class CompanyProfile:
         query_string = await create_query_string()
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/location", ), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, body, exclude_headers=["Authorization"]), data=body)
     
-    async def getLocationDetail(self, location_id=None):
-        """This API helps to get data associated to a specific location.
-        :param location_id : Id of the location which you want to view. : type string
-        """
-        payload = {}
-        
-        if location_id:
-            payload["location_id"] = location_id
-        
-
-        # Parameter validation
-        schema = CompanyProfileValidator.getLocationDetail()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/location/{location_id}", """{"required":[{"in":"path","name":"company_id","description":"Id of the company inside which the location lies.","schema":{"type":"string"},"required":true},{"in":"path","name":"location_id","description":"Id of the location which you want to view.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company inside which the location lies.","schema":{"type":"string"},"required":true},{"in":"path","name":"location_id","description":"Id of the location which you want to view.","schema":{"type":"string"},"required":true}]}""", location_id=location_id)
-        query_string = await create_query_string(location_id=location_id)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/location/{location_id}", location_id=location_id), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
-    
     async def updateLocation(self, location_id=None, body=""):
         """This API allows to edit a location associated to a company.
         :param location_id : Id of the location which you want to edit. : type string
@@ -2838,6 +2816,25 @@ class CompanyProfile:
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/location/{location_id}", """{"required":[{"in":"path","name":"company_id","description":"Id of the company inside which the location is to be created.","schema":{"type":"string"},"required":true},{"in":"path","name":"location_id","description":"Id of the location which you want to edit.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company inside which the location is to be created.","schema":{"type":"string"},"required":true},{"in":"path","name":"location_id","description":"Id of the location which you want to edit.","schema":{"type":"string"},"required":true}]}""", location_id=location_id)
         query_string = await create_query_string(location_id=location_id)
         return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/location/{location_id}", location_id=location_id), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, body, exclude_headers=["Authorization"]), data=body)
+    
+    async def getLocationDetail(self, location_id=None):
+        """This API helps to get data associated to a specific location.
+        :param location_id : Id of the location which you want to view. : type string
+        """
+        payload = {}
+        
+        if location_id:
+            payload["location_id"] = location_id
+        
+
+        # Parameter validation
+        schema = CompanyProfileValidator.getLocationDetail()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/location/{location_id}", """{"required":[{"in":"path","name":"company_id","description":"Id of the company inside which the location lies.","schema":{"type":"string"},"required":true},{"in":"path","name":"location_id","description":"Id of the location which you want to view.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company inside which the location lies.","schema":{"type":"string"},"required":true},{"in":"path","name":"location_id","description":"Id of the location which you want to view.","schema":{"type":"string"},"required":true}]}""", location_id=location_id)
+        query_string = await create_query_string(location_id=location_id)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/location/{location_id}", location_id=location_id), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
     
     async def createLocationBulk(self, body=""):
         """This API allows to create a location associated to a company.
@@ -3038,235 +3035,6 @@ This operation will return the url for the uploaded file.
 class Share:
     def __init__(self, config):
         self._conf = config
-    
-
-class Inventory:
-    def __init__(self, config):
-        self._conf = config
-    
-    async def getJobsByCompany(self, page_no=None, page_size=None):
-        """REST Endpoint that returns all job configs for a company
-        :param page_no : Page Number : type integer
-        :param page_size : Page Size : type integer
-        """
-        payload = {}
-        
-        if page_no:
-            payload["page_no"] = page_no
-        
-        if page_size:
-            payload["page_size"] = page_size
-        
-
-        # Parameter validation
-        schema = InventoryValidator.getJobsByCompany()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}}],"optional":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer","format":"int32","default":1}},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32","default":10}}],"query":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer","format":"int32","default":1}},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32","default":10}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}}]}""", page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs", page_no=page_no, page_size=page_size), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
-    
-    async def updateJob(self, body=""):
-        """REST Endpoint that updates a job config
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = InventoryValidator.updateJob()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models.JobConfigDTO import JobConfigDTO
-        schema = JobConfigDTO()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}}]}""", )
-        query_string = await create_query_string()
-        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs", ), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, body, exclude_headers=["Authorization"]), data=body)
-    
-    async def createJob(self, body=""):
-        """REST Endpoint that creates a new job config
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = InventoryValidator.createJob()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models.JobConfigDTO import JobConfigDTO
-        schema = JobConfigDTO()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}}]}""", )
-        query_string = await create_query_string()
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs", ), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, body, exclude_headers=["Authorization"]), data=body)
-    
-    async def getJobSteps(self, job_id=None):
-        """REST Endpoint that returns Inventory Job Steps
-        :param job_id : Job Id : type integer
-        """
-        payload = {}
-        
-        if job_id:
-            payload["job_id"] = job_id
-        
-
-        # Parameter validation
-        schema = InventoryValidator.getJobSteps()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs/steps/{job_id}", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}},{"name":"job_id","in":"path","description":"Job Id","required":true,"schema":{"type":"integer","format":"int32"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}},{"name":"job_id","in":"path","description":"Job Id","required":true,"schema":{"type":"integer","format":"int32"}}]}""", job_id=job_id)
-        query_string = await create_query_string(job_id=job_id)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs/steps/{job_id}", job_id=job_id), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
-    
-    async def getJobByCompanyAndIntegration(self, integration_id=None, page_no=None, page_size=None):
-        """REST Endpoint that returns all job configs by company And integration
-        :param integration_id : Integration Id : type string
-        :param page_no : Page Number : type integer
-        :param page_size : Page Size : type integer
-        """
-        payload = {}
-        
-        if integration_id:
-            payload["integration_id"] = integration_id
-        
-        if page_no:
-            payload["page_no"] = page_no
-        
-        if page_size:
-            payload["page_size"] = page_size
-        
-
-        # Parameter validation
-        schema = InventoryValidator.getJobByCompanyAndIntegration()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs/integration/{integration_id}", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}},{"name":"integration_id","in":"path","description":"Integration Id","required":true,"schema":{"type":"string"}}],"optional":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer","format":"int32","default":1}},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32","default":10}}],"query":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer","format":"int32","default":1}},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32","default":10}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}},{"name":"integration_id","in":"path","description":"Integration Id","required":true,"schema":{"type":"string"}}]}""", integration_id=integration_id, page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(integration_id=integration_id, page_no=page_no, page_size=page_size)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs/integration/{integration_id}", integration_id=integration_id, page_no=page_no, page_size=page_size), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
-    
-    async def disable(self, integration_id=None):
-        """REST Endpoint that disables Inventory Job Config
-        :param integration_id : IntegrationId : type string
-        """
-        payload = {}
-        
-        if integration_id:
-            payload["integration_id"] = integration_id
-        
-
-        # Parameter validation
-        schema = InventoryValidator.disable()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs/disable/integration/{integration_id}", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}},{"name":"integration_id","in":"path","description":"IntegrationId","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}},{"name":"integration_id","in":"path","description":"IntegrationId","required":true,"schema":{"type":"string"}}]}""", integration_id=integration_id)
-        query_string = await create_query_string(integration_id=integration_id)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs/disable/integration/{integration_id}", integration_id=integration_id), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
-    
-    async def getJobConfigDefaults(self, ):
-        """REST Endpoint that returns default fields job configs by company And integration
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = InventoryValidator.getJobConfigDefaults()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs/defaults", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}}]}""", )
-        query_string = await create_query_string()
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs/defaults", ), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
-    
-    async def getJobByCode(self, code=None):
-        """REST Endpoint that returns job config by code
-        :param code : Job Code : type string
-        """
-        payload = {}
-        
-        if code:
-            payload["code"] = code
-        
-
-        # Parameter validation
-        schema = InventoryValidator.getJobByCode()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs/code/{code}", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}},{"name":"code","in":"path","description":"Job Code","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}},{"name":"code","in":"path","description":"Job Code","required":true,"schema":{"type":"string"}}]}""", code=code)
-        query_string = await create_query_string(code=code)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs/code/{code}", code=code), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
-    
-    async def getJobCodeMetrics(self, code=None, page_no=None, page_size=None, status=None, date=None):
-        """REST Endpoint that returns Inventory Run History For A Job Code
-        :param code : Code : type string
-        :param page_no : Page Number : type integer
-        :param page_size : Page Size : type integer
-        :param status : Status : type string
-        :param date : From Date : type string
-        """
-        payload = {}
-        
-        if code:
-            payload["code"] = code
-        
-        if page_no:
-            payload["page_no"] = page_no
-        
-        if page_size:
-            payload["page_size"] = page_size
-        
-        if status:
-            payload["status"] = status
-        
-        if date:
-            payload["date"] = date
-        
-
-        # Parameter validation
-        schema = InventoryValidator.getJobCodeMetrics()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs/code/{code}/metrics", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}},{"name":"code","in":"path","description":"Code","required":true,"schema":{"type":"string"}}],"optional":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer","format":"int32","default":1}},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32","default":10}},{"name":"status","in":"query","description":"Status","required":false,"schema":{"type":"string"}},{"name":"date","in":"query","description":"From Date","required":false,"schema":{"type":"string","format":"date-time"}}],"query":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer","format":"int32","default":1}},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32","default":10}},{"name":"status","in":"query","description":"Status","required":false,"schema":{"type":"string"}},{"name":"date","in":"query","description":"From Date","required":false,"schema":{"type":"string","format":"date-time"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}},{"name":"code","in":"path","description":"Code","required":true,"schema":{"type":"string"}}]}""", code=code, page_no=page_no, page_size=page_size, status=status, date=date)
-        query_string = await create_query_string(code=code, page_no=page_no, page_size=page_size, status=status, date=date)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs/code/{code}/metrics", code=code, page_no=page_no, page_size=page_size, status=status, date=date), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
-    
-    async def getJobCodesByCompanyAndIntegration(self, integration_id=None, page_no=None, page_size=None):
-        """REST Endpoint that returns all job codes by company And integration
-        :param integration_id : Integration Id : type string
-        :param page_no : Page Number : type integer
-        :param page_size : Page Size : type integer
-        """
-        payload = {}
-        
-        if integration_id:
-            payload["integration_id"] = integration_id
-        
-        if page_no:
-            payload["page_no"] = page_no
-        
-        if page_size:
-            payload["page_size"] = page_size
-        
-
-        # Parameter validation
-        schema = InventoryValidator.getJobCodesByCompanyAndIntegration()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs/code/integration/{integration_id}", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}},{"name":"integration_id","in":"path","description":"Integration Id","required":true,"schema":{"type":"string"}}],"optional":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer","format":"int32","default":1}},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32","default":10}}],"query":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer","format":"int32","default":1}},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32","default":10}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}},{"name":"integration_id","in":"path","description":"Integration Id","required":true,"schema":{"type":"string"}}]}""", integration_id=integration_id, page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(integration_id=integration_id, page_no=page_no, page_size=page_size)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs/code/integration/{integration_id}", integration_id=integration_id, page_no=page_no, page_size=page_size), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
     
 
 class Configuration:
@@ -3720,127 +3488,6 @@ class Cart:
         self._conf = config
     
 
-class Rewards:
-    def __init__(self, config):
-        self._conf = config
-    
-
-class Analytics:
-    def __init__(self, config):
-        self._conf = config
-    
-    async def createExportJob(self, export_type=None, body=""):
-        """Create data export job in required format
-        :param export_type : Export type / format : type string
-        """
-        payload = {}
-        
-        if export_type:
-            payload["export_type"] = export_type
-        
-
-        # Parameter validation
-        schema = AnalyticsValidator.createExportJob()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models.ExportJobReq import ExportJobReq
-        schema = ExportJobReq()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/export/{export_type}", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"export_type","in":"path","description":"Export type / format","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"export_type","in":"path","description":"Export type / format","required":true,"schema":{"type":"string"}}]}""", export_type=export_type)
-        query_string = await create_query_string(export_type=export_type)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/export/{export_type}", export_type=export_type), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, body, exclude_headers=["Authorization"]), data=body)
-    
-    async def getExportJobStatus(self, export_type=None, job_id=None):
-        """Get data export job status
-        :param export_type : Export type / format : type string
-        :param job_id : Export job id : type string
-        """
-        payload = {}
-        
-        if export_type:
-            payload["export_type"] = export_type
-        
-        if job_id:
-            payload["job_id"] = job_id
-        
-
-        # Parameter validation
-        schema = AnalyticsValidator.getExportJobStatus()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/export/{export_type}/job/{job_id}", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"export_type","in":"path","description":"Export type / format","required":true,"schema":{"type":"string"}},{"name":"job_id","in":"path","description":"Export job id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"export_type","in":"path","description":"Export type / format","required":true,"schema":{"type":"string"}},{"name":"job_id","in":"path","description":"Export job id","required":true,"schema":{"type":"string"}}]}""", export_type=export_type, job_id=job_id)
-        query_string = await create_query_string(export_type=export_type, job_id=job_id)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/export/{export_type}/job/{job_id}", export_type=export_type, job_id=job_id), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
-    
-    async def getLogsList(self, log_type=None, page_no=None, page_size=None, body=""):
-        """Get logs list
-        :param log_type : Log type : type string
-        :param page_no : Current page number : type integer
-        :param page_size : Current page size : type integer
-        """
-        payload = {}
-        
-        if log_type:
-            payload["log_type"] = log_type
-        
-        if page_no:
-            payload["page_no"] = page_no
-        
-        if page_size:
-            payload["page_size"] = page_size
-        
-
-        # Parameter validation
-        schema = AnalyticsValidator.getLogsList()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models.GetLogsListReq import GetLogsListReq
-        schema = GetLogsListReq()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/logs/{log_type}", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"log_type","in":"path","description":"Log type","required":true,"schema":{"type":"string"}}],"optional":[{"name":"page_no","in":"query","description":"Current page number","required":false,"schema":{"type":"integer","default":0}},{"name":"page_size","in":"query","description":"Current page size","required":false,"schema":{"type":"integer","default":10}}],"query":[{"name":"page_no","in":"query","description":"Current page number","required":false,"schema":{"type":"integer","default":0}},{"name":"page_size","in":"query","description":"Current page size","required":false,"schema":{"type":"integer","default":10}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"log_type","in":"path","description":"Log type","required":true,"schema":{"type":"string"}}]}""", log_type=log_type, page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(log_type=log_type, page_no=page_no, page_size=page_size)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/logs/{log_type}", log_type=log_type, page_no=page_no, page_size=page_size), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, body, exclude_headers=["Authorization"]), data=body)
-    
-    async def searchLogs(self, page_no=None, page_size=None, log_type=None, body=""):
-        """Search logs
-        :param page_no : Current page number : type integer
-        :param page_size : Current page size : type integer
-        :param log_type : Log type : type string
-        """
-        payload = {}
-        
-        if page_no:
-            payload["page_no"] = page_no
-        
-        if page_size:
-            payload["page_size"] = page_size
-        
-        if log_type:
-            payload["log_type"] = log_type
-        
-
-        # Parameter validation
-        schema = AnalyticsValidator.searchLogs()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models.SearchLogReq import SearchLogReq
-        schema = SearchLogReq()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/logs/{log_type}/search", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"log_type","in":"path","description":"Log type","required":true,"schema":{"type":"string"}}],"optional":[{"name":"page_no","in":"query","description":"Current page number","required":false,"schema":{"type":"integer","default":0}},{"name":"page_size","in":"query","description":"Current page size","required":false,"schema":{"type":"integer","default":10}}],"query":[{"name":"page_no","in":"query","description":"Current page number","required":false,"schema":{"type":"integer","default":0}},{"name":"page_size","in":"query","description":"Current page size","required":false,"schema":{"type":"integer","default":10}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"log_type","in":"path","description":"Log type","required":true,"schema":{"type":"string"}}]}""", page_no=page_no, page_size=page_size, log_type=log_type)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, log_type=log_type)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/logs/{log_type}/search", page_no=page_no, page_size=page_size, log_type=log_type), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, body, exclude_headers=["Authorization"]), data=body)
-    
-
 class Discount:
     def __init__(self, config):
         self._conf = config
@@ -4241,11 +3888,8 @@ class PlatformClient:
         self.companyProfile = CompanyProfile(config)
         self.fileStorage = FileStorage(config)
         self.share = Share(config)
-        self.inventory = Inventory(config)
         self.configuration = Configuration(config)
         self.cart = Cart(config)
-        self.rewards = Rewards(config)
-        self.analytics = Analytics(config)
         self.discount = Discount(config)
         self.partner = Partner(config)
         self.webhook = Webhook(config)

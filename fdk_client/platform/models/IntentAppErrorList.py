@@ -8,10 +8,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class DBParamConfig(BaseSchema):
-    # Inventory swagger.json
+
+
+class IntentAppErrorList(BaseSchema):
+    # Payment swagger.json
 
     
-    params = fields.Dict(required=False)
+    code = fields.Str(required=False)
+    
+    package_name = fields.Str(required=False)
     
 

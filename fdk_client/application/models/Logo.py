@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class SortMethod(BaseSchema):
-    # Feedback swagger.json
+class Logo(BaseSchema):
+    # Payment swagger.json
 
     
-    name = fields.Str(required=False)
+    small = fields.Str(required=False)
     
-    selected = fields.Boolean(required=False)
-    
-    type = fields.Str(required=False)
+    large = fields.Str(required=False)
     
 

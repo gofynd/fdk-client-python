@@ -9,21 +9,21 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+from .Logo import Logo
 
 
 
 
-
-class RefundAccountResponse(BaseSchema):
+class IntentApp(BaseSchema):
     # Payment swagger.json
 
     
-    success = fields.Boolean(required=False)
+    code = fields.Str(required=False)
     
-    data = fields.Dict(required=False)
+    package_name = fields.Str(required=False)
     
-    is_verified_flag = fields.Boolean(required=False)
+    logos = fields.Nested(Logo, required=False)
     
-    message = fields.Str(required=False)
+    display_name = fields.Str(required=False)
     
 

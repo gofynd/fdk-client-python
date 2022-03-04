@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class VoteCount(BaseSchema):
-    # Feedback swagger.json
+class IntentAppErrorList(BaseSchema):
+    # Payment swagger.json
 
     
-    downvote = fields.Int(required=False)
+    code = fields.Str(required=False)
     
-    upvote = fields.Int(required=False)
+    package_name = fields.Str(required=False)
     
 
