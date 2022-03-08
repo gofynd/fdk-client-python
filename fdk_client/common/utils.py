@@ -18,10 +18,10 @@ async def validate_required_query_params(proccessed_params: Dict, params: Dict):
             raise RequiredParametersError(message="{} missing".format(r_param["name"]))
 
 
-async def create_url_with_params(domain: Text, url: Text, proccessed_params: Text, **kwargs):
+async def create_url_with_params(domain: Text = "", api_url: Text = "", proccessed_params: Text = "", **kwargs):
     """Creates url with params"""
     params = {}
-    final_url = domain + url
+    final_url = domain + api_url
     for key, value in kwargs.items():
         if value:
             new_key = key.replace("__", "-")
