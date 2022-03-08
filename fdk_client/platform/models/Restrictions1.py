@@ -5,15 +5,15 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .PostOrder1 import PostOrder1
 
+
+
+from .PromotionPaymentModes import PromotionPaymentModes
 
 from .UserRegistered import UserRegistered
 
 
-
-from .PostOrder1 import PostOrder1
-
-from .PromotionPaymentModes import PromotionPaymentModes
 
 
 
@@ -28,17 +28,17 @@ class Restrictions1(BaseSchema):
     # Cart swagger.json
 
     
-    order_quantity = fields.Int(required=False)
-    
-    user_registered = fields.Nested(UserRegistered, required=False)
+    post_order = fields.Nested(PostOrder1, required=False)
     
     platforms = fields.List(fields.Str(required=False), required=False)
     
-    post_order = fields.Nested(PostOrder1, required=False)
-    
     payments = fields.List(fields.Nested(PromotionPaymentModes, required=False), required=False)
     
+    user_registered = fields.Nested(UserRegistered, required=False)
+    
     user_id = fields.List(fields.Str(required=False), required=False)
+    
+    order_quantity = fields.Int(required=False)
     
     anonymous_users = fields.Boolean(required=False)
     
