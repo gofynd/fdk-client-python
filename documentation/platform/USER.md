@@ -9,8 +9,11 @@ Authentication Service
 * [getCustomers](#getcustomers)
 * [searchUsers](#searchusers)
 * [createUser](#createuser)
+* [blockOrUnblockUsers](#blockorunblockusers)
 * [updateUser](#updateuser)
 * [createUserSession](#createusersession)
+* [getActiveSessions](#getactivesessions)
+* [deleteActiveSessions](#deleteactivesessions)
 * [getPlatformConfig](#getplatformconfig)
 * [updatePlatformConfig](#updateplatformconfig)
 
@@ -336,6 +339,64 @@ User create
 ---
 
 
+### blockOrUnblockUsers
+Block/Unblock user
+
+
+
+
+```python
+try:
+    result = await client.application("<APPLICATION_ID>").user.blockOrUnblockUsers(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [BlockUserRequestSchema](#BlockUserRequestSchema) | yes | Request body |
+
+
+Block/Unblock user
+
+*Returned Response:*
+
+
+
+
+[BlockUserSuccess](#BlockUserSuccess)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
 ### updateUser
 Update user
 
@@ -487,6 +548,146 @@ Create user session
   }
 }
 ```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getActiveSessions
+Get a list of all sections for a user
+
+
+
+
+```python
+try:
+    result = await client.application("<APPLICATION_ID>").user.getActiveSessions(id=id)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | ID of a customer. |  
+
+
+
+Use this API to retrieve a list of customers who have registered in the application.
+
+*Returned Response:*
+
+
+
+
+[SessionListResponseSchema](#SessionListResponseSchema)
+
+Success. Refer `SessionListResponseSchema` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; Success</i></summary>
+
+```json
+{
+  "value": {
+    "items": [
+      "sess:123",
+      "sess:456"
+    ]
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### deleteActiveSessions
+Get a list of all sections for a user
+
+
+
+
+```python
+try:
+    result = await client.application("<APPLICATION_ID>").user.deleteActiveSessions(id=id)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | ID of a customer. |  
+
+
+
+Use this API to retrieve a list of customers who have registered in the application.
+
+*Returned Response:*
+
+
+
+
+[SessionListResponseSchema](#SessionListResponseSchema)
+
+Success. Refer `SessionListResponseSchema` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; Success</i></summary>
+
+```json
+{
+  "value": {
+    "items": [
+      "sess:123",
+      "sess:456"
+    ]
+  }
+}
+```
+</details>
+
 </details>
 
 
@@ -740,6 +941,19 @@ Success. Returns a JSON object with the updated platform configurations. Refer `
 
 
 ### Schemas
+
+ 
+ 
+ #### [BlockUserRequestSchema](#BlockUserRequestSchema)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | status | Boolean? |  yes  |  |
+ | userId | ArrayList<String>? |  yes  |  |
+ | reason | String? |  yes  |  |
+
+---
+
 
  
  
@@ -1158,6 +1372,17 @@ Success. Returns a JSON object with the updated platform configurations. Refer `
 
  
  
+ #### [BlockUserSuccess](#BlockUserSuccess)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | success | Boolean? |  yes  |  |
+
+---
+
+
+ 
+ 
  #### [OtpSuccess](#OtpSuccess)
 
  | Properties | Type | Nullable | Description |
@@ -1276,6 +1501,17 @@ Success. Returns a JSON object with the updated platform configurations. Refer `
  | hasNext | Boolean? |  yes  |  |
  | type | String? |  yes  |  |
  | current | Int? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [SessionListResponseSchema](#SessionListResponseSchema)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | items | ArrayList<String>? |  yes  |  |
 
 ---
 

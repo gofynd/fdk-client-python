@@ -22,12 +22,12 @@ class GetSearchWordsData(BaseSchema):
     
     words = fields.List(fields.Str(required=False), required=False)
     
-    _custom_json = fields.Dict(required=False)
-    
     uid = fields.Str(required=False)
     
-    result = fields.Dict(required=False)
-    
     app_id = fields.Str(required=False)
+    
+    _custom_json = fields.Dict(required=False)
+    
+    result = fields.Dict(required=False)
     
 

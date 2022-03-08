@@ -11,13 +11,13 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .ProductStockPrice import ProductStockPrice
-
-from .CompanyDetail import CompanyDetail
+from .StoreDetail import StoreDetail
 
 from .Seller import Seller
 
-from .StoreDetail import StoreDetail
+from .CompanyDetail import CompanyDetail
+
+from .ProductStockPrice import ProductStockPrice
 
 
 
@@ -28,19 +28,19 @@ class ProductStockStatusItem(BaseSchema):
     # Catalog swagger.json
 
     
-    uid = fields.Str(required=False)
+    identifier = fields.Dict(required=False)
     
     size = fields.Str(required=False)
     
-    identifier = fields.Dict(required=False)
+    uid = fields.Str(required=False)
     
-    price = fields.Nested(ProductStockPrice, required=False)
-    
-    company = fields.Nested(CompanyDetail, required=False)
+    store = fields.Nested(StoreDetail, required=False)
     
     seller = fields.Nested(Seller, required=False)
     
-    store = fields.Nested(StoreDetail, required=False)
+    company = fields.Nested(CompanyDetail, required=False)
+    
+    price = fields.Nested(ProductStockPrice, required=False)
     
     item_id = fields.Int(required=False)
     
