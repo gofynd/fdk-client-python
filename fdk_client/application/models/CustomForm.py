@@ -15,6 +15,8 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+from .Priority import Priority
+
 
 
 
@@ -47,6 +49,8 @@ class CustomForm(BaseSchema):
     title = fields.Str(required=False)
     
     description = fields.Str(required=False)
+    
+    priority = fields.Nested(Priority, required=False)
     
     login_required = fields.Boolean(required=False)
     

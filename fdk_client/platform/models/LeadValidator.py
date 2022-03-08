@@ -19,7 +19,7 @@ class LeadValidator:
         
         status = fields.Str(required=False)
         
-        priority = fields.Str(required=False)
+        priority = fields.Str(required=False, validate=OneOf([val.value for val in PriorityEnum.__members__.values()]))
         
         category = fields.Str(required=False)
         
@@ -47,7 +47,7 @@ class LeadValidator:
         
         status = fields.Str(required=False)
         
-        priority = fields.Str(required=False)
+        priority = fields.Str(required=False, validate=OneOf([val.value for val in PriorityEnum.__members__.values()]))
         
         category = fields.Str(required=False)
          
@@ -56,14 +56,14 @@ class LeadValidator:
         
         company_id = fields.Str(required=False)
         
-        ticket_id = fields.Str(required=False)
+        id = fields.Str(required=False)
          
     
     class editTicket(BaseSchema):
         
         company_id = fields.Str(required=False)
         
-        ticket_id = fields.Str(required=False)
+        id = fields.Str(required=False)
          
     
     class getTicket(BaseSchema):
@@ -72,7 +72,7 @@ class LeadValidator:
         
         application_id = fields.Str(required=False)
         
-        ticket_id = fields.Str(required=False)
+        id = fields.Str(required=False)
          
     
     class editTicket(BaseSchema):
@@ -81,21 +81,35 @@ class LeadValidator:
         
         application_id = fields.Str(required=False)
         
-        ticket_id = fields.Str(required=False)
+        id = fields.Str(required=False)
          
     
     class createHistory(BaseSchema):
         
         company_id = fields.Str(required=False)
         
-        ticket_id = fields.Str(required=False)
+        id = fields.Str(required=False)
          
     
     class getTicketHistory(BaseSchema):
         
         company_id = fields.Str(required=False)
         
-        ticket_id = fields.Str(required=False)
+        id = fields.Str(required=False)
+         
+    
+    class getFeedbacks(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+    
+    class submitFeedback(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
          
     
     class createHistory(BaseSchema):
@@ -104,7 +118,7 @@ class LeadValidator:
         
         application_id = fields.Str(required=False)
         
-        ticket_id = fields.Str(required=False)
+        id = fields.Str(required=False)
          
     
     class getTicketHistory(BaseSchema):
@@ -113,7 +127,7 @@ class LeadValidator:
         
         application_id = fields.Str(required=False)
         
-        ticket_id = fields.Str(required=False)
+        id = fields.Str(required=False)
          
     
     class getCustomForm(BaseSchema):
@@ -152,7 +166,21 @@ class LeadValidator:
         
         company_id = fields.Str(required=False)
         
+        unique_name = fields.Str(required=False)
+         
+    
+    class getTokenForVideoRoom(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
         application_id = fields.Str(required=False)
+        
+        unique_name = fields.Str(required=False)
+         
+    
+    class getVideoParticipants(BaseSchema):
+        
+        company_id = fields.Str(required=False)
         
         unique_name = fields.Str(required=False)
          

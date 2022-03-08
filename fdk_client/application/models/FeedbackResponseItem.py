@@ -10,12 +10,16 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class Logo(BaseSchema):
-    # Payment swagger.json
+
+
+class FeedbackResponseItem(BaseSchema):
+    # Lead swagger.json
 
     
-    small = fields.Str(required=False)
+    display = fields.Str(required=False)
     
-    large = fields.Str(required=False)
+    key = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
     
 

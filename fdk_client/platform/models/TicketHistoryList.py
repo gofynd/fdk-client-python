@@ -7,27 +7,15 @@ from ..models.BaseSchema import BaseSchema
 
 from .TicketHistory import TicketHistory
 
-
-
-
-
-
-
-
+from .Page import Page
 
 
 class TicketHistoryList(BaseSchema):
     # Lead swagger.json
 
     
-    docs = fields.List(fields.Nested(TicketHistory, required=False), required=False)
+    items = fields.List(fields.Nested(TicketHistory, required=False), required=False)
     
-    limit = fields.Int(required=False)
-    
-    page = fields.Int(required=False)
-    
-    pages = fields.Int(required=False)
-    
-    total = fields.Int(required=False)
+    page = fields.Nested(Page, required=False)
     
 

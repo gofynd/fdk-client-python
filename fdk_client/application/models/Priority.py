@@ -16,7 +16,7 @@ class Priority(BaseSchema):
     # Lead swagger.json
 
     
-    key = fields.Str(required=False)
+    key = fields.Str(required=False, validate=OneOf([val.value for val in PriorityEnum.__members__.values()]))
     
     display = fields.Str(required=False)
     

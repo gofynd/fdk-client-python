@@ -19,6 +19,8 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 from .PollForAssignment import PollForAssignment
 
 
@@ -31,6 +33,8 @@ class EditCustomFormPayload(BaseSchema):
     inputs = fields.List(fields.Dict(required=False), required=False)
     
     description = fields.Str(required=False)
+    
+    priority = fields.Str(required=False, validate=OneOf([val.value for val in PriorityEnum.__members__.values()]))
     
     header_image = fields.Str(required=False)
     

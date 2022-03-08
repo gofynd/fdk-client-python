@@ -24,7 +24,7 @@ class ChargeCustomerResponse(BaseSchema):
     # Payment swagger.json
 
     
-    success = fields.Boolean(required=False)
+    status = fields.Str(required=False)
     
     delivery_address_id = fields.Str(required=False)
     
@@ -32,9 +32,9 @@ class ChargeCustomerResponse(BaseSchema):
     
     cart_id = fields.Str(required=False)
     
-    status = fields.Str(required=False)
-    
     order_id = fields.Str(required=False)
+    
+    success = fields.Boolean(required=False)
     
     aggregator = fields.Str(required=False)
     

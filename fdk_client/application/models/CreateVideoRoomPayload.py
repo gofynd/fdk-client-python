@@ -7,7 +7,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
+from .NotifyUser import NotifyUser
 
 
 class CreateVideoRoomPayload(BaseSchema):
@@ -16,6 +16,6 @@ class CreateVideoRoomPayload(BaseSchema):
     
     unique_name = fields.Str(required=False)
     
-    notify = fields.List(fields.Dict(required=False), required=False)
+    notify = fields.List(fields.Nested(NotifyUser, required=False), required=False)
     
 

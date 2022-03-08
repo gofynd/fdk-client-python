@@ -516,28 +516,6 @@ class Catalog:
         query_string = await create_query_string(collection_type=collection_type, page_id=page_id, page_size=page_size)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain("/service/application/catalog/v1.0/follow/{collection_type}/", collection_type=collection_type, page_id=page_id, page_size=page_size), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
     
-    async def followById(self, collection_type=None, collection_id=None, body=""):
-        """Follow a particular entity such as product, brand, collection specified by its ID.
-        :param collection_type : Type of collection followed, i.e. products, brands, or collections. : type string
-        :param collection_id : The ID of the collection type. : type string
-        """
-        payload = {}
-        
-        if collection_type:
-            payload["collection_type"] = collection_type
-        
-        if collection_id:
-            payload["collection_id"] = collection_id
-        
-        # Parameter validation
-        schema = CatalogValidator.followById()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, "/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/", """{"required":[{"in":"path","name":"collection_type","description":"Type of collection followed, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true},{"in":"path","name":"collection_id","description":"The ID of the collection type.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"collection_type","description":"Type of collection followed, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true},{"in":"path","name":"collection_id","description":"The ID of the collection type.","schema":{"type":"string"},"required":true}]}""", collection_type=collection_type, collection_id=collection_id)
-        query_string = await create_query_string(collection_type=collection_type, collection_id=collection_id)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain("/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/", collection_type=collection_type, collection_id=collection_id), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
-    
     async def unfollowById(self, collection_type=None, collection_id=None, body=""):
         """You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
         :param collection_type : Type of collection followed, i.e. products, brands, or collections. : type string
@@ -559,6 +537,28 @@ class Catalog:
         url_with_params = await create_url_with_params(self._conf.domain, "/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/", """{"required":[{"in":"path","name":"collection_type","description":"Type of collection followed, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true},{"in":"path","name":"collection_id","description":"The ID of the collection type.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"collection_type","description":"Type of collection followed, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true},{"in":"path","name":"collection_id","description":"The ID of the collection type.","schema":{"type":"string"},"required":true}]}""", collection_type=collection_type, collection_id=collection_id)
         query_string = await create_query_string(collection_type=collection_type, collection_id=collection_id)
         return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain("/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/", collection_type=collection_type, collection_id=collection_id), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
+    
+    async def followById(self, collection_type=None, collection_id=None, body=""):
+        """Follow a particular entity such as product, brand, collection specified by its ID.
+        :param collection_type : Type of collection followed, i.e. products, brands, or collections. : type string
+        :param collection_id : The ID of the collection type. : type string
+        """
+        payload = {}
+        
+        if collection_type:
+            payload["collection_type"] = collection_type
+        
+        if collection_id:
+            payload["collection_id"] = collection_id
+        
+        # Parameter validation
+        schema = CatalogValidator.followById()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, "/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/", """{"required":[{"in":"path","name":"collection_type","description":"Type of collection followed, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true},{"in":"path","name":"collection_id","description":"The ID of the collection type.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"collection_type","description":"Type of collection followed, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true},{"in":"path","name":"collection_id","description":"The ID of the collection type.","schema":{"type":"string"},"required":true}]}""", collection_type=collection_type, collection_id=collection_id)
+        query_string = await create_query_string(collection_type=collection_type, collection_id=collection_id)
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain("/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/", collection_type=collection_type, collection_id=collection_id), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
     
     async def getFollowerCountById(self, collection_type=None, collection_id=None, body=""):
         """Get the total count of followers for a given collection type and collection ID.
@@ -1513,14 +1513,14 @@ class Lead:
         query_string = await create_query_string(id=id)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain("/service/application/lead/v1.0/ticket/{id}", id=id), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
     
-    async def createHistory(self, ticket_id=None, body=""):
+    async def createHistory(self, id=None, body=""):
         """Create history for specific Ticket, this history is seen on ticket detail page, this can be comment, log or rating.
-        :param ticket_id : Ticket ID for which history is created : type string
+        :param id : Ticket ID for which history is created : type string
         """
         payload = {}
         
-        if ticket_id:
-            payload["ticket_id"] = ticket_id
+        if id:
+            payload["id"] = id
         
         # Parameter validation
         schema = LeadValidator.createHistory()
@@ -1532,9 +1532,9 @@ class Lead:
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, "/service/application/lead/v1.0/ticket/{ticket_id}/history", """{"required":[{"name":"ticket_id","in":"path","description":"Ticket ID for which history is created","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"ticket_id","in":"path","description":"Ticket ID for which history is created","required":true,"schema":{"type":"string"}}]}""", ticket_id=ticket_id)
-        query_string = await create_query_string(ticket_id=ticket_id)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain("/service/application/lead/v1.0/ticket/{ticket_id}/history", ticket_id=ticket_id), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
+        url_with_params = await create_url_with_params(self._conf.domain, "/service/application/lead/v1.0/ticket/{id}/history", """{"required":[{"name":"id","in":"path","description":"Ticket ID for which history is created","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"id","in":"path","description":"Ticket ID for which history is created","required":true,"schema":{"type":"string"}}]}""", id=id)
+        query_string = await create_query_string(id=id)
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain("/service/application/lead/v1.0/ticket/{id}/history", id=id), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
     
     async def createTicket(self, body=""):
         """This is used to Create Ticket.
