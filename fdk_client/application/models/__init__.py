@@ -1226,11 +1226,11 @@ from .AggregatorRoute import AggregatorRoute
     
 from .PaymentFlow import PaymentFlow
     
+from .IntentAppErrorList import IntentAppErrorList
+    
 from .PaymentModeLogo import PaymentModeLogo
     
 from .IntentApp import IntentApp
-    
-from .IntentAppErrorList import IntentAppErrorList
     
 from .PaymentModeList import PaymentModeList
     
