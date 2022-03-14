@@ -18,11 +18,11 @@ class CollectionMedia(BaseSchema):
     # Catalog swagger.json
 
     
-    landscape = fields.Dict(required=False)
+    portrait = fields.Dict(required=False)
     
     custombanner = fields.List(fields.Nested(CustomBanner, required=False), required=False)
     
-    portrait = fields.Dict(required=False)
+    landscape = fields.Dict(required=False)
     
     logo = fields.Nested(BannerImage, required=False)
     
