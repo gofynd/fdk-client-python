@@ -4907,7 +4907,7 @@ Get page meta
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.getPageMeta(pageType=pageType, cartPages=cartPages)
+    result = await client.application("<APPLICATION_ID>").content.getPageMeta()
     # use result
 except Exception as e:
     print(e)
@@ -4915,12 +4915,6 @@ except Exception as e:
 
 
 
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| pageType | String? | no | Fetch meta by page type. Acceptable values are: system, custom and all |   
-| cartPages | Boolean? | no | Pass this param value as `true` to fetch meta with cart pages |  
 
 
 
@@ -5566,7 +5560,7 @@ Success. Refer `PathMappingSchema` for more details.
 
 ```json
 {
-  "data": {
+  "value": {
     "_id": "615188e9db1e444cb0f40837",
     "application": "000000000000000000000002",
     "redirections": [

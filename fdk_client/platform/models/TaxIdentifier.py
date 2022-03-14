@@ -10,12 +10,16 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class SearchKeywordResult(BaseSchema):
+
+
+class TaxIdentifier(BaseSchema):
     # Catalog swagger.json
 
     
-    query = fields.Dict(required=False)
+    hsn_code = fields.Str(required=False)
     
-    sort_on = fields.Str(required=False)
+    hsn_code_id = fields.Str(required=False)
+    
+    reporting_hsn = fields.Str(required=False)
     
 

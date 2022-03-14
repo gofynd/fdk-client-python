@@ -7,9 +7,17 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .ProductStockPrice import ProductStockPrice
+from .StrategyWiseListing import StrategyWiseListing
 
-from .ReturnConfig import ReturnConfig
+from .Store1 import Store1
+
+
+
+
+
+from .ArticleAssignment import ArticleAssignment
+
+from .ProductStockPrice import ProductStockPrice
 
 from .MarketPlaceSttributes import MarketPlaceSttributes
 
@@ -17,25 +25,17 @@ from .MarketPlaceSttributes import MarketPlaceSttributes
 
 
 
-
-
-from .StrategyWiseListing import StrategyWiseListing
-
-
+from .ProductStockPrice import ProductStockPrice
 
 from .Seller import Seller
 
-
-
-from .Store1 import Store1
-
-from .ProductStockPrice import ProductStockPrice
-
-
-
-from .ArticleAssignment import ArticleAssignment
-
 from .ProductSet import ProductSet
+
+from .ReturnConfig import ReturnConfig
+
+
+
+
 
 
 
@@ -46,40 +46,40 @@ class ProductSizePriceResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    seller_count = fields.Int(required=False)
-    
-    price_per_piece = fields.Nested(ProductStockPrice, required=False)
-    
-    return_config = fields.Nested(ReturnConfig, required=False)
-    
-    marketplace_attributes = fields.List(fields.Nested(MarketPlaceSttributes, required=False), required=False)
-    
-    special_badge = fields.Str(required=False)
-    
-    pincode = fields.Int(required=False)
-    
-    article_id = fields.Str(required=False)
+    discount = fields.Str(required=False)
     
     strategy_wise_listing = fields.List(fields.Nested(StrategyWiseListing, required=False), required=False)
     
-    trader = fields.List(fields.Dict(required=False), required=False)
+    store = fields.Nested(Store1, required=False)
     
-    seller = fields.Nested(Seller, required=False)
+    pincode = fields.Int(required=False)
     
     item_type = fields.Str(required=False)
     
-    store = fields.Nested(Store1, required=False)
+    article_assignment = fields.Nested(ArticleAssignment, required=False)
     
     price = fields.Nested(ProductStockPrice, required=False)
     
-    discount = fields.Str(required=False)
+    marketplace_attributes = fields.List(fields.Nested(MarketPlaceSttributes, required=False), required=False)
     
-    article_assignment = fields.Nested(ArticleAssignment, required=False)
-    
-    set = fields.Nested(ProductSet, required=False)
+    article_id = fields.Str(required=False)
     
     quantity = fields.Int(required=False)
     
+    price_per_piece = fields.Nested(ProductStockPrice, required=False)
+    
+    seller = fields.Nested(Seller, required=False)
+    
+    set = fields.Nested(ProductSet, required=False)
+    
+    return_config = fields.Nested(ReturnConfig, required=False)
+    
     long_lat = fields.List(fields.Float(required=False), required=False)
+    
+    special_badge = fields.Str(required=False)
+    
+    trader = fields.List(fields.Dict(required=False), required=False)
+    
+    seller_count = fields.Int(required=False)
     
 
