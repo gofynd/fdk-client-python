@@ -19,8 +19,6 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
 from .Upload import Upload
 
 from .CDN import CDN
@@ -45,8 +43,6 @@ class CompleteResponse(BaseSchema):
     file_path = fields.Str(required=False)
     
     content_type = fields.Str(required=False)
-    
-    method = fields.Str(required=False)
     
     namespace = fields.Str(required=False)
     

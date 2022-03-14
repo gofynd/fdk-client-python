@@ -11,6 +11,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
+
+
 from .PhoneNumber import PhoneNumber
 
 from .Email import Email
@@ -41,6 +45,10 @@ from .Debug import Debug
 class UserSchema(BaseSchema):
     # User swagger.json
 
+    
+    application_id = fields.Str(required=False)
+    
+    user_id = fields.Str(required=False)
     
     first_name = fields.Str(required=False)
     

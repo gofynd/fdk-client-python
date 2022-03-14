@@ -13,9 +13,9 @@ from .DisplayMetaDict import DisplayMetaDict
 
 from .DisplayMetaDict import DisplayMetaDict
 
-
-
 from .DisplayMetaDict import DisplayMetaDict
+
+
 
 
 class DisplayMeta(BaseSchema):
@@ -30,8 +30,8 @@ class DisplayMeta(BaseSchema):
     
     apply = fields.Nested(DisplayMetaDict, required=False)
     
-    title = fields.Str(required=False)
-    
     auto = fields.Nested(DisplayMetaDict, required=False)
+    
+    title = fields.Str(required=False)
     
 

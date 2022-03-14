@@ -20,6 +20,8 @@ class MultiTenderPaymentMeta(BaseSchema):
     # Cart swagger.json
 
     
+    payment_gateway = fields.Str(required=False)
+    
     order_id = fields.Str(required=False)
     
     payment_id = fields.Str(required=False)
@@ -27,7 +29,5 @@ class MultiTenderPaymentMeta(BaseSchema):
     current_status = fields.Str(required=False)
     
     extra_meta = fields.Dict(required=False)
-    
-    payment_gateway = fields.Str(required=False)
     
 
