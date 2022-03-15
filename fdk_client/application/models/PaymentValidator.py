@@ -143,6 +143,8 @@ class PaymentValidator:
     class redirectToAggregator(BaseSchema):
         
         source = fields.Str(required=False)
+        
+        aggregator = fields.Str(required=False)
          
     
     class checkCredit(BaseSchema):
