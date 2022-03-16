@@ -12,14 +12,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ReturnConfig(BaseSchema):
+class DetailsSchemaV2(BaseSchema):
     # Catalog swagger.json
 
     
-    returnable = fields.Boolean(required=False)
+    type = fields.Str(required=False)
     
-    time = fields.Int(required=False)
+    key = fields.Str(required=False)
     
-    unit = fields.Str(required=False)
+    value = fields.Str(required=False)
     
 

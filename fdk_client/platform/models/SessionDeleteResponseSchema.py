@@ -8,14 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class KeyValue(BaseSchema):
-    # Lead swagger.json
+class SessionDeleteResponseSchema(BaseSchema):
+    # User swagger.json
 
     
-    key = fields.Str(required=False)
-    
-    value = fields.Dict(required=False)
+    items = fields.List(fields.Str(required=False), required=False)
     
 

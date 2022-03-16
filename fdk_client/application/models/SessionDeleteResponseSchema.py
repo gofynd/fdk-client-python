@@ -8,18 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
-class Store1(BaseSchema):
-    # Catalog swagger.json
+class SessionDeleteResponseSchema(BaseSchema):
+    # User swagger.json
 
     
-    uid = fields.Int(required=False)
-    
-    name = fields.Str(required=False)
-    
-    count = fields.Int(required=False)
+    items = fields.List(fields.Str(required=False), required=False)
     
 

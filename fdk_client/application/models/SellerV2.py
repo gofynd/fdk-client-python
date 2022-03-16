@@ -10,12 +10,16 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class KeyValue(BaseSchema):
-    # Lead swagger.json
+
+
+class SellerV2(BaseSchema):
+    # Catalog swagger.json
 
     
-    key = fields.Str(required=False)
+    count = fields.Int(required=False)
     
-    value = fields.Dict(required=False)
+    uid = fields.Int(required=False)
+    
+    name = fields.Str(required=False)
     
 

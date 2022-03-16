@@ -12,18 +12,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class StrategyWiseListing(BaseSchema):
+class ProductListingActionPage(BaseSchema):
     # Catalog swagger.json
 
     
-    pincode = fields.Int(required=False)
+    type = fields.Str(required=False)
     
-    quantity = fields.Int(required=False)
+    params = fields.Dict(required=False)
     
-    distance = fields.Int(required=False)
-    
-    tat = fields.Int(required=False)
+    query = fields.Dict(required=False)
     
 

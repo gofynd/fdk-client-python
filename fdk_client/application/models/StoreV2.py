@@ -5,17 +5,21 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .Details import Details
 
 
 
 
-class MarketPlaceSttributes(BaseSchema):
+
+
+
+class StoreV2(BaseSchema):
     # Catalog swagger.json
 
     
-    details = fields.List(fields.Nested(Details, required=False), required=False)
+    count = fields.Int(required=False)
     
-    title = fields.Str(required=False)
+    uid = fields.Int(required=False)
+    
+    name = fields.Str(required=False)
     
 

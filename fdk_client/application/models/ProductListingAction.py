@@ -7,19 +7,15 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+from .ProductListingActionPage import ProductListingActionPage
 
 
-
-
-
-class Details(BaseSchema):
+class ProductListingAction(BaseSchema):
     # Catalog swagger.json
 
     
-    key = fields.Str(required=False)
-    
     type = fields.Str(required=False)
     
-    value = fields.Str(required=False)
+    page = fields.Nested(ProductListingActionPage, required=False)
     
 

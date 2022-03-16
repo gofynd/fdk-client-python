@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ProductSetDistributionSize(BaseSchema):
+class ArticleAssignmentV2(BaseSchema):
     # Catalog swagger.json
 
     
-    pieces = fields.Int(required=False)
+    strategy = fields.Str(required=False)
     
-    size = fields.Str(required=False)
+    level = fields.Str(required=False)
     
 
