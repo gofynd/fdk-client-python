@@ -13,7 +13,7 @@ from .SellerPhoneNumber import SellerPhoneNumber
 
 
 class LocationManagerSerializer(BaseSchema):
-    # CompanyProfile swagger.json
+    # Catalog swagger.json
 
     
     mobile_no = fields.Nested(SellerPhoneNumber, required=False)

@@ -149,6 +149,15 @@ class CatalogValidator:
         id = fields.Str(required=False)
          
     
+    class updateAppProduct(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        item_id = fields.Str(required=False)
+         
+    
     class getCatalogConfiguration(BaseSchema):
         
         company_id = fields.Str(required=False)
@@ -465,7 +474,7 @@ class CatalogValidator:
         
         department_ids = fields.List(fields.Int(required=False), required=False)
         
-        item_code = fields.List(fields.Float(required=False), required=False)
+        item_code = fields.List(fields.Str(required=False), required=False)
         
         q = fields.Str(required=False)
         
@@ -618,6 +627,25 @@ class CatalogValidator:
         location_ids = fields.List(fields.Int(required=False), required=False)
          
     
+    class getDiscountedInventoryBySizeIdentifier(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        item_id = fields.Int(required=False)
+        
+        size_identifier = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        q = fields.Str(required=False)
+        
+        location_ids = fields.List(fields.Int(required=False), required=False)
+         
+    
     class deleteInventory(BaseSchema):
         
         company_id = fields.Str(required=False)
@@ -720,6 +748,10 @@ class CatalogValidator:
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
+        
+        q = fields.Str(required=False)
+        
+        brand_id = fields.List(fields.Int(required=False), required=False)
          
     
     class getDepartments(BaseSchema):
@@ -796,5 +828,24 @@ class CatalogValidator:
     class getOptimalLocations(BaseSchema):
         
         company_id = fields.Str(required=False)
+         
+    
+    class getAppLocations(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        store_type = fields.Str(required=False)
+        
+        uid = fields.List(fields.Int(required=False), required=False)
+        
+        q = fields.Str(required=False)
+        
+        stage = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
          
     

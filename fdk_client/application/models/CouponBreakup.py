@@ -24,11 +24,11 @@ class CouponBreakup(BaseSchema):
     
     type = fields.Str(required=False)
     
-    message = fields.Str(required=False)
+    value = fields.Float(required=False)
     
     uid = fields.Str(required=False)
     
-    value = fields.Float(required=False)
+    message = fields.Str(required=False)
     
     code = fields.Str(required=False)
     
