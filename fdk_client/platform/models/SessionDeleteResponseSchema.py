@@ -8,14 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class Ownership(BaseSchema):
-    # Cart swagger.json
+class SessionDeleteResponseSchema(BaseSchema):
+    # User swagger.json
 
     
-    payable_category = fields.Str(required=False)
-    
-    payable_by = fields.Str(required=False)
+    items = fields.List(fields.Str(required=False), required=False)
     
 
