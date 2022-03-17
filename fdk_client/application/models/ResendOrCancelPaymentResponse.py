@@ -7,15 +7,15 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+from .LinkStatus import LinkStatus
 
 
-
-class SetDefaultBeneficiaryRequest(BaseSchema):
+class ResendOrCancelPaymentResponse(BaseSchema):
     # Payment swagger.json
 
     
-    beneficiary_id = fields.Str(required=False)
+    success = fields.Boolean(required=False)
     
-    order_id = fields.Str(required=False)
+    data = fields.Nested(LinkStatus, required=False)
     
 

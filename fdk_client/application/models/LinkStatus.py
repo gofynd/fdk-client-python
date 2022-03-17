@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class SetDefaultBeneficiaryRequest(BaseSchema):
+class LinkStatus(BaseSchema):
     # Payment swagger.json
 
     
-    beneficiary_id = fields.Str(required=False)
+    message = fields.Str(required=False)
     
-    order_id = fields.Str(required=False)
+    status = fields.Boolean(required=False)
     
 

@@ -18,8 +18,8 @@ class ValidateCustomerResponse(BaseSchema):
     
     message = fields.Str(required=False)
     
-    data = fields.Dict(required=False)
-    
     success = fields.Boolean(required=False)
+    
+    data = fields.Dict(required=False)
     
 

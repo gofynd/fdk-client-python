@@ -10,11 +10,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class SetDefaultBeneficiaryRequest(BaseSchema):
+class ResendOrCancelPaymentRequest(BaseSchema):
     # Payment swagger.json
 
     
-    beneficiary_id = fields.Str(required=False)
+    request_type = fields.Str(required=False)
     
     order_id = fields.Str(required=False)
     
