@@ -210,13 +210,31 @@ from .ProductSizeSellersResponseV2 import ProductSizeSellersResponseV2
     
 
     
-from .PromiseFormatted import PromiseFormatted
+from .CartCurrency import CartCurrency
     
-from .PromiseTimestamp import PromiseTimestamp
+from .PaymentSelectionLock import PaymentSelectionLock
     
-from .ShipmentPromise import ShipmentPromise
+from .ProductPrice import ProductPrice
+    
+from .ProductPriceInfo import ProductPriceInfo
+    
+from .ActionQuery import ActionQuery
+    
+from .ProductAction import ProductAction
+    
+from .CategoryInfo import CategoryInfo
+    
+from .ProductImage import ProductImage
     
 from .BaseInfo import BaseInfo
+    
+from .CartProduct import CartProduct
+    
+from .CartProductIdentifer import CartProductIdentifer
+    
+from .PromoMeta import PromoMeta
+    
+from .ProductAvailability import ProductAvailability
     
 from .BasePrice import BasePrice
     
@@ -224,43 +242,25 @@ from .ArticlePriceInfo import ArticlePriceInfo
     
 from .ProductArticle import ProductArticle
     
-from .ProductAvailability import ProductAvailability
-    
-from .ProductPrice import ProductPrice
-    
-from .ProductPriceInfo import ProductPriceInfo
-    
-from .CategoryInfo import CategoryInfo
-    
-from .ProductImage import ProductImage
-    
-from .ActionQuery import ActionQuery
-    
-from .ProductAction import ProductAction
-    
-from .CartProduct import CartProduct
-    
-from .PromoMeta import PromoMeta
-    
-from .CartProductIdentifer import CartProductIdentifer
-    
 from .AppliedPromotion import AppliedPromotion
     
 from .CartProductInfo import CartProductInfo
     
-from .LoyaltyPoints import LoyaltyPoints
+from .RawBreakup import RawBreakup
     
 from .CouponBreakup import CouponBreakup
     
-from .DisplayBreakup import DisplayBreakup
+from .LoyaltyPoints import LoyaltyPoints
     
-from .RawBreakup import RawBreakup
+from .DisplayBreakup import DisplayBreakup
     
 from .CartBreakup import CartBreakup
     
-from .CartCurrency import CartCurrency
+from .PromiseFormatted import PromiseFormatted
     
-from .PaymentSelectionLock import PaymentSelectionLock
+from .PromiseTimestamp import PromiseTimestamp
+    
+from .ShipmentPromise import ShipmentPromise
     
 from .CartDetailResponse import CartDetailResponse
     
@@ -286,11 +286,11 @@ from .GetCouponResponse import GetCouponResponse
     
 from .ApplyCouponRequest import ApplyCouponRequest
     
+from .OfferSeller import OfferSeller
+    
 from .OfferPrice import OfferPrice
     
 from .OfferItem import OfferItem
-    
-from .OfferSeller import OfferSeller
     
 from .BulkPriceOffer import BulkPriceOffer
     
