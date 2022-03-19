@@ -24,9 +24,9 @@ class LadderPrice(BaseSchema):
     
     offer_price = fields.Float(required=False)
     
-    marked = fields.Int(required=False)
-    
     currency_code = fields.Str(required=False)
+    
+    marked = fields.Int(required=False)
     
     currency_symbol = fields.Str(required=False)
     

@@ -7,9 +7,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .CustomBanner import CustomBanner
-
 from .BannerImage import BannerImage
+
+from .CustomBanner import CustomBanner
 
 
 
@@ -18,12 +18,12 @@ class CollectionMedia(BaseSchema):
     # Catalog swagger.json
 
     
-    portrait = fields.Dict(required=False)
-    
-    custombanner = fields.List(fields.Nested(CustomBanner, required=False), required=False)
+    landscape = fields.Dict(required=False)
     
     logo = fields.Nested(BannerImage, required=False)
     
-    landscape = fields.Dict(required=False)
+    custombanner = fields.List(fields.Nested(CustomBanner, required=False), required=False)
+    
+    portrait = fields.Dict(required=False)
     
 
