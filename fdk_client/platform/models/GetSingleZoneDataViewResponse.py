@@ -12,6 +12,6 @@ class GetSingleZoneDataViewResponse(BaseSchema):
     # Serviceability swagger.json
 
     
-    data = fields.List(fields.Nested(GetZoneDataViewItems, required=False), required=False)
+    data = fields.Nested(GetZoneDataViewItems, required=False)
     
 

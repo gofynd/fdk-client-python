@@ -10,12 +10,16 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class FilerList(BaseSchema):
-    # Catalog swagger.json
+
+
+class ServiceabilityrErrorResponse(BaseSchema):
+    # Serviceability swagger.json
 
     
     value = fields.Str(required=False)
     
-    display = fields.Str(required=False)
+    type = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
     
 
