@@ -30,17 +30,11 @@ class PayoutBankDetails(BaseSchema):
     # Payment swagger.json
 
     
-    state = fields.Str(required=False)
-    
-    branch_name = fields.Str(required=False)
-    
     country = fields.Str(required=False)
-    
-    pincode = fields.Int(required=False)
     
     bank_name = fields.Str(required=False)
     
-    account_holder = fields.Str(required=False)
+    pincode = fields.Int(required=False)
     
     ifsc_code = fields.Str(required=False)
     
@@ -49,5 +43,11 @@ class PayoutBankDetails(BaseSchema):
     account_no = fields.Str(required=False)
     
     city = fields.Str(required=False)
+    
+    branch_name = fields.Str(required=False)
+    
+    account_holder = fields.Str(required=False)
+    
+    state = fields.Str(required=False)
     
 
