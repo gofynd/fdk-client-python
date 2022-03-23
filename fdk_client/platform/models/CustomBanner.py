@@ -18,8 +18,8 @@ class CustomBanner(BaseSchema):
     
     url = fields.Str(required=False)
     
-    banner_name = fields.Str(required=False)
-    
     aspect_ratio = fields.Str(required=False)
+    
+    banner_name = fields.Str(required=False)
     
 

@@ -1340,11 +1340,11 @@ from .CreditDetail import CreditDetail
     
 from .CheckCreditResponse import CheckCreditResponse
     
-from .DeviceDetails import DeviceDetails
-    
 from .KYCAddress import KYCAddress
     
 from .BusinessDetails import BusinessDetails
+    
+from .DeviceDetails import DeviceDetails
     
 from .MarketplaceInfo import MarketplaceInfo
     
