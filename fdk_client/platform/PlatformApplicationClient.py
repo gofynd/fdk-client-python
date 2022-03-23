@@ -1194,7 +1194,7 @@ class User:
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/session", ), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, body, exclude_headers=["Authorization"]), data=body)
     
     async def getActiveSessions(self, id=None):
-        """Use this API to retrieve a list of customers who have registered in the application.
+        """Use this API to retrieve a list of session of customers who have registered in the application.
         :param id : ID of a customer. : type string
         """
         payload = {}
@@ -1213,7 +1213,7 @@ class User:
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/sesions", id=id), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
     
     async def deleteActiveSessions(self, id=None):
-        """Use this API to retrieve a list of customers who have registered in the application.
+        """Use this API to Delete a list of session of customers who have registered in the application.
         :param id : ID of a customer. : type string
         """
         payload = {}

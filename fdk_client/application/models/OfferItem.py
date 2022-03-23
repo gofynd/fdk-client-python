@@ -9,9 +9,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
 from .OfferPrice import OfferPrice
+
+
 
 
 
@@ -28,8 +28,6 @@ class OfferItem(BaseSchema):
     
     quantity = fields.Int(required=False)
     
-    auto_applied = fields.Boolean(required=False)
-    
     price = fields.Nested(OfferPrice, required=False)
     
     total = fields.Float(required=False)
@@ -37,5 +35,7 @@ class OfferItem(BaseSchema):
     best = fields.Boolean(required=False)
     
     margin = fields.Int(required=False)
+    
+    auto_applied = fields.Boolean(required=False)
     
 
