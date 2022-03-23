@@ -9,9 +9,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 from .LadderOfferItem import LadderOfferItem
-
-
 
 
 class LadderPriceOffer(BaseSchema):
@@ -22,8 +22,8 @@ class LadderPriceOffer(BaseSchema):
     
     id = fields.Str(required=False)
     
-    offer_prices = fields.List(fields.Nested(LadderOfferItem, required=False), required=False)
-    
     description = fields.Str(required=False)
+    
+    offer_prices = fields.List(fields.Nested(LadderOfferItem, required=False), required=False)
     
 

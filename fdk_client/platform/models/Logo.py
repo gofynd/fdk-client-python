@@ -18,9 +18,9 @@ class Logo(BaseSchema):
     # Catalog swagger.json
 
     
-    secure_url = fields.Str(required=False)
-    
     aspect_ratio_f = fields.Int(required=False)
+    
+    secure_url = fields.Str(required=False)
     
     url = fields.Str(required=False)
     
