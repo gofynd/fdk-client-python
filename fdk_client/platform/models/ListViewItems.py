@@ -11,11 +11,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
 from .ListViewProduct import ListViewProduct
+
+
+
+
 
 
 
@@ -30,20 +30,20 @@ class ListViewItems(BaseSchema):
     
     id = fields.Str(required=False)
     
-    slug = fields.Str(required=False)
-    
     is_active = fields.Boolean(required=False)
     
-    pincodes_count = fields.Int(required=False)
-    
-    name = fields.Str(required=False)
+    slug = fields.Str(required=False)
     
     product = fields.Nested(ListViewProduct, required=False)
     
+    name = fields.Str(required=False)
+    
     stores_count = fields.Int(required=False)
+    
+    company_id = fields.Int(required=False)
     
     channels = fields.Nested(ListViewChannels, required=False)
     
-    company_id = fields.Int(required=False)
+    pincodes_count = fields.Int(required=False)
     
 
