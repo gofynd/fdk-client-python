@@ -968,11 +968,11 @@ from .ErrorCodeAndDescription import ErrorCodeAndDescription
     
 from .HttpErrorCodeAndResponse import HttpErrorCodeAndResponse
     
-from .IntentAppErrorList import IntentAppErrorList
-    
 from .PaymentModeLogo import PaymentModeLogo
     
 from .IntentApp import IntentApp
+    
+from .IntentAppErrorList import IntentAppErrorList
     
 from .PaymentModeList import PaymentModeList
     
@@ -2340,47 +2340,47 @@ from .OrderingStoresResponse import OrderingStoresResponse
     
 
     
+from .RuleDefinition import RuleDefinition
+    
+from .DisplayMetaDict import DisplayMetaDict
+    
+from .DisplayMeta import DisplayMeta
+    
 from .Ownership import Ownership
-    
-from .CouponDateMeta import CouponDateMeta
-    
-from .Identifier import Identifier
-    
-from .Validation import Validation
     
 from .State import State
     
-from .Validity import Validity
-    
 from .CouponSchedule import CouponSchedule
-    
-from .CouponAction import CouponAction
-    
-from .RuleDefinition import RuleDefinition
     
 from .Rule import Rule
     
-from .CouponAuthor import CouponAuthor
-    
-from .PriceRange import PriceRange
-    
-from .PaymentAllowValue import PaymentAllowValue
-    
-from .PaymentModes import PaymentModes
+from .Validity import Validity
     
 from .BulkBundleRestriction import BulkBundleRestriction
     
-from .PostOrder import PostOrder
+from .PriceRange import PriceRange
     
 from .UsesRemaining import UsesRemaining
     
 from .UsesRestriction import UsesRestriction
     
+from .PostOrder import PostOrder
+    
+from .PaymentAllowValue import PaymentAllowValue
+    
+from .PaymentModes import PaymentModes
+    
 from .Restrictions import Restrictions
     
-from .DisplayMetaDict import DisplayMetaDict
+from .Identifier import Identifier
     
-from .DisplayMeta import DisplayMeta
+from .CouponAction import CouponAction
+    
+from .CouponDateMeta import CouponDateMeta
+    
+from .Validation import Validation
+    
+from .CouponAuthor import CouponAuthor
     
 from .CouponAdd import CouponAdd
     
@@ -2394,41 +2394,41 @@ from .CouponUpdate import CouponUpdate
     
 from .CouponPartialUpdate import CouponPartialUpdate
     
+from .PromotionSchedule import PromotionSchedule
+    
+from .DiscountOffer import DiscountOffer
+    
 from .CompareObject import CompareObject
     
 from .ItemCriteria import ItemCriteria
     
-from .Ownership1 import Ownership1
-    
-from .DisplayMeta1 import DisplayMeta1
+from .DiscountRule import DiscountRule
     
 from .PromotionDateMeta import PromotionDateMeta
     
+from .PromotionAction import PromotionAction
+    
+from .Ownership1 import Ownership1
+    
 from .PromotionAuthor import PromotionAuthor
     
-from .DiscountOffer import DiscountOffer
-    
-from .DiscountRule import DiscountRule
+from .DisplayMeta1 import DisplayMeta1
     
 from .Visibility import Visibility
-    
-from .UserRegistered import UserRegistered
-    
-from .PaymentAllowValue1 import PaymentAllowValue1
-    
-from .PromotionPaymentModes import PromotionPaymentModes
-    
-from .PostOrder1 import PostOrder1
     
 from .UsesRemaining1 import UsesRemaining1
     
 from .UsesRestriction1 import UsesRestriction1
     
+from .PostOrder1 import PostOrder1
+    
+from .PaymentAllowValue1 import PaymentAllowValue1
+    
+from .PromotionPaymentModes import PromotionPaymentModes
+    
+from .UserRegistered import UserRegistered
+    
 from .Restrictions1 import Restrictions1
-    
-from .PromotionAction import PromotionAction
-    
-from .PromotionSchedule import PromotionSchedule
     
 from .PromotionListItem import PromotionListItem
     
@@ -2448,41 +2448,41 @@ from .ProductPrice import ProductPrice
     
 from .ProductPriceInfo import ProductPriceInfo
     
-from .ProductAvailability import ProductAvailability
-    
 from .CartProductIdentifer import CartProductIdentifer
-    
-from .AppliedPromotion import AppliedPromotion
-    
-from .PromoMeta import PromoMeta
-    
-from .BasePrice import BasePrice
-    
-from .ArticlePriceInfo import ArticlePriceInfo
-    
-from .BaseInfo import BaseInfo
-    
-from .ProductArticle import ProductArticle
-    
-from .CategoryInfo import CategoryInfo
-    
-from .ProductImage import ProductImage
     
 from .ActionQuery import ActionQuery
     
 from .ProductAction import ProductAction
     
+from .BaseInfo import BaseInfo
+    
+from .ProductImage import ProductImage
+    
+from .CategoryInfo import CategoryInfo
+    
 from .CartProduct import CartProduct
     
+from .ProductAvailability import ProductAvailability
+    
+from .BasePrice import BasePrice
+    
+from .ArticlePriceInfo import ArticlePriceInfo
+    
+from .ProductArticle import ProductArticle
+    
+from .PromoMeta import PromoMeta
+    
+from .AppliedPromotion import AppliedPromotion
+    
 from .CartProductInfo import CartProductInfo
-    
-from .DisplayBreakup import DisplayBreakup
-    
-from .CouponBreakup import CouponBreakup
     
 from .LoyaltyPoints import LoyaltyPoints
     
 from .RawBreakup import RawBreakup
+    
+from .DisplayBreakup import DisplayBreakup
+    
+from .CouponBreakup import CouponBreakup
     
 from .CartBreakup import CartBreakup
     
@@ -2494,19 +2494,19 @@ from .ShippingAddress import ShippingAddress
     
 from .OpenApiCartServiceabilityRequest import OpenApiCartServiceabilityRequest
     
-from .PromiseTimestamp import PromiseTimestamp
-    
 from .PromiseFormatted import PromiseFormatted
+    
+from .PromiseTimestamp import PromiseTimestamp
     
 from .ShipmentPromise import ShipmentPromise
     
 from .OpenApiCartServiceabilityResponse import OpenApiCartServiceabilityResponse
     
+from .OpenApiFiles import OpenApiFiles
+    
 from .MultiTenderPaymentMeta import MultiTenderPaymentMeta
     
 from .MultiTenderPaymentMethod import MultiTenderPaymentMethod
-    
-from .OpenApiFiles import OpenApiFiles
     
 from .CartItemMeta import CartItemMeta
     

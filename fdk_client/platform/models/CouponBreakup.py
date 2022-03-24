@@ -22,7 +22,7 @@ class CouponBreakup(BaseSchema):
     # Cart swagger.json
 
     
-    code = fields.Str(required=False)
+    message = fields.Str(required=False)
     
     type = fields.Str(required=False)
     
@@ -32,6 +32,6 @@ class CouponBreakup(BaseSchema):
     
     uid = fields.Str(required=False)
     
-    message = fields.Str(required=False)
+    code = fields.Str(required=False)
     
 
