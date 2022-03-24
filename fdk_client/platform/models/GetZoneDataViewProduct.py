@@ -14,8 +14,8 @@ class GetZoneDataViewProduct(BaseSchema):
     # Serviceability swagger.json
 
     
-    type = fields.Str(required=False)
-    
     count = fields.Int(required=False)
+    
+    type = fields.Str(required=False)
     
 

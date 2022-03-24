@@ -2135,6 +2135,25 @@ class Catalog:
         query_string = await create_query_string()
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk", ), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, body, exclude_headers=["Authorization"]), data=body)
     
+    async def deleteProductBulkJob(self, batch_id=None):
+        """This API allows to delete bulk product job associated with company.
+        :param batch_id : Batch Id of the bulk product job to be deleted. : type integer
+        """
+        payload = {}
+        
+        if batch_id:
+            payload["batch_id"] = batch_id
+        
+
+        # Parameter validation
+        schema = CatalogValidator.deleteProductBulkJob()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk/{batch_id}", """{"required":[{"in":"path","name":"company_id","description":"Company Id of the company associated to size that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"Batch Id of the bulk product job to be deleted.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of the company associated to size that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"Batch Id of the bulk product job to be deleted.","schema":{"type":"integer"},"required":true}]}""", batch_id=batch_id)
+        query_string = await create_query_string(batch_id=batch_id)
+        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk/{batch_id}", batch_id=batch_id), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
+    
     async def createProductsInBulk(self, batch_id=None, body=""):
         """This API helps to create products in bulk push to kafka for approval/creation.
         :param batch_id : Batch Id in which assets to be uploaded. : type string
@@ -2158,25 +2177,6 @@ class Catalog:
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk/{batch_id}", """{"required":[{"in":"path","name":"company_id","description":"Company Id in which assets to be uploaded.","schema":{"type":"integer"},"required":true},{"in":"path","name":"batch_id","description":"Batch Id in which assets to be uploaded.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id in which assets to be uploaded.","schema":{"type":"integer"},"required":true},{"in":"path","name":"batch_id","description":"Batch Id in which assets to be uploaded.","schema":{"type":"string"},"required":true}]}""", batch_id=batch_id)
         query_string = await create_query_string(batch_id=batch_id)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk/{batch_id}", batch_id=batch_id), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, body, exclude_headers=["Authorization"]), data=body)
-    
-    async def deleteProductBulkJob(self, batch_id=None):
-        """This API allows to delete bulk product job associated with company.
-        :param batch_id : Batch Id of the bulk product job to be deleted. : type integer
-        """
-        payload = {}
-        
-        if batch_id:
-            payload["batch_id"] = batch_id
-        
-
-        # Parameter validation
-        schema = CatalogValidator.deleteProductBulkJob()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk/{batch_id}", """{"required":[{"in":"path","name":"company_id","description":"Company Id of the company associated to size that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"Batch Id of the bulk product job to be deleted.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of the company associated to size that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"Batch Id of the bulk product job to be deleted.","schema":{"type":"integer"},"required":true}]}""", batch_id=batch_id)
-        query_string = await create_query_string(batch_id=batch_id)
-        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk/{batch_id}", batch_id=batch_id), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
     
     async def getProductTags(self, ):
         """This API helps to get tags data associated to a particular company.
@@ -2435,6 +2435,25 @@ class Catalog:
         query_string = await create_query_string()
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/", ), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, body, exclude_headers=["Authorization"]), data=body)
     
+    async def deleteBulkInventoryJob(self, batch_id=None):
+        """This API allows to delete bulk Inventory job associated with company.
+        :param batch_id : Batch Id of the bulk delete job. : type string
+        """
+        payload = {}
+        
+        if batch_id:
+            payload["batch_id"] = batch_id
+        
+
+        # Parameter validation
+        schema = CatalogValidator.deleteBulkInventoryJob()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/{batch_id}/", """{"required":[{"in":"path","name":"company_id","description":"Company Id of the company of which bulk Inventory job is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"Batch Id of the bulk delete job.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of the company of which bulk Inventory job is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"Batch Id of the bulk delete job.","schema":{"type":"string"},"required":true}]}""", batch_id=batch_id)
+        query_string = await create_query_string(batch_id=batch_id)
+        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/{batch_id}/", batch_id=batch_id), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
+    
     async def createBulkInventory(self, batch_id=None, body=""):
         """This API helps to create products in bulk push to kafka for approval/creation.
         :param batch_id : Batch Id of the bulk create job. : type string
@@ -2458,25 +2477,6 @@ class Catalog:
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/{batch_id}/", """{"required":[{"in":"path","name":"company_id","description":"Company Id in which Inventory is to be uploaded.","schema":{"type":"integer"},"required":true},{"in":"path","name":"batch_id","description":"Batch Id of the bulk create job.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id in which Inventory is to be uploaded.","schema":{"type":"integer"},"required":true},{"in":"path","name":"batch_id","description":"Batch Id of the bulk create job.","schema":{"type":"string"},"required":true}]}""", batch_id=batch_id)
         query_string = await create_query_string(batch_id=batch_id)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/{batch_id}/", batch_id=batch_id), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, body, exclude_headers=["Authorization"]), data=body)
-    
-    async def deleteBulkInventoryJob(self, batch_id=None):
-        """This API allows to delete bulk Inventory job associated with company.
-        :param batch_id : Batch Id of the bulk delete job. : type string
-        """
-        payload = {}
-        
-        if batch_id:
-            payload["batch_id"] = batch_id
-        
-
-        # Parameter validation
-        schema = CatalogValidator.deleteBulkInventoryJob()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/{batch_id}/", """{"required":[{"in":"path","name":"company_id","description":"Company Id of the company of which bulk Inventory job is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"Batch Id of the bulk delete job.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of the company of which bulk Inventory job is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"Batch Id of the bulk delete job.","schema":{"type":"string"},"required":true}]}""", batch_id=batch_id)
-        query_string = await create_query_string(batch_id=batch_id)
-        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/{batch_id}/", batch_id=batch_id), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
     
     async def getInventoryExport(self, ):
         """This API helps to get Inventory export history.
