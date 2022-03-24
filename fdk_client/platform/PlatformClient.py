@@ -2667,21 +2667,6 @@ class CompanyProfile:
     def __init__(self, config):
         self._conf = config
     
-    async def cbsOnboardGet(self, ):
-        """This API allows to view the company profile of the seller account.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = CompanyProfileValidator.cbsOnboardGet()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}]}""", )
-        query_string = await create_query_string()
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}", ), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
-    
     async def updateCompany(self, body=""):
         """This API allows to edit the company profile of the seller account.
         """
@@ -2701,6 +2686,21 @@ class CompanyProfile:
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}]}""", )
         query_string = await create_query_string()
         return await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}", ), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, body, exclude_headers=["Authorization"]), data=body)
+    
+    async def cbsOnboardGet(self, ):
+        """This API allows to view the company profile of the seller account.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = CompanyProfileValidator.cbsOnboardGet()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}]}""", )
+        query_string = await create_query_string()
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}", ), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
     
     async def getCompanyMetrics(self, ):
         """This API allows to view the company metrics, i.e. the status of its brand and stores. Also its allows to view the number of products, company documents & store documents which are verified and unverified.
@@ -4362,8 +4362,8 @@ class Serviceability:
         query_string = await create_query_string()
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics-internal/v1.0/company/{self._conf.companyId}/all-stores", ), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
     
-    async def upsertZoneControllerView(self, zone_id=None, body=""):
-        """This API returns response of insertation of zone in mongo database.<br>Correction- `zone_id` in the path must be removed.<br> path is `/service/platform/logistics-internal/v1.0/company/{company_id}/zone/`
+    async def getZoneDataView(self, zone_id=None):
+        """This API returns Zone Data View of the application.
         :param zone_id : A `zone_id` is a unique identifier for a particular zone. : type string
         """
         payload = {}
@@ -4373,18 +4373,13 @@ class Serviceability:
         
 
         # Parameter validation
-        schema = ServiceabilityValidator.upsertZoneControllerView()
+        schema = ServiceabilityValidator.getZoneDataView()
         schema.dump(schema.load(payload))
         
-        # Body validation
-        from .models.ZoneRequest import ZoneRequest
-        schema = ZoneRequest()
-        schema.dump(schema.load(body))
-        
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics-internal/v1.0/company/{self._conf.companyId}/zone/{zone_id}", """{"required":[{"in":"path","name":"zone_id","description":"A `zone_id` is a unique identifier for a particular zone.","schema":{"type":"string"},"required":true},{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"zone_id","description":"A `zone_id` is a unique identifier for a particular zone.","schema":{"type":"string"},"required":true},{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}]}""", zone_id=zone_id, )
-        query_string = await create_query_string(zone_id=zone_id, )
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics-internal/v1.0/company/{self._conf.companyId}/zone/{zone_id}", zone_id=zone_id, ), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, body, exclude_headers=["Authorization"]), data=body)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics-internal/v1.0/company/{self._conf.companyId}/zone/{zone_id}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"zone_id","description":"A `zone_id` is a unique identifier for a particular zone.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"zone_id","description":"A `zone_id` is a unique identifier for a particular zone.","schema":{"type":"string"},"required":true}]}""", zone_id=zone_id)
+        query_string = await create_query_string(zone_id=zone_id)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics-internal/v1.0/company/{self._conf.companyId}/zone/{zone_id}", zone_id=zone_id), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
     
     async def updateZoneControllerView(self, zone_id=None, body=""):
         """This API returns response of updation of zone in mongo database.
@@ -4410,8 +4405,8 @@ class Serviceability:
         query_string = await create_query_string(zone_id=zone_id, )
         return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/logistics-internal/v1.0/company/{self._conf.companyId}/zone/{zone_id}", zone_id=zone_id, ), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, body, exclude_headers=["Authorization"]), data=body)
     
-    async def getZoneDataView(self, zone_id=None):
-        """This API returns Zone Data View of the application.
+    async def upsertZoneControllerView(self, zone_id=None, body=""):
+        """This API returns response of insertation of zone in mongo database.<br>Correction- `zone_id` in the path must be removed.<br> path is `/service/platform/logistics-internal/v1.0/company/{company_id}/zone/`
         :param zone_id : A `zone_id` is a unique identifier for a particular zone. : type string
         """
         payload = {}
@@ -4421,13 +4416,18 @@ class Serviceability:
         
 
         # Parameter validation
-        schema = ServiceabilityValidator.getZoneDataView()
+        schema = ServiceabilityValidator.upsertZoneControllerView()
         schema.dump(schema.load(payload))
         
+        # Body validation
+        from .models.ZoneRequest import ZoneRequest
+        schema = ZoneRequest()
+        schema.dump(schema.load(body))
+        
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics-internal/v1.0/company/{self._conf.companyId}/zone/{zone_id}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"zone_id","description":"A `zone_id` is a unique identifier for a particular zone.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"zone_id","description":"A `zone_id` is a unique identifier for a particular zone.","schema":{"type":"string"},"required":true}]}""", zone_id=zone_id)
-        query_string = await create_query_string(zone_id=zone_id)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics-internal/v1.0/company/{self._conf.companyId}/zone/{zone_id}", zone_id=zone_id), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics-internal/v1.0/company/{self._conf.companyId}/zone/{zone_id}", """{"required":[{"in":"path","name":"zone_id","description":"A `zone_id` is a unique identifier for a particular zone.","schema":{"type":"string"},"required":true},{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"zone_id","description":"A `zone_id` is a unique identifier for a particular zone.","schema":{"type":"string"},"required":true},{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}]}""", zone_id=zone_id, )
+        query_string = await create_query_string(zone_id=zone_id, )
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics-internal/v1.0/company/{self._conf.companyId}/zone/{zone_id}", zone_id=zone_id, ), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, body, exclude_headers=["Authorization"]), data=body)
     
 
 

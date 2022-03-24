@@ -16,10 +16,10 @@ class ZoneRequest(BaseSchema):
     # Serviceability swagger.json
 
     
+    channels = fields.List(fields.Dict(required=False), required=False)
+    
     data = fields.Dict(required=False)
     
     identifier = fields.Str(required=False)
-    
-    channels = fields.List(fields.Dict(required=False), required=False)
     
 
