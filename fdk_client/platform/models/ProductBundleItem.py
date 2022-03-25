@@ -22,10 +22,6 @@ class ProductBundleItem(BaseSchema):
     # Catalog swagger.json
 
     
-    max_quantity = fields.Int(required=False)
-    
-    product_uid = fields.Int(required=False)
-    
     allow_remove = fields.Boolean(required=False)
     
     auto_select = fields.Boolean(required=False)
@@ -33,5 +29,9 @@ class ProductBundleItem(BaseSchema):
     auto_add_to_cart = fields.Boolean(required=False)
     
     min_quantity = fields.Int(required=False)
+    
+    max_quantity = fields.Int(required=False)
+    
+    product_uid = fields.Int(required=False)
     
 
