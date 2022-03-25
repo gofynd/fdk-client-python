@@ -24,15 +24,15 @@ class AssignStore(BaseSchema):
     # Catalog swagger.json
 
     
+    pincode = fields.Str(required=False)
+    
+    channel_type = fields.Str(required=False)
+    
     company_id = fields.Int(required=False)
     
     store_ids = fields.List(fields.Int(required=False), required=False)
     
-    pincode = fields.Str(required=False)
-    
     channel_identifier = fields.Str(required=False)
-    
-    channel_type = fields.Str(required=False)
     
     app_id = fields.Str(required=False)
     

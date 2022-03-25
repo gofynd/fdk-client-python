@@ -7,11 +7,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
 from .CustomBanner import CustomBanner
 
 from .BannerImage import BannerImage
+
+
 
 
 class CollectionMedia(BaseSchema):
@@ -20,10 +20,10 @@ class CollectionMedia(BaseSchema):
     
     portrait = fields.Dict(required=False)
     
-    landscape = fields.Dict(required=False)
-    
     custombanner = fields.List(fields.Nested(CustomBanner, required=False), required=False)
     
     logo = fields.Nested(BannerImage, required=False)
+    
+    landscape = fields.Dict(required=False)
     
 

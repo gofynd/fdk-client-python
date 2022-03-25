@@ -32,15 +32,15 @@ class GetProductBundleResponse(BaseSchema):
     
     same_store_assignment = fields.Boolean(required=False)
     
-    name = fields.Str(required=False)
-    
     page_visibility = fields.List(fields.Str(required=False), required=False)
     
-    logo = fields.Str(required=False)
+    slug = fields.Str(required=False)
     
     company_id = fields.Int(required=False)
     
     choice = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
     
     is_active = fields.Boolean(required=False)
     
@@ -48,6 +48,6 @@ class GetProductBundleResponse(BaseSchema):
     
     products = fields.List(fields.Nested(GetProducts, required=False), required=False)
     
-    slug = fields.Str(required=False)
+    logo = fields.Str(required=False)
     
 

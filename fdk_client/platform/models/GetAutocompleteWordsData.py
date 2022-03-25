@@ -20,9 +20,9 @@ class GetAutocompleteWordsData(BaseSchema):
     # Catalog swagger.json
 
     
-    results = fields.List(fields.Dict(required=False), required=False)
-    
     _custom_json = fields.Dict(required=False)
+    
+    results = fields.List(fields.Dict(required=False), required=False)
     
     uid = fields.Str(required=False)
     

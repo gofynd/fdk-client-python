@@ -25,10 +25,6 @@ class ContentValidator:
         page_size = fields.Int(required=False)
          
     
-    class getDataLoaders(BaseSchema):
-        
-        pass 
-    
     class getFaqs(BaseSchema):
         
         pass 
