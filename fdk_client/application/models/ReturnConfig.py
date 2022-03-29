@@ -5,17 +5,21 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .ProductSetDistributionV2 import ProductSetDistributionV2
 
 
 
 
-class ProductSetV2(BaseSchema):
+
+
+
+class ReturnConfig(BaseSchema):
     # Catalog swagger.json
 
     
-    size_distribution = fields.Nested(ProductSetDistributionV2, required=False)
+    unit = fields.Str(required=False)
     
-    quantity = fields.Int(required=False)
+    time = fields.Int(required=False)
+    
+    returnable = fields.Boolean(required=False)
     
 

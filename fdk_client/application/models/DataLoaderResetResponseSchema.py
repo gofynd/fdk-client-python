@@ -8,14 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class ProductSetDistributionSizeV2(BaseSchema):
-    # Catalog swagger.json
+class DataLoaderResetResponseSchema(BaseSchema):
+    # Content swagger.json
 
     
-    size = fields.Str(required=False)
-    
-    pieces = fields.Int(required=False)
+    reset = fields.Str(required=False)
     
 

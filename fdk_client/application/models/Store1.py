@@ -12,18 +12,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class StrategyWiseListingSchemaV2(BaseSchema):
+class Store1(BaseSchema):
     # Catalog swagger.json
 
     
-    tat = fields.Int(required=False)
+    count = fields.Int(required=False)
     
-    pincode = fields.Int(required=False)
+    uid = fields.Int(required=False)
     
-    distance = fields.Int(required=False)
-    
-    quantity = fields.Int(required=False)
+    name = fields.Str(required=False)
     
 

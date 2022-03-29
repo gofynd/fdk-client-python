@@ -7,19 +7,15 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+from .ProductSetDistribution import ProductSetDistribution
 
 
-
-
-
-class SellerV2(BaseSchema):
+class ProductSet(BaseSchema):
     # Catalog swagger.json
 
     
-    uid = fields.Int(required=False)
+    quantity = fields.Int(required=False)
     
-    name = fields.Str(required=False)
-    
-    count = fields.Int(required=False)
+    size_distribution = fields.Nested(ProductSetDistribution, required=False)
     
 

@@ -12,14 +12,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ProductListingActionPage(BaseSchema):
+class Details(BaseSchema):
     # Catalog swagger.json
 
     
+    value = fields.Str(required=False)
+    
+    key = fields.Str(required=False)
+    
     type = fields.Str(required=False)
-    
-    params = fields.Dict(required=False)
-    
-    query = fields.Dict(required=False)
     
 

@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class ProductStockPriceV2(BaseSchema):
+class ArticleAssignment(BaseSchema):
     # Catalog swagger.json
 
     
-    marked = fields.Float(required=False)
+    strategy = fields.Str(required=False)
     
-    effective = fields.Float(required=False)
-    
-    currency = fields.Str(required=False)
+    level = fields.Str(required=False)
     
 

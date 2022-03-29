@@ -7,7 +7,9 @@ from ..models.BaseSchema import BaseSchema
 
 from .StoreManagerSerializer import StoreManagerSerializer
 
-from .StoreTiming import StoreTiming
+
+
+
 
 from .CompanyStore import CompanyStore
 
@@ -17,11 +19,9 @@ from .StoreDepartments import StoreDepartments
 
 from .StoreAddressSerializer import StoreAddressSerializer
 
-
-
-
-
 from .SellerPhoneNumber import SellerPhoneNumber
+
+from .StoreTiming import StoreTiming
 
 
 class StoreDetails(BaseSchema):
@@ -30,7 +30,9 @@ class StoreDetails(BaseSchema):
     
     manager = fields.Nested(StoreManagerSerializer, required=False)
     
-    timing = fields.List(fields.Nested(StoreTiming, required=False), required=False)
+    uid = fields.Int(required=False)
+    
+    name = fields.Str(required=False)
     
     company = fields.Nested(CompanyStore, required=False)
     
@@ -40,10 +42,8 @@ class StoreDetails(BaseSchema):
     
     address = fields.Nested(StoreAddressSerializer, required=False)
     
-    name = fields.Str(required=False)
-    
-    uid = fields.Int(required=False)
-    
     contact_numbers = fields.List(fields.Nested(SellerPhoneNumber, required=False), required=False)
+    
+    timing = fields.List(fields.Nested(StoreTiming, required=False), required=False)
     
 

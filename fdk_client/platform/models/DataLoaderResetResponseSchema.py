@@ -8,14 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class KeyValue(BaseSchema):
-    # Lead swagger.json
+class DataLoaderResetResponseSchema(BaseSchema):
+    # Content swagger.json
 
     
-    key = fields.Str(required=False)
-    
-    value = fields.Dict(required=False)
+    reset = fields.Str(required=False)
     
 

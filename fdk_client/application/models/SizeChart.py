@@ -5,13 +5,13 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+
+
+
+
+
+
 from .SizeChartValues import SizeChartValues
-
-
-
-
-
-
 
 
 
@@ -24,15 +24,15 @@ class SizeChart(BaseSchema):
     # Catalog swagger.json
 
     
-    sizes = fields.List(fields.Nested(SizeChartValues, required=False), required=False)
-    
     image = fields.Str(required=False)
     
     title = fields.Str(required=False)
     
-    description = fields.Str(required=False)
-    
     size_tip = fields.Str(required=False)
+    
+    sizes = fields.List(fields.Nested(SizeChartValues, required=False), required=False)
+    
+    description = fields.Str(required=False)
     
     unit = fields.Str(required=False)
     

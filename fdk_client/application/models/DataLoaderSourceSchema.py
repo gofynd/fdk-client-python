@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class StoreV2(BaseSchema):
-    # Catalog swagger.json
+class DataLoaderSourceSchema(BaseSchema):
+    # Content swagger.json
 
     
-    uid = fields.Int(required=False)
+    type = fields.Str(required=False)
     
-    name = fields.Str(required=False)
-    
-    count = fields.Int(required=False)
+    id = fields.Str(required=False)
     
 

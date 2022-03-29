@@ -1,4 +1,4 @@
-"""Application Models."""
+"""Platform Models."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class KeyValue(BaseSchema):
-    # Lead swagger.json
+class EntityObject(BaseSchema):
+    # AuditTrail swagger.json
 
     
-    key = fields.Str(required=False)
+    type = fields.Str(required=False)
     
-    value = fields.Dict(required=False)
+    action = fields.Str(required=False)
     
 

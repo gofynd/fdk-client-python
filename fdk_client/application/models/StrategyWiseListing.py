@@ -12,14 +12,18 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ReturnConfigSchemaV2(BaseSchema):
+
+
+class StrategyWiseListing(BaseSchema):
     # Catalog swagger.json
 
     
-    returnable = fields.Boolean(required=False)
+    quantity = fields.Int(required=False)
     
-    time = fields.Int(required=False)
+    tat = fields.Int(required=False)
     
-    unit = fields.Str(required=False)
+    pincode = fields.Int(required=False)
+    
+    distance = fields.Int(required=False)
     
 

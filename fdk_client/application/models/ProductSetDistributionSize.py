@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class ProductSizeSellerFilterSchemaV2(BaseSchema):
+class ProductSetDistributionSize(BaseSchema):
     # Catalog swagger.json
 
     
-    value = fields.Str(required=False)
+    size = fields.Str(required=False)
     
-    is_selected = fields.Boolean(required=False)
-    
-    name = fields.Str(required=False)
+    pieces = fields.Int(required=False)
     
 

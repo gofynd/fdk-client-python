@@ -12,14 +12,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class DetailsSchemaV2(BaseSchema):
+class ProductSizeSellerFilter(BaseSchema):
     # Catalog swagger.json
 
     
-    type = fields.Str(required=False)
-    
-    key = fields.Str(required=False)
-    
     value = fields.Str(required=False)
+    
+    is_selected = fields.Boolean(required=False)
+    
+    name = fields.Str(required=False)
     
 
