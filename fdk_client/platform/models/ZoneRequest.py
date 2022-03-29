@@ -7,19 +7,15 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
+from .CreateZoneData import CreateZoneData
 
 
 class ZoneRequest(BaseSchema):
     # Serviceability swagger.json
 
     
-    data = fields.Dict(required=False)
-    
     identifier = fields.Str(required=False)
     
-    channels = fields.List(fields.Dict(required=False), required=False)
+    data = fields.Nested(CreateZoneData, required=False)
     
 

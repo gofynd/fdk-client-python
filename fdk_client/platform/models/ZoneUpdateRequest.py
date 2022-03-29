@@ -7,15 +7,15 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+from .UpdateZoneData import UpdateZoneData
 
 
-
-class GetZoneDataViewProduct(BaseSchema):
+class ZoneUpdateRequest(BaseSchema):
     # Serviceability swagger.json
 
     
-    count = fields.Int(required=False)
+    identifier = fields.Str(required=False)
     
-    type = fields.Str(required=False)
+    data = fields.Nested(UpdateZoneData, required=False)
     
 

@@ -28,19 +28,19 @@ class ListViewItems(BaseSchema):
     # Serviceability swagger.json
 
     
-    id = fields.Str(required=False)
+    stores_count = fields.Int(required=False)
     
-    is_active = fields.Boolean(required=False)
-    
-    slug = fields.Str(required=False)
-    
-    product = fields.Nested(ListViewProduct, required=False)
+    zone_id = fields.Str(required=False)
     
     name = fields.Str(required=False)
     
-    stores_count = fields.Int(required=False)
+    product = fields.Nested(ListViewProduct, required=False)
     
     company_id = fields.Int(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    is_active = fields.Boolean(required=False)
     
     channels = fields.Nested(ListViewChannels, required=False)
     

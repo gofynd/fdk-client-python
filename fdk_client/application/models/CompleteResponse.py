@@ -54,7 +54,7 @@ class CompleteResponse(BaseSchema):
     
     cdn = fields.Nested(CDN, required=False)
     
-    success = fields.Str(required=False)
+    success = fields.Boolean(required=False)
     
     tags = fields.List(fields.Str(required=False), required=False)
     
