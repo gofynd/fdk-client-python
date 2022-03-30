@@ -24,9 +24,9 @@ class GetSearchWordsData(BaseSchema):
     
     result = fields.Dict(required=False)
     
-    words = fields.List(fields.Str(required=False), required=False)
-    
     _custom_json = fields.Dict(required=False)
+    
+    words = fields.List(fields.Str(required=False), required=False)
     
     uid = fields.Str(required=False)
     
