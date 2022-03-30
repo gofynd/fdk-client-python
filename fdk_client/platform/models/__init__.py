@@ -1802,15 +1802,15 @@ from .Website import Website
     
 from .BusinessDetails import BusinessDetails
     
-from .CreateUpdateAddressSerializer import CreateUpdateAddressSerializer
+from .BusinessCountryInfo import BusinessCountryInfo
     
 from .ContactDetails import ContactDetails
     
-from .UpdateCompany import UpdateCompany
-    
-from .BusinessCountryInfo import BusinessCountryInfo
-    
 from .GetCompanyProfileSerializerResponse import GetCompanyProfileSerializerResponse
+    
+from .CreateUpdateAddressSerializer import CreateUpdateAddressSerializer
+    
+from .UpdateCompany import UpdateCompany
     
 from .DocumentsObj import DocumentsObj
     
@@ -1822,11 +1822,11 @@ from .GetBrandResponseSerializer import GetBrandResponseSerializer
     
 from .CreateUpdateBrandRequestSerializer import CreateUpdateBrandRequestSerializer
     
-from .CompanyBrandPostRequestSerializer import CompanyBrandPostRequestSerializer
-    
 from .CompanyBrandSerializer import CompanyBrandSerializer
     
 from .CompanyBrandListSerializer import CompanyBrandListSerializer
+    
+from .CompanyBrandPostRequestSerializer import CompanyBrandPostRequestSerializer
     
 from .GetAddressSerializer1 import GetAddressSerializer1
     
