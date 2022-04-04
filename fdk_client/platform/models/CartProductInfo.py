@@ -7,9 +7,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+from .CartProduct import CartProduct
 
 
-from .ProductPriceInfo import ProductPriceInfo
 
 from .ProductAvailability import ProductAvailability
 
@@ -17,23 +17,23 @@ from .ProductAvailability import ProductAvailability
 
 from .ProductPriceInfo import ProductPriceInfo
 
+from .AppliedPromotion import AppliedPromotion
+
 
 
 from .ProductArticle import ProductArticle
 
-from .CartProduct import CartProduct
 
 
 
 
+from .ProductPriceInfo import ProductPriceInfo
 
 from .PromoMeta import PromoMeta
 
-from .AppliedPromotion import AppliedPromotion
+
 
 from .CartProductIdentifer import CartProductIdentifer
-
-
 
 
 class CartProductInfo(BaseSchema):
@@ -42,9 +42,9 @@ class CartProductInfo(BaseSchema):
     
     is_set = fields.Boolean(required=False)
     
-    key = fields.Str(required=False)
+    product = fields.Nested(CartProduct, required=False)
     
-    price = fields.Nested(ProductPriceInfo, required=False)
+    key = fields.Str(required=False)
     
     availability = fields.Nested(ProductAvailability, required=False)
     
@@ -52,22 +52,22 @@ class CartProductInfo(BaseSchema):
     
     price_per_unit = fields.Nested(ProductPriceInfo, required=False)
     
-    discount = fields.Str(required=False)
-    
-    article = fields.Nested(ProductArticle, required=False)
-    
-    product = fields.Nested(CartProduct, required=False)
+    promotion_applied = fields.List(fields.Nested(AppliedPromotion, required=False), required=False)
     
     bulk_offer = fields.Dict(required=False)
     
-    message = fields.Str(required=False)
+    article = fields.Nested(ProductArticle, required=False)
+    
+    discount = fields.Str(required=False)
+    
+    quantity = fields.Int(required=False)
+    
+    price = fields.Nested(ProductPriceInfo, required=False)
     
     promo_meta = fields.Nested(PromoMeta, required=False)
     
-    promotion_applied = fields.List(fields.Nested(AppliedPromotion, required=False), required=False)
+    message = fields.Str(required=False)
     
     identifiers = fields.Nested(CartProductIdentifer, required=False)
-    
-    quantity = fields.Int(required=False)
     
 

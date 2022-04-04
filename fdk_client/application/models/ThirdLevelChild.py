@@ -9,9 +9,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
 from .ImageUrls import ImageUrls
+
+
 
 
 
@@ -28,9 +28,9 @@ class ThirdLevelChild(BaseSchema):
     
     childs = fields.List(fields.Dict(required=False), required=False)
     
-    uid = fields.Int(required=False)
-    
     banners = fields.Nested(ImageUrls, required=False)
+    
+    uid = fields.Int(required=False)
     
     slug = fields.Str(required=False)
     

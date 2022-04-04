@@ -7,17 +7,17 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .SellerPhoneNumber import SellerPhoneNumber
-
 from .StoreManagerSerializer import StoreManagerSerializer
 
 from .StoreAddressSerializer import StoreAddressSerializer
 
-from .CompanyStore import CompanyStore
+
+
+from .SellerPhoneNumber import SellerPhoneNumber
 
 from .StoreDepartments import StoreDepartments
 
-
+from .CompanyStore import CompanyStore
 
 
 class AppStore(BaseSchema):
@@ -26,16 +26,16 @@ class AppStore(BaseSchema):
     
     name = fields.Str(required=False)
     
-    contact_numbers = fields.List(fields.Nested(SellerPhoneNumber, required=False), required=False)
-    
     manager = fields.Nested(StoreManagerSerializer, required=False)
     
     address = fields.Nested(StoreAddressSerializer, required=False)
     
-    company = fields.Nested(CompanyStore, required=False)
+    uid = fields.Int(required=False)
+    
+    contact_numbers = fields.List(fields.Nested(SellerPhoneNumber, required=False), required=False)
     
     departments = fields.List(fields.Nested(StoreDepartments, required=False), required=False)
     
-    uid = fields.Int(required=False)
+    company = fields.Nested(CompanyStore, required=False)
     
 
