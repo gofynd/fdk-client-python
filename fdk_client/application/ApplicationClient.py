@@ -860,7 +860,9 @@ class Cart:
             "updateCartMeta": "/service/application/cart/v1.0/meta",
             "getCartShareLink": "/service/application/cart/v1.0/share-cart",
             "getCartSharedItems": "/service/application/cart/v1.0/share-cart/{token}",
-            "updateCartWithSharedItems": "/service/application/cart/v1.0/share-cart/{token}/{action}"
+            "updateCartWithSharedItems": "/service/application/cart/v1.0/share-cart/{token}/{action}",
+            "getPromotionOffers": "/service/application/cart/v1.0/available-promotions",
+            "getLadderOffers": "/service/application/cart/v1.0/available-ladder-prices"
             
         }
         self._urls = {
@@ -1480,6 +1482,62 @@ class Cart:
         url_with_params = await create_url_with_params(api_url=self._urls["updateCartWithSharedItems"], proccessed_params="""{"required":[{"name":"token","description":"Token of the shared short link","schema":{"type":"string"},"in":"path","required":true},{"name":"action","description":"Operation to perform on the existing cart merge or replace.","schema":{"type":"string","enum":["merge","replace"]},"in":"path","required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"token","description":"Token of the shared short link","schema":{"type":"string"},"in":"path","required":true},{"name":"action","description":"Operation to perform on the existing cart merge or replace.","schema":{"type":"string","enum":["merge","replace"]},"in":"path","required":true}]}""", token=token, action=action)
         query_string = await create_query_string(token=token, action=action)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["updateCartWithSharedItems"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/share-cart/{token}/{action}", token=token, action=action), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
+    
+    async def getPromotionOffers(self, slug=None, page_size=None, promotion_group=None, body=""):
+        """Use this API to get top 5 offers available for current product
+        :param slug : A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ : type string
+        :param page_size : Number of offers to be fetched to show : type integer
+        :param promotion_group : Type of promotion groups : type integer
+        """
+        payload = {}
+        
+        if slug:
+            payload["slug"] = slug
+        
+        if page_size:
+            payload["page_size"] = page_size
+        
+        if promotion_group:
+            payload["promotion_group"] = promotion_group
+        
+        # Parameter validation
+        schema = CartValidator.getPromotionOffers()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getPromotionOffers"], proccessed_params="""{"required":[],"optional":[{"name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/","in":"query","schema":{"type":"string"}},{"name":"page_size","description":"Number of offers to be fetched to show","in":"query","schema":{"type":"integer"}},{"name":"promotion_group","description":"Type of promotion groups","in":"query","schema":{"type":"integer"}}],"query":[{"name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/","in":"query","schema":{"type":"string"}},{"name":"page_size","description":"Number of offers to be fetched to show","in":"query","schema":{"type":"integer"}},{"name":"promotion_group","description":"Type of promotion groups","in":"query","schema":{"type":"integer"}}],"headers":[],"path":[]}""", slug=slug, page_size=page_size, promotion_group=promotion_group)
+        query_string = await create_query_string(slug=slug, page_size=page_size, promotion_group=promotion_group)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getPromotionOffers"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/available-promotions", slug=slug, page_size=page_size, promotion_group=promotion_group), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
+    
+    async def getLadderOffers(self, slug=None, store_id=None, promotion_id=None, page_size=None, body=""):
+        """Use this API to get applicable ladder price promotion for current product
+        :param slug : A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ : type string
+        :param store_id : Store uid of assigned store on PDP page. If not passed default first created ladder will be returned : type string
+        :param promotion_id : Get ladder information of given promotion id explicitely : type string
+        :param page_size : Number of offers to be fetched to show : type integer
+        """
+        payload = {}
+        
+        if slug:
+            payload["slug"] = slug
+        
+        if store_id:
+            payload["store_id"] = store_id
+        
+        if promotion_id:
+            payload["promotion_id"] = promotion_id
+        
+        if page_size:
+            payload["page_size"] = page_size
+        
+        # Parameter validation
+        schema = CartValidator.getLadderOffers()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getLadderOffers"], proccessed_params="""{"required":[{"name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/","in":"query","required":true,"schema":{"type":"string"}}],"optional":[{"name":"store_id","description":"Store uid of assigned store on PDP page. If not passed default first created ladder will be returned","in":"query","schema":{"type":"string"}},{"name":"promotion_id","description":"Get ladder information of given promotion id explicitely","in":"query","required":false,"schema":{"type":"string"}},{"name":"page_size","description":"Number of offers to be fetched to show","in":"query","schema":{"type":"integer"}}],"query":[{"name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/","in":"query","required":true,"schema":{"type":"string"}},{"name":"store_id","description":"Store uid of assigned store on PDP page. If not passed default first created ladder will be returned","in":"query","schema":{"type":"string"}},{"name":"promotion_id","description":"Get ladder information of given promotion id explicitely","in":"query","required":false,"schema":{"type":"string"}},{"name":"page_size","description":"Number of offers to be fetched to show","in":"query","schema":{"type":"integer"}}],"headers":[],"path":[]}""", slug=slug, store_id=store_id, promotion_id=promotion_id, page_size=page_size)
+        query_string = await create_query_string(slug=slug, store_id=store_id, promotion_id=promotion_id, page_size=page_size)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getLadderOffers"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/available-ladder-prices", slug=slug, store_id=store_id, promotion_id=promotion_id, page_size=page_size), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
     
 
 class Common:
@@ -3566,6 +3624,7 @@ class Payment:
             "getPaymentModeRoutes": "/service/application/payment/v1.0/payment/options",
             "getPosPaymentModeRoutes": "/service/application/payment/v1.0/payment/options/pos",
             "getRupifiBannerDetails": "/service/application/payment/v1.0/rupifi/banner",
+            "resendOrCancelPayment": "/service/application/payment/v1.0/payment/resend_or_cancel",
             "getActiveRefundTransferModes": "/service/application/payment/v1.0/refund/transfer-mode",
             "enableOrDisableRefundTransferMode": "/service/application/payment/v1.0/refund/transfer-mode",
             "getUserBeneficiariesDetail": "/service/application/payment/v1.0/refund/user/beneficiary",
@@ -3858,6 +3917,25 @@ class Payment:
         url_with_params = await create_url_with_params(api_url=self._urls["getRupifiBannerDetails"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
         query_string = await create_query_string()
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getRupifiBannerDetails"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/rupifi/banner", ), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
+    
+    async def resendOrCancelPayment(self, body=""):
+        """Use this API to perform resend or cancel a payment link based on request payload.
+        """
+        payload = {}
+        
+        # Parameter validation
+        schema = PaymentValidator.resendOrCancelPayment()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models.ResendOrCancelPaymentRequest import ResendOrCancelPaymentRequest
+        schema = ResendOrCancelPaymentRequest()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["resendOrCancelPayment"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        query_string = await create_query_string()
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["resendOrCancelPayment"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/resend_or_cancel", ), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
     
     async def getActiveRefundTransferModes(self, body=""):
         """Use this API to retrieve eligible refund modes (such as Netbanking) and add the beneficiary details.

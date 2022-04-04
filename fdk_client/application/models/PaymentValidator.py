@@ -88,6 +88,10 @@ class PaymentValidator:
         
         pass 
     
+    class resendOrCancelPayment(BaseSchema):
+        
+        pass 
+    
     class getActiveRefundTransferModes(BaseSchema):
         
         pass 
