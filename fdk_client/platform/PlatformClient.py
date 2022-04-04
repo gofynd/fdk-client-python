@@ -3377,29 +3377,6 @@ class Inventory:
         query_string = await create_query_string(integration_id=integration_id, page_no=page_no, page_size=page_size)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs/code/integration/{integration_id}", integration_id=integration_id, page_no=page_no, page_size=page_size), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
     
-    async def getJobConfigByIntegrationType(self, integration_type=None, disable=None):
-        """REST Endpoint that returns all job Configs by Integration Type
-        :param integration_type : Integration Type : type string
-        :param disable : JobConfig current state : type boolean
-        """
-        payload = {}
-        
-        if integration_type:
-            payload["integration_type"] = integration_type
-        
-        if disable:
-            payload["disable"] = disable
-        
-
-        # Parameter validation
-        schema = InventoryValidator.getJobConfigByIntegrationType()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/job/config", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}},{"name":"integration_type","in":"query","description":"Integration Type","required":true,"schema":{"type":"string"}}],"optional":[{"name":"disable","in":"query","description":"JobConfig current state","required":false,"schema":{"type":"boolean","default":false}}],"query":[{"name":"integration_type","in":"query","description":"Integration Type","required":true,"schema":{"type":"string"}},{"name":"disable","in":"query","description":"JobConfig current state","required":false,"schema":{"type":"boolean","default":false}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}}]}""", integration_type=integration_type, disable=disable)
-        query_string = await create_query_string(integration_type=integration_type, disable=disable)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/job/config", integration_type=integration_type, disable=disable), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
-    
     async def getJobCodesMetrics(self, daily_job=None, job_code=None):
         """Endpoint to return all JobCodes present in Metrics Collection
         :param daily_job : Daily Job Flag : type boolean
