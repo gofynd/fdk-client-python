@@ -1798,19 +1798,19 @@ from .LocationListSerializer import LocationListSerializer
     
 
     
-from .BusinessCountryInfo import BusinessCountryInfo
-    
-from .ContactDetails import ContactDetails
-    
 from .Website import Website
     
 from .BusinessDetails import BusinessDetails
     
+from .BusinessCountryInfo import BusinessCountryInfo
+    
+from .ContactDetails import ContactDetails
+    
 from .GetCompanyProfileSerializerResponse import GetCompanyProfileSerializerResponse
     
-from .CompanyTax import CompanyTax
-    
 from .CreateUpdateAddressSerializer import CreateUpdateAddressSerializer
+    
+from .CompanyTax import CompanyTax
     
 from .UpdateCompany import UpdateCompany
     
