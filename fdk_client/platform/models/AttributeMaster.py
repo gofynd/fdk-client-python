@@ -28,9 +28,9 @@ class AttributeMaster(BaseSchema):
     
     format = fields.Str(required=False)
     
-    mandatory = fields.Boolean(required=False)
-    
     allowed_values = fields.List(fields.Str(required=False), required=False)
+    
+    mandatory = fields.Boolean(required=False)
     
     range = fields.Nested(AttributeSchemaRange, required=False)
     

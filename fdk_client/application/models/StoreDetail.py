@@ -18,9 +18,9 @@ class StoreDetail(BaseSchema):
     # Catalog swagger.json
 
     
-    id = fields.Int(required=False)
-    
     name = fields.Str(required=False)
+    
+    id = fields.Int(required=False)
     
     city = fields.Str(required=False)
     
