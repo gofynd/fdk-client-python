@@ -20,10 +20,10 @@ class CompanyTax(BaseSchema):
     
     effective_date = fields.Str(required=False)
     
+    enable = fields.Boolean(required=False)
+    
     cess = fields.Float(required=False)
     
     rate = fields.Float(required=False)
-    
-    enable = fields.Boolean(required=False)
     
 

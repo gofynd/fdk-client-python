@@ -3377,49 +3377,6 @@ class Inventory:
         query_string = await create_query_string(integration_id=integration_id, page_no=page_no, page_size=page_size)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs/code/integration/{integration_id}", integration_id=integration_id, page_no=page_no, page_size=page_size), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
     
-    async def getJobCodesMetrics(self, daily_job=None, job_code=None):
-        """Endpoint to return all JobCodes present in Metrics Collection
-        :param daily_job : Daily Job Flag : type boolean
-        :param job_code : Email Job Code : type string
-        """
-        payload = {}
-        
-        if daily_job:
-            payload["daily_job"] = daily_job
-        
-        if job_code:
-            payload["job_code"] = job_code
-        
-
-        # Parameter validation
-        schema = InventoryValidator.getJobCodesMetrics()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/email/jobCode", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}}],"optional":[{"name":"daily_job","in":"query","description":"Daily Job Flag","required":false,"schema":{"type":"boolean"}},{"name":"job_code","in":"query","description":"Email Job Code","required":false,"schema":{"type":"string"}}],"query":[{"name":"daily_job","in":"query","description":"Daily Job Flag","required":false,"schema":{"type":"boolean"}},{"name":"job_code","in":"query","description":"Email Job Code","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}}]}""", daily_job=daily_job, job_code=job_code)
-        query_string = await create_query_string(daily_job=daily_job, job_code=job_code)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/email/jobCode", daily_job=daily_job, job_code=job_code), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, "", exclude_headers=["Authorization"]), data="")
-    
-    async def saveJobCodesMetrics(self, body=""):
-        """Endpoint to save JobCode Metrics
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = InventoryValidator.saveJobCodesMetrics()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models.EmailJobMetrics import EmailJobMetrics
-        schema = EmailJobMetrics()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/email/jobCode", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}}]}""", )
-        query_string = await create_query_string()
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/email/jobCode", ), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, body, exclude_headers=["Authorization"]), data=body)
-    
 
 class Configuration:
     def __init__(self, config):
