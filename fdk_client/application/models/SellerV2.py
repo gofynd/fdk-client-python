@@ -7,15 +7,19 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .Details import Details
 
 
-class MarketPlaceSttributes(BaseSchema):
+
+
+
+class SellerV2(BaseSchema):
     # Catalog swagger.json
 
     
-    title = fields.Str(required=False)
+    count = fields.Int(required=False)
     
-    details = fields.List(fields.Nested(Details, required=False), required=False)
+    uid = fields.Int(required=False)
+    
+    name = fields.Str(required=False)
     
 

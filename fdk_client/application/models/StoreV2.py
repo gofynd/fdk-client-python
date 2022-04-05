@@ -10,12 +10,16 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ProductSetDistributionSize(BaseSchema):
+
+
+class StoreV2(BaseSchema):
     # Catalog swagger.json
 
     
-    size = fields.Str(required=False)
+    count = fields.Int(required=False)
     
-    pieces = fields.Int(required=False)
+    uid = fields.Int(required=False)
+    
+    name = fields.Str(required=False)
     
 
