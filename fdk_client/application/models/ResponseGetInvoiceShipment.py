@@ -9,17 +9,21 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .CouponValidity import CouponValidity
 
 
-class PaymentCouponValidate(BaseSchema):
-    # Cart swagger.json
 
-    
-    message = fields.Str(required=False)
+
+
+class ResponseGetInvoiceShipment(BaseSchema):
+    # Order swagger.json
+
     
     success = fields.Boolean(required=False)
     
-    coupon_validity = fields.Nested(CouponValidity, required=False)
+    presigned_type = fields.Str(required=False)
+    
+    shipment_id = fields.Str(required=False)
+    
+    presigned_url = fields.Str(required=False)
     
 
