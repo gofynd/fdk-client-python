@@ -17,10 +17,6 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .CategoryMapping import CategoryMapping
-
-
-
 
 
 
@@ -28,6 +24,10 @@ from .CategoryMapping import CategoryMapping
 from .Hierarchy import Hierarchy
 
 
+
+
+
+from .CategoryMapping import CategoryMapping
 
 
 
@@ -44,38 +44,38 @@ class Category(BaseSchema):
     # Catalog swagger.json
 
     
+    modified_on = fields.Str(required=False)
+    
+    created_by = fields.Dict(required=False)
+    
+    is_active = fields.Boolean(required=False)
+    
     synonyms = fields.List(fields.Str(required=False), required=False)
-    
-    departments = fields.List(fields.Int(required=False), required=False)
-    
-    created_on = fields.Str(required=False)
     
     uid = fields.Int(required=False)
     
-    created_by = fields.Dict(required=False)
+    name = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    created_on = fields.Str(required=False)
+    
+    hierarchy = fields.List(fields.Nested(Hierarchy, required=False), required=False)
+    
+    modified_by = fields.Dict(required=False)
     
     _id = fields.Str(required=False)
     
     marketplaces = fields.Nested(CategoryMapping, required=False)
     
-    slug = fields.Str(required=False)
-    
-    is_active = fields.Boolean(required=False)
-    
-    modified_by = fields.Dict(required=False)
-    
-    hierarchy = fields.List(fields.Nested(Hierarchy, required=False), required=False)
+    priority = fields.Int(required=False)
     
     level = fields.Int(required=False)
     
-    name = fields.Str(required=False)
+    media = fields.Nested(Media2, required=False)
     
     tryouts = fields.List(fields.Str(required=False), required=False)
     
-    media = fields.Nested(Media2, required=False)
-    
-    modified_on = fields.Str(required=False)
-    
-    priority = fields.Int(required=False)
+    departments = fields.List(fields.Int(required=False), required=False)
     
 
