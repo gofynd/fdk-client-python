@@ -7,11 +7,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
+
+
 from .ConfigurationBucketPoints import ConfigurationBucketPoints
-
-
-
-
 
 
 
@@ -22,11 +22,11 @@ class ConfigurationListingFilterValue(BaseSchema):
     
     value = fields.Str(required=False)
     
-    bucket_points = fields.List(fields.Nested(ConfigurationBucketPoints, required=False), required=False)
-    
     map = fields.Dict(required=False)
     
     sort = fields.Str(required=False)
+    
+    bucket_points = fields.List(fields.Nested(ConfigurationBucketPoints, required=False), required=False)
     
     condition = fields.Str(required=False)
     
