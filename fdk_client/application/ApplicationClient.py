@@ -51,8 +51,8 @@ class Catalog:
             "getCollectionItemsBySlug": "/service/application/catalog/v1.0/collections/{slug}/items/",
             "getCollectionDetailBySlug": "/service/application/catalog/v1.0/collections/{slug}/",
             "getFollowedListing": "/service/application/catalog/v1.0/follow/{collection_type}/",
-            "unfollowById": "/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/",
             "followById": "/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/",
+            "unfollowById": "/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/",
             "getFollowerCountById": "/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/count/",
             "getFollowIds": "/service/application/catalog/v1.0/follow/ids/",
             "getStores": "/service/application/catalog/v1.0/locations/",
@@ -556,28 +556,6 @@ class Catalog:
         query_string = await create_query_string(collection_type=collection_type, page_id=page_id, page_size=page_size)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getFollowedListing"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/follow/{collection_type}/", collection_type=collection_type, page_id=page_id, page_size=page_size), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
     
-    async def unfollowById(self, collection_type=None, collection_id=None, body=""):
-        """You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
-        :param collection_type : Type of collection followed, i.e. products, brands, or collections. : type string
-        :param collection_id : The ID of the collection type. : type string
-        """
-        payload = {}
-        
-        if collection_type:
-            payload["collection_type"] = collection_type
-        
-        if collection_id:
-            payload["collection_id"] = collection_id
-        
-        # Parameter validation
-        schema = CatalogValidator.unfollowById()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["unfollowById"], proccessed_params="""{"required":[{"in":"path","name":"collection_type","description":"Type of collection followed, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true},{"in":"path","name":"collection_id","description":"The ID of the collection type.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"collection_type","description":"Type of collection followed, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true},{"in":"path","name":"collection_id","description":"The ID of the collection type.","schema":{"type":"string"},"required":true}]}""", collection_type=collection_type, collection_id=collection_id)
-        query_string = await create_query_string(collection_type=collection_type, collection_id=collection_id)
-        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["unfollowById"]).netloc, "delete", await create_url_without_domain("/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/", collection_type=collection_type, collection_id=collection_id), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
-    
     async def followById(self, collection_type=None, collection_id=None, body=""):
         """Follow a particular entity such as product, brand, collection specified by its ID.
         :param collection_type : Type of collection followed, i.e. products, brands, or collections. : type string
@@ -599,6 +577,28 @@ class Catalog:
         url_with_params = await create_url_with_params(api_url=self._urls["followById"], proccessed_params="""{"required":[{"in":"path","name":"collection_type","description":"Type of collection followed, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true},{"in":"path","name":"collection_id","description":"The ID of the collection type.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"collection_type","description":"Type of collection followed, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true},{"in":"path","name":"collection_id","description":"The ID of the collection type.","schema":{"type":"string"},"required":true}]}""", collection_type=collection_type, collection_id=collection_id)
         query_string = await create_query_string(collection_type=collection_type, collection_id=collection_id)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["followById"]).netloc, "post", await create_url_without_domain("/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/", collection_type=collection_type, collection_id=collection_id), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
+    
+    async def unfollowById(self, collection_type=None, collection_id=None, body=""):
+        """You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+        :param collection_type : Type of collection followed, i.e. products, brands, or collections. : type string
+        :param collection_id : The ID of the collection type. : type string
+        """
+        payload = {}
+        
+        if collection_type:
+            payload["collection_type"] = collection_type
+        
+        if collection_id:
+            payload["collection_id"] = collection_id
+        
+        # Parameter validation
+        schema = CatalogValidator.unfollowById()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["unfollowById"], proccessed_params="""{"required":[{"in":"path","name":"collection_type","description":"Type of collection followed, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true},{"in":"path","name":"collection_id","description":"The ID of the collection type.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"collection_type","description":"Type of collection followed, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true},{"in":"path","name":"collection_id","description":"The ID of the collection type.","schema":{"type":"string"},"required":true}]}""", collection_type=collection_type, collection_id=collection_id)
+        query_string = await create_query_string(collection_type=collection_type, collection_id=collection_id)
+        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["unfollowById"]).netloc, "delete", await create_url_without_domain("/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/", collection_type=collection_type, collection_id=collection_id), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
     
     async def getFollowerCountById(self, collection_type=None, collection_id=None, body=""):
         """Get the total count of followers for a given collection type and collection ID.
@@ -4639,15 +4639,15 @@ class Feedback:
     def __init__(self, config):
         self._conf = config
         self._relativeUrls = {
-            "createAbuseReport": "/service/application/feedback/v1.0/abuse",
-            "updateAbuseReport": "/service/application/feedback/v1.0/abuse",
+            "createAbuseReport": "/service/application/feedback/v1.0/abuse/",
+            "updateAbuseReport": "/service/application/feedback/v1.0/abuse/",
             "getAbuseReports": "/service/application/feedback/v1.0/abuse/entity/{entity_type}/entity-id/{entity_id}",
-            "getAttributes": "/service/application/feedback/v1.0/attributes",
-            "createAttribute": "/service/application/feedback/v1.0/attributes",
+            "getAttributes": "/service/application/feedback/v1.0/attributes/",
+            "createAttribute": "/service/application/feedback/v1.0/attributes/",
             "getAttribute": "/service/application/feedback/v1.0/attributes/{slug}",
             "updateAttribute": "/service/application/feedback/v1.0/attributes/{slug}",
-            "createComment": "/service/application/feedback/v1.0/comment",
-            "updateComment": "/service/application/feedback/v1.0/comment",
+            "createComment": "/service/application/feedback/v1.0/comment/",
+            "updateComment": "/service/application/feedback/v1.0/comment/",
             "getComments": "/service/application/feedback/v1.0/comment/entity/{entity_type}",
             "checkEligibility": "/service/application/feedback/v1.0/config/entity/{entity_type}/entity-id/{entity_id}",
             "deleteMedia": "/service/application/feedback/v1.0/media/",
@@ -4691,7 +4691,7 @@ class Feedback:
 
         url_with_params = await create_url_with_params(api_url=self._urls["createAbuseReport"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
         query_string = await create_query_string()
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["createAbuseReport"]).netloc, "post", await create_url_without_domain("/service/application/feedback/v1.0/abuse", ), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["createAbuseReport"]).netloc, "post", await create_url_without_domain("/service/application/feedback/v1.0/abuse/", ), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
     
     async def updateAbuseReport(self, body=""):
         """Use this API to update the abuse details, i.e. status and description.
@@ -4710,7 +4710,7 @@ class Feedback:
 
         url_with_params = await create_url_with_params(api_url=self._urls["updateAbuseReport"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
         query_string = await create_query_string()
-        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["updateAbuseReport"]).netloc, "put", await create_url_without_domain("/service/application/feedback/v1.0/abuse", ), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
+        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["updateAbuseReport"]).netloc, "put", await create_url_without_domain("/service/application/feedback/v1.0/abuse/", ), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
     
     async def getAbuseReports(self, entity_id=None, entity_type=None, id=None, page_id=None, page_size=None, body=""):
         """Use this API to retrieve a list of abuse data from entity type and entity ID.
@@ -4766,7 +4766,7 @@ class Feedback:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getAttributes"], proccessed_params="""{"required":[],"optional":[{"description":"The page number to navigate through the given set of results. Default value is 1. ","in":"query","name":"page_no","schema":{"type":"integer"}},{"description":"The number of items to retrieve in each page.","in":"query","name":"page_size","schema":{"type":"integer"}}],"query":[{"description":"The page number to navigate through the given set of results. Default value is 1. ","in":"query","name":"page_no","schema":{"type":"integer"}},{"description":"The number of items to retrieve in each page.","in":"query","name":"page_size","schema":{"type":"integer"}}],"headers":[],"path":[]}""", page_no=page_no, page_size=page_size)
         query_string = await create_query_string(page_no=page_no, page_size=page_size)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getAttributes"]).netloc, "get", await create_url_without_domain("/service/application/feedback/v1.0/attributes", page_no=page_no, page_size=page_size), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getAttributes"]).netloc, "get", await create_url_without_domain("/service/application/feedback/v1.0/attributes/", page_no=page_no, page_size=page_size), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
     
     async def createAttribute(self, body=""):
         """Use this API to add a new attribute (e.g. product quality/material/value for money) with its name, slug and description.
@@ -4785,7 +4785,7 @@ class Feedback:
 
         url_with_params = await create_url_with_params(api_url=self._urls["createAttribute"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
         query_string = await create_query_string()
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["createAttribute"]).netloc, "post", await create_url_without_domain("/service/application/feedback/v1.0/attributes", ), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["createAttribute"]).netloc, "post", await create_url_without_domain("/service/application/feedback/v1.0/attributes/", ), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
     
     async def getAttribute(self, slug=None, body=""):
         """Use this API to retrieve a single attribute data from a given slug.
@@ -4845,7 +4845,7 @@ class Feedback:
 
         url_with_params = await create_url_with_params(api_url=self._urls["createComment"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
         query_string = await create_query_string()
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["createComment"]).netloc, "post", await create_url_without_domain("/service/application/feedback/v1.0/comment", ), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["createComment"]).netloc, "post", await create_url_without_domain("/service/application/feedback/v1.0/comment/", ), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
     
     async def updateComment(self, body=""):
         """Use this API to update the comment status (active or approve) along with new comment if any.
@@ -4864,7 +4864,7 @@ class Feedback:
 
         url_with_params = await create_url_with_params(api_url=self._urls["updateComment"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
         query_string = await create_query_string()
-        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["updateComment"]).netloc, "put", await create_url_without_domain("/service/application/feedback/v1.0/comment", ), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
+        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["updateComment"]).netloc, "put", await create_url_without_domain("/service/application/feedback/v1.0/comment/", ), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
     
     async def getComments(self, entity_type=None, id=None, entity_id=None, user_id=None, page_id=None, page_size=None, body=""):
         """Use this API to retrieve a list of comments for a specific entity type, e.g. products.
@@ -4926,19 +4926,23 @@ class Feedback:
         query_string = await create_query_string(entity_type=entity_type, entity_id=entity_id)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["checkEligibility"]).netloc, "get", await create_url_without_domain("/service/application/feedback/v1.0/config/entity/{entity_type}/entity-id/{entity_id}", entity_type=entity_type, entity_id=entity_id), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
     
-    async def deleteMedia(self, body=""):
+    async def deleteMedia(self, ids=None, body=""):
         """Use this API to delete media for an entity ID.
+        :param ids : List of media ID : type array
         """
         payload = {}
+        
+        if ids:
+            payload["ids"] = ids
         
         # Parameter validation
         schema = FeedbackValidator.deleteMedia()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["deleteMedia"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
-        query_string = await create_query_string()
-        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["deleteMedia"]).netloc, "delete", await create_url_without_domain("/service/application/feedback/v1.0/media/", ), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
+        url_with_params = await create_url_with_params(api_url=self._urls["deleteMedia"], proccessed_params="""{"required":[{"description":"List of media ID","in":"query","name":"ids","required":true,"schema":{"items":{"type":"string"},"type":"array"}}],"optional":[],"query":[{"description":"List of media ID","in":"query","name":"ids","required":true,"schema":{"items":{"type":"string"},"type":"array"}}],"headers":[],"path":[]}""", ids=ids)
+        query_string = await create_query_string(ids=ids)
+        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["deleteMedia"]).netloc, "delete", await create_url_without_domain("/service/application/feedback/v1.0/media/", ids=ids), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body)
     
     async def createMedia(self, body=""):
         """Use this API to add media to an entity, e.g. review.

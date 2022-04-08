@@ -679,7 +679,7 @@ Delete Media
 
 ```python
 try:
-    result = await client.feedback.deleteMedia()
+    result = await client.feedback.deleteMedia(ids=ids)
     # use result
 except Exception as e:
     print(e)
@@ -687,6 +687,11 @@ except Exception as e:
 
 
 
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| ids | ArrayList<String> | yes | List of media ID |  
 
 
 
