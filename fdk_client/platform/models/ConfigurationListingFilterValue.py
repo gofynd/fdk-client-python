@@ -24,10 +24,10 @@ class ConfigurationListingFilterValue(BaseSchema):
     
     sort = fields.Str(required=False)
     
-    condition = fields.Str(required=False)
+    value = fields.Str(required=False)
     
     bucket_points = fields.List(fields.Nested(ConfigurationBucketPoints, required=False), required=False)
     
-    value = fields.Str(required=False)
+    condition = fields.Str(required=False)
     
 
