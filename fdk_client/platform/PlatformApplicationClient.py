@@ -25,6 +25,7 @@ from .models.AnalyticsValidator import AnalyticsValidator
 from .models.DiscountValidator import DiscountValidator
 from .models.PartnerValidator import PartnerValidator
 from .models.WebhookValidator import WebhookValidator
+from .models.AuditTrailValidator import AuditTrailValidator
 
 
 
@@ -6260,6 +6261,12 @@ class Webhook:
         self.applicationId = applicationId
     
 
+class AuditTrail:
+    def __init__(self, config, applicationId):
+        self._conf = config
+        self.applicationId = applicationId
+    
+
 
 
 class PlatformApplicationClient:
@@ -6286,4 +6293,5 @@ class PlatformApplicationClient:
         self.discount = Discount(config, applicationId)
         self.partner = Partner(config, applicationId)
         self.webhook = Webhook(config, applicationId)
+        self.auditTrail = AuditTrail(config, applicationId)
         
