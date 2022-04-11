@@ -24,10 +24,10 @@ class AppliedPromotion(BaseSchema):
     
     amount = fields.Float(required=False)
     
-    article_quantity = fields.Int(required=False)
-    
     promo_id = fields.Str(required=False)
     
     mrp_promotion = fields.Boolean(required=False)
+    
+    article_quantity = fields.Int(required=False)
     
 

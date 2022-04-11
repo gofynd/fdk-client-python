@@ -18,8 +18,8 @@ class InventoryDeleteData(BaseSchema):
     
     size = fields.Str(required=False)
     
-    location_id = fields.Int(required=False)
-    
     item_id = fields.Int(required=False)
+    
+    location_id = fields.Int(required=False)
     
 
