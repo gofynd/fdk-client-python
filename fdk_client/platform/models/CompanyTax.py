@@ -12,14 +12,18 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class CompanyBrandPostRequestSerializer(BaseSchema):
+
+
+class CompanyTax(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    company = fields.Int(required=False)
+    effective_date = fields.Str(required=False)
     
-    brands = fields.List(fields.Int(required=False), required=False)
+    cess = fields.Float(required=False)
     
-    uid = fields.Int(required=False)
+    rate = fields.Float(required=False)
+    
+    enable = fields.Boolean(required=False)
     
 

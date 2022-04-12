@@ -5,25 +5,17 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .DetailsSchemaV2 import DetailsSchemaV2
 
 
 
 
-
-
-
-
-
-class ProductFiltersKey(BaseSchema):
+class SellerGroupAttributes(BaseSchema):
     # Catalog swagger.json
 
     
-    name = fields.Str(required=False)
+    details = fields.List(fields.Nested(DetailsSchemaV2, required=False), required=False)
     
-    display = fields.Str(required=False)
-    
-    kind = fields.Str(required=False)
-    
-    logo = fields.Str(required=False)
+    title = fields.Str(required=False)
     
 

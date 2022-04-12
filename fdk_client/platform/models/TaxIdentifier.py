@@ -7,15 +7,19 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .InventoryDeleteData import InventoryDeleteData
 
 
-class InventoryDelete(BaseSchema):
+
+
+
+class TaxIdentifier(BaseSchema):
     # Catalog swagger.json
 
     
-    success = fields.Boolean(required=False)
+    hsn_code = fields.Str(required=False)
     
-    data = fields.Nested(InventoryDeleteData, required=False)
+    reporting_hsn = fields.Str(required=False)
+    
+    hsn_code_id = fields.Str(required=False)
     
 

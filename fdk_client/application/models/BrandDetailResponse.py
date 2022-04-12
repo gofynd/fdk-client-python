@@ -18,9 +18,9 @@ class BrandDetailResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    uid = fields.Int(required=False)
-    
     name = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
     
     banners = fields.Nested(ImageUrls, required=False)
     

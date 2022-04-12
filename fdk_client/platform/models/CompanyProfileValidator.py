@@ -7,12 +7,12 @@ from ..models.BaseSchema import BaseSchema
 
 class CompanyProfileValidator:
     
-    class cbsOnboardGet(BaseSchema):
+    class updateCompany(BaseSchema):
         
         company_id = fields.Str(required=False)
          
     
-    class updateCompany(BaseSchema):
+    class cbsOnboardGet(BaseSchema):
         
         company_id = fields.Str(required=False)
          
@@ -22,14 +22,14 @@ class CompanyProfileValidator:
         company_id = fields.Str(required=False)
          
     
-    class getBrand(BaseSchema):
+    class editBrand(BaseSchema):
         
         company_id = fields.Str(required=False)
         
         brand_id = fields.Str(required=False)
          
     
-    class editBrand(BaseSchema):
+    class getBrand(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -72,21 +72,21 @@ class CompanyProfileValidator:
         
         stage = fields.Str(required=False)
         
-        store_code = fields.Str(required=False)
+        store_code = fields.List(fields.Raw(required=False), required=False)
         
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
          
     
-    class getLocationDetail(BaseSchema):
+    class updateLocation(BaseSchema):
         
         company_id = fields.Str(required=False)
         
         location_id = fields.Str(required=False)
          
     
-    class updateLocation(BaseSchema):
+    class getLocationDetail(BaseSchema):
         
         company_id = fields.Str(required=False)
         
