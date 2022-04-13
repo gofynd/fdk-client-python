@@ -20,10 +20,10 @@ class AutocompleteItem(BaseSchema):
     
     logo = fields.Nested(Media, required=False)
     
-    type = fields.Str(required=False)
+    display = fields.Str(required=False)
     
     action = fields.Nested(ProductListingAction, required=False)
     
-    display = fields.Str(required=False)
+    type = fields.Str(required=False)
     
 

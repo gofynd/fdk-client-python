@@ -7,6 +7,15 @@ from ..models.BaseSchema import BaseSchema
 
 class CatalogValidator:
     
+    class getSearchKeywords(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+    
     class updateSearchKeywords(BaseSchema):
         
         company_id = fields.Str(required=False)
@@ -17,15 +26,6 @@ class CatalogValidator:
          
     
     class deleteSearchKeywords(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-         
-    
-    class getSearchKeywords(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -48,6 +48,15 @@ class CatalogValidator:
         application_id = fields.Str(required=False)
          
     
+    class getAutocompleteKeywordDetail(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+    
     class updateAutocompleteKeyword(BaseSchema):
         
         company_id = fields.Str(required=False)
@@ -58,15 +67,6 @@ class CatalogValidator:
          
     
     class deleteAutocompleteKeyword(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-         
-    
-    class getAutocompleteKeywordDetail(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -497,6 +497,17 @@ class CatalogValidator:
         page_size = fields.Int(required=False)
          
     
+    class getProduct(BaseSchema):
+        
+        item_code = fields.Str(required=False)
+        
+        company_id = fields.Int(required=False)
+        
+        item_id = fields.Int(required=False)
+        
+        brand_uid = fields.Int(required=False)
+         
+    
     class editProduct(BaseSchema):
         
         company_id = fields.Str(required=False)
@@ -509,17 +520,6 @@ class CatalogValidator:
         company_id = fields.Str(required=False)
         
         item_id = fields.Int(required=False)
-         
-    
-    class getProduct(BaseSchema):
-        
-        item_code = fields.Str(required=False)
-        
-        company_id = fields.Int(required=False)
-        
-        item_id = fields.Int(required=False)
-        
-        brand_uid = fields.Int(required=False)
          
     
     class getProductValidation(BaseSchema):

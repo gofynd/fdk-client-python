@@ -167,6 +167,8 @@ class PageType(Enum):
     
     CART_REVIEW = "cart-review"
     
+    LOGIN = "login"
+    
     @classmethod
     async def is_valid(cls, value):
         if value in cls._value2member_map_:
@@ -203,6 +205,7 @@ class SubscriberStatus(Enum):
         if value in cls._value2member_map_:
             return None
         raise Exception("Invalid SubscriberStatus type")
+
 
 
 

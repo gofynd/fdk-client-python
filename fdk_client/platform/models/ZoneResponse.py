@@ -16,9 +16,9 @@ class ZoneResponse(BaseSchema):
     # Serviceability swagger.json
 
     
-    status_code = fields.Int(required=False)
-    
     zone_id = fields.Str(required=False)
+    
+    status_code = fields.Int(required=False)
     
     success = fields.Boolean(required=False)
     
