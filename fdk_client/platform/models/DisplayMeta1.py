@@ -18,8 +18,8 @@ class DisplayMeta1(BaseSchema):
     
     offer_text = fields.Str(required=False)
     
-    name = fields.Str(required=False)
-    
     description = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
     
 

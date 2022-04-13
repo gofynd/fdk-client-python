@@ -197,11 +197,15 @@ class CartValidator:
         slug = fields.Str(required=False)
         
         page_size = fields.Int(required=False)
+        
+        promotion_group = fields.Str(required=False)
          
     
     class getLadderOffers(BaseSchema):
         
         slug = fields.Str(required=False)
+        
+        store_id = fields.Str(required=False)
         
         promotion_id = fields.Str(required=False)
         
