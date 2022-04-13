@@ -5,17 +5,17 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .DetailsSchemaV2 import DetailsSchemaV2
 
 
 
 
-
-class Time(BaseSchema):
+class SellerGroupAttributes(BaseSchema):
     # Catalog swagger.json
 
     
-    hour = fields.Int(required=False)
+    details = fields.List(fields.Nested(DetailsSchemaV2, required=False), required=False)
     
-    minute = fields.Int(required=False)
+    title = fields.Str(required=False)
     
 

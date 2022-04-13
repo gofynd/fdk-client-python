@@ -22,8 +22,6 @@ class ColumnHeaders(BaseSchema):
     # Catalog swagger.json
 
     
-    col_6 = fields.Nested(ColumnHeader, required=False)
-    
     col_2 = fields.Nested(ColumnHeader, required=False)
     
     col_1 = fields.Nested(ColumnHeader, required=False)
@@ -31,6 +29,8 @@ class ColumnHeaders(BaseSchema):
     col_4 = fields.Nested(ColumnHeader, required=False)
     
     col_3 = fields.Nested(ColumnHeader, required=False)
+    
+    col_6 = fields.Nested(ColumnHeader, required=False)
     
     col_5 = fields.Nested(ColumnHeader, required=False)
     

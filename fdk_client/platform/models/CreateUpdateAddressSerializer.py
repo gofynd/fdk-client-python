@@ -32,19 +32,17 @@ class CreateUpdateAddressSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    country = fields.Str(required=False)
-    
-    state = fields.Str(required=False)
+    address1 = fields.Str(required=False)
     
     country_code = fields.Str(required=False)
     
-    landmark = fields.Str(required=False)
+    pincode = fields.Int(required=False)
     
     address_type = fields.Str(required=False)
     
-    address1 = fields.Str(required=False)
+    longitude = fields.Float(required=False)
     
-    pincode = fields.Int(required=False)
+    country = fields.Str(required=False)
     
     address2 = fields.Str(required=False)
     
@@ -52,6 +50,8 @@ class CreateUpdateAddressSerializer(BaseSchema):
     
     latitude = fields.Float(required=False)
     
-    longitude = fields.Float(required=False)
+    landmark = fields.Str(required=False)
+    
+    state = fields.Str(required=False)
     
 

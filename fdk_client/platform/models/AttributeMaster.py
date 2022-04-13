@@ -22,11 +22,11 @@ class AttributeMaster(BaseSchema):
     # Catalog swagger.json
 
     
-    mandatory = fields.Boolean(required=False)
+    format = fields.Str(required=False)
     
     multi = fields.Boolean(required=False)
     
-    format = fields.Str(required=False)
+    mandatory = fields.Boolean(required=False)
     
     allowed_values = fields.List(fields.Str(required=False), required=False)
     
