@@ -13,16 +13,18 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
+
+
 from .ProductSize import ProductSize
-
-
-
-
 
 
 class ConfigurationProductVariantConfig(BaseSchema):
     # Catalog swagger.json
 
+    
+    logo = fields.Str(required=False)
     
     display_type = fields.Str(required=False)
     
@@ -30,12 +32,10 @@ class ConfigurationProductVariantConfig(BaseSchema):
     
     key = fields.Str(required=False)
     
-    logo = fields.Str(required=False)
-    
-    size = fields.Nested(ProductSize, required=False)
-    
     name = fields.Str(required=False)
     
     priority = fields.Int(required=False)
+    
+    size = fields.Nested(ProductSize, required=False)
     
 

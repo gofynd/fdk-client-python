@@ -20,8 +20,6 @@ class StoreDepartments(BaseSchema):
     # Catalog swagger.json
 
     
-    name = fields.Str(required=False)
-    
     uid = fields.Int(required=False)
     
     priority_order = fields.Int(required=False)
@@ -29,5 +27,7 @@ class StoreDepartments(BaseSchema):
     slug = fields.Str(required=False)
     
     logo = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
     
 

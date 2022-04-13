@@ -13,9 +13,9 @@ from .ConfigurationProduct import ConfigurationProduct
 
 
 
-
-
 from .ConfigurationListing import ConfigurationListing
+
+
 
 
 class AppCatalogConfiguration(BaseSchema):
@@ -30,8 +30,8 @@ class AppCatalogConfiguration(BaseSchema):
     
     config_id = fields.Str(required=False)
     
-    config_type = fields.Str(required=False)
-    
     listing = fields.Nested(ConfigurationListing, required=False)
+    
+    config_type = fields.Str(required=False)
     
 

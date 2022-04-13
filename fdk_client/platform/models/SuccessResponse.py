@@ -8,9 +8,13 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 class SuccessResponse(BaseSchema):
     # Catalog swagger.json
 
+    
+    uid = fields.Int(required=False)
     
     success = fields.Boolean(required=False)
     
