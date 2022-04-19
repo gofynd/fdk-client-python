@@ -28,10 +28,10 @@ class DisplayMeta(BaseSchema):
     
     description = fields.Str(required=False)
     
-    auto = fields.Nested(DisplayMetaDict, required=False)
-    
     remove = fields.Nested(DisplayMetaDict, required=False)
     
     apply = fields.Nested(DisplayMetaDict, required=False)
+    
+    auto = fields.Nested(DisplayMetaDict, required=False)
     
 

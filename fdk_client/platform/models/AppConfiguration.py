@@ -24,10 +24,10 @@ class AppConfiguration(BaseSchema):
     
     app_id = fields.Str(required=False)
     
-    config_id = fields.Str(required=False)
+    config_type = fields.Str(required=False)
     
     listing = fields.Nested(ConfigurationListing, required=False)
     
-    config_type = fields.Str(required=False)
+    config_id = fields.Str(required=False)
     
 

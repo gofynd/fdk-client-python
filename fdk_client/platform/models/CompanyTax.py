@@ -18,12 +18,12 @@ class CompanyTax(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    effective_date = fields.Str(required=False)
-    
-    enable = fields.Boolean(required=False)
-    
     cess = fields.Float(required=False)
     
     rate = fields.Float(required=False)
+    
+    effective_date = fields.Str(required=False)
+    
+    enable = fields.Boolean(required=False)
     
 
