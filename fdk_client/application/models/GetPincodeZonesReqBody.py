@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class DetailsSchemaV2(BaseSchema):
-    # Catalog swagger.json
+class GetPincodeZonesReqBody(BaseSchema):
+    # Logistic swagger.json
 
     
-    value = fields.Str(required=False)
+    country = fields.Str(required=False)
     
-    type = fields.Str(required=False)
-    
-    key = fields.Str(required=False)
+    pincode = fields.Str(required=False)
     
 

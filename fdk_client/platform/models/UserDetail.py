@@ -18,8 +18,8 @@ class UserDetail(BaseSchema):
     
     username = fields.Str(required=False)
     
-    full_name = fields.Str(required=False)
-    
     user_id = fields.Str(required=False)
+    
+    full_name = fields.Str(required=False)
     
 

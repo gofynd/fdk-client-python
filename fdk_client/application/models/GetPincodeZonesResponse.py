@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class DetailsSchemaV2(BaseSchema):
-    # Catalog swagger.json
+class GetPincodeZonesResponse(BaseSchema):
+    # Logistic swagger.json
 
     
-    value = fields.Str(required=False)
+    zones = fields.List(fields.Raw(required=False), required=False)
     
-    type = fields.Str(required=False)
-    
-    key = fields.Str(required=False)
+    serviceability_type = fields.Str(required=False)
     
 
