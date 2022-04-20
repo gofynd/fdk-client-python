@@ -11,9 +11,9 @@ from .GetCatalogConfigurationDetailsProduct import GetCatalogConfigurationDetail
 
 
 
-
-
 from .GetCatalogConfigurationDetailsSchemaListing import GetCatalogConfigurationDetailsSchemaListing
+
+
 
 
 
@@ -28,9 +28,9 @@ class EntityConfiguration(BaseSchema):
     
     config_type = fields.Str(required=False)
     
-    id = fields.Str(required=False)
-    
     listing = fields.Nested(GetCatalogConfigurationDetailsSchemaListing, required=False)
+    
+    id = fields.Str(required=False)
     
     config_id = fields.Str(required=False)
     

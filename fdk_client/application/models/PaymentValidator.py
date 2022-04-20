@@ -88,10 +88,6 @@ class PaymentValidator:
         
         pass 
     
-    class getEpaylaterBannerDetails(BaseSchema):
-        
-        pass 
-    
     class getActiveRefundTransferModes(BaseSchema):
         
         pass 
@@ -132,25 +128,6 @@ class PaymentValidator:
         pass 
     
     class updateDefaultBeneficiary(BaseSchema):
-        
-        pass 
-    
-    class customerCreditSummary(BaseSchema):
-        
-        aggregator = fields.Str(required=False)
-         
-    
-    class redirectToAggregator(BaseSchema):
-        
-        source = fields.Str(required=False)
-         
-    
-    class checkCredit(BaseSchema):
-        
-        aggregator = fields.Str(required=False)
-         
-    
-    class customerOnboard(BaseSchema):
         
         pass 
     

@@ -1,21 +1,25 @@
-"""Application Models."""
+"""Platform Models."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .EpaylaterBannerData import EpaylaterBannerData
 
 
 
 
-class EpaylaterBannerResponse(BaseSchema):
-    # Payment swagger.json
+
+
+
+class ZoneResponse(BaseSchema):
+    # Serviceability swagger.json
 
     
-    data = fields.Nested(EpaylaterBannerData, required=False)
+    zone_id = fields.Str(required=False)
     
     success = fields.Boolean(required=False)
+    
+    status_code = fields.Int(required=False)
     
 
