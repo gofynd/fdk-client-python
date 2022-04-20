@@ -11,8 +11,6 @@ from .AggregatorConfigDetail import AggregatorConfigDetail
 
 from .AggregatorConfigDetail import AggregatorConfigDetail
 
-
-
 from .AggregatorConfigDetail import AggregatorConfigDetail
 
 
@@ -20,6 +18,8 @@ from .AggregatorConfigDetail import AggregatorConfigDetail
 from .AggregatorConfigDetail import AggregatorConfigDetail
 
 from .AggregatorConfigDetail import AggregatorConfigDetail
+
+
 
 from .AggregatorConfigDetail import AggregatorConfigDetail
 
@@ -30,9 +30,17 @@ class AggregatorsConfigDetailResponse(BaseSchema):
     # Payment swagger.json
 
     
+    ccavenue = fields.Nested(AggregatorConfigDetail, required=False)
+    
     payumoney = fields.Nested(AggregatorConfigDetail, required=False)
     
     simpl = fields.Nested(AggregatorConfigDetail, required=False)
+    
+    stripe = fields.Nested(AggregatorConfigDetail, required=False)
+    
+    env = fields.Str(required=False)
+    
+    rupifi = fields.Nested(AggregatorConfigDetail, required=False)
     
     mswipe = fields.Nested(AggregatorConfigDetail, required=False)
     
@@ -40,14 +48,6 @@ class AggregatorsConfigDetailResponse(BaseSchema):
     
     juspay = fields.Nested(AggregatorConfigDetail, required=False)
     
-    env = fields.Str(required=False)
-    
     razorpay = fields.Nested(AggregatorConfigDetail, required=False)
-    
-    rupifi = fields.Nested(AggregatorConfigDetail, required=False)
-    
-    stripe = fields.Nested(AggregatorConfigDetail, required=False)
-    
-    ccavenue = fields.Nested(AggregatorConfigDetail, required=False)
     
 

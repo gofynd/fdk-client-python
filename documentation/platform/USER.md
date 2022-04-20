@@ -10,6 +10,7 @@ Authentication Service
 * [searchUsers](#searchusers)
 * [createUser](#createuser)
 * [blockOrUnblockUsers](#blockorunblockusers)
+* [archiveUser](#archiveuser)
 * [updateUser](#updateuser)
 * [createUserSession](#createusersession)
 * [getActiveSessions](#getactivesessions)
@@ -76,9 +77,6 @@ Success. Refer `CustomerListResponseSchema` for more details.
       {
         "_id": "000000000000000023106198",
         "gender": "male",
-        "roles": [
-          "Ark-Qnatemplate-FullAccess"
-        ],
         "active": true,
         "emails": [
           {
@@ -367,6 +365,64 @@ Block/Unblock user
 
 
 [BlockUserSuccess](#BlockUserSuccess)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### archiveUser
+archive user
+
+
+
+
+```python
+try:
+    result = await client.application("<APPLICATION_ID>").user.archiveUser(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [ArchiveUserRequestSchema](#ArchiveUserRequestSchema) | yes | Request body |
+
+
+archive user
+
+*Returned Response:*
+
+
+
+
+[ArchiveUserSuccess](#ArchiveUserSuccess)
 
 Success
 
@@ -953,6 +1009,17 @@ Success. Returns a JSON object with the updated platform configurations. Refer `
 
  
  
+ #### [ArchiveUserRequestSchema](#ArchiveUserRequestSchema)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | userId | String? |  yes  |  |
+
+---
+
+
+ 
+ 
  #### [EditEmailRequestSchema](#EditEmailRequestSchema)
 
  | Properties | Type | Nullable | Description |
@@ -1375,6 +1442,17 @@ Success. Returns a JSON object with the updated platform configurations. Refer `
  
  
  #### [BlockUserSuccess](#BlockUserSuccess)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | success | Boolean? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [ArchiveUserSuccess](#ArchiveUserSuccess)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |

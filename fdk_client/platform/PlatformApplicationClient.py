@@ -1151,6 +1151,26 @@ class User:
         query_string = await create_query_string()
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/activation", ), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, body, exclude_headers=["Authorization"]), data=body)
     
+    async def archiveUser(self, body=""):
+        """archive user
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = UserValidator.archiveUser()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models.ArchiveUserRequestSchema import ArchiveUserRequestSchema
+        schema = ArchiveUserRequestSchema()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/archive", """{"required":[{"name":"company_id","in":"path","description":"Company ID","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company ID","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID","required":true,"schema":{"type":"string"}}]}""", )
+        query_string = await create_query_string()
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/archive", ), query_string, {"Authorization": "Bearer " + await self._conf.getAccessToken()}, body, exclude_headers=["Authorization"]), data=body)
+    
     async def updateUser(self, user_id=None, body=""):
         """Update user
         :param user_id : User ID : type string
