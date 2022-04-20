@@ -1258,11 +1258,11 @@ from .PaymentStatusUpdateRequest import PaymentStatusUpdateRequest
     
 from .PaymentStatusUpdateResponse import PaymentStatusUpdateResponse
     
-from .IntentAppErrorList import IntentAppErrorList
-    
 from .PaymentModeLogo import PaymentModeLogo
     
 from .IntentApp import IntentApp
+    
+from .IntentAppErrorList import IntentAppErrorList
     
 from .PaymentModeList import PaymentModeList
     
@@ -1279,6 +1279,10 @@ from .PaymentModeRouteResponse import PaymentModeRouteResponse
 from .RupifiBannerData import RupifiBannerData
     
 from .RupifiBannerResponse import RupifiBannerResponse
+    
+from .EpaylaterBannerData import EpaylaterBannerData
+    
+from .EpaylaterBannerResponse import EpaylaterBannerResponse
     
 from .TransferItemsDetails import TransferItemsDetails
     
@@ -1323,6 +1327,36 @@ from .WalletOtpResponse import WalletOtpResponse
 from .SetDefaultBeneficiaryRequest import SetDefaultBeneficiaryRequest
     
 from .SetDefaultBeneficiaryResponse import SetDefaultBeneficiaryResponse
+    
+from .BalanceDetails import BalanceDetails
+    
+from .CreditSummary import CreditSummary
+    
+from .CustomerCreditSummaryResponse import CustomerCreditSummaryResponse
+    
+from .RedirectURL import RedirectURL
+    
+from .RedirectToAggregatorResponse import RedirectToAggregatorResponse
+    
+from .CreditDetail import CreditDetail
+    
+from .CheckCreditResponse import CheckCreditResponse
+    
+from .MarketplaceInfo import MarketplaceInfo
+    
+from .KYCAddress import KYCAddress
+    
+from .BusinessDetails import BusinessDetails
+    
+from .UserPersonalInfoInDetails import UserPersonalInfoInDetails
+    
+from .DeviceDetails import DeviceDetails
+    
+from .CustomerOnboardingRequest import CustomerOnboardingRequest
+    
+from .OnboardSummary import OnboardSummary
+    
+from .CustomerOnboardingResponse import CustomerOnboardingResponse
     
 
     
