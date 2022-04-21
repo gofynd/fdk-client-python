@@ -22,8 +22,8 @@ class UpdateAddressResponse(BaseSchema):
     
     success = fields.Boolean(required=False)
     
-    is_updated = fields.Boolean(required=False)
-    
     id = fields.Str(required=False)
+    
+    is_updated = fields.Boolean(required=False)
     
 
