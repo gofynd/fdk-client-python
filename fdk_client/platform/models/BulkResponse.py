@@ -7,15 +7,31 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .CopyFileTask import CopyFileTask
+
+
+
+
+from .UserInfo1 import UserInfo1
+
+from .UserInfo1 import UserInfo1
+
+
 
 
 class BulkResponse(BaseSchema):
-    # FileStorage swagger.json
+    # Catalog swagger.json
 
     
-    tracking_url = fields.Str(required=False)
+    modified_on = fields.Str(required=False)
     
-    task = fields.Nested(CopyFileTask, required=False)
+    is_active = fields.Boolean(required=False)
+    
+    batch_id = fields.Str(required=False)
+    
+    created_by = fields.Nested(UserInfo1, required=False)
+    
+    modified_by = fields.Nested(UserInfo1, required=False)
+    
+    created_on = fields.Str(required=False)
     
 
