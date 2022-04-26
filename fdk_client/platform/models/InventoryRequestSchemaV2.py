@@ -20,10 +20,10 @@ class InventoryRequestSchemaV2(BaseSchema):
     
     payload = fields.List(fields.Nested(InventoryPayload, required=False), required=False)
     
-    company_id = fields.Int(required=False)
-    
     meta = fields.Dict(required=False)
     
     item_id = fields.Int(required=False)
+    
+    company_id = fields.Int(required=False)
     
 

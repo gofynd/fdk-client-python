@@ -5,9 +5,9 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+
+
 from .Media import Media
-
-
 
 
 
@@ -18,9 +18,9 @@ class AutocompleteResult(BaseSchema):
     # Catalog swagger.json
 
     
-    logo = fields.Nested(Media, required=False)
-    
     _custom_json = fields.Dict(required=False)
+    
+    logo = fields.Nested(Media, required=False)
     
     display = fields.Str(required=False)
     

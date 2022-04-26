@@ -22,9 +22,9 @@ class Rule(BaseSchema):
     
     min = fields.Float(required=False)
     
-    max = fields.Float(required=False)
-    
     key = fields.Float(required=False)
+    
+    max = fields.Float(required=False)
     
     value = fields.Float(required=False)
     

@@ -7,19 +7,15 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+from .DetailsSchemaV2 import DetailsSchemaV2
 
 
-
-
-
-class ReturnConfigSchemaV2(BaseSchema):
+class SellerGroupAttributes(BaseSchema):
     # Catalog swagger.json
 
     
-    time = fields.Int(required=False)
+    title = fields.Str(required=False)
     
-    unit = fields.Str(required=False)
-    
-    returnable = fields.Boolean(required=False)
+    details = fields.List(fields.Nested(DetailsSchemaV2, required=False), required=False)
     
 
