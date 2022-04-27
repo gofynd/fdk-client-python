@@ -22,8 +22,8 @@ class StrategyWiseListingSchemaV2(BaseSchema):
     
     quantity = fields.Int(required=False)
     
-    distance = fields.Int(required=False)
-    
     pincode = fields.Int(required=False)
+    
+    distance = fields.Int(required=False)
     
 

@@ -8,14 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class SuccessResponse1(BaseSchema):
+class InventoryFailedReason(BaseSchema):
     # Catalog swagger.json
 
     
-    uid = fields.Int(required=False)
-    
-    success = fields.Boolean(required=False)
+    message = fields.Str(required=False)
     
 

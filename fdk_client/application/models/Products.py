@@ -7,17 +7,17 @@ from ..models.BaseSchema import BaseSchema
 
 from .ProductDetails import ProductDetails
 
-from .Price1 import Price1
-
-
-
-
-
 
 
 
 
 from .Size import Size
+
+
+
+from .Price1 import Price1
+
+
 
 
 
@@ -30,13 +30,7 @@ class Products(BaseSchema):
     
     product_details = fields.Nested(ProductDetails, required=False)
     
-    price = fields.Nested(Price1, required=False)
-    
     max_quantity = fields.Int(required=False)
-    
-    auto_add_to_cart = fields.Boolean(required=False)
-    
-    allow_remove = fields.Boolean(required=False)
     
     min_quantity = fields.Int(required=False)
     
@@ -44,6 +38,12 @@ class Products(BaseSchema):
     
     auto_select = fields.Boolean(required=False)
     
+    price = fields.Nested(Price1, required=False)
+    
     product_uid = fields.Int(required=False)
+    
+    allow_remove = fields.Boolean(required=False)
+    
+    auto_add_to_cart = fields.Boolean(required=False)
     
 

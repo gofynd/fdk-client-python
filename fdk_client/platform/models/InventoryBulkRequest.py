@@ -22,8 +22,8 @@ class InventoryBulkRequest(BaseSchema):
     
     sizes = fields.List(fields.Nested(Size1, required=False), required=False)
     
-    user = fields.Dict(required=False)
-    
     batch_id = fields.Str(required=False)
+    
+    user = fields.Dict(required=False)
     
 
