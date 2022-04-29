@@ -837,6 +837,27 @@ class CatalogValidator:
         q = fields.Str(required=False)
          
     
+    class getAppZoneProducts(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        brand_ids = fields.List(fields.Int(required=False), required=False)
+        
+        category_ids = fields.List(fields.Int(required=False), required=False)
+        
+        department_ids = fields.List(fields.Int(required=False), required=False)
+        
+        tags = fields.List(fields.Str(required=False), required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        q = fields.Str(required=False)
+         
+    
     class getAppLocations(BaseSchema):
         
         company_id = fields.Str(required=False)

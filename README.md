@@ -30,22 +30,10 @@ from fdk_client.application.ApplicationConfig import ApplicationConfig
 config = ApplicationConfig({
     "applicationID": "YOUR_APPLICATION_ID",
     "applicationToken": "YOUR_APPLICATION_TOKEN",
-    "domain": "YOUR_DOMAIN",
-    "locationDetails": "LOCATION_DETAILS_OBJECT"
+    "domain": "YOUR_DOMAIN"
 })
 
 applicationClient = ApplicationClient(config)
-applicationClient.setLocationDetails(
-    { 
-        "pincode":"385001",
-        "country": "India",
-        "city":  "Ahmedabad",
-        "location": {
-            "longitude": "72.585022", 
-            "latitude": "23.033863"
-        }
-    }
-)
 
 async def getProductDetails():
     try:

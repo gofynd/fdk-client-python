@@ -13,7 +13,6 @@ class PlatformConfig:
         self.apiKey = config.get("apiKey", "")
         self.apiSecret = config.get("apiSecret", "")
         self.oauthClient = OAuthClient(self)
-        self.extraHeaders = []
 
     async def getAccessToken(self):
         token = await self.oauthClient.getAccessToken()
