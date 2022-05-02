@@ -20,7 +20,7 @@ class PageCoupon(BaseSchema):
     # Cart swagger.json
 
     
-    has_previous = fields.Boolean(required=False)
+    current = fields.Int(required=False)
     
     total = fields.Int(required=False)
     
@@ -28,6 +28,6 @@ class PageCoupon(BaseSchema):
     
     has_next = fields.Boolean(required=False)
     
-    current = fields.Int(required=False)
+    has_previous = fields.Boolean(required=False)
     
 

@@ -57,6 +57,15 @@ class CompanyProfileValidator:
         company_id = fields.Str(required=False)
          
     
+    class updateAppBrand(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        brand_uid = fields.Str(required=False)
+         
+    
     class getLocations(BaseSchema):
         
         company_id = fields.Str(required=False)
