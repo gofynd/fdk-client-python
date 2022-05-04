@@ -8,14 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class CollectionImage(BaseSchema):
-    # Catalog swagger.json
+class StoreData(BaseSchema):
+    # Inventory swagger.json
 
     
-    url = fields.Str(required=False)
-    
-    aspect_ratio = fields.Str(required=False)
+    location_id = fields.Str(required=False)
     
 

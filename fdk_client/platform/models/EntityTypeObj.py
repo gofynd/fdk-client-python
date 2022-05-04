@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class CollectionImage(BaseSchema):
-    # Catalog swagger.json
+class EntityTypeObj(BaseSchema):
+    # AuditTrail swagger.json
 
     
-    url = fields.Str(required=False)
+    entity_value = fields.Str(required=False)
     
-    aspect_ratio = fields.Str(required=False)
+    display_name = fields.Str(required=False)
     
 

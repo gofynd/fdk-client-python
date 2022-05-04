@@ -23,6 +23,8 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+from .StoreData import StoreData
+
 
 class GStore(BaseSchema):
     # Inventory swagger.json
@@ -45,5 +47,7 @@ class GStore(BaseSchema):
     code = fields.Str(required=False)
     
     name = fields.Str(required=False)
+    
+    data = fields.Nested(StoreData, required=False)
     
 
