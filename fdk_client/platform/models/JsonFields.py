@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class InventoryValidationResponse(BaseSchema):
-    # Catalog swagger.json
+class JsonFields(BaseSchema):
+    # CompanyProfile swagger.json
 
     
-    data = fields.Dict(required=False)
+    value = fields.Dict(required=False)
     
-    message = fields.Str(required=False)
+    key = fields.Str(required=False)
     
 

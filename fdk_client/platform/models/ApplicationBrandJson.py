@@ -5,17 +5,13 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .JsonFields import JsonFields
 
 
-
-
-
-class BusinessCountryInfo(BaseSchema):
+class ApplicationBrandJson(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    country = fields.Str(required=False)
-    
-    country_code = fields.Str(required=False)
+    _custom_json = fields.List(fields.Nested(JsonFields, required=False), required=False)
     
 

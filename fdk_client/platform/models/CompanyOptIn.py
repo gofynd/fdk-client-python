@@ -30,17 +30,17 @@ class CompanyOptIn(BaseSchema):
     # Catalog swagger.json
 
     
-    brand_ids = fields.List(fields.Int(required=False), required=False)
+    modified_by = fields.Dict(required=False)
     
-    created_on = fields.Int(required=False)
+    enabled = fields.Boolean(required=False)
     
     store_ids = fields.List(fields.Int(required=False), required=False)
+    
+    created_on = fields.Int(required=False)
     
     platform = fields.Str(required=False)
     
     opt_level = fields.Str(required=False)
-    
-    enabled = fields.Boolean(required=False)
     
     created_by = fields.Dict(required=False)
     
@@ -48,6 +48,6 @@ class CompanyOptIn(BaseSchema):
     
     modified_on = fields.Int(required=False)
     
-    modified_by = fields.Dict(required=False)
+    brand_ids = fields.List(fields.Int(required=False), required=False)
     
 
