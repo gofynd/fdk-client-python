@@ -8,14 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class InventoryValidationResponse(BaseSchema):
-    # Catalog swagger.json
+class SuppressStoreModel(BaseSchema):
+    # Inventory swagger.json
 
     
-    data = fields.Dict(required=False)
-    
-    message = fields.Str(required=False)
+    stores = fields.List(fields.Int(required=False), required=False)
     
 

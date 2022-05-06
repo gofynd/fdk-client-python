@@ -11,11 +11,11 @@ from .Child import Child
 
 from .Action import Action
 
-
-
-
-
 from .ImageUrls import ImageUrls
+
+
+
+
 
 
 class CategoryItems(BaseSchema):
@@ -28,10 +28,10 @@ class CategoryItems(BaseSchema):
     
     action = fields.Nested(Action, required=False)
     
-    name = fields.Str(required=False)
+    banners = fields.Nested(ImageUrls, required=False)
     
     uid = fields.Int(required=False)
     
-    banners = fields.Nested(ImageUrls, required=False)
+    name = fields.Str(required=False)
     
 
