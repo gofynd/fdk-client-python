@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class SuccessResponse1(BaseSchema):
-    # Catalog swagger.json
+class GetZoneDataViewChannels(BaseSchema):
+    # Serviceability swagger.json
 
     
-    uid = fields.Int(required=False)
+    channel_id = fields.Str(required=False)
     
-    success = fields.Boolean(required=False)
+    channel_type = fields.Str(required=False)
     
 

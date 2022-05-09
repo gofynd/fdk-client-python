@@ -7,6 +7,8 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 from .ScheduleStartSchema import ScheduleStartSchema
 
 
@@ -15,6 +17,8 @@ class AnnouncementSchema(BaseSchema):
 
     
     announcement = fields.Str(required=False)
+    
+    page_type = fields.Str(required=False)
     
     schedule = fields.Nested(ScheduleStartSchema, required=False)
     

@@ -9,9 +9,9 @@ from .CartBreakup import CartBreakup
 
 
 
+
+
 from .CartProductInfo import CartProductInfo
-
-
 
 
 class OpenapiCartDetailsResponse(BaseSchema):
@@ -22,8 +22,8 @@ class OpenapiCartDetailsResponse(BaseSchema):
     
     is_valid = fields.Boolean(required=False)
     
-    items = fields.List(fields.Nested(CartProductInfo, required=False), required=False)
-    
     message = fields.Str(required=False)
+    
+    items = fields.List(fields.Nested(CartProductInfo, required=False), required=False)
     
 

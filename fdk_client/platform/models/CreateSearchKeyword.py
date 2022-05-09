@@ -11,9 +11,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
 from .SearchKeywordResult import SearchKeywordResult
+
+
 
 
 class CreateSearchKeyword(BaseSchema):
@@ -26,8 +26,8 @@ class CreateSearchKeyword(BaseSchema):
     
     app_id = fields.Str(required=False)
     
-    words = fields.List(fields.Str(required=False), required=False)
-    
     result = fields.Nested(SearchKeywordResult, required=False)
+    
+    words = fields.List(fields.Str(required=False), required=False)
     
 
