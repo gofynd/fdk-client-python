@@ -11,7 +11,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class JsonFields(BaseSchema):
-    # CompanyProfile swagger.json
+    # Catalog swagger.json
 
     
     value = fields.Dict(required=False)
