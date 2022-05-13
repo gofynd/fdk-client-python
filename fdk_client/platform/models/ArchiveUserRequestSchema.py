@@ -8,14 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class ArticleAssignment1(BaseSchema):
-    # Catalog swagger.json
+class ArchiveUserRequestSchema(BaseSchema):
+    # User swagger.json
 
     
-    level = fields.Str(required=False)
-    
-    strategy = fields.Str(required=False)
+    user_id = fields.Str(required=False)
     
 

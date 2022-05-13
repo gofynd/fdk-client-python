@@ -7,19 +7,15 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+from .InventoryDeleteData import InventoryDeleteData
 
 
-
-
-
-class ArticleQuery(BaseSchema):
+class InventoryDelete(BaseSchema):
     # Catalog swagger.json
 
     
-    ignored_stores = fields.List(fields.Int(required=False), required=False)
+    success = fields.Boolean(required=False)
     
-    item_id = fields.Int(required=False)
-    
-    size = fields.Str(required=False)
+    data = fields.Nested(InventoryDeleteData, required=False)
     
 

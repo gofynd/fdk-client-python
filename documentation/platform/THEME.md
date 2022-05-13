@@ -4379,6 +4379,7 @@ Success. Refer `ThemesListingResponseSchema` for more details.
           }
         ],
         "styles": {},
+        "constants": {},
         "settings": {},
         "created_at": "2020-12-22T05:11:16.027Z",
         "updated_at": "2021-02-24T14:03:52.974Z"
@@ -6585,6 +6586,8 @@ Success. Refer `ThemesSchema` for more details.
       }
     ],
     "styles": {},
+    "constants": {},
+    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -8781,6 +8784,8 @@ Success. Refer `ThemesSchema` for more details.
       }
     ],
     "styles": {},
+    "constants": {},
+    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -11047,6 +11052,8 @@ Success. Upgrades the theme and shares the details of the new version in the res
       }
     ],
     "styles": {},
+    "constants": {},
+    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -13002,6 +13009,7 @@ Success. Refer `ThemesListingResponseSchema` for more details.
           }
         ],
         "styles": {},
+        "constants": {},
         "settings": {},
         "created_at": "2020-12-22T05:11:16.027Z",
         "updated_at": "2021-02-24T14:03:52.974Z"
@@ -15208,6 +15216,8 @@ Theme
       }
     ],
     "styles": {},
+    "constants": {},
+    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -17400,6 +17410,8 @@ Success. Refer `ThemesSchema` for more details.
       }
     ],
     "styles": {},
+    "constants": {},
+    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -19679,6 +19691,8 @@ Success. Refer `ThemesSchema` for more details.
       }
     ],
     "styles": {},
+    "constants": {},
+    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -21876,6 +21890,8 @@ Success. Refer `ThemesSchema` for more details.
       }
     ],
     "styles": {},
+    "constants": {},
+    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -24073,6 +24089,8 @@ Success. Refer `ThemesSchema` for more details.
       }
     ],
     "styles": {},
+    "constants": {},
+    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -26270,6 +26288,8 @@ Success. Refer `ThemesSchema` for more details.
       }
     ],
     "styles": {},
+    "constants": {},
+    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -28467,6 +28487,8 @@ Success. Refer `ThemesSchema` for more details.
       }
     ],
     "styles": {},
+    "constants": {},
+    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -30664,6 +30686,8 @@ Success. Refer `ThemesSchema` for more details.
       }
     ],
     "styles": {},
+    "constants": {},
+    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -32861,6 +32885,8 @@ Success. Refer `ThemesSchema` for more details.
       }
     ],
     "styles": {},
+    "constants": {},
+    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -35058,6 +35084,8 @@ Success. Refer `ThemesSchema` for more details.
       }
     ],
     "styles": {},
+    "constants": {},
+    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -35351,8 +35379,10 @@ Success. Refer `ThemesSchema` for more details.
  | src | [Src](#Src)? |  yes  |  |
  | assets | [AssetsSchema](#AssetsSchema)? |  yes  |  |
  | availableSections | ArrayList<[availableSectionSchema](#availableSectionSchema)>? |  yes  |  |
+ | constants | HashMap<String,Any>? |  yes  |  |
  | styles | HashMap<String,Any>? |  yes  |  |
  | config | [Config](#Config)? |  yes  |  |
+ | settings | HashMap<String,Any>? |  yes  |  |
  | font | [Font](#Font)? |  yes  |  |
  | id | String? |  yes  |  |
  | v | Int? |  yes  |  |

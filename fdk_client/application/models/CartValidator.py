@@ -16,6 +16,8 @@ class CartValidator:
         b = fields.Boolean(required=False)
         
         assign_card_id = fields.Int(required=False)
+        
+        area_code = fields.Str(required=False)
          
     
     class getCartLastModified(BaseSchema):
@@ -28,6 +30,8 @@ class CartValidator:
         i = fields.Boolean(required=False)
         
         b = fields.Boolean(required=False)
+        
+        area_code = fields.Str(required=False)
          
     
     class updateCart(BaseSchema):
@@ -37,6 +41,8 @@ class CartValidator:
         i = fields.Boolean(required=False)
         
         b = fields.Boolean(required=False)
+        
+        area_code = fields.Str(required=False)
          
     
     class getItemCount(BaseSchema):
@@ -190,5 +196,25 @@ class CartValidator:
         token = fields.Str(required=False)
         
         action = fields.Str(required=False)
+         
+    
+    class getPromotionOffers(BaseSchema):
+        
+        slug = fields.Str(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        promotion_group = fields.Str(required=False)
+         
+    
+    class getLadderOffers(BaseSchema):
+        
+        slug = fields.Str(required=False)
+        
+        store_id = fields.Str(required=False)
+        
+        promotion_id = fields.Str(required=False)
+        
+        page_size = fields.Int(required=False)
          
     

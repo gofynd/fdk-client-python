@@ -36,6 +36,20 @@ class UserValidator:
         application_id = fields.Str(required=False)
          
     
+    class blockOrUnblockUsers(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+    
+    class archiveUser(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+    
     class updateUser(BaseSchema):
         
         company_id = fields.Str(required=False)
@@ -50,6 +64,24 @@ class UserValidator:
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
+         
+    
+    class getActiveSessions(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+    
+    class deleteActiveSessions(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
          
     
     class getPlatformConfig(BaseSchema):

@@ -18,8 +18,8 @@ class ProductSizeSellerFilterSchemaV2(BaseSchema):
     
     name = fields.Str(required=False)
     
-    value = fields.Str(required=False)
-    
     is_selected = fields.Boolean(required=False)
+    
+    value = fields.Str(required=False)
     
 
