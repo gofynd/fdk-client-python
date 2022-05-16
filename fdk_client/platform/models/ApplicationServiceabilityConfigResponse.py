@@ -7,9 +7,9 @@ from ..models.BaseSchema import BaseSchema
 
 from .ApplicationServiceabilityConfig import ApplicationServiceabilityConfig
 
+
+
 from .ServiceabilityrErrorResponse import ServiceabilityrErrorResponse
-
-
 
 
 class ApplicationServiceabilityConfigResponse(BaseSchema):
@@ -18,8 +18,8 @@ class ApplicationServiceabilityConfigResponse(BaseSchema):
     
     data = fields.Nested(ApplicationServiceabilityConfig, required=False)
     
-    error = fields.Nested(ServiceabilityrErrorResponse, required=False)
-    
     success = fields.Boolean(required=False)
+    
+    error = fields.Nested(ServiceabilityrErrorResponse, required=False)
     
 

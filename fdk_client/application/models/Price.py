@@ -18,9 +18,9 @@ class Price(BaseSchema):
     # Catalog swagger.json
 
     
-    min = fields.Float(required=False)
-    
     currency_symbol = fields.Str(required=False)
+    
+    min = fields.Float(required=False)
     
     currency_code = fields.Str(required=False)
     
