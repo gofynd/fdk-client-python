@@ -7,9 +7,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
 from .CardPaymentGateway import CardPaymentGateway
+
+
 
 
 class ActiveCardPaymentGatewayResponse(BaseSchema):
@@ -18,8 +18,8 @@ class ActiveCardPaymentGatewayResponse(BaseSchema):
     
     message = fields.Str(required=False)
     
-    success = fields.Boolean(required=False)
-    
     cards = fields.Nested(CardPaymentGateway, required=False)
+    
+    success = fields.Boolean(required=False)
     
 
