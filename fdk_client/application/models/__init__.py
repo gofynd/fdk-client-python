@@ -1736,4 +1736,3 @@ from .PosCartValidator import PosCartValidator
 
 from .LogisticValidator import LogisticValidator
 
-from .LocationValidator import LocationValidator
