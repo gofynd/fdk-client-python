@@ -19,6 +19,8 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 from .Upload import Upload
 
 from .CDN import CDN
@@ -44,6 +46,8 @@ class CompleteResponse(BaseSchema):
     
     content_type = fields.Str(required=False)
     
+    method = fields.Str(required=False)
+    
     namespace = fields.Str(required=False)
     
     operation = fields.Str(required=False)
@@ -54,7 +58,7 @@ class CompleteResponse(BaseSchema):
     
     cdn = fields.Nested(CDN, required=False)
     
-    success = fields.Boolean(required=False)
+    success = fields.Str(required=False)
     
     tags = fields.List(fields.Str(required=False), required=False)
     

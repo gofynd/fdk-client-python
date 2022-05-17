@@ -24,11 +24,9 @@ class DiscountOffer(BaseSchema):
     # Cart swagger.json
 
     
+    code = fields.Str(required=False)
+    
     discount_percentage = fields.Float(required=False)
-    
-    discount_amount = fields.Float(required=False)
-    
-    min_offer_quantity = fields.Int(required=False)
     
     max_discount_amount = fields.Float(required=False)
     
@@ -36,6 +34,8 @@ class DiscountOffer(BaseSchema):
     
     discount_price = fields.Float(required=False)
     
-    code = fields.Str(required=False)
+    min_offer_quantity = fields.Int(required=False)
+    
+    discount_amount = fields.Float(required=False)
     
 
