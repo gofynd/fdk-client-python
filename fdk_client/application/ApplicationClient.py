@@ -3635,6 +3635,12 @@ class Payment:
             "addRefundBankAccountUsingOTP": "/service/application/payment/v1.0/refund/account/otp",
             "verifyOtpAndAddBeneficiaryForWallet": "/service/application/payment/v1.0/refund/verification/wallet",
             "updateDefaultBeneficiary": "/service/application/payment/v1.0/refund/beneficiary/default",
+            "getPaymentLink": "/service/application/payment/v1.0/create-payment-link/",
+            "createPaymentLink": "/service/application/payment/v1.0/create-payment-link/",
+            "resendPaymentLink": "/service/application/payment/v1.0/resend-payment-link/",
+            "cancelPaymentLink": "/service/application/payment/v1.0/cancel-payment-link/",
+            "getPaymentModeRoutesPaymentLink": "/service/application/payment/v1.0/payment/options/link/",
+            "pollingPaymentLink": "/service/application/payment/v1.0/polling-payment-link/",
             "customerCreditSummary": "/service/application/payment/v1.0/payment/credit-summary/",
             "redirectToAggregator": "/service/application/payment/v1.0/payment/redirect-to-aggregator/",
             "checkCredit": "/service/application/payment/v1.0/check-credits/",
@@ -4118,6 +4124,117 @@ class Payment:
         query_string = await create_query_string()
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["updateDefaultBeneficiary"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/refund/beneficiary/default", ), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body, cookies=self._conf.cookies)
     
+    async def getPaymentLink(self, id=None, body=""):
+        """Use this API to get a payment link
+        :param id :  : type string
+        """
+        payload = {}
+        
+        if id:
+            payload["id"] = id
+        
+        # Parameter validation
+        schema = PaymentValidator.getPaymentLink()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getPaymentLink"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"id","schema":{"type":"string","description":"Unique payment link id"}}],"query":[{"in":"query","name":"id","schema":{"type":"string","description":"Unique payment link id"}}],"headers":[],"path":[]}""", id=id)
+        query_string = await create_query_string(id=id)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getPaymentLink"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/create-payment-link/", id=id), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body, cookies=self._conf.cookies)
+    
+    async def createPaymentLink(self, body=""):
+        """Use this API to create a payment link for the customer
+        """
+        payload = {}
+        
+        # Parameter validation
+        schema = PaymentValidator.createPaymentLink()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models.CreatePaymentLinkRequest import CreatePaymentLinkRequest
+        schema = CreatePaymentLinkRequest()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["createPaymentLink"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        query_string = await create_query_string()
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["createPaymentLink"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/create-payment-link/", ), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body, cookies=self._conf.cookies)
+    
+    async def resendPaymentLink(self, body=""):
+        """Use this API to resend a payment link for the customer
+        """
+        payload = {}
+        
+        # Parameter validation
+        schema = PaymentValidator.resendPaymentLink()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models.CancelOrResendPaymentLinkRequest import CancelOrResendPaymentLinkRequest
+        schema = CancelOrResendPaymentLinkRequest()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["resendPaymentLink"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        query_string = await create_query_string()
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["resendPaymentLink"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/resend-payment-link/", ), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body, cookies=self._conf.cookies)
+    
+    async def cancelPaymentLink(self, body=""):
+        """Use this API to cancel a payment link for the customer
+        """
+        payload = {}
+        
+        # Parameter validation
+        schema = PaymentValidator.cancelPaymentLink()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models.CancelOrResendPaymentLinkRequest import CancelOrResendPaymentLinkRequest
+        schema = CancelOrResendPaymentLinkRequest()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["cancelPaymentLink"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        query_string = await create_query_string()
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["cancelPaymentLink"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/cancel-payment-link/", ), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body, cookies=self._conf.cookies)
+    
+    async def getPaymentModeRoutesPaymentLink(self, id=None, body=""):
+        """Use this API to get all valid payment options for doing a payment through payment link
+        :param id : Payment link id : type string
+        """
+        payload = {}
+        
+        if id:
+            payload["id"] = id
+        
+        # Parameter validation
+        schema = PaymentValidator.getPaymentModeRoutesPaymentLink()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getPaymentModeRoutesPaymentLink"], proccessed_params="""{"required":[{"name":"id","in":"query","description":"Payment link id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"name":"id","in":"query","description":"Payment link id","required":true,"schema":{"type":"string"}}],"headers":[],"path":[]}""", id=id)
+        query_string = await create_query_string(id=id)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getPaymentModeRoutesPaymentLink"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/payment/options/link/", id=id), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body, cookies=self._conf.cookies)
+    
+    async def pollingPaymentLink(self, id=None, body=""):
+        """Use this API to poll if payment through payment was successful or not
+        :param id :  : type string
+        """
+        payload = {}
+        
+        if id:
+            payload["id"] = id
+        
+        # Parameter validation
+        schema = PaymentValidator.pollingPaymentLink()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["pollingPaymentLink"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"id","schema":{"type":"string","description":"Unique payment link id"}}],"query":[{"in":"query","name":"id","schema":{"type":"string","description":"Unique payment link id"}}],"headers":[],"path":[]}""", id=id)
+        query_string = await create_query_string(id=id)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["pollingPaymentLink"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/polling-payment-link/", id=id), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body, cookies=self._conf.cookies)
+    
     async def customerCreditSummary(self, aggregator=None, body=""):
         """Use this API to fetch the customer credit summary.
         :param aggregator :  : type string
@@ -4205,7 +4322,8 @@ class Order:
             "getPosOrderById": "/service/application/order/v1.0/orders/pos-order/{order_id}",
             "getCustomerDetailsByShipmentId": "/service/application/order/v1.0/orders/{order_id}/shipments/{shipment_id}/customer-details",
             "sendOtpToShipmentCustomer": "/service/application/order/v1.0/orders/{order_id}/shipments/{shipment_id}/otp/send/",
-            "verifyOtpShipmentCustomer": "/service/application/order/v1.0/orders/{order_id}/shipments/{shipment_id}/otp/verify"
+            "verifyOtpShipmentCustomer": "/service/application/order/v1.0/orders/{order_id}/shipments/{shipment_id}/otp/verify",
+            "getInvoiceByShipmentId": "/service/application/order/v1.0/orders/shipments/{shipment_id}/invoice"
             
         }
         self._urls = {
@@ -4432,6 +4550,24 @@ class Order:
         url_with_params = await create_url_with_params(api_url=self._urls["verifyOtpShipmentCustomer"], proccessed_params="""{"required":[{"name":"order_id","in":"path","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string"}},{"name":"shipment_id","in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"order_id","in":"path","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string"}},{"name":"shipment_id","in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string"}}]}""", order_id=order_id, shipment_id=shipment_id)
         query_string = await create_query_string(order_id=order_id, shipment_id=shipment_id)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["verifyOtpShipmentCustomer"]).netloc, "post", await create_url_without_domain("/service/application/order/v1.0/orders/{order_id}/shipments/{shipment_id}/otp/verify", order_id=order_id, shipment_id=shipment_id), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body, cookies=self._conf.cookies)
+    
+    async def getInvoiceByShipmentId(self, shipment_id=None, body=""):
+        """Use this API to get a generated Invoice URL for viewing or download.
+        :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
+        """
+        payload = {}
+        
+        if shipment_id:
+            payload["shipment_id"] = shipment_id
+        
+        # Parameter validation
+        schema = OrderValidator.getInvoiceByShipmentId()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getInvoiceByShipmentId"], proccessed_params="""{"required":[{"name":"shipment_id","in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"shipment_id","in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string"}}]}""", shipment_id=shipment_id)
+        query_string = await create_query_string(shipment_id=shipment_id)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getInvoiceByShipmentId"]).netloc, "get", await create_url_without_domain("/service/application/order/v1.0/orders/shipments/{shipment_id}/invoice", shipment_id=shipment_id), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body, cookies=self._conf.cookies)
     
 
 class Rewards:
@@ -6030,6 +6166,7 @@ class Logistic:
         self._conf = config
         self._relativeUrls = {
             "getTatProduct": "/service/application/logistics/v1.0",
+            "getPincodeZones": "/service/application/logistics/v1.0/pincode/zones",
             "getPincodeCity": "/service/application/logistics/v1.0/pincode/{pincode}"
             
         }
@@ -6058,6 +6195,25 @@ class Logistic:
         url_with_params = await create_url_with_params(api_url=self._urls["getTatProduct"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
         query_string = await create_query_string()
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getTatProduct"]).netloc, "post", await create_url_without_domain("/service/application/logistics/v1.0", ), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body, cookies=self._conf.cookies)
+    
+    async def getPincodeZones(self, body=""):
+        """Get to know the zones of a specefic pincode
+        """
+        payload = {}
+        
+        # Parameter validation
+        schema = LogisticValidator.getPincodeZones()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models.GetPincodeZonesReqBody import GetPincodeZonesReqBody
+        schema = GetPincodeZonesReqBody()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getPincodeZones"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        query_string = await create_query_string()
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getPincodeZones"]).netloc, "post", await create_url_without_domain("/service/application/logistics/v1.0/pincode/zones", ), query_string, {"Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()}, body, exclude_headers=["Authorization"]), data=body, cookies=self._conf.cookies)
     
     async def getPincodeCity(self, pincode=None, body=""):
         """Use this API to retrieve a city by its PIN Code.

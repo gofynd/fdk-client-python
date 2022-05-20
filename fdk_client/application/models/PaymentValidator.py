@@ -135,6 +135,33 @@ class PaymentValidator:
         
         pass 
     
+    class getPaymentLink(BaseSchema):
+        
+        id = fields.Str(required=False)
+         
+    
+    class createPaymentLink(BaseSchema):
+        
+        pass 
+    
+    class resendPaymentLink(BaseSchema):
+        
+        pass 
+    
+    class cancelPaymentLink(BaseSchema):
+        
+        pass 
+    
+    class getPaymentModeRoutesPaymentLink(BaseSchema):
+        
+        id = fields.Str(required=False)
+         
+    
+    class pollingPaymentLink(BaseSchema):
+        
+        id = fields.Str(required=False)
+         
+    
     class customerCreditSummary(BaseSchema):
         
         aggregator = fields.Str(required=False)

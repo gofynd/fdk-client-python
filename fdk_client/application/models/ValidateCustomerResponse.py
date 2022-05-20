@@ -12,14 +12,18 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 class ValidateCustomerResponse(BaseSchema):
     # Payment swagger.json
 
     
-    message = fields.Str(required=False)
+    error = fields.Dict(required=False)
     
     success = fields.Boolean(required=False)
     
     data = fields.Dict(required=False)
+    
+    message = fields.Str(required=False)
     
 

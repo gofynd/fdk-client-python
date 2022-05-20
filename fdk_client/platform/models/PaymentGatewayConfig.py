@@ -22,11 +22,11 @@ class PaymentGatewayConfig(BaseSchema):
     
     secret = fields.Str(required=False)
     
-    is_active = fields.Boolean(required=False)
+    config_type = fields.Str(required=False)
     
     merchant_salt = fields.Str(required=False)
     
-    config_type = fields.Str(required=False)
+    is_active = fields.Boolean(required=False)
     
     key = fields.Str(required=False)
     

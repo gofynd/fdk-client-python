@@ -20,10 +20,10 @@ class Schedule(BaseSchema):
     
     cron = fields.Str(required=False)
     
+    duration = fields.Int(required=False)
+    
     start = fields.Str(required=False)
     
     end = fields.Str(required=False)
-    
-    duration = fields.Int(required=False)
     
 
