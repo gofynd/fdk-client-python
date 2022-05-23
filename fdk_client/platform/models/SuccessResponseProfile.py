@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class CompanyBrandPostRequestSerializer(BaseSchema):
+class SuccessResponseProfile(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    company = fields.Int(required=False)
-    
     uid = fields.Int(required=False)
     
-    brands = fields.List(fields.Int(required=False), required=False)
+    success = fields.Boolean(required=False)
     
 
