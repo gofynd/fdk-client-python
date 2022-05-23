@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class Ownership(BaseSchema):
-    # Cart swagger.json
+class SuccessResponseProfile(BaseSchema):
+    # CompanyProfile swagger.json
 
     
-    payable_category = fields.Str(required=False)
+    success = fields.Boolean(required=False)
     
-    payable_by = fields.Str(required=False)
+    uid = fields.Int(required=False)
     
 
