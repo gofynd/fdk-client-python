@@ -22,7 +22,7 @@ class EntityConfiguration(BaseSchema):
     # Catalog swagger.json
 
     
-    id = fields.Str(required=False)
+    config_type = fields.Str(required=False)
     
     product = fields.Nested(GetCatalogConfigurationDetailsProduct, required=False)
     
@@ -30,8 +30,8 @@ class EntityConfiguration(BaseSchema):
     
     config_id = fields.Str(required=False)
     
-    app_id = fields.Str(required=False)
+    id = fields.Str(required=False)
     
-    config_type = fields.Str(required=False)
+    app_id = fields.Str(required=False)
     
 

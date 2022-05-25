@@ -18,12 +18,12 @@ class CreditSummary(BaseSchema):
     # Payment swagger.json
 
     
-    status_message = fields.Str(required=False)
+    status = fields.Str(required=False)
     
     merchant_customer_ref_id = fields.Str(required=False)
     
-    status = fields.Str(required=False)
+    status_message = fields.Str(required=False)
     
-    balance = fields.List(fields.Nested(BalanceDetails, required=False), required=False)
+    balance = fields.Nested(BalanceDetails, required=False)
     
 

@@ -10,12 +10,16 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 class EpaylaterBannerData(BaseSchema):
     # Payment swagger.json
 
     
-    status = fields.Str(required=False)
+    display = fields.Boolean(required=False)
     
-    kyc_url = fields.Str(required=False)
+    message = fields.Str(required=False)
+    
+    status = fields.Str(required=False)
     
 

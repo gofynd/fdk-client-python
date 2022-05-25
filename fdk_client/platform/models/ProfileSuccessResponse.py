@@ -10,7 +10,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class SuccessResponseProfile(BaseSchema):
+class ProfileSuccessResponse(BaseSchema):
     # CompanyProfile swagger.json
 
     

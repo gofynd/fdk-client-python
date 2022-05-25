@@ -16,6 +16,6 @@ class CustomerCreditSummaryResponse(BaseSchema):
     
     success = fields.Boolean(required=False)
     
-    data = fields.List(fields.Nested(CreditSummary, required=False), required=False)
+    data = fields.Nested(CreditSummary, required=False)
     
 

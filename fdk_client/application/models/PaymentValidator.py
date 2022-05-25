@@ -92,6 +92,10 @@ class PaymentValidator:
         
         pass 
     
+    class resendOrCancelPayment(BaseSchema):
+        
+        pass 
+    
     class getActiveRefundTransferModes(BaseSchema):
         
         pass 
@@ -170,6 +174,8 @@ class PaymentValidator:
     class redirectToAggregator(BaseSchema):
         
         source = fields.Str(required=False)
+        
+        aggregator = fields.Str(required=False)
          
     
     class checkCredit(BaseSchema):

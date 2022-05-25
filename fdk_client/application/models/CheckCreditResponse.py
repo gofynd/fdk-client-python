@@ -16,6 +16,6 @@ class CheckCreditResponse(BaseSchema):
     
     success = fields.Boolean(required=False)
     
-    data = fields.List(fields.Nested(CreditDetail, required=False), required=False)
+    data = fields.Nested(CreditDetail, required=False)
     
 
