@@ -26,8 +26,3 @@ class AuditTrailValidator:
         id = fields.Str(required=False)
          
     
-    class getEntityTypes(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-         
-    

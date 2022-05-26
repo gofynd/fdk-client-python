@@ -8,14 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class EntityTypeObj(BaseSchema):
-    # AuditTrail swagger.json
+class SessionDeleteResponseSchema(BaseSchema):
+    # User swagger.json
 
     
-    entity_value = fields.Str(required=False)
-    
-    display_name = fields.Str(required=False)
+    items = fields.List(fields.Str(required=False), required=False)
     
 

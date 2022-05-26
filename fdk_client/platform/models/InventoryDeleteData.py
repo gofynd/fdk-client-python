@@ -12,14 +12,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class CompanyTax(BaseSchema):
-    # CompanyProfile swagger.json
+class InventoryDeleteData(BaseSchema):
+    # Catalog swagger.json
 
     
-    effective_date = fields.Str(required=False)
+    location_id = fields.Int(required=False)
     
-    rate = fields.Float(required=False)
+    size = fields.Str(required=False)
     
-    enable = fields.Boolean(required=False)
+    item_id = fields.Int(required=False)
     
 

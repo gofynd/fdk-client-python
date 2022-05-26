@@ -22,8 +22,8 @@ class ProductFiltersKey(BaseSchema):
     
     display = fields.Str(required=False)
     
-    name = fields.Str(required=False)
-    
     kind = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
     
 

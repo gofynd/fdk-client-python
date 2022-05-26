@@ -8,18 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
-class TaxIdentifier(BaseSchema):
+class CommonResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    hsn_code_id = fields.Str(required=False)
-    
-    hsn_code = fields.Str(required=False)
-    
-    reporting_hsn = fields.Str(required=False)
+    success = fields.Str(required=False)
     
 
