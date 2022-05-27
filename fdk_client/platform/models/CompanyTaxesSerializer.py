@@ -10,12 +10,16 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class BrandBannerSerializer(BaseSchema):
+
+
+class CompanyTaxesSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    landscape = fields.Str(required=False)
+    enable = fields.Boolean(required=False)
     
-    portrait = fields.Str(required=False)
+    effective_date = fields.Str(required=False)
+    
+    rate = fields.Float(required=False)
     
 
