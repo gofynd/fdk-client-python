@@ -26,8 +26,8 @@ class GetSearchWordsData(BaseSchema):
     
     uid = fields.Str(required=False)
     
-    app_id = fields.Str(required=False)
-    
     result = fields.Dict(required=False)
+    
+    app_id = fields.Str(required=False)
     
 

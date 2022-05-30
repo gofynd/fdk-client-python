@@ -7,13 +7,13 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+from .Child import Child
+
 from .ImageUrls import ImageUrls
 
 
 
 from .Action import Action
-
-from .Child import Child
 
 
 
@@ -22,7 +22,9 @@ class CategoryItems(BaseSchema):
     # Catalog swagger.json
 
     
-    name = fields.Str(required=False)
+    uid = fields.Int(required=False)
+    
+    childs = fields.List(fields.Nested(Child, required=False), required=False)
     
     banners = fields.Nested(ImageUrls, required=False)
     
@@ -30,8 +32,6 @@ class CategoryItems(BaseSchema):
     
     action = fields.Nested(Action, required=False)
     
-    childs = fields.List(fields.Nested(Child, required=False), required=False)
-    
-    uid = fields.Int(required=False)
+    name = fields.Str(required=False)
     
 
