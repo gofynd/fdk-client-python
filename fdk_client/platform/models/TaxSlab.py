@@ -12,14 +12,18 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class CatalogInsightItem(BaseSchema):
+
+
+class TaxSlab(BaseSchema):
     # Catalog swagger.json
 
     
-    out_of_stock_count = fields.Int(required=False)
+    cess = fields.Float(required=False)
     
-    sellable_count = fields.Int(required=False)
+    rate = fields.Float(required=False)
     
-    count = fields.Int(required=False)
+    threshold = fields.Float(required=False)
+    
+    effective_date = fields.Str(required=False)
     
 
