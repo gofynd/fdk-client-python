@@ -1,4 +1,4 @@
-"""Application Models."""
+"""Platform Models."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -10,12 +10,16 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class UpdateRefundTransferModeRequest(BaseSchema):
-    # Payment swagger.json
+
+
+class CompanyTaxesSerializer(BaseSchema):
+    # CompanyProfile swagger.json
 
     
-    transfer_mode = fields.Str(required=False)
-    
     enable = fields.Boolean(required=False)
+    
+    effective_date = fields.Str(required=False)
+    
+    rate = fields.Float(required=False)
     
 
