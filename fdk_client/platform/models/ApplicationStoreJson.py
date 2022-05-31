@@ -8,14 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class PostOrder1(BaseSchema):
-    # Cart swagger.json
+class ApplicationStoreJson(BaseSchema):
+    # Catalog swagger.json
 
     
-    return_allowed = fields.Boolean(required=False)
-    
-    cancellation_allowed = fields.Boolean(required=False)
+    _custom_json = fields.Dict(required=False)
     
 
