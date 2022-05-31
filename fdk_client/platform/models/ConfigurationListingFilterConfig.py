@@ -26,7 +26,7 @@ class ConfigurationListingFilterConfig(BaseSchema):
     
     type = fields.Str(required=False)
     
-    name = fields.Str(required=False)
+    priority = fields.Int(required=False)
     
     key = fields.Str(required=False)
     
@@ -34,7 +34,7 @@ class ConfigurationListingFilterConfig(BaseSchema):
     
     value_config = fields.Nested(ConfigurationListingFilterValue, required=False)
     
-    priority = fields.Int(required=False)
+    name = fields.Str(required=False)
     
     is_active = fields.Boolean(required=False)
     

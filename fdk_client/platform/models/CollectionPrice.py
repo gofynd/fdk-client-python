@@ -14,8 +14,8 @@ class CollectionPrice(BaseSchema):
     # Catalog swagger.json
 
     
-    lte = fields.Int(required=False)
-    
     gte = fields.Int(required=False)
+    
+    lte = fields.Int(required=False)
     
 
