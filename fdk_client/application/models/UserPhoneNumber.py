@@ -17,7 +17,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class UserPhoneNumber(BaseSchema):
-    # Configuration swagger.json
+    # User swagger.json
 
     
     active = fields.Boolean(required=False)
@@ -26,8 +26,8 @@ class UserPhoneNumber(BaseSchema):
     
     verified = fields.Boolean(required=False)
     
-    country_code = fields.Int(required=False)
-    
     phone = fields.Str(required=False)
+    
+    country_code = fields.Str(required=False)
     
 

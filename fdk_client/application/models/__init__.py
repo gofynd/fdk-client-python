@@ -742,6 +742,10 @@ from .UpdateUserRequestSchema import UpdateUserRequestSchema
     
 from .UserSchema import UserSchema
     
+from .UserPhoneNumber import UserPhoneNumber
+    
+from .UserEmail import UserEmail
+    
 
     
 from .ApplicationLegal import ApplicationLegal
@@ -1168,10 +1172,6 @@ from .InventoryArticleAssignment import InventoryArticleAssignment
     
 from .CompanyAboutAddress import CompanyAboutAddress
     
-from .UserEmail import UserEmail
-    
-from .UserPhoneNumber import UserPhoneNumber
-    
 from .ApplicationInformation import ApplicationInformation
     
 from .InformationAddress import InformationAddress
@@ -1360,9 +1360,9 @@ from .KYCAddress import KYCAddress
     
 from .UserPersonalInfoInDetails import UserPersonalInfoInDetails
     
-from .BusinessDetails import BusinessDetails
-    
 from .MarketplaceInfo import MarketplaceInfo
+    
+from .BusinessDetails import BusinessDetails
     
 from .CustomerOnboardingRequest import CustomerOnboardingRequest
     

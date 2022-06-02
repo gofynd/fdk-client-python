@@ -15,9 +15,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .PhoneNumber import PhoneNumber
+from .UserPhoneNumber import UserPhoneNumber
 
-from .Email import Email
+from .UserEmail import UserEmail
 
 
 
@@ -56,9 +56,9 @@ class UserSchema(BaseSchema):
     
     last_name = fields.Str(required=False)
     
-    phone_numbers = fields.List(fields.Nested(PhoneNumber, required=False), required=False)
+    phone_numbers = fields.List(fields.Nested(UserPhoneNumber, required=False), required=False)
     
-    emails = fields.List(fields.Nested(Email, required=False), required=False)
+    emails = fields.List(fields.Nested(UserEmail, required=False), required=False)
     
     gender = fields.Str(required=False)
     

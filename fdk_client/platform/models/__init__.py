@@ -466,6 +466,10 @@ from .UpdateUserRequestSchema import UpdateUserRequestSchema
     
 from .UserSchema import UserSchema
     
+from .UserPhoneNumber import UserPhoneNumber
+    
+from .UserEmail import UserEmail
+    
 
     
 from .ApplicationLegal import ApplicationLegal
@@ -2283,10 +2287,6 @@ from .ArticleAssignmentRule import ArticleAssignmentRule
 from .InventoryArticleAssignment import InventoryArticleAssignment
     
 from .CompanyAboutAddress import CompanyAboutAddress
-    
-from .UserEmail import UserEmail
-    
-from .UserPhoneNumber import UserPhoneNumber
     
 from .ApplicationInformation import ApplicationInformation
     
