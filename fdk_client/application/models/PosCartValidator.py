@@ -16,6 +16,10 @@ class PosCartValidator:
         b = fields.Boolean(required=False)
         
         assign_card_id = fields.Int(required=False)
+        
+        area_code = fields.Str(required=False)
+        
+        buy_now = fields.Boolean(required=False)
          
     
     class getCartLastModified(BaseSchema):
@@ -28,6 +32,10 @@ class PosCartValidator:
         i = fields.Boolean(required=False)
         
         b = fields.Boolean(required=False)
+        
+        area_code = fields.Str(required=False)
+        
+        buy_now = fields.Boolean(required=False)
          
     
     class updateCart(BaseSchema):
@@ -37,6 +45,10 @@ class PosCartValidator:
         i = fields.Boolean(required=False)
         
         b = fields.Boolean(required=False)
+        
+        area_code = fields.Str(required=False)
+        
+        buy_now = fields.Boolean(required=False)
          
     
     class getItemCount(BaseSchema):

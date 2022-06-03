@@ -5,8 +5,6 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .Page import Page
-
 
 
 from .ProductSortOn import ProductSortOn
@@ -15,12 +13,12 @@ from .ProductFilters import ProductFilters
 
 from .ProductListingDetail import ProductListingDetail
 
+from .Page import Page
+
 
 class ApplicationProductListingResponse(BaseSchema):
     # Catalog swagger.json
 
-    
-    page = fields.Nested(Page, required=False)
     
     operators = fields.Dict(required=False)
     
@@ -29,5 +27,7 @@ class ApplicationProductListingResponse(BaseSchema):
     filters = fields.List(fields.Nested(ProductFilters, required=False), required=False)
     
     items = fields.List(fields.Nested(ProductListingDetail, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
     
 
