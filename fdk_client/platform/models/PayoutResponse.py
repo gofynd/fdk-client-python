@@ -30,13 +30,17 @@ class PayoutResponse(BaseSchema):
     # Payment swagger.json
 
     
+    bank_details = fields.Dict(required=False)
+    
+    is_active = fields.Boolean(required=False)
+    
     payment_status = fields.Str(required=False)
     
-    success = fields.Boolean(required=False)
-    
-    transfer_type = fields.Str(required=False)
+    unique_transfer_no = fields.Str(required=False)
     
     aggregator = fields.Str(required=False)
+    
+    transfer_type = fields.Str(required=False)
     
     users = fields.Dict(required=False)
     
@@ -44,10 +48,6 @@ class PayoutResponse(BaseSchema):
     
     created = fields.Boolean(required=False)
     
-    bank_details = fields.Dict(required=False)
-    
-    is_active = fields.Boolean(required=False)
-    
-    unique_transfer_no = fields.Str(required=False)
+    success = fields.Boolean(required=False)
     
 
