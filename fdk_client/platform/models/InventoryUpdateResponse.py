@@ -10,7 +10,7 @@ from .InventoryResponseItem import InventoryResponseItem
 
 
 
-class InventoryUpdateReponse(BaseSchema):
+class InventoryUpdateResponse(BaseSchema):
     # Catalog swagger.json
 
     
