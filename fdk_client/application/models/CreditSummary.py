@@ -20,9 +20,9 @@ class CreditSummary(BaseSchema):
     
     status_message = fields.Str(required=False)
     
-    merchant_customer_ref_id = fields.Str(required=False)
-    
     status = fields.Str(required=False)
+    
+    merchant_customer_ref_id = fields.Str(required=False)
     
     balance = fields.Nested(BalanceDetails, required=False)
     

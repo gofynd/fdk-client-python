@@ -22,12 +22,12 @@ class CreatePaymentLinkResponse(BaseSchema):
     
     message = fields.Str(required=False)
     
-    payment_link_id = fields.Str(required=False)
-    
-    status_code = fields.Int(required=False)
-    
     success = fields.Boolean(required=False)
     
+    payment_link_id = fields.Str(required=False)
+    
     payment_link_url = fields.Str(required=False)
+    
+    status_code = fields.Int(required=False)
     
 

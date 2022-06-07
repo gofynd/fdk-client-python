@@ -54,8 +54,8 @@ class Catalog:
             "getCollectionItemsBySlug": "/service/application/catalog/v1.0/collections/{slug}/items/",
             "getCollectionDetailBySlug": "/service/application/catalog/v1.0/collections/{slug}/",
             "getFollowedListing": "/service/application/catalog/v1.0/follow/{collection_type}/",
-            "followById": "/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/",
             "unfollowById": "/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/",
+            "followById": "/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/",
             "getFollowerCountById": "/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/count/",
             "getFollowIds": "/service/application/catalog/v1.0/follow/ids/",
             "getStores": "/service/application/catalog/v1.0/locations/",
@@ -790,39 +790,6 @@ class Catalog:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getFollowedListing"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/follow/{collection_type}/", collection_type=collection_type, page_id=page_id, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
-    async def followById(self, collection_type=None, collection_id=None, body=""):
-        """Follow a particular entity such as product, brand, collection specified by its ID.
-        :param collection_type : Type of collection followed, i.e. products, brands, or collections. : type string
-        :param collection_id : The ID of the collection type. : type string
-        """
-        payload = {}
-        
-        if collection_type:
-            payload["collection_type"] = collection_type
-        
-        if collection_id:
-            payload["collection_id"] = collection_id
-        
-        # Parameter validation
-        schema = CatalogValidator.followById()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["followById"], proccessed_params="""{"required":[{"in":"path","name":"collection_type","description":"Type of collection followed, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true},{"in":"path","name":"collection_id","description":"The ID of the collection type.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"collection_type","description":"Type of collection followed, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true},{"in":"path","name":"collection_id","description":"The ID of the collection type.","schema":{"type":"string"},"required":true}]}""", collection_type=collection_type, collection_id=collection_id)
-        query_string = await create_query_string(collection_type=collection_type, collection_id=collection_id)
-        headers = {
-            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
-        }
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["followById"]).netloc, "post", await create_url_without_domain("/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/", collection_type=collection_type, collection_id=collection_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-    
     async def unfollowById(self, collection_type=None, collection_id=None, body=""):
         """You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
         :param collection_type : Type of collection followed, i.e. products, brands, or collections. : type string
@@ -855,6 +822,39 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["unfollowById"]).netloc, "delete", await create_url_without_domain("/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/", collection_type=collection_type, collection_id=collection_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+    
+    async def followById(self, collection_type=None, collection_id=None, body=""):
+        """Follow a particular entity such as product, brand, collection specified by its ID.
+        :param collection_type : Type of collection followed, i.e. products, brands, or collections. : type string
+        :param collection_id : The ID of the collection type. : type string
+        """
+        payload = {}
+        
+        if collection_type:
+            payload["collection_type"] = collection_type
+        
+        if collection_id:
+            payload["collection_id"] = collection_id
+        
+        # Parameter validation
+        schema = CatalogValidator.followById()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["followById"], proccessed_params="""{"required":[{"in":"path","name":"collection_type","description":"Type of collection followed, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true},{"in":"path","name":"collection_id","description":"The ID of the collection type.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"collection_type","description":"Type of collection followed, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true},{"in":"path","name":"collection_id","description":"The ID of the collection type.","schema":{"type":"string"},"required":true}]}""", collection_type=collection_type, collection_id=collection_id)
+        query_string = await create_query_string(collection_type=collection_type, collection_id=collection_id)
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["followById"]).netloc, "post", await create_url_without_domain("/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/", collection_type=collection_type, collection_id=collection_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
     async def getFollowerCountById(self, collection_type=None, collection_id=None, body=""):
         """Get the total count of followers for a given collection type and collection ID.
@@ -6096,22 +6096,22 @@ class Payment:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["updateDefaultBeneficiary"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/refund/beneficiary/default", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
-    async def getPaymentLink(self, id=None, body=""):
+    async def getPaymentLink(self, payment_link_id=None, body=""):
         """Use this API to get a payment link
-        :param id :  : type string
+        :param payment_link_id :  : type string
         """
         payload = {}
         
-        if id:
-            payload["id"] = id
+        if payment_link_id:
+            payload["payment_link_id"] = payment_link_id
         
         # Parameter validation
         schema = PaymentValidator.getPaymentLink()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getPaymentLink"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"id","schema":{"type":"string","description":"Unique payment link id"}}],"query":[{"in":"query","name":"id","schema":{"type":"string","description":"Unique payment link id"}}],"headers":[],"path":[]}""", id=id)
-        query_string = await create_query_string(id=id)
+        url_with_params = await create_url_with_params(api_url=self._urls["getPaymentLink"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"payment_link_id","schema":{"type":"string","description":"Unique payment link id"}}],"query":[{"in":"query","name":"payment_link_id","schema":{"type":"string","description":"Unique payment link id"}}],"headers":[],"path":[]}""", payment_link_id=payment_link_id)
+        query_string = await create_query_string(payment_link_id=payment_link_id)
         headers = {
             "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
         }
@@ -6123,7 +6123,7 @@ class Payment:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getPaymentLink"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/create-payment-link/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getPaymentLink"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/create-payment-link/", payment_link_id=payment_link_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
     async def createPaymentLink(self, body=""):
         """Use this API to create a payment link for the customer
@@ -6215,22 +6215,26 @@ class Payment:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["cancelPaymentLink"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/cancel-payment-link/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
-    async def getPaymentModeRoutesPaymentLink(self, id=None, body=""):
+    async def getPaymentModeRoutesPaymentLink(self, payment_link_id=None, refresh=None, body=""):
         """Use this API to get all valid payment options for doing a payment through payment link
-        :param id : Payment link id : type string
+        :param payment_link_id : Payment link id : type string
+        :param refresh : This is a boolean value. Select `true` to remove temporary cache files on payment gateway and replace with the latest one. : type boolean
         """
         payload = {}
         
-        if id:
-            payload["id"] = id
+        if payment_link_id:
+            payload["payment_link_id"] = payment_link_id
+        
+        if refresh:
+            payload["refresh"] = refresh
         
         # Parameter validation
         schema = PaymentValidator.getPaymentModeRoutesPaymentLink()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getPaymentModeRoutesPaymentLink"], proccessed_params="""{"required":[{"name":"id","in":"query","description":"Payment link id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"name":"id","in":"query","description":"Payment link id","required":true,"schema":{"type":"string"}}],"headers":[],"path":[]}""", id=id)
-        query_string = await create_query_string(id=id)
+        url_with_params = await create_url_with_params(api_url=self._urls["getPaymentModeRoutesPaymentLink"], proccessed_params="""{"required":[{"name":"payment_link_id","in":"query","description":"Payment link id","required":true,"schema":{"type":"string"}}],"optional":[{"name":"refresh","in":"query","description":"This is a boolean value. Select `true` to remove temporary cache files on payment gateway and replace with the latest one.","schema":{"type":"boolean"}}],"query":[{"name":"payment_link_id","in":"query","description":"Payment link id","required":true,"schema":{"type":"string"}},{"name":"refresh","in":"query","description":"This is a boolean value. Select `true` to remove temporary cache files on payment gateway and replace with the latest one.","schema":{"type":"boolean"}}],"headers":[],"path":[]}""", payment_link_id=payment_link_id, refresh=refresh)
+        query_string = await create_query_string(payment_link_id=payment_link_id, refresh=refresh)
         headers = {
             "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
         }
@@ -6242,24 +6246,24 @@ class Payment:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getPaymentModeRoutesPaymentLink"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/payment/options/link/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getPaymentModeRoutesPaymentLink"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/payment/options/link/", payment_link_id=payment_link_id, refresh=refresh), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
-    async def pollingPaymentLink(self, id=None, body=""):
+    async def pollingPaymentLink(self, payment_link_id=None, body=""):
         """Use this API to poll if payment through payment was successful or not
-        :param id :  : type string
+        :param payment_link_id :  : type string
         """
         payload = {}
         
-        if id:
-            payload["id"] = id
+        if payment_link_id:
+            payload["payment_link_id"] = payment_link_id
         
         # Parameter validation
         schema = PaymentValidator.pollingPaymentLink()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["pollingPaymentLink"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"id","schema":{"type":"string","description":"Unique payment link id"}}],"query":[{"in":"query","name":"id","schema":{"type":"string","description":"Unique payment link id"}}],"headers":[],"path":[]}""", id=id)
-        query_string = await create_query_string(id=id)
+        url_with_params = await create_url_with_params(api_url=self._urls["pollingPaymentLink"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"payment_link_id","schema":{"type":"string","description":"Unique payment link id"}}],"query":[{"in":"query","name":"payment_link_id","schema":{"type":"string","description":"Unique payment link id"}}],"headers":[],"path":[]}""", payment_link_id=payment_link_id)
+        query_string = await create_query_string(payment_link_id=payment_link_id)
         headers = {
             "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
         }
@@ -6271,7 +6275,7 @@ class Payment:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["pollingPaymentLink"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/polling-payment-link/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["pollingPaymentLink"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/polling-payment-link/", payment_link_id=payment_link_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
     async def customerCreditSummary(self, aggregator=None, body=""):
         """Use this API to fetch the customer credit summary.

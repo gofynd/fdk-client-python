@@ -18,8 +18,8 @@ class CancelOrResendPaymentLinkResponse(BaseSchema):
     
     message = fields.Str(required=False)
     
-    success = fields.Boolean(required=False)
-    
     status_code = fields.Int(required=False)
+    
+    success = fields.Boolean(required=False)
     
 

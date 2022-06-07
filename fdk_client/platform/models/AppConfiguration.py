@@ -24,9 +24,9 @@ class AppConfiguration(BaseSchema):
     
     product = fields.Nested(ConfigurationProduct, required=False)
     
-    app_id = fields.Str(required=False)
-    
     config_id = fields.Str(required=False)
+    
+    app_id = fields.Str(required=False)
     
     config_type = fields.Str(required=False)
     

@@ -141,7 +141,7 @@ class PaymentValidator:
     
     class getPaymentLink(BaseSchema):
         
-        id = fields.Str(required=False)
+        payment_link_id = fields.Str(required=False)
          
     
     class createPaymentLink(BaseSchema):
@@ -158,12 +158,14 @@ class PaymentValidator:
     
     class getPaymentModeRoutesPaymentLink(BaseSchema):
         
-        id = fields.Str(required=False)
+        payment_link_id = fields.Str(required=False)
+        
+        refresh = fields.Boolean(required=False)
          
     
     class pollingPaymentLink(BaseSchema):
         
-        id = fields.Str(required=False)
+        payment_link_id = fields.Str(required=False)
          
     
     class customerCreditSummary(BaseSchema):
