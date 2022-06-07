@@ -34,19 +34,21 @@ class LimitedProductData(BaseSchema):
     # Catalog swagger.json
 
     
-    country_of_origin = fields.Str(required=False)
+    sizes = fields.List(fields.Str(required=False), required=False)
     
-    slug = fields.Str(required=False)
+    attributes = fields.Dict(required=False)
+    
+    country_of_origin = fields.Str(required=False)
     
     identifier = fields.Dict(required=False)
     
-    name = fields.Str(required=False)
-    
-    images = fields.List(fields.Str(required=False), required=False)
-    
-    uid = fields.Int(required=False)
+    slug = fields.Str(required=False)
     
     item_code = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
     
     quantity = fields.Int(required=False)
     
@@ -54,8 +56,6 @@ class LimitedProductData(BaseSchema):
     
     short_description = fields.Str(required=False)
     
-    sizes = fields.List(fields.Str(required=False), required=False)
-    
-    attributes = fields.Dict(required=False)
+    images = fields.List(fields.Str(required=False), required=False)
     
 

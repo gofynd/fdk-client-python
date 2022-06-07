@@ -18,8 +18,8 @@ class CatalogInsightItem(BaseSchema):
     
     count = fields.Int(required=False)
     
-    out_of_stock_count = fields.Int(required=False)
-    
     sellable_count = fields.Int(required=False)
+    
+    out_of_stock_count = fields.Int(required=False)
     
 
