@@ -20,7 +20,7 @@ class PTErrorResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    errors = fields.Dict(required=False)
+    message = fields.Str(required=False)
     
     code = fields.Str(required=False)
     
@@ -28,6 +28,6 @@ class PTErrorResponse(BaseSchema):
     
     meta = fields.Dict(required=False)
     
-    message = fields.Str(required=False)
+    errors = fields.Dict(required=False)
     
 
