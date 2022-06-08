@@ -159,14 +159,16 @@ class PaymentValidator:
     class getPaymentModeRoutesPaymentLink(BaseSchema):
         
         payment_link_id = fields.Str(required=False)
-        
-        refresh = fields.Boolean(required=False)
          
     
     class pollingPaymentLink(BaseSchema):
         
         payment_link_id = fields.Str(required=False)
          
+    
+    class createOrderHandlerPaymentLink(BaseSchema):
+        
+        pass 
     
     class customerCreditSummary(BaseSchema):
         

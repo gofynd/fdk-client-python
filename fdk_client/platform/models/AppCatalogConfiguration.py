@@ -24,14 +24,14 @@ class AppCatalogConfiguration(BaseSchema):
     
     config_id = fields.Str(required=False)
     
-    app_id = fields.Str(required=False)
+    config_type = fields.Str(required=False)
     
     listing = fields.Nested(ConfigurationListing, required=False)
     
-    config_type = fields.Str(required=False)
+    id = fields.Str(required=False)
     
     product = fields.Nested(ConfigurationProduct, required=False)
     
-    id = fields.Str(required=False)
+    app_id = fields.Str(required=False)
     
 
