@@ -7,9 +7,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 from .ItemQueryForUserCollection import ItemQueryForUserCollection
-
-
 
 
 class CollectionItemRequest(BaseSchema):
@@ -18,8 +18,8 @@ class CollectionItemRequest(BaseSchema):
     
     query = fields.Dict(required=False)
     
-    item = fields.List(fields.Nested(ItemQueryForUserCollection, required=False), required=False)
-    
     type = fields.Str(required=False)
+    
+    item = fields.List(fields.Nested(ItemQueryForUserCollection, required=False), required=False)
     
 
