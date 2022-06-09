@@ -18,8 +18,8 @@ class PaymentStatusUpdateResponse(BaseSchema):
     
     status = fields.Str(required=False)
     
-    aggregator_name = fields.Str(required=False)
-    
     retry = fields.Boolean(required=False)
+    
+    aggregator_name = fields.Str(required=False)
     
 

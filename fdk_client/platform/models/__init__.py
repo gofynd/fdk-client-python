@@ -72,6 +72,8 @@ from .GetParticipantsInsideVideoRoomResponse import GetParticipantsInsideVideoRo
     
 from .Participant import Participant
     
+from .PhoneNumber import PhoneNumber
+    
 from .Email import Email
     
 from .Debug import Debug
@@ -451,8 +453,6 @@ from .Google import Google
 from .UpdateUserRequestSchema import UpdateUserRequestSchema
     
 from .UserSchema import UserSchema
-    
-from .PhoneNumber import PhoneNumber
     
 
     
@@ -960,9 +960,9 @@ from .ErrorCodeAndDescription import ErrorCodeAndDescription
     
 from .HttpErrorCodeAndResponse import HttpErrorCodeAndResponse
     
-from .IntentAppErrorList import IntentAppErrorList
-    
 from .PaymentModeLogo import PaymentModeLogo
+    
+from .IntentAppErrorList import IntentAppErrorList
     
 from .IntentApp import IntentApp
     
