@@ -22,12 +22,12 @@ class DepartmentErrorResponse(BaseSchema):
     
     code = fields.Str(required=False)
     
-    status = fields.Int(required=False)
-    
     errors = fields.Dict(required=False)
+    
+    message = fields.Str(required=False)
     
     meta = fields.Dict(required=False)
     
-    message = fields.Str(required=False)
+    status = fields.Int(required=False)
     
 

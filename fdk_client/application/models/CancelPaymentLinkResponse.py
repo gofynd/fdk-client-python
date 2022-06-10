@@ -12,14 +12,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class WrongOtpError(BaseSchema):
+class CancelPaymentLinkResponse(BaseSchema):
     # Payment swagger.json
 
     
-    is_verified_flag = fields.Boolean(required=False)
+    status_code = fields.Int(required=False)
     
-    description = fields.Str(required=False)
+    message = fields.Str(required=False)
     
-    success = fields.Str(required=False)
+    success = fields.Boolean(required=False)
     
 
