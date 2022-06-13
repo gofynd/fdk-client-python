@@ -26,8 +26,8 @@ from .models.AnalyticsValidator import AnalyticsValidator
 from .models.DiscountValidator import DiscountValidator
 from .models.PartnerValidator import PartnerValidator
 from .models.WebhookValidator import WebhookValidator
-from .models.AuditTrailValidator import AuditTrailValidator
 from .models.ServiceabilityValidator import ServiceabilityValidator
+from .models.AuditTrailValidator import AuditTrailValidator
 
 
 
@@ -8924,12 +8924,6 @@ class Webhook:
         self.applicationId = applicationId
     
 
-class AuditTrail:
-    def __init__(self, config, applicationId):
-        self._conf = config
-        self.applicationId = applicationId
-    
-
 class Serviceability:
     def __init__(self, config, applicationId):
         self._conf = config
@@ -8989,6 +8983,12 @@ class Serviceability:
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics-internal/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/zones", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
 
+class AuditTrail:
+    def __init__(self, config, applicationId):
+        self._conf = config
+        self.applicationId = applicationId
+    
+
 
 
 class PlatformApplicationClient:
@@ -9015,8 +9015,8 @@ class PlatformApplicationClient:
         self.discount = Discount(config, applicationId)
         self.partner = Partner(config, applicationId)
         self.webhook = Webhook(config, applicationId)
-        self.auditTrail = AuditTrail(config, applicationId)
         self.serviceability = Serviceability(config, applicationId)
+        self.auditTrail = AuditTrail(config, applicationId)
         
 
     async def setExtraHeaders(self, header):
