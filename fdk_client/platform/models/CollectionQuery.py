@@ -5,19 +5,19 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .CollectionPrice import CollectionPrice
-
-
-
-
-
-
-
 
 
 
 
 from .CollectionPrice import CollectionPrice
+
+
+
+
+
+from .CollectionPrice import CollectionPrice
+
+
 
 
 
@@ -30,15 +30,13 @@ class CollectionQuery(BaseSchema):
     # Catalog swagger.json
 
     
-    discount = fields.Nested(CollectionPrice, required=False)
-    
-    brands = fields.List(fields.Int(required=False), required=False)
-    
     sizes = fields.List(fields.Str(required=False), required=False)
     
     genders = fields.List(fields.Str(required=False), required=False)
     
-    sort_on = fields.Str(required=False)
+    discount = fields.Nested(CollectionPrice, required=False)
+    
+    brands = fields.List(fields.Int(required=False), required=False)
     
     categories = fields.List(fields.Int(required=False), required=False)
     
@@ -47,6 +45,8 @@ class CollectionQuery(BaseSchema):
     departments = fields.List(fields.Str(required=False), required=False)
     
     store_ids = fields.List(fields.Int(required=False), required=False)
+    
+    sort_on = fields.Str(required=False)
     
     image_nature = fields.List(fields.Str(required=False), required=False)
     

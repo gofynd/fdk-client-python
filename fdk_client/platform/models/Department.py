@@ -22,9 +22,9 @@ class Department(BaseSchema):
     
     uid = fields.Int(required=False)
     
-    slug = fields.Str(required=False)
-    
     priority_order = fields.Int(required=False)
+    
+    slug = fields.Str(required=False)
     
     name = fields.Str(required=False)
     
