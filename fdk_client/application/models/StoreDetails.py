@@ -5,7 +5,7 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .StoreTiming import StoreTiming
+
 
 from .StoreManagerSerializer import StoreManagerSerializer
 
@@ -19,7 +19,7 @@ from .SellerPhoneNumber import SellerPhoneNumber
 
 from .StoreDepartments import StoreDepartments
 
-
+from .StoreTiming import StoreTiming
 
 from .CompanyStore import CompanyStore
 
@@ -28,7 +28,7 @@ class StoreDetails(BaseSchema):
     # Catalog swagger.json
 
     
-    timing = fields.List(fields.Nested(StoreTiming, required=False), required=False)
+    name = fields.Str(required=False)
     
     manager = fields.Nested(StoreManagerSerializer, required=False)
     
@@ -42,7 +42,7 @@ class StoreDetails(BaseSchema):
     
     departments = fields.List(fields.Nested(StoreDepartments, required=False), required=False)
     
-    name = fields.Str(required=False)
+    timing = fields.List(fields.Nested(StoreTiming, required=False), required=False)
     
     company = fields.Nested(CompanyStore, required=False)
     
