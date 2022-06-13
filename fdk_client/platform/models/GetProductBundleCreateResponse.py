@@ -11,21 +11,21 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 from .ProductBundleItem import ProductBundleItem
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -40,9 +40,23 @@ class GetProductBundleCreateResponse(BaseSchema):
     # Catalog swagger.json
 
     
+    same_store_assignment = fields.Boolean(required=False)
+    
     created_by = fields.Dict(required=False)
     
+    name = fields.Str(required=False)
+    
     is_active = fields.Boolean(required=False)
+    
+    modified_on = fields.Str(required=False)
+    
+    company_id = fields.Int(required=False)
+    
+    created_on = fields.Str(required=False)
+    
+    meta = fields.Dict(required=False)
+    
+    logo = fields.Str(required=False)
     
     modified_by = fields.Dict(required=False)
     
@@ -50,24 +64,10 @@ class GetProductBundleCreateResponse(BaseSchema):
     
     page_visibility = fields.List(fields.Str(required=False), required=False)
     
-    company_id = fields.Int(required=False)
-    
-    modified_on = fields.Str(required=False)
-    
-    same_store_assignment = fields.Boolean(required=False)
+    choice = fields.Str(required=False)
     
     id = fields.Str(required=False)
     
-    name = fields.Str(required=False)
-    
-    created_on = fields.Str(required=False)
-    
-    choice = fields.Str(required=False)
-    
     slug = fields.Str(required=False)
-    
-    meta = fields.Dict(required=False)
-    
-    logo = fields.Str(required=False)
     
 

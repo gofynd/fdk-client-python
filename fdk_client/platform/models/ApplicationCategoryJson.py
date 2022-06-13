@@ -8,14 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class CollectionImage(BaseSchema):
+class ApplicationCategoryJson(BaseSchema):
     # Catalog swagger.json
 
     
-    url = fields.Str(required=False)
-    
-    aspect_ratio = fields.Str(required=False)
+    _custom_json = fields.Dict(required=False)
     
 
