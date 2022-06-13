@@ -8,10 +8,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class CommonResponse(BaseSchema):
-    # Catalog swagger.json
+
+
+class CompanySocialAccounts(BaseSchema):
+    # CompanyProfile swagger.json
 
     
-    success = fields.Str(required=False)
+    name = fields.Str(required=False)
+    
+    url = fields.Str(required=False)
     
 

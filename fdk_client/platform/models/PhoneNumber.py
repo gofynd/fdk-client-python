@@ -17,7 +17,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class PhoneNumber(BaseSchema):
-    # User swagger.json
+    # Lead swagger.json
 
     
     active = fields.Boolean(required=False)
@@ -28,6 +28,6 @@ class PhoneNumber(BaseSchema):
     
     phone = fields.Str(required=False)
     
-    country_code = fields.Str(required=False)
+    country_code = fields.Int(required=False)
     
 

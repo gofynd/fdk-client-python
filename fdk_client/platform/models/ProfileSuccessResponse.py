@@ -5,17 +5,17 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .InventoryDeleteData import InventoryDeleteData
 
 
 
 
-class InventoryDelete(BaseSchema):
-    # Catalog swagger.json
 
-    
-    data = fields.Nested(InventoryDeleteData, required=False)
+class ProfileSuccessResponse(BaseSchema):
+    # CompanyProfile swagger.json
+
     
     success = fields.Boolean(required=False)
+    
+    uid = fields.Int(required=False)
     
 

@@ -9,7 +9,7 @@ from .ImageUrls import ImageUrls
 
 
 
-from .Media import Media
+
 
 from .ProductListingAction import ProductListingAction
 
@@ -17,7 +17,7 @@ from .ProductListingAction import ProductListingAction
 
 
 
-
+from .Media import Media
 
 
 
@@ -28,17 +28,17 @@ class BrandItem(BaseSchema):
     
     banners = fields.Nested(ImageUrls, required=False)
     
-    slug = fields.Str(required=False)
-    
-    logo = fields.Nested(Media, required=False)
-    
-    action = fields.Nested(ProductListingAction, required=False)
+    name = fields.Str(required=False)
     
     uid = fields.Int(required=False)
     
+    action = fields.Nested(ProductListingAction, required=False)
+    
     discount = fields.Str(required=False)
     
-    name = fields.Str(required=False)
+    slug = fields.Str(required=False)
+    
+    logo = fields.Nested(Media, required=False)
     
     departments = fields.List(fields.Str(required=False), required=False)
     

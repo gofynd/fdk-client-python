@@ -12,14 +12,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class InventoryDeleteData(BaseSchema):
+class TaxIdentifier(BaseSchema):
     # Catalog swagger.json
 
     
-    item_id = fields.Int(required=False)
+    reporting_hsn = fields.Str(required=False)
     
-    location_id = fields.Int(required=False)
+    hsn_code = fields.Str(required=False)
     
-    size = fields.Str(required=False)
+    hsn_code_id = fields.Str(required=False)
     
 
