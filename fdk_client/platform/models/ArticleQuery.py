@@ -10,12 +10,16 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class CollectionPrice(BaseSchema):
+
+
+class ArticleQuery(BaseSchema):
     # Catalog swagger.json
 
     
-    lte = fields.Int(required=False)
+    item_id = fields.Int(required=False)
     
-    gte = fields.Int(required=False)
+    size = fields.Str(required=False)
+    
+    ignored_stores = fields.List(fields.Int(required=False), required=False)
     
 

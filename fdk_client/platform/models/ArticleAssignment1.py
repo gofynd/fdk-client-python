@@ -8,10 +8,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class StoreMeta(BaseSchema):
+
+
+class ArticleAssignment1(BaseSchema):
     # Catalog swagger.json
 
     
-    id = fields.Int(required=False)
+    level = fields.Str(required=False)
+    
+    strategy = fields.Str(required=False)
     
 
