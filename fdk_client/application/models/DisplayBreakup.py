@@ -22,10 +22,6 @@ class DisplayBreakup(BaseSchema):
     # Cart swagger.json
 
     
-    message = fields.List(fields.Str(required=False), required=False)
-    
-    currency_code = fields.Str(required=False)
-    
     value = fields.Float(required=False)
     
     currency_symbol = fields.Str(required=False)
@@ -33,5 +29,9 @@ class DisplayBreakup(BaseSchema):
     key = fields.Str(required=False)
     
     display = fields.Str(required=False)
+    
+    message = fields.List(fields.Str(required=False), required=False)
+    
+    currency_code = fields.Str(required=False)
     
 
