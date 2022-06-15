@@ -1812,15 +1812,15 @@ from .LocationListSerializer import LocationListSerializer
     
 
     
+from .Website import Website
+    
+from .BusinessDetails import BusinessDetails
+    
 from .ContactDetails import ContactDetails
     
 from .CompanyTaxesSerializer import CompanyTaxesSerializer
     
 from .BusinessCountryInfo import BusinessCountryInfo
-    
-from .Website import Website
-    
-from .BusinessDetails import BusinessDetails
     
 from .GetCompanyProfileSerializerResponse import GetCompanyProfileSerializerResponse
     
