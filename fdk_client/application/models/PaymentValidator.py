@@ -170,6 +170,14 @@ class PaymentValidator:
         
         pass 
     
+    class initialisePaymentPaymentLink(BaseSchema):
+        
+        pass 
+    
+    class checkAndUpdatePaymentStatusPaymentLink(BaseSchema):
+        
+        pass 
+    
     class customerCreditSummary(BaseSchema):
         
         aggregator = fields.Str(required=False)

@@ -5379,6 +5379,8 @@ class Payment:
             "getPaymentModeRoutesPaymentLink": "/service/application/payment/v1.0/payment/options/link/",
             "pollingPaymentLink": "/service/application/payment/v1.0/polling-payment-link/",
             "createOrderHandlerPaymentLink": "/service/application/payment/v1.0/create-order/link/",
+            "initialisePaymentPaymentLink": "/service/application/payment/v1.0/payment/request/link/",
+            "checkAndUpdatePaymentStatusPaymentLink": "/service/application/payment/v1.0/payment/confirm/polling/link/",
             "customerCreditSummary": "/service/application/payment/v1.0/payment/credit-summary/",
             "redirectToAggregator": "/service/application/payment/v1.0/payment/redirect-to-aggregator/",
             "checkCredit": "/service/application/payment/v1.0/check-credits/",
@@ -6351,6 +6353,66 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["createOrderHandlerPaymentLink"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/create-order/link/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+    
+    async def initialisePaymentPaymentLink(self, body=""):
+        """Use this API to inititate payment using UPI, BharatQR, wherein the UPI requests are send to the app and QR code is displayed on the screen.
+        """
+        payload = {}
+        
+        # Parameter validation
+        schema = PaymentValidator.initialisePaymentPaymentLink()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models.PaymentInitializationRequest import PaymentInitializationRequest
+        schema = PaymentInitializationRequest()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["initialisePaymentPaymentLink"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["initialisePaymentPaymentLink"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/request/link/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+    
+    async def checkAndUpdatePaymentStatusPaymentLink(self, body=""):
+        """Use this API to perform continuous polling at intervals to check the status of payment until timeout.
+        """
+        payload = {}
+        
+        # Parameter validation
+        schema = PaymentValidator.checkAndUpdatePaymentStatusPaymentLink()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models.PaymentStatusUpdateRequest import PaymentStatusUpdateRequest
+        schema = PaymentStatusUpdateRequest()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["checkAndUpdatePaymentStatusPaymentLink"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["checkAndUpdatePaymentStatusPaymentLink"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/confirm/polling/link/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
     async def customerCreditSummary(self, aggregator=None, body=""):
         """Use this API to fetch the customer credit summary.

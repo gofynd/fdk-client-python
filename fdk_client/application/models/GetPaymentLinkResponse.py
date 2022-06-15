@@ -24,18 +24,18 @@ class GetPaymentLinkResponse(BaseSchema):
     # Payment swagger.json
 
     
-    status_code = fields.Int(required=False)
+    success = fields.Boolean(required=False)
     
     message = fields.Str(required=False)
     
-    external_order_id = fields.Str(required=False)
-    
     payment_link_current_status = fields.Str(required=False)
+    
+    status_code = fields.Int(required=False)
+    
+    payment_link_url = fields.Str(required=False)
     
     amount = fields.Float(required=False)
     
-    success = fields.Boolean(required=False)
-    
-    payment_link_url = fields.Str(required=False)
+    external_order_id = fields.Str(required=False)
     
 
