@@ -10,12 +10,20 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class InventoryValidationResponse(BaseSchema):
+
+
+
+
+class TaxSlab(BaseSchema):
     # Catalog swagger.json
 
     
-    data = fields.Dict(required=False)
+    rate = fields.Float(required=False)
     
-    message = fields.Str(required=False)
+    cess = fields.Float(required=False)
+    
+    threshold = fields.Float(required=False)
+    
+    effective_date = fields.Str(required=False)
     
 
