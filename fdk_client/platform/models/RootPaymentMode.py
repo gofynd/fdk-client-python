@@ -28,13 +28,13 @@ class RootPaymentMode(BaseSchema):
     
     display_priority = fields.Int(required=False)
     
-    add_card_enabled = fields.Boolean(required=False)
+    anonymous_enable = fields.Boolean(required=False)
     
     name = fields.Str(required=False)
     
-    save_card = fields.Boolean(required=False)
+    add_card_enabled = fields.Boolean(required=False)
     
-    anonymous_enable = fields.Boolean(required=False)
+    save_card = fields.Boolean(required=False)
     
     display_name = fields.Str(required=False)
     
