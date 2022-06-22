@@ -286,19 +286,6 @@ class ConfigurationValidator:
         page_size = fields.Int(required=False)
          
     
-    class getIntegrationLevelConfig(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-        
-        level = fields.Str(required=False)
-        
-        opted = fields.Boolean(required=False)
-        
-        check_permission = fields.Boolean(required=False)
-         
-    
     class getIntegrationByLevelId(BaseSchema):
         
         company_id = fields.Str(required=False)

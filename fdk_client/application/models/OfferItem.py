@@ -11,9 +11,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 from .OfferPrice import OfferPrice
-
-
 
 
 
@@ -24,9 +24,11 @@ class OfferItem(BaseSchema):
     # Cart swagger.json
 
     
+    total = fields.Float(required=False)
+    
     margin = fields.Int(required=False)
     
-    type = fields.Str(required=False)
+    auto_applied = fields.Boolean(required=False)
     
     quantity = fields.Int(required=False)
     
@@ -34,8 +36,6 @@ class OfferItem(BaseSchema):
     
     best = fields.Boolean(required=False)
     
-    total = fields.Float(required=False)
-    
-    auto_applied = fields.Boolean(required=False)
+    type = fields.Str(required=False)
     
 
