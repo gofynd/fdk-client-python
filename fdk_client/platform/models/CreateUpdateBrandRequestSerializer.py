@@ -11,17 +11,17 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
+
+
+
+
+
+
+
+
 from .BrandBannerSerializer import BrandBannerSerializer
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -30,13 +30,9 @@ class CreateUpdateBrandRequestSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    logo = fields.Str(required=False)
+    description = fields.Str(required=False)
     
     company_id = fields.Int(required=False)
-    
-    _custom_json = fields.Dict(required=False)
-    
-    banner = fields.Nested(BrandBannerSerializer, required=False)
     
     _locale_language = fields.Dict(required=False)
     
@@ -44,10 +40,14 @@ class CreateUpdateBrandRequestSerializer(BaseSchema):
     
     brand_tier = fields.Str(required=False)
     
-    uid = fields.Int(required=False)
-    
-    description = fields.Str(required=False)
+    _custom_json = fields.Dict(required=False)
     
     name = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
+    
+    banner = fields.Nested(BrandBannerSerializer, required=False)
+    
+    logo = fields.Str(required=False)
     
 

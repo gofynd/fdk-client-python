@@ -197,7 +197,8 @@ class CartValidator:
     
     class checkoutCart(BaseSchema):
         
-        pass 
+        buy_now = fields.Boolean(required=False)
+         
     
     class updateCartMeta(BaseSchema):
         

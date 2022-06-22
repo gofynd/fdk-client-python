@@ -5,17 +5,27 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .RuleDefinition import RuleDefinition
+from .Restrictions import Restrictions
 
-from .DisplayMeta import DisplayMeta
-
-from .Validity import Validity
+from .Identifier import Identifier
 
 from .CouponDateMeta import CouponDateMeta
 
+from .State import State
+
 from .CouponAuthor import CouponAuthor
 
+from .Validity import Validity
+
+from .CouponSchedule import CouponSchedule
+
 from .Rule import Rule
+
+
+
+from .DisplayMeta import DisplayMeta
+
+from .RuleDefinition import RuleDefinition
 
 from .CouponAction import CouponAction
 
@@ -23,36 +33,36 @@ from .CouponAction import CouponAction
 
 from .Ownership import Ownership
 
+
+
 from .Validation import Validation
-
-
-
-
-
-from .CouponSchedule import CouponSchedule
-
-from .Restrictions import Restrictions
-
-from .State import State
-
-from .Identifier import Identifier
 
 
 class CouponUpdate(BaseSchema):
     # Cart swagger.json
 
     
-    rule_definition = fields.Nested(RuleDefinition, required=False)
+    restrictions = fields.Nested(Restrictions, required=False)
     
-    display_meta = fields.Nested(DisplayMeta, required=False)
-    
-    validity = fields.Nested(Validity, required=False)
+    identifiers = fields.Nested(Identifier, required=False)
     
     date_meta = fields.Nested(CouponDateMeta, required=False)
     
+    state = fields.Nested(State, required=False)
+    
     author = fields.Nested(CouponAuthor, required=False)
     
+    validity = fields.Nested(Validity, required=False)
+    
+    _schedule = fields.Nested(CouponSchedule, required=False)
+    
     rule = fields.List(fields.Nested(Rule, required=False), required=False)
+    
+    tags = fields.List(fields.Str(required=False), required=False)
+    
+    display_meta = fields.Nested(DisplayMeta, required=False)
+    
+    rule_definition = fields.Nested(RuleDefinition, required=False)
     
     action = fields.Nested(CouponAction, required=False)
     
@@ -60,18 +70,8 @@ class CouponUpdate(BaseSchema):
     
     ownership = fields.Nested(Ownership, required=False)
     
-    validation = fields.Nested(Validation, required=False)
-    
-    tags = fields.List(fields.Str(required=False), required=False)
-    
     code = fields.Str(required=False)
     
-    _schedule = fields.Nested(CouponSchedule, required=False)
-    
-    restrictions = fields.Nested(Restrictions, required=False)
-    
-    state = fields.Nested(State, required=False)
-    
-    identifiers = fields.Nested(Identifier, required=False)
+    validation = fields.Nested(Validation, required=False)
     
 
