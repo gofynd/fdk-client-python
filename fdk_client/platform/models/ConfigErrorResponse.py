@@ -8,14 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class ArticleAssignment1(BaseSchema):
+class ConfigErrorResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    strategy = fields.Str(required=False)
-    
-    level = fields.Str(required=False)
+    message = fields.Str(required=False)
     
 

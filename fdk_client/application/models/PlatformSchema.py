@@ -47,6 +47,8 @@ from .SocialTokens import SocialTokens
 
 
 
+from .DeleteAccountReasons import DeleteAccountReasons
+
 
 class PlatformSchema(BaseSchema):
     # User swagger.json
@@ -93,5 +95,7 @@ class PlatformSchema(BaseSchema):
     mobile_image = fields.Str(required=False)
     
     desktop_image = fields.Str(required=False)
+    
+    delete_account_reasons = fields.List(fields.Nested(DeleteAccountReasons, required=False), required=False)
     
 
