@@ -9,9 +9,9 @@ from .EntityRegionView_Items import EntityRegionView_Items
 
 
 
-from .EntityRegionView_Error import EntityRegionView_Error
-
 from .EntityRegionView_page import EntityRegionView_page
+
+from .EntityRegionView_Error import EntityRegionView_Error
 
 
 class EntityRegionView_Response(BaseSchema):
@@ -22,8 +22,8 @@ class EntityRegionView_Response(BaseSchema):
     
     success = fields.Boolean(required=False)
     
-    error = fields.Nested(EntityRegionView_Error, required=False)
-    
     page = fields.Nested(EntityRegionView_page, required=False)
+    
+    error = fields.Nested(EntityRegionView_Error, required=False)
     
 

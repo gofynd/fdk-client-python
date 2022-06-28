@@ -20,11 +20,11 @@ class ZoneDataItem(BaseSchema):
     # Serviceability swagger.json
 
     
+    current = fields.Int(required=False)
+    
     item_total = fields.Int(required=False)
     
     size = fields.Int(required=False)
-    
-    current = fields.Int(required=False)
     
     type = fields.Str(required=False)
     
