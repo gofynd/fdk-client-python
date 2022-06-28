@@ -7,15 +7,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .InventoryDeleteData import InventoryDeleteData
 
-
-class InventoryDelete(BaseSchema):
+class ApplicationCategoryJson(BaseSchema):
     # Catalog swagger.json
 
     
-    success = fields.Boolean(required=False)
-    
-    data = fields.Nested(InventoryDeleteData, required=False)
+    _custom_json = fields.Dict(required=False)
     
 

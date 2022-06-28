@@ -9,13 +9,13 @@ from ..models.BaseSchema import BaseSchema
 
 from .ProductSize import ProductSize
 
-
-
-from .SizeChart import SizeChart
-
 from .ProductListingPrice import ProductListingPrice
 
 from .ProductSizeStores import ProductSizeStores
+
+
+
+from .SizeChart import SizeChart
 
 
 class ProductSizes(BaseSchema):
@@ -26,12 +26,12 @@ class ProductSizes(BaseSchema):
     
     sizes = fields.List(fields.Nested(ProductSize, required=False), required=False)
     
-    sellable = fields.Boolean(required=False)
-    
-    size_chart = fields.Nested(SizeChart, required=False)
-    
     price = fields.Nested(ProductListingPrice, required=False)
     
     stores = fields.Nested(ProductSizeStores, required=False)
+    
+    sellable = fields.Boolean(required=False)
+    
+    size_chart = fields.Nested(SizeChart, required=False)
     
 

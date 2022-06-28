@@ -8,10 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class CommonResponse(BaseSchema):
+class ConfigErrorResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    success = fields.Str(required=False)
+    message = fields.Str(required=False)
     
 
