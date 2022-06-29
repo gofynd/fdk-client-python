@@ -8,10 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class AllowSingleRequest(BaseSchema):
-    # Catalog swagger.json
+class SessionDeleteResponseSchema(BaseSchema):
+    # User swagger.json
 
     
-    allow_single = fields.Boolean(required=False)
+    items = fields.List(fields.Str(required=False), required=False)
     
 

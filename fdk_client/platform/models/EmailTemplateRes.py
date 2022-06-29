@@ -31,6 +31,8 @@ from .EmailTemplateKeys import EmailTemplateKeys
 
 
 
+
+
 from .EmailTemplateHeaders import EmailTemplateHeaders
 
 from .TemplateAndType import TemplateAndType
@@ -77,6 +79,8 @@ class EmailTemplateRes(BaseSchema):
     name = fields.Str(required=False)
     
     keys = fields.Nested(EmailTemplateKeys, required=False)
+    
+    from_ = fields.Str(required=False)
     
     reply_to = fields.Str(required=False)
     

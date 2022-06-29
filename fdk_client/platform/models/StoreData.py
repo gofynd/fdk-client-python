@@ -8,10 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class DefaultKeyRequest(BaseSchema):
-    # Catalog swagger.json
+class StoreData(BaseSchema):
+    # Inventory swagger.json
 
     
-    default_key = fields.Str(required=False)
+    location_id = fields.Str(required=False)
     
 

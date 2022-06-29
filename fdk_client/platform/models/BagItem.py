@@ -38,6 +38,8 @@ from .BagItemAttributes import BagItemAttributes
 
 
 
+
+
 class BagItem(BaseSchema):
     # Order swagger.json
 
@@ -73,5 +75,7 @@ class BagItem(BaseSchema):
     brand = fields.Str(required=False)
     
     last_updated_at = fields.Str(required=False)
+    
+    quantity = fields.Int(required=False)
     
 

@@ -8,10 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ConfigSuccessResponse(BaseSchema):
-    # Catalog swagger.json
+class SuppressStoreModel(BaseSchema):
+    # Inventory swagger.json
 
     
-    message = fields.Str(required=False)
+    stores = fields.List(fields.Int(required=False), required=False)
     
 

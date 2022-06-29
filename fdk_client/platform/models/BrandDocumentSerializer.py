@@ -8,10 +8,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ConfigErrorResponse(BaseSchema):
-    # Catalog swagger.json
+
+
+class BrandDocumentSerializer(BaseSchema):
+    # CompanyProfile swagger.json
 
     
-    message = fields.Str(required=False)
+    type = fields.Str(required=False)
+    
+    url = fields.Str(required=False)
     
 

@@ -7,6 +7,15 @@ from ..models.BaseSchema import BaseSchema
 
 class CatalogValidator:
     
+    class getSearchKeywords(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+    
     class updateSearchKeywords(BaseSchema):
         
         company_id = fields.Str(required=False)
@@ -17,15 +26,6 @@ class CatalogValidator:
          
     
     class deleteSearchKeywords(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-         
-    
-    class getSearchKeywords(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -48,6 +48,15 @@ class CatalogValidator:
         application_id = fields.Str(required=False)
          
     
+    class getAutocompleteKeywordDetail(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+    
     class updateAutocompleteKeyword(BaseSchema):
         
         company_id = fields.Str(required=False)
@@ -58,15 +67,6 @@ class CatalogValidator:
          
     
     class deleteAutocompleteKeyword(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-         
-    
-    class getAutocompleteKeywordDetail(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -103,14 +103,14 @@ class CatalogValidator:
         slug = fields.List(fields.Str(required=False), required=False)
          
     
-    class updateProductBundle(BaseSchema):
+    class getProductBundleDetail(BaseSchema):
         
         company_id = fields.Str(required=False)
         
         id = fields.Str(required=False)
          
     
-    class getProductBundleDetail(BaseSchema):
+    class updateProductBundle(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -137,14 +137,14 @@ class CatalogValidator:
         page_size = fields.Int(required=False)
          
     
-    class updateSizeGuide(BaseSchema):
+    class getSizeGuide(BaseSchema):
         
         company_id = fields.Str(required=False)
         
         id = fields.Str(required=False)
          
     
-    class getSizeGuide(BaseSchema):
+    class updateSizeGuide(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -158,125 +158,6 @@ class CatalogValidator:
         application_id = fields.Str(required=False)
         
         item_id = fields.Str(required=False)
-         
-    
-    class getConfigurationMetadata(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        config_type = fields.Str(required=False)
-        
-        template_slug = fields.Str(required=False)
-         
-    
-    class createGroupConfiguration(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        config_type = fields.Str(required=False)
-         
-    
-    class getGroupConfigurations(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        config_type = fields.Str(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        search = fields.Str(required=False)
-        
-        template_slug = fields.Str(required=False)
-         
-    
-    class updateGroupConfiguration(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        config_type = fields.Str(required=False)
-        
-        group_slug = fields.Str(required=False)
-         
-    
-    class deleteGroupConfiguration(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        config_type = fields.Str(required=False)
-        
-        group_slug = fields.Str(required=False)
-         
-    
-    class createListingConfiguration(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        config_type = fields.Str(required=False)
-         
-    
-    class getListingConfigurations(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        config_type = fields.Str(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        search = fields.Str(required=False)
-         
-    
-    class updateListingConfiguration(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        config_type = fields.Str(required=False)
-        
-        config_id = fields.Str(required=False)
-         
-    
-    class deleteListingConfiguration(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        config_type = fields.Str(required=False)
-        
-        config_id = fields.Str(required=False)
-         
-    
-    class updateAllowSingle(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-    
-    class updateDefaultSort(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
          
     
     class getCatalogConfiguration(BaseSchema):
@@ -576,14 +457,14 @@ class CatalogValidator:
         page_size = fields.Int(required=False)
          
     
-    class updateCategory(BaseSchema):
+    class getCategoryData(BaseSchema):
         
         company_id = fields.Str(required=False)
         
         uid = fields.Str(required=False)
          
     
-    class getCategoryData(BaseSchema):
+    class updateCategory(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -618,6 +499,17 @@ class CatalogValidator:
         page_size = fields.Int(required=False)
          
     
+    class getProduct(BaseSchema):
+        
+        item_code = fields.Str(required=False)
+        
+        company_id = fields.Int(required=False)
+        
+        item_id = fields.Int(required=False)
+        
+        brand_uid = fields.Int(required=False)
+         
+    
     class editProduct(BaseSchema):
         
         company_id = fields.Str(required=False)
@@ -630,17 +522,6 @@ class CatalogValidator:
         company_id = fields.Str(required=False)
         
         item_id = fields.Int(required=False)
-         
-    
-    class getProduct(BaseSchema):
-        
-        item_code = fields.Str(required=False)
-        
-        company_id = fields.Int(required=False)
-        
-        item_id = fields.Int(required=False)
-        
-        brand_uid = fields.Int(required=False)
          
     
     class getProductValidation(BaseSchema):
@@ -851,14 +732,14 @@ class CatalogValidator:
         q = fields.Str(required=False)
          
     
-    class updateHsnCode(BaseSchema):
+    class getHsnCode(BaseSchema):
         
         company_id = fields.Str(required=False)
         
         id = fields.Str(required=False)
          
     
-    class getHsnCode(BaseSchema):
+    class updateHsnCode(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -868,26 +749,6 @@ class CatalogValidator:
     class bulkHsnCode(BaseSchema):
         
         company_id = fields.Str(required=False)
-         
-    
-    class getAllProductHsnCodes(BaseSchema):
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        q = fields.Str(required=False)
-        
-        type = fields.Str(required=False)
-        
-        company_id = fields.Int(required=False)
-         
-    
-    class getSingleProductHSNCode(BaseSchema):
-        
-        reporting_hsn = fields.Str(required=False)
-        
-        company_id = fields.Int(required=False)
          
     
     class getApplicationBrands(BaseSchema):

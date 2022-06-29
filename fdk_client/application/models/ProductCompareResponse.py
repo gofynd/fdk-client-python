@@ -5,9 +5,9 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+
+
 from .ProductDetail import ProductDetail
-
-
 
 
 
@@ -18,9 +18,9 @@ class ProductCompareResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    items = fields.List(fields.Nested(ProductDetail, required=False), required=False)
-    
     title = fields.Str(required=False)
+    
+    items = fields.List(fields.Nested(ProductDetail, required=False), required=False)
     
     subtitle = fields.Str(required=False)
     

@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class CompanyTaxesSerializer1(BaseSchema):
+class Deactivation(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    enable = fields.Boolean(required=False)
+    description = fields.Str(required=False)
     
-    rate = fields.Float(required=False)
-    
-    effective_date = fields.Str(required=False)
+    reason = fields.List(fields.Str(required=False), required=False)
     
 
