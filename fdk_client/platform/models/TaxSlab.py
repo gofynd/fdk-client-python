@@ -22,8 +22,8 @@ class TaxSlab(BaseSchema):
     
     threshold = fields.Float(required=False)
     
-    rate = fields.Float(required=False)
-    
     cess = fields.Float(required=False)
+    
+    rate = fields.Float(required=False)
     
 
