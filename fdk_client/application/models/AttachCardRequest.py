@@ -22,8 +22,8 @@ class AttachCardRequest(BaseSchema):
     
     refresh = fields.Boolean(required=False)
     
-    card_id = fields.Str(required=False)
-    
     nickname = fields.Str(required=False)
+    
+    card_id = fields.Str(required=False)
     
 
