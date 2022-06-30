@@ -16,6 +16,6 @@ class QuantityBase(BaseSchema):
     
     count = fields.Int(required=False)
     
-    updated_at = fields.Int(required=False)
+    updated_at = fields.Str(required=False)
     
 
