@@ -26,7 +26,7 @@ class CustomerOnboardingRequest(BaseSchema):
     
     mcc = fields.Str(required=False)
     
-    aggregator = fields.Str(required=False)
+    source = fields.Str(required=False)
     
     marketplace_info = fields.Nested(MarketplaceInfo, required=False)
     
@@ -36,6 +36,6 @@ class CustomerOnboardingRequest(BaseSchema):
     
     personal_info = fields.Nested(UserPersonalInfoInDetails, required=False)
     
-    source = fields.Str(required=False)
+    aggregator = fields.Str(required=False)
     
 
