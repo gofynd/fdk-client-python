@@ -26,8 +26,8 @@ class PromotionOffer(BaseSchema):
     
     valid_till = fields.Str(required=False)
     
-    description = fields.Str(required=False)
-    
     offer_text = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
     
 

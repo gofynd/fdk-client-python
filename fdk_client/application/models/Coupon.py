@@ -30,11 +30,13 @@ class Coupon(BaseSchema):
     # Cart swagger.json
 
     
-    minimum_cart_value = fields.Float(required=False)
+    message = fields.Str(required=False)
+    
+    coupon_value = fields.Float(required=False)
     
     title = fields.Str(required=False)
     
-    message = fields.Str(required=False)
+    max_discount_value = fields.Float(required=False)
     
     is_applicable = fields.Boolean(required=False)
     
@@ -44,10 +46,8 @@ class Coupon(BaseSchema):
     
     sub_title = fields.Str(required=False)
     
-    coupon_value = fields.Float(required=False)
-    
     is_applied = fields.Boolean(required=False)
     
-    max_discount_value = fields.Float(required=False)
+    minimum_cart_value = fields.Float(required=False)
     
 

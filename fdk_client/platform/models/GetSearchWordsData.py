@@ -20,6 +20,8 @@ class GetSearchWordsData(BaseSchema):
     # Catalog swagger.json
 
     
+    uid = fields.Str(required=False)
+    
     words = fields.List(fields.Str(required=False), required=False)
     
     app_id = fields.Str(required=False)
@@ -27,7 +29,5 @@ class GetSearchWordsData(BaseSchema):
     result = fields.Dict(required=False)
     
     _custom_json = fields.Dict(required=False)
-    
-    uid = fields.Str(required=False)
     
 
