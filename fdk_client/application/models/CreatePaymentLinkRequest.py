@@ -26,12 +26,12 @@ class CreatePaymentLinkRequest(BaseSchema):
     
     meta = fields.Nested(CreatePaymentLinkMeta, required=False)
     
-    external_order_id = fields.Str(required=False)
-    
-    mobile_number = fields.Str(required=False)
+    amount = fields.Float(required=False)
     
     description = fields.Str(required=False)
     
-    amount = fields.Float(required=False)
+    external_order_id = fields.Str(required=False)
+    
+    mobile_number = fields.Str(required=False)
     
 

@@ -11,6 +11,7 @@ Authentication Service
 * [createUser](#createuser)
 * [blockOrUnblockUsers](#blockorunblockusers)
 * [archiveUser](#archiveuser)
+* [unArchiveUser](#unarchiveuser)
 * [updateUser](#updateuser)
 * [createUserSession](#createusersession)
 * [getActiveSessions](#getactivesessions)
@@ -423,6 +424,64 @@ archive user
 
 
 [ArchiveUserSuccess](#ArchiveUserSuccess)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### unArchiveUser
+unarchive user who archived from applcation
+
+
+
+
+```python
+try:
+    result = await client.application("<APPLICATION_ID>").user.unArchiveUser(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [UnArchiveUserRequestSchema](#UnArchiveUserRequestSchema) | yes | Request body |
+
+
+unarchive user who archived from applcation
+
+*Returned Response:*
+
+
+
+
+[UnArchiveUserSuccess](#UnArchiveUserSuccess)
 
 Success
 
@@ -1030,6 +1089,32 @@ Success. Returns a JSON object with the updated platform configurations. Refer `
 
  
  
+ #### [ArchiveApplicationUserRequestSchema](#ArchiveApplicationUserRequestSchema)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | userId | String? |  yes  |  |
+ | reason | String? |  yes  |  |
+ | reasonId | String? |  yes  |  |
+ | requestId | String? |  yes  |  |
+ | otp | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [UnArchiveUserRequestSchema](#UnArchiveUserRequestSchema)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | userId | String? |  yes  |  |
+
+---
+
+
+ 
+ 
  #### [EditEmailRequestSchema](#EditEmailRequestSchema)
 
  | Properties | Type | Nullable | Description |
@@ -1463,6 +1548,17 @@ Success. Returns a JSON object with the updated platform configurations. Refer `
  
  
  #### [ArchiveUserSuccess](#ArchiveUserSuccess)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | success | Boolean? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [UnArchiveUserSuccess](#UnArchiveUserSuccess)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |

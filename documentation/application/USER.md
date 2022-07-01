@@ -22,6 +22,7 @@ Authentication Service
 * [verifyMobile](#verifymobile)
 * [hasPassword](#haspassword)
 * [updatePassword](#updatepassword)
+* [archiveUser](#archiveuser)
 * [logout](#logout)
 * [sendOTPOnMobile](#sendotponmobile)
 * [verifyMobileOTP](#verifymobileotp)
@@ -1272,6 +1273,64 @@ Success. Returns a success message. Refer `VerifyEmailSuccess` for more details.
 ```json
 {
   "message": "success"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### archiveUser
+verify otp and archive user
+
+
+
+
+```python
+try:
+    result = await client.user.archiveUser(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [ArchiveApplicationUserRequestSchema](#ArchiveApplicationUserRequestSchema) | yes | Request body |
+
+
+verify otp and archive user
+
+*Returned Response:*
+
+
+
+
+[ArchiveUserSuccess](#ArchiveUserSuccess)
+
+Success. Returns a success message. Refer `ArchiveUserSuccess` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true
 }
 ```
 </details>
@@ -2972,6 +3031,32 @@ Request body must contain an email ID. Refer `EditEmailRequestSchema` for more d
 
  
  
+ #### [ArchiveApplicationUserRequestSchema](#ArchiveApplicationUserRequestSchema)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | userId | String? |  yes  |  |
+ | reason | String? |  yes  |  |
+ | reasonId | String? |  yes  |  |
+ | requestId | String? |  yes  |  |
+ | otp | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [UnArchiveUserRequestSchema](#UnArchiveUserRequestSchema)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | userId | String? |  yes  |  |
+
+---
+
+
+ 
+ 
  #### [EditEmailRequestSchema](#EditEmailRequestSchema)
 
  | Properties | Type | Nullable | Description |
@@ -3405,6 +3490,17 @@ Request body must contain an email ID. Refer `EditEmailRequestSchema` for more d
  
  
  #### [ArchiveUserSuccess](#ArchiveUserSuccess)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | success | Boolean? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [UnArchiveUserSuccess](#UnArchiveUserSuccess)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |

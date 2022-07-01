@@ -24,10 +24,10 @@ class PaymentStatusUpdateResponse(BaseSchema):
     
     success = fields.Boolean(required=False)
     
-    status = fields.Str(required=False)
+    retry = fields.Boolean(required=False)
     
     redirect_url = fields.Str(required=False)
     
-    retry = fields.Boolean(required=False)
+    status = fields.Str(required=False)
     
 

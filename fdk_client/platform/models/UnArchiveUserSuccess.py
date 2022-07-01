@@ -8,14 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class CollectionPrice(BaseSchema):
-    # Catalog swagger.json
+class UnArchiveUserSuccess(BaseSchema):
+    # User swagger.json
 
     
-    gte = fields.Int(required=False)
-    
-    lte = fields.Int(required=False)
+    success = fields.Boolean(required=False)
     
 
