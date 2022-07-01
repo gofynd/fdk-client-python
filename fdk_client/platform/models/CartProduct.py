@@ -9,15 +9,15 @@ from .CategoryInfo import CategoryInfo
 
 from .ProductImage import ProductImage
 
-
-
-
-
 from .BaseInfo import BaseInfo
 
 
 
+
+
 from .ProductAction import ProductAction
+
+
 
 
 
@@ -30,16 +30,16 @@ class CartProduct(BaseSchema):
     
     images = fields.List(fields.Nested(ProductImage, required=False), required=False)
     
-    name = fields.Str(required=False)
+    brand = fields.Nested(BaseInfo, required=False)
+    
+    uid = fields.Int(required=False)
     
     type = fields.Str(required=False)
     
-    brand = fields.Nested(BaseInfo, required=False)
-    
-    slug = fields.Str(required=False)
-    
     action = fields.Nested(ProductAction, required=False)
     
-    uid = fields.Int(required=False)
+    name = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
     
 
