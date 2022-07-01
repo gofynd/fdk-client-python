@@ -216,27 +216,37 @@ from .ProductSizeSellersResponseV2 import ProductSizeSellersResponseV2
     
 from .PaymentSelectionLock import PaymentSelectionLock
     
-from .CartProductIdentifer import CartProductIdentifer
+from .CouponBreakup import CouponBreakup
     
-from .BaseInfo import BaseInfo
+from .LoyaltyPoints import LoyaltyPoints
     
-from .BasePrice import BasePrice
+from .RawBreakup import RawBreakup
     
-from .ArticlePriceInfo import ArticlePriceInfo
+from .DisplayBreakup import DisplayBreakup
     
-from .ProductArticle import ProductArticle
+from .CartBreakup import CartBreakup
+    
+from .PromiseTimestamp import PromiseTimestamp
+    
+from .PromiseFormatted import PromiseFormatted
+    
+from .ShipmentPromise import ShipmentPromise
+    
+from .ProductAvailability import ProductAvailability
     
 from .ProductImage import ProductImage
+    
+from .CategoryInfo import CategoryInfo
+    
+from .BaseInfo import BaseInfo
     
 from .ActionQuery import ActionQuery
     
 from .ProductAction import ProductAction
     
-from .CategoryInfo import CategoryInfo
-    
 from .CartProduct import CartProduct
     
-from .ProductAvailability import ProductAvailability
+from .CartProductIdentifer import CartProductIdentifer
     
 from .ProductPrice import ProductPrice
     
@@ -246,23 +256,13 @@ from .AppliedPromotion import AppliedPromotion
     
 from .PromoMeta import PromoMeta
     
+from .BasePrice import BasePrice
+    
+from .ArticlePriceInfo import ArticlePriceInfo
+    
+from .ProductArticle import ProductArticle
+    
 from .CartProductInfo import CartProductInfo
-    
-from .CouponBreakup import CouponBreakup
-    
-from .RawBreakup import RawBreakup
-    
-from .DisplayBreakup import DisplayBreakup
-    
-from .LoyaltyPoints import LoyaltyPoints
-    
-from .CartBreakup import CartBreakup
-    
-from .PromiseFormatted import PromiseFormatted
-    
-from .PromiseTimestamp import PromiseTimestamp
-    
-from .ShipmentPromise import ShipmentPromise
     
 from .CartCurrency import CartCurrency
     

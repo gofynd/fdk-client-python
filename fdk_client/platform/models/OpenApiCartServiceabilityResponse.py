@@ -26,8 +26,8 @@ class OpenApiCartServiceabilityResponse(BaseSchema):
     
     delivery_promise = fields.Nested(ShipmentPromise, required=False)
     
-    is_valid = fields.Boolean(required=False)
-    
     message = fields.Str(required=False)
+    
+    is_valid = fields.Boolean(required=False)
     
 
