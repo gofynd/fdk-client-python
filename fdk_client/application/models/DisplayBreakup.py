@@ -26,9 +26,9 @@ class DisplayBreakup(BaseSchema):
     
     key = fields.Str(required=False)
     
-    value = fields.Float(required=False)
-    
     display = fields.Str(required=False)
+    
+    value = fields.Float(required=False)
     
     message = fields.List(fields.Str(required=False), required=False)
     
