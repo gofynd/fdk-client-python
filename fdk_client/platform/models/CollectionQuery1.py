@@ -7,21 +7,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .CollectionPrice import CollectionPrice
 
-
-
-
-
-
-
-
-
-
-
-
-
-from .CollectionPrice import CollectionPrice
 
 
 
@@ -30,24 +16,10 @@ class CollectionQuery1(BaseSchema):
     # Catalog swagger.json
 
     
-    departments = fields.List(fields.Str(required=False), required=False)
+    value = fields.List(fields.Str(required=False), required=False)
     
-    price = fields.Nested(CollectionPrice, required=False)
+    op = fields.Str(required=False)
     
-    genders = fields.List(fields.Str(required=False), required=False)
-    
-    categories = fields.List(fields.Int(required=False), required=False)
-    
-    brands = fields.List(fields.Int(required=False), required=False)
-    
-    sort_on = fields.Str(required=False)
-    
-    store_ids = fields.List(fields.Int(required=False), required=False)
-    
-    image_nature = fields.List(fields.Str(required=False), required=False)
-    
-    discount = fields.Nested(CollectionPrice, required=False)
-    
-    sizes = fields.List(fields.Str(required=False), required=False)
+    attribute = fields.Str(required=False)
     
 

@@ -9,21 +9,21 @@ from ..models.BaseSchema import BaseSchema
 
 from .ProductListingAction import ProductListingAction
 
+
+
 from .Media import Media
-
-
 
 
 class AutocompleteItem(BaseSchema):
     # Catalog swagger.json
 
     
-    display = fields.Str(required=False)
+    type = fields.Str(required=False)
     
     action = fields.Nested(ProductListingAction, required=False)
     
-    logo = fields.Nested(Media, required=False)
+    display = fields.Str(required=False)
     
-    type = fields.Str(required=False)
+    logo = fields.Nested(Media, required=False)
     
 
