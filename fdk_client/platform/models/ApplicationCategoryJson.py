@@ -8,10 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class GatedCategoryTypes(BaseSchema):
+class ApplicationCategoryJson(BaseSchema):
     # Catalog swagger.json
 
     
-    food = fields.Boolean(required=False)
+    _custom_json = fields.Dict(required=False)
     
 

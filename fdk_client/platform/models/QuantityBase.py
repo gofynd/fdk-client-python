@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class ArticleQuery(BaseSchema):
+class QuantityBase(BaseSchema):
     # Catalog swagger.json
 
     
-    ignored_stores = fields.List(fields.Int(required=False), required=False)
+    updated_at = fields.Int(required=False)
     
-    item_id = fields.Int(required=False)
-    
-    size = fields.Str(required=False)
+    count = fields.Int(required=False)
     
 
