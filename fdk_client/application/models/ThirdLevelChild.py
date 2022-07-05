@@ -7,11 +7,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 from .ProductListingAction import ProductListingAction
 
 from .ImageUrls import ImageUrls
-
-
 
 
 
@@ -24,7 +24,9 @@ class ThirdLevelChild(BaseSchema):
     # Catalog swagger.json
 
     
-    uid = fields.Int(required=False)
+    slug = fields.Str(required=False)
+    
+    childs = fields.List(fields.Dict(required=False), required=False)
     
     action = fields.Nested(ProductListingAction, required=False)
     
@@ -32,10 +34,8 @@ class ThirdLevelChild(BaseSchema):
     
     _custom_json = fields.Dict(required=False)
     
+    uid = fields.Int(required=False)
+    
     name = fields.Str(required=False)
-    
-    childs = fields.List(fields.Dict(required=False), required=False)
-    
-    slug = fields.Str(required=False)
     
 
