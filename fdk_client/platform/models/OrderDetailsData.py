@@ -8,14 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class StageReason(BaseSchema):
-    # CompanyProfile swagger.json
+class OrderDetailsData(BaseSchema):
+    # Orders swagger.json
 
     
-    reason_code = fields.Str(required=False)
-    
-    desc = fields.Str(required=False)
+    data = fields.Str(required=False)
     
 

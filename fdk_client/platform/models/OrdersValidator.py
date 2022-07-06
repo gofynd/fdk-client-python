@@ -7,14 +7,14 @@ from ..models.BaseSchema import BaseSchema
 
 class OrdersValidator:
     
-    class getOrderShipmentDetails(BaseSchema):
+    class getShipmentDetails(BaseSchema):
         
         company_id = fields.Int(required=False)
         
         shipment_id = fields.Str(required=False)
          
     
-    class getShipmentDetails(BaseSchema):
+    class getOrderShipmentDetails(BaseSchema):
         
         company_id = fields.Int(required=False)
         
