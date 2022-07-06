@@ -8,10 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class CommonResponse(BaseSchema):
-    # Catalog swagger.json
+class ArchiveUserRequestSchema(BaseSchema):
+    # User swagger.json
 
     
-    success = fields.Str(required=False)
+    user_id = fields.Str(required=False)
     
 

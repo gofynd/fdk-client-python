@@ -24,13 +24,13 @@ class AddBeneficiaryDetailsRequest(BaseSchema):
     # Payment swagger.json
 
     
-    request_id = fields.Str(required=False)
-    
-    shipment_id = fields.Str(required=False)
-    
     otp = fields.Str(required=False)
     
     order_id = fields.Str(required=False)
+    
+    shipment_id = fields.Str(required=False)
+    
+    request_id = fields.Str(required=False)
     
     delights = fields.Boolean(required=False)
     

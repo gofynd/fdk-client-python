@@ -7,15 +7,15 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .InventoryDeleteData import InventoryDeleteData
 
 
-class InventoryDelete(BaseSchema):
+
+class QuantityBase(BaseSchema):
     # Catalog swagger.json
 
     
-    success = fields.Boolean(required=False)
+    updated_at = fields.Str(required=False)
     
-    data = fields.Nested(InventoryDeleteData, required=False)
+    count = fields.Int(required=False)
     
 

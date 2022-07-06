@@ -8,18 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
-class InventoryDeleteData(BaseSchema):
+class ConfigErrorResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    size = fields.Str(required=False)
-    
-    item_id = fields.Int(required=False)
-    
-    location_id = fields.Int(required=False)
+    message = fields.Str(required=False)
     
 

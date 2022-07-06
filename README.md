@@ -30,10 +30,22 @@ from fdk_client.application.ApplicationConfig import ApplicationConfig
 config = ApplicationConfig({
     "applicationID": "YOUR_APPLICATION_ID",
     "applicationToken": "YOUR_APPLICATION_TOKEN",
-    "domain": "YOUR_DOMAIN"
+    "domain": "YOUR_DOMAIN",
+    "locationDetails": "LOCATION_DETAILS_OBJECT"
 })
 
 applicationClient = ApplicationClient(config)
+applicationClient.setLocationDetails(
+    { 
+        "pincode":"385001",
+        "country": "India",
+        "city":  "Ahmedabad",
+        "location": {
+            "longitude": "72.585022", 
+            "latitude": "23.033863"
+        }
+    }
+)
 
 async def getProductDetails():
     try:
@@ -44,6 +56,31 @@ async def getProductDetails():
 
 getProductDetails()
 ```
+#### Persisting cookies across requests
+Some APIs require a login to proceed ahead. For this, we have several login options mentioned in these [User methods](/documentation/application/USER.md).
+Using any of these methods, you can get a cookie. All you need to do is store the cookie in application config. Consider an example with mobile OTP:
+```python
+send_otp_response = applicationClient.user.loginWithOTP(
+    platform=YOUR_APPLICATION_ID,
+    body={
+        "countryCode": "<your country code without the + sign>",
+        "captchaCode": "<your captcha code>",
+        "mobile": "<your mobile number>"
+    }
+)
+
+login_response = applicationClient.user.verifyMobileOTP(
+    platform=YOUR_APPLICATION_ID,
+    body={
+        "requestId": send_otp_response["json"]["request_id"],
+        "otp": <your OTP>
+    }
+)
+
+applicationClient.config.cookies = login_response["cookies"]
+```
+This will make sure the cookies are passed in all subsequent API calls.
+
 
 ### Sample Usage - PlatformClient
 
