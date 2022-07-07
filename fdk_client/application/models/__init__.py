@@ -1358,15 +1358,15 @@ from .CreditDetail import CreditDetail
     
 from .CheckCreditResponse import CheckCreditResponse
     
-from .DeviceDetails import DeviceDetails
-    
 from .KYCAddress import KYCAddress
     
 from .BusinessDetails import BusinessDetails
     
+from .UserPersonalInfoInDetails import UserPersonalInfoInDetails
+    
 from .MarketplaceInfo import MarketplaceInfo
     
-from .UserPersonalInfoInDetails import UserPersonalInfoInDetails
+from .DeviceDetails import DeviceDetails
     
 from .CustomerOnboardingRequest import CustomerOnboardingRequest
     
