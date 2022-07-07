@@ -14,8 +14,8 @@ class FilterOption(BaseSchema):
     # Orders swagger.json
 
     
-    value = fields.Str(required=False)
-    
     text = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
     
 
