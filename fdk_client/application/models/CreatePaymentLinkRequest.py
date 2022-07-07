@@ -22,7 +22,7 @@ class CreatePaymentLinkRequest(BaseSchema):
     # Payment swagger.json
 
     
-    email = fields.Str(required=False)
+    amount = fields.Float(required=False)
     
     description = fields.Str(required=False)
     
@@ -30,7 +30,7 @@ class CreatePaymentLinkRequest(BaseSchema):
     
     external_order_id = fields.Str(required=False)
     
-    amount = fields.Float(required=False)
+    email = fields.Str(required=False)
     
     meta = fields.Nested(CreatePaymentLinkMeta, required=False)
     
