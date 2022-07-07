@@ -1882,8 +1882,6 @@ from .LocationListSerializer import LocationListSerializer
     
 
     
-from .CompanyTaxesSerializer import CompanyTaxesSerializer
-    
 from .BusinessCountryInfo import BusinessCountryInfo
     
 from .ContactDetails import ContactDetails
@@ -1891,6 +1889,8 @@ from .ContactDetails import ContactDetails
 from .Website import Website
     
 from .BusinessDetails import BusinessDetails
+    
+from .CompanyTaxesSerializer import CompanyTaxesSerializer
     
 from .GetCompanyProfileSerializerResponse import GetCompanyProfileSerializerResponse
     
@@ -1904,9 +1904,9 @@ from .DocumentsObj import DocumentsObj
     
 from .MetricsSerializer import MetricsSerializer
     
-from .BrandDocumentsSerializer import BrandDocumentsSerializer
-    
 from .BrandBannerSerializer import BrandBannerSerializer
+    
+from .BrandDocumentsSerializer import BrandDocumentsSerializer
     
 from .GetBrandResponseSerializer import GetBrandResponseSerializer
     
@@ -1914,13 +1914,13 @@ from .BrandDocumentSerializer import BrandDocumentSerializer
     
 from .CreateUpdateBrandRequestSerializer import CreateUpdateBrandRequestSerializer
     
+from .CompanyBrandDocumentsResponseSerializer import CompanyBrandDocumentsResponseSerializer
+    
 from .CompanySocialAccounts import CompanySocialAccounts
     
 from .CompanyDetails import CompanyDetails
     
 from .CompanySerializer import CompanySerializer
-    
-from .CompanyBrandDocumentsResponseSerializer import CompanyBrandDocumentsResponseSerializer
     
 from .CompanyBrandSerializer import CompanyBrandSerializer
     
@@ -1932,9 +1932,9 @@ from .CompanyBrandPostRequestSerializer import CompanyBrandPostRequestSerializer
     
 from .Storeholiday import Storeholiday
     
-from .Correction import Correction
-    
 from .Deactivation import Deactivation
+    
+from .Correction import Correction
     
 from .Storeholiday1 import Storeholiday1
     
@@ -2808,45 +2808,21 @@ from .EntityTypeObj import EntityTypeObj
     
 
     
-from .UserDetailsData import UserDetailsData
+from .OrderDetailsData import OrderDetailsData
     
-from .FulfillingStore import FulfillingStore
+from .UserDetailsData import UserDetailsData
     
 from .ShipmentPricesData import ShipmentPricesData
     
 from .DPDetails import DPDetails
     
-from .OrderDetailsData import OrderDetailsData
+from .FulfillingStore import FulfillingStore
     
 from .Shipment import Shipment
     
 from .ShipmentDetailsResponse import ShipmentDetailsResponse
     
 from .Error import Error
-    
-from .SubLane import SubLane
-    
-from .SuperLane import SuperLane
-    
-from .LaneConfigResponse import LaneConfigResponse
-    
-from .FilterOption import FilterOption
-    
-from .FulFillingStore import FulFillingStore
-    
-from .Prices import Prices
-    
-from .ShipmentStatus import ShipmentStatus
-    
-from .PaymentModeInfo import PaymentModeInfo
-    
-from .Item import Item
-    
-from .GST import GST
-    
-from .ShipmentItem import ShipmentItem
-    
-from .ShipmentInternalPlatformViewResponse import ShipmentInternalPlatformViewResponse
     
 from .ShipmentPricesDataSet import ShipmentPricesDataSet
     

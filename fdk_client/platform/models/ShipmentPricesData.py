@@ -22,12 +22,12 @@ class ShipmentPricesData(BaseSchema):
     
     gst_fee = fields.Int(required=False)
     
-    tax_collected_at_source = fields.Int(required=False)
-    
     brand_calculated_amount = fields.Int(required=False)
     
-    gstin_code = fields.Str(required=False)
-    
     value_of_good = fields.Int(required=False)
+    
+    tax_collected_at_source = fields.Int(required=False)
+    
+    gstin_code = fields.Str(required=False)
     
 
