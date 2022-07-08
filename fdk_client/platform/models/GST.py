@@ -16,17 +16,17 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ShipmentPricesData(BaseSchema):
+class GST(BaseSchema):
     # Orders swagger.json
 
     
-    tax_collected_at_source = fields.Int(required=False)
+    tax_collected_at_source = fields.Float(required=False)
     
-    brand_calculated_amount = fields.Int(required=False)
+    brand_calculated_amount = fields.Float(required=False)
     
-    gst_fee = fields.Int(required=False)
+    gst_fee = fields.Float(required=False)
     
-    value_of_good = fields.Int(required=False)
+    value_of_good = fields.Float(required=False)
     
     gstin_code = fields.Str(required=False)
     

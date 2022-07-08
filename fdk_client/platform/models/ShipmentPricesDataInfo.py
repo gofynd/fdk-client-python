@@ -32,35 +32,27 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
-class ShipmentPricesDataSet(BaseSchema):
+class ShipmentPricesDataInfo(BaseSchema):
     # Orders swagger.json
 
     
-    tax_collected_at_source = fields.Int(required=False)
-    
     cod_charges = fields.Int(required=False)
     
-    discount = fields.Str(required=False)
+    discount = fields.Int(required=False)
     
-    cashback_applied = fields.Int(required=False)
+    coupon_value = fields.Str(required=False)
     
     price_marked = fields.Int(required=False)
     
-    brand_calculated_amount = fields.Int(required=False)
+    cashback_applied = fields.Int(required=False)
     
     refund_credit = fields.Int(required=False)
     
-    gst_fee = fields.Int(required=False)
-    
     value_of_good = fields.Int(required=False)
     
-    coupon_effective_discount = fields.Int(required=False)
-    
     amount_paid = fields.Int(required=False)
+    
+    refund_amount = fields.Int(required=False)
     
     price_effective = fields.Int(required=False)
     
