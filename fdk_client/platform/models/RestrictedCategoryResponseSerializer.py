@@ -9,9 +9,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 from .RestrictedCategoryResponseInfoSerializer import RestrictedCategoryResponseInfoSerializer
-
-
 
 
 
@@ -24,10 +24,10 @@ class RestrictedCategoryResponseSerializer(BaseSchema):
     
     name = fields.Str(required=False)
     
+    uid = fields.Int(required=False)
+    
     restricted_categories = fields.List(fields.Nested(RestrictedCategoryResponseInfoSerializer, required=False), required=False)
     
     code = fields.Str(required=False)
-    
-    uid = fields.Int(required=False)
     
 
