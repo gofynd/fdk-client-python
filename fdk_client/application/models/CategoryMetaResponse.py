@@ -22,8 +22,8 @@ class CategoryMetaResponse(BaseSchema):
     
     banners = fields.Nested(ImageUrls, required=False)
     
-    uid = fields.Int(required=False)
-    
     name = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
     
 

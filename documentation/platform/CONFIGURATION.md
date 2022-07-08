@@ -4126,7 +4126,7 @@ Check store has active integration
 
 ```python
 try:
-    result = await client.configuration.getLevelActiveIntegrations(id=id, level=level, uid=uid)
+    result = await client.configuration.getLevelActiveIntegrations(id=id, level=level, uid=uid, permission=permission)
     # use result
 except Exception as e:
     print(e)
@@ -4140,7 +4140,8 @@ except Exception as e:
 | --------- | -----  | -------- | ----------- | 
 | id | String | yes | Integration id |   
 | level | String | yes | Integration level |   
-| uid | Int | yes | Integration level uid |  
+| uid | Int | yes | Integration level uid |   
+| permission | String? | no | Check opt-in for specific integration permissions |  
 
 
 
