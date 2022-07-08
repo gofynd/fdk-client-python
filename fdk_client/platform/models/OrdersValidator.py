@@ -58,6 +58,10 @@ class OrdersValidator:
         
         request_by_ext = fields.Str(required=False)
         
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
         is_priority_sort = fields.Boolean(required=False)
          
     
@@ -91,6 +95,10 @@ class OrdersValidator:
         stores = fields.Str(required=False)
         
         sales_channel = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
         
         is_priority_sort = fields.Boolean(required=False)
          

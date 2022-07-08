@@ -14,8 +14,8 @@ class FulFillingStore(BaseSchema):
     # Orders swagger.json
 
     
-    code = fields.Str(required=False)
-    
     id = fields.Str(required=False)
+    
+    code = fields.Str(required=False)
     
 
