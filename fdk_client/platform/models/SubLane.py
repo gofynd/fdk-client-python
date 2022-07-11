@@ -22,16 +22,16 @@ class SubLane(BaseSchema):
     # Orders swagger.json
 
     
-    text = fields.Str(required=False)
+    total_shipments = fields.Int(required=False)
+    
+    index = fields.Int(required=False)
     
     current_state = fields.List(fields.Str(required=False), required=False)
     
     value = fields.Str(required=False)
     
+    text = fields.Str(required=False)
+    
     next_state = fields.List(fields.Str(required=False), required=False)
-    
-    index = fields.Int(required=False)
-    
-    total_shipments = fields.Int(required=False)
     
 

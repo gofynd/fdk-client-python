@@ -32,14 +32,14 @@ class AppConfigurationsSort(BaseSchema):
     
     logo = fields.Str(required=False)
     
-    priority = fields.Int(required=False)
-    
-    key = fields.Str(required=False)
-    
     is_default = fields.Boolean(required=False)
+    
+    priority = fields.Int(required=False)
     
     app_id = fields.Str(required=False)
     
     default_key = fields.Str(required=False)
+    
+    key = fields.Str(required=False)
     
 

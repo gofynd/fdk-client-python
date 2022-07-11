@@ -18,9 +18,9 @@ class UserDataSet(BaseSchema):
     # Orders swagger.json
 
     
-    gender = fields.Str(required=False)
-    
     email = fields.Str(required=False)
+    
+    gender = fields.Str(required=False)
     
     mobile = fields.Int(required=False)
     

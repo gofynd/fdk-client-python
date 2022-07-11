@@ -2851,34 +2851,6 @@ class Catalog:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/", item_code=item_code, item_id=item_id, brand_uid=brand_uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
-    async def deleteProduct(self, item_id=None):
-        """This API allows to delete product.
-        :param item_id : Id of the product to be updated. : type integer
-        """
-        payload = {}
-        
-        if item_id:
-            payload["item_id"] = item_id
-        
-
-        # Parameter validation
-        schema = CatalogValidator.deleteProduct()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/", """{"required":[{"in":"path","name":"company_id","description":"Company Id of the company associated to product that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Id of the product to be updated.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of the company associated to product that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Id of the product to be updated.","schema":{"type":"integer"},"required":true}]}""", item_id=item_id)
-        query_string = await create_query_string(item_id=item_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-    
     async def editProduct(self, item_id=None, body=""):
         """This API allows to edit product.
         :param item_id : Id of the product to be updated. : type integer
@@ -2911,6 +2883,34 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+    
+    async def deleteProduct(self, item_id=None):
+        """This API allows to delete product.
+        :param item_id : Id of the product to be updated. : type integer
+        """
+        payload = {}
+        
+        if item_id:
+            payload["item_id"] = item_id
+        
+
+        # Parameter validation
+        schema = CatalogValidator.deleteProduct()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/", """{"required":[{"in":"path","name":"company_id","description":"Company Id of the company associated to product that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Id of the product to be updated.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of the company associated to product that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Id of the product to be updated.","schema":{"type":"integer"},"required":true}]}""", item_id=item_id)
+        query_string = await create_query_string(item_id=item_id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def getProductValidation(self, ):
         """This API validates product data.
@@ -3037,6 +3037,34 @@ class Catalog:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
+    async def deleteProductBulkJob(self, batch_id=None):
+        """This API allows to delete bulk product job associated with company.
+        :param batch_id : Batch Id of the bulk product job to be deleted. : type integer
+        """
+        payload = {}
+        
+        if batch_id:
+            payload["batch_id"] = batch_id
+        
+
+        # Parameter validation
+        schema = CatalogValidator.deleteProductBulkJob()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk/{batch_id}", """{"required":[{"in":"path","name":"company_id","description":"Company Id of the company associated to size that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"Batch Id of the bulk product job to be deleted.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of the company associated to size that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"Batch Id of the bulk product job to be deleted.","schema":{"type":"integer"},"required":true}]}""", batch_id=batch_id)
+        query_string = await create_query_string(batch_id=batch_id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk/{batch_id}", batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+    
     async def createProductsInBulk(self, batch_id=None, body=""):
         """This API helps to create products in bulk push to kafka for approval/creation.
         :param batch_id : Batch Id in which assets to be uploaded. : type string
@@ -3069,34 +3097,6 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk/{batch_id}", batch_id=batch_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-    
-    async def deleteProductBulkJob(self, batch_id=None):
-        """This API allows to delete bulk product job associated with company.
-        :param batch_id : Batch Id of the bulk product job to be deleted. : type integer
-        """
-        payload = {}
-        
-        if batch_id:
-            payload["batch_id"] = batch_id
-        
-
-        # Parameter validation
-        schema = CatalogValidator.deleteProductBulkJob()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk/{batch_id}", """{"required":[{"in":"path","name":"company_id","description":"Company Id of the company associated to size that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"Batch Id of the bulk product job to be deleted.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of the company associated to size that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"Batch Id of the bulk product job to be deleted.","schema":{"type":"integer"},"required":true}]}""", batch_id=batch_id)
-        query_string = await create_query_string(batch_id=batch_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk/{batch_id}", batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def getProductTags(self, ):
         """This API helps to get tags data associated to a particular company.
@@ -3445,6 +3445,34 @@ class Catalog:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
+    async def deleteBulkInventoryJob(self, batch_id=None):
+        """This API allows to delete bulk Inventory job associated with company.
+        :param batch_id : Batch Id of the bulk delete job. : type string
+        """
+        payload = {}
+        
+        if batch_id:
+            payload["batch_id"] = batch_id
+        
+
+        # Parameter validation
+        schema = CatalogValidator.deleteBulkInventoryJob()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/{batch_id}/", """{"required":[{"in":"path","name":"company_id","description":"Company Id of the company of which bulk Inventory job is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"Batch Id of the bulk delete job.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of the company of which bulk Inventory job is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"Batch Id of the bulk delete job.","schema":{"type":"string"},"required":true}]}""", batch_id=batch_id)
+        query_string = await create_query_string(batch_id=batch_id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/{batch_id}/", batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+    
     async def createBulkInventory(self, batch_id=None, body=""):
         """This API helps to create products in bulk push to kafka for approval/creation.
         :param batch_id : Batch Id of the bulk create job. : type string
@@ -3477,34 +3505,6 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/{batch_id}/", batch_id=batch_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-    
-    async def deleteBulkInventoryJob(self, batch_id=None):
-        """This API allows to delete bulk Inventory job associated with company.
-        :param batch_id : Batch Id of the bulk delete job. : type string
-        """
-        payload = {}
-        
-        if batch_id:
-            payload["batch_id"] = batch_id
-        
-
-        # Parameter validation
-        schema = CatalogValidator.deleteBulkInventoryJob()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/{batch_id}/", """{"required":[{"in":"path","name":"company_id","description":"Company Id of the company of which bulk Inventory job is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"Batch Id of the bulk delete job.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of the company of which bulk Inventory job is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"Batch Id of the bulk delete job.","schema":{"type":"string"},"required":true}]}""", batch_id=batch_id)
-        query_string = await create_query_string(batch_id=batch_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/{batch_id}/", batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def getInventoryExport(self, ):
         """This API helps to get Inventory export history.
@@ -3587,43 +3587,6 @@ class Catalog:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/download/configuration/", filter_type=filter_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
-    async def updateRealtimeInventory(self, item_id=None, seller_identifier=None, body=""):
-        """This API allows add Inventory for particular size and store.
-        :param item_id : Item code of the product of which size is to be get. : type number
-        :param seller_identifier : Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get. : type string
-        """
-        payload = {}
-        
-        if item_id:
-            payload["item_id"] = item_id
-        
-        if seller_identifier:
-            payload["seller_identifier"] = seller_identifier
-        
-
-        # Parameter validation
-        schema = CatalogValidator.updateRealtimeInventory()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models.InventoryRequestSchemaV2 import InventoryRequestSchemaV2
-        schema = InventoryRequestSchemaV2()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/inventory/{seller_identifier}/", """{"required":[{"in":"path","name":"company_id","description":"Id of the company associated to product that is to be viewed.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Item code of the product of which size is to be get.","schema":{"type":"number"},"required":true},{"in":"path","name":"seller_identifier","description":"Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company associated to product that is to be viewed.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Item code of the product of which size is to be get.","schema":{"type":"number"},"required":true},{"in":"path","name":"seller_identifier","description":"Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get.","schema":{"type":"string"},"required":true}]}""", item_id=item_id, seller_identifier=seller_identifier)
-        query_string = await create_query_string(item_id=item_id, seller_identifier=seller_identifier)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/inventory/{seller_identifier}/", item_id=item_id, seller_identifier=seller_identifier), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-    
     async def deleteRealtimeInventory(self, item_id=None, seller_identifier=None, body=""):
         """This API allows add Inventory for particular size and store.
         :param item_id : Item code of the product of which size is to be get. : type number
@@ -3660,6 +3623,43 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/inventory/{seller_identifier}/", item_id=item_id, seller_identifier=seller_identifier), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+    
+    async def updateRealtimeInventory(self, item_id=None, seller_identifier=None, body=""):
+        """This API allows add Inventory for particular size and store.
+        :param item_id : Item code of the product of which size is to be get. : type number
+        :param seller_identifier : Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get. : type string
+        """
+        payload = {}
+        
+        if item_id:
+            payload["item_id"] = item_id
+        
+        if seller_identifier:
+            payload["seller_identifier"] = seller_identifier
+        
+
+        # Parameter validation
+        schema = CatalogValidator.updateRealtimeInventory()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models.InventoryRequestSchemaV2 import InventoryRequestSchemaV2
+        schema = InventoryRequestSchemaV2()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/inventory/{seller_identifier}/", """{"required":[{"in":"path","name":"company_id","description":"Id of the company associated to product that is to be viewed.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Item code of the product of which size is to be get.","schema":{"type":"number"},"required":true},{"in":"path","name":"seller_identifier","description":"Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company associated to product that is to be viewed.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Item code of the product of which size is to be get.","schema":{"type":"number"},"required":true},{"in":"path","name":"seller_identifier","description":"Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get.","schema":{"type":"string"},"required":true}]}""", item_id=item_id, seller_identifier=seller_identifier)
+        query_string = await create_query_string(item_id=item_id, seller_identifier=seller_identifier)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/inventory/{seller_identifier}/", item_id=item_id, seller_identifier=seller_identifier), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
     async def updateInventories(self, body=""):
         """This API allows add Inventory for particular size and store.
@@ -6529,7 +6529,7 @@ class Orders:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/order-details", order_id=order_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
-    async def getShipmentList(self, lane=None, search_type=None, search_id=None, from_date=None, to_date=None, dp_ids=None, ordering_company_id=None, stores=None, sales_channel=None, request_by_ext=None, page_no=None, page_size=None, is_priority_sort=None):
+    async def getShipmentList(self, lane=None, search_type=None, search_id=None, from_date=None, to_date=None, dp_ids=None, ordering_company_id=None, stores=None, sales_channel=None, request_by_ext=None, page_no=None, page_size=None, customer_id=None, is_priority_sort=None):
         """
         :param lane :  : type string
         :param search_type :  : type string
@@ -6543,6 +6543,7 @@ class Orders:
         :param request_by_ext :  : type string
         :param page_no :  : type integer
         :param page_size :  : type integer
+        :param customer_id :  : type string
         :param is_priority_sort :  : type boolean
         """
         payload = {}
@@ -6583,6 +6584,9 @@ class Orders:
         if page_size:
             payload["page_size"] = page_size
         
+        if customer_id:
+            payload["customer_id"] = customer_id
+        
         if is_priority_sort:
             payload["is_priority_sort"] = is_priority_sort
         
@@ -6592,8 +6596,8 @@ class Orders:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipments-listing", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"lane","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"ordering_company_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"stores","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channel","required":false,"schema":{"type":"string"}},{"in":"query","name":"request_by_ext","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","name":"is_priority_sort","required":false,"schema":{"type":"boolean","default":true}}],"query":[{"in":"query","name":"lane","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"ordering_company_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"stores","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channel","required":false,"schema":{"type":"string"}},{"in":"query","name":"request_by_ext","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","name":"is_priority_sort","required":false,"schema":{"type":"boolean","default":true}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", lane=lane, search_type=search_type, search_id=search_id, from_date=from_date, to_date=to_date, dp_ids=dp_ids, ordering_company_id=ordering_company_id, stores=stores, sales_channel=sales_channel, request_by_ext=request_by_ext, page_no=page_no, page_size=page_size, is_priority_sort=is_priority_sort)
-        query_string = await create_query_string(lane=lane, search_type=search_type, search_id=search_id, from_date=from_date, to_date=to_date, dp_ids=dp_ids, ordering_company_id=ordering_company_id, stores=stores, sales_channel=sales_channel, request_by_ext=request_by_ext, page_no=page_no, page_size=page_size, is_priority_sort=is_priority_sort)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipments-listing", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"lane","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"ordering_company_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"stores","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channel","required":false,"schema":{"type":"string"}},{"in":"query","name":"request_by_ext","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","name":"customer_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"is_priority_sort","required":false,"schema":{"type":"boolean","default":true}}],"query":[{"in":"query","name":"lane","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"ordering_company_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"stores","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channel","required":false,"schema":{"type":"string"}},{"in":"query","name":"request_by_ext","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","name":"customer_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"is_priority_sort","required":false,"schema":{"type":"boolean","default":true}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", lane=lane, search_type=search_type, search_id=search_id, from_date=from_date, to_date=to_date, dp_ids=dp_ids, ordering_company_id=ordering_company_id, stores=stores, sales_channel=sales_channel, request_by_ext=request_by_ext, page_no=page_no, page_size=page_size, customer_id=customer_id, is_priority_sort=is_priority_sort)
+        query_string = await create_query_string(lane=lane, search_type=search_type, search_id=search_id, from_date=from_date, to_date=to_date, dp_ids=dp_ids, ordering_company_id=ordering_company_id, stores=stores, sales_channel=sales_channel, request_by_ext=request_by_ext, page_no=page_no, page_size=page_size, customer_id=customer_id, is_priority_sort=is_priority_sort)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -6603,7 +6607,7 @@ class Orders:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipments-listing", lane=lane, search_type=search_type, search_id=search_id, from_date=from_date, to_date=to_date, dp_ids=dp_ids, ordering_company_id=ordering_company_id, stores=stores, sales_channel=sales_channel, request_by_ext=request_by_ext, page_no=page_no, page_size=page_size, is_priority_sort=is_priority_sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipments-listing", lane=lane, search_type=search_type, search_id=search_id, from_date=from_date, to_date=to_date, dp_ids=dp_ids, ordering_company_id=ordering_company_id, stores=stores, sales_channel=sales_channel, request_by_ext=request_by_ext, page_no=page_no, page_size=page_size, customer_id=customer_id, is_priority_sort=is_priority_sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def getShipmentToManifest(self, group_entity=None, sales_channel=None, dp_ids=None):
         """
@@ -6708,6 +6712,34 @@ class Orders:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/orders-listing", lane=lane, search_type=search_type, search_value=search_value, from_date=from_date, to_date=to_date, dp_ids=dp_ids, stores=stores, sales_channel=sales_channel, page_no=page_no, page_size=page_size, is_priority_sort=is_priority_sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
+    
+    async def getfilters(self, view=None):
+        """
+        :param view :  : type string
+        """
+        payload = {}
+        
+        if view:
+            payload["view"] = view
+        
+
+        # Parameter validation
+        schema = OrdersValidator.getfilters()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/filter-listing", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"query","name":"view","required":true,"schema":{"type":"string","default":"manifest"}}],"optional":[],"query":[{"in":"query","name":"view","required":true,"schema":{"type":"string","default":"manifest"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", view=view)
+        query_string = await create_query_string(view=view)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/filter-listing", view=view), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
 
 

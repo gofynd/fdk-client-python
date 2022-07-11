@@ -9,15 +9,15 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
+
+
+
+
 from .Media import Media
 
 from .ProductListingAction import ProductListingAction
-
-
-
-
-
-
 
 
 
@@ -28,9 +28,15 @@ class ProductVariantItemResponse(BaseSchema):
     # Catalog swagger.json
 
     
+    is_available = fields.Boolean(required=False)
+    
+    value = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
     name = fields.Str(required=False)
     
-    uid = fields.Int(required=False)
+    color = fields.Str(required=False)
     
     medias = fields.List(fields.Nested(Media, required=False), required=False)
     
@@ -38,12 +44,6 @@ class ProductVariantItemResponse(BaseSchema):
     
     color_name = fields.Str(required=False)
     
-    is_available = fields.Boolean(required=False)
-    
-    color = fields.Str(required=False)
-    
-    slug = fields.Str(required=False)
-    
-    value = fields.Str(required=False)
+    uid = fields.Int(required=False)
     
 

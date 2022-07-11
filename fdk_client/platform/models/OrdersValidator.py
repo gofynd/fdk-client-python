@@ -62,6 +62,8 @@ class OrdersValidator:
         
         page_size = fields.Int(required=False)
         
+        customer_id = fields.Str(required=False)
+        
         is_priority_sort = fields.Boolean(required=False)
          
     
@@ -101,5 +103,12 @@ class OrdersValidator:
         page_size = fields.Int(required=False)
         
         is_priority_sort = fields.Boolean(required=False)
+         
+    
+    class getfilters(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        view = fields.Str(required=False)
          
     
