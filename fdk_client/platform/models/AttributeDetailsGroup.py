@@ -26,9 +26,7 @@ class AttributeDetailsGroup(BaseSchema):
     # Catalog swagger.json
 
     
-    name = fields.Str(required=False)
-    
-    is_active = fields.Boolean(required=False)
+    key = fields.Str(required=False)
     
     logo = fields.Str(required=False)
     
@@ -40,6 +38,8 @@ class AttributeDetailsGroup(BaseSchema):
     
     slug = fields.Str(required=False)
     
-    key = fields.Str(required=False)
+    is_active = fields.Boolean(required=False)
+    
+    name = fields.Str(required=False)
     
 
