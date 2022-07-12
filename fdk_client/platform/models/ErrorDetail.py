@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class FulFillingStore(BaseSchema):
-    # Orders swagger.json
+class ErrorDetail(BaseSchema):
+    # OrderManage swagger.json
 
     
-    id = fields.Str(required=False)
+    message = fields.Str(required=False)
     
-    code = fields.Str(required=False)
+    success = fields.Boolean(required=False)
     
 

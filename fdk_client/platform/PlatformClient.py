@@ -29,6 +29,7 @@ from .models.PartnerValidator import PartnerValidator
 from .models.WebhookValidator import WebhookValidator
 from .models.AuditTrailValidator import AuditTrailValidator
 from .models.OrdersValidator import OrdersValidator
+from .models.OrderManageValidator import OrderManageValidator
 
 
 
@@ -2790,7 +2791,7 @@ class Catalog:
     async def getProductAttributes(self, category=None, filter=None):
         """This API allows to list all the attributes by their l3_categories.
         :param category : It is the name of the l3 cateogry : type string
-        :param filter : It is the name of the l3 cateogry : type boolean
+        :param filter : If true, returns filtered values, else returns all the attributes : type boolean
         """
         payload = {}
         
@@ -2806,7 +2807,7 @@ class Catalog:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-attributes/", """{"required":[{"in":"path","name":"company_id","description":"company for which you want to view the genders","schema":{"type":"integer"},"required":true},{"in":"query","name":"category","description":"It is the name of the l3 cateogry","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"filter","description":"It is the name of the l3 cateogry","schema":{"type":"boolean"},"required":false}],"query":[{"in":"query","name":"category","description":"It is the name of the l3 cateogry","schema":{"type":"string"},"required":true},{"in":"query","name":"filter","description":"It is the name of the l3 cateogry","schema":{"type":"boolean"},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"company for which you want to view the genders","schema":{"type":"integer"},"required":true}]}""", category=category, filter=filter)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-attributes/", """{"required":[{"in":"path","name":"company_id","description":"company for which you want to view the genders","schema":{"type":"integer"},"required":true},{"in":"query","name":"category","description":"It is the name of the l3 cateogry","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"filter","description":"If true, returns filtered values, else returns all the attributes","schema":{"type":"boolean"},"required":false}],"query":[{"in":"query","name":"category","description":"It is the name of the l3 cateogry","schema":{"type":"string"},"required":true},{"in":"query","name":"filter","description":"If true, returns filtered values, else returns all the attributes","schema":{"type":"boolean"},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"company for which you want to view the genders","schema":{"type":"integer"},"required":true}]}""", category=category, filter=filter)
         query_string = await create_query_string(category=category, filter=filter)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -6746,6 +6747,68 @@ class Orders:
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/filter-listing", view=view), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
 
+class OrderManage:
+    def __init__(self, config):
+        self._conf = config
+    
+    async def statusInternalUpdate(self, body=""):
+        """
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = OrderManageValidator.statusInternalUpdate()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models.PlatformShipmentStatusInternal import PlatformShipmentStatusInternal
+        schema = PlatformShipmentStatusInternal()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/status-internal", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/status-internal", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+    
+    async def getShipmentHistory(self, bag_id=None):
+        """
+        :param bag_id :  : type integer
+        """
+        payload = {}
+        
+        if bag_id:
+            payload["bag_id"] = bag_id
+        
+
+        # Parameter validation
+        schema = OrderManageValidator.getShipmentHistory()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/history", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"query","name":"bag_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[{"in":"query","name":"bag_id","required":true,"schema":{"type":"integer"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", bag_id=bag_id)
+        query_string = await create_query_string(bag_id=bag_id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/history", bag_id=bag_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+    
+
 
 
 class PlatformClient:
@@ -6775,6 +6838,7 @@ class PlatformClient:
         self.webhook = Webhook(config)
         self.auditTrail = AuditTrail(config)
         self.orders = Orders(config)
+        self.orderManage = OrderManage(config)
         
 
     def application(self, applicationId):
