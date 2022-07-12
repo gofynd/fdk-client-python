@@ -26,8 +26,8 @@ class BankDetailsForOTP(BaseSchema):
     
     ifsc_code = fields.Str(required=False)
     
-    branch_name = fields.Str(required=False)
-    
     account_no = fields.Str(required=False)
+    
+    branch_name = fields.Str(required=False)
     
 

@@ -28,6 +28,6 @@ class PhoneNumber(BaseSchema):
     
     phone = fields.Str(required=False)
     
-    country_code = fields.Int(required=False)
+    country_code = fields.Str(required=False)
     
 
