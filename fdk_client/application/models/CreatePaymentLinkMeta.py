@@ -20,11 +20,11 @@ class CreatePaymentLinkMeta(BaseSchema):
     # Payment swagger.json
 
     
-    assign_card_id = fields.Str(required=False)
+    pincode = fields.Str(required=False)
     
     cart_id = fields.Str(required=False)
     
-    pincode = fields.Str(required=False)
+    assign_card_id = fields.Str(required=False)
     
     amount = fields.Str(required=False)
     
