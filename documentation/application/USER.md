@@ -3925,6 +3925,7 @@ Request body must contain an email ID. Refer `EditEmailRequestSchema` for more d
  | desktopImage | String? |  yes  |  |
  | deleteAccountDay | Int? |  yes  |  |
  | deleteAccountReasons | ArrayList<[DeleteAccountReasons](#DeleteAccountReasons)>? |  yes  |  |
+ | deleteAccountConsent | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -4085,6 +4086,17 @@ Request body must contain an email ID. Refer `EditEmailRequestSchema` for more d
  | reasonText | String? |  yes  |  |
  | reasonId | String? |  yes  |  |
  | showTextArea | Boolean? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [DeleteAccountConsent](#DeleteAccountConsent)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | consentText | String? |  yes  |  |
 
 ---
 

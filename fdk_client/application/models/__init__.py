@@ -744,6 +744,8 @@ from .SocialTokens import SocialTokens
     
 from .DeleteAccountReasons import DeleteAccountReasons
     
+from .DeleteAccountConsent import DeleteAccountConsent
+    
 from .Facebook import Facebook
     
 from .Accountkit import Accountkit
