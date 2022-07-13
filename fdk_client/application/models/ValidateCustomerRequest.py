@@ -26,8 +26,8 @@ class ValidateCustomerRequest(BaseSchema):
     
     aggregator = fields.Str(required=False)
     
-    merchant_params = fields.Dict(required=False)
-    
     phone_number = fields.Str(required=False)
+    
+    merchant_params = fields.Dict(required=False)
     
 
