@@ -12,11 +12,11 @@ from .ProductListingAction import ProductListingAction
     
 from .ProductBrand import ProductBrand
     
+from .CustomMetaFields import CustomMetaFields
+    
 from .ProductDetailAttribute import ProductDetailAttribute
     
 from .ProductDetailGroupedAttribute import ProductDetailGroupedAttribute
-    
-from .MetaFields import MetaFields
     
 from .Price import Price
     
@@ -64,9 +64,9 @@ from .StoreDetail import StoreDetail
     
 from .Seller import Seller
     
-from .CompanyDetail import CompanyDetail
-    
 from .ProductStockPrice import ProductStockPrice
+    
+from .CompanyDetail import CompanyDetail
     
 from .ProductStockStatusItem import ProductStockStatusItem
     
@@ -154,11 +154,11 @@ from .StoreDepartments import StoreDepartments
     
 from .StoreAddressSerializer import StoreAddressSerializer
     
-from .CompanyStore import CompanyStore
-    
 from .SellerPhoneNumber import SellerPhoneNumber
     
 from .StoreManagerSerializer import StoreManagerSerializer
+    
+from .CompanyStore import CompanyStore
     
 from .AppStore import AppStore
     
@@ -170,11 +170,11 @@ from .StoreTiming import StoreTiming
     
 from .StoreDetails import StoreDetails
     
-from .Size import Size
-    
 from .ProductDetails import ProductDetails
     
 from .Price1 import Price1
+    
+from .Size import Size
     
 from .Products import Products
     
@@ -188,23 +188,23 @@ from .MarketPlaceSttributesSchemaV2 import MarketPlaceSttributesSchemaV2
     
 from .StoreV2 import StoreV2
     
+from .StrategyWiseListingSchemaV2 import StrategyWiseListingSchemaV2
+    
 from .SellerV2 import SellerV2
+    
+from .SellerGroupAttributes import SellerGroupAttributes
+    
+from .ProductStockPriceV2 import ProductStockPriceV2
+    
+from .ReturnConfigSchemaV2 import ReturnConfigSchemaV2
+    
+from .ArticleAssignmentV2 import ArticleAssignmentV2
     
 from .ProductSetDistributionSizeV2 import ProductSetDistributionSizeV2
     
 from .ProductSetDistributionV2 import ProductSetDistributionV2
     
 from .ProductSetV2 import ProductSetV2
-    
-from .StrategyWiseListingSchemaV2 import StrategyWiseListingSchemaV2
-    
-from .SellerGroupAttributes import SellerGroupAttributes
-    
-from .ProductStockPriceV2 import ProductStockPriceV2
-    
-from .ArticleAssignmentV2 import ArticleAssignmentV2
-    
-from .ReturnConfigSchemaV2 import ReturnConfigSchemaV2
     
 from .ProductSizePriceResponseV2 import ProductSizePriceResponseV2
     
@@ -1268,6 +1268,10 @@ from .PaymentStatusUpdateRequest import PaymentStatusUpdateRequest
     
 from .PaymentStatusUpdateResponse import PaymentStatusUpdateResponse
     
+from .AggregatorRoute import AggregatorRoute
+    
+from .PaymentFlow import PaymentFlow
+    
 from .PaymentModeLogo import PaymentModeLogo
     
 from .IntentAppErrorList import IntentAppErrorList
@@ -1277,10 +1281,6 @@ from .IntentApp import IntentApp
 from .PaymentModeList import PaymentModeList
     
 from .RootPaymentMode import RootPaymentMode
-    
-from .AggregatorRoute import AggregatorRoute
-    
-from .PaymentFlow import PaymentFlow
     
 from .PaymentOptionAndFlow import PaymentOptionAndFlow
     
@@ -1358,13 +1358,13 @@ from .CreditDetail import CreditDetail
     
 from .CheckCreditResponse import CheckCreditResponse
     
-from .MarketplaceInfo import MarketplaceInfo
-    
 from .KYCAddress import KYCAddress
     
 from .UserPersonalInfoInDetails import UserPersonalInfoInDetails
     
 from .DeviceDetails import DeviceDetails
+    
+from .MarketplaceInfo import MarketplaceInfo
     
 from .BusinessDetails import BusinessDetails
     

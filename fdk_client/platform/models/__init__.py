@@ -1882,15 +1882,15 @@ from .LocationListSerializer import LocationListSerializer
     
 
     
-from .BusinessCountryInfo import BusinessCountryInfo
-    
-from .ContactDetails import ContactDetails
-    
 from .CompanyTaxesSerializer import CompanyTaxesSerializer
     
 from .Website import Website
     
 from .BusinessDetails import BusinessDetails
+    
+from .ContactDetails import ContactDetails
+    
+from .BusinessCountryInfo import BusinessCountryInfo
     
 from .GetCompanyProfileSerializerResponse import GetCompanyProfileSerializerResponse
     
@@ -1914,13 +1914,13 @@ from .BrandDocumentSerializer import BrandDocumentSerializer
     
 from .CreateUpdateBrandRequestSerializer import CreateUpdateBrandRequestSerializer
     
+from .CompanyBrandDocumentsResponseSerializer import CompanyBrandDocumentsResponseSerializer
+    
 from .CompanySocialAccounts import CompanySocialAccounts
     
 from .CompanyDetails import CompanyDetails
     
 from .CompanySerializer import CompanySerializer
-    
-from .CompanyBrandDocumentsResponseSerializer import CompanyBrandDocumentsResponseSerializer
     
 from .CompanyBrandSerializer import CompanyBrandSerializer
     
@@ -1930,9 +1930,9 @@ from .CompanyBrandDocumentsSerializer import CompanyBrandDocumentsSerializer
     
 from .CompanyBrandPostRequestSerializer import CompanyBrandPostRequestSerializer
     
-from .Correction import Correction
-    
 from .Storeholiday import Storeholiday
+    
+from .Correction import Correction
     
 from .Deactivation import Deactivation
     
@@ -1946,9 +1946,9 @@ from .DocumentObject import DocumentObject
     
 from .RestrictedCategoryMetricsResponseSerializer import RestrictedCategoryMetricsResponseSerializer
     
-from .RestrictedCategoryFiles import RestrictedCategoryFiles
-    
 from .StageReasonResponse import StageReasonResponse
+    
+from .RestrictedCategoryFiles import RestrictedCategoryFiles
     
 from .RestrictedCategoryResponseInfoSerializer import RestrictedCategoryResponseInfoSerializer
     
@@ -2808,39 +2808,39 @@ from .EntityTypeObj import EntityTypeObj
     
 
     
-from .DPDetails import DPDetails
+from .ShipmentStatusData import ShipmentStatusData
     
-from .UserDetailsData import UserDetailsData
+from .Prices import Prices
+    
+from .BagStatusHistory import BagStatusHistory
+    
+from .ShipmentPayments import ShipmentPayments
     
 from .FinancialBreakup import FinancialBreakup
     
 from .OrderBrandName import OrderBrandName
     
-from .BagGST import BagGST
-    
-from .OrderBagArticle import OrderBagArticle
+from .BagConfigs import BagConfigs
     
 from .OrderBagItem import OrderBagItem
     
-from .BagConfigs import BagConfigs
+from .OrderBagArticle import OrderBagArticle
+    
+from .BagGST import BagGST
     
 from .OrderBags import OrderBags
     
-from .ShipmentStatusData import ShipmentStatusData
+from .DPDetails import DPDetails
     
 from .GST import GST
     
-from .BagStatusHistory import BagStatusHistory
+from .UserDetailsData import UserDetailsData
     
-from .FulfillingStore import FulfillingStore
+from .OrderDetailsData import OrderDetailsData
     
 from .TrackingList import TrackingList
     
-from .Prices import Prices
-    
-from .ShipmentPayments import ShipmentPayments
-    
-from .OrderDetailsData import OrderDetailsData
+from .FulfillingStore import FulfillingStore
     
 from .ShipmentInfoResponse import ShipmentInfoResponse
     
@@ -2852,13 +2852,11 @@ from .SuperLane import SuperLane
     
 from .LaneConfigResponse import LaneConfigResponse
     
-from .OrderDict import OrderDict
-    
 from .Shipment import Shipment
     
-from .ShipmentDetailsResponse import ShipmentDetailsResponse
+from .OrderDict import OrderDict
     
-from .ShipmentStatus import ShipmentStatus
+from .ShipmentDetailsResponse import ShipmentDetailsResponse
     
 from .Item import Item
     
@@ -2866,9 +2864,11 @@ from .BagUnit import BagUnit
     
 from .UserDataInfo import UserDataInfo
     
-from .PaymentModeInfo import PaymentModeInfo
-    
 from .ShipmentItemFulFillingStore import ShipmentItemFulFillingStore
+    
+from .ShipmentStatus import ShipmentStatus
+    
+from .PaymentModeInfo import PaymentModeInfo
     
 from .ShipmentItem import ShipmentItem
     
@@ -2897,6 +2897,8 @@ from .OrderDataSet import OrderDataSet
 from .OrderListingResponse import OrderListingResponse
     
 from .OrderErrorSchemaDataSet import OrderErrorSchemaDataSet
+    
+from .FilterDict import FilterDict
     
 from .FiltersResponse import FiltersResponse
     

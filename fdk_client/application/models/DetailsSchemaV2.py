@@ -18,7 +18,7 @@ class DetailsSchemaV2(BaseSchema):
     
     type = fields.Str(required=False)
     
-    value = fields.Str(required=False)
+    value = fields.Raw(required=False)
     
     key = fields.Str(required=False)
     

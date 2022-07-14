@@ -14,8 +14,8 @@ class Deactivation(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    reason = fields.List(fields.Str(required=False), required=False)
-    
     description = fields.Str(required=False)
+    
+    reason = fields.List(fields.Str(required=False), required=False)
     
 

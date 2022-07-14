@@ -30,8 +30,8 @@ class ColumnHeaders(BaseSchema):
     
     col_3 = fields.Nested(ColumnHeader, required=False)
     
-    col_1 = fields.Nested(ColumnHeader, required=False)
-    
     col_2 = fields.Nested(ColumnHeader, required=False)
+    
+    col_1 = fields.Nested(ColumnHeader, required=False)
     
 
