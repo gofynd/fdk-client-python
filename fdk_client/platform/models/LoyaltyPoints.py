@@ -18,9 +18,9 @@ class LoyaltyPoints(BaseSchema):
     # Cart swagger.json
 
     
-    applicable = fields.Float(required=False)
-    
     total = fields.Float(required=False)
+    
+    applicable = fields.Float(required=False)
     
     description = fields.Str(required=False)
     
