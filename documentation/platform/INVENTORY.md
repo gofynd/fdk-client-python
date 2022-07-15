@@ -607,8 +607,8 @@ except Exception as e:
 | code | String | yes | Code |   
 | pageNo | Int? | no | Page Number |   
 | pageSize | Int? | no | Page Size |   
-| status | String? | no |  |   
-| date | String? | no |  |  
+| status | String? | no | Status |   
+| date | String? | no | From Date |  
 
 
 

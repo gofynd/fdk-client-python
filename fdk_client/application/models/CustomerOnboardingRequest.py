@@ -11,13 +11,13 @@ from ..models.BaseSchema import BaseSchema
 
 from .MarketplaceInfo import MarketplaceInfo
 
-from .BusinessDetails import BusinessDetails
+
 
 from .DeviceDetails import DeviceDetails
 
+from .BusinessDetails import BusinessDetails
+
 from .UserPersonalInfoInDetails import UserPersonalInfoInDetails
-
-
 
 
 class CustomerOnboardingRequest(BaseSchema):
@@ -30,12 +30,12 @@ class CustomerOnboardingRequest(BaseSchema):
     
     marketplace_info = fields.Nested(MarketplaceInfo, required=False)
     
-    business_info = fields.Nested(BusinessDetails, required=False)
+    aggregator = fields.Str(required=False)
     
     device = fields.Nested(DeviceDetails, required=False)
     
-    personal_info = fields.Nested(UserPersonalInfoInDetails, required=False)
+    business_info = fields.Nested(BusinessDetails, required=False)
     
-    aggregator = fields.Str(required=False)
+    personal_info = fields.Nested(UserPersonalInfoInDetails, required=False)
     
 
