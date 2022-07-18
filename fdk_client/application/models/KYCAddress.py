@@ -30,9 +30,9 @@ class KYCAddress(BaseSchema):
     
     addressline1 = fields.Str(required=False)
     
-    pincode = fields.Str(required=False)
-    
     city = fields.Str(required=False)
+    
+    pincode = fields.Str(required=False)
     
     addressline2 = fields.Str(required=False)
     

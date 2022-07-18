@@ -14,8 +14,8 @@ class FiltersResponse(BaseSchema):
     # Orders swagger.json
 
     
-    channels = fields.List(fields.Nested(Filters, required=False), required=False)
-    
     delivery_partners = fields.List(fields.Nested(Filters, required=False), required=False)
+    
+    channels = fields.List(fields.Nested(Filters, required=False), required=False)
     
 

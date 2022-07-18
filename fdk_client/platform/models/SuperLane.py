@@ -16,9 +16,9 @@ class SuperLane(BaseSchema):
     # Orders swagger.json
 
     
-    value = fields.Str(required=False)
-    
     text = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
     
     options = fields.List(fields.Nested(SubLane, required=False), required=False)
     
