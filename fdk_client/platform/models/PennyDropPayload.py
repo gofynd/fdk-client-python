@@ -14,8 +14,8 @@ class PennyDropPayload(BaseSchema):
     # Payment swagger.json
 
     
-    service_provider = fields.Str(required=False)
-    
     enabled = fields.Boolean(required=False)
+    
+    service_provider = fields.Str(required=False)
     
 
