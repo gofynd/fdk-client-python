@@ -12,14 +12,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ArticleQuery(BaseSchema):
+class CollectionQuery(BaseSchema):
     # Catalog swagger.json
 
     
-    size = fields.Str(required=False)
+    op = fields.Str(required=False)
     
-    ignored_stores = fields.List(fields.Int(required=False), required=False)
+    attribute = fields.Str(required=False)
     
-    item_id = fields.Int(required=False)
+    value = fields.List(fields.Str(required=False), required=False)
     
 

@@ -1,4 +1,4 @@
-"""Application Models."""
+"""Public Models."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class MetaFields(BaseSchema):
-    # Catalog swagger.json
+class GenericDTO(BaseSchema):
+    # Inventory swagger.json
 
     
-    key = fields.Str(required=False)
+    text = fields.Str(required=False)
     
-    value = fields.Str(required=False)
+    value = fields.Dict(required=False)
     
 

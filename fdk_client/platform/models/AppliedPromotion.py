@@ -22,11 +22,11 @@ class AppliedPromotion(BaseSchema):
     # Cart swagger.json
 
     
-    promo_id = fields.Str(required=False)
+    article_quantity = fields.Int(required=False)
     
     mrp_promotion = fields.Boolean(required=False)
     
-    article_quantity = fields.Int(required=False)
+    promo_id = fields.Str(required=False)
     
     offer_text = fields.Str(required=False)
     
