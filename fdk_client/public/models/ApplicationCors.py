@@ -1,4 +1,4 @@
-"""Platform Models."""
+"""Public Models."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -8,10 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ApplicationCategoryJson(BaseSchema):
-    # Catalog swagger.json
+class ApplicationCors(BaseSchema):
+    # Configuration swagger.json
 
     
-    _custom_json = fields.Dict(required=False)
+    domains = fields.List(fields.Str(required=False), required=False)
     
 

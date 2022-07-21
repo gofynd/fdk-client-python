@@ -1,4 +1,4 @@
-"""Application Models."""
+"""Public Models."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class Moq(BaseSchema):
-    # Catalog swagger.json
+class GenericDTO(BaseSchema):
+    # Inventory swagger.json
 
     
-    minimum = fields.Int(required=False)
+    text = fields.Str(required=False)
     
-    maximum = fields.Int(required=False)
+    value = fields.Dict(required=False)
     
 

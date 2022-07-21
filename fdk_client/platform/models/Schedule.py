@@ -18,9 +18,9 @@ class Schedule(BaseSchema):
     # Catalog swagger.json
 
     
-    duration = fields.Int(required=False)
-    
     end = fields.Str(required=False)
+    
+    duration = fields.Int(required=False)
     
     cron = fields.Str(required=False)
     

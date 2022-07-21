@@ -1,4 +1,4 @@
-"""Application Models."""
+"""Public Models."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -10,11 +10,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class MetaFields(BaseSchema):
-    # Catalog swagger.json
+class ApplicationMeta(BaseSchema):
+    # Configuration swagger.json
 
     
-    key = fields.Str(required=False)
+    name = fields.Str(required=False)
     
     value = fields.Str(required=False)
     

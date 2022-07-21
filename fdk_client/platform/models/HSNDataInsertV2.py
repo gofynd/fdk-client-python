@@ -7,17 +7,17 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
+
+
+
+
+
+
+
+
 from .TaxSlab import TaxSlab
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -30,9 +30,11 @@ class HSNDataInsertV2(BaseSchema):
     # Catalog swagger.json
 
     
+    country_code = fields.Str(required=False)
+    
     created_by = fields.Dict(required=False)
     
-    taxes = fields.List(fields.Nested(TaxSlab, required=False), required=False)
+    hsn_code = fields.Str(required=False)
     
     modified_on = fields.Str(required=False)
     
@@ -40,14 +42,12 @@ class HSNDataInsertV2(BaseSchema):
     
     type = fields.Str(required=False)
     
-    modified_by = fields.Dict(required=False)
+    taxes = fields.List(fields.Nested(TaxSlab, required=False), required=False)
     
     created_on = fields.Str(required=False)
     
-    hsn_code = fields.Str(required=False)
+    modified_by = fields.Dict(required=False)
     
     description = fields.Str(required=False)
-    
-    country_code = fields.Str(required=False)
     
 
