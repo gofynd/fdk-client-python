@@ -18,9 +18,9 @@ class ProductVariantResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    header = fields.Str(required=False)
-    
     key = fields.Str(required=False)
+    
+    header = fields.Str(required=False)
     
     display_type = fields.Str(required=False)
     
