@@ -18,8 +18,8 @@ class CollectionQuery1(BaseSchema):
     
     value = fields.List(fields.Str(required=False), required=False)
     
-    op = fields.Str(required=False)
-    
     attribute = fields.Str(required=False)
+    
+    op = fields.Str(required=False)
     
 
