@@ -34,28 +34,28 @@ class RestrictedCategoryResponseInfoSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    primary = fields.Boolean(required=False)
-    
-    store_id = fields.Int(required=False)
-    
-    _id = fields.Str(required=False)
-    
-    documents = fields.List(fields.Nested(RestrictedCategoryFiles, required=False), required=False)
-    
-    stage = fields.Str(required=False)
-    
     company_id = fields.Int(required=False)
-    
-    document_type = fields.Str(required=False)
-    
-    stage_reason = fields.List(fields.Nested(StageReasonResponse, required=False), required=False)
     
     value = fields.Str(required=False)
     
-    category_type = fields.Str(required=False)
-    
     expiry_date = fields.Str(required=False)
     
+    documents = fields.List(fields.Nested(RestrictedCategoryFiles, required=False), required=False)
+    
+    category_type = fields.Str(required=False)
+    
     issue_date = fields.Str(required=False)
+    
+    primary = fields.Boolean(required=False)
+    
+    stage_reason = fields.List(fields.Nested(StageReasonResponse, required=False), required=False)
+    
+    _id = fields.Str(required=False)
+    
+    document_type = fields.Str(required=False)
+    
+    store_id = fields.Int(required=False)
+    
+    stage = fields.Str(required=False)
     
 
