@@ -24,13 +24,13 @@ class Storeholiday(BaseSchema):
     
     type = fields.Str(required=False)
     
-    slug = fields.Str(required=False)
+    end_date = fields.Str(required=False)
     
     name = fields.Str(required=False)
     
-    year = fields.Int(required=False)
+    slug = fields.Str(required=False)
     
-    end_date = fields.Str(required=False)
+    year = fields.Int(required=False)
     
     start_date = fields.Str(required=False)
     

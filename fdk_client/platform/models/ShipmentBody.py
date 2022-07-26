@@ -22,8 +22,8 @@ class ShipmentBody(BaseSchema):
     
     products = fields.List(fields.Nested(ProductDetail, required=False), required=False)
     
-    data_update = fields.Dict(required=False)
-    
     reason = fields.List(fields.Int(required=False), required=False)
+    
+    data_update = fields.Dict(required=False)
     
 

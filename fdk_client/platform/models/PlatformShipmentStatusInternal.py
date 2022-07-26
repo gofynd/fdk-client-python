@@ -16,10 +16,10 @@ class PlatformShipmentStatusInternal(BaseSchema):
     # OrderManage swagger.json
 
     
-    force_transition = fields.Boolean(required=False)
+    task = fields.Boolean(required=False)
     
     statuses = fields.Nested(Statuses, required=False)
     
-    task = fields.Boolean(required=False)
+    force_transition = fields.Boolean(required=False)
     
 

@@ -20,11 +20,11 @@ class MetricsCount(BaseSchema):
     # Orders swagger.json
 
     
-    pending_rtd = fields.Int(required=False)
+    returned = fields.Int(required=False)
     
     cancelled = fields.Int(required=False)
     
-    returned = fields.Int(required=False)
+    pending_rtd = fields.Int(required=False)
     
     pending_pickup = fields.Int(required=False)
     

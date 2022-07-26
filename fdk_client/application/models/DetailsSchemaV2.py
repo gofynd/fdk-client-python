@@ -16,9 +16,9 @@ class DetailsSchemaV2(BaseSchema):
     # Catalog swagger.json
 
     
-    value = fields.Raw(required=False)
-    
     key = fields.Str(required=False)
+    
+    value = fields.Raw(required=False)
     
     type = fields.Str(required=False)
     
