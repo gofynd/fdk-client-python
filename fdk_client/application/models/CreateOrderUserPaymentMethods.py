@@ -7,19 +7,19 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
 from .PaymentMethodsMeta import PaymentMethodsMeta
+
+
 
 
 class CreateOrderUserPaymentMethods(BaseSchema):
     # Payment swagger.json
 
     
-    mode = fields.Str(required=False)
-    
     name = fields.Str(required=False)
     
     meta = fields.Nested(PaymentMethodsMeta, required=False)
+    
+    mode = fields.Str(required=False)
     
 

@@ -1,4 +1,4 @@
-"""Platform Models."""
+"""Application Models."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ItemQueryForUserCollection(BaseSchema):
+class MetaFields(BaseSchema):
     # Catalog swagger.json
 
     
-    action = fields.Str(required=False)
+    key = fields.Str(required=False)
     
-    item_id = fields.Int(required=False)
+    value = fields.Str(required=False)
     
 
