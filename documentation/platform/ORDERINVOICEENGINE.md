@@ -136,7 +136,7 @@ Get Staus of Label generations
 
 ```python
 try:
-    result = await client.orderinvoiceengine.getLabelStatus()
+    result = await client.orderinvoiceengine.getLabelStatus(uid=uid)
     # use result
 except Exception as e:
     print(e)
@@ -144,6 +144,11 @@ except Exception as e:
 
 
 
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| uid | String | yes | UID given at time of generate request |  
 
 
 
@@ -188,7 +193,7 @@ Get Presigned URL to download labels
 
 ```python
 try:
-    result = await client.orderinvoiceengine.getLabelPresignedURL()
+    result = await client.orderinvoiceengine.getLabelPresignedURL(uid=uid)
     # use result
 except Exception as e:
     print(e)
@@ -196,6 +201,11 @@ except Exception as e:
 
 
 
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| uid | String | yes | UID given at time of generate request |  
 
 
 

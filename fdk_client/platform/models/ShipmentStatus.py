@@ -26,8 +26,8 @@ class ShipmentStatus(BaseSchema):
     
     ops_status = fields.Str(required=False)
     
-    actual_status = fields.Str(required=False)
-    
     status = fields.Str(required=False)
+    
+    actual_status = fields.Str(required=False)
     
 

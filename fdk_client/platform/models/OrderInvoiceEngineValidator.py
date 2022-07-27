@@ -20,10 +20,14 @@ class OrderInvoiceEngineValidator:
     class getLabelStatus(BaseSchema):
         
         company_id = fields.Int(required=False)
+        
+        uid = fields.Str(required=False)
          
     
     class getLabelPresignedURL(BaseSchema):
         
         company_id = fields.Int(required=False)
+        
+        uid = fields.Str(required=False)
          
     
