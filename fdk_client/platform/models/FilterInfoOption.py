@@ -10,9 +10,13 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 class FilterInfoOption(BaseSchema):
     # Orders swagger.json
 
+    
+    name = fields.Str(required=False)
     
     value = fields.Str(required=False)
     
