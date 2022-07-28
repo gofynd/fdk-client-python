@@ -30,13 +30,7 @@ class GetGroupedProducts(BaseSchema):
     # Catalog swagger.json
 
     
-    logo = fields.Str(required=False)
-    
-    same_store_assignment = fields.Boolean(required=False)
-    
-    meta = fields.Dict(required=False)
-    
-    company_id = fields.Int(required=False)
+    name = fields.Str(required=False)
     
     slug = fields.Str(required=False)
     
@@ -44,9 +38,15 @@ class GetGroupedProducts(BaseSchema):
     
     page_visibility = fields.List(fields.Str(required=False), required=False)
     
-    name = fields.Str(required=False)
-    
     choice = fields.Str(required=False)
+    
+    logo = fields.Str(required=False)
+    
+    meta = fields.Dict(required=False)
+    
+    same_store_assignment = fields.Boolean(required=False)
+    
+    company_id = fields.Int(required=False)
     
     products = fields.List(fields.Nested(Products, required=False), required=False)
     

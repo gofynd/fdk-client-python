@@ -8,10 +8,18 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ApplicationCategoryJson(BaseSchema):
+
+
+
+
+class WeightResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    _custom_json = fields.Dict(required=False)
+    is_default = fields.Boolean(required=False)
+    
+    shipping = fields.Float(required=False)
+    
+    unit = fields.Str(required=False)
     
 

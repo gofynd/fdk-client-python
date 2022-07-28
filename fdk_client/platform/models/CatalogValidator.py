@@ -16,7 +16,7 @@ class CatalogValidator:
         id = fields.Str(required=False)
          
     
-    class deleteSearchKeywords(BaseSchema):
+    class updateSearchKeywords(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -25,7 +25,7 @@ class CatalogValidator:
         id = fields.Str(required=False)
          
     
-    class updateSearchKeywords(BaseSchema):
+    class deleteSearchKeywords(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -57,7 +57,7 @@ class CatalogValidator:
         id = fields.Str(required=False)
          
     
-    class deleteAutocompleteKeyword(BaseSchema):
+    class updateAutocompleteKeyword(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -66,7 +66,7 @@ class CatalogValidator:
         id = fields.Str(required=False)
          
     
-    class updateAutocompleteKeyword(BaseSchema):
+    class deleteAutocompleteKeyword(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -333,9 +333,9 @@ class CatalogValidator:
         
         q = fields.Str(required=False)
         
-        tags = fields.List(fields.Str(required=False), required=False)
-        
         type = fields.Str(required=False)
+        
+        tags = fields.List(fields.Str(required=False), required=False)
         
         is_active = fields.Boolean(required=False)
         
@@ -618,6 +618,15 @@ class CatalogValidator:
         company_id = fields.Str(required=False)
          
     
+    class getProductAttributes(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        category = fields.Str(required=False)
+        
+        filter = fields.Boolean(required=False)
+         
+    
     class getProduct(BaseSchema):
         
         item_code = fields.Str(required=False)
@@ -629,14 +638,14 @@ class CatalogValidator:
         brand_uid = fields.Int(required=False)
          
     
-    class deleteProduct(BaseSchema):
+    class editProduct(BaseSchema):
         
         company_id = fields.Str(required=False)
         
         item_id = fields.Int(required=False)
          
     
-    class editProduct(BaseSchema):
+    class deleteProduct(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -675,18 +684,18 @@ class CatalogValidator:
         company_id = fields.Int(required=False)
          
     
-    class deleteProductBulkJob(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        batch_id = fields.Int(required=False)
-         
-    
     class createProductsInBulk(BaseSchema):
         
         company_id = fields.Int(required=False)
         
         batch_id = fields.Str(required=False)
+         
+    
+    class deleteProductBulkJob(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        batch_id = fields.Int(required=False)
          
     
     class getProductTags(BaseSchema):
@@ -804,16 +813,16 @@ class CatalogValidator:
         company_id = fields.Int(required=False)
          
     
-    class deleteBulkInventoryJob(BaseSchema):
+    class createBulkInventory(BaseSchema):
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
         batch_id = fields.Str(required=False)
          
     
-    class createBulkInventory(BaseSchema):
+    class deleteBulkInventoryJob(BaseSchema):
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         batch_id = fields.Str(required=False)
          
@@ -835,7 +844,7 @@ class CatalogValidator:
         filter_type = fields.Str(required=False)
          
     
-    class deleteRealtimeInventory(BaseSchema):
+    class updateRealtimeInventory(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -844,7 +853,7 @@ class CatalogValidator:
         seller_identifier = fields.Str(required=False)
          
     
-    class updateRealtimeInventory(BaseSchema):
+    class deleteRealtimeInventory(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -913,59 +922,6 @@ class CatalogValidator:
         company_id = fields.Int(required=False)
          
     
-    class getApplicationBrandListing(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        q = fields.Str(required=False)
-         
-    
-    class updateAppBrand(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        brand_uid = fields.Str(required=False)
-         
-    
-    class getApplicationCategoryListing(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        q = fields.Str(required=False)
-         
-    
-    class updateAppCategory(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        category_uid = fields.Str(required=False)
-         
-    
-    class updateAppLocation(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        store_uid = fields.Str(required=False)
-         
-    
     class getApplicationBrands(BaseSchema):
         
         company_id = fields.Str(required=False)
@@ -1008,8 +964,6 @@ class CatalogValidator:
         q = fields.Str(required=False)
         
         f = fields.Str(required=False)
-        
-        c = fields.Str(required=False)
         
         filters = fields.Boolean(required=False)
         

@@ -10,12 +10,16 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class CollectionPrice(BaseSchema):
+
+
+class ManufacturerResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    lte = fields.Int(required=False)
+    is_default = fields.Boolean(required=False)
     
-    gte = fields.Int(required=False)
+    name = fields.Str(required=False)
+    
+    address = fields.Str(required=False)
     
 

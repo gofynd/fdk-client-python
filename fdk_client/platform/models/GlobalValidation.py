@@ -30,8 +30,8 @@ class GlobalValidation(BaseSchema):
     
     properties = fields.Nested(Properties, required=False)
     
-    required = fields.List(fields.Str(required=False), required=False)
-    
     title = fields.Str(required=False)
+    
+    required = fields.List(fields.Str(required=False), required=False)
     
 
