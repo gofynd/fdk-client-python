@@ -18,8 +18,8 @@ class EpaylaterBannerData(BaseSchema):
     
     display = fields.Boolean(required=False)
     
-    message = fields.Str(required=False)
-    
     status = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
     
 

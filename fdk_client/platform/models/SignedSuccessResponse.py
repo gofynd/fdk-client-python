@@ -16,7 +16,7 @@ class SignedSuccessResponse(BaseSchema):
     # OrderInvoiceEngine swagger.json
 
     
-    uid = fields.Boolean(required=False)
+    uid = fields.Str(required=False)
     
     url = fields.Str(required=False)
     

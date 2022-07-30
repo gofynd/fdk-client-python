@@ -11,9 +11,9 @@ from .Action import Action
 
 from .ImageUrls import ImageUrls
 
-
-
 from .Child import Child
+
+
 
 
 
@@ -28,9 +28,9 @@ class CategoryItems(BaseSchema):
     
     banners = fields.Nested(ImageUrls, required=False)
     
-    slug = fields.Str(required=False)
-    
     childs = fields.List(fields.Nested(Child, required=False), required=False)
+    
+    slug = fields.Str(required=False)
     
     uid = fields.Int(required=False)
     

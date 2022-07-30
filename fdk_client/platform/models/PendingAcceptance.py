@@ -16,9 +16,9 @@ class PendingAcceptance(BaseSchema):
     # Orders swagger.json
 
     
-    total = fields.Int(required=False)
-    
     cod = fields.Int(required=False)
+    
+    total = fields.Int(required=False)
     
     prepaid = fields.Int(required=False)
     

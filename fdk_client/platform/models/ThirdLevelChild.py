@@ -32,9 +32,9 @@ class ThirdLevelChild(BaseSchema):
     
     banners = fields.Nested(ImageUrls, required=False)
     
-    slug = fields.Str(required=False)
-    
     childs = fields.List(fields.Dict(required=False), required=False)
+    
+    slug = fields.Str(required=False)
     
     uid = fields.Int(required=False)
     

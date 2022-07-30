@@ -28,9 +28,9 @@ class SubLane(BaseSchema):
     
     text = fields.Str(required=False)
     
-    value = fields.Str(required=False)
-    
     total_shipments = fields.Int(required=False)
+    
+    value = fields.Str(required=False)
     
     index = fields.Int(required=False)
     

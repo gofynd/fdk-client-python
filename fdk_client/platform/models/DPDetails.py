@@ -26,9 +26,11 @@ class DPDetails(BaseSchema):
     # Orders swagger.json
 
     
-    awb_no = fields.Str(required=False)
+    track_url = fields.Str(required=False)
     
     pincode = fields.Str(required=False)
+    
+    awb_no = fields.Str(required=False)
     
     id = fields.Str(required=False)
     
@@ -36,10 +38,8 @@ class DPDetails(BaseSchema):
     
     country = fields.Str(required=False)
     
-    track_url = fields.Str(required=False)
+    eway_bill_id = fields.Str(required=False)
     
     name = fields.Str(required=False)
-    
-    eway_bill_id = fields.Str(required=False)
     
 
