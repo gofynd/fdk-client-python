@@ -22,8 +22,8 @@ class BrandDetailResponse(BaseSchema):
     
     banners = fields.Nested(ImageUrls, required=False)
     
-    name = fields.Str(required=False)
-    
     uid = fields.Int(required=False)
+    
+    name = fields.Str(required=False)
     
 
