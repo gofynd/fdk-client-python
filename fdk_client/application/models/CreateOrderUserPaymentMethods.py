@@ -7,9 +7,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 from .PaymentMethodsMeta import PaymentMethodsMeta
-
-
 
 
 class CreateOrderUserPaymentMethods(BaseSchema):
@@ -18,8 +18,8 @@ class CreateOrderUserPaymentMethods(BaseSchema):
     
     name = fields.Str(required=False)
     
-    meta = fields.Nested(PaymentMethodsMeta, required=False)
-    
     mode = fields.Str(required=False)
+    
+    meta = fields.Nested(PaymentMethodsMeta, required=False)
     
 

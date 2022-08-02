@@ -26,12 +26,12 @@ class CreatePaymentLinkRequest(BaseSchema):
     
     amount = fields.Float(required=False)
     
-    description = fields.Str(required=False)
+    external_order_id = fields.Str(required=False)
     
-    mobile_number = fields.Str(required=False)
+    description = fields.Str(required=False)
     
     email = fields.Str(required=False)
     
-    external_order_id = fields.Str(required=False)
+    mobile_number = fields.Str(required=False)
     
 

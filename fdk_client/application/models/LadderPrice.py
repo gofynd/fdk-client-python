@@ -24,10 +24,10 @@ class LadderPrice(BaseSchema):
     
     offer_price = fields.Float(required=False)
     
-    effective = fields.Int(required=False)
+    marked = fields.Int(required=False)
     
     currency_symbol = fields.Str(required=False)
     
-    marked = fields.Int(required=False)
+    effective = fields.Int(required=False)
     
 

@@ -161,3 +161,25 @@ class CartValidator:
         last_id = fields.Str(required=False)
          
     
+    class addItems(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        cart_id = fields.Str(required=False)
+        
+        b = fields.Boolean(required=False)
+         
+    
+    class updateCart(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        cart_id = fields.Str(required=False)
+        
+        b = fields.Boolean(required=False)
+         
+    
