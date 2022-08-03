@@ -17,6 +17,11 @@ class OrderInvoiceEngineValidator:
         company_id = fields.Int(required=False)
          
     
+    class generateBulkShipmentLabel(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    
     class getLabelStatus(BaseSchema):
         
         company_id = fields.Int(required=False)

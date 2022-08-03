@@ -7,27 +7,23 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+from .Options import Options
 
 
 
 
-
-
-from .PendingAcceptance import PendingAcceptance
 
 
 class MetricsCount(BaseSchema):
     # Orders swagger.json
 
     
-    pending_pickup = fields.Int(required=False)
+    text = fields.Str(required=False)
     
-    returned = fields.Int(required=False)
+    options = fields.List(fields.Nested(Options, required=False), required=False)
     
-    pending_rtd = fields.Int(required=False)
+    value = fields.Int(required=False)
     
-    cancelled = fields.Int(required=False)
-    
-    pending_acceptance = fields.List(fields.Nested(PendingAcceptance, required=False), required=False)
+    key = fields.Str(required=False)
     
 

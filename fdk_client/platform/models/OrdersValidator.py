@@ -122,6 +122,10 @@ class OrdersValidator:
     class getMetricCount(BaseSchema):
         
         company_id = fields.Int(required=False)
+        
+        from_date = fields.Str(required=False)
+        
+        to_date = fields.Str(required=False)
          
     
     class getfilters(BaseSchema):

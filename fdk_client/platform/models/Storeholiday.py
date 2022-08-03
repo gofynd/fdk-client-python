@@ -22,15 +22,15 @@ class Storeholiday(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    year = fields.Int(required=False)
-    
-    end_date = fields.Str(required=False)
-    
     start_date = fields.Str(required=False)
+    
+    year = fields.Int(required=False)
     
     name = fields.Str(required=False)
     
     type = fields.Str(required=False)
+    
+    end_date = fields.Str(required=False)
     
     slug = fields.Str(required=False)
     
