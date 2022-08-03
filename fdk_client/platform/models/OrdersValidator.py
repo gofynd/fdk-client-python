@@ -12,10 +12,6 @@ class OrdersValidator:
         company_id = fields.Int(required=False)
         
         shipment_id = fields.Str(required=False)
-        
-        ordering_company_id = fields.Str(required=False)
-        
-        request_by_ext = fields.Str(required=False)
          
     
     class getLaneConfig(BaseSchema):
@@ -29,16 +25,6 @@ class OrdersValidator:
         from_date = fields.Str(required=False)
         
         to_date = fields.Str(required=False)
-        
-        dp_ids = fields.Str(required=False)
-        
-        stores = fields.Str(required=False)
-        
-        sales_channel = fields.Str(required=False)
-        
-        payment_mode = fields.Str(required=False)
-        
-        bag_status = fields.Str(required=False)
          
     
     class getOrderShipmentDetails(BaseSchema):
@@ -119,28 +105,10 @@ class OrdersValidator:
         is_priority_sort = fields.Boolean(required=False)
          
     
-    class getMetricCount(BaseSchema):
-        
-        company_id = fields.Int(required=False)
-        
-        from_date = fields.Str(required=False)
-        
-        to_date = fields.Str(required=False)
-         
-    
     class getfilters(BaseSchema):
         
         company_id = fields.Int(required=False)
         
         view = fields.Str(required=False)
-         
-    
-    class getAppOrderShipmentDetails(BaseSchema):
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        order_id = fields.Str(required=False)
          
     

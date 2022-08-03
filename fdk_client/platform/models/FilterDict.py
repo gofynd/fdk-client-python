@@ -5,13 +5,21 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .MetricsCount import MetricsCount
 
 
-class MetricCountResponse(BaseSchema):
+
+
+
+
+
+class FilterDict(BaseSchema):
     # Orders swagger.json
 
     
-    items = fields.List(fields.Nested(MetricsCount, required=False), required=False)
+    text = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
     
 

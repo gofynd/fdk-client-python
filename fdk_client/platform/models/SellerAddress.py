@@ -24,7 +24,7 @@ class SellerAddress(BaseSchema):
     
     name = fields.Str(required=False)
     
-    address1 = fields.Str(required=False)
+    address = fields.Str(required=False)
     
     city = fields.Str(required=False)
     
