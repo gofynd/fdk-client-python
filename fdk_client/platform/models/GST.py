@@ -26,8 +26,8 @@ class GST(BaseSchema):
     
     value_of_good = fields.Float(required=False)
     
-    brand_calculated_amount = fields.Float(required=False)
-    
     tax_collected_at_source = fields.Float(required=False)
+    
+    brand_calculated_amount = fields.Float(required=False)
     
 

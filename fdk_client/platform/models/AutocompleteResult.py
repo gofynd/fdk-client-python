@@ -22,8 +22,8 @@ class AutocompleteResult(BaseSchema):
     
     action = fields.Nested(AutocompleteAction, required=False)
     
-    display = fields.Str(required=False)
-    
     _custom_json = fields.Dict(required=False)
+    
+    display = fields.Str(required=False)
     
 

@@ -135,3 +135,12 @@ class OrdersValidator:
         view = fields.Str(required=False)
          
     
+    class getAppOrderShipmentDetails(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        order_id = fields.Str(required=False)
+         
+    

@@ -7,9 +7,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .OrderDict import OrderDict
-
 from .Shipment import Shipment
+
+from .OrderDict import OrderDict
 
 
 class ShipmentDetailsResponse(BaseSchema):
@@ -18,8 +18,8 @@ class ShipmentDetailsResponse(BaseSchema):
     
     success = fields.Boolean(required=False)
     
-    order = fields.Nested(OrderDict, required=False)
-    
     shipments = fields.List(fields.Nested(Shipment, required=False), required=False)
+    
+    order = fields.Nested(OrderDict, required=False)
     
 

@@ -36,13 +36,13 @@ class GetProductBundleResponse(BaseSchema):
     
     same_store_assignment = fields.Boolean(required=False)
     
-    company_id = fields.Int(required=False)
-    
     logo = fields.Str(required=False)
     
-    page_visibility = fields.List(fields.Str(required=False), required=False)
-    
     choice = fields.Str(required=False)
+    
+    company_id = fields.Int(required=False)
+    
+    page_visibility = fields.List(fields.Str(required=False), required=False)
     
     name = fields.Str(required=False)
     
