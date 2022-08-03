@@ -22,8 +22,8 @@ class Schedule(BaseSchema):
     
     duration = fields.Int(required=False)
     
-    cron = fields.Str(required=False)
-    
     start = fields.Str(required=False)
+    
+    cron = fields.Str(required=False)
     
 
