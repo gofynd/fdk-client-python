@@ -23,7 +23,7 @@ from .DataTresholdDTO import DataTresholdDTO
 
 
 class JobConfigDTO(BaseSchema):
-    # Configuration swagger.json
+    # Inventory swagger.json
 
     
     integration = fields.Str(required=False)

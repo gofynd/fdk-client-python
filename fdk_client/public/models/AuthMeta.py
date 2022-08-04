@@ -11,7 +11,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class AuthMeta(BaseSchema):
-    # Configuration swagger.json
+    # Webhook swagger.json
 
     
     type = fields.Str(required=False)

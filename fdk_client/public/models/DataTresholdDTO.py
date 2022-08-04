@@ -17,7 +17,7 @@ from .GenericDTO import GenericDTO
 
 
 class DataTresholdDTO(BaseSchema):
-    # Configuration swagger.json
+    # Inventory swagger.json
 
     
     min_price = fields.Float(required=False)

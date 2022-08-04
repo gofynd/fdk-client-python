@@ -15,7 +15,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class Association(BaseSchema):
-    # Configuration swagger.json
+    # Webhook swagger.json
 
     
     company_id = fields.Int(required=False)

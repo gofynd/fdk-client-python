@@ -29,7 +29,7 @@ from .EventConfig import EventConfig
 
 
 class SubscriberResponse(BaseSchema):
-    # Configuration swagger.json
+    # Webhook swagger.json
 
     
     id = fields.Int(required=False)

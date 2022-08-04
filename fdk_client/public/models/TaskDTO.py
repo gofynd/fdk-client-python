@@ -11,7 +11,7 @@ from .GenericDTO import GenericDTO
 
 
 class TaskDTO(BaseSchema):
-    # Configuration swagger.json
+    # Inventory swagger.json
 
     
     type = fields.Int(required=False)

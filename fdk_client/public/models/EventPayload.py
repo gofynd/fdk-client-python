@@ -21,7 +21,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class EventPayload(BaseSchema):
-    # Configuration swagger.json
+    # Webhook swagger.json
 
     
     id = fields.Int(required=False)

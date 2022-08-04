@@ -21,29 +21,3 @@ class ConfigurationValidator:
         id = fields.Str(required=False)
          
     
-    class fetchAllWebhookEvents(BaseSchema):
-        
-        pass 
-    
-    class queryWebhookEventDetails(BaseSchema):
-        
-        pass 
-    
-    class getJobConfigByIntegrationType(BaseSchema):
-        
-        integration_type = fields.Str(required=False)
-        
-        disable = fields.Boolean(required=False)
-         
-    
-    class getJobCodesMetrics(BaseSchema):
-        
-        daily_job = fields.Boolean(required=False)
-        
-        job_code = fields.Str(required=False)
-         
-    
-    class saveJobCodesMetrics(BaseSchema):
-        
-        pass 
-    

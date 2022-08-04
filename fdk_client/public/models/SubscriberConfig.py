@@ -25,7 +25,7 @@ from .AuthMeta import AuthMeta
 
 
 class SubscriberConfig(BaseSchema):
-    # Configuration swagger.json
+    # Webhook swagger.json
 
     
     id = fields.Int(required=False)

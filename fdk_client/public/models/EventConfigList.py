@@ -11,7 +11,7 @@ from .Page import Page
 
 
 class EventConfigList(BaseSchema):
-    # Configuration swagger.json
+    # Webhook swagger.json
 
     
     items = fields.List(fields.Nested(EventConfig, required=False), required=False)
