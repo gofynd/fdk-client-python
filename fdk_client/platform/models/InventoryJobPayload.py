@@ -22,9 +22,7 @@ class InventoryJobPayload(BaseSchema):
     # Catalog swagger.json
 
     
-    expiration_date = fields.Str(required=False)
-    
-    store_code = fields.Str(required=False)
+    price_effective = fields.Float(required=False)
     
     total_quantity = fields.Int(required=False)
     
@@ -32,6 +30,8 @@ class InventoryJobPayload(BaseSchema):
     
     seller_identifier = fields.Str(required=False)
     
-    price_effective = fields.Float(required=False)
+    store_code = fields.Str(required=False)
+    
+    expiration_date = fields.Str(required=False)
     
 
