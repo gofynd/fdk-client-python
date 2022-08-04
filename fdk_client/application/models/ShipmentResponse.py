@@ -5,10 +5,6 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .ShipmentPromise import ShipmentPromise
-
-
-
 
 
 
@@ -21,6 +17,10 @@ from .CartProductInfo import CartProductInfo
 
 
 
+from .ShipmentPromise import ShipmentPromise
+
+
+
 
 
 
@@ -30,11 +30,7 @@ class ShipmentResponse(BaseSchema):
     # Cart swagger.json
 
     
-    promise = fields.Nested(ShipmentPromise, required=False)
-    
-    fulfillment_type = fields.Str(required=False)
-    
-    fulfillment_id = fields.Int(required=False)
+    dp_options = fields.Dict(required=False)
     
     shipments = fields.Int(required=False)
     
@@ -42,9 +38,13 @@ class ShipmentResponse(BaseSchema):
     
     box_type = fields.Str(required=False)
     
+    fulfillment_type = fields.Str(required=False)
+    
     order_type = fields.Str(required=False)
     
-    dp_options = fields.Dict(required=False)
+    promise = fields.Nested(ShipmentPromise, required=False)
+    
+    fulfillment_id = fields.Int(required=False)
     
     shipment_type = fields.Str(required=False)
     

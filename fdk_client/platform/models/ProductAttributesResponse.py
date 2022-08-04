@@ -5,17 +5,13 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .AttributeMasterSerializer import AttributeMasterSerializer
 
 
-
-
-
-class CollectionPrice(BaseSchema):
+class ProductAttributesResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    lte = fields.Int(required=False)
-    
-    gte = fields.Int(required=False)
+    items = fields.List(fields.Nested(AttributeMasterSerializer, required=False), required=False)
     
 

@@ -12,14 +12,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class CollectionQuery(BaseSchema):
+class WeightResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    value = fields.List(fields.Str(required=False), required=False)
+    unit = fields.Str(required=False)
     
-    op = fields.Str(required=False)
+    shipping = fields.Float(required=False)
     
-    attribute = fields.Str(required=False)
+    is_default = fields.Boolean(required=False)
     
 

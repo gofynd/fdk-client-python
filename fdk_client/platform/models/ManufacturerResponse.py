@@ -8,10 +8,18 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ApplicationCategoryJson(BaseSchema):
+
+
+
+
+class ManufacturerResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    _custom_json = fields.Dict(required=False)
+    name = fields.Str(required=False)
+    
+    address = fields.Str(required=False)
+    
+    is_default = fields.Boolean(required=False)
     
 
