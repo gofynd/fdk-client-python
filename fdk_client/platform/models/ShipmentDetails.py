@@ -19,7 +19,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .ShippingAddress import ShippingAddress
+
+
+from .ShippingToAddress import ShippingToAddress
 
 from .SellerAddress import SellerAddress
 
@@ -40,9 +42,11 @@ class ShipmentDetails(BaseSchema):
     
     shipping_to = fields.Str(required=False)
     
+    seller_name = fields.Str(required=False)
+    
     gstin_number = fields.Str(required=False)
     
-    shipping_address = fields.Nested(ShippingAddress, required=False)
+    shipping_address = fields.Nested(ShippingToAddress, required=False)
     
     seller_address = fields.Nested(SellerAddress, required=False)
     

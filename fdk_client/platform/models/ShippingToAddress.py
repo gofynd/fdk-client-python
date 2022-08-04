@@ -16,7 +16,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class SellerAddress(BaseSchema):
+class ShippingToAddress(BaseSchema):
     # OrderInvoiceEngine swagger.json
 
     

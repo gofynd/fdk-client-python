@@ -492,7 +492,7 @@ Sucess Response, Presigned URL of Labels
 
  
  
- #### [ShippingAddress](#ShippingAddress)
+ #### [ShippingToAddress](#ShippingToAddress)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
@@ -511,7 +511,6 @@ Sucess Response, Presigned URL of Labels
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | name | String |  no  |  |
  | address | String |  no  |  |
  | city | String |  no  |  |
  | state | String |  no  |  |
@@ -548,8 +547,9 @@ Sucess Response, Presigned URL of Labels
  | itemQty | String |  no  |  |
  | noOfBoxes | String |  no  |  |
  | shippingTo | String |  no  |  |
+ | sellerName | String |  no  |  |
  | gstinNumber | String |  no  |  |
- | shippingAddress | [ShippingAddress](#ShippingAddress) |  no  |  |
+ | shippingAddress | [ShippingToAddress](#ShippingToAddress) |  no  |  |
  | sellerAddress | [SellerAddress](#SellerAddress) |  no  |  |
 
 ---
