@@ -4,7 +4,6 @@ from enum import Enum
 
 
 
-
 class SubscriberStatus(Enum):
     
     ACTIVE = "active"
@@ -18,6 +17,5 @@ class SubscriberStatus(Enum):
         if value in cls._value2member_map_:
             return None
         raise Exception("Invalid SubscriberStatus type")
-
 
 

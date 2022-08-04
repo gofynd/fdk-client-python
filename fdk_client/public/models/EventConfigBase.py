@@ -15,7 +15,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class EventConfigBase(BaseSchema):
-    # Webhook swagger.json
+    # Configuration swagger.json
 
     
     event_name = fields.Str(required=False)

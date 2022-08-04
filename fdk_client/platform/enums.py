@@ -80,6 +80,7 @@ class TicketSourceEnum(Enum):
 
 
 
+
 class PageType(Enum):
     
     ABOUT_US = "about-us"
@@ -173,8 +174,6 @@ class PageType(Enum):
         if value in cls._value2member_map_:
             return None
         raise Exception("Invalid PageType type")
-
-
 
 
 

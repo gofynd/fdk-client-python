@@ -11,7 +11,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class GenericDTO(BaseSchema):
-    # Inventory swagger.json
+    # Configuration swagger.json
 
     
     text = fields.Str(required=False)

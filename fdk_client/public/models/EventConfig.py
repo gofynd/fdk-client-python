@@ -23,7 +23,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class EventConfig(BaseSchema):
-    # Webhook swagger.json
+    # Configuration swagger.json
 
     
     id = fields.Int(required=False)

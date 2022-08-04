@@ -17,7 +17,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class EmailJobMetrics(BaseSchema):
-    # Inventory swagger.json
+    # Configuration swagger.json
 
     
     executed = fields.Boolean(required=False)

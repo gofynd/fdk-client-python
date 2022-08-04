@@ -15,7 +15,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class SubscriberEvent(BaseSchema):
-    # Webhook swagger.json
+    # Configuration swagger.json
 
     
     id = fields.Int(required=False)

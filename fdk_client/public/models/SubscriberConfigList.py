@@ -11,7 +11,7 @@ from .Page import Page
 
 
 class SubscriberConfigList(BaseSchema):
-    # Webhook swagger.json
+    # Configuration swagger.json
 
     
     items = fields.List(fields.Nested(SubscriberResponse, required=False), required=False)

@@ -9,8 +9,6 @@ from ..common.exceptions import FDKClientValidationError
 from ..common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
 
 from .models.ConfigurationValidator import ConfigurationValidator
-from .models.WebhookValidator import WebhookValidator
-from .models.InventoryValidator import InventoryValidator
 
 
 class Configuration:
@@ -18,7 +16,12 @@ class Configuration:
         self._conf = config
         self._relativeUrls = {
             "searchApplication": "/service/common/configuration/v1.0/application/search-application",
-            "getLocations": "/service/common/configuration/v1.0/location"
+            "getLocations": "/service/common/configuration/v1.0/location",
+            "fetchAllWebhookEvents": "/service/common/webhook/v1.0/events",
+            "queryWebhookEventDetails": "/service/common/webhook/v1.0/events/query-event-details",
+            "getJobConfigByIntegrationType": "/service/common/inventory/v1.0/company/job/config",
+            "getJobCodesMetrics": "/service/common/inventory/v1.0/company/email/jobCode",
+            "saveJobCodesMetrics": "/service/common/inventory/v1.0/company/email/jobCode"
             
         }
         self._urls = {
@@ -94,29 +97,13 @@ class Configuration:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getLocations"]).netloc, "get", await create_url_without_domain("/service/common/configuration/v1.0/location", location_type=location_type, id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
-
-class Webhook:
-    def __init__(self, config):
-        self._conf = config
-        self._relativeUrls = {
-            "fetchAllWebhookEvents": "/service/common/webhook/v1.0/events",
-            "queryWebhookEventDetails": "/service/common/webhook/v1.0/events/query-event-details"
-            
-        }
-        self._urls = {
-            method: f"{self._conf.domain}{path}" for method, path in self._relativeUrls.items()
-        }
-
-    async def updateUrls(self, urls):
-        self._urls.update(urls)
-    
     async def fetchAllWebhookEvents(self, body=""):
         """Get All Webhook Events
         """
         payload = {}
         
         # Parameter validation
-        schema = WebhookValidator.fetchAllWebhookEvents()
+        schema = ConfigurationValidator.fetchAllWebhookEvents()
         schema.dump(schema.load(payload))
         
 
@@ -141,7 +128,7 @@ class Webhook:
         payload = {}
         
         # Parameter validation
-        schema = WebhookValidator.queryWebhookEventDetails()
+        schema = ConfigurationValidator.queryWebhookEventDetails()
         schema.dump(schema.load(payload))
         
 
@@ -160,23 +147,6 @@ class Webhook:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["queryWebhookEventDetails"]).netloc, "post", await create_url_without_domain("/service/common/webhook/v1.0/events/query-event-details", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
-
-class Inventory:
-    def __init__(self, config):
-        self._conf = config
-        self._relativeUrls = {
-            "getJobConfigByIntegrationType": "/service/common/inventory/v1.0/company/job/config",
-            "getJobCodesMetrics": "/service/common/inventory/v1.0/company/email/jobCode",
-            "saveJobCodesMetrics": "/service/common/inventory/v1.0/company/email/jobCode"
-            
-        }
-        self._urls = {
-            method: f"{self._conf.domain}{path}" for method, path in self._relativeUrls.items()
-        }
-
-    async def updateUrls(self, urls):
-        self._urls.update(urls)
-    
     async def getJobConfigByIntegrationType(self, integration_type=None, disable=None, body=""):
         """REST Endpoint that returns all job Configs by Integration Type
         :param integration_type : Integration Type : type string
@@ -191,7 +161,7 @@ class Inventory:
             payload["disable"] = disable
         
         # Parameter validation
-        schema = InventoryValidator.getJobConfigByIntegrationType()
+        schema = ConfigurationValidator.getJobConfigByIntegrationType()
         schema.dump(schema.load(payload))
         
 
@@ -224,7 +194,7 @@ class Inventory:
             payload["job_code"] = job_code
         
         # Parameter validation
-        schema = InventoryValidator.getJobCodesMetrics()
+        schema = ConfigurationValidator.getJobCodesMetrics()
         schema.dump(schema.load(payload))
         
 
@@ -249,7 +219,7 @@ class Inventory:
         payload = {}
         
         # Parameter validation
-        schema = InventoryValidator.saveJobCodesMetrics()
+        schema = ConfigurationValidator.saveJobCodesMetrics()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -278,8 +248,6 @@ class PublicClient:
     def __init__(self, config):
         self.config = config
         self.configuration = Configuration(config)
-        self.webhook = Webhook(config)
-        self.inventory = Inventory(config)
         
     async def setExtraHeaders(self, header):
         if header and type(header) == dict:

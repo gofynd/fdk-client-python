@@ -29,7 +29,7 @@ from .Page import Page
 
 
 class ResponseEnvelopeEmailJobMetrics(BaseSchema):
-    # Inventory swagger.json
+    # Configuration swagger.json
 
     
     timestamp = fields.Str(required=False)

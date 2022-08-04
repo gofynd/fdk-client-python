@@ -9,7 +9,7 @@ from .EventConfig import EventConfig
 
 
 class EventConfigResponse(BaseSchema):
-    # Webhook swagger.json
+    # Configuration swagger.json
 
     
     event_configs = fields.List(fields.Nested(EventConfig, required=False), required=False)
