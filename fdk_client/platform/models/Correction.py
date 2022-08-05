@@ -14,8 +14,8 @@ class Correction(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    reason_code = fields.Str(required=False)
-    
     desc = fields.Str(required=False)
+    
+    reason_code = fields.Str(required=False)
     
 

@@ -9,15 +9,15 @@ from .StoreAddressSerializer import StoreAddressSerializer
 
 
 
-from .CompanyStore import CompanyStore
+from .StoreDepartments import StoreDepartments
+
+
 
 from .SellerPhoneNumber import SellerPhoneNumber
 
 from .StoreManagerSerializer import StoreManagerSerializer
 
-
-
-from .StoreDepartments import StoreDepartments
+from .CompanyStore import CompanyStore
 
 
 class AppStore(BaseSchema):
@@ -28,14 +28,14 @@ class AppStore(BaseSchema):
     
     name = fields.Str(required=False)
     
-    company = fields.Nested(CompanyStore, required=False)
+    departments = fields.List(fields.Nested(StoreDepartments, required=False), required=False)
+    
+    uid = fields.Int(required=False)
     
     contact_numbers = fields.List(fields.Nested(SellerPhoneNumber, required=False), required=False)
     
     manager = fields.Nested(StoreManagerSerializer, required=False)
     
-    uid = fields.Int(required=False)
-    
-    departments = fields.List(fields.Nested(StoreDepartments, required=False), required=False)
+    company = fields.Nested(CompanyStore, required=False)
     
 

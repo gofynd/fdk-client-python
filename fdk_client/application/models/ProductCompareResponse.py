@@ -9,9 +9,9 @@ from .AttributeMetadata import AttributeMetadata
 
 
 
-
-
 from .ProductDetail import ProductDetail
+
+
 
 
 class ProductCompareResponse(BaseSchema):
@@ -22,8 +22,8 @@ class ProductCompareResponse(BaseSchema):
     
     title = fields.Str(required=False)
     
-    subtitle = fields.Str(required=False)
-    
     items = fields.List(fields.Nested(ProductDetail, required=False), required=False)
+    
+    subtitle = fields.Str(required=False)
     
 
