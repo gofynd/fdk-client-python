@@ -11,9 +11,9 @@ from .ArticleQuery import ArticleQuery
 
 
 
+
+
 from .ArticleAssignment import ArticleAssignment
-
-
 
 
 class AssignStoreArticle(BaseSchema):
@@ -22,12 +22,12 @@ class AssignStoreArticle(BaseSchema):
     
     query = fields.Nested(ArticleQuery, required=False)
     
+    meta = fields.Dict(required=False)
+    
     group_id = fields.Str(required=False)
     
     quantity = fields.Int(required=False)
     
     article_assignment = fields.Nested(ArticleAssignment, required=False)
-    
-    meta = fields.Dict(required=False)
     
 
