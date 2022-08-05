@@ -9,9 +9,9 @@ from .Media import Media
 
 
 
-
-
 from .ImageUrls import ImageUrls
+
+
 
 
 class BrandDetailResponse(BaseSchema):
@@ -22,8 +22,8 @@ class BrandDetailResponse(BaseSchema):
     
     name = fields.Str(required=False)
     
-    uid = fields.Int(required=False)
-    
     banners = fields.Nested(ImageUrls, required=False)
+    
+    uid = fields.Int(required=False)
     
 
