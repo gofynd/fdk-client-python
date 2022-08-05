@@ -5,17 +5,17 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .CancelledChequePayload import CancelledChequePayload
-
 from .PennyDropPayload import PennyDropPayload
+
+from .CancelledChequePayload import CancelledChequePayload
 
 
 class PayoutPennyDropAndChequePayload(BaseSchema):
     # Payment swagger.json
 
     
-    cancelled_cheque = fields.Nested(CancelledChequePayload, required=False)
-    
     penny_drop = fields.Nested(PennyDropPayload, required=False)
+    
+    cancelled_cheque = fields.Nested(CancelledChequePayload, required=False)
     
 

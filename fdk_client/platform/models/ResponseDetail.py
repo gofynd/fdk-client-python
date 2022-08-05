@@ -14,8 +14,8 @@ class ResponseDetail(BaseSchema):
     # OrderManage swagger.json
 
     
-    message = fields.List(fields.Str(required=False), required=False)
-    
     success = fields.Boolean(required=False)
+    
+    message = fields.List(fields.Str(required=False), required=False)
     
 

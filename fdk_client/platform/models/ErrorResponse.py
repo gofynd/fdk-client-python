@@ -18,9 +18,9 @@ class ErrorResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    status = fields.Int(required=False)
-    
     code = fields.Str(required=False)
+    
+    status = fields.Int(required=False)
     
     message = fields.Str(required=False)
     

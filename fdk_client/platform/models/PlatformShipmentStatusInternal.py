@@ -18,8 +18,8 @@ class PlatformShipmentStatusInternal(BaseSchema):
     
     statuses = fields.Nested(Statuses, required=False)
     
-    task = fields.Boolean(required=False)
-    
     force_transition = fields.Boolean(required=False)
+    
+    task = fields.Boolean(required=False)
     
 
