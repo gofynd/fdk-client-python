@@ -18,8 +18,8 @@ class Hierarchy(BaseSchema):
     
     l1 = fields.Int(required=False)
     
-    l2 = fields.Int(required=False)
-    
     department = fields.Int(required=False)
+    
+    l2 = fields.Int(required=False)
     
 

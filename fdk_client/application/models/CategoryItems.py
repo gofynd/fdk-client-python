@@ -7,9 +7,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .Child import Child
-
 from .ProductListingAction import ProductListingAction
+
+from .Child import Child
 
 
 
@@ -24,9 +24,9 @@ class CategoryItems(BaseSchema):
     
     slug = fields.Str(required=False)
     
-    childs = fields.List(fields.Nested(Child, required=False), required=False)
-    
     action = fields.Nested(ProductListingAction, required=False)
+    
+    childs = fields.List(fields.Nested(Child, required=False), required=False)
     
     uid = fields.Int(required=False)
     
