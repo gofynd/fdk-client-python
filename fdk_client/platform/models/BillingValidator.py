@@ -41,7 +41,7 @@ class BillingValidator:
         subscription_id = fields.Str(required=False)
          
     
-    class createOneTimeSubscriptionCharge(BaseSchema):
+    class createOneTimeCharge(BaseSchema):
         
         company_id = fields.Str(required=False)
         

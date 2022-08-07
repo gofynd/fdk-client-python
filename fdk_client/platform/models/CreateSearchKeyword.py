@@ -9,9 +9,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
 from .SearchKeywordResult import SearchKeywordResult
+
+
 
 
 
@@ -24,10 +24,10 @@ class CreateSearchKeyword(BaseSchema):
     
     is_active = fields.Boolean(required=False)
     
-    app_id = fields.Str(required=False)
-    
     result = fields.Nested(SearchKeywordResult, required=False)
     
     words = fields.List(fields.Str(required=False), required=False)
+    
+    app_id = fields.Str(required=False)
     
 

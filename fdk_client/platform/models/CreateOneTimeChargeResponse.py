@@ -5,7 +5,7 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .OneTimeEntitySubscription import OneTimeEntitySubscription
+from .OneTimeChargeEntity import OneTimeChargeEntity
 
 
 
@@ -14,7 +14,7 @@ class CreateOneTimeChargeResponse(BaseSchema):
     # Billing swagger.json
 
     
-    subscription = fields.Nested(OneTimeEntitySubscription, required=False)
+    subscription = fields.Nested(OneTimeChargeEntity, required=False)
     
     confirm_url = fields.Str(required=False)
     

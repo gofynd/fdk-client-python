@@ -22,7 +22,7 @@ from ..models.BaseSchema import BaseSchema
 from .OneTimeCharge import OneTimeCharge
 
 
-class OneTimeEntitySubscription(BaseSchema):
+class OneTimeChargeEntity(BaseSchema):
     # Billing swagger.json
 
     

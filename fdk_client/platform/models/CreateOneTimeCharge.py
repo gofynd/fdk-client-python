@@ -14,7 +14,7 @@ from .OneTimeChargeItem import OneTimeChargeItem
 
 
 
-class CreateOneTimeSubscriptionCharge(BaseSchema):
+class CreateOneTimeCharge(BaseSchema):
     # Billing swagger.json
 
     
