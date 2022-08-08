@@ -19,7 +19,19 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .OneTimeCharge import OneTimeCharge
+
+
+
+
+
+
+
+
+
+
+
+
+from .EntityChargePrice import EntityChargePrice
 
 
 class OneTimeChargeEntity(BaseSchema):
@@ -32,14 +44,26 @@ class OneTimeChargeEntity(BaseSchema):
     
     status = fields.Str(required=False)
     
-    company_id = fields.Int(required=False)
-    
     activated_on = fields.Str(required=False)
     
     cancelled_on = fields.Str(required=False)
     
     metadata = fields.Dict(required=False)
     
-    line_items = fields.List(fields.Nested(OneTimeCharge, required=False), required=False)
+    return_url = fields.Str(required=False)
+    
+    is_test = fields.Boolean(required=False)
+    
+    pricing_type = fields.Str(required=False)
+    
+    subscriber_id = fields.Str(required=False)
+    
+    entity_type = fields.Str(required=False)
+    
+    entity_id = fields.Str(required=False)
+    
+    meta = fields.Dict(required=False)
+    
+    price = fields.Nested(EntityChargePrice, required=False)
     
 

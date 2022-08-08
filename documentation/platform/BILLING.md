@@ -11,6 +11,7 @@ Handle platform subscription
 * [getSubscriptionCharge](#getsubscriptioncharge)
 * [cancelSubscriptionCharge](#cancelsubscriptioncharge)
 * [createOneTimeCharge](#createonetimecharge)
+* [getChargeDetails](#getchargedetails)
 * [getInvoices](#getinvoices)
 * [getInvoiceById](#getinvoicebyid)
 * [getCustomerDetail](#getcustomerdetail)
@@ -288,6 +289,64 @@ Register one time subscription charge for a seller of your extension.
 
 
 [CreateOneTimeChargeResponse](#CreateOneTimeChargeResponse)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getChargeDetails
+Get subscription charge details
+
+
+
+
+```python
+try:
+    result = await client.billing.getChargeDetails(extensionId=extensionId, chargeId=chargeId)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| extensionId | String | yes | Extension _id |   
+| chargeId | String | yes | Standalone charge _id |  
+
+
+
+Get created subscription charge details
+
+*Returned Response:*
+
+
+
+
+[OneTimeChargeEntity](#OneTimeChargeEntity)
 
 Success
 
@@ -1839,28 +1898,6 @@ Success
 
  
  
- #### [OneTimeCharge](#OneTimeCharge)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | id | String? |  yes  |  |
- | name | String? |  yes  |  |
- | term | String? |  yes  | Brief description for a charge |
- | pricingType | String? |  yes  |  |
- | price | [EntityChargePrice](#EntityChargePrice)? |  yes  |  |
- | cappedAmount | Double? |  yes  |  |
- | activatedOn | String? |  yes  |  |
- | cancelledOn | String? |  yes  |  |
- | billingDate | String? |  yes  |  |
- | status | String? |  yes  |  |
- | isTest | Boolean? |  yes  |  |
- | metadata | HashMap<String,Any>? |  yes  |  |
-
----
-
-
- 
- 
  #### [OneTimeChargeEntity](#OneTimeChargeEntity)
 
  | Properties | Type | Nullable | Description |
@@ -1868,11 +1905,17 @@ Success
  | id | String? |  yes  |  |
  | name | String? |  yes  |  |
  | status | String? |  yes  |  |
- | companyId | Int? |  yes  |  |
  | activatedOn | String? |  yes  |  |
  | cancelledOn | String? |  yes  |  |
  | metadata | HashMap<String,Any>? |  yes  |  |
- | lineItems | ArrayList<[OneTimeCharge](#OneTimeCharge)>? |  yes  |  |
+ | returnUrl | String? |  yes  |  |
+ | isTest | Boolean? |  yes  |  |
+ | pricingType | String? |  yes  |  |
+ | subscriberId | String? |  yes  |  |
+ | entityType | String? |  yes  |  |
+ | entityId | String? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
+ | price | [EntityChargePrice](#EntityChargePrice)? |  yes  |  |
 
 ---
 
@@ -1883,7 +1926,7 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | subscription | [OneTimeChargeEntity](#OneTimeChargeEntity)? |  yes  |  |
+ | charge | [OneTimeChargeEntity](#OneTimeChargeEntity)? |  yes  |  |
  | confirmUrl | String? |  yes  |  |
 
 ---

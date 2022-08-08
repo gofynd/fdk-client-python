@@ -14,7 +14,7 @@ class CreateOneTimeChargeResponse(BaseSchema):
     # Billing swagger.json
 
     
-    subscription = fields.Nested(OneTimeChargeEntity, required=False)
+    charge = fields.Nested(OneTimeChargeEntity, required=False)
     
     confirm_url = fields.Str(required=False)
     
