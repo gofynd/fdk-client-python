@@ -12,23 +12,19 @@ from .ProductListingAction import ProductListingAction
     
 from .ProductBrand import ProductBrand
     
+from .ProductDetailAttribute import ProductDetailAttribute
+    
+from .ProductDetailGroupedAttribute import ProductDetailGroupedAttribute
+    
 from .Price import Price
     
 from .ProductListingPrice import ProductListingPrice
     
 from .CustomMetaFields import CustomMetaFields
     
-from .ProductDetailAttribute import ProductDetailAttribute
-    
-from .ProductDetailGroupedAttribute import ProductDetailGroupedAttribute
-    
 from .ProductDetail import ProductDetail
     
 from .ErrorResponse import ErrorResponse
-    
-from .ProductSizeStores import ProductSizeStores
-    
-from .ProductSize import ProductSize
     
 from .SizeChartValues import SizeChartValues
     
@@ -37,6 +33,10 @@ from .ColumnHeader import ColumnHeader
 from .ColumnHeaders import ColumnHeaders
     
 from .SizeChart import SizeChart
+    
+from .ProductSize import ProductSize
+    
+from .ProductSizeStores import ProductSizeStores
     
 from .ProductSizes import ProductSizes
     
@@ -60,13 +60,13 @@ from .ProductVariantResponse import ProductVariantResponse
     
 from .ProductVariantsResponse import ProductVariantsResponse
     
-from .ProductStockPrice import ProductStockPrice
-    
-from .CompanyDetail import CompanyDetail
+from .StoreDetail import StoreDetail
     
 from .Seller import Seller
     
-from .StoreDetail import StoreDetail
+from .ProductStockPrice import ProductStockPrice
+    
+from .CompanyDetail import CompanyDetail
     
 from .ProductStockStatusItem import ProductStockStatusItem
     
@@ -74,17 +74,17 @@ from .ProductStockStatusResponse import ProductStockStatusResponse
     
 from .ProductStockPolling import ProductStockPolling
     
-from .ProductSortOn import ProductSortOn
-    
-from .ProductVariantListingResponse import ProductVariantListingResponse
-    
-from .ProductListingDetail import ProductListingDetail
-    
 from .ProductFiltersKey import ProductFiltersKey
     
 from .ProductFiltersValue import ProductFiltersValue
     
 from .ProductFilters import ProductFilters
+    
+from .ProductVariantListingResponse import ProductVariantListingResponse
+    
+from .ProductListingDetail import ProductListingDetail
+    
+from .ProductSortOn import ProductSortOn
     
 from .ProductListingResponse import ProductListingResponse
     
@@ -122,15 +122,15 @@ from .AutocompleteItem import AutocompleteItem
     
 from .AutoCompleteResponse import AutoCompleteResponse
     
-from .CollectionQuery import CollectionQuery
-    
-from .GetCollectionDetailNest import GetCollectionDetailNest
+from .CollectionListingFilterType import CollectionListingFilterType
     
 from .CollectionListingFilterTag import CollectionListingFilterTag
     
-from .CollectionListingFilterType import CollectionListingFilterType
-    
 from .CollectionListingFilter import CollectionListingFilter
+    
+from .CollectionQuery import CollectionQuery
+    
+from .GetCollectionDetailNest import GetCollectionDetailNest
     
 from .GetCollectionListingResponse import GetCollectionListingResponse
     
@@ -152,15 +152,15 @@ from .Store import Store
     
 from .StoreListingResponse import StoreListingResponse
     
-from .SellerPhoneNumber import SellerPhoneNumber
+from .StoreDepartments import StoreDepartments
     
-from .CompanyStore import CompanyStore
+from .SellerPhoneNumber import SellerPhoneNumber
     
 from .StoreAddressSerializer import StoreAddressSerializer
     
-from .StoreManagerSerializer import StoreManagerSerializer
+from .CompanyStore import CompanyStore
     
-from .StoreDepartments import StoreDepartments
+from .StoreManagerSerializer import StoreManagerSerializer
     
 from .AppStore import AppStore
     
@@ -174,9 +174,9 @@ from .StoreDetails import StoreDetails
     
 from .Price1 import Price1
     
-from .ProductDetails import ProductDetails
-    
 from .Size import Size
+    
+from .ProductDetails import ProductDetails
     
 from .Products import Products
     
@@ -184,19 +184,19 @@ from .GetGroupedProducts import GetGroupedProducts
     
 from .ProductBundle import ProductBundle
     
-from .ProductStockPriceV2 import ProductStockPriceV2
-    
-from .ArticleAssignmentV2 import ArticleAssignmentV2
+from .StoreV2 import StoreV2
     
 from .SellerV2 import SellerV2
     
-from .ReturnConfigSchemaV2 import ReturnConfigSchemaV2
+from .ProductStockPriceV2 import ProductStockPriceV2
     
 from .DetailsSchemaV2 import DetailsSchemaV2
     
+from .SellerGroupAttributes import SellerGroupAttributes
+    
 from .MarketPlaceSttributesSchemaV2 import MarketPlaceSttributesSchemaV2
     
-from .StoreV2 import StoreV2
+from .ArticleAssignmentV2 import ArticleAssignmentV2
     
 from .ProductSetDistributionSizeV2 import ProductSetDistributionSizeV2
     
@@ -206,7 +206,7 @@ from .ProductSetV2 import ProductSetV2
     
 from .StrategyWiseListingSchemaV2 import StrategyWiseListingSchemaV2
     
-from .SellerGroupAttributes import SellerGroupAttributes
+from .ReturnConfigSchemaV2 import ReturnConfigSchemaV2
     
 from .ProductSizePriceResponseV2 import ProductSizePriceResponseV2
     
@@ -1376,15 +1376,15 @@ from .CreditDetail import CreditDetail
     
 from .CheckCreditResponse import CheckCreditResponse
     
+from .DeviceDetails import DeviceDetails
+    
 from .KYCAddress import KYCAddress
-    
-from .BusinessDetails import BusinessDetails
-    
-from .MarketplaceInfo import MarketplaceInfo
     
 from .UserPersonalInfoInDetails import UserPersonalInfoInDetails
     
-from .DeviceDetails import DeviceDetails
+from .MarketplaceInfo import MarketplaceInfo
+    
+from .BusinessDetails import BusinessDetails
     
 from .CustomerOnboardingRequest import CustomerOnboardingRequest
     

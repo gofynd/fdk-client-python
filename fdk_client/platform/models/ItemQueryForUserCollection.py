@@ -18,8 +18,8 @@ class ItemQueryForUserCollection(BaseSchema):
     
     action = fields.Str(required=False)
     
-    item_id = fields.Int(required=False)
-    
     priority = fields.Int(required=False)
+    
+    item_id = fields.Int(required=False)
     
 
