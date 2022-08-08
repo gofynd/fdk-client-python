@@ -5,33 +5,17 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .UserInfo1 import UserInfo1
 
 
-
-
-
-
-
-from .UserInfo1 import UserInfo1
-
-
+from .CopyFileTask import CopyFileTask
 
 
 class BulkResponse(BaseSchema):
-    # Catalog swagger.json
+    # FileStorage swagger.json
 
     
-    created_by = fields.Nested(UserInfo1, required=False)
+    tracking_url = fields.Str(required=False)
     
-    batch_id = fields.Str(required=False)
-    
-    modified_on = fields.Str(required=False)
-    
-    is_active = fields.Boolean(required=False)
-    
-    modified_by = fields.Nested(UserInfo1, required=False)
-    
-    created_on = fields.Str(required=False)
+    task = fields.Nested(CopyFileTask, required=False)
     
 

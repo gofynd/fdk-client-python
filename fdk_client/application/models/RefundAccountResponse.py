@@ -18,9 +18,9 @@ class RefundAccountResponse(BaseSchema):
     # Payment swagger.json
 
     
-    is_verified_flag = fields.Boolean(required=False)
-    
     message = fields.Str(required=False)
+    
+    is_verified_flag = fields.Boolean(required=False)
     
     success = fields.Boolean(required=False)
     
