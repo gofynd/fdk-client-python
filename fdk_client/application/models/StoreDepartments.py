@@ -26,8 +26,8 @@ class StoreDepartments(BaseSchema):
     
     slug = fields.Str(required=False)
     
-    priority_order = fields.Int(required=False)
-    
     name = fields.Str(required=False)
+    
+    priority_order = fields.Int(required=False)
     
 

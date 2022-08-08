@@ -167,14 +167,14 @@ class CatalogValidator:
         page_size = fields.Int(required=False)
          
     
-    class followById(BaseSchema):
+    class unfollowById(BaseSchema):
         
         collection_type = fields.Str(required=False)
         
         collection_id = fields.Str(required=False)
          
     
-    class unfollowById(BaseSchema):
+    class followById(BaseSchema):
         
         collection_type = fields.Str(required=False)
         
@@ -232,6 +232,13 @@ class CatalogValidator:
         location_id = fields.Int(required=False)
          
     
+    class getProductBundlesBySlug(BaseSchema):
+        
+        slug = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+    
     class getProductPriceBySlug(BaseSchema):
         
         slug = fields.Str(required=False)
@@ -256,12 +263,5 @@ class CatalogValidator:
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
-         
-    
-    class getProductBundlesBySlug(BaseSchema):
-        
-        slug = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
          
     

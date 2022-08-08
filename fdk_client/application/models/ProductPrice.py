@@ -28,10 +28,10 @@ class ProductPrice(BaseSchema):
     
     effective = fields.Float(required=False)
     
+    selling = fields.Float(required=False)
+    
     currency_symbol = fields.Str(required=False)
     
     currency_code = fields.Str(required=False)
-    
-    selling = fields.Float(required=False)
     
 
