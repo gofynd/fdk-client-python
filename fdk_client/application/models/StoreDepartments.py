@@ -20,9 +20,9 @@ class StoreDepartments(BaseSchema):
     # Catalog swagger.json
 
     
-    logo = fields.Str(required=False)
-    
     name = fields.Str(required=False)
+    
+    logo = fields.Str(required=False)
     
     slug = fields.Str(required=False)
     
