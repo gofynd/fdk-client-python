@@ -20,14 +20,14 @@ class ProductStockUnitPriceV2(BaseSchema):
     # Catalog swagger.json
 
     
-    effective = fields.Float(required=False)
+    unit = fields.Str(required=False)
     
-    currency_symbol = fields.Str(required=False)
+    effective = fields.Float(required=False)
     
     currency_code = fields.Str(required=False)
     
-    marked = fields.Float(required=False)
+    currency_symbol = fields.Str(required=False)
     
-    unit = fields.Str(required=False)
+    marked = fields.Float(required=False)
     
 
