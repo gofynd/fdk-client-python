@@ -24,11 +24,11 @@ class AddBeneficiaryDetailsRequest(BaseSchema):
     # Payment swagger.json
 
     
+    transfer_mode = fields.Str(required=False)
+    
     delights = fields.Boolean(required=False)
     
     shipment_id = fields.Str(required=False)
-    
-    transfer_mode = fields.Str(required=False)
     
     details = fields.Nested(BeneficiaryModeDetails, required=False)
     

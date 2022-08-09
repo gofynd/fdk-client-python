@@ -972,9 +972,9 @@ from .ErrorCodeAndDescription import ErrorCodeAndDescription
     
 from .HttpErrorCodeAndResponse import HttpErrorCodeAndResponse
     
-from .PaymentModeLogo import PaymentModeLogo
-    
 from .IntentAppErrorList import IntentAppErrorList
+    
+from .PaymentModeLogo import PaymentModeLogo
     
 from .IntentApp import IntentApp
     
