@@ -7,15 +7,15 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .Page import Page
 
 
-class GetResponse(BaseSchema):
-    # Feedback swagger.json
+
+class SuccessResponse1(BaseSchema):
+    # Catalog swagger.json
 
     
-    data = fields.Dict(required=False)
+    uid = fields.Int(required=False)
     
-    page = fields.Nested(Page, required=False)
+    success = fields.Boolean(required=False)
     
 

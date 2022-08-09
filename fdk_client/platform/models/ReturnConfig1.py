@@ -12,14 +12,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class MediaMeta(BaseSchema):
-    # Feedback swagger.json
+class ReturnConfig1(BaseSchema):
+    # Catalog swagger.json
 
     
-    max_count = fields.Int(required=False)
+    unit = fields.Str(required=False)
     
-    size = fields.Int(required=False)
+    returnable = fields.Boolean(required=False)
     
-    type = fields.Str(required=False)
+    time = fields.Int(required=False)
     
 

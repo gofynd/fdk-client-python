@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class SortMethod(BaseSchema):
-    # Feedback swagger.json
+class ItemQueryForUserCollection(BaseSchema):
+    # Catalog swagger.json
 
     
-    name = fields.Str(required=False)
+    item_id = fields.Int(required=False)
     
-    selected = fields.Boolean(required=False)
-    
-    type = fields.Str(required=False)
+    action = fields.Str(required=False)
     
 

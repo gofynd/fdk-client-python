@@ -8,10 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class InsertResponse(BaseSchema):
-    # Feedback swagger.json
+class ApplicationBrandJson(BaseSchema):
+    # Catalog swagger.json
 
     
-    count = fields.Int(required=False)
+    _custom_json = fields.Dict(required=False)
     
 

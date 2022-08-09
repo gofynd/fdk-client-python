@@ -8,14 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class DeviceMeta(BaseSchema):
-    # Feedback swagger.json
+class ApplicationCategoryJson(BaseSchema):
+    # Catalog swagger.json
 
     
-    app_version = fields.Str(required=False)
-    
-    platform = fields.Str(required=False)
+    _custom_json = fields.Dict(required=False)
     
 

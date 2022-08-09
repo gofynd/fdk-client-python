@@ -943,6 +943,7 @@ Success, the code is valid and returns a SignedUrl
  | image | ArrayList<String>? |  yes  |  |
  | code | String? |  yes  |  |
  | id | Double? |  yes  |  |
+ | sellerIdentifier | String? |  yes  |  |
 
 ---
 
@@ -1129,6 +1130,7 @@ Success, the code is valid and returns a SignedUrl
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | showPromise | Boolean? |  yes  |  |
  | timestamp | [Timestamp](#Timestamp)? |  yes  |  |
 
 ---
@@ -1140,7 +1142,6 @@ Success, the code is valid and returns a SignedUrl
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | showPromise | Boolean? |  yes  |  |
  | min | String? |  yes  |  |
  | max | String? |  yes  |  |
 
@@ -1205,6 +1206,8 @@ Success, the code is valid and returns a SignedUrl
  | beneficiaryDetails | Boolean? |  yes  |  |
  | canReturn | Boolean? |  yes  |  |
  | canBreak | HashMap<String,Any>? |  yes  |  |
+ | showDownloadInvoice | Boolean? |  yes  |  |
+ | showTrackLink | Boolean? |  yes  |  |
  | prices | [Prices](#Prices)? |  yes  |  |
  | needHelpUrl | String? |  yes  |  |
  | shipmentId | String? |  yes  |  |
@@ -1248,6 +1251,7 @@ Success, the code is valid and returns a SignedUrl
  | ---------- | ---- | -------- | ----------- |
  | logo | String? |  yes  |  |
  | mode | String? |  yes  |  |
+ | mop | String? |  yes  |  |
  | status | String? |  yes  |  |
 
 ---

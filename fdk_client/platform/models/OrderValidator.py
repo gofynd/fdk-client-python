@@ -113,6 +113,19 @@ class OrderValidator:
         previous = fields.Str(required=False)
          
     
+    class getOrderDetails(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        order_id = fields.Str(required=False)
+        
+        next = fields.Str(required=False)
+        
+        previous = fields.Str(required=False)
+         
+    
     class getPicklistOrdersByCompanyId(BaseSchema):
         
         company_id = fields.Str(required=False)

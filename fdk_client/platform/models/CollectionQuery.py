@@ -12,18 +12,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class TaxSlab(BaseSchema):
+class CollectionQuery(BaseSchema):
     # Catalog swagger.json
 
     
-    effective_date = fields.Str(required=False)
+    op = fields.Str(required=False)
     
-    threshold = fields.Float(required=False)
+    value = fields.List(fields.Raw(required=False), required=False)
     
-    cess = fields.Float(required=False)
-    
-    rate = fields.Float(required=False)
+    attribute = fields.Str(required=False)
     
 

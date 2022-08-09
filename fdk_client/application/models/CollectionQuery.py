@@ -12,18 +12,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class CompanyStore(BaseSchema):
+class CollectionQuery(BaseSchema):
     # Catalog swagger.json
 
     
-    company_type = fields.Str(required=False)
+    attribute = fields.Str(required=False)
     
-    name = fields.Str(required=False)
+    op = fields.Str(required=False)
     
-    business_type = fields.Str(required=False)
-    
-    uid = fields.Int(required=False)
+    value = fields.List(fields.Raw(required=False), required=False)
     
 

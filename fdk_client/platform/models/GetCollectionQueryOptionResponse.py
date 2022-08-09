@@ -5,6 +5,8 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+
+
 from .ProductFilters import ProductFilters
 
 from .ProductSortOn import ProductSortOn
@@ -13,6 +15,8 @@ from .ProductSortOn import ProductSortOn
 class GetCollectionQueryOptionResponse(BaseSchema):
     # Catalog swagger.json
 
+    
+    operators = fields.Dict(required=False)
     
     filters = fields.List(fields.Nested(ProductFilters, required=False), required=False)
     
