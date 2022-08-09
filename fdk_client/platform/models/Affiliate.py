@@ -7,19 +7,19 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+from .AffiliateConfig import AffiliateConfig
 
 
 
 
-
-class ErrorResponse(BaseSchema):
+class Affiliate(BaseSchema):
     # Order swagger.json
 
     
-    status = fields.Int(required=False)
+    id = fields.Str(required=False)
     
-    error_trace = fields.Str(required=False)
+    config = fields.Nested(AffiliateConfig, required=False)
     
-    message = fields.Str(required=False)
+    token = fields.Str(required=False)
     
 

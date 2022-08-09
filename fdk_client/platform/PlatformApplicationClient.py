@@ -5257,7 +5257,7 @@ class Order:
         self._conf = config
         self.applicationId = applicationId
     
-    async def getOrderDetails(self, order_id=None, next=None, previous=None):
+    async def getOrderDetails1(self, order_id=None, next=None, previous=None):
         """Get Orders
         :param order_id : Order Id : type string
         :param next : Next : type string
@@ -5276,7 +5276,7 @@ class Order:
         
 
         # Parameter validation
-        schema = OrderValidator.getOrderDetails()
+        schema = OrderValidator.getOrderDetails1()
         schema.dump(schema.load(payload))
         
 

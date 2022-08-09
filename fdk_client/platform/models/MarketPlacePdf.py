@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class ErrorResponse(BaseSchema):
+class MarketPlacePdf(BaseSchema):
     # Order swagger.json
 
     
-    status = fields.Int(required=False)
+    label = fields.Str(required=False)
     
-    error_trace = fields.Str(required=False)
-    
-    message = fields.Str(required=False)
+    invoice = fields.Str(required=False)
     
 

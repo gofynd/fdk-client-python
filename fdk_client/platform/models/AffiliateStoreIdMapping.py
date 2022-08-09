@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class ErrorResponse(BaseSchema):
+class AffiliateStoreIdMapping(BaseSchema):
     # Order swagger.json
 
     
-    status = fields.Int(required=False)
+    marketplace_store_id = fields.Str(required=False)
     
-    error_trace = fields.Str(required=False)
-    
-    message = fields.Str(required=False)
+    store_id = fields.Int(required=False)
     
 

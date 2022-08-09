@@ -1368,13 +1368,63 @@ from .GetClickToCallResponse import GetClickToCallResponse
     
 from .ApefaceApiError import ApefaceApiError
     
+from .OrderUser import OrderUser
+    
+from .ArticleDetails import ArticleDetails
+    
+from .ShipmentDetails import ShipmentDetails
+    
+from .LocationDetails import LocationDetails
+    
+from .ShipmentConfig import ShipmentConfig
+    
+from .ShipmentData import ShipmentData
+    
+from .OrderPriority import OrderPriority
+    
+from .UserData import UserData
+    
+from .MarketPlacePdf import MarketPlacePdf
+    
+from .AffiliateBag import AffiliateBag
+    
+from .OrderInfo import OrderInfo
+    
+from .AffiliateInventoryOrderConfig import AffiliateInventoryOrderConfig
+    
+from .AffiliateInventoryStoreConfig import AffiliateInventoryStoreConfig
+    
+from .AffiliateInventoryLogisticsConfig import AffiliateInventoryLogisticsConfig
+    
+from .AffiliateInventoryPaymentConfig import AffiliateInventoryPaymentConfig
+    
+from .AffiliateInventoryArticleAssignmentConfig import AffiliateInventoryArticleAssignmentConfig
+    
+from .AffiliateInventoryConfig import AffiliateInventoryConfig
+    
+from .AffiliateAppConfigMeta import AffiliateAppConfigMeta
+    
+from .AffiliateAppConfig import AffiliateAppConfig
+    
+from .AffiliateConfig import AffiliateConfig
+    
+from .Affiliate import Affiliate
+    
+from .AffiliateStoreIdMapping import AffiliateStoreIdMapping
+    
+from .OrderConfig import OrderConfig
+    
+from .CreateOrderPayload import CreateOrderPayload
+    
+from .CreateOrderResponse import CreateOrderResponse
+    
+from .ErrorResponse import ErrorResponse
+    
 
     
 from .GetSearchWordsData import GetSearchWordsData
     
 from .GetSearchWordsDetailResponse import GetSearchWordsDetailResponse
-    
-from .ErrorResponse import ErrorResponse
     
 from .DeleteResponse import DeleteResponse
     

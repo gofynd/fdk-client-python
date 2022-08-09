@@ -8,18 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
-class ErrorResponse(BaseSchema):
+class AffiliateInventoryOrderConfig(BaseSchema):
     # Order swagger.json
 
     
-    status = fields.Int(required=False)
-    
-    error_trace = fields.Str(required=False)
-    
-    message = fields.Str(required=False)
+    force_reassignment = fields.Boolean(required=False)
     
 

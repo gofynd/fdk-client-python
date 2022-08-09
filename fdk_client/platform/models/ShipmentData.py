@@ -5,21 +5,13 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .ShipmentConfig import ShipmentConfig
 
 
-
-
-
-
-
-class ErrorResponse(BaseSchema):
+class ShipmentData(BaseSchema):
     # Order swagger.json
 
     
-    status = fields.Int(required=False)
-    
-    error_trace = fields.Str(required=False)
-    
-    message = fields.Str(required=False)
+    shipment_data = fields.Nested(ShipmentConfig, required=False)
     
 

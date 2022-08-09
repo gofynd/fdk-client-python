@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class ErrorResponse(BaseSchema):
+class AffiliateAppConfigMeta(BaseSchema):
     # Order swagger.json
 
     
-    status = fields.Int(required=False)
+    name = fields.Str(required=False)
     
-    error_trace = fields.Str(required=False)
-    
-    message = fields.Str(required=False)
+    value = fields.Str(required=False)
     
 
