@@ -22,9 +22,9 @@ class CreateSearchKeyword(BaseSchema):
     
     result = fields.Nested(SearchKeywordResult, required=False)
     
-    app_id = fields.Str(required=False)
-    
     words = fields.List(fields.Str(required=False), required=False)
+    
+    app_id = fields.Str(required=False)
     
     is_active = fields.Boolean(required=False)
     
