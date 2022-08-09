@@ -28,6 +28,6 @@ class BadRequestResponseGenerateBulkItem(BaseSchema):
     
     parameters = fields.Nested(BadRequestResponseGenerateBulkItemParameters, required=False)
     
-    error_message = fields.Str(required=False)
+    message = fields.Str(required=False)
     
 

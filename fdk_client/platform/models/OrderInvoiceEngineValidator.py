@@ -22,6 +22,11 @@ class OrderInvoiceEngineValidator:
         company_id = fields.Int(required=False)
          
     
+    class generateNoc(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    
     class getLabelStatus(BaseSchema):
         
         company_id = fields.Int(required=False)
@@ -29,7 +34,21 @@ class OrderInvoiceEngineValidator:
         uid = fields.Str(required=False)
          
     
+    class getNocStatus(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        uid = fields.Str(required=False)
+         
+    
     class getLabelPresignedURL(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        uid = fields.Str(required=False)
+         
+    
+    class getNocPresignedURL(BaseSchema):
         
         company_id = fields.Int(required=False)
         

@@ -22,11 +22,11 @@ class PriceMeta(BaseSchema):
     
     tp_notes = fields.Dict(required=False)
     
+    transfer = fields.Float(required=False)
+    
     currency = fields.Str(required=False)
     
     marked = fields.Float(required=False)
-    
-    transfer = fields.Float(required=False)
     
     effective = fields.Float(required=False)
     
