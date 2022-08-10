@@ -26,8 +26,8 @@ class CouponValidity(BaseSchema):
     
     display_message_en = fields.Str(required=False)
     
-    valid = fields.Boolean(required=False)
-    
     title = fields.Str(required=False)
+    
+    valid = fields.Boolean(required=False)
     
 

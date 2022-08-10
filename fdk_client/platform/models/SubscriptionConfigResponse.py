@@ -18,8 +18,8 @@ class SubscriptionConfigResponse(BaseSchema):
     
     config = fields.Dict(required=False)
     
-    success = fields.Boolean(required=False)
-    
     aggregator = fields.Str(required=False)
+    
+    success = fields.Boolean(required=False)
     
 
