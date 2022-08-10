@@ -32,9 +32,9 @@ class ConfigurationProductConfig(BaseSchema):
     
     size = fields.Nested(ProductSize, required=False)
     
-    subtitle = fields.Str(required=False)
-    
     title = fields.Str(required=False)
+    
+    subtitle = fields.Str(required=False)
     
     logo = fields.Str(required=False)
     

@@ -26,13 +26,13 @@ class ConfigurationProductVariantConfig(BaseSchema):
     
     display_type = fields.Str(required=False)
     
-    name = fields.Str(required=False)
-    
     is_active = fields.Boolean(required=False)
     
     key = fields.Str(required=False)
     
     priority = fields.Int(required=False)
+    
+    name = fields.Str(required=False)
     
     size = fields.Nested(ProductSize, required=False)
     
