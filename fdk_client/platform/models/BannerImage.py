@@ -10,8 +10,6 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
 class BannerImage(BaseSchema):
     # Catalog swagger.json
 
@@ -19,7 +17,5 @@ class BannerImage(BaseSchema):
     aspect_ratio = fields.Str(required=False)
     
     url = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
     
 
