@@ -5,6 +5,8 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+
+
 from .CommunicationDetails import CommunicationDetails
 
 from .CommunicationDetails import CommunicationDetails
@@ -21,6 +23,8 @@ from .CommunicationDetails import CommunicationDetails
 class SupportGeneralConfig(BaseSchema):
     # Lead swagger.json
 
+    
+    _id = fields.Str(required=False)
     
     support_email = fields.Nested(CommunicationDetails, required=False)
     
