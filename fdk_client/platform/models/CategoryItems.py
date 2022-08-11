@@ -5,6 +5,8 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .Action import Action
+
 
 
 from .Child import Child
@@ -15,23 +17,21 @@ from .Child import Child
 
 from .ImageUrls import ImageUrls
 
-from .Action import Action
-
 
 class CategoryItems(BaseSchema):
     # Catalog swagger.json
 
     
+    action = fields.Nested(Action, required=False)
+    
     slug = fields.Str(required=False)
     
     childs = fields.List(fields.Nested(Child, required=False), required=False)
     
-    uid = fields.Int(required=False)
-    
     name = fields.Str(required=False)
     
-    banners = fields.Nested(ImageUrls, required=False)
+    uid = fields.Int(required=False)
     
-    action = fields.Nested(Action, required=False)
+    banners = fields.Nested(ImageUrls, required=False)
     
 
