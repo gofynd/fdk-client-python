@@ -80,6 +80,7 @@ class TicketSourceEnum(Enum):
 
 
 
+
 class PageType(Enum):
     
     ABOUT_US = "about-us"
@@ -204,7 +205,6 @@ class SubscriberStatus(Enum):
         if value in cls._value2member_map_:
             return None
         raise Exception("Invalid SubscriberStatus type")
-
 
 
 
