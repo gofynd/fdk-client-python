@@ -96,3 +96,25 @@ class CompanyProfileValidator:
         company_id = fields.Str(required=False)
          
     
+    class getCompanyRestrictedCategoryInfo(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+         
+    
+    class getCompanyRestrictedCategoryInfoOfOneType(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+         
+    
+    class createCompanyRestrictedCategoryDocument(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+         
+    
+    class updateCompanyRestrictedCategoryDocument(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        document_id = fields.Str(required=False)
+         
+    

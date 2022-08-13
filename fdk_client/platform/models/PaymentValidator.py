@@ -137,3 +137,8 @@ class PaymentValidator:
         application_id = fields.Str(required=False)
          
     
+    class getPayoutPennyDropAndChequeConfig(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    

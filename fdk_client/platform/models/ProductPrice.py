@@ -26,12 +26,12 @@ class ProductPrice(BaseSchema):
     
     currency_symbol = fields.Str(required=False)
     
-    effective = fields.Float(required=False)
-    
-    marked = fields.Float(required=False)
-    
     selling = fields.Float(required=False)
     
+    effective = fields.Float(required=False)
+    
     currency_code = fields.Str(required=False)
+    
+    marked = fields.Float(required=False)
     
 

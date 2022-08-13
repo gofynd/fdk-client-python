@@ -7,12 +7,6 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .BaseInfo import BaseInfo
-
-
-
-
-
 from .ProductImage import ProductImage
 
 from .ProductAction import ProductAction
@@ -22,15 +16,15 @@ from .ProductAction import ProductAction
 from .CategoryInfo import CategoryInfo
 
 
+
+
+
+from .BaseInfo import BaseInfo
+
+
 class CartProduct(BaseSchema):
     # Cart swagger.json
 
-    
-    type = fields.Str(required=False)
-    
-    brand = fields.Nested(BaseInfo, required=False)
-    
-    uid = fields.Int(required=False)
     
     slug = fields.Str(required=False)
     
@@ -41,5 +35,11 @@ class CartProduct(BaseSchema):
     name = fields.Str(required=False)
     
     categories = fields.List(fields.Nested(CategoryInfo, required=False), required=False)
+    
+    type = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
+    
+    brand = fields.Nested(BaseInfo, required=False)
     
 

@@ -14,13 +14,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
 class ProductFiltersKey(BaseSchema):
     # Catalog swagger.json
 
-    
-    operators = fields.List(fields.Str(required=False), required=False)
     
     display = fields.Str(required=False)
     
