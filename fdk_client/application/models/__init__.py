@@ -624,6 +624,8 @@ from .CodeRequestBodySchema import CodeRequestBodySchema
     
 from .SendResetPasswordEmailRequestSchema import SendResetPasswordEmailRequestSchema
     
+from .SendResetPasswordMobileRequestSchema import SendResetPasswordMobileRequestSchema
+    
 from .PasswordLoginRequestSchema import PasswordLoginRequestSchema
     
 from .SendOtpRequestSchema import SendOtpRequestSchema
