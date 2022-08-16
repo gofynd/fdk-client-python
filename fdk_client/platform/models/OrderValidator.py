@@ -113,7 +113,7 @@ class OrderValidator:
         previous = fields.Str(required=False)
          
     
-    class getOrderDetails1(BaseSchema):
+    class getOrderDetails(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -286,10 +286,5 @@ class OrderValidator:
         caller = fields.Str(required=False)
         
         receiver = fields.Str(required=False)
-         
-    
-    class createOrder(BaseSchema):
-        
-        company_id = fields.Int(required=False)
          
     
