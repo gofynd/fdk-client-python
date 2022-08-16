@@ -8,14 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class ListViewProduct(BaseSchema):
-    # Serviceability swagger.json
+class AffiliateInventoryStoreConfig(BaseSchema):
+    # Order swagger.json
 
     
-    count = fields.Int(required=False)
-    
-    type = fields.Str(required=False)
+    store = fields.Dict(required=False)
     
 

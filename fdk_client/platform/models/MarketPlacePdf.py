@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ZoneSuccessResponse(BaseSchema):
-    # Serviceability swagger.json
+class MarketPlacePdf(BaseSchema):
+    # Order swagger.json
 
     
-    success = fields.Boolean(required=False)
+    label = fields.Str(required=False)
     
-    status_code = fields.Int(required=False)
+    invoice = fields.Str(required=False)
     
 

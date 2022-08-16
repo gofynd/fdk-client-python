@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ZoneProductTypes(BaseSchema):
-    # Serviceability swagger.json
+class AffiliateInventoryPaymentConfig(BaseSchema):
+    # Order swagger.json
 
     
-    tags = fields.List(fields.Str(required=False), required=False)
+    mode_of_payment = fields.Str(required=False)
     
-    type = fields.Str(required=False)
+    source = fields.Str(required=False)
     
 

@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class ServiceabilityrErrorResponse(BaseSchema):
-    # Serviceability swagger.json
+class AffiliateAppConfigMeta(BaseSchema):
+    # Order swagger.json
 
     
     value = fields.Str(required=False)
     
-    type = fields.Str(required=False)
-    
-    message = fields.Str(required=False)
+    name = fields.Str(required=False)
     
 

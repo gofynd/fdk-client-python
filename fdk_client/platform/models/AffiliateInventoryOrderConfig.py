@@ -8,14 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class ListViewChannels(BaseSchema):
-    # Serviceability swagger.json
+class AffiliateInventoryOrderConfig(BaseSchema):
+    # Order swagger.json
 
     
-    channel_id = fields.Str(required=False)
-    
-    channel_type = fields.Str(required=False)
+    force_reassignment = fields.Boolean(required=False)
     
 

@@ -5,17 +5,13 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .ShipmentConfig import ShipmentConfig
 
 
-
-
-
-class GetZoneFromPincodeViewRequest(BaseSchema):
-    # Serviceability swagger.json
+class ShipmentData(BaseSchema):
+    # Order swagger.json
 
     
-    country = fields.Str(required=False)
-    
-    pincode = fields.Str(required=False)
+    shipment_data = fields.Nested(ShipmentConfig, required=False)
     
 
