@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
 class ItemQueryForUserCollection(BaseSchema):
     # Catalog swagger.json
 
     
-    action = fields.Str(required=False)
-    
-    priority = fields.Int(required=False)
-    
     item_id = fields.Int(required=False)
+    
+    action = fields.Str(required=False)
     
 
