@@ -298,3 +298,8 @@ class OrderValidator:
         company_id = fields.Int(required=False)
          
     
+    class reassignLocation(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    
