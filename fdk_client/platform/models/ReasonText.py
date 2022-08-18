@@ -1,4 +1,4 @@
-"""Application Models."""
+"""Platform Models."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -8,10 +8,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class UnArchiveUserSuccess(BaseSchema):
-    # User swagger.json
+
+
+class ReasonText(BaseSchema):
+    # Order swagger.json
 
     
-    success = fields.Boolean(required=False)
+    id = fields.Int(required=False)
+    
+    text = fields.Str(required=False)
     
 

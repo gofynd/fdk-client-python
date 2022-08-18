@@ -293,12 +293,22 @@ class OrderValidator:
         company_id = fields.Int(required=False)
          
     
+    class updateShipmentStatus(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    
     class invalidateShipmentCache(BaseSchema):
         
         company_id = fields.Int(required=False)
          
     
     class reassignLocation(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    
+    class updateShipmentLock(BaseSchema):
         
         company_id = fields.Int(required=False)
          

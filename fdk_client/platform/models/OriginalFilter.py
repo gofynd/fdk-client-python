@@ -8,10 +8,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class UnArchiveUserSuccess(BaseSchema):
-    # User swagger.json
+
+
+class OriginalFilter(BaseSchema):
+    # Order swagger.json
 
     
-    success = fields.Boolean(required=False)
+    affiliate_shipment_id = fields.Str(required=False)
+    
+    affiliate_id = fields.Str(required=False)
     
 

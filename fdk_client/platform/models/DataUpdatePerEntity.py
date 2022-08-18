@@ -1,4 +1,4 @@
-"""Application Models."""
+"""Platform Models."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -8,10 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class DeleteAccountConsent(BaseSchema):
-    # User swagger.json
+class DataUpdatePerEntity(BaseSchema):
+    # Order swagger.json
 
     
-    consent_text = fields.Str(required=False)
+    entity_id = fields.Dict(required=False)
     
 
