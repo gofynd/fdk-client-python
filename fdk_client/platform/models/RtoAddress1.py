@@ -15,6 +15,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+from .StoreAddress import StoreAddress
 
 
 
@@ -28,19 +29,38 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class CompanyAddress(BaseSchema):
+
+
+
+
+
+
+
+
+
+
+
+class RtoAddress1(BaseSchema):
     # Order swagger.json
 
     
     latitude = fields.Float(required=False)
     
-    pincode = fields.Int(required=False)
+    code = fields.Str(required=False)
     
-    country_code = fields.Str(required=False)
+    phone = fields.Str(required=False)
+    
+    pincode = fields.Str(required=False)
+    
+    location_type = fields.Str(required=False)
+    
+    store_address_json = fields.Nested(StoreAddress, required=False)
     
     city = fields.Str(required=False)
     
-    landmark = fields.Str(required=False)
+    contact_person = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
     
     address1 = fields.Str(required=False)
     
@@ -48,10 +68,14 @@ class CompanyAddress(BaseSchema):
     
     address2 = fields.Str(required=False)
     
-    address_type = fields.Str(required=False)
+    store_email = fields.Str(required=False)
     
     country = fields.Str(required=False)
     
     state = fields.Str(required=False)
+    
+    rtoa_id = fields.Int(required=False)
+    
+    company_id = fields.Int(required=False)
     
 

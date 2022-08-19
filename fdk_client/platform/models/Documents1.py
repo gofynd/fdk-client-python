@@ -22,8 +22,8 @@ class Documents1(BaseSchema):
     
     cin = fields.Nested(Document, required=False)
     
-    gst = fields.Nested(Document, required=False)
-    
     pan = fields.Nested(Document, required=False)
+    
+    gst = fields.Nested(Document, required=False)
     
 
