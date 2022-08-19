@@ -24,7 +24,7 @@ class RootPaymentMode(BaseSchema):
     # Payment swagger.json
 
     
-    display_name = fields.Str(required=False)
+    add_card_enabled = fields.Boolean(required=False)
     
     anonymous_enable = fields.Boolean(required=False)
     
@@ -34,8 +34,8 @@ class RootPaymentMode(BaseSchema):
     
     name = fields.Str(required=False)
     
-    aggregator_name = fields.Str(required=False)
+    display_name = fields.Str(required=False)
     
-    add_card_enabled = fields.Boolean(required=False)
+    aggregator_name = fields.Str(required=False)
     
 

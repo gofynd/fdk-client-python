@@ -5,7 +5,9 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .CollectionQuery import CollectionQuery
 
+from .ItemQueryForUserCollection import ItemQueryForUserCollection
 
 
 
@@ -14,8 +16,10 @@ class CollectionItemRequest(BaseSchema):
     # Catalog swagger.json
 
     
-    page_no = fields.Int(required=False)
+    query = fields.List(fields.Nested(CollectionQuery, required=False), required=False)
     
-    page_size = fields.Int(required=False)
+    item = fields.List(fields.Nested(ItemQueryForUserCollection, required=False), required=False)
+    
+    type = fields.Str(required=False)
     
 

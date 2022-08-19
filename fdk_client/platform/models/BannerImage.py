@@ -10,9 +10,13 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 class BannerImage(BaseSchema):
     # Catalog swagger.json
 
+    
+    type = fields.Str(required=False)
     
     aspect_ratio = fields.Str(required=False)
     
