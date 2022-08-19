@@ -18,9 +18,9 @@ class AbandonedCartResponse(BaseSchema):
     # Cart swagger.json
 
     
-    success = fields.Boolean(required=False)
-    
     message = fields.Str(required=False)
+    
+    success = fields.Boolean(required=False)
     
     page = fields.Nested(Page, required=False)
     
