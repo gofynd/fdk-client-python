@@ -49,6 +49,8 @@ from .Invoice import Invoice
 
 
 
+
+
 from .Promise import Promise
 
 from .FulfillingStore import FulfillingStore
@@ -115,6 +117,8 @@ class Shipments(BaseSchema):
     invoice = fields.Nested(Invoice, required=False)
     
     comment = fields.Str(required=False)
+    
+    refund_details = fields.Dict(required=False)
     
     order_type = fields.Str(required=False)
     

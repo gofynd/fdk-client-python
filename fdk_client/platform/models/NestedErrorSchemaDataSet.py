@@ -12,14 +12,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class FilterDict(BaseSchema):
+class NestedErrorSchemaDataSet(BaseSchema):
     # Orders swagger.json
 
     
-    text = fields.Str(required=False)
-    
     value = fields.Str(required=False)
     
-    name = fields.Str(required=False)
+    type = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
     
 

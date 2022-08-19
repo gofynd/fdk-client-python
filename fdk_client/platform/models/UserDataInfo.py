@@ -26,9 +26,9 @@ class UserDataInfo(BaseSchema):
     # Orders swagger.json
 
     
-    uid = fields.Int(required=False)
+    is_anonymous_user = fields.Boolean(required=False)
     
-    avis_user_id = fields.Str(required=False)
+    uid = fields.Int(required=False)
     
     mobile = fields.Str(required=False)
     
@@ -40,6 +40,6 @@ class UserDataInfo(BaseSchema):
     
     first_name = fields.Str(required=False)
     
-    is_anonymous_user = fields.Boolean(required=False)
+    avis_user_id = fields.Str(required=False)
     
 

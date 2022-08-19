@@ -17,6 +17,7 @@ Handles Platform websites OMS
 * [sendOtpToShipmentCustomer](#sendotptoshipmentcustomer)
 * [verifyOtpShipmentCustomer](#verifyotpshipmentcustomer)
 * [getInvoiceByShipmentId](#getinvoicebyshipmentid)
+* [getCreditNoteByShipmentId](#getcreditnotebyshipmentid)
 
 
 
@@ -658,6 +659,63 @@ Success, the code is valid and returns a SignedUrl
 ---
 
 
+### getCreditNoteByShipmentId
+Get Credit Note URL
+
+
+
+
+```python
+try:
+    result = await client.order.getCreditNoteByShipmentId(shipmentId=shipmentId)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| shipmentId | String | yes | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. |  
+
+
+
+Use this API to get a generated Credit Note URL for viewing or download.
+
+*Returned Response:*
+
+
+
+
+[ResponseGetCreditNoteShipment](#ResponseGetCreditNoteShipment)
+
+Success, the code is valid and returns a SignedUrl
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
 
 ### Schemas
 
@@ -732,6 +790,20 @@ Success, the code is valid and returns a SignedUrl
  | ---------- | ---- | -------- | ----------- |
  | requestId | String |  no  |  |
  | otpCode | String |  no  |  |
+
+---
+
+
+ 
+ 
+ #### [ResponseGetCreditNoteShipment](#ResponseGetCreditNoteShipment)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | success | Boolean |  no  |  |
+ | presignedType | String |  no  |  |
+ | shipmentId | String |  no  |  |
+ | presignedUrl | String |  no  |  |
 
 ---
 
@@ -1220,6 +1292,7 @@ Success, the code is valid and returns a SignedUrl
  | deliveryAddress | [DeliveryAddress](#DeliveryAddress)? |  yes  |  |
  | invoice | [Invoice](#Invoice)? |  yes  |  |
  | comment | String? |  yes  |  |
+ | refundDetails | HashMap<String,Any>? |  yes  |  |
  | orderType | String? |  yes  |  |
  | promise | [Promise](#Promise)? |  yes  |  |
  | fulfillingStore | [FulfillingStore](#FulfillingStore)? |  yes  |  |

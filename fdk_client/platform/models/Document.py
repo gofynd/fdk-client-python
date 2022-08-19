@@ -24,10 +24,10 @@ class Document(BaseSchema):
     
     type = fields.Str(required=False)
     
-    verified = fields.Boolean(required=False)
+    value = fields.Str(required=False)
     
     url = fields.Str(required=False)
     
-    value = fields.Str(required=False)
+    verified = fields.Boolean(required=False)
     
 

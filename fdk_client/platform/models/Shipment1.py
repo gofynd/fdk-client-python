@@ -9,9 +9,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 from .ShipmentPricesDataSet import ShipmentPricesDataSet
-
-
 
 
 
@@ -24,13 +24,13 @@ class Shipment1(BaseSchema):
     
     total_items = fields.Str(required=False)
     
-    shipment_status = fields.Str(required=False)
-    
-    prices = fields.Nested(ShipmentPricesDataSet, required=False)
-    
     order_id = fields.Str(required=False)
     
     shipment_id = fields.Str(required=False)
+    
+    prices = fields.Nested(ShipmentPricesDataSet, required=False)
+    
+    shipment_status = fields.Str(required=False)
     
     rtd_done = fields.Str(required=False)
     

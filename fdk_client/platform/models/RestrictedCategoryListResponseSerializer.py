@@ -7,9 +7,9 @@ from ..models.BaseSchema import BaseSchema
 
 from .RestrictedCategoryResponseSerializer import RestrictedCategoryResponseSerializer
 
+
+
 from .Page import Page
-
-
 
 
 class RestrictedCategoryListResponseSerializer(BaseSchema):
@@ -18,8 +18,8 @@ class RestrictedCategoryListResponseSerializer(BaseSchema):
     
     items = fields.List(fields.Nested(RestrictedCategoryResponseSerializer, required=False), required=False)
     
-    page = fields.Nested(Page, required=False)
-    
     declaration_template = fields.Dict(required=False)
+    
+    page = fields.Nested(Page, required=False)
     
 
