@@ -9,13 +9,13 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
+
+
 from .ProductListingAction import ProductListingAction
 
-
-
 from .ImageUrls import ImageUrls
-
-
 
 
 
@@ -28,14 +28,14 @@ class ThirdLevelChild(BaseSchema):
     
     childs = fields.List(fields.Dict(required=False), required=False)
     
-    action = fields.Nested(ProductListingAction, required=False)
-    
     uid = fields.Int(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    action = fields.Nested(ProductListingAction, required=False)
     
     banners = fields.Nested(ImageUrls, required=False)
     
     name = fields.Str(required=False)
-    
-    slug = fields.Str(required=False)
     
 
