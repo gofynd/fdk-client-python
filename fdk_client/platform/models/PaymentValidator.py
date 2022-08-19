@@ -137,3 +137,17 @@ class PaymentValidator:
         application_id = fields.Str(required=False)
          
     
+    class getPosPaymentModeRoutes(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+    
+    class getPosPaymentModeRoutes(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+    
