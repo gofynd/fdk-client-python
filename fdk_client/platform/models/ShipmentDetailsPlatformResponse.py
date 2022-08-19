@@ -1,0 +1,237 @@
+"""Platform Models."""
+
+from marshmallow import fields, Schema
+from marshmallow.validate import OneOf
+from ..enums import *
+from ..models.BaseSchema import BaseSchema
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+from .OrderObj import OrderObj
+
+from .Company1 import Company1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+from .Store1 import Store1
+
+
+
+from .ShipmentGST import ShipmentGST
+
+from .CurrentShipmentStatus import CurrentShipmentStatus
+
+
+
+from .ShipmentProduct import ShipmentProduct
+
+from .DPDetails import DPDetails
+
+from .Bag import Bag
+
+from .UserObj import UserObj
+
+from .ShipmentStatusCommon import ShipmentStatusCommon
+
+from .ShipmentPayments import ShipmentPayments
+
+from .ShipmentInvoice1 import ShipmentInvoice1
+
+from .ShipmentPrices1 import ShipmentPrices1
+
+
+
+
+
+
+
+
+
+from .Brand import Brand
+
+from .EinvoiceInfo import EinvoiceInfo
+
+from .RTOAddress import RTOAddress
+
+
+
+from .BagStatusHistory import BagStatusHistory
+
+from .ShipmentDetails1 import ShipmentDetails1
+
+from .DeliveryAddress import DeliveryAddress
+
+
+
+from .RequestedDPConfs import RequestedDPConfs
+
+from .AffiliateDetails import AffiliateDetails
+
+
+
+
+
+from .Store1 import Store1
+
+
+
+
+
+
+
+
+
+
+class ShipmentDetailsPlatformResponse(BaseSchema):
+    # Order swagger.json
+
+    
+    no_of_bags_order = fields.Int(required=False)
+    
+    is_processing = fields.Boolean(required=False)
+    
+    restore_promos = fields.Dict(required=False)
+    
+    comment = fields.Str(required=False)
+    
+    shipment_update_time = fields.Float(required=False)
+    
+    shipment_id = fields.Str(required=False)
+    
+    qc_required = fields.Raw(required=False)
+    
+    journey_type = fields.Str(required=False)
+    
+    lock_status = fields.Boolean(required=False)
+    
+    original_bag_list = fields.List(fields.Int(required=False), required=False)
+    
+    order = fields.Nested(OrderObj, required=False)
+    
+    company = fields.Nested(Company1, required=False)
+    
+    order_value = fields.Float(required=False)
+    
+    payment_methods = fields.Dict(required=False)
+    
+    search_key = fields.Dict(required=False)
+    
+    weight = fields.Dict(required=False)
+    
+    s_id = fields.Str(required=False)
+    
+    tags = fields.List(fields.Str(required=False), required=False)
+    
+    shipment_quantity = fields.Int(required=False)
+    
+    transaction_type = fields.Str(required=False)
+    
+    shipment_value = fields.Float(required=False)
+    
+    cart_id = fields.Int(required=False)
+    
+    fulfilling_store = fields.Nested(Store1, required=False)
+    
+    payment_type = fields.Str(required=False)
+    
+    shipment_gst = fields.Nested(ShipmentGST, required=False)
+    
+    shipment_status = fields.Nested(CurrentShipmentStatus, required=False)
+    
+    total_shipments_in_order = fields.Int(required=False)
+    
+    products = fields.List(fields.Nested(ShipmentProduct, required=False), required=False)
+    
+    dp_details = fields.Nested(DPDetails, required=False)
+    
+    bags = fields.List(fields.Nested(Bag, required=False), required=False)
+    
+    user = fields.Nested(UserObj, required=False)
+    
+    shipment_status_history = fields.List(fields.Nested(ShipmentStatusCommon, required=False), required=False)
+    
+    payments = fields.Nested(ShipmentPayments, required=False)
+    
+    invoice = fields.Nested(ShipmentInvoice1, required=False)
+    
+    prices = fields.Nested(ShipmentPrices1, required=False)
+    
+    total_shipment_bags = fields.Int(required=False)
+    
+    article_details = fields.Dict(required=False)
+    
+    fallback_user = fields.Dict(required=False)
+    
+    app_id = fields.Str(required=False)
+    
+    brand = fields.Nested(Brand, required=False)
+    
+    einvoice_info = fields.Nested(EinvoiceInfo, required=False)
+    
+    rto_address = fields.Nested(RTOAddress, required=False)
+    
+    order_type = fields.Str(required=False)
+    
+    bag_status_history = fields.List(fields.Nested(BagStatusHistory, required=False), required=False)
+    
+    shipment = fields.Nested(ShipmentDetails1, required=False)
+    
+    delivery_address = fields.Nested(DeliveryAddress, required=False)
+    
+    order_source = fields.Str(required=False)
+    
+    requested_dp_conf = fields.Nested(RequestedDPConfs, required=False)
+    
+    affiliate_details = fields.Nested(AffiliateDetails, required=False)
+    
+    delivery_slot = fields.Dict(required=False)
+    
+    operational_status = fields.Str(required=False)
+    
+    ordering_store = fields.Nested(Store1, required=False)
+    
+    order_integration_id = fields.Str(required=False)
+    
+    coupon = fields.Dict(required=False)
+    
+    fyndstore_emp = fields.Dict(required=False)
+    
+    restore_coupon = fields.Boolean(required=False)
+    
+

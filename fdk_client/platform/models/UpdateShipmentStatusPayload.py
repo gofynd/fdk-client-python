@@ -7,9 +7,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 from .EntitiesDetail import EntitiesDetail
-
-
 
 
 
@@ -20,9 +20,9 @@ class UpdateShipmentStatusPayload(BaseSchema):
     
     lock_after_transition = fields.Boolean(required=False)
     
-    entities = fields.Nested(EntitiesDetail, required=False)
-    
     process_in_background = fields.Boolean(required=False)
+    
+    entities = fields.Nested(EntitiesDetail, required=False)
     
     unlock_before_transition = fields.Boolean(required=False)
     

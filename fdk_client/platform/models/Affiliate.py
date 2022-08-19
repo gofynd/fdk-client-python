@@ -18,8 +18,8 @@ class Affiliate(BaseSchema):
     
     config = fields.Nested(AffiliateConfig, required=False)
     
-    id = fields.Str(required=False)
-    
     token = fields.Str(required=False)
+    
+    id = fields.Str(required=False)
     
 
