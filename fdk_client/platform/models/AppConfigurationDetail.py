@@ -28,9 +28,15 @@ class AppConfigurationDetail(BaseSchema):
     # Catalog swagger.json
 
     
-    app_id = fields.Str(required=False)
+    name = fields.Str(required=False)
     
     attributes = fields.List(fields.Nested(AttributeDetailsGroup, required=False), required=False)
+    
+    logo = fields.Str(required=False)
+    
+    app_id = fields.Str(required=False)
+    
+    template_slugs = fields.List(fields.Str(required=False), required=False)
     
     slug = fields.Str(required=False)
     
@@ -38,12 +44,6 @@ class AppConfigurationDetail(BaseSchema):
     
     is_default = fields.Boolean(required=False)
     
-    name = fields.Str(required=False)
-    
-    logo = fields.Str(required=False)
-    
     priority = fields.Int(required=False)
-    
-    template_slugs = fields.List(fields.Str(required=False), required=False)
     
 

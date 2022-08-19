@@ -5,6 +5,8 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .EntityTransitionError import EntityTransitionError
+
 
 
 
@@ -12,6 +14,8 @@ class UpdateShipmentStatusResponse1(BaseSchema):
     # Order swagger.json
 
     
-    message = fields.List(fields.Dict(required=False), required=False)
+    error_entities = fields.List(fields.Nested(EntityTransitionError, required=False), required=False)
+    
+    status = fields.Boolean(required=False)
     
 

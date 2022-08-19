@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class ItemQuery(BaseSchema):
-    # Catalog swagger.json
+class EntityTransitionError(BaseSchema):
+    # Order swagger.json
 
     
-    item_code = fields.Str(required=False)
+    error = fields.Str(required=False)
     
-    uid = fields.Int(required=False)
-    
-    brand_uid = fields.Int(required=False)
+    shipment_id = fields.Str(required=False)
     
 

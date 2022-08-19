@@ -14,8 +14,8 @@ class ReasonText(BaseSchema):
     # Order swagger.json
 
     
-    id = fields.Int(required=False)
-    
     text = fields.Str(required=False)
+    
+    id = fields.Int(required=False)
     
 
