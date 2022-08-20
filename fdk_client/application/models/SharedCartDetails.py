@@ -20,9 +20,9 @@ class SharedCartDetails(BaseSchema):
     # Cart swagger.json
 
     
-    meta = fields.Dict(required=False)
-    
     token = fields.Str(required=False)
+    
+    meta = fields.Dict(required=False)
     
     created_on = fields.Str(required=False)
     

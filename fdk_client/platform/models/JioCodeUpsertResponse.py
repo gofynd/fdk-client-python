@@ -24,10 +24,10 @@ class JioCodeUpsertResponse(BaseSchema):
     
     error = fields.List(fields.Nested(NestedErrorSchemaDataSet, required=False), required=False)
     
-    trace_id = fields.Str(required=False)
+    identifier = fields.Str(required=False)
     
     success = fields.Boolean(required=False)
     
-    identifier = fields.Str(required=False)
+    trace_id = fields.Str(required=False)
     
 

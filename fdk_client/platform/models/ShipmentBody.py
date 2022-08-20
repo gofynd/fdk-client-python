@@ -18,12 +18,12 @@ class ShipmentBody(BaseSchema):
     # OrderManage swagger.json
 
     
-    store_invoice_id = fields.Str(required=False)
-    
     reason = fields.List(fields.Int(required=False), required=False)
+    
+    data_update = fields.Dict(required=False)
     
     products = fields.List(fields.Nested(ProductDetail, required=False), required=False)
     
-    data_update = fields.Dict(required=False)
+    store_invoice_id = fields.Str(required=False)
     
 
