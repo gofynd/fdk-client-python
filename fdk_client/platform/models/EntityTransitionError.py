@@ -14,8 +14,8 @@ class EntityTransitionError(BaseSchema):
     # Order swagger.json
 
     
-    error = fields.Str(required=False)
-    
     shipment_id = fields.Str(required=False)
+    
+    error = fields.Str(required=False)
     
 

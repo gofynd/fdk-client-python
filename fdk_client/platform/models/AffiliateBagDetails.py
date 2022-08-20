@@ -7,11 +7,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
+
+
 from .AffiliateMeta import AffiliateMeta
-
-
-
-
 
 
 
@@ -20,14 +20,14 @@ class AffiliateBagDetails(BaseSchema):
     # Order swagger.json
 
     
-    loyalty_discount = fields.Float(required=False)
-    
-    affiliate_meta = fields.Nested(AffiliateMeta, required=False)
-    
     affiliate_order_id = fields.Str(required=False)
     
     affiliate_bag_id = fields.Str(required=False)
     
     employee_discount = fields.Float(required=False)
+    
+    affiliate_meta = fields.Nested(AffiliateMeta, required=False)
+    
+    loyalty_discount = fields.Float(required=False)
     
 
