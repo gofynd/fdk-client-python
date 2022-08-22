@@ -9,11 +9,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
+
+
 from .CheckCart import CheckCart
-
-
-
-
 
 
 
@@ -26,13 +26,7 @@ class CartCheckoutResponse(BaseSchema):
     # Cart swagger.json
 
     
-    callback_url = fields.Str(required=False)
-    
-    success = fields.Boolean(required=False)
-    
-    cart = fields.Nested(CheckCart, required=False)
-    
-    app_intercept_url = fields.Str(required=False)
+    order_id = fields.Str(required=False)
     
     payment_confirm_url = fields.Str(required=False)
     
@@ -40,6 +34,12 @@ class CartCheckoutResponse(BaseSchema):
     
     message = fields.Str(required=False)
     
-    order_id = fields.Str(required=False)
+    cart = fields.Nested(CheckCart, required=False)
+    
+    app_intercept_url = fields.Str(required=False)
+    
+    success = fields.Boolean(required=False)
+    
+    callback_url = fields.Str(required=False)
     
 
