@@ -19,11 +19,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
+
+
 from .Products import Products
-
-
-
-
 
 
 class GetGroupedProducts(BaseSchema):
@@ -32,22 +32,22 @@ class GetGroupedProducts(BaseSchema):
     
     logo = fields.Str(required=False)
     
-    choice = fields.Str(required=False)
-    
-    company_id = fields.Int(required=False)
-    
-    meta = fields.Dict(required=False)
+    same_store_assignment = fields.Boolean(required=False)
     
     page_visibility = fields.List(fields.Str(required=False), required=False)
     
-    same_store_assignment = fields.Boolean(required=False)
+    meta = fields.Dict(required=False)
+    
+    active = fields.Boolean(required=False)
+    
+    company_id = fields.Int(required=False)
+    
+    name = fields.Str(required=False)
+    
+    choice = fields.Str(required=False)
     
     slug = fields.Str(required=False)
     
     products = fields.List(fields.Nested(Products, required=False), required=False)
-    
-    active = fields.Boolean(required=False)
-    
-    name = fields.Str(required=False)
     
 

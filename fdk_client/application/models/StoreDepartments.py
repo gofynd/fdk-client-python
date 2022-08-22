@@ -26,8 +26,8 @@ class StoreDepartments(BaseSchema):
     
     uid = fields.Int(required=False)
     
-    slug = fields.Str(required=False)
-    
     name = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
     
 
