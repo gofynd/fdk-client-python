@@ -8,18 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
-class ArticleQuery(BaseSchema):
+class ApplicationCategoryJson(BaseSchema):
     # Catalog swagger.json
 
     
-    ignored_stores = fields.List(fields.Int(required=False), required=False)
-    
-    size = fields.Str(required=False)
-    
-    item_id = fields.Int(required=False)
+    _custom_json = fields.Dict(required=False)
     
 

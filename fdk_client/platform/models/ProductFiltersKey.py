@@ -14,6 +14,8 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 class ProductFiltersKey(BaseSchema):
     # Catalog swagger.json
 
@@ -21,6 +23,8 @@ class ProductFiltersKey(BaseSchema):
     name = fields.Str(required=False)
     
     kind = fields.Str(required=False)
+    
+    operators = fields.List(fields.Str(required=False), required=False)
     
     logo = fields.Str(required=False)
     
