@@ -13,7 +13,7 @@ class UserValidator:
         
         application_id = fields.Str(required=False)
         
-        q = fields.Dict(required=False)
+        q = fields.Str(required=False)
         
         page_size = fields.Int(required=False)
         
@@ -26,7 +26,7 @@ class UserValidator:
         
         application_id = fields.Str(required=False)
         
-        q = fields.Str(required=False)
+        q = fields.Dict(required=False)
          
     
     class createUser(BaseSchema):

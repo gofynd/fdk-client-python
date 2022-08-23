@@ -26,8 +26,8 @@ class TransferItemsDetails(BaseSchema):
     
     name = fields.Str(required=False)
     
-    display_name = fields.Str(required=False)
-    
     logo_large = fields.Str(required=False)
+    
+    display_name = fields.Str(required=False)
     
 
