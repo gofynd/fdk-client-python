@@ -36,11 +36,9 @@ class ProductFiltersValue(BaseSchema):
     
     display_format = fields.Str(required=False)
     
-    max = fields.Int(required=False)
+    value = fields.Raw(required=False)
     
-    min = fields.Int(required=False)
-    
-    selected_max = fields.Int(required=False)
+    is_selected = fields.Boolean(required=False)
     
     currency_symbol = fields.Str(required=False)
     
@@ -48,14 +46,16 @@ class ProductFiltersValue(BaseSchema):
     
     display = fields.Str(required=False)
     
-    count = fields.Int(required=False)
+    query_format = fields.Str(required=False)
+    
+    min = fields.Int(required=False)
     
     selected_min = fields.Int(required=False)
     
-    value = fields.Raw(required=False)
+    max = fields.Int(required=False)
     
-    is_selected = fields.Boolean(required=False)
+    count = fields.Int(required=False)
     
-    query_format = fields.Str(required=False)
+    selected_max = fields.Int(required=False)
     
 

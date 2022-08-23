@@ -14,8 +14,8 @@ class DocumentObject(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    unverified = fields.Int(required=False)
-    
     correction_requested = fields.Int(required=False)
+    
+    unverified = fields.Int(required=False)
     
 

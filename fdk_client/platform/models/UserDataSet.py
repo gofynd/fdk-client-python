@@ -20,9 +20,9 @@ class UserDataSet(BaseSchema):
     
     gender = fields.Str(required=False)
     
-    email = fields.Str(required=False)
-    
     name = fields.Str(required=False)
+    
+    email = fields.Str(required=False)
     
     mobile = fields.Int(required=False)
     
