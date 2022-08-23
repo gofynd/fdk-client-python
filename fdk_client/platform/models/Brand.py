@@ -5,7 +5,27 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .Logo import Logo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -13,13 +33,33 @@ from .Logo import Logo
 
 
 class Brand(BaseSchema):
-    # Catalog swagger.json
+    # Order swagger.json
 
     
-    logo = fields.Nested(Logo, required=False)
+    is_virtual_invoice = fields.Boolean(required=False)
     
-    name = fields.Str(required=False)
+    pickup_location = fields.Str(required=False)
     
-    uid = fields.Int(required=False)
+    brand_id = fields.Int(required=False)
+    
+    invoice_prefix = fields.Str(required=False)
+    
+    logo = fields.Str(required=False)
+    
+    start_date = fields.Str(required=False)
+    
+    created_on = fields.Int(required=False)
+    
+    script_last_ran = fields.Str(required=False)
+    
+    company = fields.Str(required=False)
+    
+    brand_name = fields.Str(required=False)
+    
+    modified_on = fields.Int(required=False)
+    
+    credit_note_allowed = fields.Boolean(required=False)
+    
+    credit_note_expiry_days = fields.Int(required=False)
     
 

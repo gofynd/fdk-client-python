@@ -7,6 +7,7 @@ from ..common.utils import create_url_with_params, create_query_string, get_head
 
 from .models.CommonValidator import CommonValidator
 from .models.LeadValidator import LeadValidator
+from .models.FeedbackValidator import FeedbackValidator
 from .models.ThemeValidator import ThemeValidator
 from .models.UserValidator import UserValidator
 from .models.ContentValidator import ContentValidator
@@ -450,6 +451,11 @@ class Lead:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/lead/v1.0/company/{self._conf.companyId}/general-config", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+    
+
+class Feedback:
+    def __init__(self, config):
+        self._conf = config
     
 
 class Theme:
@@ -1920,6 +1926,218 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/update-shipment-status", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+    
+    async def getShipmentDetailsById(self, shipment_id=None):
+        """
+        :param shipment_id :  : type string
+        """
+        payload = {}
+        
+        if shipment_id:
+            payload["shipment_id"] = shipment_id
+        
+
+        # Parameter validation
+        schema = OrderValidator.getShipmentDetailsById()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipment-details", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"query","name":"shipment_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"in":"query","name":"shipment_id","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", shipment_id=shipment_id)
+        query_string = await create_query_string(shipment_id=shipment_id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipment-details", shipment_id=shipment_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+    
+    async def getShipmentsByShipmentIds(self, shipment_ids=None, page_no=None, page_size=None):
+        """
+        :param shipment_ids :  : type string
+        :param page_no :  : type integer
+        :param page_size :  : type integer
+        """
+        payload = {}
+        
+        if shipment_ids:
+            payload["shipment_ids"] = shipment_ids
+        
+        if page_no:
+            payload["page_no"] = page_no
+        
+        if page_size:
+            payload["page_size"] = page_size
+        
+
+        # Parameter validation
+        schema = OrderValidator.getShipmentsByShipmentIds()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipments", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"query","name":"shipment_ids","required":true,"schema":{"type":"string","example":["19098374817831894713","1698374817831894713"]}}],"optional":[{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":20}}],"query":[{"in":"query","name":"shipment_ids","required":true,"schema":{"type":"string","example":["19098374817831894713","1698374817831894713"]}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":20}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", shipment_ids=shipment_ids, page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(shipment_ids=shipment_ids, page_no=page_no, page_size=page_size)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipments", shipment_ids=shipment_ids, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+    
+    async def getOrderById(self, fynd_order_id=None, page_no=None, page_size=None):
+        """
+        :param fynd_order_id :  : type string
+        :param page_no :  : type integer
+        :param page_size :  : type integer
+        """
+        payload = {}
+        
+        if fynd_order_id:
+            payload["fynd_order_id"] = fynd_order_id
+        
+        if page_no:
+            payload["page_no"] = page_no
+        
+        if page_size:
+            payload["page_size"] = page_size
+        
+
+        # Parameter validation
+        schema = OrderValidator.getOrderById()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/order-details", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"query","name":"fynd_order_id","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":20}}],"query":[{"in":"query","name":"fynd_order_id","required":true,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":20}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", fynd_order_id=fynd_order_id, page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(fynd_order_id=fynd_order_id, page_no=page_no, page_size=page_size)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/order-details", fynd_order_id=fynd_order_id, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+    
+    async def getShipmentByAffiliateBagId(self, affiliate_bag_id=None, affiliate_id=None, page_no=None, page_size=None):
+        """
+        :param affiliate_bag_id :  : type string
+        :param affiliate_id :  : type string
+        :param page_no :  : type integer
+        :param page_size :  : type integer
+        """
+        payload = {}
+        
+        if affiliate_bag_id:
+            payload["affiliate_bag_id"] = affiliate_bag_id
+        
+        if affiliate_id:
+            payload["affiliate_id"] = affiliate_id
+        
+        if page_no:
+            payload["page_no"] = page_no
+        
+        if page_size:
+            payload["page_size"] = page_size
+        
+
+        # Parameter validation
+        schema = OrderValidator.getShipmentByAffiliateBagId()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipment-details-by-affiliate-bag-id", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"query","name":"affiliate_bag_id","required":true,"schema":{"type":"string"}},{"in":"query","name":"affiliate_id","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":20}}],"query":[{"in":"query","name":"affiliate_bag_id","required":true,"schema":{"type":"string"}},{"in":"query","name":"affiliate_id","required":true,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":20}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", affiliate_bag_id=affiliate_bag_id, affiliate_id=affiliate_id, page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(affiliate_bag_id=affiliate_bag_id, affiliate_id=affiliate_id, page_no=page_no, page_size=page_size)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipment-details-by-affiliate-bag-id", affiliate_bag_id=affiliate_bag_id, affiliate_id=affiliate_id, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+    
+    async def getShipmentByAffiliateShipmentId(self, affiliate_shipment_id=None, affiliate_id=None):
+        """
+        :param affiliate_shipment_id :  : type string
+        :param affiliate_id :  : type string
+        """
+        payload = {}
+        
+        if affiliate_shipment_id:
+            payload["affiliate_shipment_id"] = affiliate_shipment_id
+        
+        if affiliate_id:
+            payload["affiliate_id"] = affiliate_id
+        
+
+        # Parameter validation
+        schema = OrderValidator.getShipmentByAffiliateShipmentId()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipment-details-by-affiliate-shipment-id", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"query","name":"affiliate_shipment_id","required":true,"schema":{"type":"string"}},{"in":"query","name":"affiliate_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"in":"query","name":"affiliate_shipment_id","required":true,"schema":{"type":"string"}},{"in":"query","name":"affiliate_id","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", affiliate_shipment_id=affiliate_shipment_id, affiliate_id=affiliate_id)
+        query_string = await create_query_string(affiliate_shipment_id=affiliate_shipment_id, affiliate_id=affiliate_id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipment-details-by-affiliate-shipment-id", affiliate_shipment_id=affiliate_shipment_id, affiliate_id=affiliate_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+    
+    async def getShipmentsByAffiliateOrderId(self, affiliate_id=None, affiliate_order_id=None, page_no=None, page_size=None):
+        """
+        :param affiliate_id :  : type string
+        :param affiliate_order_id :  : type string
+        :param page_no :  : type integer
+        :param page_size :  : type integer
+        """
+        payload = {}
+        
+        if affiliate_id:
+            payload["affiliate_id"] = affiliate_id
+        
+        if affiliate_order_id:
+            payload["affiliate_order_id"] = affiliate_order_id
+        
+        if page_no:
+            payload["page_no"] = page_no
+        
+        if page_size:
+            payload["page_size"] = page_size
+        
+
+        # Parameter validation
+        schema = OrderValidator.getShipmentsByAffiliateOrderId()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipment-details-by-affiliate-order-id", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"query","name":"affiliate_id","required":true,"schema":{"type":"string"}},{"in":"query","name":"affiliate_order_id","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":20}}],"query":[{"in":"query","name":"affiliate_id","required":true,"schema":{"type":"string"}},{"in":"query","name":"affiliate_order_id","required":true,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":20}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", affiliate_id=affiliate_id, affiliate_order_id=affiliate_order_id, page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(affiliate_id=affiliate_id, affiliate_order_id=affiliate_order_id, page_no=page_no, page_size=page_size)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipment-details-by-affiliate-order-id", affiliate_id=affiliate_id, affiliate_order_id=affiliate_order_id, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
 
 class Catalog:
@@ -6561,6 +6779,7 @@ class PlatformClient:
         self._conf = config
         self.common = Common(config)
         self.lead = Lead(config)
+        self.feedback = Feedback(config)
         self.theme = Theme(config)
         self.user = User(config)
         self.content = Content(config)
