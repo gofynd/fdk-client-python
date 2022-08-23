@@ -24,13 +24,13 @@ class CatalogInsightBrand(BaseSchema):
     
     available_articles = fields.Int(required=False)
     
-    total_sizes = fields.Int(required=False)
-    
     name = fields.Str(required=False)
     
     available_sizes = fields.Int(required=False)
     
     article_freshness = fields.Int(required=False)
+    
+    total_sizes = fields.Int(required=False)
     
     total_articles = fields.Int(required=False)
     
