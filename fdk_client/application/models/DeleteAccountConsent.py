@@ -1,4 +1,4 @@
-"""Platform Models."""
+"""Application Models."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -8,10 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class StoreEwaybill(BaseSchema):
-    # Order swagger.json
+class DeleteAccountConsent(BaseSchema):
+    # User swagger.json
 
     
-    enabled = fields.Boolean(required=False)
+    consent_text = fields.Str(required=False)
     
 

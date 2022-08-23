@@ -12,14 +12,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class EInvoicePortalDetails(BaseSchema):
-    # Order swagger.json
+class UnArchiveUserRequestSchema(BaseSchema):
+    # User swagger.json
 
     
-    password = fields.Str(required=False)
+    user_id = fields.Str(required=False)
     
-    user = fields.Str(required=False)
+    reason = fields.Str(required=False)
     
-    username = fields.Str(required=False)
+    reason_id = fields.Str(required=False)
     
 

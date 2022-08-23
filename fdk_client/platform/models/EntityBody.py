@@ -11,9 +11,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .DataUpdate import DataUpdate
-
 from .EntityReason import EntityReason
+
+from .DataUpdate import DataUpdate
 
 
 class EntityBody(BaseSchema):
@@ -26,8 +26,8 @@ class EntityBody(BaseSchema):
     
     next_status = fields.Str(required=False)
     
-    data_updates = fields.Nested(DataUpdate, required=False)
-    
     reasons = fields.Nested(EntityReason, required=False)
+    
+    data_updates = fields.Nested(DataUpdate, required=False)
     
 

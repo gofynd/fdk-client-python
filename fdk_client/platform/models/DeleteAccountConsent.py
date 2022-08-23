@@ -5,13 +5,13 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .Document import Document
 
 
-class StoreDocuments(BaseSchema):
-    # Order swagger.json
+
+class DeleteAccountConsent(BaseSchema):
+    # User swagger.json
 
     
-    gst = fields.Nested(Document, required=False)
+    consent_text = fields.Str(required=False)
     
 

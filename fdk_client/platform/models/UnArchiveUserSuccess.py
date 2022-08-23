@@ -5,13 +5,13 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .B2BPODetails import B2BPODetails
 
 
-class BagMeta(BaseSchema):
-    # Order swagger.json
+
+class UnArchiveUserSuccess(BaseSchema):
+    # User swagger.json
 
     
-    b2b_po_details = fields.Nested(B2BPODetails, required=False)
+    success = fields.Boolean(required=False)
     
 

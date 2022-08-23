@@ -8,7 +8,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class APIError(BaseSchema):
+class CommonError(BaseSchema):
     # Content swagger.json
 
     
