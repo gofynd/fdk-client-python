@@ -16,9 +16,9 @@ class Affiliate(BaseSchema):
     # Order swagger.json
 
     
-    token = fields.Str(required=False)
-    
     id = fields.Str(required=False)
+    
+    token = fields.Str(required=False)
     
     config = fields.Nested(AffiliateConfig, required=False)
     
