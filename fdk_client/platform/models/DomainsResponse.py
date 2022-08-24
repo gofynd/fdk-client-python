@@ -24,7 +24,7 @@ class DomainsResponse(BaseSchema):
     
     domains = fields.List(fields.Nested(Domain, required=False), required=False)
     
-    id = fields.Str(required=False)
+    _id = fields.Str(required=False)
     
     name = fields.Str(required=False)
     
