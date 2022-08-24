@@ -26,10 +26,7 @@ from .models.DiscountValidator import DiscountValidator
 from .models.PartnerValidator import PartnerValidator
 from .models.WebhookValidator import WebhookValidator
 from .models.AuditTrailValidator import AuditTrailValidator
-from .models.OrdersValidator import OrdersValidator
-from .models.OrderManageValidator import OrderManageValidator
 from .models.OrderInvoiceEngineValidator import OrderInvoiceEngineValidator
-from .models.ServiceabilityValidator import ServiceabilityValidator
 
 
 
@@ -5177,6 +5174,34 @@ class Catalog:
         self._conf = config
         self.applicationId = applicationId
     
+    async def getSearchKeywords(self, id=None):
+        """Get the details of a words by its `id`. If successful, returns a Collection resource in the response body specified in `GetSearchWordsDetailResponseSchema`
+        :param id : A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. : type string
+        """
+        payload = {}
+        
+        if id:
+            payload["id"] = id
+        
+
+        # Parameter validation
+        schema = CatalogValidator.getSearchKeywords()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/{id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve.","schema":{"type":"string"},"required":true}]}""", id=id)
+        query_string = await create_query_string(id=id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+    
     async def deleteSearchKeywords(self, id=None):
         """Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
         :param id : A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. : type string
@@ -5238,34 +5263,6 @@ class Catalog:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
-    async def getSearchKeywords(self, id=None):
-        """Get the details of a words by its `id`. If successful, returns a Collection resource in the response body specified in `GetSearchWordsDetailResponseSchema`
-        :param id : A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. : type string
-        """
-        payload = {}
-        
-        if id:
-            payload["id"] = id
-        
-
-        # Parameter validation
-        schema = CatalogValidator.getSearchKeywords()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/{id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve.","schema":{"type":"string"},"required":true}]}""", id=id)
-        query_string = await create_query_string(id=id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-    
     async def getAllSearchKeyword(self, ):
         """Custom Search Keyword allows you to map conditions with keywords to give you the ultimate results
         """
@@ -5318,6 +5315,34 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+    
+    async def getAutocompleteKeywordDetail(self, id=None):
+        """Get the details of a words by its `id`. If successful, returns a keywords resource in the response body specified in `GetAutocompleteWordsResponseSchema`
+        :param id : A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. : type string
+        """
+        payload = {}
+        
+        if id:
+            payload["id"] = id
+        
+
+        # Parameter validation
+        schema = CatalogValidator.getAutocompleteKeywordDetail()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete/{id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve.","schema":{"type":"string"},"required":true}]}""", id=id)
+        query_string = await create_query_string(id=id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def deleteAutocompleteKeyword(self, id=None):
         """Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
@@ -5379,34 +5404,6 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-    
-    async def getAutocompleteKeywordDetail(self, id=None):
-        """Get the details of a words by its `id`. If successful, returns a keywords resource in the response body specified in `GetAutocompleteWordsResponseSchema`
-        :param id : A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. : type string
-        """
-        payload = {}
-        
-        if id:
-            payload["id"] = id
-        
-
-        # Parameter validation
-        schema = CatalogValidator.getAutocompleteKeywordDetail()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete/{id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve.","schema":{"type":"string"},"required":true}]}""", id=id)
-        query_string = await create_query_string(id=id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def getAutocompleteConfig(self, ):
         """Custom Autocomplete Keyword allows you to map conditions with keywords to give you the ultimate results
@@ -9038,161 +9035,10 @@ class AuditTrail:
         self.applicationId = applicationId
     
 
-class Orders:
-    def __init__(self, config, applicationId):
-        self._conf = config
-        self.applicationId = applicationId
-    
-    async def getApplicationShipments(self, lane=None, search_type=None, search_id=None, from_date=None, to_date=None, dp_ids=None, ordering_company_id=None, stores=None, sales_channel=None, request_by_ext=None, page_no=None, page_size=None, customer_id=None, is_priority_sort=None):
-        """
-        :param lane :  : type string
-        :param search_type :  : type string
-        :param search_id :  : type string
-        :param from_date :  : type string
-        :param to_date :  : type string
-        :param dp_ids :  : type string
-        :param ordering_company_id :  : type string
-        :param stores :  : type string
-        :param sales_channel :  : type string
-        :param request_by_ext :  : type string
-        :param page_no :  : type integer
-        :param page_size :  : type integer
-        :param customer_id :  : type string
-        :param is_priority_sort :  : type boolean
-        """
-        payload = {}
-        
-        if lane:
-            payload["lane"] = lane
-        
-        if search_type:
-            payload["search_type"] = search_type
-        
-        if search_id:
-            payload["search_id"] = search_id
-        
-        if from_date:
-            payload["from_date"] = from_date
-        
-        if to_date:
-            payload["to_date"] = to_date
-        
-        if dp_ids:
-            payload["dp_ids"] = dp_ids
-        
-        if ordering_company_id:
-            payload["ordering_company_id"] = ordering_company_id
-        
-        if stores:
-            payload["stores"] = stores
-        
-        if sales_channel:
-            payload["sales_channel"] = sales_channel
-        
-        if request_by_ext:
-            payload["request_by_ext"] = request_by_ext
-        
-        if page_no:
-            payload["page_no"] = page_no
-        
-        if page_size:
-            payload["page_size"] = page_size
-        
-        if customer_id:
-            payload["customer_id"] = customer_id
-        
-        if is_priority_sort:
-            payload["is_priority_sort"] = is_priority_sort
-        
-
-        # Parameter validation
-        schema = OrdersValidator.getApplicationShipments()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/shipments", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"lane","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"ordering_company_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"stores","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channel","required":false,"schema":{"type":"string"}},{"in":"query","name":"request_by_ext","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","name":"customer_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"is_priority_sort","required":false,"schema":{"type":"boolean","default":true}}],"query":[{"in":"query","name":"lane","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"ordering_company_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"stores","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channel","required":false,"schema":{"type":"string"}},{"in":"query","name":"request_by_ext","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","name":"customer_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"is_priority_sort","required":false,"schema":{"type":"boolean","default":true}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", lane=lane, search_type=search_type, search_id=search_id, from_date=from_date, to_date=to_date, dp_ids=dp_ids, ordering_company_id=ordering_company_id, stores=stores, sales_channel=sales_channel, request_by_ext=request_by_ext, page_no=page_no, page_size=page_size, customer_id=customer_id, is_priority_sort=is_priority_sort)
-        query_string = await create_query_string(lane=lane, search_type=search_type, search_id=search_id, from_date=from_date, to_date=to_date, dp_ids=dp_ids, ordering_company_id=ordering_company_id, stores=stores, sales_channel=sales_channel, request_by_ext=request_by_ext, page_no=page_no, page_size=page_size, customer_id=customer_id, is_priority_sort=is_priority_sort)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/shipments", lane=lane, search_type=search_type, search_id=search_id, from_date=from_date, to_date=to_date, dp_ids=dp_ids, ordering_company_id=ordering_company_id, stores=stores, sales_channel=sales_channel, request_by_ext=request_by_ext, page_no=page_no, page_size=page_size, customer_id=customer_id, is_priority_sort=is_priority_sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
-    
-
-class OrderManage:
-    def __init__(self, config, applicationId):
-        self._conf = config
-        self.applicationId = applicationId
-    
-
 class OrderInvoiceEngine:
     def __init__(self, config, applicationId):
         self._conf = config
         self.applicationId = applicationId
-    
-
-class Serviceability:
-    def __init__(self, config, applicationId):
-        self._conf = config
-        self.applicationId = applicationId
-    
-    async def getApplicationServiceability(self, ):
-        """This API returns serviceability config of the application.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = ServiceabilityValidator.getApplicationServiceability()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics-internal/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/serviceability", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}]}""", )
-        query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics-internal/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/serviceability", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-    
-    async def upsertZoneControllerView(self, body=""):
-        """This API returns zone from the Pincode View.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = ServiceabilityValidator.upsertZoneControllerView()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models.GetZoneFromPincodeViewRequest import GetZoneFromPincodeViewRequest
-        schema = GetZoneFromPincodeViewRequest()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics-internal/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/zones", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` contains a specific ID of a company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` contains a unique ID.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` contains a specific ID of a company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` contains a unique ID.","schema":{"type":"string"},"required":true}]}""", )
-        query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics-internal/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/zones", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
 
 
@@ -9221,10 +9067,7 @@ class PlatformApplicationClient:
         self.partner = Partner(config, applicationId)
         self.webhook = Webhook(config, applicationId)
         self.auditTrail = AuditTrail(config, applicationId)
-        self.orders = Orders(config, applicationId)
-        self.orderManage = OrderManage(config, applicationId)
         self.orderInvoiceEngine = OrderInvoiceEngine(config, applicationId)
-        self.serviceability = Serviceability(config, applicationId)
         
 
     async def setExtraHeaders(self, header):
