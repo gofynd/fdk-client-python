@@ -113,7 +113,7 @@ class OrderValidator:
         previous = fields.Str(required=False)
          
     
-    class getOrderDetails(BaseSchema):
+    class getOrderDetails1(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -286,5 +286,94 @@ class OrderValidator:
         caller = fields.Str(required=False)
         
         receiver = fields.Str(required=False)
+         
+    
+    class createOrder(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    
+    class invalidateShipmentCache(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    
+    class reassignLocation(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    
+    class updateShipmentLock(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    
+    class updateShipmentStatus(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    
+    class getShipmentDetailsById(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        shipment_id = fields.Str(required=False)
+         
+    
+    class getShipmentsByShipmentIds(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        shipment_ids = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+         
+    
+    class getOrderById(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        fynd_order_id = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+         
+    
+    class getShipmentByAffiliateBagId(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        affiliate_bag_id = fields.Str(required=False)
+        
+        affiliate_id = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+         
+    
+    class getShipmentByAffiliateShipmentId(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        affiliate_shipment_id = fields.Str(required=False)
+        
+        affiliate_id = fields.Str(required=False)
+         
+    
+    class getShipmentsByAffiliateOrderId(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        affiliate_id = fields.Str(required=False)
+        
+        affiliate_order_id = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
          
     
