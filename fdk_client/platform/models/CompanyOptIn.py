@@ -32,22 +32,22 @@ class CompanyOptIn(BaseSchema):
     
     enabled = fields.Boolean(required=False)
     
-    store_ids = fields.List(fields.Int(required=False), required=False)
-    
-    opt_level = fields.Str(required=False)
-    
-    platform = fields.Str(required=False)
-    
-    modified_by = fields.Dict(required=False)
+    modified_on = fields.Int(required=False)
     
     created_on = fields.Int(required=False)
     
-    created_by = fields.Dict(required=False)
+    store_ids = fields.List(fields.Int(required=False), required=False)
+    
+    platform = fields.Str(required=False)
+    
+    opt_level = fields.Str(required=False)
     
     company_id = fields.Int(required=False)
     
+    created_by = fields.Dict(required=False)
+    
     brand_ids = fields.List(fields.Int(required=False), required=False)
     
-    modified_on = fields.Int(required=False)
+    modified_by = fields.Dict(required=False)
     
 

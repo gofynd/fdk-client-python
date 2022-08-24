@@ -192,6 +192,10 @@ class ConfigurationValidator:
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
+        
+        comapny_id = fields.Str(required=False)
+        
+        appication_id = fields.Str(required=False)
          
     
     class addDomain(BaseSchema):

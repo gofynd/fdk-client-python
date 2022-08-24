@@ -80,7 +80,6 @@ class TicketSourceEnum(Enum):
 
 
 
-
 class PageType(Enum):
     
     ABOUT_US = "about-us"
