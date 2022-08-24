@@ -32,13 +32,17 @@ class HsnCodesObject(BaseSchema):
     # Catalog swagger.json
 
     
-    company_id = fields.Int(required=False)
+    threshold1 = fields.Float(required=False)
     
     tax_on_esp = fields.Boolean(required=False)
     
-    hsn_code = fields.Str(required=False)
+    tax2 = fields.Float(required=False)
     
-    threshold1 = fields.Float(required=False)
+    company_id = fields.Int(required=False)
+    
+    threshold2 = fields.Float(required=False)
+    
+    modified_on = fields.Str(required=False)
     
     tax1 = fields.Float(required=False)
     
@@ -48,10 +52,6 @@ class HsnCodesObject(BaseSchema):
     
     id = fields.Str(required=False)
     
-    modified_on = fields.Str(required=False)
-    
-    threshold2 = fields.Float(required=False)
-    
-    tax2 = fields.Float(required=False)
+    hsn_code = fields.Str(required=False)
     
 
