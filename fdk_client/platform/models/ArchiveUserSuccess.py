@@ -1,4 +1,4 @@
-"""Application Models."""
+"""Platform Models."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -8,18 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+class ArchiveUserSuccess(BaseSchema):
+    # User swagger.json
 
-
-
-
-class CancelPaymentLinkResponse(BaseSchema):
-    # Payment swagger.json
-
-    
-    status_code = fields.Int(required=False)
     
     success = fields.Boolean(required=False)
-    
-    message = fields.Str(required=False)
     
 

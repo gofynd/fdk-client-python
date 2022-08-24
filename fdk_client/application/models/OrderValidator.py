@@ -33,6 +33,8 @@ class OrderValidator:
     class getShipmentReasons(BaseSchema):
         
         shipment_id = fields.Str(required=False)
+        
+        bag_id = fields.Int(required=False)
          
     
     class updateShipmentStatus(BaseSchema):
@@ -72,6 +74,11 @@ class OrderValidator:
          
     
     class getInvoiceByShipmentId(BaseSchema):
+        
+        shipment_id = fields.Str(required=False)
+         
+    
+    class getCreditNoteByShipmentId(BaseSchema):
         
         shipment_id = fields.Str(required=False)
          

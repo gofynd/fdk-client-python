@@ -20,6 +20,8 @@ from .ItemBrand import ItemBrand
 
 
 
+
+
 class Item(BaseSchema):
     # Order swagger.json
 
@@ -37,5 +39,7 @@ class Item(BaseSchema):
     code = fields.Str(required=False)
     
     id = fields.Float(required=False)
+    
+    seller_identifier = fields.Str(required=False)
     
 

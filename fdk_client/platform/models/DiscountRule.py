@@ -5,9 +5,9 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+
+
 from .ItemCriteria import ItemCriteria
-
-
 
 
 
@@ -18,9 +18,9 @@ class DiscountRule(BaseSchema):
     # Cart swagger.json
 
     
-    item_criteria = fields.Nested(ItemCriteria, required=False)
-    
     buy_condition = fields.Str(required=False)
+    
+    item_criteria = fields.Nested(ItemCriteria, required=False)
     
     discount_type = fields.Str(required=False)
     
