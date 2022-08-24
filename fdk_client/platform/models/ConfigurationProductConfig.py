@@ -28,14 +28,14 @@ class ConfigurationProductConfig(BaseSchema):
     
     title = fields.Str(required=False)
     
-    logo = fields.Str(required=False)
-    
-    subtitle = fields.Str(required=False)
-    
     priority = fields.Int(required=False)
     
     is_active = fields.Boolean(required=False)
     
     key = fields.Str(required=False)
+    
+    subtitle = fields.Str(required=False)
+    
+    logo = fields.Str(required=False)
     
 
