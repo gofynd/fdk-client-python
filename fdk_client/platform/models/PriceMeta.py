@@ -30,8 +30,8 @@ class PriceMeta(BaseSchema):
     
     effective = fields.Float(required=False)
     
-    marked = fields.Float(required=False)
-    
     updated_at = fields.Str(required=False)
+    
+    marked = fields.Float(required=False)
     
 
