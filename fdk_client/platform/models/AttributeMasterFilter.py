@@ -18,8 +18,8 @@ class AttributeMasterFilter(BaseSchema):
     
     priority = fields.Int(required=False)
     
-    indexing = fields.Boolean(required=False)
-    
     depends_on = fields.List(fields.Str(required=False), required=False)
+    
+    indexing = fields.Boolean(required=False)
     
 
