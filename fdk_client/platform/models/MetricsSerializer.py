@@ -7,8 +7,6 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
 from .DocumentsObj import DocumentsObj
 
 from .DocumentsObj import DocumentsObj
@@ -18,17 +16,19 @@ from .DocumentsObj import DocumentsObj
 from .DocumentsObj import DocumentsObj
 
 from .DocumentsObj import DocumentsObj
+
+
 
 
 class MetricsSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    stage = fields.Str(required=False)
-    
     uid = fields.Int(required=False)
     
     store = fields.Nested(DocumentsObj, required=False)
+    
+    brand = fields.Nested(DocumentsObj, required=False)
     
     product = fields.Nested(DocumentsObj, required=False)
     
@@ -36,6 +36,6 @@ class MetricsSerializer(BaseSchema):
     
     store_documents = fields.Nested(DocumentsObj, required=False)
     
-    brand = fields.Nested(DocumentsObj, required=False)
+    stage = fields.Str(required=False)
     
 

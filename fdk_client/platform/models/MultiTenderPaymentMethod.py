@@ -22,8 +22,8 @@ class MultiTenderPaymentMethod(BaseSchema):
     
     name = fields.Str(required=False)
     
-    amount = fields.Float(required=False)
-    
     mode = fields.Str(required=False)
+    
+    amount = fields.Float(required=False)
     
 

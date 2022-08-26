@@ -7,43 +7,43 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
+from .PromotionPaymentModes import PromotionPaymentModes
 
 from .UserRegistered import UserRegistered
 
 
 
+
+
+from .UsesRestriction1 import UsesRestriction1
+
 from .PostOrder1 import PostOrder1
 
 
 
-from .PromotionPaymentModes import PromotionPaymentModes
 
-from .UsesRestriction1 import UsesRestriction1
 
 
 class Restrictions1(BaseSchema):
     # Cart swagger.json
 
     
-    platforms = fields.List(fields.Str(required=False), required=False)
-    
-    user_id = fields.List(fields.Str(required=False), required=False)
-    
-    order_quantity = fields.Int(required=False)
-    
-    user_registered = fields.Nested(UserRegistered, required=False)
-    
     user_groups = fields.List(fields.Int(required=False), required=False)
-    
-    post_order = fields.Nested(PostOrder1, required=False)
-    
-    anonymous_users = fields.Boolean(required=False)
     
     payments = fields.List(fields.Nested(PromotionPaymentModes, required=False), required=False)
     
+    user_registered = fields.Nested(UserRegistered, required=False)
+    
+    order_quantity = fields.Int(required=False)
+    
+    anonymous_users = fields.Boolean(required=False)
+    
     uses = fields.Nested(UsesRestriction1, required=False)
+    
+    post_order = fields.Nested(PostOrder1, required=False)
+    
+    platforms = fields.List(fields.Str(required=False), required=False)
+    
+    user_id = fields.List(fields.Str(required=False), required=False)
     
 
