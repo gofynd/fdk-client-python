@@ -9,9 +9,11 @@ from .ImageUrls import ImageUrls
 
 
 
+
+
+
+
 from .Media import Media
-
-
 
 
 class CategoryMetaResponse(BaseSchema):
@@ -22,8 +24,10 @@ class CategoryMetaResponse(BaseSchema):
     
     name = fields.Str(required=False)
     
-    logo = fields.Nested(Media, required=False)
+    _custom_json = fields.Dict(required=False)
     
     uid = fields.Int(required=False)
+    
+    logo = fields.Nested(Media, required=False)
     
 
