@@ -26,16 +26,16 @@ class ArticleDetails(BaseSchema):
     
     category = fields.Dict(required=False)
     
+    brand_id = fields.Int(required=False)
+    
+    weight = fields.Dict(required=False)
+    
+    dimension = fields.Dict(required=False)
+    
     quantity = fields.Int(required=False)
     
     _id = fields.Str(required=False)
     
     attributes = fields.Dict(required=False)
-    
-    brand_id = fields.Int(required=False)
-    
-    dimension = fields.Dict(required=False)
-    
-    weight = fields.Dict(required=False)
     
 
