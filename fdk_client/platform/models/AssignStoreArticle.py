@@ -11,23 +11,23 @@ from ..models.BaseSchema import BaseSchema
 
 from .ArticleAssignment import ArticleAssignment
 
+
+
 from .ArticleQuery import ArticleQuery
-
-
 
 
 class AssignStoreArticle(BaseSchema):
     # Catalog swagger.json
 
     
-    meta = fields.Dict(required=False)
+    group_id = fields.Str(required=False)
     
     quantity = fields.Int(required=False)
     
     article_assignment = fields.Nested(ArticleAssignment, required=False)
     
-    query = fields.Nested(ArticleQuery, required=False)
+    meta = fields.Dict(required=False)
     
-    group_id = fields.Str(required=False)
+    query = fields.Nested(ArticleQuery, required=False)
     
 
