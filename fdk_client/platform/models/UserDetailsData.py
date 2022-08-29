@@ -26,7 +26,13 @@ class UserDetailsData(BaseSchema):
     # Orders swagger.json
 
     
+    email = fields.Str(required=False)
+    
+    address = fields.Str(required=False)
+    
     country = fields.Str(required=False)
+    
+    pincode = fields.Str(required=False)
     
     city = fields.Str(required=False)
     
@@ -35,11 +41,5 @@ class UserDetailsData(BaseSchema):
     name = fields.Str(required=False)
     
     phone = fields.Str(required=False)
-    
-    pincode = fields.Str(required=False)
-    
-    email = fields.Str(required=False)
-    
-    address = fields.Str(required=False)
     
 
