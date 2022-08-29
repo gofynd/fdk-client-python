@@ -18,9 +18,9 @@ class AttributeDetail(BaseSchema):
     # Catalog swagger.json
 
     
-    description = fields.Str(required=False)
-    
     display = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
     
     logo = fields.Str(required=False)
     
