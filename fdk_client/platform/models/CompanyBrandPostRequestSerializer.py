@@ -20,9 +20,9 @@ class CompanyBrandPostRequestSerializer(BaseSchema):
     
     documents = fields.List(fields.Nested(CompanyBrandDocumentsSerializer, required=False), required=False)
     
-    uid = fields.Int(required=False)
-    
     brands = fields.List(fields.Int(required=False), required=False)
+    
+    uid = fields.Int(required=False)
     
     company = fields.Int(required=False)
     

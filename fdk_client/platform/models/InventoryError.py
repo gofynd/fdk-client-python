@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class BrandDocumentSerializer(BaseSchema):
-    # CompanyProfile swagger.json
+class InventoryError(BaseSchema):
+    # Catalog swagger.json
 
     
-    type = fields.Str(required=False)
+    error = fields.Str(required=False)
     
-    url = fields.Str(required=False)
+    key = fields.Str(required=False)
     
 

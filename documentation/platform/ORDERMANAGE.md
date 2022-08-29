@@ -175,8 +175,8 @@ It shows the journey of the shipment!
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | quantity | Int? |  yes  |  |
  | identifier | String? |  yes  |  |
+ | quantity | Int? |  yes  |  |
 
 ---
 
@@ -187,10 +187,10 @@ It shows the journey of the shipment!
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | reason | ArrayList<Int>? |  yes  |  |
- | products | ArrayList<[ProductDetail](#ProductDetail)>? |  yes  |  |
- | storeInvoiceId | String? |  yes  |  |
  | dataUpdate | HashMap<String,Any>? |  yes  |  |
+ | reason | ArrayList<Int>? |  yes  |  |
+ | storeInvoiceId | String? |  yes  |  |
+ | products | ArrayList<[ProductDetail](#ProductDetail)>? |  yes  |  |
 
 ---
 
@@ -212,8 +212,8 @@ It shows the journey of the shipment!
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | shipments | [ShipmentDetail](#ShipmentDetail)? |  yes  |  |
  | status | String |  no  |  |
+ | shipments | [ShipmentDetail](#ShipmentDetail)? |  yes  |  |
  | excludeBagsNextState | String |  no  |  |
 
 ---
@@ -225,9 +225,9 @@ It shows the journey of the shipment!
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | task | Boolean? |  yes  |  |
  | forceTransition | Boolean? |  yes  |  |
  | statuses | [Statuses](#Statuses)? |  yes  |  |
- | task | Boolean? |  yes  |  |
 
 ---
 
@@ -238,8 +238,8 @@ It shows the journey of the shipment!
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | success | Boolean? |  yes  |  |
  | message | ArrayList<String>? |  yes  |  |
+ | success | Boolean? |  yes  |  |
 
 ---
 
@@ -250,8 +250,8 @@ It shows the journey of the shipment!
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | success | Boolean? |  yes  |  |
  | message | String? |  yes  |  |
+ | success | Boolean? |  yes  |  |
 
 ---
 
@@ -262,14 +262,14 @@ It shows the journey of the shipment!
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | l1Detail | String? |  yes  |  |
- | l3Detail | String? |  yes  |  |
  | createdat | String |  no  |  |
  | l2Detail | String? |  yes  |  |
- | message | String |  no  |  |
- | ticketId | String? |  yes  |  |
  | type | String |  no  |  |
  | ticketUrl | String? |  yes  |  |
+ | l1Detail | String? |  yes  |  |
+ | ticketId | String? |  yes  |  |
+ | l3Detail | String? |  yes  |  |
+ | message | String |  no  |  |
  | user | String |  no  |  |
 
 ---

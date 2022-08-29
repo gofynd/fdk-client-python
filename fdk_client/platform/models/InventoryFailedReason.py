@@ -7,7 +7,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
+from .InventoryError import InventoryError
 
 
 class InventoryFailedReason(BaseSchema):
@@ -16,6 +16,6 @@ class InventoryFailedReason(BaseSchema):
     
     message = fields.Str(required=False)
     
-    errors = fields.Str(required=False)
+    errors = fields.List(fields.Nested(InventoryError, required=False), required=False)
     
 
