@@ -13,11 +13,11 @@ from ..models.BaseSchema import BaseSchema
 
 from .Action import Action
 
-
-
-
-
 from .ImageUrls import ImageUrls
+
+
+
+
 
 
 class ThirdLevelChild(BaseSchema):
@@ -26,16 +26,16 @@ class ThirdLevelChild(BaseSchema):
     
     name = fields.Str(required=False)
     
-    childs = fields.List(fields.Dict(required=False), required=False)
-    
     uid = fields.Int(required=False)
+    
+    childs = fields.List(fields.Dict(required=False), required=False)
     
     action = fields.Nested(Action, required=False)
     
-    _custom_json = fields.Dict(required=False)
+    banners = fields.Nested(ImageUrls, required=False)
     
     slug = fields.Str(required=False)
     
-    banners = fields.Nested(ImageUrls, required=False)
+    _custom_json = fields.Dict(required=False)
     
 
