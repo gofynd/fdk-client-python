@@ -10,12 +10,16 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class InventoryValidationResponse(BaseSchema):
+
+
+class ApplicationItemMOQ(BaseSchema):
     # Catalog swagger.json
 
     
-    data = fields.Dict(required=False)
+    multiplier = fields.Int(required=False)
     
-    message = fields.Str(required=False)
+    min_qty = fields.Int(required=False)
+    
+    max_qty = fields.Int(required=False)
     
 

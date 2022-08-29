@@ -13,9 +13,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
 from .CheckCart import CheckCart
+
+
 
 
 
@@ -30,16 +30,16 @@ class CartCheckoutResponse(BaseSchema):
     
     order_id = fields.Str(required=False)
     
-    app_intercept_url = fields.Str(required=False)
-    
     success = fields.Boolean(required=False)
     
-    data = fields.Dict(required=False)
+    message = fields.Str(required=False)
     
     cart = fields.Nested(CheckCart, required=False)
     
     payment_confirm_url = fields.Str(required=False)
     
-    message = fields.Str(required=False)
+    app_intercept_url = fields.Str(required=False)
+    
+    data = fields.Dict(required=False)
     
 

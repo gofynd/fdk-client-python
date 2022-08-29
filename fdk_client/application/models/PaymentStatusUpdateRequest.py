@@ -34,13 +34,17 @@ class PaymentStatusUpdateRequest(BaseSchema):
     
     aggregator = fields.Str(required=False)
     
-    currency = fields.Str(required=False)
-    
     merchant_order_id = fields.Str(required=False)
+    
+    order_id = fields.Str(required=False)
     
     email = fields.Str(required=False)
     
-    order_id = fields.Str(required=False)
+    contact = fields.Str(required=False)
+    
+    method = fields.Str(required=False)
+    
+    status = fields.Str(required=False)
     
     amount = fields.Int(required=False)
     
@@ -48,10 +52,6 @@ class PaymentStatusUpdateRequest(BaseSchema):
     
     customer_id = fields.Str(required=False)
     
-    status = fields.Str(required=False)
-    
-    contact = fields.Str(required=False)
-    
-    method = fields.Str(required=False)
+    currency = fields.Str(required=False)
     
 
