@@ -22,13 +22,13 @@ class InventoryPayload(BaseSchema):
     # Catalog swagger.json
 
     
-    store_id = fields.Int(required=False)
-    
-    total_quantity = fields.Int(required=False)
-    
     price_effective = fields.Float(required=False)
     
+    store_id = fields.Int(required=False)
+    
     seller_identifier = fields.Str(required=False)
+    
+    total_quantity = fields.Int(required=False)
     
     expiration_date = fields.Str(required=False)
     
