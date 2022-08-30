@@ -2126,17 +2126,17 @@ from .ApplicationStoreJson import ApplicationStoreJson
     
 
     
-from .ContactDetails import ContactDetails
-    
-from .UserSerializer import UserSerializer
-    
-from .BusinessCountryInfo import BusinessCountryInfo
-    
 from .Website import Website
     
 from .BusinessDetails import BusinessDetails
     
 from .CompanyTaxesSerializer import CompanyTaxesSerializer
+    
+from .UserSerializer import UserSerializer
+    
+from .ContactDetails import ContactDetails
+    
+from .BusinessCountryInfo import BusinessCountryInfo
     
 from .GetCompanyProfileSerializerResponse import GetCompanyProfileSerializerResponse
     
