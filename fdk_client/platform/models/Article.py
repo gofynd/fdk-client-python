@@ -36,26 +36,26 @@ class Article(BaseSchema):
     
     size = fields.Str(required=False)
     
-    a_set = fields.Dict(required=False)
+    _id = fields.Str(required=False)
     
-    code = fields.Str(required=False)
+    raw_meta = fields.Raw(required=False)
     
-    child_details = fields.Dict(required=False)
-    
-    identifiers = fields.Dict(required=False)
-    
-    esp_modified = fields.Raw(required=False)
-    
-    is_set = fields.Raw(required=False)
+    uid = fields.Str(required=False)
     
     return_config = fields.Dict(required=False)
     
     seller_identifier = fields.Str(required=False)
     
-    uid = fields.Str(required=False)
+    is_set = fields.Raw(required=False)
     
-    _id = fields.Str(required=False)
+    esp_modified = fields.Raw(required=False)
     
-    raw_meta = fields.Raw(required=False)
+    identifiers = fields.Dict(required=False)
+    
+    code = fields.Str(required=False)
+    
+    a_set = fields.Dict(required=False)
+    
+    child_details = fields.Dict(required=False)
     
 

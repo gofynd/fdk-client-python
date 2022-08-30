@@ -24,10 +24,10 @@ class DimensionResponse(BaseSchema):
     
     length = fields.Float(required=False)
     
+    is_default = fields.Boolean(required=False)
+    
     unit = fields.Str(required=False)
     
     height = fields.Float(required=False)
-    
-    is_default = fields.Boolean(required=False)
     
 

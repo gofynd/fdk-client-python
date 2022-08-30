@@ -20,6 +20,8 @@ class RequestedDPConfs(BaseSchema):
     # Order swagger.json
 
     
+    awb_type = fields.Str(required=False)
+    
     exclude_dps = fields.List(fields.Int(required=False), required=False)
     
     is_dp_assigned_manually = fields.Boolean(required=False)
@@ -27,7 +29,5 @@ class RequestedDPConfs(BaseSchema):
     ewbn = fields.Raw(required=False)
     
     rdpc_id = fields.Int(required=False)
-    
-    awb_type = fields.Str(required=False)
     
 
