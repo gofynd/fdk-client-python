@@ -20,14 +20,14 @@ class CODdata(BaseSchema):
     # Payment swagger.json
 
     
-    remaining = fields.Int(required=False)
+    usages = fields.Int(required=False)
     
     limit = fields.Int(required=False)
     
-    usages = fields.Int(required=False)
-    
-    user_id = fields.Str(required=False)
+    remaining = fields.Int(required=False)
     
     is_active = fields.Boolean(required=False)
+    
+    user_id = fields.Str(required=False)
     
 

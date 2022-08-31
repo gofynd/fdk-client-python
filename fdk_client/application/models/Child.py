@@ -5,13 +5,13 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .ProductListingAction import ProductListingAction
-
 
 
 
 
 from .SecondLevelChild import SecondLevelChild
+
+from .ProductListingAction import ProductListingAction
 
 
 
@@ -24,13 +24,13 @@ class Child(BaseSchema):
     # Catalog swagger.json
 
     
-    action = fields.Nested(ProductListingAction, required=False)
-    
     name = fields.Str(required=False)
     
     uid = fields.Int(required=False)
     
     childs = fields.List(fields.Nested(SecondLevelChild, required=False), required=False)
+    
+    action = fields.Nested(ProductListingAction, required=False)
     
     slug = fields.Str(required=False)
     
