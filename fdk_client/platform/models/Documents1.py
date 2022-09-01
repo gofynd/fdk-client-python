@@ -18,12 +18,12 @@ class Documents1(BaseSchema):
     # Order swagger.json
 
     
-    pan = fields.Nested(Document, required=False)
-    
-    gst = fields.Nested(Document, required=False)
-    
     cin = fields.Nested(Document, required=False)
     
+    pan = fields.Nested(Document, required=False)
+    
     digital_signature = fields.Nested(Document, required=False)
+    
+    gst = fields.Nested(Document, required=False)
     
 

@@ -24,10 +24,10 @@ class ChargeCustomerRequest(BaseSchema):
     
     verified = fields.Boolean(required=False)
     
-    amount = fields.Int(required=False)
+    transaction_token = fields.Str(required=False)
     
     aggregator = fields.Str(required=False)
     
-    transaction_token = fields.Str(required=False)
+    amount = fields.Int(required=False)
     
 

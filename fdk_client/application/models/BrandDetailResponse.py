@@ -20,7 +20,7 @@ class BrandDetailResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    description = fields.Str(required=False)
+    uid = fields.Int(required=False)
     
     name = fields.Str(required=False)
     
@@ -28,6 +28,6 @@ class BrandDetailResponse(BaseSchema):
     
     logo = fields.Nested(Media, required=False)
     
-    uid = fields.Int(required=False)
+    description = fields.Str(required=False)
     
 

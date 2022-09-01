@@ -20,10 +20,10 @@ class ValidateCustomerResponse(BaseSchema):
     
     success = fields.Boolean(required=False)
     
+    data = fields.Dict(required=False)
+    
     error = fields.Dict(required=False)
     
     message = fields.Str(required=False)
-    
-    data = fields.Dict(required=False)
     
 

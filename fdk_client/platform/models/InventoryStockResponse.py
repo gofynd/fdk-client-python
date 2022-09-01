@@ -8,10 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class UnArchiveUserSuccess(BaseSchema):
-    # User swagger.json
+class InventoryStockResponse(BaseSchema):
+    # Catalog swagger.json
 
     
-    success = fields.Boolean(required=False)
+    items = fields.List(fields.Dict(required=False), required=False)
     
 

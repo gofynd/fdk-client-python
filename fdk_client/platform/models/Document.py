@@ -26,8 +26,8 @@ class Document(BaseSchema):
     
     value = fields.Str(required=False)
     
-    ds_type = fields.Str(required=False)
-    
     url = fields.Str(required=False)
+    
+    ds_type = fields.Str(required=False)
     
 

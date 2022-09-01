@@ -5,17 +5,17 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .RecursiveUpdate import RecursiveUpdate
-
 from .DataUpdatePerEntity import DataUpdatePerEntity
+
+from .RecursiveUpdate import RecursiveUpdate
 
 
 class DataUpdate(BaseSchema):
     # Order swagger.json
 
     
-    recursive_updates = fields.Nested(RecursiveUpdate, required=False)
-    
     entity_ids = fields.Nested(DataUpdatePerEntity, required=False)
+    
+    recursive_updates = fields.Nested(RecursiveUpdate, required=False)
     
 

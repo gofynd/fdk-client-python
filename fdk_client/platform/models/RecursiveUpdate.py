@@ -14,8 +14,8 @@ class RecursiveUpdate(BaseSchema):
     # Order swagger.json
 
     
-    bag_ids = fields.List(fields.Str(required=False), required=False)
-    
     entity_ids = fields.List(fields.Str(required=False), required=False)
+    
+    bag_ids = fields.List(fields.Str(required=False), required=False)
     
 

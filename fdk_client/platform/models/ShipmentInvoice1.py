@@ -20,10 +20,10 @@ class ShipmentInvoice1(BaseSchema):
     
     store_invoice_id = fields.Str(required=False)
     
-    invoice_url = fields.Str(required=False)
-    
     updated_date = fields.Int(required=False)
     
     label_url = fields.Str(required=False)
+    
+    invoice_url = fields.Str(required=False)
     
 
