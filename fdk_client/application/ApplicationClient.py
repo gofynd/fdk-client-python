@@ -1205,7 +1205,8 @@ class Cart:
             "getCartSharedItems": "/service/application/cart/v1.0/share-cart/{token}",
             "updateCartWithSharedItems": "/service/application/cart/v1.0/share-cart/{token}/{action}",
             "getPromotionOffers": "/service/application/cart/v1.0/available-promotions",
-            "getLadderOffers": "/service/application/cart/v1.0/available-ladder-prices"
+            "getLadderOffers": "/service/application/cart/v1.0/available-ladder-prices",
+            "overrideCart": "/service/application/cart/v1.0/checkout/over-ride"
             
         }
         self._urls = {
@@ -2179,6 +2180,36 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getLadderOffers"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/available-ladder-prices", slug=slug, store_id=store_id, promotion_id=promotion_id, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+    
+    async def overrideCart(self, body=""):
+        """Generate Fynd order while overriding cart details sent with provided `cart_items`
+        """
+        payload = {}
+        
+        # Parameter validation
+        schema = CartValidator.overrideCart()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models.OverrideCheckoutReq import OverrideCheckoutReq
+        schema = OverrideCheckoutReq()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["overrideCart"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["overrideCart"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/checkout/over-ride", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
 
 class Common:

@@ -22,11 +22,11 @@ class UpdateCartPaymentRequest(BaseSchema):
     # Cart swagger.json
 
     
-    merchant_code = fields.Str(required=False)
+    aggregator_name = fields.Str(required=False)
     
     payment_mode = fields.Str(required=False)
     
-    aggregator_name = fields.Str(required=False)
+    merchant_code = fields.Str(required=False)
     
     payment_identifier = fields.Str(required=False)
     
