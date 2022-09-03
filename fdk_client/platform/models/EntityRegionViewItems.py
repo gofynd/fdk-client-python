@@ -16,9 +16,9 @@ class EntityRegionViewItems(BaseSchema):
     # Serviceability swagger.json
 
     
-    uid = fields.Str(required=False)
-    
     name = fields.Str(required=False)
+    
+    uid = fields.Str(required=False)
     
     sub_type = fields.Str(required=False)
     

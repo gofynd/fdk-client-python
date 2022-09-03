@@ -26,8 +26,8 @@ class Document(BaseSchema):
     
     type = fields.Str(required=False)
     
-    verified = fields.Boolean(required=False)
-    
     value = fields.Str(required=False)
+    
+    verified = fields.Boolean(required=False)
     
 

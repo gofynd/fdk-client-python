@@ -7,17 +7,17 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
-
-
-
-
-
-
 from .OfferPrice import OfferPrice
+
+
+
+
+
+
+
+
+
+
 
 
 class OfferItem(BaseSchema):
@@ -26,7 +26,7 @@ class OfferItem(BaseSchema):
     
     quantity = fields.Int(required=False)
     
-    type = fields.Str(required=False)
+    price = fields.Nested(OfferPrice, required=False)
     
     best = fields.Boolean(required=False)
     
@@ -34,8 +34,8 @@ class OfferItem(BaseSchema):
     
     total = fields.Float(required=False)
     
-    margin = fields.Int(required=False)
+    type = fields.Str(required=False)
     
-    price = fields.Nested(OfferPrice, required=False)
+    margin = fields.Int(required=False)
     
 

@@ -137,14 +137,14 @@ class PaymentValidator:
         application_id = fields.Str(required=False)
          
     
-    class getPosPaymentModeRoutes(BaseSchema):
+    class getUserCODlimitRoutes(BaseSchema):
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
          
     
-    class getPosPaymentModeRoutes(BaseSchema):
+    class setUserCODlimitRoutes(BaseSchema):
         
         company_id = fields.Int(required=False)
         

@@ -39,9 +39,18 @@ class ServiceabilityValidator:
         is_active = fields.Boolean(required=False)
         
         channel_ids = fields.Str(required=False)
+        
+        q = fields.Str(required=False)
          
     
     class getCompanyStoreView(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    
+    class updateZoneControllerView(BaseSchema):
+        
+        zone_id = fields.Str(required=False)
         
         company_id = fields.Int(required=False)
          
@@ -51,13 +60,6 @@ class ServiceabilityValidator:
         company_id = fields.Int(required=False)
         
         zone_id = fields.Str(required=False)
-         
-    
-    class updateZoneControllerView(BaseSchema):
-        
-        zone_id = fields.Str(required=False)
-        
-        company_id = fields.Int(required=False)
          
     
     class upsertZoneControllerView(BaseSchema):
