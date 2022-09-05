@@ -1026,6 +1026,27 @@ class CatalogValidator:
         q = fields.Str(required=False)
          
     
+    class getAppInventory(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        item_ids = fields.List(fields.Int(required=False), required=False)
+        
+        store_ids = fields.List(fields.Int(required=False), required=False)
+        
+        brand_ids = fields.List(fields.Int(required=False), required=False)
+        
+        seller_identifiers = fields.List(fields.Str(required=False), required=False)
+        
+        timestamp = fields.Str(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        page_id = fields.Str(required=False)
+         
+    
     class getOptimalLocations(BaseSchema):
         
         company_id = fields.Str(required=False)
