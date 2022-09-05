@@ -8,14 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class QuantityBase(BaseSchema):
-    # Catalog swagger.json
+class ShipmentUpdateObject(BaseSchema):
+    # Order swagger.json
 
     
-    updated_at = fields.Str(required=False)
-    
-    count = fields.Int(required=False)
+    shipments = fields.Dict(required=False)
     
 
