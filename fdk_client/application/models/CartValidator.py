@@ -39,6 +39,11 @@ class CartValidator:
         b = fields.Boolean(required=False)
          
     
+    class deleteCart(BaseSchema):
+        
+        id = fields.Int(required=False)
+         
+    
     class getItemCount(BaseSchema):
         
         id = fields.Str(required=False)

@@ -20,9 +20,9 @@ class TransferItemsDetails(BaseSchema):
     # Payment swagger.json
 
     
-    id = fields.Int(required=False)
-    
     display_name = fields.Str(required=False)
+    
+    id = fields.Int(required=False)
     
     logo_large = fields.Str(required=False)
     
