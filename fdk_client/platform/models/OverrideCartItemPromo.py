@@ -1,4 +1,4 @@
-"""Application Models."""
+"""Platform Models."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -20,14 +20,14 @@ class OverrideCartItemPromo(BaseSchema):
     # Cart swagger.json
 
     
-    promo_amount = fields.Str(required=False)
+    rwrd_tndr = fields.Str(required=False)
     
     promo_desc = fields.Str(required=False)
     
-    rwrd_tndr = fields.Str(required=False)
-    
-    promo_id = fields.Str(required=False)
+    promo_amount = fields.Str(required=False)
     
     item_list = fields.List(fields.Dict(required=False), required=False)
+    
+    promo_id = fields.Str(required=False)
     
 

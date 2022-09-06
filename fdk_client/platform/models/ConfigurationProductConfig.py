@@ -5,9 +5,9 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-
-
 from .ProductSize import ProductSize
+
+
 
 
 
@@ -24,11 +24,11 @@ class ConfigurationProductConfig(BaseSchema):
     # Catalog swagger.json
 
     
-    priority = fields.Int(required=False)
-    
     size = fields.Nested(ProductSize, required=False)
     
     title = fields.Str(required=False)
+    
+    is_active = fields.Boolean(required=False)
     
     subtitle = fields.Str(required=False)
     
@@ -36,6 +36,6 @@ class ConfigurationProductConfig(BaseSchema):
     
     key = fields.Str(required=False)
     
-    is_active = fields.Boolean(required=False)
+    priority = fields.Int(required=False)
     
 

@@ -1,4 +1,4 @@
-"""Application Models."""
+"""Platform Models."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -22,12 +22,12 @@ class OverrideCheckoutResponse(BaseSchema):
     
     order_id = fields.Str(required=False)
     
-    cart = fields.Dict(required=False)
-    
-    message = fields.Str(required=False)
-    
     success = fields.Str(required=False)
     
     data = fields.Dict(required=False)
+    
+    cart = fields.Dict(required=False)
+    
+    message = fields.Str(required=False)
     
 

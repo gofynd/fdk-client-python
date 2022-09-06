@@ -218,7 +218,3 @@ class CartValidator:
         page_size = fields.Int(required=False)
          
     
-    class overrideCart(BaseSchema):
-        
-        pass 
-    

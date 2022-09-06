@@ -13,22 +13,24 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .BaseInfo import BaseInfo
-
-
-
-from .ArticlePriceInfo import ArticlePriceInfo
-
-from .BaseInfo import BaseInfo
 
 
 
 
 
 
-class ProductArticle(BaseSchema):
+
+
+from .OverrideCartItemPromo import OverrideCartItemPromo
+
+
+
+
+class OverrideCartItem(BaseSchema):
     # Cart swagger.json
 
+    
+    amount_paid = fields.Float(required=False)
     
     quantity = fields.Int(required=False)
     
@@ -36,18 +38,16 @@ class ProductArticle(BaseSchema):
     
     extra_meta = fields.Dict(required=False)
     
-    uid = fields.Str(required=False)
-    
-    store = fields.Nested(BaseInfo, required=False)
+    price_effective = fields.Float(required=False)
     
     size = fields.Str(required=False)
     
-    price = fields.Nested(ArticlePriceInfo, required=False)
+    price_marked = fields.Float(required=False)
     
-    seller = fields.Nested(BaseInfo, required=False)
+    item_id = fields.Int(required=False)
     
-    identifier = fields.Dict(required=False)
+    promo_list = fields.List(fields.Nested(OverrideCartItemPromo, required=False), required=False)
     
-    type = fields.Str(required=False)
+    discount = fields.Float(required=False)
     
 
