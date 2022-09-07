@@ -7,21 +7,21 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .CompanyDetail import CompanyDetail
-
-
-
-
-
 
 
 from .StoreDetail import StoreDetail
 
-
-
 from .ProductStockPrice import ProductStockPrice
 
+
+
 from .Seller import Seller
+
+
+
+
+
+from .CompanyDetail import CompanyDetail
 
 
 class ProductStockStatusItem(BaseSchema):
@@ -30,20 +30,20 @@ class ProductStockStatusItem(BaseSchema):
     
     item_id = fields.Int(required=False)
     
-    company = fields.Nested(CompanyDetail, required=False)
-    
-    size = fields.Str(required=False)
-    
     quantity = fields.Int(required=False)
-    
-    uid = fields.Str(required=False)
     
     store = fields.Nested(StoreDetail, required=False)
     
-    identifier = fields.Dict(required=False)
-    
     price = fields.Nested(ProductStockPrice, required=False)
     
+    size = fields.Str(required=False)
+    
     seller = fields.Nested(Seller, required=False)
+    
+    identifier = fields.Dict(required=False)
+    
+    uid = fields.Str(required=False)
+    
+    company = fields.Nested(CompanyDetail, required=False)
     
 

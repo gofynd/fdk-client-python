@@ -8,18 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
-class PricesBreakup(BaseSchema):
+class ResponseVerifyOTPShipment(BaseSchema):
     # Order swagger.json
 
     
-    value = fields.Int(required=False)
-    
-    name = fields.Str(required=False)
-    
-    display = fields.Str(required=False)
+    success = fields.Boolean(required=False)
     
 

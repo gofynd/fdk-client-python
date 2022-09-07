@@ -8,10 +8,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class VerifyOtpResponse(BaseSchema):
+
+
+class Identifiers(BaseSchema):
     # Order swagger.json
 
     
-    success = fields.Boolean(required=False)
+    ean = fields.Str(required=False)
+    
+    sku_code = fields.Str(required=False)
     
 
