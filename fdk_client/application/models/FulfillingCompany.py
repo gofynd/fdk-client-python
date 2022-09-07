@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class ShipmentTotalDetails(BaseSchema):
+class FulfillingCompany(BaseSchema):
     # Order swagger.json
 
     
-    total_price = fields.Float(required=False)
+    name = fields.Str(required=False)
     
-    sizes = fields.Int(required=False)
-    
-    pieces = fields.Int(required=False)
+    id = fields.Int(required=False)
     
 

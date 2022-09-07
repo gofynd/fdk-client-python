@@ -18,8 +18,8 @@ class BalanceDetails(BaseSchema):
     
     currency = fields.Str(required=False)
     
-    formatted_value = fields.Str(required=False)
-    
     value = fields.Float(required=False)
+    
+    formatted_value = fields.Str(required=False)
     
 

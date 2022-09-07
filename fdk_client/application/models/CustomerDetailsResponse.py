@@ -14,16 +14,20 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ResponseGetCreditNoteShipment(BaseSchema):
+
+
+class CustomerDetailsResponse(BaseSchema):
     # Order swagger.json
 
     
-    success = fields.Boolean(required=False)
-    
-    presigned_type = fields.Str(required=False)
+    phone = fields.Str(required=False)
     
     shipment_id = fields.Str(required=False)
     
-    presigned_url = fields.Str(required=False)
+    country = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    order_id = fields.Str(required=False)
     
 

@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class StatusesBody(BaseSchema):
+class VerifyOtp(BaseSchema):
     # Order swagger.json
 
     
-    status = fields.Str(required=False)
+    request_id = fields.Str(required=False)
     
-    shipments = fields.Dict(required=False)
+    otp_code = fields.Int(required=False)
     
 

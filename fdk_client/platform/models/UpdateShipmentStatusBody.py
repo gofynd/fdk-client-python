@@ -7,7 +7,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .ShipmentUpdateObject import ShipmentUpdateObject
+
 
 
 
@@ -20,7 +20,7 @@ class UpdateShipmentStatusBody(BaseSchema):
     
     shipments = fields.Dict(required=False)
     
-    statuses = fields.List(fields.Nested(ShipmentUpdateObject, required=False), required=False)
+    statuses = fields.List(fields.Raw(required=False), required=False)
     
     force_transition = fields.Boolean(required=False)
     
