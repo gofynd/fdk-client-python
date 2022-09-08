@@ -28,22 +28,22 @@ class ShipmentPayments(BaseSchema):
     # Order swagger.json
 
     
-    sp_id = fields.Int(required=False)
-    
-    source_nickname = fields.Str(required=False)
-    
-    display_name = fields.Str(required=False)
+    source = fields.Str(required=False)
     
     is_active = fields.Boolean(required=False)
     
-    source = fields.Str(required=False)
-    
-    display_priority = fields.Int(required=False)
-    
     mode = fields.Str(required=False)
+    
+    display_name = fields.Str(required=False)
+    
+    logo = fields.Str(required=False)
+    
+    source_nickname = fields.Str(required=False)
     
     payment_identifier = fields.Str(required=False)
     
-    logo = fields.Str(required=False)
+    display_priority = fields.Int(required=False)
+    
+    sp_id = fields.Int(required=False)
     
 

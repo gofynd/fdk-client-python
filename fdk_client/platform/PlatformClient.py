@@ -1927,23 +1927,39 @@ class Order:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/update-shipment-status", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
-    async def getShipmentDetailsById(self, shipment_id=None):
+    async def getShipmentById(self, shipment_id=None, channel_order_id=None, channel_shipment_id=None, channel_bag_id=None, channel_id=None):
         """
         :param shipment_id :  : type string
+        :param channel_order_id :  : type string
+        :param channel_shipment_id :  : type string
+        :param channel_bag_id :  : type string
+        :param channel_id :  : type string
         """
         payload = {}
         
         if shipment_id:
             payload["shipment_id"] = shipment_id
         
+        if channel_order_id:
+            payload["channel_order_id"] = channel_order_id
+        
+        if channel_shipment_id:
+            payload["channel_shipment_id"] = channel_shipment_id
+        
+        if channel_bag_id:
+            payload["channel_bag_id"] = channel_bag_id
+        
+        if channel_id:
+            payload["channel_id"] = channel_id
+        
 
         # Parameter validation
-        schema = OrderValidator.getShipmentDetailsById()
+        schema = OrderValidator.getShipmentById()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipment-details", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"query","name":"shipment_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"in":"query","name":"shipment_id","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", shipment_id=shipment_id)
-        query_string = await create_query_string(shipment_id=shipment_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipment-details", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"query","name":"shipment_id","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"channel_order_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"channel_shipment_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"channel_bag_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"channel_id","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","name":"shipment_id","required":true,"schema":{"type":"string"}},{"in":"query","name":"channel_order_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"channel_shipment_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"channel_bag_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"channel_id","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", shipment_id=shipment_id, channel_order_id=channel_order_id, channel_shipment_id=channel_shipment_id, channel_bag_id=channel_bag_id, channel_id=channel_id)
+        query_string = await create_query_string(shipment_id=shipment_id, channel_order_id=channel_order_id, channel_shipment_id=channel_shipment_id, channel_bag_id=channel_bag_id, channel_id=channel_id)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -1953,18 +1969,42 @@ class Order:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipment-details", shipment_id=shipment_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipment-details", shipment_id=shipment_id, channel_order_id=channel_order_id, channel_shipment_id=channel_shipment_id, channel_bag_id=channel_bag_id, channel_id=channel_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
-    async def getShipmentsByShipmentIds(self, shipment_ids=None, page_no=None, page_size=None):
+    async def getShipments(self, bag_ids=None, shipment_ids=None, order_ids=None, channel_bag_ids=None, channel_shipment_ids=None, channel_order_ids=None, channel_id=None, page_no=None, page_size=None):
         """
+        :param bag_ids :  : type string
         :param shipment_ids :  : type string
+        :param order_ids :  : type string
+        :param channel_bag_ids :  : type string
+        :param channel_shipment_ids :  : type string
+        :param channel_order_ids :  : type string
+        :param channel_id :  : type string
         :param page_no :  : type integer
         :param page_size :  : type integer
         """
         payload = {}
         
+        if bag_ids:
+            payload["bag_ids"] = bag_ids
+        
         if shipment_ids:
             payload["shipment_ids"] = shipment_ids
+        
+        if order_ids:
+            payload["order_ids"] = order_ids
+        
+        if channel_bag_ids:
+            payload["channel_bag_ids"] = channel_bag_ids
+        
+        if channel_shipment_ids:
+            payload["channel_shipment_ids"] = channel_shipment_ids
+        
+        if channel_order_ids:
+            payload["channel_order_ids"] = channel_order_ids
+        
+        if channel_id:
+            payload["channel_id"] = channel_id
         
         if page_no:
             payload["page_no"] = page_no
@@ -1974,12 +2014,12 @@ class Order:
         
 
         # Parameter validation
-        schema = OrderValidator.getShipmentsByShipmentIds()
+        schema = OrderValidator.getShipments()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipments", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"query","name":"shipment_ids","required":true,"schema":{"type":"string","example":["19098374817831894713","1698374817831894713"]}}],"optional":[{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":20}}],"query":[{"in":"query","name":"shipment_ids","required":true,"schema":{"type":"string","example":["19098374817831894713","1698374817831894713"]}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":20}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", shipment_ids=shipment_ids, page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(shipment_ids=shipment_ids, page_no=page_no, page_size=page_size)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipments", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"bag_ids","required":false,"schema":{"type":"string","example":["1234","2344"]}},{"in":"query","name":"shipment_ids","required":false,"schema":{"type":"string","example":["1661111234","167772344"]}},{"in":"query","name":"order_ids","required":false,"schema":{"type":"string","example":["1661111234","167772344"]}},{"in":"query","name":"channel_bag_ids","required":false,"schema":{"type":"string","example":["B1234","B2344"]}},{"in":"query","name":"channel_shipment_ids","required":false,"schema":{"type":"string","example":["S1234","S2344"]}},{"in":"query","name":"channel_order_ids","required":false,"schema":{"type":"string","example":["O1234","02344"]}},{"in":"query","name":"channel_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":20}}],"query":[{"in":"query","name":"bag_ids","required":false,"schema":{"type":"string","example":["1234","2344"]}},{"in":"query","name":"shipment_ids","required":false,"schema":{"type":"string","example":["1661111234","167772344"]}},{"in":"query","name":"order_ids","required":false,"schema":{"type":"string","example":["1661111234","167772344"]}},{"in":"query","name":"channel_bag_ids","required":false,"schema":{"type":"string","example":["B1234","B2344"]}},{"in":"query","name":"channel_shipment_ids","required":false,"schema":{"type":"string","example":["S1234","S2344"]}},{"in":"query","name":"channel_order_ids","required":false,"schema":{"type":"string","example":["O1234","02344"]}},{"in":"query","name":"channel_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":20}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", bag_ids=bag_ids, shipment_ids=shipment_ids, order_ids=order_ids, channel_bag_ids=channel_bag_ids, channel_shipment_ids=channel_shipment_ids, channel_order_ids=channel_order_ids, channel_id=channel_id, page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(bag_ids=bag_ids, shipment_ids=shipment_ids, order_ids=order_ids, channel_bag_ids=channel_bag_ids, channel_shipment_ids=channel_shipment_ids, channel_order_ids=channel_order_ids, channel_id=channel_id, page_no=page_no, page_size=page_size)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -1989,11 +2029,15 @@ class Order:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipments", shipment_ids=shipment_ids, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipments", bag_ids=bag_ids, shipment_ids=shipment_ids, order_ids=order_ids, channel_bag_ids=channel_bag_ids, channel_shipment_ids=channel_shipment_ids, channel_order_ids=channel_order_ids, channel_id=channel_id, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
-    async def getOrderById(self, fynd_order_id=None, page_no=None, page_size=None):
+    async def getOrderById(self, fynd_order_id=None, channel_order_id=None, channel_shipment_id=None, channel_bag_id=None, channel_id=None, page_no=None, page_size=None):
         """
         :param fynd_order_id :  : type string
+        :param channel_order_id :  : type string
+        :param channel_shipment_id :  : type string
+        :param channel_bag_id :  : type string
+        :param channel_id :  : type string
         :param page_no :  : type integer
         :param page_size :  : type integer
         """
@@ -2001,6 +2045,18 @@ class Order:
         
         if fynd_order_id:
             payload["fynd_order_id"] = fynd_order_id
+        
+        if channel_order_id:
+            payload["channel_order_id"] = channel_order_id
+        
+        if channel_shipment_id:
+            payload["channel_shipment_id"] = channel_shipment_id
+        
+        if channel_bag_id:
+            payload["channel_bag_id"] = channel_bag_id
+        
+        if channel_id:
+            payload["channel_id"] = channel_id
         
         if page_no:
             payload["page_no"] = page_no
@@ -2014,8 +2070,8 @@ class Order:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/order-details", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"query","name":"fynd_order_id","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":20}}],"query":[{"in":"query","name":"fynd_order_id","required":true,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":20}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", fynd_order_id=fynd_order_id, page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(fynd_order_id=fynd_order_id, page_no=page_no, page_size=page_size)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/order-details", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"fynd_order_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"channel_order_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"channel_shipment_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"channel_bag_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"channel_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":20}}],"query":[{"in":"query","name":"fynd_order_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"channel_order_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"channel_shipment_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"channel_bag_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"channel_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":20}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", fynd_order_id=fynd_order_id, channel_order_id=channel_order_id, channel_shipment_id=channel_shipment_id, channel_bag_id=channel_bag_id, channel_id=channel_id, page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(fynd_order_id=fynd_order_id, channel_order_id=channel_order_id, channel_shipment_id=channel_shipment_id, channel_bag_id=channel_bag_id, channel_id=channel_id, page_no=page_no, page_size=page_size)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -2025,22 +2081,42 @@ class Order:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/order-details", fynd_order_id=fynd_order_id, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/order-details", fynd_order_id=fynd_order_id, channel_order_id=channel_order_id, channel_shipment_id=channel_shipment_id, channel_bag_id=channel_bag_id, channel_id=channel_id, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
-    async def getShipmentByAffiliateBagId(self, affiliate_bag_id=None, affiliate_id=None, page_no=None, page_size=None):
+    async def getOrders(self, bag_ids=None, shipment_ids=None, order_ids=None, channel_bag_ids=None, channel_shipment_ids=None, channel_order_ids=None, channel_id=None, page_no=None, page_size=None):
         """
-        :param affiliate_bag_id :  : type string
-        :param affiliate_id :  : type string
+        :param bag_ids :  : type string
+        :param shipment_ids :  : type string
+        :param order_ids :  : type string
+        :param channel_bag_ids :  : type string
+        :param channel_shipment_ids :  : type string
+        :param channel_order_ids :  : type string
+        :param channel_id :  : type string
         :param page_no :  : type integer
         :param page_size :  : type integer
         """
         payload = {}
         
-        if affiliate_bag_id:
-            payload["affiliate_bag_id"] = affiliate_bag_id
+        if bag_ids:
+            payload["bag_ids"] = bag_ids
         
-        if affiliate_id:
-            payload["affiliate_id"] = affiliate_id
+        if shipment_ids:
+            payload["shipment_ids"] = shipment_ids
+        
+        if order_ids:
+            payload["order_ids"] = order_ids
+        
+        if channel_bag_ids:
+            payload["channel_bag_ids"] = channel_bag_ids
+        
+        if channel_shipment_ids:
+            payload["channel_shipment_ids"] = channel_shipment_ids
+        
+        if channel_order_ids:
+            payload["channel_order_ids"] = channel_order_ids
+        
+        if channel_id:
+            payload["channel_id"] = channel_id
         
         if page_no:
             payload["page_no"] = page_no
@@ -2050,12 +2126,12 @@ class Order:
         
 
         # Parameter validation
-        schema = OrderValidator.getShipmentByAffiliateBagId()
+        schema = OrderValidator.getOrders()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipment-details-by-affiliate-bag-id", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"query","name":"affiliate_bag_id","required":true,"schema":{"type":"string"}},{"in":"query","name":"affiliate_id","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":20}}],"query":[{"in":"query","name":"affiliate_bag_id","required":true,"schema":{"type":"string"}},{"in":"query","name":"affiliate_id","required":true,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":20}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", affiliate_bag_id=affiliate_bag_id, affiliate_id=affiliate_id, page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(affiliate_bag_id=affiliate_bag_id, affiliate_id=affiliate_id, page_no=page_no, page_size=page_size)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/orders", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"bag_ids","required":false,"schema":{"type":"string","example":["1234","2344"]}},{"in":"query","name":"shipment_ids","required":false,"schema":{"type":"string","example":["1661111234","167772344"]}},{"in":"query","name":"order_ids","required":false,"schema":{"type":"string","example":["1661111234","167772344"]}},{"in":"query","name":"channel_bag_ids","required":false,"schema":{"type":"string","example":["B1234","B2344"]}},{"in":"query","name":"channel_shipment_ids","required":false,"schema":{"type":"string","example":["S1234","S2344"]}},{"in":"query","name":"channel_order_ids","required":false,"schema":{"type":"string","example":["O1234","02344"]}},{"in":"query","name":"channel_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":20}}],"query":[{"in":"query","name":"bag_ids","required":false,"schema":{"type":"string","example":["1234","2344"]}},{"in":"query","name":"shipment_ids","required":false,"schema":{"type":"string","example":["1661111234","167772344"]}},{"in":"query","name":"order_ids","required":false,"schema":{"type":"string","example":["1661111234","167772344"]}},{"in":"query","name":"channel_bag_ids","required":false,"schema":{"type":"string","example":["B1234","B2344"]}},{"in":"query","name":"channel_shipment_ids","required":false,"schema":{"type":"string","example":["S1234","S2344"]}},{"in":"query","name":"channel_order_ids","required":false,"schema":{"type":"string","example":["O1234","02344"]}},{"in":"query","name":"channel_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":20}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", bag_ids=bag_ids, shipment_ids=shipment_ids, order_ids=order_ids, channel_bag_ids=channel_bag_ids, channel_shipment_ids=channel_shipment_ids, channel_order_ids=channel_order_ids, channel_id=channel_id, page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(bag_ids=bag_ids, shipment_ids=shipment_ids, order_ids=order_ids, channel_bag_ids=channel_bag_ids, channel_shipment_ids=channel_shipment_ids, channel_order_ids=channel_order_ids, channel_id=channel_id, page_no=page_no, page_size=page_size)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -2065,54 +2141,42 @@ class Order:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipment-details-by-affiliate-bag-id", affiliate_bag_id=affiliate_bag_id, affiliate_id=affiliate_id, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/orders", bag_ids=bag_ids, shipment_ids=shipment_ids, order_ids=order_ids, channel_bag_ids=channel_bag_ids, channel_shipment_ids=channel_shipment_ids, channel_order_ids=channel_order_ids, channel_id=channel_id, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
-    async def getShipmentByAffiliateShipmentId(self, affiliate_shipment_id=None, affiliate_id=None):
+    async def getBags(self, bag_ids=None, shipment_ids=None, order_ids=None, channel_bag_ids=None, channel_shipment_ids=None, channel_order_ids=None, channel_id=None, page_no=None, page_size=None):
         """
-        :param affiliate_shipment_id :  : type string
-        :param affiliate_id :  : type string
-        """
-        payload = {}
-        
-        if affiliate_shipment_id:
-            payload["affiliate_shipment_id"] = affiliate_shipment_id
-        
-        if affiliate_id:
-            payload["affiliate_id"] = affiliate_id
-        
-
-        # Parameter validation
-        schema = OrderValidator.getShipmentByAffiliateShipmentId()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipment-details-by-affiliate-shipment-id", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"query","name":"affiliate_shipment_id","required":true,"schema":{"type":"string"}},{"in":"query","name":"affiliate_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"in":"query","name":"affiliate_shipment_id","required":true,"schema":{"type":"string"}},{"in":"query","name":"affiliate_id","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", affiliate_shipment_id=affiliate_shipment_id, affiliate_id=affiliate_id)
-        query_string = await create_query_string(affiliate_shipment_id=affiliate_shipment_id, affiliate_id=affiliate_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipment-details-by-affiliate-shipment-id", affiliate_shipment_id=affiliate_shipment_id, affiliate_id=affiliate_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-    
-    async def getShipmentsByAffiliateOrderId(self, affiliate_id=None, affiliate_order_id=None, page_no=None, page_size=None):
-        """
-        :param affiliate_id :  : type string
-        :param affiliate_order_id :  : type string
+        :param bag_ids :  : type string
+        :param shipment_ids :  : type string
+        :param order_ids :  : type string
+        :param channel_bag_ids :  : type string
+        :param channel_shipment_ids :  : type string
+        :param channel_order_ids :  : type string
+        :param channel_id :  : type string
         :param page_no :  : type integer
         :param page_size :  : type integer
         """
         payload = {}
         
-        if affiliate_id:
-            payload["affiliate_id"] = affiliate_id
+        if bag_ids:
+            payload["bag_ids"] = bag_ids
         
-        if affiliate_order_id:
-            payload["affiliate_order_id"] = affiliate_order_id
+        if shipment_ids:
+            payload["shipment_ids"] = shipment_ids
+        
+        if order_ids:
+            payload["order_ids"] = order_ids
+        
+        if channel_bag_ids:
+            payload["channel_bag_ids"] = channel_bag_ids
+        
+        if channel_shipment_ids:
+            payload["channel_shipment_ids"] = channel_shipment_ids
+        
+        if channel_order_ids:
+            payload["channel_order_ids"] = channel_order_ids
+        
+        if channel_id:
+            payload["channel_id"] = channel_id
         
         if page_no:
             payload["page_no"] = page_no
@@ -2122,12 +2186,12 @@ class Order:
         
 
         # Parameter validation
-        schema = OrderValidator.getShipmentsByAffiliateOrderId()
+        schema = OrderValidator.getBags()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipment-details-by-affiliate-order-id", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"query","name":"affiliate_id","required":true,"schema":{"type":"string"}},{"in":"query","name":"affiliate_order_id","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":20}}],"query":[{"in":"query","name":"affiliate_id","required":true,"schema":{"type":"string"}},{"in":"query","name":"affiliate_order_id","required":true,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":20}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", affiliate_id=affiliate_id, affiliate_order_id=affiliate_order_id, page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(affiliate_id=affiliate_id, affiliate_order_id=affiliate_order_id, page_no=page_no, page_size=page_size)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/bags", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"bag_ids","required":false,"schema":{"type":"string","example":["1234","2344"]}},{"in":"query","name":"shipment_ids","required":false,"schema":{"type":"string","example":["1661111234","167772344"]}},{"in":"query","name":"order_ids","required":false,"schema":{"type":"string","example":["1661111234","167772344"]}},{"in":"query","name":"channel_bag_ids","required":false,"schema":{"type":"string","example":["B1234","B2344"]}},{"in":"query","name":"channel_shipment_ids","required":false,"schema":{"type":"string","example":["S1234","S2344"]}},{"in":"query","name":"channel_order_ids","required":false,"schema":{"type":"string","example":["O1234","02344"]}},{"in":"query","name":"channel_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":20}}],"query":[{"in":"query","name":"bag_ids","required":false,"schema":{"type":"string","example":["1234","2344"]}},{"in":"query","name":"shipment_ids","required":false,"schema":{"type":"string","example":["1661111234","167772344"]}},{"in":"query","name":"order_ids","required":false,"schema":{"type":"string","example":["1661111234","167772344"]}},{"in":"query","name":"channel_bag_ids","required":false,"schema":{"type":"string","example":["B1234","B2344"]}},{"in":"query","name":"channel_shipment_ids","required":false,"schema":{"type":"string","example":["S1234","S2344"]}},{"in":"query","name":"channel_order_ids","required":false,"schema":{"type":"string","example":["O1234","02344"]}},{"in":"query","name":"channel_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":20}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", bag_ids=bag_ids, shipment_ids=shipment_ids, order_ids=order_ids, channel_bag_ids=channel_bag_ids, channel_shipment_ids=channel_shipment_ids, channel_order_ids=channel_order_ids, channel_id=channel_id, page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(bag_ids=bag_ids, shipment_ids=shipment_ids, order_ids=order_ids, channel_bag_ids=channel_bag_ids, channel_shipment_ids=channel_shipment_ids, channel_order_ids=channel_order_ids, channel_id=channel_id, page_no=page_no, page_size=page_size)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -2137,7 +2201,43 @@ class Order:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipment-details-by-affiliate-order-id", affiliate_id=affiliate_id, affiliate_order_id=affiliate_order_id, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/bags", bag_ids=bag_ids, shipment_ids=shipment_ids, order_ids=order_ids, channel_bag_ids=channel_bag_ids, channel_shipment_ids=channel_shipment_ids, channel_order_ids=channel_order_ids, channel_id=channel_id, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+    
+    async def getBagById(self, bag_id=None, channel_bag_id=None, channel_id=None):
+        """
+        :param bag_id :  : type string
+        :param channel_bag_id :  : type string
+        :param channel_id :  : type string
+        """
+        payload = {}
+        
+        if bag_id:
+            payload["bag_id"] = bag_id
+        
+        if channel_bag_id:
+            payload["channel_bag_id"] = channel_bag_id
+        
+        if channel_id:
+            payload["channel_id"] = channel_id
+        
+
+        # Parameter validation
+        schema = OrderValidator.getBagById()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/bag-details", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"bag_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"channel_bag_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"channel_id","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","name":"bag_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"channel_bag_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"channel_id","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", bag_id=bag_id, channel_bag_id=channel_bag_id, channel_id=channel_id)
+        query_string = await create_query_string(bag_id=bag_id, channel_bag_id=channel_bag_id, channel_id=channel_id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/bag-details", bag_id=bag_id, channel_bag_id=channel_bag_id, channel_id=channel_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
 
 class Catalog:
@@ -2807,22 +2907,14 @@ class Catalog:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/{uid}/", uid=uid), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
-    async def listProductTemplate(self, department=None, page_no=None, page_size=None):
+    async def listProductTemplate(self, department=None):
         """Allows you to list all product templates, also can filter by department
         :param department : A `department` is the name of a particular department. : type string
-        :param page_no : The page number to navigate through the given set of results : type integer
-        :param page_size : Number of items to retrieve in each page. Default is 10. : type integer
         """
         payload = {}
         
         if department:
             payload["department"] = department
-        
-        if page_no:
-            payload["page_no"] = page_no
-        
-        if page_size:
-            payload["page_size"] = page_size
         
 
         # Parameter validation
@@ -2830,8 +2922,8 @@ class Catalog:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"query","name":"department","description":"A `department` is the name of a particular department.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer","default":10},"required":false}],"query":[{"in":"query","name":"department","description":"A `department` is the name of a particular department.","schema":{"type":"string"},"required":true},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer","default":10},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}]}""", department=department, page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(department=department, page_no=page_no, page_size=page_size)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"query","name":"department","description":"A `department` is the name of a particular department.","schema":{"type":"string"},"required":true}],"optional":[],"query":[{"in":"query","name":"department","description":"A `department` is the name of a particular department.","schema":{"type":"string"},"required":true}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}]}""", department=department)
+        query_string = await create_query_string(department=department)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -2841,7 +2933,7 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/", department=department, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/", department=department), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def validateProductTemplate(self, slug=None):
         """Allows you to list all product templates validation values for all the fields present in the database
@@ -3286,34 +3378,6 @@ class Catalog:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-attributes/", category=category, filter=filter), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
-    async def deleteProduct(self, item_id=None):
-        """This API allows to delete product.
-        :param item_id : Id of the product to be updated. : type integer
-        """
-        payload = {}
-        
-        if item_id:
-            payload["item_id"] = item_id
-        
-
-        # Parameter validation
-        schema = CatalogValidator.deleteProduct()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/", """{"required":[{"in":"path","name":"company_id","description":"Company Id of the company associated to product that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Id of the product to be updated.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of the company associated to product that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Id of the product to be updated.","schema":{"type":"integer"},"required":true}]}""", item_id=item_id)
-        query_string = await create_query_string(item_id=item_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-    
     async def getProduct(self, item_code=None, item_id=None, brand_uid=None):
         """This API helps to get data associated to a particular product.
         :param item_code : Item code of the product. : type string
@@ -3382,6 +3446,34 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+    
+    async def deleteProduct(self, item_id=None):
+        """This API allows to delete product.
+        :param item_id : Id of the product to be updated. : type integer
+        """
+        payload = {}
+        
+        if item_id:
+            payload["item_id"] = item_id
+        
+
+        # Parameter validation
+        schema = CatalogValidator.deleteProduct()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/", """{"required":[{"in":"path","name":"company_id","description":"Company Id of the company associated to product that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Id of the product to be updated.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of the company associated to product that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Id of the product to be updated.","schema":{"type":"integer"},"required":true}]}""", item_id=item_id)
+        query_string = await create_query_string(item_id=item_id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def getProductValidation(self, ):
         """This API validates product data.

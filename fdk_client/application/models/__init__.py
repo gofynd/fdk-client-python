@@ -1398,9 +1398,9 @@ from .KYCAddress import KYCAddress
     
 from .UserPersonalInfoInDetails import UserPersonalInfoInDetails
     
-from .DeviceDetails import DeviceDetails
-    
 from .BusinessDetails import BusinessDetails
+    
+from .DeviceDetails import DeviceDetails
     
 from .CustomerOnboardingRequest import CustomerOnboardingRequest
     

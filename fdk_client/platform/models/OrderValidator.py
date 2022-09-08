@@ -313,18 +313,38 @@ class OrderValidator:
         company_id = fields.Int(required=False)
          
     
-    class getShipmentDetailsById(BaseSchema):
+    class getShipmentById(BaseSchema):
         
         company_id = fields.Int(required=False)
         
         shipment_id = fields.Str(required=False)
+        
+        channel_order_id = fields.Str(required=False)
+        
+        channel_shipment_id = fields.Str(required=False)
+        
+        channel_bag_id = fields.Str(required=False)
+        
+        channel_id = fields.Str(required=False)
          
     
-    class getShipmentsByShipmentIds(BaseSchema):
+    class getShipments(BaseSchema):
         
         company_id = fields.Int(required=False)
         
+        bag_ids = fields.Str(required=False)
+        
         shipment_ids = fields.Str(required=False)
+        
+        order_ids = fields.Str(required=False)
+        
+        channel_bag_ids = fields.Str(required=False)
+        
+        channel_shipment_ids = fields.Str(required=False)
+        
+        channel_order_ids = fields.Str(required=False)
+        
+        channel_id = fields.Str(required=False)
         
         page_no = fields.Int(required=False)
         
@@ -337,43 +357,73 @@ class OrderValidator:
         
         fynd_order_id = fields.Str(required=False)
         
-        page_no = fields.Int(required=False)
+        channel_order_id = fields.Str(required=False)
         
-        page_size = fields.Int(required=False)
-         
-    
-    class getShipmentByAffiliateBagId(BaseSchema):
+        channel_shipment_id = fields.Str(required=False)
         
-        company_id = fields.Int(required=False)
+        channel_bag_id = fields.Str(required=False)
         
-        affiliate_bag_id = fields.Str(required=False)
-        
-        affiliate_id = fields.Str(required=False)
+        channel_id = fields.Str(required=False)
         
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
          
     
-    class getShipmentByAffiliateShipmentId(BaseSchema):
+    class getOrders(BaseSchema):
         
         company_id = fields.Int(required=False)
         
-        affiliate_shipment_id = fields.Str(required=False)
+        bag_ids = fields.Str(required=False)
         
-        affiliate_id = fields.Str(required=False)
-         
-    
-    class getShipmentsByAffiliateOrderId(BaseSchema):
+        shipment_ids = fields.Str(required=False)
         
-        company_id = fields.Int(required=False)
+        order_ids = fields.Str(required=False)
         
-        affiliate_id = fields.Str(required=False)
+        channel_bag_ids = fields.Str(required=False)
         
-        affiliate_order_id = fields.Str(required=False)
+        channel_shipment_ids = fields.Str(required=False)
+        
+        channel_order_ids = fields.Str(required=False)
+        
+        channel_id = fields.Str(required=False)
         
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
+         
+    
+    class getBags(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        bag_ids = fields.Str(required=False)
+        
+        shipment_ids = fields.Str(required=False)
+        
+        order_ids = fields.Str(required=False)
+        
+        channel_bag_ids = fields.Str(required=False)
+        
+        channel_shipment_ids = fields.Str(required=False)
+        
+        channel_order_ids = fields.Str(required=False)
+        
+        channel_id = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+         
+    
+    class getBagById(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        bag_id = fields.Str(required=False)
+        
+        channel_bag_id = fields.Str(required=False)
+        
+        channel_id = fields.Str(required=False)
          
     

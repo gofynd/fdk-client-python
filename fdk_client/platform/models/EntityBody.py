@@ -11,23 +11,23 @@ from .DataUpdate import DataUpdate
 
 
 
-
-
 from .EntityReason import EntityReason
+
+
 
 
 class EntityBody(BaseSchema):
     # Order swagger.json
 
     
-    entity_ids = fields.List(fields.Str(required=False), required=False)
+    next_status = fields.Str(required=False)
     
     data_updates = fields.Nested(DataUpdate, required=False)
-    
-    next_status = fields.Str(required=False)
     
     bag_ids = fields.List(fields.Str(required=False), required=False)
     
     reasons = fields.Nested(EntityReason, required=False)
+    
+    entity_ids = fields.List(fields.Str(required=False), required=False)
     
 

@@ -18,11 +18,11 @@ class B2BPODetails(BaseSchema):
     # Order swagger.json
 
     
+    total_gst_percentage = fields.Float(required=False)
+    
     po_tax_amount = fields.Float(required=False)
     
     item_base_price = fields.Float(required=False)
-    
-    total_gst_percentage = fields.Float(required=False)
     
     po_line_amount = fields.Float(required=False)
     

@@ -26,8 +26,8 @@ class CreatePaymentLinkMeta(BaseSchema):
     
     checkout_mode = fields.Str(required=False)
     
-    cart_id = fields.Str(required=False)
-    
     amount = fields.Str(required=False)
+    
+    cart_id = fields.Str(required=False)
     
 

@@ -1360,21 +1360,43 @@ from .GetClickToCallResponse import GetClickToCallResponse
     
 from .ApefaceApiError import ApefaceApiError
     
+from .OrderUser import OrderUser
+    
+from .OrderPriority import OrderPriority
+    
+from .ArticleDetails import ArticleDetails
+    
+from .ShipmentDetails import ShipmentDetails
+    
+from .LocationDetails import LocationDetails
+    
+from .ShipmentConfig import ShipmentConfig
+    
+from .ShipmentData import ShipmentData
+    
+from .MarketPlacePdf import MarketPlacePdf
+    
+from .AffiliateBag import AffiliateBag
+    
+from .UserData import UserData
+    
+from .OrderInfo import OrderInfo
+    
 from .AffiliateStoreIdMapping import AffiliateStoreIdMapping
     
 from .AffiliateAppConfigMeta import AffiliateAppConfigMeta
     
 from .AffiliateAppConfig import AffiliateAppConfig
     
-from .AffiliateInventoryPaymentConfig import AffiliateInventoryPaymentConfig
-    
-from .AffiliateInventoryOrderConfig import AffiliateInventoryOrderConfig
-    
-from .AffiliateInventoryStoreConfig import AffiliateInventoryStoreConfig
+from .AffiliateInventoryLogisticsConfig import AffiliateInventoryLogisticsConfig
     
 from .AffiliateInventoryArticleAssignmentConfig import AffiliateInventoryArticleAssignmentConfig
     
-from .AffiliateInventoryLogisticsConfig import AffiliateInventoryLogisticsConfig
+from .AffiliateInventoryStoreConfig import AffiliateInventoryStoreConfig
+    
+from .AffiliateInventoryOrderConfig import AffiliateInventoryOrderConfig
+    
+from .AffiliateInventoryPaymentConfig import AffiliateInventoryPaymentConfig
     
 from .AffiliateInventoryConfig import AffiliateInventoryConfig
     
@@ -1383,28 +1405,6 @@ from .AffiliateConfig import AffiliateConfig
 from .Affiliate import Affiliate
     
 from .OrderConfig import OrderConfig
-    
-from .MarketPlacePdf import MarketPlacePdf
-    
-from .AffiliateBag import AffiliateBag
-    
-from .OrderUser import OrderUser
-    
-from .ArticleDetails import ArticleDetails
-    
-from .LocationDetails import LocationDetails
-    
-from .ShipmentDetails import ShipmentDetails
-    
-from .ShipmentConfig import ShipmentConfig
-    
-from .ShipmentData import ShipmentData
-    
-from .UserData import UserData
-    
-from .OrderPriority import OrderPriority
-    
-from .OrderInfo import OrderInfo
     
 from .CreateOrderPayload import CreateOrderPayload
     
@@ -1426,17 +1426,17 @@ from .Entities import Entities
     
 from .UpdateShipmentLockPayload import UpdateShipmentLockPayload
     
-from .Bags1 import Bags1
-    
 from .OriginalFilter import OriginalFilter
+    
+from .Bags1 import Bags1
     
 from .CheckResponse import CheckResponse
     
 from .UpdateShipmentLockResponse import UpdateShipmentLockResponse
     
-from .DataUpdatePerEntity import DataUpdatePerEntity
-    
 from .RecursiveUpdate import RecursiveUpdate
+    
+from .DataUpdatePerEntity import DataUpdatePerEntity
     
 from .DataUpdate import DataUpdate
     
@@ -1456,13 +1456,29 @@ from .EntityTransitionError import EntityTransitionError
     
 from .UpdateShipmentStatusResponse1 import UpdateShipmentStatusResponse1
     
-from .ShipmentStatusCommon import ShipmentStatusCommon
+from .ShipmentPrices1 import ShipmentPrices1
+    
+from .AffiliateConfig1 import AffiliateConfig1
+    
+from .BuyerDetails import BuyerDetails
     
 from .EInvoice import EInvoice
     
 from .EinvoiceInfo import EinvoiceInfo
     
-from .EInvoicePortalDetails import EInvoicePortalDetails
+from .ShipmentMeta import ShipmentMeta
+    
+from .PDFLinks import PDFLinks
+    
+from .AffiliateMeta import AffiliateMeta
+    
+from .AffiliateDetails import AffiliateDetails
+    
+from .StoreAddress import StoreAddress
+    
+from .Document import Document
+    
+from .StoreDocuments import StoreDocuments
     
 from .StoreEwaybill import StoreEwaybill
     
@@ -1470,77 +1486,13 @@ from .StoreEinvoice import StoreEinvoice
     
 from .StoreGstCredentials import StoreGstCredentials
     
-from .Document import Document
-    
-from .StoreDocuments import StoreDocuments
+from .EInvoicePortalDetails import EInvoicePortalDetails
     
 from .StoreMeta import StoreMeta
     
-from .StoreAddress import StoreAddress
-    
 from .Store1 import Store1
     
-from .FinancialBreakup import FinancialBreakup
-    
-from .Article import Article
-    
-from .Brand import Brand
-    
-from .BagStateMapper1 import BagStateMapper1
-    
-from .BagStatusHistory import BagStatusHistory
-    
-from .Prices import Prices
-    
-from .B2BPODetails import B2BPODetails
-    
-from .BagMeta import BagMeta
-    
-from .BagReturnableCancelableStatus import BagReturnableCancelableStatus
-    
-from .AffiliateMeta import AffiliateMeta
-    
-from .AffiliateBagDetails import AffiliateBagDetails
-    
-from .Item import Item
-    
-from .BagGSTDetails import BagGSTDetails
-    
-from .Bag import Bag
-    
-from .PDFLinks import PDFLinks
-    
-from .ShipmentHandOverCustomerContact import ShipmentHandOverCustomerContact
-    
-from .DeliveryAddress import DeliveryAddress
-    
-from .BuyerDetails import BuyerDetails
-    
-from .ShipmentMeta import ShipmentMeta
-    
-from .BillingAddress1 import BillingAddress1
-    
-from .ShipmentDetails1 import ShipmentDetails1
-    
-from .ShipmentGst1 import ShipmentGst1
-    
 from .UserObj import UserObj
-    
-from .ShipmentPayments import ShipmentPayments
-    
-from .ShipmentPrices1 import ShipmentPrices1
-    
-from .RequestedDPConfs import RequestedDPConfs
-    
-from .ShipmentInvoice1 import ShipmentInvoice1
-    
-from .OrderPrices import OrderPrices
-    
-from .OrderMeta import OrderMeta
-    
-from .OrderTaxDetails import OrderTaxDetails
-    
-from .OrderObj import OrderObj
     
 from .Documents1 import Documents1
     
@@ -1550,17 +1502,65 @@ from .CompanyMeta import CompanyMeta
     
 from .Company1 import Company1
     
-from .AffiliateConfig1 import AffiliateConfig1
+from .ShipmentStatusCommon import ShipmentStatusCommon
     
-from .AffiliateDetails import AffiliateDetails
+from .ShipmentGst1 import ShipmentGst1
     
-from .CurrentShipmentStatus import CurrentShipmentStatus
+from .Prices import Prices
     
-from .DpDetails1 import DpDetails1
+from .AffiliateBagDetails import AffiliateBagDetails
+    
+from .BagGSTDetails import BagGSTDetails
+    
+from .FinancialBreakup import FinancialBreakup
+    
+from .Item import Item
+    
+from .BagReturnableCancelableStatus import BagReturnableCancelableStatus
+    
+from .BagStateMapper1 import BagStateMapper1
+    
+from .BagStatusHistory import BagStatusHistory
+    
+from .Brand import Brand
+    
+from .Article import Article
+    
+from .B2BPODetails import B2BPODetails
+    
+from .BagMeta import BagMeta
     
 from .ShipmentProduct import ShipmentProduct
     
+from .CurrentShipmentStatus import CurrentShipmentStatus
+    
+from .ShipmentPayments import ShipmentPayments
+    
+from .DpDetails1 import DpDetails1
+    
+from .DeliveryAddress import DeliveryAddress
+    
+from .ShipmentHandOverCustomerContact import ShipmentHandOverCustomerContact
+    
+from .BillingAddress1 import BillingAddress1
+    
+from .ShipmentDetails1 import ShipmentDetails1
+    
+from .RequestedDPConfs import RequestedDPConfs
+    
+from .Bag import Bag
+    
+from .OrderPrices import OrderPrices
+    
+from .OrderTaxDetails import OrderTaxDetails
+    
+from .OrderMeta import OrderMeta
+    
+from .OrderObj import OrderObj
+    
 from .RtoAddress1 import RtoAddress1
+    
+from .ShipmentInvoice1 import ShipmentInvoice1
     
 from .ShipmentDetailsPlatformResponse import ShipmentDetailsPlatformResponse
     
@@ -1572,11 +1572,11 @@ from .BulkShipmentDetailsPlatformResponse import BulkShipmentDetailsPlatformResp
     
 from .OrderDetailsPlatformResponse import OrderDetailsPlatformResponse
     
-from .ShipmentDetailsByAffiliateBagIdResponse import ShipmentDetailsByAffiliateBagIdResponse
+from .GetBagsPlatformResponse import GetBagsPlatformResponse
+    
+from .BagDetailsPlatformResponse import BagDetailsPlatformResponse
     
 
-    
-from .DeleteResponse import DeleteResponse
     
 from .GetSearchWordsData import GetSearchWordsData
     
@@ -1586,17 +1586,19 @@ from .SearchKeywordResult import SearchKeywordResult
     
 from .CreateSearchKeyword import CreateSearchKeyword
     
+from .DeleteResponse import DeleteResponse
+    
 from .GetSearchWordsResponse import GetSearchWordsResponse
     
 from .GetAutocompleteWordsData import GetAutocompleteWordsData
     
 from .GetAutocompleteWordsResponse import GetAutocompleteWordsResponse
     
-from .Media import Media
-    
 from .AutocompletePageAction import AutocompletePageAction
     
 from .AutocompleteAction import AutocompleteAction
+    
+from .Media import Media
     
 from .AutocompleteResult import AutocompleteResult
     
@@ -1612,9 +1614,9 @@ from .GetProductBundleCreateResponse import GetProductBundleCreateResponse
     
 from .GetProductBundleListingResponse import GetProductBundleListingResponse
     
-from .Price import Price
-    
 from .LimitedProductData import LimitedProductData
+    
+from .Price import Price
     
 from .Size import Size
     
@@ -1676,6 +1678,18 @@ from .MetaDataListingResponse import MetaDataListingResponse
     
 from .GetCatalogConfigurationMetaData import GetCatalogConfigurationMetaData
     
+from .ProductSize import ProductSize
+    
+from .ConfigurationProductConfig import ConfigurationProductConfig
+    
+from .ConfigurationProductSimilar import ConfigurationProductSimilar
+    
+from .ConfigurationProductVariantConfig import ConfigurationProductVariantConfig
+    
+from .ConfigurationProductVariant import ConfigurationProductVariant
+    
+from .ConfigurationProduct import ConfigurationProduct
+    
 from .ConfigurationListingSortConfig import ConfigurationListingSortConfig
     
 from .ConfigurationListingSort import ConfigurationListingSort
@@ -1690,18 +1704,6 @@ from .ConfigurationListingFilter import ConfigurationListingFilter
     
 from .ConfigurationListing import ConfigurationListing
     
-from .ProductSize import ProductSize
-    
-from .ConfigurationProductConfig import ConfigurationProductConfig
-    
-from .ConfigurationProductSimilar import ConfigurationProductSimilar
-    
-from .ConfigurationProductVariantConfig import ConfigurationProductVariantConfig
-    
-from .ConfigurationProductVariant import ConfigurationProductVariant
-    
-from .ConfigurationProduct import ConfigurationProduct
-    
 from .AppConfiguration import AppConfiguration
     
 from .AppCatalogConfiguration import AppCatalogConfiguration
@@ -1714,9 +1716,9 @@ from .EntityConfiguration import EntityConfiguration
     
 from .GetAppCatalogEntityConfiguration import GetAppCatalogEntityConfiguration
     
-from .ProductFiltersKey import ProductFiltersKey
-    
 from .ProductFiltersValue import ProductFiltersValue
+    
+from .ProductFiltersKey import ProductFiltersKey
     
 from .ProductFilters import ProductFilters
     
@@ -1724,17 +1726,17 @@ from .ProductSortOn import ProductSortOn
     
 from .GetCollectionQueryOptionResponse import GetCollectionQueryOptionResponse
     
-from .CollectionSchedule import CollectionSchedule
+from .CollectionQuery import CollectionQuery
+    
+from .UserInfo import UserInfo
+    
+from .SeoDetail import SeoDetail
+    
+from .Schedule import Schedule
     
 from .CollectionImage import CollectionImage
     
 from .CollectionBanner import CollectionBanner
-    
-from .SeoDetail import SeoDetail
-    
-from .CollectionQuery import CollectionQuery
-    
-from .UserInfo import UserInfo
     
 from .CollectionBadge import CollectionBadge
     
@@ -1782,9 +1784,9 @@ from .ProductListingDetail import ProductListingDetail
     
 from .GetCollectionItemsResponse import GetCollectionItemsResponse
     
-from .CatalogInsightItem import CatalogInsightItem
-    
 from .CatalogInsightBrand import CatalogInsightBrand
+    
+from .CatalogInsightItem import CatalogInsightItem
     
 from .CatalogInsightResponse import CatalogInsightResponse
     
@@ -1810,7 +1812,9 @@ from .StoreDetail import StoreDetail
     
 from .OptinStoreDetails import OptinStoreDetails
     
-from .AttributeMasterDetails import AttributeMasterDetails
+from .AttributeSchemaRange import AttributeSchemaRange
+    
+from .AttributeMaster import AttributeMaster
     
 from .AttributeMasterMandatoryDetails import AttributeMasterMandatoryDetails
     
@@ -1818,9 +1822,7 @@ from .AttributeMasterMeta import AttributeMasterMeta
     
 from .AttributeMasterFilter import AttributeMasterFilter
     
-from .AttributeSchemaRange import AttributeSchemaRange
-    
-from .AttributeMaster import AttributeMaster
+from .AttributeMasterDetails import AttributeMasterDetails
     
 from .GenderDetail import GenderDetail
     
@@ -1834,7 +1836,7 @@ from .DepartmentCreateResponse import DepartmentCreateResponse
     
 from .DepartmentCreateErrorResponse import DepartmentCreateErrorResponse
     
-from .BaseUserSerializerWithID import BaseUserSerializerWithID
+from .UserSerializer import UserSerializer
     
 from .GetDepartment import GetDepartment
     
@@ -1850,13 +1852,13 @@ from .ProductTemplate import ProductTemplate
     
 from .TemplatesResponse import TemplatesResponse
     
-from .TemplateDetails import TemplateDetails
-    
 from .Properties import Properties
     
 from .GlobalValidation import GlobalValidation
     
 from .TemplateValidationData import TemplateValidationData
+    
+from .TemplateDetails import TemplateDetails
     
 from .TemplatesValidationResponse import TemplatesValidationResponse
     
@@ -1896,13 +1898,11 @@ from .SingleCategoryResponse import SingleCategoryResponse
     
 from .CategoryUpdateResponse import CategoryUpdateResponse
     
-from .OrderQuantity import OrderQuantity
-    
-from .TeaserTag import TeaserTag
-    
 from .Trader import Trader
     
 from .CustomOrder import CustomOrder
+    
+from .OrderQuantity import OrderQuantity
     
 from .ProductPublish import ProductPublish
     
@@ -1910,13 +1910,15 @@ from .ReturnConfig import ReturnConfig
     
 from .TaxIdentifier import TaxIdentifier
     
+from .TeaserTag import TeaserTag
+    
 from .ProductCreateUpdate import ProductCreateUpdate
     
-from .Logo import Logo
+from .Image import Image
     
 from .ProductPublished import ProductPublished
     
-from .Image import Image
+from .Logo import Logo
     
 from .Product import Product
     
@@ -1958,8 +1960,6 @@ from .ProductSizeDeleteDataResponse import ProductSizeDeleteDataResponse
     
 from .ProductSizeDeleteResponse import ProductSizeDeleteResponse
     
-from .ItemQuery import ItemQuery
-    
 from .SetSize import SetSize
     
 from .SizeDistribution import SizeDistribution
@@ -1970,6 +1970,8 @@ from .GTIN import GTIN
     
 from .InvSize import InvSize
     
+from .ItemQuery import ItemQuery
+    
 from .InventoryRequest import InventoryRequest
     
 from .InventoryResponse import InventoryResponse
@@ -1978,19 +1980,19 @@ from .InventoryResponsePaginated import InventoryResponsePaginated
     
 from .Trader1 import Trader1
     
+from .QuantityBase import QuantityBase
+    
+from .ReturnConfig1 import ReturnConfig1
+    
 from .WeightResponse import WeightResponse
     
 from .PriceMeta import PriceMeta
     
-from .QuantityBase import QuantityBase
+from .DimensionResponse import DimensionResponse
     
 from .BrandMeta import BrandMeta
     
 from .ManufacturerResponse import ManufacturerResponse
-    
-from .ReturnConfig1 import ReturnConfig1
-    
-from .DimensionResponse import DimensionResponse
     
 from .InventorySellerResponse import InventorySellerResponse
     
@@ -2070,6 +2072,8 @@ from .ApplicationProductListingResponse import ApplicationProductListingResponse
     
 from .ProductDetail import ProductDetail
     
+from .InventoryPage import InventoryPage
+    
 from .InventoryStockResponse import InventoryStockResponse
     
 from .ArticleQuery import ArticleQuery
@@ -2082,27 +2086,29 @@ from .ArticleAssignment1 import ArticleAssignment1
     
 from .StoreAssignResponse import StoreAssignResponse
     
+from .LocationTimingSerializer import LocationTimingSerializer
+    
+from .LocationDayWiseSerializer import LocationDayWiseSerializer
+    
+from .UserSerializer1 import UserSerializer1
+    
+from .GetAddressSerializer import GetAddressSerializer
+    
+from .UserSerializer2 import UserSerializer2
+    
+from .GetCompanySerializer import GetCompanySerializer
+    
 from .SellerPhoneNumber import SellerPhoneNumber
     
 from .LocationManagerSerializer import LocationManagerSerializer
-    
-from .LocationIntegrationType import LocationIntegrationType
-    
-from .ProductReturnConfigSerializer import ProductReturnConfigSerializer
-    
-from .BaseUserSerializer import BaseUserSerializer
     
 from .InvoiceCredSerializer import InvoiceCredSerializer
     
 from .InvoiceDetailsSerializer import InvoiceDetailsSerializer
     
-from .LocationTimingSerializer import LocationTimingSerializer
+from .ProductReturnConfigSerializer import ProductReturnConfigSerializer
     
-from .LocationDayWiseSerializer import LocationDayWiseSerializer
-    
-from .GetAddressSerializer import GetAddressSerializer
-    
-from .GetCompanySerializer import GetCompanySerializer
+from .LocationIntegrationType import LocationIntegrationType
     
 from .GetLocationSerializer import GetLocationSerializer
     
@@ -2116,23 +2122,21 @@ from .ApplicationStoreJson import ApplicationStoreJson
     
 
     
-from .UserSerializer import UserSerializer
-    
 from .Website import Website
     
 from .BusinessDetails import BusinessDetails
     
-from .CompanyTaxesSerializer import CompanyTaxesSerializer
+from .BusinessCountryInfo import BusinessCountryInfo
     
 from .ContactDetails import ContactDetails
     
-from .BusinessCountryInfo import BusinessCountryInfo
+from .CompanyTaxesSerializer import CompanyTaxesSerializer
     
 from .GetCompanyProfileSerializerResponse import GetCompanyProfileSerializerResponse
     
-from .CreateUpdateAddressSerializer import CreateUpdateAddressSerializer
-    
 from .CompanyTaxesSerializer1 import CompanyTaxesSerializer1
+    
+from .CreateUpdateAddressSerializer import CreateUpdateAddressSerializer
     
 from .UpdateCompany import UpdateCompany
     
@@ -2859,8 +2863,6 @@ from .RewardUser import RewardUser
 from .RewardsAudience import RewardsAudience
     
 from .RewardsRule import RewardsRule
-    
-from .Schedule import Schedule
     
 from .ShareMessages import ShareMessages
     
