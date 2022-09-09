@@ -12,14 +12,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class UserSerializer1(BaseSchema):
+class BaseUserSerializer(BaseSchema):
     # Catalog swagger.json
 
+    
+    contact = fields.Str(required=False)
     
     user_id = fields.Str(required=False)
     
     username = fields.Str(required=False)
-    
-    contact = fields.Str(required=False)
     
 

@@ -1018,7 +1018,7 @@ from .Opts import Opts
     
 from .CopyFileTask import CopyFileTask
     
-from .BulkResponse import BulkResponse
+from .BulkUploadResponse import BulkUploadResponse
     
 from .ReqConfiguration import ReqConfiguration
     
