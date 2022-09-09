@@ -18,11 +18,11 @@ class ValidateCustomerResponse(BaseSchema):
     # Payment swagger.json
 
     
+    error = fields.Dict(required=False)
+    
     message = fields.Str(required=False)
     
     data = fields.Dict(required=False)
-    
-    error = fields.Dict(required=False)
     
     success = fields.Boolean(required=False)
     
