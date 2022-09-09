@@ -8,10 +8,22 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ResponseVerifyOTPShipment(BaseSchema):
+
+
+
+
+
+
+class SendOtpToCustomerResponse(BaseSchema):
     # Order swagger.json
 
     
     success = fields.Boolean(required=False)
+    
+    message = fields.Str(required=False)
+    
+    resend_timer = fields.Int(required=False)
+    
+    request_id = fields.Str(required=False)
     
 

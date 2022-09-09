@@ -10,20 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
-class ShipmentUserInfo(BaseSchema):
+class VerifyOtp(BaseSchema):
     # Order swagger.json
 
     
-    gender = fields.Str(required=False)
+    otp_code = fields.Int(required=False)
     
-    mobile = fields.Str(required=False)
-    
-    first_name = fields.Str(required=False)
-    
-    last_name = fields.Str(required=False)
+    request_id = fields.Str(required=False)
     
 

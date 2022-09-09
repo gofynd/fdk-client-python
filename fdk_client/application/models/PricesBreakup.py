@@ -10,12 +10,16 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ShipmentStatus(BaseSchema):
+
+
+class PricesBreakup(BaseSchema):
     # Order swagger.json
 
     
-    title = fields.Str(required=False)
+    display = fields.Str(required=False)
     
-    hex_code = fields.Str(required=False)
+    value = fields.Int(required=False)
+    
+    name = fields.Str(required=False)
     
 

@@ -5,17 +5,13 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .TrackShipmentResults import TrackShipmentResults
 
 
-
-
-
-class Timestamp(BaseSchema):
+class TrackShipmentResponse(BaseSchema):
     # Order swagger.json
 
     
-    min = fields.Str(required=False)
-    
-    max = fields.Str(required=False)
+    results = fields.List(fields.Nested(TrackShipmentResults, required=False), required=False)
     
 
