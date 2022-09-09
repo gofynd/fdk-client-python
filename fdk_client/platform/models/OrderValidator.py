@@ -269,22 +269,3 @@ class OrderValidator:
         filter_type = fields.Str(required=False)
          
     
-    class getPing(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-         
-    
-    class voiceCallback(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-         
-    
-    class voiceClickToCall(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        caller = fields.Str(required=False)
-        
-        receiver = fields.Str(required=False)
-         
-    

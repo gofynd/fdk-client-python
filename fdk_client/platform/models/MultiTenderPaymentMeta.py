@@ -17,12 +17,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 class MultiTenderPaymentMeta(BaseSchema):
-    # Payment swagger.json
+    # Cart swagger.json
 
     
-    payment_id = fields.Str(required=False)
-    
     payment_gateway = fields.Str(required=False)
+    
+    payment_id = fields.Str(required=False)
     
     current_status = fields.Str(required=False)
     
