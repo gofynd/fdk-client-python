@@ -16,9 +16,9 @@ class PaymentConfirmationResponse(BaseSchema):
     # Payment swagger.json
 
     
-    success = fields.Boolean(required=False)
-    
     message = fields.Str(required=False)
+    
+    success = fields.Boolean(required=False)
     
     order_id = fields.Str(required=False)
     

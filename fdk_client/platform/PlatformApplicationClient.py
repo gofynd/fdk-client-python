@@ -26,6 +26,7 @@ from .models.DiscountValidator import DiscountValidator
 from .models.PartnerValidator import PartnerValidator
 from .models.WebhookValidator import WebhookValidator
 from .models.AuditTrailValidator import AuditTrailValidator
+from .models.OrderManageValidator import OrderManageValidator
 
 
 
@@ -9143,6 +9144,12 @@ class AuditTrail:
         self.applicationId = applicationId
     
 
+class OrderManage:
+    def __init__(self, config, applicationId):
+        self._conf = config
+        self.applicationId = applicationId
+    
+
 
 
 class PlatformApplicationClient:
@@ -9169,6 +9176,7 @@ class PlatformApplicationClient:
         self.partner = Partner(config, applicationId)
         self.webhook = Webhook(config, applicationId)
         self.auditTrail = AuditTrail(config, applicationId)
+        self.orderManage = OrderManage(config, applicationId)
         
 
     async def setExtraHeaders(self, header):

@@ -5,9 +5,9 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-
-
 from .Media import Media
+
+
 
 
 
@@ -26,9 +26,9 @@ class BrandItem(BaseSchema):
     # Catalog swagger.json
 
     
-    name = fields.Str(required=False)
-    
     logo = fields.Nested(Media, required=False)
+    
+    name = fields.Str(required=False)
     
     discount = fields.Str(required=False)
     
