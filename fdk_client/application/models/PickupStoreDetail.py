@@ -42,9 +42,9 @@ class PickupStoreDetail(BaseSchema):
     # PosCart swagger.json
 
     
-    area_code_slug = fields.Str(required=False)
-    
     country = fields.Str(required=False)
+    
+    id = fields.Int(required=False)
     
     state = fields.Str(required=False)
     
@@ -52,26 +52,26 @@ class PickupStoreDetail(BaseSchema):
     
     address_type = fields.Str(required=False)
     
-    phone = fields.Str(required=False)
-    
-    address = fields.Str(required=False)
+    city = fields.Str(required=False)
     
     pincode = fields.Int(required=False)
     
-    uid = fields.Int(required=False)
-    
     email = fields.Str(required=False)
     
-    id = fields.Int(required=False)
+    phone = fields.Str(required=False)
     
     name = fields.Str(required=False)
     
+    store_code = fields.Str(required=False)
+    
     area_code = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
     
     area = fields.Str(required=False)
     
-    store_code = fields.Str(required=False)
+    area_code_slug = fields.Str(required=False)
     
-    city = fields.Str(required=False)
+    address = fields.Str(required=False)
     
 

@@ -22,8 +22,8 @@ class AddCartDetailResponse(BaseSchema):
     
     message = fields.Str(required=False)
     
-    partial = fields.Boolean(required=False)
-    
     success = fields.Boolean(required=False)
+    
+    partial = fields.Boolean(required=False)
     
 

@@ -22,7 +22,7 @@ class GlobalValidation(BaseSchema):
     # Catalog swagger.json
 
     
-    type = fields.Str(required=False)
+    description = fields.Str(required=False)
     
     definitions = fields.Dict(required=False)
     
@@ -30,8 +30,8 @@ class GlobalValidation(BaseSchema):
     
     properties = fields.Nested(Properties, required=False)
     
-    required = fields.List(fields.Str(required=False), required=False)
+    type = fields.Str(required=False)
     
-    description = fields.Str(required=False)
+    required = fields.List(fields.Str(required=False), required=False)
     
 

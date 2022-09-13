@@ -14,8 +14,8 @@ class AffiliateInventoryPaymentConfig(BaseSchema):
     # Order swagger.json
 
     
-    mode_of_payment = fields.Str(required=False)
-    
     source = fields.Str(required=False)
+    
+    mode_of_payment = fields.Str(required=False)
     
 

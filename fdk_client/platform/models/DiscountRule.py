@@ -9,9 +9,9 @@ from .ItemCriteria import ItemCriteria
 
 
 
+
+
 from .DiscountOffer import DiscountOffer
-
-
 
 
 class DiscountRule(BaseSchema):
@@ -20,10 +20,10 @@ class DiscountRule(BaseSchema):
     
     item_criteria = fields.Nested(ItemCriteria, required=False)
     
+    buy_condition = fields.Str(required=False)
+    
     discount_type = fields.Str(required=False)
     
     offer = fields.Nested(DiscountOffer, required=False)
-    
-    buy_condition = fields.Str(required=False)
     
 

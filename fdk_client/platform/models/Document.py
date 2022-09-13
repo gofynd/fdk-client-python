@@ -24,10 +24,10 @@ class Document(BaseSchema):
     
     legal_name = fields.Str(required=False)
     
+    ds_type = fields.Str(required=False)
+    
     url = fields.Str(required=False)
     
     verified = fields.Boolean(required=False)
-    
-    ds_type = fields.Str(required=False)
     
 

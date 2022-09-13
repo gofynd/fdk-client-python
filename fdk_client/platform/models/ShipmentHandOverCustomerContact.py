@@ -22,16 +22,16 @@ class ShipmentHandOverCustomerContact(BaseSchema):
     # Order swagger.json
 
     
-    updated_at = fields.Str(required=False)
-    
     email = fields.Str(required=False)
     
     phone = fields.Str(required=False)
     
-    version = fields.Str(required=False)
+    updated_at = fields.Str(required=False)
+    
+    created_at = fields.Str(required=False)
     
     contact_person = fields.Str(required=False)
     
-    created_at = fields.Str(required=False)
+    version = fields.Str(required=False)
     
 

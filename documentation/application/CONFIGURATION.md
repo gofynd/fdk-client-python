@@ -1934,7 +1934,7 @@ Success. Check the example shown below or refer `AppStaffResponse` for more deta
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | enabled | Boolean? |  yes  |  |
+ | enabled | Boolean? |  yes  | Allow credit of reward points |
 
 ---
 
@@ -1945,9 +1945,9 @@ Success. Check the example shown below or refer `AppStaffResponse` for more deta
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | enabled | Boolean? |  yes  |  |
- | autoApply | Boolean? |  yes  |  |
- | strategyChannel | String? |  yes  |  |
+ | enabled | Boolean? |  yes  | Allow debit of reward points |
+ | autoApply | Boolean? |  yes  | Allow automatic debit of reward points |
+ | strategyChannel | String? |  yes  | Strategy channel for debiting reward points |
 
 ---
 

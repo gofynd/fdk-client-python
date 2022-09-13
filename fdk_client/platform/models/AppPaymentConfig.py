@@ -22,6 +22,8 @@ from .PaymentSelectionLock import PaymentSelectionLock
 
 
 
+
+
 class AppPaymentConfig(BaseSchema):
     # Configuration swagger.json
 
@@ -41,5 +43,7 @@ class AppPaymentConfig(BaseSchema):
     cod_amount_limit = fields.Float(required=False)
     
     cod_charges = fields.Float(required=False)
+    
+    anonymous_cod = fields.Boolean(required=False)
     
 

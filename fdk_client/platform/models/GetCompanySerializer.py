@@ -7,16 +7,6 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .BaseUserSerializer import BaseUserSerializer
-
-
-
-from .BaseUserSerializer import BaseUserSerializer
-
-
-
-
-
 
 
 
@@ -32,23 +22,23 @@ from .BaseUserSerializer import BaseUserSerializer
 
 
 
+
+from .BaseUserSerializer import BaseUserSerializer
+
+
+
+
+
+from .BaseUserSerializer import BaseUserSerializer
+
+
 class GetCompanySerializer(BaseSchema):
     # Catalog swagger.json
 
     
-    company_type = fields.Str(required=False)
-    
-    created_by = fields.Nested(BaseUserSerializer, required=False)
-    
-    reject_reason = fields.Str(required=False)
-    
-    modified_by = fields.Nested(BaseUserSerializer, required=False)
+    name = fields.Str(required=False)
     
     modified_on = fields.Str(required=False)
-    
-    verified_on = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
     
     stage = fields.Str(required=False)
     
@@ -56,10 +46,20 @@ class GetCompanySerializer(BaseSchema):
     
     business_type = fields.Str(required=False)
     
-    created_on = fields.Str(required=False)
+    company_type = fields.Str(required=False)
+    
+    created_by = fields.Nested(BaseUserSerializer, required=False)
+    
+    uid = fields.Int(required=False)
+    
+    reject_reason = fields.Str(required=False)
     
     verified_by = fields.Nested(BaseUserSerializer, required=False)
     
-    uid = fields.Int(required=False)
+    verified_on = fields.Str(required=False)
+    
+    created_on = fields.Str(required=False)
+    
+    modified_by = fields.Nested(BaseUserSerializer, required=False)
     
 

@@ -36,6 +36,20 @@ class SizeGuideResponse(BaseSchema):
     # Catalog swagger.json
 
     
+    name = fields.Str(required=False)
+    
+    modified_on = fields.Str(required=False)
+    
+    tag = fields.Str(required=False)
+    
+    subtitle = fields.Str(required=False)
+    
+    title = fields.Str(required=False)
+    
+    company_id = fields.Int(required=False)
+    
+    id = fields.Str(required=False)
+    
     created_by = fields.Dict(required=False)
     
     guide = fields.Dict(required=False)
@@ -44,22 +58,8 @@ class SizeGuideResponse(BaseSchema):
     
     brand_id = fields.Int(required=False)
     
-    modified_on = fields.Str(required=False)
-    
-    modified_by = fields.Dict(required=False)
-    
-    name = fields.Str(required=False)
-    
-    title = fields.Str(required=False)
-    
-    subtitle = fields.Str(required=False)
-    
-    tag = fields.Str(required=False)
-    
-    id = fields.Str(required=False)
-    
     created_on = fields.Str(required=False)
     
-    company_id = fields.Int(required=False)
+    modified_by = fields.Dict(required=False)
     
 
