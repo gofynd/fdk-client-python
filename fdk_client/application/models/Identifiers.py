@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class Statuses(BaseSchema):
+class Identifiers(BaseSchema):
     # Order swagger.json
 
     
-    display = fields.Str(required=False)
+    ean = fields.Str(required=False)
     
-    value = fields.Int(required=False)
-    
-    is_selected = fields.Boolean(required=False)
+    sku_code = fields.Str(required=False)
     
 

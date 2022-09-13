@@ -8,10 +8,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class VerifyOtpResponse(BaseSchema):
+
+
+class StatusesBody(BaseSchema):
     # Order swagger.json
 
     
-    success = fields.Boolean(required=False)
+    status = fields.Str(required=False)
+    
+    shipments = fields.Dict(required=False)
     
 

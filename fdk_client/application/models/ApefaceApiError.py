@@ -9,7 +9,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class ApefaceApiError(BaseSchema):
-    # Logistic swagger.json
+    # Order swagger.json
 
     
     message = fields.Str(required=False)
