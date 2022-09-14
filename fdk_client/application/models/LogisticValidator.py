@@ -7,14 +7,14 @@ from ..models.BaseSchema import BaseSchema
 
 class LogisticValidator:
     
-    class getPincodeView(BaseSchema):
+    class getPincodeCity(BaseSchema):
         
         pincode = fields.Str(required=False)
         
         x__application__id = fields.Str(required=False)
          
     
-    class getTATView(BaseSchema):
+    class getTatProduct(BaseSchema):
         
         x__application__id = fields.Str(required=False)
          

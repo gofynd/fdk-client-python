@@ -18,9 +18,9 @@ class Parents(BaseSchema):
     # Logistic swagger.json
 
     
-    name = fields.Str(required=False)
-    
     uid = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
     
     display_name = fields.Str(required=False)
     

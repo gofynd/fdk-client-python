@@ -7910,8 +7910,8 @@ class Logistic:
     def __init__(self, config):
         self._conf = config
         self._relativeUrls = {
-            "getPincodeView": "/service/application/logistics/v1.0/pincode/{pincode}",
-            "getTATView": "/service/application/logistics/v1.0/"
+            "getPincodeCity": "/service/application/logistics/v1.0/pincode/{pincode}",
+            "getTatProduct": "/service/application/logistics/v1.0/"
             
         }
         self._urls = {
@@ -7921,7 +7921,7 @@ class Logistic:
     async def updateUrls(self, urls):
         self._urls.update(urls)
     
-    async def getPincodeView(self, pincode=None, x_application_id=None, body=""):
+    async def getPincodeCity(self, pincode=None, x_application_id=None, body=""):
         """Get pincode data
         :param pincode : A `pincode` contains a specific address of a location. : type string
         :param x-application-id : Application id is neccessary for app authorizations & retrieving config of application : type string
@@ -7935,11 +7935,11 @@ class Logistic:
             payload["x_application_id"] = x_application_id
         
         # Parameter validation
-        schema = LogisticValidator.getPincodeView()
+        schema = LogisticValidator.getPincodeCity()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getPincodeView"], proccessed_params="""{"required":[{"in":"path","name":"pincode","description":"A `pincode` contains a specific address of a location.","schema":{"type":"string"},"required":true}],"optional":[{"schema":{"type":"string"},"description":"Application id is neccessary for app authorizations & retrieving config of application","in":"header","required":false,"name":"x-application-id"}],"query":[],"headers":[{"schema":{"type":"string"},"description":"Application id is neccessary for app authorizations & retrieving config of application","in":"header","required":false,"name":"x-application-id"}],"path":[{"in":"path","name":"pincode","description":"A `pincode` contains a specific address of a location.","schema":{"type":"string"},"required":true}]}""", pincode=pincode, x_application_id=x_application_id)
+        url_with_params = await create_url_with_params(api_url=self._urls["getPincodeCity"], proccessed_params="""{"required":[{"in":"path","name":"pincode","description":"A `pincode` contains a specific address of a location.","schema":{"type":"string"},"required":true}],"optional":[{"schema":{"type":"string"},"description":"Application id is neccessary for app authorizations & retrieving config of application","in":"header","required":false,"name":"x-application-id"}],"query":[],"headers":[{"schema":{"type":"string"},"description":"Application id is neccessary for app authorizations & retrieving config of application","in":"header","required":false,"name":"x-application-id"}],"path":[{"in":"path","name":"pincode","description":"A `pincode` contains a specific address of a location.","schema":{"type":"string"},"required":true}]}""", pincode=pincode, x_application_id=x_application_id)
         query_string = await create_query_string(pincode=pincode, x_application_id=x_application_id)
         headers = {
             "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
@@ -7952,9 +7952,9 @@ class Logistic:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getPincodeView"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/pincode/{pincode}", pincode=pincode, x_application_id=x_application_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getPincodeCity"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/pincode/{pincode}", pincode=pincode, x_application_id=x_application_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
-    async def getTATView(self, x_application_id=None, body=""):
+    async def getTatProduct(self, x_application_id=None, body=""):
         """Get TAT data
         :param x-application-id : Application id is neccessary for app authorizations & retrieving config of application : type string
         """
@@ -7964,7 +7964,7 @@ class Logistic:
             payload["x_application_id"] = x_application_id
         
         # Parameter validation
-        schema = LogisticValidator.getTATView()
+        schema = LogisticValidator.getTatProduct()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -7973,7 +7973,7 @@ class Logistic:
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getTATView"], proccessed_params="""{"required":[],"optional":[{"schema":{"type":"string"},"description":"Application id is neccessary for app authorizations & retrieving config of application","in":"header","required":false,"name":"x-application-id"}],"query":[],"headers":[{"schema":{"type":"string"},"description":"Application id is neccessary for app authorizations & retrieving config of application","in":"header","required":false,"name":"x-application-id"}],"path":[]}""", x_application_id=x_application_id)
+        url_with_params = await create_url_with_params(api_url=self._urls["getTatProduct"], proccessed_params="""{"required":[],"optional":[{"schema":{"type":"string"},"description":"Application id is neccessary for app authorizations & retrieving config of application","in":"header","required":false,"name":"x-application-id"}],"query":[],"headers":[{"schema":{"type":"string"},"description":"Application id is neccessary for app authorizations & retrieving config of application","in":"header","required":false,"name":"x-application-id"}],"path":[]}""", x_application_id=x_application_id)
         query_string = await create_query_string(x_application_id=x_application_id)
         headers = {
             "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
@@ -7986,7 +7986,7 @@ class Logistic:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getTATView"]).netloc, "post", await create_url_without_domain("/service/application/logistics/v1.0/", x_application_id=x_application_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getTatProduct"]).netloc, "post", await create_url_without_domain("/service/application/logistics/v1.0/", x_application_id=x_application_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
 
 

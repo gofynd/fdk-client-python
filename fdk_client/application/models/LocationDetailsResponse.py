@@ -7,9 +7,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 from .ArticlesResponse import ArticlesResponse
-
-
 
 
 class LocationDetailsResponse(BaseSchema):
@@ -18,8 +18,8 @@ class LocationDetailsResponse(BaseSchema):
     
     from_pincode = fields.Str(required=False)
     
-    articles = fields.List(fields.Nested(ArticlesResponse, required=False), required=False)
-    
     fulfillment_id = fields.Int(required=False)
+    
+    articles = fields.List(fields.Nested(ArticlesResponse, required=False), required=False)
     
 
