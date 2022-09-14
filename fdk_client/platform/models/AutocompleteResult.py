@@ -18,11 +18,11 @@ class AutocompleteResult(BaseSchema):
     # Catalog swagger.json
 
     
-    display = fields.Str(required=False)
+    _custom_json = fields.Dict(required=False)
     
     action = fields.Nested(AutocompleteAction, required=False)
     
-    _custom_json = fields.Dict(required=False)
+    display = fields.Str(required=False)
     
     logo = fields.Nested(Media, required=False)
     
