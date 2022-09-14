@@ -40,21 +40,21 @@ class ProductFiltersValue(BaseSchema):
     
     value = fields.Raw(required=False)
     
-    max = fields.Int(required=False)
+    selected_max = fields.Int(required=False)
     
-    currency_symbol = fields.Str(required=False)
+    is_selected = fields.Boolean(required=False)
     
     min = fields.Int(required=False)
     
     display = fields.Str(required=False)
     
-    is_selected = fields.Boolean(required=False)
+    count = fields.Int(required=False)
+    
+    max = fields.Int(required=False)
     
     query_format = fields.Str(required=False)
     
-    selected_max = fields.Int(required=False)
-    
-    count = fields.Int(required=False)
+    currency_symbol = fields.Str(required=False)
     
     display_format = fields.Str(required=False)
     
