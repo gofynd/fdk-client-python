@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class LogisticMeta(BaseSchema):
+class Category(BaseSchema):
     # Logistic swagger.json
 
     
-    zone = fields.Str(required=False)
+    id = fields.Str(required=False)
     
-    deliverables = fields.List(fields.Raw(required=False), required=False)
+    level = fields.Str(required=False)
     
 

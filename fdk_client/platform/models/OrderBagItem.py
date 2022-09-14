@@ -24,9 +24,11 @@ class OrderBagItem(BaseSchema):
     # Orders swagger.json
 
     
-    l1_category = fields.List(fields.Str(required=False), required=False)
+    size = fields.Str(required=False)
     
     brand = fields.Str(required=False)
+    
+    l3_category = fields.Int(required=False)
     
     name = fields.Str(required=False)
     
@@ -34,8 +36,6 @@ class OrderBagItem(BaseSchema):
     
     image = fields.List(fields.Str(required=False), required=False)
     
-    l3_category = fields.Int(required=False)
-    
-    size = fields.Str(required=False)
+    l1_category = fields.List(fields.Str(required=False), required=False)
     
 

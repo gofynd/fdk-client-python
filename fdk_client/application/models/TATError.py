@@ -12,14 +12,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class UnArchiveUserRequestSchema(BaseSchema):
-    # User swagger.json
+class TATError(BaseSchema):
+    # Logistic swagger.json
 
     
-    user_id = fields.Str(required=False)
+    value = fields.Str(required=False)
     
-    reason = fields.Str(required=False)
+    message = fields.Str(required=False)
     
-    reason_id = fields.Str(required=False)
+    type = fields.Str(required=False)
     
 

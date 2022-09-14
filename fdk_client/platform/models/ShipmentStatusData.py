@@ -20,6 +20,8 @@ class ShipmentStatusData(BaseSchema):
     # Orders swagger.json
 
     
+    created_at = fields.Str(required=False)
+    
     status = fields.Str(required=False)
     
     id = fields.Int(required=False)
@@ -27,7 +29,5 @@ class ShipmentStatusData(BaseSchema):
     shipment_id = fields.Str(required=False)
     
     bag_list = fields.List(fields.Int(required=False), required=False)
-    
-    created_at = fields.Str(required=False)
     
 

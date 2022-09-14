@@ -7,18 +7,18 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .TatReqProductArticles import TatReqProductArticles
+from .ArticlesResponse import ArticlesResponse
 
 
 
 
-class LocationDetailsReq(BaseSchema):
+class LocationDetailsResponse(BaseSchema):
     # Logistic swagger.json
 
     
     from_pincode = fields.Str(required=False)
     
-    articles = fields.List(fields.Nested(TatReqProductArticles, required=False), required=False)
+    articles = fields.List(fields.Nested(ArticlesResponse, required=False), required=False)
     
     fulfillment_id = fields.Int(required=False)
     

@@ -10,12 +10,20 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class LogisticResponseCategory(BaseSchema):
+
+
+
+
+class ValidatePincodeSchema(BaseSchema):
     # Logistic swagger.json
 
     
-    id = fields.Int(required=False)
+    journey = fields.Str(required=False)
     
-    level = fields.Str(required=False)
+    source = fields.Str(required=False)
+    
+    action = fields.Str(required=False)
+    
+    to_pincode = fields.Str(required=False)
     
 

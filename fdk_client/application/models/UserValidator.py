@@ -79,10 +79,6 @@ class UserValidator:
         
         pass 
     
-    class archiveUser(BaseSchema):
-        
-        pass 
-    
     class logout(BaseSchema):
         
         pass 

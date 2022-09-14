@@ -8,10 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class UnArchiveUserSuccess(BaseSchema):
-    # User swagger.json
+class ShipmentUpdateObject(BaseSchema):
+    # Order swagger.json
 
     
-    success = fields.Boolean(required=False)
+    shipments = fields.Dict(required=False)
     
 
