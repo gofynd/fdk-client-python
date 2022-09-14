@@ -36,6 +36,6 @@ class DomainAdd(BaseSchema):
     
     message = fields.Str(required=False)
     
-    txt_records = fields.List(fields.Raw(required=False), required=False)
+    txt_records = fields.List(fields.Str(required=False), required=False)
     
 

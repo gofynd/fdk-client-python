@@ -8156,7 +8156,7 @@ class Configuration:
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/currency/supported", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def getOrderingStoresByFilter(self, page_no=None, page_size=None, body=""):
-        """Get ordering store by filter
+        """Get ordering store from all stores by filter
         :param page_no : Current page no : type integer
         :param page_size : Current request items count : type integer
         """

@@ -5,9 +5,9 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-
-
 from .CheckResponse import CheckResponse
+
+
 
 
 
@@ -16,9 +16,9 @@ class UpdateShipmentLockResponse(BaseSchema):
     # Order swagger.json
 
     
-    message = fields.Str(required=False)
-    
     check_response = fields.List(fields.Nested(CheckResponse, required=False), required=False)
+    
+    message = fields.Str(required=False)
     
     success = fields.Boolean(required=False)
     
