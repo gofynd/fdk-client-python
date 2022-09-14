@@ -27,6 +27,12 @@ from .TrackingDetails import TrackingDetails
 
 
 
+
+
+
+
+
+
 from .Prices import Prices
 
 
@@ -38,6 +44,8 @@ from .Prices import Prices
 from .DeliveryAddress import DeliveryAddress
 
 from .Invoice import Invoice
+
+
 
 
 
@@ -88,7 +96,13 @@ class Shipments(BaseSchema):
     
     can_break = fields.Dict(required=False)
     
+    delivery_date = fields.Str(required=False)
+    
+    returnable_date = fields.Str(required=False)
+    
     show_download_invoice = fields.Boolean(required=False)
+    
+    show_track_link = fields.Boolean(required=False)
     
     prices = fields.Nested(Prices, required=False)
     
@@ -103,6 +117,8 @@ class Shipments(BaseSchema):
     invoice = fields.Nested(Invoice, required=False)
     
     comment = fields.Str(required=False)
+    
+    refund_details = fields.Dict(required=False)
     
     order_type = fields.Str(required=False)
     

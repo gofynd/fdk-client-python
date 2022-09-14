@@ -12,11 +12,15 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 class UpdateShipmentStatusBody(BaseSchema):
     # Order swagger.json
 
     
     shipments = fields.Dict(required=False)
+    
+    statuses = fields.List(fields.Dict(required=False), required=False)
     
     force_transition = fields.Boolean(required=False)
     

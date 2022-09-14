@@ -15,20 +15,18 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
 from .ProductSize import ProductSize
+
+
 
 
 class ConfigurationProductConfig(BaseSchema):
     # Catalog swagger.json
 
     
-    logo = fields.Str(required=False)
-    
-    key = fields.Str(required=False)
-    
     subtitle = fields.Str(required=False)
+    
+    logo = fields.Str(required=False)
     
     title = fields.Str(required=False)
     
@@ -37,5 +35,7 @@ class ConfigurationProductConfig(BaseSchema):
     is_active = fields.Boolean(required=False)
     
     size = fields.Nested(ProductSize, required=False)
+    
+    key = fields.Str(required=False)
     
 

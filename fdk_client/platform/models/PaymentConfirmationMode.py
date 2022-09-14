@@ -1,4 +1,4 @@
-"""Application Models."""
+"""Platform Models."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -7,18 +7,22 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .PaymentMethodsMeta import PaymentMethodsMeta
 
 
 
 
-class CreateOrderUserPaymentMethods(BaseSchema):
+
+
+
+class PaymentConfirmationMode(BaseSchema):
     # Payment swagger.json
 
     
-    mode = fields.Str(required=False)
+    amount = fields.Float(required=False)
     
-    meta = fields.Nested(PaymentMethodsMeta, required=False)
+    meta = fields.Dict(required=False)
+    
+    mode = fields.Str(required=False)
     
     name = fields.Str(required=False)
     

@@ -8,22 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+class ArchiveUserSuccess(BaseSchema):
+    # User swagger.json
 
-
-
-
-
-
-class ResendPaymentLinkResponse(BaseSchema):
-    # Payment swagger.json
-
-    
-    polling_timeout = fields.Int(required=False)
-    
-    status_code = fields.Int(required=False)
     
     success = fields.Boolean(required=False)
-    
-    message = fields.Str(required=False)
     
 
