@@ -20,6 +20,10 @@ from .FinancialBreakup import FinancialBreakup
 
 
 
+
+
+
+
 class Bags(BaseSchema):
     # Order swagger.json
 
@@ -37,5 +41,9 @@ class Bags(BaseSchema):
     can_cancel = fields.Boolean(required=False)
     
     can_return = fields.Boolean(required=False)
+    
+    delivery_date = fields.Str(required=False)
+    
+    returnable_date = fields.Str(required=False)
     
 
