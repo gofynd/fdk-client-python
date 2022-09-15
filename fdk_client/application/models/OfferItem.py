@@ -5,13 +5,13 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+
+
+
+
+
+
 from .OfferPrice import OfferPrice
-
-
-
-
-
-
 
 
 
@@ -24,6 +24,12 @@ class OfferItem(BaseSchema):
     # Cart swagger.json
 
     
+    margin = fields.Int(required=False)
+    
+    best = fields.Boolean(required=False)
+    
+    quantity = fields.Int(required=False)
+    
     price = fields.Nested(OfferPrice, required=False)
     
     auto_applied = fields.Boolean(required=False)
@@ -31,11 +37,5 @@ class OfferItem(BaseSchema):
     total = fields.Float(required=False)
     
     type = fields.Str(required=False)
-    
-    margin = fields.Int(required=False)
-    
-    quantity = fields.Int(required=False)
-    
-    best = fields.Boolean(required=False)
     
 

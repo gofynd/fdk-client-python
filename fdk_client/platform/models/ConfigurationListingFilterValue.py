@@ -28,10 +28,10 @@ class ConfigurationListingFilterValue(BaseSchema):
     
     condition = fields.Str(required=False)
     
+    map = fields.Dict(required=False)
+    
     sort = fields.Str(required=False)
     
     value = fields.Str(required=False)
-    
-    map = fields.Dict(required=False)
     
 
