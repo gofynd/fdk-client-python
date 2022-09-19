@@ -8,14 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class Category(BaseSchema):
-    # Logistic swagger.json
+class DeleteUserSuccess(BaseSchema):
+    # User swagger.json
 
     
-    id = fields.Str(required=False)
-    
-    level = fields.Str(required=False)
+    success = fields.Boolean(required=False)
     
 

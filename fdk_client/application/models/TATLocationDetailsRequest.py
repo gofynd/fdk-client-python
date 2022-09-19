@@ -5,21 +5,21 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .TATArticlesRequest import TATArticlesRequest
 
 
 
 
-from .ArticlesResponse import ArticlesResponse
 
 
-class LocationDetailsResponse(BaseSchema):
+class TATLocationDetailsRequest(BaseSchema):
     # Logistic swagger.json
 
+    
+    articles = fields.List(fields.Nested(TATArticlesRequest, required=False), required=False)
     
     from_pincode = fields.Str(required=False)
     
     fulfillment_id = fields.Int(required=False)
-    
-    articles = fields.List(fields.Nested(ArticlesResponse, required=False), required=False)
     
 

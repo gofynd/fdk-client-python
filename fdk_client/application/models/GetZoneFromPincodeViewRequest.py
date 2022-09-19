@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class TATError(BaseSchema):
+class GetZoneFromPincodeViewRequest(BaseSchema):
     # Logistic swagger.json
 
     
-    message = fields.Str(required=False)
+    country = fields.Str(required=False)
     
-    type = fields.Str(required=False)
-    
-    value = fields.Str(required=False)
+    pincode = fields.Str(required=False)
     
 

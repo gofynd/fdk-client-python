@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class Formatted(BaseSchema):
+class TATTimestampResponse(BaseSchema):
     # Logistic swagger.json
 
     
-    min = fields.Str(required=False)
+    min = fields.Int(required=False)
     
-    max = fields.Str(required=False)
+    max = fields.Int(required=False)
     
 

@@ -7,19 +7,19 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .Category import Category
 
 
 
 
-class Articles(BaseSchema):
+
+class TATErrorSchemaResponse(BaseSchema):
     # Logistic swagger.json
 
     
-    manufacturing_time = fields.Int(required=False)
+    message = fields.Str(required=False)
     
-    category = fields.Nested(Category, required=False)
+    value = fields.Str(required=False)
     
-    manufacturing_time_unit = fields.Str(required=False)
+    type = fields.Str(required=False)
     
 

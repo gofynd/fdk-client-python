@@ -12,18 +12,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class ValidatePincodeSchema(BaseSchema):
+class PincodeErrorSchemaResponse(BaseSchema):
     # Logistic swagger.json
 
     
-    action = fields.Str(required=False)
+    message = fields.Str(required=False)
     
-    to_pincode = fields.Str(required=False)
+    value = fields.Str(required=False)
     
-    source = fields.Str(required=False)
-    
-    journey = fields.Str(required=False)
+    type = fields.Str(required=False)
     
 

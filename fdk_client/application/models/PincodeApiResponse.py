@@ -5,21 +5,21 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .DataResponse import DataResponse
 
 
+from .PincodeErrorSchemaResponse import PincodeErrorSchemaResponse
 
-from .Error import Error
+from .PincodeDataResponse import PincodeDataResponse
 
 
 class PincodeApiResponse(BaseSchema):
     # Logistic swagger.json
 
     
-    data = fields.List(fields.Nested(DataResponse, required=False), required=False)
-    
     success = fields.Boolean(required=False)
     
-    error = fields.Nested(Error, required=False)
+    error = fields.Nested(PincodeErrorSchemaResponse, required=False)
+    
+    data = fields.List(fields.Nested(PincodeDataResponse, required=False), required=False)
     
 

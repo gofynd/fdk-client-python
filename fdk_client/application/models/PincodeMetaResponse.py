@@ -10,20 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
-class Parents(BaseSchema):
+class PincodeMetaResponse(BaseSchema):
     # Logistic swagger.json
 
     
-    uid = fields.Str(required=False)
+    zone = fields.Str(required=False)
     
-    name = fields.Str(required=False)
-    
-    display_name = fields.Str(required=False)
-    
-    sub_type = fields.Str(required=False)
+    internal_zone_id = fields.Int(required=False)
     
 
