@@ -8,18 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
-class UnArchiveUserRequestSchema(BaseSchema):
+class DeleteUserSuccess(BaseSchema):
     # User swagger.json
 
     
-    user_id = fields.Str(required=False)
-    
-    reason = fields.Str(required=False)
-    
-    reason_id = fields.Str(required=False)
+    success = fields.Boolean(required=False)
     
 

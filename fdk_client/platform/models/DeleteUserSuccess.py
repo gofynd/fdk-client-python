@@ -8,7 +8,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class UnArchiveUserSuccess(BaseSchema):
+class DeleteUserSuccess(BaseSchema):
     # User swagger.json
 
     

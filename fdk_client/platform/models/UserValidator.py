@@ -50,7 +50,7 @@ class UserValidator:
         application_id = fields.Str(required=False)
          
     
-    class unArchiveUser(BaseSchema):
+    class unDeleteUser(BaseSchema):
         
         company_id = fields.Str(required=False)
         

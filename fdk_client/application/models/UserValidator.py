@@ -46,6 +46,11 @@ class UserValidator:
         platform = fields.Str(required=False)
          
     
+    class sendResetPasswordMobile(BaseSchema):
+        
+        platform = fields.Str(required=False)
+         
+    
     class forgotPassword(BaseSchema):
         
         pass 
@@ -79,7 +84,7 @@ class UserValidator:
         
         pass 
     
-    class archiveUser(BaseSchema):
+    class deleteUser(BaseSchema):
         
         pass 
     

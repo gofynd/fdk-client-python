@@ -1,4 +1,4 @@
-"""Application Models."""
+"""Platform Models."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -12,11 +12,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
-class ArchiveApplicationUserRequestSchema(BaseSchema):
+class UnDeleteUserRequestSchema(BaseSchema):
     # User swagger.json
 
     
@@ -25,9 +21,5 @@ class ArchiveApplicationUserRequestSchema(BaseSchema):
     reason = fields.Str(required=False)
     
     reason_id = fields.Str(required=False)
-    
-    request_id = fields.Str(required=False)
-    
-    otp = fields.Str(required=False)
     
 

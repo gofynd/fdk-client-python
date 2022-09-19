@@ -16,7 +16,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ArchiveApplicationUserRequestSchema(BaseSchema):
+class DeleteApplicationUserRequestSchema(BaseSchema):
     # User swagger.json
 
     
