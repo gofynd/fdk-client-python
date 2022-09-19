@@ -28,7 +28,6 @@ setup(
         "backcall==0.2.0",
         "chardet==3.0.4",
         "decorator==5.1.0",
-        "idna==3.2",
         "ipython==7.28.0",
         "jedi==0.18.0",
         "marshmallow==3.12.2",

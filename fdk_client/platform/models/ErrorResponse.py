@@ -12,14 +12,18 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ErrorResponse(BaseSchema):
-    # Order swagger.json
 
-    
-    message = fields.Str(required=False)
+
+class ErrorResponse(BaseSchema):
+    # Catalog swagger.json
+
     
     status = fields.Int(required=False)
     
-    error_trace = fields.Str(required=False)
+    meta = fields.Dict(required=False)
+    
+    code = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
     
 

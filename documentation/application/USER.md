@@ -23,7 +23,7 @@ Authentication Service
 * [verifyMobile](#verifymobile)
 * [hasPassword](#haspassword)
 * [updatePassword](#updatepassword)
-* [archiveUser](#archiveuser)
+* [deleteUser](#deleteuser)
 * [logout](#logout)
 * [sendOTPOnMobile](#sendotponmobile)
 * [verifyMobileOTP](#verifymobileotp)
@@ -1348,15 +1348,15 @@ Success. Returns a success message. Refer `VerifyEmailSuccess` for more details.
 ---
 
 
-### archiveUser
-verify otp and archive user
+### deleteUser
+verify otp and delete user
 
 
 
 
 ```python
 try:
-    result = await client.user.archiveUser(body=body)
+    result = await client.user.deleteUser(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1368,19 +1368,19 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- |
-| body | [ArchiveApplicationUserRequestSchema](#ArchiveApplicationUserRequestSchema) | yes | Request body |
+| body | [DeleteApplicationUserRequestSchema](#DeleteApplicationUserRequestSchema) | yes | Request body |
 
 
-verify otp and archive user
+verify otp and delete user
 
 *Returned Response:*
 
 
 
 
-[ArchiveUserSuccess](#ArchiveUserSuccess)
+[DeleteUserSuccess](#DeleteUserSuccess)
 
-Success. Returns a success message. Refer `ArchiveUserSuccess` for more details.
+Success. Returns a success message. Refer `DeleteUserSuccess` for more details.
 
 
 
@@ -3097,7 +3097,7 @@ Request body must contain an email ID. Refer `EditEmailRequestSchema` for more d
 
  
  
- #### [ArchiveApplicationUserRequestSchema](#ArchiveApplicationUserRequestSchema)
+ #### [DeleteApplicationUserRequestSchema](#DeleteApplicationUserRequestSchema)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
@@ -3112,7 +3112,7 @@ Request body must contain an email ID. Refer `EditEmailRequestSchema` for more d
 
  
  
- #### [UnArchiveUserRequestSchema](#UnArchiveUserRequestSchema)
+ #### [UnDeleteUserRequestSchema](#UnDeleteUserRequestSchema)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
@@ -3581,7 +3581,18 @@ Request body must contain an email ID. Refer `EditEmailRequestSchema` for more d
 
  
  
- #### [UnArchiveUserSuccess](#UnArchiveUserSuccess)
+ #### [DeleteUserSuccess](#DeleteUserSuccess)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | success | Boolean? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [UnDeleteUserSuccess](#UnDeleteUserSuccess)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |

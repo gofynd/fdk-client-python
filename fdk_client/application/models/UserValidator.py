@@ -84,7 +84,7 @@ class UserValidator:
         
         pass 
     
-    class archiveUser(BaseSchema):
+    class deleteUser(BaseSchema):
         
         pass 
     
