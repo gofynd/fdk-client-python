@@ -11,13 +11,13 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
-
-
 from .LadderOfferItem import LadderOfferItem
+
+
+
+
+
+
 
 
 class LadderPriceOffer(BaseSchema):
@@ -26,16 +26,16 @@ class LadderPriceOffer(BaseSchema):
     
     promotion_group = fields.Str(required=False)
     
-    description = fields.Str(required=False)
-    
     id = fields.Str(required=False)
     
     valid_till = fields.Str(required=False)
     
-    offer_text = fields.Str(required=False)
+    offer_prices = fields.List(fields.Nested(LadderOfferItem, required=False), required=False)
     
     calculate_on = fields.Str(required=False)
     
-    offer_prices = fields.List(fields.Nested(LadderOfferItem, required=False), required=False)
+    description = fields.Str(required=False)
+    
+    offer_text = fields.Str(required=False)
     
 

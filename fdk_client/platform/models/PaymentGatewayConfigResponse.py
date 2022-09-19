@@ -22,7 +22,7 @@ class PaymentGatewayConfigResponse(BaseSchema):
     # Payment swagger.json
 
     
-    excluded_fields = fields.List(fields.Str(required=False), required=False)
+    success = fields.Boolean(required=False)
     
     created = fields.Boolean(required=False)
     
@@ -30,8 +30,8 @@ class PaymentGatewayConfigResponse(BaseSchema):
     
     app_id = fields.Str(required=False)
     
-    aggregators = fields.List(fields.Dict(required=False), required=False)
+    excluded_fields = fields.List(fields.Str(required=False), required=False)
     
-    success = fields.Boolean(required=False)
+    aggregators = fields.List(fields.Dict(required=False), required=False)
     
 
