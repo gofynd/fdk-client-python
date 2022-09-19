@@ -31,7 +31,6 @@ setup(
         "jedi==0.18.0",
         "marshmallow==3.12.2",
         "matplotlib-inline==0.1.3",
-        "multidict==5.2.0",
         "parso==0.8.2",
         "pexpect==4.8.0",
         "pickleshare==0.7.5",
