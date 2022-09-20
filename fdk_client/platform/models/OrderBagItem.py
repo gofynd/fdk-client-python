@@ -26,15 +26,15 @@ class OrderBagItem(BaseSchema):
     
     image = fields.List(fields.Str(required=False), required=False)
     
-    size = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
+    l1_category = fields.List(fields.Str(required=False), required=False)
     
     slug_key = fields.Str(required=False)
     
-    l1_category = fields.List(fields.Str(required=False), required=False)
+    name = fields.Str(required=False)
     
     brand = fields.Str(required=False)
+    
+    size = fields.Str(required=False)
     
     l3_category = fields.Int(required=False)
     

@@ -7,9 +7,9 @@ from ..models.BaseSchema import BaseSchema
 
 from .PincodeErrorSchemaResponse import PincodeErrorSchemaResponse
 
-
-
 from .PincodeDataResponse import PincodeDataResponse
+
+
 
 
 class PincodeApiResponse(BaseSchema):
@@ -18,8 +18,8 @@ class PincodeApiResponse(BaseSchema):
     
     error = fields.Nested(PincodeErrorSchemaResponse, required=False)
     
-    success = fields.Boolean(required=False)
-    
     data = fields.List(fields.Nested(PincodeDataResponse, required=False), required=False)
+    
+    success = fields.Boolean(required=False)
     
 
