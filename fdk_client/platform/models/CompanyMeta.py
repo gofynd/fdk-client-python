@@ -8,10 +8,34 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
+
+
+
+from .CompanyAddress import CompanyAddress
+
+
+
+from .Documents1 import Documents1
+
+
 class CompanyMeta(BaseSchema):
-    # Catalog swagger.json
+    # Order swagger.json
 
     
-    id = fields.Int(required=False)
+    business_info = fields.Str(required=False)
+    
+    notification_emails = fields.List(fields.Str(required=False), required=False)
+    
+    contact_details = fields.Dict(required=False)
+    
+    business_details = fields.Dict(required=False)
+    
+    address = fields.List(fields.Nested(CompanyAddress, required=False), required=False)
+    
+    stage = fields.Str(required=False)
+    
+    documents = fields.Nested(Documents1, required=False)
     
 

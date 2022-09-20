@@ -16,10 +16,10 @@ class LocationManagerSerializer(BaseSchema):
     # Catalog swagger.json
 
     
-    email = fields.Str(required=False)
+    name = fields.Str(required=False)
     
     mobile_no = fields.Nested(SellerPhoneNumber, required=False)
     
-    name = fields.Str(required=False)
+    email = fields.Str(required=False)
     
 

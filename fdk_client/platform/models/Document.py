@@ -17,10 +17,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 class Document(BaseSchema):
-    # Catalog swagger.json
+    # Order swagger.json
 
     
-    type = fields.Str(required=False)
+    value = fields.Str(required=False)
     
     verified = fields.Boolean(required=False)
     
@@ -28,6 +28,6 @@ class Document(BaseSchema):
     
     legal_name = fields.Str(required=False)
     
-    value = fields.Str(required=False)
+    ds_type = fields.Str(required=False)
     
 
