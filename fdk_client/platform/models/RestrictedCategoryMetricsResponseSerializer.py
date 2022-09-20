@@ -14,8 +14,8 @@ class RestrictedCategoryMetricsResponseSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    drug = fields.Nested(DocumentObject, required=False)
-    
     food = fields.Nested(DocumentObject, required=False)
+    
+    drug = fields.Nested(DocumentObject, required=False)
     
 

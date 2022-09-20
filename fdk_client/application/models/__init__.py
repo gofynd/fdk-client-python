@@ -1568,10 +1568,6 @@ from .TATLocationDetailsResponse import TATLocationDetailsResponse
     
 from .TATViewResponse import TATViewResponse
     
-from .GetZoneFromPincodeViewRequest import GetZoneFromPincodeViewRequest
-    
-from .GetZoneFromPincodeViewResponse import GetZoneFromPincodeViewResponse
-    
 
 
 from .CatalogValidator import CatalogValidator
