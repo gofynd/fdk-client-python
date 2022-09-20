@@ -18,8 +18,8 @@ class Trader1(BaseSchema):
     
     name = fields.Str(required=False)
     
-    type = fields.Str(required=False)
-    
     address = fields.List(fields.Str(required=False), required=False)
+    
+    type = fields.Str(required=False)
     
 
