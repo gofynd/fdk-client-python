@@ -8,10 +8,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class DeleteUserSuccess(BaseSchema):
-    # User swagger.json
+
+
+class BadRequestErr(BaseSchema):
+    # Communication swagger.json
 
     
-    success = fields.Boolean(required=False)
+    status = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
     
 

@@ -20,7 +20,7 @@ class ProductBrand(BaseSchema):
     # Catalog swagger.json
 
     
-    name = fields.Str(required=False)
+    description = fields.Str(required=False)
     
     uid = fields.Int(required=False)
     
@@ -28,6 +28,6 @@ class ProductBrand(BaseSchema):
     
     action = fields.Nested(ProductListingAction, required=False)
     
-    description = fields.Str(required=False)
+    name = fields.Str(required=False)
     
 

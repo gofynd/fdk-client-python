@@ -2708,7 +2708,6 @@ class User:
             "loginWithOTP": "/service/application/user/authentication/v1.0/login/otp",
             "loginWithEmailAndPassword": "/service/application/user/authentication/v1.0/login/password",
             "sendResetPasswordEmail": "/service/application/user/authentication/v1.0/login/password/reset",
-            "sendResetPasswordMobile": "/service/application/user/authentication/v1.0/login/password/mobile/reset",
             "forgotPassword": "/service/application/user/authentication/v1.0/login/password/reset/forgot",
             "sendResetToken": "/service/application/user/authentication/v1.0/login/password/reset/token",
             "loginWithToken": "/service/application/user/authentication/v1.0/login/token",
@@ -2717,7 +2716,6 @@ class User:
             "verifyMobile": "/service/application/user/authentication/v1.0/verify/mobile",
             "hasPassword": "/service/application/user/authentication/v1.0/has-password",
             "updatePassword": "/service/application/user/authentication/v1.0/password",
-            "deleteUser": "/service/application/user/authentication/v1.0/delete",
             "logout": "/service/application/user/authentication/v1.0/logout",
             "sendOTPOnMobile": "/service/application/user/authentication/v1.0/otp/mobile/send",
             "verifyMobileOTP": "/service/application/user/authentication/v1.0/otp/mobile/verify",
@@ -2725,7 +2723,6 @@ class User:
             "verifyEmailOTP": "/service/application/user/authentication/v1.0/otp/email/verify",
             "getLoggedInUser": "/service/application/user/authentication/v1.0/session",
             "getListOfActiveSessions": "/service/application/user/authentication/v1.0/sessions",
-            "getPlatformConfig": "/service/application/user/platform/v1.0/config",
             "updateProfile": "/service/application/user/profile/v1.0/detail",
             "addMobileNumber": "/service/application/user/profile/v1.0/mobile",
             "deleteMobileNumber": "/service/application/user/profile/v1.0/mobile",
@@ -3012,40 +3009,6 @@ class User:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["sendResetPasswordEmail"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/login/password/reset", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
-    async def sendResetPasswordMobile(self, platform=None, body=""):
-        """Use this API to reset a password using the link sent on mobile.
-        :param platform : ID of the application : type string
-        """
-        payload = {}
-        
-        if platform:
-            payload["platform"] = platform
-        
-        # Parameter validation
-        schema = UserValidator.sendResetPasswordMobile()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models.SendResetPasswordMobileRequestSchema import SendResetPasswordMobileRequestSchema
-        schema = SendResetPasswordMobileRequestSchema()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["sendResetPasswordMobile"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", platform=platform)
-        query_string = await create_query_string(platform=platform)
-        headers = {
-            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
-        }
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["sendResetPasswordMobile"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/login/password/mobile/reset", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-    
     async def forgotPassword(self, body=""):
         """Use this API to reset a password using the code sent on email or SMS.
         """
@@ -3285,36 +3248,6 @@ class User:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["updatePassword"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/password", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
-    async def deleteUser(self, body=""):
-        """verify otp and delete user
-        """
-        payload = {}
-        
-        # Parameter validation
-        schema = UserValidator.deleteUser()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models.DeleteApplicationUserRequestSchema import DeleteApplicationUserRequestSchema
-        schema = DeleteApplicationUserRequestSchema()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["deleteUser"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
-        query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
-        }
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["deleteUser"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/delete", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-    
     async def logout(self, body=""):
         """Use this API to check to logout a user from the app.
         """
@@ -3525,35 +3458,6 @@ class User:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getListOfActiveSessions"]).netloc, "get", await create_url_without_domain("/service/application/user/authentication/v1.0/sessions", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-    
-    async def getPlatformConfig(self, name=None, body=""):
-        """Use this API to get all the platform configurations such as mobile image, desktop image, social logins, and all other text.
-        :param name : Name of the application, e.g. Fynd : type string
-        """
-        payload = {}
-        
-        if name:
-            payload["name"] = name
-        
-        # Parameter validation
-        schema = UserValidator.getPlatformConfig()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getPlatformConfig"], proccessed_params="""{"required":[],"optional":[{"name":"name","in":"query","description":"Name of the application, e.g. Fynd","schema":{"type":"string"}}],"query":[{"name":"name","in":"query","description":"Name of the application, e.g. Fynd","schema":{"type":"string"}}],"headers":[],"path":[]}""", name=name)
-        query_string = await create_query_string(name=name)
-        headers = {
-            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
-        }
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getPlatformConfig"]).netloc, "get", await create_url_without_domain("/service/application/user/platform/v1.0/config", name=name), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
     async def updateProfile(self, platform=None, body=""):
         """Use this API to update details in the user profile. Details can be first name, last name, gender, email, phone number, or profile picture.
