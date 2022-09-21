@@ -22,8 +22,8 @@ class StoreDetail(BaseSchema):
     
     id = fields.Int(required=False)
     
-    city = fields.Str(required=False)
-    
     code = fields.Str(required=False)
+    
+    city = fields.Str(required=False)
     
 

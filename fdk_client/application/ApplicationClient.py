@@ -6117,8 +6117,8 @@ class Payment:
     
     async def addRefundBankAccountUsingOTP(self, company_id=None, application_id=None, body=""):
         """Use this API to save bank details for returned/cancelled order to refund amount in his account.
-        :param company_id : Company Id : type integer
-        :param application_id : Application id : type string
+        :param company_id :  : type integer
+        :param application_id :  : type string
         """
         payload = {}
         
@@ -6138,7 +6138,7 @@ class Payment:
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["addRefundBankAccountUsingOTP"], proccessed_params="""{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", company_id=company_id, application_id=application_id)
+        url_with_params = await create_url_with_params(api_url=self._urls["addRefundBankAccountUsingOTP"], proccessed_params="""{"required":[{"in":"path","name":"company_id","schema":{"type":"integer","description":"Company Id"},"required":true},{"in":"path","name":"application_id","schema":{"type":"string","description":"Application id"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","schema":{"type":"integer","description":"Company Id"},"required":true},{"in":"path","name":"application_id","schema":{"type":"string","description":"Application id"},"required":true}]}""", company_id=company_id, application_id=application_id)
         query_string = await create_query_string(company_id=company_id, application_id=application_id)
         headers = {
             "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()

@@ -159,6 +159,8 @@ class CartValidator:
         anonymous_cart = fields.Boolean(required=False)
         
         last_id = fields.Str(required=False)
+        
+        sort_on = fields.Str(required=False)
          
     
     class addItems(BaseSchema):
