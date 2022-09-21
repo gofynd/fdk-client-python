@@ -18,9 +18,9 @@ class CreateAutocompleteWordsResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    app_id = fields.Str(required=False)
-    
     words = fields.List(fields.Str(required=False), required=False)
+    
+    app_id = fields.Str(required=False)
     
     results = fields.List(fields.Dict(required=False), required=False)
     
