@@ -982,7 +982,7 @@ from .CommunicationConsentChannels import CommunicationConsentChannels
     
 from .CommunicationConsent import CommunicationConsent
     
-from .BadRequestErr import BadRequestErr
+from .BadRequestSchema import BadRequestSchema
     
 from .PushtokenReq import PushtokenReq
     

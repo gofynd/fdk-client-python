@@ -10,7 +10,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class BadRequestErr(BaseSchema):
+class BadRequestSchema(BaseSchema):
     # Communication swagger.json
 
     
