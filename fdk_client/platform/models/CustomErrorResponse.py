@@ -28,6 +28,10 @@ class CustomErrorResponse(BaseSchema):
     
     status = fields.Int(required=False)
     
+    message = fields.Str(required=False)
+    
+    exception = fields.Str(required=False)
+    
     stack_trace = fields.Str(required=False)
     
     code = fields.Str(required=False)
@@ -37,9 +41,5 @@ class CustomErrorResponse(BaseSchema):
     meta = fields.Dict(required=False)
     
     info = fields.Str(required=False)
-    
-    exception = fields.Str(required=False)
-    
-    message = fields.Str(required=False)
     
 

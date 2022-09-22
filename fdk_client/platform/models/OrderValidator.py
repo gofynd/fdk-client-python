@@ -318,6 +318,10 @@ class OrderValidator:
         company_id = fields.Int(required=False)
         
         category = fields.Str(required=False)
+        
+        page_size = fields.Str(required=False)
+        
+        page_no = fields.Str(required=False)
          
     
     class getShipmentById(BaseSchema):

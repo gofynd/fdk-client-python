@@ -22,15 +22,15 @@ class ReasonCodes(BaseSchema):
     # Order swagger.json
 
     
-    is_active = fields.Boolean(required=False)
-    
     category = fields.Str(required=False)
     
     slug = fields.Str(required=False)
     
-    display_name = fields.Str(required=False)
+    is_active = fields.Boolean(required=False)
     
     id = fields.Int(required=False)
+    
+    display_name = fields.Str(required=False)
     
     state = fields.Str(required=False)
     

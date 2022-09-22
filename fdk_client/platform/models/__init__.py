@@ -1372,29 +1372,15 @@ from .GetClickToCallResponse import GetClickToCallResponse
     
 from .ApefaceApiError import ApefaceApiError
     
-from .AffiliateStoreIdMapping import AffiliateStoreIdMapping
+from .ArticleDetails import ArticleDetails
     
-from .AffiliateAppConfigMeta import AffiliateAppConfigMeta
+from .ShipmentDetails import ShipmentDetails
     
-from .AffiliateAppConfig import AffiliateAppConfig
+from .LocationDetails import LocationDetails
     
-from .AffiliateInventoryOrderConfig import AffiliateInventoryOrderConfig
+from .ShipmentConfig import ShipmentConfig
     
-from .AffiliateInventoryArticleAssignmentConfig import AffiliateInventoryArticleAssignmentConfig
-    
-from .AffiliateInventoryStoreConfig import AffiliateInventoryStoreConfig
-    
-from .AffiliateInventoryLogisticsConfig import AffiliateInventoryLogisticsConfig
-    
-from .AffiliateInventoryPaymentConfig import AffiliateInventoryPaymentConfig
-    
-from .AffiliateInventoryConfig import AffiliateInventoryConfig
-    
-from .AffiliateConfig import AffiliateConfig
-    
-from .Affiliate import Affiliate
-    
-from .OrderConfig import OrderConfig
+from .ShipmentData import ShipmentData
     
 from .MarketPlacePdf import MarketPlacePdf
     
@@ -1402,21 +1388,35 @@ from .AffiliateBag import AffiliateBag
     
 from .OrderUser import OrderUser
     
-from .ArticleDetails import ArticleDetails
-    
-from .LocationDetails import LocationDetails
-    
-from .ShipmentDetails import ShipmentDetails
-    
-from .ShipmentConfig import ShipmentConfig
-    
-from .ShipmentData import ShipmentData
+from .UserData import UserData
     
 from .OrderPriority import OrderPriority
     
-from .UserData import UserData
-    
 from .OrderInfo import OrderInfo
+    
+from .AffiliateInventoryLogisticsConfig import AffiliateInventoryLogisticsConfig
+    
+from .AffiliateInventoryArticleAssignmentConfig import AffiliateInventoryArticleAssignmentConfig
+    
+from .AffiliateInventoryPaymentConfig import AffiliateInventoryPaymentConfig
+    
+from .AffiliateInventoryOrderConfig import AffiliateInventoryOrderConfig
+    
+from .AffiliateInventoryStoreConfig import AffiliateInventoryStoreConfig
+    
+from .AffiliateInventoryConfig import AffiliateInventoryConfig
+    
+from .AffiliateAppConfigMeta import AffiliateAppConfigMeta
+    
+from .AffiliateAppConfig import AffiliateAppConfig
+    
+from .AffiliateConfig import AffiliateConfig
+    
+from .Affiliate import Affiliate
+    
+from .AffiliateStoreIdMapping import AffiliateStoreIdMapping
+    
+from .OrderConfig import OrderConfig
     
 from .CreateOrderPayload import CreateOrderPayload
     

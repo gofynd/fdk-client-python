@@ -1927,14 +1927,22 @@ class Order:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/update-shipment-status", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
-    async def getReasonCodes(self, category=None):
+    async def getReasonCodes(self, category=None, page_size=None, page_no=None):
         """
         :param category :  : type string
+        :param page_size :  : type string
+        :param page_no :  : type string
         """
         payload = {}
         
         if category:
             payload["category"] = category
+        
+        if page_size:
+            payload["page_size"] = page_size
+        
+        if page_no:
+            payload["page_no"] = page_no
         
 
         # Parameter validation
@@ -1942,8 +1950,8 @@ class Order:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/get-reason-codes", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"category","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","name":"category","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", category=category)
-        query_string = await create_query_string(category=category)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/get-reason-codes", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"category","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","name":"category","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", category=category, page_size=page_size, page_no=page_no)
+        query_string = await create_query_string(category=category, page_size=page_size, page_no=page_no)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -1953,7 +1961,7 @@ class Order:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/get-reason-codes", category=category), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/get-reason-codes", category=category, page_size=page_size, page_no=page_no), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def getShipmentById(self, shipment_id=None, channel_order_id=None, channel_shipment_id=None, channel_bag_id=None, channel_id=None):
         """

@@ -28,13 +28,13 @@ class ArticleDetails(BaseSchema):
     
     dimension = fields.Dict(required=False)
     
+    attributes = fields.Dict(required=False)
+    
     weight = fields.Dict(required=False)
     
     brand_id = fields.Int(required=False)
     
     quantity = fields.Int(required=False)
-    
-    attributes = fields.Dict(required=False)
     
     _id = fields.Str(required=False)
     
