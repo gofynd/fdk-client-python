@@ -12,14 +12,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ArticleQuery(BaseSchema):
+class UserSerializer2(BaseSchema):
     # Catalog swagger.json
 
     
-    ignored_stores = fields.List(fields.Int(required=False), required=False)
+    user_id = fields.Str(required=False)
     
-    size = fields.Str(required=False)
+    contact = fields.Str(required=False)
     
-    item_id = fields.Int(required=False)
+    username = fields.Str(required=False)
     
 

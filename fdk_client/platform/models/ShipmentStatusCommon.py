@@ -26,13 +26,13 @@ class ShipmentStatusCommon(BaseSchema):
     
     bag_list = fields.List(fields.Str(required=False), required=False)
     
-    current_shipment_status = fields.Str(required=False)
-    
     status = fields.Str(required=False)
     
-    ss_id = fields.Int(required=False)
+    current_shipment_status = fields.Str(required=False)
     
     created_at = fields.Str(required=False)
+    
+    ss_id = fields.Int(required=False)
     
     shipment_id = fields.Str(required=False)
     

@@ -7,7 +7,7 @@ from ..models.BaseSchema import BaseSchema
 
 from .Shipment import Shipment
 
-from .Page import Page
+from .Page1 import Page1
 
 
 class BulkShipmentDetailsPlatformResponse(BaseSchema):
@@ -16,6 +16,6 @@ class BulkShipmentDetailsPlatformResponse(BaseSchema):
     
     items = fields.List(fields.Nested(Shipment, required=False), required=False)
     
-    page = fields.Nested(Page, required=False)
+    page = fields.Nested(Page1, required=False)
     
 

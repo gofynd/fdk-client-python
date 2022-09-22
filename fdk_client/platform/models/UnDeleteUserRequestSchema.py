@@ -12,14 +12,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class BaseUserSerializer(BaseSchema):
-    # Catalog swagger.json
+class UnDeleteUserRequestSchema(BaseSchema):
+    # User swagger.json
 
     
-    username = fields.Str(required=False)
-    
-    contact = fields.Str(required=False)
-    
     user_id = fields.Str(required=False)
+    
+    reason = fields.Str(required=False)
+    
+    reason_id = fields.Str(required=False)
     
 

@@ -7,7 +7,7 @@ from ..models.BaseSchema import BaseSchema
 
 from .Bag import Bag
 
-from .Page import Page
+from .Page1 import Page1
 
 
 class GetBagsPlatformResponse(BaseSchema):
@@ -16,6 +16,6 @@ class GetBagsPlatformResponse(BaseSchema):
     
     items = fields.List(fields.Nested(Bag, required=False), required=False)
     
-    page = fields.Nested(Page, required=False)
+    page = fields.Nested(Page1, required=False)
     
 
