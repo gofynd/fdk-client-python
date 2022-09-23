@@ -4705,7 +4705,7 @@ Success
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | key | String? |  yes  |  |
- | value | Any? |  yes  |  |
+ | value | String? |  yes  |  |
 
 ---
 

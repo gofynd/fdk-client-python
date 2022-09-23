@@ -5,17 +5,25 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .BankDetailsForOTP import BankDetailsForOTP
 
 
 
 
-class AddBeneficiaryDetailsOTPRequest(BaseSchema):
+
+
+
+
+
+class PaymentConfirmationMode(BaseSchema):
     # Payment swagger.json
 
     
-    details = fields.Nested(BankDetailsForOTP, required=False)
+    mode = fields.Str(required=False)
     
-    order_id = fields.Str(required=False)
+    name = fields.Str(required=False)
+    
+    meta = fields.Dict(required=False)
+    
+    amount = fields.Float(required=False)
     
 

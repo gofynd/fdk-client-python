@@ -17,6 +17,7 @@ Handles Platform websites OMS
 * [sendOtpToShipmentCustomer](#sendotptoshipmentcustomer)
 * [verifyOtpShipmentCustomer](#verifyotpshipmentcustomer)
 * [getInvoiceByShipmentId](#getinvoicebyshipmentid)
+* [getCreditNoteByShipmentId](#getcreditnotebyshipmentid)
 
 
 
@@ -206,7 +207,7 @@ Get reasons behind full or partial cancellation of a shipment
 
 ```python
 try:
-    result = await client.order.getShipmentReasons(shipmentId=shipmentId)
+    result = await client.order.getShipmentReasons(shipmentId=shipmentId, bagId=bagId)
     # use result
 except Exception as e:
     print(e)
@@ -218,7 +219,8 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| shipmentId | String | yes | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. |  
+| shipmentId | String | yes | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. |   
+| bagId | Int? | no | Bag Id of a specefic bags which will help to categorize the reasons |  
 
 
 
@@ -657,6 +659,63 @@ Success, the code is valid and returns a SignedUrl
 ---
 
 
+### getCreditNoteByShipmentId
+Get Credit Note URL
+
+
+
+
+```python
+try:
+    result = await client.order.getCreditNoteByShipmentId(shipmentId=shipmentId)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| shipmentId | String | yes | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. |  
+
+
+
+Use this API to get a generated Credit Note URL for viewing or download.
+
+*Returned Response:*
+
+
+
+
+[ResponseGetCreditNoteShipment](#ResponseGetCreditNoteShipment)
+
+Success, the code is valid and returns a SignedUrl
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
 
 ### Schemas
 
@@ -731,6 +790,20 @@ Success, the code is valid and returns a SignedUrl
  | ---------- | ---- | -------- | ----------- |
  | requestId | String |  no  |  |
  | otpCode | String |  no  |  |
+
+---
+
+
+ 
+ 
+ #### [ResponseGetCreditNoteShipment](#ResponseGetCreditNoteShipment)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | success | Boolean |  no  |  |
+ | presignedType | String |  no  |  |
+ | shipmentId | String |  no  |  |
+ | presignedUrl | String |  no  |  |
 
 ---
 
@@ -926,6 +999,10 @@ Success, the code is valid and returns a SignedUrl
  | currentStatus | [CurrentStatus](#CurrentStatus)? |  yes  |  |
  | id | Int? |  yes  |  |
  | financialBreakup | ArrayList<[FinancialBreakup](#FinancialBreakup)>? |  yes  |  |
+ | canCancel | Boolean? |  yes  |  |
+ | canReturn | Boolean? |  yes  |  |
+ | deliveryDate | String? |  yes  |  |
+ | returnableDate | String? |  yes  |  |
 
 ---
 
@@ -943,6 +1020,7 @@ Success, the code is valid and returns a SignedUrl
  | image | ArrayList<String>? |  yes  |  |
  | code | String? |  yes  |  |
  | id | Double? |  yes  |  |
+ | sellerIdentifier | String? |  yes  |  |
 
 ---
 
@@ -1129,6 +1207,7 @@ Success, the code is valid and returns a SignedUrl
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | showPromise | Boolean? |  yes  |  |
  | timestamp | [Timestamp](#Timestamp)? |  yes  |  |
 
 ---
@@ -1140,7 +1219,6 @@ Success, the code is valid and returns a SignedUrl
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | showPromise | Boolean? |  yes  |  |
  | min | String? |  yes  |  |
  | max | String? |  yes  |  |
 
@@ -1205,7 +1283,10 @@ Success, the code is valid and returns a SignedUrl
  | beneficiaryDetails | Boolean? |  yes  |  |
  | canReturn | Boolean? |  yes  |  |
  | canBreak | HashMap<String,Any>? |  yes  |  |
+ | deliveryDate | String? |  yes  |  |
+ | returnableDate | String? |  yes  |  |
  | showDownloadInvoice | Boolean? |  yes  |  |
+ | showTrackLink | Boolean? |  yes  |  |
  | prices | [Prices](#Prices)? |  yes  |  |
  | needHelpUrl | String? |  yes  |  |
  | shipmentId | String? |  yes  |  |
@@ -1213,6 +1294,7 @@ Success, the code is valid and returns a SignedUrl
  | deliveryAddress | [DeliveryAddress](#DeliveryAddress)? |  yes  |  |
  | invoice | [Invoice](#Invoice)? |  yes  |  |
  | comment | String? |  yes  |  |
+ | refundDetails | HashMap<String,Any>? |  yes  |  |
  | orderType | String? |  yes  |  |
  | promise | [Promise](#Promise)? |  yes  |  |
  | fulfillingStore | [FulfillingStore](#FulfillingStore)? |  yes  |  |
@@ -1249,6 +1331,7 @@ Success, the code is valid and returns a SignedUrl
  | ---------- | ---- | -------- | ----------- |
  | logo | String? |  yes  |  |
  | mode | String? |  yes  |  |
+ | mop | String? |  yes  |  |
  | status | String? |  yes  |  |
 
 ---

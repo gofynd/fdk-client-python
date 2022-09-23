@@ -7,13 +7,13 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
 from .Media import Media
 
 
 
 from .ImageUrls import ImageUrls
+
+
 
 
 class BrandDetailResponse(BaseSchema):
@@ -22,12 +22,12 @@ class BrandDetailResponse(BaseSchema):
     
     description = fields.Str(required=False)
     
-    name = fields.Str(required=False)
-    
     logo = fields.Nested(Media, required=False)
     
     uid = fields.Int(required=False)
     
     banners = fields.Nested(ImageUrls, required=False)
+    
+    name = fields.Str(required=False)
     
 

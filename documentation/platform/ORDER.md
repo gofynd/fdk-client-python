@@ -12,9 +12,8 @@ Handles Platform websites OMS
 * [checkRefund](#checkrefund)
 * [shipmentBagsCanBreak](#shipmentbagscanbreak)
 * [getOrdersByCompanyId](#getordersbycompanyid)
-* [getOrderLanesCountByCompanyId](#getorderlanescountbycompanyid)
 * [getOrderDetails](#getorderdetails)
-* [getOrderDetails](#getorderdetails)
+* [getApplicationOrderDetails](#getapplicationorderdetails)
 * [getPicklistOrdersByCompanyId](#getpicklistordersbycompanyid)
 * [trackShipmentPlatform](#trackshipmentplatform)
 * [trackOrder](#trackorder)
@@ -322,7 +321,7 @@ Get Orders for company based on Company Id
 
 ```python
 try:
-    result = await client.order.getOrdersByCompanyId(pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, isPrioritySort=isPrioritySort, lockStatus=lockStatus, q=q, stage=stage, salesChannels=salesChannels, orderId=orderId, stores=stores, deploymentStores=deploymentStores, status=status, dp=dp, filterType=filterType)
+    result = await client.order.getOrdersByCompanyId(pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, isPrioritySort=isPrioritySort, lockStatus=lockStatus, userId=userId, q=q, stage=stage, salesChannels=salesChannels, orderId=orderId, stores=stores, deploymentStores=deploymentStores, status=status, dp=dp, shortenUrls=shortenUrls, filterType=filterType)
     # use result
 except Exception as e:
     print(e)
@@ -340,6 +339,7 @@ except Exception as e:
 | toDate | String? | no | To Date |   
 | isPrioritySort | Boolean? | no | Sorting Order |   
 | lockStatus | Boolean? | no | Hide Lock Status |   
+| userId | String? | no | User Id |   
 | q | String? | no | Keyword for Search |   
 | stage | String? | no | Specefic Order Stage |   
 | salesChannels | String? | no | Selected Sales Channel |   
@@ -348,6 +348,7 @@ except Exception as e:
 | deploymentStores | String? | no | Selected Deployment Stores |   
 | status | String? | no | Status of order |   
 | dp | String? | no | Delivery Partners |   
+| shortenUrls | Boolean? | no | Shorten URL option |   
 | filterType | String? | no | Filters |  
 
 
@@ -360,73 +361,6 @@ Get Orders
 
 
 [OrderListing](#OrderListing)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getOrderLanesCountByCompanyId
-Get Order Lanes Count for company based on Company Id
-
-
-
-
-```python
-try:
-    result = await client.order.getOrderLanesCountByCompanyId(pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, q=q, stage=stage, salesChannels=salesChannels, orderId=orderId, stores=stores, status=status, filterType=filterType)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| pageNo | String? | no | Current page number |   
-| pageSize | String? | no | Page limit |   
-| fromDate | String? | no | From Date |   
-| toDate | String? | no | To Date |   
-| q | String? | no | Keyword for Search |   
-| stage | String? | no | Specefic Order Stage |   
-| salesChannels | String? | no | Selected Sales Channel |   
-| orderId | String? | no | Order Id |   
-| stores | String? | no | Selected Stores |   
-| status | String? | no | Status of order |   
-| filterType | String? | no | Filters |  
-
-
-
-Get Orders Seperate Lane Count
-
-*Returned Response:*
-
-
-
-
-[OrderLanesCount](#OrderLanesCount)
 
 Success
 
@@ -511,7 +445,7 @@ Success
 ---
 
 
-### getOrderDetails
+### getApplicationOrderDetails
 Get Order Details for company based on Company Id and Order Id
 
 
@@ -519,7 +453,7 @@ Get Order Details for company based on Company Id and Order Id
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").order.getOrderDetails(orderId=orderId, next=next, previous=previous)
+    result = await client.application("<APPLICATION_ID>").order.getApplicationOrderDetails(orderId=orderId, next=next, previous=previous)
     # use result
 except Exception as e:
     print(e)
@@ -578,7 +512,7 @@ Get Orders for company based on Company Id
 
 ```python
 try:
-    result = await client.order.getPicklistOrdersByCompanyId(pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, q=q, stage=stage, salesChannels=salesChannels, orderId=orderId, stores=stores, status=status, filterType=filterType)
+    result = await client.order.getPicklistOrdersByCompanyId(pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, q=q, stage=stage, salesChannels=salesChannels, orderId=orderId, stores=stores, status=status, shortenUrls=shortenUrls, filterType=filterType)
     # use result
 except Exception as e:
     print(e)
@@ -600,6 +534,7 @@ except Exception as e:
 | orderId | String? | no | Order Id |   
 | stores | String? | no | Selected Stores |   
 | status | String? | no | Status of order |   
+| shortenUrls | Boolean? | no | Shorten URL option |   
 | filterType | String? | no | Filters |  
 
 
@@ -1156,7 +1091,7 @@ Get Orders for company based on Company Id
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").order.getOrdersByApplicationId(pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, q=q, stage=stage, salesChannels=salesChannels, orderId=orderId, stores=stores, status=status, dp=dp, filterType=filterType)
+    result = await client.application("<APPLICATION_ID>").order.getOrdersByApplicationId(pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, q=q, stage=stage, salesChannels=salesChannels, orderId=orderId, stores=stores, status=status, dp=dp, userId=userId, shortenUrls=shortenUrls, filterType=filterType)
     # use result
 except Exception as e:
     print(e)
@@ -1179,6 +1114,8 @@ except Exception as e:
 | stores | String? | no | Selected Stores |   
 | status | String? | no | Status of order |   
 | dp | String? | no | Delivery Partners |   
+| userId | String? | no | User Id |   
+| shortenUrls | Boolean? | no | Shorten URL option |   
 | filterType | String? | no | Filters |  
 
 
@@ -2268,6 +2205,7 @@ Success
  | image | ArrayList<String>? |  yes  |  |
  | brand | String? |  yes  |  |
  | lastUpdatedAt | String? |  yes  |  |
+ | quantity | Int? |  yes  |  |
 
 ---
 
@@ -3522,9 +3460,21 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | shipments | HashMap<String,Any> |  no  |  |
+ | shipments | HashMap<String,Any>? |  yes  |  |
+ | statuses | ArrayList<Any>? |  yes  |  |
  | forceTransition | Boolean |  no  |  |
  | task | Boolean |  no  |  |
+
+---
+
+
+ 
+ 
+ #### [ShipmentUpdateObject](#ShipmentUpdateObject)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | shipments | HashMap<String,Any>? |  yes  |  |
 
 ---
 

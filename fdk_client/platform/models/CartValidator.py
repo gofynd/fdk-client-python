@@ -142,3 +142,10 @@ class CartValidator:
         application_id = fields.Str(required=False)
          
     
+    class overrideCart(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+    
