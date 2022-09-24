@@ -1,4 +1,4 @@
-"""Application Models."""
+"""Platform Models."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -8,10 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class CancelOrResendPaymentLinkRequest(BaseSchema):
-    # Payment swagger.json
+class ShipmentUpdateObject(BaseSchema):
+    # Order swagger.json
 
     
-    payment_link_id = fields.Str(required=False)
+    shipments = fields.Dict(required=False)
     
 

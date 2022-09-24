@@ -15,15 +15,15 @@ from .MultiTenderPaymentMeta import MultiTenderPaymentMeta
 
 
 class MultiTenderPaymentMethod(BaseSchema):
-    # Payment swagger.json
+    # Cart swagger.json
 
     
     mode = fields.Str(required=False)
     
     meta = fields.Nested(MultiTenderPaymentMeta, required=False)
     
-    name = fields.Str(required=False)
-    
     amount = fields.Float(required=False)
+    
+    name = fields.Str(required=False)
     
 

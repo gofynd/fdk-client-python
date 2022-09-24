@@ -30,17 +30,17 @@ class ProductVariantItemResponse(BaseSchema):
     
     medias = fields.List(fields.Nested(Media, required=False), required=False)
     
-    color = fields.Str(required=False)
+    color_name = fields.Str(required=False)
     
     slug = fields.Str(required=False)
     
+    uid = fields.Int(required=False)
+    
     name = fields.Str(required=False)
     
-    color_name = fields.Str(required=False)
+    color = fields.Str(required=False)
     
     is_available = fields.Boolean(required=False)
-    
-    uid = fields.Int(required=False)
     
     value = fields.Str(required=False)
     

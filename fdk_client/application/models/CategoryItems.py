@@ -26,9 +26,9 @@ class CategoryItems(BaseSchema):
     
     slug = fields.Str(required=False)
     
-    name = fields.Str(required=False)
-    
     uid = fields.Int(required=False)
+    
+    name = fields.Str(required=False)
     
     childs = fields.List(fields.Nested(Child, required=False), required=False)
     

@@ -12,14 +12,18 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class CancelPaymentLinkResponse(BaseSchema):
-    # Payment swagger.json
+
+
+class ResponseGetCreditNoteShipment(BaseSchema):
+    # Order swagger.json
 
     
     success = fields.Boolean(required=False)
     
-    status_code = fields.Int(required=False)
+    presigned_type = fields.Str(required=False)
     
-    message = fields.Str(required=False)
+    shipment_id = fields.Str(required=False)
+    
+    presigned_url = fields.Str(required=False)
     
 
