@@ -30,23 +30,23 @@ class OverrideCartItem(BaseSchema):
     # Cart swagger.json
 
     
-    size = fields.Str(required=False)
+    price_marked = fields.Float(required=False)
     
     price_effective = fields.Float(required=False)
     
-    discount = fields.Float(required=False)
+    extra_meta = fields.Dict(required=False)
     
     promo_list = fields.List(fields.Nested(OverrideCartItemPromo, required=False), required=False)
     
-    price_marked = fields.Float(required=False)
-    
     quantity = fields.Int(required=False)
+    
+    discount = fields.Float(required=False)
+    
+    size = fields.Str(required=False)
     
     item_id = fields.Int(required=False)
     
     amount_paid = fields.Float(required=False)
-    
-    extra_meta = fields.Dict(required=False)
     
     seller_identifier = fields.Str(required=False)
     

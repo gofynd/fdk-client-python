@@ -20,9 +20,9 @@ class PaymentGatewayConfig(BaseSchema):
     # Payment swagger.json
 
     
-    config_type = fields.Str(required=False)
-    
     is_active = fields.Boolean(required=False)
+    
+    config_type = fields.Str(required=False)
     
     key = fields.Str(required=False)
     
