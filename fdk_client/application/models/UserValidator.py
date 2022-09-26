@@ -120,11 +120,6 @@ class UserValidator:
         
         pass 
     
-    class getPlatformConfig(BaseSchema):
-        
-        name = fields.Str(required=False)
-         
-    
     class updateProfile(BaseSchema):
         
         platform = fields.Str(required=False)

@@ -4271,7 +4271,7 @@ Success
 
  
  
- #### [BadRequest](#BadRequest)
+ #### [BadRequestSchema](#BadRequestSchema)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |

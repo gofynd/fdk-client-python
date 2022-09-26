@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class CollectionImage(BaseSchema):
-    # Catalog swagger.json
+class BadRequestSchema(BaseSchema):
+    # Communication swagger.json
 
     
-    url = fields.Str(required=False)
+    status = fields.Str(required=False)
     
-    aspect_ratio = fields.Str(required=False)
+    message = fields.Str(required=False)
     
 
