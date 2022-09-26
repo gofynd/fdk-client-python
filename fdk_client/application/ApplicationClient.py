@@ -2726,6 +2726,7 @@ class User:
             "verifyEmailOTP": "/service/application/user/authentication/v1.0/otp/email/verify",
             "getLoggedInUser": "/service/application/user/authentication/v1.0/session",
             "getListOfActiveSessions": "/service/application/user/authentication/v1.0/sessions",
+            "getPlatformConfig": "/service/application/user/platform/v1.0/config",
             "updateProfile": "/service/application/user/profile/v1.0/detail",
             "addMobileNumber": "/service/application/user/profile/v1.0/mobile",
             "deleteMobileNumber": "/service/application/user/profile/v1.0/mobile",
@@ -3525,6 +3526,35 @@ class User:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getListOfActiveSessions"]).netloc, "get", await create_url_without_domain("/service/application/user/authentication/v1.0/sessions", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+    
+    async def getPlatformConfig(self, name=None, body=""):
+        """Use this API to get all the platform configurations such as mobile image, desktop image, social logins, and all other text.
+        :param name : Name of the application, e.g. Fynd : type string
+        """
+        payload = {}
+        
+        if name:
+            payload["name"] = name
+        
+        # Parameter validation
+        schema = UserValidator.getPlatformConfig()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getPlatformConfig"], proccessed_params="""{"required":[],"optional":[{"name":"name","in":"query","description":"Name of the application, e.g. Fynd","schema":{"type":"string"}}],"query":[{"name":"name","in":"query","description":"Name of the application, e.g. Fynd","schema":{"type":"string"}}],"headers":[],"path":[]}""", name=name)
+        query_string = await create_query_string(name=name)
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getPlatformConfig"]).netloc, "get", await create_url_without_domain("/service/application/user/platform/v1.0/config", name=name), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
     async def updateProfile(self, platform=None, body=""):
         """Use this API to update details in the user profile. Details can be first name, last name, gender, email, phone number, or profile picture.
