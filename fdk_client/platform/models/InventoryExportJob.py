@@ -28,14 +28,14 @@ class InventoryExportJob(BaseSchema):
     
     status = fields.Str(required=False)
     
-    seller_id = fields.Int(required=False)
-    
     url = fields.Str(required=False)
     
     trigger_on = fields.Str(required=False)
     
-    completed_on = fields.Str(required=False)
+    seller_id = fields.Int(required=False)
     
     task_id = fields.Str(required=False)
+    
+    completed_on = fields.Str(required=False)
     
 

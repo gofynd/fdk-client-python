@@ -7,9 +7,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
 from .AutocompleteResult import AutocompleteResult
+
+
 
 
 
@@ -20,8 +20,6 @@ class CreateAutocompleteKeyword(BaseSchema):
     # Catalog swagger.json
 
     
-    app_id = fields.Str(required=False)
-    
     _custom_json = fields.Dict(required=False)
     
     results = fields.List(fields.Nested(AutocompleteResult, required=False), required=False)
@@ -29,5 +27,7 @@ class CreateAutocompleteKeyword(BaseSchema):
     words = fields.List(fields.Str(required=False), required=False)
     
     is_active = fields.Boolean(required=False)
+    
+    app_id = fields.Str(required=False)
     
 

@@ -170,6 +170,8 @@ class PageType(Enum):
     
     LOGIN = "login"
     
+    REGISTER = "register"
+    
     @classmethod
     async def is_valid(cls, value):
         if value in cls._value2member_map_:
