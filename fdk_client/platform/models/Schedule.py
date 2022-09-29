@@ -20,7 +20,7 @@ class Schedule(BaseSchema):
     # Catalog swagger.json
 
     
-    cron = fields.Str(required=False)
+    duration = fields.Int(required=False)
     
     end = fields.Str(required=False)
     
@@ -28,6 +28,6 @@ class Schedule(BaseSchema):
     
     start = fields.Str(required=False)
     
-    duration = fields.Int(required=False)
+    cron = fields.Str(required=False)
     
 

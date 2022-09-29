@@ -41,6 +41,22 @@ class BillingValidator:
         subscription_id = fields.Str(required=False)
          
     
+    class createOneTimeCharge(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        extension_id = fields.Str(required=False)
+         
+    
+    class getChargeDetails(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        extension_id = fields.Str(required=False)
+        
+        charge_id = fields.Str(required=False)
+         
+    
     class getInvoices(BaseSchema):
         
         company_id = fields.Str(required=False)
