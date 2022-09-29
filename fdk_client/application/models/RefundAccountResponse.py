@@ -22,8 +22,8 @@ class RefundAccountResponse(BaseSchema):
     
     data = fields.Dict(required=False)
     
-    success = fields.Boolean(required=False)
-    
     is_verified_flag = fields.Boolean(required=False)
+    
+    success = fields.Boolean(required=False)
     
 
