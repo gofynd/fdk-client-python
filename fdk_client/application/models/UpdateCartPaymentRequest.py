@@ -22,8 +22,6 @@ class UpdateCartPaymentRequest(BaseSchema):
     # Cart swagger.json
 
     
-    address_id = fields.Str(required=False)
-    
     aggregator_name = fields.Str(required=False)
     
     payment_identifier = fields.Str(required=False)
@@ -33,5 +31,7 @@ class UpdateCartPaymentRequest(BaseSchema):
     payment_mode = fields.Str(required=False)
     
     id = fields.Str(required=False)
+    
+    address_id = fields.Str(required=False)
     
 
