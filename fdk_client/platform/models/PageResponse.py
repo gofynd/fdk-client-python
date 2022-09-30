@@ -20,8 +20,6 @@ class PageResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    has_next = fields.Boolean(required=False)
-    
     item_total = fields.Int(required=False)
     
     current = fields.Str(required=False)
@@ -29,5 +27,7 @@ class PageResponse(BaseSchema):
     size = fields.Int(required=False)
     
     has_previous = fields.Boolean(required=False)
+    
+    has_next = fields.Boolean(required=False)
     
 
