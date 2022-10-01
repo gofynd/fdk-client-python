@@ -13,16 +13,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 from .CreateOrderUserPaymentMethods import CreateOrderUserPaymentMethods
-
-
 
 
 class CreateOrderUserRequest(BaseSchema):
     # Payment swagger.json
 
-    
-    currency = fields.Str(required=False)
     
     payment_link_id = fields.Str(required=False)
     
@@ -30,8 +28,10 @@ class CreateOrderUserRequest(BaseSchema):
     
     failure_callback_url = fields.Str(required=False)
     
-    payment_methods = fields.Nested(CreateOrderUserPaymentMethods, required=False)
+    currency = fields.Str(required=False)
     
     meta = fields.Dict(required=False)
+    
+    payment_methods = fields.Nested(CreateOrderUserPaymentMethods, required=False)
     
 

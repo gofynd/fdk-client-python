@@ -28,11 +28,11 @@ class GetPaymentLinkResponse(BaseSchema):
     # Payment swagger.json
 
     
-    polling_timeout = fields.Int(required=False)
+    status_code = fields.Int(required=False)
     
     external_order_id = fields.Str(required=False)
     
-    success = fields.Boolean(required=False)
+    payment_link_url = fields.Str(required=False)
     
     message = fields.Str(required=False)
     
@@ -40,10 +40,10 @@ class GetPaymentLinkResponse(BaseSchema):
     
     payment_link_current_status = fields.Str(required=False)
     
+    success = fields.Boolean(required=False)
+    
     amount = fields.Float(required=False)
     
-    payment_link_url = fields.Str(required=False)
-    
-    status_code = fields.Int(required=False)
+    polling_timeout = fields.Int(required=False)
     
 
