@@ -5,24 +5,22 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .SizeChart import SizeChart
-
 
 
 from .ProductSizeStores import ProductSizeStores
 
 from .ProductListingPrice import ProductListingPrice
 
-
-
 from .ProductSize import ProductSize
+
+
+
+from .SizeChart import SizeChart
 
 
 class ProductSizes(BaseSchema):
     # Catalog swagger.json
 
-    
-    size_chart = fields.Nested(SizeChart, required=False)
     
     sellable = fields.Boolean(required=False)
     
@@ -30,8 +28,10 @@ class ProductSizes(BaseSchema):
     
     price = fields.Nested(ProductListingPrice, required=False)
     
+    sizes = fields.List(fields.Nested(ProductSize, required=False), required=False)
+    
     discount = fields.Str(required=False)
     
-    sizes = fields.List(fields.Nested(ProductSize, required=False), required=False)
+    size_chart = fields.Nested(SizeChart, required=False)
     
 
