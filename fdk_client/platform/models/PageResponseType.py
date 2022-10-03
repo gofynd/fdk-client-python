@@ -18,9 +18,9 @@ class PageResponseType(BaseSchema):
     # Catalog swagger.json
 
     
-    total_count = fields.Int(required=False)
-    
     current = fields.Int(required=False)
+    
+    total_count = fields.Int(required=False)
     
     next = fields.Int(required=False)
     
