@@ -5,21 +5,17 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .InventoryPage import InventoryPage
 
 
 
 
-
-
-
-class ArticleQuery(BaseSchema):
+class InventoryStockResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    size = fields.Str(required=False)
+    page = fields.Nested(InventoryPage, required=False)
     
-    ignored_stores = fields.List(fields.Int(required=False), required=False)
-    
-    item_id = fields.Int(required=False)
+    items = fields.List(fields.Dict(required=False), required=False)
     
 
