@@ -20,9 +20,9 @@ class InventoryExportResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    trigger_on = fields.Str(required=False)
-    
     request_params = fields.Dict(required=False)
+    
+    trigger_on = fields.Str(required=False)
     
     status = fields.Str(required=False)
     

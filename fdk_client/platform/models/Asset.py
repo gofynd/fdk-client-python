@@ -13,7 +13,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class Asset(BaseSchema):
-    # Content swagger.json
+    # Rewards swagger.json
 
     
     aspect_ratio = fields.Str(required=False)

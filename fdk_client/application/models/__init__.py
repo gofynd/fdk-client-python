@@ -1514,151 +1514,43 @@ from .ApefaceApiError import ApefaceApiError
     
 
     
-from .AbuseReport import AbuseReport
+from .ActionPageParams import ActionPageParams
     
-from .Access import Access
+from .CatalogueOrderRequest import CatalogueOrderRequest
     
-from .AddMediaListRequest import AddMediaListRequest
+from .CatalogueOrderResponse import CatalogueOrderResponse
     
-from .AddMediaRequest import AddMediaRequest
+from .DiscountProperties import DiscountProperties
     
-from .ApplicationSchema import ApplicationSchema
+from .Error import Error
     
-from .Attribute import Attribute
+from .Offer import Offer
     
-from .AttributeObject import AttributeObject
+from .OrderDiscountRequest import OrderDiscountRequest
     
-from .AttributeResponse import AttributeResponse
+from .OrderDiscountResponse import OrderDiscountResponse
     
-from .AutoDetectors import AutoDetectors
+from .OrderDiscountRuleBucket import OrderDiscountRuleBucket
     
-from .CheckEligibilityResponse import CheckEligibilityResponse
+from .PointsHistory import PointsHistory
     
-from .Cloud import Cloud
+from .PointsHistoryResponse import PointsHistoryResponse
     
-from .Comment import Comment
+from .PointsResponse import PointsResponse
     
-from .CommentGetResponse import CommentGetResponse
+from .RedeemReferralCodeRequest import RedeemReferralCodeRequest
     
-from .CommentRequest import CommentRequest
+from .RedeemReferralCodeResponse import RedeemReferralCodeResponse
     
-from .CreateQNARequest import CreateQNARequest
+from .ReferralDetailsResponse import ReferralDetailsResponse
     
-from .CreatedBy import CreatedBy
+from .ReferralDetailsUser import ReferralDetailsUser
     
-from .CursorGetResponse import CursorGetResponse
+from .RewardsArticle import RewardsArticle
     
-from .CustomerReview import CustomerReview
+from .Schedule import Schedule
     
-from .DeviceMeta import DeviceMeta
-    
-from .Entity import Entity
-    
-from .EntityMeta import EntityMeta
-    
-from .FeedbackError import FeedbackError
-    
-from .FeedbackMedia import FeedbackMedia
-    
-from .FeedbackState import FeedbackState
-    
-from .GeoLoc import GeoLoc
-    
-from .InsertResponse import InsertResponse
-    
-from .Location import Location
-    
-from .LocationMeta import LocationMeta
-    
-from .MediaGetResponse import MediaGetResponse
-    
-from .MediaMeta import MediaMeta
-    
-from .MediaState import MediaState
-    
-from .NumberGetResponse import NumberGetResponse
-    
-from .PageNumber import PageNumber
-    
-from .ProductEntity import ProductEntity
-    
-from .QNA import QNA
-    
-from .QNAGetResponse import QNAGetResponse
-    
-from .QNAState import QNAState
-    
-from .Question import Question
-    
-from .Rating import Rating
-    
-from .RatingGetResponse import RatingGetResponse
-    
-from .RatingMetric import RatingMetric
-    
-from .ReportAbuseGetResponse import ReportAbuseGetResponse
-    
-from .ReportAbuseRequest import ReportAbuseRequest
-    
-from .Review import Review
-    
-from .ReviewFacet import ReviewFacet
-    
-from .ReviewGetResponse import ReviewGetResponse
-    
-from .ReviewMediaMeta import ReviewMediaMeta
-    
-from .ReviewMetric import ReviewMetric
-    
-from .ReviewMetricGetResponse import ReviewMetricGetResponse
-    
-from .ReviewRating import ReviewRating
-    
-from .SaveAttributeRequest import SaveAttributeRequest
-    
-from .SortMethod import SortMethod
-    
-from .State import State
-    
-from .TagMeta import TagMeta
-    
-from .Template import Template
-    
-from .TemplateGetResponse import TemplateGetResponse
-    
-from .TemplateReview import TemplateReview
-    
-from .TextDetector import TextDetector
-    
-from .UI import UI
-    
-from .UIIcon import UIIcon
-    
-from .UpdateAbuseStatusRequest import UpdateAbuseStatusRequest
-    
-from .UpdateAttributeRequest import UpdateAttributeRequest
-    
-from .UpdateCommentRequest import UpdateCommentRequest
-    
-from .UpdateMediaListRequest import UpdateMediaListRequest
-    
-from .UpdateQNARequest import UpdateQNARequest
-    
-from .UpdateResponse import UpdateResponse
-    
-from .UpdateReviewRequest import UpdateReviewRequest
-    
-from .UpdateVoteRequest import UpdateVoteRequest
-    
-from .Url import Url
-    
-from .Vote import Vote
-    
-from .VoteCount import VoteCount
-    
-from .VoteRequest import VoteRequest
-    
-from .VoteResponse import VoteResponse
+from .ShareMessages import ShareMessages
     
 
     
@@ -1742,7 +1634,7 @@ from .PaymentValidator import PaymentValidator
 
 from .OrderValidator import OrderValidator
 
-from .FeedbackValidator import FeedbackValidator
+from .RewardsValidator import RewardsValidator
 
 from .PosCartValidator import PosCartValidator
 
