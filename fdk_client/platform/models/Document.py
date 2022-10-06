@@ -17,14 +17,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 class Document(BaseSchema):
-    # Order swagger.json
+    # Catalog swagger.json
 
     
-    ds_type = fields.Str(required=False)
+    value = fields.Str(required=False)
     
     verified = fields.Boolean(required=False)
     
-    value = fields.Str(required=False)
+    type = fields.Str(required=False)
     
     legal_name = fields.Str(required=False)
     

@@ -15,8 +15,6 @@ from .ShipmentPrices import ShipmentPrices
 
 from .ShipmentGst import ShipmentGst
 
-from .ShipmentBreakupValues import ShipmentBreakupValues
-
 
 
 
@@ -41,8 +39,6 @@ class PlatformShipment(BaseSchema):
     id = fields.Str(required=False)
     
     gst = fields.Nested(ShipmentGst, required=False)
-    
-    breakup_values = fields.Nested(ShipmentBreakupValues, required=False)
     
     priority = fields.Float(required=False)
     
