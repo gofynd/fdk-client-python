@@ -7,9 +7,9 @@ from ..models.BaseSchema import BaseSchema
 
 from .MetaFields import MetaFields
 
+
+
 from .ApplicationItemMOQ import ApplicationItemMOQ
-
-
 
 
 class ApplicationItemMeta(BaseSchema):
@@ -18,8 +18,8 @@ class ApplicationItemMeta(BaseSchema):
     
     _custom_meta = fields.List(fields.Nested(MetaFields, required=False), required=False)
     
-    moq = fields.Nested(ApplicationItemMOQ, required=False)
-    
     _custom_json = fields.Dict(required=False)
+    
+    moq = fields.Nested(ApplicationItemMOQ, required=False)
     
 

@@ -160,3 +160,13 @@ class PaymentValidator:
         
         pass 
     
+    class outstandingOrderDetails(BaseSchema):
+        
+        merchant_user_id = fields.Str(required=False)
+         
+    
+    class paidOrderDetails(BaseSchema):
+        
+        merchant_user_id = fields.Str(required=False)
+         
+    

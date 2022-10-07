@@ -1270,9 +1270,9 @@ from .PaymentStatusUpdateRequest import PaymentStatusUpdateRequest
     
 from .PaymentStatusUpdateResponse import PaymentStatusUpdateResponse
     
-from .IntentAppErrorList import IntentAppErrorList
-    
 from .PaymentModeLogo import PaymentModeLogo
+    
+from .IntentAppErrorList import IntentAppErrorList
     
 from .IntentApp import IntentApp
     
@@ -1360,13 +1360,13 @@ from .CreditDetail import CreditDetail
     
 from .CheckCreditResponse import CheckCreditResponse
     
-from .MarketplaceInfo import MarketplaceInfo
-    
 from .KYCAddress import KYCAddress
     
 from .BusinessDetails import BusinessDetails
     
 from .UserPersonalInfoInDetails import UserPersonalInfoInDetails
+    
+from .MarketplaceInfo import MarketplaceInfo
     
 from .DeviceDetails import DeviceDetails
     
@@ -1375,6 +1375,10 @@ from .CustomerOnboardingRequest import CustomerOnboardingRequest
 from .OnboardSummary import OnboardSummary
     
 from .CustomerOnboardingResponse import CustomerOnboardingResponse
+    
+from .OutstandingOrderDetailsResponse import OutstandingOrderDetailsResponse
+    
+from .PaidOrderDetailsResponse import PaidOrderDetailsResponse
     
 
     

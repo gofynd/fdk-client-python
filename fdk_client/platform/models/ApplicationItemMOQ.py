@@ -16,10 +16,10 @@ class ApplicationItemMOQ(BaseSchema):
     # Catalog swagger.json
 
     
+    min_qty = fields.Int(required=False)
+    
     multiplier = fields.Int(required=False)
     
     max_qty = fields.Int(required=False)
-    
-    min_qty = fields.Int(required=False)
     
 

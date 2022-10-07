@@ -5357,7 +5357,9 @@ class Payment:
             "customerCreditSummary": "/service/application/payment/v1.0/payment/credit-summary/",
             "redirectToAggregator": "/service/application/payment/v1.0/payment/redirect-to-aggregator/",
             "checkCredit": "/service/application/payment/v1.0/check-credits/",
-            "customerOnboard": "/service/application/payment/v1.0/credit-onboard/"
+            "customerOnboard": "/service/application/payment/v1.0/credit-onboard/",
+            "outstandingOrderDetails": "/service/application/payment/v1.0/payment/outstanding-orders/",
+            "paidOrderDetails": "/service/application/payment/v1.0/payment/paid-orders/"
             
         }
         self._urls = {
@@ -6240,6 +6242,64 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["customerOnboard"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/credit-onboard/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+    
+    async def outstandingOrderDetails(self, merchant_user_id=None, body=""):
+        """Use this API to fetch the outstanding order details.
+        :param merchant_user_id :  : type string
+        """
+        payload = {}
+        
+        if merchant_user_id:
+            payload["merchant_user_id"] = merchant_user_id
+        
+        # Parameter validation
+        schema = PaymentValidator.outstandingOrderDetails()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["outstandingOrderDetails"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"merchant_user_id","schema":{"type":"string","description":"This is a String value that contains merchant_user_id as value."}}],"query":[{"in":"query","name":"merchant_user_id","schema":{"type":"string","description":"This is a String value that contains merchant_user_id as value."}}],"headers":[],"path":[]}""", merchant_user_id=merchant_user_id)
+        query_string = await create_query_string(merchant_user_id=merchant_user_id)
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["outstandingOrderDetails"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/payment/outstanding-orders/", merchant_user_id=merchant_user_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+    
+    async def paidOrderDetails(self, merchant_user_id=None, body=""):
+        """Use this API to fetch the paid order details.
+        :param merchant_user_id :  : type string
+        """
+        payload = {}
+        
+        if merchant_user_id:
+            payload["merchant_user_id"] = merchant_user_id
+        
+        # Parameter validation
+        schema = PaymentValidator.paidOrderDetails()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["paidOrderDetails"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"merchant_user_id","schema":{"type":"string","description":"This is a String value that contains merchant_user_id as value."}}],"query":[{"in":"query","name":"merchant_user_id","schema":{"type":"string","description":"This is a String value that contains merchant_user_id as value."}}],"headers":[],"path":[]}""", merchant_user_id=merchant_user_id)
+        query_string = await create_query_string(merchant_user_id=merchant_user_id)
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["paidOrderDetails"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/payment/paid-orders/", merchant_user_id=merchant_user_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
 
 class Order:
