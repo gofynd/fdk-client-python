@@ -20,10 +20,10 @@ class UserDetail(BaseSchema):
     
     super_user = fields.Boolean(required=False)
     
+    username = fields.Str(required=False)
+    
     user_id = fields.Str(required=False)
     
     contact = fields.Str(required=False)
-    
-    username = fields.Str(required=False)
     
 
