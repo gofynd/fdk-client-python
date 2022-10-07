@@ -70,8 +70,6 @@ class OrderValidator:
         
         dp = fields.Str(required=False)
         
-        shorten_urls = fields.Boolean(required=False)
-        
         filter_type = fields.Str(required=False)
          
     
@@ -98,8 +96,6 @@ class OrderValidator:
         stores = fields.Str(required=False)
         
         status = fields.Str(required=False)
-        
-        shorten_urls = fields.Boolean(required=False)
         
         filter_type = fields.Str(required=False)
          
@@ -151,8 +147,6 @@ class OrderValidator:
         stores = fields.Str(required=False)
         
         status = fields.Str(required=False)
-        
-        shorten_urls = fields.Boolean(required=False)
         
         filter_type = fields.Str(required=False)
          
@@ -268,27 +262,6 @@ class OrderValidator:
         
         user_id = fields.Str(required=False)
         
-        shorten_urls = fields.Boolean(required=False)
-        
         filter_type = fields.Str(required=False)
-         
-    
-    class getPing(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-         
-    
-    class voiceCallback(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-         
-    
-    class voiceClickToCall(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        caller = fields.Str(required=False)
-        
-        receiver = fields.Str(required=False)
          
     

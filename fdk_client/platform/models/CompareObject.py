@@ -20,6 +20,8 @@ class CompareObject(BaseSchema):
     # Cart swagger.json
 
     
+    greater_than = fields.Float(required=False)
+    
     less_than_equals = fields.Float(required=False)
     
     equals = fields.Float(required=False)
@@ -27,7 +29,5 @@ class CompareObject(BaseSchema):
     greater_than_equals = fields.Float(required=False)
     
     less_than = fields.Float(required=False)
-    
-    greater_than = fields.Float(required=False)
     
 
