@@ -162,11 +162,11 @@ class PaymentValidator:
     
     class outstandingOrderDetails(BaseSchema):
         
-        merchant_user_id = fields.Str(required=False)
+        aggregator = fields.Str(required=False)
          
     
     class paidOrderDetails(BaseSchema):
         
-        merchant_user_id = fields.Str(required=False)
+        aggregator = fields.Str(required=False)
          
     

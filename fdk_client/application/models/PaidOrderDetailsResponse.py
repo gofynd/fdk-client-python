@@ -18,9 +18,9 @@ class PaidOrderDetailsResponse(BaseSchema):
     # Payment swagger.json
 
     
-    status_code = fields.Int(required=False)
-    
     data = fields.List(fields.Dict(required=False), required=False)
+    
+    status_code = fields.Int(required=False)
     
     success = fields.Boolean(required=False)
     
