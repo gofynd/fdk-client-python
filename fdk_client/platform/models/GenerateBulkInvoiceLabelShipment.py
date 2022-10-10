@@ -17,7 +17,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class GenerateBulkInvoiceLabelShipment(BaseSchema):
-    # OrderInvoiceEngine swagger.json
+    # DocumentEngine swagger.json
 
     
     store_id = fields.Float(required=False)

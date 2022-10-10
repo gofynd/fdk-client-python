@@ -15,7 +15,7 @@ from .ShipmentDetails import ShipmentDetails
 
 
 class GenerateBulkShipmentLabel(BaseSchema):
-    # OrderInvoiceEngine swagger.json
+    # DocumentEngine swagger.json
 
     
     label_type = fields.Str(required=False)

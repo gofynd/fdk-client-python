@@ -11,7 +11,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class BulkListFailedResponse(BaseSchema):
-    # OrderInvoiceEngine swagger.json
+    # DocumentEngine swagger.json
 
     
     success = fields.Boolean(required=False)

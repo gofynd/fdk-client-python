@@ -14,8 +14,8 @@ class TATCategoryRequest(BaseSchema):
     # Logistic swagger.json
 
     
-    level = fields.Str(required=False)
-    
     id = fields.Int(required=False)
+    
+    level = fields.Str(required=False)
     
 

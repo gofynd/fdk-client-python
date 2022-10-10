@@ -17,7 +17,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class ShippingToAddress(BaseSchema):
-    # OrderInvoiceEngine swagger.json
+    # DocumentEngine swagger.json
 
     
     address = fields.Str(required=False)

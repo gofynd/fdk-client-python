@@ -7,11 +7,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .UserDataSet import UserDataSet
-
 from .ShipmentDataSet import ShipmentDataSet
 
 
+
+from .UserDataSet import UserDataSet
 
 
 class OrderDataSet(BaseSchema):
@@ -20,10 +20,10 @@ class OrderDataSet(BaseSchema):
     
     order_id = fields.Str(required=False)
     
-    user_info = fields.Nested(UserDataSet, required=False)
-    
     shipments = fields.List(fields.Nested(ShipmentDataSet, required=False), required=False)
     
     order_created_time = fields.Str(required=False)
+    
+    user_info = fields.Nested(UserDataSet, required=False)
     
 

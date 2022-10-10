@@ -19,7 +19,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class PackageDetails(BaseSchema):
-    # OrderInvoiceEngine swagger.json
+    # DocumentEngine swagger.json
 
     
     package_id = fields.Str(required=False)

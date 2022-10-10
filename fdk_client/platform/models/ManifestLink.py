@@ -11,7 +11,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class ManifestLink(BaseSchema):
-    # OrderInvoiceEngine swagger.json
+    # DocumentEngine swagger.json
 
     
     name = fields.Str(required=False)

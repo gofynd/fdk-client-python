@@ -15,7 +15,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class GenerateBulkUrlSuccessResponse(BaseSchema):
-    # OrderInvoiceEngine swagger.json
+    # DocumentEngine swagger.json
 
     
     url = fields.Str(required=False)

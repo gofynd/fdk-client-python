@@ -15,7 +15,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class GenerateManifest(BaseSchema):
-    # OrderInvoiceEngine swagger.json
+    # DocumentEngine swagger.json
 
     
     store_id = fields.Float(required=False)

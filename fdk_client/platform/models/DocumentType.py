@@ -11,7 +11,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class DocumentType(BaseSchema):
-    # OrderInvoiceEngine swagger.json
+    # DocumentEngine swagger.json
 
     
     invoice = fields.Str(required=False)

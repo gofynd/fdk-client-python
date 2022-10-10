@@ -11,7 +11,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class GeneratePresignedManifestUrl(BaseSchema):
-    # OrderInvoiceEngine swagger.json
+    # DocumentEngine swagger.json
 
     
     manifest_id = fields.Str(required=False)

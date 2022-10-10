@@ -27,7 +27,7 @@ from .SellerAddress import SellerAddress
 
 
 class ShipmentDetails(BaseSchema):
-    # OrderInvoiceEngine swagger.json
+    # DocumentEngine swagger.json
 
     
     shipment_no = fields.Str(required=False)

@@ -13,7 +13,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class SignedSuccessResponse(BaseSchema):
-    # OrderInvoiceEngine swagger.json
+    # DocumentEngine swagger.json
 
     
     uid = fields.Str(required=False)

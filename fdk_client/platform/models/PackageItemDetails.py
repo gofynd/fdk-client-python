@@ -21,7 +21,7 @@ from .PackageDetails import PackageDetails
 
 
 class PackageItemDetails(BaseSchema):
-    # OrderInvoiceEngine swagger.json
+    # DocumentEngine swagger.json
 
     
     jio_code = fields.Str(required=False)

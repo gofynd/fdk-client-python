@@ -19,7 +19,7 @@ from .BoxDetails import BoxDetails
 
 
 class GenerateBulkBoxLabel(BaseSchema):
-    # OrderInvoiceEngine swagger.json
+    # DocumentEngine swagger.json
 
     
     stock_transfer_id = fields.Str(required=False)

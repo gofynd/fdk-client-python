@@ -17,7 +17,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class GenerateManifestUrlSuccessResponse(BaseSchema):
-    # OrderInvoiceEngine swagger.json
+    # DocumentEngine swagger.json
 
     
     url = fields.Str(required=False)

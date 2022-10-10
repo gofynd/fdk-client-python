@@ -17,7 +17,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class BoxDetails(BaseSchema):
-    # OrderInvoiceEngine swagger.json
+    # DocumentEngine swagger.json
 
     
     box_id = fields.Str(required=False)

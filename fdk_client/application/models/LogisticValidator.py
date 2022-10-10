@@ -16,3 +16,7 @@ class LogisticValidator:
         
         pass 
     
+    class getPincodeZones(BaseSchema):
+        
+        pass 
+    

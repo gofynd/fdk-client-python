@@ -11,7 +11,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class OrderInvoiceEngineError(BaseSchema):
-    # OrderInvoiceEngine swagger.json
+    # DocumentEngine swagger.json
 
     
     message = fields.Str(required=False)

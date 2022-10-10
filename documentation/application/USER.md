@@ -3725,6 +3725,7 @@ Request body must contain an email ID. Refer `EditEmailRequestSchema` for more d
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | message | String? |  yes  |  |
+ | isDeleted | Boolean? |  yes  |  |
 
 ---
 

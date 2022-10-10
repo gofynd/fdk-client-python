@@ -21,7 +21,7 @@ from .SellerAddress import SellerAddress
 
 
 class GenerateNoc(BaseSchema):
-    # OrderInvoiceEngine swagger.json
+    # DocumentEngine swagger.json
 
     
     uid = fields.Str(required=False)

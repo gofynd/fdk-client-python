@@ -17,7 +17,7 @@ from .BadRequestResponseGenerateBulkItemParameters import BadRequestResponseGene
 
 
 class BadRequestResponseGenerateBulkItem(BaseSchema):
-    # OrderInvoiceEngine swagger.json
+    # DocumentEngine swagger.json
 
     
     keyword = fields.Str(required=False)
