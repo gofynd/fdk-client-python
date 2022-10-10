@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class SetCODForUserRequest(BaseSchema):
+class MerchantOnBoardingResponse(BaseSchema):
     # Payment swagger.json
 
     
-    merchant_user_id = fields.Str(required=False)
+    success = fields.Boolean(required=False)
     
-    mobileno = fields.Str(required=False)
-    
-    is_active = fields.Boolean(required=False)
+    data = fields.Dict(required=False)
     
 

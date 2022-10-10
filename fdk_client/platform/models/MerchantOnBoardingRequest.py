@@ -16,18 +16,18 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class CODdata(BaseSchema):
+class MerchantOnBoardingRequest(BaseSchema):
     # Payment swagger.json
 
     
     user_id = fields.Str(required=False)
     
-    usages = fields.Int(required=False)
+    app_id = fields.Str(required=False)
     
-    limit = fields.Int(required=False)
+    status = fields.Str(required=False)
     
-    is_active = fields.Boolean(required=False)
+    credit_line_id = fields.Str(required=False)
     
-    remaining_limit = fields.Int(required=False)
+    aggregator = fields.Str(required=False)
     
 

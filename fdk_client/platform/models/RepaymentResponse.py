@@ -7,15 +7,15 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .CODdata import CODdata
 
 
-class GetUserCODLimitResponse(BaseSchema):
+
+class RepaymentResponse(BaseSchema):
     # Payment swagger.json
 
     
     success = fields.Boolean(required=False)
     
-    user_cod_data = fields.Nested(CODdata, required=False)
+    data = fields.Dict(required=False)
     
 
