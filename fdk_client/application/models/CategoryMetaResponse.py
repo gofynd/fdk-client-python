@@ -5,9 +5,9 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-
-
 from .ImageUrls import ImageUrls
+
+
 
 
 
@@ -20,11 +20,11 @@ class CategoryMetaResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    _custom_json = fields.Dict(required=False)
-    
     banners = fields.Nested(ImageUrls, required=False)
     
     name = fields.Str(required=False)
+    
+    _custom_json = fields.Dict(required=False)
     
     uid = fields.Int(required=False)
     
