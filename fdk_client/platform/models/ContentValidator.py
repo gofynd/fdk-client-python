@@ -284,20 +284,6 @@ class ContentValidator:
         id = fields.Str(required=False)
          
     
-    class getLegalInformation(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-    
-    class updateLegalInformation(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-    
     class getNavigations(BaseSchema):
         
         company_id = fields.Str(required=False)
