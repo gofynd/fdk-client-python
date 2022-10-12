@@ -5,21 +5,17 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .InventoryPage import InventoryPage
 
 
 
 
-
-
-
-class ApplicationItemMOQ(BaseSchema):
+class InventoryStockResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    min_qty = fields.Int(required=False)
+    page = fields.Nested(InventoryPage, required=False)
     
-    multiplier = fields.Int(required=False)
-    
-    max_qty = fields.Int(required=False)
+    items = fields.List(fields.Dict(required=False), required=False)
     
 

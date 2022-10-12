@@ -20,10 +20,10 @@ class InventoryBulkRequest(BaseSchema):
     
     sizes = fields.List(fields.Nested(InventoryJobPayload, required=False), required=False)
     
-    user = fields.Dict(required=False)
+    company_id = fields.Int(required=False)
     
     batch_id = fields.Str(required=False)
     
-    company_id = fields.Int(required=False)
+    user = fields.Dict(required=False)
     
 

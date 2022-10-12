@@ -7,35 +7,35 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
-from .MarketplaceInfo import MarketplaceInfo
-
-from .DeviceDetails import DeviceDetails
+from .UserPersonalInfoInDetails import UserPersonalInfoInDetails
 
 from .BusinessDetails import BusinessDetails
 
-from .UserPersonalInfoInDetails import UserPersonalInfoInDetails
+
+
+
+
+from .DeviceDetails import DeviceDetails
+
+from .MarketplaceInfo import MarketplaceInfo
 
 
 class CustomerOnboardingRequest(BaseSchema):
     # Payment swagger.json
 
     
-    mcc = fields.Str(required=False)
-    
     aggregator = fields.Str(required=False)
     
-    source = fields.Str(required=False)
-    
-    marketplace_info = fields.Nested(MarketplaceInfo, required=False)
-    
-    device = fields.Nested(DeviceDetails, required=False)
+    personal_info = fields.Nested(UserPersonalInfoInDetails, required=False)
     
     business_info = fields.Nested(BusinessDetails, required=False)
     
-    personal_info = fields.Nested(UserPersonalInfoInDetails, required=False)
+    mcc = fields.Str(required=False)
+    
+    source = fields.Str(required=False)
+    
+    device = fields.Nested(DeviceDetails, required=False)
+    
+    marketplace_info = fields.Nested(MarketplaceInfo, required=False)
     
 

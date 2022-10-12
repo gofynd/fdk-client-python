@@ -12,14 +12,22 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class Media(BaseSchema):
+
+
+
+
+class InventoryPage(BaseSchema):
     # Catalog swagger.json
 
     
-    aspect_ratio = fields.Str(required=False)
+    has_next = fields.Boolean(required=False)
     
-    url = fields.Str(required=False)
+    next_id = fields.Str(required=False)
     
     type = fields.Str(required=False)
+    
+    item_total = fields.Int(required=False)
+    
+    has_previous = fields.Boolean(required=False)
     
 
