@@ -216,33 +216,11 @@ from .ProductSizeSellersResponseV2 import ProductSizeSellersResponseV2
     
 
     
-from .PromiseFormatted import PromiseFormatted
-    
-from .PromiseTimestamp import PromiseTimestamp
-    
-from .ShipmentPromise import ShipmentPromise
+from .PaymentSelectionLock import PaymentSelectionLock
     
 from .CartCurrency import CartCurrency
     
-from .PaymentSelectionLock import PaymentSelectionLock
-    
-from .DisplayBreakup import DisplayBreakup
-    
-from .CouponBreakup import CouponBreakup
-    
-from .RawBreakup import RawBreakup
-    
-from .LoyaltyPoints import LoyaltyPoints
-    
-from .CartBreakup import CartBreakup
-    
-from .BasePrice import BasePrice
-    
-from .ArticlePriceInfo import ArticlePriceInfo
-    
-from .BaseInfo import BaseInfo
-    
-from .ProductArticle import ProductArticle
+from .PromoMeta import PromoMeta
     
 from .ProductAvailability import ProductAvailability
     
@@ -250,23 +228,45 @@ from .ProductPrice import ProductPrice
     
 from .ProductPriceInfo import ProductPriceInfo
     
-from .AppliedPromotion import AppliedPromotion
-    
-from .ActionQuery import ActionQuery
-    
-from .ProductAction import ProductAction
+from .BaseInfo import BaseInfo
     
 from .CategoryInfo import CategoryInfo
     
 from .ProductImage import ProductImage
     
+from .ActionQuery import ActionQuery
+    
+from .ProductAction import ProductAction
+    
 from .CartProduct import CartProduct
+    
+from .AppliedPromotion import AppliedPromotion
     
 from .CartProductIdentifer import CartProductIdentifer
     
-from .PromoMeta import PromoMeta
+from .BasePrice import BasePrice
+    
+from .ArticlePriceInfo import ArticlePriceInfo
+    
+from .ProductArticle import ProductArticle
     
 from .CartProductInfo import CartProductInfo
+    
+from .CouponBreakup import CouponBreakup
+    
+from .RawBreakup import RawBreakup
+    
+from .LoyaltyPoints import LoyaltyPoints
+    
+from .DisplayBreakup import DisplayBreakup
+    
+from .CartBreakup import CartBreakup
+    
+from .PromiseFormatted import PromiseFormatted
+    
+from .PromiseTimestamp import PromiseTimestamp
+    
+from .ShipmentPromise import ShipmentPromise
     
 from .CartDetailResponse import CartDetailResponse
     
@@ -292,11 +292,11 @@ from .GetCouponResponse import GetCouponResponse
     
 from .ApplyCouponRequest import ApplyCouponRequest
     
+from .OfferSeller import OfferSeller
+    
 from .OfferPrice import OfferPrice
     
 from .OfferItem import OfferItem
-    
-from .OfferSeller import OfferSeller
     
 from .BulkPriceOffer import BulkPriceOffer
     
@@ -358,13 +358,13 @@ from .PromotionOffersResponse import PromotionOffersResponse
     
 from .OperationErrorResponse import OperationErrorResponse
     
+from .CurrencyInfo import CurrencyInfo
+    
 from .LadderPrice import LadderPrice
     
 from .LadderOfferItem import LadderOfferItem
     
 from .LadderPriceOffer import LadderPriceOffer
-    
-from .CurrencyInfo import CurrencyInfo
     
 from .LadderPriceOffers import LadderPriceOffers
     
@@ -702,6 +702,12 @@ from .AuthSuccessUserDebug import AuthSuccessUserDebug
     
 from .AuthSuccessUserEmails import AuthSuccessUserEmails
     
+from .UserGroupResponseSchema import UserGroupResponseSchema
+    
+from .UserGroupListResponseSchema import UserGroupListResponseSchema
+    
+from .CreateUserGroupSchema import CreateUserGroupSchema
+    
 from .CreateUserRequestSchema import CreateUserRequestSchema
     
 from .CreateUserResponseSchema import CreateUserResponseSchema
@@ -741,6 +747,8 @@ from .Facebook import Facebook
 from .Accountkit import Accountkit
     
 from .Google import Google
+    
+from .UpdateUserGroupSchema import UpdateUserGroupSchema
     
 from .UpdateUserRequestSchema import UpdateUserRequestSchema
     
@@ -1360,15 +1368,15 @@ from .CreditDetail import CreditDetail
     
 from .CheckCreditResponse import CheckCreditResponse
     
-from .KYCAddress import KYCAddress
+from .DeviceDetails import DeviceDetails
     
-from .UserPersonalInfoInDetails import UserPersonalInfoInDetails
+from .KYCAddress import KYCAddress
     
 from .BusinessDetails import BusinessDetails
     
-from .DeviceDetails import DeviceDetails
-    
 from .MarketplaceInfo import MarketplaceInfo
+    
+from .UserPersonalInfoInDetails import UserPersonalInfoInDetails
     
 from .CustomerOnboardingRequest import CustomerOnboardingRequest
     
