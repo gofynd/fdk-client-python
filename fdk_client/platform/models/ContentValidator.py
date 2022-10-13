@@ -138,15 +138,6 @@ class ContentValidator:
         data_loader_id = fields.Str(required=False)
          
     
-    class getDataLoadersByService(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        service_name = fields.Str(required=False)
-         
-    
     class selectDataLoader(BaseSchema):
         
         company_id = fields.Str(required=False)
@@ -368,6 +359,10 @@ class ContentValidator:
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
+        
+        page_type = fields.Str(required=False)
+        
+        cart_pages = fields.Boolean(required=False)
          
     
     class getPageSpec(BaseSchema):

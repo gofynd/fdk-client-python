@@ -16,6 +16,14 @@ from .CurrentStatus import CurrentStatus
 from .FinancialBreakup import FinancialBreakup
 
 
+
+
+
+
+
+
+
+
 class Bags(BaseSchema):
     # Order swagger.json
 
@@ -29,5 +37,13 @@ class Bags(BaseSchema):
     id = fields.Int(required=False)
     
     financial_breakup = fields.List(fields.Nested(FinancialBreakup, required=False), required=False)
+    
+    can_cancel = fields.Boolean(required=False)
+    
+    can_return = fields.Boolean(required=False)
+    
+    delivery_date = fields.Str(required=False)
+    
+    returnable_date = fields.Str(required=False)
     
 

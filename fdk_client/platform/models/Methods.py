@@ -43,6 +43,8 @@ from .PaymentModeConfig import PaymentModeConfig
 
 from .PaymentModeConfig import PaymentModeConfig
 
+from .PaymentModeConfig import PaymentModeConfig
+
 
 class Methods(BaseSchema):
     # Configuration swagger.json
@@ -73,6 +75,8 @@ class Methods(BaseSchema):
     fc = fields.Nested(PaymentModeConfig, required=False)
     
     jiopp = fields.Nested(PaymentModeConfig, required=False)
+    
+    jiopplink = fields.Nested(PaymentModeConfig, required=False)
     
     stripepg = fields.Nested(PaymentModeConfig, required=False)
     

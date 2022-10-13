@@ -14,7 +14,6 @@ Handles Platform websites OMS
 * [getOrdersByCompanyId](#getordersbycompanyid)
 * [getOrderLanesCountByCompanyId](#getorderlanescountbycompanyid)
 * [getOrderDetails](#getorderdetails)
-* [getOrderDetails](#getorderdetails)
 * [getPicklistOrdersByCompanyId](#getpicklistordersbycompanyid)
 * [trackShipmentPlatform](#trackshipmentplatform)
 * [trackOrder](#trackorder)
@@ -26,6 +25,9 @@ Handles Platform websites OMS
 * [getShipmentAddress](#getshipmentaddress)
 * [updateShipmentAddress](#updateshipmentaddress)
 * [getOrdersByApplicationId](#getordersbyapplicationid)
+* [getPing](#getping)
+* [voiceCallback](#voicecallback)
+* [voiceClickToCall](#voiceclicktocall)
 
 
 
@@ -322,7 +324,7 @@ Get Orders for company based on Company Id
 
 ```python
 try:
-    result = await client.order.getOrdersByCompanyId(pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, isPrioritySort=isPrioritySort, lockStatus=lockStatus, userId=userId, q=q, stage=stage, salesChannels=salesChannels, orderId=orderId, stores=stores, deploymentStores=deploymentStores, status=status, dp=dp, filterType=filterType)
+    result = await client.order.getOrdersByCompanyId(pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, isPrioritySort=isPrioritySort, lockStatus=lockStatus, userId=userId, q=q, stage=stage, salesChannels=salesChannels, orderId=orderId, stores=stores, deploymentStores=deploymentStores, status=status, dp=dp, shortenUrls=shortenUrls, filterType=filterType)
     # use result
 except Exception as e:
     print(e)
@@ -349,6 +351,7 @@ except Exception as e:
 | deploymentStores | String? | no | Selected Deployment Stores |   
 | status | String? | no | Status of order |   
 | dp | String? | no | Delivery Partners |   
+| shortenUrls | Boolean? | no | Shorten URL option |   
 | filterType | String? | no | Filters |  
 
 
@@ -394,7 +397,7 @@ Get Order Lanes Count for company based on Company Id
 
 ```python
 try:
-    result = await client.order.getOrderLanesCountByCompanyId(pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, q=q, stage=stage, salesChannels=salesChannels, orderId=orderId, stores=stores, status=status, filterType=filterType)
+    result = await client.order.getOrderLanesCountByCompanyId(pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, q=q, stage=stage, salesChannels=salesChannels, orderId=orderId, stores=stores, status=status, shortenUrls=shortenUrls, filterType=filterType)
     # use result
 except Exception as e:
     print(e)
@@ -416,6 +419,7 @@ except Exception as e:
 | orderId | String? | no | Order Id |   
 | stores | String? | no | Selected Stores |   
 | status | String? | no | Status of order |   
+| shortenUrls | Boolean? | no | Shorten URL option |   
 | filterType | String? | no | Filters |  
 
 
@@ -512,65 +516,6 @@ Success
 ---
 
 
-### getOrderDetails
-Get Order Details for company based on Company Id and Order Id
-
-
-
-
-```python
-try:
-    result = await client.application("<APPLICATION_ID>").order.getOrderDetails(orderId=orderId, next=next, previous=previous)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| orderId | String? | no | Order Id |   
-| next | String? | no | Next |   
-| previous | String? | no | Previous |  
-
-
-
-Get Orders
-
-*Returned Response:*
-
-
-
-
-[OrderDetails](#OrderDetails)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
 ### getPicklistOrdersByCompanyId
 Get Orders for company based on Company Id
 
@@ -579,7 +524,7 @@ Get Orders for company based on Company Id
 
 ```python
 try:
-    result = await client.order.getPicklistOrdersByCompanyId(pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, q=q, stage=stage, salesChannels=salesChannels, orderId=orderId, stores=stores, status=status, filterType=filterType)
+    result = await client.order.getPicklistOrdersByCompanyId(pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, q=q, stage=stage, salesChannels=salesChannels, orderId=orderId, stores=stores, status=status, shortenUrls=shortenUrls, filterType=filterType)
     # use result
 except Exception as e:
     print(e)
@@ -601,6 +546,7 @@ except Exception as e:
 | orderId | String? | no | Order Id |   
 | stores | String? | no | Selected Stores |   
 | status | String? | no | Status of order |   
+| shortenUrls | Boolean? | no | Shorten URL option |   
 | filterType | String? | no | Filters |  
 
 
@@ -1157,7 +1103,7 @@ Get Orders for company based on Company Id
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").order.getOrdersByApplicationId(pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, q=q, stage=stage, salesChannels=salesChannels, orderId=orderId, stores=stores, status=status, dp=dp, userId=userId, filterType=filterType)
+    result = await client.application("<APPLICATION_ID>").order.getOrdersByApplicationId(pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, q=q, stage=stage, salesChannels=salesChannels, orderId=orderId, stores=stores, status=status, dp=dp, userId=userId, shortenUrls=shortenUrls, filterType=filterType)
     # use result
 except Exception as e:
     print(e)
@@ -1181,6 +1127,7 @@ except Exception as e:
 | status | String? | no | Status of order |   
 | dp | String? | no | Delivery Partners |   
 | userId | String? | no | User Id |   
+| shortenUrls | Boolean? | no | Shorten URL option |   
 | filterType | String? | no | Filters |  
 
 
@@ -1193,6 +1140,168 @@ Get Orders at Application Level
 
 
 [OrderListing](#OrderListing)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getPing
+Get Ping
+
+
+
+
+```python
+try:
+    result = await client.order.getPing()
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+
+Get Ping
+
+*Returned Response:*
+
+
+
+
+[GetPingResponse](#GetPingResponse)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### voiceCallback
+Get Voice Callback
+
+
+
+
+```python
+try:
+    result = await client.order.voiceCallback()
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+
+Voice Callback
+
+*Returned Response:*
+
+
+
+
+[GetVoiceCallbackResponse](#GetVoiceCallbackResponse)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### voiceClickToCall
+Get Voice Click to Call
+
+
+
+
+```python
+try:
+    result = await client.order.voiceClickToCall(caller=caller, receiver=receiver)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| caller | String | yes | Caller contact number |   
+| receiver | String | yes | Receiver contact number |  
+
+
+
+Voice Click to Call
+
+*Returned Response:*
+
+
+
+
+[GetClickToCallResponse](#GetClickToCallResponse)
 
 Success
 

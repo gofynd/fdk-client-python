@@ -22,9 +22,9 @@ class SharedCartDetails(BaseSchema):
     
     user = fields.Dict(required=False)
     
-    token = fields.Str(required=False)
-    
     created_on = fields.Str(required=False)
+    
+    token = fields.Str(required=False)
     
     meta = fields.Dict(required=False)
     
