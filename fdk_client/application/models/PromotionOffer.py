@@ -26,16 +26,16 @@ class PromotionOffer(BaseSchema):
     
     valid_till = fields.Str(required=False)
     
-    offer_text = fields.Str(required=False)
-    
-    id = fields.Str(required=False)
-    
-    discount_rules = fields.List(fields.Dict(required=False), required=False)
-    
-    buy_rules = fields.Dict(required=False)
-    
     promotion_group = fields.Str(required=False)
     
     description = fields.Str(required=False)
+    
+    id = fields.Str(required=False)
+    
+    buy_rules = fields.Dict(required=False)
+    
+    offer_text = fields.Str(required=False)
+    
+    discount_rules = fields.List(fields.Dict(required=False), required=False)
     
 
