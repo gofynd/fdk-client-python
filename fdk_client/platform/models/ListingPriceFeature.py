@@ -8,10 +8,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 class ListingPriceFeature(BaseSchema):
     # Configuration swagger.json
 
     
     value = fields.Str(required=False)
+    
+    sort = fields.Str(required=False)
     
 

@@ -1826,6 +1826,136 @@ class User:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/platform/config", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
+    async def createUserGroup(self, body=""):
+        """Use this API to create new user Group
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = UserValidator.createUserGroup()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models.CreateUserGroupSchema import CreateUserGroupSchema
+        schema = CreateUserGroupSchema()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_groups", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_groups", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+    
+    async def getUserGroups(self, page_no=None, page_size=None, name=None, status=None):
+        """Use this API to get User Groups mathing criteria passed in query
+        :param page_no : page number for pagination result : type string
+        :param page_size : page size for pagination result : type string
+        :param name : to seartch for User Groups which contains given string in their name : type string
+        :param status : to get User Groups with given status : type string
+        """
+        payload = {}
+        
+        if page_no:
+            payload["page_no"] = page_no
+        
+        if page_size:
+            payload["page_size"] = page_size
+        
+        if name:
+            payload["name"] = name
+        
+        if status:
+            payload["status"] = status
+        
+
+        # Parameter validation
+        schema = UserValidator.getUserGroups()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_groups", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"page_no","in":"query","description":"page number for pagination result","required":false,"schema":{"type":"string"}},{"name":"page_size","in":"query","description":"page size for pagination result","required":false,"schema":{"type":"string"}},{"name":"name","in":"query","description":"to seartch for User Groups which contains given string in their name","required":false,"schema":{"type":"string"}},{"name":"status","in":"query","description":"to get User Groups with given status","required":false,"schema":{"type":"string"}}],"query":[{"name":"page_no","in":"query","description":"page number for pagination result","required":false,"schema":{"type":"string"}},{"name":"page_size","in":"query","description":"page size for pagination result","required":false,"schema":{"type":"string"}},{"name":"name","in":"query","description":"to seartch for User Groups which contains given string in their name","required":false,"schema":{"type":"string"}},{"name":"status","in":"query","description":"to get User Groups with given status","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", page_no=page_no, page_size=page_size, name=name, status=status)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, name=name, status=status)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_groups", page_no=page_no, page_size=page_size, name=name, status=status), query_string, headers, "", exclude_headers=exclude_headers), data="")
+    
+    async def updateUserGroup(self, group_id=None, body=""):
+        """Use this API to update an existing user Group
+        :param group_id : Numeric ID allotted to a User Group : type string
+        """
+        payload = {}
+        
+        if group_id:
+            payload["group_id"] = group_id
+        
+
+        # Parameter validation
+        schema = UserValidator.updateUserGroup()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models.UpdateUserGroupSchema import UpdateUserGroupSchema
+        schema = UpdateUserGroupSchema()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_groups/{group_id}", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"group_id","in":"path","description":"Numeric ID allotted to a User Group","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"group_id","in":"path","description":"Numeric ID allotted to a User Group","required":true,"schema":{"type":"string"}}]}""", group_id=group_id)
+        query_string = await create_query_string(group_id=group_id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_groups/{group_id}", group_id=group_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+    
+    async def getUserGroupById(self, group_id=None):
+        """Use this API to get details of an existing user Group
+        :param group_id : Numeric ID allotted to a User Group : type string
+        """
+        payload = {}
+        
+        if group_id:
+            payload["group_id"] = group_id
+        
+
+        # Parameter validation
+        schema = UserValidator.getUserGroupById()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_groups/{group_id}", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"group_id","in":"path","description":"Numeric ID allotted to a User Group","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"group_id","in":"path","description":"Numeric ID allotted to a User Group","required":true,"schema":{"type":"string"}}]}""", group_id=group_id)
+        query_string = await create_query_string(group_id=group_id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_groups/{group_id}", group_id=group_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+    
 
 class Content:
     def __init__(self, config, applicationId):
@@ -7650,8 +7780,8 @@ class Configuration:
         self.applicationId = applicationId
     
     async def getBuildConfig(self, platform_type=None):
-        """Get latest build config
-        :param platform_type : Current platform name : type string
+        """Fetch latest build configuration, such as app name, landing page image, splash image used in a mobile build.
+        :param platform_type : The device platform for which the mobile app was built, e.g. android, ios. : type string
         """
         payload = {}
         
@@ -7664,7 +7794,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/build/{platform_type}/configuration", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current application id","in":"path","required":true,"name":"application_id"},{"schema":{"type":"string","enum":["android","ios"]},"description":"Current platform name","in":"path","required":true,"name":"platform_type"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current application id","in":"path","required":true,"name":"application_id"},{"schema":{"type":"string","enum":["android","ios"]},"description":"Current platform name","in":"path","required":true,"name":"platform_type"}]}""", platform_type=platform_type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/build/{platform_type}/configuration", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current application id","in":"path","required":true,"name":"application_id"},{"schema":{"type":"string","enum":["android","ios"]},"description":"The device platform for which the mobile app was built, e.g. android, ios.","in":"path","required":true,"name":"platform_type"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current application id","in":"path","required":true,"name":"application_id"},{"schema":{"type":"string","enum":["android","ios"]},"description":"The device platform for which the mobile app was built, e.g. android, ios.","in":"path","required":true,"name":"platform_type"}]}""", platform_type=platform_type)
         query_string = await create_query_string(platform_type=platform_type)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -7739,7 +7869,7 @@ class Configuration:
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/build/{platform_type}/versions", platform_type=platform_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def getAppFeatures(self, ):
-        """Get features of application
+        """It gives the features of sales channel. Moreover, get the details about product details, landing page, registration page, home page, listing page, reward points and many more properties.
         """
         payload = {}
         
@@ -7763,7 +7893,7 @@ class Configuration:
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/feature", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def updateAppFeatures(self, body=""):
-        """Update features of application
+        """It saves or Updates the features of sales channel.
         """
         payload = {}
         
@@ -7792,7 +7922,7 @@ class Configuration:
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/feature", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
     async def getAppBasicDetails(self, ):
-        """Get basic application details like name
+        """Get basic sales channel details like name, description, logo, domain ,company id and other related information.
         """
         payload = {}
         
@@ -7816,7 +7946,7 @@ class Configuration:
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def updateAppBasicDetails(self, body=""):
-        """Add or update application's basic details
+        """Add or update sales channel basic details like name, description, logo, domain ,company id and other information.
         """
         payload = {}
         
@@ -7845,7 +7975,7 @@ class Configuration:
         return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
     async def getAppContactInfo(self, ):
-        """Get Application Current Information. This includes information about social links, address and contact information of company/seller/brand of the application.
+        """Get sales channel Current Information. This includes information about social links, address and contact information of company/seller/brand of the application.
         """
         payload = {}
         
@@ -7869,7 +7999,7 @@ class Configuration:
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/information", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def updateAppContactInfo(self, body=""):
-        """Save Application Current Information. This includes information about social links, address and contact information of an application.
+        """Save or update the sales channel current information. This includes information about social links, address and contact information of an application.
         """
         payload = {}
         
@@ -7898,7 +8028,7 @@ class Configuration:
         return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/information", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
     async def getAppApiTokens(self, ):
-        """Get social tokens.
+        """Get social tokens for the sales channel.
         """
         payload = {}
         
@@ -7922,7 +8052,7 @@ class Configuration:
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/token", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def updateAppApiTokens(self, body=""):
-        """Add social tokens.
+        """Add social tokens for the sales channel.
         """
         payload = {}
         
@@ -7951,7 +8081,7 @@ class Configuration:
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/token", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
     async def getAppCompanies(self, uid=None, page_no=None, page_size=None):
-        """Application inventory enabled companies.
+        """Get sales channel inventory enabled companies. Company has information about company name, uid and company type.
         :param uid : uid of companies to be fetched : type integer
         :param page_no : Current page no : type integer
         :param page_size : Current request items count : type integer
@@ -7987,7 +8117,7 @@ class Configuration:
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/companies", uid=uid, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def getAppStores(self, page_no=None, page_size=None):
-        """Application inventory enabled stores.
+        """Get sales channel inventory enabled stores. Inventory enabled store has information about uid, name, display name, store type, store code and company id.
         :param page_no : Current page no : type integer
         :param page_size : Current request items count : type integer
         """
@@ -8101,7 +8231,7 @@ class Configuration:
         return await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/configuration", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
     async def getAppCurrencyConfig(self, ):
-        """Get application enabled currency list
+        """It gives all enabled currency list for the current sales channel.
         """
         payload = {}
         
@@ -8125,7 +8255,7 @@ class Configuration:
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/currency", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def updateAppCurrencyConfig(self, body=""):
-        """Add initial application supported currency for various features and data. Default INR will be enabled.
+        """Update sales channel supported currency for various features and data. Default INR will be enabled.
         """
         payload = {}
         

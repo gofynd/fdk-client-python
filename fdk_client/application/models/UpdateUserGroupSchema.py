@@ -12,18 +12,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+class UpdateUserGroupSchema(BaseSchema):
+    # User swagger.json
 
-
-class CompanyStore(BaseSchema):
-    # Catalog swagger.json
-
-    
-    uid = fields.Int(required=False)
-    
-    business_type = fields.Str(required=False)
     
     name = fields.Str(required=False)
     
-    company_type = fields.Str(required=False)
+    description = fields.Str(required=False)
+    
+    file_url = fields.Str(required=False)
     
 
