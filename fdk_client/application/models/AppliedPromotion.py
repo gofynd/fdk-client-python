@@ -24,9 +24,9 @@ class AppliedPromotion(BaseSchema):
     
     article_quantity = fields.Int(required=False)
     
-    amount = fields.Float(required=False)
-    
     mrp_promotion = fields.Boolean(required=False)
+    
+    amount = fields.Float(required=False)
     
     offer_text = fields.Str(required=False)
     
