@@ -24,13 +24,13 @@ class InventoryPayload(BaseSchema):
     # Catalog swagger.json
 
     
-    tags = fields.List(fields.Str(required=False), required=False)
-    
     price_effective = fields.Float(required=False)
+    
+    seller_identifier = fields.Str(required=False)
     
     store_id = fields.Int(required=False)
     
-    seller_identifier = fields.Str(required=False)
+    tags = fields.List(fields.Str(required=False), required=False)
     
     price_marked = fields.Float(required=False)
     
