@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class LogisticResponseCategory(BaseSchema):
+class PincodeMetaResponse(BaseSchema):
     # Logistic swagger.json
 
     
-    id = fields.Int(required=False)
+    internal_zone_id = fields.Int(required=False)
     
-    level = fields.Str(required=False)
+    zone = fields.Str(required=False)
     
 

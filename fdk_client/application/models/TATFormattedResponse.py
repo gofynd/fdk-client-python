@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class GetPincodeZonesReqBody(BaseSchema):
+class TATFormattedResponse(BaseSchema):
     # Logistic swagger.json
 
     
-    country = fields.Str(required=False)
+    min = fields.Str(required=False)
     
-    pincode = fields.Str(required=False)
+    max = fields.Str(required=False)
     
 

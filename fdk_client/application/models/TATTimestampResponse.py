@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class LogisticError(BaseSchema):
+class TATTimestampResponse(BaseSchema):
     # Logistic swagger.json
 
     
-    type = fields.Str(required=False)
+    min = fields.Int(required=False)
     
-    value = fields.Str(required=False)
-    
-    message = fields.Str(required=False)
+    max = fields.Int(required=False)
     
 

@@ -1568,41 +1568,41 @@ from .StoreDetailsResponse import StoreDetailsResponse
     
 
     
-from .GetPincodeCityResponse import GetPincodeCityResponse
+from .PincodeParentsResponse import PincodeParentsResponse
     
-from .LogisticPincodeData import LogisticPincodeData
+from .PincodeErrorSchemaResponse import PincodeErrorSchemaResponse
     
-from .LogisticMeta import LogisticMeta
+from .PincodeMetaResponse import PincodeMetaResponse
     
-from .LogisticParents import LogisticParents
+from .PincodeDataResponse import PincodeDataResponse
     
-from .LogisticError import LogisticError
+from .PincodeApiResponse import PincodeApiResponse
     
-from .GetPincodeZonesReqBody import GetPincodeZonesReqBody
+from .TATCategoryRequest import TATCategoryRequest
     
-from .GetPincodeZonesResponse import GetPincodeZonesResponse
+from .TATArticlesRequest import TATArticlesRequest
     
-from .GetTatProductReqBody import GetTatProductReqBody
+from .TATLocationDetailsRequest import TATLocationDetailsRequest
     
-from .LocationDetailsReq import LocationDetailsReq
+from .TATViewRequest import TATViewRequest
     
-from .TatReqProductArticles import TatReqProductArticles
+from .TATFormattedResponse import TATFormattedResponse
     
-from .LogisticRequestCategory import LogisticRequestCategory
+from .TATTimestampResponse import TATTimestampResponse
     
-from .GetTatProductResponse import GetTatProductResponse
+from .TATPromiseResponse import TATPromiseResponse
     
-from .LocationDetails import LocationDetails
+from .TATErrorSchemaResponse import TATErrorSchemaResponse
     
-from .TatProductArticles import TatProductArticles
+from .TATArticlesResponse import TATArticlesResponse
     
-from .LogisticResponseCategory import LogisticResponseCategory
+from .TATLocationDetailsResponse import TATLocationDetailsResponse
     
-from .LogisticPromise import LogisticPromise
+from .TATViewResponse import TATViewResponse
     
-from .LogisticTimestamp import LogisticTimestamp
+from .GetZoneFromPincodeViewRequest import GetZoneFromPincodeViewRequest
     
-from .Formatted import Formatted
+from .GetZoneFromPincodeViewResponse import GetZoneFromPincodeViewResponse
     
 
 

@@ -9,17 +9,17 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .LogisticRequestCategory import LogisticRequestCategory
+from .TATCategoryRequest import TATCategoryRequest
 
 
-class TatReqProductArticles(BaseSchema):
+class TATArticlesRequest(BaseSchema):
     # Logistic swagger.json
 
     
-    manufacturing_time = fields.Int(required=False)
-    
     manufacturing_time_unit = fields.Str(required=False)
     
-    category = fields.Nested(LogisticRequestCategory, required=False)
+    manufacturing_time = fields.Int(required=False)
+    
+    category = fields.Nested(TATCategoryRequest, required=False)
     
 

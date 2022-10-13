@@ -10,12 +10,16 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class LogisticMeta(BaseSchema):
+
+
+class TATErrorSchemaResponse(BaseSchema):
     # Logistic swagger.json
 
     
-    zone = fields.Str(required=False)
+    type = fields.Str(required=False)
     
-    deliverables = fields.List(fields.Raw(required=False), required=False)
+    value = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
     
 

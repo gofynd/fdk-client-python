@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class LogisticTimestamp(BaseSchema):
+class GetZoneFromPincodeViewResponse(BaseSchema):
     # Logistic swagger.json
 
     
-    min = fields.Int(required=False)
+    zones = fields.List(fields.Str(required=False), required=False)
     
-    max = fields.Int(required=False)
+    serviceability_type = fields.Str(required=False)
     
 

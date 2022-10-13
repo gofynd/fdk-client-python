@@ -10,12 +10,20 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class GetPincodeZonesResponse(BaseSchema):
+
+
+
+
+class PincodeParentsResponse(BaseSchema):
     # Logistic swagger.json
 
     
-    zones = fields.List(fields.Raw(required=False), required=False)
+    sub_type = fields.Str(required=False)
     
-    serviceability_type = fields.Str(required=False)
+    uid = fields.Str(required=False)
+    
+    display_name = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
     
 

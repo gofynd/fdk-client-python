@@ -10,20 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
-class LogisticParents(BaseSchema):
+class GetZoneFromPincodeViewRequest(BaseSchema):
     # Logistic swagger.json
 
     
-    sub_type = fields.Str(required=False)
+    country = fields.Str(required=False)
     
-    name = fields.Str(required=False)
-    
-    display_name = fields.Str(required=False)
-    
-    uid = fields.Str(required=False)
+    pincode = fields.Str(required=False)
     
 

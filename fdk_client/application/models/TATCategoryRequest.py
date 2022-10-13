@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class Formatted(BaseSchema):
+class TATCategoryRequest(BaseSchema):
     # Logistic swagger.json
 
     
-    min = fields.Str(required=False)
+    id = fields.Int(required=False)
     
-    max = fields.Str(required=False)
+    level = fields.Str(required=False)
     
 

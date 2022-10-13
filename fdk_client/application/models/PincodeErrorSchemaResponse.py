@@ -10,12 +10,16 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class LogisticRequestCategory(BaseSchema):
+
+
+class PincodeErrorSchemaResponse(BaseSchema):
     # Logistic swagger.json
 
     
-    id = fields.Int(required=False)
+    type = fields.Str(required=False)
     
-    level = fields.Str(required=False)
+    value = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
     
 
