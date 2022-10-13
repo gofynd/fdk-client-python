@@ -32,14 +32,14 @@ class CartCheckoutResponse(BaseSchema):
     
     callback_url = fields.Str(required=False)
     
-    success = fields.Boolean(required=False)
+    order_id = fields.Str(required=False)
     
     message = fields.Str(required=False)
     
-    order_id = fields.Str(required=False)
+    data = fields.Dict(required=False)
     
     payment_confirm_url = fields.Str(required=False)
     
-    data = fields.Dict(required=False)
+    success = fields.Boolean(required=False)
     
 

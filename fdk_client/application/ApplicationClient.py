@@ -6365,7 +6365,7 @@ class Order:
     
     async def getShipmentReasons(self, shipment_id=None, bag_id=None, body=""):
         """Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
-        :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type integer
+        :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
         :param bag_id : Bag Id of a specefic bags which will help to categorize the reasons : type string
         """
         payload = {}
@@ -6381,7 +6381,7 @@ class Order:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getShipmentReasons"], proccessed_params="""{"required":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"integer","default":"16538880933361957252J"}},{"in":"query","description":"Bag Id of a specefic bags which will help to categorize the reasons","name":"bag_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"in":"query","description":"Bag Id of a specefic bags which will help to categorize the reasons","name":"bag_id","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"integer","default":"16538880933361957252J"}}]}""", shipment_id=shipment_id, bag_id=bag_id)
+        url_with_params = await create_url_with_params(api_url=self._urls["getShipmentReasons"], proccessed_params="""{"required":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string","default":"16538880933361957252J"}},{"in":"query","description":"Bag Id of a specefic bags which will help to categorize the reasons","name":"bag_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"in":"query","description":"Bag Id of a specefic bags which will help to categorize the reasons","name":"bag_id","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string","default":"16538880933361957252J"}}]}""", shipment_id=shipment_id, bag_id=bag_id)
         query_string = await create_query_string(shipment_id=shipment_id, bag_id=bag_id)
         headers = {
             "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()

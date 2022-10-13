@@ -20,9 +20,9 @@ class UserInfo(BaseSchema):
     
     email = fields.Str(required=False)
     
-    mobile = fields.Str(required=False)
-    
     gender = fields.Str(required=False)
+    
+    mobile = fields.Str(required=False)
     
     name = fields.Str(required=False)
     
