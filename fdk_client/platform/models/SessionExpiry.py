@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class CollectionImage(BaseSchema):
-    # Catalog swagger.json
+class SessionExpiry(BaseSchema):
+    # User swagger.json
 
     
-    url = fields.Str(required=False)
+    duration = fields.Int(required=False)
     
-    aspect_ratio = fields.Str(required=False)
+    type = fields.Str(required=False)
     
 

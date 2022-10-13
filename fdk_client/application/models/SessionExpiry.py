@@ -1,4 +1,4 @@
-"""Platform Models."""
+"""Application Models."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class TeaserTag(BaseSchema):
-    # Catalog swagger.json
+class SessionExpiry(BaseSchema):
+    # User swagger.json
 
     
-    url = fields.Str(required=False)
+    duration = fields.Int(required=False)
     
-    tag = fields.Str(required=False)
+    type = fields.Str(required=False)
     
 

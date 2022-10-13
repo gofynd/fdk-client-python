@@ -20,8 +20,6 @@ class ErrorResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    error = fields.Str(required=False)
-    
     meta = fields.Dict(required=False)
     
     code = fields.Str(required=False)
@@ -29,5 +27,7 @@ class ErrorResponse(BaseSchema):
     status = fields.Int(required=False)
     
     message = fields.Str(required=False)
+    
+    error = fields.Str(required=False)
     
 
