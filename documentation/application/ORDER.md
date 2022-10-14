@@ -2741,9 +2741,9 @@ Success Response, Presigned URL of Invoice
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | storeInvoiceId | String? |  yes  |  |
  | products | ArrayList<[ProductDetail](#ProductDetail)>? |  yes  |  |
  | dataUpdate | HashMap<String,Any>? |  yes  |  |
- | storeInvoiceId | String? |  yes  |  |
  | bags | ArrayList<Int>? |  yes  |  |
  | reason | ArrayList<Int>? |  yes  |  |
 
@@ -2767,7 +2767,7 @@ Success Response, Presigned URL of Invoice
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | excludeBagsNextState | String |  no  |  |
+ | excludeBagsNextState | String? |  yes  |  |
  | status | String |  no  |  |
  | shipments | [ShipmentDetail](#ShipmentDetail)? |  yes  |  |
 
@@ -2780,9 +2780,9 @@ Success Response, Presigned URL of Invoice
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | statuses | ArrayList<[Statuses1](#Statuses1)>? |  yes  |  |
  | task | Boolean? |  yes  |  |
  | forceTransition | Boolean? |  yes  |  |
+ | statuses | ArrayList<[Statuses1](#Statuses1)>? |  yes  |  |
 
 ---
 
@@ -2793,8 +2793,8 @@ Success Response, Presigned URL of Invoice
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | success | Boolean |  no  |  |
  | message | ArrayList<HashMap<String,Any>> |  no  |  |
+ | success | Boolean |  no  |  |
 
 ---
 

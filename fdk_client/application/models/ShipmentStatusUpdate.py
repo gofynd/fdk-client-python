@@ -14,8 +14,8 @@ class ShipmentStatusUpdate(BaseSchema):
     # Order swagger.json
 
     
-    success = fields.Boolean(required=False)
-    
     message = fields.List(fields.Dict(required=False), required=False)
+    
+    success = fields.Boolean(required=False)
     
 
