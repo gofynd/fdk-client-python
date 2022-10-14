@@ -32,7 +32,13 @@ class HsnUpsert(BaseSchema):
     # Catalog swagger.json
 
     
-    is_active = fields.Boolean(required=False)
+    tax2 = fields.Float(required=False)
+    
+    tax_on_mrp = fields.Boolean(required=False)
+    
+    threshold1 = fields.Float(required=False)
+    
+    hs2_code = fields.Str(required=False)
     
     hsn_code = fields.Str(required=False)
     
@@ -40,17 +46,11 @@ class HsnUpsert(BaseSchema):
     
     tax_on_esp = fields.Boolean(required=False)
     
-    tax_on_mrp = fields.Boolean(required=False)
+    tax1 = fields.Float(required=False)
     
-    threshold1 = fields.Float(required=False)
-    
-    tax2 = fields.Float(required=False)
-    
-    hs2_code = fields.Str(required=False)
+    is_active = fields.Boolean(required=False)
     
     uid = fields.Int(required=False)
-    
-    tax1 = fields.Float(required=False)
     
     threshold2 = fields.Float(required=False)
     

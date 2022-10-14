@@ -19,3 +19,8 @@ class OrderManageValidator:
         bag_id = fields.Int(required=False)
          
     
+    class manualStoreReassignment(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    

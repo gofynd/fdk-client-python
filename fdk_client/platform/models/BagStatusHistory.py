@@ -22,16 +22,16 @@ class BagStatusHistory(BaseSchema):
     # Orders swagger.json
 
     
-    state_type = fields.Boolean(required=False)
-    
     updated_at = fields.Str(required=False)
-    
-    display_name = fields.Boolean(required=False)
     
     forward = fields.Boolean(required=False)
     
+    status = fields.Str(required=False)
+    
+    display_name = fields.Boolean(required=False)
+    
     app_display_name = fields.Boolean(required=False)
     
-    status = fields.Str(required=False)
+    state_type = fields.Boolean(required=False)
     
 

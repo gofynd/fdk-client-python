@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class ShipmentPayments(BaseSchema):
-    # Orders swagger.json
+class ManualStoreReassignResponse(BaseSchema):
+    # OrderManage swagger.json
 
     
-    mode = fields.Str(required=False)
+    success = fields.Boolean(required=False)
     
-    logo = fields.Str(required=False)
-    
-    source = fields.Str(required=False)
+    message = fields.Str(required=False)
     
 
