@@ -14,8 +14,8 @@ class TATFormattedResponse(BaseSchema):
     # Logistic swagger.json
 
     
-    min = fields.Str(required=False)
-    
     max = fields.Str(required=False)
+    
+    min = fields.Str(required=False)
     
 
