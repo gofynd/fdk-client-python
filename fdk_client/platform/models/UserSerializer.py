@@ -26,8 +26,8 @@ class UserSerializer(BaseSchema):
     
     username = fields.Str(required=False)
     
-    contact = fields.Str(required=False)
-    
     uid = fields.Str(required=False)
+    
+    contact = fields.Str(required=False)
     
 

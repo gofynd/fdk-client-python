@@ -22,8 +22,8 @@ class CompanyStore(BaseSchema):
     
     name = fields.Str(required=False)
     
-    uid = fields.Int(required=False)
-    
     company_type = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
     
 
