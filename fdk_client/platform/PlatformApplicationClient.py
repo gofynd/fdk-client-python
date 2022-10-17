@@ -7804,8 +7804,8 @@ class Configuration:
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/build/{platform_type}/configuration", platform_type=platform_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def updateBuildConfig(self, platform_type=None, body=""):
-        """Update build config for next build
-        :param platform_type : Current platform name : type string
+        """It Updates the build configuration for next build. It updates the details such as app name, landing page image, splash image used in a mobile build.
+        :param platform_type : The device current platform name for which the app was built, e.g. android, ios. : type string
         """
         payload = {}
         
@@ -7823,7 +7823,7 @@ class Configuration:
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/build/{platform_type}/configuration", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current application id","in":"path","required":true,"name":"application_id"},{"schema":{"type":"string","enum":["android","ios"]},"description":"Current platform name","in":"path","required":true,"name":"platform_type"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current application id","in":"path","required":true,"name":"application_id"},{"schema":{"type":"string","enum":["android","ios"]},"description":"Current platform name","in":"path","required":true,"name":"platform_type"}]}""", platform_type=platform_type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/build/{platform_type}/configuration", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current application id","in":"path","required":true,"name":"application_id"},{"schema":{"type":"string","enum":["android","ios"]},"description":"The device current platform name for which the app was built, e.g. android, ios.","in":"path","required":true,"name":"platform_type"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current application id","in":"path","required":true,"name":"application_id"},{"schema":{"type":"string","enum":["android","ios"]},"description":"The device current platform name for which the app was built, e.g. android, ios.","in":"path","required":true,"name":"platform_type"}]}""", platform_type=platform_type)
         query_string = await create_query_string(platform_type=platform_type)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -7837,8 +7837,14 @@ class Configuration:
         return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/build/{platform_type}/configuration", platform_type=platform_type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
     async def getPreviousVersions(self, platform_type=None):
-        """Get previous build versions
-        :param platform_type : Current platform name : type string
+        """It gives previous build versions info. It contains the details about platform type, build status, version name, and version code in previous build versions.
+Builed status - It shows application build status. Build status can be pending or cancelled or failed or success.
+    * pending
+    * cancelled
+    * failed
+    * success
+
+        :param platform_type : The device current platform name for which the app was built, e.g. android, ios. : type string
         """
         payload = {}
         
@@ -7851,7 +7857,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/build/{platform_type}/versions", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current application id","in":"path","required":true,"name":"application_id"},{"schema":{"type":"string","enum":["android","ios"]},"description":"Current platform name","in":"path","required":true,"name":"platform_type"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current application id","in":"path","required":true,"name":"application_id"},{"schema":{"type":"string","enum":["android","ios"]},"description":"Current platform name","in":"path","required":true,"name":"platform_type"}]}""", platform_type=platform_type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/build/{platform_type}/versions", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current application id","in":"path","required":true,"name":"application_id"},{"schema":{"type":"string","enum":["android","ios"]},"description":"The device current platform name for which the app was built, e.g. android, ios.","in":"path","required":true,"name":"platform_type"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current application id","in":"path","required":true,"name":"application_id"},{"schema":{"type":"string","enum":["android","ios"]},"description":"The device current platform name for which the app was built, e.g. android, ios.","in":"path","required":true,"name":"platform_type"}]}""", platform_type=platform_type)
         query_string = await create_query_string(platform_type=platform_type)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
