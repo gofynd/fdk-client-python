@@ -26,8 +26,8 @@ class InventoryExportResponse(BaseSchema):
     
     request_params = fields.Dict(required=False)
     
-    seller_id = fields.Int(required=False)
-    
     trigger_on = fields.Str(required=False)
+    
+    seller_id = fields.Int(required=False)
     
 

@@ -18,12 +18,12 @@ class PaidOrderDetailsResponse(BaseSchema):
     # Payment swagger.json
 
     
-    data = fields.List(fields.Dict(required=False), required=False)
+    status_code = fields.Int(required=False)
     
     message = fields.Str(required=False)
     
-    success = fields.Boolean(required=False)
+    data = fields.List(fields.Dict(required=False), required=False)
     
-    status_code = fields.Int(required=False)
+    success = fields.Boolean(required=False)
     
 

@@ -23,26 +23,18 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
 from .KYCAddress import KYCAddress
+
+
 
 
 class BusinessDetails(BaseSchema):
     # Payment swagger.json
 
     
-    business_type = fields.Str(required=False)
-    
-    business_ownership_type = fields.Str(required=False)
-    
     name = fields.Str(required=False)
     
-    fssai = fields.Str(required=False)
-    
-    vintage = fields.Str(required=False)
-    
-    pan = fields.Str(required=False)
+    business_ownership_type = fields.Str(required=False)
     
     gstin = fields.Str(required=False)
     
@@ -50,8 +42,16 @@ class BusinessDetails(BaseSchema):
     
     fda = fields.Str(required=False)
     
+    pan = fields.Str(required=False)
+    
+    vintage = fields.Str(required=False)
+    
+    business_type = fields.Str(required=False)
+    
     entity_type = fields.Str(required=False)
     
     address = fields.Nested(KYCAddress, required=False)
+    
+    fssai = fields.Str(required=False)
     
 

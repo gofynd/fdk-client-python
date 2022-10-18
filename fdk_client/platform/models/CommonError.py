@@ -8,14 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class CollectionImage(BaseSchema):
-    # Catalog swagger.json
+class CommonError(BaseSchema):
+    # Content swagger.json
 
     
-    url = fields.Str(required=False)
-    
-    aspect_ratio = fields.Str(required=False)
+    message = fields.Str(required=False)
     
 

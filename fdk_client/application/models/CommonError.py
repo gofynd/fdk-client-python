@@ -1,4 +1,4 @@
-"""Platform Models."""
+"""Application Models."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -8,14 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class UpdatedResponse(BaseSchema):
-    # Catalog swagger.json
+class CommonError(BaseSchema):
+    # Content swagger.json
 
     
     message = fields.Str(required=False)
-    
-    items_not_updated = fields.List(fields.Int(required=False), required=False)
     
 
