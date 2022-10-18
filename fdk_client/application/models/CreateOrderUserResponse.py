@@ -24,7 +24,7 @@ class CreateOrderUserResponse(BaseSchema):
     # Payment swagger.json
 
     
-    order_id = fields.Str(required=False)
+    message = fields.Str(required=False)
     
     success = fields.Boolean(required=False)
     
@@ -32,7 +32,7 @@ class CreateOrderUserResponse(BaseSchema):
     
     callback_url = fields.Str(required=False)
     
-    message = fields.Str(required=False)
+    order_id = fields.Str(required=False)
     
     payment_confirm_url = fields.Str(required=False)
     

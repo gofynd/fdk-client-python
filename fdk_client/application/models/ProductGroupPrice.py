@@ -20,9 +20,9 @@ class ProductGroupPrice(BaseSchema):
     # Catalog swagger.json
 
     
-    min_marked = fields.Float(required=False)
-    
     min_effective = fields.Float(required=False)
+    
+    min_marked = fields.Float(required=False)
     
     currency = fields.Raw(required=False)
     

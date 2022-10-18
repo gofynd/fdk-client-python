@@ -2086,6 +2086,10 @@ Success. Returns a JSON object containing the all the platform configurations. R
   "delete_account_consent": {
     "consent_text": ""
   },
+  "session_timeout": {
+    "duration": "30",
+    "type": "Days"
+  },
   "_id": "5e04a5e5220bc15839ad9bc0",
   "created_at": "2019-12-26T12:21:57.878Z",
   "updated_at": "2020-08-13T14:31:09.878Z",
@@ -3798,7 +3802,6 @@ Request body must contain an email ID. Refer `EditEmailRequestSchema` for more d
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | message | String? |  yes  |  |
- | isDeleted | Boolean? |  yes  |  |
 
 ---
 
@@ -4011,6 +4014,7 @@ Request body must contain an email ID. Refer `EditEmailRequestSchema` for more d
  | deleteAccountDay | Int? |  yes  |  |
  | deleteAccountReasons | ArrayList<[DeleteAccountReasons](#DeleteAccountReasons)>? |  yes  |  |
  | deleteAccountConsent | HashMap<String,Any>? |  yes  |  |
+ | sessionTimeout | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -4215,6 +4219,18 @@ Request body must contain an email ID. Refer `EditEmailRequestSchema` for more d
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | appId | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [SessionExpiry](#SessionExpiry)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | duration | Int? |  yes  |  |
+ | type | String? |  yes  |  |
 
 ---
 

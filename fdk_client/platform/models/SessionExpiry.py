@@ -5,13 +5,17 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .GetReportListData import GetReportListData
 
 
-class GetReportListRequest(BaseSchema):
-    # Finance swagger.json
+
+
+
+class SessionExpiry(BaseSchema):
+    # User swagger.json
 
     
-    data = fields.Nested(GetReportListData, required=False)
+    duration = fields.Int(required=False)
+    
+    type = fields.Str(required=False)
     
 

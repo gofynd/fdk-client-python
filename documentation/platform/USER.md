@@ -1802,7 +1802,6 @@ Success. Returns a JSON object with the updated platform configurations. Refer `
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | message | String? |  yes  |  |
- | isDeleted | Boolean? |  yes  |  |
 
 ---
 
@@ -2015,6 +2014,7 @@ Success. Returns a JSON object with the updated platform configurations. Refer `
  | deleteAccountDay | Int? |  yes  |  |
  | deleteAccountReasons | ArrayList<[DeleteAccountReasons](#DeleteAccountReasons)>? |  yes  |  |
  | deleteAccountConsent | HashMap<String,Any>? |  yes  |  |
+ | sessionTimeout | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -2219,6 +2219,18 @@ Success. Returns a JSON object with the updated platform configurations. Refer `
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | appId | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [SessionExpiry](#SessionExpiry)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | duration | Int? |  yes  |  |
+ | type | String? |  yes  |  |
 
 ---
 

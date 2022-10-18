@@ -8,14 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
 class AuthenticationApiErrorSchema(BaseSchema):
     # User swagger.json
 
     
     message = fields.Str(required=False)
-    
-    is_deleted = fields.Boolean(required=False)
     
 
