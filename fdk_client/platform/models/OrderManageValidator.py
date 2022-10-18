@@ -24,3 +24,8 @@ class OrderManageValidator:
         company_id = fields.Int(required=False)
          
     
+    class shipmentEDDUpdate(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    
