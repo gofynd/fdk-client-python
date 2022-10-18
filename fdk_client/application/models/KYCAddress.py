@@ -26,13 +26,13 @@ class KYCAddress(BaseSchema):
     
     addressline2 = fields.Str(required=False)
     
-    city = fields.Str(required=False)
+    pincode = fields.Str(required=False)
     
-    land_mark = fields.Str(required=False)
+    city = fields.Str(required=False)
     
     ownership_type = fields.Str(required=False)
     
-    pincode = fields.Str(required=False)
+    land_mark = fields.Str(required=False)
     
     state = fields.Str(required=False)
     

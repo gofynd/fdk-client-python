@@ -8,10 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class CommonResponse(BaseSchema):
+class ApplicationCategoryJson(BaseSchema):
     # Catalog swagger.json
 
     
-    success = fields.Str(required=False)
+    _custom_json = fields.Dict(required=False)
     
 

@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class InventoryDeleteData(BaseSchema):
+class QuantityBase(BaseSchema):
     # Catalog swagger.json
 
     
-    size = fields.Str(required=False)
+    updated_at = fields.Str(required=False)
     
-    location_id = fields.Int(required=False)
-    
-    item_id = fields.Int(required=False)
+    count = fields.Int(required=False)
     
 
