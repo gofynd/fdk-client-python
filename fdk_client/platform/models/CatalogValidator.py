@@ -16,7 +16,7 @@ class CatalogValidator:
         id = fields.Str(required=False)
          
     
-    class deleteSearchKeywords(BaseSchema):
+    class updateSearchKeywords(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -25,7 +25,7 @@ class CatalogValidator:
         id = fields.Str(required=False)
          
     
-    class updateSearchKeywords(BaseSchema):
+    class deleteSearchKeywords(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -57,7 +57,7 @@ class CatalogValidator:
         id = fields.Str(required=False)
          
     
-    class deleteAutocompleteKeyword(BaseSchema):
+    class updateAutocompleteKeyword(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -66,7 +66,7 @@ class CatalogValidator:
         id = fields.Str(required=False)
          
     
-    class updateAutocompleteKeyword(BaseSchema):
+    class deleteAutocompleteKeyword(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -652,14 +652,14 @@ class CatalogValidator:
         brand_uid = fields.Int(required=False)
          
     
-    class deleteProduct(BaseSchema):
+    class editProduct(BaseSchema):
         
         company_id = fields.Str(required=False)
         
         item_id = fields.Int(required=False)
          
     
-    class editProduct(BaseSchema):
+    class deleteProduct(BaseSchema):
         
         company_id = fields.Str(required=False)
         

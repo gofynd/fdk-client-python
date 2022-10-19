@@ -22,13 +22,13 @@ class PriceMeta(BaseSchema):
     # Catalog swagger.json
 
     
-    transfer = fields.Float(required=False)
+    tp_notes = fields.Dict(required=False)
     
     marked = fields.Float(required=False)
     
-    currency = fields.Str(required=False)
+    transfer = fields.Float(required=False)
     
-    tp_notes = fields.Dict(required=False)
+    currency = fields.Str(required=False)
     
     effective = fields.Float(required=False)
     
