@@ -3084,7 +3084,7 @@ Success
 
 
 ### createApplication
-Create application
+Create new sales channel
 
 
 
@@ -3106,7 +3106,7 @@ except Exception as e:
 | body | [CreateApplicationRequest](#CreateApplicationRequest) | yes | Request body |
 
 
-Create new application
+Create new sales channel under current company
 
 *Returned Response:*
 
@@ -3140,7 +3140,7 @@ Success
 
 
 ### getApplications
-Get list of application under company
+Get list of registered sales channels under company
 
 
 
@@ -3165,7 +3165,7 @@ except Exception as e:
 
 
 
-Get list of application under company
+Get list of registered sales channels under current company. Sales channel has the details of name , description, channel_type, app_type, domain and many others.
 
 *Returned Response:*
 
@@ -3199,7 +3199,7 @@ Success
 
 
 ### getApplicationById
-Get application data from id
+Get sales channel data from id
 
 
 
@@ -3217,7 +3217,7 @@ except Exception as e:
 
 
 
-Get application data from id
+Get sales channel data from sales channel id under current company
 
 *Returned Response:*
 
@@ -3269,7 +3269,7 @@ except Exception as e:
 
 
 
-Get all currencies
+Get all currencies for the current company
 
 *Returned Response:*
 
@@ -4300,7 +4300,7 @@ except Exception as e:
 
 
 
-Get brands by company for current sales channel
+Get brands by company. Brand has information about name, value, brand logo, brand banner and brand portrait image.
 
 *Returned Response:*
 
@@ -4375,7 +4375,7 @@ except Exception as e:
 | body | [CompanyByBrandsRequest](#CompanyByBrandsRequest) | yes | Request body |
 
 
-Get company by brand uids
+Get company by brand uids. Company has information about company name and company id.
 
 *Returned Response:*
 
@@ -4431,7 +4431,7 @@ Success
 
 
 ### getStoreByBrands
-Get stores by brand uids
+Get stores by brand uids for the current company
 
 
 
@@ -4455,7 +4455,7 @@ except Exception as e:
 | body | [StoreByBrandsRequest](#StoreByBrandsRequest) | yes | Request body |
 
 
-Get stores by brand uids
+Get stores by brand uids for the current company. Store has information about store name, store type, store code, store address, and company detail.
 
 *Returned Response:*
 
@@ -4550,7 +4550,7 @@ Success
 
 
 ### getOtherSellerApplications
-Get other seller applications
+Get other seller sales channels
 
 
 
@@ -4574,7 +4574,7 @@ except Exception as e:
 
 
 
-Get other seller applications who has opted current company as inventory
+Get other seller sales channels who has opted current company as inventory
 
 *Returned Response:*
 
@@ -4651,7 +4651,7 @@ Success
 
 
 ### getOtherSellerApplicationById
-Get other seller applications
+Get other seller sales channel
 
 
 
@@ -4674,7 +4674,7 @@ except Exception as e:
 
 
 
-Get other seller application
+Get other seller sales channel in current company
 
 *Returned Response:*
 
@@ -4755,7 +4755,7 @@ Success
 
 
 ### optOutFromApplication
-Opt out company or store from other seller application
+UpdateOpt out company or store from other seller sales channel
 
 
 
@@ -4778,7 +4778,7 @@ except Exception as e:
 | body | [OptOutInventory](#OptOutInventory) | yes | Request body |
 
 
-Opt out company or store from other seller application
+Update Opt out company or store data from other seller sales channel.
 
 *Returned Response:*
 
@@ -4854,9 +4854,9 @@ Success
  | category | [InventoryCategory](#InventoryCategory)? |  yes  |  |
  | price | [InventoryPrice](#InventoryPrice)? |  yes  |  |
  | discount | [InventoryDiscount](#InventoryDiscount)? |  yes  |  |
- | outOfStock | Boolean? |  yes  | Show out of stock products |
+ | outOfStock | Boolean? |  yes  | Allow out of stock product in sales channel inventory |
  | onlyVerifiedProducts | Boolean? |  yes  | Show only verified products |
- | franchiseEnabled | Boolean? |  yes  |  |
+ | franchiseEnabled | Boolean? |  yes  | Allow franchise for sales channel inventory |
  | excludeCategory | ArrayList<Any>? |  yes  | List of excluded brands category |
  | image | ArrayList<String>? |  yes  |  |
  | companyStore | ArrayList<Any>? |  yes  |  |
@@ -4956,7 +4956,7 @@ Success
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | rules | [ArticleAssignmentRules](#ArticleAssignmentRules)? |  yes  |  |
- | postOrderReassignment | Boolean? |  yes  |  |
+ | postOrderReassignment | Boolean? |  yes  | Allow post order reassigment of article |
 
 ---
 
@@ -5033,9 +5033,9 @@ Success
  | callbackUrl | [CallbackUrl](#CallbackUrl)? |  yes  |  |
  | methods | [Methods](#Methods)? |  yes  |  |
  | paymentSelectionLock | [PaymentSelectionLock](#PaymentSelectionLock)? |  yes  |  |
- | modeOfPayment | String? |  yes  | Mode of payment |
- | source | String? |  yes  |  |
- | enabled | Boolean? |  yes  | Allow payment |
+ | modeOfPayment | String? |  yes  | Mode of payment for sales channel payment. It is required and default value is null. |
+ | source | String? |  yes  | Source of the payment mode. Default value is FYND. |
+ | enabled | Boolean? |  yes  | Allow payment for sales channel |
  | codAmountLimit | Double? |  yes  | Maximum amount allowed for cash on delivery |
  | codCharges | Double? |  yes  | cash on delivery charges |
  | anonymousCod | Boolean? |  yes  | Allow cash on delivery for anonymous user |
@@ -5168,8 +5168,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | companyName | String? |  yes  |  |
- | companyId | Int? |  yes  |  |
+ | companyName | String? |  yes  | Company name for the brand |
+ | companyId | Int? |  yes  | Company id for the brand |
 
 ---
 
@@ -5229,10 +5229,10 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | storeName | String? |  yes  |  |
- | storeId | Int? |  yes  |  |
- | storeType | String? |  yes  |  |
- | storeCode | String? |  yes  |  |
+ | storeName | String? |  yes  | Store name of the brand |
+ | storeId | Int? |  yes  | The unique identifier of the store |
+ | storeType | String? |  yes  | Store type of the brand like warehouse, high_street etc. |
+ | storeCode | String? |  yes  | Store code of the brand. It is unique for every brand store. |
  | storeAddress | [OptedStoreAddress](#OptedStoreAddress)? |  yes  |  |
  | company | [OptedCompany](#OptedCompany)? |  yes  |  |
 
@@ -5246,7 +5246,7 @@ Success
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | name | String? |  yes  | Brand name |
- | value | Int? |  yes  |  |
+ | value | Int? |  yes  | Brand uid.Brand uid for identify the brand |
  | brandLogoUrl | String? |  yes  | Brand logo hosted url |
  | brandBannerUrl | String? |  yes  | Brand banner hosted url |
  | brandBannerPortraitUrl | String? |  yes  | Brand banner portrait hosted url |
@@ -5891,10 +5891,10 @@ Success
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | companyId | String? |  yes  | Current company id |
- | channelType | String? |  yes  |  |
+ | channelType | String? |  yes  | It indicates different channel types like store, website-and-mobile-apps. Default value is store |
  | auth | [ApplicationAuth](#ApplicationAuth)? |  yes  |  |
- | name | String? |  yes  | User friendly name for application |
- | desc | String? |  yes  | Basic description of application |
+ | name | String? |  yes  | User friendly name for sales channel |
+ | desc | String? |  yes  | Detail description of about sales channel |
 
 ---
 
@@ -5908,9 +5908,9 @@ Success
  | brand | [InventoryBrandRule](#InventoryBrandRule)? |  yes  |  |
  | store | [InventoryStoreRule](#InventoryStoreRule)? |  yes  |  |
  | image | ArrayList<String>? |  yes  |  |
- | franchiseEnabled | Boolean? |  yes  |  |
- | outOfStock | Boolean? |  yes  |  |
- | onlyVerifiedProducts | Boolean? |  yes  |  |
+ | franchiseEnabled | Boolean? |  yes  | Allow franchise for sales channel inventory |
+ | outOfStock | Boolean? |  yes  | Allow out of stock product in sales channel inventory |
+ | onlyVerifiedProducts | Boolean? |  yes  | Show only verified products |
  | payment | [InventoryPaymentConfig](#InventoryPaymentConfig)? |  yes  |  |
  | articleAssignment | [InventoryArticleAssignment](#InventoryArticleAssignment)? |  yes  |  |
 
@@ -5923,7 +5923,7 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | name | String? |  yes  |  |
+ | name | String? |  yes  | Domain url of current sales channel |
 
 ---
 
@@ -6030,8 +6030,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
- | name | String? |  yes  |  |
+ | uid | Int? |  yes  | Uid of the seller company |
+ | name | String? |  yes  | Name of the seller company |
 
 ---
 
@@ -6042,12 +6042,12 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | name | String? |  yes  |  |
- | description | String? |  yes  |  |
- | id | String? |  yes  |  |
- | domain | String? |  yes  |  |
+ | name | String? |  yes  | Name of the seller sales channel |
+ | description | String? |  yes  | Basic deatil about the seller sales channel |
+ | id | String? |  yes  | The unique identifier of the seller sales channel |
+ | domain | String? |  yes  | Domain url of the seller sales channel |
  | company | [OtherSellerCompany](#OtherSellerCompany)? |  yes  |  |
- | optType | String? |  yes  |  |
+ | optType | String? |  yes  | Opted type of seller sales channel. It can be store or company. |
 
 ---
 
@@ -6070,10 +6070,10 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | name | String? |  yes  |  |
- | description | String? |  yes  |  |
- | id | String? |  yes  |  |
- | domain | String? |  yes  |  |
+ | name | String? |  yes  | Name of the opted sales channel |
+ | description | String? |  yes  | Basic deatil about the opted sales channel |
+ | id | String? |  yes  | The unique identifier of the opted sales channel |
+ | domain | String? |  yes  | Domain url of the opted sales channel |
  | company | [OptedCompany](#OptedCompany)? |  yes  |  |
  | optedInventory | [OptedInventory](#OptedInventory)? |  yes  |  |
  | optOutInventory | [OptOutInventory](#OptOutInventory)? |  yes  |  |
@@ -6087,8 +6087,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
- | name | String? |  yes  |  |
+ | uid | Int? |  yes  | Opted company uid for inventory. It has unique value for the company. |
+ | name | String? |  yes  | Opted company name of the inventory |
 
 ---
 
@@ -6111,8 +6111,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | key | String? |  yes  |  |
- | display | String? |  yes  |  |
+ | key | String? |  yes  | Opted type of inventory store. It can be store or company. |
+ | display | String? |  yes  | Display text of opted type for inventory store |
 
 ---
 
@@ -6123,15 +6123,15 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | name | String? |  yes  |  |
- | storeCode | String? |  yes  |  |
- | id | String? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
- | uid | Int? |  yes  |  |
+ | name | String? |  yes  | Name of the opted inventory store |
+ | storeCode | String? |  yes  | Store code of the opted inventory store. It is unique for every store. |
+ | id | String? |  yes  | The unique identifier of the opted inventory store |
+ | modifiedOn | String? |  yes  | Epoch timestamp of opted inventory store creation |
+ | uid | Int? |  yes  | Uid of opted inventory store |
  | address | [OptedStoreAddress](#OptedStoreAddress)? |  yes  |  |
- | displayName | String? |  yes  |  |
- | storeType | String? |  yes  |  |
- | companyId | Int? |  yes  |  |
+ | displayName | String? |  yes  | Display name of the opted inventory store |
+ | storeType | String? |  yes  | Store type of the opted inventory store like warehouse, high_street etc. |
+ | companyId | Int? |  yes  | Company id for the opted inventory store |
 
 ---
 
@@ -6142,8 +6142,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | store | ArrayList<Int> |  no  |  |
- | company | ArrayList<Int> |  no  |  |
+ | store | ArrayList<Int> |  no  | List of Opt out store for inventory |
+ | company | ArrayList<Int> |  no  | List of Opt out company for inventory |
 
 ---
 
@@ -6878,8 +6878,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | modeOfPayment | String? |  yes  |  |
- | source | String? |  yes  |  |
+ | modeOfPayment | String? |  yes  | Mode of payment for the inventory of sales channel. It is required and default value is null. |
+ | source | String? |  yes  | Source of the payment mode for the inventory payment of sales channel. Default value is FYND. |
 
 ---
 

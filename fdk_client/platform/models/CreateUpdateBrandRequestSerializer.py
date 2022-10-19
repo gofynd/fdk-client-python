@@ -30,11 +30,11 @@ class CreateUpdateBrandRequestSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    uid = fields.Int(required=False)
-    
-    brand_tier = fields.Str(required=False)
-    
     name = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+    _locale_language = fields.Dict(required=False)
     
     banner = fields.Nested(BrandBannerSerializer, required=False)
     
@@ -42,12 +42,12 @@ class CreateUpdateBrandRequestSerializer(BaseSchema):
     
     synonyms = fields.List(fields.Str(required=False), required=False)
     
-    company_id = fields.Int(required=False)
-    
-    _locale_language = fields.Dict(required=False)
-    
-    description = fields.Str(required=False)
-    
     logo = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
+    
+    brand_tier = fields.Str(required=False)
+    
+    company_id = fields.Int(required=False)
     
 
