@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class LinkStatus(BaseSchema):
+class renderHTMLResponse(BaseSchema):
     # Payment swagger.json
 
     
-    status = fields.Boolean(required=False)
+    html = fields.Str(required=False)
     
-    message = fields.Str(required=False)
+    status = fields.Boolean(required=False)
     
 

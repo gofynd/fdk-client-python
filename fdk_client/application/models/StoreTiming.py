@@ -9,9 +9,9 @@ from ..models.BaseSchema import BaseSchema
 
 from .Time import Time
 
-
-
 from .Time import Time
+
+
 
 
 class StoreTiming(BaseSchema):
@@ -20,10 +20,10 @@ class StoreTiming(BaseSchema):
     
     open = fields.Boolean(required=False)
     
+    closing = fields.Nested(Time, required=False)
+    
     opening = fields.Nested(Time, required=False)
     
     weekday = fields.Str(required=False)
-    
-    closing = fields.Nested(Time, required=False)
     
 

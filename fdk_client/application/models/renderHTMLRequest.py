@@ -8,14 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class LinkStatus(BaseSchema):
+class renderHTMLRequest(BaseSchema):
     # Payment swagger.json
 
     
-    status = fields.Boolean(required=False)
-    
-    message = fields.Str(required=False)
+    base64_html = fields.Str(required=False)
     
 

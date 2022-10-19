@@ -22,9 +22,9 @@ class CouponValidity(BaseSchema):
     
     title = fields.Str(required=False)
     
-    valid = fields.Boolean(required=False)
-    
     code = fields.Str(required=False)
+    
+    valid = fields.Boolean(required=False)
     
     discount = fields.Float(required=False)
     
