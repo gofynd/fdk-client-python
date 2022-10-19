@@ -6,15 +6,13 @@ from .ProductDetailAttribute import ProductDetailAttribute
     
 from .ProductDetailGroupedAttribute import ProductDetailGroupedAttribute
     
-from .CustomMetaFields import CustomMetaFields
+from .Meta import Meta
+    
+from .Media import Media
     
 from .ProductListingActionPage import ProductListingActionPage
     
 from .ProductListingAction import ProductListingAction
-    
-from .Meta import Meta
-    
-from .Media import Media
     
 from .ProductBrand import ProductBrand
     
@@ -22,13 +20,13 @@ from .Price import Price
     
 from .ProductListingPrice import ProductListingPrice
     
+from .CustomMetaFields import CustomMetaFields
+    
 from .ProductDetail import ProductDetail
     
 from .ErrorResponse import ErrorResponse
     
 from .ProductSizeStores import ProductSizeStores
-    
-from .ProductSize import ProductSize
     
 from .SizeChartValues import SizeChartValues
     
@@ -37,6 +35,8 @@ from .ColumnHeader import ColumnHeader
 from .ColumnHeaders import ColumnHeaders
     
 from .SizeChart import SizeChart
+    
+from .ProductSize import ProductSize
     
 from .ProductSizes import ProductSizes
     
@@ -62,11 +62,11 @@ from .ProductVariantsResponse import ProductVariantsResponse
     
 from .Seller import Seller
     
+from .CompanyDetail import CompanyDetail
+    
 from .ProductStockPrice import ProductStockPrice
     
 from .StoreDetail import StoreDetail
-    
-from .CompanyDetail import CompanyDetail
     
 from .ProductStockStatusItem import ProductStockStatusItem
     
@@ -126,9 +126,9 @@ from .CollectionQuery import CollectionQuery
     
 from .GetCollectionDetailNest import GetCollectionDetailNest
     
-from .CollectionListingFilterType import CollectionListingFilterType
-    
 from .CollectionListingFilterTag import CollectionListingFilterTag
+    
+from .CollectionListingFilterType import CollectionListingFilterType
     
 from .CollectionListingFilter import CollectionListingFilter
     
@@ -154,11 +154,11 @@ from .StoreListingResponse import StoreListingResponse
     
 from .SellerPhoneNumber import SellerPhoneNumber
     
-from .StoreAddressSerializer import StoreAddressSerializer
-    
 from .StoreManagerSerializer import StoreManagerSerializer
     
 from .StoreDepartments import StoreDepartments
+    
+from .StoreAddressSerializer import StoreAddressSerializer
     
 from .CompanyStore import CompanyStore
     
@@ -172,19 +172,29 @@ from .StoreTiming import StoreTiming
     
 from .StoreDetails import StoreDetails
     
-from .UserDetail import UserDetail
-    
-from .Size import Size
-    
 from .ProductGroupPrice import ProductGroupPrice
     
 from .ProductDetails import ProductDetails
     
+from .Size import Size
+    
 from .ProductInGroup import ProductInGroup
+    
+from .UserDetail import UserDetail
     
 from .ProductGroupingModel import ProductGroupingModel
     
 from .ProductBundle import ProductBundle
+    
+from .SellerV2 import SellerV2
+    
+from .ReturnConfigSchemaV2 import ReturnConfigSchemaV2
+    
+from .DetailsSchemaV2 import DetailsSchemaV2
+    
+from .MarketPlaceSttributesSchemaV2 import MarketPlaceSttributesSchemaV2
+    
+from .SellerGroupAttributes import SellerGroupAttributes
     
 from .ProductSetDistributionSizeV2 import ProductSetDistributionSizeV2
     
@@ -192,23 +202,13 @@ from .ProductSetDistributionV2 import ProductSetDistributionV2
     
 from .ProductSetV2 import ProductSetV2
     
-from .ReturnConfigSchemaV2 import ReturnConfigSchemaV2
-    
-from .DetailsSchemaV2 import DetailsSchemaV2
-    
-from .SellerGroupAttributes import SellerGroupAttributes
-    
-from .SellerV2 import SellerV2
+from .ArticleAssignmentV2 import ArticleAssignmentV2
     
 from .ProductStockPriceV2 import ProductStockPriceV2
-    
-from .ArticleAssignmentV2 import ArticleAssignmentV2
     
 from .StrategyWiseListingSchemaV2 import StrategyWiseListingSchemaV2
     
 from .StoreV2 import StoreV2
-    
-from .MarketPlaceSttributesSchemaV2 import MarketPlaceSttributesSchemaV2
     
 from .ProductSizePriceResponseV2 import ProductSizePriceResponseV2
     

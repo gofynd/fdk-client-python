@@ -38,7 +38,7 @@ class Item(BaseSchema):
     
     color = fields.Str(required=False)
     
-    name = fields.Str(required=False)
+    image = fields.List(fields.Str(required=False), required=False)
     
     can_cancel = fields.Boolean(required=False)
     
@@ -48,14 +48,14 @@ class Item(BaseSchema):
     
     can_return = fields.Boolean(required=False)
     
-    id = fields.Int(required=False)
-    
-    l3_category_name = fields.Str(required=False)
-    
     code = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
     
     l3_category = fields.Int(required=False)
     
-    image = fields.List(fields.Str(required=False), required=False)
+    id = fields.Int(required=False)
+    
+    l3_category_name = fields.Str(required=False)
     
 
