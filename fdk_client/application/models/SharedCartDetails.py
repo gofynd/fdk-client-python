@@ -24,10 +24,10 @@ class SharedCartDetails(BaseSchema):
     
     source = fields.Dict(required=False)
     
-    meta = fields.Dict(required=False)
+    created_on = fields.Str(required=False)
     
     token = fields.Str(required=False)
     
-    created_on = fields.Str(required=False)
+    meta = fields.Dict(required=False)
     
 
