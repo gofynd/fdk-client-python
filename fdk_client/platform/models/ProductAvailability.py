@@ -26,8 +26,8 @@ class ProductAvailability(BaseSchema):
     
     other_store_quantity = fields.Int(required=False)
     
-    is_valid = fields.Boolean(required=False)
-    
     deliverable = fields.Boolean(required=False)
+    
+    is_valid = fields.Boolean(required=False)
     
 
