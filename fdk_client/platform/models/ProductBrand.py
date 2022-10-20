@@ -18,11 +18,11 @@ class ProductBrand(BaseSchema):
     # Catalog swagger.json
 
     
-    uid = fields.Int(required=False)
+    name = fields.Str(required=False)
     
     logo = fields.Nested(Media1, required=False)
     
-    name = fields.Str(required=False)
+    uid = fields.Int(required=False)
     
     action = fields.Nested(Action, required=False)
     

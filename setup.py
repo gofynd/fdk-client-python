@@ -11,7 +11,7 @@ with open('README.md', 'r') as fh:
 
 setup(
     name='fdk_client',
-    version='0.1.27',
+    version='0.1.28',
     author='Manish Magnani',
     author_email='manishmagnani@gofynd.com',
     description=description,
@@ -22,14 +22,14 @@ setup(
         exclude=('tests*', 'documentation', '_macros')),
     license='',
     install_requires=[
-        "aiohttp==3.7.3",
+        "aiohttp>=3.7.3",
         "async-timeout==3.0.1",
         "attrs==21.2.0",
         "backcall==0.2.0",
         "chardet>=3.0.4",
         "decorator==5.1.0",
         "idna>=2.10",
-        "ipython==7.28.0",
+        "ipython>=7.28.0",
         "jedi==0.18.0",
         "marshmallow==3.12.2",
         "matplotlib-inline==0.1.3",
@@ -43,7 +43,7 @@ setup(
         "pytz>=2021.3",
         "traitlets==5.1.1",
         "typing-extensions==3.10.0.2",
-        "ujson==4.0.1",
+        "ujson>=4.0.1",
         "wcwidth==0.2.5",
         "yarl==1.6.3"
     ],
