@@ -5,13 +5,13 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .StoreAddressSerializer import StoreAddressSerializer
-
 from .StoreDepartments import StoreDepartments
+
+
 
 from .CompanyStore import CompanyStore
 
-
+from .StoreAddressSerializer import StoreAddressSerializer
 
 from .StoreManagerSerializer import StoreManagerSerializer
 
@@ -24,13 +24,13 @@ class AppStore(BaseSchema):
     # Catalog swagger.json
 
     
-    address = fields.Nested(StoreAddressSerializer, required=False)
-    
     departments = fields.List(fields.Nested(StoreDepartments, required=False), required=False)
+    
+    name = fields.Str(required=False)
     
     company = fields.Nested(CompanyStore, required=False)
     
-    name = fields.Str(required=False)
+    address = fields.Nested(StoreAddressSerializer, required=False)
     
     manager = fields.Nested(StoreManagerSerializer, required=False)
     

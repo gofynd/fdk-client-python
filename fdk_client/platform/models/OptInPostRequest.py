@@ -24,9 +24,9 @@ class OptInPostRequest(BaseSchema):
     
     enabled = fields.Boolean(required=False)
     
-    platform = fields.Str(required=False)
-    
     company_id = fields.Int(required=False)
+    
+    platform = fields.Str(required=False)
     
     opt_level = fields.Str(required=False)
     
