@@ -5,17 +5,13 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .ProductSimilarItem import ProductSimilarItem
 
 
-
-
-
-class SellerPhoneNumber(BaseSchema):
+class SimilarProductByTypeResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    number = fields.Str(required=False)
-    
-    country_code = fields.Int(required=False)
+    similars = fields.Nested(ProductSimilarItem, required=False)
     
 
