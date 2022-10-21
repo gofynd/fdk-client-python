@@ -7,7 +7,7 @@ from ..models.BaseSchema import BaseSchema
 
 from .ProductImage import ProductImage
 
-from .BaseInfo import BaseInfo
+
 
 from .ProductAction import ProductAction
 
@@ -15,7 +15,7 @@ from .ProductAction import ProductAction
 
 
 
-
+from .BaseInfo import BaseInfo
 
 
 
@@ -28,7 +28,7 @@ class CartProduct(BaseSchema):
     
     images = fields.List(fields.Nested(ProductImage, required=False), required=False)
     
-    brand = fields.Nested(BaseInfo, required=False)
+    name = fields.Str(required=False)
     
     action = fields.Nested(ProductAction, required=False)
     
@@ -36,7 +36,7 @@ class CartProduct(BaseSchema):
     
     uid = fields.Int(required=False)
     
-    name = fields.Str(required=False)
+    brand = fields.Nested(BaseInfo, required=False)
     
     slug = fields.Str(required=False)
     
