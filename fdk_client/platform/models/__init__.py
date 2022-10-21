@@ -1900,21 +1900,21 @@ from .ApplicationStoreJson import ApplicationStoreJson
     
 
     
-from .ContactDetails import ContactDetails
-    
 from .BusinessCountryInfo import BusinessCountryInfo
-    
-from .CompanyTaxesSerializer import CompanyTaxesSerializer
     
 from .Website import Website
     
 from .BusinessDetails import BusinessDetails
     
+from .CompanyTaxesSerializer import CompanyTaxesSerializer
+    
+from .ContactDetails import ContactDetails
+    
 from .GetCompanyProfileSerializerResponse import GetCompanyProfileSerializerResponse
     
-from .CreateUpdateAddressSerializer import CreateUpdateAddressSerializer
-    
 from .CompanyTaxesSerializer1 import CompanyTaxesSerializer1
+    
+from .CreateUpdateAddressSerializer import CreateUpdateAddressSerializer
     
 from .UpdateCompany import UpdateCompany
     

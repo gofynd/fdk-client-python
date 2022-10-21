@@ -23,7 +23,7 @@ setup(
     license='',
     install_requires=[
         "aiohttp>=3.7.3",
-        "async-timeout==3.0.1",
+        "async-timeout>=3.0.1",
         "attrs==21.2.0",
         "backcall==0.2.0",
         "chardet>=3.0.4",
