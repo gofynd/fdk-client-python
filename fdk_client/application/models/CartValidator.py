@@ -177,8 +177,7 @@ class CartValidator:
     
     class checkoutCart(BaseSchema):
         
-        id = fields.Str(required=False)
-         
+        pass 
     
     class updateCartMeta(BaseSchema):
         
