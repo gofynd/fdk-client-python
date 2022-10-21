@@ -24,9 +24,9 @@ class ErrorResponse(BaseSchema):
     
     message = fields.Str(required=False)
     
-    code = fields.Str(required=False)
-    
     error = fields.Str(required=False)
+    
+    code = fields.Str(required=False)
     
     status = fields.Int(required=False)
     
