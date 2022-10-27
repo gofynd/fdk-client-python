@@ -24,14 +24,14 @@ class OptInPostRequest(BaseSchema):
     
     enabled = fields.Boolean(required=False)
     
-    store_ids = fields.List(fields.Int(required=False), required=False)
-    
     opt_level = fields.Str(required=False)
+    
+    platform = fields.Str(required=False)
     
     company_id = fields.Int(required=False)
     
     brand_ids = fields.List(fields.Int(required=False), required=False)
     
-    platform = fields.Str(required=False)
+    store_ids = fields.List(fields.Int(required=False), required=False)
     
 

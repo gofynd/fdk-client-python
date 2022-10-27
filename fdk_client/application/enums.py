@@ -172,7 +172,7 @@ class PageType(Enum):
     
     REGISTER = "register"
     
-    SHIPMENT_POLICY = "shipment-policy"
+    SHIPPING_POLICY = "shipping-policy"
     
     RETURN_POLICY = "return-policy"
     
