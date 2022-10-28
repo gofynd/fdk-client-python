@@ -28,17 +28,17 @@ class AttributeDetailsGroup(BaseSchema):
     
     is_active = fields.Boolean(required=False)
     
-    unit = fields.Str(required=False)
-    
-    logo = fields.Str(required=False)
+    priority = fields.Int(required=False)
     
     display_type = fields.Str(required=False)
     
-    key = fields.Str(required=False)
-    
-    priority = fields.Int(required=False)
-    
     slug = fields.Str(required=False)
+    
+    logo = fields.Str(required=False)
+    
+    unit = fields.Str(required=False)
+    
+    key = fields.Str(required=False)
     
     name = fields.Str(required=False)
     
