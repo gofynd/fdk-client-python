@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
 class PostOrder1(BaseSchema):
     # Cart swagger.json
 
     
-    partial_can_ret = fields.Boolean(required=False)
+    cancellation_allowed = fields.Boolean(required=False)
     
     return_allowed = fields.Boolean(required=False)
-    
-    cancellation_allowed = fields.Boolean(required=False)
     
 

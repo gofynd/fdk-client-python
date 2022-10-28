@@ -28,7 +28,13 @@ class ActivePromosResponse(BaseSchema):
     # Cart swagger.json
 
     
-    is_active = fields.Boolean(required=False)
+    subtitle = fields.Str(required=False)
+    
+    entity_type = fields.Str(required=False)
+    
+    created_on = fields.Str(required=False)
+    
+    modified_on = fields.Str(required=False)
     
     entity_slug = fields.Str(required=False)
     
@@ -36,14 +42,8 @@ class ActivePromosResponse(BaseSchema):
     
     example = fields.Str(required=False)
     
-    entity_type = fields.Str(required=False)
-    
-    created_on = fields.Str(required=False)
-    
-    subtitle = fields.Str(required=False)
+    is_active = fields.Boolean(required=False)
     
     title = fields.Str(required=False)
-    
-    modified_on = fields.Str(required=False)
     
 

@@ -24,11 +24,15 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 class RepaymentRequestDetails(BaseSchema):
     # Payment swagger.json
 
     
-    fwd_shipment_id = fields.Str(required=False)
+    amount = fields.Float(required=False)
+    
+    payment_mode_identifier = fields.Str(required=False)
     
     aggregator_order_id = fields.Str(required=False)
     
@@ -36,14 +40,14 @@ class RepaymentRequestDetails(BaseSchema):
     
     payment_mode = fields.Str(required=False)
     
-    amount = fields.Int(required=False)
-    
     aggregator = fields.Str(required=False)
-    
-    aggregator_transaction_id = fields.Str(required=False)
     
     merchant_order_id = fields.Str(required=False)
     
-    payment_mode_identifier = fields.Str(required=False)
+    outstanding_details_id = fields.Int(required=False)
+    
+    fwd_shipment_id = fields.Str(required=False)
+    
+    aggregator_transaction_id = fields.Str(required=False)
     
 
