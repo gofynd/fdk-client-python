@@ -20,6 +20,8 @@ class SharedCartDetails(BaseSchema):
     # Cart swagger.json
 
     
+    user = fields.Dict(required=False)
+    
     created_on = fields.Str(required=False)
     
     token = fields.Str(required=False)
@@ -27,7 +29,5 @@ class SharedCartDetails(BaseSchema):
     meta = fields.Dict(required=False)
     
     source = fields.Dict(required=False)
-    
-    user = fields.Dict(required=False)
     
 
