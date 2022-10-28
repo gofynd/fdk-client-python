@@ -15,13 +15,13 @@ from .Media import Media
 
 
 
-
-
-
-
-
-
 from .ProductListingAction import ProductListingAction
+
+
+
+
+
+
 
 
 class ProductVariantItemResponse(BaseSchema):
@@ -30,20 +30,20 @@ class ProductVariantItemResponse(BaseSchema):
     
     value = fields.Str(required=False)
     
-    uid = fields.Int(required=False)
-    
-    name = fields.Str(required=False)
-    
-    medias = fields.List(fields.Nested(Media, required=False), required=False)
-    
-    is_available = fields.Boolean(required=False)
+    color = fields.Str(required=False)
     
     color_name = fields.Str(required=False)
     
+    medias = fields.List(fields.Nested(Media, required=False), required=False)
+    
     slug = fields.Str(required=False)
     
-    color = fields.Str(required=False)
-    
     action = fields.Nested(ProductListingAction, required=False)
+    
+    is_available = fields.Boolean(required=False)
+    
+    name = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
     
 

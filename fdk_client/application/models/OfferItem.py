@@ -26,16 +26,16 @@ class OfferItem(BaseSchema):
     
     price = fields.Nested(OfferPrice, required=False)
     
-    best = fields.Boolean(required=False)
-    
     total = fields.Float(required=False)
     
-    quantity = fields.Int(required=False)
-    
-    auto_applied = fields.Boolean(required=False)
+    margin = fields.Int(required=False)
     
     type = fields.Str(required=False)
     
-    margin = fields.Int(required=False)
+    best = fields.Boolean(required=False)
+    
+    auto_applied = fields.Boolean(required=False)
+    
+    quantity = fields.Int(required=False)
     
 
