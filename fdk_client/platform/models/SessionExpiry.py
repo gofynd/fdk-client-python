@@ -10,6 +10,8 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 class SessionExpiry(BaseSchema):
     # User swagger.json
 
@@ -17,5 +19,7 @@ class SessionExpiry(BaseSchema):
     duration = fields.Int(required=False)
     
     type = fields.Str(required=False)
+    
+    is_active = fields.Boolean(required=False)
     
 

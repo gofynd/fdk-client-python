@@ -24,14 +24,14 @@ class ConfigurationListingFilterValue(BaseSchema):
     
     condition = fields.Str(required=False)
     
-    value = fields.Str(required=False)
+    map = fields.Dict(required=False)
+    
+    map_values = fields.List(fields.Dict(required=False), required=False)
     
     sort = fields.Str(required=False)
     
-    map = fields.Dict(required=False)
-    
     bucket_points = fields.List(fields.Nested(ConfigurationBucketPoints, required=False), required=False)
     
-    map_values = fields.List(fields.Dict(required=False), required=False)
+    value = fields.Str(required=False)
     
 

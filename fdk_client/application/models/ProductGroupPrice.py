@@ -16,7 +16,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class Price1(BaseSchema):
+class ProductGroupPrice(BaseSchema):
     # Catalog swagger.json
 
     
@@ -26,8 +26,8 @@ class Price1(BaseSchema):
     
     max_effective = fields.Float(required=False)
     
-    max_marked = fields.Float(required=False)
+    currency = fields.Raw(required=False)
     
-    currency = fields.Str(required=False)
+    max_marked = fields.Float(required=False)
     
 

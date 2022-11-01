@@ -14,16 +14,20 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 class ProductSize(BaseSchema):
     # Catalog swagger.json
 
     
-    value = fields.Str(required=False)
+    is_available = fields.Boolean(required=False)
     
-    display = fields.Str(required=False)
+    seller_identifiers = fields.List(fields.Str(required=False), required=False)
     
     quantity = fields.Int(required=False)
     
-    is_available = fields.Boolean(required=False)
+    display = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
     
 
