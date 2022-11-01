@@ -14,8 +14,8 @@ class renderHTMLResponse(BaseSchema):
     # Payment swagger.json
 
     
-    html = fields.Str(required=False)
-    
     status = fields.Boolean(required=False)
+    
+    html = fields.Str(required=False)
     
 

@@ -28,23 +28,17 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 class InventoryJobPayload(BaseSchema):
     # Catalog swagger.json
 
     
-    item_dimensions_unit_of_measure = fields.Str(required=False)
+    store_code = fields.Str(required=False)
+    
+    total_quantity = fields.Int(required=False)
     
     expiration_date = fields.Str(required=False)
-    
-    price_effective = fields.Float(required=False)
-    
-    currency = fields.Str(required=False)
-    
-    item_weight_unit_of_measure = fields.Str(required=False)
-    
-    seller_identifier = fields.Str(required=False)
-    
-    store_code = fields.Str(required=False)
     
     quantity = fields.Int(required=False)
     
@@ -52,6 +46,16 @@ class InventoryJobPayload(BaseSchema):
     
     price = fields.Float(required=False)
     
-    total_quantity = fields.Int(required=False)
+    price_effective = fields.Float(required=False)
+    
+    item_weight_unit_of_measure = fields.Str(required=False)
+    
+    tags = fields.List(fields.Str(required=False), required=False)
+    
+    currency = fields.Str(required=False)
+    
+    seller_identifier = fields.Str(required=False)
+    
+    item_dimensions_unit_of_measure = fields.Str(required=False)
     
 
