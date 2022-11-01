@@ -9,9 +9,9 @@ from .SizeChart import SizeChart
 
 
 
-
-
 from .ProductListingPrice import ProductListingPrice
+
+
 
 from .ProductSizeStores import ProductSizeStores
 
@@ -24,11 +24,11 @@ class ProductSizes(BaseSchema):
     
     size_chart = fields.Nested(SizeChart, required=False)
     
-    sellable = fields.Boolean(required=False)
-    
     discount = fields.Str(required=False)
     
     price = fields.Nested(ProductListingPrice, required=False)
+    
+    sellable = fields.Boolean(required=False)
     
     stores = fields.Nested(ProductSizeStores, required=False)
     

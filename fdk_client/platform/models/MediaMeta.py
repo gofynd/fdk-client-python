@@ -12,14 +12,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class OrderQuantity(BaseSchema):
-    # Catalog swagger.json
+class MediaMeta(BaseSchema):
+    # Feedback swagger.json
 
     
-    is_set = fields.Boolean(required=False)
+    max_count = fields.Int(required=False)
     
-    maximum = fields.Int(required=False)
+    size = fields.Int(required=False)
     
-    minimum = fields.Int(required=False)
+    type = fields.Str(required=False)
     
 
