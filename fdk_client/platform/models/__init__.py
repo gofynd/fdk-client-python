@@ -122,40 +122,6 @@ from .Ticket import Ticket
     
 
     
-from .AppUser import AppUser
-    
-from .Asset import Asset
-    
-from .E import E
-    
-from .Giveaway import Giveaway
-    
-from .GiveawayResponse import GiveawayResponse
-    
-from .HistoryPretty import HistoryPretty
-    
-from .HistoryRes import HistoryRes
-    
-from .Offer import Offer
-    
-from .Points import Points
-    
-from .Referral import Referral
-    
-from .RewardUser import RewardUser
-    
-from .RewardsAudience import RewardsAudience
-    
-from .RewardsRule import RewardsRule
-    
-from .Schedule import Schedule
-    
-from .ShareMessages import ShareMessages
-    
-from .UserRes import UserRes
-    
-
-    
 from .AvailablePageSchema import AvailablePageSchema
     
 from .AvailablePageSectionMetaAttributes import AvailablePageSectionMetaAttributes
@@ -473,6 +439,8 @@ from .ScheduleStartSchema import ScheduleStartSchema
 from .BlogGetResponse import BlogGetResponse
     
 from .ResourceContent import ResourceContent
+    
+from .Asset import Asset
     
 from .Author import Author
     
@@ -2642,6 +2610,38 @@ from .UpdateCartDetailResponse import UpdateCartDetailResponse
     
 
     
+from .AppUser import AppUser
+    
+from .E import E
+    
+from .Giveaway import Giveaway
+    
+from .GiveawayResponse import GiveawayResponse
+    
+from .HistoryPretty import HistoryPretty
+    
+from .HistoryRes import HistoryRes
+    
+from .Offer import Offer
+    
+from .Points import Points
+    
+from .Referral import Referral
+    
+from .RewardUser import RewardUser
+    
+from .RewardsAudience import RewardsAudience
+    
+from .RewardsRule import RewardsRule
+    
+from .Schedule import Schedule
+    
+from .ShareMessages import ShareMessages
+    
+from .UserRes import UserRes
+    
+
+    
 from .StatGroup import StatGroup
     
 from .StatsGroups import StatsGroups
@@ -2766,8 +2766,6 @@ from .CommonValidator import CommonValidator
 
 from .LeadValidator import LeadValidator
 
-from .RewardsValidator import RewardsValidator
-
 from .ThemeValidator import ThemeValidator
 
 from .UserValidator import UserValidator
@@ -2795,6 +2793,8 @@ from .InventoryValidator import InventoryValidator
 from .ConfigurationValidator import ConfigurationValidator
 
 from .CartValidator import CartValidator
+
+from .RewardsValidator import RewardsValidator
 
 from .AnalyticsValidator import AnalyticsValidator
 

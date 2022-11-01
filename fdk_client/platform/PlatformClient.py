@@ -7,7 +7,6 @@ from ..common.utils import create_url_with_params, create_query_string, get_head
 
 from .models.CommonValidator import CommonValidator
 from .models.LeadValidator import LeadValidator
-from .models.RewardsValidator import RewardsValidator
 from .models.ThemeValidator import ThemeValidator
 from .models.UserValidator import UserValidator
 from .models.ContentValidator import ContentValidator
@@ -22,6 +21,7 @@ from .models.ShareValidator import ShareValidator
 from .models.InventoryValidator import InventoryValidator
 from .models.ConfigurationValidator import ConfigurationValidator
 from .models.CartValidator import CartValidator
+from .models.RewardsValidator import RewardsValidator
 from .models.AnalyticsValidator import AnalyticsValidator
 from .models.DiscountValidator import DiscountValidator
 from .models.PartnerValidator import PartnerValidator
@@ -450,11 +450,6 @@ class Lead:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/lead/v1.0/company/{self._conf.companyId}/general-config", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-    
-
-class Rewards:
-    def __init__(self, config):
-        self._conf = config
     
 
 class Theme:
@@ -5505,6 +5500,11 @@ class Cart:
         self._conf = config
     
 
+class Rewards:
+    def __init__(self, config):
+        self._conf = config
+    
+
 class Analytics:
     def __init__(self, config):
         self._conf = config
@@ -6303,7 +6303,6 @@ class PlatformClient:
         self._conf = config
         self.common = Common(config)
         self.lead = Lead(config)
-        self.rewards = Rewards(config)
         self.theme = Theme(config)
         self.user = User(config)
         self.content = Content(config)
@@ -6318,6 +6317,7 @@ class PlatformClient:
         self.inventory = Inventory(config)
         self.configuration = Configuration(config)
         self.cart = Cart(config)
+        self.rewards = Rewards(config)
         self.analytics = Analytics(config)
         self.discount = Discount(config)
         self.partner = Partner(config)
