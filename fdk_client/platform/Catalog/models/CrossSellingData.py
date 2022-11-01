@@ -17,7 +17,7 @@ class CrossSellingData(BaseSchema):
     #  swagger.json
 
     
-    products = fields.Int(required=False)
-    
     articles = fields.Int(required=False)
+    
+    products = fields.Int(required=False)
     

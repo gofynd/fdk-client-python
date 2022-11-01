@@ -1,15 +1,15 @@
 """CompanyProfile Platform Models and Enums"""
 
 
-from .SellerPhoneNumber import SellerPhoneNumber
-
-from .ContactDetails import ContactDetails
+from .BusinessCountryInfo import BusinessCountryInfo
 
 from .UserSerializer import UserSerializer
 
-from .BusinessCountryInfo import BusinessCountryInfo
-
 from .CompanyTaxesSerializer import CompanyTaxesSerializer
+
+from .SellerPhoneNumber import SellerPhoneNumber
+
+from .ContactDetails import ContactDetails
 
 from .Document import Document
 
@@ -41,6 +41,8 @@ from .GetBrandResponseSerializer import GetBrandResponseSerializer
 
 from .CreateUpdateBrandRequestSerializer import CreateUpdateBrandRequestSerializer
 
+from .Page import Page
+
 from .CompanySocialAccounts import CompanySocialAccounts
 
 from .CompanyDetails import CompanyDetails
@@ -49,27 +51,25 @@ from .CompanySerializer import CompanySerializer
 
 from .CompanyBrandSerializer import CompanyBrandSerializer
 
-from .Page import Page
-
 from .CompanyBrandListSerializer import CompanyBrandListSerializer
 
 from .CompanyBrandPostRequestSerializer import CompanyBrandPostRequestSerializer
-
-from .GetCompanySerializer import GetCompanySerializer
-
-from .LocationIntegrationType import LocationIntegrationType
-
-from .InvoiceCredSerializer import InvoiceCredSerializer
-
-from .InvoiceDetailsSerializer import InvoiceDetailsSerializer
-
-from .ProductReturnConfigSerializer import ProductReturnConfigSerializer
 
 from .LocationTimingSerializer import LocationTimingSerializer
 
 from .LocationDayWiseSerializer import LocationDayWiseSerializer
 
+from .GetCompanySerializer import GetCompanySerializer
+
 from .LocationManagerSerializer import LocationManagerSerializer
+
+from .InvoiceCredSerializer import InvoiceCredSerializer
+
+from .InvoiceDetailsSerializer import InvoiceDetailsSerializer
+
+from .LocationIntegrationType import LocationIntegrationType
+
+from .ProductReturnConfigSerializer import ProductReturnConfigSerializer
 
 from .GetLocationSerializer import GetLocationSerializer
 

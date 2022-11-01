@@ -27,15 +27,15 @@ from .UserDetail import UserDetail
 
 
 
-from .UserDetail import UserDetail
-
-
-
-
-
 
 
 from .UserDetail import UserDetail
+
+
+
+from .UserDetail import UserDetail
+
+
 
 
 
@@ -51,17 +51,19 @@ class DepartmentModel(BaseSchema):
     #  swagger.json
 
     
-    verified_on = fields.Str(required=False)
+    _id = fields.Raw(required=False)
+    
+    _custom_json = fields.Dict(required=False)
     
     created_on = fields.Str(required=False)
     
+    created_by = fields.Nested(UserDetail, required=False)
+    
     slug = fields.Raw(required=False)
     
-    verified_by = fields.Nested(UserDetail, required=False)
-    
-    uid = fields.Int(required=False)
-    
     priority_order = fields.Int(required=False)
+    
+    logo = fields.Str(required=False)
     
     _cls = fields.Raw(required=False)
     
@@ -69,17 +71,15 @@ class DepartmentModel(BaseSchema):
     
     modified_by = fields.Nested(UserDetail, required=False)
     
-    name = fields.Raw(required=False)
-    
-    logo = fields.Str(required=False)
-    
-    created_by = fields.Nested(UserDetail, required=False)
+    verified_by = fields.Nested(UserDetail, required=False)
     
     is_active = fields.Boolean(required=False)
     
-    _custom_json = fields.Dict(required=False)
-    
     modified_on = fields.Str(required=False)
     
-    _id = fields.Raw(required=False)
+    uid = fields.Int(required=False)
+    
+    name = fields.Raw(required=False)
+    
+    verified_on = fields.Str(required=False)
     

@@ -11,27 +11,27 @@ from ...PlatformModel import BaseSchema
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 from .ProductBundleItem import ProductBundleItem
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -41,15 +41,15 @@ class ProductBundleUpdateRequest(BaseSchema):
     
     choice = fields.Str(required=False)
     
-    slug = fields.Str(required=False)
-    
-    company_id = fields.Int(required=False)
+    products = fields.List(fields.Nested(ProductBundleItem, required=False), required=False)
     
     meta = fields.Dict(required=False)
     
-    name = fields.Str(required=False)
+    slug = fields.Str(required=False)
     
     logo = fields.Str(required=False)
+    
+    company_id = fields.Int(required=False)
     
     same_store_assignment = fields.Boolean(required=False)
     
@@ -61,5 +61,5 @@ class ProductBundleUpdateRequest(BaseSchema):
     
     modified_on = fields.Str(required=False)
     
-    products = fields.List(fields.Nested(ProductBundleItem, required=False), required=False)
+    name = fields.Str(required=False)
     

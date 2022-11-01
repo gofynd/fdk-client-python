@@ -9,11 +9,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .ProductBulkRequest import ProductBulkRequest
-
-
-
 from .Page import Page
+
+
+
+from .ProductBulkRequest import ProductBulkRequest
 
 
 
@@ -21,7 +21,7 @@ class ProductBulkRequestList(BaseSchema):
     #  swagger.json
 
     
-    items = fields.Nested(ProductBulkRequest, required=False)
-    
     page = fields.Nested(Page, required=False)
+    
+    items = fields.Nested(ProductBulkRequest, required=False)
     

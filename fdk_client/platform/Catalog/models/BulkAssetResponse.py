@@ -9,11 +9,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .Items import Items
-
-
-
 from .Page import Page
+
+
+
+from .Items import Items
 
 
 
@@ -21,7 +21,7 @@ class BulkAssetResponse(BaseSchema):
     #  swagger.json
 
     
-    items = fields.List(fields.Nested(Items, required=False), required=False)
-    
     page = fields.Nested(Page, required=False)
+    
+    items = fields.List(fields.Nested(Items, required=False), required=False)
     
