@@ -3,9 +3,7 @@
 from typing import Dict
 
 from ..common.constants import DEFAULT_DOMAIN
-from ..platform.OAuthClient import OAuthClient
-
-
+from OAuthClient import OAuthClient
 class PlatformConfig:
     def __init__(self, config: Dict):
         self.companyId = config.get("companyId", "")
