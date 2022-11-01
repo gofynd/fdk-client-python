@@ -5,9 +5,9 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-
-
 from .TATCategoryRequest import TATCategoryRequest
+
+
 
 
 
@@ -16,9 +16,9 @@ class TATArticlesRequest(BaseSchema):
     # Logistic swagger.json
 
     
-    manufacturing_time = fields.Int(required=False)
-    
     category = fields.Nested(TATCategoryRequest, required=False)
+    
+    manufacturing_time = fields.Int(required=False)
     
     manufacturing_time_unit = fields.Str(required=False)
     
