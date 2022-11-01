@@ -18,12 +18,12 @@ class CategoryMetaResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    uid = fields.Int(required=False)
+    name = fields.Str(required=False)
     
     banners = fields.Nested(ImageUrls, required=False)
     
     logo = fields.Nested(Media, required=False)
     
-    name = fields.Str(required=False)
+    uid = fields.Int(required=False)
     
 

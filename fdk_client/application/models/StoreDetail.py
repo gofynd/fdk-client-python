@@ -20,9 +20,9 @@ class StoreDetail(BaseSchema):
     
     city = fields.Str(required=False)
     
-    id = fields.Int(required=False)
-    
     name = fields.Str(required=False)
+    
+    id = fields.Int(required=False)
     
     code = fields.Str(required=False)
     
