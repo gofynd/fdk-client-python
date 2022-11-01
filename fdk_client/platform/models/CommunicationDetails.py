@@ -10,12 +10,16 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class KeyValue(BaseSchema):
+
+
+class CommunicationDetails(BaseSchema):
     # Lead swagger.json
 
     
-    key = fields.Str(required=False)
+    value = fields.Str(required=False)
     
-    value = fields.Dict(required=False)
+    description = fields.Str(required=False)
+    
+    enabled = fields.Boolean(required=False)
     
 
