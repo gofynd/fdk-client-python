@@ -17,7 +17,7 @@ class FollowPostResponse(BaseSchema):
     #  swagger.json
 
     
-    message = fields.Str(required=False)
-    
     id = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
     

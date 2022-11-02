@@ -11,11 +11,11 @@ from ...ApplicationModel import BaseSchema
 
 
 
+
+
+
+
 from .ProductVariantItemResponse import ProductVariantItemResponse
-
-
-
-
 
 
 
@@ -25,9 +25,9 @@ class ProductVariantResponse(BaseSchema):
     
     key = fields.Str(required=False)
     
-    items = fields.List(fields.Nested(ProductVariantItemResponse, required=False), required=False)
-    
     display_type = fields.Str(required=False)
     
     header = fields.Str(required=False)
+    
+    items = fields.List(fields.Nested(ProductVariantItemResponse, required=False), required=False)
     

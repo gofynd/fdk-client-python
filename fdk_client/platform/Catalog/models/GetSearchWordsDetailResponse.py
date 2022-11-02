@@ -9,11 +9,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .GetSearchWordsData import GetSearchWordsData
-
-
-
 from .Page import Page
+
+
+
+from .GetSearchWordsData import GetSearchWordsData
 
 
 
@@ -21,7 +21,7 @@ class GetSearchWordsDetailResponse(BaseSchema):
     #  swagger.json
 
     
-    items = fields.Nested(GetSearchWordsData, required=False)
-    
     page = fields.Nested(Page, required=False)
+    
+    items = fields.Nested(GetSearchWordsData, required=False)
     

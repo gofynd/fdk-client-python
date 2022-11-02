@@ -9,6 +9,8 @@ from ...ApplicationModel import BaseSchema
 
 
 
+
+
 from .ImageUrls import ImageUrls
 
 
@@ -16,8 +18,6 @@ from .ImageUrls import ImageUrls
 
 
 from .ProductListingAction import ProductListingAction
-
-
 
 
 
@@ -31,13 +31,13 @@ class CategoryItems(BaseSchema):
     #  swagger.json
 
     
+    slug = fields.Str(required=False)
+    
     banners = fields.Nested(ImageUrls, required=False)
     
     name = fields.Str(required=False)
     
     action = fields.Nested(ProductListingAction, required=False)
-    
-    slug = fields.Str(required=False)
     
     childs = fields.List(fields.Nested(Child, required=False), required=False)
     
