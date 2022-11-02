@@ -32,26 +32,26 @@ class DepartmentCreateUpdate(BaseSchema):
     # Catalog swagger.json
 
     
+    logo = fields.Str(required=False)
+    
     _custom_json = fields.Dict(required=False)
-    
-    is_active = fields.Boolean(required=False)
-    
-    synonyms = fields.List(fields.Str(required=False), required=False)
-    
-    slug = fields.Str(required=False)
-    
-    tags = fields.List(fields.Str(required=False), required=False)
-    
-    priority_order = fields.Int(required=False)
-    
-    platforms = fields.Dict(required=False)
-    
-    name = fields.Str(required=False)
     
     uid = fields.Int(required=False)
     
-    logo = fields.Str(required=False)
+    priority_order = fields.Int(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    is_active = fields.Boolean(required=False)
+    
+    name = fields.Str(required=False)
+    
+    platforms = fields.Dict(required=False)
     
     _cls = fields.Str(required=False)
+    
+    synonyms = fields.List(fields.Str(required=False), required=False)
+    
+    tags = fields.List(fields.Str(required=False), required=False)
     
 

@@ -14,16 +14,20 @@ from .ProductDetail import ProductDetail
 
 
 
+
+
 class ShipmentBody(BaseSchema):
     # OrderManage swagger.json
 
     
     products = fields.List(fields.Nested(ProductDetail, required=False), required=False)
     
+    reason = fields.List(fields.Int(required=False), required=False)
+    
     store_invoice_id = fields.Str(required=False)
     
-    data_update = fields.Dict(required=False)
+    bags = fields.List(fields.Int(required=False), required=False)
     
-    reason = fields.List(fields.Int(required=False), required=False)
+    data_update = fields.Dict(required=False)
     
 

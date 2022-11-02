@@ -27,6 +27,8 @@ from .models.PartnerValidator import PartnerValidator
 from .models.WebhookValidator import WebhookValidator
 from .models.AuditTrailValidator import AuditTrailValidator
 from .models.OrderManageValidator import OrderManageValidator
+from .models.DocumentEngineValidator import DocumentEngineValidator
+from .models.OrdersValidator import OrdersValidator
 
 
 
@@ -5715,38 +5717,6 @@ class Catalog:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/groups", config_type=config_type, page_no=page_no, page_size=page_size, search=search, template_slug=template_slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
-    async def deleteGroupConfiguration(self, config_type=None, group_slug=None):
-        """Delete configuration of the product config type of the application.
-        :param config_type : A `config_type` is a unique identifier for a particular group configuration type. : type string
-        :param group_slug : A `group_slug` is a unique identifier of a particular configuration. : type string
-        """
-        payload = {}
-        
-        if config_type:
-            payload["config_type"] = config_type
-        
-        if group_slug:
-            payload["group_slug"] = group_slug
-        
-
-        # Parameter validation
-        schema = CatalogValidator.deleteGroupConfiguration()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/groups/{group_slug}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"config_type","description":"A `config_type` is a unique identifier for a particular group configuration type.","schema":{"type":"string","enum":["comparisons_groups","details_groups","seller_groups"]},"required":true},{"in":"path","name":"group_slug","description":"A `group_slug` is a unique identifier of a particular configuration.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"config_type","description":"A `config_type` is a unique identifier for a particular group configuration type.","schema":{"type":"string","enum":["comparisons_groups","details_groups","seller_groups"]},"required":true},{"in":"path","name":"group_slug","description":"A `group_slug` is a unique identifier of a particular configuration.","schema":{"type":"string"},"required":true}]}""", config_type=config_type, group_slug=group_slug)
-        query_string = await create_query_string(config_type=config_type, group_slug=group_slug)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/groups/{group_slug}", config_type=config_type, group_slug=group_slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
-    
     async def updateGroupConfiguration(self, config_type=None, group_slug=None, body=""):
         """Update the group configurations for the application.
         :param config_type : A `config_type` is a unique identifier for a particular group configuration type. : type string
@@ -5783,6 +5753,38 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/groups/{group_slug}", config_type=config_type, group_slug=group_slug), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+    
+    async def deleteGroupConfiguration(self, config_type=None, group_slug=None):
+        """Delete configuration of the product config type of the application.
+        :param config_type : A `config_type` is a unique identifier for a particular group configuration type. : type string
+        :param group_slug : A `group_slug` is a unique identifier of a particular configuration. : type string
+        """
+        payload = {}
+        
+        if config_type:
+            payload["config_type"] = config_type
+        
+        if group_slug:
+            payload["group_slug"] = group_slug
+        
+
+        # Parameter validation
+        schema = CatalogValidator.deleteGroupConfiguration()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/groups/{group_slug}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"config_type","description":"A `config_type` is a unique identifier for a particular group configuration type.","schema":{"type":"string","enum":["comparisons_groups","details_groups","seller_groups"]},"required":true},{"in":"path","name":"group_slug","description":"A `group_slug` is a unique identifier of a particular configuration.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"config_type","description":"A `config_type` is a unique identifier for a particular group configuration type.","schema":{"type":"string","enum":["comparisons_groups","details_groups","seller_groups"]},"required":true},{"in":"path","name":"group_slug","description":"A `group_slug` is a unique identifier of a particular configuration.","schema":{"type":"string"},"required":true}]}""", config_type=config_type, group_slug=group_slug)
+        query_string = await create_query_string(config_type=config_type, group_slug=group_slug)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/groups/{group_slug}", config_type=config_type, group_slug=group_slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def createListingConfiguration(self, config_type=None, body=""):
         """Add configuration for listing.
@@ -5857,38 +5859,6 @@ class Catalog:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/", config_type=config_type, page_no=page_no, page_size=page_size, search=search), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
-    async def deleteListingConfiguration(self, config_type=None, config_id=None):
-        """Delete configuration for listing.
-        :param config_type : A `config_type` is a unique identifier for a particular listing configuration type. : type string
-        :param config_id : A `config_id` is a unique identifier of a particular configuration. : type string
-        """
-        payload = {}
-        
-        if config_type:
-            payload["config_type"] = config_type
-        
-        if config_id:
-            payload["config_id"] = config_id
-        
-
-        # Parameter validation
-        schema = CatalogValidator.deleteListingConfiguration()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/item/{config_id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"config_type","description":"A `config_type` is a unique identifier for a particular listing configuration type.","schema":{"type":"string","enum":["filter","sort","brands","categories","variant","similar"]},"required":true},{"in":"path","name":"config_id","description":"A `config_id` is a unique identifier of a particular configuration.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"config_type","description":"A `config_type` is a unique identifier for a particular listing configuration type.","schema":{"type":"string","enum":["filter","sort","brands","categories","variant","similar"]},"required":true},{"in":"path","name":"config_id","description":"A `config_id` is a unique identifier of a particular configuration.","schema":{"type":"string"},"required":true}]}""", config_type=config_type, config_id=config_id)
-        query_string = await create_query_string(config_type=config_type, config_id=config_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/item/{config_id}/", config_type=config_type, config_id=config_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-    
     async def updateListingConfiguration(self, config_type=None, config_id=None, body=""):
         """Update configuration for listing.
         :param config_type : A `config_type` is a unique identifier for a particular listing configuration type. : type string
@@ -5925,6 +5895,38 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/item/{config_id}/", config_type=config_type, config_id=config_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+    
+    async def deleteListingConfiguration(self, config_type=None, config_id=None):
+        """Delete configuration for listing.
+        :param config_type : A `config_type` is a unique identifier for a particular listing configuration type. : type string
+        :param config_id : A `config_id` is a unique identifier of a particular configuration. : type string
+        """
+        payload = {}
+        
+        if config_type:
+            payload["config_type"] = config_type
+        
+        if config_id:
+            payload["config_id"] = config_id
+        
+
+        # Parameter validation
+        schema = CatalogValidator.deleteListingConfiguration()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/item/{config_id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"config_type","description":"A `config_type` is a unique identifier for a particular listing configuration type.","schema":{"type":"string","enum":["filter","sort","brands","categories","variant","similar"]},"required":true},{"in":"path","name":"config_id","description":"A `config_id` is a unique identifier of a particular configuration.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"config_type","description":"A `config_type` is a unique identifier for a particular listing configuration type.","schema":{"type":"string","enum":["filter","sort","brands","categories","variant","similar"]},"required":true},{"in":"path","name":"config_id","description":"A `config_id` is a unique identifier of a particular configuration.","schema":{"type":"string"},"required":true}]}""", config_type=config_type, config_id=config_id)
+        query_string = await create_query_string(config_type=config_type, config_id=config_id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/item/{config_id}/", config_type=config_type, config_id=config_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def updateAllowSingle(self, body=""):
         """Update allow single flag for filters of the application.
@@ -6255,34 +6257,6 @@ class Catalog:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/{slug}/", slug=slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
-    async def deleteCollection(self, id=None):
-        """Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
-        :param id : A `id` is a unique identifier of a collection. : type string
-        """
-        payload = {}
-        
-        if id:
-            payload["id"] = id
-        
-
-        # Parameter validation
-        schema = CatalogValidator.deleteCollection()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/{id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier of a collection.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier of a collection.","schema":{"type":"string"},"required":true}]}""", id=id)
-        query_string = await create_query_string(id=id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-    
     async def updateCollection(self, id=None, body=""):
         """Update a collection by it's id. On successful request, returns the updated collection
         :param id : A `id` is a unique identifier of a collection. : type string
@@ -6315,6 +6289,34 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+    
+    async def deleteCollection(self, id=None):
+        """Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
+        :param id : A `id` is a unique identifier of a collection. : type string
+        """
+        payload = {}
+        
+        if id:
+            payload["id"] = id
+        
+
+        # Parameter validation
+        schema = CatalogValidator.deleteCollection()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/{id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier of a collection.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier of a collection.","schema":{"type":"string"},"required":true}]}""", id=id)
+        query_string = await create_query_string(id=id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def addCollectionItems(self, id=None, body=""):
         """Adds items to a collection specified by its `id`. See `CollectionItemRequest` for the list of attributes needed to add items to an collection.
@@ -9237,6 +9239,98 @@ class OrderManage:
         self.applicationId = applicationId
     
 
+class DocumentEngine:
+    def __init__(self, config, applicationId):
+        self._conf = config
+        self.applicationId = applicationId
+    
+
+class Orders:
+    def __init__(self, config, applicationId):
+        self._conf = config
+        self.applicationId = applicationId
+    
+    async def getApplicationShipments(self, lane=None, search_type=None, search_id=None, from_date=None, to_date=None, dp_ids=None, ordering_company_id=None, stores=None, sales_channel=None, request_by_ext=None, page_no=None, page_size=None, customer_id=None, is_priority_sort=None):
+        """
+        :param lane :  : type string
+        :param search_type :  : type string
+        :param search_id :  : type string
+        :param from_date :  : type string
+        :param to_date :  : type string
+        :param dp_ids :  : type string
+        :param ordering_company_id :  : type string
+        :param stores :  : type string
+        :param sales_channel :  : type string
+        :param request_by_ext :  : type string
+        :param page_no :  : type integer
+        :param page_size :  : type integer
+        :param customer_id :  : type string
+        :param is_priority_sort :  : type boolean
+        """
+        payload = {}
+        
+        if lane:
+            payload["lane"] = lane
+        
+        if search_type:
+            payload["search_type"] = search_type
+        
+        if search_id:
+            payload["search_id"] = search_id
+        
+        if from_date:
+            payload["from_date"] = from_date
+        
+        if to_date:
+            payload["to_date"] = to_date
+        
+        if dp_ids:
+            payload["dp_ids"] = dp_ids
+        
+        if ordering_company_id:
+            payload["ordering_company_id"] = ordering_company_id
+        
+        if stores:
+            payload["stores"] = stores
+        
+        if sales_channel:
+            payload["sales_channel"] = sales_channel
+        
+        if request_by_ext:
+            payload["request_by_ext"] = request_by_ext
+        
+        if page_no:
+            payload["page_no"] = page_no
+        
+        if page_size:
+            payload["page_size"] = page_size
+        
+        if customer_id:
+            payload["customer_id"] = customer_id
+        
+        if is_priority_sort:
+            payload["is_priority_sort"] = is_priority_sort
+        
+
+        # Parameter validation
+        schema = OrdersValidator.getApplicationShipments()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/shipments", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"lane","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"ordering_company_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"stores","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channel","required":false,"schema":{"type":"string"}},{"in":"query","name":"request_by_ext","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","name":"customer_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"is_priority_sort","required":false,"schema":{"type":"boolean","default":true}}],"query":[{"in":"query","name":"lane","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"ordering_company_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"stores","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channel","required":false,"schema":{"type":"string"}},{"in":"query","name":"request_by_ext","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","name":"customer_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"is_priority_sort","required":false,"schema":{"type":"boolean","default":true}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", lane=lane, search_type=search_type, search_id=search_id, from_date=from_date, to_date=to_date, dp_ids=dp_ids, ordering_company_id=ordering_company_id, stores=stores, sales_channel=sales_channel, request_by_ext=request_by_ext, page_no=page_no, page_size=page_size, customer_id=customer_id, is_priority_sort=is_priority_sort)
+        query_string = await create_query_string(lane=lane, search_type=search_type, search_id=search_id, from_date=from_date, to_date=to_date, dp_ids=dp_ids, ordering_company_id=ordering_company_id, stores=stores, sales_channel=sales_channel, request_by_ext=request_by_ext, page_no=page_no, page_size=page_size, customer_id=customer_id, is_priority_sort=is_priority_sort)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/shipments", lane=lane, search_type=search_type, search_id=search_id, from_date=from_date, to_date=to_date, dp_ids=dp_ids, ordering_company_id=ordering_company_id, stores=stores, sales_channel=sales_channel, request_by_ext=request_by_ext, page_no=page_no, page_size=page_size, customer_id=customer_id, is_priority_sort=is_priority_sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
+    
+
 
 
 class PlatformApplicationClient:
@@ -9264,6 +9358,8 @@ class PlatformApplicationClient:
         self.webhook = Webhook(config, applicationId)
         self.auditTrail = AuditTrail(config, applicationId)
         self.orderManage = OrderManage(config, applicationId)
+        self.documentEngine = DocumentEngine(config, applicationId)
+        self.orders = Orders(config, applicationId)
         
 
     async def setExtraHeaders(self, header):
