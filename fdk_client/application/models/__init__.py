@@ -1284,19 +1284,19 @@ from .PaymentStatusUpdateRequest import PaymentStatusUpdateRequest
     
 from .PaymentStatusUpdateResponse import PaymentStatusUpdateResponse
     
-from .AggregatorRoute import AggregatorRoute
-    
-from .PaymentFlow import PaymentFlow
-    
 from .PaymentModeLogo import PaymentModeLogo
     
-from .IntentApp import IntentApp
-    
 from .IntentAppErrorList import IntentAppErrorList
+    
+from .IntentApp import IntentApp
     
 from .PaymentModeList import PaymentModeList
     
 from .RootPaymentMode import RootPaymentMode
+    
+from .AggregatorRoute import AggregatorRoute
+    
+from .PaymentFlow import PaymentFlow
     
 from .PaymentOptionAndFlow import PaymentOptionAndFlow
     
@@ -1374,15 +1374,15 @@ from .CreditDetail import CreditDetail
     
 from .CheckCreditResponse import CheckCreditResponse
     
+from .MarketplaceInfo import MarketplaceInfo
+    
 from .KYCAddress import KYCAddress
     
 from .BusinessDetails import BusinessDetails
     
-from .MarketplaceInfo import MarketplaceInfo
+from .UserPersonalInfoInDetails import UserPersonalInfoInDetails
     
 from .DeviceDetails import DeviceDetails
-    
-from .UserPersonalInfoInDetails import UserPersonalInfoInDetails
     
 from .CustomerOnboardingRequest import CustomerOnboardingRequest
     
@@ -1479,6 +1479,8 @@ from .ShipmentPayment import ShipmentPayment
 from .Track import Track
     
 from .TrackingDetails import TrackingDetails
+    
+from .NestedTrackingDetails import NestedTrackingDetails
     
 from .UserInfo import UserInfo
     

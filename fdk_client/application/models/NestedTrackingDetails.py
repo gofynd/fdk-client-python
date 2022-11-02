@@ -12,14 +12,18 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class PaymentStatusUpdateResponse(BaseSchema):
-    # Payment swagger.json
+
+
+class NestedTrackingDetails(BaseSchema):
+    # Order swagger.json
 
     
-    aggregator_name = fields.Str(required=False)
-    
-    retry = fields.Boolean(required=False)
+    is_current = fields.Boolean(required=False)
     
     status = fields.Str(required=False)
+    
+    time = fields.Str(required=False)
+    
+    is_passed = fields.Boolean(required=False)
     
 
