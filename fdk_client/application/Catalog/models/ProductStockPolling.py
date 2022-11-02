@@ -9,11 +9,11 @@ from ...ApplicationModel import BaseSchema
 
 
 
-from .Page import Page
-
-
-
 from .ProductStockStatusItem import ProductStockStatusItem
+
+
+
+from .Page import Page
 
 
 
@@ -21,7 +21,7 @@ class ProductStockPolling(BaseSchema):
     #  swagger.json
 
     
-    page = fields.Nested(Page, required=False)
-    
     items = fields.List(fields.Nested(ProductStockStatusItem, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
     

@@ -17,7 +17,7 @@ class ColumnHeader(BaseSchema):
     #  swagger.json
 
     
-    convertable = fields.Boolean(required=False)
-    
     value = fields.Str(required=False)
+    
+    convertable = fields.Boolean(required=False)
     

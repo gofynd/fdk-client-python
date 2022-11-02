@@ -9,11 +9,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .CatalogInsightBrand import CatalogInsightBrand
-
-
-
 from .CatalogInsightItem import CatalogInsightItem
+
+
+
+from .CatalogInsightBrand import CatalogInsightBrand
 
 
 
@@ -21,7 +21,7 @@ class CatalogInsightResponse(BaseSchema):
     #  swagger.json
 
     
-    brand_distribution = fields.Nested(CatalogInsightBrand, required=False)
-    
     item = fields.Nested(CatalogInsightItem, required=False)
+    
+    brand_distribution = fields.Nested(CatalogInsightBrand, required=False)
     

@@ -17,7 +17,7 @@ class DepartmentIdentifier(BaseSchema):
     #  swagger.json
 
     
-    uid = fields.Int(required=False)
-    
     slug = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
     
