@@ -16,9 +16,9 @@ class ActiveCardPaymentGatewayResponse(BaseSchema):
     # Payment swagger.json
 
     
-    message = fields.Str(required=False)
-    
     success = fields.Boolean(required=False)
+    
+    message = fields.Str(required=False)
     
     cards = fields.Nested(CardPaymentGateway, required=False)
     

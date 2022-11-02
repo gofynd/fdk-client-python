@@ -1358,11 +1358,11 @@ from .CheckCreditResponse import CheckCreditResponse
     
 from .KYCAddress import KYCAddress
     
-from .UserPersonalInfoInDetails import UserPersonalInfoInDetails
+from .BusinessDetails import BusinessDetails
     
 from .DeviceDetails import DeviceDetails
     
-from .BusinessDetails import BusinessDetails
+from .UserPersonalInfoInDetails import UserPersonalInfoInDetails
     
 from .MarketplaceInfo import MarketplaceInfo
     
@@ -1371,6 +1371,10 @@ from .CustomerOnboardingRequest import CustomerOnboardingRequest
 from .OnboardSummary import OnboardSummary
     
 from .CustomerOnboardingResponse import CustomerOnboardingResponse
+    
+from .OutstandingOrderDetailsResponse import OutstandingOrderDetailsResponse
+    
+from .PaidOrderDetailsResponse import PaidOrderDetailsResponse
     
 
     
@@ -1457,6 +1461,8 @@ from .ShipmentPayment import ShipmentPayment
 from .Track import Track
     
 from .TrackingDetails import TrackingDetails
+    
+from .NestedTrackingDetails import NestedTrackingDetails
     
 from .UserInfo import UserInfo
     
