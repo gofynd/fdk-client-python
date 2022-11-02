@@ -33,6 +33,8 @@ from .analytics.applicationClient import Analytics
 
 from .partner.applicationClient import Partner
 
+from .logistic.applicationClient import Logistic
+
 
 class PlatformApplicationClient:
     def __init__(self, applicationId, config):
@@ -66,6 +68,8 @@ class PlatformApplicationClient:
         self.analytics = Analytics(config, applicationId)
         
         self.partner = Partner(config, applicationId)
+        
+        self.logistic = Logistic(config, applicationId)
         
 
     async def setExtraHeaders(self, header):

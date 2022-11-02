@@ -1,0 +1,19 @@
+"""Logistic Platform Model"""
+
+from marshmallow import fields, Schema
+from marshmallow.validate import OneOf
+
+
+from ...PlatformModel import BaseSchema
+
+
+
+
+
+
+class ProductReturnConfigResponse(BaseSchema):
+    #  swagger.json
+
+    
+    on_same_store = fields.Boolean(required=False)
+    

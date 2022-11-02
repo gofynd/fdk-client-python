@@ -1,7 +1,7 @@
 """CompanyProfile Platform Models and Enums"""
 
 
-from .BusinessCountryInfo import BusinessCountryInfo
+from .GetAddressSerializer import GetAddressSerializer
 
 from .UserSerializer import UserSerializer
 
@@ -11,21 +11,21 @@ from .SellerPhoneNumber import SellerPhoneNumber
 
 from .ContactDetails import ContactDetails
 
-from .Document import Document
-
 from .Website import Website
 
 from .BusinessDetails import BusinessDetails
 
-from .GetAddressSerializer import GetAddressSerializer
+from .Document import Document
+
+from .BusinessCountryInfo import BusinessCountryInfo
 
 from .GetCompanyProfileSerializerResponse import GetCompanyProfileSerializerResponse
 
 from .ErrorResponse import ErrorResponse
 
-from .CompanyTaxesSerializer1 import CompanyTaxesSerializer1
-
 from .CreateUpdateAddressSerializer import CreateUpdateAddressSerializer
+
+from .CompanyTaxesSerializer1 import CompanyTaxesSerializer1
 
 from .UpdateCompany import UpdateCompany
 
@@ -59,17 +59,17 @@ from .LocationTimingSerializer import LocationTimingSerializer
 
 from .LocationDayWiseSerializer import LocationDayWiseSerializer
 
-from .GetCompanySerializer import GetCompanySerializer
-
-from .LocationManagerSerializer import LocationManagerSerializer
+from .ProductReturnConfigSerializer import ProductReturnConfigSerializer
 
 from .InvoiceCredSerializer import InvoiceCredSerializer
 
 from .InvoiceDetailsSerializer import InvoiceDetailsSerializer
 
-from .LocationIntegrationType import LocationIntegrationType
+from .LocationManagerSerializer import LocationManagerSerializer
 
-from .ProductReturnConfigSerializer import ProductReturnConfigSerializer
+from .GetCompanySerializer import GetCompanySerializer
+
+from .LocationIntegrationType import LocationIntegrationType
 
 from .GetLocationSerializer import GetLocationSerializer
 

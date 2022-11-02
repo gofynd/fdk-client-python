@@ -9,9 +9,9 @@ from ...PlatformModel import BaseSchema
 
 
 
+
+
 from .Action import Action
-
-
 
 
 
@@ -25,9 +25,9 @@ class ProductBrand(BaseSchema):
     #  swagger.json
 
     
-    action = fields.Nested(Action, required=False)
-    
     uid = fields.Int(required=False)
+    
+    action = fields.Nested(Action, required=False)
     
     name = fields.Str(required=False)
     

@@ -9,11 +9,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .PageResponse import PageResponse
-
-
-
 from .HsnCodesObject import HsnCodesObject
+
+
+
+from .PageResponse import PageResponse
 
 
 
@@ -21,7 +21,7 @@ class HsnCodesListingResponse(BaseSchema):
     #  swagger.json
 
     
-    page = fields.Nested(PageResponse, required=False)
-    
     items = fields.List(fields.Nested(HsnCodesObject, required=False), required=False)
+    
+    page = fields.Nested(PageResponse, required=False)
     

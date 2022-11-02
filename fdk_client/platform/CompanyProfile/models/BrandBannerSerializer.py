@@ -17,7 +17,7 @@ class BrandBannerSerializer(BaseSchema):
     #  swagger.json
 
     
-    portrait = fields.Str(required=False)
-    
     landscape = fields.Str(required=False)
+    
+    portrait = fields.Str(required=False)
     

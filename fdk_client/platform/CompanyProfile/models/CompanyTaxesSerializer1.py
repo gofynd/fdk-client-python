@@ -19,9 +19,9 @@ class CompanyTaxesSerializer1(BaseSchema):
     #  swagger.json
 
     
-    rate = fields.Float(required=False)
+    enable = fields.Boolean(required=False)
     
     effective_date = fields.Str(required=False)
     
-    enable = fields.Boolean(required=False)
+    rate = fields.Float(required=False)
     
