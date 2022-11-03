@@ -14,8 +14,8 @@ class ErrorSchemaDataSet(BaseSchema):
     # Orders swagger.json
 
     
-    success = fields.Boolean(required=False)
-    
     reason = fields.Str(required=False)
+    
+    success = fields.Boolean(required=False)
     
 

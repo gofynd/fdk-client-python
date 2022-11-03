@@ -8,7 +8,6 @@
 Update Status all platform shipment api(s)
 * [statusInternalUpdate](#statusinternalupdate)
 * [getShipmentHistory](#getshipmenthistory)
-* [manualStoreReassignment](#manualstorereassignment)
 
 
 
@@ -167,62 +166,6 @@ It shows the journey of the shipment!
 ---
 
 
-### manualStoreReassignment
-
-
-
-
-
-```python
-try:
-    result = await client.ordermanage.manualStoreReassignment(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [ManualStoreReassign](#ManualStoreReassign) | yes | Request body |
-
-
-Manual Store Reassignment
-
-*Returned Response:*
-
-
-
-
-[SuccessResponse](#SuccessResponse)
-
-Successfully reassigned store!
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
 
 ### Schemas
 
@@ -232,8 +175,8 @@ Successfully reassigned store!
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | identifier | String? |  yes  |  |
  | quantity | Int? |  yes  |  |
+ | identifier | String? |  yes  |  |
 
 ---
 
@@ -247,6 +190,7 @@ Successfully reassigned store!
  | reason | ArrayList<Int>? |  yes  |  |
  | products | ArrayList<[ProductDetail](#ProductDetail)>? |  yes  |  |
  | storeInvoiceId | String? |  yes  |  |
+ | bags | ArrayList<Int>? |  yes  |  |
  | dataUpdate | HashMap<String,Any>? |  yes  |  |
 
 ---
@@ -269,9 +213,9 @@ Successfully reassigned store!
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | shipments | [ShipmentDetail](#ShipmentDetail)? |  yes  |  |
- | excludeBagsNextState | String |  no  |  |
  | status | String |  no  |  |
+ | excludeBagsNextState | String? |  yes  |  |
+ | shipments | [ShipmentDetail](#ShipmentDetail)? |  yes  |  |
 
 ---
 
@@ -282,9 +226,9 @@ Successfully reassigned store!
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | statuses | [Statuses](#Statuses)? |  yes  |  |
  | task | Boolean? |  yes  |  |
  | forceTransition | Boolean? |  yes  |  |
+ | statuses | ArrayList<[Statuses](#Statuses)>? |  yes  |  |
 
 ---
 
@@ -295,8 +239,8 @@ Successfully reassigned store!
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | success | Boolean? |  yes  |  |
  | message | ArrayList<String>? |  yes  |  |
+ | success | Boolean? |  yes  |  |
 
 ---
 
@@ -307,7 +251,6 @@ Successfully reassigned store!
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | success | Boolean? |  yes  |  |
  | message | String? |  yes  |  |
 
 ---
@@ -319,15 +262,15 @@ Successfully reassigned store!
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | ticketUrl | String? |  yes  |  |
- | l2Detail | String? |  yes  |  |
- | user | String |  no  |  |
- | message | String |  no  |  |
- | ticketId | String? |  yes  |  |
- | createdat | String |  no  |  |
- | l1Detail | String? |  yes  |  |
  | type | String |  no  |  |
  | l3Detail | String? |  yes  |  |
+ | l2Detail | String? |  yes  |  |
+ | message | String |  no  |  |
+ | l1Detail | String? |  yes  |  |
+ | ticketId | String? |  yes  |  |
+ | createdat | String |  no  |  |
+ | user | String |  no  |  |
+ | ticketUrl | String? |  yes  |  |
 
 ---
 
@@ -339,32 +282,6 @@ Successfully reassigned store!
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | activityHistory | ArrayList<[HistoryDict](#HistoryDict)>? |  yes  |  |
-
----
-
-
- 
- 
- #### [ManualStoreReassign](#ManualStoreReassign)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | shipmentId | String |  no  |  |
- | reasonId | ArrayList<Int>? |  yes  |  |
- | storeId | Int |  no  |  |
- | reasonText | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [SuccessResponse](#SuccessResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | success | Boolean? |  yes  |  |
- | message | String? |  yes  |  |
 
 ---
 

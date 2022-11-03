@@ -8,13 +8,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
 class ErrorDetail(BaseSchema):
     # OrderManage swagger.json
 
-    
-    success = fields.Boolean(required=False)
     
     message = fields.Str(required=False)
     

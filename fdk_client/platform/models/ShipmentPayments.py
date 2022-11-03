@@ -18,8 +18,8 @@ class ShipmentPayments(BaseSchema):
     
     mode = fields.Str(required=False)
     
-    logo = fields.Str(required=False)
-    
     source = fields.Str(required=False)
+    
+    logo = fields.Str(required=False)
     
 

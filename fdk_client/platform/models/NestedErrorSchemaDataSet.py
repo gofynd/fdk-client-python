@@ -18,8 +18,8 @@ class NestedErrorSchemaDataSet(BaseSchema):
     
     value = fields.Str(required=False)
     
-    message = fields.Str(required=False)
-    
     type = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
     
 

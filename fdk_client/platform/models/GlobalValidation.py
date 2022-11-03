@@ -30,8 +30,8 @@ class GlobalValidation(BaseSchema):
     
     required = fields.List(fields.Str(required=False), required=False)
     
-    definitions = fields.Dict(required=False)
-    
     type = fields.Str(required=False)
+    
+    definitions = fields.Dict(required=False)
     
 
