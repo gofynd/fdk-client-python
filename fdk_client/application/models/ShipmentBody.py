@@ -26,8 +26,8 @@ class ShipmentBody(BaseSchema):
     
     reason = fields.List(fields.Int(required=False), required=False)
     
-    bags = fields.List(fields.Int(required=False), required=False)
-    
     data_update = fields.Dict(required=False)
+    
+    bags = fields.List(fields.Int(required=False), required=False)
     
 

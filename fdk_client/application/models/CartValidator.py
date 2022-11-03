@@ -45,6 +45,11 @@ class CartValidator:
         area_code = fields.Str(required=False)
          
     
+    class deleteCart(BaseSchema):
+        
+        id = fields.Int(required=False)
+         
+    
     class getItemCount(BaseSchema):
         
         id = fields.Str(required=False)

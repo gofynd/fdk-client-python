@@ -22,8 +22,8 @@ class JioCodeUpsertDataSet(BaseSchema):
     
     article_id = fields.Str(required=False)
     
-    jio_code = fields.Str(required=False)
-    
     company_id = fields.Str(required=False)
+    
+    jio_code = fields.Str(required=False)
     
 

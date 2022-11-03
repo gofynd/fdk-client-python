@@ -16,9 +16,9 @@ class ShipmentStatusUpdateBody(BaseSchema):
     # Order swagger.json
 
     
-    force_transition = fields.Boolean(required=False)
-    
     task = fields.Boolean(required=False)
+    
+    force_transition = fields.Boolean(required=False)
     
     statuses = fields.List(fields.Nested(Statuses1, required=False), required=False)
     

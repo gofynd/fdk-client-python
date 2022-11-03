@@ -1184,6 +1184,7 @@ class Cart:
             "getCartLastModified": "/service/application/cart/v1.0/detail",
             "addItems": "/service/application/cart/v1.0/detail",
             "updateCart": "/service/application/cart/v1.0/detail",
+            "deleteCart": "/service/application/cart/v1.0/cart_archive",
             "getItemCount": "/service/application/cart/v1.0/basic",
             "getCoupons": "/service/application/cart/v1.0/coupon",
             "applyCoupon": "/service/application/cart/v1.0/coupon",
@@ -1376,6 +1377,35 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["updateCart"]).netloc, "put", await create_url_without_domain("/service/application/cart/v1.0/detail", id=id, i=i, b=b, area_code=area_code), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+    
+    async def deleteCart(self, id=None, body=""):
+        """Use this API to delete the cart.
+        :param id : The unique identifier of the cart. : type integer
+        """
+        payload = {}
+        
+        if id:
+            payload["id"] = id
+        
+        # Parameter validation
+        schema = CartValidator.deleteCart()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["deleteCart"], proccessed_params="""{"required":[],"optional":[{"name":"id","in":"query","description":"The unique identifier of the cart.","schema":{"type":"integer"}}],"query":[{"name":"id","in":"query","description":"The unique identifier of the cart.","schema":{"type":"integer"}}],"headers":[],"path":[]}""", id=id)
+        query_string = await create_query_string(id=id)
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["deleteCart"]).netloc, "put", await create_url_without_domain("/service/application/cart/v1.0/cart_archive", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
     async def getItemCount(self, id=None, body=""):
         """Use this API to get the total number of items present in cart.

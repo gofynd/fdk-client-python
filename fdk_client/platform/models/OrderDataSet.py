@@ -18,9 +18,9 @@ class OrderDataSet(BaseSchema):
     # Orders swagger.json
 
     
-    order_id = fields.Str(required=False)
-    
     order_created_time = fields.Str(required=False)
+    
+    order_id = fields.Str(required=False)
     
     user_info = fields.Nested(UserDataSet, required=False)
     

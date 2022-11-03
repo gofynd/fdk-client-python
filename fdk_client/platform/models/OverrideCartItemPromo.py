@@ -22,12 +22,12 @@ class OverrideCartItemPromo(BaseSchema):
     
     rwrd_tndr = fields.Str(required=False)
     
-    promo_amount = fields.Str(required=False)
+    promo_id = fields.Str(required=False)
     
     item_list = fields.List(fields.Dict(required=False), required=False)
     
     promo_desc = fields.Str(required=False)
     
-    promo_id = fields.Str(required=False)
+    promo_amount = fields.Str(required=False)
     
 

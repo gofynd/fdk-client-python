@@ -18,8 +18,8 @@ class FilterInfoOption(BaseSchema):
     
     value = fields.Str(required=False)
     
-    text = fields.Str(required=False)
-    
     name = fields.Str(required=False)
+    
+    text = fields.Str(required=False)
     
 
