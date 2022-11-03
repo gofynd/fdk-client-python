@@ -22,9 +22,9 @@ class InventoryPage(BaseSchema):
     
     has_previous = fields.Boolean(required=False)
     
-    item_total = fields.Int(required=False)
-    
     next_id = fields.Str(required=False)
+    
+    item_total = fields.Int(required=False)
     
     type = fields.Str(required=False)
     
