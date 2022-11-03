@@ -24,10 +24,10 @@ class Department(BaseSchema):
     
     logo = fields.Nested(Media, required=False)
     
+    uid = fields.Int(required=False)
+    
     priority_order = fields.Int(required=False)
     
     slug = fields.Str(required=False)
-    
-    uid = fields.Int(required=False)
     
 
