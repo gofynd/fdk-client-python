@@ -12,14 +12,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class WeightResponse(BaseSchema):
+class ApplicationItemMOQ(BaseSchema):
     # Catalog swagger.json
 
     
-    unit = fields.Str(required=False)
+    multiplier = fields.Int(required=False)
     
-    is_default = fields.Boolean(required=False)
+    min_qty = fields.Int(required=False)
     
-    shipping = fields.Float(required=False)
+    max_qty = fields.Int(required=False)
     
 
