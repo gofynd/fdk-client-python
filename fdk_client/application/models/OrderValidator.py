@@ -18,6 +18,8 @@ class OrderValidator:
         to_date = fields.Str(required=False)
         
         status = fields.Int(required=False)
+        
+        custom_meta = fields.Str(required=False)
          
     
     class getOrderById(BaseSchema):

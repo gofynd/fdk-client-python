@@ -5,21 +5,21 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .SEO import SEO
 
 
 
+from .MOQ import MOQ
 
 
-
-
-class OrderQuantity(BaseSchema):
+class ApplicationItemResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    is_set = fields.Boolean(required=False)
+    seo = fields.Nested(SEO, required=False)
     
-    maximum = fields.Int(required=False)
+    alt_text = fields.Dict(required=False)
     
-    minimum = fields.Int(required=False)
+    moq = fields.Nested(MOQ, required=False)
     
 

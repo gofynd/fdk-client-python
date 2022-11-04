@@ -26,7 +26,7 @@ class GstDetails(BaseSchema):
     
     brand_calculated_amount = fields.Float(required=False)
     
-    gst_fee = fields.Str(required=False)
+    gst_fee = fields.Float(required=False)
     
     gst_tag = fields.Str(required=False)
     
