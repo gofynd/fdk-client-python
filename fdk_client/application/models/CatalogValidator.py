@@ -34,13 +34,6 @@ class CatalogValidator:
         slug = fields.Str(required=False)
          
     
-    class getProductSimilarByIdentifier(BaseSchema):
-        
-        slug = fields.Str(required=False)
-        
-        similar_type = fields.Str(required=False)
-         
-    
     class getProductVariantsBySlug(BaseSchema):
         
         slug = fields.Str(required=False)

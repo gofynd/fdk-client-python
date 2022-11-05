@@ -32,7 +32,7 @@ Get all orders
 
 ```python
 try:
-    result = await client.order.getOrders(pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, status=status)
+    result = await client.order.getOrders(pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, status=status, customMeta=customMeta)
     # use result
 except Exception as e:
     print(e)
@@ -48,7 +48,8 @@ except Exception as e:
 | pageSize | Int? | no | The number of items to retrieve in each page. Default value is 10. |   
 | fromDate | String? | no | The date from which the orders should be retrieved. |   
 | toDate | String? | no | The date till which the orders should be retrieved. |   
-| status | Int? | no | A filter to retrieve orders by their current status such as _placed_, _delivered_, etc. |  
+| status | Int? | no | A filter to retrieve orders by their current status such as _placed_, _delivered_, etc. |   
+| customMeta | String? | no | A filter and retrieve data using special fields included for special use-cases |  
 
 
 
@@ -1076,7 +1077,7 @@ Success, the code is valid and returns a SignedUrl
  | brandCalculatedAmount | Double? |  yes  |  |
  | couponValue | Double? |  yes  |  |
  | amountPaidRoundoff | Double? |  yes  |  |
- | gstFee | String? |  yes  |  |
+ | gstFee | Double? |  yes  |  |
  | refundCredit | Double? |  yes  |  |
  | cashback | Double? |  yes  |  |
  | refundAmount | Double? |  yes  |  |
@@ -1293,6 +1294,7 @@ Success, the code is valid and returns a SignedUrl
  | invoice | [Invoice](#Invoice)? |  yes  |  |
  | comment | String? |  yes  |  |
  | orderType | String? |  yes  |  |
+ | customMeta | ArrayList<Any>? |  yes  |  |
  | promise | [Promise](#Promise)? |  yes  |  |
  | fulfillingStore | [FulfillingStore](#FulfillingStore)? |  yes  |  |
  | bags | ArrayList<[Bags](#Bags)>? |  yes  |  |
