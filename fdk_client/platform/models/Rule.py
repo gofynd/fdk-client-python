@@ -24,10 +24,10 @@ class Rule(BaseSchema):
     
     min = fields.Float(required=False)
     
-    discount_qty = fields.Float(required=False)
+    value = fields.Float(required=False)
     
     key = fields.Float(required=False)
     
-    value = fields.Float(required=False)
+    discount_qty = fields.Float(required=False)
     
 

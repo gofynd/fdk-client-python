@@ -22,7 +22,7 @@ class DisplayMeta(BaseSchema):
     # Cart swagger.json
 
     
-    title = fields.Str(required=False)
+    description = fields.Str(required=False)
     
     apply = fields.Nested(DisplayMetaDict, required=False)
     
@@ -32,6 +32,6 @@ class DisplayMeta(BaseSchema):
     
     subtitle = fields.Str(required=False)
     
-    description = fields.Str(required=False)
+    title = fields.Str(required=False)
     
 

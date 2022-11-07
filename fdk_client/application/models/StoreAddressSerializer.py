@@ -28,15 +28,13 @@ class StoreAddressSerializer(BaseSchema):
     # Catalog swagger.json
 
     
-    longitude = fields.Float(required=False)
-    
-    city = fields.Str(required=False)
-    
     state = fields.Str(required=False)
     
-    landmark = fields.Str(required=False)
+    address2 = fields.Str(required=False)
     
     latitude = fields.Float(required=False)
+    
+    landmark = fields.Str(required=False)
     
     pincode = fields.Int(required=False)
     
@@ -44,6 +42,8 @@ class StoreAddressSerializer(BaseSchema):
     
     country = fields.Str(required=False)
     
-    address2 = fields.Str(required=False)
+    longitude = fields.Float(required=False)
+    
+    city = fields.Str(required=False)
     
 
