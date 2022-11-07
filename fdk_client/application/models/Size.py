@@ -20,9 +20,9 @@ class Size(BaseSchema):
     
     is_available = fields.Boolean(required=False)
     
-    value = fields.Raw(required=False)
-    
     display = fields.Raw(required=False)
+    
+    value = fields.Raw(required=False)
     
     quantity = fields.Int(required=False)
     

@@ -13,11 +13,11 @@ from .ProductListingAction import ProductListingAction
 
 
 
-from .ImageUrls import ImageUrls
-
 
 
 from .ThirdLevelChild import ThirdLevelChild
+
+from .ImageUrls import ImageUrls
 
 
 class SecondLevelChild(BaseSchema):
@@ -26,16 +26,16 @@ class SecondLevelChild(BaseSchema):
     
     action = fields.Nested(ProductListingAction, required=False)
     
-    slug = fields.Str(required=False)
+    _custom_json = fields.Dict(required=False)
     
     uid = fields.Int(required=False)
     
+    slug = fields.Str(required=False)
+    
     name = fields.Str(required=False)
     
-    banners = fields.Nested(ImageUrls, required=False)
-    
-    _custom_json = fields.Dict(required=False)
-    
     childs = fields.List(fields.Nested(ThirdLevelChild, required=False), required=False)
+    
+    banners = fields.Nested(ImageUrls, required=False)
     
 
