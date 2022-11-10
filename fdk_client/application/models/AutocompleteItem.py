@@ -7,11 +7,13 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+from .ProductListingAction import ProductListingAction
+
 from .Media import Media
 
 
 
-from .ProductListingAction import ProductListingAction
+
 
 
 class AutocompleteItem(BaseSchema):
@@ -20,10 +22,12 @@ class AutocompleteItem(BaseSchema):
     
     display = fields.Str(required=False)
     
+    action = fields.Nested(ProductListingAction, required=False)
+    
     logo = fields.Nested(Media, required=False)
     
     type = fields.Str(required=False)
     
-    action = fields.Nested(ProductListingAction, required=False)
+    _custom_json = fields.Dict(required=False)
     
 

@@ -7,23 +7,19 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+from .MOQ import MOQ
+
+from .SEO import SEO
 
 
-
-
-
-
-
-class UserInfo(BaseSchema):
+class ApplicationItemResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    email = fields.Str(required=False)
+    alt_text = fields.Dict(required=False)
     
-    uid = fields.Str(required=False)
+    moq = fields.Nested(MOQ, required=False)
     
-    user_id = fields.Str(required=False)
-    
-    username = fields.Str(required=False)
+    seo = fields.Nested(SEO, required=False)
     
 
