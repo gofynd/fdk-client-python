@@ -20,7 +20,7 @@ class ProductAvailability(BaseSchema):
     # Cart swagger.json
 
     
-    sizes = fields.List(fields.Str(required=False), required=False)
+    is_valid = fields.Boolean(required=False)
     
     deliverable = fields.Boolean(required=False)
     
@@ -28,6 +28,6 @@ class ProductAvailability(BaseSchema):
     
     other_store_quantity = fields.Int(required=False)
     
-    is_valid = fields.Boolean(required=False)
+    sizes = fields.List(fields.Str(required=False), required=False)
     
 
