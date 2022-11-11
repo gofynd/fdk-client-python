@@ -22,6 +22,8 @@ class CatalogInsightBrand(BaseSchema):
     # Catalog swagger.json
 
     
+    available_articles = fields.Int(required=False)
+    
     name = fields.Str(required=False)
     
     article_freshness = fields.Int(required=False)
@@ -29,8 +31,6 @@ class CatalogInsightBrand(BaseSchema):
     available_sizes = fields.Int(required=False)
     
     total_sizes = fields.Int(required=False)
-    
-    available_articles = fields.Int(required=False)
     
     total_articles = fields.Int(required=False)
     

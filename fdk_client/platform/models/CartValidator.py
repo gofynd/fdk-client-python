@@ -76,7 +76,7 @@ class CartValidator:
         
         q = fields.Str(required=False)
         
-        is_active = fields.Boolean(required=False)
+        status = fields.Str(required=False)
         
         promo_group = fields.Str(required=False)
         
