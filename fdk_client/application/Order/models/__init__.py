@@ -19,6 +19,8 @@ from .ResponseVerifyOTPShipment import ResponseVerifyOTPShipment
 
 from .sendOTPApplicationResponse import sendOTPApplicationResponse
 
+from .ShipmentBagReasons import ShipmentBagReasons
+
 from .ShipmentById import ShipmentById
 
 from .CustomerDetailsByShipmentId import CustomerDetailsByShipmentId
@@ -40,6 +42,8 @@ from .BagsForReorder import BagsForReorder
 from .BagsForReorderArticleAssignment import BagsForReorderArticleAssignment
 
 from .PosOrderById import PosOrderById
+
+from .BagReasons import BagReasons
 
 from .Bags import Bags
 

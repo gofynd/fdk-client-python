@@ -1,4 +1,4 @@
-"""SwaggerTest Platform Model"""
+"""Catalog Platform Model"""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -11,9 +11,13 @@ from ...PlatformModel import BaseSchema
 
 
 
-class TestResponse(BaseSchema):
+
+
+class SEO(BaseSchema):
     #  swagger.json
 
     
-    success = fields.Boolean(required=False)
+    title = fields.Raw(required=False)
+    
+    description = fields.Raw(required=False)
     

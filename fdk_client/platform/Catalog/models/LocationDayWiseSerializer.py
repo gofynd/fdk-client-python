@@ -25,11 +25,11 @@ class LocationDayWiseSerializer(BaseSchema):
     #  swagger.json
 
     
-    closing = fields.Nested(LocationTimingSerializer, required=False)
+    opening = fields.Nested(LocationTimingSerializer, required=False)
     
     weekday = fields.Str(required=False)
     
-    opening = fields.Nested(LocationTimingSerializer, required=False)
+    closing = fields.Nested(LocationTimingSerializer, required=False)
     
     open = fields.Boolean(required=False)
     

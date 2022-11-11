@@ -17,7 +17,7 @@ class UserRegistered(BaseSchema):
     #  swagger.json
 
     
-    start = fields.Str(required=False)
-    
     end = fields.Str(required=False)
+    
+    start = fields.Str(required=False)
     

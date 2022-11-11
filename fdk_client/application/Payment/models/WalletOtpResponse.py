@@ -21,7 +21,7 @@ class WalletOtpResponse(BaseSchema):
     
     request_id = fields.Str(required=False)
     
-    is_verified_flag = fields.Str(required=False)
-    
     success = fields.Boolean(required=False)
+    
+    is_verified_flag = fields.Str(required=False)
     

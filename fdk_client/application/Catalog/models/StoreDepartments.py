@@ -29,7 +29,7 @@ class StoreDepartments(BaseSchema):
     
     slug = fields.Str(required=False)
     
-    logo = fields.Str(required=False)
-    
     uid = fields.Int(required=False)
+    
+    logo = fields.Str(required=False)
     

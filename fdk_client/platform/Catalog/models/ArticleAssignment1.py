@@ -1,4 +1,4 @@
-"""CompanyProfile Platform Model"""
+"""Catalog Platform Model"""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -13,11 +13,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-class LocationIntegrationType(BaseSchema):
+class ArticleAssignment1(BaseSchema):
     #  swagger.json
 
     
-    inventory = fields.Str(required=False)
+    level = fields.Str(required=False)
     
-    order = fields.Str(required=False)
+    strategy = fields.Str(required=False)
     

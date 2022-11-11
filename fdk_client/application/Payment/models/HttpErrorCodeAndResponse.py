@@ -9,9 +9,9 @@ from ...ApplicationModel import BaseSchema
 
 
 
+
+
 from .ErrorCodeAndDescription import ErrorCodeAndDescription
-
-
 
 
 
@@ -19,7 +19,7 @@ class HttpErrorCodeAndResponse(BaseSchema):
     #  swagger.json
 
     
-    error = fields.Nested(ErrorCodeAndDescription, required=False)
-    
     success = fields.Boolean(required=False)
+    
+    error = fields.Nested(ErrorCodeAndDescription, required=False)
     

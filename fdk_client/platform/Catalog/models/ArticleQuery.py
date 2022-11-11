@@ -15,13 +15,13 @@ from ...PlatformModel import BaseSchema
 
 
 
-class OrderQuantity(BaseSchema):
+class ArticleQuery(BaseSchema):
     #  swagger.json
 
     
-    is_set = fields.Boolean(required=False)
+    item_id = fields.Int(required=False)
     
-    minimum = fields.Int(required=False)
+    size = fields.Str(required=False)
     
-    maximum = fields.Int(required=False)
+    ignored_stores = fields.List(fields.Int(required=False), required=False)
     

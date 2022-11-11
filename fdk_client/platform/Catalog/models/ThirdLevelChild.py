@@ -11,11 +11,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-
-
-
-
 from .ImageUrls import ImageUrls
+
+
+
+
 
 
 
@@ -33,11 +33,11 @@ class ThirdLevelChild(BaseSchema):
     
     uid = fields.Int(required=False)
     
+    banners = fields.Nested(ImageUrls, required=False)
+    
     slug = fields.Str(required=False)
     
     _custom_json = fields.Dict(required=False)
-    
-    banners = fields.Nested(ImageUrls, required=False)
     
     action = fields.Nested(Action, required=False)
     

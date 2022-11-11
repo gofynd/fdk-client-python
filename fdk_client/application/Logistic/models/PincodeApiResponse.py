@@ -13,9 +13,9 @@ from .PincodeDataResponse import PincodeDataResponse
 
 
 
-
-
 from .PincodeErrorSchemaResponse import PincodeErrorSchemaResponse
+
+
 
 
 
@@ -25,7 +25,7 @@ class PincodeApiResponse(BaseSchema):
     
     data = fields.List(fields.Nested(PincodeDataResponse, required=False), required=False)
     
-    success = fields.Boolean(required=False)
-    
     error = fields.Nested(PincodeErrorSchemaResponse, required=False)
+    
+    success = fields.Boolean(required=False)
     

@@ -77,7 +77,7 @@ class BagFinancialBreakup(BaseSchema):
     
     cod_charges = fields.Float(required=False)
     
-    gst_fee = fields.Str(required=False)
+    gst_fee = fields.Float(required=False)
     
     fynd_credits = fields.Float(required=False)
     

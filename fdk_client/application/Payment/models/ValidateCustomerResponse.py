@@ -21,11 +21,11 @@ class ValidateCustomerResponse(BaseSchema):
     #  swagger.json
 
     
-    error = fields.Dict(required=False)
-    
-    message = fields.Str(required=False)
-    
     data = fields.Dict(required=False)
     
     success = fields.Boolean(required=False)
+    
+    message = fields.Str(required=False)
+    
+    error = fields.Dict(required=False)
     

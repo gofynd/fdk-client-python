@@ -11,9 +11,9 @@ from ...PlatformModel import BaseSchema
 
 
 
+
+
 from .ActionQuery import ActionQuery
-
-
 
 
 
@@ -21,9 +21,9 @@ class ProductAction(BaseSchema):
     #  swagger.json
 
     
+    type = fields.Str(required=False)
+    
     url = fields.Str(required=False)
     
     query = fields.Nested(ActionQuery, required=False)
-    
-    type = fields.Str(required=False)
     

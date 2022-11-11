@@ -21,7 +21,7 @@ class CollectionBanner(BaseSchema):
     #  swagger.json
 
     
-    portrait = fields.Nested(CollectionImage, required=False)
-    
     landscape = fields.Nested(CollectionImage, required=False)
+    
+    portrait = fields.Nested(CollectionImage, required=False)
     

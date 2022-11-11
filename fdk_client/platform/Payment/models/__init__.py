@@ -53,13 +53,13 @@ from .SaveSubscriptionSetupIntentRequest import SaveSubscriptionSetupIntentReque
 
 from .SaveSubscriptionSetupIntentResponse import SaveSubscriptionSetupIntentResponse
 
-from .BeneficiaryModeDetails import BeneficiaryModeDetails
-
-from .AddBeneficiaryDetailsRequest import AddBeneficiaryDetailsRequest
-
 from .RefundAccountResponse import RefundAccountResponse
 
 from .NotFoundResourceError import NotFoundResourceError
+
+from .BankDetailsForOTP import BankDetailsForOTP
+
+from .AddBeneficiaryDetailsOTPRequest import AddBeneficiaryDetailsOTPRequest
 
 from .IfscCodeResponse import IfscCodeResponse
 

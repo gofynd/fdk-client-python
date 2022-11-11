@@ -21,7 +21,7 @@ class AddBeneficiaryViaOtpVerificationRequest(BaseSchema):
     
     request_id = fields.Str(required=False)
     
-    hash_key = fields.Str(required=False)
-    
     otp = fields.Str(required=False)
+    
+    hash_key = fields.Str(required=False)
     

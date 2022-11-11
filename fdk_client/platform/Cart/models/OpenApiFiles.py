@@ -17,7 +17,7 @@ class OpenApiFiles(BaseSchema):
     #  swagger.json
 
     
-    values = fields.List(fields.Str(required=False), required=False)
-    
     key = fields.Str(required=False)
+    
+    values = fields.List(fields.Str(required=False), required=False)
     

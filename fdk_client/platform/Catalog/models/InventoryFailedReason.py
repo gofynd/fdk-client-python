@@ -17,7 +17,7 @@ class InventoryFailedReason(BaseSchema):
     #  swagger.json
 
     
-    errors = fields.Str(required=False)
-    
     message = fields.Str(required=False)
+    
+    errors = fields.Str(required=False)
     

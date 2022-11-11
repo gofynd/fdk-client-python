@@ -15,9 +15,9 @@ from ...ApplicationModel import BaseSchema
 
 
 
+
+
 from .Media import Media
-
-
 
 
 
@@ -31,7 +31,7 @@ class Department(BaseSchema):
     
     slug = fields.Str(required=False)
     
-    logo = fields.Nested(Media, required=False)
-    
     uid = fields.Int(required=False)
+    
+    logo = fields.Nested(Media, required=False)
     

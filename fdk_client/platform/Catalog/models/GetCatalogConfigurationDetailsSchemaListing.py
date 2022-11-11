@@ -17,7 +17,7 @@ class GetCatalogConfigurationDetailsSchemaListing(BaseSchema):
     #  swagger.json
 
     
-    filter = fields.Dict(required=False)
-    
     sort = fields.Dict(required=False)
+    
+    filter = fields.Dict(required=False)
     

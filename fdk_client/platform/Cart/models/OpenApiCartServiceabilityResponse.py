@@ -17,11 +17,11 @@ from .ShipmentPromise import ShipmentPromise
 
 
 
-from .CartProductInfo import CartProductInfo
-
-
-
 from .CartBreakup import CartBreakup
+
+
+
+from .CartProductInfo import CartProductInfo
 
 
 
@@ -35,7 +35,7 @@ class OpenApiCartServiceabilityResponse(BaseSchema):
     
     message = fields.Str(required=False)
     
-    items = fields.List(fields.Nested(CartProductInfo, required=False), required=False)
-    
     breakup_values = fields.Nested(CartBreakup, required=False)
+    
+    items = fields.List(fields.Nested(CartProductInfo, required=False), required=False)
     
