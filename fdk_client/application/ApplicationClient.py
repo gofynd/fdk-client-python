@@ -6269,6 +6269,7 @@ class Order:
             "getOrderById": "/service/application/order/v1.0/orders/{order_id}",
             "getShipmentById": "/service/application/order/v1.0/orders/shipments/{shipment_id}",
             "getShipmentReasons": "/service/application/order/v1.0/orders/shipments/{shipment_id}/reasons",
+            "getShipmentBagReasons": "/service/application/order/v1.0/orders/shipments/{shipment_id}/bags/{bag_id}/reasons/",
             "updateShipmentStatus": "/service/application/order/v1.0/orders/shipments/{shipment_id}/status",
             "trackShipment": "/service/application/order/v1.0/orders/shipments/{shipment_id}/track",
             "getPosOrderById": "/service/application/order/v1.0/orders/pos-order/{order_id}",
@@ -6421,6 +6422,39 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getShipmentReasons"]).netloc, "get", await create_url_without_domain("/service/application/order/v1.0/orders/shipments/{shipment_id}/reasons", shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+    
+    async def getShipmentBagReasons(self, shipment_id=None, bag_id=None, body=""):
+        """Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
+        :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
+        :param bag_id : ID of the bag. : type string
+        """
+        payload = {}
+        
+        if shipment_id:
+            payload["shipment_id"] = shipment_id
+        
+        if bag_id:
+            payload["bag_id"] = bag_id
+        
+        # Parameter validation
+        schema = OrderValidator.getShipmentBagReasons()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getShipmentBagReasons"], proccessed_params="""{"required":[{"name":"shipment_id","in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string"}},{"name":"bag_id","in":"path","description":"ID of the bag.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"shipment_id","in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string"}},{"name":"bag_id","in":"path","description":"ID of the bag.","required":true,"schema":{"type":"string"}}]}""", shipment_id=shipment_id, bag_id=bag_id)
+        query_string = await create_query_string(shipment_id=shipment_id, bag_id=bag_id)
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getShipmentBagReasons"]).netloc, "get", await create_url_without_domain("/service/application/order/v1.0/orders/shipments/{shipment_id}/bags/{bag_id}/reasons/", shipment_id=shipment_id, bag_id=bag_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
     async def updateShipmentStatus(self, shipment_id=None, body=""):
         """Use this API to update the status of a shipment using its shipment ID.

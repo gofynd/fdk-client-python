@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class MOQ(BaseSchema):
-    # Catalog swagger.json
+class BuyRules(BaseSchema):
+    # Cart swagger.json
 
     
-    minimum = fields.Int(required=False)
+    item_criteria = fields.Dict(required=False)
     
-    increment_unit = fields.Int(required=False)
-    
-    maximum = fields.Int(required=False)
+    cart_conditions = fields.Dict(required=False)
     
 

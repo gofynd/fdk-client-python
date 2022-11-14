@@ -12,14 +12,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ArticleQuery(BaseSchema):
+class OrderQuantity(BaseSchema):
     # Catalog swagger.json
 
     
-    item_id = fields.Int(required=False)
+    maximum = fields.Int(required=False)
     
-    size = fields.Str(required=False)
+    minimum = fields.Int(required=False)
     
-    ignored_stores = fields.List(fields.Int(required=False), required=False)
+    is_set = fields.Boolean(required=False)
     
 

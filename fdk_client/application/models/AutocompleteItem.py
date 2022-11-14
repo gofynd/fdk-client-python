@@ -9,9 +9,9 @@ from ..models.BaseSchema import BaseSchema
 
 from .Media import Media
 
+
+
 from .ProductListingAction import ProductListingAction
-
-
 
 
 class AutocompleteItem(BaseSchema):
@@ -22,8 +22,8 @@ class AutocompleteItem(BaseSchema):
     
     logo = fields.Nested(Media, required=False)
     
-    action = fields.Nested(ProductListingAction, required=False)
-    
     display = fields.Str(required=False)
+    
+    action = fields.Nested(ProductListingAction, required=False)
     
 
