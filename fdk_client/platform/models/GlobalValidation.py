@@ -9,11 +9,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
 from .Properties import Properties
+
+
+
+
 
 
 
@@ -24,13 +24,13 @@ class GlobalValidation(BaseSchema):
     
     type = fields.Str(required=False)
     
-    title = fields.Str(required=False)
-    
-    definitions = fields.Dict(required=False)
-    
     required = fields.List(fields.Str(required=False), required=False)
     
     properties = fields.Nested(Properties, required=False)
+    
+    title = fields.Str(required=False)
+    
+    definitions = fields.Dict(required=False)
     
     description = fields.Str(required=False)
     
