@@ -19,9 +19,9 @@ class UsesRemaining(BaseSchema):
     #  swagger.json
 
     
-    total = fields.Int(required=False)
-    
     app = fields.Int(required=False)
     
     user = fields.Int(required=False)
+    
+    total = fields.Int(required=False)
     

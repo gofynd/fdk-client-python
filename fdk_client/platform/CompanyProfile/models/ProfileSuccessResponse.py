@@ -17,7 +17,7 @@ class ProfileSuccessResponse(BaseSchema):
     #  swagger.json
 
     
-    success = fields.Boolean(required=False)
-    
     uid = fields.Int(required=False)
+    
+    success = fields.Boolean(required=False)
     

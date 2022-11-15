@@ -9,20 +9,6 @@ from ...ApplicationModel import BaseSchema
 
 
 
-from .ProductStockPrice import ProductStockPrice
-
-
-
-
-
-
-
-from .Seller import Seller
-
-
-
-
-
 from .StoreDetail import StoreDetail
 
 
@@ -35,19 +21,23 @@ from .CompanyDetail import CompanyDetail
 
 
 
+
+
+
+
+from .ProductStockPrice import ProductStockPrice
+
+
+
+from .Seller import Seller
+
+
+
+
+
 class ProductStockStatusItem(BaseSchema):
     #  swagger.json
 
-    
-    price = fields.Nested(ProductStockPrice, required=False)
-    
-    item_id = fields.Int(required=False)
-    
-    quantity = fields.Int(required=False)
-    
-    seller = fields.Nested(Seller, required=False)
-    
-    uid = fields.Str(required=False)
     
     store = fields.Nested(StoreDetail, required=False)
     
@@ -55,5 +45,15 @@ class ProductStockStatusItem(BaseSchema):
     
     company = fields.Nested(CompanyDetail, required=False)
     
+    uid = fields.Str(required=False)
+    
+    item_id = fields.Int(required=False)
+    
     identifier = fields.Dict(required=False)
+    
+    price = fields.Nested(ProductStockPrice, required=False)
+    
+    seller = fields.Nested(Seller, required=False)
+    
+    quantity = fields.Int(required=False)
     

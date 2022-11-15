@@ -9,9 +9,9 @@ from ...PlatformModel import BaseSchema
 
 
 
+
+
 from .ActionPage import ActionPage
-
-
 
 
 
@@ -19,7 +19,7 @@ class Action(BaseSchema):
     #  swagger.json
 
     
-    page = fields.Nested(ActionPage, required=False)
-    
     type = fields.Str(required=False)
+    
+    page = fields.Nested(ActionPage, required=False)
     

@@ -17,7 +17,7 @@ class BagReasons(BaseSchema):
     #  swagger.json
 
     
-    id = fields.Str(required=False)
+    id = fields.Int(required=False)
     
     display_name = fields.Str(required=False)
     

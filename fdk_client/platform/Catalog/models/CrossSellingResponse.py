@@ -9,11 +9,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .CrossSellingData import CrossSellingData
-
-
-
 from .CatalogInsightBrand import CatalogInsightBrand
+
+
+
+from .CrossSellingData import CrossSellingData
 
 
 
@@ -21,7 +21,7 @@ class CrossSellingResponse(BaseSchema):
     #  swagger.json
 
     
-    data = fields.Nested(CrossSellingData, required=False)
-    
     brand_distribution = fields.Nested(CatalogInsightBrand, required=False)
+    
+    data = fields.Nested(CrossSellingData, required=False)
     

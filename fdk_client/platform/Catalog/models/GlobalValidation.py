@@ -29,8 +29,6 @@ class GlobalValidation(BaseSchema):
     
     properties = fields.Nested(Properties, required=False)
     
-    definitions = fields.Dict(required=False)
-    
     title = fields.Str(required=False)
     
     required = fields.List(fields.Str(required=False), required=False)
@@ -38,4 +36,6 @@ class GlobalValidation(BaseSchema):
     description = fields.Str(required=False)
     
     type = fields.Str(required=False)
+    
+    definitions = fields.Dict(required=False)
     

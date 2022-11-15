@@ -17,15 +17,15 @@ from ...ApplicationModel import BaseSchema
 
 
 
-class Price(BaseSchema):
+class ProductStockUnitPriceV2(BaseSchema):
     #  swagger.json
 
     
-    min = fields.Float(required=False)
-    
     currency_symbol = fields.Str(required=False)
     
-    max = fields.Float(required=False)
+    price = fields.Float(required=False)
+    
+    unit = fields.Str(required=False)
     
     currency_code = fields.Str(required=False)
     

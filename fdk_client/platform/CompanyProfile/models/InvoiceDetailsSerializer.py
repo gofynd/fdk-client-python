@@ -21,7 +21,7 @@ class InvoiceDetailsSerializer(BaseSchema):
     #  swagger.json
 
     
-    e_invoice = fields.Nested(InvoiceCredSerializer, required=False)
-    
     e_waybill = fields.Nested(InvoiceCredSerializer, required=False)
+    
+    e_invoice = fields.Nested(InvoiceCredSerializer, required=False)
     
