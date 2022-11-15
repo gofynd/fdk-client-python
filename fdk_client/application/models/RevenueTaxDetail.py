@@ -14,8 +14,8 @@ class RevenueTaxDetail(BaseSchema):
     # Cart swagger.json
 
     
-    tax_percentage = fields.Float(required=False)
-    
     tax_type = fields.Str(required=False)
+    
+    tax_percentage = fields.Float(required=False)
     
 

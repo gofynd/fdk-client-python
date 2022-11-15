@@ -20,14 +20,14 @@ class CartMetaRequest(BaseSchema):
     # Cart swagger.json
 
     
-    pick_up_customer_details = fields.Dict(required=False)
+    gstin = fields.Str(required=False)
     
     revenue_tax = fields.Nested(RevenueTaxDetail, required=False)
     
-    gstin = fields.Str(required=False)
+    comment = fields.Str(required=False)
+    
+    pick_up_customer_details = fields.Dict(required=False)
     
     checkout_mode = fields.Str(required=False)
-    
-    comment = fields.Str(required=False)
     
 

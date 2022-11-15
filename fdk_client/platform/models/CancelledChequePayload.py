@@ -14,8 +14,8 @@ class CancelledChequePayload(BaseSchema):
     # Payment swagger.json
 
     
-    document_mandatory = fields.Boolean(required=False)
-    
     enabled = fields.Boolean(required=False)
+    
+    document_mandatory = fields.Boolean(required=False)
     
 

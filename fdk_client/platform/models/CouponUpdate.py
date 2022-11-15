@@ -5,33 +5,33 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .Rule import Rule
 
-from .DisplayMeta import DisplayMeta
-
-from .CouponAction import CouponAction
-
-from .CouponSchedule import CouponSchedule
-
-
-
-
-
-from .Identifier import Identifier
-
-from .Validity import Validity
-
-from .Ownership import Ownership
-
-from .State import State
 
 from .CouponAuthor import CouponAuthor
 
-from .RuleDefinition import RuleDefinition
-
 from .Restrictions import Restrictions
 
+from .Validity import Validity
+
+from .Identifier import Identifier
+
 from .Validation import Validation
+
+from .RuleDefinition import RuleDefinition
+
+from .State import State
+
+from .Ownership import Ownership
+
+
+
+from .CouponAction import CouponAction
+
+from .DisplayMeta import DisplayMeta
+
+from .Rule import Rule
+
+from .CouponSchedule import CouponSchedule
 
 from .CouponDateMeta import CouponDateMeta
 
@@ -42,36 +42,36 @@ class CouponUpdate(BaseSchema):
     # Cart swagger.json
 
     
-    rule = fields.List(fields.Nested(Rule, required=False), required=False)
-    
-    display_meta = fields.Nested(DisplayMeta, required=False)
-    
-    action = fields.Nested(CouponAction, required=False)
-    
-    _schedule = fields.Nested(CouponSchedule, required=False)
-    
-    tags = fields.List(fields.Str(required=False), required=False)
-    
     code = fields.Str(required=False)
-    
-    identifiers = fields.Nested(Identifier, required=False)
-    
-    validity = fields.Nested(Validity, required=False)
-    
-    ownership = fields.Nested(Ownership, required=False)
-    
-    state = fields.Nested(State, required=False)
     
     author = fields.Nested(CouponAuthor, required=False)
     
-    rule_definition = fields.Nested(RuleDefinition, required=False)
-    
     restrictions = fields.Nested(Restrictions, required=False)
+    
+    validity = fields.Nested(Validity, required=False)
+    
+    identifiers = fields.Nested(Identifier, required=False)
     
     validation = fields.Nested(Validation, required=False)
     
-    date_meta = fields.Nested(CouponDateMeta, required=False)
+    rule_definition = fields.Nested(RuleDefinition, required=False)
+    
+    state = fields.Nested(State, required=False)
+    
+    ownership = fields.Nested(Ownership, required=False)
     
     type_slug = fields.Str(required=False)
+    
+    action = fields.Nested(CouponAction, required=False)
+    
+    display_meta = fields.Nested(DisplayMeta, required=False)
+    
+    rule = fields.List(fields.Nested(Rule, required=False), required=False)
+    
+    _schedule = fields.Nested(CouponSchedule, required=False)
+    
+    date_meta = fields.Nested(CouponDateMeta, required=False)
+    
+    tags = fields.List(fields.Str(required=False), required=False)
     
 
