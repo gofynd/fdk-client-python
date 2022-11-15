@@ -26,9 +26,9 @@ class PriceMeta(BaseSchema):
     
     transfer = fields.Float(required=False)
     
-    tp_notes = fields.Dict(required=False)
-    
     updated_at = fields.Str(required=False)
+    
+    tp_notes = fields.Dict(required=False)
     
     currency = fields.Str(required=False)
     

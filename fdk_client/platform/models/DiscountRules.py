@@ -18,9 +18,9 @@ class DiscountRules(BaseSchema):
     # Cart swagger.json
 
     
-    raw_offer = fields.Dict(required=False)
-    
     offer = fields.Dict(required=False)
+    
+    raw_offer = fields.Dict(required=False)
     
     item_criteria = fields.Dict(required=False)
     
