@@ -26,13 +26,11 @@ class RuleDefinition(BaseSchema):
     # Cart swagger.json
 
     
+    auto_apply = fields.Boolean(required=False)
+    
     scope = fields.List(fields.Str(required=False), required=False)
     
     type = fields.Str(required=False)
-    
-    is_exact = fields.Boolean(required=False)
-    
-    auto_apply = fields.Boolean(required=False)
     
     value_type = fields.Str(required=False)
     
@@ -41,5 +39,7 @@ class RuleDefinition(BaseSchema):
     calculate_on = fields.Str(required=False)
     
     currency_code = fields.Str(required=False)
+    
+    is_exact = fields.Boolean(required=False)
     
 
