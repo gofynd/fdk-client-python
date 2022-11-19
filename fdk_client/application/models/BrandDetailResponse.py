@@ -5,7 +5,9 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .ImageUrls import ImageUrls
+
+
+
 
 from .Media import Media
 
@@ -13,16 +15,16 @@ from .Media import Media
 
 
 
-
-
-
+from .ImageUrls import ImageUrls
 
 
 class BrandDetailResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    banners = fields.Nested(ImageUrls, required=False)
+    description = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
     
     logo = fields.Nested(Media, required=False)
     
@@ -30,8 +32,6 @@ class BrandDetailResponse(BaseSchema):
     
     name = fields.Str(required=False)
     
-    description = fields.Str(required=False)
-    
-    uid = fields.Int(required=False)
+    banners = fields.Nested(ImageUrls, required=False)
     
 
