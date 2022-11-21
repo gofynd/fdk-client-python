@@ -24,9 +24,9 @@ class StoreDepartments(BaseSchema):
     
     priority_order = fields.Int(required=False)
     
-    logo = fields.Str(required=False)
-    
     slug = fields.Str(required=False)
+    
+    logo = fields.Str(required=False)
     
     name = fields.Str(required=False)
     

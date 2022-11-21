@@ -24,10 +24,10 @@ class CollectionSchedule(BaseSchema):
     
     end = fields.Str(required=False)
     
+    duration = fields.Int(required=False)
+    
     cron = fields.Str(required=False)
     
     start = fields.Str(required=False)
-    
-    duration = fields.Int(required=False)
     
 

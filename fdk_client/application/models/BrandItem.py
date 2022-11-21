@@ -9,7 +9,13 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
+
+
 from .ImageUrls import ImageUrls
+
+
 
 from .Media import Media
 
@@ -18,31 +24,25 @@ from .ProductListingAction import ProductListingAction
 
 
 
-
-
-
-
-
-
 class BrandItem(BaseSchema):
     # Catalog swagger.json
 
     
+    discount = fields.Str(required=False)
+    
     uid = fields.Int(required=False)
+    
+    description = fields.Str(required=False)
     
     departments = fields.List(fields.Str(required=False), required=False)
     
     banners = fields.Nested(ImageUrls, required=False)
     
+    slug = fields.Str(required=False)
+    
     logo = fields.Nested(Media, required=False)
     
     action = fields.Nested(ProductListingAction, required=False)
-    
-    slug = fields.Str(required=False)
-    
-    description = fields.Str(required=False)
-    
-    discount = fields.Str(required=False)
     
     name = fields.Str(required=False)
     
