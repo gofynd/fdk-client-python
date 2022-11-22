@@ -12,14 +12,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class OrderQuantity(BaseSchema):
-    # Catalog swagger.json
+class OrderBagArticle(BaseSchema):
+    # Order swagger.json
 
     
-    minimum = fields.Int(required=False)
+    identifiers = fields.Dict(required=False)
     
-    is_set = fields.Boolean(required=False)
+    uid = fields.Str(required=False)
     
-    maximum = fields.Int(required=False)
+    return_config = fields.Dict(required=False)
     
 

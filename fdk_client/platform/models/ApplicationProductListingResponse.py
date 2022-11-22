@@ -11,9 +11,9 @@ from .ProductSortOn import ProductSortOn
 
 from .Page import Page
 
-
-
 from .ProductFilters import ProductFilters
+
+
 
 
 class ApplicationProductListingResponse(BaseSchema):
@@ -26,8 +26,8 @@ class ApplicationProductListingResponse(BaseSchema):
     
     page = fields.Nested(Page, required=False)
     
-    operators = fields.Dict(required=False)
-    
     filters = fields.List(fields.Nested(ProductFilters, required=False), required=False)
+    
+    operators = fields.Dict(required=False)
     
 

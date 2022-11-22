@@ -22,8 +22,8 @@ class AttributeDetail(BaseSchema):
     
     key = fields.Str(required=False)
     
-    logo = fields.Str(required=False)
-    
     display = fields.Str(required=False)
+    
+    logo = fields.Str(required=False)
     
 

@@ -22,13 +22,13 @@ class ShipmentReasonsResponse(BaseSchema):
     # Order swagger.json
 
     
-    flow = fields.Str(required=False)
+    show_text_area = fields.Boolean(required=False)
     
     reason_text = fields.Str(required=False)
     
     reason_id = fields.Int(required=False)
     
-    show_text_area = fields.Boolean(required=False)
+    flow = fields.Str(required=False)
     
     feedback_type = fields.Str(required=False)
     

@@ -22,9 +22,9 @@ class GlobalValidation(BaseSchema):
     # Catalog swagger.json
 
     
-    title = fields.Str(required=False)
-    
     type = fields.Str(required=False)
+    
+    title = fields.Str(required=False)
     
     required = fields.List(fields.Str(required=False), required=False)
     
