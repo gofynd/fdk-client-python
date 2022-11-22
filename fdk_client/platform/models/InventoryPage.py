@@ -20,13 +20,13 @@ class InventoryPage(BaseSchema):
     # Catalog swagger.json
 
     
-    has_previous = fields.Boolean(required=False)
-    
     type = fields.Str(required=False)
     
     item_total = fields.Int(required=False)
     
     has_next = fields.Boolean(required=False)
+    
+    has_previous = fields.Boolean(required=False)
     
     next_id = fields.Str(required=False)
     
