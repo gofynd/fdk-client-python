@@ -66,3 +66,8 @@ class OrderValidator:
         bag_id = fields.Str(required=False)
          
     
+    class updateShipmentStatus(BaseSchema):
+        
+        shipment_id = fields.Str(required=False)
+         
+    

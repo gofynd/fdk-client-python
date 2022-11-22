@@ -5,15 +5,15 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-
-
-
-
-
-
-
-
 from .ProductDownloadItemsData import ProductDownloadItemsData
+
+
+
+
+
+
+
+
 
 
 
@@ -30,17 +30,17 @@ class ProductDownloadsItems(BaseSchema):
     # Catalog swagger.json
 
     
-    url = fields.Str(required=False)
+    data = fields.Nested(ProductDownloadItemsData, required=False)
     
     seller_id = fields.Float(required=False)
     
-    trigger_on = fields.Str(required=False)
-    
     template_tags = fields.Dict(required=False)
     
-    data = fields.Nested(ProductDownloadItemsData, required=False)
-    
     completed_on = fields.Str(required=False)
+    
+    url = fields.Str(required=False)
+    
+    trigger_on = fields.Str(required=False)
     
     created_by = fields.Nested(VerifiedBy, required=False)
     
