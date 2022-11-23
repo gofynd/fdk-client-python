@@ -11,17 +11,15 @@ from ...ApplicationModel import BaseSchema
 
 
 
+from .TimeStampData import TimeStampData
 
 
 
-
-class Statuses(BaseSchema):
+class Promise1(BaseSchema):
     #  swagger.json
 
     
-    display = fields.Str(required=False)
+    show_promise = fields.Str(required=False)
     
-    is_selected = fields.Boolean(required=False)
-    
-    value = fields.Int(required=False)
+    timestamp = fields.Nested(TimeStampData, required=False)
     

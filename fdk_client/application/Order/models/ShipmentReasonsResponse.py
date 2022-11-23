@@ -9,9 +9,9 @@ from ...ApplicationModel import BaseSchema
 
 
 
-
-
 from .ReasonsResponse import ReasonsResponse
+
+
 
 
 
@@ -19,7 +19,7 @@ class ShipmentReasonsResponse(BaseSchema):
     #  swagger.json
 
     
-    success = fields.Boolean(required=False)
-    
     reasons = fields.List(fields.Nested(ReasonsResponse, required=False), required=False)
+    
+    success = fields.Boolean(required=False)
     

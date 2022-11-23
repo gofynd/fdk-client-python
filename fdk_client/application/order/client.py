@@ -665,7 +665,7 @@ class Order:
     async def verifyOtpShipmentCustomer1(self, order_id=None, shipment_id=None, body=""):
         """Use this API to verify OTP and create a session token with custom payload.
         :param order_id : A unique number used for identifying and tracking your orders. : type string
-        :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type integer
+        :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
         """
         payload = {}
         
@@ -685,7 +685,7 @@ class Order:
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["verifyOtpShipmentCustomer1"], proccessed_params="""{"required":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string","default":"FYMP6294545C010B89FD"}},{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"integer","default":"16538880933361957252J"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string","default":"FYMP6294545C010B89FD"}},{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"integer","default":"16538880933361957252J"}}]}""", order_id=order_id, shipment_id=shipment_id)
+        url_with_params = await create_url_with_params(api_url=self._urls["verifyOtpShipmentCustomer1"], proccessed_params="""{"required":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string","default":"FYMP6294545C010B89FD"}},{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string","default":"16538880933361957252J"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string","default":"FYMP6294545C010B89FD"}},{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string","default":"16538880933361957252J"}}]}""", order_id=order_id, shipment_id=shipment_id)
         query_string = await create_query_string(order_id=order_id, shipment_id=shipment_id)
         headers = {
             "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()

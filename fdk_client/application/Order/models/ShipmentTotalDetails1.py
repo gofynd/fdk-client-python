@@ -15,17 +15,13 @@ from ...ApplicationModel import BaseSchema
 
 
 
-
-
-class FulfillingStore1(BaseSchema):
+class ShipmentTotalDetails1(BaseSchema):
     #  swagger.json
 
     
-    name = fields.Str(required=False)
+    total_price = fields.Float(required=False)
     
-    code = fields.Str(required=False)
+    pieces = fields.Float(required=False)
     
-    id = fields.Int(required=False)
-    
-    company_id = fields.Int(required=False)
+    sizes = fields.Float(required=False)
     

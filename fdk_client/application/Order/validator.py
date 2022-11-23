@@ -258,7 +258,7 @@ class OrderValidator:
         
         order_id = fields.Str(required=False)
         
-        shipment_id = fields.Int(required=False)
+        shipment_id = fields.Str(required=False)
          
         
     

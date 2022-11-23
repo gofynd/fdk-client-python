@@ -15,13 +15,13 @@ from ...ApplicationModel import BaseSchema
 
 
 
-class Statuses(BaseSchema):
+class InvoiceData(BaseSchema):
     #  swagger.json
 
     
-    display = fields.Str(required=False)
+    invoice_url = fields.Str(required=False)
     
-    is_selected = fields.Boolean(required=False)
+    updated_date = fields.Str(required=False)
     
-    value = fields.Int(required=False)
+    label_url = fields.Str(required=False)
     

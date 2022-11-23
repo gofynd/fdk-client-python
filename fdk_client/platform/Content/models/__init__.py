@@ -7,8 +7,6 @@ from .ApplicationLegalFAQ import ApplicationLegalFAQ
 
 from .PathMappingSchema import PathMappingSchema
 
-from .RedirectionSchema import RedirectionSchema
-
 from .SeoComponent import SeoComponent
 
 from .SeoSchema import SeoSchema

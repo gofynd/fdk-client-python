@@ -29,8 +29,6 @@ class AppliedPromos(BaseSchema):
     #  swagger.json
 
     
-    amount = fields.Float(required=False)
-    
     promo_id = fields.Str(required=False)
     
     promotion_name = fields.Str(required=False)
@@ -40,6 +38,8 @@ class AppliedPromos(BaseSchema):
     article_quantity = fields.Float(required=False)
     
     mrp_promotion = fields.Boolean(required=False)
+    
+    amount = fields.Float(required=False)
     
     applied_free_articles = fields.Nested(AppliedFreeArticles, required=False)
     

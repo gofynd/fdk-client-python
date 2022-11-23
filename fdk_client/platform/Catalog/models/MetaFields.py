@@ -17,7 +17,7 @@ class MetaFields(BaseSchema):
     #  swagger.json
 
     
-    key = fields.Str(required=False)
-    
     value = fields.Str(required=False)
+    
+    key = fields.Str(required=False)
     

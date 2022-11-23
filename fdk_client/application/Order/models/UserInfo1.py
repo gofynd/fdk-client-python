@@ -17,15 +17,15 @@ from ...ApplicationModel import BaseSchema
 
 
 
-class TrackingDetails(BaseSchema):
+class UserInfo1(BaseSchema):
     #  swagger.json
 
     
-    is_passed = fields.Boolean(required=False)
+    gender = fields.Str(required=False)
     
-    status = fields.Str(required=False)
+    first_name = fields.Str(required=False)
     
-    is_current = fields.Boolean(required=False)
+    last_name = fields.Str(required=False)
     
-    time = fields.Str(required=False)
+    mobile = fields.Str(required=False)
     

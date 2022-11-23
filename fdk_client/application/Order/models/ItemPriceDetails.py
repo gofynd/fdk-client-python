@@ -11,11 +11,11 @@ from ...ApplicationModel import BaseSchema
 
 
 
-from .MarkedValues import MarkedValues
-
-
-
 from .EffectiveValues import EffectiveValues
+
+
+
+from .MarkedValues import MarkedValues
 
 
 
@@ -25,7 +25,7 @@ class ItemPriceDetails(BaseSchema):
     
     currency = fields.Str(required=False)
     
-    marked = fields.Nested(MarkedValues, required=False)
-    
     effective = fields.Nested(EffectiveValues, required=False)
+    
+    marked = fields.Nested(MarkedValues, required=False)
     

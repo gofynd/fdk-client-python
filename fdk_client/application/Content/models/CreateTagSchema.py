@@ -25,6 +25,8 @@ from ...ApplicationModel import BaseSchema
 
 
 
+
+
 class CreateTagSchema(BaseSchema):
     #  swagger.json
 
@@ -42,6 +44,8 @@ class CreateTagSchema(BaseSchema):
     position = fields.Str(required=False)
     
     attributes = fields.Dict(required=False)
+    
+    pages = fields.List(fields.Str(required=False), required=False)
     
     content = fields.Str(required=False)
     

@@ -17,7 +17,7 @@ class EffectiveValues(BaseSchema):
     #  swagger.json
 
     
-    max = fields.Float(required=False)
-    
     min = fields.Float(required=False)
+    
+    max = fields.Float(required=False)
     
