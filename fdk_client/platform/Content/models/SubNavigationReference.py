@@ -1,10 +1,10 @@
-"""Content Application Model"""
+"""Content Platform Model"""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
 
 
-from ...ApplicationModel import BaseSchema
+from ...PlatformModel import BaseSchema
 
 
 
@@ -35,7 +35,7 @@ from .NavigationReference import NavigationReference
 
 
 
-class _NavigationReference(BaseSchema):
+class SubNavigationReference(BaseSchema):
     #  swagger.json
 
     

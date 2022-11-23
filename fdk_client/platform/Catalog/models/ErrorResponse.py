@@ -23,9 +23,9 @@ class ErrorResponse(BaseSchema):
     #  swagger.json
 
     
-    code = fields.Str(required=False)
-    
     status = fields.Int(required=False)
+    
+    code = fields.Str(required=False)
     
     error = fields.Str(required=False)
     

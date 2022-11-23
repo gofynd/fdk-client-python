@@ -69,7 +69,7 @@ from .ActionPage import ActionPage
 
 from .NavigationReference import NavigationReference
 
-from ._NavigationReference import _NavigationReference
+from .SubNavigationReference import SubNavigationReference
 
 from .LandingPage import LandingPage
 
