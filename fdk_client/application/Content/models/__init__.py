@@ -7,6 +7,8 @@ from .ApplicationLegalFAQ import ApplicationLegalFAQ
 
 from .PathMappingSchema import PathMappingSchema
 
+from .RedirectionSchema import RedirectionSchema
+
 from .SeoComponent import SeoComponent
 
 from .SeoSchema import SeoSchema
@@ -68,6 +70,8 @@ from .Action import Action
 from .ActionPage import ActionPage
 
 from .NavigationReference import NavigationReference
+
+from ._NavigationReference import _NavigationReference
 
 from .LandingPage import LandingPage
 

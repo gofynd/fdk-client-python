@@ -9,11 +9,11 @@ from ...ApplicationModel import BaseSchema
 
 
 
-from .OfferSeller import OfferSeller
-
-
-
 from .OfferItem import OfferItem
+
+
+
+from .OfferSeller import OfferSeller
 
 
 
@@ -21,7 +21,7 @@ class BulkPriceOffer(BaseSchema):
     #  swagger.json
 
     
-    seller = fields.Nested(OfferSeller, required=False)
-    
     offers = fields.List(fields.Nested(OfferItem, required=False), required=False)
+    
+    seller = fields.Nested(OfferSeller, required=False)
     

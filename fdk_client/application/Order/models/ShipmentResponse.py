@@ -1,0 +1,159 @@
+"""Order Application Model"""
+
+from marshmallow import fields, Schema
+from marshmallow.validate import OneOf
+
+
+from ...ApplicationModel import BaseSchema
+
+
+
+
+from .UserInfo import UserInfo
+
+
+
+
+
+from .PricesBreakup import PricesBreakup
+
+
+
+from .BagsData import BagsData
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+from .FulfillingCompany import FulfillingCompany
+
+
+
+
+
+
+
+from .PaymentInfo import PaymentInfo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+from .FulfillingStore1 import FulfillingStore1
+
+
+
+
+
+class ShipmentResponse(BaseSchema):
+    #  swagger.json
+
+    
+    user_info = fields.Nested(UserInfo, required=False)
+    
+    returnable_date = fields.Str(required=False)
+    
+    breakup_values = fields.List(fields.Nested(PricesBreakup, required=False), required=False)
+    
+    bags = fields.List(fields.Nested(BagsData, required=False), required=False)
+    
+    prices = fields.Dict(required=False)
+    
+    refund_details = fields.Dict(required=False)
+    
+    can_cancel = fields.Boolean(required=False)
+    
+    can_break = fields.Dict(required=False)
+    
+    dp_name = fields.Str(required=False)
+    
+    show_track_link = fields.Boolean(required=False)
+    
+    traking_no = fields.Str(required=False)
+    
+    fulfilling_company = fields.Nested(FulfillingCompany, required=False)
+    
+    beneficiary_details = fields.Boolean(required=False)
+    
+    invoice = fields.Dict(required=False)
+    
+    payment = fields.Nested(PaymentInfo, required=False)
+    
+    shipment_created_at = fields.Str(required=False)
+    
+    need_help_url = fields.Str(required=False)
+    
+    awb_no = fields.Str(required=False)
+    
+    size_info = fields.Dict(required=False)
+    
+    shipment_id = fields.Str(required=False)
+    
+    tracking_details = fields.Dict(required=False)
+    
+    delivery_address = fields.Dict(required=False)
+    
+    show_download_invoice = fields.Boolean(required=False)
+    
+    shipment_status = fields.Dict(required=False)
+    
+    can_return = fields.Boolean(required=False)
+    
+    comment = fields.Str(required=False)
+    
+    order_id = fields.Str(required=False)
+    
+    total_details = fields.Dict(required=False)
+    
+    track_url = fields.Str(required=False)
+    
+    delivery_date = fields.Str(required=False)
+    
+    total_bags = fields.Int(required=False)
+    
+    fulfilling_store = fields.Nested(FulfillingStore1, required=False)
+    
+    promise = fields.Dict(required=False)
+    

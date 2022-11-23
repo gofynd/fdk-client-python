@@ -59,6 +59,18 @@ from .Identifiers import Identifiers
 
 from .ItemBrand import ItemBrand
 
+from .AppliedPromos import AppliedPromos
+
+from .AppliedFreeArticles import AppliedFreeArticles
+
+from .FreeGiftItemDetails import FreeGiftItemDetails
+
+from .ItemPriceDetails import ItemPriceDetails
+
+from .MarkedValues import MarkedValues
+
+from .EffectiveValues import EffectiveValues
+
 from .BreakupValues import BreakupValues
 
 from .DeliveryAddress import DeliveryAddress
@@ -90,5 +102,53 @@ from .TrackingDetails import TrackingDetails
 from .UserInfo import UserInfo
 
 from .ApefaceApiError import ApefaceApiError
+
+from .PricesBreakup import PricesBreakup
+
+from .Item1 import Item1
+
+from .Prices1 import Prices1
+
+from .BagsData import BagsData
+
+from .FulfillingCompany import FulfillingCompany
+
+from .PaymentInfo import PaymentInfo
+
+from .FulfillingStore1 import FulfillingStore1
+
+from .ShipmentResponse import ShipmentResponse
+
+from .OrderItems import OrderItems
+
+from .Statuses import Statuses
+
+from .Filters import Filters
+
+from .Page import Page
+
+from .OrderList1 import OrderList1
+
+from .Error import Error
+
+from .ShipmentById1 import ShipmentById1
+
+from .TrackShipmentResults import TrackShipmentResults
+
+from .TrackShipmentResponse import TrackShipmentResponse
+
+from .CustomerDetailsResponse import CustomerDetailsResponse
+
+from .SendOtpToCustomerResponse import SendOtpToCustomerResponse
+
+from .VerifyOtp import VerifyOtp
+
+from .VerifyOtpResponse import VerifyOtpResponse
+
+from .QuestionSet import QuestionSet
+
+from .ReasonsResponse import ReasonsResponse
+
+from .ShipmentReasonsResponse import ShipmentReasonsResponse
 
 

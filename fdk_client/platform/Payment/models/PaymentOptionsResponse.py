@@ -9,9 +9,9 @@ from ...PlatformModel import BaseSchema
 
 
 
-
-
 from .PaymentOptions import PaymentOptions
+
+
 
 
 
@@ -19,7 +19,7 @@ class PaymentOptionsResponse(BaseSchema):
     #  swagger.json
 
     
-    success = fields.Boolean(required=False)
-    
     payment_options = fields.Nested(PaymentOptions, required=False)
+    
+    success = fields.Boolean(required=False)
     

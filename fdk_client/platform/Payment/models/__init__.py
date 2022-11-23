@@ -75,4 +75,12 @@ from .PaymentConfirmationRequest import PaymentConfirmationRequest
 
 from .PaymentConfirmationResponse import PaymentConfirmationResponse
 
+from .CODdata import CODdata
+
+from .GetUserCODLimitResponse import GetUserCODLimitResponse
+
+from .SetCODForUserRequest import SetCODForUserRequest
+
+from .SetCODOptionResponse import SetCODOptionResponse
+
 

@@ -17,7 +17,7 @@ class GeoLocation(BaseSchema):
     #  swagger.json
 
     
-    latitude = fields.Float(required=False)
-    
     longitude = fields.Float(required=False)
+    
+    latitude = fields.Float(required=False)
     

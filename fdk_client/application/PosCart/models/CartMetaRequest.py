@@ -25,7 +25,7 @@ class CartMetaRequest(BaseSchema):
     
     comment = fields.Str(required=False)
     
-    checkout_mode = fields.Str(required=False)
-    
     gstin = fields.Str(required=False)
+    
+    checkout_mode = fields.Str(required=False)
     

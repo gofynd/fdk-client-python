@@ -11,13 +11,13 @@ from ...ApplicationModel import BaseSchema
 
 
 
+
+
+
+
+
+
 from .CreatePaymentLinkMeta import CreatePaymentLinkMeta
-
-
-
-
-
-
 
 
 
@@ -29,13 +29,13 @@ class CreatePaymentLinkRequest(BaseSchema):
     
     amount = fields.Float(required=False)
     
-    meta = fields.Nested(CreatePaymentLinkMeta, required=False)
+    email = fields.Str(required=False)
     
     description = fields.Str(required=False)
     
-    external_order_id = fields.Str(required=False)
-    
-    email = fields.Str(required=False)
-    
     mobile_number = fields.Str(required=False)
+    
+    meta = fields.Nested(CreatePaymentLinkMeta, required=False)
+    
+    external_order_id = fields.Str(required=False)
     

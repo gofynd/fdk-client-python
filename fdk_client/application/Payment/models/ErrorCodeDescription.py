@@ -21,7 +21,7 @@ class ErrorCodeDescription(BaseSchema):
     
     description = fields.Str(required=False)
     
-    success = fields.Boolean(required=False)
-    
     code = fields.Str(required=False)
+    
+    success = fields.Boolean(required=False)
     

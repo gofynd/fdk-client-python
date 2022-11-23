@@ -1,23 +1,23 @@
 """CompanyProfile Platform Models and Enums"""
 
 
-from .CompanyTaxesSerializer import CompanyTaxesSerializer
+from .SellerPhoneNumber import SellerPhoneNumber
+
+from .ContactDetails import ContactDetails
 
 from .BusinessCountryInfo import BusinessCountryInfo
 
+from .GetAddressSerializer import GetAddressSerializer
+
 from .UserSerializer import UserSerializer
 
-from .Document import Document
-
-from .GetAddressSerializer import GetAddressSerializer
+from .CompanyTaxesSerializer import CompanyTaxesSerializer
 
 from .Website import Website
 
 from .BusinessDetails import BusinessDetails
 
-from .SellerPhoneNumber import SellerPhoneNumber
-
-from .ContactDetails import ContactDetails
+from .Document import Document
 
 from .GetCompanyProfileSerializerResponse import GetCompanyProfileSerializerResponse
 
@@ -41,6 +41,8 @@ from .GetBrandResponseSerializer import GetBrandResponseSerializer
 
 from .CreateUpdateBrandRequestSerializer import CreateUpdateBrandRequestSerializer
 
+from .Page import Page
+
 from .CompanySocialAccounts import CompanySocialAccounts
 
 from .CompanyDetails import CompanyDetails
@@ -49,15 +51,9 @@ from .CompanySerializer import CompanySerializer
 
 from .CompanyBrandSerializer import CompanyBrandSerializer
 
-from .Page import Page
-
 from .CompanyBrandListSerializer import CompanyBrandListSerializer
 
 from .CompanyBrandPostRequestSerializer import CompanyBrandPostRequestSerializer
-
-from .InvoiceCredSerializer import InvoiceCredSerializer
-
-from .InvoiceDetailsSerializer import InvoiceDetailsSerializer
 
 from .GetCompanySerializer import GetCompanySerializer
 
@@ -65,9 +61,13 @@ from .LocationTimingSerializer import LocationTimingSerializer
 
 from .LocationDayWiseSerializer import LocationDayWiseSerializer
 
-from .ProductReturnConfigSerializer import ProductReturnConfigSerializer
+from .InvoiceCredSerializer import InvoiceCredSerializer
+
+from .InvoiceDetailsSerializer import InvoiceDetailsSerializer
 
 from .LocationManagerSerializer import LocationManagerSerializer
+
+from .ProductReturnConfigSerializer import ProductReturnConfigSerializer
 
 from .GetLocationSerializer import GetLocationSerializer
 

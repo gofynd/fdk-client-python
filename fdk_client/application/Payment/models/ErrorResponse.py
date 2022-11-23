@@ -11,9 +11,9 @@ from ...ApplicationModel import BaseSchema
 
 
 
-
-
 from .ErrorDescription import ErrorDescription
+
+
 
 
 
@@ -23,11 +23,11 @@ class ErrorResponse(BaseSchema):
     #  swagger.json
 
     
-    success = fields.Boolean(required=False)
-    
     message = fields.Str(required=False)
     
     error = fields.Nested(ErrorDescription, required=False)
     
     status_code = fields.Int(required=False)
+    
+    success = fields.Boolean(required=False)
     

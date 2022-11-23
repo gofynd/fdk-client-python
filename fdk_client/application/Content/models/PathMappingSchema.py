@@ -11,17 +11,13 @@ from ...ApplicationModel import BaseSchema
 
 
 
+from .RedirectionSchema import RedirectionSchema
 
 
 
 
 
 
-
-
-
-
-from .TagSourceSchema import TagSourceSchema
 
 
 
@@ -31,15 +27,11 @@ class PathMappingSchema(BaseSchema):
     
     application = fields.Str(required=False)
     
+    redirections = fields.List(fields.Nested(RedirectionSchema, required=False), required=False)
+    
     _id = fields.Str(required=False)
-    
-    redirect_from = fields.Str(required=False)
-    
-    redirect_to = fields.Str(required=False)
     
     updated_at = fields.Str(required=False)
     
     created_at = fields.Str(required=False)
-    
-    __source = fields.Nested(TagSourceSchema, required=False)
     

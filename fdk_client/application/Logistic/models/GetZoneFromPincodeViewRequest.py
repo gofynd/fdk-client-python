@@ -17,7 +17,7 @@ class GetZoneFromPincodeViewRequest(BaseSchema):
     #  swagger.json
 
     
-    country = fields.Str(required=False)
-    
     pincode = fields.Str(required=False)
+    
+    country = fields.Str(required=False)
     

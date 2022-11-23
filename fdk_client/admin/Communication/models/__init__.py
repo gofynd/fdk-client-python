@@ -133,6 +133,8 @@ from .Logs import Logs
 
 from .SendOtpSmsCommsTemplate import SendOtpSmsCommsTemplate
 
+from .SendOtpSmsCommsProvider import SendOtpSmsCommsProvider
+
 from .SendOtpEmailCommsTemplate import SendOtpEmailCommsTemplate
 
 from .SendOtpCommsReqData import SendOtpCommsReqData

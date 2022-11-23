@@ -9,11 +9,11 @@ from ...ApplicationModel import BaseSchema
 
 
 
-from .RootPaymentMode import RootPaymentMode
-
-
-
 from .PaymentFlow import PaymentFlow
+
+
+
+from .RootPaymentMode import RootPaymentMode
 
 
 
@@ -21,7 +21,7 @@ class PaymentOptionAndFlow(BaseSchema):
     #  swagger.json
 
     
-    payment_option = fields.List(fields.Nested(RootPaymentMode, required=False), required=False)
-    
     payment_flows = fields.Nested(PaymentFlow, required=False)
+    
+    payment_option = fields.List(fields.Nested(RootPaymentMode, required=False), required=False)
     

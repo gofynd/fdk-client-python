@@ -23,11 +23,11 @@ class DepartmentErrorResponse(BaseSchema):
     #  swagger.json
 
     
-    code = fields.Str(required=False)
-    
     meta = fields.Dict(required=False)
     
     status = fields.Int(required=False)
+    
+    code = fields.Str(required=False)
     
     message = fields.Str(required=False)
     

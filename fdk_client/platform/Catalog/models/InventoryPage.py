@@ -23,7 +23,7 @@ class InventoryPage(BaseSchema):
     #  swagger.json
 
     
-    has_previous = fields.Boolean(required=False)
+    next_id = fields.Str(required=False)
     
     has_next = fields.Boolean(required=False)
     
@@ -31,5 +31,5 @@ class InventoryPage(BaseSchema):
     
     type = fields.Str(required=False)
     
-    next_id = fields.Str(required=False)
+    has_previous = fields.Boolean(required=False)
     

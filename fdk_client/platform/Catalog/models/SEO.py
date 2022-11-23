@@ -17,7 +17,7 @@ class SEO(BaseSchema):
     #  swagger.json
 
     
-    title = fields.Raw(required=False)
-    
     description = fields.Raw(required=False)
+    
+    title = fields.Raw(required=False)
     

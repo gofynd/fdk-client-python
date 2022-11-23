@@ -21,7 +21,7 @@ class Seller(BaseSchema):
     
     count = fields.Int(required=False)
     
-    uid = fields.Int(required=False)
-    
     name = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
     
