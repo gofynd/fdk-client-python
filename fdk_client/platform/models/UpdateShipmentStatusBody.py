@@ -20,7 +20,7 @@ class UpdateShipmentStatusBody(BaseSchema):
     
     shipments = fields.Dict(required=False)
     
-    statuses = fields.List(fields.Dict(required=False), required=False)
+    statuses = fields.List(fields.Raw(required=False), required=False)
     
     force_transition = fields.Boolean(required=False)
     

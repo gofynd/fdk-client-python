@@ -37,7 +37,6 @@ class Catalog:
             "getProductComparisonBySlugs": "/service/application/catalog/v1.0/products/compare/",
             "getSimilarComparisonProductBySlug": "/service/application/catalog/v1.0/products/{slug}/similar/compare/",
             "getComparedFrequentlyProductBySlug": "/service/application/catalog/v1.0/products/{slug}/similar/compared-frequently/",
-            "getProductSimilarByIdentifier": "/service/application/catalog/v1.0/products/{slug}/similar/{similar_type}/",
             "getProductVariantsBySlug": "/service/application/catalog/v1.0/products/{slug}/variants/",
             "getProductStockByIds": "/service/application/catalog/v1.0/products/stock-status/",
             "getProductStockForTimeByIds": "/service/application/catalog/v1.0/products/stock-status/poll/",
@@ -220,39 +219,6 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getComparedFrequentlyProductBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/products/{slug}/similar/compared-frequently/", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-    
-    async def getProductSimilarByIdentifier(self, slug=None, similar_type=None, body=""):
-        """Use this API to retrieve products similar to the one specified by its slug. You can search not only similar looking products, but also those that are sold by same seller, or those that belong to the same category, price, specifications, etc.
-        :param slug : A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ : type string
-        :param similar_type : Similarity criteria such as basic, visual, price, seller, category and spec. Visual - Products having similar patterns, Price - Products in similar price range, Seller - Products sold by the same seller, Category - Products belonging to the same category, e.g. sports shoes, Spec - Products having similar specifications, e.g. phones with same memory. : type string
-        """
-        payload = {}
-        
-        if slug:
-            payload["slug"] = slug
-        
-        if similar_type:
-            payload["similar_type"] = similar_type
-        
-        # Parameter validation
-        schema = CatalogValidator.getProductSimilarByIdentifier()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getProductSimilarByIdentifier"], proccessed_params="""{"required":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/","schema":{"type":"string"},"required":true},{"in":"path","name":"similar_type","description":"Similarity criteria such as basic, visual, price, seller, category and spec. Visual - Products having similar patterns, Price - Products in similar price range, Seller - Products sold by the same seller, Category - Products belonging to the same category, e.g. sports shoes, Spec - Products having similar specifications, e.g. phones with same memory.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/","schema":{"type":"string"},"required":true},{"in":"path","name":"similar_type","description":"Similarity criteria such as basic, visual, price, seller, category and spec. Visual - Products having similar patterns, Price - Products in similar price range, Seller - Products sold by the same seller, Category - Products belonging to the same category, e.g. sports shoes, Spec - Products having similar specifications, e.g. phones with same memory.","schema":{"type":"string"},"required":true}]}""", slug=slug, similar_type=similar_type)
-        query_string = await create_query_string(slug=slug, similar_type=similar_type)
-        headers = {
-            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
-        }
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getProductSimilarByIdentifier"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/products/{slug}/similar/{similar_type}/", slug=slug, similar_type=similar_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
     async def getProductVariantsBySlug(self, slug=None, body=""):
         """A product can have a different type of variants such as colour, shade, memory. Use this API to fetch all the available variants of a product using its slug.
@@ -1085,12 +1051,13 @@ class Catalog:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getProductBundlesBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/product-grouping/", slug=slug, id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
-    async def getProductPriceBySlug(self, slug=None, size=None, store_id=None, pincode=None, body=""):
+    async def getProductPriceBySlug(self, slug=None, size=None, store_id=None, pincode=None, moq=None, body=""):
         """Prices may vary for different sizes of a product. Use this API to retrieve the price of a product size at all the selling locations near to a PIN Code.
         :param slug : A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ : type string
         :param size : A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes : type string
         :param store_id : The ID of the store that is selling the product, e.g. 1,2,3. : type integer
         :param pincode : The PIN Code of the area near which the selling locations should be searched, e.g. 400059. : type string
+        :param moq : An Integer indication the Minimum Order Quantity of a product, e.g. 100. : type integer
         """
         payload = {}
         
@@ -1106,13 +1073,16 @@ class Catalog:
         if pincode:
             payload["pincode"] = pincode
         
+        if moq:
+            payload["moq"] = moq
+        
         # Parameter validation
         schema = CatalogValidator.getProductPriceBySlug()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getProductPriceBySlug"], proccessed_params="""{"required":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/","schema":{"type":"string"},"required":true},{"in":"path","name":"size","description":"A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"store_id","description":"The ID of the store that is selling the product, e.g. 1,2,3.","schema":{"type":"integer"},"required":false},{"in":"query","name":"pincode","description":"The PIN Code of the area near which the selling locations should be searched, e.g. 400059.","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"store_id","description":"The ID of the store that is selling the product, e.g. 1,2,3.","schema":{"type":"integer"},"required":false},{"in":"query","name":"pincode","description":"The PIN Code of the area near which the selling locations should be searched, e.g. 400059.","schema":{"type":"string"},"required":false}],"headers":[],"path":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/","schema":{"type":"string"},"required":true},{"in":"path","name":"size","description":"A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes","schema":{"type":"string"},"required":true}]}""", slug=slug, size=size, store_id=store_id, pincode=pincode)
-        query_string = await create_query_string(slug=slug, size=size, store_id=store_id, pincode=pincode)
+        url_with_params = await create_url_with_params(api_url=self._urls["getProductPriceBySlug"], proccessed_params="""{"required":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/","schema":{"type":"string"},"required":true},{"in":"path","name":"size","description":"A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"store_id","description":"The ID of the store that is selling the product, e.g. 1,2,3.","schema":{"type":"integer"},"required":false},{"in":"query","name":"pincode","description":"The PIN Code of the area near which the selling locations should be searched, e.g. 400059.","schema":{"type":"string"},"required":false},{"in":"query","name":"moq","description":"An Integer indication the Minimum Order Quantity of a product, e.g. 100.","schema":{"type":"integer"},"required":false}],"query":[{"in":"query","name":"store_id","description":"The ID of the store that is selling the product, e.g. 1,2,3.","schema":{"type":"integer"},"required":false},{"in":"query","name":"pincode","description":"The PIN Code of the area near which the selling locations should be searched, e.g. 400059.","schema":{"type":"string"},"required":false},{"in":"query","name":"moq","description":"An Integer indication the Minimum Order Quantity of a product, e.g. 100.","schema":{"type":"integer"},"required":false}],"headers":[],"path":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/","schema":{"type":"string"},"required":true},{"in":"path","name":"size","description":"A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes","schema":{"type":"string"},"required":true}]}""", slug=slug, size=size, store_id=store_id, pincode=pincode, moq=moq)
+        query_string = await create_query_string(slug=slug, size=size, store_id=store_id, pincode=pincode, moq=moq)
         headers = {
             "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
         }
@@ -1124,7 +1094,7 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getProductPriceBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v2.0/products/{slug}/sizes/{size}/price/", slug=slug, size=size, store_id=store_id, pincode=pincode), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getProductPriceBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v2.0/products/{slug}/sizes/{size}/price/", slug=slug, size=size, store_id=store_id, pincode=pincode, moq=moq), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
     async def getProductSellersBySlug(self, slug=None, size=None, pincode=None, strategy=None, page_no=None, page_size=None, body=""):
         """A product of a particular size may be sold by multiple sellers. Use this API to fetch the sellers having the stock of a particular size at a given PIN Code.
@@ -2644,6 +2614,7 @@ class User:
             "loginWithOTP": "/service/application/user/authentication/v1.0/login/otp",
             "loginWithEmailAndPassword": "/service/application/user/authentication/v1.0/login/password",
             "sendResetPasswordEmail": "/service/application/user/authentication/v1.0/login/password/reset",
+            "sendResetPasswordMobile": "/service/application/user/authentication/v1.0/login/password/mobile/reset",
             "forgotPassword": "/service/application/user/authentication/v1.0/login/password/reset/forgot",
             "sendResetToken": "/service/application/user/authentication/v1.0/login/password/reset/token",
             "loginWithToken": "/service/application/user/authentication/v1.0/login/token",
@@ -2652,6 +2623,7 @@ class User:
             "verifyMobile": "/service/application/user/authentication/v1.0/verify/mobile",
             "hasPassword": "/service/application/user/authentication/v1.0/has-password",
             "updatePassword": "/service/application/user/authentication/v1.0/password",
+            "deleteUser": "/service/application/user/authentication/v1.0/delete",
             "logout": "/service/application/user/authentication/v1.0/logout",
             "sendOTPOnMobile": "/service/application/user/authentication/v1.0/otp/mobile/send",
             "verifyMobileOTP": "/service/application/user/authentication/v1.0/otp/mobile/verify",
@@ -2946,6 +2918,40 @@ class User:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["sendResetPasswordEmail"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/login/password/reset", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
+    async def sendResetPasswordMobile(self, platform=None, body=""):
+        """Use this API to reset a password using the link sent on mobile.
+        :param platform : ID of the application : type string
+        """
+        payload = {}
+        
+        if platform:
+            payload["platform"] = platform
+        
+        # Parameter validation
+        schema = UserValidator.sendResetPasswordMobile()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models.SendResetPasswordMobileRequestSchema import SendResetPasswordMobileRequestSchema
+        schema = SendResetPasswordMobileRequestSchema()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["sendResetPasswordMobile"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", platform=platform)
+        query_string = await create_query_string(platform=platform)
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["sendResetPasswordMobile"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/login/password/mobile/reset", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+    
     async def forgotPassword(self, body=""):
         """Use this API to reset a password using the code sent on email or SMS.
         """
@@ -3184,6 +3190,36 @@ class User:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["updatePassword"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/password", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+    
+    async def deleteUser(self, body=""):
+        """verify otp and delete user
+        """
+        payload = {}
+        
+        # Parameter validation
+        schema = UserValidator.deleteUser()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models.DeleteApplicationUserRequestSchema import DeleteApplicationUserRequestSchema
+        schema = DeleteApplicationUserRequestSchema()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["deleteUser"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["deleteUser"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/delete", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
     async def logout(self, body=""):
         """Use this API to check to logout a user from the app.
@@ -6203,15 +6239,15 @@ class Order:
     def __init__(self, config):
         self._conf = config
         self._relativeUrls = {
-            "getShipmentById": "/service/application/orders/v1.0/orders/shipments/{shipment_id}",
-            "getCustomerDetailsByShipmentId": "/service/application/orders/v1.0/orders/{order_id}/shipments/{shipment_id}/customer-details",
-            "sendOtpToShipmentCustomer": "/service/application/orders/v1.0/orders/{order_id}/shipments/{shipment_id}/otp/send",
-            "getShipmentReasons": "/service/application/orders/v1.0/orders/shipments/{shipment_id}/reasons",
-            "verifyOtpShipmentCustomer": "/service/application/orders/v1.0/orders/{order_id}/shipments/{shipment_id}/otp/verify",
             "getOrders": "/service/application/orders/v1.0/orders",
             "getOrderById": "/service/application/orders/v1.0/orders/{order_id}",
-            "getPosOrderById": "/service/application/orders/v1.0/pos-order/{order_id}",
+            "getPosOrderById": "/service/application/orders/v1.0/orders/pos-order/{order_id}",
+            "getShipmentById": "/service/application/orders/v1.0/orders/shipments/{shipment_id}",
             "trackShipment": "/service/application/orders/v1.0/orders/shipments/{shipment_id}/track",
+            "getCustomerDetailsByShipmentId": "/service/application/orders/v1.0/orders/{order_id}/shipments/{shipment_id}/customer-details",
+            "sendOtpToShipmentCustomer": "/service/application/orders/v1.0/orders/{order_id}/shipments/{shipment_id}/otp/send/",
+            "verifyOtpShipmentCustomer": "/service/application/orders/v1.0/orders/{order_id}/shipments/{shipment_id}/otp/verify/",
+            "getShipmentBagReasons": "/service/application/orders/v1.0/orders/shipments/{shipment_id}/bags/{bag_id}/reasons",
             "updateShipmentStatus": "/service/application/order-manage/v1.0/orders/shipments/{shipment_id}/status",
             "getInvoiceByShipmentId": "/service/application/document/v1.0/orders/shipments/{shipment_id}/invoice",
             "getCreditNoteByShipmentId": "/service/application/document/v1.0/orders/shipments/{shipment_id}/credit-note"
@@ -6223,172 +6259,6 @@ class Order:
 
     async def updateUrls(self, urls):
         self._urls.update(urls)
-    
-    async def getShipmentById(self, shipment_id=None, body=""):
-        """Use this API to retrieve shipment details such as price breakup, tracking details, store information, etc. using Shipment ID.
-        :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
-        """
-        payload = {}
-        
-        if shipment_id:
-            payload["shipment_id"] = shipment_id
-        
-        # Parameter validation
-        schema = OrderValidator.getShipmentById()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getShipmentById"], proccessed_params="""{"required":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string","default":"16602143565551542371K"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string","default":"16602143565551542371K"}}]}""", shipment_id=shipment_id)
-        query_string = await create_query_string(shipment_id=shipment_id)
-        headers = {
-            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
-        }
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getShipmentById"]).netloc, "get", await create_url_without_domain("/service/application/orders/v1.0/orders/shipments/{shipment_id}", shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-    
-    async def getCustomerDetailsByShipmentId(self, order_id=None, shipment_id=None, body=""):
-        """Use this API to retrieve customer details such as mobileno using Shipment ID.
-        :param order_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
-        :param shipment_id : A unique number used for identifying and tracking your orders. : type string
-        """
-        payload = {}
-        
-        if order_id:
-            payload["order_id"] = order_id
-        
-        if shipment_id:
-            payload["shipment_id"] = shipment_id
-        
-        # Parameter validation
-        schema = OrderValidator.getCustomerDetailsByShipmentId()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getCustomerDetailsByShipmentId"], proccessed_params="""{"required":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"order_id","required":true,"schema":{"type":"string","default":"16544950215681060915J"}},{"in":"path","description":"A unique number used for identifying and tracking your orders.","name":"shipment_id","required":true,"schema":{"type":"string","default":"FY6299E19701B4EAEFC2"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"order_id","required":true,"schema":{"type":"string","default":"16544950215681060915J"}},{"in":"path","description":"A unique number used for identifying and tracking your orders.","name":"shipment_id","required":true,"schema":{"type":"string","default":"FY6299E19701B4EAEFC2"}}]}""", order_id=order_id, shipment_id=shipment_id)
-        query_string = await create_query_string(order_id=order_id, shipment_id=shipment_id)
-        headers = {
-            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
-        }
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getCustomerDetailsByShipmentId"]).netloc, "get", await create_url_without_domain("/service/application/orders/v1.0/orders/{order_id}/shipments/{shipment_id}/customer-details", order_id=order_id, shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-    
-    async def sendOtpToShipmentCustomer(self, order_id=None, shipment_id=None, body=""):
-        """Use this API to send OTP to the customer of the mapped Shipment.
-        :param order_id : A unique number used for identifying and tracking your orders. : type string
-        :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
-        """
-        payload = {}
-        
-        if order_id:
-            payload["order_id"] = order_id
-        
-        if shipment_id:
-            payload["shipment_id"] = shipment_id
-        
-        # Parameter validation
-        schema = OrderValidator.sendOtpToShipmentCustomer()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["sendOtpToShipmentCustomer"], proccessed_params="""{"required":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string","default":"FY6299E19701B4EAEFC2"}},{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string","default":"16544950215681060915J"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string","default":"FY6299E19701B4EAEFC2"}},{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string","default":"16544950215681060915J"}}]}""", order_id=order_id, shipment_id=shipment_id)
-        query_string = await create_query_string(order_id=order_id, shipment_id=shipment_id)
-        headers = {
-            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
-        }
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["sendOtpToShipmentCustomer"]).netloc, "post", await create_url_without_domain("/service/application/orders/v1.0/orders/{order_id}/shipments/{shipment_id}/otp/send", order_id=order_id, shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-    
-    async def getShipmentReasons(self, shipment_id=None, bag_id=None, body=""):
-        """Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
-        :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
-        :param bag_id : Bag Id of a specefic bags which will help to categorize the reasons : type string
-        """
-        payload = {}
-        
-        if shipment_id:
-            payload["shipment_id"] = shipment_id
-        
-        if bag_id:
-            payload["bag_id"] = bag_id
-        
-        # Parameter validation
-        schema = OrderValidator.getShipmentReasons()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getShipmentReasons"], proccessed_params="""{"required":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string","default":"16538880933361957252J"}},{"in":"query","description":"Bag Id of a specefic bags which will help to categorize the reasons","name":"bag_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"in":"query","description":"Bag Id of a specefic bags which will help to categorize the reasons","name":"bag_id","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string","default":"16538880933361957252J"}}]}""", shipment_id=shipment_id, bag_id=bag_id)
-        query_string = await create_query_string(shipment_id=shipment_id, bag_id=bag_id)
-        headers = {
-            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
-        }
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getShipmentReasons"]).netloc, "get", await create_url_without_domain("/service/application/orders/v1.0/orders/shipments/{shipment_id}/reasons", shipment_id=shipment_id, bag_id=bag_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-    
-    async def verifyOtpShipmentCustomer(self, order_id=None, shipment_id=None, body=""):
-        """Use this API to verify OTP and create a session token with custom payload.
-        :param order_id : A unique number used for identifying and tracking your orders. : type string
-        :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type integer
-        """
-        payload = {}
-        
-        if order_id:
-            payload["order_id"] = order_id
-        
-        if shipment_id:
-            payload["shipment_id"] = shipment_id
-        
-        # Parameter validation
-        schema = OrderValidator.verifyOtpShipmentCustomer()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models.VerifyOtp import VerifyOtp
-        schema = VerifyOtp()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["verifyOtpShipmentCustomer"], proccessed_params="""{"required":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string","default":"FYMP6294545C010B89FD"}},{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"integer","default":"16538880933361957252J"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string","default":"FYMP6294545C010B89FD"}},{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"integer","default":"16538880933361957252J"}}]}""", order_id=order_id, shipment_id=shipment_id)
-        query_string = await create_query_string(order_id=order_id, shipment_id=shipment_id)
-        headers = {
-            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
-        }
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["verifyOtpShipmentCustomer"]).netloc, "post", await create_url_without_domain("/service/application/orders/v1.0/orders/{order_id}/shipments/{shipment_id}/otp/verify", order_id=order_id, shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
     async def getOrders(self, status=None, page_no=None, page_size=None, from_date=None, to_date=None, body=""):
         """Use this API to retrieve all the orders.
@@ -6491,7 +6361,36 @@ class Order:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getPosOrderById"]).netloc, "get", await create_url_without_domain("/service/application/orders/v1.0/pos-order/{order_id}", order_id=order_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getPosOrderById"]).netloc, "get", await create_url_without_domain("/service/application/orders/v1.0/orders/pos-order/{order_id}", order_id=order_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+    
+    async def getShipmentById(self, shipment_id=None, body=""):
+        """Use this API to retrieve shipment details such as price breakup, tracking details, store information, etc. using Shipment ID.
+        :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
+        """
+        payload = {}
+        
+        if shipment_id:
+            payload["shipment_id"] = shipment_id
+        
+        # Parameter validation
+        schema = OrderValidator.getShipmentById()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getShipmentById"], proccessed_params="""{"required":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string","default":"16602143565551542371K"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string","default":"16602143565551542371K"}}]}""", shipment_id=shipment_id)
+        query_string = await create_query_string(shipment_id=shipment_id)
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getShipmentById"]).netloc, "get", await create_url_without_domain("/service/application/orders/v1.0/orders/shipments/{shipment_id}", shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
     async def trackShipment(self, shipment_id=None, body=""):
         """Track Shipment by shipment id, for application based on application Id
@@ -6522,9 +6421,146 @@ class Order:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["trackShipment"]).netloc, "get", await create_url_without_domain("/service/application/orders/v1.0/orders/shipments/{shipment_id}/track", shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
-    async def updateShipmentStatus(self, shipment_id=None, body=""):
-        """Use this API to update the status of a shipment using its shipment ID.
+    async def getCustomerDetailsByShipmentId(self, order_id=None, shipment_id=None, body=""):
+        """Use this API to retrieve customer details such as mobileno using Shipment ID.
+        :param order_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
+        :param shipment_id : A unique number used for identifying and tracking your orders. : type string
+        """
+        payload = {}
+        
+        if order_id:
+            payload["order_id"] = order_id
+        
+        if shipment_id:
+            payload["shipment_id"] = shipment_id
+        
+        # Parameter validation
+        schema = OrderValidator.getCustomerDetailsByShipmentId()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getCustomerDetailsByShipmentId"], proccessed_params="""{"required":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"order_id","required":true,"schema":{"type":"string","default":"16544950215681060915J"}},{"in":"path","description":"A unique number used for identifying and tracking your orders.","name":"shipment_id","required":true,"schema":{"type":"string","default":"FY6299E19701B4EAEFC2"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"order_id","required":true,"schema":{"type":"string","default":"16544950215681060915J"}},{"in":"path","description":"A unique number used for identifying and tracking your orders.","name":"shipment_id","required":true,"schema":{"type":"string","default":"FY6299E19701B4EAEFC2"}}]}""", order_id=order_id, shipment_id=shipment_id)
+        query_string = await create_query_string(order_id=order_id, shipment_id=shipment_id)
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getCustomerDetailsByShipmentId"]).netloc, "get", await create_url_without_domain("/service/application/orders/v1.0/orders/{order_id}/shipments/{shipment_id}/customer-details", order_id=order_id, shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+    
+    async def sendOtpToShipmentCustomer(self, order_id=None, shipment_id=None, body=""):
+        """Use this API to send OTP to the customer of the mapped Shipment.
+        :param order_id : A unique number used for identifying and tracking your orders. : type string
         :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
+        """
+        payload = {}
+        
+        if order_id:
+            payload["order_id"] = order_id
+        
+        if shipment_id:
+            payload["shipment_id"] = shipment_id
+        
+        # Parameter validation
+        schema = OrderValidator.sendOtpToShipmentCustomer()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["sendOtpToShipmentCustomer"], proccessed_params="""{"required":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string","default":"FY6299E19701B4EAEFC2"}},{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string","default":"16544950215681060915J"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string","default":"FY6299E19701B4EAEFC2"}},{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string","default":"16544950215681060915J"}}]}""", order_id=order_id, shipment_id=shipment_id)
+        query_string = await create_query_string(order_id=order_id, shipment_id=shipment_id)
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["sendOtpToShipmentCustomer"]).netloc, "post", await create_url_without_domain("/service/application/orders/v1.0/orders/{order_id}/shipments/{shipment_id}/otp/send/", order_id=order_id, shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+    
+    async def verifyOtpShipmentCustomer(self, order_id=None, shipment_id=None, body=""):
+        """Use this API to verify OTP and create a session token with custom payload.
+        :param order_id : A unique number used for identifying and tracking your orders. : type string
+        :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
+        """
+        payload = {}
+        
+        if order_id:
+            payload["order_id"] = order_id
+        
+        if shipment_id:
+            payload["shipment_id"] = shipment_id
+        
+        # Parameter validation
+        schema = OrderValidator.verifyOtpShipmentCustomer()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models.VerifyOtp import VerifyOtp
+        schema = VerifyOtp()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["verifyOtpShipmentCustomer"], proccessed_params="""{"required":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string","default":"FYMP6294545C010B89FD"}},{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string","default":"16538880933361957252J"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string","default":"FYMP6294545C010B89FD"}},{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string","default":"16538880933361957252J"}}]}""", order_id=order_id, shipment_id=shipment_id)
+        query_string = await create_query_string(order_id=order_id, shipment_id=shipment_id)
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["verifyOtpShipmentCustomer"]).netloc, "post", await create_url_without_domain("/service/application/orders/v1.0/orders/{order_id}/shipments/{shipment_id}/otp/verify/", order_id=order_id, shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+    
+    async def getShipmentBagReasons(self, shipment_id=None, bag_id=None, body=""):
+        """Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
+        :param shipment_id : ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
+        :param bag_id : ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type integer
+        """
+        payload = {}
+        
+        if shipment_id:
+            payload["shipment_id"] = shipment_id
+        
+        if bag_id:
+            payload["bag_id"] = bag_id
+        
+        # Parameter validation
+        schema = OrderValidator.getShipmentBagReasons()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getShipmentBagReasons"], proccessed_params="""{"required":[{"in":"path","description":"ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string","default":"16538880933361957252J"}},{"in":"path","description":"ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"bag_id","required":true,"schema":{"type":"integer","default":109080}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","description":"ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string","default":"16538880933361957252J"}},{"in":"path","description":"ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"bag_id","required":true,"schema":{"type":"integer","default":109080}}]}""", shipment_id=shipment_id, bag_id=bag_id)
+        query_string = await create_query_string(shipment_id=shipment_id, bag_id=bag_id)
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getShipmentBagReasons"]).netloc, "get", await create_url_without_domain("/service/application/orders/v1.0/orders/shipments/{shipment_id}/bags/{bag_id}/reasons", shipment_id=shipment_id, bag_id=bag_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+    
+    async def updateShipmentStatus(self, shipment_id=None, body=""):
+        """updateShipmentStatus
+        :param shipment_id :  : type string
         """
         payload = {}
         
@@ -6536,12 +6572,12 @@ class Order:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ShipmentStatusUpdateBody import ShipmentStatusUpdateBody
-        schema = ShipmentStatusUpdateBody()
+        from .models.StatusUpdateInternalRequest import StatusUpdateInternalRequest
+        schema = StatusUpdateInternalRequest()
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["updateShipmentStatus"], proccessed_params="""{"required":[{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string"}}]}""", shipment_id=shipment_id)
+        url_with_params = await create_url_with_params(api_url=self._urls["updateShipmentStatus"], proccessed_params="""{"required":[{"in":"path","name":"shipment_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"shipment_id","required":true,"schema":{"type":"string"}}]}""", shipment_id=shipment_id)
         query_string = await create_query_string(shipment_id=shipment_id)
         headers = {
             "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()

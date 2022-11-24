@@ -5,15 +5,7 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-
-
-
-
-
-
-
-
-
+from .ReasonsResponse import ReasonsResponse
 
 
 
@@ -22,16 +14,8 @@ class ShipmentReasonsResponse(BaseSchema):
     # Order swagger.json
 
     
-    reason_text = fields.Str(required=False)
+    reasons = fields.List(fields.Nested(ReasonsResponse, required=False), required=False)
     
-    flow = fields.Str(required=False)
-    
-    feedback_type = fields.Str(required=False)
-    
-    priority = fields.Int(required=False)
-    
-    reason_id = fields.Int(required=False)
-    
-    show_text_area = fields.Boolean(required=False)
+    success = fields.Boolean(required=False)
     
 

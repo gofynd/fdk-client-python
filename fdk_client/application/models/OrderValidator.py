@@ -7,39 +7,6 @@ from ..models.BaseSchema import BaseSchema
 
 class OrderValidator:
     
-    class getShipmentById(BaseSchema):
-        
-        shipment_id = fields.Str(required=False)
-         
-    
-    class getCustomerDetailsByShipmentId(BaseSchema):
-        
-        order_id = fields.Str(required=False)
-        
-        shipment_id = fields.Str(required=False)
-         
-    
-    class sendOtpToShipmentCustomer(BaseSchema):
-        
-        order_id = fields.Str(required=False)
-        
-        shipment_id = fields.Str(required=False)
-         
-    
-    class getShipmentReasons(BaseSchema):
-        
-        shipment_id = fields.Str(required=False)
-        
-        bag_id = fields.Str(required=False)
-         
-    
-    class verifyOtpShipmentCustomer(BaseSchema):
-        
-        order_id = fields.Str(required=False)
-        
-        shipment_id = fields.Int(required=False)
-         
-    
     class getOrders(BaseSchema):
         
         status = fields.Int(required=False)
@@ -63,9 +30,42 @@ class OrderValidator:
         order_id = fields.Str(required=False)
          
     
+    class getShipmentById(BaseSchema):
+        
+        shipment_id = fields.Str(required=False)
+         
+    
     class trackShipment(BaseSchema):
         
         shipment_id = fields.Str(required=False)
+         
+    
+    class getCustomerDetailsByShipmentId(BaseSchema):
+        
+        order_id = fields.Str(required=False)
+        
+        shipment_id = fields.Str(required=False)
+         
+    
+    class sendOtpToShipmentCustomer(BaseSchema):
+        
+        order_id = fields.Str(required=False)
+        
+        shipment_id = fields.Str(required=False)
+         
+    
+    class verifyOtpShipmentCustomer(BaseSchema):
+        
+        order_id = fields.Str(required=False)
+        
+        shipment_id = fields.Str(required=False)
+         
+    
+    class getShipmentBagReasons(BaseSchema):
+        
+        shipment_id = fields.Str(required=False)
+        
+        bag_id = fields.Int(required=False)
          
     
     class updateShipmentStatus(BaseSchema):

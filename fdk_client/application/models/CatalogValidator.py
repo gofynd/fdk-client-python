@@ -34,13 +34,6 @@ class CatalogValidator:
         slug = fields.Str(required=False)
          
     
-    class getProductSimilarByIdentifier(BaseSchema):
-        
-        slug = fields.Str(required=False)
-        
-        similar_type = fields.Str(required=False)
-         
-    
     class getProductVariantsBySlug(BaseSchema):
         
         slug = fields.Str(required=False)
@@ -248,6 +241,8 @@ class CatalogValidator:
         store_id = fields.Int(required=False)
         
         pincode = fields.Str(required=False)
+        
+        moq = fields.Int(required=False)
          
     
     class getProductSellersBySlug(BaseSchema):

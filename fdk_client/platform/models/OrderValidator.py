@@ -70,8 +70,6 @@ class OrderValidator:
         
         dp = fields.Str(required=False)
         
-        shorten_urls = fields.Boolean(required=False)
-        
         filter_type = fields.Str(required=False)
          
     
@@ -122,8 +120,6 @@ class OrderValidator:
         stores = fields.Str(required=False)
         
         status = fields.Str(required=False)
-        
-        shorten_urls = fields.Boolean(required=False)
         
         filter_type = fields.Str(required=False)
          
@@ -239,7 +235,7 @@ class OrderValidator:
         
         user_id = fields.Str(required=False)
         
-        shorten_urls = fields.Boolean(required=False)
+        shorten_urls = fields.Str(required=False)
         
         filter_type = fields.Str(required=False)
          
