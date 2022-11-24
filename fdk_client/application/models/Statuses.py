@@ -16,9 +16,9 @@ class Statuses(BaseSchema):
     # Order swagger.json
 
     
-    display = fields.Str(required=False)
-    
     is_selected = fields.Boolean(required=False)
+    
+    display = fields.Str(required=False)
     
     value = fields.Int(required=False)
     

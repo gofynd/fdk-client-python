@@ -28,19 +28,19 @@ class ProductVariantItemResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    is_available = fields.Boolean(required=False)
+    slug = fields.Str(required=False)
     
     action = fields.Nested(ProductListingAction, required=False)
     
+    is_available = fields.Boolean(required=False)
+    
     uid = fields.Int(required=False)
-    
-    name = fields.Str(required=False)
-    
-    color_name = fields.Str(required=False)
     
     color = fields.Str(required=False)
     
-    slug = fields.Str(required=False)
+    color_name = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
     
     value = fields.Str(required=False)
     

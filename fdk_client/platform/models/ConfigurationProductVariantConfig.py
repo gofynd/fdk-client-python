@@ -24,9 +24,9 @@ class ConfigurationProductVariantConfig(BaseSchema):
     # Catalog swagger.json
 
     
-    logo = fields.Str(required=False)
-    
     display_type = fields.Str(required=False)
+    
+    priority = fields.Int(required=False)
     
     key = fields.Str(required=False)
     
@@ -34,8 +34,8 @@ class ConfigurationProductVariantConfig(BaseSchema):
     
     is_active = fields.Boolean(required=False)
     
-    name = fields.Str(required=False)
+    logo = fields.Str(required=False)
     
-    priority = fields.Int(required=False)
+    name = fields.Str(required=False)
     
 
