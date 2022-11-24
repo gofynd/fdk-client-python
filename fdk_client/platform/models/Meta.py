@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
 class Meta(BaseSchema):
-    # Catalog swagger.json
+    # Order swagger.json
 
     
-    headers = fields.Dict(required=False)
+    kafka_emission_status = fields.Int(required=False)
     
-    values = fields.List(fields.Dict(required=False), required=False)
-    
-    unit = fields.Str(required=False)
+    state_manager_used = fields.Str(required=False)
     
 

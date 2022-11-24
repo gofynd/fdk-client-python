@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class RedirectionSchema(BaseSchema):
-    # Content swagger.json
+class OrderDetails(BaseSchema):
+    # Order swagger.json
 
     
-    redirect_from = fields.Str(required=False)
+    fynd_order_id = fields.Str(required=False)
     
-    redirect_to = fields.Str(required=False)
+    created_at = fields.Str(required=False)
     
 

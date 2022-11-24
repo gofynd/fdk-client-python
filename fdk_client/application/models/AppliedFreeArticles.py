@@ -18,12 +18,12 @@ class AppliedFreeArticles(BaseSchema):
     # Cart swagger.json
 
     
-    article_id = fields.Str(required=False)
+    quantity = fields.Int(required=False)
     
     parent_item_identifier = fields.Str(required=False)
     
     free_gift_item_detials = fields.List(fields.Nested(FreeGiftItem, required=False), required=False)
     
-    quantity = fields.Int(required=False)
+    article_id = fields.Str(required=False)
     
 

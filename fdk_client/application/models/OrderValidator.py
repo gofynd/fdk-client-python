@@ -58,12 +58,14 @@ class OrderValidator:
         
         order_id = fields.Str(required=False)
         
-        shipment_id = fields.Int(required=False)
+        shipment_id = fields.Str(required=False)
          
     
-    class getPlatformShipmentReasons(BaseSchema):
+    class getShipmentBagReasons(BaseSchema):
         
-        bag_id = fields.Str(required=False)
+        shipment_id = fields.Str(required=False)
+        
+        bag_id = fields.Int(required=False)
          
     
     class updateShipmentStatus(BaseSchema):
