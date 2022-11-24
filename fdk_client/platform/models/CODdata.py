@@ -26,8 +26,8 @@ class CODdata(BaseSchema):
     
     limit = fields.Int(required=False)
     
-    remaining_limit = fields.Int(required=False)
-    
     usages = fields.Int(required=False)
+    
+    remaining_limit = fields.Int(required=False)
     
 

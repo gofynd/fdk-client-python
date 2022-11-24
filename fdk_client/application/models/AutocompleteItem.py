@@ -14,6 +14,8 @@ from .Media import Media
 from .ProductListingAction import ProductListingAction
 
 
+
+
 class AutocompleteItem(BaseSchema):
     # Catalog swagger.json
 
@@ -25,5 +27,7 @@ class AutocompleteItem(BaseSchema):
     type = fields.Str(required=False)
     
     action = fields.Nested(ProductListingAction, required=False)
+    
+    _custom_json = fields.Dict(required=False)
     
 

@@ -12,14 +12,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class OrderQuantity(BaseSchema):
-    # Catalog swagger.json
+class CommunicationDetails(BaseSchema):
+    # Lead swagger.json
 
     
-    maximum = fields.Int(required=False)
+    value = fields.Str(required=False)
     
-    is_set = fields.Boolean(required=False)
+    description = fields.Str(required=False)
     
-    minimum = fields.Int(required=False)
+    enabled = fields.Boolean(required=False)
     
 
