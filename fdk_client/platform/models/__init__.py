@@ -1868,15 +1868,15 @@ from .ApplicationStoreJson import ApplicationStoreJson
     
 
     
-from .ContactDetails import ContactDetails
+from .CompanyTaxesSerializer import CompanyTaxesSerializer
     
 from .BusinessCountryInfo import BusinessCountryInfo
+    
+from .ContactDetails import ContactDetails
     
 from .Website import Website
     
 from .BusinessDetails import BusinessDetails
-    
-from .CompanyTaxesSerializer import CompanyTaxesSerializer
     
 from .GetCompanyProfileSerializerResponse import GetCompanyProfileSerializerResponse
     
