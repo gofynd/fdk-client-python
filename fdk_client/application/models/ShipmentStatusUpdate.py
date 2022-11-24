@@ -16,6 +16,6 @@ class ShipmentStatusUpdate(BaseSchema):
     
     message = fields.List(fields.Dict(required=False), required=False)
     
-    status = fields.Boolean(required=False)
+    success = fields.Boolean(required=False)
     
 

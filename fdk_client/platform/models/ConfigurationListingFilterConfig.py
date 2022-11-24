@@ -30,16 +30,16 @@ class ConfigurationListingFilterConfig(BaseSchema):
     
     key = fields.Str(required=False)
     
+    logo = fields.Str(required=False)
+    
     name = fields.Str(required=False)
     
     type = fields.Str(required=False)
     
+    display_name = fields.Str(required=False)
+    
     is_active = fields.Boolean(required=False)
     
     priority = fields.Int(required=False)
-    
-    display_name = fields.Str(required=False)
-    
-    logo = fields.Str(required=False)
     
 
