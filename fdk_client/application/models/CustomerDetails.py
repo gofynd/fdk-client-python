@@ -16,10 +16,10 @@ class CustomerDetails(BaseSchema):
     # Cart swagger.json
 
     
-    email = fields.Str(required=False)
+    mobile = fields.Str(required=False)
     
     name = fields.Str(required=False)
     
-    mobile = fields.Str(required=False)
+    email = fields.Str(required=False)
     
 

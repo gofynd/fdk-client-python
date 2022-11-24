@@ -1,4 +1,4 @@
-"""Application Models."""
+"""Platform Models."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -10,20 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
-class getInvoiceByShipmentId200Response(BaseSchema):
+class Error(BaseSchema):
     # Order swagger.json
 
     
     success = fields.Boolean(required=False)
     
-    presigned_type = fields.Str(required=False)
-    
-    shipment_id = fields.Str(required=False)
-    
-    presigned_url = fields.Str(required=False)
+    message = fields.Str(required=False)
     
 

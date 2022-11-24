@@ -20,11 +20,11 @@ class OrderPage(BaseSchema):
     # Order swagger.json
 
     
-    has_next = fields.Boolean(required=False)
+    type = fields.Str(required=False)
     
     current = fields.Int(required=False)
     
-    type = fields.Str(required=False)
+    has_next = fields.Boolean(required=False)
     
     item_total = fields.Int(required=False)
     

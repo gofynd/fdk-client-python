@@ -5,9 +5,9 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-
-
 from .EffectiveValues import EffectiveValues
+
+
 
 from .MarkedValues import MarkedValues
 
@@ -16,9 +16,9 @@ class ItemPriceDetails(BaseSchema):
     # Order swagger.json
 
     
-    currency = fields.Str(required=False)
-    
     effective = fields.Nested(EffectiveValues, required=False)
+    
+    currency = fields.Str(required=False)
     
     marked = fields.Nested(MarkedValues, required=False)
     

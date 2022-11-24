@@ -14,16 +14,16 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ShipmentUserInfo(BaseSchema):
+class NestedTrackingDetails(BaseSchema):
     # Order swagger.json
 
     
-    mobile = fields.Str(required=False)
+    status = fields.Str(required=False)
     
-    last_name = fields.Str(required=False)
+    time = fields.Str(required=False)
     
-    gender = fields.Str(required=False)
+    is_passed = fields.Boolean(required=False)
     
-    first_name = fields.Str(required=False)
+    is_current = fields.Boolean(required=False)
     
 

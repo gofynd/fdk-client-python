@@ -60,10 +60,3 @@ class DocumentEngineValidator:
         uid = fields.Str(required=False)
          
     
-    class getBulkShipmentStatus(BaseSchema):
-        
-        company_id = fields.Int(required=False)
-        
-        batch_id = fields.Str(required=False)
-         
-    

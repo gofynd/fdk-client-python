@@ -5,21 +5,13 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .Track import Track
 
 
-
-
-
-
-
-class Products(BaseSchema):
+class ShipmentTrack(BaseSchema):
     # Order swagger.json
 
     
-    identifier = fields.Str(required=False)
-    
-    line_number = fields.Int(required=False)
-    
-    quantity = fields.Int(required=False)
+    results = fields.List(fields.Nested(Track, required=False), required=False)
     
 

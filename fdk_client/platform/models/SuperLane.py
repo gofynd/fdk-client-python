@@ -7,19 +7,19 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
 from .SubLane import SubLane
+
+
 
 
 class SuperLane(BaseSchema):
     # Order swagger.json
 
     
-    text = fields.Str(required=False)
-    
     value = fields.Str(required=False)
     
     options = fields.List(fields.Nested(SubLane, required=False), required=False)
+    
+    text = fields.Str(required=False)
     
 

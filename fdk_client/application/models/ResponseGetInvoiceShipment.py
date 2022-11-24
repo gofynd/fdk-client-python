@@ -14,16 +14,16 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ShipmentUserInfo1(BaseSchema):
+class ResponseGetInvoiceShipment(BaseSchema):
     # Order swagger.json
 
     
-    gender = fields.Str(required=False)
+    success = fields.Boolean(required=False)
     
-    email = fields.Str(required=False)
+    presigned_type = fields.Str(required=False)
     
-    name = fields.Str(required=False)
+    shipment_id = fields.Str(required=False)
     
-    mobile = fields.Str(required=False)
+    presigned_url = fields.Str(required=False)
     
 

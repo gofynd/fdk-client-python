@@ -14,8 +14,8 @@ class ShipmentStatus(BaseSchema):
     # Order swagger.json
 
     
-    title = fields.Str(required=False)
-    
     hex_code = fields.Str(required=False)
+    
+    title = fields.Str(required=False)
     
 
