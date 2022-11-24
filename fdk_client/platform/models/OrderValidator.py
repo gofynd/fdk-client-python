@@ -83,31 +83,6 @@ class OrderValidator:
         bag_status = fields.Str(required=False)
          
     
-    class getLaneConfigCrossSellingData(BaseSchema):
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        super_lane = fields.Str(required=False)
-        
-        group_entity = fields.Str(required=False)
-        
-        from_date = fields.Str(required=False)
-        
-        to_date = fields.Str(required=False)
-        
-        dp_ids = fields.Str(required=False)
-        
-        stores = fields.Str(required=False)
-        
-        sales_channel = fields.Str(required=False)
-        
-        payment_mode = fields.Str(required=False)
-        
-        bag_status = fields.Str(required=False)
-         
-    
     class getApplicationShipments(BaseSchema):
         
         company_id = fields.Int(required=False)
@@ -218,6 +193,13 @@ class OrderValidator:
     class upsertJioCode(BaseSchema):
         
         company_id = fields.Int(required=False)
+         
+    
+    class getBulkInvoice(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        batch_id = fields.Str(required=False)
          
     
     class bulkActionProcessXlsxFile(BaseSchema):

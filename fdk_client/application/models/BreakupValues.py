@@ -12,18 +12,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class UserInfo1(BaseSchema):
+class BreakupValues(BaseSchema):
     # Order swagger.json
 
     
-    first_name = fields.Str(required=False)
+    display = fields.Str(required=False)
     
-    last_name = fields.Str(required=False)
+    name = fields.Str(required=False)
     
-    gender = fields.Str(required=False)
-    
-    mobile = fields.Str(required=False)
+    value = fields.Float(required=False)
     
 

@@ -14,16 +14,16 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class PaymentInfo(BaseSchema):
+class ShipmentUserInfo1(BaseSchema):
     # Order swagger.json
 
     
-    mode = fields.Str(required=False)
+    gender = fields.Str(required=False)
     
-    mop = fields.Str(required=False)
+    email = fields.Str(required=False)
     
-    status = fields.Str(required=False)
+    name = fields.Str(required=False)
     
-    logo = fields.Str(required=False)
+    mobile = fields.Str(required=False)
     
 

@@ -5,21 +5,13 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .OrderStatuses import OrderStatuses
 
 
-
-
-
-
-
-class InvoiceData(BaseSchema):
+class OrderFilters(BaseSchema):
     # Order swagger.json
 
     
-    label_url = fields.Str(required=False)
-    
-    invoice_url = fields.Str(required=False)
-    
-    updated_date = fields.Str(required=False)
+    statuses = fields.List(fields.Nested(OrderStatuses, required=False), required=False)
     
 

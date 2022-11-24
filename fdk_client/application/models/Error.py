@@ -8,9 +8,21 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class Error(BaseSchema):
-    # Order swagger.json
 
+
+
+
+
+
+class Error(BaseSchema):
+    # Rewards swagger.json
+
+    
+    code = fields.Int(required=False)
+    
+    exception = fields.Str(required=False)
+    
+    info = fields.Str(required=False)
     
     message = fields.Str(required=False)
     

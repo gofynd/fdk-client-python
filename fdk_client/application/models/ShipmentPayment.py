@@ -12,14 +12,18 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class PricesBreakup(BaseSchema):
+
+
+class ShipmentPayment(BaseSchema):
     # Order swagger.json
 
     
-    value = fields.Float(required=False)
+    logo = fields.Str(required=False)
     
-    display = fields.Str(required=False)
+    mode = fields.Str(required=False)
     
-    name = fields.Str(required=False)
+    status = fields.Str(required=False)
+    
+    mop = fields.Str(required=False)
     
 

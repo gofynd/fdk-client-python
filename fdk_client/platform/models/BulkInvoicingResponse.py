@@ -1,4 +1,4 @@
-"""Application Models."""
+"""Platform Models."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class Statuses(BaseSchema):
+class BulkInvoicingResponse(BaseSchema):
     # Order swagger.json
 
     
-    is_selected = fields.Boolean(required=False)
+    message = fields.Str(required=False)
     
-    display = fields.Str(required=False)
-    
-    value = fields.Int(required=False)
+    success = fields.Boolean(required=False)
     
 
