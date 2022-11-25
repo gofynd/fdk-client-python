@@ -20,11 +20,11 @@ class FulfillingStore(BaseSchema):
     # Order swagger.json
 
     
+    company_id = fields.Int(required=False)
+    
     name = fields.Str(required=False)
     
     company_name = fields.Str(required=False)
-    
-    company_id = fields.Int(required=False)
     
     code = fields.Str(required=False)
     

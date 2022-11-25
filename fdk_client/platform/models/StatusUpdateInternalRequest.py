@@ -9,11 +9,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
+
+
 from .StatuesRequest import StatuesRequest
-
-
-
-
 
 
 class StatusUpdateInternalRequest(BaseSchema):
@@ -24,10 +24,10 @@ class StatusUpdateInternalRequest(BaseSchema):
     
     unlock_before_transition = fields.Boolean(required=False)
     
-    statues = fields.List(fields.Nested(StatuesRequest, required=False), required=False)
-    
     force_transition = fields.Boolean(required=False)
     
     task = fields.Boolean(required=False)
+    
+    statues = fields.List(fields.Nested(StatuesRequest, required=False), required=False)
     
 

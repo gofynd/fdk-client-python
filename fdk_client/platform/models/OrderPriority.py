@@ -18,8 +18,8 @@ class OrderPriority(BaseSchema):
     
     affiliate_priority_code = fields.Str(required=False)
     
-    fulfilment_priority = fields.Int(required=False)
-    
     fulfilment_priority_text = fields.Str(required=False)
+    
+    fulfilment_priority = fields.Int(required=False)
     
 
