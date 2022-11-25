@@ -5,21 +5,13 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .ShipmentReason import ShipmentReason
 
 
-
-
-
-
-
-class BreakupValues(BaseSchema):
+class ShipmentReasons(BaseSchema):
     # Order swagger.json
 
     
-    value = fields.Float(required=False)
-    
-    display = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
+    reasons = fields.List(fields.Nested(ShipmentReason, required=False), required=False)
     
 

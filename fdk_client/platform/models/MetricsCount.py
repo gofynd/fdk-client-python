@@ -22,8 +22,8 @@ class MetricsCount(BaseSchema):
     
     key = fields.Str(required=False)
     
-    text = fields.Str(required=False)
-    
     value = fields.Int(required=False)
+    
+    text = fields.Str(required=False)
     
 

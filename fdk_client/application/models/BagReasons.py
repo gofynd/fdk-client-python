@@ -18,9 +18,9 @@ class BagReasons(BaseSchema):
     # Order swagger.json
 
     
-    id = fields.Int(required=False)
-    
     display_name = fields.Str(required=False)
+    
+    id = fields.Int(required=False)
     
     question_set = fields.List(fields.Nested(QuestionSet, required=False), required=False)
     

@@ -22,8 +22,8 @@ class UserInfo(BaseSchema):
     
     email = fields.Str(required=False)
     
-    uid = fields.Str(required=False)
-    
     username = fields.Str(required=False)
+    
+    uid = fields.Str(required=False)
     
 

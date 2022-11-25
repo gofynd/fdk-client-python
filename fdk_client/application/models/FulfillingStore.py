@@ -22,11 +22,11 @@ class FulfillingStore(BaseSchema):
     
     company_id = fields.Int(required=False)
     
-    name = fields.Str(required=False)
-    
     company_name = fields.Str(required=False)
     
     code = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
     
     id = fields.Int(required=False)
     
