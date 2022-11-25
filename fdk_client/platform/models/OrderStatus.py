@@ -7,23 +7,23 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
 from .FyndOrderIdList import FyndOrderIdList
+
+
+
+
 
 
 class OrderStatus(BaseSchema):
     # Order swagger.json
 
     
-    mobile = fields.Int(required=False)
-    
-    end_date = fields.Str(required=False)
-    
     start_date = fields.Str(required=False)
     
     order_details = fields.List(fields.Nested(FyndOrderIdList, required=False), required=False)
+    
+    end_date = fields.Str(required=False)
+    
+    mobile = fields.Int(required=False)
     
 

@@ -9,9 +9,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 from .Meta import Meta
-
-
 
 
 class Media(BaseSchema):
@@ -22,8 +22,8 @@ class Media(BaseSchema):
     
     alt = fields.Str(required=False)
     
-    meta = fields.Nested(Meta, required=False)
-    
     type = fields.Str(required=False)
+    
+    meta = fields.Nested(Meta, required=False)
     
 

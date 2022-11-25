@@ -20,9 +20,9 @@ class DimensionResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    unit = fields.Str(required=False)
-    
     height = fields.Float(required=False)
+    
+    unit = fields.Str(required=False)
     
     length = fields.Float(required=False)
     
