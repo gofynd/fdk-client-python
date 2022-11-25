@@ -20,14 +20,14 @@ class ShipmentidResponse(BaseSchema):
     # OrderManage swagger.json
 
     
+    code = fields.Str(required=False)
+    
     message = fields.Str(required=False)
+    
+    status = fields.Int(required=False)
     
     exception = fields.Str(required=False)
     
     stack_trace = fields.Str(required=False)
-    
-    status = fields.Int(required=False)
-    
-    code = fields.Str(required=False)
     
 

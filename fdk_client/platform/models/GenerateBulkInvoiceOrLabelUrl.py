@@ -1,4 +1,4 @@
-"""Application Models."""
+"""Platform Models."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -12,14 +12,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class SignedSuccessResponse(BaseSchema):
-    # Order swagger.json
+class GenerateBulkInvoiceOrLabelUrl(BaseSchema):
+    # DocumentEngine swagger.json
 
     
     uid = fields.Str(required=False)
     
-    url = fields.Str(required=False)
+    document_type = fields.Str(required=False)
     
-    expires_in = fields.Float(required=False)
+    batch_id = fields.Float(required=False)
     
 

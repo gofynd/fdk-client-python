@@ -18,8 +18,8 @@ class ShipmentTotalDetails(BaseSchema):
     
     sizes = fields.Float(required=False)
     
-    pieces = fields.Float(required=False)
-    
     total_price = fields.Float(required=False)
+    
+    pieces = fields.Float(required=False)
     
 

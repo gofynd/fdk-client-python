@@ -1,4 +1,4 @@
-"""Application Models."""
+"""Platform Models."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -10,8 +10,8 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class SignedBadRequestResponse(BaseSchema):
-    # Order swagger.json
+class StatusBadRequestResponse(BaseSchema):
+    # DocumentEngine swagger.json
 
     
     success = fields.Boolean(required=False)

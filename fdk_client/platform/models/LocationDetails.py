@@ -7,9 +7,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
 from .ArticleDetails import ArticleDetails
+
+
 
 
 class LocationDetails(BaseSchema):
@@ -18,8 +18,8 @@ class LocationDetails(BaseSchema):
     
     fulfillment_type = fields.Str(required=False)
     
-    fulfillment_id = fields.Int(required=False)
-    
     articles = fields.List(fields.Nested(ArticleDetails, required=False), required=False)
+    
+    fulfillment_id = fields.Int(required=False)
     
 

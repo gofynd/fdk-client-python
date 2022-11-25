@@ -5,21 +5,21 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .EffectiveValues import EffectiveValues
+
 
 
 from .MarkedValues import MarkedValues
-
-from .EffectiveValues import EffectiveValues
 
 
 class ItemPriceDetails(BaseSchema):
     # Order swagger.json
 
     
+    effective = fields.Nested(EffectiveValues, required=False)
+    
     currency = fields.Str(required=False)
     
     marked = fields.Nested(MarkedValues, required=False)
-    
-    effective = fields.Nested(EffectiveValues, required=False)
     
 

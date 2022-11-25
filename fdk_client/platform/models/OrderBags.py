@@ -5,13 +5,7 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .BagConfigs import BagConfigs
-
-
-
-from .OrderBrandName import OrderBrandName
-
-
+from .OrderBagArticle import OrderBagArticle
 
 
 
@@ -21,37 +15,43 @@ from .OrderBrandName import OrderBrandName
 
 from .OrderBagItem import OrderBagItem
 
-from .BagGST import BagGST
+from .BagConfigs import BagConfigs
 
-from .OrderBagArticle import OrderBagArticle
+
 
 from .FinancialBreakup import FinancialBreakup
+
+from .OrderBrandName import OrderBrandName
+
+from .BagGST import BagGST
+
+
 
 
 class OrderBags(BaseSchema):
     # Orders swagger.json
 
     
-    bag_configs = fields.Nested(BagConfigs, required=False)
+    article = fields.Nested(OrderBagArticle, required=False)
     
     current_status = fields.Str(required=False)
-    
-    brand = fields.Nested(OrderBrandName, required=False)
     
     quantity = fields.Int(required=False)
     
     display_name = fields.Str(required=False)
     
+    item = fields.Nested(OrderBagItem, required=False)
+    
+    bag_configs = fields.Nested(BagConfigs, required=False)
+    
     bag_id = fields.Int(required=False)
     
-    entity_type = fields.Str(required=False)
+    financial_breakup = fields.List(fields.Nested(FinancialBreakup, required=False), required=False)
     
-    item = fields.Nested(OrderBagItem, required=False)
+    brand = fields.Nested(OrderBrandName, required=False)
     
     gst_details = fields.Nested(BagGST, required=False)
     
-    article = fields.Nested(OrderBagArticle, required=False)
-    
-    financial_breakup = fields.List(fields.Nested(FinancialBreakup, required=False), required=False)
+    entity_type = fields.Str(required=False)
     
 

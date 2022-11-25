@@ -18,12 +18,12 @@ class MetricsCount(BaseSchema):
     # Orders swagger.json
 
     
-    key = fields.Str(required=False)
+    text = fields.Str(required=False)
     
-    value = fields.Int(required=False)
+    key = fields.Str(required=False)
     
     options = fields.List(fields.Nested(Options, required=False), required=False)
     
-    text = fields.Str(required=False)
+    value = fields.Int(required=False)
     
 
