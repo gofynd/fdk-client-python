@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class OrderQuantity(BaseSchema):
+class NetQuantity(BaseSchema):
     # Catalog swagger.json
 
     
-    maximum = fields.Int(required=False)
+    value = fields.Float(required=False)
     
-    is_set = fields.Boolean(required=False)
-    
-    minimum = fields.Int(required=False)
+    unit = fields.Raw(required=False)
     
 

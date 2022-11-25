@@ -321,7 +321,7 @@ Get Orders for company based on Company Id
 
 ```python
 try:
-    result = await client.order.getOrdersByCompanyId(pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, isPrioritySort=isPrioritySort, lockStatus=lockStatus, userId=userId, q=q, stage=stage, salesChannels=salesChannels, orderId=orderId, stores=stores, deploymentStores=deploymentStores, status=status, dp=dp, shortenUrls=shortenUrls, filterType=filterType)
+    result = await client.order.getOrdersByCompanyId(pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, isPrioritySort=isPrioritySort, lockStatus=lockStatus, userId=userId, q=q, stage=stage, salesChannels=salesChannels, orderId=orderId, stores=stores, deploymentStores=deploymentStores, status=status, dp=dp, filterType=filterType)
     # use result
 except Exception as e:
     print(e)
@@ -348,7 +348,6 @@ except Exception as e:
 | deploymentStores | String? | no | Selected Deployment Stores |   
 | status | String? | no | Status of order |   
 | dp | String? | no | Delivery Partners |   
-| shortenUrls | Boolean? | no | Shorten URL option |   
 | filterType | String? | no | Filters |  
 
 
@@ -512,7 +511,7 @@ Get Orders for company based on Company Id
 
 ```python
 try:
-    result = await client.order.getPicklistOrdersByCompanyId(pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, q=q, stage=stage, salesChannels=salesChannels, orderId=orderId, stores=stores, status=status, shortenUrls=shortenUrls, filterType=filterType)
+    result = await client.order.getPicklistOrdersByCompanyId(pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, q=q, stage=stage, salesChannels=salesChannels, orderId=orderId, stores=stores, status=status, filterType=filterType)
     # use result
 except Exception as e:
     print(e)
@@ -534,7 +533,6 @@ except Exception as e:
 | orderId | String? | no | Order Id |   
 | stores | String? | no | Selected Stores |   
 | status | String? | no | Status of order |   
-| shortenUrls | Boolean? | no | Shorten URL option |   
 | filterType | String? | no | Filters |  
 
 
@@ -1115,7 +1113,7 @@ except Exception as e:
 | status | String? | no | Status of order |   
 | dp | String? | no | Delivery Partners |   
 | userId | String? | no | User Id |   
-| shortenUrls | Boolean? | no | Shorten URL option |   
+| shortenUrls | String? | no | User Id |   
 | filterType | String? | no | Filters |  
 
 
@@ -2516,7 +2514,7 @@ Success
  | hsnCode | String? |  yes  |  |
  | priceEffective | Double? |  yes  |  |
  | codCharges | Double? |  yes  |  |
- | gstFee | String? |  yes  |  |
+ | gstFee | Double? |  yes  |  |
  | fyndCredits | Double? |  yes  |  |
  | refundAmount | Double? |  yes  |  |
  | cashbackApplied | Double? |  yes  |  |
@@ -2656,7 +2654,7 @@ Success
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | brandCalculatedAmount | Double? |  yes  |  |
- | gstFee | String? |  yes  |  |
+ | gstFee | Double? |  yes  |  |
  | gstTag | String? |  yes  |  |
  | hsnCode | String? |  yes  |  |
  | valueOfGood | Double? |  yes  |  |

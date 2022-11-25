@@ -22,8 +22,8 @@ class PaymentConfirmationMode(BaseSchema):
     
     meta = fields.Dict(required=False)
     
-    name = fields.Str(required=False)
-    
     amount = fields.Float(required=False)
+    
+    name = fields.Str(required=False)
     
 

@@ -12,14 +12,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ApplicationItemMOQ(BaseSchema):
-    # Catalog swagger.json
+class UnDeleteUserRequestSchema(BaseSchema):
+    # User swagger.json
 
     
-    max_qty = fields.Int(required=False)
+    user_id = fields.Str(required=False)
     
-    min_qty = fields.Int(required=False)
+    reason = fields.Str(required=False)
     
-    multiplier = fields.Int(required=False)
+    reason_id = fields.Str(required=False)
     
 

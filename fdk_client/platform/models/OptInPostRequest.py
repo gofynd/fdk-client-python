@@ -22,11 +22,11 @@ class OptInPostRequest(BaseSchema):
     # Catalog swagger.json
 
     
+    company_id = fields.Int(required=False)
+    
     enabled = fields.Boolean(required=False)
     
     brand_ids = fields.List(fields.Int(required=False), required=False)
-    
-    company_id = fields.Int(required=False)
     
     platform = fields.Str(required=False)
     

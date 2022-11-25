@@ -50,6 +50,13 @@ class UserValidator:
         application_id = fields.Str(required=False)
          
     
+    class unDeleteUser(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+    
     class updateUser(BaseSchema):
         
         company_id = fields.Str(required=False)
@@ -96,45 +103,5 @@ class UserValidator:
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
-         
-    
-    class createUserGroup(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-    
-    class getUserGroups(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        page_no = fields.Str(required=False)
-        
-        page_size = fields.Str(required=False)
-        
-        name = fields.Str(required=False)
-        
-        status = fields.Str(required=False)
-         
-    
-    class updateUserGroup(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        group_id = fields.Str(required=False)
-         
-    
-    class getUserGroupById(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        group_id = fields.Str(required=False)
          
     
