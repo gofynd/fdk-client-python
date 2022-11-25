@@ -17,7 +17,7 @@ class MarkedValues(BaseSchema):
     #  swagger.json
 
     
-    min = fields.Float(required=False)
-    
     max = fields.Float(required=False)
+    
+    min = fields.Float(required=False)
     

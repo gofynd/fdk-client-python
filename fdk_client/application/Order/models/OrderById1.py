@@ -9,19 +9,13 @@ from ...ApplicationModel import BaseSchema
 
 
 
+from .OrderSchema1 import OrderSchema1
 
 
 
-
-
-
-class ShipmentTotalDetails1(BaseSchema):
+class OrderById1(BaseSchema):
     #  swagger.json
 
     
-    total_price = fields.Float(required=False)
-    
-    pieces = fields.Float(required=False)
-    
-    sizes = fields.Float(required=False)
+    order = fields.Nested(OrderSchema1, required=False)
     

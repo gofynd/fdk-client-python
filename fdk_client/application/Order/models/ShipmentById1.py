@@ -9,7 +9,7 @@ from ...ApplicationModel import BaseSchema
 
 
 
-from .ShipmentResponse import ShipmentResponse
+from .Shipments1 import Shipments1
 
 
 
@@ -17,5 +17,5 @@ class ShipmentById1(BaseSchema):
     #  swagger.json
 
     
-    shipment = fields.Nested(ShipmentResponse, required=False)
+    shipment = fields.Nested(Shipments1, required=False)
     

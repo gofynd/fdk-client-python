@@ -21,7 +21,7 @@ class UsesRestriction(BaseSchema):
     #  swagger.json
 
     
-    maximum = fields.Nested(UsesRemaining, required=False)
-    
     remaining = fields.Nested(UsesRemaining, required=False)
+    
+    maximum = fields.Nested(UsesRemaining, required=False)
     

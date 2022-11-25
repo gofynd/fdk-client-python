@@ -9,11 +9,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .PromotionListItem import PromotionListItem
-
-
-
 from .Page import Page
+
+
+
+from .PromotionListItem import PromotionListItem
 
 
 
@@ -21,7 +21,7 @@ class PromotionsResponse(BaseSchema):
     #  swagger.json
 
     
-    items = fields.Nested(PromotionListItem, required=False)
-    
     page = fields.Nested(Page, required=False)
+    
+    items = fields.Nested(PromotionListItem, required=False)
     

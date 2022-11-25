@@ -13,15 +13,11 @@ from ...ApplicationModel import BaseSchema
 
 
 
-
-
-class Statuses(BaseSchema):
+class ApefaceApiError1(BaseSchema):
     #  swagger.json
 
     
-    display = fields.Str(required=False)
+    success = fields.Boolean(required=False)
     
-    is_selected = fields.Boolean(required=False)
-    
-    value = fields.Int(required=False)
+    message = fields.Str(required=False)
     

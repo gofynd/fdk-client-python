@@ -9,11 +9,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .ConfigurationProductVariant import ConfigurationProductVariant
-
-
-
 from .ConfigurationProductSimilar import ConfigurationProductSimilar
+
+
+
+from .ConfigurationProductVariant import ConfigurationProductVariant
 
 
 
@@ -21,7 +21,7 @@ class ConfigurationProduct(BaseSchema):
     #  swagger.json
 
     
-    variant = fields.Nested(ConfigurationProductVariant, required=False)
-    
     similar = fields.Nested(ConfigurationProductSimilar, required=False)
+    
+    variant = fields.Nested(ConfigurationProductVariant, required=False)
     

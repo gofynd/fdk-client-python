@@ -9,9 +9,9 @@ from ...ApplicationModel import BaseSchema
 
 
 
+
+
 from .ImageUrls import ImageUrls
-
-
 
 
 
@@ -25,11 +25,11 @@ class CategoryMetaResponse(BaseSchema):
     #  swagger.json
 
     
+    uid = fields.Int(required=False)
+    
     banners = fields.Nested(ImageUrls, required=False)
     
     name = fields.Str(required=False)
-    
-    uid = fields.Int(required=False)
     
     logo = fields.Nested(Media, required=False)
     

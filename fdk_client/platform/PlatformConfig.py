@@ -10,6 +10,7 @@ class PlatformConfig:
         self.domain = config.get("domain", DEFAULT_DOMAIN)
         self.apiKey = config.get("apiKey", "")
         self.apiSecret = config.get("apiSecret", "")
+        self.useAutoRenewTimer = config.get("useAutoRenewTimer", True)
         self.oauthClient = OAuthClient(self)
         self.extraHeaders = []
 

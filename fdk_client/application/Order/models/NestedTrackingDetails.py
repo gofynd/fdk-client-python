@@ -17,15 +17,15 @@ from ...ApplicationModel import BaseSchema
 
 
 
-class PaymentInfo(BaseSchema):
+class NestedTrackingDetails(BaseSchema):
     #  swagger.json
 
     
-    logo = fields.Str(required=False)
+    is_current = fields.Boolean(required=False)
     
-    mop = fields.Str(required=False)
+    is_passed = fields.Boolean(required=False)
     
     status = fields.Str(required=False)
     
-    mode = fields.Str(required=False)
+    time = fields.Str(required=False)
     

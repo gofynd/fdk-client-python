@@ -60,6 +60,7 @@ from ..ApplicationModel import BaseSchema
         
         
         
+        
     
     
         
@@ -204,6 +205,8 @@ class OrderValidator:
         from_date = fields.Str(required=False)
         
         to_date = fields.Str(required=False)
+        
+        custom_meta = fields.Str(required=False)
          
         
     
@@ -267,7 +270,7 @@ class OrderValidator:
         
         shipment_id = fields.Str(required=False)
         
-        bag_id = fields.Int(required=False)
+        bag_id = fields.Str(required=False)
          
         
     

@@ -23,9 +23,9 @@ class OrderPage(BaseSchema):
     #  swagger.json
 
     
-    item_total = fields.Int(required=False)
-    
     type = fields.Str(required=False)
+    
+    item_total = fields.Int(required=False)
     
     size = fields.Int(required=False)
     

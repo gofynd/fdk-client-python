@@ -17,15 +17,15 @@ from ...ApplicationModel import BaseSchema
 
 
 
-class UserInfo1(BaseSchema):
+class ShipmentPayment1(BaseSchema):
     #  swagger.json
 
     
-    gender = fields.Str(required=False)
+    mode = fields.Str(required=False)
     
-    first_name = fields.Str(required=False)
+    status = fields.Str(required=False)
     
-    last_name = fields.Str(required=False)
+    mop = fields.Str(required=False)
     
-    mobile = fields.Str(required=False)
+    logo = fields.Str(required=False)
     

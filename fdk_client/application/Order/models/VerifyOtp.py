@@ -19,5 +19,5 @@ class VerifyOtp(BaseSchema):
     
     request_id = fields.Str(required=False)
     
-    otp_code = fields.Int(required=False)
+    otp_code = fields.Str(required=False)
     

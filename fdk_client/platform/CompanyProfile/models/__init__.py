@@ -1,31 +1,31 @@
 """CompanyProfile Platform Models and Enums"""
 
 
-from .SellerPhoneNumber import SellerPhoneNumber
-
-from .ContactDetails import ContactDetails
-
-from .BusinessCountryInfo import BusinessCountryInfo
-
-from .GetAddressSerializer import GetAddressSerializer
-
 from .UserSerializer import UserSerializer
-
-from .CompanyTaxesSerializer import CompanyTaxesSerializer
 
 from .Website import Website
 
 from .BusinessDetails import BusinessDetails
 
+from .GetAddressSerializer import GetAddressSerializer
+
+from .SellerPhoneNumber import SellerPhoneNumber
+
+from .ContactDetails import ContactDetails
+
 from .Document import Document
+
+from .BusinessCountryInfo import BusinessCountryInfo
+
+from .CompanyTaxesSerializer import CompanyTaxesSerializer
 
 from .GetCompanyProfileSerializerResponse import GetCompanyProfileSerializerResponse
 
 from .ErrorResponse import ErrorResponse
 
-from .CompanyTaxesSerializer1 import CompanyTaxesSerializer1
-
 from .CreateUpdateAddressSerializer import CreateUpdateAddressSerializer
+
+from .CompanyTaxesSerializer1 import CompanyTaxesSerializer1
 
 from .UpdateCompany import UpdateCompany
 
@@ -55,6 +55,8 @@ from .CompanyBrandListSerializer import CompanyBrandListSerializer
 
 from .CompanyBrandPostRequestSerializer import CompanyBrandPostRequestSerializer
 
+from .ProductReturnConfigSerializer import ProductReturnConfigSerializer
+
 from .GetCompanySerializer import GetCompanySerializer
 
 from .LocationTimingSerializer import LocationTimingSerializer
@@ -66,8 +68,6 @@ from .InvoiceCredSerializer import InvoiceCredSerializer
 from .InvoiceDetailsSerializer import InvoiceDetailsSerializer
 
 from .LocationManagerSerializer import LocationManagerSerializer
-
-from .ProductReturnConfigSerializer import ProductReturnConfigSerializer
 
 from .GetLocationSerializer import GetLocationSerializer
 

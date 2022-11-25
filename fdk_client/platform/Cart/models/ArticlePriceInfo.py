@@ -21,7 +21,7 @@ class ArticlePriceInfo(BaseSchema):
     #  swagger.json
 
     
-    converted = fields.Nested(BasePrice, required=False)
-    
     base = fields.Nested(BasePrice, required=False)
+    
+    converted = fields.Nested(BasePrice, required=False)
     

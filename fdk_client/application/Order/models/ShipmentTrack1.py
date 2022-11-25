@@ -9,13 +9,13 @@ from ...ApplicationModel import BaseSchema
 
 
 
-from .Statuses import Statuses
+from .Track import Track
 
 
 
-class Filters(BaseSchema):
+class ShipmentTrack1(BaseSchema):
     #  swagger.json
 
     
-    statuses = fields.List(fields.Nested(Statuses, required=False), required=False)
+    results = fields.List(fields.Nested(Track, required=False), required=False)
     

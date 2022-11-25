@@ -23,11 +23,11 @@ class OfferPrice(BaseSchema):
     #  swagger.json
 
     
-    effective = fields.Int(required=False)
-    
     currency_symbol = fields.Str(required=False)
     
     bulk_effective = fields.Float(required=False)
+    
+    effective = fields.Int(required=False)
     
     marked = fields.Int(required=False)
     
