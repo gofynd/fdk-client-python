@@ -9,9 +9,9 @@ from ...PlatformModel import BaseSchema
 
 
 
-
-
 from .CompanySocialAccounts import CompanySocialAccounts
+
+
 
 
 
@@ -19,7 +19,7 @@ class CompanyDetails(BaseSchema):
     #  swagger.json
 
     
-    website_url = fields.Str(required=False)
-    
     socials = fields.List(fields.Nested(CompanySocialAccounts, required=False), required=False)
+    
+    website_url = fields.Str(required=False)
     

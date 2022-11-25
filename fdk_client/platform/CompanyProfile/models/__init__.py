@@ -9,15 +9,15 @@ from .BusinessDetails import BusinessDetails
 
 from .GetAddressSerializer import GetAddressSerializer
 
+from .CompanyTaxesSerializer import CompanyTaxesSerializer
+
+from .Document import Document
+
 from .SellerPhoneNumber import SellerPhoneNumber
 
 from .ContactDetails import ContactDetails
 
-from .Document import Document
-
 from .BusinessCountryInfo import BusinessCountryInfo
-
-from .CompanyTaxesSerializer import CompanyTaxesSerializer
 
 from .GetCompanyProfileSerializerResponse import GetCompanyProfileSerializerResponse
 
@@ -41,8 +41,6 @@ from .GetBrandResponseSerializer import GetBrandResponseSerializer
 
 from .CreateUpdateBrandRequestSerializer import CreateUpdateBrandRequestSerializer
 
-from .Page import Page
-
 from .CompanySocialAccounts import CompanySocialAccounts
 
 from .CompanyDetails import CompanyDetails
@@ -51,23 +49,25 @@ from .CompanySerializer import CompanySerializer
 
 from .CompanyBrandSerializer import CompanyBrandSerializer
 
+from .Page import Page
+
 from .CompanyBrandListSerializer import CompanyBrandListSerializer
 
 from .CompanyBrandPostRequestSerializer import CompanyBrandPostRequestSerializer
 
-from .ProductReturnConfigSerializer import ProductReturnConfigSerializer
-
-from .GetCompanySerializer import GetCompanySerializer
+from .LocationManagerSerializer import LocationManagerSerializer
 
 from .LocationTimingSerializer import LocationTimingSerializer
 
 from .LocationDayWiseSerializer import LocationDayWiseSerializer
 
+from .GetCompanySerializer import GetCompanySerializer
+
+from .ProductReturnConfigSerializer import ProductReturnConfigSerializer
+
 from .InvoiceCredSerializer import InvoiceCredSerializer
 
 from .InvoiceDetailsSerializer import InvoiceDetailsSerializer
-
-from .LocationManagerSerializer import LocationManagerSerializer
 
 from .GetLocationSerializer import GetLocationSerializer
 

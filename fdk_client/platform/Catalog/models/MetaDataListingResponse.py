@@ -9,11 +9,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .MetaDataListingFilterResponse import MetaDataListingFilterResponse
-
-
-
 from .MetaDataListingSortResponse import MetaDataListingSortResponse
+
+
+
+from .MetaDataListingFilterResponse import MetaDataListingFilterResponse
 
 
 
@@ -21,7 +21,7 @@ class MetaDataListingResponse(BaseSchema):
     #  swagger.json
 
     
-    filter = fields.Nested(MetaDataListingFilterResponse, required=False)
-    
     sort = fields.Nested(MetaDataListingSortResponse, required=False)
+    
+    filter = fields.Nested(MetaDataListingFilterResponse, required=False)
     

@@ -9,11 +9,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .InventorySellerResponse import InventorySellerResponse
-
-
-
 from .Page import Page
+
+
+
+from .InventorySellerResponse import InventorySellerResponse
 
 
 
@@ -21,7 +21,7 @@ class InventorySellerIdentifierResponsePaginated(BaseSchema):
     #  swagger.json
 
     
-    items = fields.List(fields.Nested(InventorySellerResponse, required=False), required=False)
-    
     page = fields.Nested(Page, required=False)
+    
+    items = fields.List(fields.Nested(InventorySellerResponse, required=False), required=False)
     

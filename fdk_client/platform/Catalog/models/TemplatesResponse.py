@@ -9,11 +9,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .ProductTemplate import ProductTemplate
-
-
-
 from .Page import Page
+
+
+
+from .ProductTemplate import ProductTemplate
 
 
 
@@ -21,7 +21,7 @@ class TemplatesResponse(BaseSchema):
     #  swagger.json
 
     
-    items = fields.Nested(ProductTemplate, required=False)
-    
     page = fields.Nested(Page, required=False)
+    
+    items = fields.Nested(ProductTemplate, required=False)
     

@@ -9,11 +9,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .BulkInventoryGetItems import BulkInventoryGetItems
-
-
-
 from .Page import Page
+
+
+
+from .BulkInventoryGetItems import BulkInventoryGetItems
 
 
 
@@ -21,7 +21,7 @@ class BulkInventoryGet(BaseSchema):
     #  swagger.json
 
     
-    items = fields.List(fields.Nested(BulkInventoryGetItems, required=False), required=False)
-    
     page = fields.Nested(Page, required=False)
+    
+    items = fields.List(fields.Nested(BulkInventoryGetItems, required=False), required=False)
     
