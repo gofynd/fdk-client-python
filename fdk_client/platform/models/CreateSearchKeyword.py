@@ -26,8 +26,8 @@ class CreateSearchKeyword(BaseSchema):
     
     app_id = fields.Str(required=False)
     
-    words = fields.List(fields.Str(required=False), required=False)
-    
     is_active = fields.Boolean(required=False)
+    
+    words = fields.List(fields.Str(required=False), required=False)
     
 
