@@ -26,7 +26,7 @@ class ConfigurationProductConfig(BaseSchema):
     
     title = fields.Str(required=False)
     
-    subtitle = fields.Str(required=False)
+    is_active = fields.Boolean(required=False)
     
     priority = fields.Int(required=False)
     
@@ -36,6 +36,6 @@ class ConfigurationProductConfig(BaseSchema):
     
     logo = fields.Str(required=False)
     
-    is_active = fields.Boolean(required=False)
+    subtitle = fields.Str(required=False)
     
 
