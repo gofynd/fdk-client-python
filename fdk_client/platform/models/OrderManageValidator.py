@@ -97,6 +97,8 @@ class OrderManageValidator:
         
         company_id = fields.Int(required=False)
         
+        shipment_id = fields.Int(required=False)
+        
         bag_id = fields.Int(required=False)
          
     

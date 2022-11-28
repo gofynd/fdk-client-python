@@ -7,20 +7,24 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
+
+
 from .AffiliateStoreIdMapping import AffiliateStoreIdMapping
-
-
 
 
 
 from .Affiliate import Affiliate
 
 
-
-
 class OrderConfig(BaseSchema):
     # OrderManage swagger.json
 
+    
+    store_lookup = fields.Str(required=False)
+    
+    article_lookup = fields.Str(required=False)
     
     bag_end_state = fields.Str(required=False)
     
@@ -28,10 +32,6 @@ class OrderConfig(BaseSchema):
     
     create_user = fields.Boolean(required=False)
     
-    article_lookup = fields.Str(required=False)
-    
     affiliate = fields.Nested(Affiliate, required=False)
-    
-    store_lookup = fields.Str(required=False)
     
 
