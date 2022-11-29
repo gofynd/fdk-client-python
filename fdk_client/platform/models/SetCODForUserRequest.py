@@ -16,9 +16,9 @@ class SetCODForUserRequest(BaseSchema):
     # Payment swagger.json
 
     
-    merchant_user_id = fields.Str(required=False)
-    
     mobileno = fields.Str(required=False)
+    
+    merchant_user_id = fields.Str(required=False)
     
     is_active = fields.Boolean(required=False)
     

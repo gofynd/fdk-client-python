@@ -1292,9 +1292,9 @@ from .PaymentFlow import PaymentFlow
     
 from .PaymentModeLogo import PaymentModeLogo
     
-from .IntentApp import IntentApp
-    
 from .IntentAppErrorList import IntentAppErrorList
+    
+from .IntentApp import IntentApp
     
 from .PaymentModeList import PaymentModeList
     
@@ -1376,15 +1376,15 @@ from .CreditDetail import CreditDetail
     
 from .CheckCreditResponse import CheckCreditResponse
     
-from .MarketplaceInfo import MarketplaceInfo
-    
-from .DeviceDetails import DeviceDetails
-    
 from .KYCAddress import KYCAddress
+    
+from .BusinessDetails import BusinessDetails
     
 from .UserPersonalInfoInDetails import UserPersonalInfoInDetails
     
-from .BusinessDetails import BusinessDetails
+from .DeviceDetails import DeviceDetails
+    
+from .MarketplaceInfo import MarketplaceInfo
     
 from .CustomerOnboardingRequest import CustomerOnboardingRequest
     
