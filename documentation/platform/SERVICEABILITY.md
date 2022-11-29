@@ -687,8 +687,8 @@ Zone List of application in descending order of their last modified date.
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | serviceabilityType | String |  no  |  |
- | channelType | String |  no  |  |
  | channelId | String |  no  |  |
+ | channelType | String |  no  |  |
 
 ---
 
@@ -700,8 +700,8 @@ Zone List of application in descending order of their last modified date.
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | message | String |  no  |  |
- | type | String |  no  |  |
  | value | String |  no  |  |
+ | type | String |  no  |  |
 
 ---
 
@@ -712,8 +712,8 @@ Zone List of application in descending order of their last modified date.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | success | Boolean |  no  |  |
  | data | [ApplicationServiceabilityResponse](#ApplicationServiceabilityResponse)? |  yes  |  |
+ | success | Boolean |  no  |  |
  | error | [ServiceabilityErrorResponse](#ServiceabilityErrorResponse)? |  yes  |  |
 
 ---
@@ -744,13 +744,26 @@ Zone List of application in descending order of their last modified date.
 
  
  
+ #### [EntityRegionViewError](#EntityRegionViewError)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | message | String? |  yes  |  |
+ | value | String? |  yes  |  |
+ | type | String? |  yes  |  |
+
+---
+
+
+ 
+ 
  #### [EntityRegionViewItems](#EntityRegionViewItems)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | name | String |  no  |  |
  | subType | String |  no  |  |
  | uid | String |  no  |  |
- | name | String |  no  |  |
 
 ---
 
@@ -761,24 +774,11 @@ Zone List of application in descending order of their last modified date.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | size | Int |  no  |  |
+ | type | String |  no  |  |
  | itemTotal | Int |  no  |  |
  | current | Int |  no  |  |
- | type | String |  no  |  |
- | size | Int |  no  |  |
  | hasNext | Boolean |  no  |  |
-
----
-
-
- 
- 
- #### [EntityRegionViewError](#EntityRegionViewError)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | message | String? |  yes  |  |
- | type | String? |  yes  |  |
- | value | String? |  yes  |  |
 
 ---
 
@@ -789,10 +789,25 @@ Zone List of application in descending order of their last modified date.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | success | Boolean |  no  |  |
+ | error | [EntityRegionViewError](#EntityRegionViewError) |  no  |  |
  | data | ArrayList<[EntityRegionViewItems](#EntityRegionViewItems)> |  no  |  |
  | page | [EntityRegionViewPage](#EntityRegionViewPage) |  no  |  |
- | error | [EntityRegionViewError](#EntityRegionViewError) |  no  |  |
+ | success | Boolean |  no  |  |
+
+---
+
+
+ 
+ 
+ #### [ZoneDataItem](#ZoneDataItem)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | size | Int |  no  |  |
+ | itemTotal | Int |  no  |  |
+ | type | String |  no  |  |
+ | current | Int |  no  |  |
+ | hasNext | Boolean |  no  |  |
 
 ---
 
@@ -803,21 +818,9 @@ Zone List of application in descending order of their last modified date.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | totalZones | Int |  no  |  |
  | totalPincodesServed | Int |  no  |  |
+ | totalZones | Int |  no  |  |
  | totalActiveZones | Int |  no  |  |
-
----
-
-
- 
- 
- #### [ListViewChannels](#ListViewChannels)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | channelType | String |  no  |  |
- | channelId | String |  no  |  |
 
 ---
 
@@ -836,34 +839,31 @@ Zone List of application in descending order of their last modified date.
 
  
  
- #### [ListViewItems](#ListViewItems)
+ #### [ListViewChannels](#ListViewChannels)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean |  no  |  |
- | slug | String |  no  |  |
- | storesCount | Int |  no  |  |
- | channels | [ListViewChannels](#ListViewChannels) |  no  |  |
- | companyId | Int |  no  |  |
- | name | String |  no  |  |
- | pincodesCount | Int |  no  |  |
- | product | [ListViewProduct](#ListViewProduct) |  no  |  |
- | zoneId | String |  no  |  |
+ | channelId | String |  no  |  |
+ | channelType | String |  no  |  |
 
 ---
 
 
  
  
- #### [ZoneDataItem](#ZoneDataItem)
+ #### [ListViewItems](#ListViewItems)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | itemTotal | Int |  no  |  |
- | current | Int |  no  |  |
- | type | String |  no  |  |
- | size | Int |  no  |  |
- | hasNext | Boolean |  no  |  |
+ | product | [ListViewProduct](#ListViewProduct) |  no  |  |
+ | isActive | Boolean |  no  |  |
+ | name | String |  no  |  |
+ | channels | [ListViewChannels](#ListViewChannels) |  no  |  |
+ | slug | String |  no  |  |
+ | zoneId | String |  no  |  |
+ | pincodesCount | Int |  no  |  |
+ | storesCount | Int |  no  |  |
+ | companyId | Int |  no  |  |
 
 ---
 
@@ -874,9 +874,9 @@ Zone List of application in descending order of their last modified date.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | page | ArrayList<[ZoneDataItem](#ZoneDataItem)> |  no  |  |
  | summary | ArrayList<[ListViewSummary](#ListViewSummary)> |  no  |  |
  | items | ArrayList<[ListViewItems](#ListViewItems)> |  no  |  |
- | page | ArrayList<[ZoneDataItem](#ZoneDataItem)> |  no  |  |
 
 ---
 
@@ -887,10 +887,10 @@ Zone List of application in descending order of their last modified date.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | size | Int |  no  |  |
+ | type | String |  no  |  |
  | itemTotal | Int |  no  |  |
  | current | Int |  no  |  |
- | type | String |  no  |  |
- | size | Int |  no  |  |
  | hasNext | Boolean |  no  |  |
 
 ---
@@ -902,8 +902,8 @@ Zone List of application in descending order of their last modified date.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | items | ArrayList<HashMap<String,Any>>? |  yes  |  |
  | page | ArrayList<[CompanyStoreView_PageItems](#CompanyStoreView_PageItems)> |  no  |  |
+ | items | ArrayList<HashMap<String,Any>>? |  yes  |  |
 
 ---
 
@@ -914,8 +914,8 @@ Zone List of application in descending order of their last modified date.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | channelType | String |  no  |  |
  | channelId | String |  no  |  |
+ | channelType | String |  no  |  |
 
 ---
 
@@ -938,8 +938,8 @@ Zone List of application in descending order of their last modified date.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | pincode | ArrayList<String>? |  yes  |  |
  | state | ArrayList<String>? |  yes  |  |
+ | pincode | ArrayList<String>? |  yes  |  |
  | country | String |  no  |  |
 
 ---
@@ -1006,8 +1006,8 @@ Zone List of application in descending order of their last modified date.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | data | [UpdateZoneData](#UpdateZoneData) |  no  |  |
  | identifier | String |  no  |  |
+ | data | [UpdateZoneData](#UpdateZoneData) |  no  |  |
 
 ---
 
@@ -1018,8 +1018,8 @@ Zone List of application in descending order of their last modified date.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | success | Boolean |  no  |  |
  | statusCode | Int |  no  |  |
+ | success | Boolean |  no  |  |
 
 ---
 
@@ -1050,8 +1050,8 @@ Zone List of application in descending order of their last modified date.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | data | [CreateZoneData](#CreateZoneData) |  no  |  |
  | identifier | String |  no  |  |
+ | data | [CreateZoneData](#CreateZoneData) |  no  |  |
 
 ---
 
@@ -1062,9 +1062,9 @@ Zone List of application in descending order of their last modified date.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | success | Boolean |  no  |  |
  | zoneId | String |  no  |  |
  | statusCode | Int |  no  |  |
+ | success | Boolean |  no  |  |
 
 ---
 
@@ -1075,8 +1075,8 @@ Zone List of application in descending order of their last modified date.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | items | ArrayList<[ListViewItems](#ListViewItems)> |  no  |  |
  | page | ArrayList<[ZoneDataItem](#ZoneDataItem)> |  no  |  |
+ | items | ArrayList<[ListViewItems](#ListViewItems)> |  no  |  |
 
 ---
 

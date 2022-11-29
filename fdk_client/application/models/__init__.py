@@ -1376,15 +1376,15 @@ from .CreditDetail import CreditDetail
     
 from .CheckCreditResponse import CheckCreditResponse
     
-from .KYCAddress import KYCAddress
-    
-from .BusinessDetails import BusinessDetails
-    
 from .MarketplaceInfo import MarketplaceInfo
     
 from .DeviceDetails import DeviceDetails
     
+from .KYCAddress import KYCAddress
+    
 from .UserPersonalInfoInDetails import UserPersonalInfoInDetails
+    
+from .BusinessDetails import BusinessDetails
     
 from .CustomerOnboardingRequest import CustomerOnboardingRequest
     
