@@ -70,7 +70,7 @@ class FinancialBreakup(BaseSchema):
     
     amount_paid_roundoff = fields.Float(required=False)
     
-    gst_fee = fields.Str(required=False)
+    gst_fee = fields.Float(required=False)
     
     refund_credit = fields.Float(required=False)
     

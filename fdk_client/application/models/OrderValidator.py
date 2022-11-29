@@ -18,6 +18,8 @@ class OrderValidator:
         to_date = fields.Str(required=False)
         
         status = fields.Int(required=False)
+        
+        custom_meta = fields.Str(required=False)
          
     
     class getOrderById(BaseSchema):
@@ -33,6 +35,13 @@ class OrderValidator:
     class getShipmentReasons(BaseSchema):
         
         shipment_id = fields.Str(required=False)
+         
+    
+    class getShipmentBagReasons(BaseSchema):
+        
+        shipment_id = fields.Str(required=False)
+        
+        bag_id = fields.Str(required=False)
          
     
     class updateShipmentStatus(BaseSchema):

@@ -160,3 +160,13 @@ class PaymentValidator:
         
         pass 
     
+    class outstandingOrderDetails(BaseSchema):
+        
+        aggregator = fields.Str(required=False)
+         
+    
+    class paidOrderDetails(BaseSchema):
+        
+        aggregator = fields.Str(required=False)
+         
+    

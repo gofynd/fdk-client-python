@@ -20,6 +20,12 @@ from .FinancialBreakup import FinancialBreakup
 
 
 
+
+
+
+from .AppliedPromos import AppliedPromos
+
+
 class Bags(BaseSchema):
     # Order swagger.json
 
@@ -37,5 +43,11 @@ class Bags(BaseSchema):
     can_cancel = fields.Boolean(required=False)
     
     can_return = fields.Boolean(required=False)
+    
+    delivery_date = fields.Str(required=False)
+    
+    returnable_date = fields.Str(required=False)
+    
+    applied_promos = fields.List(fields.Nested(AppliedPromos, required=False), required=False)
     
 

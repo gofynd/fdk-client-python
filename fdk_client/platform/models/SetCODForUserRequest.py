@@ -18,8 +18,8 @@ class SetCODForUserRequest(BaseSchema):
     
     is_active = fields.Boolean(required=False)
     
-    mobileno = fields.Str(required=False)
-    
     merchant_user_id = fields.Str(required=False)
+    
+    mobileno = fields.Str(required=False)
     
 
