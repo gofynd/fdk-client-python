@@ -9,11 +9,11 @@ from ...ApplicationModel import BaseSchema
 
 
 
-from .EffectiveValues import EffectiveValues
-
-
-
 from .MarkedValues import MarkedValues
+
+
+
+from .EffectiveValues import EffectiveValues
 
 
 
@@ -23,9 +23,9 @@ class ItemPriceDetails(BaseSchema):
     #  swagger.json
 
     
-    effective = fields.Nested(EffectiveValues, required=False)
-    
     marked = fields.Nested(MarkedValues, required=False)
+    
+    effective = fields.Nested(EffectiveValues, required=False)
     
     currency = fields.Str(required=False)
     

@@ -76,7 +76,6 @@ from ..ApplicationModel import BaseSchema
     
     
         
-        
     
     
         
@@ -88,6 +87,13 @@ from ..ApplicationModel import BaseSchema
     
     
         
+        
+    
+    
+        
+        
+    
+    
         
 
 class OrderValidator:
@@ -231,6 +237,13 @@ class OrderValidator:
          
         
     
+    class getInvoiceByShipmentId1(BaseSchema):
+        
+        
+        shipment_id = fields.Str(required=False)
+         
+        
+    
     class trackShipment1(BaseSchema):
         
         
@@ -271,6 +284,13 @@ class OrderValidator:
         shipment_id = fields.Str(required=False)
         
         bag_id = fields.Str(required=False)
+         
+        
+    
+    class getShipmentReasons1(BaseSchema):
+        
+        
+        shipment_id = fields.Str(required=False)
          
         
     

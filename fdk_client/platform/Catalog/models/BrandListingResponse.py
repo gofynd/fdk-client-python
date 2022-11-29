@@ -9,11 +9,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .Page import Page
-
-
-
 from .BrandItem import BrandItem
+
+
+
+from .Page import Page
 
 
 
@@ -21,7 +21,7 @@ class BrandListingResponse(BaseSchema):
     #  swagger.json
 
     
-    page = fields.Nested(Page, required=False)
-    
     items = fields.List(fields.Nested(BrandItem, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
     

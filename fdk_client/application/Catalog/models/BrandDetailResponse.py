@@ -9,17 +9,17 @@ from ...ApplicationModel import BaseSchema
 
 
 
-
-
-from .ImageUrls import ImageUrls
-
-
-
-
-
 from .Media import Media
 
 
+
+
+
+
+
+
+
+from .ImageUrls import ImageUrls
 
 
 
@@ -27,13 +27,13 @@ class BrandDetailResponse(BaseSchema):
     #  swagger.json
 
     
-    uid = fields.Int(required=False)
-    
-    banners = fields.Nested(ImageUrls, required=False)
-    
-    name = fields.Str(required=False)
-    
     logo = fields.Nested(Media, required=False)
     
     description = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
+    
+    name = fields.Str(required=False)
+    
+    banners = fields.Nested(ImageUrls, required=False)
     

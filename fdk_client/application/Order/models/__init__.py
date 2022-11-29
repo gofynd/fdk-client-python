@@ -103,10 +103,6 @@ from .UserInfo import UserInfo
 
 from .ApefaceApiError import ApefaceApiError
 
-from .ShipmentPayment1 import ShipmentPayment1
-
-from .FulfillingCompany import FulfillingCompany
-
 from .TimeStampData import TimeStampData
 
 from .Promise1 import Promise1
@@ -114,6 +110,10 @@ from .Promise1 import Promise1
 from .NestedTrackingDetails import NestedTrackingDetails
 
 from .TrackingDetails1 import TrackingDetails1
+
+from .FulfillingCompany import FulfillingCompany
+
+from .ShipmentPayment1 import ShipmentPayment1
 
 from .Item1 import Item1
 
@@ -131,6 +131,8 @@ from .OrderById1 import OrderById1
 
 from .ShipmentById1 import ShipmentById1
 
+from .ResponseGetInvoiceShipment1 import ResponseGetInvoiceShipment1
+
 from .ShipmentTrack1 import ShipmentTrack1
 
 from .CustomerDetailsResponse import CustomerDetailsResponse
@@ -146,5 +148,9 @@ from .QuestionSet import QuestionSet
 from .BagReasons1 import BagReasons1
 
 from .ShipmentBagReasons1 import ShipmentBagReasons1
+
+from .ShipmentReason import ShipmentReason
+
+from .ShipmentReasons1 import ShipmentReasons1
 
 

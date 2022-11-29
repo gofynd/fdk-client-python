@@ -19,6 +19,8 @@ from ...PlatformModel import BaseSchema
 
 
 
+
+
 class Domain(BaseSchema):
     #  swagger.json
 
@@ -32,4 +34,6 @@ class Domain(BaseSchema):
     is_primary = fields.Boolean(required=False)
     
     is_shortlink = fields.Boolean(required=False)
+    
+    is_predefined = fields.Boolean(required=False)
     

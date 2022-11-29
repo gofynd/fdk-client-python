@@ -45,7 +45,7 @@ class CreateTagSchema(BaseSchema):
     
     attributes = fields.Dict(required=False)
     
-    pages = fields.List(fields.Str(required=False), required=False)
+    pages = fields.List(fields.Dict(required=False), required=False)
     
     content = fields.Str(required=False)
     

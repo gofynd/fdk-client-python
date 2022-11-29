@@ -31,15 +31,15 @@ class AppliedPromos(BaseSchema):
     
     applied_free_articles = fields.Nested(AppliedFreeArticles, required=False)
     
-    article_quantity = fields.Float(required=False)
-    
     promo_id = fields.Str(required=False)
     
-    amount = fields.Float(required=False)
+    article_quantity = fields.Float(required=False)
     
-    promotion_type = fields.Str(required=False)
+    mrp_promotion = fields.Boolean(required=False)
     
     promotion_name = fields.Str(required=False)
     
-    mrp_promotion = fields.Boolean(required=False)
+    promotion_type = fields.Str(required=False)
+    
+    amount = fields.Float(required=False)
     

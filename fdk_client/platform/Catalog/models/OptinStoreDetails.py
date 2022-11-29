@@ -9,11 +9,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .Page import Page
-
-
-
 from .StoreDetail import StoreDetail
+
+
+
+from .Page import Page
 
 
 
@@ -21,7 +21,7 @@ class OptinStoreDetails(BaseSchema):
     #  swagger.json
 
     
-    page = fields.Nested(Page, required=False)
-    
     items = fields.List(fields.Nested(StoreDetail, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
     

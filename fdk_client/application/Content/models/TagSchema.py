@@ -51,7 +51,7 @@ class TagSchema(BaseSchema):
     
     content = fields.Str(required=False)
     
-    pages = fields.List(fields.Str(required=False), required=False)
+    pages = fields.List(fields.Dict(required=False), required=False)
     
     __source = fields.Nested(TagSourceSchema, required=False)
     

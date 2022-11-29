@@ -21,7 +21,7 @@ class ReturnConfig(BaseSchema):
     
     time = fields.Int(required=False)
     
-    unit = fields.Str(required=False)
-    
     returnable = fields.Boolean(required=False)
+    
+    unit = fields.Str(required=False)
     

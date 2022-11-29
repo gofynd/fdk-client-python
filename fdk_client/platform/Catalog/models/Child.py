@@ -9,15 +9,9 @@ from ...PlatformModel import BaseSchema
 
 
 
+
+
 from .ImageUrls import ImageUrls
-
-
-
-
-
-
-
-
 
 
 
@@ -25,7 +19,13 @@ from .SecondLevelChild import SecondLevelChild
 
 
 
+
+
+
+
 from .Action import Action
+
+
 
 
 
@@ -33,17 +33,17 @@ class Child(BaseSchema):
     #  swagger.json
 
     
-    banners = fields.Nested(ImageUrls, required=False)
-    
-    uid = fields.Int(required=False)
-    
     slug = fields.Str(required=False)
     
-    name = fields.Str(required=False)
-    
-    _custom_json = fields.Dict(required=False)
+    banners = fields.Nested(ImageUrls, required=False)
     
     childs = fields.List(fields.Nested(SecondLevelChild, required=False), required=False)
     
+    uid = fields.Int(required=False)
+    
+    _custom_json = fields.Dict(required=False)
+    
     action = fields.Nested(Action, required=False)
+    
+    name = fields.Str(required=False)
     

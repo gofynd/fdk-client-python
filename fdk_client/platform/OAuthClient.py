@@ -47,7 +47,7 @@ class OAuthClient:
     # returns timestamp in milliseconds
     # JS/Java equivalent of `new Date().getTime()`
     def get_current_timestamp():
-        return time.time() // 1_000_000
+        return time.time_ns() // 1_000_000
 
 
     async def setToken(self, token):

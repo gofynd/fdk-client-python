@@ -21,7 +21,7 @@ class CompanyBrandPostRequestSerializer(BaseSchema):
     
     uid = fields.Int(required=False)
     
-    brands = fields.List(fields.Int(required=False), required=False)
-    
     company = fields.Int(required=False)
+    
+    brands = fields.List(fields.Int(required=False), required=False)
     
