@@ -26,9 +26,9 @@ class MetricsSerializer(BaseSchema):
     
     brand = fields.Nested(DocumentsObj, required=False)
     
-    store = fields.Nested(DocumentsObj, required=False)
-    
     product = fields.Nested(DocumentsObj, required=False)
+    
+    store = fields.Nested(DocumentsObj, required=False)
     
     uid = fields.Int(required=False)
     
