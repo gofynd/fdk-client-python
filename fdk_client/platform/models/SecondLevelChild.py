@@ -7,15 +7,15 @@ from ..models.BaseSchema import BaseSchema
 
 from .ImageUrls import ImageUrls
 
-
-
-
-
-
+from .Action import Action
 
 from .ThirdLevelChild import ThirdLevelChild
 
-from .Action import Action
+
+
+
+
+
 
 
 
@@ -26,16 +26,16 @@ class SecondLevelChild(BaseSchema):
     
     banners = fields.Nested(ImageUrls, required=False)
     
-    uid = fields.Int(required=False)
-    
-    slug = fields.Str(required=False)
-    
-    _custom_json = fields.Dict(required=False)
+    action = fields.Nested(Action, required=False)
     
     childs = fields.List(fields.Nested(ThirdLevelChild, required=False), required=False)
     
-    action = fields.Nested(Action, required=False)
+    _custom_json = fields.Dict(required=False)
     
     name = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
+    
+    slug = fields.Str(required=False)
     
 

@@ -20,6 +20,8 @@ class Document(BaseSchema):
     # Catalog swagger.json
 
     
+    verified = fields.Boolean(required=False)
+    
     legal_name = fields.Str(required=False)
     
     type = fields.Str(required=False)
@@ -27,7 +29,5 @@ class Document(BaseSchema):
     url = fields.Str(required=False)
     
     value = fields.Str(required=False)
-    
-    verified = fields.Boolean(required=False)
     
 
