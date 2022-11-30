@@ -20,10 +20,10 @@ class OutstandingOrderDetailsResponse(BaseSchema):
     
     success = fields.Boolean(required=False)
     
-    message = fields.Str(required=False)
-    
     data = fields.List(fields.Dict(required=False), required=False)
     
     status_code = fields.Int(required=False)
+    
+    message = fields.Str(required=False)
     
 
