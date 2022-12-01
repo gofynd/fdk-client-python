@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class SetDefaultBeneficiaryRequest(BaseSchema):
-    # Payment swagger.json
+class CartCheckoutCustomMeta(BaseSchema):
+    # Cart swagger.json
 
     
-    beneficiary_id = fields.Str(required=False)
+    value = fields.Str(required=False)
     
-    order_id = fields.Str(required=False)
+    key = fields.Str(required=False)
     
 
