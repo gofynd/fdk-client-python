@@ -11,15 +11,9 @@ from ...ApplicationModel import BaseSchema
 
 
 
-from .TATErrorSchemaResponse import TATErrorSchemaResponse
-
-
-
-
-
-
-
 from .TATCategoryRequest import TATCategoryRequest
+
+
 
 
 
@@ -29,15 +23,15 @@ from .TATPromiseResponse import TATPromiseResponse
 
 
 
+from .TATErrorSchemaResponse import TATErrorSchemaResponse
+
+
+
+
+
 class TATArticlesResponse(BaseSchema):
     #  swagger.json
 
-    
-    manufacturing_time_unit = fields.Str(required=False)
-    
-    error = fields.Nested(TATErrorSchemaResponse, required=False)
-    
-    _manufacturing_time_seconds = fields.Int(required=False)
     
     is_cod_available = fields.Boolean(required=False)
     
@@ -45,5 +39,11 @@ class TATArticlesResponse(BaseSchema):
     
     manufacturing_time = fields.Int(required=False)
     
+    _manufacturing_time_seconds = fields.Int(required=False)
+    
     promise = fields.Nested(TATPromiseResponse, required=False)
+    
+    error = fields.Nested(TATErrorSchemaResponse, required=False)
+    
+    manufacturing_time_unit = fields.Str(required=False)
     

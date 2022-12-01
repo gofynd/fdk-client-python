@@ -19,9 +19,9 @@ class InventoryExportRequest(BaseSchema):
     #  swagger.json
 
     
-    brand = fields.List(fields.Int(required=False), required=False)
-    
     type = fields.Str(required=False)
+    
+    brand = fields.List(fields.Int(required=False), required=False)
     
     store = fields.List(fields.Int(required=False), required=False)
     

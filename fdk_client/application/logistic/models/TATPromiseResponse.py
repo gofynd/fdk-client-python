@@ -9,11 +9,11 @@ from ...ApplicationModel import BaseSchema
 
 
 
-from .TATFormattedResponse import TATFormattedResponse
-
-
-
 from .TATTimestampResponse import TATTimestampResponse
+
+
+
+from .TATFormattedResponse import TATFormattedResponse
 
 
 
@@ -21,7 +21,7 @@ class TATPromiseResponse(BaseSchema):
     #  swagger.json
 
     
-    formatted = fields.Nested(TATFormattedResponse, required=False)
-    
     timestamp = fields.Nested(TATTimestampResponse, required=False)
+    
+    formatted = fields.Nested(TATFormattedResponse, required=False)
     

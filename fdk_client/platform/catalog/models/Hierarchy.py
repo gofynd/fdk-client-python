@@ -21,7 +21,7 @@ class Hierarchy(BaseSchema):
     
     department = fields.Int(required=False)
     
-    l2 = fields.Int(required=False)
-    
     l1 = fields.Int(required=False)
+    
+    l2 = fields.Int(required=False)
     

@@ -3,13 +3,13 @@
 
 from .Page import Page
 
-from .CategoryMappingValues import CategoryMappingValues
-
-from .CategoryMapping import CategoryMapping
-
 from .Hierarchy import Hierarchy
 
 from .Media import Media
+
+from .CategoryMappingValues import CategoryMappingValues
+
+from .CategoryMapping import CategoryMapping
 
 from .Category import Category
 
@@ -21,17 +21,9 @@ from .CategoryRequestBody import CategoryRequestBody
 
 from .CategoryCreateResponse import CategoryCreateResponse
 
-from .SingleCategoryResponse import SingleCategoryResponse
-
 from .CategoryUpdateResponse import CategoryUpdateResponse
 
-from .UserSerializer import UserSerializer
-
-from .GetDepartment import GetDepartment
-
-from .DepartmentsResponse import DepartmentsResponse
-
-from .DepartmentErrorResponse import DepartmentErrorResponse
+from .SingleCategoryResponse import SingleCategoryResponse
 
 from .DepartmentCreateUpdate import DepartmentCreateUpdate
 
@@ -40,6 +32,14 @@ from .UserDetail import UserDetail
 from .DepartmentModel import DepartmentModel
 
 from .DepartmentCreateErrorResponse import DepartmentCreateErrorResponse
+
+from .UserSerializer import UserSerializer
+
+from .GetDepartment import GetDepartment
+
+from .DepartmentsResponse import DepartmentsResponse
+
+from .DepartmentErrorResponse import DepartmentErrorResponse
 
 from .PageResponse import PageResponse
 

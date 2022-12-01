@@ -21,9 +21,9 @@ class MetaDataListingFilterMetaResponse(BaseSchema):
     #  swagger.json
 
     
-    display = fields.Str(required=False)
-    
     filter_types = fields.List(fields.Str(required=False), required=False)
+    
+    display = fields.Str(required=False)
     
     key = fields.Str(required=False)
     

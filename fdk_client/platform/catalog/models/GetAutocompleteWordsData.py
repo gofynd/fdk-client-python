@@ -27,9 +27,9 @@ class GetAutocompleteWordsData(BaseSchema):
     
     words = fields.List(fields.Str(required=False), required=False)
     
-    app_id = fields.Str(required=False)
-    
     uid = fields.Str(required=False)
+    
+    app_id = fields.Str(required=False)
     
     results = fields.List(fields.Dict(required=False), required=False)
     

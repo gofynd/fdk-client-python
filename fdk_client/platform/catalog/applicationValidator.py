@@ -60,9 +60,9 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
         
+    
+    
         
         
         
@@ -317,6 +317,17 @@ from ..PlatformModel import BaseSchema
 class CatalogValidator:
     
     
+    class updateSearchKeywords(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
     class getSearchKeywords(BaseSchema):
         
         
@@ -329,17 +340,6 @@ class CatalogValidator:
         
     
     class deleteSearchKeywords(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-         
-        
-    
-    class updateSearchKeywords(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -368,6 +368,17 @@ class CatalogValidator:
          
         
     
+    class updateAutocompleteKeyword(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
     class getAutocompleteKeywordDetail(BaseSchema):
         
         
@@ -380,17 +391,6 @@ class CatalogValidator:
         
     
     class deleteAutocompleteKeyword(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-         
-        
-    
-    class updateAutocompleteKeyword(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -419,17 +419,6 @@ class CatalogValidator:
          
         
     
-    class updateAppProduct(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        item_id = fields.Str(required=False)
-         
-        
-    
     class getAppProduct(BaseSchema):
         
         
@@ -440,6 +429,17 @@ class CatalogValidator:
         item_id = fields.Str(required=False)
         
         slice_attr = fields.Str(required=False)
+         
+        
+    
+    class updateAppProduct(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        item_id = fields.Str(required=False)
          
         
     
@@ -486,7 +486,7 @@ class CatalogValidator:
          
         
     
-    class deleteGroupConfiguration(BaseSchema):
+    class updateGroupConfiguration(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -499,7 +499,7 @@ class CatalogValidator:
          
         
     
-    class updateGroupConfiguration(BaseSchema):
+    class deleteGroupConfiguration(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -540,7 +540,7 @@ class CatalogValidator:
          
         
     
-    class deleteListingConfiguration(BaseSchema):
+    class updateListingConfiguration(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -553,7 +553,7 @@ class CatalogValidator:
          
         
     
-    class updateListingConfiguration(BaseSchema):
+    class deleteListingConfiguration(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -685,7 +685,7 @@ class CatalogValidator:
          
         
     
-    class deleteCollection(BaseSchema):
+    class updateCollection(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -696,7 +696,7 @@ class CatalogValidator:
          
         
     
-    class updateCollection(BaseSchema):
+    class deleteCollection(BaseSchema):
         
         
         company_id = fields.Str(required=False)

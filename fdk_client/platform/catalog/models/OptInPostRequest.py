@@ -25,13 +25,13 @@ class OptInPostRequest(BaseSchema):
     #  swagger.json
 
     
+    enabled = fields.Boolean(required=False)
+    
     company_id = fields.Int(required=False)
     
     opt_level = fields.Str(required=False)
     
     store_ids = fields.List(fields.Int(required=False), required=False)
-    
-    enabled = fields.Boolean(required=False)
     
     brand_ids = fields.List(fields.Int(required=False), required=False)
     
