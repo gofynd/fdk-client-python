@@ -22,9 +22,9 @@ class JioCodeUpsertResponse(BaseSchema):
     
     success = fields.Boolean(required=False)
     
-    data = fields.List(fields.Dict(required=False), required=False)
-    
     trace_id = fields.Str(required=False)
+    
+    data = fields.List(fields.Dict(required=False), required=False)
     
     identifier = fields.Str(required=False)
     

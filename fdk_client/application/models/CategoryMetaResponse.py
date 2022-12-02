@@ -7,9 +7,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
 from .Media import Media
+
+
 
 
 
@@ -20,11 +20,11 @@ class CategoryMetaResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    uid = fields.Int(required=False)
-    
     _custom_json = fields.Dict(required=False)
     
     logo = fields.Nested(Media, required=False)
+    
+    uid = fields.Int(required=False)
     
     name = fields.Str(required=False)
     

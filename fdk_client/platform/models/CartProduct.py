@@ -7,15 +7,15 @@ from ..models.BaseSchema import BaseSchema
 
 from .CategoryInfo import CategoryInfo
 
-from .BaseInfo import BaseInfo
-
-
+from .ProductImage import ProductImage
 
 from .ProductAction import ProductAction
 
 
 
-from .ProductImage import ProductImage
+from .BaseInfo import BaseInfo
+
+
 
 
 
@@ -28,17 +28,17 @@ class CartProduct(BaseSchema):
     
     categories = fields.List(fields.Nested(CategoryInfo, required=False), required=False)
     
+    images = fields.List(fields.Nested(ProductImage, required=False), required=False)
+    
+    action = fields.Nested(ProductAction, required=False)
+    
+    uid = fields.Int(required=False)
+    
     brand = fields.Nested(BaseInfo, required=False)
     
     name = fields.Str(required=False)
     
-    action = fields.Nested(ProductAction, required=False)
-    
     slug = fields.Str(required=False)
-    
-    images = fields.List(fields.Nested(ProductImage, required=False), required=False)
-    
-    uid = fields.Int(required=False)
     
     type = fields.Str(required=False)
     
