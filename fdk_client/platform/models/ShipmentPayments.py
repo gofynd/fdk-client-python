@@ -16,9 +16,9 @@ class ShipmentPayments(BaseSchema):
     # Order swagger.json
 
     
-    mode = fields.Str(required=False)
-    
     source = fields.Str(required=False)
+    
+    mode = fields.Str(required=False)
     
     logo = fields.Str(required=False)
     

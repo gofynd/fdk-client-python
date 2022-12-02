@@ -8,10 +8,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ApefaceApiError1(BaseSchema):
-    # Order swagger.json
+
+
+class RedirectionSchema(BaseSchema):
+    # Content swagger.json
 
     
-    message = fields.Str(required=False)
+    redirect_from = fields.Str(required=False)
+    
+    redirect_to = fields.Str(required=False)
     
 

@@ -22,8 +22,8 @@ class CurrentStatus(BaseSchema):
     
     updated_at = fields.Str(required=False)
     
-    journey_type = fields.Str(required=False)
-    
     name = fields.Str(required=False)
+    
+    journey_type = fields.Str(required=False)
     
 

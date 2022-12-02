@@ -9,35 +9,35 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 from .MarketPlacePdf import MarketPlacePdf
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -56,15 +56,25 @@ class AffiliateBag(BaseSchema):
     # Order swagger.json
 
     
+    amount_paid = fields.Float(required=False)
+    
     quantity = fields.Int(required=False)
     
-    identifier = fields.Dict(required=False)
+    pdf_links = fields.Nested(MarketPlacePdf, required=False)
+    
+    unit_price = fields.Float(required=False)
     
     delivery_charge = fields.Float(required=False)
     
-    price_marked = fields.Float(required=False)
+    fynd_store_id = fields.Str(required=False)
     
     seller_identifier = fields.Str(required=False)
+    
+    _id = fields.Str(required=False)
+    
+    discount = fields.Float(required=False)
+    
+    item_id = fields.Int(required=False)
     
     transfer_price = fields.Int(required=False)
     
@@ -74,32 +84,22 @@ class AffiliateBag(BaseSchema):
     
     avl_qty = fields.Int(required=False)
     
+    identifier = fields.Dict(required=False)
+    
     store_id = fields.Int(required=False)
     
-    item_size = fields.Str(required=False)
+    sku = fields.Str(required=False)
+    
+    affiliate_store_id = fields.Str(required=False)
     
     price_effective = fields.Float(required=False)
-    
-    item_id = fields.Int(required=False)
-    
-    fynd_store_id = fields.Str(required=False)
-    
-    amount_paid = fields.Float(required=False)
-    
-    unit_price = fields.Float(required=False)
-    
-    pdf_links = fields.Nested(MarketPlacePdf, required=False)
-    
-    _id = fields.Str(required=False)
     
     company_id = fields.Int(required=False)
     
     modified_on = fields.Str(required=False)
     
-    affiliate_store_id = fields.Str(required=False)
+    item_size = fields.Str(required=False)
     
-    sku = fields.Str(required=False)
-    
-    discount = fields.Float(required=False)
+    price_marked = fields.Float(required=False)
     
 

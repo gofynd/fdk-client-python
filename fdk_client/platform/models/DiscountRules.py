@@ -10,20 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
 class DiscountRules(BaseSchema):
-    # Cart swagger.json
+    # Order swagger.json
 
     
-    item_criteria = fields.Dict(required=False)
+    type = fields.Str(required=False)
     
-    matched_buy_rules = fields.List(fields.Str(required=False), required=False)
-    
-    raw_offer = fields.Dict(required=False)
-    
-    offer = fields.Dict(required=False)
+    value = fields.Int(required=False)
     
 

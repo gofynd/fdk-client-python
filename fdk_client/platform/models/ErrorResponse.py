@@ -18,8 +18,8 @@ class ErrorResponse(BaseSchema):
     
     message = fields.Str(required=False)
     
-    status = fields.Int(required=False)
-    
     error_trace = fields.Str(required=False)
+    
+    status = fields.Int(required=False)
     
 

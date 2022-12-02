@@ -16,8 +16,6 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
 class FaqSchema(BaseSchema):
     # Content swagger.json
 
@@ -31,7 +29,5 @@ class FaqSchema(BaseSchema):
     question = fields.Str(required=False)
     
     answer = fields.Str(required=False)
-    
-    tags = fields.List(fields.Str(required=False), required=False)
     
 

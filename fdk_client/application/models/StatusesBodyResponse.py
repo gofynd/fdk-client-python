@@ -8,14 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class OrderInvoiceEngineError(BaseSchema):
+class StatusesBodyResponse(BaseSchema):
     # Order swagger.json
 
     
-    message = fields.Str(required=False)
-    
-    success = fields.Boolean(required=False)
+    shipments = fields.Dict(required=False)
     
 

@@ -26,7 +26,7 @@ from .Action import Action
 from .NavigationReference import NavigationReference
 
 
-class _NavigationReference(BaseSchema):
+class SubNavigationReference(BaseSchema):
     # Content swagger.json
 
     

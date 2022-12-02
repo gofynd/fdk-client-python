@@ -9,9 +9,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 from .SearchKeywordResult import SearchKeywordResult
-
-
 
 
 
@@ -24,9 +24,9 @@ class CreateSearchKeyword(BaseSchema):
     
     words = fields.List(fields.Str(required=False), required=False)
     
-    result = fields.Nested(SearchKeywordResult, required=False)
-    
     app_id = fields.Str(required=False)
+    
+    result = fields.Nested(SearchKeywordResult, required=False)
     
     _custom_json = fields.Dict(required=False)
     

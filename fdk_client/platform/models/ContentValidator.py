@@ -284,6 +284,20 @@ class ContentValidator:
         id = fields.Str(required=False)
          
     
+    class getLegalInformation(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+    
+    class updateLegalInformation(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+    
     class getNavigations(BaseSchema):
         
         company_id = fields.Str(required=False)
@@ -345,10 +359,6 @@ class ContentValidator:
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
-        
-        page_type = fields.Str(required=False)
-        
-        cart_pages = fields.Boolean(required=False)
          
     
     class getPageSpec(BaseSchema):
@@ -383,7 +393,7 @@ class ContentValidator:
         id = fields.Str(required=False)
          
     
-    class addPathRedirectionRules(BaseSchema):
+    class updatePathRedirectionRules(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -395,37 +405,6 @@ class ContentValidator:
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        page_no = fields.Int(required=False)
-         
-    
-    class getPathRedirectionRule(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        path_id = fields.Str(required=False)
-         
-    
-    class updatePathRedirectionRules(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        path_id = fields.Str(required=False)
-         
-    
-    class deletePathRedirectionRules(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        path_id = fields.Str(required=False)
          
     
     class getSEOConfiguration(BaseSchema):

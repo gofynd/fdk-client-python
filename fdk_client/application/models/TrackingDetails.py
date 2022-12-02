@@ -20,13 +20,13 @@ class TrackingDetails(BaseSchema):
     # Order swagger.json
 
     
-    status = fields.Str(required=False)
+    is_passed = fields.Boolean(required=False)
     
-    time = fields.Str(required=False)
+    status = fields.Str(required=False)
     
     tracking_details = fields.List(fields.Nested(NestedTrackingDetails, required=False), required=False)
     
-    is_passed = fields.Boolean(required=False)
+    time = fields.Str(required=False)
     
     is_current = fields.Boolean(required=False)
     

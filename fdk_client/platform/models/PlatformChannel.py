@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class OrderInvoiceEngineError(BaseSchema):
-    # DocumentEngine swagger.json
+class PlatformChannel(BaseSchema):
+    # Order swagger.json
 
     
-    message = fields.Str(required=False)
+    name = fields.Str(required=False)
     
-    success = fields.Boolean(required=False)
+    logo = fields.Str(required=False)
     
 
