@@ -1414,8 +1414,6 @@ from .OrderStatuses import OrderStatuses
     
 from .OrderFilters import OrderFilters
     
-from .OrderPage import OrderPage
-    
 from .BreakupValues import BreakupValues
     
 from .BagsForReorderArticleAssignment import BagsForReorderArticleAssignment
@@ -1424,31 +1422,33 @@ from .BagsForReorder import BagsForReorder
     
 from .UserInfo import UserInfo
     
+from .Invoice import Invoice
+    
+from .DeliveryAddress import DeliveryAddress
+    
+from .ShipmentUserInfo import ShipmentUserInfo
+    
+from .FulfillingStore import FulfillingStore
+    
 from .NestedTrackingDetails import NestedTrackingDetails
     
 from .TrackingDetails import TrackingDetails
     
 from .ShipmentStatus import ShipmentStatus
     
-from .FulfillingStore import FulfillingStore
-    
-from .ShipmentTotalDetails import ShipmentTotalDetails
-    
 from .ShipmentPayment import ShipmentPayment
-    
-from .FulfillingCompany import FulfillingCompany
     
 from .Prices import Prices
     
-from .ShipmentUserInfo import ShipmentUserInfo
-    
-from .DeliveryAddress import DeliveryAddress
+from .ShipmentTotalDetails import ShipmentTotalDetails
     
 from .TimeStampData import TimeStampData
     
 from .Promise import Promise
     
-from .Invoice import Invoice
+from .ItemBrand import ItemBrand
+    
+from .Item import Item
     
 from .CurrentStatus import CurrentStatus
     
@@ -1466,15 +1466,15 @@ from .FreeGiftItemDetails import FreeGiftItemDetails
     
 from .AppliedPromos import AppliedPromos
     
-from .ItemBrand import ItemBrand
-    
-from .Item import Item
-    
 from .Bags import Bags
+    
+from .FulfillingCompany import FulfillingCompany
     
 from .Shipments import Shipments
     
 from .OrderSchema import OrderSchema
+    
+from .OrderPage import OrderPage
     
 from .OrderList import OrderList
     

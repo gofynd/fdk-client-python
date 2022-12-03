@@ -22,8 +22,8 @@ class ManualAssignDPToShipment(BaseSchema):
     
     shipment_ids = fields.List(fields.Str(required=False), required=False)
     
-    qc_required = fields.Str(required=False)
-    
     order_type = fields.Str(required=False)
+    
+    qc_required = fields.Str(required=False)
     
 

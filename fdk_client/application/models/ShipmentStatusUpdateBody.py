@@ -7,11 +7,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
+
+
 from .StatusesBody import StatusesBody
-
-
-
-
 
 
 
@@ -22,12 +22,12 @@ class ShipmentStatusUpdateBody(BaseSchema):
     
     force_transition = fields.Boolean(required=False)
     
-    statuses = fields.List(fields.Nested(StatusesBody, required=False), required=False)
+    unlock_before_transition = fields.Boolean(required=False)
     
     task = fields.Boolean(required=False)
     
-    lock_after_transition = fields.Boolean(required=False)
+    statuses = fields.List(fields.Nested(StatusesBody, required=False), required=False)
     
-    unlock_before_transition = fields.Boolean(required=False)
+    lock_after_transition = fields.Boolean(required=False)
     
 

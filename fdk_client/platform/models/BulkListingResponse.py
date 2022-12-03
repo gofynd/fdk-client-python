@@ -18,11 +18,11 @@ class BulkListingResponse(BaseSchema):
     # Order swagger.json
 
     
-    success = fields.Boolean(required=False)
+    error = fields.Str(required=False)
     
     page = fields.Nested(BulkListingPage, required=False)
     
-    error = fields.Str(required=False)
+    success = fields.Boolean(required=False)
     
     data = fields.List(fields.Nested(bulkListingData, required=False), required=False)
     

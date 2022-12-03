@@ -7,11 +7,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
 from .ItemPriceDetails import ItemPriceDetails
+
+
+
+
 
 
 class FreeGiftItemDetails(BaseSchema):
@@ -20,10 +20,10 @@ class FreeGiftItemDetails(BaseSchema):
     
     item_brand_name = fields.Str(required=False)
     
-    item_id = fields.Str(required=False)
+    item_price_details = fields.Nested(ItemPriceDetails, required=False)
     
     item_name = fields.Str(required=False)
     
-    item_price_details = fields.Nested(ItemPriceDetails, required=False)
+    item_id = fields.Str(required=False)
     
 

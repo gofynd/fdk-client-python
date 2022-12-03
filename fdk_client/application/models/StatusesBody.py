@@ -16,10 +16,10 @@ class StatusesBody(BaseSchema):
     # Order swagger.json
 
     
-    status = fields.Str(required=False)
-    
     exclude_bags_next_state = fields.Str(required=False)
     
     shipments = fields.Dict(required=False)
+    
+    status = fields.Str(required=False)
     
 

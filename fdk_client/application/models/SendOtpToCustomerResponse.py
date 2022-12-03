@@ -20,10 +20,10 @@ class SendOtpToCustomerResponse(BaseSchema):
     
     success = fields.Boolean(required=False)
     
-    message = fields.Str(required=False)
-    
     resend_timer = fields.Int(required=False)
     
     request_id = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
     
 

@@ -20,10 +20,10 @@ class ShipmentPayment(BaseSchema):
     
     status = fields.Str(required=False)
     
+    logo = fields.Str(required=False)
+    
     mop = fields.Str(required=False)
     
     mode = fields.Str(required=False)
-    
-    logo = fields.Str(required=False)
     
 

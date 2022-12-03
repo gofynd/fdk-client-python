@@ -18,11 +18,11 @@ class ActionInfo(BaseSchema):
     # Order swagger.json
 
     
-    display_text = fields.Str(required=False)
+    description = fields.Str(required=False)
     
     slug = fields.Str(required=False)
     
-    description = fields.Str(required=False)
+    display_text = fields.Str(required=False)
     
     id = fields.Int(required=False)
     
