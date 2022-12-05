@@ -19,9 +19,9 @@ class SelectCartAddressRequest(BaseSchema):
     #  swagger.json
 
     
+    id = fields.Str(required=False)
+    
     cart_id = fields.Str(required=False)
     
     billing_address_id = fields.Str(required=False)
-    
-    id = fields.Str(required=False)
     

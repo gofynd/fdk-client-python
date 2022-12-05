@@ -13,9 +13,9 @@ from .Page import Page
 
 
 
+
+
 from .ProductListingDetail import ProductListingDetail
-
-
 
 
 
@@ -25,7 +25,7 @@ class HomeListingResponse(BaseSchema):
     
     page = fields.Nested(Page, required=False)
     
-    items = fields.List(fields.Nested(ProductListingDetail, required=False), required=False)
-    
     message = fields.Str(required=False)
+    
+    items = fields.List(fields.Nested(ProductListingDetail, required=False), required=False)
     

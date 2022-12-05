@@ -17,7 +17,7 @@ class NetQuantity(BaseSchema):
     #  swagger.json
 
     
-    unit = fields.Raw(required=False)
-    
     value = fields.Float(required=False)
+    
+    unit = fields.Raw(required=False)
     

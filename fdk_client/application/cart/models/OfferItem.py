@@ -13,9 +13,9 @@ from ...ApplicationModel import BaseSchema
 
 
 
-
-
 from .OfferPrice import OfferPrice
+
+
 
 
 
@@ -29,11 +29,9 @@ class OfferItem(BaseSchema):
     #  swagger.json
 
     
-    total = fields.Float(required=False)
-    
     type = fields.Str(required=False)
     
-    margin = fields.Int(required=False)
+    total = fields.Float(required=False)
     
     price = fields.Nested(OfferPrice, required=False)
     
@@ -42,4 +40,6 @@ class OfferItem(BaseSchema):
     quantity = fields.Int(required=False)
     
     auto_applied = fields.Boolean(required=False)
+    
+    margin = fields.Int(required=False)
     

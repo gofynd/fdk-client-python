@@ -25,7 +25,7 @@ class HSNDataV2(BaseSchema):
     #  swagger.json
 
     
-    description = fields.Str(required=False)
+    hsn_code = fields.Str(required=False)
     
     country_code = fields.Str(required=False)
     
@@ -33,5 +33,5 @@ class HSNDataV2(BaseSchema):
     
     type = fields.Str(required=False)
     
-    hsn_code = fields.Str(required=False)
+    description = fields.Str(required=False)
     

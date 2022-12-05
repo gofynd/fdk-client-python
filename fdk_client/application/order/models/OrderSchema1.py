@@ -9,18 +9,6 @@ from ...ApplicationModel import BaseSchema
 
 
 
-
-
-
-
-from .UserInfo import UserInfo
-
-
-
-from .BreakupValues import BreakupValues
-
-
-
 from .Shipments1 import Shipments1
 
 
@@ -31,21 +19,33 @@ from .BagsForReorder import BagsForReorder
 
 
 
+from .BreakupValues import BreakupValues
+
+
+
+from .UserInfo import UserInfo
+
+
+
+
+
+
+
 class OrderSchema1(BaseSchema):
     #  swagger.json
 
     
+    shipments = fields.List(fields.Nested(Shipments1, required=False), required=False)
+    
     order_id = fields.Str(required=False)
     
-    order_created_time = fields.Str(required=False)
-    
-    user_info = fields.Nested(UserInfo, required=False)
+    bags_for_reorder = fields.List(fields.Nested(BagsForReorder, required=False), required=False)
     
     breakup_values = fields.List(fields.Nested(BreakupValues, required=False), required=False)
     
-    shipments = fields.List(fields.Nested(Shipments1, required=False), required=False)
+    user_info = fields.Nested(UserInfo, required=False)
+    
+    order_created_time = fields.Str(required=False)
     
     total_shipments_in_order = fields.Int(required=False)
-    
-    bags_for_reorder = fields.List(fields.Nested(BagsForReorder, required=False), required=False)
     

@@ -20,7 +20,7 @@ class OAuthClient:
         self._conf = config
         self.token = None
         self.refreshToken = None
-        self.retryOAuthTokenTimer = None
+        self.retryOAuthTokenTimer: Timer = None
         self.raw_token = None
         self.token_expires_in = None
         self.token_expires_at = 0
@@ -50,22 +50,22 @@ class OAuthClient:
         return time.time_ns() // 1_000_000
 
 
-    async def setToken(self, token):
+    def setToken(self, token):
         self.raw_token = token
         self.token_expires_in = token.get("expires_in")
         self.token = token.get("access_token")
         self.refreshToken = token.get("refresh_token") if token.get("refresh_token") else None
         if self.refreshToken and self.useAutoRenewTimer:
-            await self.retryOAuthToken(token.get("expires_in"))
+            self.retryOAuthToken(token.get("expires_in"))
 
-    async def retryOAuthToken(self, expires_in):
+    def retryOAuthToken(self, expires_in):
         if self.retryOAuthTokenTimer:
             self.retryOAuthTokenTimer.cancel()
         if expires_in > 60:
             self.retryOAuthTokenTimer = Timer(float(expires_in - 60), lambda: asyncio.run(self.renewAccessToken()))
             self.retryOAuthTokenTimer.start()
 
-    async def startAuthorization(self, options: Dict):
+    def startAuthorization(self, options: Dict):
         query = {
             "access_mode": options.get("access_mode", ""),
             "client_id": self._conf.apiKey,
@@ -84,10 +84,10 @@ class OAuthClient:
           "headers": {},
           "signQuery": True
         }
-        queryString = await get_headers_with_signature(self._conf.domain, "get",
+        queryString = asyncio.run(get_headers_with_signature(self._conf.domain, "get",
                                                             f"/service/panel/authentication/v1.0/company/"
                                                             f"{self._conf.companyId}/oauth/authorize",
-                                                            queryString, {}, sign_query=True)
+                                                            queryString, {}, sign_query=True))
         return f"{self._conf.domain}{signingOptions['path']}?{queryString}"
 
     async def verifyCallback(self, query):
@@ -95,7 +95,7 @@ class OAuthClient:
             raise FDKOAuthCodeError(query["error_description"])
         try:
             res = await self.getAccesstokenObj(grant_type="authorization_code", code=query.get("code", ""))
-            await self.setToken(res)
+            self.setToken(res)
             self.token_expires_at = self.get_current_timestamp() + self.token_expires_in * 1000
         except Exception as e:
             raise FDKTokenIssueError(str(e))
@@ -119,7 +119,7 @@ class OAuthClient:
         else:
             res = await self.getAccesstokenObj(grant_type="refresh_token", refresh_token=self.refreshToken)
         
-        await self.setToken(res)
+        self.setToken(res)
         self.token_expires_at = self.get_current_timestamp() + self.token_expires_in * 1000
         return res
 
@@ -172,11 +172,11 @@ class OAuthClient:
         headers = await get_headers_with_signature(
             domain=self._conf.domain,
             method="post",
-            url=url,
+            url=f"/servide/panel/authentication/v1.0/company/{self._conf.companyId}/oauth/offline-token",
             query_string="",
             headers=headers,
             body=data,
-            exclude_headers=["Authorization"]
+            exclude_headers=list(headers.keys())
         )
         response = await AiohttpHelper().aiohttp_request(request_type="POST", url=url, data=data, headers=headers)
         return response["json"]

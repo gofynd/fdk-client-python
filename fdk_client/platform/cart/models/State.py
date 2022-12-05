@@ -19,9 +19,9 @@ class State(BaseSchema):
     #  swagger.json
 
     
-    is_display = fields.Boolean(required=False)
-    
     is_public = fields.Boolean(required=False)
     
     is_archived = fields.Boolean(required=False)
+    
+    is_display = fields.Boolean(required=False)
     

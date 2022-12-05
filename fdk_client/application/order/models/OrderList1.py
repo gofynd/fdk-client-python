@@ -9,7 +9,7 @@ from ...ApplicationModel import BaseSchema
 
 
 
-from .OrderPage import OrderPage
+from .OrderSchema1 import OrderSchema1
 
 
 
@@ -17,7 +17,7 @@ from .OrderFilters import OrderFilters
 
 
 
-from .OrderSchema1 import OrderSchema1
+from .OrderPage import OrderPage
 
 
 
@@ -25,9 +25,9 @@ class OrderList1(BaseSchema):
     #  swagger.json
 
     
-    page = fields.Nested(OrderPage, required=False)
+    items = fields.List(fields.Nested(OrderSchema1, required=False), required=False)
     
     filters = fields.Nested(OrderFilters, required=False)
     
-    items = fields.List(fields.Nested(OrderSchema1, required=False), required=False)
+    page = fields.Nested(OrderPage, required=False)
     

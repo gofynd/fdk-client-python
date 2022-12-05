@@ -23,9 +23,9 @@ class PromotionOffer(BaseSchema):
     #  swagger.json
 
     
-    promotion_group = fields.Str(required=False)
-    
     valid_till = fields.Str(required=False)
+    
+    promotion_group = fields.Str(required=False)
     
     description = fields.Str(required=False)
     

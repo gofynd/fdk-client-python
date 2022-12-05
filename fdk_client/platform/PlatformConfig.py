@@ -15,6 +15,6 @@ class PlatformConfig:
         self.oauthClient = OAuthClient(self)
         self.extraHeaders = []
 
-    async def getAccessToken(self):
+    async def getAccessToken(self) -> str:
         token = await self.oauthClient.getAccessToken()
-        return token
+        return token.get("access_token")
