@@ -16,9 +16,9 @@ class PricesBreakup(BaseSchema):
     # Order swagger.json
 
     
-    name = fields.Str(required=False)
-    
     display = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
     
     value = fields.Int(required=False)
     

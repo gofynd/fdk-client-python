@@ -11,9 +11,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
 from .NextSchedule import NextSchedule
+
+
 
 
 class Schedule(BaseSchema):
@@ -26,8 +26,8 @@ class Schedule(BaseSchema):
     
     start = fields.Str(required=False)
     
-    cron = fields.Str(required=False)
-    
     next_schedule = fields.List(fields.Nested(NextSchedule, required=False), required=False)
+    
+    cron = fields.Str(required=False)
     
 
