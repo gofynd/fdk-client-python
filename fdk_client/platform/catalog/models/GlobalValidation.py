@@ -31,9 +31,9 @@ class GlobalValidation(BaseSchema):
     
     type = fields.Str(required=False)
     
-    title = fields.Str(required=False)
-    
     definitions = fields.Dict(required=False)
+    
+    title = fields.Str(required=False)
     
     description = fields.Str(required=False)
     

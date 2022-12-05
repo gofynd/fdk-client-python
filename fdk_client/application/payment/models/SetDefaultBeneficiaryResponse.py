@@ -17,7 +17,7 @@ class SetDefaultBeneficiaryResponse(BaseSchema):
     #  swagger.json
 
     
-    is_beneficiary_set = fields.Boolean(required=False)
-    
     success = fields.Boolean(required=False)
+    
+    is_beneficiary_set = fields.Boolean(required=False)
     

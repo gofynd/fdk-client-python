@@ -9,11 +9,11 @@ from ...ApplicationModel import BaseSchema
 
 
 
+
+
+
+
 from .Media import Media
-
-
-
-
 
 
 
@@ -27,11 +27,11 @@ class ProductBrand(BaseSchema):
     #  swagger.json
 
     
-    logo = fields.Nested(Media, required=False)
+    uid = fields.Int(required=False)
     
     description = fields.Str(required=False)
     
-    uid = fields.Int(required=False)
+    logo = fields.Nested(Media, required=False)
     
     action = fields.Nested(ProductListingAction, required=False)
     

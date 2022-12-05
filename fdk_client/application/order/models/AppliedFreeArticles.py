@@ -13,9 +13,9 @@ from ...ApplicationModel import BaseSchema
 
 
 
+
+
 from .FreeGiftItemDetails import FreeGiftItemDetails
-
-
 
 
 
@@ -23,11 +23,11 @@ class AppliedFreeArticles(BaseSchema):
     #  swagger.json
 
     
-    parent_item_identifier = fields.Str(required=False)
-    
     quantity = fields.Float(required=False)
     
-    free_gift_item_details = fields.List(fields.Nested(FreeGiftItemDetails, required=False), required=False)
-    
     article_id = fields.Str(required=False)
+    
+    parent_item_identifier = fields.Str(required=False)
+    
+    free_gift_item_details = fields.List(fields.Nested(FreeGiftItemDetails, required=False), required=False)
     

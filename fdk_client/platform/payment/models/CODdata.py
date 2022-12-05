@@ -27,9 +27,9 @@ class CODdata(BaseSchema):
     
     is_active = fields.Boolean(required=False)
     
-    usages = fields.Int(required=False)
+    user_id = fields.Str(required=False)
     
     limit = fields.Int(required=False)
     
-    user_id = fields.Str(required=False)
+    usages = fields.Int(required=False)
     

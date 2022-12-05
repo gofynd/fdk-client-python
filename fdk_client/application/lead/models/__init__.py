@@ -81,6 +81,10 @@ from .CommunicationDetails import CommunicationDetails
 
 from .SupportGeneralConfig import SupportGeneralConfig
 
+from .FeedbackForm import FeedbackForm
+
+from .CategorySchema import CategorySchema
+
 from .CategoryData import CategoryData
 
 from .IntegrationConfig import IntegrationConfig

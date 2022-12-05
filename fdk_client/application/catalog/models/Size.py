@@ -21,11 +21,11 @@ class Size(BaseSchema):
     #  swagger.json
 
     
-    display = fields.Raw(required=False)
-    
     quantity = fields.Int(required=False)
     
-    is_available = fields.Boolean(required=False)
+    display = fields.Raw(required=False)
     
     value = fields.Raw(required=False)
+    
+    is_available = fields.Boolean(required=False)
     

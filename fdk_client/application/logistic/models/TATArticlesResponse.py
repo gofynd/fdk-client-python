@@ -19,11 +19,11 @@ from .TATCategoryRequest import TATCategoryRequest
 
 
 
-from .TATPromiseResponse import TATPromiseResponse
-
-
-
 from .TATErrorSchemaResponse import TATErrorSchemaResponse
+
+
+
+from .TATPromiseResponse import TATPromiseResponse
 
 
 
@@ -33,17 +33,17 @@ class TATArticlesResponse(BaseSchema):
     #  swagger.json
 
     
-    is_cod_available = fields.Boolean(required=False)
+    _manufacturing_time_seconds = fields.Int(required=False)
     
     category = fields.Nested(TATCategoryRequest, required=False)
     
     manufacturing_time = fields.Int(required=False)
     
-    _manufacturing_time_seconds = fields.Int(required=False)
-    
-    promise = fields.Nested(TATPromiseResponse, required=False)
+    manufacturing_time_unit = fields.Str(required=False)
     
     error = fields.Nested(TATErrorSchemaResponse, required=False)
     
-    manufacturing_time_unit = fields.Str(required=False)
+    promise = fields.Nested(TATPromiseResponse, required=False)
+    
+    is_cod_available = fields.Boolean(required=False)
     

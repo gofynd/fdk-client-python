@@ -9,9 +9,9 @@ from ...ApplicationModel import BaseSchema
 
 
 
+
+
 from .EpaylaterBannerData import EpaylaterBannerData
-
-
 
 
 
@@ -19,7 +19,7 @@ class EpaylaterBannerResponse(BaseSchema):
     #  swagger.json
 
     
-    data = fields.Nested(EpaylaterBannerData, required=False)
-    
     success = fields.Boolean(required=False)
+    
+    data = fields.Nested(EpaylaterBannerData, required=False)
     

@@ -9,11 +9,7 @@ from ...ApplicationModel import BaseSchema
 
 
 
-
-
-
-
-from .UserPersonalInfoInDetails import UserPersonalInfoInDetails
+from .DeviceDetails import DeviceDetails
 
 
 
@@ -23,7 +19,11 @@ from .MarketplaceInfo import MarketplaceInfo
 
 
 
-from .DeviceDetails import DeviceDetails
+
+
+from .UserPersonalInfoInDetails import UserPersonalInfoInDetails
+
+
 
 
 
@@ -35,17 +35,17 @@ class CustomerOnboardingRequest(BaseSchema):
     #  swagger.json
 
     
-    source = fields.Str(required=False)
-    
-    mcc = fields.Str(required=False)
-    
-    personal_info = fields.Nested(UserPersonalInfoInDetails, required=False)
+    device = fields.Nested(DeviceDetails, required=False)
     
     aggregator = fields.Str(required=False)
     
     marketplace_info = fields.Nested(MarketplaceInfo, required=False)
     
-    device = fields.Nested(DeviceDetails, required=False)
+    source = fields.Str(required=False)
+    
+    personal_info = fields.Nested(UserPersonalInfoInDetails, required=False)
+    
+    mcc = fields.Str(required=False)
     
     business_info = fields.Nested(BusinessDetails, required=False)
     

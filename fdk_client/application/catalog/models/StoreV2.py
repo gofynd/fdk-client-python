@@ -19,9 +19,9 @@ class StoreV2(BaseSchema):
     #  swagger.json
 
     
-    uid = fields.Int(required=False)
-    
     count = fields.Int(required=False)
     
     name = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
     

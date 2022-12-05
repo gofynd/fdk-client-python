@@ -19,9 +19,9 @@ class CancelPaymentLinkResponse(BaseSchema):
     #  swagger.json
 
     
-    message = fields.Str(required=False)
+    success = fields.Boolean(required=False)
     
     status_code = fields.Int(required=False)
     
-    success = fields.Boolean(required=False)
+    message = fields.Str(required=False)
     

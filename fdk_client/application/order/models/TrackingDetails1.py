@@ -13,9 +13,9 @@ from ...ApplicationModel import BaseSchema
 
 
 
+
+
 from .NestedTrackingDetails import NestedTrackingDetails
-
-
 
 
 
@@ -29,9 +29,9 @@ class TrackingDetails1(BaseSchema):
     
     time = fields.Str(required=False)
     
-    tracking_details = fields.List(fields.Nested(NestedTrackingDetails, required=False), required=False)
-    
     status = fields.Str(required=False)
+    
+    tracking_details = fields.List(fields.Nested(NestedTrackingDetails, required=False), required=False)
     
     is_passed = fields.Boolean(required=False)
     

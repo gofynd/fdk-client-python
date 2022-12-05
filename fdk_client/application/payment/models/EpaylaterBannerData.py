@@ -19,9 +19,9 @@ class EpaylaterBannerData(BaseSchema):
     #  swagger.json
 
     
-    display = fields.Boolean(required=False)
-    
     message = fields.Str(required=False)
     
     status = fields.Str(required=False)
+    
+    display = fields.Boolean(required=False)
     

@@ -17,7 +17,7 @@ class PaymentModeLogo(BaseSchema):
     #  swagger.json
 
     
-    small = fields.Str(required=False)
-    
     large = fields.Str(required=False)
+    
+    small = fields.Str(required=False)
     

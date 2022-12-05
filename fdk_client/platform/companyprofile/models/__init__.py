@@ -5,27 +5,27 @@ from .SellerPhoneNumber import SellerPhoneNumber
 
 from .ContactDetails import ContactDetails
 
-from .GetAddressSerializer import GetAddressSerializer
-
 from .UserSerializer import UserSerializer
-
-from .CompanyTaxesSerializer import CompanyTaxesSerializer
-
-from .BusinessCountryInfo import BusinessCountryInfo
-
-from .Document import Document
 
 from .Website import Website
 
 from .BusinessDetails import BusinessDetails
 
+from .GetAddressSerializer import GetAddressSerializer
+
+from .BusinessCountryInfo import BusinessCountryInfo
+
+from .CompanyTaxesSerializer import CompanyTaxesSerializer
+
+from .Document import Document
+
 from .GetCompanyProfileSerializerResponse import GetCompanyProfileSerializerResponse
 
 from .ErrorResponse import ErrorResponse
 
-from .CompanyTaxesSerializer1 import CompanyTaxesSerializer1
-
 from .CreateUpdateAddressSerializer import CreateUpdateAddressSerializer
+
+from .CompanyTaxesSerializer1 import CompanyTaxesSerializer1
 
 from .UpdateCompany import UpdateCompany
 
@@ -41,8 +41,6 @@ from .GetBrandResponseSerializer import GetBrandResponseSerializer
 
 from .CreateUpdateBrandRequestSerializer import CreateUpdateBrandRequestSerializer
 
-from .Page import Page
-
 from .CompanySocialAccounts import CompanySocialAccounts
 
 from .CompanyDetails import CompanyDetails
@@ -51,21 +49,23 @@ from .CompanySerializer import CompanySerializer
 
 from .CompanyBrandSerializer import CompanyBrandSerializer
 
+from .Page import Page
+
 from .CompanyBrandListSerializer import CompanyBrandListSerializer
 
 from .CompanyBrandPostRequestSerializer import CompanyBrandPostRequestSerializer
+
+from .InvoiceCredSerializer import InvoiceCredSerializer
+
+from .InvoiceDetailsSerializer import InvoiceDetailsSerializer
+
+from .GetCompanySerializer import GetCompanySerializer
 
 from .LocationTimingSerializer import LocationTimingSerializer
 
 from .LocationDayWiseSerializer import LocationDayWiseSerializer
 
-from .GetCompanySerializer import GetCompanySerializer
-
 from .ProductReturnConfigSerializer import ProductReturnConfigSerializer
-
-from .InvoiceCredSerializer import InvoiceCredSerializer
-
-from .InvoiceDetailsSerializer import InvoiceDetailsSerializer
 
 from .LocationManagerSerializer import LocationManagerSerializer
 

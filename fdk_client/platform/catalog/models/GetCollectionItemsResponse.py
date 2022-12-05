@@ -17,11 +17,11 @@ from .ProductSortOn import ProductSortOn
 
 
 
-from .Page import Page
-
-
-
 from .ProductListingDetail import ProductListingDetail
+
+
+
+from .Page import Page
 
 
 
@@ -33,7 +33,7 @@ class GetCollectionItemsResponse(BaseSchema):
     
     sort_on = fields.List(fields.Nested(ProductSortOn, required=False), required=False)
     
-    page = fields.Nested(Page, required=False)
-    
     items = fields.List(fields.Nested(ProductListingDetail, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
     

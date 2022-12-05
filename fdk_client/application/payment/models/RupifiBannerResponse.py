@@ -9,9 +9,9 @@ from ...ApplicationModel import BaseSchema
 
 
 
+
+
 from .RupifiBannerData import RupifiBannerData
-
-
 
 
 
@@ -19,7 +19,7 @@ class RupifiBannerResponse(BaseSchema):
     #  swagger.json
 
     
-    data = fields.Nested(RupifiBannerData, required=False)
-    
     success = fields.Boolean(required=False)
+    
+    data = fields.Nested(RupifiBannerData, required=False)
     

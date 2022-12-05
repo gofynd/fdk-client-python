@@ -9,9 +9,9 @@ from ...ApplicationModel import BaseSchema
 
 
 
+
+
 from .PaymentOptionAndFlow import PaymentOptionAndFlow
-
-
 
 
 
@@ -19,7 +19,7 @@ class PaymentModeRouteResponse(BaseSchema):
     #  swagger.json
 
     
-    payment_options = fields.Nested(PaymentOptionAndFlow, required=False)
-    
     success = fields.Boolean(required=False)
+    
+    payment_options = fields.Nested(PaymentOptionAndFlow, required=False)
     

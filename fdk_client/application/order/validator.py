@@ -237,7 +237,7 @@ class OrderValidator:
          
         
     
-    class getInvoiceByShipmentId1(BaseSchema):
+    class getInvoiceByShipmentIds(BaseSchema):
         
         
         shipment_id = fields.Str(required=False)

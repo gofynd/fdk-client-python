@@ -105,19 +105,23 @@ from .ApefaceApiError import ApefaceApiError
 
 from .Item1 import Item1
 
+from .AppliedFreeArticles1 import AppliedFreeArticles1
+
+from .AppliedPromos1 import AppliedPromos1
+
 from .Bags1 import Bags1
+
+from .ShipmentPayment1 import ShipmentPayment1
 
 from .TimeStampData import TimeStampData
 
 from .Promise1 import Promise1
 
-from .FulfillingCompany import FulfillingCompany
-
 from .NestedTrackingDetails import NestedTrackingDetails
 
 from .TrackingDetails1 import TrackingDetails1
 
-from .ShipmentPayment1 import ShipmentPayment1
+from .FulfillingCompany import FulfillingCompany
 
 from .Shipments1 import Shipments1
 

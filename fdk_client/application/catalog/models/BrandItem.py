@@ -11,15 +11,15 @@ from ...ApplicationModel import BaseSchema
 
 
 
+
+
+
+
 from .Media import Media
 
 
 
-
-
 from .ProductListingAction import ProductListingAction
-
-
 
 
 
@@ -39,19 +39,19 @@ class BrandItem(BaseSchema):
     
     discount = fields.Str(required=False)
     
-    logo = fields.Nested(Media, required=False)
-    
     uid = fields.Int(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    logo = fields.Nested(Media, required=False)
     
     action = fields.Nested(ProductListingAction, required=False)
     
-    name = fields.Str(required=False)
+    departments = fields.List(fields.Str(required=False), required=False)
     
     description = fields.Str(required=False)
     
-    departments = fields.List(fields.Str(required=False), required=False)
-    
-    slug = fields.Str(required=False)
+    name = fields.Str(required=False)
     
     banners = fields.Nested(ImageUrls, required=False)
     
