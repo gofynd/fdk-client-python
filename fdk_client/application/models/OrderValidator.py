@@ -37,7 +37,7 @@ class OrderValidator:
         shipment_id = fields.Str(required=False)
          
     
-    class getInvoiceByShipmentId(BaseSchema):
+    class getInvoiceByShipmentIds(BaseSchema):
         
         shipment_id = fields.Str(required=False)
          
@@ -85,7 +85,7 @@ class OrderValidator:
         shipment_id = fields.Str(required=False)
          
     
-    class getInvoiceByShipmentId1(BaseSchema):
+    class getInvoiceByShipmentId(BaseSchema):
         
         shipment_id = fields.Str(required=False)
         

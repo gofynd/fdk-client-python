@@ -14,8 +14,8 @@ class FileUploadResponse(BaseSchema):
     # Order swagger.json
 
     
-    expiry = fields.Int(required=False)
-    
     url = fields.Str(required=False)
+    
+    expiry = fields.Int(required=False)
     
 

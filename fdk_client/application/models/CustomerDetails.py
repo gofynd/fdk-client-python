@@ -18,8 +18,8 @@ class CustomerDetails(BaseSchema):
     
     email = fields.Str(required=False)
     
-    mobile = fields.Str(required=False)
-    
     name = fields.Str(required=False)
+    
+    mobile = fields.Str(required=False)
     
 

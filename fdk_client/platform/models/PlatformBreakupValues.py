@@ -18,8 +18,8 @@ class PlatformBreakupValues(BaseSchema):
     
     value = fields.Str(required=False)
     
-    display = fields.Str(required=False)
-    
     name = fields.Str(required=False)
+    
+    display = fields.Str(required=False)
     
 

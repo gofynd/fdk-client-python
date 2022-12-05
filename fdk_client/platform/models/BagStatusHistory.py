@@ -30,8 +30,8 @@ class BagStatusHistory(BaseSchema):
     
     state_type = fields.Boolean(required=False)
     
-    app_display_name = fields.Boolean(required=False)
-    
     display_name = fields.Boolean(required=False)
+    
+    app_display_name = fields.Boolean(required=False)
     
 

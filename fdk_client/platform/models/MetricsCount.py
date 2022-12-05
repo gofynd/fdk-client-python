@@ -18,9 +18,9 @@ class MetricsCount(BaseSchema):
     # Order swagger.json
 
     
-    value = fields.Int(required=False)
-    
     key = fields.Str(required=False)
+    
+    value = fields.Int(required=False)
     
     options = fields.List(fields.Nested(Options, required=False), required=False)
     

@@ -7,9 +7,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 from .SmsDataPayload import SmsDataPayload
-
-
 
 
 class SendSmsPayload(BaseSchema):
@@ -18,8 +18,8 @@ class SendSmsPayload(BaseSchema):
     
     bag_id = fields.Int(required=False)
     
-    data = fields.Nested(SmsDataPayload, required=False)
-    
     slug = fields.Str(required=False)
+    
+    data = fields.Nested(SmsDataPayload, required=False)
     
 
