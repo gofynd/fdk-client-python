@@ -50,8 +50,11 @@ Content System
 * [createPagePreview](#createpagepreview)
 * [updatePagePreview](#updatepagepreview)
 * [deletePage](#deletepage)
-* [updatePathRedirectionRules](#updatepathredirectionrules)
+* [addPathRedirectionRules](#addpathredirectionrules)
 * [getPathRedirectionRules](#getpathredirectionrules)
+* [getPathRedirectionRule](#getpathredirectionrule)
+* [updatePathRedirectionRules](#updatepathredirectionrules)
+* [deletePathRedirectionRules](#deletepathredirectionrules)
 * [getSEOConfiguration](#getseoconfiguration)
 * [updateSEOConfiguration](#updateseoconfiguration)
 * [getSlideshows](#getslideshows)
@@ -5368,7 +5371,7 @@ Success.
 ---
 
 
-### updatePathRedirectionRules
+### addPathRedirectionRules
 Save path based redirection rules
 
 
@@ -5376,7 +5379,7 @@ Save path based redirection rules
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.updatePathRedirectionRules(body=body)
+    result = await client.application("<APPLICATION_ID>").content.addPathRedirectionRules(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -5391,7 +5394,7 @@ except Exception as e:
 | body | [PathMappingSchema](#PathMappingSchema) | yes | Request body |
 
 
-Use this API to add, update or delete path-based redirection rules
+Use this API to add redirection rules
 
 *Returned Response:*
 
@@ -5406,18 +5409,26 @@ Success. Refer `PathMappingSchema` for more details.
 
 
 <details>
-<summary><i>&nbsp; Example:</i></summary>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; Success</i></summary>
 
 ```json
 {
-  "redirections": [
-    {
-      "redirect_from": "test.hostfynd.dev/redirect_from",
-      "redirect_to": "/redirect_to"
-    }
-  ]
+  "value": {
+    "_id": "615188e9db1e444cb0f40837",
+    "application": "000000000000000000000002",
+    "redirect_from": "/from",
+    "redirect_to": "/to",
+    "createdAt": "2021-09-27T09:03:37.053Z",
+    "updatedAt": "2021-09-27T09:09:25.587Z"
+  }
 }
 ```
+</details>
+
 </details>
 
 
@@ -5439,7 +5450,7 @@ Get path based redirection rules
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.getPathRedirectionRules()
+    result = await client.application("<APPLICATION_ID>").content.getPathRedirectionRules(pageSize=pageSize, pageNo=pageNo)
     # use result
 except Exception as e:
     print(e)
@@ -5447,6 +5458,12 @@ except Exception as e:
 
 
 
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| pageSize | Int? | no | The number of items to retrieve in each page. Default value is 5.  |   
+| pageNo | Int? | no | The page number to navigate through the given set of results. Default value is 1. |  
 
 
 
@@ -5476,12 +5493,8 @@ Success. Refer `PathMappingSchema` for more details.
   "value": {
     "_id": "615188e9db1e444cb0f40837",
     "application": "000000000000000000000002",
-    "redirections": [
-      {
-        "redirect_from": "/from",
-        "redirect_to": "/to"
-      }
-    ],
+    "redirect_from": "/from",
+    "redirect_to": "/to",
     "createdAt": "2021-09-27T09:03:37.053Z",
     "updatedAt": "2021-09-27T09:09:25.587Z"
   }
@@ -5489,6 +5502,209 @@ Success. Refer `PathMappingSchema` for more details.
 ```
 </details>
 
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getPathRedirectionRule
+Get path based redirection rule
+
+
+
+
+```python
+try:
+    result = await client.application("<APPLICATION_ID>").content.getPathRedirectionRule(pathId=pathId)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| pathId | String | yes | ID allotted to the path redirection rule. |  
+
+
+
+Use this API to get path based redirection rule.
+
+*Returned Response:*
+
+
+
+
+[PathMappingSchema](#PathMappingSchema)
+
+Success. Refer `PathMappingSchema` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; Success</i></summary>
+
+```json
+{
+  "value": {
+    "_id": "615188e9db1e444cb0f40837",
+    "application": "000000000000000000000002",
+    "redirect_from": "/from",
+    "redirect_to": "/to",
+    "createdAt": "2021-09-27T09:03:37.053Z",
+    "updatedAt": "2021-09-27T09:09:25.587Z"
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### updatePathRedirectionRules
+Update path based redirection rules
+
+
+
+
+```python
+try:
+    result = await client.application("<APPLICATION_ID>").content.updatePathRedirectionRules(pathId=pathId, body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| pathId | String | yes | ID allotted to the path redirection rule. |  
+| body | [PathMappingSchema](#PathMappingSchema) | yes | Request body |
+
+
+Use this API to update redirection rules
+
+*Returned Response:*
+
+
+
+
+[PathMappingSchema](#PathMappingSchema)
+
+Success. Refer `PathMappingSchema` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; Success</i></summary>
+
+```json
+{
+  "value": {
+    "_id": "615188e9db1e444cb0f40837",
+    "application": "000000000000000000000002",
+    "redirect_from": "/from",
+    "redirect_to": "/to",
+    "createdAt": "2021-09-27T09:03:37.053Z",
+    "updatedAt": "2021-09-27T09:09:25.587Z"
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### deletePathRedirectionRules
+Delete path based redirection rules
+
+
+
+
+```python
+try:
+    result = await client.application("<APPLICATION_ID>").content.deletePathRedirectionRules(pathId=pathId)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| pathId | String | yes | ID allotted to the path redirection rule. |  
+
+
+
+Use this API to delete redirection rules
+
+*Returned Response:*
+
+
+
+
+[HashMap<String,Any>](#HashMap<String,Any>)
+
+Success.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "message": "Redirection deleted successfully"
+}
+```
 </details>
 
 
@@ -7311,22 +7527,12 @@ Success. Returns a JSON object of components. Refer `PageSchema` for more detail
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | application | String? |  yes  |  |
- | redirections | ArrayList<[RedirectionSchema](#RedirectionSchema)>? |  yes  |  |
  | id | String? |  yes  |  |
- | updatedAt | String? |  yes  |  |
- | createdAt | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [RedirectionSchema](#RedirectionSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
  | redirectFrom | String? |  yes  |  |
  | redirectTo | String? |  yes  |  |
+ | updatedAt | String? |  yes  |  |
+ | createdAt | String? |  yes  |  |
+ | source | [TagSourceSchema](#TagSourceSchema)? |  yes  |  |
 
 ---
 
@@ -7904,6 +8110,7 @@ Success. Returns a JSON object of components. Refer `PageSchema` for more detail
  | url | String? |  yes  |  |
  | position | String? |  yes  |  |
  | attributes | HashMap<String,Any>? |  yes  |  |
+ | pages | ArrayList<HashMap<String,Any>>? |  yes  |  |
  | content | String? |  yes  |  |
 
 ---
@@ -8689,6 +8896,7 @@ Success. Returns a JSON object of components. Refer `PageSchema` for more detail
  | position | String? |  yes  |  |
  | attributes | HashMap<String,Any>? |  yes  |  |
  | content | String? |  yes  |  |
+ | pages | ArrayList<HashMap<String,Any>>? |  yes  |  |
  | source | [TagSourceSchema](#TagSourceSchema)? |  yes  |  |
 
 ---
@@ -8732,7 +8940,7 @@ Success. Returns a JSON object of components. Refer `PageSchema` for more detail
  | collections | collections | Symbolic link for Collections: /collections/ |
  | contactUs | contact-us | Symbolic link for Contact Us: /contact-us/ |
  | external | external | Symbolic link for External Link: /external/ |
- | faq | faq | Symbolic link for FAQ: /faq/:category |
+ | faq | faq | Symbolic link for FAQ: /faq |
  | freshchat | freshchat | Symbolic link for Chat by Freshchat: /freshchat |
  | home | home | Symbolic link for Home: / |
  | notificationSettings | notification-settings | Symbolic link for Notification Settings: /notification-settings |

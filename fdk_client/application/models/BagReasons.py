@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class RedirectionSchema(BaseSchema):
-    # Content swagger.json
+class BagReasons(BaseSchema):
+    # Order swagger.json
 
     
-    redirect_from = fields.Str(required=False)
+    id = fields.Int(required=False)
     
-    redirect_to = fields.Str(required=False)
+    display_name = fields.Str(required=False)
     
 

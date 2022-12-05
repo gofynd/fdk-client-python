@@ -163,6 +163,19 @@ class CartValidator:
         sort_on = fields.Str(required=False)
          
     
+    class getAbandonedCartDetails(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+        
+        i = fields.Boolean(required=False)
+        
+        b = fields.Boolean(required=False)
+         
+    
     class addItems(BaseSchema):
         
         company_id = fields.Str(required=False)

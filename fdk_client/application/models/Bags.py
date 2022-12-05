@@ -15,6 +15,8 @@ from .CurrentStatus import CurrentStatus
 
 from .FinancialBreakup import FinancialBreakup
 
+from .AppliedPromos import AppliedPromos
+
 
 class Bags(BaseSchema):
     # Order swagger.json
@@ -29,5 +31,7 @@ class Bags(BaseSchema):
     id = fields.Int(required=False)
     
     financial_breakup = fields.List(fields.Nested(FinancialBreakup, required=False), required=False)
+    
+    applied_promos = fields.List(fields.Nested(AppliedPromos, required=False), required=False)
     
 

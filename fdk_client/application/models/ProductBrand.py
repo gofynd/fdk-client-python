@@ -26,8 +26,8 @@ class ProductBrand(BaseSchema):
     
     name = fields.Str(required=False)
     
-    description = fields.Str(required=False)
-    
     uid = fields.Int(required=False)
+    
+    description = fields.Str(required=False)
     
 

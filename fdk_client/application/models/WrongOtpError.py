@@ -18,8 +18,8 @@ class WrongOtpError(BaseSchema):
     
     description = fields.Str(required=False)
     
-    is_verified_flag = fields.Boolean(required=False)
-    
     success = fields.Str(required=False)
+    
+    is_verified_flag = fields.Boolean(required=False)
     
 

@@ -36,21 +36,13 @@ class PaymentFlow(BaseSchema):
     # Payment swagger.json
 
     
-    jiopay = fields.Nested(AggregatorRoute, required=False)
-    
     ccavenue = fields.Nested(AggregatorRoute, required=False)
-    
-    bqr_razorpay = fields.Nested(AggregatorRoute, required=False)
-    
-    juspay = fields.Nested(AggregatorRoute, required=False)
-    
-    razorpay = fields.Nested(AggregatorRoute, required=False)
-    
-    simpl = fields.Nested(AggregatorRoute, required=False)
     
     rupifi = fields.Nested(AggregatorRoute, required=False)
     
-    epaylater = fields.Nested(AggregatorRoute, required=False)
+    upi_razorpay = fields.Nested(AggregatorRoute, required=False)
+    
+    bqr_razorpay = fields.Nested(AggregatorRoute, required=False)
     
     mswipe = fields.Nested(AggregatorRoute, required=False)
     
@@ -60,6 +52,14 @@ class PaymentFlow(BaseSchema):
     
     payubiz = fields.Nested(AggregatorRoute, required=False)
     
-    upi_razorpay = fields.Nested(AggregatorRoute, required=False)
+    jiopay = fields.Nested(AggregatorRoute, required=False)
+    
+    juspay = fields.Nested(AggregatorRoute, required=False)
+    
+    simpl = fields.Nested(AggregatorRoute, required=False)
+    
+    epaylater = fields.Nested(AggregatorRoute, required=False)
+    
+    razorpay = fields.Nested(AggregatorRoute, required=False)
     
 

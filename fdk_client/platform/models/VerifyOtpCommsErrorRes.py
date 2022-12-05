@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class RedirectionSchema(BaseSchema):
-    # Content swagger.json
+class VerifyOtpCommsErrorRes(BaseSchema):
+    # Communication swagger.json
 
     
-    redirect_from = fields.Str(required=False)
+    success = fields.Boolean(required=False)
     
-    redirect_to = fields.Str(required=False)
+    message = fields.Str(required=False)
     
 

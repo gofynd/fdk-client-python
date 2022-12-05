@@ -16,9 +16,9 @@ class PincodeErrorSchemaResponse(BaseSchema):
     # Logistic swagger.json
 
     
-    value = fields.Str(required=False)
-    
     type = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
     
     message = fields.Str(required=False)
     
