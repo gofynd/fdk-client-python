@@ -27,7 +27,7 @@ class BagReasons1(BaseSchema):
     
     question_set = fields.List(fields.Nested(QuestionSet, required=False), required=False)
     
-    id = fields.Int(required=False)
-    
     qc_type = fields.List(fields.Str(required=False), required=False)
+    
+    id = fields.Int(required=False)
     

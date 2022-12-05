@@ -46,7 +46,7 @@ class OAuthClient:
 
     # returns timestamp in milliseconds
     # JS/Java equivalent of `new Date().getTime()`
-    def get_current_timestamp():
+    def get_current_timestamp(self):
         return time.time_ns() // 1_000_000
 
 
@@ -96,7 +96,7 @@ class OAuthClient:
         try:
             res = await self.getAccesstokenObj(grant_type="authorization_code", code=query.get("code", ""))
             await self.setToken(res)
-            self.token_expires_at = self.get_current_timestamp + self.token_expires_in * 1000
+            self.token_expires_at = self.get_current_timestamp() + self.token_expires_in * 1000
         except Exception as e:
             raise FDKTokenIssueError(str(e))
 
@@ -120,7 +120,7 @@ class OAuthClient:
             res = await self.getAccesstokenObj(grant_type="refresh_token", refresh_token=self.refreshToken)
         
         await self.setToken(res)
-        self.token_expires_at = self.get_current_timestamp + self.token_expires_in * 1000
+        self.token_expires_at = self.get_current_timestamp() + self.token_expires_in * 1000
         return res
 
     async def getAccesstokenObj(self, grant_type="", refresh_token="", code=""):
@@ -148,7 +148,7 @@ class OAuthClient:
         try:
             res = await self.getOfflineAccessTokenObj(scopes, code)
             self.setToken(res)
-            self.token_expires_at = self.get_current_timestamp + self.token_expires_in * 1000
+            self.token_expires_at = self.get_current_timestamp() + self.token_expires_in * 1000
             return res
         except Exception as e:
             raise FDKTokenIssueError(str(e))
