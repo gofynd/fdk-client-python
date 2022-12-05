@@ -22,9 +22,9 @@ class Document(BaseSchema):
     
     value = fields.Str(required=False)
     
-    verified = fields.Boolean(required=False)
-    
     url = fields.Str(required=False)
+    
+    verified = fields.Boolean(required=False)
     
     type = fields.Str(required=False)
     

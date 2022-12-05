@@ -32,6 +32,8 @@ class PosCartValidator:
         b = fields.Boolean(required=False)
         
         area_code = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
          
     
     class updateCart(BaseSchema):

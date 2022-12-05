@@ -32,9 +32,9 @@ class CreditSummary(BaseSchema):
     
     credit_line_id = fields.Str(required=False)
     
-    merchant_customer_ref_id = fields.Str(required=False)
-    
     buyer_status = fields.Str(required=False)
+    
+    merchant_customer_ref_id = fields.Str(required=False)
     
     status = fields.Str(required=False)
     
