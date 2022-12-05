@@ -28,9 +28,9 @@ class PayoutRequest(BaseSchema):
     
     users = fields.Dict(required=False)
     
-    unique_external_id = fields.Str(required=False)
-    
     aggregator = fields.Str(required=False)
+    
+    unique_external_id = fields.Str(required=False)
     
     bank_details = fields.Nested(PayoutBankDetails, required=False)
     

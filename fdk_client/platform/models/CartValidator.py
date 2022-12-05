@@ -121,6 +121,13 @@ class CartValidator:
         id = fields.Str(required=False)
          
     
+    class getPromosCouponConfig(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+    
     class fetchAndvalidateCartItems(BaseSchema):
         
         company_id = fields.Str(required=False)
