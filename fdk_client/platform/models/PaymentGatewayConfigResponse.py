@@ -22,11 +22,11 @@ class PaymentGatewayConfigResponse(BaseSchema):
     # Payment swagger.json
 
     
+    success = fields.Boolean(required=False)
+    
     created = fields.Boolean(required=False)
     
     display_fields = fields.List(fields.Str(required=False), required=False)
-    
-    success = fields.Boolean(required=False)
     
     app_id = fields.Str(required=False)
     
