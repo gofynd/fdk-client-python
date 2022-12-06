@@ -21,7 +21,7 @@ class ItemQuery(BaseSchema):
     
     uid = fields.Int(required=False)
     
-    item_code = fields.Str(required=False)
-    
     brand_uid = fields.Int(required=False)
+    
+    item_code = fields.Str(required=False)
     

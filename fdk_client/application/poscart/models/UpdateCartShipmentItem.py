@@ -21,7 +21,7 @@ class UpdateCartShipmentItem(BaseSchema):
     
     shipment_type = fields.Str(required=False)
     
-    article_uid = fields.Str(required=False)
-    
     quantity = fields.Int(required=False)
+    
+    article_uid = fields.Str(required=False)
     

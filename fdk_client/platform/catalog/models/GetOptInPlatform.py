@@ -9,11 +9,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .CompanyOptIn import CompanyOptIn
-
-
-
 from .Page import Page
+
+
+
+from .CompanyOptIn import CompanyOptIn
 
 
 
@@ -21,7 +21,7 @@ class GetOptInPlatform(BaseSchema):
     #  swagger.json
 
     
-    items = fields.List(fields.Nested(CompanyOptIn, required=False), required=False)
-    
     page = fields.Nested(Page, required=False)
+    
+    items = fields.List(fields.Nested(CompanyOptIn, required=False), required=False)
     

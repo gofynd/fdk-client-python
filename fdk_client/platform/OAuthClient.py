@@ -58,6 +58,14 @@ class OAuthClient:
         if self.refreshToken and self.useAutoRenewTimer:
             self.retryOAuthToken(token.get("expires_in"))
 
+    def setTokenFromSession(self, session):
+        self.raw_token = session
+        self.token_expires_in = session.expires_in
+        self.token = session.access_token
+        self.refreshToken = session.refresh_token if session.refresh_token else None
+        if self.refreshToken and self.useAutoRenewTimer:
+            self.retryOAuthToken(session.expires_in)
+
     def retryOAuthToken(self, expires_in):
         if self.retryOAuthTokenTimer:
             self.retryOAuthTokenTimer.cancel()
@@ -155,7 +163,7 @@ class OAuthClient:
 
     
     async def getOfflineAccessTokenObj(self, scopes, code):
-        url = f"{self._conf.domain}/servide/panel/authentication/v1.0/company/{self._conf.companyId}/oauth/offline-token"
+        url = f"{self._conf.domain}/service/panel/authentication/v1.0/company/{self._conf.companyId}/oauth/offline-token"
         data = {
             "client_id": self._conf.apiKey,
             "client_secret": self._conf.apiSecret,
@@ -172,7 +180,7 @@ class OAuthClient:
         headers = get_headers_with_signature(
             domain=self._conf.domain,
             method="post",
-            url=f"/servide/panel/authentication/v1.0/company/{self._conf.companyId}/oauth/offline-token",
+            url=f"/service/panel/authentication/v1.0/company/{self._conf.companyId}/oauth/offline-token",
             query_string="",
             headers=headers,
             body=data,

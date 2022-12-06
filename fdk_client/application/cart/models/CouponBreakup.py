@@ -25,9 +25,9 @@ class CouponBreakup(BaseSchema):
     #  swagger.json
 
     
-    uid = fields.Str(required=False)
-    
     value = fields.Float(required=False)
+    
+    is_applied = fields.Boolean(required=False)
     
     code = fields.Str(required=False)
     
@@ -35,5 +35,5 @@ class CouponBreakup(BaseSchema):
     
     message = fields.Str(required=False)
     
-    is_applied = fields.Boolean(required=False)
+    uid = fields.Str(required=False)
     

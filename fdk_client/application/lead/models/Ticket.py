@@ -63,8 +63,6 @@ from .Priority import Priority
 
 
 
-
-
 class Ticket(BaseSchema):
     #  swagger.json
 
@@ -100,8 +98,6 @@ class Ticket(BaseSchema):
     is_feedback_pending = fields.Boolean(required=False)
     
     integration = fields.Dict(required=False)
-    
-    avis_shipment_mapping = fields.Dict(required=False)
     
     _id = fields.Str(required=False)
     

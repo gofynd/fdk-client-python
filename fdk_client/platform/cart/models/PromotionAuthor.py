@@ -17,7 +17,7 @@ class PromotionAuthor(BaseSchema):
     #  swagger.json
 
     
-    created_by = fields.Str(required=False)
-    
     modified_by = fields.Str(required=False)
+    
+    created_by = fields.Str(required=False)
     

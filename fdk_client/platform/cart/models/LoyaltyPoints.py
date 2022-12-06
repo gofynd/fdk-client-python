@@ -21,9 +21,9 @@ class LoyaltyPoints(BaseSchema):
     #  swagger.json
 
     
-    total = fields.Float(required=False)
-    
     description = fields.Str(required=False)
+    
+    total = fields.Float(required=False)
     
     is_applied = fields.Boolean(required=False)
     

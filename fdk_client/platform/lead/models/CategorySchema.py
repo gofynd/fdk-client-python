@@ -17,8 +17,6 @@ from ...PlatformModel import BaseSchema
 
 
 
-
-
 from .FeedbackForm import FeedbackForm
 
 
@@ -26,8 +24,6 @@ from .FeedbackForm import FeedbackForm
 class CategorySchema(BaseSchema):
     #  swagger.json
 
-    
-    _id = fields.Str(required=False)
     
     display = fields.Str(required=False)
     

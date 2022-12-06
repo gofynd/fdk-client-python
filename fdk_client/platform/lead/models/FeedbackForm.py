@@ -15,13 +15,9 @@ from ...PlatformModel import BaseSchema
 
 
 
-
-
 class FeedbackForm(BaseSchema):
     #  swagger.json
 
-    
-    _id = fields.Str(required=False)
     
     inputs = fields.Dict(required=False)
     

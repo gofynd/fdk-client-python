@@ -4523,7 +4523,6 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | id | String? |  yes  | Unique identifier for the category |
  | inputs | HashMap<String,Any>? |  yes  | Input details for the feed back form |
  | title | String? |  yes  | Title for the feed back form |
  | timestamps | HashMap<String,Any>? |  yes  | Gives details of category releted data |
@@ -4537,7 +4536,6 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | id | String? |  yes  | Unique identifier for the category |
  | display | String? |  yes  | Category display value identifier |
  | key | String? |  yes  | Category key value identifier |
  | subCategories | [CategorySchema](#CategorySchema)? |  yes  | Support category array list details |
@@ -4553,8 +4551,6 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | id | String? |  yes  | Unique identifier for the ticket |
- | timestamps | HashMap<String,Any>? |  yes  | Gives details of category releted data |
  | list | [CategorySchema](#CategorySchema)? |  yes  |  |
 
 ---
@@ -4652,7 +4648,6 @@ Success
  | customJson | HashMap<String,Any>? |  yes  | custom json relevant to the ticket |
  | isFeedbackPending | Boolean? |  yes  | Denotes if feedback submission is pending for the ticket |
  | integration | HashMap<String,Any>? |  yes  | Integration type and its details of the ticket |
- | avisShipmentMapping | HashMap<String,Any>? |  yes  | Avis shipment mapping details of the ticket |
  | id | String |  no  | Unique identifier for the ticket |
  | updatedAt | String? |  yes  | Time when the ticket was last updated |
  | createdAt | String? |  yes  | Time when the ticket was created |
