@@ -11,9 +11,13 @@ from ...ApplicationModel import BaseSchema
 
 
 
+
+
 class ApefaceApiError(BaseSchema):
     #  swagger.json
 
     
     message = fields.Str(required=False)
+    
+    success = fields.Boolean(required=False)
     

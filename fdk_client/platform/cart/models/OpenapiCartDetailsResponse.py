@@ -13,9 +13,9 @@ from .CartProductInfo import CartProductInfo
 
 
 
+
+
 from .CartBreakup import CartBreakup
-
-
 
 
 
@@ -27,9 +27,9 @@ class OpenapiCartDetailsResponse(BaseSchema):
     
     items = fields.List(fields.Nested(CartProductInfo, required=False), required=False)
     
+    message = fields.Str(required=False)
+    
     breakup_values = fields.Nested(CartBreakup, required=False)
     
     is_valid = fields.Boolean(required=False)
-    
-    message = fields.Str(required=False)
     

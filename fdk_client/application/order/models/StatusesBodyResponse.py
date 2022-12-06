@@ -9,13 +9,11 @@ from ...ApplicationModel import BaseSchema
 
 
 
-from .OrderSchema1 import OrderSchema1
 
 
-
-class OrderById1(BaseSchema):
+class StatusesBodyResponse(BaseSchema):
     #  swagger.json
 
     
-    order = fields.Nested(OrderSchema1, required=False)
+    shipments = fields.Dict(required=False)
     

@@ -9,15 +9,13 @@ from ...ApplicationModel import BaseSchema
 
 
 
+from .CreateOrderConfig import CreateOrderConfig
 
 
 
-
-class MarkedValues(BaseSchema):
+class CreateOrderConfigData(BaseSchema):
     #  swagger.json
 
     
-    max = fields.Float(required=False)
-    
-    min = fields.Float(required=False)
+    config_data = fields.Nested(CreateOrderConfig, required=False)
     

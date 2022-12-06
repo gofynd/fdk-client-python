@@ -15,17 +15,13 @@ from ...ApplicationModel import BaseSchema
 
 
 
-
-
-class ShipmentPayment1(BaseSchema):
+class createOrderConfigResponse(BaseSchema):
     #  swagger.json
 
     
-    mop = fields.Str(required=False)
+    is_inserted = fields.Boolean(required=False)
     
-    mode = fields.Str(required=False)
+    is_upserted = fields.Boolean(required=False)
     
-    logo = fields.Str(required=False)
-    
-    status = fields.Str(required=False)
+    acknowledged = fields.Boolean(required=False)
     

@@ -16,50 +16,6 @@ from ..ApplicationModel import BaseSchema
         
         
         
-    
-    
-        
-    
-    
-        
-    
-    
-        
-    
-    
-        
-        
-    
-    
-        
-    
-    
-        
-    
-    
-        
-    
-    
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-    
-    
-        
-    
-    
-        
-        
-        
-        
-        
         
     
     
@@ -95,12 +51,19 @@ from ..ApplicationModel import BaseSchema
     
     
         
+    
+    
+        
+    
+    
 
 class OrderValidator:
     
     
     class getOrders(BaseSchema):
         
+        
+        status = fields.Int(required=False)
         
         page_no = fields.Int(required=False)
         
@@ -110,11 +73,18 @@ class OrderValidator:
         
         to_date = fields.Str(required=False)
         
-        status = fields.Int(required=False)
+        custom_meta = fields.Str(required=False)
          
         
     
     class getOrderById(BaseSchema):
+        
+        
+        order_id = fields.Str(required=False)
+         
+        
+    
+    class getPosOrderById(BaseSchema):
         
         
         order_id = fields.Str(required=False)
@@ -128,23 +98,7 @@ class OrderValidator:
          
         
     
-    class getShipmentReasons(BaseSchema):
-        
-        
-        shipment_id = fields.Str(required=False)
-         
-        
-    
-    class getShipmentBagReasons(BaseSchema):
-        
-        
-        shipment_id = fields.Str(required=False)
-        
-        bag_id = fields.Str(required=False)
-         
-        
-    
-    class updateShipmentStatus(BaseSchema):
+    class getInvoiceByShipmentIds(BaseSchema):
         
         
         shipment_id = fields.Str(required=False)
@@ -155,13 +109,6 @@ class OrderValidator:
         
         
         shipment_id = fields.Str(required=False)
-         
-        
-    
-    class getPosOrderById(BaseSchema):
-        
-        
-        order_id = fields.Str(required=False)
          
         
     
@@ -192,93 +139,7 @@ class OrderValidator:
          
         
     
-    class getInvoiceByShipmentId(BaseSchema):
-        
-        
-        shipment_id = fields.Str(required=False)
-         
-        
-    
-    class getOrders1(BaseSchema):
-        
-        
-        status = fields.Int(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        from_date = fields.Str(required=False)
-        
-        to_date = fields.Str(required=False)
-        
-        custom_meta = fields.Str(required=False)
-         
-        
-    
-    class getOrderById1(BaseSchema):
-        
-        
-        order_id = fields.Str(required=False)
-         
-        
-    
-    class getPosOrderById1(BaseSchema):
-        
-        
-        order_id = fields.Str(required=False)
-         
-        
-    
-    class getShipmentById1(BaseSchema):
-        
-        
-        shipment_id = fields.Str(required=False)
-         
-        
-    
-    class getInvoiceByShipmentIds(BaseSchema):
-        
-        
-        shipment_id = fields.Str(required=False)
-         
-        
-    
-    class trackShipment1(BaseSchema):
-        
-        
-        shipment_id = fields.Str(required=False)
-         
-        
-    
-    class getCustomerDetailsByShipmentId1(BaseSchema):
-        
-        
-        order_id = fields.Str(required=False)
-        
-        shipment_id = fields.Str(required=False)
-         
-        
-    
-    class sendOtpToShipmentCustomer1(BaseSchema):
-        
-        
-        order_id = fields.Str(required=False)
-        
-        shipment_id = fields.Str(required=False)
-         
-        
-    
-    class verifyOtpShipmentCustomer1(BaseSchema):
-        
-        
-        order_id = fields.Str(required=False)
-        
-        shipment_id = fields.Str(required=False)
-         
-        
-    
-    class getShipmentBagReasons1(BaseSchema):
+    class getShipmentBagReasons(BaseSchema):
         
         
         shipment_id = fields.Str(required=False)
@@ -287,11 +148,28 @@ class OrderValidator:
          
         
     
-    class getShipmentReasons1(BaseSchema):
+    class getShipmentReasons(BaseSchema):
         
         
         shipment_id = fields.Str(required=False)
          
+        
+    
+    class updateShipmentStatus(BaseSchema):
+        
+        
+        shipment_id = fields.Str(required=False)
+         
+        
+    
+    class createOrderConfig(BaseSchema):
+        
+        pass 
+        
+    
+    class getCreateOrderConfig(BaseSchema):
+        
+        pass 
         
     
     

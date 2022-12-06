@@ -9,7 +9,9 @@ from ...ApplicationModel import BaseSchema
 
 
 
-from .Timestamp import Timestamp
+
+
+from .TimeStampData import TimeStampData
 
 
 
@@ -17,5 +19,7 @@ class Promise(BaseSchema):
     #  swagger.json
 
     
-    timestamp = fields.Nested(Timestamp, required=False)
+    show_promise = fields.Boolean(required=False)
+    
+    timestamp = fields.Nested(TimeStampData, required=False)
     

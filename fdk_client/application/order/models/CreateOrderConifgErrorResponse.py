@@ -9,13 +9,11 @@ from ...ApplicationModel import BaseSchema
 
 
 
-from .ShipmentReason import ShipmentReason
 
 
-
-class ShipmentReasons1(BaseSchema):
+class CreateOrderConifgErrorResponse(BaseSchema):
     #  swagger.json
 
     
-    reasons = fields.List(fields.Nested(ShipmentReason, required=False), required=False)
+    error = fields.Str(required=False)
     

@@ -1,143 +1,79 @@
 """order Application Models and Enums"""
 
 
-from .OrderById import OrderById
-
-from .OrderList import OrderList
-
-from .OrderPage import OrderPage
+from .OrderStatuses import OrderStatuses
 
 from .OrderFilters import OrderFilters
 
-from .OrderStatuses import OrderStatuses
-
-from .ReqBodyVerifyOTPShipment import ReqBodyVerifyOTPShipment
-
-from .ResponseGetInvoiceShipment import ResponseGetInvoiceShipment
-
-from .ResponseVerifyOTPShipment import ResponseVerifyOTPShipment
-
-from .sendOTPApplicationResponse import sendOTPApplicationResponse
-
-from .ShipmentBagReasons import ShipmentBagReasons
-
-from .ShipmentById import ShipmentById
-
-from .CustomerDetailsByShipmentId import CustomerDetailsByShipmentId
-
-from .ShipmentReasons import ShipmentReasons
-
-from .ShipmentStatusUpdateBody import ShipmentStatusUpdateBody
-
-from .StatusesBody import StatusesBody
-
-from .ShipmentStatusUpdate import ShipmentStatusUpdate
-
-from .ShipmentTrack import ShipmentTrack
-
-from .OrderSchema import OrderSchema
-
-from .BagsForReorder import BagsForReorder
-
-from .BagsForReorderArticleAssignment import BagsForReorderArticleAssignment
-
-from .PosOrderById import PosOrderById
-
-from .BagReasons import BagReasons
-
-from .Bags import Bags
-
-from .Item import Item
-
-from .Prices import Prices
-
-from .CurrentStatus import CurrentStatus
-
-from .FinancialBreakup import FinancialBreakup
-
-from .Identifiers import Identifiers
-
-from .ItemBrand import ItemBrand
-
-from .AppliedPromos import AppliedPromos
-
-from .AppliedFreeArticles import AppliedFreeArticles
-
-from .FreeGiftItemDetails import FreeGiftItemDetails
-
-from .ItemPriceDetails import ItemPriceDetails
-
-from .MarkedValues import MarkedValues
-
-from .EffectiveValues import EffectiveValues
+from .OrderPage import OrderPage
 
 from .BreakupValues import BreakupValues
 
-from .DeliveryAddress import DeliveryAddress
-
 from .FulfillingStore import FulfillingStore
-
-from .Invoice import Invoice
-
-from .Promise import Promise
-
-from .Timestamp import Timestamp
-
-from .Reasons import Reasons
-
-from .ShipmentStatus import ShipmentStatus
-
-from .ShipmentUserInfo import ShipmentUserInfo
-
-from .Shipments import Shipments
 
 from .ShipmentTotalDetails import ShipmentTotalDetails
 
-from .ShipmentPayment import ShipmentPayment
-
-from .Track import Track
-
-from .TrackingDetails import TrackingDetails
-
-from .UserInfo import UserInfo
-
-from .ApefaceApiError import ApefaceApiError
-
 from .TimeStampData import TimeStampData
 
-from .Promise1 import Promise1
-
-from .NestedTrackingDetails import NestedTrackingDetails
-
-from .TrackingDetails1 import TrackingDetails1
+from .Promise import Promise
 
 from .FulfillingCompany import FulfillingCompany
 
-from .Item1 import Item1
+from .ShipmentUserInfo import ShipmentUserInfo
 
-from .AppliedFreeArticles1 import AppliedFreeArticles1
+from .ShipmentPayment import ShipmentPayment
 
-from .AppliedPromos1 import AppliedPromos1
+from .DeliveryAddress import DeliveryAddress
 
-from .Bags1 import Bags1
+from .ShipmentStatus import ShipmentStatus
 
-from .ShipmentPayment1 import ShipmentPayment1
+from .NestedTrackingDetails import NestedTrackingDetails
 
-from .Shipments1 import Shipments1
+from .TrackingDetails import TrackingDetails
 
-from .OrderSchema1 import OrderSchema1
+from .Prices import Prices
 
-from .OrderList1 import OrderList1
+from .Identifiers import Identifiers
 
-from .ApefaceApiError1 import ApefaceApiError1
+from .FinancialBreakup import FinancialBreakup
 
-from .OrderById1 import OrderById1
+from .ItemBrand import ItemBrand
 
-from .ShipmentById1 import ShipmentById1
+from .Item import Item
 
-from .ResponseGetInvoiceShipment1 import ResponseGetInvoiceShipment1
+from .CurrentStatus import CurrentStatus
 
-from .ShipmentTrack1 import ShipmentTrack1
+from .AppliedFreeArticles import AppliedFreeArticles
+
+from .AppliedPromos import AppliedPromos
+
+from .Bags import Bags
+
+from .Invoice import Invoice
+
+from .Shipments import Shipments
+
+from .BagsForReorderArticleAssignment import BagsForReorderArticleAssignment
+
+from .BagsForReorder import BagsForReorder
+
+from .UserInfo import UserInfo
+
+from .OrderSchema import OrderSchema
+
+from .OrderList import OrderList
+
+from .ApefaceApiError import ApefaceApiError
+
+from .OrderById import OrderById
+
+from .ShipmentById import ShipmentById
+
+from .ResponseGetInvoiceShipment import ResponseGetInvoiceShipment
+
+from .Track import Track
+
+from .ShipmentTrack import ShipmentTrack
 
 from .CustomerDetailsResponse import CustomerDetailsResponse
 
@@ -149,12 +85,36 @@ from .VerifyOtpResponse import VerifyOtpResponse
 
 from .QuestionSet import QuestionSet
 
-from .BagReasons1 import BagReasons1
+from .BagReasons import BagReasons
 
-from .ShipmentBagReasons1 import ShipmentBagReasons1
+from .ShipmentBagReasons import ShipmentBagReasons
 
 from .ShipmentReason import ShipmentReason
 
-from .ShipmentReasons1 import ShipmentReasons1
+from .ShipmentReasons import ShipmentReasons
+
+from .StatusesBody import StatusesBody
+
+from .ShipmentStatusUpdateBody import ShipmentStatusUpdateBody
+
+from .StatusesBodyResponse import StatusesBodyResponse
+
+from .ShipmentApplicationStatusResponse import ShipmentApplicationStatusResponse
+
+from .PaymentMethods import PaymentMethods
+
+from .PaymentInfo import PaymentInfo
+
+from .DpConfiguration import DpConfiguration
+
+from .CreateOrderConfig import CreateOrderConfig
+
+from .CreateOrderConfigData import CreateOrderConfigData
+
+from .createOrderConfigResponse import createOrderConfigResponse
+
+from .CreateOrderConfigDataResponse import CreateOrderConfigDataResponse
+
+from .CreateOrderConifgErrorResponse import CreateOrderConifgErrorResponse
 
 
