@@ -22,12 +22,12 @@ class ShipmentidResponse(BaseSchema):
     
     status = fields.Int(required=False)
     
-    code = fields.Str(required=False)
-    
     exception = fields.Str(required=False)
     
     stack_trace = fields.Str(required=False)
     
     message = fields.Str(required=False)
+    
+    code = fields.Str(required=False)
     
 

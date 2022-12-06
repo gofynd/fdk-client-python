@@ -5,6 +5,8 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .GetCatalogConfigurationDetailsSchemaListing import GetCatalogConfigurationDetailsSchemaListing
+
 
 
 
@@ -15,12 +17,12 @@ from .GetCatalogConfigurationDetailsProduct import GetCatalogConfigurationDetail
 
 
 
-from .GetCatalogConfigurationDetailsSchemaListing import GetCatalogConfigurationDetailsSchemaListing
-
 
 class EntityConfiguration(BaseSchema):
     # Catalog swagger.json
 
+    
+    listing = fields.Nested(GetCatalogConfigurationDetailsSchemaListing, required=False)
     
     config_type = fields.Str(required=False)
     
@@ -31,7 +33,5 @@ class EntityConfiguration(BaseSchema):
     id = fields.Str(required=False)
     
     app_id = fields.Str(required=False)
-    
-    listing = fields.Nested(GetCatalogConfigurationDetailsSchemaListing, required=False)
     
 

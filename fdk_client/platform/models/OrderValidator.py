@@ -364,11 +364,6 @@ class OrderValidator:
         batch_id = fields.Str(required=False)
          
     
-    class createOrder(BaseSchema):
-        
-        company_id = fields.Int(required=False)
-         
-    
     class invalidateShipmentCache(BaseSchema):
         
         company_id = fields.Int(required=False)
@@ -464,12 +459,17 @@ class OrderValidator:
         company_id = fields.Int(required=False)
          
     
-    class manualAssignDPToShipment(BaseSchema):
+    class platformManualAssignDPToShipment(BaseSchema):
         
         company_id = fields.Int(required=False)
          
     
     class updatePackagingDimensions(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    
+    class createOrder(BaseSchema):
         
         company_id = fields.Int(required=False)
          
