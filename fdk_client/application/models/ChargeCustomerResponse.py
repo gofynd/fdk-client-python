@@ -30,12 +30,12 @@ class ChargeCustomerResponse(BaseSchema):
     
     message = fields.Str(required=False)
     
-    order_id = fields.Str(required=False)
-    
-    cart_id = fields.Str(required=False)
-    
     status = fields.Str(required=False)
     
+    order_id = fields.Str(required=False)
+    
     delivery_address_id = fields.Str(required=False)
+    
+    cart_id = fields.Str(required=False)
     
 

@@ -27,6 +27,7 @@ from .models.DiscountValidator import DiscountValidator
 from .models.PartnerValidator import PartnerValidator
 from .models.WebhookValidator import WebhookValidator
 from .models.AuditTrailValidator import AuditTrailValidator
+from .models.DocumentEngineValidator import DocumentEngineValidator
 
 
 
@@ -2735,6 +2736,34 @@ class Catalog:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
+    async def deleteProduct(self, item_id=None):
+        """This API allows to delete product.
+        :param item_id : Id of the product to be updated. : type integer
+        """
+        payload = {}
+        
+        if item_id:
+            payload["item_id"] = item_id
+        
+
+        # Parameter validation
+        schema = CatalogValidator.deleteProduct()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/", """{"required":[{"in":"path","name":"company_id","description":"Company Id of the company associated to product that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Id of the product to be updated.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of the company associated to product that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Id of the product to be updated.","schema":{"type":"integer"},"required":true}]}""", item_id=item_id)
+        query_string = await create_query_string(item_id=item_id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+    
     async def getProduct(self, item_code=None, item_id=None, brand_uid=None):
         """This API helps to get data associated to a particular product.
         :param item_code : Item code of the product. : type string
@@ -2770,34 +2799,6 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/", item_code=item_code, item_id=item_id, brand_uid=brand_uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
-    
-    async def deleteProduct(self, item_id=None):
-        """This API allows to delete product.
-        :param item_id : Id of the product to be updated. : type integer
-        """
-        payload = {}
-        
-        if item_id:
-            payload["item_id"] = item_id
-        
-
-        # Parameter validation
-        schema = CatalogValidator.deleteProduct()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/", """{"required":[{"in":"path","name":"company_id","description":"Company Id of the company associated to product that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Id of the product to be updated.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of the company associated to product that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Id of the product to be updated.","schema":{"type":"integer"},"required":true}]}""", item_id=item_id)
-        query_string = await create_query_string(item_id=item_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def getProductValidation(self, ):
         """This API validates product data.
@@ -3799,6 +3800,35 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/hsn/{reporting_hsn}", reporting_hsn=reporting_hsn, ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+    
+    async def getOptimalLocations(self, body=""):
+        """
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = CatalogValidator.getOptimalLocations()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models.AssignStore import AssignStore
+        schema = AssignStore()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/location/reassign/", """{"required":[{"in":"path","name":"company_id","description":"Id of the company inside which the location is to be created.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company inside which the location is to be created.","schema":{"type":"string"},"required":true}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/location/reassign/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
 
 class CompanyProfile:
@@ -6216,6 +6246,268 @@ class AuditTrail:
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/audit-trail/v1.0/company/{self._conf.companyId}/entity-types", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
 
+class DocumentEngine:
+    def __init__(self, config):
+        self._conf = config
+    
+    async def generateBulkPackageLabel(self, body=""):
+        """Use this API to generate label for Packages
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = DocumentEngineValidator.generateBulkPackageLabel()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models.GenerateBulkPackageLabel import GenerateBulkPackageLabel
+        schema = GenerateBulkPackageLabel()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/document/v1.0/company/{self._conf.companyId}/generate-bulk-package-label", """{"required":[{"in":"path","name":"company_id","required":true,"description":"Company ID","schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"description":"Company ID","schema":{"type":"integer"}}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/document/v1.0/company/{self._conf.companyId}/generate-bulk-package-label", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+    
+    async def generateBulkBoxLabel(self, body=""):
+        """Use this API to generate label for Boxes
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = DocumentEngineValidator.generateBulkBoxLabel()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models.GenerateBulkBoxLabel import GenerateBulkBoxLabel
+        schema = GenerateBulkBoxLabel()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/document/v1.0/company/{self._conf.companyId}/generate-bulk-box-label", """{"required":[{"in":"path","name":"company_id","required":true,"description":"Company ID","schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"description":"Company ID","schema":{"type":"integer"}}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/document/v1.0/company/{self._conf.companyId}/generate-bulk-box-label", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+    
+    async def generateBulkShipmentLabel(self, body=""):
+        """Use this API to generate label for Shipments
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = DocumentEngineValidator.generateBulkShipmentLabel()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models.GenerateBulkShipmentLabel import GenerateBulkShipmentLabel
+        schema = GenerateBulkShipmentLabel()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/document/v1.0/company/{self._conf.companyId}/generate-bulk-shipment-label", """{"required":[{"in":"path","name":"company_id","required":true,"description":"Company ID","schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"description":"Company ID","schema":{"type":"integer"}}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/document/v1.0/company/{self._conf.companyId}/generate-bulk-shipment-label", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+    
+    async def generateNoc(self, body=""):
+        """Use this API to generate NOC for Seller
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = DocumentEngineValidator.generateNoc()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models.GenerateNoc import GenerateNoc
+        schema = GenerateNoc()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/document/v1.0/company/{self._conf.companyId}/generate-noc", """{"required":[{"in":"path","name":"company_id","required":true,"description":"Company ID","schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"description":"Company ID","schema":{"type":"integer"}}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/document/v1.0/company/{self._conf.companyId}/generate-noc", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+    
+    async def getLabelStatus(self, uid=None):
+        """Use this API to fetch status of PDF generation of Labels
+        :param uid : UID given at time of generate request : type string
+        """
+        payload = {}
+        
+        if uid:
+            payload["uid"] = uid
+        
+
+        # Parameter validation
+        schema = DocumentEngineValidator.getLabelStatus()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/document/v1.0/company/{self._conf.companyId}/get-label-list", """{"required":[{"in":"path","name":"company_id","required":true,"description":"Company ID","schema":{"type":"integer"}},{"in":"query","name":"uid","required":true,"description":"UID given at time of generate request","schema":{"type":"string"}}],"optional":[],"query":[{"in":"query","name":"uid","required":true,"description":"UID given at time of generate request","schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"description":"Company ID","schema":{"type":"integer"}}]}""", uid=uid)
+        query_string = await create_query_string(uid=uid)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/document/v1.0/company/{self._conf.companyId}/get-label-list", uid=uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
+    
+    async def getNocStatus(self, uid=None):
+        """Use this API to fetch status of PDF generation of NOC
+        :param uid : UID given at time of generate request : type string
+        """
+        payload = {}
+        
+        if uid:
+            payload["uid"] = uid
+        
+
+        # Parameter validation
+        schema = DocumentEngineValidator.getNocStatus()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/document/v1.0/company/{self._conf.companyId}/get-noc-status", """{"required":[{"in":"path","name":"company_id","required":true,"description":"Company ID","schema":{"type":"integer"}},{"in":"query","name":"uid","required":true,"description":"UID given at time of generate request","schema":{"type":"string"}}],"optional":[],"query":[{"in":"query","name":"uid","required":true,"description":"UID given at time of generate request","schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"description":"Company ID","schema":{"type":"integer"}}]}""", uid=uid)
+        query_string = await create_query_string(uid=uid)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/document/v1.0/company/{self._conf.companyId}/get-noc-status", uid=uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
+    
+    async def getPresignedURL(self, body=""):
+        """Use this API to generate Presigned URLs for downloading PDFs
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = DocumentEngineValidator.getPresignedURL()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models.InvoiceLabelPresignedRequestBody import InvoiceLabelPresignedRequestBody
+        schema = InvoiceLabelPresignedRequestBody()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/document/v1.0/company/{self._conf.companyId}/get-single-presigned-url", """{"required":[{"in":"path","name":"company_id","required":true,"description":"Company ID","schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"description":"Company ID","schema":{"type":"integer"}}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/document/v1.0/company/{self._conf.companyId}/get-single-presigned-url", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+    
+    async def getLabelPresignedURL(self, uid=None):
+        """Use this API to generate Presigned URLs for downloading labels
+        :param uid : UID given at time of generate request : type string
+        """
+        payload = {}
+        
+        if uid:
+            payload["uid"] = uid
+        
+
+        # Parameter validation
+        schema = DocumentEngineValidator.getLabelPresignedURL()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/document/v1.0/company/{self._conf.companyId}/get-label-presigned-url", """{"required":[{"in":"path","name":"company_id","required":true,"description":"Company ID","schema":{"type":"integer"}},{"in":"query","name":"uid","required":true,"description":"UID given at time of generate request","schema":{"type":"string"}}],"optional":[],"query":[{"in":"query","name":"uid","required":true,"description":"UID given at time of generate request","schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"description":"Company ID","schema":{"type":"integer"}}]}""", uid=uid)
+        query_string = await create_query_string(uid=uid)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/document/v1.0/company/{self._conf.companyId}/get-label-presigned-url", uid=uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
+    
+    async def getNocPresignedURL(self, uid=None):
+        """Use this API to generate Presigned URL for downloading NOC Pdf
+        :param uid : UID given at time of generate request : type string
+        """
+        payload = {}
+        
+        if uid:
+            payload["uid"] = uid
+        
+
+        # Parameter validation
+        schema = DocumentEngineValidator.getNocPresignedURL()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/document/v1.0/company/{self._conf.companyId}/get-noc-presigned-url", """{"required":[{"in":"path","name":"company_id","required":true,"description":"Company ID","schema":{"type":"integer"}},{"in":"query","name":"uid","required":true,"description":"UID given at time of generate request","schema":{"type":"string"}}],"optional":[],"query":[{"in":"query","name":"uid","required":true,"description":"UID given at time of generate request","schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"description":"Company ID","schema":{"type":"integer"}}]}""", uid=uid)
+        query_string = await create_query_string(uid=uid)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/document/v1.0/company/{self._conf.companyId}/get-noc-presigned-url", uid=uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
+    
+
 
 
 class PlatformClient:
@@ -6243,6 +6535,7 @@ class PlatformClient:
         self.partner = Partner(config)
         self.webhook = Webhook(config)
         self.auditTrail = AuditTrail(config)
+        self.documentEngine = DocumentEngine(config)
         
 
     def application(self, applicationId):
