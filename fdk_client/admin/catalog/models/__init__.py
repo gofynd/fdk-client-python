@@ -1,37 +1,29 @@
 """catalog Platform Models and Enums"""
 
 
-from .Hierarchy import Hierarchy
-
 from .Media import Media
 
 from .CategoryMappingValues import CategoryMappingValues
 
 from .CategoryMapping import CategoryMapping
 
-from .Category import Category
-
-from .Page import Page
-
-from .CategoryResponse import CategoryResponse
-
-from .ErrorResponse import ErrorResponse
+from .Hierarchy import Hierarchy
 
 from .CategoryRequestBody import CategoryRequestBody
 
 from .CategoryCreateResponse import CategoryCreateResponse
 
-from .SingleCategoryResponse import SingleCategoryResponse
+from .ErrorResponse import ErrorResponse
+
+from .Page import Page
+
+from .Category import Category
+
+from .CategoryResponse import CategoryResponse
 
 from .CategoryUpdateResponse import CategoryUpdateResponse
 
-from .UserSerializer import UserSerializer
-
-from .GetDepartment import GetDepartment
-
-from .DepartmentsResponse import DepartmentsResponse
-
-from .DepartmentErrorResponse import DepartmentErrorResponse
+from .SingleCategoryResponse import SingleCategoryResponse
 
 from .DepartmentCreateUpdate import DepartmentCreateUpdate
 
@@ -41,16 +33,24 @@ from .DepartmentModel import DepartmentModel
 
 from .DepartmentCreateErrorResponse import DepartmentCreateErrorResponse
 
+from .UserSerializer import UserSerializer
+
+from .GetDepartment import GetDepartment
+
+from .DepartmentsResponse import DepartmentsResponse
+
+from .DepartmentErrorResponse import DepartmentErrorResponse
+
 from .TaxSlab import TaxSlab
-
-from .HSNDataInsertV2 import HSNDataInsertV2
-
-from .PageResponse import PageResponse
-
-from .HsnCodesListingResponseSchemaV2 import HsnCodesListingResponseSchemaV2
 
 from .HSNDataV2 import HSNDataV2
 
 from .HsnCodeCreateUpdateResponseSchemaV2 import HsnCodeCreateUpdateResponseSchemaV2
+
+from .PageResponse import PageResponse
+
+from .HSNDataInsertV2 import HSNDataInsertV2
+
+from .HsnCodesListingResponseSchemaV2 import HsnCodesListingResponseSchemaV2
 
 

@@ -19,9 +19,9 @@ class ConfigurationBucketPoints(BaseSchema):
     #  swagger.json
 
     
-    start = fields.Float(required=False)
-    
     display = fields.Str(required=False)
+    
+    start = fields.Float(required=False)
     
     end = fields.Float(required=False)
     

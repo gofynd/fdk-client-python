@@ -5,13 +5,15 @@ from .OrderStatuses import OrderStatuses
 
 from .OrderFilters import OrderFilters
 
-from .OrderPage import OrderPage
-
-from .BreakupValues import BreakupValues
-
-from .FulfillingStore import FulfillingStore
+from .ShipmentStatus import ShipmentStatus
 
 from .ShipmentTotalDetails import ShipmentTotalDetails
+
+from .Prices import Prices
+
+from .Invoice import Invoice
+
+from .DeliveryAddress import DeliveryAddress
 
 from .TimeStampData import TimeStampData
 
@@ -19,37 +21,33 @@ from .Promise import Promise
 
 from .FulfillingCompany import FulfillingCompany
 
-from .ShipmentUserInfo import ShipmentUserInfo
-
-from .ShipmentPayment import ShipmentPayment
-
-from .DeliveryAddress import DeliveryAddress
-
-from .ShipmentStatus import ShipmentStatus
-
-from .NestedTrackingDetails import NestedTrackingDetails
-
-from .TrackingDetails import TrackingDetails
-
-from .Prices import Prices
+from .CurrentStatus import CurrentStatus
 
 from .Identifiers import Identifiers
 
 from .FinancialBreakup import FinancialBreakup
 
-from .ItemBrand import ItemBrand
-
-from .Item import Item
-
-from .CurrentStatus import CurrentStatus
-
 from .AppliedFreeArticles import AppliedFreeArticles
 
 from .AppliedPromos import AppliedPromos
 
+from .ItemBrand import ItemBrand
+
+from .Item import Item
+
 from .Bags import Bags
 
-from .Invoice import Invoice
+from .NestedTrackingDetails import NestedTrackingDetails
+
+from .TrackingDetails import TrackingDetails
+
+from .ShipmentUserInfo import ShipmentUserInfo
+
+from .ShipmentPayment import ShipmentPayment
+
+from .BreakupValues import BreakupValues
+
+from .FulfillingStore import FulfillingStore
 
 from .Shipments import Shipments
 
@@ -60,6 +58,8 @@ from .BagsForReorder import BagsForReorder
 from .UserInfo import UserInfo
 
 from .OrderSchema import OrderSchema
+
+from .OrderPage import OrderPage
 
 from .OrderList import OrderList
 
@@ -101,11 +101,11 @@ from .StatusesBodyResponse import StatusesBodyResponse
 
 from .ShipmentApplicationStatusResponse import ShipmentApplicationStatusResponse
 
+from .DpConfiguration import DpConfiguration
+
 from .PaymentMethods import PaymentMethods
 
 from .PaymentInfo import PaymentInfo
-
-from .DpConfiguration import DpConfiguration
 
 from .CreateOrderConfig import CreateOrderConfig
 

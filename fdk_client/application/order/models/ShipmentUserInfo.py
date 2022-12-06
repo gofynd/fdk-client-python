@@ -21,9 +21,9 @@ class ShipmentUserInfo(BaseSchema):
     #  swagger.json
 
     
-    mobile = fields.Str(required=False)
-    
     first_name = fields.Str(required=False)
+    
+    mobile = fields.Str(required=False)
     
     gender = fields.Str(required=False)
     
