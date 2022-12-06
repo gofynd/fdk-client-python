@@ -27,7 +27,7 @@ class PaymentModes(BaseSchema):
     
     types = fields.List(fields.Str(required=False), required=False)
     
-    networks = fields.List(fields.Str(required=False), required=False)
-    
     codes = fields.List(fields.Str(required=False), required=False)
+    
+    networks = fields.List(fields.Str(required=False), required=False)
     

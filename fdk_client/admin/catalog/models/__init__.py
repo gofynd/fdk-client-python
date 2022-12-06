@@ -1,17 +1,17 @@
 """catalog Platform Models and Enums"""
 
 
+from .Page import Page
+
 from .Hierarchy import Hierarchy
+
+from .Media import Media
 
 from .CategoryMappingValues import CategoryMappingValues
 
 from .CategoryMapping import CategoryMapping
 
-from .Media import Media
-
 from .Category import Category
-
-from .Page import Page
 
 from .CategoryResponse import CategoryResponse
 
@@ -41,11 +41,11 @@ from .DepartmentModel import DepartmentModel
 
 from .DepartmentCreateErrorResponse import DepartmentCreateErrorResponse
 
+from .PageResponse import PageResponse
+
 from .TaxSlab import TaxSlab
 
 from .HSNDataInsertV2 import HSNDataInsertV2
-
-from .PageResponse import PageResponse
 
 from .HsnCodesListingResponseSchemaV2 import HsnCodesListingResponseSchemaV2
 

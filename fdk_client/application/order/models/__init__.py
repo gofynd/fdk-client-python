@@ -103,17 +103,13 @@ from .UserInfo import UserInfo
 
 from .ApefaceApiError import ApefaceApiError
 
-from .NestedTrackingDetails import NestedTrackingDetails
-
-from .TrackingDetails1 import TrackingDetails1
-
-from .FulfillingCompany import FulfillingCompany
-
-from .ShipmentPayment1 import ShipmentPayment1
-
 from .TimeStampData import TimeStampData
 
 from .Promise1 import Promise1
+
+from .NestedTrackingDetails import NestedTrackingDetails
+
+from .TrackingDetails1 import TrackingDetails1
 
 from .AppliedFreeArticles1 import AppliedFreeArticles1
 
@@ -122,6 +118,10 @@ from .AppliedPromos1 import AppliedPromos1
 from .Item1 import Item1
 
 from .Bags1 import Bags1
+
+from .ShipmentPayment1 import ShipmentPayment1
+
+from .FulfillingCompany import FulfillingCompany
 
 from .Shipments1 import Shipments1
 

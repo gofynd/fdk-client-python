@@ -84,10 +84,10 @@ class OAuthClient:
           "headers": {},
           "signQuery": True
         }
-        queryString = asyncio.run(get_headers_with_signature(self._conf.domain, "get",
+        queryString = get_headers_with_signature(self._conf.domain, "get",
                                                             f"/service/panel/authentication/v1.0/company/"
                                                             f"{self._conf.companyId}/oauth/authorize",
-                                                            queryString, {}, sign_query=True))
+                                                            queryString, {}, sign_query=True)
         return f"{self._conf.domain}{signingOptions['path']}?{queryString}"
 
     async def verifyCallback(self, query):
@@ -137,7 +137,7 @@ class OAuthClient:
         headers = {
             "Authorization": f"Basic {token}"
         }
-        headers = await get_headers_with_signature(self._conf.domain, "post",
+        headers = get_headers_with_signature(self._conf.domain, "post",
                                              f"/service/panel/authentication/v1.0/company/{self._conf.companyId}/oauth/token",
                                              "", headers, reqData, ["Authorization"])
         response = await AiohttpHelper().aiohttp_request("POST", url, reqData, headers)
@@ -169,7 +169,7 @@ class OAuthClient:
             "Content-Type": "application/json"
         }
         # getting x-fp-signature 
-        headers = await get_headers_with_signature(
+        headers = get_headers_with_signature(
             domain=self._conf.domain,
             method="post",
             url=f"/servide/panel/authentication/v1.0/company/{self._conf.companyId}/oauth/offline-token",

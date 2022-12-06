@@ -29,9 +29,9 @@ class CouponBreakup(BaseSchema):
     
     value = fields.Float(required=False)
     
-    type = fields.Str(required=False)
-    
     code = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
     
     message = fields.Str(required=False)
     
