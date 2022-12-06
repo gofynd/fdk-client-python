@@ -7,6 +7,17 @@ from ..models.BaseSchema import BaseSchema
 
 class InventoryValidator:
     
+    class getJobCodesMetrics(BaseSchema):
+        
+        daily_job = fields.Boolean(required=False)
+        
+        job_code = fields.Str(required=False)
+         
+    
+    class saveJobCodesMetrics(BaseSchema):
+        
+        pass 
+    
     class getConfigByApiKey(BaseSchema):
         
         apikey = fields.Str(required=False)
@@ -30,15 +41,4 @@ class InventoryValidator:
         
         disable = fields.Boolean(required=False)
          
-    
-    class getJobCodesMetrics(BaseSchema):
-        
-        daily_job = fields.Boolean(required=False)
-        
-        job_code = fields.Str(required=False)
-         
-    
-    class saveJobCodesMetrics(BaseSchema):
-        
-        pass 
     

@@ -64,6 +64,10 @@ from .EventConfigBase import EventConfigBase
     
 
     
+from .EmailJobMetrics import EmailJobMetrics
+    
+from .ResponseEnvelopeEmailJobMetrics import ResponseEnvelopeEmailJobMetrics
+    
 from .GCompany import GCompany
     
 from .GStore import GStore
@@ -93,10 +97,6 @@ from .ResponseEnvelopeJobConfigDTO import ResponseEnvelopeJobConfigDTO
 from .TaskDTO import TaskDTO
     
 from .ResponseEnvelopeListJobConfigDTO import ResponseEnvelopeListJobConfigDTO
-    
-from .EmailJobMetrics import EmailJobMetrics
-    
-from .ResponseEnvelopeEmailJobMetrics import ResponseEnvelopeEmailJobMetrics
     
 from .ResponseEnvelopeObject import ResponseEnvelopeObject
     

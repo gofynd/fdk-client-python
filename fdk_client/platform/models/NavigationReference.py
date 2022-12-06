@@ -23,7 +23,7 @@ from .Action import Action
 
 
 
-
+from .SubNavigationReference import SubNavigationReference
 
 
 class NavigationReference(BaseSchema):
@@ -48,6 +48,6 @@ class NavigationReference(BaseSchema):
     
     sort_order = fields.Int(required=False)
     
-    sub_navigation = fields.List(fields.Nested(lambda: NavigationReference(exclude=('sub_navigation')), required=False), required=False)
+    sub_navigation = fields.List(fields.Nested(SubNavigationReference, required=False), required=False)
     
 
