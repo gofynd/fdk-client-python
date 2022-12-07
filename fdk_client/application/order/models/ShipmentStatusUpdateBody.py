@@ -27,11 +27,11 @@ class ShipmentStatusUpdateBody(BaseSchema):
     
     statuses = fields.List(fields.Nested(StatusesBody, required=False), required=False)
     
-    unlock_before_transition = fields.Boolean(required=False)
-    
-    task = fields.Boolean(required=False)
+    lock_after_transition = fields.Boolean(required=False)
     
     force_transition = fields.Boolean(required=False)
     
-    lock_after_transition = fields.Boolean(required=False)
+    unlock_before_transition = fields.Boolean(required=False)
+    
+    task = fields.Boolean(required=False)
     

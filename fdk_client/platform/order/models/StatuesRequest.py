@@ -1,0 +1,29 @@
+"""order Platform Model"""
+
+from marshmallow import fields, Schema
+from marshmallow.validate import OneOf
+
+
+from ...PlatformModel import BaseSchema
+
+
+
+
+
+
+from .ShipmentsRequest import ShipmentsRequest
+
+
+
+
+
+class StatuesRequest(BaseSchema):
+    #  swagger.json
+
+    
+    exclude_bags_next_state = fields.Str(required=False)
+    
+    shipments = fields.Nested(ShipmentsRequest, required=False)
+    
+    status = fields.Str(required=False)
+    

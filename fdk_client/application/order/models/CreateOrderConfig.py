@@ -11,8 +11,6 @@ from ...ApplicationModel import BaseSchema
 
 
 
-
-
 from .PaymentInfo import PaymentInfo
 
 
@@ -25,13 +23,13 @@ from .DpConfiguration import DpConfiguration
 
 
 
+
+
 class CreateOrderConfig(BaseSchema):
     #  swagger.json
 
     
-    shipment_assignment = fields.Str(required=False)
-    
-    logo_url = fields.Dict(required=False)
+    lock_states = fields.Str(required=False)
     
     payment_info = fields.Nested(PaymentInfo, required=False)
     
@@ -39,5 +37,7 @@ class CreateOrderConfig(BaseSchema):
     
     dp_configuration = fields.Nested(DpConfiguration, required=False)
     
-    lock_states = fields.Str(required=False)
+    logo_url = fields.Dict(required=False)
+    
+    shipment_assignment = fields.Str(required=False)
     

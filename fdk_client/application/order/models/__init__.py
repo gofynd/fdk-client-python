@@ -5,6 +5,8 @@ from .OrderStatuses import OrderStatuses
 
 from .OrderFilters import OrderFilters
 
+from .OrderPage import OrderPage
+
 from .BagsForReorderArticleAssignment import BagsForReorderArticleAssignment
 
 from .BagsForReorder import BagsForReorder
@@ -13,21 +15,15 @@ from .UserInfo import UserInfo
 
 from .BreakupValues import BreakupValues
 
-from .ShipmentTotalDetails import ShipmentTotalDetails
-
-from .TimeStampData import TimeStampData
-
-from .Promise import Promise
-
-from .ShipmentPayment import ShipmentPayment
-
-from .DeliveryAddress import DeliveryAddress
+from .ShipmentStatus import ShipmentStatus
 
 from .FulfillingCompany import FulfillingCompany
 
-from .Prices import Prices
+from .ItemBrand import ItemBrand
 
-from .FulfillingStore import FulfillingStore
+from .Item import Item
+
+from .Prices import Prices
 
 from .Identifiers import Identifiers
 
@@ -37,19 +33,25 @@ from .AppliedFreeArticles import AppliedFreeArticles
 
 from .AppliedPromos import AppliedPromos
 
-from .ItemBrand import ItemBrand
-
-from .Item import Item
-
 from .CurrentStatus import CurrentStatus
 
 from .Bags import Bags
 
+from .ShipmentTotalDetails import ShipmentTotalDetails
+
+from .TimeStampData import TimeStampData
+
+from .Promise import Promise
+
 from .ShipmentUserInfo import ShipmentUserInfo
+
+from .ShipmentPayment import ShipmentPayment
 
 from .Invoice import Invoice
 
-from .ShipmentStatus import ShipmentStatus
+from .DeliveryAddress import DeliveryAddress
+
+from .FulfillingStore import FulfillingStore
 
 from .NestedTrackingDetails import NestedTrackingDetails
 
@@ -58,8 +60,6 @@ from .TrackingDetails import TrackingDetails
 from .Shipments import Shipments
 
 from .OrderSchema import OrderSchema
-
-from .OrderPage import OrderPage
 
 from .OrderList import OrderList
 

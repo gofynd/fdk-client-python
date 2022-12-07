@@ -162,12 +162,12 @@ class OrderValidator:
          
         
     
-    class createOrderConfig(BaseSchema):
+    class createChannelConfig(BaseSchema):
         
         pass 
         
     
-    class getCreateOrderConfig(BaseSchema):
+    class getChannelConfig(BaseSchema):
         
         pass 
         
