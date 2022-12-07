@@ -30,7 +30,7 @@ class HSNDataInsertV2(BaseSchema):
     # Catalog swagger.json
 
     
-    reporting_hsn = fields.Str(required=False)
+    modified_on = fields.Str(required=False)
     
     description = fields.Str(required=False)
     
@@ -38,16 +38,16 @@ class HSNDataInsertV2(BaseSchema):
     
     created_by = fields.Dict(required=False)
     
-    created_on = fields.Str(required=False)
+    hsn_code = fields.Str(required=False)
     
-    modified_on = fields.Str(required=False)
+    country_code = fields.Str(required=False)
+    
+    created_on = fields.Str(required=False)
     
     type = fields.Str(required=False)
     
     modified_by = fields.Dict(required=False)
     
-    hsn_code = fields.Str(required=False)
-    
-    country_code = fields.Str(required=False)
+    reporting_hsn = fields.Str(required=False)
     
 

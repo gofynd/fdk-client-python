@@ -5,13 +5,13 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .StatusesBody import StatusesBody
+from .StatusesBodyResponse import StatusesBodyResponse
 
 
 class ShipmentApplicationStatusResponse(BaseSchema):
     # Order swagger.json
 
     
-    statuses = fields.List(fields.Nested(StatusesBody, required=False), required=False)
+    statuses = fields.List(fields.Nested(StatusesBodyResponse, required=False), required=False)
     
 

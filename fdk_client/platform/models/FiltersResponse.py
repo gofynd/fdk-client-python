@@ -5,17 +5,13 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .FiltersInfo import FiltersInfo
 
-from .FiltersInfo import FiltersInfo
 
 
 class FiltersResponse(BaseSchema):
     # Orders swagger.json
 
     
-    channels = fields.List(fields.Nested(FiltersInfo, required=False), required=False)
-    
-    delivery_partners = fields.List(fields.Nested(FiltersInfo, required=False), required=False)
+    advance = fields.List(fields.Dict(required=False), required=False)
     
 

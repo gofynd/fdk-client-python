@@ -14,16 +14,20 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 class TrackingList(BaseSchema):
     # Orders swagger.json
 
     
-    is_passed = fields.Boolean(required=False)
+    is_current = fields.Boolean(required=False)
+    
+    text = fields.Str(required=False)
     
     time = fields.Str(required=False)
     
-    status = fields.Str(required=False)
+    is_passed = fields.Boolean(required=False)
     
-    is_current = fields.Boolean(required=False)
+    status = fields.Str(required=False)
     
 

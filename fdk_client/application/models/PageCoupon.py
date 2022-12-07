@@ -24,10 +24,10 @@ class PageCoupon(BaseSchema):
     
     total = fields.Int(required=False)
     
-    has_next = fields.Boolean(required=False)
+    current = fields.Int(required=False)
     
     has_previous = fields.Boolean(required=False)
     
-    current = fields.Int(required=False)
+    has_next = fields.Boolean(required=False)
     
 

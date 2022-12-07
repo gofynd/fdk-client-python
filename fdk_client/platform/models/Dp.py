@@ -32,22 +32,22 @@ class Dp(BaseSchema):
     
     rvp_priority = fields.Int(required=False)
     
-    internal_account_id = fields.Str(required=False)
-    
-    transport_mode = fields.Str(required=False)
-    
     area_code = fields.Int(required=False)
-    
-    payment_mode = fields.Str(required=False)
     
     external_account_id = fields.Str(required=False)
     
-    lm_priority = fields.Int(required=False)
-    
     assign_dp_from_sb = fields.Boolean(required=False)
+    
+    transport_mode = fields.Str(required=False)
+    
+    internal_account_id = fields.Str(required=False)
     
     fm_priority = fields.Int(required=False)
     
+    lm_priority = fields.Int(required=False)
+    
     operations = fields.List(fields.Str(required=False), required=False)
+    
+    payment_mode = fields.Str(required=False)
     
 

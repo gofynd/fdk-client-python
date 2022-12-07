@@ -15,6 +15,8 @@ class OrdersValidator:
         
         search_type = fields.Str(required=False)
         
+        search_value = fields.Str(required=False)
+        
         search_id = fields.Str(required=False)
         
         from_date = fields.Str(required=False)
@@ -63,31 +65,6 @@ class OrdersValidator:
     class getLaneConfig(BaseSchema):
         
         company_id = fields.Int(required=False)
-        
-        super_lane = fields.Str(required=False)
-        
-        group_entity = fields.Str(required=False)
-        
-        from_date = fields.Str(required=False)
-        
-        to_date = fields.Str(required=False)
-        
-        dp_ids = fields.Str(required=False)
-        
-        stores = fields.Str(required=False)
-        
-        sales_channel = fields.Str(required=False)
-        
-        payment_mode = fields.Str(required=False)
-        
-        bag_status = fields.Str(required=False)
-         
-    
-    class getLaneConfigCrossSellingData(BaseSchema):
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
         
         super_lane = fields.Str(required=False)
         
@@ -188,6 +165,15 @@ class OrdersValidator:
         order_id = fields.Str(required=False)
          
     
+    class trackPlatformShipment(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        shipment_id = fields.Str(required=False)
+         
+    
     class getfilters(BaseSchema):
         
         company_id = fields.Int(required=False)
@@ -225,6 +211,134 @@ class OrdersValidator:
         company_id = fields.Int(required=False)
         
         batch_id = fields.Str(required=False)
+        
+        doc_type = fields.Str(required=False)
+         
+    
+    class getBulkInvoiceLabel(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        batch_id = fields.Str(required=False)
+         
+    
+    class getBulkShipmentExcelFile(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        lane = fields.Str(required=False)
+        
+        search_type = fields.Str(required=False)
+        
+        search_id = fields.Str(required=False)
+        
+        from_date = fields.Str(required=False)
+        
+        to_date = fields.Str(required=False)
+        
+        dp_ids = fields.Str(required=False)
+        
+        ordering_company_id = fields.Str(required=False)
+        
+        stores = fields.Str(required=False)
+        
+        sales_channel = fields.Str(required=False)
+        
+        request_by_ext = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        customer_id = fields.Str(required=False)
+        
+        is_priority_sort = fields.Boolean(required=False)
+         
+    
+    class getBulkList(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        lane = fields.Str(required=False)
+        
+        search_type = fields.Str(required=False)
+        
+        search_id = fields.Str(required=False)
+        
+        from_date = fields.Str(required=False)
+        
+        to_date = fields.Str(required=False)
+        
+        dp_ids = fields.Str(required=False)
+        
+        ordering_company_id = fields.Str(required=False)
+        
+        stores = fields.Str(required=False)
+        
+        sales_channel = fields.Str(required=False)
+        
+        request_by_ext = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        customer_id = fields.Str(required=False)
+        
+        is_priority_sort = fields.Boolean(required=False)
+         
+    
+    class getManifestList(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        status = fields.Str(required=False)
+        
+        store_id = fields.Int(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        search_value = fields.Str(required=False)
+        
+        from_date = fields.Str(required=False)
+        
+        to_date = fields.Str(required=False)
+         
+    
+    class getManifestDetailsWithShipments(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        manifest_id = fields.Str(required=False)
+        
+        from_date = fields.Str(required=False)
+        
+        to_date = fields.Str(required=False)
+        
+        store_id = fields.Int(required=False)
+        
+        page = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        lane = fields.Str(required=False)
+        
+        dp_ids = fields.Int(required=False)
+        
+        search_type = fields.Str(required=False)
+        
+        search_value = fields.Str(required=False)
+         
+    
+    class getBulkActionFailedReport(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        batch_id = fields.Str(required=False)
+        
+        report_type = fields.Str(required=False)
          
     
     class getPlatformShipmentReasons(BaseSchema):
@@ -248,5 +362,39 @@ class OrdersValidator:
         company_id = fields.Str(required=False)
         
         batch_id = fields.Str(required=False)
+         
+    
+    class getBagById(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        bag_id = fields.Str(required=False)
+        
+        channel_bag_id = fields.Str(required=False)
+        
+        channel_id = fields.Str(required=False)
+         
+    
+    class getBags(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        bag_ids = fields.Str(required=False)
+        
+        shipment_ids = fields.Str(required=False)
+        
+        order_ids = fields.Str(required=False)
+        
+        channel_bag_ids = fields.Str(required=False)
+        
+        channel_shipment_ids = fields.Str(required=False)
+        
+        channel_order_ids = fields.Str(required=False)
+        
+        channel_id = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
          
     

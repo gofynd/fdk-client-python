@@ -14,8 +14,8 @@ class OpeningClosing(BaseSchema):
     # Serviceability swagger.json
 
     
-    hour = fields.Int(required=False)
-    
     minute = fields.Int(required=False)
+    
+    hour = fields.Int(required=False)
     
 

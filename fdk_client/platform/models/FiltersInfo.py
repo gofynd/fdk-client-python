@@ -7,9 +7,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
 from .FilterInfoOption import FilterInfoOption
+
+
 
 
 
@@ -18,12 +18,12 @@ class FiltersInfo(BaseSchema):
     # Orders swagger.json
 
     
-    text = fields.Str(required=False)
-    
     type = fields.Str(required=False)
     
     options = fields.List(fields.Nested(FilterInfoOption, required=False), required=False)
     
     value = fields.Str(required=False)
+    
+    text = fields.Str(required=False)
     
 

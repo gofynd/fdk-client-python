@@ -18,6 +18,8 @@ class OrderValidator:
         from_date = fields.Str(required=False)
         
         to_date = fields.Str(required=False)
+        
+        custom_meta = fields.Str(required=False)
          
     
     class getOrderById(BaseSchema):
@@ -31,6 +33,11 @@ class OrderValidator:
          
     
     class getShipmentById(BaseSchema):
+        
+        shipment_id = fields.Str(required=False)
+         
+    
+    class getInvoiceByShipmentId(BaseSchema):
         
         shipment_id = fields.Str(required=False)
          
@@ -65,7 +72,12 @@ class OrderValidator:
         
         shipment_id = fields.Str(required=False)
         
-        bag_id = fields.Int(required=False)
+        bag_id = fields.Str(required=False)
+         
+    
+    class getShipmentReasons(BaseSchema):
+        
+        shipment_id = fields.Str(required=False)
          
     
     class updateShipmentStatus(BaseSchema):
@@ -73,7 +85,15 @@ class OrderValidator:
         shipment_id = fields.Str(required=False)
          
     
-    class getInvoiceByShipmentId(BaseSchema):
+    class getChannelConfig(BaseSchema):
+        
+        pass 
+    
+    class createChannelConfig(BaseSchema):
+        
+        pass 
+    
+    class getInvoiceByShipmentId1(BaseSchema):
         
         shipment_id = fields.Str(required=False)
         

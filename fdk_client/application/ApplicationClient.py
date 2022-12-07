@@ -6243,13 +6243,17 @@ class Order:
             "getOrderById": "/service/application/orders/v1.0/orders/{order_id}",
             "getPosOrderById": "/service/application/orders/v1.0/orders/pos-order/{order_id}",
             "getShipmentById": "/service/application/orders/v1.0/orders/shipments/{shipment_id}",
+            "getInvoiceByShipmentId": "/service/application/orders/v1.0/orders/shipments/{shipment_id}/invoice",
             "trackShipment": "/service/application/orders/v1.0/orders/shipments/{shipment_id}/track",
             "getCustomerDetailsByShipmentId": "/service/application/orders/v1.0/orders/{order_id}/shipments/{shipment_id}/customer-details",
             "sendOtpToShipmentCustomer": "/service/application/orders/v1.0/orders/{order_id}/shipments/{shipment_id}/otp/send/",
             "verifyOtpShipmentCustomer": "/service/application/orders/v1.0/orders/{order_id}/shipments/{shipment_id}/otp/verify/",
             "getShipmentBagReasons": "/service/application/orders/v1.0/orders/shipments/{shipment_id}/bags/{bag_id}/reasons",
+            "getShipmentReasons": "/service/application/orders/v1.0/orders/shipments/{shipment_id}/reasons",
             "updateShipmentStatus": "/service/application/order-manage/v1.0/orders/shipments/{shipment_id}/status",
-            "getInvoiceByShipmentId": "/service/application/document/v1.0/orders/shipments/{shipment_id}/invoice",
+            "getChannelConfig": "/service/application/order-manage/v1.0/orders/co-config",
+            "createChannelConfig": "/service/application/order-manage/v1.0/orders/co-config",
+            "getInvoiceByShipmentId1": "/service/application/document/v1.0/orders/shipments/{shipment_id}/invoice",
             "getCreditNoteByShipmentId": "/service/application/document/v1.0/orders/shipments/{shipment_id}/credit-note"
             
         }
@@ -6260,13 +6264,14 @@ class Order:
     async def updateUrls(self, urls):
         self._urls.update(urls)
     
-    async def getOrders(self, status=None, page_no=None, page_size=None, from_date=None, to_date=None, body=""):
+    async def getOrders(self, status=None, page_no=None, page_size=None, from_date=None, to_date=None, custom_meta=None, body=""):
         """Use this API to retrieve all the orders.
         :param status : A filter to retrieve orders by their current status such as _placed_, _delivered_, etc. : type integer
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         :param from_date : The date from which the orders should be retrieved. : type string
         :param to_date : The date till which the orders should be retrieved. : type string
+        :param custom_meta : A filter and retrieve data using special fields included for special use-cases : type string
         """
         payload = {}
         
@@ -6285,13 +6290,16 @@ class Order:
         if to_date:
             payload["to_date"] = to_date
         
+        if custom_meta:
+            payload["custom_meta"] = custom_meta
+        
         # Parameter validation
         schema = OrderValidator.getOrders()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getOrders"], proccessed_params="""{"required":[],"optional":[{"in":"query","description":"A filter to retrieve orders by their current status such as _placed_, _delivered_, etc.","name":"status","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The number of items to retrieve in each page. Default value is 10.","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The date from which the orders should be retrieved.","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","description":"The date till which the orders should be retrieved.","name":"to_date","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","description":"A filter to retrieve orders by their current status such as _placed_, _delivered_, etc.","name":"status","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The number of items to retrieve in each page. Default value is 10.","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The date from which the orders should be retrieved.","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","description":"The date till which the orders should be retrieved.","name":"to_date","required":false,"schema":{"type":"string"}}],"headers":[],"path":[]}""", status=status, page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date)
-        query_string = await create_query_string(status=status, page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date)
+        url_with_params = await create_url_with_params(api_url=self._urls["getOrders"], proccessed_params="""{"required":[],"optional":[{"in":"query","description":"A filter to retrieve orders by their current status such as _placed_, _delivered_, etc.","name":"status","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The number of items to retrieve in each page. Default value is 10.","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The date from which the orders should be retrieved.","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","description":"The date till which the orders should be retrieved.","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","description":"A filter and retrieve data using special fields included for special use-cases","name":"custom_meta","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","description":"A filter to retrieve orders by their current status such as _placed_, _delivered_, etc.","name":"status","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The number of items to retrieve in each page. Default value is 10.","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The date from which the orders should be retrieved.","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","description":"The date till which the orders should be retrieved.","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","description":"A filter and retrieve data using special fields included for special use-cases","name":"custom_meta","required":false,"schema":{"type":"string"}}],"headers":[],"path":[]}""", status=status, page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, custom_meta=custom_meta)
+        query_string = await create_query_string(status=status, page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, custom_meta=custom_meta)
         headers = {
             "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
         }
@@ -6303,7 +6311,7 @@ class Order:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getOrders"]).netloc, "get", await create_url_without_domain("/service/application/orders/v1.0/orders", status=status, page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getOrders"]).netloc, "get", await create_url_without_domain("/service/application/orders/v1.0/orders", status=status, page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, custom_meta=custom_meta), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
     async def getOrderById(self, order_id=None, body=""):
         """Use this API to retrieve order details such as tracking details, shipment, store information using Fynd Order ID.
@@ -6377,7 +6385,7 @@ class Order:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getShipmentById"], proccessed_params="""{"required":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string","default":"16602143565551542371K"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string","default":"16602143565551542371K"}}]}""", shipment_id=shipment_id)
+        url_with_params = await create_url_with_params(api_url=self._urls["getShipmentById"], proccessed_params="""{"required":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}}]}""", shipment_id=shipment_id)
         query_string = await create_query_string(shipment_id=shipment_id)
         headers = {
             "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
@@ -6391,6 +6399,35 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getShipmentById"]).netloc, "get", await create_url_without_domain("/service/application/orders/v1.0/orders/shipments/{shipment_id}", shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+    
+    async def getInvoiceByShipmentId(self, shipment_id=None, body=""):
+        """Use this API to retrieve shipment invoice.
+        :param shipment_id : ID of the shipment. : type string
+        """
+        payload = {}
+        
+        if shipment_id:
+            payload["shipment_id"] = shipment_id
+        
+        # Parameter validation
+        schema = OrderValidator.getInvoiceByShipmentId()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getInvoiceByShipmentId"], proccessed_params="""{"required":[{"in":"path","description":"ID of the shipment.","name":"shipment_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","description":"ID of the shipment.","name":"shipment_id","required":true,"schema":{"type":"string"}}]}""", shipment_id=shipment_id)
+        query_string = await create_query_string(shipment_id=shipment_id)
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getInvoiceByShipmentId"]).netloc, "get", await create_url_without_domain("/service/application/orders/v1.0/orders/shipments/{shipment_id}/invoice", shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
     async def trackShipment(self, shipment_id=None, body=""):
         """Track Shipment by shipment id, for application based on application Id
@@ -6528,7 +6565,7 @@ class Order:
     async def getShipmentBagReasons(self, shipment_id=None, bag_id=None, body=""):
         """Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
         :param shipment_id : ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
-        :param bag_id : ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type integer
+        :param bag_id : ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
         """
         payload = {}
         
@@ -6543,7 +6580,7 @@ class Order:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getShipmentBagReasons"], proccessed_params="""{"required":[{"in":"path","description":"ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string","default":"16538880933361957252J"}},{"in":"path","description":"ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"bag_id","required":true,"schema":{"type":"integer","default":109080}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","description":"ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string","default":"16538880933361957252J"}},{"in":"path","description":"ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"bag_id","required":true,"schema":{"type":"integer","default":109080}}]}""", shipment_id=shipment_id, bag_id=bag_id)
+        url_with_params = await create_url_with_params(api_url=self._urls["getShipmentBagReasons"], proccessed_params="""{"required":[{"in":"path","description":"ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}},{"in":"path","description":"ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"bag_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","description":"ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}},{"in":"path","description":"ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"bag_id","required":true,"schema":{"type":"string"}}]}""", shipment_id=shipment_id, bag_id=bag_id)
         query_string = await create_query_string(shipment_id=shipment_id, bag_id=bag_id)
         headers = {
             "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
@@ -6557,6 +6594,35 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getShipmentBagReasons"]).netloc, "get", await create_url_without_domain("/service/application/orders/v1.0/orders/shipments/{shipment_id}/bags/{bag_id}/reasons", shipment_id=shipment_id, bag_id=bag_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+    
+    async def getShipmentReasons(self, shipment_id=None, body=""):
+        """Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
+        :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
+        """
+        payload = {}
+        
+        if shipment_id:
+            payload["shipment_id"] = shipment_id
+        
+        # Parameter validation
+        schema = OrderValidator.getShipmentReasons()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getShipmentReasons"], proccessed_params="""{"required":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}}]}""", shipment_id=shipment_id)
+        query_string = await create_query_string(shipment_id=shipment_id)
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getShipmentReasons"]).netloc, "get", await create_url_without_domain("/service/application/orders/v1.0/orders/shipments/{shipment_id}/reasons", shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
     async def updateShipmentStatus(self, shipment_id=None, body=""):
         """updateShipmentStatus
@@ -6572,8 +6638,8 @@ class Order:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ShipmentStatusUpdateBody import ShipmentStatusUpdateBody
-        schema = ShipmentStatusUpdateBody()
+        from .models.StatusUpdateInternalRequest import StatusUpdateInternalRequest
+        schema = StatusUpdateInternalRequest()
         schema.dump(schema.load(body))
         
 
@@ -6592,7 +6658,62 @@ class Order:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["updateShipmentStatus"]).netloc, "put", await create_url_without_domain("/service/application/order-manage/v1.0/orders/shipments/{shipment_id}/status", shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
-    async def getInvoiceByShipmentId(self, shipment_id=None, parameters=None, body=""):
+    async def getChannelConfig(self, body=""):
+        """getChannelConfig
+        """
+        payload = {}
+        
+        # Parameter validation
+        schema = OrderValidator.getChannelConfig()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getChannelConfig"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getChannelConfig"]).netloc, "get", await create_url_without_domain("/service/application/order-manage/v1.0/orders/co-config", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+    
+    async def createChannelConfig(self, body=""):
+        """createChannelConfig
+        """
+        payload = {}
+        
+        # Parameter validation
+        schema = OrderValidator.createChannelConfig()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models.CreateOrderConfigData import CreateOrderConfigData
+        schema = CreateOrderConfigData()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["createChannelConfig"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["createChannelConfig"]).netloc, "post", await create_url_without_domain("/service/application/order-manage/v1.0/orders/co-config", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+    
+    async def getInvoiceByShipmentId1(self, shipment_id=None, parameters=None, body=""):
         """Use this API to generate Presigned URLs for downloading Invoice
         :param shipment_id : Shiment ID : type string
         :param parameters :  : type 
@@ -6606,11 +6727,11 @@ class Order:
             payload["parameters"] = parameters
         
         # Parameter validation
-        schema = OrderValidator.getInvoiceByShipmentId()
+        schema = OrderValidator.getInvoiceByShipmentId1()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getInvoiceByShipmentId"], proccessed_params="""{"required":[{"in":"path","name":"shipment_id","required":true,"description":"Shiment ID","schema":{"type":"string"}}],"optional":[{"in":"query","name":"parameters","required":false,"schema":{"$ref":"#/components/schemas/invoiceParameter"},"style":"form","explode":true}],"query":[{"in":"query","name":"parameters","required":false,"schema":{"$ref":"#/components/schemas/invoiceParameter"},"style":"form","explode":true}],"headers":[],"path":[{"in":"path","name":"shipment_id","required":true,"description":"Shiment ID","schema":{"type":"string"}}]}""", shipment_id=shipment_id, parameters=parameters)
+        url_with_params = await create_url_with_params(api_url=self._urls["getInvoiceByShipmentId1"], proccessed_params="""{"required":[{"in":"path","name":"shipment_id","required":true,"description":"Shiment ID","schema":{"type":"string"}}],"optional":[{"in":"query","name":"parameters","required":false,"schema":{"$ref":"#/components/schemas/invoiceParameter"},"style":"form","explode":true}],"query":[{"in":"query","name":"parameters","required":false,"schema":{"$ref":"#/components/schemas/invoiceParameter"},"style":"form","explode":true}],"headers":[],"path":[{"in":"path","name":"shipment_id","required":true,"description":"Shiment ID","schema":{"type":"string"}}]}""", shipment_id=shipment_id, parameters=parameters)
         query_string = await create_query_string(shipment_id=shipment_id, parameters=parameters)
         headers = {
             "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
@@ -6623,7 +6744,7 @@ class Order:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getInvoiceByShipmentId"]).netloc, "get", await create_url_without_domain("/service/application/document/v1.0/orders/shipments/{shipment_id}/invoice", shipment_id=shipment_id, parameters=parameters), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getInvoiceByShipmentId1"]).netloc, "get", await create_url_without_domain("/service/application/document/v1.0/orders/shipments/{shipment_id}/invoice", shipment_id=shipment_id, parameters=parameters), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
     async def getCreditNoteByShipmentId(self, shipment_id=None, parameters=None, body=""):
         """Use this API to generate Presigned URLs for downloading Invoice

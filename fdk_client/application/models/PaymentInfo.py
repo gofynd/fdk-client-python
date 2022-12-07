@@ -7,9 +7,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
+from .PaymentMethods import PaymentMethods
 
 
 
@@ -18,12 +16,10 @@ class PaymentInfo(BaseSchema):
     # Order swagger.json
 
     
-    status = fields.Str(required=False)
+    mode_of_payment = fields.Str(required=False)
     
-    logo = fields.Str(required=False)
+    payment_methods = fields.List(fields.Nested(PaymentMethods, required=False), required=False)
     
-    mode = fields.Str(required=False)
-    
-    mop = fields.Str(required=False)
+    source = fields.Str(required=False)
     
 

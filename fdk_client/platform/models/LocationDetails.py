@@ -7,19 +7,19 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
 from .ArticleDetails import ArticleDetails
+
+
 
 
 class LocationDetails(BaseSchema):
     # OrderManage swagger.json
 
     
-    fulfillment_type = fields.Str(required=False)
-    
     fulfillment_id = fields.Int(required=False)
     
     articles = fields.List(fields.Nested(ArticleDetails, required=False), required=False)
+    
+    fulfillment_type = fields.Str(required=False)
     
 

@@ -14,8 +14,8 @@ class ZoneSuccessResponse(BaseSchema):
     # Serviceability swagger.json
 
     
-    status_code = fields.Int(required=False)
-    
     success = fields.Boolean(required=False)
+    
+    status_code = fields.Int(required=False)
     
 

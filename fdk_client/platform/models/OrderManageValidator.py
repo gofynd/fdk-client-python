@@ -7,11 +7,6 @@ from ..models.BaseSchema import BaseSchema
 
 class OrderManageValidator:
     
-    class createOrder(BaseSchema):
-        
-        company_id = fields.Int(required=False)
-         
-    
     class invalidateShipmentCache(BaseSchema):
         
         company_id = fields.Int(required=False)
@@ -103,6 +98,21 @@ class OrderManageValidator:
          
     
     class sendSmsNinja(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    
+    class platformManualAssignDPToShipment(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    
+    class updatePackagingDimensions(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    
+    class createOrder(BaseSchema):
         
         company_id = fields.Int(required=False)
          
