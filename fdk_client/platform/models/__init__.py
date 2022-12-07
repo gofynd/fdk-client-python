@@ -1184,19 +1184,19 @@ from .BaseResponse import BaseResponse
     
 from .Click2CallResponse import Click2CallResponse
     
-from .ProductsReasons import ProductsReasons
-    
-from .EntitiesReasons import EntitiesReasons
-    
-from .ReasonsData import ReasonsData
-    
-from .Products import Products
+from .EntitiesDataUpdates import EntitiesDataUpdates
     
 from .ProductsDataUpdates import ProductsDataUpdates
     
-from .EntitiesDataUpdates import EntitiesDataUpdates
-    
 from .DataUpdates import DataUpdates
+    
+from .Products import Products
+    
+from .EntitiesReasons import EntitiesReasons
+    
+from .ProductsReasons import ProductsReasons
+    
+from .ReasonsData import ReasonsData
     
 from .ShipmentsRequest import ShipmentsRequest
     
@@ -1210,51 +1210,51 @@ from .StatuesResponse import StatuesResponse
     
 from .StatusUpdateInternalResponse import StatusUpdateInternalResponse
     
-from .MarketPlacePdf import MarketPlacePdf
-    
-from .AffiliateBag import AffiliateBag
-    
-from .OrderUser import OrderUser
-    
-from .OrderPriority import OrderPriority
-    
-from .UserData import UserData
-    
-from .ArticleDetails import ArticleDetails
-    
-from .LocationDetails import LocationDetails
-    
-from .ShipmentDetails import ShipmentDetails
-    
-from .ShipmentConfig import ShipmentConfig
-    
-from .ShipmentData import ShipmentData
-    
-from .OrderInfo import OrderInfo
-    
-from .AffiliateInventoryArticleAssignmentConfig import AffiliateInventoryArticleAssignmentConfig
-    
-from .AffiliateInventoryStoreConfig import AffiliateInventoryStoreConfig
-    
-from .AffiliateInventoryPaymentConfig import AffiliateInventoryPaymentConfig
-    
-from .AffiliateInventoryOrderConfig import AffiliateInventoryOrderConfig
-    
-from .AffiliateInventoryLogisticsConfig import AffiliateInventoryLogisticsConfig
-    
-from .AffiliateInventoryConfig import AffiliateInventoryConfig
+from .AffiliateStoreIdMapping import AffiliateStoreIdMapping
     
 from .AffiliateAppConfigMeta import AffiliateAppConfigMeta
     
 from .AffiliateAppConfig import AffiliateAppConfig
     
+from .AffiliateInventoryLogisticsConfig import AffiliateInventoryLogisticsConfig
+    
+from .AffiliateInventoryArticleAssignmentConfig import AffiliateInventoryArticleAssignmentConfig
+    
+from .AffiliateInventoryPaymentConfig import AffiliateInventoryPaymentConfig
+    
+from .AffiliateInventoryStoreConfig import AffiliateInventoryStoreConfig
+    
+from .AffiliateInventoryOrderConfig import AffiliateInventoryOrderConfig
+    
+from .AffiliateInventoryConfig import AffiliateInventoryConfig
+    
 from .AffiliateConfig import AffiliateConfig
     
 from .Affiliate import Affiliate
     
-from .AffiliateStoreIdMapping import AffiliateStoreIdMapping
-    
 from .OrderConfig import OrderConfig
+    
+from .OrderUser import OrderUser
+    
+from .UserData import UserData
+    
+from .MarketPlacePdf import MarketPlacePdf
+    
+from .AffiliateBag import AffiliateBag
+    
+from .ArticleDetails import ArticleDetails
+    
+from .ShipmentDetails import ShipmentDetails
+    
+from .LocationDetails import LocationDetails
+    
+from .ShipmentConfig import ShipmentConfig
+    
+from .ShipmentData import ShipmentData
+    
+from .OrderPriority import OrderPriority
+    
+from .OrderInfo import OrderInfo
     
 from .CreateOrderPayload import CreateOrderPayload
     
@@ -1274,11 +1274,11 @@ from .SmsDataPayload import SmsDataPayload
     
 from .SendSmsPayload import SendSmsPayload
     
+from .OrderDetails import OrderDetails
+    
 from .Meta import Meta
     
 from .ShipmentDetail import ShipmentDetail
-    
-from .OrderDetails import OrderDetails
     
 from .OrderStatusData import OrderStatusData
     
@@ -1288,25 +1288,25 @@ from .ManualAssignDPToShipment import ManualAssignDPToShipment
     
 from .ManualAssignDPToShipmentResponse import ManualAssignDPToShipmentResponse
     
+from .ShippingInfo import ShippingInfo
+    
+from .PaymentMethod import PaymentMethod
+    
+from .PaymentInfo import PaymentInfo
+    
 from .BillingInfo import BillingInfo
+    
+from .TaxInfo import TaxInfo
     
 from .Tax import Tax
     
 from .Charge import Charge
     
-from .LineItem import LineItem
-    
 from .ProcessingDates import ProcessingDates
     
+from .LineItem import LineItem
+    
 from .Shipment import Shipment
-    
-from .ShippingInfo import ShippingInfo
-    
-from .TaxInfo import TaxInfo
-    
-from .PaymentMethod import PaymentMethod
-    
-from .PaymentInfo import PaymentInfo
     
 from .CreateOrderAPI import CreateOrderAPI
     
@@ -1864,11 +1864,11 @@ from .ApplicationStoreJson import ApplicationStoreJson
     
 
     
-from .ContactDetails import ContactDetails
-    
 from .CompanyTaxesSerializer import CompanyTaxesSerializer
     
 from .BusinessCountryInfo import BusinessCountryInfo
+    
+from .ContactDetails import ContactDetails
     
 from .Website import Website
     
@@ -1876,9 +1876,9 @@ from .BusinessDetails import BusinessDetails
     
 from .GetCompanyProfileSerializerResponse import GetCompanyProfileSerializerResponse
     
-from .CreateUpdateAddressSerializer import CreateUpdateAddressSerializer
-    
 from .CompanyTaxesSerializer1 import CompanyTaxesSerializer1
+    
+from .CreateUpdateAddressSerializer import CreateUpdateAddressSerializer
     
 from .UpdateCompany import UpdateCompany
     

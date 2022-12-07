@@ -26,19 +26,19 @@ class CreateOrderErrorReponse(BaseSchema):
     # Order swagger.json
 
     
-    status = fields.Int(required=False)
-    
-    request_id = fields.Str(required=False)
-    
-    info = fields.Raw(required=False)
-    
-    exception = fields.Str(required=False)
-    
     code = fields.Str(required=False)
     
     meta = fields.Str(required=False)
     
+    exception = fields.Str(required=False)
+    
+    info = fields.Raw(required=False)
+    
+    request_id = fields.Str(required=False)
+    
     stack_trace = fields.Str(required=False)
+    
+    status = fields.Int(required=False)
     
     message = fields.Str(required=False)
     

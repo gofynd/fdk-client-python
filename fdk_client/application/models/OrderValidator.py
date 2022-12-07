@@ -85,11 +85,11 @@ class OrderValidator:
         shipment_id = fields.Str(required=False)
          
     
-    class createOrderConfig(BaseSchema):
+    class createChannelConfig(BaseSchema):
         
         pass 
     
-    class getCreateOrderConfig(BaseSchema):
+    class getChannelConfig(BaseSchema):
         
         pass 
     
