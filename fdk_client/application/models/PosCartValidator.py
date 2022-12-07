@@ -19,7 +19,7 @@ class PosCartValidator:
         
         area_code = fields.Str(required=False)
         
-        empty_cart = fields.Str(required=False)
+        empty_cart = fields.Boolean(required=False)
          
     
     class getCartLastModified(BaseSchema):
