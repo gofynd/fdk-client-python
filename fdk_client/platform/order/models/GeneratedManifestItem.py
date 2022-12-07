@@ -13,11 +13,11 @@ from ...PlatformModel import BaseSchema
 
 
 
+
+
+
+
 from .ManifestFilter import ManifestFilter
-
-
-
-
 
 
 
@@ -31,15 +31,15 @@ class GeneratedManifestItem(BaseSchema):
     
     is_active = fields.Boolean(required=False)
     
-    created_by = fields.Str(required=False)
-    
-    filters = fields.Nested(ManifestFilter, required=False)
+    company_id = fields.Int(required=False)
     
     status = fields.Str(required=False)
     
-    company_id = fields.Int(required=False)
+    manifest_id = fields.Str(required=False)
+    
+    filters = fields.Nested(ManifestFilter, required=False)
     
     created_at = fields.Str(required=False)
     
-    manifest_id = fields.Str(required=False)
+    created_by = fields.Str(required=False)
     

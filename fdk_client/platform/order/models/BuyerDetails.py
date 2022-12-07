@@ -31,13 +31,13 @@ class BuyerDetails(BaseSchema):
     
     address = fields.Str(required=False)
     
-    name = fields.Str(required=False)
-    
-    state = fields.Str(required=False)
-    
     pincode = fields.Int(required=False)
     
     gstin = fields.Str(required=False)
     
     city = fields.Str(required=False)
+    
+    state = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
     

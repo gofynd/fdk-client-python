@@ -25,7 +25,9 @@ class OrderBrandName(BaseSchema):
     #  swagger.json
 
     
-    id = fields.Int(required=False)
+    company = fields.Str(required=False)
+    
+    logo = fields.Str(required=False)
     
     modified_on = fields.Int(required=False)
     
@@ -33,7 +35,5 @@ class OrderBrandName(BaseSchema):
     
     created_on = fields.Int(required=False)
     
-    company = fields.Str(required=False)
-    
-    logo = fields.Str(required=False)
+    id = fields.Int(required=False)
     

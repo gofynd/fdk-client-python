@@ -25,7 +25,7 @@ class CurrentStatus(BaseSchema):
     
     updated_at = fields.Str(required=False)
     
-    status = fields.Str(required=False)
-    
     name = fields.Str(required=False)
+    
+    status = fields.Str(required=False)
     

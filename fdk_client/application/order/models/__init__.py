@@ -1,33 +1,39 @@
 """order Application Models and Enums"""
 
 
-from .OrderStatuses import OrderStatuses
+from .BreakupValues import BreakupValues
 
-from .OrderFilters import OrderFilters
-
-from .OrderPage import OrderPage
+from .UserInfo import UserInfo
 
 from .BagsForReorderArticleAssignment import BagsForReorderArticleAssignment
 
 from .BagsForReorder import BagsForReorder
 
-from .UserInfo import UserInfo
+from .ShipmentTotalDetails import ShipmentTotalDetails
 
-from .BreakupValues import BreakupValues
+from .FulfillingCompany import FulfillingCompany
+
+from .TimeStampData import TimeStampData
+
+from .Promise import Promise
 
 from .ShipmentStatus import ShipmentStatus
 
-from .FulfillingCompany import FulfillingCompany
+from .DeliveryAddress import DeliveryAddress
+
+from .ShipmentUserInfo import ShipmentUserInfo
+
+from .Invoice import Invoice
+
+from .NestedTrackingDetails import NestedTrackingDetails
+
+from .TrackingDetails import TrackingDetails
+
+from .Prices import Prices
 
 from .ItemBrand import ItemBrand
 
 from .Item import Item
-
-from .Prices import Prices
-
-from .Identifiers import Identifiers
-
-from .FinancialBreakup import FinancialBreakup
 
 from .AppliedFreeArticles import AppliedFreeArticles
 
@@ -35,31 +41,25 @@ from .AppliedPromos import AppliedPromos
 
 from .CurrentStatus import CurrentStatus
 
+from .Identifiers import Identifiers
+
+from .FinancialBreakup import FinancialBreakup
+
 from .Bags import Bags
-
-from .ShipmentTotalDetails import ShipmentTotalDetails
-
-from .TimeStampData import TimeStampData
-
-from .Promise import Promise
-
-from .ShipmentUserInfo import ShipmentUserInfo
 
 from .ShipmentPayment import ShipmentPayment
 
-from .Invoice import Invoice
-
-from .DeliveryAddress import DeliveryAddress
-
 from .FulfillingStore import FulfillingStore
-
-from .NestedTrackingDetails import NestedTrackingDetails
-
-from .TrackingDetails import TrackingDetails
 
 from .Shipments import Shipments
 
 from .OrderSchema import OrderSchema
+
+from .OrderPage import OrderPage
+
+from .OrderStatuses import OrderStatuses
+
+from .OrderFilters import OrderFilters
 
 from .OrderList import OrderList
 

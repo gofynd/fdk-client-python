@@ -9,9 +9,9 @@ from ...PlatformModel import BaseSchema
 
 
 
+
+
 from .PlatformTrack import PlatformTrack
-
-
 
 
 
@@ -19,7 +19,7 @@ class PlatformShipmentTrack1(BaseSchema):
     #  swagger.json
 
     
-    results = fields.List(fields.Nested(PlatformTrack, required=False), required=False)
-    
     meta = fields.Dict(required=False)
+    
+    results = fields.List(fields.Nested(PlatformTrack, required=False), required=False)
     

@@ -41,9 +41,9 @@ class ManifestFilter(BaseSchema):
     
     stores = fields.Str(required=False)
     
-    store_name = fields.Str(required=False)
-    
     sales_channel_name = fields.Str(required=False)
+    
+    store_name = fields.Str(required=False)
     
     sales_channels = fields.Str(required=False)
     
