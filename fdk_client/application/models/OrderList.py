@@ -7,9 +7,9 @@ from ..models.BaseSchema import BaseSchema
 
 from .Filters import Filters
 
-from .Page import Page
-
 from .OrderItems import OrderItems
+
+from .Page import Page
 
 
 class OrderList(BaseSchema):
@@ -18,8 +18,8 @@ class OrderList(BaseSchema):
     
     filters = fields.Nested(Filters, required=False)
     
-    page = fields.Nested(Page, required=False)
-    
     items = fields.List(fields.Nested(OrderItems, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
     
 

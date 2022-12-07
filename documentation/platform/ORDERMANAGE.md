@@ -232,8 +232,8 @@ We are processing the order!
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | quantity | Int? |  yes  |  |
  | identifier | String? |  yes  |  |
+ | quantity | Int? |  yes  |  |
 
 ---
 
@@ -245,9 +245,9 @@ We are processing the order!
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | storeInvoiceId | String? |  yes  |  |
- | dataUpdate | HashMap<String,Any>? |  yes  |  |
  | bags | ArrayList<Int>? |  yes  |  |
  | reason | ArrayList<Int>? |  yes  |  |
+ | dataUpdate | HashMap<String,Any>? |  yes  |  |
  | products | ArrayList<[ProductDetail](#ProductDetail)>? |  yes  |  |
 
 ---
@@ -270,9 +270,9 @@ We are processing the order!
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | excludeBagsNextState | String? |  yes  |  |
- | status | String |  no  |  |
  | shipments | [ShipmentDetail](#ShipmentDetail)? |  yes  |  |
+ | status | String |  no  |  |
+ | excludeBagsNextState | String? |  yes  |  |
 
 ---
 
@@ -283,9 +283,9 @@ We are processing the order!
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | task | Boolean? |  yes  |  |
  | statuses | [Statuses](#Statuses)? |  yes  |  |
  | forceTransition | Boolean? |  yes  |  |
+ | task | Boolean? |  yes  |  |
 
 ---
 
@@ -296,8 +296,8 @@ We are processing the order!
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | success | Boolean? |  yes  |  |
  | message | ArrayList<String>? |  yes  |  |
+ | success | Boolean? |  yes  |  |
 
 ---
 
@@ -319,15 +319,15 @@ We are processing the order!
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | type | String |  no  |  |
- | ticketId | String? |  yes  |  |
- | createdat | String |  no  |  |
+ | l3Detail | String? |  yes  |  |
  | ticketUrl | String? |  yes  |  |
+ | l2Detail | String? |  yes  |  |
+ | ticketId | String? |  yes  |  |
+ | type | String |  no  |  |
  | l1Detail | String? |  yes  |  |
  | user | String |  no  |  |
- | l2Detail | String? |  yes  |  |
  | message | String |  no  |  |
- | l3Detail | String? |  yes  |  |
+ | createdat | String |  no  |  |
 
 ---
 

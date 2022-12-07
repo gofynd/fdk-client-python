@@ -1,4 +1,4 @@
-"""Platform Models."""
+"""Application Models."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -8,10 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ShipmentUpdateObject(BaseSchema):
-    # Order swagger.json
+class CommonError(BaseSchema):
+    # Content swagger.json
 
     
-    shipments = fields.Dict(required=False)
+    message = fields.Str(required=False)
     
 

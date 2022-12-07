@@ -22,12 +22,12 @@ class OverrideCheckoutResponse(BaseSchema):
     
     data = fields.Dict(required=False)
     
-    cart = fields.Dict(required=False)
+    success = fields.Str(required=False)
     
     order_id = fields.Str(required=False)
     
     message = fields.Str(required=False)
     
-    success = fields.Str(required=False)
+    cart = fields.Dict(required=False)
     
 

@@ -18,6 +18,8 @@ class PosCartValidator:
         assign_card_id = fields.Int(required=False)
         
         area_code = fields.Str(required=False)
+        
+        empty_cart = fields.Str(required=False)
          
     
     class getCartLastModified(BaseSchema):

@@ -5,19 +5,19 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .StoreDetail import StoreDetail
+from .Seller import Seller
 
 from .CompanyDetail import CompanyDetail
+
+from .StoreDetail import StoreDetail
+
+
 
 
 
 
 
 from .ProductStockPrice import ProductStockPrice
-
-
-
-from .Seller import Seller
 
 
 
@@ -28,11 +28,15 @@ class ProductStockStatusItem(BaseSchema):
     # Catalog swagger.json
 
     
-    store = fields.Nested(StoreDetail, required=False)
+    seller = fields.Nested(Seller, required=False)
     
     company = fields.Nested(CompanyDetail, required=False)
     
-    identifier = fields.Dict(required=False)
+    store = fields.Nested(StoreDetail, required=False)
+    
+    uid = fields.Str(required=False)
+    
+    quantity = fields.Int(required=False)
     
     item_id = fields.Int(required=False)
     
@@ -40,10 +44,6 @@ class ProductStockStatusItem(BaseSchema):
     
     size = fields.Str(required=False)
     
-    seller = fields.Nested(Seller, required=False)
-    
-    quantity = fields.Int(required=False)
-    
-    uid = fields.Str(required=False)
+    identifier = fields.Dict(required=False)
     
 

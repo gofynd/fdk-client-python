@@ -32,12 +32,6 @@ class OverrideCartItem(BaseSchema):
     
     promo_list = fields.List(fields.Nested(OverrideCartItemPromo, required=False), required=False)
     
-    quantity = fields.Int(required=False)
-    
-    price_effective = fields.Float(required=False)
-    
-    price_marked = fields.Float(required=False)
-    
     extra_meta = fields.Dict(required=False)
     
     item_id = fields.Int(required=False)
@@ -46,8 +40,14 @@ class OverrideCartItem(BaseSchema):
     
     size = fields.Str(required=False)
     
+    amount_paid = fields.Float(required=False)
+    
+    price_effective = fields.Float(required=False)
+    
     discount = fields.Float(required=False)
     
-    amount_paid = fields.Float(required=False)
+    quantity = fields.Int(required=False)
+    
+    price_marked = fields.Float(required=False)
     
 
