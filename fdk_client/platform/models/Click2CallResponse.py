@@ -14,8 +14,8 @@ class Click2CallResponse(BaseSchema):
     # Order swagger.json
 
     
-    call_id = fields.Str(required=False)
-    
     status = fields.Boolean(required=False)
+    
+    call_id = fields.Str(required=False)
     
 

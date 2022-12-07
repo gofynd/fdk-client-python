@@ -26,8 +26,8 @@ class OrderPage(BaseSchema):
     
     current = fields.Int(required=False)
     
-    item_total = fields.Int(required=False)
-    
     type = fields.Str(required=False)
+    
+    item_total = fields.Int(required=False)
     
 

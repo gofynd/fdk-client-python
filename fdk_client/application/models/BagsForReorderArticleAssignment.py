@@ -14,8 +14,8 @@ class BagsForReorderArticleAssignment(BaseSchema):
     # Order swagger.json
 
     
-    level = fields.Str(required=False)
-    
     strategy = fields.Str(required=False)
+    
+    level = fields.Str(required=False)
     
 

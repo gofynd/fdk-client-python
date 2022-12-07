@@ -18,12 +18,12 @@ class PaymentConfirmationMode(BaseSchema):
     # Payment swagger.json
 
     
+    meta = fields.Dict(required=False)
+    
     mode = fields.Str(required=False)
     
     amount = fields.Float(required=False)
     
     name = fields.Str(required=False)
-    
-    meta = fields.Dict(required=False)
     
 

@@ -32,22 +32,22 @@ class AnnouncementResponse(BaseSchema):
     
     to_datetime = fields.Str(required=False)
     
-    company_id = fields.Int(required=False)
+    created_at = fields.Str(required=False)
     
-    from_datetime = fields.Str(required=False)
-    
-    title = fields.Str(required=False)
+    description = fields.Str(required=False)
     
     logo_url = fields.Str(required=False)
     
-    created_at = fields.Str(required=False)
+    platform_id = fields.Str(required=False)
     
     platform_name = fields.Str(required=False)
     
-    platform_id = fields.Str(required=False)
+    title = fields.Str(required=False)
     
     id = fields.Int(required=False)
     
-    description = fields.Str(required=False)
+    company_id = fields.Int(required=False)
+    
+    from_datetime = fields.Str(required=False)
     
 
