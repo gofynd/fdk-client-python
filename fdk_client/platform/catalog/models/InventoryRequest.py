@@ -13,9 +13,9 @@ from .ItemQuery import ItemQuery
 
 
 
+
+
 from .InvSize import InvSize
-
-
 
 
 
@@ -25,7 +25,7 @@ class InventoryRequest(BaseSchema):
     
     item = fields.Nested(ItemQuery, required=False)
     
-    sizes = fields.List(fields.Nested(InvSize, required=False), required=False)
-    
     company_id = fields.Int(required=False)
+    
+    sizes = fields.List(fields.Nested(InvSize, required=False), required=False)
     

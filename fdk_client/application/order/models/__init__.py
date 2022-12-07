@@ -5,23 +5,29 @@ from .OrderStatuses import OrderStatuses
 
 from .OrderFilters import OrderFilters
 
-from .ShipmentStatus import ShipmentStatus
+from .BagsForReorderArticleAssignment import BagsForReorderArticleAssignment
+
+from .BagsForReorder import BagsForReorder
+
+from .UserInfo import UserInfo
+
+from .BreakupValues import BreakupValues
 
 from .ShipmentTotalDetails import ShipmentTotalDetails
-
-from .Prices import Prices
-
-from .Invoice import Invoice
-
-from .DeliveryAddress import DeliveryAddress
 
 from .TimeStampData import TimeStampData
 
 from .Promise import Promise
 
+from .ShipmentPayment import ShipmentPayment
+
+from .DeliveryAddress import DeliveryAddress
+
 from .FulfillingCompany import FulfillingCompany
 
-from .CurrentStatus import CurrentStatus
+from .Prices import Prices
+
+from .FulfillingStore import FulfillingStore
 
 from .Identifiers import Identifiers
 
@@ -35,27 +41,21 @@ from .ItemBrand import ItemBrand
 
 from .Item import Item
 
+from .CurrentStatus import CurrentStatus
+
 from .Bags import Bags
+
+from .ShipmentUserInfo import ShipmentUserInfo
+
+from .Invoice import Invoice
+
+from .ShipmentStatus import ShipmentStatus
 
 from .NestedTrackingDetails import NestedTrackingDetails
 
 from .TrackingDetails import TrackingDetails
 
-from .ShipmentUserInfo import ShipmentUserInfo
-
-from .ShipmentPayment import ShipmentPayment
-
-from .BreakupValues import BreakupValues
-
-from .FulfillingStore import FulfillingStore
-
 from .Shipments import Shipments
-
-from .BagsForReorderArticleAssignment import BagsForReorderArticleAssignment
-
-from .BagsForReorder import BagsForReorder
-
-from .UserInfo import UserInfo
 
 from .OrderSchema import OrderSchema
 
@@ -101,11 +101,11 @@ from .StatusesBodyResponse import StatusesBodyResponse
 
 from .ShipmentApplicationStatusResponse import ShipmentApplicationStatusResponse
 
-from .DpConfiguration import DpConfiguration
-
 from .PaymentMethods import PaymentMethods
 
 from .PaymentInfo import PaymentInfo
+
+from .DpConfiguration import DpConfiguration
 
 from .CreateOrderConfig import CreateOrderConfig
 

@@ -23,7 +23,7 @@ class InventorySet(BaseSchema):
     
     size_distribution = fields.Nested(SizeDistribution, required=False)
     
-    quantity = fields.Int(required=False)
-    
     name = fields.Str(required=False)
+    
+    quantity = fields.Int(required=False)
     

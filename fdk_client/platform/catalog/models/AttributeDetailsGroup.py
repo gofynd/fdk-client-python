@@ -33,15 +33,15 @@ class AttributeDetailsGroup(BaseSchema):
     
     slug = fields.Str(required=False)
     
-    is_active = fields.Boolean(required=False)
-    
-    logo = fields.Str(required=False)
+    priority = fields.Int(required=False)
     
     display_type = fields.Str(required=False)
+    
+    logo = fields.Str(required=False)
     
     unit = fields.Str(required=False)
     
     name = fields.Str(required=False)
     
-    priority = fields.Int(required=False)
+    is_active = fields.Boolean(required=False)
     
