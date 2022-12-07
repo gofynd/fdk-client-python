@@ -15,5 +15,5 @@ class StatusesBodyResponse(BaseSchema):
     #  swagger.json
 
     
-    shipments = fields.Dict(required=False)
+    shipments = fields.List(fields.Dict(required=False), required=False)
     

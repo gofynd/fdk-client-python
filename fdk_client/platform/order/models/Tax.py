@@ -21,11 +21,11 @@ class Tax(BaseSchema):
     #  swagger.json
 
     
-    breakup = fields.List(fields.Dict(required=False), required=False)
-    
-    amount = fields.Dict(required=False)
-    
     tax_exempt = fields.Boolean(required=False)
     
     name = fields.Str(required=False)
+    
+    breakup = fields.List(fields.Dict(required=False), required=False)
+    
+    amount = fields.Dict(required=False)
     

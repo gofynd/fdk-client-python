@@ -13,15 +13,11 @@ from ...ApplicationModel import BaseSchema
 
 
 
-
-
-class StatusesBody(BaseSchema):
+class EntitiesDataUpdates(BaseSchema):
     #  swagger.json
 
     
-    exclude_bags_next_state = fields.Str(required=False)
+    filters = fields.List(fields.Dict(required=False), required=False)
     
-    status = fields.Str(required=False)
-    
-    shipments = fields.Dict(required=False)
+    data = fields.Dict(required=False)
     

@@ -11,9 +11,9 @@ from ...PlatformModel import BaseSchema
 
 
 
+
+
 from .AffiliateConfig import AffiliateConfig
-
-
 
 
 
@@ -23,7 +23,7 @@ class Affiliate(BaseSchema):
     
     token = fields.Str(required=False)
     
-    config = fields.Nested(AffiliateConfig, required=False)
-    
     id = fields.Str(required=False)
+    
+    config = fields.Nested(AffiliateConfig, required=False)
     

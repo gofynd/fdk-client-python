@@ -27,7 +27,7 @@ class MetricsCount(BaseSchema):
     
     options = fields.List(fields.Nested(Options1, required=False), required=False)
     
-    text = fields.Str(required=False)
-    
     key = fields.Str(required=False)
+    
+    text = fields.Str(required=False)
     

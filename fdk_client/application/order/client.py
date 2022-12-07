@@ -27,8 +27,8 @@ class Order:
             "getShipmentBagReasons": "/service/application/orders/v1.0/orders/shipments/{shipment_id}/bags/{bag_id}/reasons",
             "getShipmentReasons": "/service/application/orders/v1.0/orders/shipments/{shipment_id}/reasons",
             "updateShipmentStatus": "/service/application/order-manage/v1.0/orders/shipments/{shipment_id}/status",
-            "createChannelConfig": "/service/application/order-manage/v1.0/orders/co-config",
-            "getChannelConfig": "/service/application/order-manage/v1.0/orders/co-config"
+            "getChannelConfig": "/service/application/order-manage/v1.0/orders/co-config",
+            "createChannelConfig": "/service/application/order-manage/v1.0/orders/co-config"
             
         }
         self._urls = {
@@ -412,8 +412,8 @@ class Order:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ShipmentStatusUpdateBody import ShipmentStatusUpdateBody
-        schema = ShipmentStatusUpdateBody()
+        from .models.StatusUpdateInternalRequest import StatusUpdateInternalRequest
+        schema = StatusUpdateInternalRequest()
         schema.dump(schema.load(body))
         
 
@@ -431,6 +431,31 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["updateShipmentStatus"]).netloc, "put", await create_url_without_domain("/service/application/order-manage/v1.0/orders/shipments/{shipment_id}/status", shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+    
+    async def getChannelConfig(self, body=""):
+        """getChannelConfig
+        """
+        payload = {}
+        
+        # Parameter validation
+        schema = OrderValidator.getChannelConfig()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getChannelConfig"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getChannelConfig"]).netloc, "get", await create_url_without_domain("/service/application/order-manage/v1.0/orders/co-config", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
     async def createChannelConfig(self, body=""):
         """createChannelConfig
@@ -461,30 +486,5 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["createChannelConfig"]).netloc, "post", await create_url_without_domain("/service/application/order-manage/v1.0/orders/co-config", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-    
-    async def getChannelConfig(self, body=""):
-        """getChannelConfig
-        """
-        payload = {}
-        
-        # Parameter validation
-        schema = OrderValidator.getChannelConfig()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getChannelConfig"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
-        query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
-        }
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getChannelConfig"]).netloc, "get", await create_url_without_domain("/service/application/order-manage/v1.0/orders/co-config", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
 

@@ -27,7 +27,7 @@ class SuperLane(BaseSchema):
     
     options = fields.List(fields.Nested(SubLane, required=False), required=False)
     
-    text = fields.Str(required=False)
-    
     total_items = fields.Int(required=False)
+    
+    text = fields.Str(required=False)
     

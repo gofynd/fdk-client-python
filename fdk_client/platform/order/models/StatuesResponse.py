@@ -17,5 +17,5 @@ class StatuesResponse(BaseSchema):
     #  swagger.json
 
     
-    shipments = fields.Nested(ShipmentsResponse, required=False)
+    shipments = fields.List(fields.Nested(ShipmentsResponse, required=False), required=False)
     

@@ -13,11 +13,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-class TimeStamp(BaseSchema):
+class ProductsReasons(BaseSchema):
     #  swagger.json
 
     
-    t_min = fields.Str(required=False)
+    filters = fields.List(fields.Dict(required=False), required=False)
     
-    t_max = fields.Str(required=False)
+    data = fields.Dict(required=False)
     

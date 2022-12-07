@@ -174,6 +174,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -693,6 +694,8 @@ class OrderValidator:
         is_priority_sort = fields.Boolean(required=False)
         
         exclude_locked_shipments = fields.Boolean(required=False)
+        
+        payment_methods = fields.Str(required=False)
          
         
     
@@ -972,7 +975,7 @@ class OrderValidator:
          
         
     
-    class getPlatformShipmentReasons1(BaseSchema):
+    class getShipmentReasons(BaseSchema):
         
         
         company_id = fields.Int(required=False)

@@ -27,7 +27,7 @@ class AddCartDetailResponse(BaseSchema):
     
     cart = fields.Nested(CartDetailResponse, required=False)
     
-    message = fields.Str(required=False)
-    
     success = fields.Boolean(required=False)
+    
+    message = fields.Str(required=False)
     

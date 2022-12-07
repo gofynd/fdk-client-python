@@ -23,9 +23,9 @@ class UserInfo(BaseSchema):
     
     gender = fields.Str(required=False)
     
+    mobile = fields.Str(required=False)
+    
     name = fields.Str(required=False)
     
     email = fields.Str(required=False)
-    
-    mobile = fields.Str(required=False)
     

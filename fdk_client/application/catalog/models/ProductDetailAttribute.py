@@ -21,7 +21,7 @@ class ProductDetailAttribute(BaseSchema):
     
     value = fields.Str(required=False)
     
-    key = fields.Str(required=False)
-    
     type = fields.Str(required=False)
+    
+    key = fields.Str(required=False)
     

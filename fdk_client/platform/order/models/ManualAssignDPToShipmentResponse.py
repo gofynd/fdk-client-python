@@ -17,7 +17,7 @@ class ManualAssignDPToShipmentResponse(BaseSchema):
     #  swagger.json
 
     
-    errors = fields.List(fields.Str(required=False), required=False)
-    
     success = fields.Str(required=False)
+    
+    errors = fields.List(fields.Str(required=False), required=False)
     

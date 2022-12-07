@@ -23,6 +23,8 @@ class PromotionOffer(BaseSchema):
     #  swagger.json
 
     
+    description = fields.Str(required=False)
+    
     id = fields.Str(required=False)
     
     valid_till = fields.Str(required=False)
@@ -30,6 +32,4 @@ class PromotionOffer(BaseSchema):
     offer_text = fields.Str(required=False)
     
     promotion_group = fields.Str(required=False)
-    
-    description = fields.Str(required=False)
     
