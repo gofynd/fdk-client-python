@@ -1410,63 +1410,63 @@ from .CustomerOnboardingResponse import CustomerOnboardingResponse
     
 
     
-from .OrderPage import OrderPage
+from .OrderStatuses import OrderStatuses
     
-from .NestedTrackingDetails import NestedTrackingDetails
-    
-from .TrackingDetails import TrackingDetails
-    
-from .FulfillingCompany import FulfillingCompany
-    
-from .CurrentStatus import CurrentStatus
-    
-from .Prices import Prices
-    
-from .AppliedPromos import AppliedPromos
-    
-from .ItemBrand import ItemBrand
-    
-from .Item import Item
-    
-from .Identifiers import Identifiers
-    
-from .FinancialBreakup import FinancialBreakup
-    
-from .Bags import Bags
-    
-from .ShipmentTotalDetails import ShipmentTotalDetails
-    
-from .DeliveryAddress import DeliveryAddress
-    
-from .FulfillingStore import FulfillingStore
-    
-from .ShipmentUserInfo import ShipmentUserInfo
-    
-from .BreakupValues import BreakupValues
-    
-from .Invoice import Invoice
-    
-from .ShipmentPayment import ShipmentPayment
-    
-from .ShipmentStatus import ShipmentStatus
-    
-from .TimeStampData import TimeStampData
-    
-from .Promise import Promise
-    
-from .Shipments import Shipments
-    
-from .UserInfo import UserInfo
+from .OrderFilters import OrderFilters
     
 from .BagsForReorderArticleAssignment import BagsForReorderArticleAssignment
     
 from .BagsForReorder import BagsForReorder
     
+from .TimeStampData import TimeStampData
+    
+from .Promise import Promise
+    
+from .FulfillingCompany import FulfillingCompany
+    
+from .NestedTrackingDetails import NestedTrackingDetails
+    
+from .TrackingDetails import TrackingDetails
+    
+from .ShipmentStatus import ShipmentStatus
+    
+from .Prices import Prices
+    
+from .FulfillingStore import FulfillingStore
+    
+from .BreakupValues import BreakupValues
+    
+from .ShipmentPayment import ShipmentPayment
+    
+from .ShipmentTotalDetails import ShipmentTotalDetails
+    
+from .Invoice import Invoice
+    
+from .Identifiers import Identifiers
+    
+from .FinancialBreakup import FinancialBreakup
+    
+from .ItemBrand import ItemBrand
+    
+from .Item import Item
+    
+from .AppliedPromos import AppliedPromos
+    
+from .CurrentStatus import CurrentStatus
+    
+from .Bags import Bags
+    
+from .DeliveryAddress import DeliveryAddress
+    
+from .ShipmentUserInfo import ShipmentUserInfo
+    
+from .Shipments import Shipments
+    
+from .UserInfo import UserInfo
+    
 from .OrderSchema import OrderSchema
     
-from .OrderStatuses import OrderStatuses
-    
-from .OrderFilters import OrderFilters
+from .OrderPage import OrderPage
     
 from .OrderList import OrderList
     
@@ -1506,13 +1506,13 @@ from .ProductsReasons import ProductsReasons
     
 from .ReasonsData import ReasonsData
     
-from .Products import Products
-    
 from .EntitiesDataUpdates import EntitiesDataUpdates
     
 from .ProductsDataUpdates import ProductsDataUpdates
     
 from .DataUpdates import DataUpdates
+    
+from .Products import Products
     
 from .ShipmentsRequest import ShipmentsRequest
     
@@ -1524,11 +1524,11 @@ from .StatusesBodyResponse import StatusesBodyResponse
     
 from .ShipmentApplicationStatusResponse import ShipmentApplicationStatusResponse
     
-from .DpConfiguration import DpConfiguration
-    
 from .PaymentMethods import PaymentMethods
     
 from .PaymentInfo import PaymentInfo
+    
+from .DpConfiguration import DpConfiguration
     
 from .CreateOrderConfig import CreateOrderConfig
     

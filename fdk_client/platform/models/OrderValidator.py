@@ -7,7 +7,7 @@ from ..models.BaseSchema import BaseSchema
 
 class OrderValidator:
     
-    class getShipmentList(BaseSchema):
+    class getShipments(BaseSchema):
         
         company_id = fields.Int(required=False)
         
@@ -42,20 +42,26 @@ class OrderValidator:
         is_priority_sort = fields.Boolean(required=False)
         
         exclude_locked_shipments = fields.Boolean(required=False)
+        
+        payment_methods = fields.Str(required=False)
+        
+        channel_shipment_id = fields.Str(required=False)
+        
+        channel_order_id = fields.Str(required=False)
          
     
-    class getShipmentDetails(BaseSchema):
+    class getShipmentById(BaseSchema):
         
         company_id = fields.Int(required=False)
         
-        shipment_id = fields.Str(required=False)
+        channel_shipment_id = fields.Str(required=False)
         
         ordering_company_id = fields.Str(required=False)
         
         request_by_ext = fields.Str(required=False)
          
     
-    class getOrderShipmentDetails(BaseSchema):
+    class getOrderById(BaseSchema):
         
         company_id = fields.Int(required=False)
         
@@ -464,12 +470,17 @@ class OrderValidator:
         company_id = fields.Int(required=False)
          
     
-    class statusUpdateInternalV4(BaseSchema):
+    class updateShipmentStatus(BaseSchema):
         
         company_id = fields.Int(required=False)
          
     
     class processManifest(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    
+    class dispatchManifest(BaseSchema):
         
         company_id = fields.Int(required=False)
          
@@ -504,6 +515,21 @@ class OrderValidator:
          
     
     class createOrder(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    
+    class getChannelConfig(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    
+    class createChannelConfig(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    
+    class uploadConsent(BaseSchema):
         
         company_id = fields.Int(required=False)
          

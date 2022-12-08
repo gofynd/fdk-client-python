@@ -5,13 +5,13 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .StatuesResponse import StatuesResponse
 
 
-class StatusUpdateInternalResponse(BaseSchema):
+
+class DispatchManifest(BaseSchema):
     # Order swagger.json
 
     
-    statuses = fields.List(fields.Nested(StatuesResponse, required=False), required=False)
+    manifest_id = fields.Str(required=False)
     
 

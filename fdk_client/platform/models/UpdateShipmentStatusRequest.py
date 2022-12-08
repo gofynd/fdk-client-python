@@ -9,14 +9,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
 from .StatuesRequest import StatuesRequest
 
 
 
 
-class StatusUpdateInternalRequest(BaseSchema):
+
+
+class UpdateShipmentStatusRequest(BaseSchema):
     # Order swagger.json
 
     
@@ -24,10 +24,10 @@ class StatusUpdateInternalRequest(BaseSchema):
     
     force_transition = fields.Boolean(required=False)
     
-    task = fields.Boolean(required=False)
-    
     statues = fields.List(fields.Nested(StatuesRequest, required=False), required=False)
     
     lock_after_transition = fields.Boolean(required=False)
+    
+    task = fields.Boolean(required=False)
     
 
