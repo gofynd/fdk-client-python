@@ -28,14 +28,14 @@ class ConfigurationProductConfig(BaseSchema):
     
     key = fields.Str(required=False)
     
-    title = fields.Str(required=False)
+    logo = fields.Str(required=False)
     
     priority = fields.Int(required=False)
     
-    logo = fields.Str(required=False)
+    subtitle = fields.Str(required=False)
     
     size = fields.Nested(ProductSize, required=False)
     
-    subtitle = fields.Str(required=False)
+    title = fields.Str(required=False)
     
 
