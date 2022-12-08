@@ -20,7 +20,7 @@ class ProductFiltersKey(BaseSchema):
     # Catalog swagger.json
 
     
-    display = fields.Str(required=False)
+    operators = fields.List(fields.Str(required=False), required=False)
     
     name = fields.Str(required=False)
     
@@ -28,6 +28,6 @@ class ProductFiltersKey(BaseSchema):
     
     kind = fields.Str(required=False)
     
-    operators = fields.List(fields.Str(required=False), required=False)
+    display = fields.Str(required=False)
     
 

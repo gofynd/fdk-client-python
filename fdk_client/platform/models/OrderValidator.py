@@ -341,7 +341,7 @@ class OrderValidator:
         report_type = fields.Str(required=False)
          
     
-    class getPlatformShipmentReasons(BaseSchema):
+    class getShipmentReasons(BaseSchema):
         
         company_id = fields.Int(required=False)
         
@@ -362,6 +362,40 @@ class OrderValidator:
         company_id = fields.Str(required=False)
         
         batch_id = fields.Str(required=False)
+         
+    
+    class getBagById(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        bag_id = fields.Str(required=False)
+        
+        channel_bag_id = fields.Str(required=False)
+        
+        channel_id = fields.Str(required=False)
+         
+    
+    class getBags(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        bag_ids = fields.Str(required=False)
+        
+        shipment_ids = fields.Str(required=False)
+        
+        order_ids = fields.Str(required=False)
+        
+        channel_bag_ids = fields.Str(required=False)
+        
+        channel_shipment_ids = fields.Str(required=False)
+        
+        channel_order_ids = fields.Str(required=False)
+        
+        channel_id = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
          
     
     class invalidateShipmentCache(BaseSchema):

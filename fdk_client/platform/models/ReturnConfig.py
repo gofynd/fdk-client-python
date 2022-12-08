@@ -13,7 +13,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class ReturnConfig(BaseSchema):
-    # Catalog swagger.json
+    # Order swagger.json
 
     
     returnable = fields.Boolean(required=False)

@@ -20,9 +20,9 @@ class ProductStockUnitPriceV2(BaseSchema):
     
     currency_code = fields.Str(required=False)
     
-    currency_symbol = fields.Str(required=False)
-    
     price = fields.Float(required=False)
+    
+    currency_symbol = fields.Str(required=False)
     
     unit = fields.Str(required=False)
     

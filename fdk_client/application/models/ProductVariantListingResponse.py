@@ -26,8 +26,8 @@ class ProductVariantListingResponse(BaseSchema):
     
     key = fields.Str(required=False)
     
-    total = fields.Int(required=False)
-    
     header = fields.Str(required=False)
+    
+    total = fields.Int(required=False)
     
 
