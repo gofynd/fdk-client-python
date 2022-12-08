@@ -25,7 +25,7 @@ class Tax(BaseSchema):
     
     name = fields.Str(required=False)
     
-    breakup = fields.List(fields.Dict(required=False), required=False)
-    
     amount = fields.Dict(required=False)
+    
+    breakup = fields.List(fields.Dict(required=False), required=False)
     

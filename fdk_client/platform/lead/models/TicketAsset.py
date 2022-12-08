@@ -25,5 +25,5 @@ class TicketAsset(BaseSchema):
     
     value = fields.Str(required=False)
     
-    type = fields.Nested(TicketAssetTypeEnum, required=False)
+    type = fields.Str(required=False, validate=OneOf([val.value for val in TicketAssetTypeEnum.__members__.values()]))
     

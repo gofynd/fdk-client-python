@@ -23,9 +23,9 @@ class ManifestDetailItem(BaseSchema):
     #  swagger.json
 
     
-    invoice_id = fields.Str(required=False)
-    
     item_qty = fields.Int(required=False)
+    
+    invoice_id = fields.Str(required=False)
     
     order_id = fields.Str(required=False)
     

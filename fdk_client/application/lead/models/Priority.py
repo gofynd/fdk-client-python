@@ -21,7 +21,7 @@ class Priority(BaseSchema):
     #  swagger.json
 
     
-    key = fields.Nested(PriorityEnum, required=False)
+    key = fields.Str(required=False, validate=OneOf([val.value for val in PriorityEnum.__members__.values()]))
     
     display = fields.Str(required=False)
     

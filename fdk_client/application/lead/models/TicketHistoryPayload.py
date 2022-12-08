@@ -21,5 +21,5 @@ class TicketHistoryPayload(BaseSchema):
     
     value = fields.Dict(required=False)
     
-    type = fields.Nested(HistoryTypeEnum, required=False)
+    type = fields.Str(required=False, validate=OneOf([val.value for val in HistoryTypeEnum.__members__.values()]))
     

@@ -9,9 +9,9 @@ from ...ApplicationModel import BaseSchema
 
 
 
-
-
 from .SharedCart import SharedCart
+
+
 
 
 
@@ -19,7 +19,7 @@ class SharedCartResponse(BaseSchema):
     #  swagger.json
 
     
-    error = fields.Str(required=False)
-    
     cart = fields.Nested(SharedCart, required=False)
+    
+    error = fields.Str(required=False)
     

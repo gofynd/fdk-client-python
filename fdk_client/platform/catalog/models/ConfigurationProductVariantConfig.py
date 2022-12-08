@@ -11,9 +11,9 @@ from ...PlatformModel import BaseSchema
 
 
 
+
+
 from .ProductSize import ProductSize
-
-
 
 
 
@@ -31,9 +31,9 @@ class ConfigurationProductVariantConfig(BaseSchema):
     
     priority = fields.Int(required=False)
     
-    size = fields.Nested(ProductSize, required=False)
+    key = fields.Str(required=False)
     
-    logo = fields.Str(required=False)
+    size = fields.Nested(ProductSize, required=False)
     
     display_type = fields.Str(required=False)
     
@@ -41,5 +41,5 @@ class ConfigurationProductVariantConfig(BaseSchema):
     
     name = fields.Str(required=False)
     
-    key = fields.Str(required=False)
+    logo = fields.Str(required=False)
     

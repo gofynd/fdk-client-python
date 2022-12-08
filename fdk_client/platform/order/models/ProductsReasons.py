@@ -9,7 +9,11 @@ from ...PlatformModel import BaseSchema
 
 
 
+from .ProductsReasonsData import ProductsReasonsData
 
+
+
+from .ProductsReasonsFilters import ProductsReasonsFilters
 
 
 
@@ -17,7 +21,7 @@ class ProductsReasons(BaseSchema):
     #  swagger.json
 
     
-    filters = fields.List(fields.Dict(required=False), required=False)
+    data = fields.Nested(ProductsReasonsData, required=False)
     
-    data = fields.Dict(required=False)
+    filters = fields.List(fields.Nested(ProductsReasonsFilters, required=False), required=False)
     

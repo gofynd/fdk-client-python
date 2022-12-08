@@ -9,11 +9,11 @@ from ...ApplicationModel import BaseSchema
 
 
 
-from .GetCollectionDetailNest import GetCollectionDetailNest
-
-
-
 from .Page import Page
+
+
+
+from .GetCollectionDetailNest import GetCollectionDetailNest
 
 
 
@@ -25,9 +25,9 @@ class GetCollectionListingResponse(BaseSchema):
     #  swagger.json
 
     
-    items = fields.List(fields.Nested(GetCollectionDetailNest, required=False), required=False)
-    
     page = fields.Nested(Page, required=False)
+    
+    items = fields.List(fields.Nested(GetCollectionDetailNest, required=False), required=False)
     
     filters = fields.Nested(CollectionListingFilter, required=False)
     

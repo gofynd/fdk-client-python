@@ -9,13 +9,15 @@ from ...ApplicationModel import BaseSchema
 
 
 
-from .CreateOrderConfig import CreateOrderConfig
 
 
 
-class CreateOrderConfigData(BaseSchema):
+
+class ProductsDataUpdatesFilters(BaseSchema):
     #  swagger.json
 
     
-    config_data = fields.Nested(CreateOrderConfig, required=False)
+    identifier = fields.Str(required=False)
+    
+    line_number = fields.Int(required=False)
     

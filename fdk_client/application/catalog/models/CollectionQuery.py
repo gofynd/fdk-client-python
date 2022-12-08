@@ -21,7 +21,7 @@ class CollectionQuery(BaseSchema):
     
     value = fields.List(fields.Raw(required=False), required=False)
     
-    attribute = fields.Str(required=False)
-    
     op = fields.Str(required=False)
+    
+    attribute = fields.Str(required=False)
     

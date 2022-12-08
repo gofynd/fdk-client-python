@@ -55,7 +55,7 @@ class SubscriberResponse(BaseSchema):
     
     email_id = fields.Str(required=False)
     
-    status = fields.Nested(SubscriberStatus, required=False)
+    status = fields.Str(required=False, validate=OneOf([val.value for val in SubscriberStatus.__members__.values()]))
     
     auth_meta = fields.Nested(AuthMeta, required=False)
     

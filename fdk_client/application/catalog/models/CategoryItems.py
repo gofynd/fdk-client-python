@@ -15,15 +15,15 @@ from .ImageUrls import ImageUrls
 
 
 
-
-
-from .Child import Child
-
-
-
 from .ProductListingAction import ProductListingAction
 
 
+
+
+
+
+
+from .Child import Child
 
 
 
@@ -33,13 +33,13 @@ class CategoryItems(BaseSchema):
     
     banners = fields.Nested(ImageUrls, required=False)
     
-    uid = fields.Int(required=False)
-    
     slug = fields.Str(required=False)
-    
-    childs = fields.List(fields.Nested(Child, required=False), required=False)
     
     action = fields.Nested(ProductListingAction, required=False)
     
     name = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
+    
+    childs = fields.List(fields.Nested(Child, required=False), required=False)
     

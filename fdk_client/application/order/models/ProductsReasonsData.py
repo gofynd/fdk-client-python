@@ -11,9 +11,13 @@ from ...ApplicationModel import BaseSchema
 
 
 
-class CreateOrderConifgErrorResponse(BaseSchema):
+
+
+class ProductsReasonsData(BaseSchema):
     #  swagger.json
 
     
-    error = fields.Str(required=False)
+    reason_text = fields.Str(required=False)
+    
+    reason_id = fields.Int(required=False)
     

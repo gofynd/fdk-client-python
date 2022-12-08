@@ -47,7 +47,7 @@ class SubscriberConfig(BaseSchema):
     
     custom_headers = fields.Dict(required=False)
     
-    status = fields.Nested(SubscriberStatus, required=False)
+    status = fields.Str(required=False, validate=OneOf([val.value for val in SubscriberStatus.__members__.values()]))
     
     email_id = fields.Str(required=False)
     

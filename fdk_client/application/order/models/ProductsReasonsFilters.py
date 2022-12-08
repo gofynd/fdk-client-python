@@ -15,13 +15,13 @@ from ...ApplicationModel import BaseSchema
 
 
 
-class createOrderConfigResponse(BaseSchema):
+class ProductsReasonsFilters(BaseSchema):
     #  swagger.json
 
     
-    is_inserted = fields.Boolean(required=False)
+    identifier = fields.Str(required=False)
     
-    acknowledged = fields.Boolean(required=False)
+    quantity = fields.Int(required=False)
     
-    is_upserted = fields.Boolean(required=False)
+    line_number = fields.Int(required=False)
     

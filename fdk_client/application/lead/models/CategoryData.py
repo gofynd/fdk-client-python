@@ -9,7 +9,7 @@ from ...ApplicationModel import BaseSchema
 
 
 
-from .CategorySchema import CategorySchema
+from .TicketCategory import TicketCategory
 
 
 
@@ -17,5 +17,5 @@ class CategoryData(BaseSchema):
     #  swagger.json
 
     
-    list = fields.Nested(CategorySchema, required=False)
+    list = fields.Nested(TicketCategory, required=False)
     

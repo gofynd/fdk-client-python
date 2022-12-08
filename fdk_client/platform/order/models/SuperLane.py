@@ -23,11 +23,11 @@ class SuperLane(BaseSchema):
     #  swagger.json
 
     
-    value = fields.Str(required=False)
+    total_items = fields.Int(required=False)
     
     options = fields.List(fields.Nested(SubLane, required=False), required=False)
     
-    total_items = fields.Int(required=False)
-    
     text = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
     

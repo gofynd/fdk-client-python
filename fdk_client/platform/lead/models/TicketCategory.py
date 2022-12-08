@@ -13,15 +13,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .CustomForm import CustomForm
 
 
 
-from .TicketSubCategory import TicketSubCategory
 
-
-
-from .TicketFeedbackForm import TicketFeedbackForm
+from .FeedbackForm import FeedbackForm
 
 
 
@@ -29,13 +25,13 @@ class TicketCategory(BaseSchema):
     #  swagger.json
 
     
-    key = fields.Str(required=False)
-    
     display = fields.Str(required=False)
     
-    form = fields.Nested(CustomForm, required=False)
+    key = fields.Str(required=False)
     
-    sub_categories = fields.List(fields.Nested(TicketSubCategory, required=False), required=False)
+    sub_categories = fields.Nested(lambda: TicketCategory(exclude=('sub_categories')), required=False)
     
-    feedback_form = fields.Nested(TicketFeedbackForm, required=False)
+    group_id = fields.Float(required=False)
+    
+    feedback_form = fields.Nested(FeedbackForm, required=False)
     

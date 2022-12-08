@@ -54,8 +54,6 @@ from ..ApplicationModel import BaseSchema
     
     
         
-    
-    
 
 class OrderValidator:
     
@@ -160,16 +158,6 @@ class OrderValidator:
         
         shipment_id = fields.Str(required=False)
          
-        
-    
-    class getChannelConfig(BaseSchema):
-        
-        pass 
-        
-    
-    class createChannelConfig(BaseSchema):
-        
-        pass 
         
     
     

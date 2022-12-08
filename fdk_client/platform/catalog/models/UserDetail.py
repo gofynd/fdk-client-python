@@ -23,9 +23,9 @@ class UserDetail(BaseSchema):
     
     username = fields.Str(required=False)
     
-    contact = fields.Str(required=False)
-    
     user_id = fields.Str(required=False)
+    
+    contact = fields.Str(required=False)
     
     super_user = fields.Boolean(required=False)
     

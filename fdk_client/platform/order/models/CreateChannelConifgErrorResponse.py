@@ -9,13 +9,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .StatuesResponse import StatuesResponse
 
 
-
-class StatusUpdateInternalResponse(BaseSchema):
+class CreateChannelConifgErrorResponse(BaseSchema):
     #  swagger.json
 
     
-    statuses = fields.List(fields.Nested(StatuesResponse, required=False), required=False)
+    error = fields.Str(required=False)
     

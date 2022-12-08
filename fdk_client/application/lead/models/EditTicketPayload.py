@@ -45,7 +45,7 @@ class EditTicketPayload(BaseSchema):
     
     status = fields.Str(required=False)
     
-    priority = fields.Nested(PriorityEnum, required=False)
+    priority = fields.Str(required=False, validate=OneOf([val.value for val in PriorityEnum.__members__.values()]))
     
     assigned_to = fields.Nested(AgentChangePayload, required=False)
     

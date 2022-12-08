@@ -25,11 +25,11 @@ class ShipmentStatusData(BaseSchema):
     
     bag_list = fields.List(fields.Int(required=False), required=False)
     
-    id = fields.Int(required=False)
-    
     status = fields.Str(required=False)
+    
+    created_at = fields.Str(required=False)
     
     shipment_id = fields.Str(required=False)
     
-    created_at = fields.Str(required=False)
+    id = fields.Int(required=False)
     

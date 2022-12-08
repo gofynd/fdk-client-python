@@ -1,23 +1,23 @@
 """companyprofile Platform Models and Enums"""
 
 
+from .CompanyTaxesSerializer import CompanyTaxesSerializer
+
+from .Document import Document
+
+from .BusinessCountryInfo import BusinessCountryInfo
+
 from .SellerPhoneNumber import SellerPhoneNumber
 
 from .ContactDetails import ContactDetails
+
+from .GetAddressSerializer import GetAddressSerializer
 
 from .UserSerializer import UserSerializer
 
 from .Website import Website
 
 from .BusinessDetails import BusinessDetails
-
-from .BusinessCountryInfo import BusinessCountryInfo
-
-from .Document import Document
-
-from .GetAddressSerializer import GetAddressSerializer
-
-from .CompanyTaxesSerializer import CompanyTaxesSerializer
 
 from .GetCompanyProfileSerializerResponse import GetCompanyProfileSerializerResponse
 
@@ -55,19 +55,19 @@ from .CompanyBrandListSerializer import CompanyBrandListSerializer
 
 from .CompanyBrandPostRequestSerializer import CompanyBrandPostRequestSerializer
 
-from .LocationManagerSerializer import LocationManagerSerializer
+from .LocationTimingSerializer import LocationTimingSerializer
 
-from .ProductReturnConfigSerializer import ProductReturnConfigSerializer
+from .LocationDayWiseSerializer import LocationDayWiseSerializer
 
 from .InvoiceCredSerializer import InvoiceCredSerializer
 
 from .InvoiceDetailsSerializer import InvoiceDetailsSerializer
 
-from .LocationTimingSerializer import LocationTimingSerializer
-
-from .LocationDayWiseSerializer import LocationDayWiseSerializer
+from .LocationManagerSerializer import LocationManagerSerializer
 
 from .GetCompanySerializer import GetCompanySerializer
+
+from .ProductReturnConfigSerializer import ProductReturnConfigSerializer
 
 from .GetLocationSerializer import GetLocationSerializer
 

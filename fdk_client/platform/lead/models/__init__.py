@@ -61,10 +61,6 @@ from .Priority import Priority
 
 from .Status import Status
 
-from .TicketCategory import TicketCategory
-
-from .TicketSubCategory import TicketSubCategory
-
 from .TicketFeedbackForm import TicketFeedbackForm
 
 from .TicketFeedbackList import TicketFeedbackList
@@ -83,7 +79,9 @@ from .SupportGeneralConfig import SupportGeneralConfig
 
 from .FeedbackForm import FeedbackForm
 
-from .CategorySchema import CategorySchema
+from .TicketSubCategory import TicketSubCategory
+
+from .TicketCategory import TicketCategory
 
 from .CategoryData import CategoryData
 
@@ -106,3 +104,5 @@ from .HistoryTypeEnum import HistoryTypeEnum
 from .TicketAssetTypeEnum import TicketAssetTypeEnum
 
 from .TicketSourceEnum import TicketSourceEnum
+
+from .TicketIntegrationDetails import TicketIntegrationDetails

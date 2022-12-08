@@ -25,11 +25,7 @@ from .TicketContent import TicketContent
 
 
 
-from .TicketCategory import TicketCategory
 
-
-
-from .TicketSubCategory import TicketSubCategory
 
 
 
@@ -77,11 +73,11 @@ class Ticket(BaseSchema):
     
     ticket_id = fields.Str(required=False)
     
-    category = fields.Nested(TicketCategory, required=False)
+    category = fields.Str(required=False)
     
-    sub_category = fields.Nested(TicketSubCategory, required=False)
+    sub_category = fields.Str(required=False)
     
-    source = fields.Nested(TicketSourceEnum, required=False)
+    source = fields.Str(required=False, validate=OneOf([val.value for val in TicketSourceEnum.__members__.values()]))
     
     status = fields.Nested(Status, required=False)
     

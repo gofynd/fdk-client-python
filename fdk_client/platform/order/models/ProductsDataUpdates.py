@@ -11,13 +11,15 @@ from ...PlatformModel import BaseSchema
 
 
 
+from .ProductsDataUpdatesFilters import ProductsDataUpdatesFilters
+
 
 
 class ProductsDataUpdates(BaseSchema):
     #  swagger.json
 
     
-    filters = fields.List(fields.Dict(required=False), required=False)
-    
     data = fields.Dict(required=False)
+    
+    filters = fields.List(fields.Nested(ProductsDataUpdatesFilters, required=False), required=False)
     
