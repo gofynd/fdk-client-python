@@ -216,25 +216,23 @@ from .ProductSizeSellersResponseV2 import ProductSizeSellersResponseV2
     
 
     
+from .ProductPrice import ProductPrice
+    
+from .ProductPriceInfo import ProductPriceInfo
+    
 from .PromoMeta import PromoMeta
     
 from .ProductImage import ProductImage
-    
-from .BaseInfo import BaseInfo
     
 from .ActionQuery import ActionQuery
     
 from .ProductAction import ProductAction
     
+from .BaseInfo import BaseInfo
+    
 from .CategoryInfo import CategoryInfo
     
 from .CartProduct import CartProduct
-    
-from .ProductPrice import ProductPrice
-    
-from .ProductPriceInfo import ProductPriceInfo
-    
-from .ProductAvailability import ProductAvailability
     
 from .FreeGiftItem import FreeGiftItem
     
@@ -246,35 +244,37 @@ from .BuyRules import BuyRules
     
 from .AppliedPromotion import AppliedPromotion
     
-from .CartProductIdentifer import CartProductIdentifer
-    
 from .BasePrice import BasePrice
     
 from .ArticlePriceInfo import ArticlePriceInfo
     
 from .ProductArticle import ProductArticle
     
+from .ProductAvailability import ProductAvailability
+    
+from .CartProductIdentifer import CartProductIdentifer
+    
 from .CartProductInfo import CartProductInfo
+    
+from .CartCurrency import CartCurrency
+    
+from .PromiseFormatted import PromiseFormatted
+    
+from .PromiseTimestamp import PromiseTimestamp
+    
+from .ShipmentPromise import ShipmentPromise
+    
+from .PaymentSelectionLock import PaymentSelectionLock
+    
+from .DisplayBreakup import DisplayBreakup
+    
+from .LoyaltyPoints import LoyaltyPoints
     
 from .CouponBreakup import CouponBreakup
     
 from .RawBreakup import RawBreakup
     
-from .LoyaltyPoints import LoyaltyPoints
-    
-from .DisplayBreakup import DisplayBreakup
-    
 from .CartBreakup import CartBreakup
-    
-from .CartCurrency import CartCurrency
-    
-from .PaymentSelectionLock import PaymentSelectionLock
-    
-from .PromiseTimestamp import PromiseTimestamp
-    
-from .PromiseFormatted import PromiseFormatted
-    
-from .ShipmentPromise import ShipmentPromise
     
 from .CartDetailResponse import CartDetailResponse
     
@@ -336,9 +336,9 @@ from .ShipmentResponse import ShipmentResponse
     
 from .CartShipmentsResponse import CartShipmentsResponse
     
-from .CustomerDetails import CustomerDetails
-    
 from .StaffCheckout import StaffCheckout
+    
+from .CustomerDetails import CustomerDetails
     
 from .CartCheckoutDetailRequest import CartCheckoutDetailRequest
     
@@ -370,13 +370,13 @@ from .PromotionOffersResponse import PromotionOffersResponse
     
 from .OperationErrorResponse import OperationErrorResponse
     
+from .CurrencyInfo import CurrencyInfo
+    
 from .LadderPrice import LadderPrice
     
 from .LadderOfferItem import LadderOfferItem
     
 from .LadderPriceOffer import LadderPriceOffer
-    
-from .CurrencyInfo import CurrencyInfo
     
 from .LadderPriceOffers import LadderPriceOffers
     
@@ -1304,9 +1304,9 @@ from .PaymentFlow import PaymentFlow
     
 from .PaymentModeLogo import PaymentModeLogo
     
-from .IntentApp import IntentApp
-    
 from .IntentAppErrorList import IntentAppErrorList
+    
+from .IntentApp import IntentApp
     
 from .PaymentModeList import PaymentModeList
     
@@ -1420,13 +1420,13 @@ from .CreditDetail import CreditDetail
     
 from .CheckCreditResponse import CheckCreditResponse
     
-from .MarketplaceInfo import MarketplaceInfo
-    
 from .KYCAddress import KYCAddress
     
 from .UserPersonalInfoInDetails import UserPersonalInfoInDetails
     
 from .BusinessDetails import BusinessDetails
+    
+from .MarketplaceInfo import MarketplaceInfo
     
 from .DeviceDetails import DeviceDetails
     
@@ -1438,43 +1438,19 @@ from .CustomerOnboardingResponse import CustomerOnboardingResponse
     
 
     
-from .OrderPage import OrderPage
-    
-from .UserInfo import UserInfo
-    
-from .ShipmentStatus import ShipmentStatus
-    
-from .ShipmentUserInfo import ShipmentUserInfo
-    
-from .NestedTrackingDetails import NestedTrackingDetails
-    
-from .TrackingDetails import TrackingDetails
-    
-from .ShipmentTotalDetails import ShipmentTotalDetails
-    
-from .FulfillingCompany import FulfillingCompany
-    
 from .Prices import Prices
-    
-from .FulfillingStore import FulfillingStore
     
 from .Invoice import Invoice
     
-from .TimeStampData import TimeStampData
-    
-from .Promise import Promise
-    
 from .DeliveryAddress import DeliveryAddress
     
-from .ShipmentPayment import ShipmentPayment
-    
-from .CurrentStatus import CurrentStatus
+from .AppliedPromos import AppliedPromos
     
 from .Identifiers import Identifiers
     
 from .FinancialBreakup import FinancialBreakup
     
-from .AppliedPromos import AppliedPromos
+from .CurrentStatus import CurrentStatus
     
 from .ItemBrand import ItemBrand
     
@@ -1482,15 +1458,39 @@ from .Item import Item
     
 from .Bags import Bags
     
+from .ShipmentStatus import ShipmentStatus
+    
+from .FulfillingStore import FulfillingStore
+    
+from .TimeStampData import TimeStampData
+    
+from .Promise import Promise
+    
+from .ShipmentUserInfo import ShipmentUserInfo
+    
+from .NestedTrackingDetails import NestedTrackingDetails
+    
+from .TrackingDetails import TrackingDetails
+    
+from .ShipmentPayment import ShipmentPayment
+    
 from .BreakupValues import BreakupValues
     
+from .FulfillingCompany import FulfillingCompany
+    
+from .ShipmentTotalDetails import ShipmentTotalDetails
+    
 from .Shipments import Shipments
+    
+from .UserInfo import UserInfo
     
 from .BagsForReorderArticleAssignment import BagsForReorderArticleAssignment
     
 from .BagsForReorder import BagsForReorder
     
 from .OrderSchema import OrderSchema
+    
+from .OrderPage import OrderPage
     
 from .OrderStatuses import OrderStatuses
     

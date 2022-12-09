@@ -22,15 +22,15 @@ class ManifestPage(BaseSchema):
     # Order swagger.json
 
     
-    has_next = fields.Boolean(required=False)
-    
     total = fields.Int(required=False)
+    
+    size = fields.Str(required=False)
     
     has_previous = fields.Boolean(required=False)
     
-    current = fields.Str(required=False)
+    has_next = fields.Boolean(required=False)
     
-    size = fields.Str(required=False)
+    current = fields.Str(required=False)
     
     type = fields.Str(required=False)
     
