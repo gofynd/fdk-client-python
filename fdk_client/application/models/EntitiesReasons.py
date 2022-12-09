@@ -7,15 +7,15 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
+from .EntityReasonData import EntityReasonData
 
 
 class EntitiesReasons(BaseSchema):
     # Order swagger.json
 
     
-    data = fields.Dict(required=False)
-    
     filters = fields.List(fields.Dict(required=False), required=False)
+    
+    data = fields.Nested(EntityReasonData, required=False)
     
 

@@ -5,17 +5,17 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .ProductsReasonsData import ProductsReasonsData
 
-
-
+from .ProductsReasonsFilters import ProductsReasonsFilters
 
 
 class ProductsReasons(BaseSchema):
     # OrderManage swagger.json
 
     
-    data = fields.Dict(required=False)
+    data = fields.Nested(ProductsReasonsData, required=False)
     
-    filters = fields.List(fields.Dict(required=False), required=False)
+    filters = fields.List(fields.Nested(ProductsReasonsFilters, required=False), required=False)
     
 

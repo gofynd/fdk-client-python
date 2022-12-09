@@ -14,8 +14,8 @@ class PlatformChannel(BaseSchema):
     # Orders swagger.json
 
     
-    name = fields.Str(required=False)
-    
     logo = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
     
 

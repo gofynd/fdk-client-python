@@ -9,9 +9,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 from .FyndOrderIdList import FyndOrderIdList
-
-
 
 
 class OrderStatus(BaseSchema):
@@ -20,10 +20,10 @@ class OrderStatus(BaseSchema):
     
     end_date = fields.Str(required=False)
     
+    start_date = fields.Str(required=False)
+    
     mobile = fields.Int(required=False)
     
     order_details = fields.List(fields.Nested(FyndOrderIdList, required=False), required=False)
-    
-    start_date = fields.Str(required=False)
     
 

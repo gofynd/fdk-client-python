@@ -1,4 +1,4 @@
-"""Application Models."""
+"""Platform Models."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -12,14 +12,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class createOrderConfigResponse(BaseSchema):
-    # Order swagger.json
+class CreateChannelConfigResponse(BaseSchema):
+    # OrderManage swagger.json
 
-    
-    is_inserted = fields.Boolean(required=False)
     
     acknowledged = fields.Boolean(required=False)
     
     is_upserted = fields.Boolean(required=False)
+    
+    is_inserted = fields.Boolean(required=False)
     
 

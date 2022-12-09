@@ -73,12 +73,17 @@ class OrderManageValidator:
         company_id = fields.Int(required=False)
          
     
-    class statusUpdateInternalV4(BaseSchema):
+    class updateShipmentStatus(BaseSchema):
         
         company_id = fields.Int(required=False)
          
     
     class processManifest(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    
+    class dispatchManifest(BaseSchema):
         
         company_id = fields.Int(required=False)
          
@@ -113,6 +118,21 @@ class OrderManageValidator:
          
     
     class createOrder(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    
+    class createChannelConfig(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    
+    class getChannelConfig(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    
+    class uploadConsent(BaseSchema):
         
         company_id = fields.Int(required=False)
          

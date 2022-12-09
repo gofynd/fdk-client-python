@@ -28,15 +28,13 @@ class OrderDetailsData(BaseSchema):
     # Orders swagger.json
 
     
-    affiliate_id = fields.Str(required=False)
-    
     source = fields.Str(required=False)
     
-    order_date = fields.Str(required=False)
-    
-    ordering_channel_logo = fields.Dict(required=False)
-    
     ordering_channel = fields.Str(required=False)
+    
+    affiliate_id = fields.Str(required=False)
+    
+    fynd_order_id = fields.Str(required=False)
     
     tax_details = fields.Dict(required=False)
     
@@ -44,6 +42,8 @@ class OrderDetailsData(BaseSchema):
     
     order_value = fields.Str(required=False)
     
-    fynd_order_id = fields.Str(required=False)
+    order_date = fields.Str(required=False)
+    
+    ordering_channel_logo = fields.Dict(required=False)
     
 

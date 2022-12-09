@@ -1,4 +1,4 @@
-"""Application Models."""
+"""Platform Models."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -13,7 +13,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class PaymentMethods(BaseSchema):
-    # Order swagger.json
+    # OrderManage swagger.json
 
     
     mode = fields.Str(required=False)

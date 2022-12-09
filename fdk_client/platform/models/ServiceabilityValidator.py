@@ -7,6 +7,13 @@ from ..models.BaseSchema import BaseSchema
 
 class ServiceabilityValidator:
     
+    class postApplicationServiceability(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+    
     class getApplicationServiceability(BaseSchema):
         
         company_id = fields.Str(required=False)

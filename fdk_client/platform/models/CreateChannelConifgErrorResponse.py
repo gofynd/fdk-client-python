@@ -1,4 +1,4 @@
-"""Application Models."""
+"""Platform Models."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -8,10 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class DpConfiguration(BaseSchema):
-    # Order swagger.json
+class CreateChannelConifgErrorResponse(BaseSchema):
+    # OrderManage swagger.json
 
     
-    shipping_by = fields.Str(required=False)
+    error = fields.Str(required=False)
     
 

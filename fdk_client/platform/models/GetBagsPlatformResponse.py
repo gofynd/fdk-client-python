@@ -5,17 +5,17 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .BagDetailsPlatformResponse import BagDetailsPlatformResponse
-
 from .Page1 import Page1
+
+from .BagDetailsPlatformResponse import BagDetailsPlatformResponse
 
 
 class GetBagsPlatformResponse(BaseSchema):
     # Orders swagger.json
 
     
-    items = fields.List(fields.Nested(BagDetailsPlatformResponse, required=False), required=False)
-    
     page = fields.Nested(Page1, required=False)
+    
+    items = fields.List(fields.Nested(BagDetailsPlatformResponse, required=False), required=False)
     
 

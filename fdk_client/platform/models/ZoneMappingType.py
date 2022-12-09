@@ -18,8 +18,8 @@ class ZoneMappingType(BaseSchema):
     
     pincode = fields.List(fields.Str(required=False), required=False)
     
-    country = fields.Str(required=False)
-    
     state = fields.List(fields.Str(required=False), required=False)
+    
+    country = fields.Str(required=False)
     
 

@@ -7,7 +7,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
+from .ProductsDataUpdatesFilters import ProductsDataUpdatesFilters
 
 
 class ProductsDataUpdates(BaseSchema):
@@ -16,6 +16,6 @@ class ProductsDataUpdates(BaseSchema):
     
     data = fields.Dict(required=False)
     
-    filters = fields.List(fields.Dict(required=False), required=False)
+    filters = fields.List(fields.Nested(ProductsDataUpdatesFilters, required=False), required=False)
     
 

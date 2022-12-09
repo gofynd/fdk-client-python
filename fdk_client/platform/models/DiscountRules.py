@@ -14,8 +14,8 @@ class DiscountRules(BaseSchema):
     # Orders swagger.json
 
     
-    type = fields.Str(required=False)
-    
     value = fields.Int(required=False)
+    
+    type = fields.Str(required=False)
     
 
