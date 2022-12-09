@@ -12,11 +12,19 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
+
+
 class PaymentStatusUpdateResponse(BaseSchema):
     # Payment swagger.json
 
     
     retry = fields.Boolean(required=False)
+    
+    redirect_url = fields.Str(required=False)
+    
+    success = fields.Boolean(required=False)
     
     status = fields.Str(required=False)
     

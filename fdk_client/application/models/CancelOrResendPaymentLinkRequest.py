@@ -5,13 +5,13 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .CreateOrderConfig import CreateOrderConfig
 
 
-class CreateOrderConfigData(BaseSchema):
-    # Order swagger.json
+
+class CancelOrResendPaymentLinkRequest(BaseSchema):
+    # Payment swagger.json
 
     
-    config_data = fields.Nested(CreateOrderConfig, required=False)
+    payment_link_id = fields.Str(required=False)
     
 

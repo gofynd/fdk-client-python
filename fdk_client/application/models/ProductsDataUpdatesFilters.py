@@ -8,10 +8,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class DpConfiguration(BaseSchema):
+
+
+class ProductsDataUpdatesFilters(BaseSchema):
     # Order swagger.json
 
     
-    shipping_by = fields.Str(required=False)
+    identifier = fields.Str(required=False)
+    
+    line_number = fields.Int(required=False)
     
 

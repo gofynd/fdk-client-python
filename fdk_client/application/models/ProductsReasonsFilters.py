@@ -8,10 +8,18 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class CreateOrderConifgErrorResponse(BaseSchema):
+
+
+
+
+class ProductsReasonsFilters(BaseSchema):
     # Order swagger.json
 
     
-    error = fields.Str(required=False)
+    quantity = fields.Int(required=False)
+    
+    identifier = fields.Str(required=False)
+    
+    line_number = fields.Int(required=False)
     
 

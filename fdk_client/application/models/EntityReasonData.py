@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class createOrderConfigResponse(BaseSchema):
+class EntityReasonData(BaseSchema):
     # Order swagger.json
 
     
-    is_upserted = fields.Boolean(required=False)
+    reason_text = fields.Str(required=False)
     
-    acknowledged = fields.Boolean(required=False)
-    
-    is_inserted = fields.Boolean(required=False)
+    reason_id = fields.Int(required=False)
     
 

@@ -7,7 +7,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
+from .EntityReasonData import EntityReasonData
 
 
 class EntitiesReasons(BaseSchema):
@@ -16,6 +16,6 @@ class EntitiesReasons(BaseSchema):
     
     filters = fields.List(fields.Dict(required=False), required=False)
     
-    data = fields.Dict(required=False)
+    data = fields.Nested(EntityReasonData, required=False)
     
 

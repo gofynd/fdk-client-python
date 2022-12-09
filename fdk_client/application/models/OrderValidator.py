@@ -85,14 +85,6 @@ class OrderValidator:
         shipment_id = fields.Str(required=False)
          
     
-    class createChannelConfig(BaseSchema):
-        
-        pass 
-    
-    class getChannelConfig(BaseSchema):
-        
-        pass 
-    
     class getInvoiceByShipmentId1(BaseSchema):
         
         shipment_id = fields.Str(required=False)

@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class PaymentMethods(BaseSchema):
+class ProductsReasonsData(BaseSchema):
     # Order swagger.json
 
     
-    refund_by = fields.Str(required=False)
+    reason_text = fields.Str(required=False)
     
-    collect_by = fields.Str(required=False)
-    
-    mode = fields.Str(required=False)
+    reason_id = fields.Int(required=False)
     
 

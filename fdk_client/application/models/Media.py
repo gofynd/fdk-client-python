@@ -18,9 +18,9 @@ class Media(BaseSchema):
     # Catalog swagger.json
 
     
-    alt = fields.Str(required=False)
-    
     url = fields.Str(required=False)
+    
+    alt = fields.Str(required=False)
     
     meta = fields.Nested(Meta, required=False)
     

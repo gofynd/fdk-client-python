@@ -18,12 +18,12 @@ class InvalidateShipmentCacheNestedResponse(BaseSchema):
     # Order swagger.json
 
     
-    message = fields.Str(required=False)
-    
     shipment_id = fields.Str(required=False)
     
-    status = fields.Int(required=False)
+    message = fields.Str(required=False)
     
     error = fields.Str(required=False)
+    
+    status = fields.Int(required=False)
     
 

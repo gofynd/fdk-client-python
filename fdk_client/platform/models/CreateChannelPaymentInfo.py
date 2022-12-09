@@ -16,9 +16,9 @@ class CreateChannelPaymentInfo(BaseSchema):
     # Order swagger.json
 
     
-    source = fields.Str(required=False)
-    
     mode_of_payment = fields.Str(required=False)
+    
+    source = fields.Str(required=False)
     
     payment_methods = fields.List(fields.Nested(PaymentMethods, required=False), required=False)
     

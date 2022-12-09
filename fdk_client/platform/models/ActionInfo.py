@@ -20,9 +20,9 @@ class ActionInfo(BaseSchema):
     
     description = fields.Str(required=False)
     
-    slug = fields.Str(required=False)
-    
     display_text = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
     
     id = fields.Int(required=False)
     
