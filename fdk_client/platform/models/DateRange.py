@@ -14,8 +14,8 @@ class DateRange(BaseSchema):
     # Orders swagger.json
 
     
-    from_date = fields.Str(required=False)
-    
     to_date = fields.Str(required=False)
+    
+    from_date = fields.Str(required=False)
     
 

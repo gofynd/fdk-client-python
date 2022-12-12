@@ -10,7 +10,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class TimeStamp(BaseSchema):
+class ShipmentTimeStamp(BaseSchema):
     # Orders swagger.json
 
     

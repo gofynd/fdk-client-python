@@ -18,9 +18,9 @@ class UpdateShipmentLockPayload(BaseSchema):
     # OrderManage swagger.json
 
     
-    entity_type = fields.Str(required=False)
-    
     action = fields.Str(required=False)
+    
+    entity_type = fields.Str(required=False)
     
     entities = fields.List(fields.Nested(Entities, required=False), required=False)
     

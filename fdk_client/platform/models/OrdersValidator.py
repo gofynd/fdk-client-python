@@ -7,7 +7,7 @@ from ..models.BaseSchema import BaseSchema
 
 class OrdersValidator:
     
-    class getShipmentList(BaseSchema):
+    class getShipments(BaseSchema):
         
         company_id = fields.Int(required=False)
         
@@ -37,16 +37,24 @@ class OrdersValidator:
         
         page_size = fields.Int(required=False)
         
-        customer_id = fields.Str(required=False)
-        
         is_priority_sort = fields.Boolean(required=False)
         
         exclude_locked_shipments = fields.Boolean(required=False)
+        
+        payment_methods = fields.Str(required=False)
+        
+        channel_shipment_id = fields.Str(required=False)
+        
+        channel_order_id = fields.Str(required=False)
+        
+        custom_meta = fields.Str(required=False)
          
     
-    class getShipmentDetails(BaseSchema):
+    class getShipmentById(BaseSchema):
         
         company_id = fields.Int(required=False)
+        
+        channel_shipment_id = fields.Str(required=False)
         
         shipment_id = fields.Str(required=False)
         
@@ -55,7 +63,7 @@ class OrdersValidator:
         request_by_ext = fields.Str(required=False)
          
     
-    class getOrderShipmentDetails(BaseSchema):
+    class getOrderById(BaseSchema):
         
         company_id = fields.Int(required=False)
         
@@ -145,6 +153,8 @@ class OrdersValidator:
         page_size = fields.Int(required=False)
         
         is_priority_sort = fields.Boolean(required=False)
+        
+        custom_meta = fields.Str(required=False)
          
     
     class getMetricCount(BaseSchema):
@@ -341,7 +351,7 @@ class OrdersValidator:
         report_type = fields.Str(required=False)
          
     
-    class getPlatformShipmentReasons(BaseSchema):
+    class getShipmentReasons(BaseSchema):
         
         company_id = fields.Int(required=False)
         
