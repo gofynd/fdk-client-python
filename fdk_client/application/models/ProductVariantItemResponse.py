@@ -11,19 +11,17 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
+
+
 from .ProductListingAction import ProductListingAction
 
 
 
 
 
-
-
 from .Media import Media
-
-from .CustomMetaFields import CustomMetaFields
-
-
 
 
 class ProductVariantItemResponse(BaseSchema):
@@ -34,20 +32,18 @@ class ProductVariantItemResponse(BaseSchema):
     
     uid = fields.Int(required=False)
     
-    value = fields.Str(required=False)
-    
-    action = fields.Nested(ProductListingAction, required=False)
+    name = fields.Str(required=False)
     
     color_name = fields.Str(required=False)
     
-    name = fields.Str(required=False)
-    
     slug = fields.Str(required=False)
     
-    medias = fields.List(fields.Nested(Media, required=False), required=False)
-    
-    _custom_meta = fields.List(fields.Nested(CustomMetaFields, required=False), required=False)
+    action = fields.Nested(ProductListingAction, required=False)
     
     color = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
+    
+    medias = fields.List(fields.Nested(Media, required=False), required=False)
     
 

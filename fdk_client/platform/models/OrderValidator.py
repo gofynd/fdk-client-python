@@ -37,8 +37,6 @@ class OrderValidator:
         
         page_size = fields.Int(required=False)
         
-        customer_id = fields.Str(required=False)
-        
         is_priority_sort = fields.Boolean(required=False)
         
         exclude_locked_shipments = fields.Boolean(required=False)
@@ -48,6 +46,8 @@ class OrderValidator:
         channel_shipment_id = fields.Str(required=False)
         
         channel_order_id = fields.Str(required=False)
+        
+        custom_meta = fields.Str(required=False)
          
     
     class getShipmentById(BaseSchema):
@@ -151,6 +151,8 @@ class OrderValidator:
         page_size = fields.Int(required=False)
         
         is_priority_sort = fields.Boolean(required=False)
+        
+        custom_meta = fields.Str(required=False)
          
     
     class getMetricCount(BaseSchema):
@@ -519,12 +521,12 @@ class OrderValidator:
         company_id = fields.Int(required=False)
          
     
-    class getChannelConfig(BaseSchema):
+    class createChannelConfig(BaseSchema):
         
         company_id = fields.Int(required=False)
          
     
-    class createChannelConfig(BaseSchema):
+    class getChannelConfig(BaseSchema):
         
         company_id = fields.Int(required=False)
          

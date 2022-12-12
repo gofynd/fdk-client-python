@@ -26,8 +26,8 @@ class TrackingList(BaseSchema):
     
     time = fields.Str(required=False)
     
-    is_passed = fields.Boolean(required=False)
-    
     status = fields.Str(required=False)
+    
+    is_passed = fields.Boolean(required=False)
     
 

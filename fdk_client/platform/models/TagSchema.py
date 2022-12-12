@@ -21,6 +21,8 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 from .TagSourceSchema import TagSourceSchema
 
 
@@ -43,6 +45,8 @@ class TagSchema(BaseSchema):
     attributes = fields.Dict(required=False)
     
     content = fields.Str(required=False)
+    
+    pages = fields.List(fields.Dict(required=False), required=False)
     
     __source = fields.Nested(TagSourceSchema, required=False)
     
