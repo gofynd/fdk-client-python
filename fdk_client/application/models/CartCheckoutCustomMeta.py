@@ -14,8 +14,8 @@ class CartCheckoutCustomMeta(BaseSchema):
     # Cart swagger.json
 
     
-    value = fields.Str(required=False)
-    
     key = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
     
 
