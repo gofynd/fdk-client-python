@@ -9,9 +9,9 @@ from .ManifestPage import ManifestPage
 
 from .ManifestDetailItem import ManifestDetailItem
 
+
+
 from .ManifestDetail import ManifestDetail
-
-
 
 
 class ManifestDetailResponse(BaseSchema):
@@ -22,8 +22,8 @@ class ManifestDetailResponse(BaseSchema):
     
     items = fields.List(fields.Nested(ManifestDetailItem, required=False), required=False)
     
-    manifest_details = fields.List(fields.Nested(ManifestDetail, required=False), required=False)
-    
     additional_shipment_count = fields.Int(required=False)
+    
+    manifest_details = fields.List(fields.Nested(ManifestDetail, required=False), required=False)
     
 

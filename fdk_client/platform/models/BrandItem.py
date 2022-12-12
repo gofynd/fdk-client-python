@@ -9,11 +9,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+from .Action import Action
+
 
 
 from .ImageUrls import ImageUrls
-
-from .Action import Action
 
 
 
@@ -26,15 +26,15 @@ class BrandItem(BaseSchema):
     # Catalog swagger.json
 
     
+    uid = fields.Int(required=False)
+    
     name = fields.Str(required=False)
+    
+    action = fields.Nested(Action, required=False)
     
     departments = fields.List(fields.Str(required=False), required=False)
     
-    uid = fields.Int(required=False)
-    
     banners = fields.Nested(ImageUrls, required=False)
-    
-    action = fields.Nested(Action, required=False)
     
     discount = fields.Str(required=False)
     

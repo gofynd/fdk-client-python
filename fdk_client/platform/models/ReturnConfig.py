@@ -16,10 +16,10 @@ class ReturnConfig(BaseSchema):
     # Order swagger.json
 
     
+    time = fields.Int(required=False)
+    
     returnable = fields.Boolean(required=False)
     
     unit = fields.Str(required=False)
-    
-    time = fields.Int(required=False)
     
 

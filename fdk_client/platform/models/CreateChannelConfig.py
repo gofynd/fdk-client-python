@@ -22,9 +22,9 @@ class CreateChannelConfig(BaseSchema):
     # Order swagger.json
 
     
-    shipment_assignment = fields.Str(required=False)
+    lock_states = fields.Str(required=False)
     
-    logo_url = fields.Dict(required=False)
+    shipment_assignment = fields.Str(required=False)
     
     payment_info = fields.Nested(CreateChannelPaymentInfo, required=False)
     
@@ -32,6 +32,6 @@ class CreateChannelConfig(BaseSchema):
     
     location_reassignment = fields.Boolean(required=False)
     
-    lock_states = fields.Str(required=False)
+    logo_url = fields.Dict(required=False)
     
 
