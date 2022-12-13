@@ -18,9 +18,9 @@ class Tax(BaseSchema):
     # Order swagger.json
 
     
-    name = fields.Str(required=False)
-    
     amount = fields.Dict(required=False)
+    
+    name = fields.Str(required=False)
     
     breakup = fields.List(fields.Dict(required=False), required=False)
     

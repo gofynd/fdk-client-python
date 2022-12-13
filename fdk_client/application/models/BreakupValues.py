@@ -16,10 +16,10 @@ class BreakupValues(BaseSchema):
     # Order swagger.json
 
     
-    display = fields.Str(required=False)
-    
     name = fields.Str(required=False)
     
     value = fields.Float(required=False)
+    
+    display = fields.Str(required=False)
     
 

@@ -14,8 +14,8 @@ class MarketPlacePdf(BaseSchema):
     # Order swagger.json
 
     
-    label = fields.Str(required=False)
-    
     invoice = fields.Str(required=False)
+    
+    label = fields.Str(required=False)
     
 

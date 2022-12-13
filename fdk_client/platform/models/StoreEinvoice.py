@@ -22,8 +22,8 @@ class StoreEinvoice(BaseSchema):
     
     password = fields.Str(required=False)
     
-    username = fields.Str(required=False)
-    
     user = fields.Str(required=False)
+    
+    username = fields.Str(required=False)
     
 

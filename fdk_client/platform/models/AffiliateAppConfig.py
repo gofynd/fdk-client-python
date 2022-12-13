@@ -9,13 +9,13 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
-
-
 from .AffiliateAppConfigMeta import AffiliateAppConfigMeta
+
+
+
+
+
+
 
 
 
@@ -30,7 +30,13 @@ class AffiliateAppConfig(BaseSchema):
     
     created_at = fields.Str(required=False)
     
+    token = fields.Str(required=False)
+    
+    meta = fields.List(fields.Nested(AffiliateAppConfigMeta, required=False), required=False)
+    
     name = fields.Str(required=False)
+    
+    secret = fields.Str(required=False)
     
     owner = fields.Str(required=False)
     
@@ -38,12 +44,6 @@ class AffiliateAppConfig(BaseSchema):
     
     id = fields.Str(required=False)
     
-    meta = fields.List(fields.Nested(AffiliateAppConfigMeta, required=False), required=False)
-    
-    secret = fields.Str(required=False)
-    
     description = fields.Str(required=False)
-    
-    token = fields.Str(required=False)
     
 

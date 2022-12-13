@@ -7,11 +7,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 from .DpConfiguration import DpConfiguration
 
 from .CreateChannelPaymentInfo import CreateChannelPaymentInfo
-
-
 
 
 
@@ -22,7 +22,9 @@ class CreateChannelConfig(BaseSchema):
     # Order swagger.json
 
     
-    location_reassignment = fields.Boolean(required=False)
+    logo_url = fields.Dict(required=False)
+    
+    lock_states = fields.List(fields.Str(required=False), required=False)
     
     dp_configuration = fields.Nested(DpConfiguration, required=False)
     
@@ -30,8 +32,6 @@ class CreateChannelConfig(BaseSchema):
     
     shipment_assignment = fields.Str(required=False)
     
-    lock_states = fields.List(fields.Str(required=False), required=False)
-    
-    logo_url = fields.Dict(required=False)
+    location_reassignment = fields.Boolean(required=False)
     
 

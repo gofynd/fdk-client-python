@@ -18,9 +18,9 @@ class NestedTrackingDetails(BaseSchema):
     # Order swagger.json
 
     
-    is_passed = fields.Boolean(required=False)
-    
     status = fields.Str(required=False)
+    
+    is_passed = fields.Boolean(required=False)
     
     time = fields.Str(required=False)
     
