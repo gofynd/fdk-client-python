@@ -32,10 +32,10 @@ class DeviceDetails(BaseSchema):
     
     os = fields.Str(required=False)
     
+    device_make = fields.Str(required=False)
+    
     device_type = fields.Str(required=False)
     
     identifier_type = fields.Str(required=False)
-    
-    device_make = fields.Str(required=False)
     
 

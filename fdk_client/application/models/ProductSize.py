@@ -22,11 +22,11 @@ class ProductSize(BaseSchema):
     
     quantity = fields.Int(required=False)
     
-    seller_identifiers = fields.List(fields.Str(required=False), required=False)
+    is_available = fields.Boolean(required=False)
     
     value = fields.Str(required=False)
     
-    is_available = fields.Boolean(required=False)
+    seller_identifiers = fields.List(fields.Str(required=False), required=False)
     
     display = fields.Str(required=False)
     

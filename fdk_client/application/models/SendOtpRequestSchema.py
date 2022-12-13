@@ -12,6 +12,8 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 class SendOtpRequestSchema(BaseSchema):
     # User swagger.json
 
@@ -21,5 +23,7 @@ class SendOtpRequestSchema(BaseSchema):
     captcha_code = fields.Str(required=False)
     
     mobile = fields.Str(required=False)
+    
+    android_hash = fields.Str(required=False)
     
 

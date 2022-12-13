@@ -20,13 +20,13 @@ class SubLane(BaseSchema):
     # Order swagger.json
 
     
-    index = fields.Int(required=False)
-    
-    total_items = fields.Int(required=False)
-    
     value = fields.Str(required=False)
     
     text = fields.Str(required=False)
+    
+    index = fields.Int(required=False)
+    
+    total_items = fields.Int(required=False)
     
     actions = fields.List(fields.Dict(required=False), required=False)
     

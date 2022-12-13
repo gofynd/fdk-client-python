@@ -20,10 +20,10 @@ class MultiTenderPaymentMethod(BaseSchema):
     
     amount = fields.Float(required=False)
     
-    name = fields.Str(required=False)
+    mode = fields.Str(required=False)
     
     meta = fields.Nested(MultiTenderPaymentMeta, required=False)
     
-    mode = fields.Str(required=False)
+    name = fields.Str(required=False)
     
 

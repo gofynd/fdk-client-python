@@ -22,16 +22,16 @@ class CreateOrderUserRequest(BaseSchema):
     # Payment swagger.json
 
     
-    success_callback_url = fields.Str(required=False)
-    
-    meta = fields.Dict(required=False)
-    
-    payment_methods = fields.Nested(CreateOrderUserPaymentMethods, required=False)
-    
     currency = fields.Str(required=False)
     
     payment_link_id = fields.Str(required=False)
     
+    payment_methods = fields.Nested(CreateOrderUserPaymentMethods, required=False)
+    
+    meta = fields.Dict(required=False)
+    
     failure_callback_url = fields.Str(required=False)
+    
+    success_callback_url = fields.Str(required=False)
     
 
