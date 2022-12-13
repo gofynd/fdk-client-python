@@ -22,8 +22,8 @@ class ResponseGetInvoiceShipment(BaseSchema):
     
     presigned_type = fields.Str(required=False)
     
-    shipment_id = fields.Str(required=False)
-    
     presigned_url = fields.Str(required=False)
+    
+    shipment_id = fields.Str(required=False)
     
 

@@ -7,7 +7,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .Timestamp import Timestamp
+from .TimeStampData import TimeStampData
 
 
 class Promise(BaseSchema):
@@ -16,6 +16,6 @@ class Promise(BaseSchema):
     
     show_promise = fields.Boolean(required=False)
     
-    timestamp = fields.Nested(Timestamp, required=False)
+    timestamp = fields.Nested(TimeStampData, required=False)
     
 

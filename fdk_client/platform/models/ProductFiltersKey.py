@@ -24,10 +24,10 @@ class ProductFiltersKey(BaseSchema):
     
     kind = fields.Str(required=False)
     
-    logo = fields.Str(required=False)
-    
     name = fields.Str(required=False)
     
     operators = fields.List(fields.Str(required=False), required=False)
+    
+    logo = fields.Str(required=False)
     
 
