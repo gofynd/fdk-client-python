@@ -17,7 +17,7 @@ class PromiseFormatted(BaseSchema):
     #  swagger.json
 
     
-    max = fields.Str(required=False)
-    
     min = fields.Str(required=False)
+    
+    max = fields.Str(required=False)
     

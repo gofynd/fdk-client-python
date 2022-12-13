@@ -505,21 +505,21 @@ from .FyndOrderIdList import FyndOrderIdList
 
 from .OrderStatus import OrderStatus
 
-from .ShipmentItemFulFillingStore import ShipmentItemFulFillingStore
-
 from .Prices import Prices
-
-from .PlatformItem import PlatformItem
-
-from .GSTDetailsData import GSTDetailsData
-
-from .BagUnit import BagUnit
 
 from .PaymentModeInfo import PaymentModeInfo
 
-from .UserDataInfo import UserDataInfo
+from .GSTDetailsData import GSTDetailsData
+
+from .PlatformItem import PlatformItem
+
+from .BagUnit import BagUnit
 
 from .ShipmentStatus import ShipmentStatus
+
+from .ShipmentItemFulFillingStore import ShipmentItemFulFillingStore
+
+from .UserDataInfo import UserDataInfo
 
 from .ShipmentItem import ShipmentItem
 
@@ -531,47 +531,47 @@ from .ShipmentInternalPlatformViewResponse import ShipmentInternalPlatformViewRe
 
 from .Error import Error
 
-from .TrackingList import TrackingList
-
-from .DPDetailsData import DPDetailsData
-
-from .ShipmentPayments import ShipmentPayments
-
-from .BagGST import BagGST
-
-from .BagConfigs import BagConfigs
-
-from .OrderBrandName import OrderBrandName
-
-from .PlatformDeliveryAddress1 import PlatformDeliveryAddress1
-
-from .Identifier import Identifier
-
-from .FinancialBreakup import FinancialBreakup
-
-from .OrderBagArticle import OrderBagArticle
-
-from .DiscountRules import DiscountRules
-
-from .ItemCriterias import ItemCriterias
-
-from .BuyRules import BuyRules
-
-from .AppliedPromos import AppliedPromos
-
-from .OrderBags import OrderBags
-
 from .UserDetailsData import UserDetailsData
+
+from .OrderDetailsData import OrderDetailsData
+
+from .TrackingList import TrackingList
 
 from .BagStateMapper1 import BagStateMapper1
 
 from .BagStatusHistory import BagStatusHistory
 
-from .ShipmentStatusData import ShipmentStatusData
-
-from .OrderDetailsData import OrderDetailsData
+from .ShipmentPayments import ShipmentPayments
 
 from .FulfillingStore import FulfillingStore
+
+from .ShipmentStatusData import ShipmentStatusData
+
+from .DPDetailsData import DPDetailsData
+
+from .Identifier import Identifier
+
+from .FinancialBreakup import FinancialBreakup
+
+from .BagConfigs import BagConfigs
+
+from .PlatformDeliveryAddress1 import PlatformDeliveryAddress1
+
+from .OrderBrandName import OrderBrandName
+
+from .BagGST import BagGST
+
+from .ItemCriterias import ItemCriterias
+
+from .BuyRules import BuyRules
+
+from .DiscountRules import DiscountRules
+
+from .AppliedPromos import AppliedPromos
+
+from .OrderBagArticle import OrderBagArticle
+
+from .OrderBags import OrderBags
 
 from .ShipmentInfoResponse import ShipmentInfoResponse
 
@@ -631,9 +631,9 @@ from .FileUploadResponse import FileUploadResponse
 
 from .FileResponse import FileResponse
 
-from .bulkListingData import bulkListingData
-
 from .BulkListingPage import BulkListingPage
+
+from .bulkListingData import bulkListingData
 
 from .BulkListingResponse import BulkListingResponse
 
@@ -647,13 +647,13 @@ from .ManifestPage import ManifestPage
 
 from .GeneratedManifestResponse import GeneratedManifestResponse
 
-from .ManifestDetailItem import ManifestDetailItem
-
 from .ManifestDetailTotalShipmentPricesCount import ManifestDetailTotalShipmentPricesCount
 
 from .ManifestDetailMeta import ManifestDetailMeta
 
 from .ManifestDetail import ManifestDetail
+
+from .ManifestDetailItem import ManifestDetailItem
 
 from .ManifestDetailResponse import ManifestDetailResponse
 
@@ -675,57 +675,57 @@ from .AffiliateMeta import AffiliateMeta
 
 from .AffiliateBagDetails import AffiliateBagDetails
 
-from .B2BPODetails import B2BPODetails
-
-from .BagMeta import BagMeta
-
-from .BagGSTDetails import BagGSTDetails
-
 from .Brand import Brand
 
 from .ArticleDetails1 import ArticleDetails1
 
-from .Dates import Dates
-
-from .BagReturnableCancelableStatus import BagReturnableCancelableStatus
-
-from .EInvoice import EInvoice
-
-from .EinvoiceInfo import EinvoiceInfo
-
-from .LockData import LockData
-
-from .Formatted import Formatted
-
-from .ShipmentTimeStamp import ShipmentTimeStamp
-
-from .BuyerDetails import BuyerDetails
-
-from .DebugInfo import DebugInfo
-
-from .ShipmentMeta import ShipmentMeta
-
-from .PDFLinks import PDFLinks
-
-from .AffiliateDetails import AffiliateDetails
-
-from .Document import Document
-
-from .StoreDocuments import StoreDocuments
-
-from .StoreEwaybill import StoreEwaybill
+from .StoreAddress import StoreAddress
 
 from .StoreEinvoice import StoreEinvoice
+
+from .StoreEwaybill import StoreEwaybill
 
 from .StoreGstCredentials import StoreGstCredentials
 
 from .EInvoicePortalDetails import EInvoicePortalDetails
 
+from .Document import Document
+
+from .StoreDocuments import StoreDocuments
+
 from .StoreMeta import StoreMeta
 
-from .StoreAddress import StoreAddress
-
 from .Store1 import Store1
+
+from .Dates import Dates
+
+from .Attributes import Attributes
+
+from .Item import Item
+
+from .BagGSTDetails import BagGSTDetails
+
+from .BagReturnableCancelableStatus import BagReturnableCancelableStatus
+
+from .PDFLinks import PDFLinks
+
+from .BuyerDetails import BuyerDetails
+
+from .DebugInfo import DebugInfo
+
+from .Formatted import Formatted
+
+from .ShipmentTimeStamp import ShipmentTimeStamp
+
+from .LockData import LockData
+
+from .EInvoice import EInvoice
+
+from .EinvoiceInfo import EinvoiceInfo
+
+from .ShipmentMeta import ShipmentMeta
+
+from .AffiliateDetails import AffiliateDetails
 
 from .ReturnConfig import ReturnConfig
 
@@ -733,9 +733,9 @@ from .Dimensions import Dimensions
 
 from .Article import Article
 
-from .Attributes import Attributes
+from .B2BPODetails import B2BPODetails
 
-from .Item import Item
+from .BagMeta import BagMeta
 
 from .BagDetailsPlatformResponse import BagDetailsPlatformResponse
 

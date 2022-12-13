@@ -21,7 +21,7 @@ class AttributeMasterFilter(BaseSchema):
     
     indexing = fields.Boolean(required=False)
     
-    priority = fields.Int(required=False)
-    
     depends_on = fields.List(fields.Str(required=False), required=False)
+    
+    priority = fields.Int(required=False)
     

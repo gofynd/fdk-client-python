@@ -13,9 +13,9 @@ from ...PlatformModel import BaseSchema
 
 
 
+
+
 from .CartDetailResponse import CartDetailResponse
-
-
 
 
 
@@ -27,7 +27,7 @@ class AddCartDetailResponse(BaseSchema):
     
     success = fields.Boolean(required=False)
     
-    cart = fields.Nested(CartDetailResponse, required=False)
-    
     partial = fields.Boolean(required=False)
+    
+    cart = fields.Nested(CartDetailResponse, required=False)
     

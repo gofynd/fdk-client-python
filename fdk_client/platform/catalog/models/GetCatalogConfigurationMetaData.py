@@ -9,11 +9,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .GetCatalogConfigurationDetailsProduct import GetCatalogConfigurationDetailsProduct
-
-
-
 from .MetaDataListingResponse import MetaDataListingResponse
+
+
+
+from .GetCatalogConfigurationDetailsProduct import GetCatalogConfigurationDetailsProduct
 
 
 
@@ -21,7 +21,7 @@ class GetCatalogConfigurationMetaData(BaseSchema):
     #  swagger.json
 
     
-    product = fields.Nested(GetCatalogConfigurationDetailsProduct, required=False)
-    
     listing = fields.Nested(MetaDataListingResponse, required=False)
+    
+    product = fields.Nested(GetCatalogConfigurationDetailsProduct, required=False)
     

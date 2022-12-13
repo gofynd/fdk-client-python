@@ -23,11 +23,11 @@ class AddCartDetailResponse(BaseSchema):
     #  swagger.json
 
     
-    message = fields.Str(required=False)
+    partial = fields.Boolean(required=False)
     
     cart = fields.Nested(CartDetailResponse, required=False)
     
-    partial = fields.Boolean(required=False)
-    
     success = fields.Boolean(required=False)
+    
+    message = fields.Str(required=False)
     

@@ -17,7 +17,7 @@ class DateRange(BaseSchema):
     #  swagger.json
 
     
-    from_date = fields.Str(required=False)
-    
     to_date = fields.Str(required=False)
+    
+    from_date = fields.Str(required=False)
     

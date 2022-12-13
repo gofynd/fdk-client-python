@@ -19,9 +19,9 @@ class CartItem(BaseSchema):
     #  swagger.json
 
     
-    quantity = fields.Int(required=False)
-    
     size = fields.Str(required=False)
+    
+    quantity = fields.Int(required=False)
     
     product_id = fields.Str(required=False)
     

@@ -11,11 +11,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .SEO import SEO
-
-
-
 from .MOQ import MOQ
+
+
+
+from .SEO import SEO
 
 
 
@@ -25,7 +25,7 @@ class ApplicationItemResponse(BaseSchema):
     
     alt_text = fields.Dict(required=False)
     
-    seo = fields.Nested(SEO, required=False)
-    
     moq = fields.Nested(MOQ, required=False)
+    
+    seo = fields.Nested(SEO, required=False)
     

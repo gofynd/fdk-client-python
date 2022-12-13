@@ -23,7 +23,7 @@ class Brand(BaseSchema):
     
     logo = fields.Nested(Logo, required=False)
     
-    uid = fields.Int(required=False)
-    
     name = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
     
