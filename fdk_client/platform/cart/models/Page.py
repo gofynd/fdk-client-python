@@ -31,21 +31,21 @@ class Page(BaseSchema):
     #  swagger.json
 
     
+    item_total = fields.Int(required=False)
+    
+    has_next = fields.Boolean(required=False)
+    
     current = fields.Int(required=False)
     
+    size = fields.Int(required=False)
+    
     has_previous = fields.Boolean(required=False)
+    
+    page = fields.Int(required=False)
     
     last_id = fields.Str(required=False)
     
     type = fields.Str(required=False)
     
-    size = fields.Int(required=False)
-    
     next_id = fields.Str(required=False)
-    
-    page = fields.Int(required=False)
-    
-    has_next = fields.Boolean(required=False)
-    
-    item_total = fields.Int(required=False)
     

@@ -7,19 +7,21 @@ from .OrderStatuses import OrderStatuses
 
 from .OrderFilters import OrderFilters
 
+from .UserInfo import UserInfo
+
 from .BreakupValues import BreakupValues
+
+from .AppliedFreeArticles import AppliedFreeArticles
+
+from .AppliedPromos import AppliedPromos
 
 from .ItemBrand import ItemBrand
 
 from .Item import Item
 
-from .Prices import Prices
-
 from .CurrentStatus import CurrentStatus
 
-from .AppliedFreeArticles import AppliedFreeArticles
-
-from .AppliedPromos import AppliedPromos
+from .Prices import Prices
 
 from .Identifiers import Identifiers
 
@@ -27,33 +29,31 @@ from .FinancialBreakup import FinancialBreakup
 
 from .Bags import Bags
 
-from .TimeStampData import TimeStampData
-
-from .Promise import Promise
-
 from .NestedTrackingDetails import NestedTrackingDetails
 
 from .TrackingDetails import TrackingDetails
 
 from .ShipmentTotalDetails import ShipmentTotalDetails
 
-from .ShipmentStatus import ShipmentStatus
-
 from .DeliveryAddress import DeliveryAddress
-
-from .Invoice import Invoice
-
-from .FulfillingCompany import FulfillingCompany
-
-from .FulfillingStore import FulfillingStore
 
 from .ShipmentUserInfo import ShipmentUserInfo
 
+from .TimeStampData import TimeStampData
+
+from .Promise import Promise
+
+from .Invoice import Invoice
+
+from .ShipmentStatus import ShipmentStatus
+
 from .ShipmentPayment import ShipmentPayment
 
-from .Shipments import Shipments
+from .FulfillingStore import FulfillingStore
 
-from .UserInfo import UserInfo
+from .FulfillingCompany import FulfillingCompany
+
+from .Shipments import Shipments
 
 from .BagsForReorderArticleAssignment import BagsForReorderArticleAssignment
 
@@ -95,31 +95,31 @@ from .ShipmentReasons import ShipmentReasons
 
 from .Products import Products
 
-from .EntitiesDataUpdates import EntitiesDataUpdates
-
-from .ProductsDataUpdatesFilters import ProductsDataUpdatesFilters
-
-from .ProductsDataUpdates import ProductsDataUpdates
-
-from .DataUpdates import DataUpdates
-
-from .EntityReasonData import EntityReasonData
-
-from .EntitiesReasons import EntitiesReasons
-
 from .ProductsReasonsData import ProductsReasonsData
 
 from .ProductsReasonsFilters import ProductsReasonsFilters
 
 from .ProductsReasons import ProductsReasons
 
+from .EntityReasonData import EntityReasonData
+
+from .EntitiesReasons import EntitiesReasons
+
 from .ReasonsData import ReasonsData
+
+from .ProductsDataUpdatesFilters import ProductsDataUpdatesFilters
+
+from .ProductsDataUpdates import ProductsDataUpdates
+
+from .EntitiesDataUpdates import EntitiesDataUpdates
+
+from .DataUpdates import DataUpdates
 
 from .ShipmentsRequest import ShipmentsRequest
 
 from .StatuesRequest import StatuesRequest
 
-from .StatusUpdateInternalRequest import StatusUpdateInternalRequest
+from .UpdateShipmentStatusRequest import UpdateShipmentStatusRequest
 
 from .StatusesBodyResponse import StatusesBodyResponse
 

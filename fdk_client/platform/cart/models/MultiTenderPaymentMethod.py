@@ -23,11 +23,11 @@ class MultiTenderPaymentMethod(BaseSchema):
     #  swagger.json
 
     
-    amount = fields.Float(required=False)
+    name = fields.Str(required=False)
     
     meta = fields.Nested(MultiTenderPaymentMeta, required=False)
     
-    name = fields.Str(required=False)
-    
     mode = fields.Str(required=False)
+    
+    amount = fields.Float(required=False)
     

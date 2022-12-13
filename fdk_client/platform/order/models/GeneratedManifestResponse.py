@@ -9,11 +9,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .ManifestPage import ManifestPage
-
-
-
 from .GeneratedManifestItem import GeneratedManifestItem
+
+
+
+from .ManifestPage import ManifestPage
 
 
 
@@ -21,7 +21,7 @@ class GeneratedManifestResponse(BaseSchema):
     #  swagger.json
 
     
-    page = fields.Nested(ManifestPage, required=False)
-    
     items = fields.List(fields.Nested(GeneratedManifestItem, required=False), required=False)
+    
+    page = fields.Nested(ManifestPage, required=False)
     

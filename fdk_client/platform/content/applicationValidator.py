@@ -167,6 +167,14 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
+        
+    
+    
+        
+        
         
         
         
@@ -671,6 +679,24 @@ class ContentValidator:
         application_id = fields.Str(required=False)
         
         id = fields.Str(required=False)
+         
+        
+    
+    class getLegalInformation(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class updateLegalInformation(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
          
         
     

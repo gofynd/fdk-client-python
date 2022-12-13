@@ -17,7 +17,7 @@ class CartCurrency(BaseSchema):
     #  swagger.json
 
     
-    code = fields.Str(required=False)
-    
     symbol = fields.Str(required=False)
+    
+    code = fields.Str(required=False)
     

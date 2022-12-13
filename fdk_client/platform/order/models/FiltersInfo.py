@@ -25,9 +25,9 @@ class FiltersInfo(BaseSchema):
     
     options = fields.List(fields.Nested(FilterInfoOption, required=False), required=False)
     
+    value = fields.Str(required=False)
+    
     text = fields.Str(required=False)
     
     type = fields.Str(required=False)
-    
-    value = fields.Str(required=False)
     

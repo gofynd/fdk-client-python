@@ -9,11 +9,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-
-
-
-
 from .AutocompleteAction import AutocompleteAction
+
+
+
+
 
 
 
@@ -25,11 +25,11 @@ class AutocompleteResult(BaseSchema):
     #  swagger.json
 
     
+    action = fields.Nested(AutocompleteAction, required=False)
+    
     display = fields.Str(required=False)
     
     _custom_json = fields.Dict(required=False)
-    
-    action = fields.Nested(AutocompleteAction, required=False)
     
     logo = fields.Nested(Media, required=False)
     
