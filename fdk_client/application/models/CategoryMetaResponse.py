@@ -22,9 +22,9 @@ class CategoryMetaResponse(BaseSchema):
     
     banners = fields.Nested(ImageUrls, required=False)
     
-    name = fields.Str(required=False)
-    
     _custom_json = fields.Dict(required=False)
+    
+    name = fields.Str(required=False)
     
     logo = fields.Nested(Media, required=False)
     

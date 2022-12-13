@@ -18,6 +18,8 @@ class PosCartValidator:
         assign_card_id = fields.Int(required=False)
         
         area_code = fields.Str(required=False)
+        
+        buy_now = fields.Boolean(required=False)
          
     
     class getCartLastModified(BaseSchema):
@@ -32,6 +34,8 @@ class PosCartValidator:
         b = fields.Boolean(required=False)
         
         area_code = fields.Str(required=False)
+        
+        buy_now = fields.Boolean(required=False)
          
     
     class updateCart(BaseSchema):
@@ -43,16 +47,22 @@ class PosCartValidator:
         b = fields.Boolean(required=False)
         
         area_code = fields.Str(required=False)
+        
+        buy_now = fields.Boolean(required=False)
          
     
     class getItemCount(BaseSchema):
         
         id = fields.Str(required=False)
+        
+        buy_now = fields.Boolean(required=False)
          
     
     class getCoupons(BaseSchema):
         
         id = fields.Str(required=False)
+        
+        buy_now = fields.Boolean(required=False)
          
     
     class applyCoupon(BaseSchema):
@@ -64,11 +74,15 @@ class PosCartValidator:
         p = fields.Boolean(required=False)
         
         id = fields.Str(required=False)
+        
+        buy_now = fields.Boolean(required=False)
          
     
     class removeCoupon(BaseSchema):
         
         id = fields.Str(required=False)
+        
+        buy_now = fields.Boolean(required=False)
          
     
     class getBulkDiscountOffers(BaseSchema):
@@ -89,11 +103,15 @@ class PosCartValidator:
         i = fields.Boolean(required=False)
         
         b = fields.Boolean(required=False)
+        
+        buy_now = fields.Boolean(required=False)
          
     
     class getAddresses(BaseSchema):
         
         cart_id = fields.Str(required=False)
+        
+        buy_now = fields.Boolean(required=False)
         
         mobile_no = fields.Str(required=False)
         
@@ -113,6 +131,8 @@ class PosCartValidator:
         id = fields.Str(required=False)
         
         cart_id = fields.Str(required=False)
+        
+        buy_now = fields.Boolean(required=False)
         
         mobile_no = fields.Str(required=False)
         
@@ -137,6 +157,8 @@ class PosCartValidator:
         
         cart_id = fields.Str(required=False)
         
+        buy_now = fields.Boolean(required=False)
+        
         i = fields.Boolean(required=False)
         
         b = fields.Boolean(required=False)
@@ -145,11 +167,15 @@ class PosCartValidator:
     class selectPaymentMode(BaseSchema):
         
         id = fields.Str(required=False)
+        
+        buy_now = fields.Boolean(required=False)
          
     
     class validateCouponForPayment(BaseSchema):
         
         id = fields.Str(required=False)
+        
+        buy_now = fields.Boolean(required=False)
         
         address_id = fields.Str(required=False)
         
@@ -200,6 +226,8 @@ class PosCartValidator:
     class updateCartMeta(BaseSchema):
         
         id = fields.Str(required=False)
+        
+        buy_now = fields.Boolean(required=False)
          
     
     class getAvailableDeliveryModes(BaseSchema):

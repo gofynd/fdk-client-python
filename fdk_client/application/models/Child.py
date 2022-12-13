@@ -15,9 +15,9 @@ from .ProductListingAction import ProductListingAction
 
 
 
-
-
 from .SecondLevelChild import SecondLevelChild
+
+
 
 
 class Child(BaseSchema):
@@ -26,16 +26,16 @@ class Child(BaseSchema):
     
     banners = fields.Nested(ImageUrls, required=False)
     
-    slug = fields.Str(required=False)
+    _custom_json = fields.Dict(required=False)
     
     name = fields.Str(required=False)
     
     action = fields.Nested(ProductListingAction, required=False)
     
-    _custom_json = fields.Dict(required=False)
-    
-    uid = fields.Int(required=False)
+    slug = fields.Str(required=False)
     
     childs = fields.List(fields.Nested(SecondLevelChild, required=False), required=False)
+    
+    uid = fields.Int(required=False)
     
 

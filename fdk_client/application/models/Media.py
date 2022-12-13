@@ -12,6 +12,8 @@ from ..models.BaseSchema import BaseSchema
 from .Meta import Meta
 
 
+
+
 class Media(BaseSchema):
     # Catalog swagger.json
 
@@ -21,5 +23,7 @@ class Media(BaseSchema):
     type = fields.Str(required=False)
     
     meta = fields.Nested(Meta, required=False)
+    
+    alt = fields.Str(required=False)
     
 
