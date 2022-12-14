@@ -13,20 +13,22 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
+
+
+
+
 from .FreeGiftItems import FreeGiftItems
-
-
-
-
-
-
 
 
 class PromotionOffer(BaseSchema):
     # Cart swagger.json
 
     
-    buy_rules = fields.Dict(required=False)
+    id = fields.Str(required=False)
+    
+    promotion_group = fields.Str(required=False)
     
     description = fields.Str(required=False)
     
@@ -34,12 +36,10 @@ class PromotionOffer(BaseSchema):
     
     discount_rules = fields.List(fields.Dict(required=False), required=False)
     
-    free_gift_items = fields.List(fields.Nested(FreeGiftItems, required=False), required=False)
-    
     offer_text = fields.Str(required=False)
     
-    id = fields.Str(required=False)
+    buy_rules = fields.Dict(required=False)
     
-    promotion_group = fields.Str(required=False)
+    free_gift_items = fields.List(fields.Nested(FreeGiftItems, required=False), required=False)
     
 
