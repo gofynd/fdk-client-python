@@ -148,3 +148,17 @@ class PaymentValidator:
         application_id = fields.Str(required=False)
          
     
+    class getPlatformPaymentConfig(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+    
+    class updatePlatformPaymentConfig(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+    

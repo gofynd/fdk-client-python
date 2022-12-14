@@ -16,6 +16,6 @@ class NetQuantity(BaseSchema):
     
     value = fields.Float(required=False)
     
-    unit = fields.Raw(required=False)
+    unit = fields.Str(required=False)
     
 

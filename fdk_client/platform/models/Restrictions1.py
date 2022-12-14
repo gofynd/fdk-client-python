@@ -13,13 +13,13 @@ from .PostOrder1 import PostOrder1
 
 from .UserRegistered import UserRegistered
 
+
+
 from .UsesRestriction1 import UsesRestriction1
 
 
 
 from .PromotionPaymentModes import PromotionPaymentModes
-
-
 
 
 
@@ -32,9 +32,11 @@ class Restrictions1(BaseSchema):
     
     post_order = fields.Nested(PostOrder1, required=False)
     
-    anonymous_users = fields.Boolean(required=False)
+    order_quantity = fields.Int(required=False)
     
     user_registered = fields.Nested(UserRegistered, required=False)
+    
+    anonymous_users = fields.Boolean(required=False)
     
     uses = fields.Nested(UsesRestriction1, required=False)
     
@@ -43,7 +45,5 @@ class Restrictions1(BaseSchema):
     payments = fields.List(fields.Nested(PromotionPaymentModes, required=False), required=False)
     
     user_groups = fields.List(fields.Int(required=False), required=False)
-    
-    order_quantity = fields.Int(required=False)
     
 

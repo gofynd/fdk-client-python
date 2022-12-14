@@ -18,6 +18,8 @@ from .DeliveryCharges import DeliveryCharges
 
 
 
+
+
 class AppCartConfig(BaseSchema):
     # Configuration swagger.json
 
@@ -33,5 +35,7 @@ class AppCartConfig(BaseSchema):
     bulk_coupons = fields.Boolean(required=False)
     
     revenue_engine_coupon = fields.Boolean(required=False)
+    
+    empty_cart = fields.Boolean(required=False)
     
 

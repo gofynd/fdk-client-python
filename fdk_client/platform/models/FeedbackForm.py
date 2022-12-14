@@ -10,12 +10,16 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ArticleAssignment1(BaseSchema):
-    # Catalog swagger.json
+
+
+class FeedbackForm(BaseSchema):
+    # Lead swagger.json
 
     
-    level = fields.Str(required=False)
+    inputs = fields.Dict(required=False)
     
-    strategy = fields.Str(required=False)
+    title = fields.Str(required=False)
+    
+    timestamps = fields.Dict(required=False)
     
 

@@ -12,8 +12,8 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ArticleQuery(BaseSchema):
-    # Catalog swagger.json
+class _ArticleQuery(BaseSchema):
+    # CompanyProfile swagger.json
 
     
     size = fields.Str(required=False)
