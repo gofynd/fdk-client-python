@@ -24,9 +24,9 @@ class PageResponse(BaseSchema):
     
     item_total = fields.Int(required=False)
     
-    current = fields.Str(required=False)
-    
     has_next = fields.Boolean(required=False)
+    
+    current = fields.Str(required=False)
     
     size = fields.Int(required=False)
     

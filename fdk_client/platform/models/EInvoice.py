@@ -24,7 +24,7 @@ class EInvoice(BaseSchema):
     # Order swagger.json
 
     
-    acknowledge_no = fields.Int(required=False)
+    signed_invoice = fields.Str(required=False)
     
     error_code = fields.Str(required=False)
     
@@ -34,8 +34,8 @@ class EInvoice(BaseSchema):
     
     error_message = fields.Str(required=False)
     
-    signed_qr_code = fields.Str(required=False)
+    acknowledge_no = fields.Int(required=False)
     
-    signed_invoice = fields.Str(required=False)
+    signed_qr_code = fields.Str(required=False)
     
 

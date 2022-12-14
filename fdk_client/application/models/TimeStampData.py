@@ -14,8 +14,8 @@ class TimeStampData(BaseSchema):
     # Order swagger.json
 
     
-    min = fields.Str(required=False)
-    
     max = fields.Str(required=False)
+    
+    min = fields.Str(required=False)
     
 

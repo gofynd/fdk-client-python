@@ -9,13 +9,13 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
+
+
+
+
 from .Meta import Meta
-
-
-
-
-
-
 
 
 class ShipmentDetail(BaseSchema):
@@ -24,14 +24,14 @@ class ShipmentDetail(BaseSchema):
     
     remarks = fields.Str(required=False)
     
-    id = fields.Int(required=False)
+    shipment_id = fields.Str(required=False)
     
-    meta = fields.Nested(Meta, required=False)
+    id = fields.Int(required=False)
     
     bag_list = fields.List(fields.Int(required=False), required=False)
     
     status = fields.Str(required=False)
     
-    shipment_id = fields.Str(required=False)
+    meta = fields.Nested(Meta, required=False)
     
 
