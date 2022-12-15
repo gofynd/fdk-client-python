@@ -11,9 +11,9 @@ from .Page import Page
 
 
 
+
+
 from .AbandonedCart import AbandonedCart
-
-
 
 
 class AbandonedCartResponse(BaseSchema):
@@ -24,10 +24,10 @@ class AbandonedCartResponse(BaseSchema):
     
     message = fields.Str(required=False)
     
+    result = fields.Dict(required=False)
+    
     success = fields.Boolean(required=False)
     
     items = fields.List(fields.Nested(AbandonedCart, required=False), required=False)
-    
-    result = fields.Dict(required=False)
     
 

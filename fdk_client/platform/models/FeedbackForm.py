@@ -10,12 +10,16 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class RedirectionSchema(BaseSchema):
-    # Content swagger.json
+
+
+class FeedbackForm(BaseSchema):
+    # Lead swagger.json
 
     
-    redirect_from = fields.Str(required=False)
+    inputs = fields.Dict(required=False)
     
-    redirect_to = fields.Str(required=False)
+    title = fields.Str(required=False)
+    
+    timestamps = fields.Dict(required=False)
     
 
