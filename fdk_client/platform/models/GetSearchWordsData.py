@@ -22,11 +22,11 @@ class GetSearchWordsData(BaseSchema):
     # Catalog swagger.json
 
     
-    app_id = fields.Str(required=False)
-    
     _custom_json = fields.Dict(required=False)
     
     is_active = fields.Boolean(required=False)
+    
+    app_id = fields.Str(required=False)
     
     uid = fields.Str(required=False)
     

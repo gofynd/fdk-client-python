@@ -24,9 +24,9 @@ class ProductBrand(BaseSchema):
     
     logo = fields.Nested(Media, required=False)
     
-    name = fields.Str(required=False)
-    
     description = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
     
     uid = fields.Int(required=False)
     
