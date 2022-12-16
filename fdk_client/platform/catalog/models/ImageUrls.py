@@ -21,7 +21,7 @@ class ImageUrls(BaseSchema):
     #  swagger.json
 
     
-    landscape = fields.Nested(BannerImage, required=False)
-    
     portrait = fields.Nested(BannerImage, required=False)
+    
+    landscape = fields.Nested(BannerImage, required=False)
     

@@ -21,7 +21,7 @@ class OrderDict(BaseSchema):
     
     fynd_order_id = fields.Str(required=False)
     
-    shipment_count = fields.Int(required=False)
-    
     order_date = fields.Str(required=False)
+    
+    shipment_count = fields.Int(required=False)
     

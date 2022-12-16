@@ -21,7 +21,7 @@ class OpenApiErrorResponse(BaseSchema):
     
     success = fields.Boolean(required=False)
     
-    errors = fields.Dict(required=False)
-    
     message = fields.Str(required=False)
+    
+    errors = fields.Dict(required=False)
     

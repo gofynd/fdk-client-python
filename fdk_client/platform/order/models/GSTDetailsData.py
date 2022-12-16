@@ -27,9 +27,9 @@ class GSTDetailsData(BaseSchema):
     
     gstin_code = fields.Str(required=False)
     
+    value_of_good = fields.Float(required=False)
+    
     gst_fee = fields.Float(required=False)
     
     brand_calculated_amount = fields.Float(required=False)
-    
-    value_of_good = fields.Float(required=False)
     

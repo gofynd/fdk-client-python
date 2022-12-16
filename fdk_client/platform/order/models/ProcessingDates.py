@@ -25,7 +25,7 @@ class ProcessingDates(BaseSchema):
     #  swagger.json
 
     
-    customer_pickup_slot = fields.Dict(required=False)
+    dispatch_by_date = fields.Str(required=False)
     
     dp_pickup_slot = fields.Dict(required=False)
     
@@ -35,5 +35,5 @@ class ProcessingDates(BaseSchema):
     
     pack_by_date = fields.Str(required=False)
     
-    dispatch_by_date = fields.Str(required=False)
+    customer_pickup_slot = fields.Dict(required=False)
     

@@ -17,7 +17,7 @@ class Identifiers(BaseSchema):
     #  swagger.json
 
     
-    sku_code = fields.Str(required=False)
-    
     ean = fields.Str(required=False)
+    
+    sku_code = fields.Str(required=False)
     

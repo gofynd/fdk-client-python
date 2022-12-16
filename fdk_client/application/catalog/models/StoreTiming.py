@@ -9,13 +9,13 @@ from ...ApplicationModel import BaseSchema
 
 
 
+
+
 from .Time import Time
 
 
 
 from .Time import Time
-
-
 
 
 
@@ -25,11 +25,11 @@ class StoreTiming(BaseSchema):
     #  swagger.json
 
     
+    weekday = fields.Str(required=False)
+    
     opening = fields.Nested(Time, required=False)
     
     closing = fields.Nested(Time, required=False)
-    
-    weekday = fields.Str(required=False)
     
     open = fields.Boolean(required=False)
     

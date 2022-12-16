@@ -9,9 +9,9 @@ from ...PlatformModel import BaseSchema
 
 
 
-
-
 from .Options1 import Options1
+
+
 
 
 
@@ -23,11 +23,11 @@ class MetricsCount(BaseSchema):
     #  swagger.json
 
     
-    value = fields.Int(required=False)
-    
     options = fields.List(fields.Nested(Options1, required=False), required=False)
     
-    key = fields.Str(required=False)
-    
     text = fields.Str(required=False)
+    
+    value = fields.Int(required=False)
+    
+    key = fields.Str(required=False)
     

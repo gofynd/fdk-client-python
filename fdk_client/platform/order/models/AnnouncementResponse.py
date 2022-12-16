@@ -33,17 +33,11 @@ class AnnouncementResponse(BaseSchema):
     #  swagger.json
 
     
-    company_id = fields.Int(required=False)
-    
     title = fields.Str(required=False)
     
-    platform_id = fields.Str(required=False)
+    id = fields.Int(required=False)
     
     logo_url = fields.Str(required=False)
-    
-    description = fields.Str(required=False)
-    
-    from_datetime = fields.Str(required=False)
     
     to_datetime = fields.Str(required=False)
     
@@ -51,5 +45,11 @@ class AnnouncementResponse(BaseSchema):
     
     created_at = fields.Str(required=False)
     
-    id = fields.Int(required=False)
+    from_datetime = fields.Str(required=False)
+    
+    company_id = fields.Int(required=False)
+    
+    platform_id = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
     

@@ -27,17 +27,17 @@ class ArticleDetails(BaseSchema):
     #  swagger.json
 
     
-    quantity = fields.Int(required=False)
-    
-    _id = fields.Str(required=False)
-    
     brand_id = fields.Int(required=False)
     
     category = fields.Dict(required=False)
     
+    weight = fields.Dict(required=False)
+    
+    quantity = fields.Int(required=False)
+    
+    _id = fields.Str(required=False)
+    
     dimension = fields.Dict(required=False)
     
     attributes = fields.Dict(required=False)
-    
-    weight = fields.Dict(required=False)
     

@@ -1672,6 +1672,7 @@ Success. User Group details. `UserGroupResponseSchema` for more details.
  | countryCode | String? |  yes  |  |
  | captchaCode | String? |  yes  |  |
  | mobile | String? |  yes  |  |
+ | androidHash | String? |  yes  |  |
 
 ---
 

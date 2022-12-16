@@ -17,7 +17,7 @@ class ManifestDetailTotalShipmentPricesCount(BaseSchema):
     #  swagger.json
 
     
-    total_price = fields.Float(required=False)
-    
     shipment_count = fields.Int(required=False)
+    
+    total_price = fields.Float(required=False)
     
