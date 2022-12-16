@@ -24,11 +24,11 @@ class KYCAddress(BaseSchema):
     # Payment swagger.json
 
     
-    city = fields.Str(required=False)
-    
     state = fields.Str(required=False)
     
     land_mark = fields.Str(required=False)
+    
+    city = fields.Str(required=False)
     
     addressline1 = fields.Str(required=False)
     
