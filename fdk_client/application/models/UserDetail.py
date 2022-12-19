@@ -18,9 +18,9 @@ class UserDetail(BaseSchema):
     # Catalog swagger.json
 
     
-    super_user = fields.Boolean(required=False)
-    
     user_id = fields.Str(required=False)
+    
+    super_user = fields.Boolean(required=False)
     
     username = fields.Str(required=False)
     
