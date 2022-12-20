@@ -9,9 +9,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 from .Options import Options
-
-
 
 
 class MetricsCount(BaseSchema):
@@ -22,8 +22,8 @@ class MetricsCount(BaseSchema):
     
     value = fields.Int(required=False)
     
-    options = fields.List(fields.Nested(Options, required=False), required=False)
-    
     key = fields.Str(required=False)
+    
+    options = fields.List(fields.Nested(Options, required=False), required=False)
     
 

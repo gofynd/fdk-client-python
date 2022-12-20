@@ -22,8 +22,8 @@ class ActionInfo(BaseSchema):
     
     display_text = fields.Str(required=False)
     
-    description = fields.Str(required=False)
-    
     id = fields.Int(required=False)
+    
+    description = fields.Str(required=False)
     
 

@@ -28,14 +28,14 @@ class AddBeneficiaryDetailsRequest(BaseSchema):
     
     transfer_mode = fields.Str(required=False)
     
-    request_id = fields.Str(required=False)
-    
     otp = fields.Str(required=False)
     
-    shipment_id = fields.Str(required=False)
+    request_id = fields.Str(required=False)
     
     delights = fields.Boolean(required=False)
     
     order_id = fields.Str(required=False)
+    
+    shipment_id = fields.Str(required=False)
     
 

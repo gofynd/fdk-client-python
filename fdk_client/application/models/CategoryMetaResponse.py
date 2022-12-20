@@ -20,7 +20,7 @@ class CategoryMetaResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    name = fields.Str(required=False)
+    uid = fields.Int(required=False)
     
     banners = fields.Nested(ImageUrls, required=False)
     
@@ -28,6 +28,6 @@ class CategoryMetaResponse(BaseSchema):
     
     logo = fields.Nested(Media, required=False)
     
-    uid = fields.Int(required=False)
+    name = fields.Str(required=False)
     
 

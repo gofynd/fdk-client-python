@@ -26,12 +26,12 @@ class OrderListingResponse(BaseSchema):
     
     page = fields.Nested(Page, required=False)
     
-    success = fields.Boolean(required=False)
-    
-    total_count = fields.Int(required=False)
+    message = fields.Str(required=False)
     
     lane = fields.Str(required=False)
     
-    message = fields.Str(required=False)
+    total_count = fields.Int(required=False)
+    
+    success = fields.Boolean(required=False)
     
 

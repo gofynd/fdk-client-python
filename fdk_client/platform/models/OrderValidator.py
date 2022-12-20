@@ -523,17 +523,22 @@ class OrderValidator:
         company_id = fields.Int(required=False)
          
     
-    class createChannelConfig(BaseSchema):
-        
-        company_id = fields.Int(required=False)
-         
-    
     class getChannelConfig(BaseSchema):
         
         company_id = fields.Int(required=False)
          
     
+    class createChannelConfig(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    
     class uploadConsent(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    
+    class orderUpdate(BaseSchema):
         
         company_id = fields.Int(required=False)
          

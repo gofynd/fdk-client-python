@@ -24,18 +24,18 @@ class PaymentMethod(BaseSchema):
     # Order swagger.json
 
     
-    refund_by = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
     collect_by = fields.Str(required=False)
+    
+    amount = fields.Float(required=False)
     
     transaction_data = fields.Dict(required=False)
     
-    mode = fields.Str(required=False)
-    
     meta = fields.Dict(required=False)
     
-    amount = fields.Float(required=False)
+    mode = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    refund_by = fields.Str(required=False)
     
 
