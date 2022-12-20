@@ -12,17 +12,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
 class CommunicationDetails(BaseSchema):
     # Lead swagger.json
 
-    
-    type = fields.Str(required=False)
-    
-    title = fields.Str(required=False)
     
     value = fields.Str(required=False)
     

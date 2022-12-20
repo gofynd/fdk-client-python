@@ -26,11 +26,11 @@ class JobConfigDTO(BaseSchema):
     # Inventory swagger.json
 
     
+    integration = fields.Str(required=False)
+    
     integration_data = fields.Dict(required=False)
     
     company_name = fields.Str(required=False)
-    
-    integration = fields.Str(required=False)
     
     company_id = fields.Int(required=False)
     

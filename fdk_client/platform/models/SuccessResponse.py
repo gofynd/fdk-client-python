@@ -8,9 +8,13 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class SuccessResponse(BaseSchema):
-    # Catalog swagger.json
 
+
+class SuccessResponse(BaseSchema):
+    # Order swagger.json
+
+    
+    message = fields.Str(required=False)
     
     success = fields.Boolean(required=False)
     

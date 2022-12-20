@@ -16,6 +16,6 @@ class SendOtpSmsCommsTemplate(BaseSchema):
     
     key = fields.Str(required=False)
     
-    value = fields.Raw(required=False)
+    value = fields.Str(required=False)
     
 

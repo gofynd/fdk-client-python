@@ -5,7 +5,11 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .BagItem import BagItem
+
+
+
+
+
 
 
 
@@ -14,8 +18,12 @@ class Bags(BaseSchema):
     # Order swagger.json
 
     
-    item = fields.Nested(BagItem, required=False)
+    affiliate_bag_id = fields.Str(required=False)
     
-    id = fields.Int(required=False)
+    affiliate_order_id = fields.Str(required=False)
+    
+    is_locked = fields.Boolean(required=False)
+    
+    bag_id = fields.Int(required=False)
     
 

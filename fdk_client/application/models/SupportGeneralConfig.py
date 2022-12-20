@@ -15,8 +15,6 @@ from .CommunicationDetails import CommunicationDetails
 
 
 
-from .CommunicationDetails import CommunicationDetails
-
 
 
 
@@ -35,8 +33,6 @@ class SupportGeneralConfig(BaseSchema):
     support_faq = fields.Nested(CommunicationDetails, required=False)
     
     show_communication_info = fields.Boolean(required=False)
-    
-    support_communication = fields.Nested(CommunicationDetails, required=False)
     
     show_support_dris = fields.Boolean(required=False)
     

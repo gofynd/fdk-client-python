@@ -18,8 +18,8 @@ class OrderStatuses(BaseSchema):
     
     display = fields.Str(required=False)
     
-    value = fields.Int(required=False)
-    
     is_selected = fields.Boolean(required=False)
+    
+    value = fields.Int(required=False)
     
 

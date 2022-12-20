@@ -9,6 +9,8 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 from .Send import Send
 
 
@@ -55,6 +57,8 @@ class PropBeanConfig(BaseSchema):
 
     
     required = fields.Boolean(required=False)
+    
+    mapping = fields.Dict(required=False)
     
     optional = fields.Boolean(required=False)
     

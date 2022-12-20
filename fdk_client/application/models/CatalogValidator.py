@@ -241,6 +241,8 @@ class CatalogValidator:
         store_id = fields.Int(required=False)
         
         pincode = fields.Str(required=False)
+        
+        moq = fields.Int(required=False)
          
     
     class getProductSellersBySlug(BaseSchema):

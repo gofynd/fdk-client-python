@@ -18,9 +18,9 @@ class JobConfigRawDTO(BaseSchema):
     # Inventory swagger.json
 
     
-    company_name = fields.Str(required=False)
-    
     integration = fields.Str(required=False)
+    
+    company_name = fields.Str(required=False)
     
     company_id = fields.Int(required=False)
     
