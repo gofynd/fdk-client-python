@@ -7,11 +7,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
 from .GetCatalogConfigurationDetailsProduct import GetCatalogConfigurationDetailsProduct
+
+
+
+
 
 from .GetCatalogConfigurationDetailsSchemaListing import GetCatalogConfigurationDetailsSchemaListing
 
@@ -24,11 +24,11 @@ class EntityConfiguration(BaseSchema):
     
     config_id = fields.Str(required=False)
     
-    id = fields.Str(required=False)
+    product = fields.Nested(GetCatalogConfigurationDetailsProduct, required=False)
     
     config_type = fields.Str(required=False)
     
-    product = fields.Nested(GetCatalogConfigurationDetailsProduct, required=False)
+    id = fields.Str(required=False)
     
     listing = fields.Nested(GetCatalogConfigurationDetailsSchemaListing, required=False)
     

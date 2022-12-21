@@ -5,6 +5,14 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .TATCategoryRequest import TATCategoryRequest
+
+
+
+
+
+from .TATErrorSchemaResponse import TATErrorSchemaResponse
+
 from .TATPromiseResponse import TATPromiseResponse
 
 
@@ -12,30 +20,22 @@ from .TATPromiseResponse import TATPromiseResponse
 
 
 
-
-
-
-from .TATCategoryRequest import TATCategoryRequest
-
-from .TATErrorSchemaResponse import TATErrorSchemaResponse
-
-
 class TATArticlesResponse(BaseSchema):
     # Logistic swagger.json
 
     
-    promise = fields.Nested(TATPromiseResponse, required=False)
-    
-    _manufacturing_time_seconds = fields.Int(required=False)
-    
-    manufacturing_time = fields.Int(required=False)
-    
-    is_cod_available = fields.Boolean(required=False)
+    category = fields.Nested(TATCategoryRequest, required=False)
     
     manufacturing_time_unit = fields.Str(required=False)
     
-    category = fields.Nested(TATCategoryRequest, required=False)
+    manufacturing_time = fields.Int(required=False)
     
     error = fields.Nested(TATErrorSchemaResponse, required=False)
+    
+    promise = fields.Nested(TATPromiseResponse, required=False)
+    
+    is_cod_available = fields.Boolean(required=False)
+    
+    _manufacturing_time_seconds = fields.Int(required=False)
     
 
