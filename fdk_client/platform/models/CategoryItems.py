@@ -26,11 +26,11 @@ class CategoryItems(BaseSchema):
     
     action = fields.Nested(Action, required=False)
     
-    name = fields.Str(required=False)
+    uid = fields.Int(required=False)
     
     slug = fields.Str(required=False)
     
-    uid = fields.Int(required=False)
+    name = fields.Str(required=False)
     
     childs = fields.List(fields.Nested(Child, required=False), required=False)
     

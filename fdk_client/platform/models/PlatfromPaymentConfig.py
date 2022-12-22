@@ -7,9 +7,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 from .PlatformPaymentOptions import PlatformPaymentOptions
-
-
 
 
 class PlatfromPaymentConfig(BaseSchema):
@@ -18,8 +18,8 @@ class PlatfromPaymentConfig(BaseSchema):
     
     message = fields.Str(required=False)
     
-    data = fields.Nested(PlatformPaymentOptions, required=False)
-    
     success = fields.Boolean(required=False)
+    
+    data = fields.Nested(PlatformPaymentOptions, required=False)
     
 
