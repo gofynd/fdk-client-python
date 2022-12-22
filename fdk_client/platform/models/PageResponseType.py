@@ -22,8 +22,8 @@ class PageResponseType(BaseSchema):
     
     current = fields.Int(required=False)
     
-    total_count = fields.Int(required=False)
-    
     next = fields.Int(required=False)
+    
+    total_count = fields.Int(required=False)
     
 
