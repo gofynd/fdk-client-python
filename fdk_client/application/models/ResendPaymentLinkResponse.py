@@ -22,8 +22,8 @@ class ResendPaymentLinkResponse(BaseSchema):
     
     message = fields.Str(required=False)
     
-    polling_timeout = fields.Int(required=False)
-    
     success = fields.Boolean(required=False)
+    
+    polling_timeout = fields.Int(required=False)
     
 

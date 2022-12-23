@@ -22,12 +22,12 @@ class CreatePaymentLinkMeta(BaseSchema):
     
     pincode = fields.Str(required=False)
     
-    checkout_mode = fields.Str(required=False)
+    cart_id = fields.Str(required=False)
     
     amount = fields.Str(required=False)
     
-    cart_id = fields.Str(required=False)
-    
     assign_card_id = fields.Str(required=False)
+    
+    checkout_mode = fields.Str(required=False)
     
 

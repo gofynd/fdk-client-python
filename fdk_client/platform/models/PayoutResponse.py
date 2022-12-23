@@ -32,13 +32,11 @@ class PayoutResponse(BaseSchema):
     
     users = fields.Dict(required=False)
     
-    aggregator = fields.Str(required=False)
-    
-    transfer_type = fields.Str(required=False)
-    
     created = fields.Boolean(required=False)
     
-    success = fields.Boolean(required=False)
+    aggregator = fields.Str(required=False)
+    
+    bank_details = fields.Dict(required=False)
     
     unique_transfer_no = fields.Str(required=False)
     
@@ -46,8 +44,10 @@ class PayoutResponse(BaseSchema):
     
     is_active = fields.Boolean(required=False)
     
-    bank_details = fields.Dict(required=False)
-    
     payment_status = fields.Str(required=False)
+    
+    transfer_type = fields.Str(required=False)
+    
+    success = fields.Boolean(required=False)
     
 
