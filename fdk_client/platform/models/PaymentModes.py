@@ -22,8 +22,8 @@ class PaymentModes(BaseSchema):
     
     uses = fields.Nested(PaymentAllowValue, required=False)
     
-    codes = fields.List(fields.Str(required=False), required=False)
-    
     networks = fields.List(fields.Str(required=False), required=False)
+    
+    codes = fields.List(fields.Str(required=False), required=False)
     
 

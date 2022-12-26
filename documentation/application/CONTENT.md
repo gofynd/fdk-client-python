@@ -2486,6 +2486,7 @@ Success. Returns a list of pages along with their details. Check the example sho
  | url | String? |  yes  |  |
  | position | String? |  yes  |  |
  | attributes | HashMap<String,Any>? |  yes  |  |
+ | pages | ArrayList<HashMap<String,Any>>? |  yes  |  |
  | content | String? |  yes  |  |
 
 ---
@@ -3271,6 +3272,7 @@ Success. Returns a list of pages along with their details. Check the example sho
  | position | String? |  yes  |  |
  | attributes | HashMap<String,Any>? |  yes  |  |
  | content | String? |  yes  |  |
+ | pages | ArrayList<HashMap<String,Any>>? |  yes  |  |
  | source | [TagSourceSchema](#TagSourceSchema)? |  yes  |  |
 
 ---

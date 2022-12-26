@@ -368,13 +368,6 @@ class ContentValidator:
         application_id = fields.Str(required=False)
          
     
-    class createPagePreview(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-    
     class updatePagePreview(BaseSchema):
         
         company_id = fields.Str(required=False)
