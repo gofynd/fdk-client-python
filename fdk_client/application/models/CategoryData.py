@@ -5,17 +5,13 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .TicketCategory import TicketCategory
 
 
-
-
-
-class RedirectionSchema(BaseSchema):
-    # Content swagger.json
+class CategoryData(BaseSchema):
+    # Lead swagger.json
 
     
-    redirect_from = fields.Str(required=False)
-    
-    redirect_to = fields.Str(required=False)
+    list = fields.Nested(TicketCategory, required=False)
     
 

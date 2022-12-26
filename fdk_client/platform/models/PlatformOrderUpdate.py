@@ -8,14 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class RedirectionSchema(BaseSchema):
-    # Content swagger.json
+class PlatformOrderUpdate(BaseSchema):
+    # Order swagger.json
 
     
-    redirect_from = fields.Str(required=False)
-    
-    redirect_to = fields.Str(required=False)
+    order_id = fields.Str(required=False)
     
 

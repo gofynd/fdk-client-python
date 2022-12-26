@@ -22,7 +22,9 @@ class BulkResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    created_by = fields.Nested(UserInfo1, required=False)
+    modified_by = fields.Nested(UserInfo1, required=False)
+    
+    modified_on = fields.Str(required=False)
     
     is_active = fields.Boolean(required=False)
     
@@ -30,8 +32,6 @@ class BulkResponse(BaseSchema):
     
     created_on = fields.Str(required=False)
     
-    modified_on = fields.Str(required=False)
-    
-    modified_by = fields.Nested(UserInfo1, required=False)
+    created_by = fields.Nested(UserInfo1, required=False)
     
 

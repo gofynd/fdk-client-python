@@ -18,9 +18,9 @@ class JioCodeUpsertDataSet(BaseSchema):
     # Order swagger.json
 
     
-    item_id = fields.Str(required=False)
-    
     article_id = fields.Str(required=False)
+    
+    item_id = fields.Str(required=False)
     
     jio_code = fields.Str(required=False)
     

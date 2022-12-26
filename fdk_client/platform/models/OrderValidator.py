@@ -56,8 +56,6 @@ class OrderValidator:
         
         channel_shipment_id = fields.Str(required=False)
         
-        shipment_id = fields.Str(required=False)
-        
         ordering_company_id = fields.Str(required=False)
         
         request_by_ext = fields.Str(required=False)
@@ -538,7 +536,17 @@ class OrderValidator:
         company_id = fields.Int(required=False)
          
     
+    class orderUpdate(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    
     class checkOrderStatus(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    
+    class sendSmsNinjaPlatform(BaseSchema):
         
         company_id = fields.Int(required=False)
          
