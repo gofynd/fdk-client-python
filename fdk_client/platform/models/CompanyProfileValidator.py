@@ -98,3 +98,8 @@ class CompanyProfileValidator:
         company_id = fields.Str(required=False)
          
     
+    class getOptimalLocations(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+         
+    

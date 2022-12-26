@@ -18,11 +18,11 @@ class StoreEinvoice(BaseSchema):
     # Order swagger.json
 
     
-    username = fields.Str(required=False)
+    enabled = fields.Boolean(required=False)
     
     user = fields.Str(required=False)
     
-    enabled = fields.Boolean(required=False)
+    username = fields.Str(required=False)
     
     password = fields.Str(required=False)
     

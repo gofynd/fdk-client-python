@@ -20,13 +20,13 @@ class ManifestDetailItem(BaseSchema):
     # Order swagger.json
 
     
-    order_id = fields.Str(required=False)
-    
     shipment_id = fields.Str(required=False)
+    
+    invoice_id = fields.Str(required=False)
     
     awb = fields.Str(required=False)
     
-    invoice_id = fields.Str(required=False)
+    order_id = fields.Str(required=False)
     
     item_qty = fields.Int(required=False)
     

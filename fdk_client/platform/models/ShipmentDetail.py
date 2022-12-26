@@ -26,12 +26,12 @@ class ShipmentDetail(BaseSchema):
     
     meta = fields.Nested(Meta, required=False)
     
-    id = fields.Int(required=False)
-    
     bag_list = fields.List(fields.Int(required=False), required=False)
+    
+    shipment_id = fields.Str(required=False)
     
     remarks = fields.Str(required=False)
     
-    shipment_id = fields.Str(required=False)
+    id = fields.Int(required=False)
     
 

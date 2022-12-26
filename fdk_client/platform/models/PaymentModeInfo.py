@@ -14,8 +14,8 @@ class PaymentModeInfo(BaseSchema):
     # Order swagger.json
 
     
-    type = fields.Str(required=False)
-    
     logo = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
     
 

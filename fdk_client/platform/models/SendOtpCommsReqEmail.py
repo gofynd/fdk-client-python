@@ -9,7 +9,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .SendOtpSmsCommsTemplate import SendOtpSmsCommsTemplate
+from .SendOtpEmailCommsTemplate import SendOtpEmailCommsTemplate
 
 
 class SendOtpCommsReqEmail(BaseSchema):
@@ -20,6 +20,6 @@ class SendOtpCommsReqEmail(BaseSchema):
     
     expiry = fields.Int(required=False)
     
-    template = fields.Nested(SendOtpSmsCommsTemplate, required=False)
+    template = fields.Nested(SendOtpEmailCommsTemplate, required=False)
     
 
