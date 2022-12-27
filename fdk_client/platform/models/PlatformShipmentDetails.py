@@ -76,11 +76,11 @@ class PlatformShipmentDetails(BaseSchema):
     
     status = fields.Nested(PlatformShipmentDetailsStatus, required=False)
     
-    bags = fields.Nested(BagsDetails, required=False)
+    bags = fields.List(fields.Nested(BagsDetails, required=False), required=False)
     
     prices = fields.Nested(ShipmentPrices, required=False)
     
-    breakup_values = fields.Nested(ShipmentBreakupValues, required=False)
+    breakup_values = fields.List(fields.Nested(ShipmentBreakupValues, required=False), required=False)
     
     id = fields.Str(required=False)
     
@@ -112,7 +112,7 @@ class PlatformShipmentDetails(BaseSchema):
     
     promise = fields.Nested(Promise, required=False)
     
-    tracking_details = fields.Nested(ShipmentTrackingDetails, required=False)
+    tracking_details = fields.List(fields.Nested(ShipmentTrackingDetails, required=False), required=False)
     
     is_fynd_coupon = fields.Boolean(required=False)
     

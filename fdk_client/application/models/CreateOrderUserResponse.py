@@ -5,9 +5,9 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-
-
 from .CreateOrderUserData import CreateOrderUserData
+
+
 
 
 
@@ -24,8 +24,6 @@ class CreateOrderUserResponse(BaseSchema):
     # Payment swagger.json
 
     
-    order_id = fields.Str(required=False)
-    
     data = fields.Nested(CreateOrderUserData, required=False)
     
     payment_confirm_url = fields.Str(required=False)
@@ -35,6 +33,8 @@ class CreateOrderUserResponse(BaseSchema):
     callback_url = fields.Str(required=False)
     
     status_code = fields.Int(required=False)
+    
+    order_id = fields.Str(required=False)
     
     success = fields.Boolean(required=False)
     

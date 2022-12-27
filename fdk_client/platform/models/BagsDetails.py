@@ -52,7 +52,7 @@ class BagsDetails(BaseSchema):
     
     gst_details = fields.Nested(GstDetails, required=False)
     
-    breakup_values = fields.Nested(BagBreakupValues, required=False)
+    breakup_values = fields.List(fields.Nested(BagBreakupValues, required=False), required=False)
     
     update_time = fields.Int(required=False)
     

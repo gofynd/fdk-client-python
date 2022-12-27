@@ -63,6 +63,8 @@ from .ShipmentUserInfo import ShipmentUserInfo
 
 from .ShipmentTotalDetails import ShipmentTotalDetails
 
+from .ReturnMetaData import ReturnMetaData
+
 
 class Shipments(BaseSchema):
     # Order swagger.json
@@ -125,5 +127,7 @@ class Shipments(BaseSchema):
     size_info = fields.Dict(required=False)
     
     total_details = fields.Nested(ShipmentTotalDetails, required=False)
+    
+    return_meta = fields.Nested(ReturnMetaData, required=False)
     
 

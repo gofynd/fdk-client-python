@@ -14,8 +14,8 @@ class _ArticleAssignment(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    level = fields.Str(required=False)
-    
     strategy = fields.Str(required=False)
+    
+    level = fields.Str(required=False)
     
 

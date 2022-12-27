@@ -111,7 +111,7 @@ class OrderValidator:
         previous = fields.Str(required=False)
          
     
-    class getOrderDetails(BaseSchema):
+    class getApplicationOrderDetails(BaseSchema):
         
         company_id = fields.Str(required=False)
         

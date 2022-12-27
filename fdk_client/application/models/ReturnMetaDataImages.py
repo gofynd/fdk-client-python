@@ -8,14 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class SetDefaultBeneficiaryRequest(BaseSchema):
-    # Payment swagger.json
+class ReturnMetaDataImages(BaseSchema):
+    # Order swagger.json
 
     
-    beneficiary_id = fields.Str(required=False)
-    
-    order_id = fields.Str(required=False)
+    url = fields.Str(required=False)
     
 

@@ -46,7 +46,7 @@ class OrderDetailsItem(BaseSchema):
     
     ordering_store = fields.Dict(required=False)
     
-    breakup_values = fields.Nested(PlatformBreakupValues, required=False)
+    breakup_values = fields.List(fields.Nested(PlatformBreakupValues, required=False), required=False)
     
     id = fields.Str(required=False)
     

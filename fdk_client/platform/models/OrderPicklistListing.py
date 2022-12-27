@@ -13,7 +13,7 @@ from .Channel import Channel
 
 
 
-
+from .PlatformFulfillingStore import PlatformFulfillingStore
 
 from .PlatformBreakupValues import PlatformBreakupValues
 
@@ -44,15 +44,15 @@ class OrderPicklistListing(BaseSchema):
     
     fyndstore_emp = fields.Dict(required=False)
     
-    ordering_store = fields.Dict(required=False)
+    ordering_store = fields.Nested(PlatformFulfillingStore, required=False)
     
-    breakup_values = fields.Nested(PlatformBreakupValues, required=False)
+    breakup_values = fields.List(fields.Nested(PlatformBreakupValues, required=False), required=False)
     
     id = fields.Str(required=False)
     
     application = fields.Nested(PlatformApplication, required=False)
     
-    shipments = fields.Nested(PlatformShipmentDetails, required=False)
+    shipments = fields.List(fields.Nested(PlatformShipmentDetails, required=False), required=False)
     
     created_at = fields.Str(required=False)
     
