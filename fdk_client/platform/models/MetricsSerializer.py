@@ -11,9 +11,9 @@ from .DocumentsObj import DocumentsObj
 
 
 
-
-
 from .DocumentsObj import DocumentsObj
+
+
 
 from .DocumentsObj import DocumentsObj
 
@@ -30,12 +30,12 @@ class MetricsSerializer(BaseSchema):
     
     stage = fields.Str(required=False)
     
-    uid = fields.Int(required=False)
-    
     product = fields.Nested(DocumentsObj, required=False)
     
-    brand = fields.Nested(DocumentsObj, required=False)
+    uid = fields.Int(required=False)
     
     store_documents = fields.Nested(DocumentsObj, required=False)
+    
+    brand = fields.Nested(DocumentsObj, required=False)
     
 

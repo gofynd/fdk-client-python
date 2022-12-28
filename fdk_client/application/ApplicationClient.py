@@ -5402,6 +5402,7 @@ class Payment:
             "getEpaylaterBannerDetails": "/service/application/payment/v1.0/epaylater/banner",
             "resendOrCancelPayment": "/service/application/payment/v1.0/payment/resend_or_cancel",
             "renderHTML": "/service/application/payment/v1.0/payment/html/render/",
+            "validateVPA": "/service/application/payment/v1.0/validate-vpa",
             "getActiveRefundTransferModes": "/service/application/payment/v1.0/refund/transfer-mode",
             "enableOrDisableRefundTransferMode": "/service/application/payment/v1.0/refund/transfer-mode",
             "getUserBeneficiariesDetail": "/service/application/payment/v1.0/refund/user/beneficiary",
@@ -5924,6 +5925,36 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["renderHTML"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/html/render/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+    
+    async def validateVPA(self, body=""):
+        """API to Validate UPI ID
+        """
+        payload = {}
+        
+        # Parameter validation
+        schema = PaymentValidator.validateVPA()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models.ValidateVPARequest import ValidateVPARequest
+        schema = ValidateVPARequest()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["validateVPA"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["validateVPA"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/validate-vpa", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
     async def getActiveRefundTransferModes(self, body=""):
         """Use this API to retrieve eligible refund modes (such as Netbanking) and add the beneficiary details.

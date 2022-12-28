@@ -24,6 +24,12 @@ class InventoryExportJob(BaseSchema):
     # Catalog swagger.json
 
     
+    seller_id = fields.Int(required=False)
+    
+    task_id = fields.Str(required=False)
+    
+    request_params = fields.Dict(required=False)
+    
     status = fields.Str(required=False)
     
     completed_on = fields.Str(required=False)
@@ -31,11 +37,5 @@ class InventoryExportJob(BaseSchema):
     trigger_on = fields.Str(required=False)
     
     url = fields.Str(required=False)
-    
-    task_id = fields.Str(required=False)
-    
-    request_params = fields.Dict(required=False)
-    
-    seller_id = fields.Int(required=False)
     
 

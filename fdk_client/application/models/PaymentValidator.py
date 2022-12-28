@@ -100,6 +100,10 @@ class PaymentValidator:
         
         pass 
     
+    class validateVPA(BaseSchema):
+        
+        pass 
+    
     class getActiveRefundTransferModes(BaseSchema):
         
         pass 

@@ -34,19 +34,19 @@ class CreateUpdateBrandRequestSerializer(BaseSchema):
     
     synonyms = fields.List(fields.Str(required=False), required=False)
     
-    company_id = fields.Int(required=False)
+    _locale_language = fields.Dict(required=False)
     
     logo = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    uid = fields.Int(required=False)
     
     description = fields.Str(required=False)
     
     brand_tier = fields.Str(required=False)
     
-    _locale_language = fields.Dict(required=False)
+    uid = fields.Int(required=False)
+    
+    name = fields.Str(required=False)
+    
+    company_id = fields.Int(required=False)
     
     banner = fields.Nested(BrandBannerSerializer, required=False)
     
