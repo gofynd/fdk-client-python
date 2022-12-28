@@ -5,19 +5,25 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .Validation import Validation
-
-
-
-from .Restrictions import Restrictions
-
-from .CouponSchedule import CouponSchedule
-
 from .RuleDefinition import RuleDefinition
+
+from .Identifier import Identifier
+
+
 
 from .Validity import Validity
 
 from .DisplayMeta import DisplayMeta
+
+from .Ownership import Ownership
+
+from .CouponSchedule import CouponSchedule
+
+from .Validation import Validation
+
+
+
+
 
 from .CouponAuthor import CouponAuthor
 
@@ -27,34 +33,34 @@ from .Rule import Rule
 
 from .CouponAction import CouponAction
 
-from .Identifier import Identifier
-
-
-
-
-
 from .State import State
 
-from .Ownership import Ownership
+from .Restrictions import Restrictions
 
 
 class CouponAdd(BaseSchema):
     # Cart swagger.json
 
     
-    validation = fields.Nested(Validation, required=False)
-    
-    tags = fields.List(fields.Str(required=False), required=False)
-    
-    restrictions = fields.Nested(Restrictions, required=False)
-    
-    _schedule = fields.Nested(CouponSchedule, required=False)
-    
     rule_definition = fields.Nested(RuleDefinition, required=False)
+    
+    identifiers = fields.Nested(Identifier, required=False)
+    
+    code = fields.Str(required=False)
     
     validity = fields.Nested(Validity, required=False)
     
     display_meta = fields.Nested(DisplayMeta, required=False)
+    
+    ownership = fields.Nested(Ownership, required=False)
+    
+    _schedule = fields.Nested(CouponSchedule, required=False)
+    
+    validation = fields.Nested(Validation, required=False)
+    
+    type_slug = fields.Str(required=False)
+    
+    tags = fields.List(fields.Str(required=False), required=False)
     
     author = fields.Nested(CouponAuthor, required=False)
     
@@ -64,14 +70,8 @@ class CouponAdd(BaseSchema):
     
     action = fields.Nested(CouponAction, required=False)
     
-    identifiers = fields.Nested(Identifier, required=False)
-    
-    type_slug = fields.Str(required=False)
-    
-    code = fields.Str(required=False)
-    
     state = fields.Nested(State, required=False)
     
-    ownership = fields.Nested(Ownership, required=False)
+    restrictions = fields.Nested(Restrictions, required=False)
     
 

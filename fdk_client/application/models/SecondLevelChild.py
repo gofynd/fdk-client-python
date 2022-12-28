@@ -5,11 +5,11 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-
-
-
-
 from .ProductListingAction import ProductListingAction
+
+
+
+
 
 
 
@@ -24,15 +24,15 @@ class SecondLevelChild(BaseSchema):
     # Catalog swagger.json
 
     
-    _custom_json = fields.Dict(required=False)
+    action = fields.Nested(ProductListingAction, required=False)
     
     uid = fields.Int(required=False)
     
-    action = fields.Nested(ProductListingAction, required=False)
+    slug = fields.Str(required=False)
     
     name = fields.Str(required=False)
     
-    slug = fields.Str(required=False)
+    _custom_json = fields.Dict(required=False)
     
     childs = fields.List(fields.Nested(ThirdLevelChild, required=False), required=False)
     

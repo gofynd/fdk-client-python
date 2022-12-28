@@ -9,13 +9,13 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
+
+
+
+
 from .ProductBundleItem import ProductBundleItem
-
-
-
-
-
-
 
 
 
@@ -34,7 +34,13 @@ class ProductBundleUpdateRequest(BaseSchema):
     # Catalog swagger.json
 
     
-    modified_on = fields.Str(required=False)
+    is_active = fields.Boolean(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    company_id = fields.Int(required=False)
+    
+    meta = fields.Dict(required=False)
     
     modified_by = fields.Dict(required=False)
     
@@ -42,20 +48,14 @@ class ProductBundleUpdateRequest(BaseSchema):
     
     logo = fields.Str(required=False)
     
-    same_store_assignment = fields.Boolean(required=False)
-    
-    page_visibility = fields.List(fields.Str(required=False), required=False)
+    modified_on = fields.Str(required=False)
     
     choice = fields.Str(required=False)
     
-    meta = fields.Dict(required=False)
+    page_visibility = fields.List(fields.Str(required=False), required=False)
     
-    is_active = fields.Boolean(required=False)
+    same_store_assignment = fields.Boolean(required=False)
     
     name = fields.Str(required=False)
-    
-    company_id = fields.Int(required=False)
-    
-    slug = fields.Str(required=False)
     
 
