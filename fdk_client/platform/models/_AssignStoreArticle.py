@@ -5,11 +5,11 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-
-
-
-
 from ._ArticleAssignment import _ArticleAssignment
+
+
+
+
 
 
 
@@ -20,11 +20,11 @@ class _AssignStoreArticle(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    quantity = fields.Int(required=False)
+    article_assignment = fields.Nested(_ArticleAssignment, required=False)
     
     meta = fields.Dict(required=False)
     
-    article_assignment = fields.Nested(_ArticleAssignment, required=False)
+    quantity = fields.Int(required=False)
     
     group_id = fields.Str(required=False)
     
