@@ -24,7 +24,7 @@ class BuyerDetails(BaseSchema):
     # Order swagger.json
 
     
-    city = fields.Str(required=False)
+    ajio_site_id = fields.Str(required=False)
     
     state = fields.Str(required=False)
     
@@ -32,10 +32,10 @@ class BuyerDetails(BaseSchema):
     
     name = fields.Str(required=False)
     
-    gstin = fields.Str(required=False)
-    
     pincode = fields.Int(required=False)
     
-    ajio_site_id = fields.Str(required=False)
+    gstin = fields.Str(required=False)
+    
+    city = fields.Str(required=False)
     
 

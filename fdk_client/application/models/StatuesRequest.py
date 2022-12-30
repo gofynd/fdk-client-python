@@ -16,9 +16,9 @@ class StatuesRequest(BaseSchema):
     # Order swagger.json
 
     
-    exclude_bags_next_state = fields.Str(required=False)
-    
     status = fields.Str(required=False)
+    
+    exclude_bags_next_state = fields.Str(required=False)
     
     shipments = fields.List(fields.Nested(ShipmentsRequest, required=False), required=False)
     

@@ -16,10 +16,10 @@ class PaymentMethods(BaseSchema):
     # Order swagger.json
 
     
+    collect_by = fields.Str(required=False)
+    
     refund_by = fields.Str(required=False)
     
     mode = fields.Str(required=False)
-    
-    collect_by = fields.Str(required=False)
     
 

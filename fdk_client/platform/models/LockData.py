@@ -16,9 +16,9 @@ class LockData(BaseSchema):
     # Order swagger.json
 
     
-    lock_message = fields.Str(required=False)
-    
     locked = fields.Boolean(required=False)
+    
+    lock_message = fields.Str(required=False)
     
     mto = fields.Boolean(required=False)
     
