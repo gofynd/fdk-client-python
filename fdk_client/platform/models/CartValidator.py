@@ -76,7 +76,7 @@ class CartValidator:
         
         q = fields.Str(required=False)
         
-        is_active = fields.Boolean(required=False)
+        status = fields.Str(required=False)
         
         promo_group = fields.Str(required=False)
         
@@ -119,6 +119,13 @@ class CartValidator:
         application_id = fields.Str(required=False)
         
         id = fields.Str(required=False)
+         
+    
+    class getPromosCouponConfig(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
          
     
     class fetchAndvalidateCartItems(BaseSchema):

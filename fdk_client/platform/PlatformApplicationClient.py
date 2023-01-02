@@ -132,7 +132,7 @@ class Lead:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.EditTicketPayload import EditTicketPayload
+        from .models import EditTicketPayload
         schema = EditTicketPayload()
         schema.dump(schema.load(body))
         
@@ -165,7 +165,7 @@ class Lead:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.TicketHistoryPayload import TicketHistoryPayload
+        from .models import TicketHistoryPayload
         schema = TicketHistoryPayload()
         schema.dump(schema.load(body))
         
@@ -254,7 +254,7 @@ class Lead:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.EditCustomFormPayload import EditCustomFormPayload
+        from .models import EditCustomFormPayload
         schema = EditCustomFormPayload()
         schema.dump(schema.load(body))
         
@@ -307,7 +307,7 @@ class Lead:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CreateCustomFormPayload import CreateCustomFormPayload
+        from .models import CreateCustomFormPayload
         schema = CreateCustomFormPayload()
         schema.dump(schema.load(body))
         
@@ -392,7 +392,7 @@ class Lead:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CreateVideoRoomPayload import CreateVideoRoomPayload
+        from .models import CreateVideoRoomPayload
         schema = CreateVideoRoomPayload()
         schema.dump(schema.load(body))
         
@@ -575,7 +575,7 @@ class Feedback:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ApproveRequest import ApproveRequest
+        from .models import ApproveRequest
         schema = ApproveRequest()
         schema.dump(schema.load(body))
         
@@ -667,7 +667,7 @@ class Feedback:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.TemplateRequestList import TemplateRequestList
+        from .models import TemplateRequestList
         schema = TemplateRequestList()
         schema.dump(schema.load(body))
         
@@ -728,7 +728,7 @@ class Feedback:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.UpdateTemplateRequest import UpdateTemplateRequest
+        from .models import UpdateTemplateRequest
         schema = UpdateTemplateRequest()
         schema.dump(schema.load(body))
         
@@ -761,7 +761,7 @@ class Feedback:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.UpdateTemplateStatusRequest import UpdateTemplateStatusRequest
+        from .models import UpdateTemplateStatusRequest
         schema = UpdateTemplateStatusRequest()
         schema.dump(schema.load(body))
         
@@ -828,7 +828,7 @@ class Theme:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AvailablePageSchema import AvailablePageSchema
+        from .models import AvailablePageSchema
         schema = AvailablePageSchema()
         schema.dump(schema.load(body))
         
@@ -861,7 +861,7 @@ class Theme:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AllAvailablePageSchema import AllAvailablePageSchema
+        from .models import AllAvailablePageSchema
         schema = AllAvailablePageSchema()
         schema.dump(schema.load(body))
         
@@ -930,7 +930,7 @@ class Theme:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AvailablePageSchema import AvailablePageSchema
+        from .models import AvailablePageSchema
         schema = AvailablePageSchema()
         schema.dump(schema.load(body))
         
@@ -1023,7 +1023,7 @@ class Theme:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AddThemeRequestSchema import AddThemeRequestSchema
+        from .models import AddThemeRequestSchema
         schema = AddThemeRequestSchema()
         schema.dump(schema.load(body))
         
@@ -1052,7 +1052,7 @@ class Theme:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AddThemeRequestSchema import AddThemeRequestSchema
+        from .models import AddThemeRequestSchema
         schema = AddThemeRequestSchema()
         schema.dump(schema.load(body))
         
@@ -1169,7 +1169,7 @@ class Theme:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ThemesSchema import ThemesSchema
+        from .models import ThemesSchema
         schema = ThemesSchema()
         schema.dump(schema.load(body))
         
@@ -1278,7 +1278,7 @@ class Theme:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ThemesSchema import ThemesSchema
+        from .models import ThemesSchema
         schema = ThemesSchema()
         schema.dump(schema.load(body))
         
@@ -1573,7 +1573,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CreateUserRequestSchema import CreateUserRequestSchema
+        from .models import CreateUserRequestSchema
         schema = CreateUserRequestSchema()
         schema.dump(schema.load(body))
         
@@ -1602,7 +1602,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.BlockUserRequestSchema import BlockUserRequestSchema
+        from .models import BlockUserRequestSchema
         schema = BlockUserRequestSchema()
         schema.dump(schema.load(body))
         
@@ -1631,7 +1631,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ArchiveUserRequestSchema import ArchiveUserRequestSchema
+        from .models import ArchiveUserRequestSchema
         schema = ArchiveUserRequestSchema()
         schema.dump(schema.load(body))
         
@@ -1660,7 +1660,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.UnDeleteUserRequestSchema import UnDeleteUserRequestSchema
+        from .models import UnDeleteUserRequestSchema
         schema = UnDeleteUserRequestSchema()
         schema.dump(schema.load(body))
         
@@ -1693,7 +1693,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.UpdateUserRequestSchema import UpdateUserRequestSchema
+        from .models import UpdateUserRequestSchema
         schema = UpdateUserRequestSchema()
         schema.dump(schema.load(body))
         
@@ -1722,7 +1722,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CreateUserSessionRequestSchema import CreateUserSessionRequestSchema
+        from .models import CreateUserSessionRequestSchema
         schema = CreateUserSessionRequestSchema()
         schema.dump(schema.load(body))
         
@@ -1831,7 +1831,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PlatformSchema import PlatformSchema
+        from .models import PlatformSchema
         schema = PlatformSchema()
         schema.dump(schema.load(body))
         
@@ -1898,7 +1898,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AdminAnnouncementSchema import AdminAnnouncementSchema
+        from .models import AdminAnnouncementSchema
         schema = AdminAnnouncementSchema()
         schema.dump(schema.load(body))
         
@@ -1959,7 +1959,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AdminAnnouncementSchema import AdminAnnouncementSchema
+        from .models import AdminAnnouncementSchema
         schema = AdminAnnouncementSchema()
         schema.dump(schema.load(body))
         
@@ -1992,7 +1992,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ScheduleSchema import ScheduleSchema
+        from .models import ScheduleSchema
         schema = ScheduleSchema()
         schema.dump(schema.load(body))
         
@@ -2049,7 +2049,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.BlogRequest import BlogRequest
+        from .models import BlogRequest
         schema = BlogRequest()
         schema.dump(schema.load(body))
         
@@ -2114,7 +2114,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.BlogRequest import BlogRequest
+        from .models import BlogRequest
         schema = BlogRequest()
         schema.dump(schema.load(body))
         
@@ -2199,7 +2199,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.DataLoaderSchema import DataLoaderSchema
+        from .models import DataLoaderSchema
         schema = DataLoaderSchema()
         schema.dump(schema.load(body))
         
@@ -2284,7 +2284,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.DataLoaderSchema import DataLoaderSchema
+        from .models import DataLoaderSchema
         schema = DataLoaderSchema()
         schema.dump(schema.load(body))
         
@@ -2425,7 +2425,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CreateFaqCategoryRequestSchema import CreateFaqCategoryRequestSchema
+        from .models import CreateFaqCategoryRequestSchema
         schema = CreateFaqCategoryRequestSchema()
         schema.dump(schema.load(body))
         
@@ -2458,7 +2458,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.UpdateFaqCategoryRequestSchema import UpdateFaqCategoryRequestSchema
+        from .models import UpdateFaqCategoryRequestSchema
         schema = UpdateFaqCategoryRequestSchema()
         schema.dump(schema.load(body))
         
@@ -2547,7 +2547,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CreateFaqSchema import CreateFaqSchema
+        from .models import CreateFaqSchema
         schema = CreateFaqSchema()
         schema.dump(schema.load(body))
         
@@ -2584,7 +2584,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CreateFaqSchema import CreateFaqSchema
+        from .models import CreateFaqSchema
         schema = CreateFaqSchema()
         schema.dump(schema.load(body))
         
@@ -2705,7 +2705,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.LandingPageSchema import LandingPageSchema
+        from .models import LandingPageSchema
         schema = LandingPageSchema()
         schema.dump(schema.load(body))
         
@@ -2738,7 +2738,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.LandingPageSchema import LandingPageSchema
+        from .models import LandingPageSchema
         schema = LandingPageSchema()
         schema.dump(schema.load(body))
         
@@ -2819,7 +2819,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ApplicationLegal import ApplicationLegal
+        from .models import ApplicationLegal
         schema = ApplicationLegal()
         schema.dump(schema.load(body))
         
@@ -2884,7 +2884,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.NavigationRequest import NavigationRequest
+        from .models import NavigationRequest
         schema = NavigationRequest()
         schema.dump(schema.load(body))
         
@@ -2973,7 +2973,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.NavigationRequest import NavigationRequest
+        from .models import NavigationRequest
         schema = NavigationRequest()
         schema.dump(schema.load(body))
         
@@ -3019,18 +3019,10 @@ class Content:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/navigations/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
-    async def getPageMeta(self, page_type=None, cart_pages=None):
+    async def getPageMeta(self, ):
         """Use this API to get the meta of custom pages (blog, page) and default system pages (e.g. home/brand/category/collection).
-        :param page_type : Fetch meta by page type. Acceptable values are: system, custom and all : type string
-        :param cart_pages : Pass this param value as `true` to fetch meta with cart pages : type boolean
         """
         payload = {}
-        
-        if page_type:
-            payload["page_type"] = page_type
-        
-        if cart_pages:
-            payload["cart_pages"] = cart_pages
         
 
         # Parameter validation
@@ -3038,8 +3030,8 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pages/meta", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"page_type","in":"query","description":"Fetch meta by page type. Acceptable values are: system, custom and all","required":false,"schema":{"type":"string","default":"all"}},{"name":"cart_pages","in":"query","description":"Pass this param value as `true` to fetch meta with cart pages","required":false,"schema":{"type":"boolean","default":"false"}}],"query":[{"name":"page_type","in":"query","description":"Fetch meta by page type. Acceptable values are: system, custom and all","required":false,"schema":{"type":"string","default":"all"}},{"name":"cart_pages","in":"query","description":"Pass this param value as `true` to fetch meta with cart pages","required":false,"schema":{"type":"boolean","default":"false"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", page_type=page_type, cart_pages=cart_pages)
-        query_string = await create_query_string(page_type=page_type, cart_pages=cart_pages)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pages/meta", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", )
+        query_string = await create_query_string()
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -3049,7 +3041,7 @@ class Content:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pages/meta", page_type=page_type, cart_pages=cart_pages), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pages/meta", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def getPageSpec(self, ):
         """Use this API to get the specifications of a page, such as page type, display name, params and query.
@@ -3090,7 +3082,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PagePublishRequest import PagePublishRequest
+        from .models import PagePublishRequest
         schema = PagePublishRequest()
         schema.dump(schema.load(body))
         
@@ -3147,7 +3139,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PathMappingSchema import PathMappingSchema
+        from .models import PathMappingSchema
         schema = PathMappingSchema()
         schema.dump(schema.load(body))
         
@@ -3240,7 +3232,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PathMappingSchema import PathMappingSchema
+        from .models import PathMappingSchema
         schema = PathMappingSchema()
         schema.dump(schema.load(body))
         
@@ -3321,7 +3313,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SeoComponent import SeoComponent
+        from .models import SeoComponent
         schema = SeoComponent()
         schema.dump(schema.load(body))
         
@@ -3386,7 +3378,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SlideshowRequest import SlideshowRequest
+        from .models import SlideshowRequest
         schema = SlideshowRequest()
         schema.dump(schema.load(body))
         
@@ -3451,7 +3443,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SlideshowRequest import SlideshowRequest
+        from .models import SlideshowRequest
         schema = SlideshowRequest()
         schema.dump(schema.load(body))
         
@@ -3532,7 +3524,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.Support import Support
+        from .models import Support
         schema = Support()
         schema.dump(schema.load(body))
         
@@ -3561,7 +3553,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CreateTagRequestSchema import CreateTagRequestSchema
+        from .models import CreateTagRequestSchema
         schema = CreateTagRequestSchema()
         schema.dump(schema.load(body))
         
@@ -3638,7 +3630,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CreateTagRequestSchema import CreateTagRequestSchema
+        from .models import CreateTagRequestSchema
         schema = CreateTagRequestSchema()
         schema.dump(schema.load(body))
         
@@ -3667,7 +3659,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.RemoveHandpickedSchema import RemoveHandpickedSchema
+        from .models import RemoveHandpickedSchema
         schema = RemoveHandpickedSchema()
         schema.dump(schema.load(body))
         
@@ -3700,7 +3692,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.UpdateHandpickedSchema import UpdateHandpickedSchema
+        from .models import UpdateHandpickedSchema
         schema = UpdateHandpickedSchema()
         schema.dump(schema.load(body))
         
@@ -3729,7 +3721,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PageRequest import PageRequest
+        from .models import PageRequest
         schema = PageRequest()
         schema.dump(schema.load(body))
         
@@ -3794,7 +3786,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PageSchema import PageSchema
+        from .models import PageSchema
         schema = PageSchema()
         schema.dump(schema.load(body))
         
@@ -3899,7 +3891,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CampaignReq import CampaignReq
+        from .models import CampaignReq
         schema = CampaignReq()
         schema.dump(schema.load(body))
         
@@ -3960,7 +3952,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CampaignReq import CampaignReq
+        from .models import CampaignReq
         schema = CampaignReq()
         schema.dump(schema.load(body))
         
@@ -4053,7 +4045,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AudienceReq import AudienceReq
+        from .models import AudienceReq
         schema = AudienceReq()
         schema.dump(schema.load(body))
         
@@ -4082,7 +4074,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.BigqueryHeadersReq import BigqueryHeadersReq
+        from .models import BigqueryHeadersReq
         schema = BigqueryHeadersReq()
         schema.dump(schema.load(body))
         
@@ -4143,7 +4135,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AudienceReq import AudienceReq
+        from .models import AudienceReq
         schema = AudienceReq()
         schema.dump(schema.load(body))
         
@@ -4172,7 +4164,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.GetNRecordsCsvReq import GetNRecordsCsvReq
+        from .models import GetNRecordsCsvReq
         schema = GetNRecordsCsvReq()
         schema.dump(schema.load(body))
         
@@ -4237,7 +4229,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.EmailProviderReq import EmailProviderReq
+        from .models import EmailProviderReq
         schema = EmailProviderReq()
         schema.dump(schema.load(body))
         
@@ -4298,7 +4290,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.EmailProviderReq import EmailProviderReq
+        from .models import EmailProviderReq
         schema = EmailProviderReq()
         schema.dump(schema.load(body))
         
@@ -4363,7 +4355,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.EmailTemplateReq import EmailTemplateReq
+        from .models import EmailTemplateReq
         schema = EmailTemplateReq()
         schema.dump(schema.load(body))
         
@@ -4460,7 +4452,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.EmailTemplateReq import EmailTemplateReq
+        from .models import EmailTemplateReq
         schema = EmailTemplateReq()
         schema.dump(schema.load(body))
         
@@ -4517,7 +4509,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.EngineRequest import EngineRequest
+        from .models import EngineRequest
         schema = EngineRequest()
         schema.dump(schema.load(body))
         
@@ -4546,7 +4538,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.EngineRequest import EngineRequest
+        from .models import EngineRequest
         schema = EngineRequest()
         schema.dump(schema.load(body))
         
@@ -4647,7 +4639,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.TriggerJobRequest import TriggerJobRequest
+        from .models import TriggerJobRequest
         schema = TriggerJobRequest()
         schema.dump(schema.load(body))
         
@@ -4752,7 +4744,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SendOtpCommsReq import SendOtpCommsReq
+        from .models import SendOtpCommsReq
         schema = SendOtpCommsReq()
         schema.dump(schema.load(body))
         
@@ -4781,7 +4773,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.VerifyOtpCommsReq import VerifyOtpCommsReq
+        from .models import VerifyOtpCommsReq
         schema = VerifyOtpCommsReq()
         schema.dump(schema.load(body))
         
@@ -4846,7 +4838,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SmsProviderReq import SmsProviderReq
+        from .models import SmsProviderReq
         schema = SmsProviderReq()
         schema.dump(schema.load(body))
         
@@ -4907,7 +4899,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SmsProviderReq import SmsProviderReq
+        from .models import SmsProviderReq
         schema = SmsProviderReq()
         schema.dump(schema.load(body))
         
@@ -4972,7 +4964,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SmsTemplateReq import SmsTemplateReq
+        from .models import SmsTemplateReq
         schema = SmsTemplateReq()
         schema.dump(schema.load(body))
         
@@ -5033,7 +5025,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SmsTemplateReq import SmsTemplateReq
+        from .models import SmsTemplateReq
         schema = SmsTemplateReq()
         schema.dump(schema.load(body))
         
@@ -5156,7 +5148,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PaymentGatewayConfigRequest import PaymentGatewayConfigRequest
+        from .models import PaymentGatewayConfigRequest
         schema = PaymentGatewayConfigRequest()
         schema.dump(schema.load(body))
         
@@ -5185,7 +5177,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PaymentGatewayConfigRequest import PaymentGatewayConfigRequest
+        from .models import PaymentGatewayConfigRequest
         schema = PaymentGatewayConfigRequest()
         schema.dump(schema.load(body))
         
@@ -5278,7 +5270,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AddBeneficiaryDetailsOTPRequest import AddBeneficiaryDetailsOTPRequest
+        from .models import AddBeneficiaryDetailsOTPRequest
         schema = AddBeneficiaryDetailsOTPRequest()
         schema.dump(schema.load(body))
         
@@ -5363,7 +5355,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PaymentConfirmationRequest import PaymentConfirmationRequest
+        from .models import PaymentConfirmationRequest
         schema = PaymentConfirmationRequest()
         schema.dump(schema.load(body))
         
@@ -5416,7 +5408,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.UpdatePlatformPaymentConfig import UpdatePlatformPaymentConfig
+        from .models import UpdatePlatformPaymentConfig
         schema = UpdatePlatformPaymentConfig()
         schema.dump(schema.load(body))
         
@@ -5477,7 +5469,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SetCODForUserRequest import SetCODForUserRequest
+        from .models import SetCODForUserRequest
         schema = SetCODForUserRequest()
         schema.dump(schema.load(body))
         
@@ -5660,7 +5652,7 @@ class Order:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ShipmentUpdateRequest import ShipmentUpdateRequest
+        from .models import ShipmentUpdateRequest
         schema = ShipmentUpdateRequest()
         schema.dump(schema.load(body))
         
@@ -5820,8 +5812,8 @@ class Catalog:
         self._conf = config
         self.applicationId = applicationId
     
-    async def updateSearchKeywords(self, id=None, body=""):
-        """Update Search Keyword by its id. On successful request, returns the updated collection
+    async def deleteSearchKeywords(self, id=None):
+        """Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
         :param id : A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. : type string
         """
         payload = {}
@@ -5831,13 +5823,8 @@ class Catalog:
         
 
         # Parameter validation
-        schema = CatalogValidator.updateSearchKeywords()
+        schema = CatalogValidator.deleteSearchKeywords()
         schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models.CreateSearchKeyword import CreateSearchKeyword
-        schema = CreateSearchKeyword()
-        schema.dump(schema.load(body))
         
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/{id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete.","schema":{"type":"string"},"required":true}]}""", id=id)
@@ -5851,7 +5838,7 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def getSearchKeywords(self, id=None):
         """Get the details of a words by its `id`. If successful, returns a Collection resource in the response body specified in `GetSearchWordsDetailResponseSchema`
@@ -5881,8 +5868,8 @@ class Catalog:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
-    async def deleteSearchKeywords(self, id=None):
-        """Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+    async def updateSearchKeywords(self, id=None, body=""):
+        """Update Search Keyword by its id. On successful request, returns the updated collection
         :param id : A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. : type string
         """
         payload = {}
@@ -5892,8 +5879,13 @@ class Catalog:
         
 
         # Parameter validation
-        schema = CatalogValidator.deleteSearchKeywords()
+        schema = CatalogValidator.updateSearchKeywords()
         schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import CreateSearchKeyword
+        schema = CreateSearchKeyword()
+        schema.dump(schema.load(body))
         
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/{id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete.","schema":{"type":"string"},"required":true}]}""", id=id)
@@ -5907,7 +5899,7 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
     async def getAllSearchKeyword(self, ):
         """Custom Search Keyword allows you to map conditions with keywords to give you the ultimate results
@@ -5944,7 +5936,7 @@ class Catalog:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CreateSearchKeyword import CreateSearchKeyword
+        from .models import CreateSearchKeyword
         schema = CreateSearchKeyword()
         schema.dump(schema.load(body))
         
@@ -5962,8 +5954,8 @@ class Catalog:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
-    async def updateAutocompleteKeyword(self, id=None, body=""):
-        """Update a mapping by it's id. On successful request, returns the updated Keyword mapping
+    async def deleteAutocompleteKeyword(self, id=None):
+        """Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
         :param id : A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. : type string
         """
         payload = {}
@@ -5973,13 +5965,8 @@ class Catalog:
         
 
         # Parameter validation
-        schema = CatalogValidator.updateAutocompleteKeyword()
+        schema = CatalogValidator.deleteAutocompleteKeyword()
         schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models.CreateAutocompleteKeyword import CreateAutocompleteKeyword
-        schema = CreateAutocompleteKeyword()
-        schema.dump(schema.load(body))
         
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete/{id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete.","schema":{"type":"string"},"required":true}]}""", id=id)
@@ -5993,7 +5980,7 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def getAutocompleteKeywordDetail(self, id=None):
         """Get the details of a words by its `id`. If successful, returns a keywords resource in the response body specified in `GetAutocompleteWordsResponseSchema`
@@ -6023,8 +6010,8 @@ class Catalog:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
-    async def deleteAutocompleteKeyword(self, id=None):
-        """Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+    async def updateAutocompleteKeyword(self, id=None, body=""):
+        """Update a mapping by it's id. On successful request, returns the updated Keyword mapping
         :param id : A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. : type string
         """
         payload = {}
@@ -6034,8 +6021,13 @@ class Catalog:
         
 
         # Parameter validation
-        schema = CatalogValidator.deleteAutocompleteKeyword()
+        schema = CatalogValidator.updateAutocompleteKeyword()
         schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import CreateAutocompleteKeyword
+        schema = CreateAutocompleteKeyword()
+        schema.dump(schema.load(body))
         
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete/{id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete.","schema":{"type":"string"},"required":true}]}""", id=id)
@@ -6049,7 +6041,7 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
     async def getAutocompleteConfig(self, ):
         """Custom Autocomplete Keyword allows you to map conditions with keywords to give you the ultimate results
@@ -6086,7 +6078,7 @@ class Catalog:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CreateAutocompleteKeyword import CreateAutocompleteKeyword
+        from .models import CreateAutocompleteKeyword
         schema = CreateAutocompleteKeyword()
         schema.dump(schema.load(body))
         
@@ -6104,38 +6096,6 @@ class Catalog:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
-    async def getAppProduct(self, item_id=None, slice_attr=None):
-        """Products are the core resource of an application. If successful, returns a Company Application Product resource in the response body depending upon filter sent.
-        :param item_id : product id for a particular product. : type string
-        :param slice_attr : Get product's data sliced by attribute : type string
-        """
-        payload = {}
-        
-        if item_id:
-            payload["item_id"] = item_id
-        
-        if slice_attr:
-            payload["slice_attr"] = slice_attr
-        
-
-        # Parameter validation
-        schema = CatalogValidator.getAppProduct()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product/{item_id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"product id for a particular product.","schema":{"type":"string"},"required":true},{"in":"query","name":"slice_attr","description":"Get product's data sliced by attribute","schema":{"type":"string"},"required":true}],"optional":[],"query":[{"in":"query","name":"slice_attr","description":"Get product's data sliced by attribute","schema":{"type":"string"},"required":true}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"product id for a particular product.","schema":{"type":"string"},"required":true}]}""", item_id=item_id, slice_attr=slice_attr)
-        query_string = await create_query_string(item_id=item_id, slice_attr=slice_attr)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product/{item_id}/", item_id=item_id, slice_attr=slice_attr), query_string, headers, "", exclude_headers=exclude_headers), data="")
-    
     async def updateAppProduct(self, item_id=None, body=""):
         """This API helps to update data associated to a item custom meta.
         :param item_id : product id for which the custom_meta is associated. : type string
@@ -6151,7 +6111,7 @@ class Catalog:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ApplicationItemMeta import ApplicationItemMeta
+        from .models import ApplicationItemMeta
         schema = ApplicationItemMeta()
         schema.dump(schema.load(body))
         
@@ -6168,6 +6128,34 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product/{item_id}/", item_id=item_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+    
+    async def getAppProduct(self, item_id=None):
+        """Products are the core resource of an application. If successful, returns a Company Application Product resource in the response body depending upon filter sent.
+        :param item_id : product id for a particular product. : type string
+        """
+        payload = {}
+        
+        if item_id:
+            payload["item_id"] = item_id
+        
+
+        # Parameter validation
+        schema = CatalogValidator.getAppProduct()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product/{item_id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"product id for a particular product.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"product id for a particular product.","schema":{"type":"string"},"required":true}]}""", item_id=item_id)
+        query_string = await create_query_string(item_id=item_id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product/{item_id}/", item_id=item_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def getConfigurationMetadata(self, config_type=None, template_slug=None):
         """Get the configuraion metadata details for catalog.
@@ -6260,7 +6248,7 @@ class Catalog:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AppConfigurationDetail import AppConfigurationDetail
+        from .models import AppConfigurationDetail
         schema = AppConfigurationDetail()
         schema.dump(schema.load(body))
         
@@ -6277,43 +6265,6 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/groups", config_type=config_type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-    
-    async def updateGroupConfiguration(self, config_type=None, group_slug=None, body=""):
-        """Update the group configurations for the application.
-        :param config_type : A `config_type` is a unique identifier for a particular group configuration type. : type string
-        :param group_slug : A `group_slug` is a unique identifier of a particular configuration. : type string
-        """
-        payload = {}
-        
-        if config_type:
-            payload["config_type"] = config_type
-        
-        if group_slug:
-            payload["group_slug"] = group_slug
-        
-
-        # Parameter validation
-        schema = CatalogValidator.updateGroupConfiguration()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models.AppConfigurationDetail import AppConfigurationDetail
-        schema = AppConfigurationDetail()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/groups/{group_slug}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"config_type","description":"A `config_type` is a unique identifier for a particular group configuration type.","schema":{"type":"string","enum":["comparisons_groups","details_groups","seller_groups"]},"required":true},{"in":"path","name":"group_slug","description":"A `group_slug` is a unique identifier of a particular configuration.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"config_type","description":"A `config_type` is a unique identifier for a particular group configuration type.","schema":{"type":"string","enum":["comparisons_groups","details_groups","seller_groups"]},"required":true},{"in":"path","name":"group_slug","description":"A `group_slug` is a unique identifier of a particular configuration.","schema":{"type":"string"},"required":true}]}""", config_type=config_type, group_slug=group_slug)
-        query_string = await create_query_string(config_type=config_type, group_slug=group_slug)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/groups/{group_slug}", config_type=config_type, group_slug=group_slug), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
     async def deleteGroupConfiguration(self, config_type=None, group_slug=None):
         """Delete configuration of the product config type of the application.
@@ -6346,6 +6297,43 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/groups/{group_slug}", config_type=config_type, group_slug=group_slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
+    
+    async def updateGroupConfiguration(self, config_type=None, group_slug=None, body=""):
+        """Update the group configurations for the application.
+        :param config_type : A `config_type` is a unique identifier for a particular group configuration type. : type string
+        :param group_slug : A `group_slug` is a unique identifier of a particular configuration. : type string
+        """
+        payload = {}
+        
+        if config_type:
+            payload["config_type"] = config_type
+        
+        if group_slug:
+            payload["group_slug"] = group_slug
+        
+
+        # Parameter validation
+        schema = CatalogValidator.updateGroupConfiguration()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import AppConfigurationDetail
+        schema = AppConfigurationDetail()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/groups/{group_slug}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"config_type","description":"A `config_type` is a unique identifier for a particular group configuration type.","schema":{"type":"string","enum":["comparisons_groups","details_groups","seller_groups"]},"required":true},{"in":"path","name":"group_slug","description":"A `group_slug` is a unique identifier of a particular configuration.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"config_type","description":"A `config_type` is a unique identifier for a particular group configuration type.","schema":{"type":"string","enum":["comparisons_groups","details_groups","seller_groups"]},"required":true},{"in":"path","name":"group_slug","description":"A `group_slug` is a unique identifier of a particular configuration.","schema":{"type":"string"},"required":true}]}""", config_type=config_type, group_slug=group_slug)
+        query_string = await create_query_string(config_type=config_type, group_slug=group_slug)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/groups/{group_slug}", config_type=config_type, group_slug=group_slug), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
     async def getListingConfigurations(self, config_type=None, page_no=None, page_size=None, search=None):
         """Get the details of the application configured configurations of listing config types.
@@ -6402,7 +6390,7 @@ class Catalog:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AppConfigurationsSort import AppConfigurationsSort
+        from .models import AppConfigurationsSort
         schema = AppConfigurationsSort()
         schema.dump(schema.load(body))
         
@@ -6419,43 +6407,6 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/", config_type=config_type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-    
-    async def updateListingConfiguration(self, config_type=None, config_id=None, body=""):
-        """Update configuration for listing.
-        :param config_type : A `config_type` is a unique identifier for a particular listing configuration type. : type string
-        :param config_id : A `config_id` is a unique identifier of a particular configuration. : type string
-        """
-        payload = {}
-        
-        if config_type:
-            payload["config_type"] = config_type
-        
-        if config_id:
-            payload["config_id"] = config_id
-        
-
-        # Parameter validation
-        schema = CatalogValidator.updateListingConfiguration()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models.AppConfigurationsSort import AppConfigurationsSort
-        schema = AppConfigurationsSort()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/item/{config_id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"config_type","description":"A `config_type` is a unique identifier for a particular listing configuration type.","schema":{"type":"string","enum":["filter","sort","brands","categories","variant","similar"]},"required":true},{"in":"path","name":"config_id","description":"A `config_id` is a unique identifier of a particular configuration.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"config_type","description":"A `config_type` is a unique identifier for a particular listing configuration type.","schema":{"type":"string","enum":["filter","sort","brands","categories","variant","similar"]},"required":true},{"in":"path","name":"config_id","description":"A `config_id` is a unique identifier of a particular configuration.","schema":{"type":"string"},"required":true}]}""", config_type=config_type, config_id=config_id)
-        query_string = await create_query_string(config_type=config_type, config_id=config_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/item/{config_id}/", config_type=config_type, config_id=config_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
     async def deleteListingConfiguration(self, config_type=None, config_id=None):
         """Delete configuration for listing.
@@ -6489,6 +6440,43 @@ class Catalog:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/item/{config_id}/", config_type=config_type, config_id=config_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
+    async def updateListingConfiguration(self, config_type=None, config_id=None, body=""):
+        """Update configuration for listing.
+        :param config_type : A `config_type` is a unique identifier for a particular listing configuration type. : type string
+        :param config_id : A `config_id` is a unique identifier of a particular configuration. : type string
+        """
+        payload = {}
+        
+        if config_type:
+            payload["config_type"] = config_type
+        
+        if config_id:
+            payload["config_id"] = config_id
+        
+
+        # Parameter validation
+        schema = CatalogValidator.updateListingConfiguration()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import AppConfigurationsSort
+        schema = AppConfigurationsSort()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/item/{config_id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"config_type","description":"A `config_type` is a unique identifier for a particular listing configuration type.","schema":{"type":"string","enum":["filter","sort","brands","categories","variant","similar"]},"required":true},{"in":"path","name":"config_id","description":"A `config_id` is a unique identifier of a particular configuration.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"config_type","description":"A `config_type` is a unique identifier for a particular listing configuration type.","schema":{"type":"string","enum":["filter","sort","brands","categories","variant","similar"]},"required":true},{"in":"path","name":"config_id","description":"A `config_id` is a unique identifier of a particular configuration.","schema":{"type":"string"},"required":true}]}""", config_type=config_type, config_id=config_id)
+        query_string = await create_query_string(config_type=config_type, config_id=config_id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/item/{config_id}/", config_type=config_type, config_id=config_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+    
     async def updateAllowSingle(self, body=""):
         """Update allow single flag for filters of the application.
         """
@@ -6500,7 +6488,7 @@ class Catalog:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AllowSingleRequest import AllowSingleRequest
+        from .models import AllowSingleRequest
         schema = AllowSingleRequest()
         schema.dump(schema.load(body))
         
@@ -6529,7 +6517,7 @@ class Catalog:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.DefaultKeyRequest import DefaultKeyRequest
+        from .models import DefaultKeyRequest
         schema = DefaultKeyRequest()
         schema.dump(schema.load(body))
         
@@ -6606,7 +6594,7 @@ class Catalog:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AppConfiguration import AppConfiguration
+        from .models import AppConfiguration
         schema = AppConfiguration()
         schema.dump(schema.load(body))
         
@@ -6667,7 +6655,7 @@ class Catalog:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AppConfiguration import AppConfiguration
+        from .models import AppConfiguration
         schema = AppConfiguration()
         schema.dump(schema.load(body))
         
@@ -6772,7 +6760,7 @@ class Catalog:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CreateCollection import CreateCollection
+        from .models import CreateCollection
         schema = CreateCollection()
         schema.dump(schema.load(body))
         
@@ -6818,39 +6806,6 @@ class Catalog:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/{slug}/", slug=slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
-    async def updateCollection(self, id=None, body=""):
-        """Update a collection by it's id. On successful request, returns the updated collection
-        :param id : A `id` is a unique identifier of a collection. : type string
-        """
-        payload = {}
-        
-        if id:
-            payload["id"] = id
-        
-
-        # Parameter validation
-        schema = CatalogValidator.updateCollection()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models.UpdateCollection import UpdateCollection
-        schema = UpdateCollection()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/{id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier of a collection.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier of a collection.","schema":{"type":"string"},"required":true}]}""", id=id)
-        query_string = await create_query_string(id=id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-    
     async def deleteCollection(self, id=None):
         """Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
         :param id : A `id` is a unique identifier of a collection. : type string
@@ -6878,6 +6833,39 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+    
+    async def updateCollection(self, id=None, body=""):
+        """Update a collection by it's id. On successful request, returns the updated collection
+        :param id : A `id` is a unique identifier of a collection. : type string
+        """
+        payload = {}
+        
+        if id:
+            payload["id"] = id
+        
+
+        # Parameter validation
+        schema = CatalogValidator.updateCollection()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import UpdateCollection
+        schema = UpdateCollection()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/{id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier of a collection.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier of a collection.","schema":{"type":"string"},"required":true}]}""", id=id)
+        query_string = await create_query_string(id=id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
     async def getCollectionItems(self, id=None, sort_on=None, page_id=None, page_size=None):
         """Get items from a collection specified by its `id`.
@@ -6934,7 +6922,7 @@ class Catalog:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CollectionItemRequest import CollectionItemRequest
+        from .models import CollectionItemRequest
         schema = CollectionItemRequest()
         schema.dump(schema.load(body))
         
@@ -7419,7 +7407,7 @@ class Catalog:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ApplicationBrandJson import ApplicationBrandJson
+        from .models import ApplicationBrandJson
         schema = ApplicationBrandJson()
         schema.dump(schema.load(body))
         
@@ -7488,7 +7476,7 @@ class Catalog:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ApplicationCategoryJson import ApplicationCategoryJson
+        from .models import ApplicationCategoryJson
         schema = ApplicationCategoryJson()
         schema.dump(schema.load(body))
         
@@ -7521,7 +7509,7 @@ class Catalog:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ApplicationStoreJson import ApplicationStoreJson
+        from .models import ApplicationStoreJson
         schema = ApplicationStoreJson()
         schema.dump(schema.load(body))
         
@@ -7584,7 +7572,7 @@ This operation will return the url for the uploaded file.
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.StartRequest import StartRequest
+        from .models import StartRequest
         schema = StartRequest()
         schema.dump(schema.load(body))
         
@@ -7635,7 +7623,7 @@ This operation will return the url for the uploaded file.
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.StartResponse import StartResponse
+        from .models import StartResponse
         schema = StartResponse()
         schema.dump(schema.load(body))
         
@@ -7668,7 +7656,7 @@ This operation will return the url for the uploaded file.
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.BulkRequest import BulkRequest
+        from .models import BulkRequest
         schema = BulkRequest()
         schema.dump(schema.load(body))
         
@@ -7735,7 +7723,7 @@ class Share:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ShortLinkReq import ShortLinkReq
+        from .models import ShortLinkReq
         schema = ShortLinkReq()
         schema.dump(schema.load(body))
         
@@ -7840,7 +7828,7 @@ class Share:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ShortLinkReq import ShortLinkReq
+        from .models import ShortLinkReq
         schema = ShortLinkReq()
         schema.dump(schema.load(body))
         
@@ -7913,7 +7901,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.MobileAppConfigRequest import MobileAppConfigRequest
+        from .models import MobileAppConfigRequest
         schema = MobileAppConfigRequest()
         schema.dump(schema.load(body))
         
@@ -7994,7 +7982,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AppFeatureRequest import AppFeatureRequest
+        from .models import AppFeatureRequest
         schema = AppFeatureRequest()
         schema.dump(schema.load(body))
         
@@ -8047,7 +8035,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ApplicationDetail import ApplicationDetail
+        from .models import ApplicationDetail
         schema = ApplicationDetail()
         schema.dump(schema.load(body))
         
@@ -8100,7 +8088,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ApplicationInformation import ApplicationInformation
+        from .models import ApplicationInformation
         schema = ApplicationInformation()
         schema.dump(schema.load(body))
         
@@ -8153,7 +8141,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.TokenResponse import TokenResponse
+        from .models import TokenResponse
         schema = TokenResponse()
         schema.dump(schema.load(body))
         
@@ -8274,7 +8262,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ApplicationInventory import ApplicationInventory
+        from .models import ApplicationInventory
         schema = ApplicationInventory()
         schema.dump(schema.load(body))
         
@@ -8303,7 +8291,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AppInventoryPartialUpdate import AppInventoryPartialUpdate
+        from .models import AppInventoryPartialUpdate
         schema = AppInventoryPartialUpdate()
         schema.dump(schema.load(body))
         
@@ -8356,7 +8344,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AppSupportedCurrency import AppSupportedCurrency
+        from .models import AppSupportedCurrency
         schema = AppSupportedCurrency()
         schema.dump(schema.load(body))
         
@@ -8417,7 +8405,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.FilterOrderingStoreRequest import FilterOrderingStoreRequest
+        from .models import FilterOrderingStoreRequest
         schema = FilterOrderingStoreRequest()
         schema.dump(schema.load(body))
         
@@ -8446,7 +8434,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.OrderingStoreConfig import OrderingStoreConfig
+        from .models import OrderingStoreConfig
         schema = OrderingStoreConfig()
         schema.dump(schema.load(body))
         
@@ -8535,7 +8523,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.DomainAddRequest import DomainAddRequest
+        from .models import DomainAddRequest
         schema = DomainAddRequest()
         schema.dump(schema.load(body))
         
@@ -8592,7 +8580,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.UpdateDomainTypeRequest import UpdateDomainTypeRequest
+        from .models import UpdateDomainTypeRequest
         schema = UpdateDomainTypeRequest()
         schema.dump(schema.load(body))
         
@@ -8621,7 +8609,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.DomainStatusRequest import DomainStatusRequest
+        from .models import DomainStatusRequest
         schema = DomainStatusRequest()
         schema.dump(schema.load(body))
         
@@ -8736,7 +8724,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CouponAdd import CouponAdd
+        from .models import CouponAdd
         schema = CouponAdd()
         schema.dump(schema.load(body))
         
@@ -8797,7 +8785,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CouponUpdate import CouponUpdate
+        from .models import CouponUpdate
         schema = CouponUpdate()
         schema.dump(schema.load(body))
         
@@ -8830,7 +8818,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CouponPartialUpdate import CouponPartialUpdate
+        from .models import CouponPartialUpdate
         schema = CouponPartialUpdate()
         schema.dump(schema.load(body))
         
@@ -8848,12 +8836,12 @@ class Cart:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/coupon/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
-    async def getPromotions(self, page_no=None, page_size=None, q=None, is_active=None, promo_group=None, promotion_type=None, fp_panel=None, promotion_id=None):
+    async def getPromotions(self, page_no=None, page_size=None, q=None, status=None, promo_group=None, promotion_type=None, fp_panel=None, promotion_id=None):
         """Get promotion list with pagination
         :param page_no :  : type integer
         :param page_size :  : type integer
         :param q :  : type string
-        :param is_active :  : type boolean
+        :param status :  : type string
         :param promo_group :  : type string
         :param promotion_type :  : type string
         :param fp_panel :  : type string
@@ -8870,8 +8858,8 @@ class Cart:
         if q:
             payload["q"] = q
         
-        if is_active:
-            payload["is_active"] = is_active
+        if status:
+            payload["status"] = status
         
         if promo_group:
             payload["promo_group"] = promo_group
@@ -8891,8 +8879,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer","default":0,"description":"current page no as per pagination"}},{"name":"page_size","in":"query","schema":{"type":"integer","default":10,"description":"Promotion max records fetched in single request"}},{"name":"q","in":"query","schema":{"type":"string","description":"Filter by name"}},{"name":"is_active","in":"query","schema":{"type":"boolean","description":"Filter by active or inactive promotion","default":true}},{"name":"promo_group","in":"query","schema":{"type":"string","description":"Filter promotion group","enum":["product","cart","contract","ladder_price","limited_timer"]}},{"name":"promotion_type","in":"query","schema":{"type":"string","description":"Filter promotion type"}},{"name":"fp_panel","in":"query","schema":{"type":"string","description":"Filter non extension promotions"}},{"name":"promotion_id","in":"query","schema":{"type":"string","description":"Filter by promotion _id"}}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer","default":0,"description":"current page no as per pagination"}},{"name":"page_size","in":"query","schema":{"type":"integer","default":10,"description":"Promotion max records fetched in single request"}},{"name":"q","in":"query","schema":{"type":"string","description":"Filter by name"}},{"name":"is_active","in":"query","schema":{"type":"boolean","description":"Filter by active or inactive promotion","default":true}},{"name":"promo_group","in":"query","schema":{"type":"string","description":"Filter promotion group","enum":["product","cart","contract","ladder_price","limited_timer"]}},{"name":"promotion_type","in":"query","schema":{"type":"string","description":"Filter promotion type"}},{"name":"fp_panel","in":"query","schema":{"type":"string","description":"Filter non extension promotions"}},{"name":"promotion_id","in":"query","schema":{"type":"string","description":"Filter by promotion _id"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", page_no=page_no, page_size=page_size, q=q, is_active=is_active, promo_group=promo_group, promotion_type=promotion_type, fp_panel=fp_panel, promotion_id=promotion_id)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, q=q, is_active=is_active, promo_group=promo_group, promotion_type=promotion_type, fp_panel=fp_panel, promotion_id=promotion_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer","default":0,"description":"current page no as per pagination"}},{"name":"page_size","in":"query","schema":{"type":"integer","default":10,"description":"Promotion max records fetched in single request"}},{"name":"q","in":"query","schema":{"type":"string","description":"Filter by name"}},{"name":"status","in":"query","schema":{"type":"string","description":"Filter by active, inactive or expired promotion","enum":["active","inactive","expired"]}},{"name":"promo_group","in":"query","schema":{"type":"string","description":"Filter promotion group","enum":["product","cart","contract","ladder_price","limited_timer"]}},{"name":"promotion_type","in":"query","schema":{"type":"string","description":"Filter promotion type"}},{"name":"fp_panel","in":"query","schema":{"type":"string","description":"Filter non extension promotions"}},{"name":"promotion_id","in":"query","schema":{"type":"string","description":"Filter by promotion _id"}}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer","default":0,"description":"current page no as per pagination"}},{"name":"page_size","in":"query","schema":{"type":"integer","default":10,"description":"Promotion max records fetched in single request"}},{"name":"q","in":"query","schema":{"type":"string","description":"Filter by name"}},{"name":"status","in":"query","schema":{"type":"string","description":"Filter by active, inactive or expired promotion","enum":["active","inactive","expired"]}},{"name":"promo_group","in":"query","schema":{"type":"string","description":"Filter promotion group","enum":["product","cart","contract","ladder_price","limited_timer"]}},{"name":"promotion_type","in":"query","schema":{"type":"string","description":"Filter promotion type"}},{"name":"fp_panel","in":"query","schema":{"type":"string","description":"Filter non extension promotions"}},{"name":"promotion_id","in":"query","schema":{"type":"string","description":"Filter by promotion _id"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", page_no=page_no, page_size=page_size, q=q, status=status, promo_group=promo_group, promotion_type=promotion_type, fp_panel=fp_panel, promotion_id=promotion_id)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, q=q, status=status, promo_group=promo_group, promotion_type=promotion_type, fp_panel=fp_panel, promotion_id=promotion_id)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -8902,7 +8890,7 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion", page_no=page_no, page_size=page_size, q=q, is_active=is_active, promo_group=promo_group, promotion_type=promotion_type, fp_panel=fp_panel, promotion_id=promotion_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion", page_no=page_no, page_size=page_size, q=q, status=status, promo_group=promo_group, promotion_type=promotion_type, fp_panel=fp_panel, promotion_id=promotion_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def createPromotion(self, body=""):
         """Create new promotion
@@ -8915,7 +8903,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PromotionAdd import PromotionAdd
+        from .models import PromotionAdd
         schema = PromotionAdd()
         schema.dump(schema.load(body))
         
@@ -8976,7 +8964,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PromotionUpdate import PromotionUpdate
+        from .models import PromotionUpdate
         schema = PromotionUpdate()
         schema.dump(schema.load(body))
         
@@ -9009,7 +8997,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PromotionPartialUpdate import PromotionPartialUpdate
+        from .models import PromotionPartialUpdate
         schema = PromotionPartialUpdate()
         schema.dump(schema.load(body))
         
@@ -9027,6 +9015,30 @@ class Cart:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
+    async def getPromosCouponConfig(self, ):
+        """Use this API to get list of all the active promos/coupons.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = CartValidator.getPromosCouponConfig()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promo-coupons", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promo-coupons", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+    
     async def fetchAndvalidateCartItems(self, body=""):
         """Get all the details of cart for a list of provided `cart_items`
         """
@@ -9038,7 +9050,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.OpenapiCartDetailsRequest import OpenapiCartDetailsRequest
+        from .models import OpenapiCartDetailsRequest
         schema = OpenapiCartDetailsRequest()
         schema.dump(schema.load(body))
         
@@ -9067,7 +9079,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.OpenApiCartServiceabilityRequest import OpenApiCartServiceabilityRequest
+        from .models import OpenApiCartServiceabilityRequest
         schema = OpenApiCartServiceabilityRequest()
         schema.dump(schema.load(body))
         
@@ -9096,7 +9108,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.OpenApiPlatformCheckoutReq import OpenApiPlatformCheckoutReq
+        from .models import OpenApiPlatformCheckoutReq
         schema = OpenApiPlatformCheckoutReq()
         schema.dump(schema.load(body))
         
@@ -9221,7 +9233,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AddCartRequest import AddCartRequest
+        from .models import AddCartRequest
         schema = AddCartRequest()
         schema.dump(schema.load(body))
         
@@ -9258,7 +9270,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.UpdateCartRequest import UpdateCartRequest
+        from .models import UpdateCartRequest
         schema = UpdateCartRequest()
         schema.dump(schema.load(body))
         
@@ -9325,7 +9337,7 @@ class Rewards:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.Giveaway import Giveaway
+        from .models import Giveaway
         schema = Giveaway()
         schema.dump(schema.load(body))
         
@@ -9386,7 +9398,7 @@ class Rewards:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.Giveaway import Giveaway
+        from .models import Giveaway
         schema = Giveaway()
         schema.dump(schema.load(body))
         
@@ -9475,7 +9487,7 @@ class Rewards:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.Offer import Offer
+        from .models import Offer
         schema = Offer()
         schema.dump(schema.load(body))
         
@@ -9536,7 +9548,7 @@ class Rewards:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AppUser import AppUser
+        from .models import AppUser
         schema = AppUser()
         schema.dump(schema.load(body))
         
@@ -9864,7 +9876,7 @@ class Partner:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AddProxyReq import AddProxyReq
+        from .models import AddProxyReq
         schema = AddProxyReq()
         schema.dump(schema.load(body))
         
