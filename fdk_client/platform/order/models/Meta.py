@@ -17,7 +17,7 @@ class Meta(BaseSchema):
     #  swagger.json
 
     
-    state_manager_used = fields.Str(required=False)
-    
     kafka_emission_status = fields.Int(required=False)
+    
+    state_manager_used = fields.Str(required=False)
     

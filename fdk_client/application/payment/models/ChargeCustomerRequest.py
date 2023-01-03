@@ -23,13 +23,13 @@ class ChargeCustomerRequest(BaseSchema):
     #  swagger.json
 
     
-    amount = fields.Int(required=False)
+    order_id = fields.Str(required=False)
     
     verified = fields.Boolean(required=False)
     
+    transaction_token = fields.Str(required=False)
+    
     aggregator = fields.Str(required=False)
     
-    order_id = fields.Str(required=False)
-    
-    transaction_token = fields.Str(required=False)
+    amount = fields.Int(required=False)
     

@@ -15,11 +15,11 @@ from .ManifestPage import ManifestPage
 
 
 
-from .ManifestDetailItem import ManifestDetailItem
-
-
-
 from .ManifestDetail import ManifestDetail
+
+
+
+from .ManifestDetailItem import ManifestDetailItem
 
 
 
@@ -31,7 +31,7 @@ class ManifestDetailResponse(BaseSchema):
     
     page = fields.Nested(ManifestPage, required=False)
     
-    items = fields.List(fields.Nested(ManifestDetailItem, required=False), required=False)
-    
     manifest_details = fields.List(fields.Nested(ManifestDetail, required=False), required=False)
+    
+    items = fields.List(fields.Nested(ManifestDetailItem, required=False), required=False)
     

@@ -216,10 +216,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
-        
-        
         
     
     
@@ -782,15 +778,6 @@ class ContentValidator:
         
     
     class getPageSpec(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class createPagePreview(BaseSchema):
         
         
         company_id = fields.Str(required=False)

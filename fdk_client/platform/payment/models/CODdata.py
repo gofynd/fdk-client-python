@@ -23,13 +23,13 @@ class CODdata(BaseSchema):
     #  swagger.json
 
     
-    remaining_limit = fields.Int(required=False)
-    
     is_active = fields.Boolean(required=False)
     
     user_id = fields.Str(required=False)
     
+    usages = fields.Int(required=False)
+    
     limit = fields.Int(required=False)
     
-    usages = fields.Int(required=False)
+    remaining_limit = fields.Int(required=False)
     

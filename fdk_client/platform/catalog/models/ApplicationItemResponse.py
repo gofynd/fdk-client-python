@@ -9,13 +9,17 @@ from ...PlatformModel import BaseSchema
 
 
 
-
-
-from .SEO import SEO
+from .SEOData import SEOData
 
 
 
-from .MOQ import MOQ
+from .MOQData import MOQData
+
+
+
+
+
+
 
 
 
@@ -23,9 +27,13 @@ class ApplicationItemResponse(BaseSchema):
     #  swagger.json
 
     
+    seo = fields.Nested(SEOData, required=False)
+    
+    moq = fields.Nested(MOQData, required=False)
+    
+    is_cod = fields.Boolean(required=False)
+    
+    is_gift = fields.Boolean(required=False)
+    
     alt_text = fields.Dict(required=False)
-    
-    seo = fields.Nested(SEO, required=False)
-    
-    moq = fields.Nested(MOQ, required=False)
     

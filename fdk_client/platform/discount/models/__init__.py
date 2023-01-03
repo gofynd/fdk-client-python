@@ -9,6 +9,10 @@ from .DiscountJob import DiscountJob
 
 from .ListOrCalender import ListOrCalender
 
+from .DiscountItems import DiscountItems
+
+from .BulkDiscount import BulkDiscount
+
 from .FileJobResponse import FileJobResponse
 
 from .DownloadFileJob import DownloadFileJob

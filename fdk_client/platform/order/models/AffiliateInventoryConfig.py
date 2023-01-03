@@ -9,7 +9,7 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .AffiliateInventoryStoreConfig import AffiliateInventoryStoreConfig
+from .AffiliateInventoryPaymentConfig import AffiliateInventoryPaymentConfig
 
 
 
@@ -17,7 +17,7 @@ from .AffiliateInventoryArticleAssignmentConfig import AffiliateInventoryArticle
 
 
 
-from .AffiliateInventoryLogisticsConfig import AffiliateInventoryLogisticsConfig
+from .AffiliateInventoryStoreConfig import AffiliateInventoryStoreConfig
 
 
 
@@ -25,7 +25,7 @@ from .AffiliateInventoryOrderConfig import AffiliateInventoryOrderConfig
 
 
 
-from .AffiliateInventoryPaymentConfig import AffiliateInventoryPaymentConfig
+from .AffiliateInventoryLogisticsConfig import AffiliateInventoryLogisticsConfig
 
 
 
@@ -33,13 +33,13 @@ class AffiliateInventoryConfig(BaseSchema):
     #  swagger.json
 
     
-    inventory = fields.Nested(AffiliateInventoryStoreConfig, required=False)
+    payment = fields.Nested(AffiliateInventoryPaymentConfig, required=False)
     
     article_assignment = fields.Nested(AffiliateInventoryArticleAssignmentConfig, required=False)
     
-    logistics = fields.Nested(AffiliateInventoryLogisticsConfig, required=False)
+    inventory = fields.Nested(AffiliateInventoryStoreConfig, required=False)
     
     order = fields.Nested(AffiliateInventoryOrderConfig, required=False)
     
-    payment = fields.Nested(AffiliateInventoryPaymentConfig, required=False)
+    logistics = fields.Nested(AffiliateInventoryLogisticsConfig, required=False)
     

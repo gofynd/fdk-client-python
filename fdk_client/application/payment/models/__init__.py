@@ -41,11 +41,11 @@ from .PaymentStatusUpdateRequest import PaymentStatusUpdateRequest
 
 from .PaymentStatusUpdateResponse import PaymentStatusUpdateResponse
 
+from .IntentAppErrorList import IntentAppErrorList
+
 from .PaymentModeLogo import PaymentModeLogo
 
 from .IntentApp import IntentApp
-
-from .IntentAppErrorList import IntentAppErrorList
 
 from .PaymentModeList import PaymentModeList
 
@@ -161,15 +161,15 @@ from .CreditDetail import CreditDetail
 
 from .CheckCreditResponse import CheckCreditResponse
 
-from .DeviceDetails import DeviceDetails
-
-from .MarketplaceInfo import MarketplaceInfo
-
 from .KYCAddress import KYCAddress
+
+from .BusinessDetails import BusinessDetails
 
 from .UserPersonalInfoInDetails import UserPersonalInfoInDetails
 
-from .BusinessDetails import BusinessDetails
+from .DeviceDetails import DeviceDetails
+
+from .MarketplaceInfo import MarketplaceInfo
 
 from .CustomerOnboardingRequest import CustomerOnboardingRequest
 

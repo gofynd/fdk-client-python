@@ -27,8 +27,6 @@ from .TicketContent import TicketContent
 
 
 
-
-
 from .TicketSourceEnum import TicketSourceEnum
 
 
@@ -70,8 +68,6 @@ class Ticket(BaseSchema):
     response_id = fields.Str(required=False)
     
     content = fields.Nested(TicketContent, required=False)
-    
-    ticket_id = fields.Str(required=False)
     
     category = fields.Str(required=False)
     

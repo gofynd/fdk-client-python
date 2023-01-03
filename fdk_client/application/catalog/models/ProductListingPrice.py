@@ -21,7 +21,7 @@ class ProductListingPrice(BaseSchema):
     #  swagger.json
 
     
-    effective = fields.Nested(Price, required=False)
-    
     marked = fields.Nested(Price, required=False)
+    
+    effective = fields.Nested(Price, required=False)
     

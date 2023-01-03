@@ -17,7 +17,7 @@ class ErrorCodeAndDescription(BaseSchema):
     #  swagger.json
 
     
-    code = fields.Str(required=False)
-    
     description = fields.Str(required=False)
+    
+    code = fields.Str(required=False)
     

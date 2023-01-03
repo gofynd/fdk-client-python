@@ -17,7 +17,7 @@ class DocumentsObj(BaseSchema):
     #  swagger.json
 
     
-    pending = fields.Int(required=False)
-    
     verified = fields.Int(required=False)
+    
+    pending = fields.Int(required=False)
     

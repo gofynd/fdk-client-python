@@ -9,9 +9,9 @@ from ...ApplicationModel import BaseSchema
 
 
 
-
-
 from .CartDetailResponse import CartDetailResponse
+
+
 
 
 
@@ -21,9 +21,9 @@ class UpdateCartDetailResponse(BaseSchema):
     #  swagger.json
 
     
-    success = fields.Boolean(required=False)
-    
     cart = fields.Nested(CartDetailResponse, required=False)
+    
+    success = fields.Boolean(required=False)
     
     message = fields.Str(required=False)
     

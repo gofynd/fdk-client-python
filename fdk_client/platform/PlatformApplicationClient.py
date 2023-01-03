@@ -5,8 +5,6 @@ from ..common.exceptions import FDKClientValidationError
 
 from .lead.applicationClient import Lead
 
-from .rewards.applicationClient import Rewards
-
 from .theme.applicationClient import Theme
 
 from .user.applicationClient import User
@@ -29,9 +27,9 @@ from .configuration.applicationClient import Configuration
 
 from .cart.applicationClient import Cart
 
-from .analytics.applicationClient import Analytics
+from .rewards.applicationClient import Rewards
 
-from .partner.applicationClient import Partner
+from .analytics.applicationClient import Analytics
 
 from .logistic.applicationClient import Logistic
 
@@ -40,8 +38,6 @@ class PlatformApplicationClient:
     def __init__(self, applicationId, config):
         
         self.lead = Lead(config, applicationId)
-        
-        self.rewards = Rewards(config, applicationId)
         
         self.theme = Theme(config, applicationId)
         
@@ -65,9 +61,9 @@ class PlatformApplicationClient:
         
         self.cart = Cart(config, applicationId)
         
-        self.analytics = Analytics(config, applicationId)
+        self.rewards = Rewards(config, applicationId)
         
-        self.partner = Partner(config, applicationId)
+        self.analytics = Analytics(config, applicationId)
         
         self.logistic = Logistic(config, applicationId)
         

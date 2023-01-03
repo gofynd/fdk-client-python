@@ -21,9 +21,9 @@ class BulkProductRequest(BaseSchema):
     #  swagger.json
 
     
-    template_tag = fields.Str(required=False)
-    
     data = fields.List(fields.Dict(required=False), required=False)
+    
+    template_tag = fields.Str(required=False)
     
     company_id = fields.Int(required=False)
     

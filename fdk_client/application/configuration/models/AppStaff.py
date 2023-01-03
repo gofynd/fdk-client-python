@@ -29,8 +29,6 @@ from ...ApplicationModel import BaseSchema
 
 
 
-
-
 class AppStaff(BaseSchema):
     #  swagger.json
 
@@ -54,6 +52,4 @@ class AppStaff(BaseSchema):
     last_name = fields.Str(required=False)
     
     profile_pic_url = fields.Str(required=False)
-    
-    description = fields.Raw(required=False)
     

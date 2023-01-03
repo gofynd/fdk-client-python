@@ -25,9 +25,9 @@ class GSTDetailsData(BaseSchema):
     
     tax_collected_at_source = fields.Float(required=False)
     
-    gstin_code = fields.Str(required=False)
-    
     value_of_good = fields.Float(required=False)
+    
+    gstin_code = fields.Str(required=False)
     
     gst_fee = fields.Float(required=False)
     

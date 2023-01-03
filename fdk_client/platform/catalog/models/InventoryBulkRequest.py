@@ -27,7 +27,7 @@ class InventoryBulkRequest(BaseSchema):
     
     company_id = fields.Int(required=False)
     
-    batch_id = fields.Str(required=False)
-    
     user = fields.Dict(required=False)
+    
+    batch_id = fields.Str(required=False)
     

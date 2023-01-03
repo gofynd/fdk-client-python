@@ -31,7 +31,7 @@ class ShareMessages(BaseSchema):
     #  swagger.json
 
     
-    email = fields.Str(required=False)
+    email = fields.Int(required=False)
     
     facebook = fields.Str(required=False)
     

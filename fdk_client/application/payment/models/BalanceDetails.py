@@ -19,9 +19,9 @@ class BalanceDetails(BaseSchema):
     #  swagger.json
 
     
-    formatted_value = fields.Str(required=False)
+    currency = fields.Str(required=False)
     
     value = fields.Float(required=False)
     
-    currency = fields.Str(required=False)
+    formatted_value = fields.Str(required=False)
     

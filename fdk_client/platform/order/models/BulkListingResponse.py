@@ -9,9 +9,9 @@ from ...PlatformModel import BaseSchema
 
 
 
+
+
 from .BulkListingPage import BulkListingPage
-
-
 
 
 
@@ -25,9 +25,9 @@ class BulkListingResponse(BaseSchema):
     #  swagger.json
 
     
-    page = fields.Nested(BulkListingPage, required=False)
-    
     error = fields.Str(required=False)
+    
+    page = fields.Nested(BulkListingPage, required=False)
     
     success = fields.Boolean(required=False)
     

@@ -25,9 +25,9 @@ class ErrorResponse(BaseSchema):
     
     error = fields.Nested(ErrorDescription, required=False)
     
-    success = fields.Boolean(required=False)
-    
     status_code = fields.Int(required=False)
     
     message = fields.Str(required=False)
+    
+    success = fields.Boolean(required=False)
     

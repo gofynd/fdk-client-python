@@ -9,6 +9,8 @@ from ...PlatformModel import BaseSchema
 
 
 
+
+
 from .ItemCriteria import ItemCriteria
 
 
@@ -19,17 +21,15 @@ from .DiscountOffer import DiscountOffer
 
 
 
-
-
 class DiscountRule(BaseSchema):
     #  swagger.json
 
+    
+    buy_condition = fields.Str(required=False)
     
     item_criteria = fields.Nested(ItemCriteria, required=False)
     
     offer = fields.Nested(DiscountOffer, required=False)
     
     discount_type = fields.Str(required=False)
-    
-    buy_condition = fields.Str(required=False)
     

@@ -9,13 +9,13 @@ from ...ApplicationModel import BaseSchema
 
 
 
+
+
+
+
+
+
 from .PaymentModeLogo import PaymentModeLogo
-
-
-
-
-
-
 
 
 
@@ -23,11 +23,11 @@ class IntentApp(BaseSchema):
     #  swagger.json
 
     
-    logos = fields.Nested(PaymentModeLogo, required=False)
+    display_name = fields.Str(required=False)
     
     package_name = fields.Str(required=False)
     
     code = fields.Str(required=False)
     
-    display_name = fields.Str(required=False)
+    logos = fields.Nested(PaymentModeLogo, required=False)
     
