@@ -14,8 +14,8 @@ class renderHTMLRequest(BaseSchema):
     # Payment swagger.json
 
     
-    returntype = fields.Str(required=False)
-    
     base64_html = fields.Str(required=False)
+    
+    returntype = fields.Str(required=False)
     
 

@@ -24,9 +24,9 @@ class DimensionResponse(BaseSchema):
     
     unit = fields.Str(required=False)
     
-    length = fields.Float(required=False)
-    
     width = fields.Float(required=False)
+    
+    length = fields.Float(required=False)
     
     is_default = fields.Boolean(required=False)
     

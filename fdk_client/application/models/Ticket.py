@@ -19,8 +19,6 @@ from .TicketContent import TicketContent
 
 
 
-
-
 from .Status import Status
 
 from .Priority import Priority
@@ -55,8 +53,6 @@ class Ticket(BaseSchema):
     response_id = fields.Str(required=False)
     
     content = fields.Nested(TicketContent, required=False)
-    
-    ticket_id = fields.Str(required=False)
     
     category = fields.Str(required=False)
     

@@ -20,9 +20,9 @@ class InventoryPage(BaseSchema):
     # Catalog swagger.json
 
     
-    item_total = fields.Int(required=False)
-    
     next_id = fields.Str(required=False)
+    
+    item_total = fields.Int(required=False)
     
     type = fields.Str(required=False)
     
