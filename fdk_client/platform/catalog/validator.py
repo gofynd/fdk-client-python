@@ -276,6 +276,16 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
     
     
         
@@ -731,7 +741,7 @@ class CatalogValidator:
          
         
     
-    class editProduct(BaseSchema):
+    class deleteProduct(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -740,7 +750,7 @@ class CatalogValidator:
          
         
     
-    class deleteProduct(BaseSchema):
+    class editProduct(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -920,6 +930,27 @@ class CatalogValidator:
         
         
         company_id = fields.Int(required=False)
+         
+        
+    
+    class getInventories(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        item_id = fields.Str(required=False)
+        
+        size = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        q = fields.Str(required=False)
+        
+        sellable = fields.Boolean(required=False)
+        
+        size_identifier = fields.Str(required=False)
          
         
     

@@ -21,7 +21,7 @@ class UserData(BaseSchema):
     #  swagger.json
 
     
-    shipping_user = fields.Nested(OrderUser, required=False)
-    
     billing_user = fields.Nested(OrderUser, required=False)
+    
+    shipping_user = fields.Nested(OrderUser, required=False)
     

@@ -9,11 +9,11 @@ from ...ApplicationModel import BaseSchema
 
 
 
-from .CollectionListingFilterType import CollectionListingFilterType
-
-
-
 from .CollectionListingFilterTag import CollectionListingFilterTag
+
+
+
+from .CollectionListingFilterType import CollectionListingFilterType
 
 
 
@@ -21,7 +21,7 @@ class CollectionListingFilter(BaseSchema):
     #  swagger.json
 
     
-    type = fields.List(fields.Nested(CollectionListingFilterType, required=False), required=False)
-    
     tags = fields.List(fields.Nested(CollectionListingFilterTag, required=False), required=False)
+    
+    type = fields.List(fields.Nested(CollectionListingFilterType, required=False), required=False)
     

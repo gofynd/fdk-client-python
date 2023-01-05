@@ -19,9 +19,9 @@ class InvoiceCredSerializer(BaseSchema):
     #  swagger.json
 
     
-    password = fields.Str(required=False)
-    
     username = fields.Str(required=False)
+    
+    password = fields.Str(required=False)
     
     enabled = fields.Boolean(required=False)
     

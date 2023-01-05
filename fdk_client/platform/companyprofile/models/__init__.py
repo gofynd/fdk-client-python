@@ -7,17 +7,17 @@ from .ContactDetails import ContactDetails
 
 from .UserSerializer import UserSerializer
 
+from .GetAddressSerializer import GetAddressSerializer
+
 from .Website import Website
 
 from .BusinessDetails import BusinessDetails
 
 from .CompanyTaxesSerializer import CompanyTaxesSerializer
 
-from .BusinessCountryInfo import BusinessCountryInfo
-
-from .GetAddressSerializer import GetAddressSerializer
-
 from .Document import Document
+
+from .BusinessCountryInfo import BusinessCountryInfo
 
 from .GetCompanyProfileSerializerResponse import GetCompanyProfileSerializerResponse
 
@@ -41,6 +41,8 @@ from .GetBrandResponseSerializer import GetBrandResponseSerializer
 
 from .CreateUpdateBrandRequestSerializer import CreateUpdateBrandRequestSerializer
 
+from .Page import Page
+
 from .CompanySocialAccounts import CompanySocialAccounts
 
 from .CompanyDetails import CompanyDetails
@@ -49,29 +51,27 @@ from .CompanySerializer import CompanySerializer
 
 from .CompanyBrandSerializer import CompanyBrandSerializer
 
-from .Page import Page
-
 from .CompanyBrandListSerializer import CompanyBrandListSerializer
 
 from .CompanyBrandPostRequestSerializer import CompanyBrandPostRequestSerializer
+
+from .LocationManagerSerializer import LocationManagerSerializer
+
+from .GetCompanySerializer import GetCompanySerializer
 
 from .InvoiceCredSerializer import InvoiceCredSerializer
 
 from .InvoiceDetailsSerializer import InvoiceDetailsSerializer
 
-from .LocationTimingSerializer import LocationTimingSerializer
-
-from .LocationDayWiseSerializer import LocationDayWiseSerializer
-
-from .GetCompanySerializer import GetCompanySerializer
-
-from .ProductReturnConfigSerializer import ProductReturnConfigSerializer
-
-from .LocationManagerSerializer import LocationManagerSerializer
-
 from .HolidayDateSerializer import HolidayDateSerializer
 
 from .HolidaySchemaSerializer import HolidaySchemaSerializer
+
+from .ProductReturnConfigSerializer import ProductReturnConfigSerializer
+
+from .LocationTimingSerializer import LocationTimingSerializer
+
+from .LocationDayWiseSerializer import LocationDayWiseSerializer
 
 from .GetLocationSerializer import GetLocationSerializer
 
@@ -81,9 +81,9 @@ from .LocationSerializer import LocationSerializer
 
 from .BulkLocationSerializer import BulkLocationSerializer
 
-from ._ArticleAssignment import _ArticleAssignment
-
 from ._ArticleQuery import _ArticleQuery
+
+from ._ArticleAssignment import _ArticleAssignment
 
 from ._AssignStoreArticle import _AssignStoreArticle
 

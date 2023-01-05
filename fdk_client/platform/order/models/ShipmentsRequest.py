@@ -9,8 +9,6 @@ from ...PlatformModel import BaseSchema
 
 
 
-
-
 from .Products import Products
 
 
@@ -23,15 +21,17 @@ from .ReasonsData import ReasonsData
 
 
 
+
+
 class ShipmentsRequest(BaseSchema):
     #  swagger.json
 
-    
-    identifier = fields.Str(required=False)
     
     products = fields.List(fields.Nested(Products, required=False), required=False)
     
     data_updates = fields.Nested(DataUpdates, required=False)
     
     reasons = fields.Nested(ReasonsData, required=False)
+    
+    identifier = fields.Str(required=False)
     

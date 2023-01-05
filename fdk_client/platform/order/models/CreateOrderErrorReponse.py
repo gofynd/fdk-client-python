@@ -31,17 +31,17 @@ class CreateOrderErrorReponse(BaseSchema):
     
     message = fields.Str(required=False)
     
-    stack_trace = fields.Str(required=False)
-    
-    meta = fields.Str(required=False)
+    status = fields.Int(required=False)
     
     code = fields.Str(required=False)
     
-    status = fields.Int(required=False)
-    
     request_id = fields.Str(required=False)
+    
+    stack_trace = fields.Str(required=False)
     
     exception = fields.Str(required=False)
     
     info = fields.Raw(required=False)
+    
+    meta = fields.Str(required=False)
     

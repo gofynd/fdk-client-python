@@ -9,11 +9,11 @@ from ...ApplicationModel import BaseSchema
 
 
 
+
+
+
+
 from .Media import Media
-
-
-
-
 
 
 
@@ -25,11 +25,11 @@ class Department(BaseSchema):
     #  swagger.json
 
     
-    logo = fields.Nested(Media, required=False)
+    priority_order = fields.Int(required=False)
     
     name = fields.Str(required=False)
     
-    priority_order = fields.Int(required=False)
+    logo = fields.Nested(Media, required=False)
     
     slug = fields.Str(required=False)
     

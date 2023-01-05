@@ -35,23 +35,23 @@ from .Click2CallResponse import Click2CallResponse
 
 from .Products import Products
 
-from .EntitiesDataUpdates import EntitiesDataUpdates
-
 from .ProductsDataUpdatesFilters import ProductsDataUpdatesFilters
 
 from .ProductsDataUpdates import ProductsDataUpdates
 
+from .EntitiesDataUpdates import EntitiesDataUpdates
+
 from .DataUpdates import DataUpdates
+
+from .ProductsReasonsFilters import ProductsReasonsFilters
+
+from .ProductsReasonsData import ProductsReasonsData
+
+from .ProductsReasons import ProductsReasons
 
 from .EntityReasonData import EntityReasonData
 
 from .EntitiesReasons import EntitiesReasons
-
-from .ProductsReasonsData import ProductsReasonsData
-
-from .ProductsReasonsFilters import ProductsReasonsFilters
-
-from .ProductsReasons import ProductsReasons
 
 from .ReasonsData import ReasonsData
 
@@ -67,39 +67,15 @@ from .StatuesResponse import StatuesResponse
 
 from .UpdateShipmentStatusResponseBody import UpdateShipmentStatusResponseBody
 
-from .AffiliateStoreIdMapping import AffiliateStoreIdMapping
-
-from .AffiliateInventoryPaymentConfig import AffiliateInventoryPaymentConfig
-
-from .AffiliateInventoryArticleAssignmentConfig import AffiliateInventoryArticleAssignmentConfig
-
-from .AffiliateInventoryStoreConfig import AffiliateInventoryStoreConfig
-
-from .AffiliateInventoryOrderConfig import AffiliateInventoryOrderConfig
-
-from .AffiliateInventoryLogisticsConfig import AffiliateInventoryLogisticsConfig
-
-from .AffiliateInventoryConfig import AffiliateInventoryConfig
-
-from .AffiliateAppConfigMeta import AffiliateAppConfigMeta
-
-from .AffiliateAppConfig import AffiliateAppConfig
-
-from .AffiliateConfig import AffiliateConfig
-
-from .Affiliate import Affiliate
-
-from .OrderConfig import OrderConfig
-
-from .OrderUser import OrderUser
-
-from .UserData import UserData
-
 from .OrderPriority import OrderPriority
 
 from .MarketPlacePdf import MarketPlacePdf
 
 from .AffiliateBag import AffiliateBag
+
+from .OrderUser import OrderUser
+
+from .UserData import UserData
 
 from .ArticleDetails import ArticleDetails
 
@@ -112,6 +88,30 @@ from .ShipmentConfig import ShipmentConfig
 from .ShipmentData import ShipmentData
 
 from .OrderInfo import OrderInfo
+
+from .AffiliateInventoryLogisticsConfig import AffiliateInventoryLogisticsConfig
+
+from .AffiliateInventoryStoreConfig import AffiliateInventoryStoreConfig
+
+from .AffiliateInventoryPaymentConfig import AffiliateInventoryPaymentConfig
+
+from .AffiliateInventoryOrderConfig import AffiliateInventoryOrderConfig
+
+from .AffiliateInventoryArticleAssignmentConfig import AffiliateInventoryArticleAssignmentConfig
+
+from .AffiliateInventoryConfig import AffiliateInventoryConfig
+
+from .AffiliateAppConfigMeta import AffiliateAppConfigMeta
+
+from .AffiliateAppConfig import AffiliateAppConfig
+
+from .AffiliateConfig import AffiliateConfig
+
+from .Affiliate import Affiliate
+
+from .AffiliateStoreIdMapping import AffiliateStoreIdMapping
+
+from .OrderConfig import OrderConfig
 
 from .CreateOrderPayload import CreateOrderPayload
 
@@ -149,35 +149,35 @@ from .ManualAssignDPToShipment import ManualAssignDPToShipment
 
 from .ManualAssignDPToShipmentResponse import ManualAssignDPToShipmentResponse
 
-from .BillingInfo import BillingInfo
-
-from .ShippingInfo import ShippingInfo
-
-from .PaymentMethod import PaymentMethod
-
-from .PaymentInfo import PaymentInfo
+from .ProcessingDates import ProcessingDates
 
 from .Tax import Tax
 
 from .Charge import Charge
 
-from .ProcessingDates import ProcessingDates
-
 from .LineItem import LineItem
 
 from .Shipment import Shipment
 
+from .BillingInfo import BillingInfo
+
+from .PaymentMethod import PaymentMethod
+
+from .PaymentInfo import PaymentInfo
+
 from .TaxInfo import TaxInfo
+
+from .ShippingInfo import ShippingInfo
 
 from .CreateOrderAPI import CreateOrderAPI
 
 from .CreateOrderErrorReponse import CreateOrderErrorReponse
 
+from .DpConfiguration import DpConfiguration
+
 from .PaymentMethods import PaymentMethods
 
 from .CreateChannelPaymentInfo import CreateChannelPaymentInfo
-
-from .DpConfiguration import DpConfiguration
 
 from .CreateChannelConfig import CreateChannelConfig
 

@@ -17,7 +17,7 @@ from ...PlatformModel import BaseSchema
 
 
 
-class Error(BaseSchema):
+class E(BaseSchema):
     #  swagger.json
 
     

@@ -21,9 +21,9 @@ class PromotionPaymentModes(BaseSchema):
     #  swagger.json
 
     
-    type = fields.Str(required=False)
-    
     codes = fields.List(fields.Str(required=False), required=False)
+    
+    type = fields.Str(required=False)
     
     uses = fields.Nested(PaymentAllowValue1, required=False)
     

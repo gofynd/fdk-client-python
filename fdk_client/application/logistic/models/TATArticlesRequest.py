@@ -11,9 +11,9 @@ from ...ApplicationModel import BaseSchema
 
 
 
-
-
 from .TATCategoryRequest import TATCategoryRequest
+
+
 
 
 
@@ -23,7 +23,7 @@ class TATArticlesRequest(BaseSchema):
     
     manufacturing_time = fields.Int(required=False)
     
-    manufacturing_time_unit = fields.Str(required=False)
-    
     category = fields.Nested(TATCategoryRequest, required=False)
+    
+    manufacturing_time_unit = fields.Str(required=False)
     
