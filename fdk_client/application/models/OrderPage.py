@@ -24,10 +24,10 @@ class OrderPage(BaseSchema):
     
     item_total = fields.Int(required=False)
     
-    current = fields.Int(required=False)
-    
     type = fields.Str(required=False)
     
     size = fields.Int(required=False)
+    
+    current = fields.Int(required=False)
     
 
