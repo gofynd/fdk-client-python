@@ -21,7 +21,7 @@ class InventoryExportRequest(BaseSchema):
     
     store = fields.List(fields.Int(required=False), required=False)
     
-    brand = fields.List(fields.Int(required=False), required=False)
-    
     type = fields.Str(required=False)
+    
+    brand = fields.List(fields.Int(required=False), required=False)
     

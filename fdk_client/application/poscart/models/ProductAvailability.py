@@ -23,9 +23,9 @@ class ProductAvailability(BaseSchema):
     #  swagger.json
 
     
-    deliverable = fields.Boolean(required=False)
-    
     sizes = fields.List(fields.Str(required=False), required=False)
+    
+    deliverable = fields.Boolean(required=False)
     
     is_valid = fields.Boolean(required=False)
     

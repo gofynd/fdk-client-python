@@ -21,7 +21,7 @@ class BreakupValues(BaseSchema):
     
     name = fields.Str(required=False)
     
-    display = fields.Str(required=False)
-    
     value = fields.Float(required=False)
+    
+    display = fields.Str(required=False)
     

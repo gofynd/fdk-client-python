@@ -9,11 +9,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .AffiliateAppConfig import AffiliateAppConfig
-
-
-
 from .AffiliateInventoryConfig import AffiliateInventoryConfig
+
+
+
+from .AffiliateAppConfig import AffiliateAppConfig
 
 
 
@@ -21,7 +21,7 @@ class AffiliateConfig(BaseSchema):
     #  swagger.json
 
     
-    app = fields.Nested(AffiliateAppConfig, required=False)
-    
     inventory = fields.Nested(AffiliateInventoryConfig, required=False)
+    
+    app = fields.Nested(AffiliateAppConfig, required=False)
     

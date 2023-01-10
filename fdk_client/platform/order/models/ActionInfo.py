@@ -25,7 +25,7 @@ class ActionInfo(BaseSchema):
     
     display_text = fields.Str(required=False)
     
-    id = fields.Int(required=False)
-    
     slug = fields.Str(required=False)
+    
+    id = fields.Int(required=False)
     

@@ -21,11 +21,11 @@ class PageResponseType(BaseSchema):
     #  swagger.json
 
     
-    has_next = fields.Boolean(required=False)
-    
-    next = fields.Int(required=False)
-    
     current = fields.Int(required=False)
     
     total_count = fields.Int(required=False)
+    
+    next = fields.Int(required=False)
+    
+    has_next = fields.Boolean(required=False)
     

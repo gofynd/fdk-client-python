@@ -25,9 +25,9 @@ class AppliedFreeArticles(BaseSchema):
     
     free_gift_item_details = fields.Nested(FreeGiftItem, required=False)
     
-    parent_item_identifier = fields.Str(required=False)
-    
     quantity = fields.Int(required=False)
     
     article_id = fields.Str(required=False)
+    
+    parent_item_identifier = fields.Str(required=False)
     

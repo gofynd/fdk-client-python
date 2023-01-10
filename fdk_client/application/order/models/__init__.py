@@ -1,29 +1,19 @@
 """order Application Models and Enums"""
 
 
-from .OrderStatuses import OrderStatuses
-
-from .OrderFilters import OrderFilters
-
-from .OrderPage import OrderPage
-
 from .BagsForReorderArticleAssignment import BagsForReorderArticleAssignment
 
 from .BagsForReorder import BagsForReorder
 
-from .BreakupValues import BreakupValues
+from .ShipmentTotalDetails import ShipmentTotalDetails
 
-from .UserInfo import UserInfo
+from .ShipmentStatus import ShipmentStatus
 
-from .FulfillingCompany import FulfillingCompany
+from .ShipmentPayment import ShipmentPayment
 
-from .Prices import Prices
+from .NestedTrackingDetails import NestedTrackingDetails
 
-from .CurrentStatus import CurrentStatus
-
-from .AppliedFreeArticles import AppliedFreeArticles
-
-from .AppliedPromos import AppliedPromos
+from .TrackingDetails import TrackingDetails
 
 from .Identifiers import Identifiers
 
@@ -33,33 +23,43 @@ from .ItemBrand import ItemBrand
 
 from .Item import Item
 
+from .AppliedFreeArticles import AppliedFreeArticles
+
+from .AppliedPromos import AppliedPromos
+
+from .CurrentStatus import CurrentStatus
+
+from .Prices import Prices
+
 from .Bags import Bags
-
-from .DeliveryAddress import DeliveryAddress
-
-from .ShipmentStatus import ShipmentStatus
-
-from .Invoice import Invoice
-
-from .FulfillingStore import FulfillingStore
-
-from .ShipmentUserInfo import ShipmentUserInfo
-
-from .ShipmentTotalDetails import ShipmentTotalDetails
 
 from .TimeStampData import TimeStampData
 
 from .Promise import Promise
 
-from .ShipmentPayment import ShipmentPayment
+from .DeliveryAddress import DeliveryAddress
 
-from .NestedTrackingDetails import NestedTrackingDetails
+from .BreakupValues import BreakupValues
 
-from .TrackingDetails import TrackingDetails
+from .Invoice import Invoice
+
+from .FulfillingStore import FulfillingStore
+
+from .FulfillingCompany import FulfillingCompany
+
+from .ShipmentUserInfo import ShipmentUserInfo
 
 from .Shipments import Shipments
 
+from .UserInfo import UserInfo
+
 from .OrderSchema import OrderSchema
+
+from .OrderStatuses import OrderStatuses
+
+from .OrderFilters import OrderFilters
+
+from .OrderPage import OrderPage
 
 from .OrderList import OrderList
 
@@ -97,8 +97,6 @@ from .UpdateShipmentExternalRequest import UpdateShipmentExternalRequest
 
 from .UpdateShipmentResponse import UpdateShipmentResponse
 
-from .Products import Products
-
 from .ProductsReasonsData import ProductsReasonsData
 
 from .ProductsReasonsFilters import ProductsReasonsFilters
@@ -110,6 +108,8 @@ from .EntityReasonData import EntityReasonData
 from .EntitiesReasons import EntitiesReasons
 
 from .ReasonsData import ReasonsData
+
+from .Products import Products
 
 from .ProductsDataUpdatesFilters import ProductsDataUpdatesFilters
 

@@ -21,13 +21,13 @@ from .Size import Size
 
 
 
+
+
+
+
+
+
 from .Price import Price
-
-
-
-
-
-
 
 
 
@@ -41,17 +41,17 @@ class GetProducts(BaseSchema):
     
     product_uid = fields.Int(required=False)
     
-    auto_add_to_cart = fields.Boolean(required=False)
+    allow_remove = fields.Boolean(required=False)
     
     sizes = fields.List(fields.Nested(Size, required=False), required=False)
     
-    price = fields.Nested(Price, required=False)
+    auto_add_to_cart = fields.Boolean(required=False)
     
-    allow_remove = fields.Boolean(required=False)
+    max_quantity = fields.Int(required=False)
     
     auto_select = fields.Boolean(required=False)
     
-    max_quantity = fields.Int(required=False)
+    price = fields.Nested(Price, required=False)
     
     min_quantity = fields.Int(required=False)
     

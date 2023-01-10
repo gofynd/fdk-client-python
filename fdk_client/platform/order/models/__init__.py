@@ -17,9 +17,9 @@ from .Entities import Entities
 
 from .UpdateShipmentLockPayload import UpdateShipmentLockPayload
 
-from .Bags import Bags
-
 from .OriginalFilter import OriginalFilter
+
+from .Bags import Bags
 
 from .CheckResponse import CheckResponse
 
@@ -41,6 +41,8 @@ from .ProductsDataUpdates import ProductsDataUpdates
 
 from .DataUpdates import DataUpdates
 
+from .Products import Products
+
 from .EntityReasonData import EntityReasonData
 
 from .EntitiesReasons import EntitiesReasons
@@ -52,8 +54,6 @@ from .ProductsReasonsFilters import ProductsReasonsFilters
 from .ProductsReasons import ProductsReasons
 
 from .ReasonsData import ReasonsData
-
-from .Products import Products
 
 from .ShipmentsRequest import ShipmentsRequest
 
@@ -67,29 +67,19 @@ from .StatuesResponse import StatuesResponse
 
 from .UpdateShipmentStatusResponseBody import UpdateShipmentStatusResponseBody
 
-from .AffiliateStoreIdMapping import AffiliateStoreIdMapping
+from .OrderUser import OrderUser
 
-from .AffiliateAppConfigMeta import AffiliateAppConfigMeta
+from .UserData import UserData
 
-from .AffiliateAppConfig import AffiliateAppConfig
+from .ArticleDetails import ArticleDetails
 
-from .AffiliateInventoryStoreConfig import AffiliateInventoryStoreConfig
+from .ShipmentDetails import ShipmentDetails
 
-from .AffiliateInventoryPaymentConfig import AffiliateInventoryPaymentConfig
+from .LocationDetails import LocationDetails
 
-from .AffiliateInventoryArticleAssignmentConfig import AffiliateInventoryArticleAssignmentConfig
+from .ShipmentConfig import ShipmentConfig
 
-from .AffiliateInventoryLogisticsConfig import AffiliateInventoryLogisticsConfig
-
-from .AffiliateInventoryOrderConfig import AffiliateInventoryOrderConfig
-
-from .AffiliateInventoryConfig import AffiliateInventoryConfig
-
-from .AffiliateConfig import AffiliateConfig
-
-from .Affiliate import Affiliate
-
-from .OrderConfig import OrderConfig
+from .ShipmentData import ShipmentData
 
 from .MarketPlacePdf import MarketPlacePdf
 
@@ -97,21 +87,31 @@ from .AffiliateBag import AffiliateBag
 
 from .OrderPriority import OrderPriority
 
-from .OrderUser import OrderUser
-
-from .ArticleDetails import ArticleDetails
-
-from .LocationDetails import LocationDetails
-
-from .ShipmentDetails import ShipmentDetails
-
-from .ShipmentConfig import ShipmentConfig
-
-from .ShipmentData import ShipmentData
-
-from .UserData import UserData
-
 from .OrderInfo import OrderInfo
+
+from .AffiliateInventoryPaymentConfig import AffiliateInventoryPaymentConfig
+
+from .AffiliateInventoryArticleAssignmentConfig import AffiliateInventoryArticleAssignmentConfig
+
+from .AffiliateInventoryStoreConfig import AffiliateInventoryStoreConfig
+
+from .AffiliateInventoryLogisticsConfig import AffiliateInventoryLogisticsConfig
+
+from .AffiliateInventoryOrderConfig import AffiliateInventoryOrderConfig
+
+from .AffiliateInventoryConfig import AffiliateInventoryConfig
+
+from .AffiliateAppConfigMeta import AffiliateAppConfigMeta
+
+from .AffiliateAppConfig import AffiliateAppConfig
+
+from .AffiliateConfig import AffiliateConfig
+
+from .Affiliate import Affiliate
+
+from .AffiliateStoreIdMapping import AffiliateStoreIdMapping
+
+from .OrderConfig import OrderConfig
 
 from .CreateOrderPayload import CreateOrderPayload
 
@@ -149,43 +149,43 @@ from .ManualAssignDPToShipment import ManualAssignDPToShipment
 
 from .ManualAssignDPToShipmentResponse import ManualAssignDPToShipmentResponse
 
-from .ShippingInfo import ShippingInfo
-
 from .BillingInfo import BillingInfo
 
-from .TaxInfo import TaxInfo
+from .ShippingInfo import ShippingInfo
 
 from .Tax import Tax
 
 from .Charge import Charge
 
+from .LineItem import LineItem
+
+from .ProcessingDates import ProcessingDates
+
+from .Shipment import Shipment
+
 from .PaymentMethod import PaymentMethod
 
 from .PaymentInfo import PaymentInfo
 
-from .ProcessingDates import ProcessingDates
-
-from .LineItem import LineItem
-
-from .Shipment import Shipment
+from .TaxInfo import TaxInfo
 
 from .CreateOrderAPI import CreateOrderAPI
 
 from .CreateOrderErrorReponse import CreateOrderErrorReponse
 
-from .DpConfiguration import DpConfiguration
-
 from .PaymentMethods import PaymentMethods
 
 from .CreateChannelPaymentInfo import CreateChannelPaymentInfo
+
+from .DpConfiguration import DpConfiguration
 
 from .CreateChannelConfig import CreateChannelConfig
 
 from .CreateChannelConfigData import CreateChannelConfigData
 
-from .CreateChannelConfigResponse import CreateChannelConfigResponse
-
 from .CreateChannelConifgErrorResponse import CreateChannelConifgErrorResponse
+
+from .CreateChannelConfigResponse import CreateChannelConfigResponse
 
 from .UploadConsent import UploadConsent
 

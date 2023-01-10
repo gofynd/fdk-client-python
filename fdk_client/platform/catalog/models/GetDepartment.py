@@ -19,27 +19,27 @@ from ...PlatformModel import BaseSchema
 
 
 
+
+
+
+
+
+
+
+
+
+
 from .UserSerializer import UserSerializer
 
 
 
+
+
+
+
+
+
 from .UserSerializer import UserSerializer
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -53,27 +53,27 @@ class GetDepartment(BaseSchema):
     
     uid = fields.Int(required=False)
     
-    page_size = fields.Int(required=False)
-    
-    slug = fields.Str(required=False)
-    
-    modified_by = fields.Nested(UserSerializer, required=False)
-    
-    created_by = fields.Nested(UserSerializer, required=False)
-    
     priority_order = fields.Int(required=False)
     
-    page_no = fields.Int(required=False)
-    
-    is_active = fields.Boolean(required=False)
+    page_size = fields.Int(required=False)
     
     name = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
     
     modified_on = fields.Str(required=False)
     
     synonyms = fields.List(fields.Str(required=False), required=False)
     
-    created_on = fields.Str(required=False)
+    page_no = fields.Int(required=False)
+    
+    modified_by = fields.Nested(UserSerializer, required=False)
     
     logo = fields.Str(required=False)
+    
+    created_on = fields.Str(required=False)
+    
+    is_active = fields.Boolean(required=False)
+    
+    created_by = fields.Nested(UserSerializer, required=False)
     

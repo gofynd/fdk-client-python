@@ -1,23 +1,23 @@
 """companyprofile Platform Models and Enums"""
 
 
-from .UserSerializer import UserSerializer
-
 from .SellerPhoneNumber import SellerPhoneNumber
 
 from .ContactDetails import ContactDetails
 
-from .GetAddressSerializer import GetAddressSerializer
+from .Document import Document
 
-from .CompanyTaxesSerializer import CompanyTaxesSerializer
+from .GetAddressSerializer import GetAddressSerializer
 
 from .BusinessCountryInfo import BusinessCountryInfo
 
-from .Document import Document
+from .UserSerializer import UserSerializer
 
 from .Website import Website
 
 from .BusinessDetails import BusinessDetails
+
+from .CompanyTaxesSerializer import CompanyTaxesSerializer
 
 from .GetCompanyProfileSerializerResponse import GetCompanyProfileSerializerResponse
 
@@ -55,23 +55,23 @@ from .CompanyBrandListSerializer import CompanyBrandListSerializer
 
 from .CompanyBrandPostRequestSerializer import CompanyBrandPostRequestSerializer
 
-from .HolidayDateSerializer import HolidayDateSerializer
-
-from .HolidaySchemaSerializer import HolidaySchemaSerializer
-
-from .GetCompanySerializer import GetCompanySerializer
+from .LocationManagerSerializer import LocationManagerSerializer
 
 from .ProductReturnConfigSerializer import ProductReturnConfigSerializer
 
-from .InvoiceCredSerializer import InvoiceCredSerializer
-
-from .InvoiceDetailsSerializer import InvoiceDetailsSerializer
-
-from .LocationManagerSerializer import LocationManagerSerializer
+from .GetCompanySerializer import GetCompanySerializer
 
 from .LocationTimingSerializer import LocationTimingSerializer
 
 from .LocationDayWiseSerializer import LocationDayWiseSerializer
+
+from .HolidayDateSerializer import HolidayDateSerializer
+
+from .HolidaySchemaSerializer import HolidaySchemaSerializer
+
+from .InvoiceCredSerializer import InvoiceCredSerializer
+
+from .InvoiceDetailsSerializer import InvoiceDetailsSerializer
 
 from .GetLocationSerializer import GetLocationSerializer
 
