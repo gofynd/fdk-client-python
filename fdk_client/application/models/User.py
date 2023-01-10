@@ -83,6 +83,10 @@ class SendResetPasswordEmailRequestSchema(BaseSchema):
     pass
 
 
+class SendResetPasswordMobileRequestSchema(BaseSchema):
+    pass
+
+
 class PasswordLoginRequestSchema(BaseSchema):
     pass
 
@@ -618,6 +622,18 @@ class SendResetPasswordEmailRequestSchema(BaseSchema):
     
 
 
+class SendResetPasswordMobileRequestSchema(BaseSchema):
+    # User swagger.json
+
+    
+    country_code = fields.Str(required=False)
+    
+    mobile = fields.Str(required=False)
+    
+    captcha_code = fields.Str(required=False)
+    
+
+
 class PasswordLoginRequestSchema(BaseSchema):
     # User swagger.json
 
@@ -639,8 +655,6 @@ class SendOtpRequestSchema(BaseSchema):
     captcha_code = fields.Str(required=False)
     
     mobile = fields.Str(required=False)
-    
-    android_hash = fields.Str(required=False)
     
 
 
@@ -1037,8 +1051,6 @@ class AuthenticationApiErrorSchema(BaseSchema):
 
     
     message = fields.Str(required=False)
-    
-    is_deleted = fields.Boolean(required=False)
     
 
 
