@@ -21,9 +21,9 @@ class StrategyWiseListingSchemaV2(BaseSchema):
     #  swagger.json
 
     
-    tat = fields.Int(required=False)
-    
     quantity = fields.Int(required=False)
+    
+    tat = fields.Int(required=False)
     
     distance = fields.Int(required=False)
     

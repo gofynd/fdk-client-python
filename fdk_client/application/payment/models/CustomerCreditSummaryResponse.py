@@ -9,9 +9,9 @@ from ...ApplicationModel import BaseSchema
 
 
 
+
+
 from .CreditSummary import CreditSummary
-
-
 
 
 
@@ -19,7 +19,7 @@ class CustomerCreditSummaryResponse(BaseSchema):
     #  swagger.json
 
     
-    data = fields.Nested(CreditSummary, required=False)
-    
     success = fields.Boolean(required=False)
+    
+    data = fields.Nested(CreditSummary, required=False)
     

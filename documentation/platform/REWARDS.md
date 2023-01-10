@@ -16,6 +16,7 @@ Earn and redeem reward points
 * [updateOfferByName](#updateofferbyname)
 * [updateUserStatus](#updateuserstatus)
 * [user](#user)
+* [getPointsHistory](#getpointshistory)
 
 
 
@@ -588,6 +589,65 @@ Success. Check example below or refer `UserRes` for more details.
 ---
 
 
+### getPointsHistory
+Get all transactions of reward points
+
+
+
+
+```python
+try:
+    result = await client.application("<APPLICATION_ID>").rewards.getPointsHistory(pageId=pageId, pageSize=pageSize, userId=userId)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| pageId | String? | no | PageID is the ID of the requested page. For first request it should be kept empty. |   
+| pageSize | Int? | no | The number of items to retrieve in each page. |   
+| userId | String | yes | user id |  
+
+
+
+Use this API to get a list of points transactions.
+
+*Returned Response:*
+
+
+
+
+[HistoryRes](#HistoryRes)
+
+Success. Check example below or refer `HistoryRes` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
 
 ### Schemas
 
@@ -715,7 +775,7 @@ Success. Check example below or refer `UserRes` for more details.
  | schedule | [Schedule](#Schedule)? |  yes  |  |
  | active | Boolean? |  yes  |  |
  | applicationId | String? |  yes  |  |
- | bannerImage | Any? |  yes  |  |
+ | bannerImage | [Asset](#Asset)? |  yes  |  |
  | createdAt | String? |  yes  |  |
  | name | String? |  yes  |  |
  | rule | HashMap<String,Any>? |  yes  |  |
@@ -826,6 +886,43 @@ Success. Check example below or refer `UserRes` for more details.
  | ---------- | ---- | -------- | ----------- |
  | audienceId | String? |  yes  |  |
  | currentCount | Double? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [HistoryRes](#HistoryRes)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | items | ArrayList<[PointsHistory](#PointsHistory)>? |  yes  | History is the list of points transaction. |
+ | page | [Page](#Page)? |  yes  |  |
+ | points | Double? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [PointsHistory](#PointsHistory)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | id | String? |  yes  |  |
+ | applicationId | String? |  yes  |  |
+ | claimed | Boolean? |  yes  |  |
+ | createdAt | String? |  yes  |  |
+ | expiresOn | String? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
+ | points | Double? |  yes  |  |
+ | remainingPoints | Double? |  yes  |  |
+ | text1 | String? |  yes  |  |
+ | text2 | String? |  yes  |  |
+ | text3 | String? |  yes  |  |
+ | txnName | String? |  yes  |  |
+ | updatedAt | String? |  yes  |  |
+ | userId | String? |  yes  |  |
 
 ---
 

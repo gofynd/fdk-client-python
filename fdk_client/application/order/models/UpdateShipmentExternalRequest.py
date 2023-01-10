@@ -9,13 +9,15 @@ from ...ApplicationModel import BaseSchema
 
 
 
-from .Shipments1 import Shipments1
 
 
 
-class ShipmentById1(BaseSchema):
+
+class UpdateShipmentExternalRequest(BaseSchema):
     #  swagger.json
 
     
-    shipment = fields.Nested(Shipments1, required=False)
+    statuses = fields.List(fields.Dict(required=False), required=False)
+    
+    force_transition = fields.Boolean(required=False)
     

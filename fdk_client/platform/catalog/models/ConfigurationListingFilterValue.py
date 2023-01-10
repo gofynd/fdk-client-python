@@ -15,11 +15,11 @@ from ...PlatformModel import BaseSchema
 
 
 
+
+
+
+
 from .ConfigurationBucketPoints import ConfigurationBucketPoints
-
-
-
-
 
 
 
@@ -33,9 +33,9 @@ class ConfigurationListingFilterValue(BaseSchema):
     
     condition = fields.Str(required=False)
     
-    bucket_points = fields.List(fields.Nested(ConfigurationBucketPoints, required=False), required=False)
+    value = fields.Str(required=False)
     
     sort = fields.Str(required=False)
     
-    value = fields.Str(required=False)
+    bucket_points = fields.List(fields.Nested(ConfigurationBucketPoints, required=False), required=False)
     

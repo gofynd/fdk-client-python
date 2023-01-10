@@ -11,9 +11,9 @@ from ...PlatformModel import BaseSchema
 
 
 
-
-
 from .Action import Action
+
+
 
 
 
@@ -27,9 +27,9 @@ class ProductBrand(BaseSchema):
     
     name = fields.Str(required=False)
     
-    uid = fields.Int(required=False)
-    
     action = fields.Nested(Action, required=False)
+    
+    uid = fields.Int(required=False)
     
     logo = fields.Nested(Media1, required=False)
     

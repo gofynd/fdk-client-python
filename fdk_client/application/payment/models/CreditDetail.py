@@ -19,9 +19,9 @@ class CreditDetail(BaseSchema):
     #  swagger.json
 
     
-    status = fields.Boolean(required=False)
+    signup_url = fields.Str(required=False)
     
     is_registered = fields.Boolean(required=False)
     
-    signup_url = fields.Str(required=False)
+    status = fields.Boolean(required=False)
     

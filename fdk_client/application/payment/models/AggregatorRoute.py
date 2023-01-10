@@ -25,7 +25,7 @@ class AggregatorRoute(BaseSchema):
     
     data = fields.Dict(required=False)
     
-    api_link = fields.Str(required=False)
-    
     payment_flow_data = fields.Str(required=False)
+    
+    api_link = fields.Str(required=False)
     

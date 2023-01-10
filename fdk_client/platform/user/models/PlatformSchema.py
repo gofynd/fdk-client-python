@@ -129,5 +129,5 @@ class PlatformSchema(BaseSchema):
     
     delete_account_consent = fields.Dict(required=False)
     
-    session_timeout = fields.Dict(required=False)
+    session_config = fields.Dict(required=False)
     

@@ -25,9 +25,9 @@ class IntentApp(BaseSchema):
     
     logos = fields.Nested(PaymentModeLogo, required=False)
     
-    code = fields.Str(required=False)
-    
     display_name = fields.Str(required=False)
+    
+    code = fields.Str(required=False)
     
     package_name = fields.Str(required=False)
     

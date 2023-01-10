@@ -23,13 +23,13 @@ class CouponValidity(BaseSchema):
     #  swagger.json
 
     
+    valid = fields.Boolean(required=False)
+    
     display_message_en = fields.Str(required=False)
+    
+    discount = fields.Float(required=False)
     
     title = fields.Str(required=False)
     
     code = fields.Str(required=False)
-    
-    valid = fields.Boolean(required=False)
-    
-    discount = fields.Float(required=False)
     

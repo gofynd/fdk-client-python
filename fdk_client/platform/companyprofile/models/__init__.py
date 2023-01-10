@@ -1,31 +1,31 @@
 """companyprofile Platform Models and Enums"""
 
 
+from .UserSerializer import UserSerializer
+
 from .SellerPhoneNumber import SellerPhoneNumber
 
 from .ContactDetails import ContactDetails
 
-from .UserSerializer import UserSerializer
-
 from .GetAddressSerializer import GetAddressSerializer
+
+from .CompanyTaxesSerializer import CompanyTaxesSerializer
+
+from .BusinessCountryInfo import BusinessCountryInfo
+
+from .Document import Document
 
 from .Website import Website
 
 from .BusinessDetails import BusinessDetails
 
-from .CompanyTaxesSerializer import CompanyTaxesSerializer
-
-from .Document import Document
-
-from .BusinessCountryInfo import BusinessCountryInfo
-
 from .GetCompanyProfileSerializerResponse import GetCompanyProfileSerializerResponse
 
 from .ErrorResponse import ErrorResponse
 
-from .CreateUpdateAddressSerializer import CreateUpdateAddressSerializer
-
 from .CompanyTaxesSerializer1 import CompanyTaxesSerializer1
+
+from .CreateUpdateAddressSerializer import CreateUpdateAddressSerializer
 
 from .UpdateCompany import UpdateCompany
 
@@ -55,19 +55,19 @@ from .CompanyBrandListSerializer import CompanyBrandListSerializer
 
 from .CompanyBrandPostRequestSerializer import CompanyBrandPostRequestSerializer
 
-from .LocationManagerSerializer import LocationManagerSerializer
+from .HolidayDateSerializer import HolidayDateSerializer
+
+from .HolidaySchemaSerializer import HolidaySchemaSerializer
 
 from .GetCompanySerializer import GetCompanySerializer
+
+from .ProductReturnConfigSerializer import ProductReturnConfigSerializer
 
 from .InvoiceCredSerializer import InvoiceCredSerializer
 
 from .InvoiceDetailsSerializer import InvoiceDetailsSerializer
 
-from .HolidayDateSerializer import HolidayDateSerializer
-
-from .HolidaySchemaSerializer import HolidaySchemaSerializer
-
-from .ProductReturnConfigSerializer import ProductReturnConfigSerializer
+from .LocationManagerSerializer import LocationManagerSerializer
 
 from .LocationTimingSerializer import LocationTimingSerializer
 
@@ -81,9 +81,9 @@ from .LocationSerializer import LocationSerializer
 
 from .BulkLocationSerializer import BulkLocationSerializer
 
-from ._ArticleQuery import _ArticleQuery
-
 from ._ArticleAssignment import _ArticleAssignment
+
+from ._ArticleQuery import _ArticleQuery
 
 from ._AssignStoreArticle import _AssignStoreArticle
 

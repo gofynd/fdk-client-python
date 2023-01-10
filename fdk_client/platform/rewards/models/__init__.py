@@ -33,4 +33,8 @@ from .AppUser import AppUser
 
 from .GiveawayAudience import GiveawayAudience
 
+from .HistoryRes import HistoryRes
+
+from .PointsHistory import PointsHistory
+
 

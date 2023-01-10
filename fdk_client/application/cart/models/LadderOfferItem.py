@@ -27,11 +27,11 @@ class LadderOfferItem(BaseSchema):
     
     price = fields.Nested(LadderPrice, required=False)
     
-    min_quantity = fields.Int(required=False)
-    
     max_quantity = fields.Int(required=False)
     
     type = fields.Str(required=False)
     
     margin = fields.Int(required=False)
+    
+    min_quantity = fields.Int(required=False)
     

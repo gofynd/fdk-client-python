@@ -17,7 +17,7 @@ class RupifiBannerData(BaseSchema):
     #  swagger.json
 
     
-    kyc_url = fields.Str(required=False)
-    
     status = fields.Str(required=False)
+    
+    kyc_url = fields.Str(required=False)
     

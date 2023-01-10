@@ -17,7 +17,7 @@ class OrderDetails(BaseSchema):
     #  swagger.json
 
     
-    created_at = fields.Str(required=False)
-    
     fynd_order_id = fields.Str(required=False)
+    
+    created_at = fields.Str(required=False)
     

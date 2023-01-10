@@ -17,6 +17,8 @@ from .Schedule import Schedule
 
 
 
+from .Asset import Asset
+
 
 
 
@@ -51,7 +53,7 @@ class Offer(BaseSchema):
     
     application_id = fields.Str(required=False)
     
-    banner_image = fields.Raw(required=False)
+    banner_image = fields.Nested(Asset, required=False)
     
     created_at = fields.Str(required=False)
     

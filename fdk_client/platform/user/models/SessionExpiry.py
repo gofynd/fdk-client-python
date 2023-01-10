@@ -23,5 +23,5 @@ class SessionExpiry(BaseSchema):
     
     type = fields.Str(required=False)
     
-    is_active = fields.Boolean(required=False)
+    is_rolling = fields.Boolean(required=False)
     

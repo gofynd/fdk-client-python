@@ -19,9 +19,9 @@ class UpdatePayoutResponse(BaseSchema):
     #  swagger.json
 
     
-    success = fields.Boolean(required=False)
+    is_active = fields.Boolean(required=False)
     
     is_default = fields.Boolean(required=False)
     
-    is_active = fields.Boolean(required=False)
+    success = fields.Boolean(required=False)
     

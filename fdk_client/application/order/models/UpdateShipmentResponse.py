@@ -15,13 +15,13 @@ from ...ApplicationModel import BaseSchema
 
 
 
-class Timestamp(BaseSchema):
+class UpdateShipmentResponse(BaseSchema):
     #  swagger.json
 
     
-    show_promise = fields.Boolean(required=False)
+    status = fields.Boolean(required=False)
     
-    min = fields.Str(required=False)
+    message = fields.List(fields.Str(required=False), required=False)
     
-    max = fields.Str(required=False)
+    final_state = fields.Dict(required=False)
     

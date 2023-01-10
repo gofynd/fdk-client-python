@@ -9,9 +9,9 @@ from ...ApplicationModel import BaseSchema
 
 
 
+
+
 from .RedirectURL import RedirectURL
-
-
 
 
 
@@ -19,7 +19,7 @@ class RedirectToAggregatorResponse(BaseSchema):
     #  swagger.json
 
     
-    data = fields.Nested(RedirectURL, required=False)
-    
     success = fields.Boolean(required=False)
+    
+    data = fields.Nested(RedirectURL, required=False)
     
