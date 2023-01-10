@@ -19,9 +19,9 @@ class Seller(BaseSchema):
     #  swagger.json
 
     
+    count = fields.Int(required=False)
+    
     uid = fields.Int(required=False)
     
     name = fields.Str(required=False)
-    
-    count = fields.Int(required=False)
     

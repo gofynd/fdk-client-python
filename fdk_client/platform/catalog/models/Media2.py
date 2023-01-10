@@ -21,7 +21,7 @@ class Media2(BaseSchema):
     
     landscape = fields.Str(required=False)
     
-    portrait = fields.Str(required=False)
-    
     logo = fields.Str(required=False)
+    
+    portrait = fields.Str(required=False)
     

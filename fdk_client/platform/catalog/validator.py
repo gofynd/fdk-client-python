@@ -194,10 +194,10 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
-        
     
     
+        
+        
         
         
     
@@ -759,6 +759,15 @@ class CatalogValidator:
          
         
     
+    class patchProduct(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        item_id = fields.Int(required=False)
+         
+        
+    
     class getProduct(BaseSchema):
         
         
@@ -769,15 +778,6 @@ class CatalogValidator:
         item_id = fields.Int(required=False)
         
         brand_uid = fields.Int(required=False)
-         
-        
-    
-    class patchProduct(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        item_id = fields.Int(required=False)
          
         
     
@@ -821,21 +821,21 @@ class CatalogValidator:
          
         
     
-    class deleteProductBulkJob(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        batch_id = fields.Int(required=False)
-         
-        
-    
     class createProductsInBulk(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         batch_id = fields.Str(required=False)
+         
+        
+    
+    class deleteProductBulkJob(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        batch_id = fields.Int(required=False)
          
         
     
@@ -976,19 +976,19 @@ class CatalogValidator:
          
         
     
-    class deleteBulkInventoryJob(BaseSchema):
+    class createBulkInventory(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
         batch_id = fields.Str(required=False)
          
         
     
-    class createBulkInventory(BaseSchema):
+    class deleteBulkInventoryJob(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         batch_id = fields.Str(required=False)
          
@@ -1017,7 +1017,7 @@ class CatalogValidator:
          
         
     
-    class deleteRealtimeInventory(BaseSchema):
+    class updateRealtimeInventory(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -1028,7 +1028,7 @@ class CatalogValidator:
          
         
     
-    class updateRealtimeInventory(BaseSchema):
+    class deleteRealtimeInventory(BaseSchema):
         
         
         company_id = fields.Str(required=False)

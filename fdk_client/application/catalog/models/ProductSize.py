@@ -11,10 +11,6 @@ from ...ApplicationModel import BaseSchema
 
 
 
-from .Weight import Weight
-
-
-
 
 
 
@@ -27,21 +23,25 @@ from .Dimension import Dimension
 
 
 
+from .Weight import Weight
+
+
+
 class ProductSize(BaseSchema):
     #  swagger.json
 
-    
-    seller_identifiers = fields.List(fields.Str(required=False), required=False)
-    
-    weight = fields.Nested(Weight, required=False)
     
     display = fields.Str(required=False)
     
     is_available = fields.Boolean(required=False)
     
+    seller_identifiers = fields.List(fields.Str(required=False), required=False)
+    
     dimension = fields.Nested(Dimension, required=False)
+    
+    quantity = fields.Int(required=False)
     
     value = fields.Str(required=False)
     
-    quantity = fields.Int(required=False)
+    weight = fields.Nested(Weight, required=False)
     

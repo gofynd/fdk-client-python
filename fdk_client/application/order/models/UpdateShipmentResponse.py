@@ -19,9 +19,9 @@ class UpdateShipmentResponse(BaseSchema):
     #  swagger.json
 
     
+    message = fields.List(fields.Str(required=False), required=False)
+    
     final_state = fields.Dict(required=False)
     
     status = fields.Boolean(required=False)
-    
-    message = fields.List(fields.Str(required=False), required=False)
     

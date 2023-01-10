@@ -11,15 +11,15 @@ from ...ApplicationModel import BaseSchema
 
 
 
+
+
+
+
+
+
+
+
 from .BagsForReorderArticleAssignment import BagsForReorderArticleAssignment
-
-
-
-
-
-
-
-
 
 
 
@@ -29,7 +29,7 @@ class BagsForReorder(BaseSchema):
     
     store_id = fields.Int(required=False)
     
-    article_assignment = fields.Nested(BagsForReorderArticleAssignment, required=False)
+    item_size = fields.Str(required=False)
     
     quantity = fields.Int(required=False)
     
@@ -37,5 +37,5 @@ class BagsForReorder(BaseSchema):
     
     seller_id = fields.Int(required=False)
     
-    item_size = fields.Str(required=False)
+    article_assignment = fields.Nested(BagsForReorderArticleAssignment, required=False)
     

@@ -17,11 +17,11 @@ from .AffiliateInventoryArticleAssignmentConfig import AffiliateInventoryArticle
 
 
 
-from .AffiliateInventoryStoreConfig import AffiliateInventoryStoreConfig
-
-
-
 from .AffiliateInventoryLogisticsConfig import AffiliateInventoryLogisticsConfig
+
+
+
+from .AffiliateInventoryStoreConfig import AffiliateInventoryStoreConfig
 
 
 
@@ -37,9 +37,9 @@ class AffiliateInventoryConfig(BaseSchema):
     
     article_assignment = fields.Nested(AffiliateInventoryArticleAssignmentConfig, required=False)
     
-    inventory = fields.Nested(AffiliateInventoryStoreConfig, required=False)
-    
     logistics = fields.Nested(AffiliateInventoryLogisticsConfig, required=False)
+    
+    inventory = fields.Nested(AffiliateInventoryStoreConfig, required=False)
     
     order = fields.Nested(AffiliateInventoryOrderConfig, required=False)
     

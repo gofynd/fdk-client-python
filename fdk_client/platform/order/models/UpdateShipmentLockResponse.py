@@ -23,7 +23,7 @@ class UpdateShipmentLockResponse(BaseSchema):
     
     check_response = fields.List(fields.Nested(CheckResponse, required=False), required=False)
     
-    message = fields.Str(required=False)
-    
     success = fields.Boolean(required=False)
+    
+    message = fields.Str(required=False)
     

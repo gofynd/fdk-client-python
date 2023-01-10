@@ -21,9 +21,9 @@ class SendSmsPayload(BaseSchema):
     #  swagger.json
 
     
-    bag_id = fields.Int(required=False)
+    slug = fields.Str(required=False)
     
     data = fields.Nested(SmsDataPayload, required=False)
     
-    slug = fields.Str(required=False)
+    bag_id = fields.Int(required=False)
     
