@@ -9,9 +9,9 @@ from ...ApplicationModel import BaseSchema
 
 
 
+
+
 from .PincodeErrorSchemaResponse import PincodeErrorSchemaResponse
-
-
 
 
 
@@ -23,9 +23,9 @@ class PincodeApiResponse(BaseSchema):
     #  swagger.json
 
     
-    error = fields.Nested(PincodeErrorSchemaResponse, required=False)
-    
     success = fields.Boolean(required=False)
+    
+    error = fields.Nested(PincodeErrorSchemaResponse, required=False)
     
     data = fields.List(fields.Nested(PincodeDataResponse, required=False), required=False)
     

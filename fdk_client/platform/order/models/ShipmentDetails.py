@@ -29,17 +29,17 @@ class ShipmentDetails(BaseSchema):
     #  swagger.json
 
     
+    affiliate_shipment_id = fields.Str(required=False)
+    
     shipments = fields.Int(required=False)
-    
-    box_type = fields.Str(required=False)
-    
-    meta = fields.Dict(required=False)
-    
-    articles = fields.List(fields.Nested(ArticleDetails, required=False), required=False)
     
     fulfillment_id = fields.Int(required=False)
     
+    articles = fields.List(fields.Nested(ArticleDetails, required=False), required=False)
+    
+    meta = fields.Dict(required=False)
+    
     dp_id = fields.Int(required=False)
     
-    affiliate_shipment_id = fields.Str(required=False)
+    box_type = fields.Str(required=False)
     

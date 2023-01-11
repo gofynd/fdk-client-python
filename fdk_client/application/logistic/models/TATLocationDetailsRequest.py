@@ -21,9 +21,9 @@ class TATLocationDetailsRequest(BaseSchema):
     #  swagger.json
 
     
-    fulfillment_id = fields.Int(required=False)
-    
     from_pincode = fields.Str(required=False)
+    
+    fulfillment_id = fields.Int(required=False)
     
     articles = fields.List(fields.Nested(TATArticlesRequest, required=False), required=False)
     

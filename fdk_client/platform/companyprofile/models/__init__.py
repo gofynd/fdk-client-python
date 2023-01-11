@@ -1,31 +1,31 @@
 """companyprofile Platform Models and Enums"""
 
 
+from .GetAddressSerializer import GetAddressSerializer
+
+from .UserSerializer import UserSerializer
+
+from .CompanyTaxesSerializer import CompanyTaxesSerializer
+
+from .Website import Website
+
+from .BusinessDetails import BusinessDetails
+
 from .SellerPhoneNumber import SellerPhoneNumber
 
 from .ContactDetails import ContactDetails
 
 from .Document import Document
 
-from .GetAddressSerializer import GetAddressSerializer
-
 from .BusinessCountryInfo import BusinessCountryInfo
-
-from .UserSerializer import UserSerializer
-
-from .Website import Website
-
-from .BusinessDetails import BusinessDetails
-
-from .CompanyTaxesSerializer import CompanyTaxesSerializer
 
 from .GetCompanyProfileSerializerResponse import GetCompanyProfileSerializerResponse
 
 from .ErrorResponse import ErrorResponse
 
-from .CompanyTaxesSerializer1 import CompanyTaxesSerializer1
-
 from .CreateUpdateAddressSerializer import CreateUpdateAddressSerializer
+
+from .CompanyTaxesSerializer1 import CompanyTaxesSerializer1
 
 from .UpdateCompany import UpdateCompany
 
@@ -55,23 +55,23 @@ from .CompanyBrandListSerializer import CompanyBrandListSerializer
 
 from .CompanyBrandPostRequestSerializer import CompanyBrandPostRequestSerializer
 
-from .LocationManagerSerializer import LocationManagerSerializer
-
-from .ProductReturnConfigSerializer import ProductReturnConfigSerializer
-
-from .GetCompanySerializer import GetCompanySerializer
-
 from .LocationTimingSerializer import LocationTimingSerializer
 
 from .LocationDayWiseSerializer import LocationDayWiseSerializer
 
-from .HolidayDateSerializer import HolidayDateSerializer
-
-from .HolidaySchemaSerializer import HolidaySchemaSerializer
+from .GetCompanySerializer import GetCompanySerializer
 
 from .InvoiceCredSerializer import InvoiceCredSerializer
 
 from .InvoiceDetailsSerializer import InvoiceDetailsSerializer
+
+from .LocationManagerSerializer import LocationManagerSerializer
+
+from .ProductReturnConfigSerializer import ProductReturnConfigSerializer
+
+from .HolidayDateSerializer import HolidayDateSerializer
+
+from .HolidaySchemaSerializer import HolidaySchemaSerializer
 
 from .GetLocationSerializer import GetLocationSerializer
 

@@ -19,9 +19,9 @@ class Meta(BaseSchema):
     #  swagger.json
 
     
+    unit = fields.Str(required=False)
+    
     headers = fields.Dict(required=False)
     
     values = fields.List(fields.Dict(required=False), required=False)
-    
-    unit = fields.Str(required=False)
     

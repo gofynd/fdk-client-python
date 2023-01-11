@@ -33,8 +33,6 @@ from .BaseResponse import BaseResponse
 
 from .Click2CallResponse import Click2CallResponse
 
-from .Products import Products
-
 from .EntityReasonData import EntityReasonData
 
 from .EntitiesReasons import EntitiesReasons
@@ -55,6 +53,8 @@ from .ProductsDataUpdates import ProductsDataUpdates
 
 from .DataUpdates import DataUpdates
 
+from .Products import Products
+
 from .ShipmentsRequest import ShipmentsRequest
 
 from .StatuesRequest import StatuesRequest
@@ -67,39 +67,29 @@ from .StatuesResponse import StatuesResponse
 
 from .UpdateShipmentStatusResponseBody import UpdateShipmentStatusResponseBody
 
-from .AffiliateInventoryPaymentConfig import AffiliateInventoryPaymentConfig
-
-from .AffiliateInventoryArticleAssignmentConfig import AffiliateInventoryArticleAssignmentConfig
-
-from .AffiliateInventoryLogisticsConfig import AffiliateInventoryLogisticsConfig
-
-from .AffiliateInventoryStoreConfig import AffiliateInventoryStoreConfig
-
-from .AffiliateInventoryOrderConfig import AffiliateInventoryOrderConfig
-
-from .AffiliateInventoryConfig import AffiliateInventoryConfig
+from .AffiliateStoreIdMapping import AffiliateStoreIdMapping
 
 from .AffiliateAppConfigMeta import AffiliateAppConfigMeta
 
 from .AffiliateAppConfig import AffiliateAppConfig
 
+from .AffiliateInventoryArticleAssignmentConfig import AffiliateInventoryArticleAssignmentConfig
+
+from .AffiliateInventoryOrderConfig import AffiliateInventoryOrderConfig
+
+from .AffiliateInventoryPaymentConfig import AffiliateInventoryPaymentConfig
+
+from .AffiliateInventoryStoreConfig import AffiliateInventoryStoreConfig
+
+from .AffiliateInventoryLogisticsConfig import AffiliateInventoryLogisticsConfig
+
+from .AffiliateInventoryConfig import AffiliateInventoryConfig
+
 from .AffiliateConfig import AffiliateConfig
 
 from .Affiliate import Affiliate
 
-from .AffiliateStoreIdMapping import AffiliateStoreIdMapping
-
 from .OrderConfig import OrderConfig
-
-from .ArticleDetails import ArticleDetails
-
-from .ShipmentDetails import ShipmentDetails
-
-from .LocationDetails import LocationDetails
-
-from .ShipmentConfig import ShipmentConfig
-
-from .ShipmentData import ShipmentData
 
 from .MarketPlacePdf import MarketPlacePdf
 
@@ -110,6 +100,16 @@ from .OrderUser import OrderUser
 from .UserData import UserData
 
 from .OrderPriority import OrderPriority
+
+from .ArticleDetails import ArticleDetails
+
+from .ShipmentDetails import ShipmentDetails
+
+from .LocationDetails import LocationDetails
+
+from .ShipmentConfig import ShipmentConfig
+
+from .ShipmentData import ShipmentData
 
 from .OrderInfo import OrderInfo
 
@@ -135,11 +135,11 @@ from .SmsDataPayload import SmsDataPayload
 
 from .SendSmsPayload import SendSmsPayload
 
+from .OrderDetails import OrderDetails
+
 from .Meta import Meta
 
 from .ShipmentDetail import ShipmentDetail
-
-from .OrderDetails import OrderDetails
 
 from .OrderStatusData import OrderStatusData
 
@@ -149,25 +149,25 @@ from .ManualAssignDPToShipment import ManualAssignDPToShipment
 
 from .ManualAssignDPToShipmentResponse import ManualAssignDPToShipmentResponse
 
-from .ShippingInfo import ShippingInfo
+from .PaymentMethod import PaymentMethod
+
+from .PaymentInfo import PaymentInfo
 
 from .Tax import Tax
 
 from .Charge import Charge
 
-from .TaxInfo import TaxInfo
+from .LineItem import LineItem
 
 from .ProcessingDates import ProcessingDates
 
-from .LineItem import LineItem
-
 from .Shipment import Shipment
+
+from .ShippingInfo import ShippingInfo
 
 from .BillingInfo import BillingInfo
 
-from .PaymentMethod import PaymentMethod
-
-from .PaymentInfo import PaymentInfo
+from .TaxInfo import TaxInfo
 
 from .CreateOrderAPI import CreateOrderAPI
 
