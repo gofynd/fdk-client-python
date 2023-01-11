@@ -355,6 +355,10 @@ class Google(BaseSchema):
     pass
 
 
+class SessionExpiry(BaseSchema):
+    pass
+
+
 class UpdateUserRequestSchema(BaseSchema):
     pass
 
@@ -655,6 +659,8 @@ class SendOtpRequestSchema(BaseSchema):
     captcha_code = fields.Str(required=False)
     
     mobile = fields.Str(required=False)
+    
+    android_hash = fields.Str(required=False)
     
 
 
@@ -1280,6 +1286,8 @@ class PlatformSchema(BaseSchema):
     
     delete_account_consent = fields.Dict(required=False)
     
+    session_config = fields.Dict(required=False)
+    
 
 
 class LookAndFeel(BaseSchema):
@@ -1449,6 +1457,18 @@ class Google(BaseSchema):
 
     
     app_id = fields.Str(required=False)
+    
+
+
+class SessionExpiry(BaseSchema):
+    # User swagger.json
+
+    
+    duration = fields.Int(required=False)
+    
+    type = fields.Str(required=False)
+    
+    is_rolling = fields.Boolean(required=False)
     
 
 

@@ -862,8 +862,6 @@ class Ticket(BaseSchema):
     
     content = fields.Nested(TicketContent, required=False)
     
-    ticket_id = fields.Str(required=False)
-    
     category = fields.Str(required=False)
     
     sub_category = fields.Str(required=False)
