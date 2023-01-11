@@ -97,8 +97,6 @@ from .UpdateShipmentExternalRequest import UpdateShipmentExternalRequest
 
 from .UpdateShipmentResponse import UpdateShipmentResponse
 
-from .Products import Products
-
 from .ProductsReasonsData import ProductsReasonsData
 
 from .ProductsReasonsFilters import ProductsReasonsFilters
@@ -118,6 +116,8 @@ from .ProductsDataUpdates import ProductsDataUpdates
 from .EntitiesDataUpdates import EntitiesDataUpdates
 
 from .DataUpdates import DataUpdates
+
+from .Products import Products
 
 from .ShipmentsRequest import ShipmentsRequest
 

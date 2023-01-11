@@ -25,11 +25,11 @@ class ProcessingDates(BaseSchema):
     #  swagger.json
 
     
-    dispatch_after_date = fields.Str(required=False)
-    
     pack_by_date = fields.Str(required=False)
     
     confirm_by_date = fields.Str(required=False)
+    
+    dispatch_after_date = fields.Str(required=False)
     
     customer_pickup_slot = fields.Dict(required=False)
     

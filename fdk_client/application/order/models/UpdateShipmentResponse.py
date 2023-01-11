@@ -21,7 +21,7 @@ class UpdateShipmentResponse(BaseSchema):
     
     message = fields.List(fields.Str(required=False), required=False)
     
-    status = fields.Boolean(required=False)
-    
     final_state = fields.Dict(required=False)
+    
+    status = fields.Boolean(required=False)
     

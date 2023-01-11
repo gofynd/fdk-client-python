@@ -11,8 +11,6 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .Action import Action
-
 
 
 from .ImageUrls import ImageUrls
@@ -27,6 +25,8 @@ from .ThirdLevelChild import ThirdLevelChild
 
 
 
+from .Action import Action
+
 
 
 class SecondLevelChild(BaseSchema):
@@ -35,7 +35,7 @@ class SecondLevelChild(BaseSchema):
     
     uid = fields.Int(required=False)
     
-    action = fields.Nested(Action, required=False)
+    _custom_json = fields.Dict(required=False)
     
     banners = fields.Nested(ImageUrls, required=False)
     
@@ -43,7 +43,7 @@ class SecondLevelChild(BaseSchema):
     
     childs = fields.List(fields.Nested(ThirdLevelChild, required=False), required=False)
     
-    _custom_json = fields.Dict(required=False)
-    
     name = fields.Str(required=False)
+    
+    action = fields.Nested(Action, required=False)
     
