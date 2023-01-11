@@ -9,7 +9,7 @@ from .InvalidateShipmentCacheNestedResponse import InvalidateShipmentCacheNested
 
 
 class InvalidateShipmentCacheResponse(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     response = fields.List(fields.Nested(InvalidateShipmentCacheNestedResponse, required=False), required=False)

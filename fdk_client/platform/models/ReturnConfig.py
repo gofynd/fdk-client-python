@@ -13,13 +13,13 @@ from ..models.BaseSchema import BaseSchema
 
 
 class ReturnConfig(BaseSchema):
-    # Catalog swagger.json
+    # Order swagger.json
 
     
     time = fields.Int(required=False)
     
-    returnable = fields.Boolean(required=False)
-    
     unit = fields.Str(required=False)
+    
+    returnable = fields.Boolean(required=False)
     
 

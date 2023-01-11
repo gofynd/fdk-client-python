@@ -11,7 +11,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class FileUploadResponse(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     url = fields.Str(required=False)

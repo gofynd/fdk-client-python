@@ -9,7 +9,7 @@ from .MetricsCount import MetricsCount
 
 
 class MetricCountResponse(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     items = fields.List(fields.Nested(MetricsCount, required=False), required=False)

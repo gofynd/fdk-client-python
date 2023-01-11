@@ -22,8 +22,8 @@ class SendOtpToCustomerResponse(BaseSchema):
     
     request_id = fields.Str(required=False)
     
-    success = fields.Boolean(required=False)
-    
     resend_timer = fields.Int(required=False)
+    
+    success = fields.Boolean(required=False)
     
 

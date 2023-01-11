@@ -16,6 +16,6 @@ class Options(BaseSchema):
     
     text = fields.Str(required=False)
     
-    value = fields.Str(required=False)
+    value = fields.Int(required=False)
     
 

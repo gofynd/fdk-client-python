@@ -13,13 +13,13 @@ from ..models.BaseSchema import BaseSchema
 
 
 class OrderPriority(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     fulfilment_priority_text = fields.Str(required=False)
     
-    affiliate_priority_code = fields.Str(required=False)
-    
     fulfilment_priority = fields.Int(required=False)
+    
+    affiliate_priority_code = fields.Str(required=False)
     
 

@@ -15,15 +15,15 @@ from ..models.BaseSchema import BaseSchema
 
 
 class ActionInfo(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     id = fields.Int(required=False)
     
-    description = fields.Str(required=False)
+    display_text = fields.Str(required=False)
     
     slug = fields.Str(required=False)
     
-    display_text = fields.Str(required=False)
+    description = fields.Str(required=False)
     
 

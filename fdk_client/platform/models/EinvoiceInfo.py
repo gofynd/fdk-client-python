@@ -11,11 +11,11 @@ from .EInvoice import EInvoice
 
 
 class EinvoiceInfo(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
-    invoice = fields.Nested(EInvoice, required=False)
-    
     credit_note = fields.Nested(EInvoice, required=False)
+    
+    invoice = fields.Nested(EInvoice, required=False)
     
 

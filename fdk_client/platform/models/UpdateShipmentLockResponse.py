@@ -13,7 +13,7 @@ from .CheckResponse import CheckResponse
 
 
 class UpdateShipmentLockResponse(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     success = fields.Boolean(required=False)

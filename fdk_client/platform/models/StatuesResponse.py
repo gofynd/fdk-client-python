@@ -9,7 +9,7 @@ from .ShipmentsResponse import ShipmentsResponse
 
 
 class StatuesResponse(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     shipments = fields.List(fields.Nested(ShipmentsResponse, required=False), required=False)

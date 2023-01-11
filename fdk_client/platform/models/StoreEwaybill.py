@@ -9,7 +9,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class StoreEwaybill(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     enabled = fields.Boolean(required=False)

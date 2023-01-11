@@ -9,7 +9,7 @@ from .AnnouncementResponse import AnnouncementResponse
 
 
 class AnnouncementsResponse(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     announcements = fields.List(fields.Nested(AnnouncementResponse, required=False), required=False)

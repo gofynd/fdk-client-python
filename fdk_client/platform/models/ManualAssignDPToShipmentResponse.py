@@ -11,11 +11,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 class ManualAssignDPToShipmentResponse(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
-    success = fields.Str(required=False)
-    
     errors = fields.List(fields.Str(required=False), required=False)
+    
+    success = fields.Str(required=False)
     
 

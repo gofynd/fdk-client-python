@@ -17,17 +17,17 @@ from ..models.BaseSchema import BaseSchema
 
 
 class Dimensions(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
-    
-    height = fields.Int(required=False)
-    
-    unit = fields.Str(required=False)
-    
-    width = fields.Int(required=False)
     
     length = fields.Int(required=False)
     
+    unit = fields.Str(required=False)
+    
+    height = fields.Int(required=False)
+    
     is_default = fields.Boolean(required=False)
+    
+    width = fields.Int(required=False)
     
 

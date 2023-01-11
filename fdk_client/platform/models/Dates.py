@@ -11,7 +11,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class Dates(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     order_created = fields.Str(required=False)

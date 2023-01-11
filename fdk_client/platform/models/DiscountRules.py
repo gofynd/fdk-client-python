@@ -11,11 +11,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 class DiscountRules(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
-    value = fields.Int(required=False)
-    
     type = fields.Str(required=False)
+    
+    value = fields.Int(required=False)
     
 

@@ -17,14 +17,14 @@ from .AffiliateMeta import AffiliateMeta
 
 
 class AffiliateBagDetails(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
+    
+    loyalty_discount = fields.Float(required=False)
     
     affiliate_bag_id = fields.Str(required=False)
     
     employee_discount = fields.Float(required=False)
-    
-    loyalty_discount = fields.Float(required=False)
     
     affiliate_order_id = fields.Str(required=False)
     

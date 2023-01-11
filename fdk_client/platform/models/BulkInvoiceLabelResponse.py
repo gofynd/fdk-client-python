@@ -27,27 +27,27 @@ from ..models.BaseSchema import BaseSchema
 
 
 class BulkInvoiceLabelResponse(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
-    invoice_status = fields.Str(required=False)
+    label = fields.Dict(required=False)
     
-    data = fields.Dict(required=False)
+    batch_id = fields.Str(required=False)
+    
+    do_invoice_label_generated = fields.Boolean(required=False)
     
     store_id = fields.Str(required=False)
     
     invoice = fields.Dict(required=False)
     
+    invoice_status = fields.Str(required=False)
+    
+    data = fields.Dict(required=False)
+    
     company_id = fields.Str(required=False)
     
     store_name = fields.Str(required=False)
     
-    do_invoice_label_generated = fields.Boolean(required=False)
-    
-    batch_id = fields.Str(required=False)
-    
     store_code = fields.Str(required=False)
-    
-    label = fields.Dict(required=False)
     
 

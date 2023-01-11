@@ -9,7 +9,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class FiltersResponse(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     advance = fields.List(fields.Dict(required=False), required=False)

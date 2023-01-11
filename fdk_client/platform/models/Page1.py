@@ -17,17 +17,17 @@ from ..models.BaseSchema import BaseSchema
 
 
 class Page1(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
+    has_next = fields.Boolean(required=False)
+    
     item_total = fields.Int(required=False)
+    
+    page_type = fields.Str(required=False)
     
     size = fields.Int(required=False)
     
     current = fields.Int(required=False)
-    
-    page_type = fields.Str(required=False)
-    
-    has_next = fields.Boolean(required=False)
     
 

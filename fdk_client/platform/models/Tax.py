@@ -15,15 +15,15 @@ from ..models.BaseSchema import BaseSchema
 
 
 class Tax(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
+    
+    breakup = fields.List(fields.Dict(required=False), required=False)
+    
+    amount = fields.Dict(required=False)
     
     tax_exempt = fields.Boolean(required=False)
     
     name = fields.Str(required=False)
-    
-    amount = fields.Dict(required=False)
-    
-    breakup = fields.List(fields.Dict(required=False), required=False)
     
 

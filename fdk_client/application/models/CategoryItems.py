@@ -26,12 +26,12 @@ class CategoryItems(BaseSchema):
     
     childs = fields.List(fields.Nested(Child, required=False), required=False)
     
-    slug = fields.Str(required=False)
+    uid = fields.Int(required=False)
     
-    name = fields.Str(required=False)
+    slug = fields.Str(required=False)
     
     banners = fields.Nested(ImageUrls, required=False)
     
-    uid = fields.Int(required=False)
+    name = fields.Str(required=False)
     
 

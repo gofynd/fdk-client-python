@@ -11,7 +11,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class EntitiesDataUpdates(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     data = fields.Dict(required=False)

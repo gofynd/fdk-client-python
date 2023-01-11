@@ -11,11 +11,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 class QuestionSet(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
-    id = fields.Int(required=False)
-    
     display_name = fields.Str(required=False)
+    
+    id = fields.Int(required=False)
     
 

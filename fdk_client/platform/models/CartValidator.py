@@ -76,7 +76,7 @@ class CartValidator:
         
         q = fields.Str(required=False)
         
-        is_active = fields.Boolean(required=False)
+        status = fields.Str(required=False)
         
         promo_group = fields.Str(required=False)
         
@@ -121,6 +121,13 @@ class CartValidator:
         id = fields.Str(required=False)
          
     
+    class getPromosCouponConfig(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+    
     class fetchAndvalidateCartItems(BaseSchema):
         
         company_id = fields.Str(required=False)
@@ -140,5 +147,48 @@ class CartValidator:
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
+         
+    
+    class getAbandonedCart(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        from_date = fields.Str(required=False)
+        
+        to_date = fields.Str(required=False)
+        
+        anonymous_cart = fields.Boolean(required=False)
+        
+        last_id = fields.Str(required=False)
+        
+        sort_on = fields.Str(required=False)
+         
+    
+    class addItems(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        cart_id = fields.Str(required=False)
+        
+        b = fields.Boolean(required=False)
+         
+    
+    class updateCart(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        cart_id = fields.Str(required=False)
+        
+        b = fields.Boolean(required=False)
          
     

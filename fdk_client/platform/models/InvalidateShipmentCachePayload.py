@@ -9,7 +9,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class InvalidateShipmentCachePayload(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     shipment_ids = fields.List(fields.Str(required=False), required=False)

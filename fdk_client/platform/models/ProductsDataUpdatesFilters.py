@@ -11,7 +11,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class ProductsDataUpdatesFilters(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     identifier = fields.Str(required=False)

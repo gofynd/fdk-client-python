@@ -11,11 +11,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 class AffiliateStoreIdMapping(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
-    marketplace_store_id = fields.Str(required=False)
-    
     store_id = fields.Int(required=False)
+    
+    marketplace_store_id = fields.Str(required=False)
     
 

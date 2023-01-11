@@ -11,11 +11,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 class ShipmentItemFulFillingStore(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
-    id = fields.Str(required=False)
-    
     code = fields.Str(required=False)
+    
+    id = fields.Str(required=False)
     
 

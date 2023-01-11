@@ -5,8 +5,6 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-
-
 from .MultiTenderPaymentMeta import MultiTenderPaymentMeta
 
 
@@ -14,15 +12,17 @@ from .MultiTenderPaymentMeta import MultiTenderPaymentMeta
 
 
 
-class MultiTenderPaymentMethod(BaseSchema):
-    # Cart swagger.json
 
-    
-    mode = fields.Str(required=False)
+
+class MultiTenderPaymentMethod(BaseSchema):
+    # Payment swagger.json
+
     
     meta = fields.Nested(MultiTenderPaymentMeta, required=False)
     
     amount = fields.Float(required=False)
+    
+    mode = fields.Str(required=False)
     
     name = fields.Str(required=False)
     

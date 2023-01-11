@@ -9,7 +9,7 @@ from .ActionInfo import ActionInfo
 
 
 class GetActionsResponse(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     permissions = fields.Nested(ActionInfo, required=False)

@@ -11,7 +11,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class BulkActionResponse(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     status = fields.Boolean(required=False)

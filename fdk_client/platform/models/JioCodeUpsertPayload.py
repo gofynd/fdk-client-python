@@ -9,7 +9,7 @@ from .JioCodeUpsertDataSet import JioCodeUpsertDataSet
 
 
 class JioCodeUpsertPayload(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     data = fields.List(fields.Nested(JioCodeUpsertDataSet, required=False), required=False)

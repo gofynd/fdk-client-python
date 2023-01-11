@@ -17,16 +17,16 @@ from ..models.BaseSchema import BaseSchema
 
 
 class ShipmentStatusData(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
-    
-    created_at = fields.Str(required=False)
     
     shipment_id = fields.Str(required=False)
     
+    status = fields.Str(required=False)
+    
     id = fields.Int(required=False)
     
-    status = fields.Str(required=False)
+    created_at = fields.Str(required=False)
     
     bag_list = fields.List(fields.Int(required=False), required=False)
     

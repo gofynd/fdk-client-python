@@ -9,7 +9,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class FyndOrderIdList(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     fynd_order_id = fields.List(fields.Str(required=False), required=False)

@@ -17,17 +17,17 @@ from ..models.BaseSchema import BaseSchema
 
 
 class ManifestDetailItem(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
-    
-    item_qty = fields.Int(required=False)
     
     shipment_id = fields.Str(required=False)
     
     invoice_id = fields.Str(required=False)
     
+    awb = fields.Str(required=False)
+    
     order_id = fields.Str(required=False)
     
-    awb = fields.Str(required=False)
+    item_qty = fields.Int(required=False)
     
 

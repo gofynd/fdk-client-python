@@ -11,7 +11,7 @@ from .ProductsDataUpdatesFilters import ProductsDataUpdatesFilters
 
 
 class ProductsDataUpdates(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     data = fields.Dict(required=False)

@@ -9,7 +9,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class CreateOrderResponse(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     fynd_order_id = fields.Str(required=False)

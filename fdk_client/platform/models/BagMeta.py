@@ -9,7 +9,7 @@ from .B2BPODetails import B2BPODetails
 
 
 class BagMeta(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     b2b_po_details = fields.Nested(B2BPODetails, required=False)

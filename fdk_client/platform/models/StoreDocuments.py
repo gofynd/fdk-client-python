@@ -9,7 +9,7 @@ from .Document import Document
 
 
 class StoreDocuments(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     gst = fields.Nested(Document, required=False)

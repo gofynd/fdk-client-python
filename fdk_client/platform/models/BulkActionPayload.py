@@ -9,7 +9,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class BulkActionPayload(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     url = fields.Str(required=False)

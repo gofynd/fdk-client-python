@@ -11,7 +11,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class MarketPlacePdf(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     invoice = fields.Str(required=False)

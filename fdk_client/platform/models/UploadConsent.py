@@ -11,7 +11,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class UploadConsent(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     consent_url = fields.Str(required=False)

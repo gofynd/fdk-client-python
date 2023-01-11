@@ -21,14 +21,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 class PaymentMethod(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
-    
-    name = fields.Str(required=False)
     
     refund_by = fields.Str(required=False)
     
-    transaction_data = fields.Dict(required=False)
+    name = fields.Str(required=False)
     
     amount = fields.Float(required=False)
     
@@ -37,5 +35,7 @@ class PaymentMethod(BaseSchema):
     collect_by = fields.Str(required=False)
     
     mode = fields.Str(required=False)
+    
+    transaction_data = fields.Dict(required=False)
     
 

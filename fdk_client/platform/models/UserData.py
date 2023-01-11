@@ -11,7 +11,7 @@ from .OrderUser import OrderUser
 
 
 class UserData(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     billing_user = fields.Nested(OrderUser, required=False)

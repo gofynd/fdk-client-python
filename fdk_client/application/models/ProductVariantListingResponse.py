@@ -11,9 +11,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 from .ProductVariantItemResponse import ProductVariantItemResponse
-
-
 
 
 class ProductVariantListingResponse(BaseSchema):
@@ -26,8 +26,8 @@ class ProductVariantListingResponse(BaseSchema):
     
     total = fields.Int(required=False)
     
-    items = fields.List(fields.Nested(ProductVariantItemResponse, required=False), required=False)
-    
     key = fields.Str(required=False)
+    
+    items = fields.List(fields.Nested(ProductVariantItemResponse, required=False), required=False)
     
 

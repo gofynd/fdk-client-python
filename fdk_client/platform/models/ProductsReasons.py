@@ -11,7 +11,7 @@ from .ProductsReasonsFilters import ProductsReasonsFilters
 
 
 class ProductsReasons(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     data = fields.Nested(ProductsReasonsData, required=False)

@@ -11,7 +11,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class AffiliateInventoryPaymentConfig(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     source = fields.Str(required=False)
