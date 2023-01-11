@@ -11,13 +11,13 @@ from ...ApplicationModel import BaseSchema
 
 
 
+
+
+
+
+
+
 from .StatuesRequest import StatuesRequest
-
-
-
-
-
-
 
 
 
@@ -27,11 +27,11 @@ class UpdateShipmentStatusRequest(BaseSchema):
     
     unlock_before_transition = fields.Boolean(required=False)
     
-    statuses = fields.List(fields.Nested(StatuesRequest, required=False), required=False)
-    
-    force_transition = fields.Boolean(required=False)
+    task = fields.Boolean(required=False)
     
     lock_after_transition = fields.Boolean(required=False)
     
-    task = fields.Boolean(required=False)
+    force_transition = fields.Boolean(required=False)
+    
+    statuses = fields.List(fields.Nested(StatuesRequest, required=False), required=False)
     

@@ -11,13 +11,9 @@ from ...ApplicationModel import BaseSchema
 
 
 
-
-
-class FulfillingCompany(BaseSchema):
+class BagReasonMeta(BaseSchema):
     #  swagger.json
 
     
-    name = fields.Str(required=False)
-    
-    id = fields.Int(required=False)
+    show_text_area = fields.Boolean(required=False)
     

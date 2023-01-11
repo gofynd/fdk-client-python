@@ -17,7 +17,7 @@ class ApplicationItemSEO(BaseSchema):
     #  swagger.json
 
     
-    description = fields.Raw(required=False)
-    
     title = fields.Raw(required=False)
+    
+    description = fields.Raw(required=False)
     

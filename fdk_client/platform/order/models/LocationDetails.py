@@ -11,9 +11,9 @@ from ...PlatformModel import BaseSchema
 
 
 
+
+
 from .ArticleDetails import ArticleDetails
-
-
 
 
 
@@ -23,7 +23,7 @@ class LocationDetails(BaseSchema):
     
     fulfillment_id = fields.Int(required=False)
     
-    articles = fields.List(fields.Nested(ArticleDetails, required=False), required=False)
-    
     fulfillment_type = fields.Str(required=False)
+    
+    articles = fields.List(fields.Nested(ArticleDetails, required=False), required=False)
     

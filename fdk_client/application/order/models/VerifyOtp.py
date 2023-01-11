@@ -17,7 +17,7 @@ class VerifyOtp(BaseSchema):
     #  swagger.json
 
     
-    otp_code = fields.Str(required=False)
-    
     request_id = fields.Str(required=False)
+    
+    otp_code = fields.Str(required=False)
     

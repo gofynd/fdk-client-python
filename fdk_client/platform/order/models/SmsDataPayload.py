@@ -31,9 +31,15 @@ class SmsDataPayload(BaseSchema):
     #  swagger.json
 
     
-    message = fields.Str(required=False)
+    shipment_id = fields.Int(required=False)
+    
+    phone_number = fields.Int(required=False)
+    
+    country_code = fields.Str(required=False)
     
     customer_name = fields.Str(required=False)
+    
+    payment_mode = fields.Str(required=False)
     
     brand_name = fields.Str(required=False)
     
@@ -41,11 +47,5 @@ class SmsDataPayload(BaseSchema):
     
     amount_paid = fields.Int(required=False)
     
-    payment_mode = fields.Str(required=False)
-    
-    shipment_id = fields.Int(required=False)
-    
-    phone_number = fields.Int(required=False)
-    
-    country_code = fields.Str(required=False)
+    message = fields.Str(required=False)
     
