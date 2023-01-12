@@ -7,11 +7,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
 from .QuestionSet import QuestionSet
+
+
+
+
 
 
 class Reason(BaseSchema):
@@ -20,10 +20,10 @@ class Reason(BaseSchema):
     
     display_name = fields.Str(required=False)
     
-    id = fields.Int(required=False)
+    question_set = fields.List(fields.Nested(QuestionSet, required=False), required=False)
     
     qc_type = fields.List(fields.Str(required=False), required=False)
     
-    question_set = fields.List(fields.Nested(QuestionSet, required=False), required=False)
+    id = fields.Int(required=False)
     
 

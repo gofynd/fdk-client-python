@@ -18,8 +18,8 @@ class ProductCategoryMap(BaseSchema):
     
     l3 = fields.Nested(ProductBrand, required=False)
     
-    l2 = fields.Nested(ProductBrand, required=False)
-    
     l1 = fields.Nested(ProductBrand, required=False)
+    
+    l2 = fields.Nested(ProductBrand, required=False)
     
 

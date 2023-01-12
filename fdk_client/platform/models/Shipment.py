@@ -5,10 +5,6 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .LineItem import LineItem
-
-
-
 
 
 
@@ -17,21 +13,25 @@ from .ProcessingDates import ProcessingDates
 
 
 
+from .LineItem import LineItem
+
+
+
 
 class Shipment(BaseSchema):
     # Order swagger.json
 
     
-    line_items = fields.List(fields.Nested(LineItem, required=False), required=False)
-    
-    meta = fields.Dict(required=False)
+    external_shipment_id = fields.Float(required=False)
     
     priority = fields.Int(required=False)
     
-    location_id = fields.Int(required=False)
-    
     processing_dates = fields.Nested(ProcessingDates, required=False)
     
-    external_shipment_id = fields.Float(required=False)
+    location_id = fields.Int(required=False)
+    
+    line_items = fields.List(fields.Nested(LineItem, required=False), required=False)
+    
+    meta = fields.Dict(required=False)
     
 

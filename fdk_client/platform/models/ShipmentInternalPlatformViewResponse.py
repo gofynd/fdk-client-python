@@ -5,9 +5,9 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-
-
 from .FiltersInfo import FiltersInfo
+
+
 
 
 
@@ -18,9 +18,9 @@ class ShipmentInternalPlatformViewResponse(BaseSchema):
     # Order swagger.json
 
     
-    page = fields.Dict(required=False)
-    
     filters = fields.List(fields.Nested(FiltersInfo, required=False), required=False)
+    
+    page = fields.Dict(required=False)
     
     applied_filters = fields.Dict(required=False)
     

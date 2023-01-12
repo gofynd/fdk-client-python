@@ -14,8 +14,8 @@ class UpdateShipmentExternalRequest(BaseSchema):
     # Order swagger.json
 
     
-    force_transition = fields.Boolean(required=False)
-    
     statuses = fields.List(fields.Dict(required=False), required=False)
+    
+    force_transition = fields.Boolean(required=False)
     
 
