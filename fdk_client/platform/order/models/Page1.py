@@ -23,9 +23,9 @@ class Page1(BaseSchema):
     #  swagger.json
 
     
-    has_next = fields.Boolean(required=False)
-    
     item_total = fields.Int(required=False)
+    
+    has_next = fields.Boolean(required=False)
     
     page_type = fields.Str(required=False)
     

@@ -31,11 +31,11 @@ class AttributeMaster(BaseSchema):
     
     range = fields.Nested(AttributeSchemaRange, required=False)
     
-    multi = fields.Boolean(required=False)
-    
-    type = fields.Str(required=False)
-    
     allowed_values = fields.List(fields.Str(required=False), required=False)
     
     format = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    multi = fields.Boolean(required=False)
     

@@ -17,7 +17,7 @@ class PromotionDateMeta(BaseSchema):
     #  swagger.json
 
     
-    modified_on = fields.Str(required=False)
-    
     created_on = fields.Str(required=False)
+    
+    modified_on = fields.Str(required=False)
     

@@ -13,11 +13,11 @@ from ...ApplicationModel import BaseSchema
 
 
 
-class ApefaceApiError(BaseSchema):
+class EntityReasonData1(BaseSchema):
     #  swagger.json
 
     
-    success = fields.Boolean(required=False)
+    reason_text = fields.Str(required=False)
     
-    message = fields.Str(required=False)
+    reason_id = fields.Int(required=False)
     

@@ -121,64 +121,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
-        
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-    
-    
-        
-        
         
     
     
@@ -196,9 +138,51 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+    
+    
+        
+        
+        
+    
+    
         
         
     
@@ -228,11 +212,15 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+        
+        
+        
+        
+        
+        
     
     
-        
-        
-        
         
         
         
@@ -526,6 +514,8 @@ class OrderValidator:
         
         channel_shipment_id = fields.Str(required=False)
         
+        shipment_id = fields.Str(required=False)
+        
         ordering_company_id = fields.Str(required=False)
         
         request_by_ext = fields.Str(required=False)
@@ -756,33 +746,6 @@ class OrderValidator:
         from_date = fields.Str(required=False)
         
         to_date = fields.Str(required=False)
-         
-        
-    
-    class getManifestDetailsWithShipments(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        manifest_id = fields.Str(required=False)
-        
-        from_date = fields.Str(required=False)
-        
-        to_date = fields.Str(required=False)
-        
-        store_id = fields.Int(required=False)
-        
-        page = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        lane = fields.Str(required=False)
-        
-        dp_ids = fields.Int(required=False)
-        
-        search_type = fields.Str(required=False)
-        
-        search_value = fields.Str(required=False)
          
         
     

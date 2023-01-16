@@ -9,11 +9,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .ApplicationDepartment import ApplicationDepartment
-
-
-
 from .Page import Page
+
+
+
+from .ApplicationDepartment import ApplicationDepartment
 
 
 
@@ -21,7 +21,7 @@ class ApplicationDepartmentListingResponse(BaseSchema):
     #  swagger.json
 
     
-    items = fields.List(fields.Nested(ApplicationDepartment, required=False), required=False)
-    
     page = fields.Nested(Page, required=False)
+    
+    items = fields.List(fields.Nested(ApplicationDepartment, required=False), required=False)
     

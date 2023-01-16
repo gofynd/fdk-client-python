@@ -37,7 +37,7 @@ class BrandDetailResponse(BaseSchema):
     
     banners = fields.Nested(ImageUrls, required=False)
     
-    _custom_json = fields.Dict(required=False)
-    
     uid = fields.Int(required=False)
+    
+    _custom_json = fields.Dict(required=False)
     

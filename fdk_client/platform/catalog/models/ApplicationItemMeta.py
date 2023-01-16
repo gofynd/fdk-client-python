@@ -15,17 +15,17 @@ from .MetaFields import MetaFields
 
 
 
+from .ApplicationItemSEO import ApplicationItemSEO
+
+
+
+
+
 
 
 
 
 from .ApplicationItemMOQ import ApplicationItemMOQ
-
-
-
-
-
-from .ApplicationItemSEO import ApplicationItemSEO
 
 
 
@@ -37,13 +37,13 @@ class ApplicationItemMeta(BaseSchema):
     
     alt_text = fields.Dict(required=False)
     
-    is_gift = fields.Boolean(required=False)
+    seo = fields.Nested(ApplicationItemSEO, required=False)
     
     _custom_json = fields.Dict(required=False)
     
-    moq = fields.Nested(ApplicationItemMOQ, required=False)
-    
     is_cod = fields.Boolean(required=False)
     
-    seo = fields.Nested(ApplicationItemSEO, required=False)
+    is_gift = fields.Boolean(required=False)
+    
+    moq = fields.Nested(ApplicationItemMOQ, required=False)
     

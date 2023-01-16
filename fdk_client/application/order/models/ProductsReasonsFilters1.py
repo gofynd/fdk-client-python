@@ -13,11 +13,15 @@ from ...ApplicationModel import BaseSchema
 
 
 
-class ShipmentStatusUpdateBody(BaseSchema):
+
+
+class ProductsReasonsFilters1(BaseSchema):
     #  swagger.json
 
     
-    statuses = fields.List(fields.Dict(required=False), required=False)
+    identifier = fields.Str(required=False)
     
-    force_transition = fields.Boolean(required=False)
+    line_number = fields.Int(required=False)
+    
+    quantity = fields.Int(required=False)
     

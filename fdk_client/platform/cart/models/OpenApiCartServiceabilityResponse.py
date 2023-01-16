@@ -9,8 +9,6 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .CartProductInfo import CartProductInfo
-
 
 
 
@@ -23,13 +21,15 @@ from .CartBreakup import CartBreakup
 
 
 
+from .CartProductInfo import CartProductInfo
+
 
 
 class OpenApiCartServiceabilityResponse(BaseSchema):
     #  swagger.json
 
     
-    items = fields.List(fields.Nested(CartProductInfo, required=False), required=False)
+    is_valid = fields.Boolean(required=False)
     
     message = fields.Str(required=False)
     
@@ -37,5 +37,5 @@ class OpenApiCartServiceabilityResponse(BaseSchema):
     
     breakup_values = fields.Nested(CartBreakup, required=False)
     
-    is_valid = fields.Boolean(required=False)
+    items = fields.List(fields.Nested(CartProductInfo, required=False), required=False)
     

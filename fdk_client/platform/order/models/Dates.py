@@ -17,7 +17,7 @@ class Dates(BaseSchema):
     #  swagger.json
 
     
-    order_created = fields.Str(required=False)
-    
     delivery_date = fields.Raw(required=False)
+    
+    order_created = fields.Str(required=False)
     
