@@ -21,11 +21,11 @@ class PincodeParentsResponse(BaseSchema):
     #  swagger.json
 
     
+    uid = fields.Str(required=False)
+    
     sub_type = fields.Str(required=False)
     
     display_name = fields.Str(required=False)
-    
-    uid = fields.Str(required=False)
     
     name = fields.Str(required=False)
     

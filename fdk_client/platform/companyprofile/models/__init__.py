@@ -1,23 +1,23 @@
 """companyprofile Platform Models and Enums"""
 
 
-from .GetAddressSerializer import GetAddressSerializer
+from .Document import Document
+
+from .BusinessCountryInfo import BusinessCountryInfo
 
 from .UserSerializer import UserSerializer
-
-from .CompanyTaxesSerializer import CompanyTaxesSerializer
 
 from .Website import Website
 
 from .BusinessDetails import BusinessDetails
 
+from .GetAddressSerializer import GetAddressSerializer
+
+from .CompanyTaxesSerializer import CompanyTaxesSerializer
+
 from .SellerPhoneNumber import SellerPhoneNumber
 
 from .ContactDetails import ContactDetails
-
-from .Document import Document
-
-from .BusinessCountryInfo import BusinessCountryInfo
 
 from .GetCompanyProfileSerializerResponse import GetCompanyProfileSerializerResponse
 
@@ -55,12 +55,6 @@ from .CompanyBrandListSerializer import CompanyBrandListSerializer
 
 from .CompanyBrandPostRequestSerializer import CompanyBrandPostRequestSerializer
 
-from .LocationTimingSerializer import LocationTimingSerializer
-
-from .LocationDayWiseSerializer import LocationDayWiseSerializer
-
-from .GetCompanySerializer import GetCompanySerializer
-
 from .InvoiceCredSerializer import InvoiceCredSerializer
 
 from .InvoiceDetailsSerializer import InvoiceDetailsSerializer
@@ -69,9 +63,15 @@ from .LocationManagerSerializer import LocationManagerSerializer
 
 from .ProductReturnConfigSerializer import ProductReturnConfigSerializer
 
+from .GetCompanySerializer import GetCompanySerializer
+
 from .HolidayDateSerializer import HolidayDateSerializer
 
 from .HolidaySchemaSerializer import HolidaySchemaSerializer
+
+from .LocationTimingSerializer import LocationTimingSerializer
+
+from .LocationDayWiseSerializer import LocationDayWiseSerializer
 
 from .GetLocationSerializer import GetLocationSerializer
 

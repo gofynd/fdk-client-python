@@ -9,21 +9,23 @@ from ...PlatformModel import BaseSchema
 
 
 
-
-
-
-
-
-
-
-
 from .StatuesRequest import StatuesRequest
+
+
+
+
+
+
+
+
 
 
 
 class UpdateShipmentStatusRequest(BaseSchema):
     #  swagger.json
 
+    
+    statuses = fields.List(fields.Nested(StatuesRequest, required=False), required=False)
     
     task = fields.Boolean(required=False)
     
@@ -32,6 +34,4 @@ class UpdateShipmentStatusRequest(BaseSchema):
     force_transition = fields.Boolean(required=False)
     
     unlock_before_transition = fields.Boolean(required=False)
-    
-    statuses = fields.List(fields.Nested(StatuesRequest, required=False), required=False)
     

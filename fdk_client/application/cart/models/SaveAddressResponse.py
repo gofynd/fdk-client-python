@@ -19,9 +19,9 @@ class SaveAddressResponse(BaseSchema):
     #  swagger.json
 
     
-    id = fields.Str(required=False)
-    
     success = fields.Boolean(required=False)
+    
+    id = fields.Str(required=False)
     
     is_default_address = fields.Boolean(required=False)
     

@@ -15,13 +15,13 @@ from ...ApplicationModel import BaseSchema
 
 
 
-class UpdateShipmentResponse(BaseSchema):
+class ShipmentStatusUpdate(BaseSchema):
     #  swagger.json
 
-    
-    status = fields.Boolean(required=False)
     
     message = fields.List(fields.Str(required=False), required=False)
     
     final_state = fields.Dict(required=False)
+    
+    status = fields.Boolean(required=False)
     

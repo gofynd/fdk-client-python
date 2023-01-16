@@ -13,7 +13,7 @@ from ...ApplicationModel import BaseSchema
 
 
 
-class UpdateShipmentExternalRequest(BaseSchema):
+class ShipmentStatusUpdateBody(BaseSchema):
     #  swagger.json
 
     

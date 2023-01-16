@@ -9,9 +9,9 @@ from ...PlatformModel import BaseSchema
 
 
 
-
-
 from .CouponSchedule import CouponSchedule
+
+
 
 
 
@@ -19,7 +19,7 @@ class CouponPartialUpdate(BaseSchema):
     #  swagger.json
 
     
-    archive = fields.Boolean(required=False)
-    
     schedule = fields.Nested(CouponSchedule, required=False)
+    
+    archive = fields.Boolean(required=False)
     

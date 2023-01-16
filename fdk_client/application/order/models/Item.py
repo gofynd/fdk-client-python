@@ -33,9 +33,7 @@ class Item(BaseSchema):
     
     image = fields.List(fields.Str(required=False), required=False)
     
-    id = fields.Float(required=False)
-    
-    size = fields.Str(required=False)
+    slug_key = fields.Str(required=False)
     
     code = fields.Str(required=False)
     
@@ -43,7 +41,9 @@ class Item(BaseSchema):
     
     name = fields.Str(required=False)
     
+    size = fields.Str(required=False)
+    
     brand = fields.Nested(ItemBrand, required=False)
     
-    slug_key = fields.Str(required=False)
+    id = fields.Float(required=False)
     

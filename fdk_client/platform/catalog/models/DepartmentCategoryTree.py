@@ -9,9 +9,9 @@ from ...PlatformModel import BaseSchema
 
 
 
+
+
 from .CategoryItems import CategoryItems
-
-
 
 
 
@@ -19,7 +19,7 @@ class DepartmentCategoryTree(BaseSchema):
     #  swagger.json
 
     
-    items = fields.List(fields.Nested(CategoryItems, required=False), required=False)
-    
     department = fields.Str(required=False)
+    
+    items = fields.List(fields.Nested(CategoryItems, required=False), required=False)
     

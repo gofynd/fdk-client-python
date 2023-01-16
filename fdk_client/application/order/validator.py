@@ -201,14 +201,14 @@ class OrderValidator:
          
         
     
-    class updateShipmentExternal(BaseSchema):
+    class updateShipmentStatus(BaseSchema):
         
         
         shipment_id = fields.Int(required=False)
          
         
     
-    class updateShipmentStatus(BaseSchema):
+    class updateShipmentStatus1(BaseSchema):
         
         
         shipment_id = fields.Str(required=False)
@@ -310,7 +310,7 @@ class OrderValidator:
          
         
     
-    class updateShipmentExternal1(BaseSchema):
+    class updateShipmentStatus2(BaseSchema):
         
         
         shipment_id = fields.Int(required=False)

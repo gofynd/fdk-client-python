@@ -9,6 +9,10 @@ from ...ApplicationModel import BaseSchema
 
 
 
+
+
+
+
 from .DiscountRulesApp import DiscountRulesApp
 
 
@@ -23,9 +27,7 @@ from .DiscountRulesApp import DiscountRulesApp
 
 
 
-
-
-
+from .AppliedFreeArticles import AppliedFreeArticles
 
 
 
@@ -33,13 +35,15 @@ from .BuyRules import BuyRules
 
 
 
-from .AppliedFreeArticles import AppliedFreeArticles
-
 
 
 class AppliedPromotion(BaseSchema):
     #  swagger.json
 
+    
+    promotion_name = fields.Str(required=False)
+    
+    promo_id = fields.Str(required=False)
     
     discount_rules = fields.List(fields.Nested(DiscountRulesApp, required=False), required=False)
     
@@ -47,19 +51,15 @@ class AppliedPromotion(BaseSchema):
     
     mrp_promotion = fields.Boolean(required=False)
     
-    promo_id = fields.Str(required=False)
-    
-    offer_text = fields.Str(required=False)
-    
-    promotion_name = fields.Str(required=False)
+    promotion_group = fields.Str(required=False)
     
     amount = fields.Float(required=False)
     
     article_quantity = fields.Int(required=False)
     
-    promotion_group = fields.Str(required=False)
+    applied_free_articles = fields.List(fields.Nested(AppliedFreeArticles, required=False), required=False)
     
     buy_rules = fields.List(fields.Nested(BuyRules, required=False), required=False)
     
-    applied_free_articles = fields.List(fields.Nested(AppliedFreeArticles, required=False), required=False)
+    offer_text = fields.Str(required=False)
     

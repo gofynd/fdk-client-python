@@ -7,35 +7,27 @@ from .OrderStatuses import OrderStatuses
 
 from .OrderFilters import OrderFilters
 
-from .UserInfo import UserInfo
+from .ShipmentTotalDetails import ShipmentTotalDetails
 
-from .BagsForReorderArticleAssignment import BagsForReorderArticleAssignment
-
-from .BagsForReorder import BagsForReorder
-
-from .BreakupValues import BreakupValues
+from .FulfillingCompany import FulfillingCompany
 
 from .FulfillingStore import FulfillingStore
 
+from .Prices import Prices
+
+from .BreakupValues import BreakupValues
+
 from .Invoice import Invoice
 
-from .ShipmentStatus import ShipmentStatus
+from .DeliveryAddress import DeliveryAddress
 
-from .ShipmentTotalDetails import ShipmentTotalDetails
-
-from .Prices import Prices
+from .ShipmentPayment import ShipmentPayment
 
 from .NestedTrackingDetails import NestedTrackingDetails
 
 from .TrackingDetails import TrackingDetails
 
-from .ShipmentPayment import ShipmentPayment
-
-from .FulfillingCompany import FulfillingCompany
-
-from .TimeStampData import TimeStampData
-
-from .Promise import Promise
+from .CurrentStatus import CurrentStatus
 
 from .ItemBrand import ItemBrand
 
@@ -49,15 +41,23 @@ from .Identifiers import Identifiers
 
 from .FinancialBreakup import FinancialBreakup
 
-from .CurrentStatus import CurrentStatus
-
 from .Bags import Bags
+
+from .TimeStampData import TimeStampData
+
+from .Promise import Promise
 
 from .ShipmentUserInfo import ShipmentUserInfo
 
-from .DeliveryAddress import DeliveryAddress
+from .ShipmentStatus import ShipmentStatus
 
 from .Shipments import Shipments
+
+from .BagsForReorderArticleAssignment import BagsForReorderArticleAssignment
+
+from .BagsForReorder import BagsForReorder
+
+from .UserInfo import UserInfo
 
 from .OrderSchema import OrderSchema
 
@@ -83,9 +83,9 @@ from .VerifyOtp import VerifyOtp
 
 from .VerifyOtpResponse import VerifyOtpResponse
 
-from .QuestionSet import QuestionSet
-
 from .BagReasonMeta import BagReasonMeta
+
+from .QuestionSet import QuestionSet
 
 from .BagReasons import BagReasons
 
@@ -95,31 +95,31 @@ from .ShipmentReason import ShipmentReason
 
 from .ShipmentReasons import ShipmentReasons
 
-from .UpdateShipmentExternalRequest import UpdateShipmentExternalRequest
+from .ShipmentStatusUpdateBody import ShipmentStatusUpdateBody
 
-from .UpdateShipmentResponse import UpdateShipmentResponse
+from .ShipmentStatusUpdate import ShipmentStatusUpdate
+
+from .Products import Products
+
+from .ProductsReasonsData import ProductsReasonsData
+
+from .ProductsReasonsFilters import ProductsReasonsFilters
+
+from .ProductsReasons import ProductsReasons
 
 from .EntityReasonData import EntityReasonData
 
 from .EntitiesReasons import EntitiesReasons
 
-from .ProductsReasonsFilters import ProductsReasonsFilters
-
-from .ProductsReasonsData import ProductsReasonsData
-
-from .ProductsReasons import ProductsReasons
-
 from .ReasonsData import ReasonsData
-
-from .EntitiesDataUpdates import EntitiesDataUpdates
 
 from .ProductsDataUpdatesFilters import ProductsDataUpdatesFilters
 
 from .ProductsDataUpdates import ProductsDataUpdates
 
-from .DataUpdates import DataUpdates
+from .EntitiesDataUpdates import EntitiesDataUpdates
 
-from .Products import Products
+from .DataUpdates import DataUpdates
 
 from .ShipmentsRequest import ShipmentsRequest
 

@@ -15,13 +15,21 @@ from ...PlatformModel import BaseSchema
 
 
 
-class Media3(BaseSchema):
+
+
+
+
+class ErrorResponse(BaseSchema):
     #  swagger.json
 
     
-    url = fields.Str(required=False)
+    code = fields.Str(required=False)
     
     meta = fields.Dict(required=False)
     
-    type = fields.Str(required=False)
+    status = fields.Int(required=False)
+    
+    message = fields.Str(required=False)
+    
+    error = fields.Str(required=False)
     

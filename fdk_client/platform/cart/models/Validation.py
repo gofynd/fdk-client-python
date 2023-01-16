@@ -19,9 +19,9 @@ class Validation(BaseSchema):
     #  swagger.json
 
     
-    user_registered_after = fields.Str(required=False)
+    app_id = fields.List(fields.Str(required=False), required=False)
     
     anonymous = fields.Boolean(required=False)
     
-    app_id = fields.List(fields.Str(required=False), required=False)
+    user_registered_after = fields.Str(required=False)
     

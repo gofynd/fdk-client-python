@@ -17,9 +17,9 @@ from .Entities import Entities
 
 from .UpdateShipmentLockPayload import UpdateShipmentLockPayload
 
-from .OriginalFilter import OriginalFilter
-
 from .Bags import Bags
+
+from .OriginalFilter import OriginalFilter
 
 from .CheckResponse import CheckResponse
 
@@ -33,27 +33,27 @@ from .BaseResponse import BaseResponse
 
 from .Click2CallResponse import Click2CallResponse
 
+from .EntitiesDataUpdates import EntitiesDataUpdates
+
 from .ProductsDataUpdatesFilters import ProductsDataUpdatesFilters
 
 from .ProductsDataUpdates import ProductsDataUpdates
 
-from .EntitiesDataUpdates import EntitiesDataUpdates
-
 from .DataUpdates import DataUpdates
-
-from .Products import Products
-
-from .ProductsReasonsFilters import ProductsReasonsFilters
-
-from .ProductsReasonsData import ProductsReasonsData
-
-from .ProductsReasons import ProductsReasons
 
 from .EntityReasonData import EntityReasonData
 
 from .EntitiesReasons import EntitiesReasons
 
+from .ProductsReasonsData import ProductsReasonsData
+
+from .ProductsReasonsFilters import ProductsReasonsFilters
+
+from .ProductsReasons import ProductsReasons
+
 from .ReasonsData import ReasonsData
+
+from .Products import Products
 
 from .ShipmentsRequest import ShipmentsRequest
 
@@ -67,16 +67,6 @@ from .StatuesResponse import StatuesResponse
 
 from .UpdateShipmentStatusResponseBody import UpdateShipmentStatusResponseBody
 
-from .MarketPlacePdf import MarketPlacePdf
-
-from .AffiliateBag import AffiliateBag
-
-from .OrderPriority import OrderPriority
-
-from .OrderUser import OrderUser
-
-from .UserData import UserData
-
 from .ArticleDetails import ArticleDetails
 
 from .ShipmentDetails import ShipmentDetails
@@ -87,29 +77,39 @@ from .ShipmentConfig import ShipmentConfig
 
 from .ShipmentData import ShipmentData
 
+from .OrderPriority import OrderPriority
+
+from .OrderUser import OrderUser
+
+from .UserData import UserData
+
+from .MarketPlacePdf import MarketPlacePdf
+
+from .AffiliateBag import AffiliateBag
+
 from .OrderInfo import OrderInfo
+
+from .AffiliateStoreIdMapping import AffiliateStoreIdMapping
 
 from .AffiliateAppConfigMeta import AffiliateAppConfigMeta
 
 from .AffiliateAppConfig import AffiliateAppConfig
 
-from .AffiliateInventoryArticleAssignmentConfig import AffiliateInventoryArticleAssignmentConfig
-
 from .AffiliateInventoryStoreConfig import AffiliateInventoryStoreConfig
 
 from .AffiliateInventoryOrderConfig import AffiliateInventoryOrderConfig
 
-from .AffiliateInventoryPaymentConfig import AffiliateInventoryPaymentConfig
+from .AffiliateInventoryArticleAssignmentConfig import AffiliateInventoryArticleAssignmentConfig
 
 from .AffiliateInventoryLogisticsConfig import AffiliateInventoryLogisticsConfig
+
+from .AffiliateInventoryPaymentConfig import AffiliateInventoryPaymentConfig
 
 from .AffiliateInventoryConfig import AffiliateInventoryConfig
 
 from .AffiliateConfig import AffiliateConfig
 
 from .Affiliate import Affiliate
-
-from .AffiliateStoreIdMapping import AffiliateStoreIdMapping
 
 from .OrderConfig import OrderConfig
 
@@ -149,6 +149,12 @@ from .ManualAssignDPToShipment import ManualAssignDPToShipment
 
 from .ManualAssignDPToShipmentResponse import ManualAssignDPToShipmentResponse
 
+from .PaymentMethod import PaymentMethod
+
+from .PaymentInfo import PaymentInfo
+
+from .BillingInfo import BillingInfo
+
 from .ProcessingDates import ProcessingDates
 
 from .Tax import Tax
@@ -159,25 +165,19 @@ from .LineItem import LineItem
 
 from .Shipment import Shipment
 
-from .ShippingInfo import ShippingInfo
-
-from .PaymentMethod import PaymentMethod
-
-from .PaymentInfo import PaymentInfo
-
 from .TaxInfo import TaxInfo
 
-from .BillingInfo import BillingInfo
+from .ShippingInfo import ShippingInfo
 
 from .CreateOrderAPI import CreateOrderAPI
 
 from .CreateOrderErrorReponse import CreateOrderErrorReponse
 
+from .DpConfiguration import DpConfiguration
+
 from .PaymentMethods import PaymentMethods
 
 from .CreateChannelPaymentInfo import CreateChannelPaymentInfo
-
-from .DpConfiguration import DpConfiguration
 
 from .CreateChannelConfig import CreateChannelConfig
 

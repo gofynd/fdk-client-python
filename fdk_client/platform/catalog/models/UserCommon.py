@@ -19,9 +19,9 @@ class UserCommon(BaseSchema):
     #  swagger.json
 
     
+    company_id = fields.Int(required=False)
+    
     username = fields.Str(required=False)
     
     user_id = fields.Str(required=False)
-    
-    company_id = fields.Int(required=False)
     
