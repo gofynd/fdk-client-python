@@ -9,6 +9,8 @@ class OrderValidator:
     
     class getOrders(BaseSchema):
         
+        status = fields.Int(required=False)
+        
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
@@ -17,10 +19,15 @@ class OrderValidator:
         
         to_date = fields.Str(required=False)
         
-        status = fields.Int(required=False)
+        custom_meta = fields.Str(required=False)
          
     
     class getOrderById(BaseSchema):
+        
+        order_id = fields.Str(required=False)
+         
+    
+    class getPosOrderById(BaseSchema):
         
         order_id = fields.Str(required=False)
          
@@ -30,19 +37,7 @@ class OrderValidator:
         shipment_id = fields.Str(required=False)
          
     
-    class getShipmentReasons(BaseSchema):
-        
-        shipment_id = fields.Str(required=False)
-         
-    
-    class getShipmentBagReasons(BaseSchema):
-        
-        shipment_id = fields.Str(required=False)
-        
-        bag_id = fields.Str(required=False)
-         
-    
-    class updateShipmentStatus(BaseSchema):
+    class getInvoiceByShipmentId(BaseSchema):
         
         shipment_id = fields.Str(required=False)
          
@@ -50,11 +45,6 @@ class OrderValidator:
     class trackShipment(BaseSchema):
         
         shipment_id = fields.Str(required=False)
-         
-    
-    class getPosOrderById(BaseSchema):
-        
-        order_id = fields.Str(required=False)
          
     
     class getCustomerDetailsByShipmentId(BaseSchema):
@@ -78,8 +68,20 @@ class OrderValidator:
         shipment_id = fields.Str(required=False)
          
     
-    class getInvoiceByShipmentId(BaseSchema):
+    class getShipmentBagReasons(BaseSchema):
         
         shipment_id = fields.Str(required=False)
+        
+        bag_id = fields.Str(required=False)
+         
+    
+    class getShipmentReasons(BaseSchema):
+        
+        shipment_id = fields.Str(required=False)
+         
+    
+    class updateShipmentStatus(BaseSchema):
+        
+        shipment_id = fields.Int(required=False)
          
     

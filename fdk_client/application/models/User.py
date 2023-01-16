@@ -656,6 +656,8 @@ class SendOtpRequestSchema(BaseSchema):
     
     mobile = fields.Str(required=False)
     
+    android_hash = fields.Str(required=False)
+    
 
 
 class OAuthRequestSchema(BaseSchema):
