@@ -288,6 +288,20 @@ class CommunicationValidator:
         page_size = fields.Int(required=False)
          
     
+    class sendOtp(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+    
+    class verfiyOtp(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+    
     class getSmsProviders(BaseSchema):
         
         company_id = fields.Str(required=False)

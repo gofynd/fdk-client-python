@@ -70,6 +70,8 @@ class CompanyProfileValidator:
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
+        
+        location_ids = fields.List(fields.Int(required=False), required=False)
          
     
     class createLocation(BaseSchema):
@@ -92,6 +94,11 @@ class CompanyProfileValidator:
          
     
     class createLocationBulk(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+         
+    
+    class getOptimalLocations(BaseSchema):
         
         company_id = fields.Str(required=False)
          
