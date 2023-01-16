@@ -149,8 +149,6 @@ class PageType(Enum):
     
     PROFILE = "profile"
     
-    PROFILE_ORDER_SHIPMENT = "profile-order-shipment"
-    
     PROFILE_BASIC = "profile-basic"
     
     PROFILE_COMPANY = "profile-company"
@@ -227,6 +225,7 @@ class SubscriberStatus(Enum):
         if value in cls._value2member_map_:
             return None
         raise Exception("Invalid SubscriberStatus type")
+
 
 
 
