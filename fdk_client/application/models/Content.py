@@ -19,6 +19,10 @@ class PathMappingSchema(BaseSchema):
     pass
 
 
+class RedirectionSchema(BaseSchema):
+    pass
+
+
 class SeoComponent(BaseSchema):
     pass
 
@@ -456,17 +460,23 @@ class PathMappingSchema(BaseSchema):
     
     application = fields.Str(required=False)
     
+    redirections = fields.List(fields.Nested(RedirectionSchema, required=False), required=False)
+    
     _id = fields.Str(required=False)
-    
-    redirect_from = fields.Str(required=False)
-    
-    redirect_to = fields.Str(required=False)
     
     updated_at = fields.Str(required=False)
     
     created_at = fields.Str(required=False)
     
-    __source = fields.Nested(TagSourceSchema, required=False)
+
+
+class RedirectionSchema(BaseSchema):
+    # Content swagger.json
+
+    
+    redirect_from = fields.Str(required=False)
+    
+    redirect_to = fields.Str(required=False)
     
 
 
@@ -1251,8 +1261,6 @@ class FaqSchema(BaseSchema):
     question = fields.Str(required=False)
     
     answer = fields.Str(required=False)
-    
-    tags = fields.List(fields.Str(required=False), required=False)
     
 
 

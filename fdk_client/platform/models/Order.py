@@ -1986,7 +1986,7 @@ class OrderDetailsItem(BaseSchema):
     
     ordering_store = fields.Dict(required=False)
     
-    breakup_values = fields.List(fields.Nested(PlatformBreakupValues, required=False), required=False)
+    breakup_values = fields.Nested(PlatformBreakupValues, required=False)
     
     id = fields.Str(required=False)
     
@@ -2032,11 +2032,11 @@ class PlatformShipmentDetails(BaseSchema):
     
     status = fields.Nested(PlatformShipmentDetailsStatus, required=False)
     
-    bags = fields.List(fields.Nested(BagsDetails, required=False), required=False)
+    bags = fields.Nested(BagsDetails, required=False)
     
     prices = fields.Nested(ShipmentPrices, required=False)
     
-    breakup_values = fields.List(fields.Nested(ShipmentBreakupValues, required=False), required=False)
+    breakup_values = fields.Nested(ShipmentBreakupValues, required=False)
     
     id = fields.Str(required=False)
     
@@ -2068,7 +2068,7 @@ class PlatformShipmentDetails(BaseSchema):
     
     promise = fields.Nested(Promise, required=False)
     
-    tracking_details = fields.List(fields.Nested(ShipmentTrackingDetails, required=False), required=False)
+    tracking_details = fields.Nested(ShipmentTrackingDetails, required=False)
     
     is_fynd_coupon = fields.Boolean(required=False)
     
@@ -2138,7 +2138,7 @@ class BagsDetails(BaseSchema):
     
     gst_details = fields.Nested(GstDetails, required=False)
     
-    breakup_values = fields.List(fields.Nested(BagBreakupValues, required=False), required=False)
+    breakup_values = fields.Nested(BagBreakupValues, required=False)
     
     update_time = fields.Int(required=False)
     
@@ -2916,15 +2916,15 @@ class OrderPicklistListing(BaseSchema):
     
     fyndstore_emp = fields.Dict(required=False)
     
-    ordering_store = fields.Nested(PlatformFulfillingStore, required=False)
+    ordering_store = fields.Dict(required=False)
     
-    breakup_values = fields.List(fields.Nested(PlatformBreakupValues, required=False), required=False)
+    breakup_values = fields.Nested(PlatformBreakupValues, required=False)
     
     id = fields.Str(required=False)
     
     application = fields.Nested(PlatformApplication, required=False)
     
-    shipments = fields.List(fields.Nested(PlatformShipmentDetails, required=False), required=False)
+    shipments = fields.Nested(PlatformShipmentDetails, required=False)
     
     created_at = fields.Str(required=False)
     
