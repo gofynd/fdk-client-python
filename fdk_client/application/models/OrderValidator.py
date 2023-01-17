@@ -82,6 +82,6 @@ class OrderValidator:
     
     class updateShipmentStatus(BaseSchema):
         
-        shipment_id = fields.Int(required=False)
+        shipment_id = fields.Str(required=False)
          
     
