@@ -151,6 +151,8 @@ class PageType(Enum):
     
     PROFILE = "profile"
     
+    PROFILE_ORDER_SHIPMENT = "profile-order-shipment"
+    
     PROFILE_BASIC = "profile-basic"
     
     PROFILE_COMPANY = "profile-company"
