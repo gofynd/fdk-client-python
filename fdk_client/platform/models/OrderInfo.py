@@ -9,65 +9,65 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .OrderPriority import OrderPriority
+from .AffiliateBag import AffiliateBag
+
+
 
 
 
 from .ShipmentData import ShipmentData
 
-from .OrderUser import OrderUser
-
-
-
-
-
-
-
-
-
 
 
 from .UserData import UserData
 
+from .OrderUser import OrderUser
+
+from .OrderPriority import OrderPriority
+
 
 
 from .OrderUser import OrderUser
 
-from .AffiliateBag import AffiliateBag
+
+
+
+
+
 
 
 class OrderInfo(BaseSchema):
     # Order swagger.json
 
     
-    order_value = fields.Float(required=False)
-    
     delivery_charges = fields.Float(required=False)
-    
-    order_priority = fields.Nested(OrderPriority, required=False)
     
     affiliate_order_id = fields.Str(required=False)
     
-    shipment = fields.Nested(ShipmentData, required=False)
+    bags = fields.List(fields.Nested(AffiliateBag, required=False), required=False)
     
-    billing_address = fields.Nested(OrderUser, required=False)
-    
-    items = fields.Dict(required=False)
-    
-    cod_charges = fields.Float(required=False)
-    
-    payment = fields.Dict(required=False)
-    
-    payment_mode = fields.Str(required=False)
+    order_value = fields.Float(required=False)
     
     discount = fields.Float(required=False)
     
-    user = fields.Nested(UserData, required=False)
+    shipment = fields.Nested(ShipmentData, required=False)
     
-    coupon = fields.Str(required=False)
+    payment_mode = fields.Str(required=False)
+    
+    user = fields.Nested(UserData, required=False)
     
     shipping_address = fields.Nested(OrderUser, required=False)
     
-    bags = fields.List(fields.Nested(AffiliateBag, required=False), required=False)
+    order_priority = fields.Nested(OrderPriority, required=False)
+    
+    items = fields.Dict(required=False)
+    
+    billing_address = fields.Nested(OrderUser, required=False)
+    
+    payment = fields.Dict(required=False)
+    
+    cod_charges = fields.Float(required=False)
+    
+    coupon = fields.Str(required=False)
     
 

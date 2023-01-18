@@ -8,14 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class UpdateShipmentExternalRequest(BaseSchema):
+class BagReasonMeta(BaseSchema):
     # Order swagger.json
 
     
-    statuses = fields.List(fields.Dict(required=False), required=False)
-    
-    force_transition = fields.Boolean(required=False)
+    show_text_area = fields.Boolean(required=False)
     
 

@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class UpdateShipmentResponse(BaseSchema):
+class ShipmentStatusUpdateBody(BaseSchema):
     # Order swagger.json
 
     
-    status = fields.Boolean(required=False)
+    force_transition = fields.Boolean(required=False)
     
-    message = fields.List(fields.Str(required=False), required=False)
-    
-    final_state = fields.Dict(required=False)
+    statuses = fields.List(fields.Dict(required=False), required=False)
     
 

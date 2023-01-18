@@ -16,10 +16,10 @@ class ErrorResponse1(BaseSchema):
     # Order swagger.json
 
     
-    error_trace = fields.Str(required=False)
-    
     message = fields.Str(required=False)
     
     status = fields.Int(required=False)
+    
+    error_trace = fields.Str(required=False)
     
 

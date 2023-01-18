@@ -9,18 +9,6 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .PlatformItem import PlatformItem
-
-
-
-
-
-from .Prices import Prices
-
-
-
-
-
 
 
 from .GSTDetailsData import GSTDetailsData
@@ -28,21 +16,25 @@ from .GSTDetailsData import GSTDetailsData
 
 
 
+
+
+
+from .Prices import Prices
+
+from .PlatformItem import PlatformItem
+
+
 class BagUnit(BaseSchema):
     # Order swagger.json
 
     
-    status = fields.Dict(required=False)
-    
-    can_cancel = fields.Boolean(required=False)
-    
-    item = fields.Nested(PlatformItem, required=False)
-    
-    can_return = fields.Boolean(required=False)
-    
     total_shipment_bags = fields.Int(required=False)
     
-    prices = fields.Nested(Prices, required=False)
+    shipment_id = fields.Str(required=False)
+    
+    status = fields.Dict(required=False)
+    
+    gst = fields.Nested(GSTDetailsData, required=False)
     
     ordering_channel = fields.Str(required=False)
     
@@ -50,8 +42,8 @@ class BagUnit(BaseSchema):
     
     item_quantity = fields.Int(required=False)
     
-    gst = fields.Nested(GSTDetailsData, required=False)
+    prices = fields.Nested(Prices, required=False)
     
-    shipment_id = fields.Str(required=False)
+    item = fields.Nested(PlatformItem, required=False)
     
 

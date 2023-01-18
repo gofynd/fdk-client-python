@@ -22,6 +22,8 @@ class ShipmentDetail(BaseSchema):
     # Order swagger.json
 
     
+    shipment_id = fields.Str(required=False)
+    
     bag_list = fields.List(fields.Int(required=False), required=False)
     
     remarks = fields.Str(required=False)
@@ -29,8 +31,6 @@ class ShipmentDetail(BaseSchema):
     status = fields.Str(required=False)
     
     id = fields.Int(required=False)
-    
-    shipment_id = fields.Str(required=False)
     
     meta = fields.Nested(Meta, required=False)
     

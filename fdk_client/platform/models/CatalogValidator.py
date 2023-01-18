@@ -938,6 +938,11 @@ class CatalogValidator:
         company_id = fields.Int(required=False)
          
     
+    class getOptimalLocations(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+         
+    
     class getSingleProductHSNCode(BaseSchema):
         
         reporting_hsn = fields.Str(required=False)
@@ -1103,6 +1108,8 @@ class CatalogValidator:
         
         application_id = fields.Str(required=False)
         
+        department_id = fields.Int(required=False)
+        
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
@@ -1117,6 +1124,28 @@ class CatalogValidator:
         application_id = fields.Str(required=False)
         
         category_uid = fields.Str(required=False)
+         
+    
+    class getApplicationDepartmentListing(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        q = fields.Str(required=False)
+         
+    
+    class updateAppDepartment(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        department_uid = fields.Str(required=False)
          
     
     class updateAppLocation(BaseSchema):

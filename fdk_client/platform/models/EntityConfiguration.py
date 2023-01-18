@@ -9,11 +9,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 from .GetCatalogConfigurationDetailsProduct import GetCatalogConfigurationDetailsProduct
 
 from .GetCatalogConfigurationDetailsSchemaListing import GetCatalogConfigurationDetailsSchemaListing
-
-
 
 
 
@@ -22,7 +22,9 @@ class EntityConfiguration(BaseSchema):
     # Catalog swagger.json
 
     
-    config_id = fields.Str(required=False)
+    id = fields.Str(required=False)
+    
+    config_type = fields.Str(required=False)
     
     app_id = fields.Str(required=False)
     
@@ -30,8 +32,6 @@ class EntityConfiguration(BaseSchema):
     
     listing = fields.Nested(GetCatalogConfigurationDetailsSchemaListing, required=False)
     
-    id = fields.Str(required=False)
-    
-    config_type = fields.Str(required=False)
+    config_id = fields.Str(required=False)
     
 

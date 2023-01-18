@@ -16,10 +16,10 @@ class PlatformBreakupValues(BaseSchema):
     # Order swagger.json
 
     
+    name = fields.Str(required=False)
+    
     display = fields.Str(required=False)
     
     value = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
     
 

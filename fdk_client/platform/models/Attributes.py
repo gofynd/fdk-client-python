@@ -28,22 +28,22 @@ class Attributes(BaseSchema):
     # Order swagger.json
 
     
+    brand_name = fields.Str(required=False)
+    
     marketer_name = fields.Str(required=False)
+    
+    essential = fields.Str(required=False)
+    
+    gender = fields.List(fields.Str(required=False), required=False)
+    
+    primary_color = fields.Str(required=False)
     
     marketer_address = fields.Str(required=False)
     
     name = fields.Str(required=False)
     
-    primary_color = fields.Str(required=False)
+    primary_color_hex = fields.Str(required=False)
     
     primary_material = fields.Str(required=False)
-    
-    gender = fields.List(fields.Str(required=False), required=False)
-    
-    essential = fields.Str(required=False)
-    
-    brand_name = fields.Str(required=False)
-    
-    primary_color_hex = fields.Str(required=False)
     
 

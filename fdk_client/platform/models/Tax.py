@@ -18,12 +18,12 @@ class Tax(BaseSchema):
     # Order swagger.json
 
     
-    name = fields.Str(required=False)
+    rate = fields.Float(required=False)
     
     amount = fields.Dict(required=False)
     
     breakup = fields.List(fields.Dict(required=False), required=False)
     
-    tax_exempt = fields.Boolean(required=False)
+    name = fields.Str(required=False)
     
 

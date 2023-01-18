@@ -22,9 +22,9 @@ class FreeGiftItems(BaseSchema):
     # Cart swagger.json
 
     
-    item_brand_name = fields.Str(required=False)
+    item_id = fields.Int(required=False)
     
-    item_images_url = fields.List(fields.Str(required=False), required=False)
+    item_brand_name = fields.Str(required=False)
     
     item_price_details = fields.Dict(required=False)
     
@@ -32,6 +32,6 @@ class FreeGiftItems(BaseSchema):
     
     item_name = fields.Str(required=False)
     
-    item_id = fields.Int(required=False)
+    item_images_url = fields.List(fields.Str(required=False), required=False)
     
 

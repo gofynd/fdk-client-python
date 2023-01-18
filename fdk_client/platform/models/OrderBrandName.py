@@ -22,9 +22,9 @@ class OrderBrandName(BaseSchema):
     # Order swagger.json
 
     
-    modified_on = fields.Int(required=False)
-    
     brand_name = fields.Str(required=False)
+    
+    modified_on = fields.Int(required=False)
     
     company = fields.Str(required=False)
     
