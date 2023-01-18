@@ -21,7 +21,7 @@ class EntityRegionView_Error(BaseSchema):
     
     type = fields.Str(required=False)
     
-    message = fields.Str(required=False)
-    
     value = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
     

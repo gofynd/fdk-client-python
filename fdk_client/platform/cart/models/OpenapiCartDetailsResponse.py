@@ -15,9 +15,9 @@ from .CartProductInfo import CartProductInfo
 
 
 
-
-
 from .CartBreakup import CartBreakup
+
+
 
 
 
@@ -25,11 +25,11 @@ class OpenapiCartDetailsResponse(BaseSchema):
     #  swagger.json
 
     
-    message = fields.Str(required=False)
+    is_valid = fields.Boolean(required=False)
     
     items = fields.List(fields.Nested(CartProductInfo, required=False), required=False)
     
-    is_valid = fields.Boolean(required=False)
-    
     breakup_values = fields.Nested(CartBreakup, required=False)
+    
+    message = fields.Str(required=False)
     

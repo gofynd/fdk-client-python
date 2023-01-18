@@ -13,13 +13,13 @@ from .ReasonsData import ReasonsData
 
 
 
+
+
 from .Products import Products
 
 
 
-
-
-from .DataUpdates1 import DataUpdates1
+from .DataUpdates import DataUpdates
 
 
 
@@ -29,9 +29,9 @@ class ShipmentsRequest(BaseSchema):
     
     reasons = fields.Nested(ReasonsData, required=False)
     
-    products = fields.List(fields.Nested(Products, required=False), required=False)
-    
     identifier = fields.Str(required=False)
     
-    data_updates = fields.Nested(DataUpdates1, required=False)
+    products = fields.List(fields.Nested(Products, required=False), required=False)
+    
+    data_updates = fields.Nested(DataUpdates, required=False)
     

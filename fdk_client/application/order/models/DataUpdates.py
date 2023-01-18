@@ -9,7 +9,7 @@ from ...ApplicationModel import BaseSchema
 
 
 
-from .ProductsDataUpdates1 import ProductsDataUpdates1
+from .ProductsDataUpdates import ProductsDataUpdates
 
 
 
@@ -21,7 +21,7 @@ class DataUpdates(BaseSchema):
     #  swagger.json
 
     
-    products = fields.List(fields.Nested(ProductsDataUpdates1, required=False), required=False)
+    products = fields.List(fields.Nested(ProductsDataUpdates, required=False), required=False)
     
     entities = fields.List(fields.Nested(EntitiesDataUpdates, required=False), required=False)
     

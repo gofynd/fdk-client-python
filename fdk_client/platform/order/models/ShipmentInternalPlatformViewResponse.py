@@ -15,9 +15,9 @@ from .ShipmentItem import ShipmentItem
 
 
 
+
+
 from .FiltersInfo import FiltersInfo
-
-
 
 
 
@@ -27,9 +27,9 @@ class ShipmentInternalPlatformViewResponse(BaseSchema):
     
     items = fields.List(fields.Nested(ShipmentItem, required=False), required=False)
     
+    page = fields.Dict(required=False)
+    
     applied_filters = fields.Dict(required=False)
     
     filters = fields.List(fields.Nested(FiltersInfo, required=False), required=False)
-    
-    page = fields.Dict(required=False)
     

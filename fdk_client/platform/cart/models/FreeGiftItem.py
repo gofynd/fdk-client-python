@@ -29,11 +29,11 @@ class FreeGiftItem(BaseSchema):
     
     item_name = fields.Str(required=False)
     
-    item_brand_name = fields.Str(required=False)
+    item_id = fields.Int(required=False)
     
     item_slug = fields.Str(required=False)
     
-    item_id = fields.Int(required=False)
+    item_brand_name = fields.Str(required=False)
     
     item_price_details = fields.Dict(required=False)
     

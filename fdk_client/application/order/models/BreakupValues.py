@@ -19,9 +19,9 @@ class BreakupValues(BaseSchema):
     #  swagger.json
 
     
-    value = fields.Float(required=False)
+    name = fields.Str(required=False)
     
     display = fields.Str(required=False)
     
-    name = fields.Str(required=False)
+    value = fields.Float(required=False)
     

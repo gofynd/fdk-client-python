@@ -21,9 +21,9 @@ class DisplayMeta1(BaseSchema):
     #  swagger.json
 
     
-    offer_text = fields.Str(required=False)
-    
     offer_label = fields.Str(required=False)
+    
+    offer_text = fields.Str(required=False)
     
     description = fields.Str(required=False)
     

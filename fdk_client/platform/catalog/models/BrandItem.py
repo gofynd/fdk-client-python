@@ -9,9 +9,7 @@ from ...PlatformModel import BaseSchema
 
 
 
-
-
-
+from .ImageUrls import ImageUrls
 
 
 
@@ -19,7 +17,9 @@ from .Action import Action
 
 
 
-from .ImageUrls import ImageUrls
+
+
+
 
 
 
@@ -35,15 +35,15 @@ class BrandItem(BaseSchema):
     #  swagger.json
 
     
-    name = fields.Str(required=False)
-    
-    uid = fields.Int(required=False)
-    
-    slug = fields.Str(required=False)
+    banners = fields.Nested(ImageUrls, required=False)
     
     action = fields.Nested(Action, required=False)
     
-    banners = fields.Nested(ImageUrls, required=False)
+    name = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
     
     departments = fields.List(fields.Str(required=False), required=False)
     

@@ -29,7 +29,7 @@ class PageResponse(BaseSchema):
     
     current = fields.Int(required=False)
     
-    has_next = fields.Boolean(required=False)
-    
     size = fields.Int(required=False)
+    
+    has_next = fields.Boolean(required=False)
     

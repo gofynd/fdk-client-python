@@ -21,7 +21,7 @@ class LockData(BaseSchema):
     
     mto = fields.Boolean(required=False)
     
-    locked = fields.Boolean(required=False)
-    
     lock_message = fields.Str(required=False)
+    
+    locked = fields.Boolean(required=False)
     

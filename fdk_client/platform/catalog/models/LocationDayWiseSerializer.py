@@ -13,9 +13,9 @@ from .LocationTimingSerializer import LocationTimingSerializer
 
 
 
-
-
 from .LocationTimingSerializer import LocationTimingSerializer
+
+
 
 
 
@@ -27,9 +27,9 @@ class LocationDayWiseSerializer(BaseSchema):
     
     closing = fields.Nested(LocationTimingSerializer, required=False)
     
-    open = fields.Boolean(required=False)
-    
     opening = fields.Nested(LocationTimingSerializer, required=False)
     
     weekday = fields.Str(required=False)
+    
+    open = fields.Boolean(required=False)
     

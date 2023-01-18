@@ -17,7 +17,7 @@ class Formatted(BaseSchema):
     #  swagger.json
 
     
-    f_min = fields.Str(required=False)
-    
     f_max = fields.Str(required=False)
+    
+    f_min = fields.Str(required=False)
     

@@ -9,9 +9,9 @@ from ...ApplicationModel import BaseSchema
 
 
 
+from .ShipmentsRequest import ShipmentsRequest
 
 
-from .ShipmentsRequest1 import ShipmentsRequest1
 
 
 
@@ -21,9 +21,9 @@ class StatuesRequest(BaseSchema):
     #  swagger.json
 
     
-    status = fields.Str(required=False)
+    shipments = fields.List(fields.Nested(ShipmentsRequest, required=False), required=False)
     
-    shipments = fields.List(fields.Nested(ShipmentsRequest1, required=False), required=False)
+    status = fields.Str(required=False)
     
     exclude_bags_next_state = fields.Str(required=False)
     

@@ -19,9 +19,9 @@ class Weight(BaseSchema):
     #  swagger.json
 
     
-    is_default = fields.Boolean(required=False)
-    
     shipping = fields.Int(required=False)
+    
+    is_default = fields.Boolean(required=False)
     
     unit = fields.Str(required=False)
     
