@@ -7,18 +7,6 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class EmailJobMetrics(BaseSchema):
-    pass
-
-
-class Page(BaseSchema):
-    pass
-
-
-class ResponseEnvelopeEmailJobMetrics(BaseSchema):
-    pass
-
-
 class GCompany(BaseSchema):
     pass
 
@@ -28,6 +16,10 @@ class GStore(BaseSchema):
 
 
 class Metum(BaseSchema):
+    pass
+
+
+class Page(BaseSchema):
     pass
 
 
@@ -79,73 +71,17 @@ class ResponseEnvelopeListJobConfigDTO(BaseSchema):
     pass
 
 
-class ResponseEnvelopeObject(BaseSchema):
+class EmailJobMetrics(BaseSchema):
     pass
 
 
-
-class EmailJobMetrics(BaseSchema):
-    # Inventory swagger.json
-
-    
-    executed = fields.Boolean(required=False)
-    
-    id = fields.Str(required=False)
-    
-    job_code = fields.Str(required=False)
-    
-    daily_job = fields.Boolean(required=False)
-    
-    last_executed_on = fields.Str(required=False)
-    
-
-
-class Page(BaseSchema):
-    # Inventory swagger.json
-
-    
-    type = fields.Str(required=False)
-    
-    size = fields.Int(required=False)
-    
-    current = fields.Int(required=False)
-    
-    has_next = fields.Boolean(required=False)
-    
-    item_total = fields.Int(required=False)
-    
-    next_id = fields.Str(required=False)
-    
-    has_previous = fields.Boolean(required=False)
-    
-
-
 class ResponseEnvelopeEmailJobMetrics(BaseSchema):
-    # Inventory swagger.json
+    pass
 
-    
-    timestamp = fields.Str(required=False)
-    
-    status = fields.Int(required=False)
-    
-    error = fields.Str(required=False)
-    
-    exception = fields.Str(required=False)
-    
-    message = fields.Str(required=False)
-    
-    total_time_taken_in_millis = fields.Int(required=False)
-    
-    http_status = fields.Str(required=False)
-    
-    items = fields.Nested(EmailJobMetrics, required=False)
-    
-    payload = fields.Nested(EmailJobMetrics, required=False)
-    
-    trace_id = fields.Str(required=False)
-    
-    page = fields.Nested(Page, required=False)
-    
+
+class ResponseEnvelopeObject(BaseSchema):
+    pass
+
 
 
 class GCompany(BaseSchema):
@@ -169,6 +105,8 @@ class GCompany(BaseSchema):
     name = fields.Str(required=False)
     
     stores = fields.List(fields.Nested(GStore, required=False), required=False)
+    
+    gstores = fields.List(fields.Nested(GStore, required=False), required=False)
     
 
 
@@ -207,6 +145,26 @@ class Metum(BaseSchema):
     name = fields.Str(required=False)
     
     value = fields.Str(required=False)
+    
+
+
+class Page(BaseSchema):
+    # Inventory swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    size = fields.Int(required=False)
+    
+    current = fields.Int(required=False)
+    
+    has_next = fields.Boolean(required=False)
+    
+    item_total = fields.Int(required=False)
+    
+    next_id = fields.Str(required=False)
+    
+    has_previous = fields.Boolean(required=False)
     
 
 
@@ -340,11 +298,11 @@ class JobConfigDTO(BaseSchema):
     # Inventory swagger.json
 
     
+    integration = fields.Str(required=False)
+    
     integration_data = fields.Dict(required=False)
     
     company_name = fields.Str(required=False)
-    
-    integration = fields.Str(required=False)
     
     company_id = fields.Int(required=False)
     
@@ -417,6 +375,50 @@ class ResponseEnvelopeListJobConfigDTO(BaseSchema):
     items = fields.List(fields.Nested(JobConfigDTO, required=False), required=False)
     
     payload = fields.List(fields.Nested(JobConfigDTO, required=False), required=False)
+    
+    trace_id = fields.Str(required=False)
+    
+    page = fields.Nested(Page, required=False)
+    
+
+
+class EmailJobMetrics(BaseSchema):
+    # Inventory swagger.json
+
+    
+    executed = fields.Boolean(required=False)
+    
+    id = fields.Str(required=False)
+    
+    job_code = fields.Str(required=False)
+    
+    daily_job = fields.Boolean(required=False)
+    
+    last_executed_on = fields.Str(required=False)
+    
+
+
+class ResponseEnvelopeEmailJobMetrics(BaseSchema):
+    # Inventory swagger.json
+
+    
+    timestamp = fields.Str(required=False)
+    
+    status = fields.Int(required=False)
+    
+    error = fields.Str(required=False)
+    
+    exception = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
+    
+    total_time_taken_in_millis = fields.Int(required=False)
+    
+    http_status = fields.Str(required=False)
+    
+    items = fields.Nested(EmailJobMetrics, required=False)
+    
+    payload = fields.Nested(EmailJobMetrics, required=False)
     
     trace_id = fields.Str(required=False)
     

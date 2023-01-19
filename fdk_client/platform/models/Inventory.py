@@ -7,19 +7,15 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class DataTresholdDTO(BaseSchema):
+class GCompany(BaseSchema):
     pass
 
 
-class GenericDTO(BaseSchema):
+class GStore(BaseSchema):
     pass
 
 
-class JobConfigDTO(BaseSchema):
-    pass
-
-
-class TaskDTO(BaseSchema):
+class Metum(BaseSchema):
     pass
 
 
@@ -27,7 +23,19 @@ class Page(BaseSchema):
     pass
 
 
-class ResponseEnvelopeString(BaseSchema):
+class ResponseEnvelopeListSlingshotConfigurationDetail(BaseSchema):
+    pass
+
+
+class SlingshotConfigurationDetail(BaseSchema):
+    pass
+
+
+class SlingshotIntegration(BaseSchema):
+    pass
+
+
+class StoreData(BaseSchema):
     pass
 
 
@@ -51,31 +59,23 @@ class ResponseEnvelopeKafkaResponse(BaseSchema):
     pass
 
 
-class GCompany(BaseSchema):
+class DataTresholdDTO(BaseSchema):
     pass
 
 
-class GStore(BaseSchema):
+class GenericDTO(BaseSchema):
     pass
 
 
-class Metum(BaseSchema):
+class JobConfigDTO(BaseSchema):
     pass
 
 
-class ResponseEnvelopeListSlingshotConfigurationDetail(BaseSchema):
+class TaskDTO(BaseSchema):
     pass
 
 
-class SlingshotConfigurationDetail(BaseSchema):
-    pass
-
-
-class SlingshotIntegration(BaseSchema):
-    pass
-
-
-class StoreData(BaseSchema):
+class ResponseEnvelopeString(BaseSchema):
     pass
 
 
@@ -244,61 +244,67 @@ class ResponseEnvelopeListJobConfigListDTO(BaseSchema):
 
 
 
-class DataTresholdDTO(BaseSchema):
+class GCompany(BaseSchema):
     # Inventory swagger.json
 
     
-    min_price = fields.Float(required=False)
-    
-    safe_stock = fields.Int(required=False)
-    
-    period_threshold = fields.Int(required=False)
-    
-    period_threshold_type = fields.Str(required=False)
-    
-    period_type_list = fields.List(fields.Nested(GenericDTO, required=False), required=False)
-    
-
-
-class GenericDTO(BaseSchema):
-    # Inventory swagger.json
-
-    
-    text = fields.Str(required=False)
-    
-    value = fields.Dict(required=False)
-    
-
-
-class JobConfigDTO(BaseSchema):
-    # Inventory swagger.json
-
-    
-    integration_data = fields.Dict(required=False)
-    
-    company_name = fields.Str(required=False)
+    _id = fields.Str(required=False)
     
     integration = fields.Str(required=False)
     
-    company_id = fields.Int(required=False)
+    level = fields.Str(required=False)
     
-    task_details = fields.Nested(TaskDTO, required=False)
+    uid = fields.Int(required=False)
     
-    threshold_details = fields.Nested(DataTresholdDTO, required=False)
+    opted = fields.Boolean(required=False)
     
-    job_code = fields.Str(required=False)
+    permissions = fields.List(fields.Str(required=False), required=False)
     
-    alias = fields.Str(required=False)
+    token = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    stores = fields.List(fields.Nested(GStore, required=False), required=False)
+    
+    gstores = fields.List(fields.Nested(GStore, required=False), required=False)
     
 
 
-class TaskDTO(BaseSchema):
+class GStore(BaseSchema):
     # Inventory swagger.json
 
     
-    type = fields.Int(required=False)
+    _id = fields.Str(required=False)
     
-    group_list = fields.List(fields.Nested(GenericDTO, required=False), required=False)
+    integration = fields.Str(required=False)
+    
+    level = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
+    
+    opted = fields.Boolean(required=False)
+    
+    permissions = fields.List(fields.Str(required=False), required=False)
+    
+    token = fields.Str(required=False)
+    
+    code = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    data = fields.Nested(StoreData, required=False)
+    
+
+
+class Metum(BaseSchema):
+    # Inventory swagger.json
+
+    
+    _id = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
     
 
 
@@ -322,7 +328,7 @@ class Page(BaseSchema):
     
 
 
-class ResponseEnvelopeString(BaseSchema):
+class ResponseEnvelopeListSlingshotConfigurationDetail(BaseSchema):
     # Inventory swagger.json
 
     
@@ -340,13 +346,47 @@ class ResponseEnvelopeString(BaseSchema):
     
     http_status = fields.Str(required=False)
     
-    items = fields.Str(required=False)
+    items = fields.List(fields.Nested(SlingshotConfigurationDetail, required=False), required=False)
     
-    payload = fields.Str(required=False)
+    payload = fields.List(fields.Nested(SlingshotConfigurationDetail, required=False), required=False)
     
     trace_id = fields.Str(required=False)
     
     page = fields.Nested(Page, required=False)
+    
+
+
+class SlingshotConfigurationDetail(BaseSchema):
+    # Inventory swagger.json
+
+    
+    integration = fields.Nested(SlingshotIntegration, required=False)
+    
+    companies = fields.List(fields.Nested(GCompany, required=False), required=False)
+    
+
+
+class SlingshotIntegration(BaseSchema):
+    # Inventory swagger.json
+
+    
+    _id = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    meta = fields.List(fields.Nested(Metum, required=False), required=False)
+    
+
+
+class StoreData(BaseSchema):
+    # Inventory swagger.json
+
+    
+    location_id = fields.Str(required=False)
     
 
 
@@ -424,69 +464,65 @@ class ResponseEnvelopeKafkaResponse(BaseSchema):
     
 
 
-class GCompany(BaseSchema):
+class DataTresholdDTO(BaseSchema):
     # Inventory swagger.json
 
     
-    _id = fields.Str(required=False)
+    min_price = fields.Float(required=False)
+    
+    safe_stock = fields.Int(required=False)
+    
+    period_threshold = fields.Int(required=False)
+    
+    period_threshold_type = fields.Str(required=False)
+    
+    period_type_list = fields.List(fields.Nested(GenericDTO, required=False), required=False)
+    
+
+
+class GenericDTO(BaseSchema):
+    # Inventory swagger.json
+
+    
+    text = fields.Str(required=False)
+    
+    value = fields.Dict(required=False)
+    
+
+
+class JobConfigDTO(BaseSchema):
+    # Inventory swagger.json
+
     
     integration = fields.Str(required=False)
     
-    level = fields.Str(required=False)
+    integration_data = fields.Dict(required=False)
     
-    uid = fields.Int(required=False)
+    company_name = fields.Str(required=False)
     
-    opted = fields.Boolean(required=False)
+    company_id = fields.Int(required=False)
     
-    permissions = fields.List(fields.Str(required=False), required=False)
+    task_details = fields.Nested(TaskDTO, required=False)
     
-    token = fields.Str(required=False)
+    threshold_details = fields.Nested(DataTresholdDTO, required=False)
     
-    name = fields.Str(required=False)
+    job_code = fields.Str(required=False)
     
-    stores = fields.List(fields.Nested(GStore, required=False), required=False)
+    alias = fields.Str(required=False)
     
 
 
-class GStore(BaseSchema):
+class TaskDTO(BaseSchema):
     # Inventory swagger.json
 
     
-    _id = fields.Str(required=False)
+    type = fields.Int(required=False)
     
-    integration = fields.Str(required=False)
-    
-    level = fields.Str(required=False)
-    
-    uid = fields.Int(required=False)
-    
-    opted = fields.Boolean(required=False)
-    
-    permissions = fields.List(fields.Str(required=False), required=False)
-    
-    token = fields.Str(required=False)
-    
-    code = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    data = fields.Nested(StoreData, required=False)
+    group_list = fields.List(fields.Nested(GenericDTO, required=False), required=False)
     
 
 
-class Metum(BaseSchema):
-    # Inventory swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    value = fields.Str(required=False)
-    
-
-
-class ResponseEnvelopeListSlingshotConfigurationDetail(BaseSchema):
+class ResponseEnvelopeString(BaseSchema):
     # Inventory swagger.json
 
     
@@ -504,47 +540,13 @@ class ResponseEnvelopeListSlingshotConfigurationDetail(BaseSchema):
     
     http_status = fields.Str(required=False)
     
-    items = fields.List(fields.Nested(SlingshotConfigurationDetail, required=False), required=False)
+    items = fields.Str(required=False)
     
-    payload = fields.List(fields.Nested(SlingshotConfigurationDetail, required=False), required=False)
+    payload = fields.Str(required=False)
     
     trace_id = fields.Str(required=False)
     
     page = fields.Nested(Page, required=False)
-    
-
-
-class SlingshotConfigurationDetail(BaseSchema):
-    # Inventory swagger.json
-
-    
-    integration = fields.Nested(SlingshotIntegration, required=False)
-    
-    companies = fields.List(fields.Nested(GCompany, required=False), required=False)
-    
-
-
-class SlingshotIntegration(BaseSchema):
-    # Inventory swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    description = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    slug = fields.Str(required=False)
-    
-    meta = fields.List(fields.Nested(Metum, required=False), required=False)
-    
-
-
-class StoreData(BaseSchema):
-    # Inventory swagger.json
-
-    
-    location_id = fields.Str(required=False)
     
 
 
@@ -938,9 +940,9 @@ class JobConfigRawDTO(BaseSchema):
     # Inventory swagger.json
 
     
-    company_name = fields.Str(required=False)
-    
     integration = fields.Str(required=False)
+    
+    company_name = fields.Str(required=False)
     
     company_id = fields.Int(required=False)
     
@@ -1067,6 +1069,8 @@ class PropBeanConfig(BaseSchema):
 
     
     required = fields.Boolean(required=False)
+    
+    mapping = fields.Dict(required=False)
     
     optional = fields.Boolean(required=False)
     
