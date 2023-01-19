@@ -7,13 +7,13 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .StoreDepartments import StoreDepartments
-
-from .CompanyStore import CompanyStore
-
 from .StoreManagerSerializer import StoreManagerSerializer
 
 from .SellerPhoneNumber import SellerPhoneNumber
+
+from .CompanyStore import CompanyStore
+
+from .StoreDepartments import StoreDepartments
 
 from .StoreAddressSerializer import StoreAddressSerializer
 
@@ -24,18 +24,18 @@ class AppStore(BaseSchema):
     # Catalog swagger.json
 
     
-    name = fields.Str(required=False)
-    
-    departments = fields.List(fields.Nested(StoreDepartments, required=False), required=False)
-    
-    company = fields.Nested(CompanyStore, required=False)
+    uid = fields.Int(required=False)
     
     manager = fields.Nested(StoreManagerSerializer, required=False)
     
     contact_numbers = fields.List(fields.Nested(SellerPhoneNumber, required=False), required=False)
     
+    company = fields.Nested(CompanyStore, required=False)
+    
+    departments = fields.List(fields.Nested(StoreDepartments, required=False), required=False)
+    
     address = fields.Nested(StoreAddressSerializer, required=False)
     
-    uid = fields.Int(required=False)
+    name = fields.Str(required=False)
     
 

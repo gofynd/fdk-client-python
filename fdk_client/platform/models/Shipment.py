@@ -11,11 +11,11 @@ from .LineItem import LineItem
 
 
 
+
+
+
+
 from .ProcessingDates import ProcessingDates
-
-
-
-
 
 
 class Shipment(BaseSchema):
@@ -28,10 +28,10 @@ class Shipment(BaseSchema):
     
     external_shipment_id = fields.Float(required=False)
     
-    processing_dates = fields.Nested(ProcessingDates, required=False)
+    meta = fields.Dict(required=False)
     
     location_id = fields.Int(required=False)
     
-    meta = fields.Dict(required=False)
+    processing_dates = fields.Nested(ProcessingDates, required=False)
     
 

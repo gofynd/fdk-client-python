@@ -20,7 +20,7 @@ class LadderOfferItem(BaseSchema):
     # Cart swagger.json
 
     
-    type = fields.Str(required=False)
+    margin = fields.Int(required=False)
     
     price = fields.Nested(LadderPrice, required=False)
     
@@ -28,6 +28,6 @@ class LadderOfferItem(BaseSchema):
     
     max_quantity = fields.Int(required=False)
     
-    margin = fields.Int(required=False)
+    type = fields.Str(required=False)
     
 

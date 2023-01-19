@@ -7,15 +7,15 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+from .EntityReasonData1 import EntityReasonData1
 
 
-
-class ShipmentStatusUpdateBody(BaseSchema):
+class EntitiesReasons1(BaseSchema):
     # Order swagger.json
 
     
-    force_transition = fields.Boolean(required=False)
+    filters = fields.List(fields.Dict(required=False), required=False)
     
-    statuses = fields.List(fields.Dict(required=False), required=False)
+    data = fields.Nested(EntityReasonData1, required=False)
     
 

@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class ShipmentStatusUpdate(BaseSchema):
+class EntityReasonData1(BaseSchema):
     # Order swagger.json
 
     
-    message = fields.List(fields.Str(required=False), required=False)
+    reason_id = fields.Int(required=False)
     
-    final_state = fields.Dict(required=False)
-    
-    status = fields.Boolean(required=False)
+    reason_text = fields.Str(required=False)
     
 

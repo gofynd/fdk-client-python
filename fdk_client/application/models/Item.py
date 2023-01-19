@@ -30,15 +30,15 @@ class Item(BaseSchema):
     
     slug_key = fields.Str(required=False)
     
-    image = fields.List(fields.Str(required=False), required=False)
-    
-    seller_identifier = fields.Str(required=False)
-    
-    id = fields.Float(required=False)
+    size = fields.Str(required=False)
     
     code = fields.Str(required=False)
     
-    size = fields.Str(required=False)
+    image = fields.List(fields.Str(required=False), required=False)
+    
+    id = fields.Float(required=False)
+    
+    seller_identifier = fields.Str(required=False)
     
     name = fields.Str(required=False)
     

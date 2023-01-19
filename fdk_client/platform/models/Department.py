@@ -20,9 +20,9 @@ class Department(BaseSchema):
     # Catalog swagger.json
 
     
-    uid = fields.Int(required=False)
-    
     slug = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
     
     name = fields.Str(required=False)
     

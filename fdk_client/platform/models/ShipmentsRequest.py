@@ -5,9 +5,9 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .ReasonsData import ReasonsData
-
 from .DataUpdates import DataUpdates
+
+from .ReasonsData import ReasonsData
 
 
 
@@ -18,9 +18,9 @@ class ShipmentsRequest(BaseSchema):
     # Order swagger.json
 
     
-    reasons = fields.Nested(ReasonsData, required=False)
-    
     data_updates = fields.Nested(DataUpdates, required=False)
+    
+    reasons = fields.Nested(ReasonsData, required=False)
     
     identifier = fields.Str(required=False)
     

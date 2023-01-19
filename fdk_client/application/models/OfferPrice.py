@@ -20,6 +20,8 @@ class OfferPrice(BaseSchema):
     # Cart swagger.json
 
     
+    marked = fields.Int(required=False)
+    
     currency_code = fields.Str(required=False)
     
     currency_symbol = fields.Str(required=False)
@@ -27,7 +29,5 @@ class OfferPrice(BaseSchema):
     effective = fields.Int(required=False)
     
     bulk_effective = fields.Float(required=False)
-    
-    marked = fields.Int(required=False)
     
 

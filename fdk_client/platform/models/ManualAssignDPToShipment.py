@@ -18,9 +18,9 @@ class ManualAssignDPToShipment(BaseSchema):
     # Order swagger.json
 
     
-    order_type = fields.Str(required=False)
-    
     qc_required = fields.Str(required=False)
+    
+    order_type = fields.Str(required=False)
     
     dp_id = fields.Int(required=False)
     

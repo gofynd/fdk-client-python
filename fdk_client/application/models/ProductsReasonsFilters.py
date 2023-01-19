@@ -18,8 +18,8 @@ class ProductsReasonsFilters(BaseSchema):
     
     line_number = fields.Int(required=False)
     
-    identifier = fields.Str(required=False)
-    
     quantity = fields.Int(required=False)
+    
+    identifier = fields.Str(required=False)
     
 
