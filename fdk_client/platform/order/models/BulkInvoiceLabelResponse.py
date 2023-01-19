@@ -33,18 +33,6 @@ class BulkInvoiceLabelResponse(BaseSchema):
     #  swagger.json
 
     
-    invoice = fields.Dict(required=False)
-    
-    data = fields.Dict(required=False)
-    
-    do_invoice_label_generated = fields.Boolean(required=False)
-    
-    invoice_status = fields.Str(required=False)
-    
-    company_id = fields.Str(required=False)
-    
-    batch_id = fields.Str(required=False)
-    
     label = fields.Dict(required=False)
     
     store_id = fields.Str(required=False)
@@ -52,4 +40,16 @@ class BulkInvoiceLabelResponse(BaseSchema):
     store_code = fields.Str(required=False)
     
     store_name = fields.Str(required=False)
+    
+    batch_id = fields.Str(required=False)
+    
+    company_id = fields.Str(required=False)
+    
+    do_invoice_label_generated = fields.Boolean(required=False)
+    
+    invoice = fields.Dict(required=False)
+    
+    data = fields.Dict(required=False)
+    
+    invoice_status = fields.Str(required=False)
     

@@ -9,21 +9,13 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .PaymentModeInfo import PaymentModeInfo
-
 
 
 from .ShipmentItemFulFillingStore import ShipmentItemFulFillingStore
 
 
 
-
-
-
-
-
-
-
+from .UserDataInfo import UserDataInfo
 
 
 
@@ -33,11 +25,11 @@ from .Prices import Prices
 
 
 
+
+
 from .ShipmentStatus import ShipmentStatus
 
 
-
-from .UserDataInfo import UserDataInfo
 
 
 
@@ -53,33 +45,35 @@ from .BagUnit import BagUnit
 
 
 
+from .PaymentModeInfo import PaymentModeInfo
+
+
+
+
+
+
+
 class ShipmentItem(BaseSchema):
     #  swagger.json
 
     
-    payment_mode_info = fields.Nested(PaymentModeInfo, required=False)
+    payment_methods = fields.Dict(required=False)
     
     fulfilling_store = fields.Nested(ShipmentItemFulFillingStore, required=False)
     
-    application = fields.Dict(required=False)
-    
-    fulfilling_centre = fields.Str(required=False)
-    
-    total_shipments_in_order = fields.Int(required=False)
-    
-    payment_methods = fields.Dict(required=False)
-    
-    created_at = fields.Str(required=False)
+    user = fields.Nested(UserDataInfo, required=False)
     
     prices = fields.Nested(Prices, required=False)
     
-    total_bags_count = fields.Int(required=False)
+    total_shipments_in_order = fields.Int(required=False)
+    
+    shipment_created_at = fields.Int(required=False)
     
     shipment_status = fields.Nested(ShipmentStatus, required=False)
     
-    user = fields.Nested(UserDataInfo, required=False)
-    
     id = fields.Str(required=False)
+    
+    application = fields.Dict(required=False)
     
     channel = fields.Dict(required=False)
     
@@ -87,5 +81,11 @@ class ShipmentItem(BaseSchema):
     
     bags = fields.List(fields.Nested(BagUnit, required=False), required=False)
     
-    shipment_created_at = fields.Int(required=False)
+    created_at = fields.Str(required=False)
+    
+    payment_mode_info = fields.Nested(PaymentModeInfo, required=False)
+    
+    fulfilling_centre = fields.Str(required=False)
+    
+    total_bags_count = fields.Int(required=False)
     

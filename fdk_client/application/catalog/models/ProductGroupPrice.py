@@ -25,11 +25,11 @@ class ProductGroupPrice(BaseSchema):
     
     max_effective = fields.Float(required=False)
     
+    currency = fields.Raw(required=False)
+    
     min_effective = fields.Float(required=False)
     
     min_marked = fields.Float(required=False)
-    
-    currency = fields.Raw(required=False)
     
     max_marked = fields.Float(required=False)
     
