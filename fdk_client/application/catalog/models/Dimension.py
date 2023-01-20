@@ -23,11 +23,11 @@ class Dimension(BaseSchema):
     #  swagger.json
 
     
+    width = fields.Float(required=False)
+    
     is_default = fields.Boolean(required=False)
     
     unit = fields.Str(required=False)
-    
-    width = fields.Float(required=False)
     
     height = fields.Float(required=False)
     

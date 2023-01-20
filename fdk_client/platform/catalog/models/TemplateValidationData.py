@@ -9,9 +9,9 @@ from ...PlatformModel import BaseSchema
 
 
 
+
+
 from .GlobalValidation import GlobalValidation
-
-
 
 
 
@@ -19,7 +19,7 @@ class TemplateValidationData(BaseSchema):
     #  swagger.json
 
     
-    global_validation = fields.Nested(GlobalValidation, required=False)
-    
     template_validation = fields.Dict(required=False)
+    
+    global_validation = fields.Nested(GlobalValidation, required=False)
     

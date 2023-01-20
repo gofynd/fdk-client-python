@@ -39,15 +39,11 @@ class InventoryJobPayload(BaseSchema):
     #  swagger.json
 
     
-    tags = fields.List(fields.Str(required=False), required=False)
-    
-    price_marked = fields.Float(required=False)
-    
-    trace_id = fields.Str(required=False)
+    price = fields.Float(required=False)
     
     item_dimensions_unit_of_measure = fields.Str(required=False)
     
-    total_quantity = fields.Int(required=False)
+    store_code = fields.Str(required=False)
     
     price_effective = fields.Float(required=False)
     
@@ -55,13 +51,17 @@ class InventoryJobPayload(BaseSchema):
     
     expiration_date = fields.Str(required=False)
     
-    price = fields.Float(required=False)
-    
     item_weight_unit_of_measure = fields.Str(required=False)
     
-    store_code = fields.Str(required=False)
+    price_marked = fields.Float(required=False)
+    
+    trace_id = fields.Str(required=False)
     
     quantity = fields.Int(required=False)
     
     currency = fields.Str(required=False)
+    
+    tags = fields.List(fields.Str(required=False), required=False)
+    
+    total_quantity = fields.Int(required=False)
     
