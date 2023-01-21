@@ -20,9 +20,9 @@ class ChargeCustomerRequest(BaseSchema):
     # Payment swagger.json
 
     
-    amount = fields.Int(required=False)
-    
     transaction_token = fields.Str(required=False)
+    
+    amount = fields.Int(required=False)
     
     verified = fields.Boolean(required=False)
     

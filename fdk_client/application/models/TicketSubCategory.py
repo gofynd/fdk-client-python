@@ -10,6 +10,8 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 class TicketSubCategory(BaseSchema):
     # Lead swagger.json
 
@@ -17,5 +19,7 @@ class TicketSubCategory(BaseSchema):
     key = fields.Str(required=False)
     
     display = fields.Str(required=False)
+    
+    sub_categories = fields.Nested(lambda: TicketSubCategory(exclude=('sub_categories')), required=False)
     
 

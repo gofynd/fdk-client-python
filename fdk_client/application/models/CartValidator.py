@@ -248,3 +248,8 @@ class CartValidator:
         page_size = fields.Int(required=False)
          
     
+    class checkoutCartV2(BaseSchema):
+        
+        buy_now = fields.Boolean(required=False)
+         
+    

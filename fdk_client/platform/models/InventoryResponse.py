@@ -36,17 +36,11 @@ class InventoryResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    price = fields.Float(required=False)
+    sellable_quantity = fields.Int(required=False)
     
-    price_effective = fields.Float(required=False)
+    uid = fields.Str(required=False)
     
-    size = fields.Str(required=False)
-    
-    store = fields.Dict(required=False)
-    
-    quantity = fields.Int(required=False)
-    
-    item_id = fields.Int(required=False)
+    currency = fields.Str(required=False)
     
     identifiers = fields.Dict(required=False)
     
@@ -54,12 +48,18 @@ class InventoryResponse(BaseSchema):
     
     seller_identifier = fields.Str(required=False)
     
-    uid = fields.Str(required=False)
+    quantity = fields.Int(required=False)
     
-    sellable_quantity = fields.Int(required=False)
+    store = fields.Dict(required=False)
     
-    currency = fields.Str(required=False)
+    item_id = fields.Int(required=False)
+    
+    size = fields.Str(required=False)
     
     price_transfer = fields.Float(required=False)
+    
+    price_effective = fields.Float(required=False)
+    
+    price = fields.Float(required=False)
     
 
