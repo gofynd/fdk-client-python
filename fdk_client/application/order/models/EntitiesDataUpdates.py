@@ -17,7 +17,7 @@ class EntitiesDataUpdates(BaseSchema):
     #  swagger.json
 
     
-    data = fields.Dict(required=False)
-    
     filters = fields.List(fields.Dict(required=False), required=False)
+    
+    data = fields.Dict(required=False)
     
