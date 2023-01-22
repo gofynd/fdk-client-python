@@ -17,7 +17,7 @@ class ErrorDetail(BaseSchema):
     #  swagger.json
 
     
-    success = fields.Boolean(required=False)
-    
     message = fields.Str(required=False)
+    
+    success = fields.Boolean(required=False)
     

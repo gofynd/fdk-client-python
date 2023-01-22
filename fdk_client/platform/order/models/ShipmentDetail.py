@@ -11,13 +11,13 @@ from ...PlatformModel import BaseSchema
 
 
 
+
+
+
+
+
+
 from .Meta import Meta
-
-
-
-
-
-
 
 
 
@@ -27,9 +27,7 @@ class ShipmentDetail(BaseSchema):
     #  swagger.json
 
     
-    id = fields.Int(required=False)
-    
-    meta = fields.Nested(Meta, required=False)
+    shipment_id = fields.Str(required=False)
     
     remarks = fields.Str(required=False)
     
@@ -37,5 +35,7 @@ class ShipmentDetail(BaseSchema):
     
     bag_list = fields.List(fields.Int(required=False), required=False)
     
-    shipment_id = fields.Str(required=False)
+    meta = fields.Nested(Meta, required=False)
+    
+    id = fields.Int(required=False)
     

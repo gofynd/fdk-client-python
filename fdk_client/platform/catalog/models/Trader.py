@@ -21,7 +21,7 @@ class Trader(BaseSchema):
     
     type = fields.Str(required=False)
     
-    name = fields.Raw(required=False)
-    
     address = fields.List(fields.Str(required=False), required=False)
+    
+    name = fields.Raw(required=False)
     
