@@ -11,9 +11,9 @@ from ...ApplicationModel import BaseSchema
 
 
 
-
-
 from .ActionQuery import ActionQuery
+
+
 
 
 
@@ -23,7 +23,7 @@ class ProductAction(BaseSchema):
     
     url = fields.Str(required=False)
     
-    type = fields.Str(required=False)
-    
     query = fields.Nested(ActionQuery, required=False)
+    
+    type = fields.Str(required=False)
     

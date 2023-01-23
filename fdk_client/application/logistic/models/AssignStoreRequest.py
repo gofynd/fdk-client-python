@@ -33,19 +33,19 @@ class AssignStoreRequest(BaseSchema):
     
     application_config = fields.Dict(required=False)
     
-    articles = fields.List(fields.Dict(required=False), required=False)
+    page_size = fields.Int(required=False)
     
     page_no = fields.Int(required=False)
     
-    page_size = fields.Int(required=False)
+    identifier = fields.Str(required=False)
     
-    to_pincode = fields.Str(required=False)
+    items = fields.Dict(required=False)
     
     extension_config = fields.Dict(required=False)
     
-    identifier = fields.Str(required=False)
+    articles = fields.List(fields.Dict(required=False), required=False)
     
     customer_details = fields.Dict(required=False)
     
-    items = fields.Dict(required=False)
+    to_pincode = fields.Str(required=False)
     

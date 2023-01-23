@@ -25,13 +25,13 @@ class ApplicationDepartment(BaseSchema):
     #  swagger.json
 
     
-    uid = fields.Int(required=False)
-    
-    app_id = fields.Str(required=False)
-    
     name = fields.Str(required=False)
     
     logo = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
+    
+    app_id = fields.Str(required=False)
     
     is_active = fields.Boolean(required=False)
     

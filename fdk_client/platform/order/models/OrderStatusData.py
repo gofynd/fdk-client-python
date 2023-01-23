@@ -13,9 +13,9 @@ from .OrderDetails import OrderDetails
 
 
 
-
-
 from .ShipmentDetail import ShipmentDetail
+
+
 
 
 
@@ -25,7 +25,7 @@ class OrderStatusData(BaseSchema):
     
     order_details = fields.Nested(OrderDetails, required=False)
     
-    errors = fields.List(fields.Str(required=False), required=False)
-    
     shipment_details = fields.List(fields.Nested(ShipmentDetail, required=False), required=False)
+    
+    errors = fields.List(fields.Str(required=False), required=False)
     

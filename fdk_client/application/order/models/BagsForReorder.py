@@ -29,13 +29,13 @@ class BagsForReorder(BaseSchema):
     
     article_assignment = fields.Nested(BagsForReorderArticleAssignment, required=False)
     
-    quantity = fields.Int(required=False)
+    seller_id = fields.Int(required=False)
+    
+    store_id = fields.Int(required=False)
     
     item_size = fields.Str(required=False)
     
-    seller_id = fields.Int(required=False)
-    
     item_id = fields.Int(required=False)
     
-    store_id = fields.Int(required=False)
+    quantity = fields.Int(required=False)
     

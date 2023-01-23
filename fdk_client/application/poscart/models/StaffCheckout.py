@@ -21,9 +21,9 @@ class StaffCheckout(BaseSchema):
     #  swagger.json
 
     
-    user = fields.Str(required=False)
-    
     _id = fields.Str(required=False)
+    
+    user = fields.Str(required=False)
     
     first_name = fields.Str(required=False)
     

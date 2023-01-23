@@ -17,7 +17,7 @@ class PincodeMetaResponse(BaseSchema):
     #  swagger.json
 
     
-    internal_zone_id = fields.Int(required=False)
-    
     zone = fields.Str(required=False)
+    
+    internal_zone_id = fields.Int(required=False)
     

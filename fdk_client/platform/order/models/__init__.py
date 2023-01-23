@@ -277,14 +277,6 @@ from .Click2CallResponse import Click2CallResponse
 
 from .Products import Products
 
-from .ProductsDataUpdatesFilters import ProductsDataUpdatesFilters
-
-from .ProductsDataUpdates import ProductsDataUpdates
-
-from .EntitiesDataUpdates import EntitiesDataUpdates
-
-from .DataUpdates import DataUpdates
-
 from .ProductsReasonsData import ProductsReasonsData
 
 from .ProductsReasonsFilters import ProductsReasonsFilters
@@ -296,6 +288,14 @@ from .EntityReasonData import EntityReasonData
 from .EntitiesReasons import EntitiesReasons
 
 from .ReasonsData import ReasonsData
+
+from .ProductsDataUpdatesFilters import ProductsDataUpdatesFilters
+
+from .ProductsDataUpdates import ProductsDataUpdates
+
+from .EntitiesDataUpdates import EntitiesDataUpdates
+
+from .DataUpdates import DataUpdates
 
 from .ShipmentsRequest import ShipmentsRequest
 
@@ -315,15 +315,15 @@ from .AffiliateAppConfigMeta import AffiliateAppConfigMeta
 
 from .AffiliateAppConfig import AffiliateAppConfig
 
-from .AffiliateInventoryPaymentConfig import AffiliateInventoryPaymentConfig
-
-from .AffiliateInventoryStoreConfig import AffiliateInventoryStoreConfig
-
-from .AffiliateInventoryLogisticsConfig import AffiliateInventoryLogisticsConfig
+from .AffiliateInventoryOrderConfig import AffiliateInventoryOrderConfig
 
 from .AffiliateInventoryArticleAssignmentConfig import AffiliateInventoryArticleAssignmentConfig
 
-from .AffiliateInventoryOrderConfig import AffiliateInventoryOrderConfig
+from .AffiliateInventoryLogisticsConfig import AffiliateInventoryLogisticsConfig
+
+from .AffiliateInventoryPaymentConfig import AffiliateInventoryPaymentConfig
+
+from .AffiliateInventoryStoreConfig import AffiliateInventoryStoreConfig
 
 from .AffiliateInventoryConfig import AffiliateInventoryConfig
 
@@ -333,21 +333,21 @@ from .Affiliate import Affiliate
 
 from .OrderConfig import OrderConfig
 
-from .OrderPriority import OrderPriority
+from .OrderUser import OrderUser
+
+from .UserData import UserData
 
 from .MarketPlacePdf import MarketPlacePdf
 
 from .AffiliateBag import AffiliateBag
 
-from .OrderUser import OrderUser
-
-from .UserData import UserData
+from .OrderPriority import OrderPriority
 
 from .ArticleDetails1 import ArticleDetails1
 
-from .ShipmentDetails import ShipmentDetails
-
 from .LocationDetails import LocationDetails
+
+from .ShipmentDetails import ShipmentDetails
 
 from .ShipmentConfig import ShipmentConfig
 
@@ -395,10 +395,6 @@ from .Tax import Tax
 
 from .Charge import Charge
 
-from .ShippingInfo import ShippingInfo
-
-from .BillingInfo import BillingInfo
-
 from .LineItem import LineItem
 
 from .ProcessingDates import ProcessingDates
@@ -409,7 +405,11 @@ from .PaymentMethod import PaymentMethod
 
 from .PaymentInfo import PaymentInfo
 
+from .ShippingInfo import ShippingInfo
+
 from .TaxInfo import TaxInfo
+
+from .BillingInfo import BillingInfo
 
 from .CreateOrderAPI import CreateOrderAPI
 

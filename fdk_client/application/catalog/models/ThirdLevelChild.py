@@ -11,17 +11,17 @@ from ...ApplicationModel import BaseSchema
 
 
 
+from .ImageUrls import ImageUrls
+
+
+
+
+
 
 
 
 
 from .ProductListingAction import ProductListingAction
-
-
-
-
-
-from .ImageUrls import ImageUrls
 
 
 
@@ -33,15 +33,15 @@ class ThirdLevelChild(BaseSchema):
     
     _custom_json = fields.Dict(required=False)
     
+    banners = fields.Nested(ImageUrls, required=False)
+    
     uid = fields.Int(required=False)
     
-    name = fields.Str(required=False)
-    
-    action = fields.Nested(ProductListingAction, required=False)
+    slug = fields.Str(required=False)
     
     childs = fields.List(fields.Dict(required=False), required=False)
     
-    banners = fields.Nested(ImageUrls, required=False)
+    action = fields.Nested(ProductListingAction, required=False)
     
-    slug = fields.Str(required=False)
+    name = fields.Str(required=False)
     

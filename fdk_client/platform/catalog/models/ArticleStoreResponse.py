@@ -13,8 +13,6 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .StoreIntegrationType import StoreIntegrationType
-
 
 
 
@@ -23,11 +21,11 @@ class ArticleStoreResponse(BaseSchema):
     #  swagger.json
 
     
-    store_type = fields.Str(required=False)
+    store_code = fields.Str(required=False)
     
     uid = fields.Int(required=False)
     
-    integration_type = fields.Nested(StoreIntegrationType, required=False)
+    store_type = fields.Str(required=False)
     
     name = fields.Str(required=False)
     

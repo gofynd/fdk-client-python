@@ -31,11 +31,11 @@ class Shipment(BaseSchema):
     
     external_shipment_id = fields.Float(required=False)
     
-    priority = fields.Int(required=False)
+    location_id = fields.Int(required=False)
     
     line_items = fields.List(fields.Nested(LineItem, required=False), required=False)
     
-    location_id = fields.Int(required=False)
+    priority = fields.Int(required=False)
     
     meta = fields.Dict(required=False)
     

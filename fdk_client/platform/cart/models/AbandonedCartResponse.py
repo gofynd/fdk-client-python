@@ -31,9 +31,9 @@ class AbandonedCartResponse(BaseSchema):
     
     result = fields.Dict(required=False)
     
-    success = fields.Boolean(required=False)
+    message = fields.Str(required=False)
     
     items = fields.List(fields.Nested(AbandonedCart, required=False), required=False)
     
-    message = fields.Str(required=False)
+    success = fields.Boolean(required=False)
     

@@ -11,13 +11,9 @@ from ...PlatformModel import BaseSchema
 
 
 
-
-
-class StoreIntegrationType(BaseSchema):
+class CompanyMeta1(BaseSchema):
     #  swagger.json
 
     
-    order = fields.Str(required=False)
-    
-    inventory = fields.Str(required=False)
+    id = fields.Int(required=False)
     
