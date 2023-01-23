@@ -7,15 +7,15 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
+from .GetZonesForZoneFromPincode import GetZonesForZoneFromPincode
 
 
 class GetZoneFromPincodeViewResponse(BaseSchema):
     # Serviceability swagger.json
 
     
-    zones = fields.List(fields.Str(required=False), required=False)
-    
     serviceability_type = fields.Str(required=False)
+    
+    zones = fields.List(fields.Nested(GetZonesForZoneFromPincode, required=False), required=False)
     
 

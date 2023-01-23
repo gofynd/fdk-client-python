@@ -26,9 +26,9 @@ class ConfigurationListingFilterConfig(BaseSchema):
     # Catalog swagger.json
 
     
-    priority = fields.Int(required=False)
+    is_active = fields.Boolean(required=False)
     
-    logo = fields.Str(required=False)
+    key = fields.Str(required=False)
     
     value_config = fields.Nested(ConfigurationListingFilterValue, required=False)
     
@@ -36,9 +36,9 @@ class ConfigurationListingFilterConfig(BaseSchema):
     
     display_name = fields.Str(required=False)
     
-    key = fields.Str(required=False)
+    logo = fields.Str(required=False)
     
-    is_active = fields.Boolean(required=False)
+    priority = fields.Int(required=False)
     
     name = fields.Str(required=False)
     
