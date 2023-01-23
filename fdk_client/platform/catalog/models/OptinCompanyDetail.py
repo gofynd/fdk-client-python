@@ -21,9 +21,9 @@ class OptinCompanyDetail(BaseSchema):
     #  swagger.json
 
     
-    company_type = fields.Str(required=False)
-    
     uid = fields.Int(required=False)
+    
+    company_type = fields.Str(required=False)
     
     business_type = fields.Str(required=False)
     

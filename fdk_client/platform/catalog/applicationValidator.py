@@ -330,17 +330,6 @@ from ..PlatformModel import BaseSchema
 class CatalogValidator:
     
     
-    class getSearchKeywords(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-         
-        
-    
     class updateSearchKeywords(BaseSchema):
         
         
@@ -353,6 +342,17 @@ class CatalogValidator:
         
     
     class deleteSearchKeywords(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
+    class getSearchKeywords(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -381,17 +381,6 @@ class CatalogValidator:
          
         
     
-    class getAutocompleteKeywordDetail(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-         
-        
-    
     class updateAutocompleteKeyword(BaseSchema):
         
         
@@ -404,6 +393,17 @@ class CatalogValidator:
         
     
     class deleteAutocompleteKeyword(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
+    class getAutocompleteKeywordDetail(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -432,7 +432,7 @@ class CatalogValidator:
          
         
     
-    class getAppProduct(BaseSchema):
+    class updateAppProduct(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -443,7 +443,7 @@ class CatalogValidator:
          
         
     
-    class updateAppProduct(BaseSchema):
+    class getAppProduct(BaseSchema):
         
         
         company_id = fields.Str(required=False)
