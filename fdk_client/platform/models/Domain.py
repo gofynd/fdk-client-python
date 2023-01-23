@@ -16,6 +16,8 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 class Domain(BaseSchema):
     # Common swagger.json
 
@@ -29,5 +31,7 @@ class Domain(BaseSchema):
     _id = fields.Str(required=False)
     
     name = fields.Str(required=False)
+    
+    is_predefined = fields.Boolean(required=False)
     
 

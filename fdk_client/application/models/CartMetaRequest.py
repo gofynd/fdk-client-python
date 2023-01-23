@@ -18,9 +18,9 @@ class CartMetaRequest(BaseSchema):
     # Cart swagger.json
 
     
-    gstin = fields.Str(required=False)
-    
     comment = fields.Str(required=False)
+    
+    gstin = fields.Str(required=False)
     
     checkout_mode = fields.Str(required=False)
     

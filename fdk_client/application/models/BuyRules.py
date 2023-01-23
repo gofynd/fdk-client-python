@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class RedirectionSchema(BaseSchema):
-    # Content swagger.json
+class BuyRules(BaseSchema):
+    # Cart swagger.json
 
     
-    redirect_from = fields.Str(required=False)
+    cart_conditions = fields.Dict(required=False)
     
-    redirect_to = fields.Str(required=False)
+    item_criteria = fields.Dict(required=False)
     
 

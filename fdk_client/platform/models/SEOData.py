@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class MOQ(BaseSchema):
+class SEOData(BaseSchema):
     # Catalog swagger.json
 
     
-    increment_unit = fields.Int(required=False)
+    description = fields.Raw(required=False)
     
-    minimum = fields.Int(required=False)
-    
-    maximum = fields.Int(required=False)
+    title = fields.Raw(required=False)
     
 
