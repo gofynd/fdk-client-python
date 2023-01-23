@@ -25,7 +25,7 @@ class ArticleStoreResponse(BaseSchema):
     
     uid = fields.Int(required=False)
     
-    store_type = fields.Str(required=False)
-    
     name = fields.Str(required=False)
+    
+    store_type = fields.Str(required=False)
     

@@ -29,7 +29,7 @@ class GetAutocompleteWordsData(BaseSchema):
     
     uid = fields.Str(required=False)
     
-    app_id = fields.Str(required=False)
-    
     _custom_json = fields.Dict(required=False)
+    
+    app_id = fields.Str(required=False)
     

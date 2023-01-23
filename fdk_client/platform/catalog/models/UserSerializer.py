@@ -23,8 +23,6 @@ class UserSerializer(BaseSchema):
     #  swagger.json
 
     
-    _id = fields.Str(required=False)
-    
     username = fields.Str(required=False)
     
     uid = fields.Str(required=False)
@@ -32,4 +30,6 @@ class UserSerializer(BaseSchema):
     user_id = fields.Str(required=False)
     
     contact = fields.Str(required=False)
+    
+    _id = fields.Str(required=False)
     
