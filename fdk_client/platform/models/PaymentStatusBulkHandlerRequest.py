@@ -8,14 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class CollectionImage(BaseSchema):
-    # Catalog swagger.json
+class PaymentStatusBulkHandlerRequest(BaseSchema):
+    # Payment swagger.json
 
     
-    url = fields.Str(required=False)
-    
-    aspect_ratio = fields.Str(required=False)
+    merchant_order_id = fields.List(fields.Str(required=False), required=False)
     
 

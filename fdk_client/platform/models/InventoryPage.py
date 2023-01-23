@@ -24,10 +24,10 @@ class InventoryPage(BaseSchema):
     
     next_id = fields.Str(required=False)
     
+    has_next = fields.Boolean(required=False)
+    
     type = fields.Str(required=False)
     
     has_previous = fields.Boolean(required=False)
-    
-    has_next = fields.Boolean(required=False)
     
 

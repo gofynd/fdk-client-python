@@ -153,3 +153,10 @@ class PaymentValidator:
         company_id = fields.Int(required=False)
          
     
+    class paymentStatusBulk(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+    
