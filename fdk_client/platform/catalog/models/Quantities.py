@@ -33,7 +33,7 @@ class Quantities(BaseSchema):
     
     order_committed = fields.Nested(QuantityBase, required=False)
     
-    sellable = fields.Nested(QuantityBase, required=False)
-    
     not_available = fields.Nested(QuantityBase, required=False)
+    
+    sellable = fields.Nested(QuantityBase, required=False)
     

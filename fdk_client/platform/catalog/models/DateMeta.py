@@ -23,9 +23,9 @@ class DateMeta(BaseSchema):
     
     modified_on = fields.Str(required=False)
     
+    added_on_store = fields.Str(required=False)
+    
     inventory_updated_on = fields.Str(required=False)
     
     created_on = fields.Str(required=False)
-    
-    added_on_store = fields.Str(required=False)
     

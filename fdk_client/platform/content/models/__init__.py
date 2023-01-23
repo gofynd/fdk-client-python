@@ -69,8 +69,6 @@ from .ActionPage import ActionPage
 
 from .NavigationReference import NavigationReference
 
-from .SubNavigationReference import SubNavigationReference
-
 from .LandingPage import LandingPage
 
 from .ConfigurationSchema import ConfigurationSchema
