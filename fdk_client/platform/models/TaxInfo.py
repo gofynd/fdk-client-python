@@ -14,8 +14,8 @@ class TaxInfo(BaseSchema):
     # Order swagger.json
 
     
-    gstin = fields.Str(required=False)
-    
     b2b_gstin_number = fields.Str(required=False)
+    
+    gstin = fields.Str(required=False)
     
 

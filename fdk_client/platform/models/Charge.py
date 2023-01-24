@@ -20,13 +20,13 @@ class Charge(BaseSchema):
     # Order swagger.json
 
     
-    type = fields.Str(required=False)
+    amount = fields.Dict(required=False)
     
     tax = fields.Nested(Tax, required=False)
     
     name = fields.Str(required=False)
     
-    amount = fields.Dict(required=False)
+    type = fields.Str(required=False)
     
     code = fields.Str(required=False)
     

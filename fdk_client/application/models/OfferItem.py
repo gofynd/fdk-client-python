@@ -11,18 +11,20 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
+
+
+
+
 from .OfferPrice import OfferPrice
-
-
-
-
-
-
 
 
 class OfferItem(BaseSchema):
     # Cart swagger.json
 
+    
+    total = fields.Float(required=False)
     
     auto_applied = fields.Boolean(required=False)
     
@@ -30,12 +32,10 @@ class OfferItem(BaseSchema):
     
     margin = fields.Int(required=False)
     
-    price = fields.Nested(OfferPrice, required=False)
-    
-    total = fields.Float(required=False)
+    type = fields.Str(required=False)
     
     best = fields.Boolean(required=False)
     
-    type = fields.Str(required=False)
+    price = fields.Nested(OfferPrice, required=False)
     
 

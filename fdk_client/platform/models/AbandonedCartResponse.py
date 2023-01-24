@@ -20,14 +20,14 @@ class AbandonedCartResponse(BaseSchema):
     # Cart swagger.json
 
     
-    result = fields.Dict(required=False)
+    success = fields.Boolean(required=False)
     
     items = fields.List(fields.Nested(AbandonedCart, required=False), required=False)
     
-    success = fields.Boolean(required=False)
+    message = fields.Str(required=False)
     
     page = fields.Nested(Page, required=False)
     
-    message = fields.Str(required=False)
+    result = fields.Dict(required=False)
     
 

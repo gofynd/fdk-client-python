@@ -18,8 +18,8 @@ class Products(BaseSchema):
     
     line_number = fields.Int(required=False)
     
-    quantity = fields.Int(required=False)
-    
     identifier = fields.Str(required=False)
+    
+    quantity = fields.Int(required=False)
     
 
