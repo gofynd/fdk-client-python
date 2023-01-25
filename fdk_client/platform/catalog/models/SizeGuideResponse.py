@@ -41,13 +41,11 @@ class SizeGuideResponse(BaseSchema):
     
     active = fields.Boolean(required=False)
     
-    tag = fields.Str(required=False)
+    created_on = fields.Str(required=False)
     
-    title = fields.Str(required=False)
+    created_by = fields.Dict(required=False)
     
-    company_id = fields.Int(required=False)
-    
-    modified_on = fields.Str(required=False)
+    name = fields.Str(required=False)
     
     subtitle = fields.Str(required=False)
     
@@ -55,13 +53,15 @@ class SizeGuideResponse(BaseSchema):
     
     brand_id = fields.Int(required=False)
     
+    company_id = fields.Int(required=False)
+    
     guide = fields.Dict(required=False)
+    
+    tag = fields.Str(required=False)
+    
+    title = fields.Str(required=False)
     
     modified_by = fields.Dict(required=False)
     
-    created_by = fields.Dict(required=False)
-    
-    name = fields.Str(required=False)
-    
-    created_on = fields.Str(required=False)
+    modified_on = fields.Str(required=False)
     

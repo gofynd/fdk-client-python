@@ -15,5 +15,5 @@ class FiltersResponse(BaseSchema):
     #  swagger.json
 
     
-    advance = fields.List(fields.Dict(required=False), required=False)
+    advance = fields.Raw(required=False)
     

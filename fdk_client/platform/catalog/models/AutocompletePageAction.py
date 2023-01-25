@@ -23,9 +23,9 @@ class AutocompletePageAction(BaseSchema):
     
     query = fields.Dict(required=False)
     
-    params = fields.Dict(required=False)
-    
     type = fields.Str(required=False)
     
     url = fields.Str(required=False)
+    
+    params = fields.Dict(required=False)
     

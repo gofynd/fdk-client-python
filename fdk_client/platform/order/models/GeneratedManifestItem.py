@@ -29,7 +29,7 @@ class GeneratedManifestItem(BaseSchema):
     #  swagger.json
 
     
-    status = fields.Str(required=False)
+    manifest_id = fields.Str(required=False)
     
     filters = fields.Nested(ManifestFilter, required=False)
     
@@ -37,9 +37,9 @@ class GeneratedManifestItem(BaseSchema):
     
     is_active = fields.Boolean(required=False)
     
-    manifest_id = fields.Str(required=False)
+    created_at = fields.Str(required=False)
+    
+    status = fields.Str(required=False)
     
     company_id = fields.Int(required=False)
-    
-    created_at = fields.Str(required=False)
     

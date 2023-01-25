@@ -19,9 +19,9 @@ class OrderDict(BaseSchema):
     #  swagger.json
 
     
-    fynd_order_id = fields.Str(required=False)
+    order_date = fields.Str(required=False)
     
     shipment_count = fields.Int(required=False)
     
-    order_date = fields.Str(required=False)
+    fynd_order_id = fields.Str(required=False)
     

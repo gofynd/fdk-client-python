@@ -11,7 +11,7 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .DiscountRules import DiscountRules
+
 
 
 
@@ -25,7 +25,7 @@ from .BuyRules import BuyRules
 
 
 
-
+from .DiscountRules import DiscountRules
 
 
 
@@ -33,19 +33,19 @@ class AppliedPromos(BaseSchema):
     #  swagger.json
 
     
+    amount = fields.Float(required=False)
+    
     promo_id = fields.Str(required=False)
-    
-    discount_rules = fields.List(fields.Nested(DiscountRules, required=False), required=False)
-    
-    mrp_promotion = fields.Boolean(required=False)
-    
-    buy_rules = fields.List(fields.Nested(BuyRules, required=False), required=False)
-    
-    article_quantity = fields.Int(required=False)
     
     promotion_name = fields.Str(required=False)
     
-    amount = fields.Float(required=False)
+    article_quantity = fields.Int(required=False)
+    
+    buy_rules = fields.List(fields.Nested(BuyRules, required=False), required=False)
+    
+    mrp_promotion = fields.Boolean(required=False)
     
     promotion_type = fields.Str(required=False)
+    
+    discount_rules = fields.List(fields.Nested(DiscountRules, required=False), required=False)
     

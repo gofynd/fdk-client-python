@@ -23,7 +23,7 @@ class ManifestDetailItem(BaseSchema):
     #  swagger.json
 
     
-    shipment_id = fields.Str(required=False)
+    item_qty = fields.Int(required=False)
     
     invoice_id = fields.Str(required=False)
     
@@ -31,5 +31,5 @@ class ManifestDetailItem(BaseSchema):
     
     order_id = fields.Str(required=False)
     
-    item_qty = fields.Int(required=False)
+    shipment_id = fields.Str(required=False)
     

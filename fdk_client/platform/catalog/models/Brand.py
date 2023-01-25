@@ -11,9 +11,9 @@ from ...PlatformModel import BaseSchema
 
 
 
+
+
 from .Logo import Logo
-
-
 
 
 
@@ -23,7 +23,7 @@ class Brand(BaseSchema):
     
     uid = fields.Int(required=False)
     
-    logo = fields.Nested(Logo, required=False)
-    
     name = fields.Str(required=False)
+    
+    logo = fields.Nested(Logo, required=False)
     

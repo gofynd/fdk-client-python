@@ -31,17 +31,17 @@ class AppConfigurationsSort(BaseSchema):
     
     priority = fields.Int(required=False)
     
-    app_id = fields.Str(required=False)
-    
-    is_active = fields.Boolean(required=False)
+    name = fields.Str(required=False)
     
     default_key = fields.Str(required=False)
     
-    is_default = fields.Boolean(required=False)
-    
-    key = fields.Str(required=False)
-    
     logo = fields.Str(required=False)
     
-    name = fields.Str(required=False)
+    app_id = fields.Str(required=False)
+    
+    is_default = fields.Boolean(required=False)
+    
+    is_active = fields.Boolean(required=False)
+    
+    key = fields.Str(required=False)
     
