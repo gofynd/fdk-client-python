@@ -5967,8 +5967,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import cardDetails
-        schema = cardDetails()
+        from .models import cardDetailsRequest
+        schema = cardDetailsRequest()
         schema.dump(schema.load(body))
         
 
