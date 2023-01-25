@@ -104,6 +104,10 @@ class PaymentValidator:
         
         pass 
     
+    class cardDetails(BaseSchema):
+        
+        pass 
+    
     class getActiveRefundTransferModes(BaseSchema):
         
         pass 
