@@ -7,31 +7,31 @@ from ..models.BaseSchema import BaseSchema
 
 class RewardsValidator:
     
-    class getPointsOnProduct(BaseSchema):
-        
-        pass 
-    
     class getOfferByName(BaseSchema):
         
         name = fields.Str(required=False)
          
     
-    class getOrderDiscount(BaseSchema):
+    class catalogueOrder(BaseSchema):
         
         pass 
     
-    class getUserPoints(BaseSchema):
-        
-        pass 
-    
-    class getUserPointsHistory(BaseSchema):
+    class getPointsHistory(BaseSchema):
         
         page_id = fields.Str(required=False)
         
         page_size = fields.Int(required=False)
          
     
-    class getUserReferralDetails(BaseSchema):
+    class getPoints(BaseSchema):
+        
+        pass 
+    
+    class referral(BaseSchema):
+        
+        pass 
+    
+    class orderDiscount(BaseSchema):
         
         pass 
     
