@@ -151,7 +151,7 @@ class CatalogValidator:
         id = fields.Str(required=False)
          
     
-    class updateAppProduct(BaseSchema):
+    class getAppProduct(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -160,7 +160,7 @@ class CatalogValidator:
         item_id = fields.Str(required=False)
          
     
-    class getAppProduct(BaseSchema):
+    class updateAppProduct(BaseSchema):
         
         company_id = fields.Str(required=False)
         

@@ -22,11 +22,11 @@ class _AssignStoreArticle(BaseSchema):
     
     article_assignment = fields.Nested(_ArticleAssignment, required=False)
     
+    group_id = fields.Str(required=False)
+    
     meta = fields.Dict(required=False)
     
     quantity = fields.Int(required=False)
-    
-    group_id = fields.Str(required=False)
     
     query = fields.Nested(_ArticleQuery, required=False)
     

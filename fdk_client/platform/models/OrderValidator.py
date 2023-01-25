@@ -56,6 +56,8 @@ class OrderValidator:
         
         channel_shipment_id = fields.Str(required=False)
         
+        shipment_id = fields.Str(required=False)
+        
         ordering_company_id = fields.Str(required=False)
         
         request_by_ext = fields.Str(required=False)

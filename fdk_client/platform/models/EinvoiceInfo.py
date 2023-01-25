@@ -14,8 +14,8 @@ class EinvoiceInfo(BaseSchema):
     # Order swagger.json
 
     
-    credit_note = fields.Nested(EInvoice, required=False)
-    
     invoice = fields.Nested(EInvoice, required=False)
+    
+    credit_note = fields.Nested(EInvoice, required=False)
     
 

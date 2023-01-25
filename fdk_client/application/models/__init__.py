@@ -1316,19 +1316,19 @@ from .PaymentStatusUpdateRequest import PaymentStatusUpdateRequest
     
 from .PaymentStatusUpdateResponse import PaymentStatusUpdateResponse
     
+from .AggregatorRoute import AggregatorRoute
+    
+from .PaymentFlow import PaymentFlow
+    
 from .PaymentModeLogo import PaymentModeLogo
     
-from .IntentAppErrorList import IntentAppErrorList
-    
 from .IntentApp import IntentApp
+    
+from .IntentAppErrorList import IntentAppErrorList
     
 from .PaymentModeList import PaymentModeList
     
 from .RootPaymentMode import RootPaymentMode
-    
-from .AggregatorRoute import AggregatorRoute
-    
-from .PaymentFlow import PaymentFlow
     
 from .PaymentOptionAndFlow import PaymentOptionAndFlow
     
@@ -1438,11 +1438,11 @@ from .KYCAddress import KYCAddress
     
 from .BusinessDetails import BusinessDetails
     
+from .UserPersonalInfoInDetails import UserPersonalInfoInDetails
+    
 from .MarketplaceInfo import MarketplaceInfo
     
 from .DeviceDetails import DeviceDetails
-    
-from .UserPersonalInfoInDetails import UserPersonalInfoInDetails
     
 from .CustomerOnboardingRequest import CustomerOnboardingRequest
     
@@ -1452,39 +1452,15 @@ from .CustomerOnboardingResponse import CustomerOnboardingResponse
     
 
     
-from .OrderStatuses import OrderStatuses
-    
-from .OrderFilters import OrderFilters
-    
-from .OrderPage import OrderPage
-    
-from .UserInfo import UserInfo
-    
 from .BagsForReorderArticleAssignment import BagsForReorderArticleAssignment
     
 from .BagsForReorder import BagsForReorder
     
-from .Prices import Prices
-    
-from .DeliveryAddress import DeliveryAddress
-    
-from .FulfillingStore import FulfillingStore
-    
-from .FulfillingCompany import FulfillingCompany
-    
-from .ShipmentPayment import ShipmentPayment
-    
-from .Invoice import Invoice
-    
-from .TimeStampData import TimeStampData
-    
-from .Promise import Promise
-    
-from .ShipmentStatus import ShipmentStatus
-    
 from .BreakupValues import BreakupValues
     
-from .ShipmentUserInfo import ShipmentUserInfo
+from .ItemBrand import ItemBrand
+    
+from .Item import Item
     
 from .AppliedPromos import AppliedPromos
     
@@ -1494,21 +1470,45 @@ from .FinancialBreakup import FinancialBreakup
     
 from .CurrentStatus import CurrentStatus
     
-from .ItemBrand import ItemBrand
-    
-from .Item import Item
+from .Prices import Prices
     
 from .Bags import Bags
-    
-from .ShipmentTotalDetails import ShipmentTotalDetails
     
 from .NestedTrackingDetails import NestedTrackingDetails
     
 from .TrackingDetails import TrackingDetails
     
+from .ShipmentUserInfo import ShipmentUserInfo
+    
+from .FulfillingStore import FulfillingStore
+    
+from .ShipmentStatus import ShipmentStatus
+    
+from .ShipmentTotalDetails import ShipmentTotalDetails
+    
+from .DeliveryAddress import DeliveryAddress
+    
+from .Invoice import Invoice
+    
+from .ShipmentPayment import ShipmentPayment
+    
+from .FulfillingCompany import FulfillingCompany
+    
+from .TimeStampData import TimeStampData
+    
+from .Promise import Promise
+    
 from .Shipments import Shipments
     
+from .UserInfo import UserInfo
+    
 from .OrderSchema import OrderSchema
+    
+from .OrderPage import OrderPage
+    
+from .OrderStatuses import OrderStatuses
+    
+from .OrderFilters import OrderFilters
     
 from .OrderList import OrderList
     
@@ -1532,9 +1532,9 @@ from .VerifyOtp import VerifyOtp
     
 from .VerifyOtpResponse import VerifyOtpResponse
     
-from .BagReasonMeta import BagReasonMeta
-    
 from .QuestionSet import QuestionSet
+    
+from .BagReasonMeta import BagReasonMeta
     
 from .BagReasons import BagReasons
     
@@ -1554,9 +1554,9 @@ from .EntitiesDataUpdates import EntitiesDataUpdates
     
 from .DataUpdates import DataUpdates
     
-from .ProductsReasonsFilters import ProductsReasonsFilters
-    
 from .ProductsReasonsData import ProductsReasonsData
+    
+from .ProductsReasonsFilters import ProductsReasonsFilters
     
 from .ProductsReasons import ProductsReasons
     
