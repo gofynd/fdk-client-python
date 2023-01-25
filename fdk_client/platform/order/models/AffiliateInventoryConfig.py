@@ -13,11 +13,7 @@ from .AffiliateInventoryLogisticsConfig import AffiliateInventoryLogisticsConfig
 
 
 
-from .AffiliateInventoryPaymentConfig import AffiliateInventoryPaymentConfig
-
-
-
-from .AffiliateInventoryStoreConfig import AffiliateInventoryStoreConfig
+from .AffiliateInventoryOrderConfig import AffiliateInventoryOrderConfig
 
 
 
@@ -25,7 +21,11 @@ from .AffiliateInventoryArticleAssignmentConfig import AffiliateInventoryArticle
 
 
 
-from .AffiliateInventoryOrderConfig import AffiliateInventoryOrderConfig
+from .AffiliateInventoryPaymentConfig import AffiliateInventoryPaymentConfig
+
+
+
+from .AffiliateInventoryStoreConfig import AffiliateInventoryStoreConfig
 
 
 
@@ -35,11 +35,11 @@ class AffiliateInventoryConfig(BaseSchema):
     
     logistics = fields.Nested(AffiliateInventoryLogisticsConfig, required=False)
     
-    payment = fields.Nested(AffiliateInventoryPaymentConfig, required=False)
-    
-    inventory = fields.Nested(AffiliateInventoryStoreConfig, required=False)
+    order = fields.Nested(AffiliateInventoryOrderConfig, required=False)
     
     article_assignment = fields.Nested(AffiliateInventoryArticleAssignmentConfig, required=False)
     
-    order = fields.Nested(AffiliateInventoryOrderConfig, required=False)
+    payment = fields.Nested(AffiliateInventoryPaymentConfig, required=False)
+    
+    inventory = fields.Nested(AffiliateInventoryStoreConfig, required=False)
     

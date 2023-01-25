@@ -127,6 +127,8 @@ from .OAuthRequestAppleSchemaProfile import OAuthRequestAppleSchemaProfile
 
 from .AuthSuccessUser import AuthSuccessUser
 
+from .SessionListResponseInfo import SessionListResponseInfo
+
 from .AuthSuccessUserDebug import AuthSuccessUserDebug
 
 from .AuthSuccessUserEmails import AuthSuccessUserEmails

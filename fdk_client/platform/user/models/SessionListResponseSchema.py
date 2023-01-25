@@ -9,11 +9,13 @@ from ...PlatformModel import BaseSchema
 
 
 
+from .SessionListResponseInfo import SessionListResponseInfo
+
 
 
 class SessionListResponseSchema(BaseSchema):
     #  swagger.json
 
     
-    items = fields.List(fields.Str(required=False), required=False)
+    items = fields.List(fields.Nested(SessionListResponseInfo, required=False), required=False)
     

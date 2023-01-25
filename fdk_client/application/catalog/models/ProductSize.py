@@ -13,9 +13,9 @@ from ...ApplicationModel import BaseSchema
 
 
 
-
-
 from .Dimension import Dimension
+
+
 
 
 
@@ -31,17 +31,17 @@ class ProductSize(BaseSchema):
     #  swagger.json
 
     
-    quantity = fields.Int(required=False)
+    display = fields.Str(required=False)
     
-    is_available = fields.Boolean(required=False)
-    
-    value = fields.Str(required=False)
+    seller_identifiers = fields.List(fields.Str(required=False), required=False)
     
     dimension = fields.Nested(Dimension, required=False)
     
-    display = fields.Str(required=False)
+    value = fields.Str(required=False)
+    
+    is_available = fields.Boolean(required=False)
     
     weight = fields.Nested(Weight, required=False)
     
-    seller_identifiers = fields.List(fields.Str(required=False), required=False)
+    quantity = fields.Int(required=False)
     

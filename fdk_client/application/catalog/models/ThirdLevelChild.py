@@ -9,9 +9,9 @@ from ...ApplicationModel import BaseSchema
 
 
 
-
-
 from .ImageUrls import ImageUrls
+
+
 
 
 
@@ -31,17 +31,17 @@ class ThirdLevelChild(BaseSchema):
     #  swagger.json
 
     
-    _custom_json = fields.Dict(required=False)
-    
     banners = fields.Nested(ImageUrls, required=False)
+    
+    name = fields.Str(required=False)
     
     uid = fields.Int(required=False)
     
-    slug = fields.Str(required=False)
-    
     childs = fields.List(fields.Dict(required=False), required=False)
+    
+    _custom_json = fields.Dict(required=False)
     
     action = fields.Nested(ProductListingAction, required=False)
     
-    name = fields.Str(required=False)
+    slug = fields.Str(required=False)
     

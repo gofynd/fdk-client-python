@@ -33,13 +33,13 @@ class CategoryItems(BaseSchema):
     
     banners = fields.Nested(CategoryBanner, required=False)
     
-    uid = fields.Int(required=False)
+    name = fields.Str(required=False)
     
-    slug = fields.Str(required=False)
+    uid = fields.Int(required=False)
     
     childs = fields.List(fields.Nested(Child, required=False), required=False)
     
     action = fields.Nested(ProductListingAction, required=False)
     
-    name = fields.Str(required=False)
+    slug = fields.Str(required=False)
     
