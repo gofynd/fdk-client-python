@@ -36,7 +36,17 @@ class StoreDetail(BaseSchema):
     # Catalog swagger.json
 
     
+    store_type = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    modified_on = fields.Str(required=False)
+    
+    store_code = fields.Str(required=False)
+    
     uid = fields.Int(required=False)
+    
+    address = fields.Dict(required=False)
     
     created_on = fields.Str(required=False)
     
@@ -46,20 +56,10 @@ class StoreDetail(BaseSchema):
     
     timing = fields.Dict(required=False)
     
-    store_type = fields.Str(required=False)
+    company_id = fields.Int(required=False)
     
     manager = fields.Dict(required=False)
     
-    store_code = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
     additional_contacts = fields.List(fields.Dict(required=False), required=False)
-    
-    modified_on = fields.Str(required=False)
-    
-    address = fields.Dict(required=False)
-    
-    company_id = fields.Int(required=False)
     
 
