@@ -14,8 +14,8 @@ class ProductsReasonsData1(BaseSchema):
     # Order swagger.json
 
     
-    reason_text = fields.Str(required=False)
-    
     reason_id = fields.Int(required=False)
+    
+    reason_text = fields.Str(required=False)
     
 

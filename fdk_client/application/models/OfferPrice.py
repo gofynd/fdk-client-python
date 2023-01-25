@@ -26,8 +26,8 @@ class OfferPrice(BaseSchema):
     
     effective = fields.Int(required=False)
     
-    bulk_effective = fields.Float(required=False)
-    
     currency_code = fields.Str(required=False)
+    
+    bulk_effective = fields.Float(required=False)
     
 

@@ -18,8 +18,8 @@ class Invoice(BaseSchema):
     
     invoice_url = fields.Str(required=False)
     
-    label_url = fields.Str(required=False)
-    
     updated_date = fields.Str(required=False)
+    
+    label_url = fields.Str(required=False)
     
 

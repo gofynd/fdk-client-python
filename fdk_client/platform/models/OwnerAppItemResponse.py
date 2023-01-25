@@ -9,9 +9,9 @@ from .MOQData import MOQData
 
 
 
+
+
 from .SEOData import SEOData
-
-
 
 
 
@@ -24,9 +24,9 @@ class OwnerAppItemResponse(BaseSchema):
     
     is_gift = fields.Boolean(required=False)
     
-    seo = fields.Nested(SEOData, required=False)
-    
     is_cod = fields.Boolean(required=False)
+    
+    seo = fields.Nested(SEOData, required=False)
     
     alt_text = fields.Dict(required=False)
     
