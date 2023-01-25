@@ -9,11 +9,11 @@ from ...ApplicationModel import BaseSchema
 
 
 
+
+
+
+
 from .AppliedFreeArticles import AppliedFreeArticles
-
-
-
-
 
 
 
@@ -29,11 +29,11 @@ class AppliedPromos(BaseSchema):
     #  swagger.json
 
     
-    applied_free_articles = fields.List(fields.Nested(AppliedFreeArticles, required=False), required=False)
-    
     promotion_type = fields.Str(required=False)
     
     promo_id = fields.Str(required=False)
+    
+    applied_free_articles = fields.List(fields.Nested(AppliedFreeArticles, required=False), required=False)
     
     amount = fields.Float(required=False)
     

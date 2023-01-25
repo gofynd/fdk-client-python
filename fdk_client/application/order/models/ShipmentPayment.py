@@ -31,9 +31,9 @@ class ShipmentPayment(BaseSchema):
     
     mop = fields.Str(required=False)
     
-    mode = fields.Str(required=False)
-    
     status = fields.Str(required=False)
+    
+    mode = fields.Str(required=False)
     
     display_name = fields.Str(required=False)
     
