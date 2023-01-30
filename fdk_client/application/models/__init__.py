@@ -226,6 +226,18 @@ from .ProductSizeSellersResponseV2 import ProductSizeSellersResponseV2
     
 
     
+from .CartCurrency import CartCurrency
+    
+from .DisplayBreakup import DisplayBreakup
+    
+from .LoyaltyPoints import LoyaltyPoints
+    
+from .RawBreakup import RawBreakup
+    
+from .CouponBreakup import CouponBreakup
+    
+from .CartBreakup import CartBreakup
+    
 from .PromiseFormatted import PromiseFormatted
     
 from .PromiseTimestamp import PromiseTimestamp
@@ -234,61 +246,49 @@ from .ShipmentPromise import ShipmentPromise
     
 from .PaymentSelectionLock import PaymentSelectionLock
     
-from .DisplayBreakup import DisplayBreakup
-    
-from .LoyaltyPoints import LoyaltyPoints
-    
-from .CouponBreakup import CouponBreakup
-    
-from .RawBreakup import RawBreakup
-    
-from .CartBreakup import CartBreakup
-    
-from .BuyRules import BuyRules
-    
-from .DiscountRulesApp import DiscountRulesApp
+from .CartProductIdentifer import CartProductIdentifer
     
 from .FreeGiftItem import FreeGiftItem
     
 from .AppliedFreeArticles import AppliedFreeArticles
     
-from .AppliedPromotion import AppliedPromotion
+from .BuyRules import BuyRules
     
-from .CouponDetails import CouponDetails
+from .DiscountRulesApp import DiscountRulesApp
+    
+from .AppliedPromotion import AppliedPromotion
     
 from .ProductPrice import ProductPrice
     
 from .ProductPriceInfo import ProductPriceInfo
     
-from .CartProductIdentifer import CartProductIdentifer
+from .BasePrice import BasePrice
     
-from .CategoryInfo import CategoryInfo
+from .ArticlePriceInfo import ArticlePriceInfo
     
-from .Tags import Tags
+from .BaseInfo import BaseInfo
+    
+from .ProductArticle import ProductArticle
+    
+from .PromoMeta import PromoMeta
+    
+from .CouponDetails import CouponDetails
+    
+from .ProductAvailability import ProductAvailability
     
 from .ProductImage import ProductImage
     
-from .BaseInfo import BaseInfo
+from .CategoryInfo import CategoryInfo
     
 from .ActionQuery import ActionQuery
     
 from .ProductAction import ProductAction
     
+from .Tags import Tags
+    
 from .CartProduct import CartProduct
     
-from .ProductAvailability import ProductAvailability
-    
-from .PromoMeta import PromoMeta
-    
-from .BasePrice import BasePrice
-    
-from .ArticlePriceInfo import ArticlePriceInfo
-    
-from .ProductArticle import ProductArticle
-    
 from .CartProductInfo import CartProductInfo
-    
-from .CartCurrency import CartCurrency
     
 from .CartDetailResponse import CartDetailResponse
     
@@ -314,11 +314,11 @@ from .GetCouponResponse import GetCouponResponse
     
 from .ApplyCouponRequest import ApplyCouponRequest
     
+from .OfferSeller import OfferSeller
+    
 from .OfferPrice import OfferPrice
     
 from .OfferItem import OfferItem
-    
-from .OfferSeller import OfferSeller
     
 from .BulkPriceOffer import BulkPriceOffer
     

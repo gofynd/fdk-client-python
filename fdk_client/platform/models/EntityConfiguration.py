@@ -9,9 +9,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .GetCatalogConfigurationDetailsSchemaListing import GetCatalogConfigurationDetailsSchemaListing
-
 from .GetCatalogConfigurationDetailsProduct import GetCatalogConfigurationDetailsProduct
+
+from .GetCatalogConfigurationDetailsSchemaListing import GetCatalogConfigurationDetailsSchemaListing
 
 
 
@@ -26,12 +26,12 @@ class EntityConfiguration(BaseSchema):
     
     id = fields.Str(required=False)
     
-    listing = fields.Nested(GetCatalogConfigurationDetailsSchemaListing, required=False)
-    
     product = fields.Nested(GetCatalogConfigurationDetailsProduct, required=False)
     
-    app_id = fields.Str(required=False)
+    listing = fields.Nested(GetCatalogConfigurationDetailsSchemaListing, required=False)
     
     config_type = fields.Str(required=False)
+    
+    app_id = fields.Str(required=False)
     
 
