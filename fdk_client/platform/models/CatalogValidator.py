@@ -7,7 +7,7 @@ from ..models.BaseSchema import BaseSchema
 
 class CatalogValidator:
     
-    class updateSearchKeywords(BaseSchema):
+    class deleteSearchKeywords(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -16,7 +16,7 @@ class CatalogValidator:
         id = fields.Str(required=False)
          
     
-    class deleteSearchKeywords(BaseSchema):
+    class updateSearchKeywords(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -48,7 +48,7 @@ class CatalogValidator:
         application_id = fields.Str(required=False)
          
     
-    class updateAutocompleteKeyword(BaseSchema):
+    class deleteAutocompleteKeyword(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -57,7 +57,7 @@ class CatalogValidator:
         id = fields.Str(required=False)
          
     
-    class deleteAutocompleteKeyword(BaseSchema):
+    class updateAutocompleteKeyword(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -206,7 +206,7 @@ class CatalogValidator:
         template_slug = fields.Str(required=False)
          
     
-    class updateGroupConfiguration(BaseSchema):
+    class deleteGroupConfiguration(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -217,7 +217,7 @@ class CatalogValidator:
         group_slug = fields.Str(required=False)
          
     
-    class deleteGroupConfiguration(BaseSchema):
+    class updateGroupConfiguration(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -252,7 +252,7 @@ class CatalogValidator:
         search = fields.Str(required=False)
          
     
-    class updateListingConfiguration(BaseSchema):
+    class deleteListingConfiguration(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -263,7 +263,7 @@ class CatalogValidator:
         config_id = fields.Str(required=False)
          
     
-    class deleteListingConfiguration(BaseSchema):
+    class updateListingConfiguration(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -371,7 +371,7 @@ class CatalogValidator:
         slug = fields.Str(required=False)
          
     
-    class updateCollection(BaseSchema):
+    class deleteCollection(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -380,7 +380,7 @@ class CatalogValidator:
         id = fields.Str(required=False)
          
     
-    class deleteCollection(BaseSchema):
+    class updateCollection(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -663,14 +663,21 @@ class CatalogValidator:
         filter = fields.Boolean(required=False)
          
     
-    class editProduct(BaseSchema):
+    class deleteProduct(BaseSchema):
         
         company_id = fields.Str(required=False)
         
         item_id = fields.Int(required=False)
          
     
-    class deleteProduct(BaseSchema):
+    class patchProduct(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        item_id = fields.Int(required=False)
+         
+    
+    class editProduct(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -686,6 +693,13 @@ class CatalogValidator:
         item_id = fields.Int(required=False)
         
         brand_uid = fields.Int(required=False)
+         
+    
+    class allSizes(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        item_id = fields.Int(required=False)
          
     
     class getProductValidation(BaseSchema):
@@ -884,6 +898,27 @@ class CatalogValidator:
         company_id = fields.Int(required=False)
          
     
+    class getInventories(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        item_id = fields.Str(required=False)
+        
+        size = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        q = fields.Str(required=False)
+        
+        sellable = fields.Boolean(required=False)
+        
+        store_ids = fields.List(fields.Int(required=False), required=False)
+        
+        size_identifier = fields.Str(required=False)
+         
+    
     class exportInventoryConfig(BaseSchema):
         
         company_id = fields.Str(required=False)
@@ -1078,11 +1113,6 @@ class CatalogValidator:
         page_size = fields.Int(required=False)
         
         page_id = fields.Str(required=False)
-         
-    
-    class getOptimalLocations(BaseSchema):
-        
-        company_id = fields.Str(required=False)
          
     
     class getAppLocations(BaseSchema):
