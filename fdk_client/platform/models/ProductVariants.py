@@ -24,7 +24,7 @@ class ProductVariants(BaseSchema):
     
     media = fields.List(fields.Nested(Media1, required=False), required=False)
     
-    name = fields.Str(required=False)
+    brand_uid = fields.Int(required=False)
     
     category_uid = fields.Int(required=False)
     
@@ -32,6 +32,6 @@ class ProductVariants(BaseSchema):
     
     item_code = fields.Str(required=False)
     
-    brand_uid = fields.Int(required=False)
+    name = fields.Str(required=False)
     
 

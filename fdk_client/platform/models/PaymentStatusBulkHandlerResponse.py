@@ -5,17 +5,29 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .PaymentStatusObject import PaymentStatusObject
 
 
-from .PaymentObjectListSerializer import PaymentObjectListSerializer
+
+
+
+
+
+
 
 
 class PaymentStatusBulkHandlerResponse(BaseSchema):
     # Payment swagger.json
 
     
-    merchant_order_id = fields.Str(required=False)
+    data = fields.List(fields.Nested(PaymentStatusObject, required=False), required=False)
     
-    payment_object_list = fields.List(fields.Nested(PaymentObjectListSerializer, required=False), required=False)
+    error = fields.Str(required=False)
+    
+    count = fields.Int(required=False)
+    
+    status = fields.Int(required=False)
+    
+    success = fields.Str(required=False)
     
 

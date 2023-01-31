@@ -7,27 +7,27 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-from .Page import Page
-
 from .AbandonedCart import AbandonedCart
 
 
+
+
+
+from .Page import Page
 
 
 class AbandonedCartResponse(BaseSchema):
     # Cart swagger.json
 
     
-    result = fields.Dict(required=False)
-    
     success = fields.Boolean(required=False)
-    
-    page = fields.Nested(Page, required=False)
     
     items = fields.List(fields.Nested(AbandonedCart, required=False), required=False)
     
+    result = fields.Dict(required=False)
+    
     message = fields.Str(required=False)
+    
+    page = fields.Nested(Page, required=False)
     
 
