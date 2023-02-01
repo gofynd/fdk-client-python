@@ -19,9 +19,9 @@ class TATErrorSchemaResponse(BaseSchema):
     #  swagger.json
 
     
-    type = fields.Str(required=False)
-    
     value = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
     
     message = fields.Str(required=False)
     

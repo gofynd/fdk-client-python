@@ -25,9 +25,9 @@ from .ProductSizeStores import ProductSizeStores
 
 
 
+
+
 from .ProductListingPrice import ProductListingPrice
-
-
 
 
 
@@ -41,11 +41,11 @@ class ProductSizes(BaseSchema):
     
     discount = fields.Str(required=False)
     
-    multi_size = fields.Boolean(required=False)
+    sellable = fields.Boolean(required=False)
     
     stores = fields.Nested(ProductSizeStores, required=False)
     
-    price = fields.Nested(ProductListingPrice, required=False)
+    multi_size = fields.Boolean(required=False)
     
-    sellable = fields.Boolean(required=False)
+    price = fields.Nested(ProductListingPrice, required=False)
     

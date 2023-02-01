@@ -19,9 +19,9 @@ class ZoneResponse(BaseSchema):
     #  swagger.json
 
     
-    status_code = fields.Int(required=False)
+    success = fields.Boolean(required=False)
     
     zone_id = fields.Str(required=False)
     
-    success = fields.Boolean(required=False)
+    status_code = fields.Int(required=False)
     

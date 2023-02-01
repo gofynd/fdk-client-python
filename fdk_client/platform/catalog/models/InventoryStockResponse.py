@@ -9,9 +9,9 @@ from ...PlatformModel import BaseSchema
 
 
 
-
-
 from .InventoryPage import InventoryPage
+
+
 
 
 
@@ -19,7 +19,7 @@ class InventoryStockResponse(BaseSchema):
     #  swagger.json
 
     
-    items = fields.List(fields.Dict(required=False), required=False)
-    
     page = fields.Nested(InventoryPage, required=False)
+    
+    items = fields.List(fields.Dict(required=False), required=False)
     

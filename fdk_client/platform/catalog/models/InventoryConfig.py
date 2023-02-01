@@ -9,9 +9,9 @@ from ...PlatformModel import BaseSchema
 
 
 
-
-
 from .FilerList import FilerList
+
+
 
 
 
@@ -19,7 +19,7 @@ class InventoryConfig(BaseSchema):
     #  swagger.json
 
     
-    multivalues = fields.Boolean(required=False)
-    
     data = fields.List(fields.Nested(FilerList, required=False), required=False)
+    
+    multivalues = fields.Boolean(required=False)
     

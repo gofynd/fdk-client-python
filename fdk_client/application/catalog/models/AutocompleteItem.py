@@ -9,9 +9,9 @@ from ...ApplicationModel import BaseSchema
 
 
 
+
+
 from .Media import Media
-
-
 
 
 
@@ -27,9 +27,9 @@ class AutocompleteItem(BaseSchema):
     #  swagger.json
 
     
-    logo = fields.Nested(Media, required=False)
-    
     display = fields.Str(required=False)
+    
+    logo = fields.Nested(Media, required=False)
     
     type = fields.Str(required=False)
     

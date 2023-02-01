@@ -23,11 +23,11 @@ class SubLane(BaseSchema):
     #  swagger.json
 
     
-    total_items = fields.Int(required=False)
-    
     actions = fields.List(fields.Dict(required=False), required=False)
     
     index = fields.Int(required=False)
+    
+    total_items = fields.Int(required=False)
     
     value = fields.Str(required=False)
     

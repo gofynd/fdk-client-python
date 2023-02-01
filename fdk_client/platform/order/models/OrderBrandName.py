@@ -25,9 +25,9 @@ class OrderBrandName(BaseSchema):
     #  swagger.json
 
     
-    logo = fields.Str(required=False)
-    
     id = fields.Int(required=False)
+    
+    logo = fields.Str(required=False)
     
     brand_name = fields.Str(required=False)
     

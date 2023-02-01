@@ -23,7 +23,7 @@ class HolidaySchemaSerializer(BaseSchema):
     
     date = fields.Nested(HolidayDateSerializer, required=False)
     
-    holiday_type = fields.Str(required=False)
-    
     title = fields.Str(required=False)
+    
+    holiday_type = fields.Str(required=False)
     

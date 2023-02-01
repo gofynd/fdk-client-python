@@ -23,7 +23,7 @@ class TATLocationDetailsRequest(BaseSchema):
     
     articles = fields.List(fields.Nested(TATArticlesRequest, required=False), required=False)
     
-    fulfillment_id = fields.Int(required=False)
-    
     from_pincode = fields.Str(required=False)
+    
+    fulfillment_id = fields.Int(required=False)
     

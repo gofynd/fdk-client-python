@@ -27,11 +27,11 @@ class PaymentMethod(BaseSchema):
     #  swagger.json
 
     
+    collect_by = fields.Str(required=False)
+    
     transaction_data = fields.Dict(required=False)
     
-    name = fields.Str(required=False)
-    
-    collect_by = fields.Str(required=False)
+    meta = fields.Dict(required=False)
     
     mode = fields.Str(required=False)
     
@@ -39,5 +39,5 @@ class PaymentMethod(BaseSchema):
     
     amount = fields.Float(required=False)
     
-    meta = fields.Dict(required=False)
+    name = fields.Str(required=False)
     
