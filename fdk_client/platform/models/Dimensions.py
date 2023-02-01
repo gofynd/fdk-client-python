@@ -20,7 +20,7 @@ class Dimensions(BaseSchema):
     # Order swagger.json
 
     
-    is_default = fields.Boolean(required=False)
+    width = fields.Int(required=False)
     
     unit = fields.Str(required=False)
     
@@ -28,6 +28,6 @@ class Dimensions(BaseSchema):
     
     height = fields.Int(required=False)
     
-    width = fields.Int(required=False)
+    is_default = fields.Boolean(required=False)
     
 

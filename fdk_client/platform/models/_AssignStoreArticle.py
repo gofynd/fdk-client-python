@@ -7,13 +7,13 @@ from ..models.BaseSchema import BaseSchema
 
 from ._ArticleAssignment import _ArticleAssignment
 
-
-
-
-
-
-
 from ._ArticleQuery import _ArticleQuery
+
+
+
+
+
+
 
 
 class _AssignStoreArticle(BaseSchema):
@@ -22,12 +22,12 @@ class _AssignStoreArticle(BaseSchema):
     
     article_assignment = fields.Nested(_ArticleAssignment, required=False)
     
-    meta = fields.Dict(required=False)
+    query = fields.Nested(_ArticleQuery, required=False)
     
     group_id = fields.Str(required=False)
     
-    quantity = fields.Int(required=False)
+    meta = fields.Dict(required=False)
     
-    query = fields.Nested(_ArticleQuery, required=False)
+    quantity = fields.Int(required=False)
     
 

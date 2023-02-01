@@ -32,22 +32,22 @@ class ActivePromosResponse(BaseSchema):
     
     subtitle = fields.Str(required=False)
     
-    is_hidden = fields.Boolean(required=False)
-    
-    type = fields.Str(required=False)
-    
-    entity_slug = fields.Str(required=False)
-    
-    example = fields.Str(required=False)
-    
     description = fields.Str(required=False)
     
     title = fields.Str(required=False)
+    
+    is_hidden = fields.Boolean(required=False)
+    
+    example = fields.Str(required=False)
     
     created_on = fields.Str(required=False)
     
     modified_on = fields.Str(required=False)
     
+    type = fields.Str(required=False)
+    
     entity_type = fields.Str(required=False)
+    
+    entity_slug = fields.Str(required=False)
     
 

@@ -14,8 +14,8 @@ class ShipmentItemFulFillingStore(BaseSchema):
     # Order swagger.json
 
     
-    id = fields.Str(required=False)
-    
     code = fields.Str(required=False)
+    
+    id = fields.Str(required=False)
     
 
