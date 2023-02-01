@@ -106,7 +106,10 @@ class PaymentValidator:
     
     class cardDetails(BaseSchema):
         
-        pass 
+        card_bin = fields.Str(required=False)
+        
+        aggregator = fields.Str(required=False)
+         
     
     class getActiveRefundTransferModes(BaseSchema):
         
