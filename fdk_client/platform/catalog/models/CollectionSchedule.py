@@ -31,7 +31,7 @@ class CollectionSchedule(BaseSchema):
     
     next_schedule = fields.List(fields.Nested(NextSchedule, required=False), required=False)
     
-    cron = fields.Str(required=False)
-    
     end = fields.Str(required=False)
+    
+    cron = fields.Str(required=False)
     

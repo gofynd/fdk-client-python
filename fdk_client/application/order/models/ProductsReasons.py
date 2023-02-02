@@ -9,11 +9,11 @@ from ...ApplicationModel import BaseSchema
 
 
 
-from .ProductsReasonsFilters import ProductsReasonsFilters
-
-
-
 from .ProductsReasonsData import ProductsReasonsData
+
+
+
+from .ProductsReasonsFilters import ProductsReasonsFilters
 
 
 
@@ -21,7 +21,7 @@ class ProductsReasons(BaseSchema):
     #  swagger.json
 
     
-    filters = fields.List(fields.Nested(ProductsReasonsFilters, required=False), required=False)
-    
     data = fields.Nested(ProductsReasonsData, required=False)
+    
+    filters = fields.List(fields.Nested(ProductsReasonsFilters, required=False), required=False)
     

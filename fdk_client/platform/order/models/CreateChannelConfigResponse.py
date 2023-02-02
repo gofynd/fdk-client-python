@@ -21,7 +21,7 @@ class CreateChannelConfigResponse(BaseSchema):
     
     is_upserted = fields.Boolean(required=False)
     
-    acknowledged = fields.Boolean(required=False)
-    
     is_inserted = fields.Boolean(required=False)
+    
+    acknowledged = fields.Boolean(required=False)
     

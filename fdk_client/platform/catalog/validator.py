@@ -186,10 +186,10 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
         
         
+    
+    
         
         
     
@@ -752,15 +752,6 @@ class CatalogValidator:
          
         
     
-    class editProduct(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        item_id = fields.Int(required=False)
-         
-        
-    
     class getProduct(BaseSchema):
         
         
@@ -774,7 +765,7 @@ class CatalogValidator:
          
         
     
-    class patchProduct(BaseSchema):
+    class deleteProduct(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -783,7 +774,16 @@ class CatalogValidator:
          
         
     
-    class deleteProduct(BaseSchema):
+    class editProduct(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        item_id = fields.Int(required=False)
+         
+        
+    
+    class patchProduct(BaseSchema):
         
         
         company_id = fields.Str(required=False)

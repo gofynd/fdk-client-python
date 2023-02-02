@@ -241,9 +241,9 @@ from .Entities import Entities
 
 from .UpdateShipmentLockPayload import UpdateShipmentLockPayload
 
-from .OriginalFilter import OriginalFilter
-
 from .Bags import Bags
+
+from .OriginalFilter import OriginalFilter
 
 from .CheckResponse import CheckResponse
 
@@ -291,13 +291,15 @@ from .StatuesResponse import StatuesResponse
 
 from .UpdateShipmentStatusResponseBody import UpdateShipmentStatusResponseBody
 
+from .AffiliateStoreIdMapping import AffiliateStoreIdMapping
+
 from .AffiliateInventoryArticleAssignmentConfig import AffiliateInventoryArticleAssignmentConfig
 
 from .AffiliateInventoryStoreConfig import AffiliateInventoryStoreConfig
 
-from .AffiliateInventoryPaymentConfig import AffiliateInventoryPaymentConfig
-
 from .AffiliateInventoryLogisticsConfig import AffiliateInventoryLogisticsConfig
+
+from .AffiliateInventoryPaymentConfig import AffiliateInventoryPaymentConfig
 
 from .AffiliateInventoryOrderConfig import AffiliateInventoryOrderConfig
 
@@ -311,29 +313,27 @@ from .AffiliateConfig import AffiliateConfig
 
 from .Affiliate import Affiliate
 
-from .AffiliateStoreIdMapping import AffiliateStoreIdMapping
-
 from .OrderConfig import OrderConfig
+
+from .MarketPlacePdf import MarketPlacePdf
+
+from .AffiliateBag import AffiliateBag
 
 from .OrderUser import OrderUser
 
-from .OrderPriority import OrderPriority
+from .UserData import UserData
 
 from .ArticleDetails1 import ArticleDetails1
 
-from .ShipmentDetails import ShipmentDetails
-
 from .LocationDetails import LocationDetails
+
+from .ShipmentDetails import ShipmentDetails
 
 from .ShipmentConfig import ShipmentConfig
 
 from .ShipmentData import ShipmentData
 
-from .UserData import UserData
-
-from .MarketPlacePdf import MarketPlacePdf
-
-from .AffiliateBag import AffiliateBag
+from .OrderPriority import OrderPriority
 
 from .OrderInfo import OrderInfo
 
@@ -373,10 +373,6 @@ from .ManualAssignDPToShipment import ManualAssignDPToShipment
 
 from .ManualAssignDPToShipmentResponse import ManualAssignDPToShipmentResponse
 
-from .PaymentMethod import PaymentMethod
-
-from .PaymentInfo import PaymentInfo
-
 from .Tax import Tax
 
 from .Charge import Charge
@@ -386,6 +382,10 @@ from .BillingInfo import BillingInfo
 from .ShippingInfo import ShippingInfo
 
 from .TaxInfo import TaxInfo
+
+from .PaymentMethod import PaymentMethod
+
+from .PaymentInfo import PaymentInfo
 
 from .ProcessingDates import ProcessingDates
 
@@ -407,9 +407,9 @@ from .CreateChannelConfig import CreateChannelConfig
 
 from .CreateChannelConfigData import CreateChannelConfigData
 
-from .CreateChannelConifgErrorResponse import CreateChannelConifgErrorResponse
-
 from .CreateChannelConfigResponse import CreateChannelConfigResponse
+
+from .CreateChannelConifgErrorResponse import CreateChannelConifgErrorResponse
 
 from .UploadConsent import UploadConsent
 
