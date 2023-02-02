@@ -24,10 +24,10 @@ class InventoryExportResponse(BaseSchema):
     
     seller_id = fields.Int(required=False)
     
+    task_id = fields.Str(required=False)
+    
     status = fields.Str(required=False)
     
     trigger_on = fields.Str(required=False)
-    
-    task_id = fields.Str(required=False)
     
 

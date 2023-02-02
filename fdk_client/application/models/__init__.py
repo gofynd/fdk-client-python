@@ -2,45 +2,45 @@
 
 
     
-from .Meta import Meta
+from .Price import Price
     
-from .Media import Media
+from .ProductListingPrice import ProductListingPrice
     
 from .ProductListingActionPage import ProductListingActionPage
     
 from .ProductListingAction import ProductListingAction
     
+from .Meta import Meta
+    
+from .Media import Media
+    
 from .ProductBrand import ProductBrand
+    
+from .CustomMetaFields import CustomMetaFields
+    
+from .ApplicationItemSEO import ApplicationItemSEO
+    
+from .ApplicationItemMOQ import ApplicationItemMOQ
     
 from .ProductDetailAttribute import ProductDetailAttribute
     
 from .ProductDetailGroupedAttribute import ProductDetailGroupedAttribute
     
-from .ApplicationItemMOQ import ApplicationItemMOQ
-    
-from .ApplicationItemSEO import ApplicationItemSEO
-    
-from .CustomMetaFields import CustomMetaFields
-    
-from .Price import Price
-    
-from .ProductListingPrice import ProductListingPrice
-    
 from .ProductDetail import ProductDetail
     
 from .ErrorResponse import ErrorResponse
+    
+from .ProductSizeStores import ProductSizeStores
+    
+from .ProductSize import ProductSize
+    
+from .SizeChartValues import SizeChartValues
     
 from .ColumnHeader import ColumnHeader
     
 from .ColumnHeaders import ColumnHeaders
     
-from .SizeChartValues import SizeChartValues
-    
 from .SizeChart import SizeChart
-    
-from .ProductSizeStores import ProductSizeStores
-    
-from .ProductSize import ProductSize
     
 from .ProductSizes import ProductSizes
     
@@ -60,13 +60,13 @@ from .ProductVariantResponse import ProductVariantResponse
     
 from .ProductVariantsResponse import ProductVariantsResponse
     
-from .ProductStockPrice import ProductStockPrice
-    
-from .Seller import Seller
-    
 from .StoreDetail import StoreDetail
     
 from .CompanyDetail import CompanyDetail
+    
+from .Seller import Seller
+    
+from .ProductStockPrice import ProductStockPrice
     
 from .ProductStockStatusItem import ProductStockStatusItem
     
@@ -98,8 +98,6 @@ from .BrandListingResponse import BrandListingResponse
     
 from .BrandDetailResponse import BrandDetailResponse
     
-from .DepartmentIdentifier import DepartmentIdentifier
-    
 from .ThirdLevelChild import ThirdLevelChild
     
 from .SecondLevelChild import SecondLevelChild
@@ -109,6 +107,8 @@ from .Child import Child
 from .CategoryItems import CategoryItems
     
 from .DepartmentCategoryTree import DepartmentCategoryTree
+    
+from .DepartmentIdentifier import DepartmentIdentifier
     
 from .CategoryListingResponse import CategoryListingResponse
     
@@ -124,9 +124,9 @@ from .AutocompleteItem import AutocompleteItem
     
 from .AutoCompleteResponse import AutoCompleteResponse
     
-from .CollectionListingFilterTag import CollectionListingFilterTag
-    
 from .CollectionListingFilterType import CollectionListingFilterType
+    
+from .CollectionListingFilterTag import CollectionListingFilterTag
     
 from .CollectionListingFilter import CollectionListingFilter
     
@@ -160,9 +160,9 @@ from .StoreAddressSerializer import StoreAddressSerializer
     
 from .SellerPhoneNumber import SellerPhoneNumber
     
-from .StoreManagerSerializer import StoreManagerSerializer
-    
 from .CompanyStore import CompanyStore
+    
+from .StoreManagerSerializer import StoreManagerSerializer
     
 from .AppStore import AppStore
     
@@ -174,45 +174,45 @@ from .StoreTiming import StoreTiming
     
 from .StoreDetails import StoreDetails
     
-from .UserDetail import UserDetail
-    
 from .ProductDetails import ProductDetails
-    
-from .ProductGroupPrice import ProductGroupPrice
     
 from .Size import Size
     
+from .ProductGroupPrice import ProductGroupPrice
+    
 from .ProductInGroup import ProductInGroup
+    
+from .UserDetail import UserDetail
     
 from .ProductGroupingModel import ProductGroupingModel
     
 from .ProductBundle import ProductBundle
     
-from .ArticleAssignmentV2 import ArticleAssignmentV2
-    
-from .ProductStockUnitPriceV2 import ProductStockUnitPriceV2
-    
-from .StoreV2 import StoreV2
-    
 from .DetailsSchemaV2 import DetailsSchemaV2
     
-from .SellerGroupAttributes import SellerGroupAttributes
-    
-from .ReturnConfigSchemaV2 import ReturnConfigSchemaV2
-    
-from .StrategyWiseListingSchemaV2 import StrategyWiseListingSchemaV2
-    
 from .MarketPlaceSttributesSchemaV2 import MarketPlaceSttributesSchemaV2
-    
-from .SellerV2 import SellerV2
-    
-from .ProductStockPriceV2 import ProductStockPriceV2
     
 from .ProductSetDistributionSizeV2 import ProductSetDistributionSizeV2
     
 from .ProductSetDistributionV2 import ProductSetDistributionV2
     
 from .ProductSetV2 import ProductSetV2
+    
+from .ProductStockPriceV2 import ProductStockPriceV2
+    
+from .StrategyWiseListingSchemaV2 import StrategyWiseListingSchemaV2
+    
+from .ArticleAssignmentV2 import ArticleAssignmentV2
+    
+from .SellerV2 import SellerV2
+    
+from .ProductStockUnitPriceV2 import ProductStockUnitPriceV2
+    
+from .ReturnConfigSchemaV2 import ReturnConfigSchemaV2
+    
+from .SellerGroupAttributes import SellerGroupAttributes
+    
+from .StoreV2 import StoreV2
     
 from .ProductSizePriceResponseV2 import ProductSizePriceResponseV2
     
@@ -222,39 +222,21 @@ from .ProductSizeSellersResponseV2 import ProductSizeSellersResponseV2
     
 
     
-from .PromiseFormatted import PromiseFormatted
-    
-from .PromiseTimestamp import PromiseTimestamp
-    
-from .ShipmentPromise import ShipmentPromise
-    
-from .CartCurrency import CartCurrency
-    
-from .PaymentSelectionLock import PaymentSelectionLock
-    
 from .CartProductIdentifer import CartProductIdentifer
     
-from .AppliedPromotion import AppliedPromotion
-    
-from .BaseInfo import BaseInfo
-    
-from .BasePrice import BasePrice
-    
-from .ArticlePriceInfo import ArticlePriceInfo
-    
-from .ProductArticle import ProductArticle
-    
 from .ProductAvailability import ProductAvailability
-    
-from .PromoMeta import PromoMeta
     
 from .ProductPrice import ProductPrice
     
 from .ProductPriceInfo import ProductPriceInfo
     
-from .ProductImage import ProductImage
+from .AppliedPromotion import AppliedPromotion
+    
+from .BaseInfo import BaseInfo
     
 from .CategoryInfo import CategoryInfo
+    
+from .ProductImage import ProductImage
     
 from .ActionQuery import ActionQuery
     
@@ -262,7 +244,19 @@ from .ProductAction import ProductAction
     
 from .CartProduct import CartProduct
     
+from .BasePrice import BasePrice
+    
+from .ArticlePriceInfo import ArticlePriceInfo
+    
+from .ProductArticle import ProductArticle
+    
+from .PromoMeta import PromoMeta
+    
 from .CartProductInfo import CartProductInfo
+    
+from .PaymentSelectionLock import PaymentSelectionLock
+    
+from .LoyaltyPoints import LoyaltyPoints
     
 from .RawBreakup import RawBreakup
     
@@ -270,9 +264,15 @@ from .CouponBreakup import CouponBreakup
     
 from .DisplayBreakup import DisplayBreakup
     
-from .LoyaltyPoints import LoyaltyPoints
-    
 from .CartBreakup import CartBreakup
+    
+from .CartCurrency import CartCurrency
+    
+from .PromiseFormatted import PromiseFormatted
+    
+from .PromiseTimestamp import PromiseTimestamp
+    
+from .ShipmentPromise import ShipmentPromise
     
 from .CartDetailResponse import CartDetailResponse
     
@@ -336,9 +336,9 @@ from .ShipmentResponse import ShipmentResponse
     
 from .CartShipmentsResponse import CartShipmentsResponse
     
-from .StaffCheckout import StaffCheckout
-    
 from .CustomerDetails import CustomerDetails
+    
+from .StaffCheckout import StaffCheckout
     
 from .CartCheckoutDetailRequest import CartCheckoutDetailRequest
     
@@ -779,6 +779,8 @@ from .Facebook import Facebook
 from .Accountkit import Accountkit
     
 from .Google import Google
+    
+from .SessionExpiry import SessionExpiry
     
 from .UpdateUserRequestSchema import UpdateUserRequestSchema
     
@@ -1428,15 +1430,15 @@ from .CreditDetail import CreditDetail
     
 from .CheckCreditResponse import CheckCreditResponse
     
-from .MarketplaceInfo import MarketplaceInfo
-    
-from .DeviceDetails import DeviceDetails
-    
 from .KYCAddress import KYCAddress
+    
+from .BusinessDetails import BusinessDetails
     
 from .UserPersonalInfoInDetails import UserPersonalInfoInDetails
     
-from .BusinessDetails import BusinessDetails
+from .MarketplaceInfo import MarketplaceInfo
+    
+from .DeviceDetails import DeviceDetails
     
 from .CustomerOnboardingRequest import CustomerOnboardingRequest
     

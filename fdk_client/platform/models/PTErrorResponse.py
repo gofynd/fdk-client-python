@@ -24,10 +24,10 @@ class PTErrorResponse(BaseSchema):
     
     status = fields.Int(required=False)
     
-    code = fields.Str(required=False)
+    errors = fields.Dict(required=False)
     
     meta = fields.Dict(required=False)
     
-    errors = fields.Dict(required=False)
+    code = fields.Str(required=False)
     
 
