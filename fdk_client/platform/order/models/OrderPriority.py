@@ -21,7 +21,7 @@ class OrderPriority(BaseSchema):
     
     fulfilment_priority = fields.Int(required=False)
     
-    affiliate_priority_code = fields.Str(required=False)
-    
     fulfilment_priority_text = fields.Str(required=False)
+    
+    affiliate_priority_code = fields.Str(required=False)
     

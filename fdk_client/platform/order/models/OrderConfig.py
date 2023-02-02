@@ -31,9 +31,9 @@ class OrderConfig(BaseSchema):
     
     create_user = fields.Boolean(required=False)
     
-    article_lookup = fields.Str(required=False)
-    
     bag_end_state = fields.Str(required=False)
+    
+    article_lookup = fields.Str(required=False)
     
     affiliate_store_id_mapping = fields.List(fields.Nested(AffiliateStoreIdMapping, required=False), required=False)
     

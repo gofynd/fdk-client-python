@@ -21,7 +21,7 @@ class Media3(BaseSchema):
     
     meta = fields.Dict(required=False)
     
-    url = fields.Str(required=False)
-    
     type = fields.Str(required=False)
+    
+    url = fields.Str(required=False)
     
