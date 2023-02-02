@@ -9,7 +9,7 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .ProductPublish1 import ProductPublish1
+from .ProductPublish import ProductPublish
 
 
 
@@ -31,7 +31,7 @@ from .ProductPublish1 import ProductPublish1
 
 
 
-from .TeaserTag1 import TeaserTag1
+from .TeaserTag import TeaserTag
 
 
 
@@ -59,7 +59,7 @@ from .TeaserTag1 import TeaserTag1
 
 
 
-from .ReturnConfig1 import ReturnConfig1
+from .ReturnConfig import ReturnConfig
 
 
 
@@ -67,7 +67,7 @@ from .NetQuantity import NetQuantity
 
 
 
-from .Trader1 import Trader1
+from .Trader import Trader
 
 
 
@@ -79,7 +79,9 @@ from .Trader1 import Trader1
 
 
 
-from .TaxIdentifier1 import TaxIdentifier1
+
+
+from .TaxIdentifier import TaxIdentifier
 
 
 
@@ -91,7 +93,9 @@ from .TaxIdentifier1 import TaxIdentifier1
 
 
 
-from .Media3 import Media3
+
+
+from .Media1 import Media1
 
 
 
@@ -99,15 +103,15 @@ from .Media3 import Media3
 
 
 
-from .CustomOrder1 import CustomOrder1
+from .CustomOrder import CustomOrder
 
 
 
-class ProductPatch(BaseSchema):
+class ProductCreateUpdateV2(BaseSchema):
     #  swagger.json
 
     
-    product_publish = fields.Nested(ProductPublish1, required=False)
+    product_publish = fields.Nested(ProductPublish, required=False)
     
     departments = fields.List(fields.Int(required=False), required=False)
     
@@ -127,7 +131,7 @@ class ProductPatch(BaseSchema):
     
     _custom_json = fields.Dict(required=False)
     
-    teaser_tag = fields.Nested(TeaserTag1, required=False)
+    teaser_tag = fields.Nested(TeaserTag, required=False)
     
     item_type = fields.Str(required=False)
     
@@ -143,7 +147,7 @@ class ProductPatch(BaseSchema):
     
     country_of_origin = fields.Str(required=False)
     
-    name = fields.Str(required=False)
+    name = fields.Raw(required=False)
     
     slug = fields.Str(required=False)
     
@@ -153,21 +157,23 @@ class ProductPatch(BaseSchema):
     
     no_of_boxes = fields.Int(required=False)
     
-    return_config = fields.Nested(ReturnConfig1, required=False)
+    return_config = fields.Nested(ReturnConfig, required=False)
     
     net_quantity = fields.Nested(NetQuantity, required=False)
     
-    trader = fields.List(fields.Nested(Trader1, required=False), required=False)
+    trader = fields.List(fields.Nested(Trader, required=False), required=False)
     
     currency = fields.Str(required=False)
     
     item_code = fields.Raw(required=False)
     
+    variant_group = fields.Dict(required=False)
+    
     is_image_less_product = fields.Boolean(required=False)
     
     company_id = fields.Int(required=False)
     
-    tax_identifier = fields.Nested(TaxIdentifier1, required=False)
+    tax_identifier = fields.Nested(TaxIdentifier, required=False)
     
     description = fields.Str(required=False)
     
@@ -177,11 +183,13 @@ class ProductPatch(BaseSchema):
     
     highlights = fields.List(fields.Str(required=False), required=False)
     
-    media = fields.List(fields.Nested(Media3, required=False), required=False)
+    attributes = fields.Dict(required=False)
+    
+    media = fields.List(fields.Nested(Media1, required=False), required=False)
     
     is_set = fields.Boolean(required=False)
     
     requester = fields.Str(required=False)
     
-    custom_order = fields.Nested(CustomOrder1, required=False)
+    custom_order = fields.Nested(CustomOrder, required=False)
     

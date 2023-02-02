@@ -29,11 +29,11 @@ class QuantitiesArticle(BaseSchema):
     #  swagger.json
 
     
-    order_committed = fields.Nested(Quantity, required=False)
+    sellable = fields.Nested(Quantity, required=False)
     
     not_available = fields.Nested(Quantity, required=False)
     
     damaged = fields.Nested(Quantity, required=False)
     
-    sellable = fields.Nested(Quantity, required=False)
+    order_committed = fields.Nested(Quantity, required=False)
     

@@ -27,6 +27,8 @@ class PriceMeta(BaseSchema):
     
     marked = fields.Float(required=False)
     
+    tp_notes = fields.Dict(required=False)
+    
     effective = fields.Float(required=False)
     
     currency = fields.Str(required=False)
@@ -34,6 +36,4 @@ class PriceMeta(BaseSchema):
     transfer = fields.Float(required=False)
     
     updated_at = fields.Str(required=False)
-    
-    tp_notes = fields.Dict(required=False)
     

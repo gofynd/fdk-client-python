@@ -19,9 +19,9 @@ class ApplicationItemMOQ(BaseSchema):
     #  swagger.json
 
     
-    minimum = fields.Int(required=False)
-    
     increment_unit = fields.Int(required=False)
+    
+    minimum = fields.Int(required=False)
     
     maximum = fields.Int(required=False)
     

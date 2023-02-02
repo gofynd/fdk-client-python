@@ -9,7 +9,7 @@ from ...ApplicationModel import BaseSchema
 
 
 
-
+from .Media import Media
 
 
 
@@ -19,7 +19,7 @@ from .ProductListingAction import ProductListingAction
 
 
 
-from .Media import Media
+
 
 
 
@@ -27,13 +27,13 @@ class AutocompleteItem(BaseSchema):
     #  swagger.json
 
     
-    _custom_json = fields.Dict(required=False)
-    
-    type = fields.Str(required=False)
+    logo = fields.Nested(Media, required=False)
     
     action = fields.Nested(ProductListingAction, required=False)
     
     display = fields.Str(required=False)
     
-    logo = fields.Nested(Media, required=False)
+    _custom_json = fields.Dict(required=False)
+    
+    type = fields.Str(required=False)
     

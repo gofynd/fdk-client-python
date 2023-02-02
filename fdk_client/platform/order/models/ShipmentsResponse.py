@@ -29,19 +29,19 @@ class ShipmentsResponse(BaseSchema):
     #  swagger.json
 
     
-    code = fields.Str(required=False)
+    status = fields.Int(required=False)
     
     exception = fields.Str(required=False)
     
-    meta = fields.Dict(required=False)
-    
-    final_state = fields.Dict(required=False)
+    message = fields.Str(required=False)
     
     stack_trace = fields.Str(required=False)
     
     identifier = fields.Str(required=False)
     
-    status = fields.Int(required=False)
+    code = fields.Str(required=False)
     
-    message = fields.Str(required=False)
+    meta = fields.Dict(required=False)
+    
+    final_state = fields.Dict(required=False)
     

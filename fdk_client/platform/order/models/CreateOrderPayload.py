@@ -9,13 +9,13 @@ from ...PlatformModel import BaseSchema
 
 
 
+from .OrderInfo import OrderInfo
+
+
+
 from .OrderConfig import OrderConfig
 
 
-
-
-
-from .OrderInfo import OrderInfo
 
 
 
@@ -23,9 +23,9 @@ class CreateOrderPayload(BaseSchema):
     #  swagger.json
 
     
+    order_info = fields.Nested(OrderInfo, required=False)
+    
     order_config = fields.Nested(OrderConfig, required=False)
     
     affiliate_id = fields.Str(required=False)
-    
-    order_info = fields.Nested(OrderInfo, required=False)
     

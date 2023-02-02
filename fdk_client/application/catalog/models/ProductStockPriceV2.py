@@ -21,7 +21,7 @@ class ProductStockPriceV2(BaseSchema):
     
     effective = fields.Float(required=False)
     
-    marked = fields.Float(required=False)
-    
     currency = fields.Str(required=False)
+    
+    marked = fields.Float(required=False)
     
