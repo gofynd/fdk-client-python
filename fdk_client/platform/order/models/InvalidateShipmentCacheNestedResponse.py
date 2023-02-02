@@ -23,9 +23,9 @@ class InvalidateShipmentCacheNestedResponse(BaseSchema):
     
     shipment_id = fields.Str(required=False)
     
-    message = fields.Str(required=False)
-    
     status = fields.Int(required=False)
     
     error = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
     

@@ -33,11 +33,11 @@ class PaymentMethod(BaseSchema):
     
     meta = fields.Dict(required=False)
     
-    mode = fields.Str(required=False)
+    name = fields.Str(required=False)
     
     refund_by = fields.Str(required=False)
     
     amount = fields.Float(required=False)
     
-    name = fields.Str(required=False)
+    mode = fields.Str(required=False)
     

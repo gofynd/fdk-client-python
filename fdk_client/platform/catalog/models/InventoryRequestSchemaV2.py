@@ -11,9 +11,9 @@ from ...PlatformModel import BaseSchema
 
 
 
+
+
 from .InventoryPayload import InventoryPayload
-
-
 
 
 
@@ -23,7 +23,7 @@ class InventoryRequestSchemaV2(BaseSchema):
     
     meta = fields.Dict(required=False)
     
-    payload = fields.List(fields.Nested(InventoryPayload, required=False), required=False)
-    
     company_id = fields.Int(required=False)
+    
+    payload = fields.List(fields.Nested(InventoryPayload, required=False), required=False)
     

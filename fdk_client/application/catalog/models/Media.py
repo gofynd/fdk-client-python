@@ -23,11 +23,11 @@ class Media(BaseSchema):
     #  swagger.json
 
     
+    type = fields.Str(required=False)
+    
     alt = fields.Str(required=False)
     
     url = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
     
     meta = fields.Nested(Meta, required=False)
     

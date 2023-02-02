@@ -9,39 +9,15 @@ from ...PlatformModel import BaseSchema
 
 
 
-
-
-
-
-from .LocationManagerSerializer import LocationManagerSerializer
-
-
-
-
-
-
-
 from .UserSerializer import UserSerializer
 
 
 
-
-
-from .SellerPhoneNumber import SellerPhoneNumber
-
-
-
-from .GetCompanySerializer import GetCompanySerializer
+from .GetAddressSerializer import GetAddressSerializer
 
 
 
 from .UserSerializer import UserSerializer
-
-
-
-from .InvoiceDetailsSerializer import InvoiceDetailsSerializer
-
-
 
 
 
@@ -51,13 +27,35 @@ from .ProductReturnConfigSerializer import ProductReturnConfigSerializer
 
 
 
-from .GetAddressSerializer import GetAddressSerializer
+
+
+from .InvoiceDetailsSerializer import InvoiceDetailsSerializer
+
+
+
+
+
+from .SellerPhoneNumber import SellerPhoneNumber
+
+
+
+
+
+from .UserSerializer import UserSerializer
 
 
 
 from .LocationDayWiseSerializer import LocationDayWiseSerializer
 
 
+
+from .GetCompanySerializer import GetCompanySerializer
+
+
+
+
+
+from .LocationManagerSerializer import LocationManagerSerializer
 
 
 
@@ -69,7 +67,9 @@ from .Document import Document
 
 
 
-from .UserSerializer import UserSerializer
+
+
+
 
 
 
@@ -87,53 +87,53 @@ class GetLocationSerializer(BaseSchema):
     #  swagger.json
 
     
-    uid = fields.Int(required=False)
-    
-    store_type = fields.Str(required=False)
-    
-    manager = fields.Nested(LocationManagerSerializer, required=False)
-    
-    display_name = fields.Str(required=False)
-    
-    notification_emails = fields.List(fields.Str(required=False), required=False)
-    
     modified_by = fields.Nested(UserSerializer, required=False)
-    
-    warnings = fields.Dict(required=False)
-    
-    contact_numbers = fields.List(fields.Nested(SellerPhoneNumber, required=False), required=False)
-    
-    company = fields.Nested(GetCompanySerializer, required=False)
-    
-    verified_by = fields.Nested(UserSerializer, required=False)
-    
-    gst_credentials = fields.Nested(InvoiceDetailsSerializer, required=False)
-    
-    created_on = fields.Str(required=False)
-    
-    phone_number = fields.Str(required=False)
-    
-    product_return_config = fields.Nested(ProductReturnConfigSerializer, required=False)
     
     address = fields.Nested(GetAddressSerializer, required=False)
     
-    timing = fields.List(fields.Nested(LocationDayWiseSerializer, required=False), required=False)
+    verified_by = fields.Nested(UserSerializer, required=False)
+    
+    modified_on = fields.Str(required=False)
+    
+    product_return_config = fields.Nested(ProductReturnConfigSerializer, required=False)
     
     stage = fields.Str(required=False)
+    
+    gst_credentials = fields.Nested(InvoiceDetailsSerializer, required=False)
+    
+    verified_on = fields.Str(required=False)
+    
+    contact_numbers = fields.List(fields.Nested(SellerPhoneNumber, required=False), required=False)
+    
+    phone_number = fields.Str(required=False)
+    
+    created_by = fields.Nested(UserSerializer, required=False)
+    
+    timing = fields.List(fields.Nested(LocationDayWiseSerializer, required=False), required=False)
+    
+    company = fields.Nested(GetCompanySerializer, required=False)
+    
+    display_name = fields.Str(required=False)
+    
+    manager = fields.Nested(LocationManagerSerializer, required=False)
     
     holiday = fields.List(fields.Nested(HolidaySchemaSerializer, required=False), required=False)
     
     documents = fields.List(fields.Nested(Document, required=False), required=False)
     
-    created_by = fields.Nested(UserSerializer, required=False)
-    
-    verified_on = fields.Str(required=False)
+    uid = fields.Int(required=False)
     
     _custom_json = fields.Dict(required=False)
     
+    warnings = fields.Dict(required=False)
+    
     name = fields.Str(required=False)
     
-    modified_on = fields.Str(required=False)
+    created_on = fields.Str(required=False)
     
     code = fields.Str(required=False)
+    
+    notification_emails = fields.List(fields.Str(required=False), required=False)
+    
+    store_type = fields.Str(required=False)
     

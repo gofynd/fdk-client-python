@@ -35,11 +35,11 @@ class ShipmentDetails(BaseSchema):
     
     fulfillment_id = fields.Int(required=False)
     
-    shipments = fields.Int(required=False)
-    
-    box_type = fields.Str(required=False)
+    affiliate_shipment_id = fields.Str(required=False)
     
     dp_id = fields.Int(required=False)
     
-    affiliate_shipment_id = fields.Str(required=False)
+    box_type = fields.Str(required=False)
+    
+    shipments = fields.Int(required=False)
     

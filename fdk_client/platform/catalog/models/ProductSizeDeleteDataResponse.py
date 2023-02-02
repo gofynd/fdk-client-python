@@ -21,7 +21,7 @@ class ProductSizeDeleteDataResponse(BaseSchema):
     
     item_id = fields.Int(required=False)
     
-    company_id = fields.Int(required=False)
-    
     size = fields.Str(required=False)
+    
+    company_id = fields.Int(required=False)
     
