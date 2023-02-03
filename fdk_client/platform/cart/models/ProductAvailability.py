@@ -29,7 +29,7 @@ class ProductAvailability(BaseSchema):
     
     deliverable = fields.Boolean(required=False)
     
-    out_of_stock = fields.Boolean(required=False)
-    
     is_valid = fields.Boolean(required=False)
+    
+    out_of_stock = fields.Boolean(required=False)
     

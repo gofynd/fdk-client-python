@@ -1,43 +1,13 @@
 """order Application Models and Enums"""
 
 
-from .OrderStatuses import OrderStatuses
-
-from .OrderFilters import OrderFilters
-
-from .BagsForReorderArticleAssignment import BagsForReorderArticleAssignment
-
-from .BagsForReorder import BagsForReorder
+from .UserInfo import UserInfo
 
 from .BreakupValues import BreakupValues
 
-from .TimeStampData import TimeStampData
-
-from .Promise import Promise
-
-from .FulfillingCompany import FulfillingCompany
-
-from .ShipmentStatus import ShipmentStatus
-
-from .Invoice import Invoice
-
-from .ShipmentUserInfo import ShipmentUserInfo
-
-from .ShipmentTotalDetails import ShipmentTotalDetails
-
-from .ShipmentPayment import ShipmentPayment
+from .DeliveryAddress import DeliveryAddress
 
 from .Prices import Prices
-
-from .NestedTrackingDetails import NestedTrackingDetails
-
-from .TrackingDetails import TrackingDetails
-
-from .CurrentStatus import CurrentStatus
-
-from .AppliedFreeArticles import AppliedFreeArticles
-
-from .AppliedPromos import AppliedPromos
 
 from .ItemBrand import ItemBrand
 
@@ -47,19 +17,49 @@ from .Identifiers import Identifiers
 
 from .FinancialBreakup import FinancialBreakup
 
+from .AppliedFreeArticles import AppliedFreeArticles
+
+from .AppliedPromos import AppliedPromos
+
+from .CurrentStatus import CurrentStatus
+
 from .Bags import Bags
 
-from .DeliveryAddress import DeliveryAddress
+from .FulfillingCompany import FulfillingCompany
+
+from .NestedTrackingDetails import NestedTrackingDetails
+
+from .TrackingDetails import TrackingDetails
+
+from .ShipmentStatus import ShipmentStatus
+
+from .TimeStampData import TimeStampData
+
+from .Promise import Promise
+
+from .Invoice import Invoice
+
+from .ShipmentPayment import ShipmentPayment
 
 from .FulfillingStore import FulfillingStore
 
+from .ShipmentUserInfo import ShipmentUserInfo
+
+from .ShipmentTotalDetails import ShipmentTotalDetails
+
 from .Shipments import Shipments
 
-from .UserInfo import UserInfo
+from .BagsForReorderArticleAssignment import BagsForReorderArticleAssignment
+
+from .BagsForReorder import BagsForReorder
 
 from .OrderSchema import OrderSchema
 
 from .OrderPage import OrderPage
+
+from .OrderStatuses import OrderStatuses
+
+from .OrderFilters import OrderFilters
 
 from .OrderList import OrderList
 
@@ -83,9 +83,9 @@ from .VerifyOtp import VerifyOtp
 
 from .VerifyOtpResponse import VerifyOtpResponse
 
-from .QuestionSet import QuestionSet
-
 from .BagReasonMeta import BagReasonMeta
+
+from .QuestionSet import QuestionSet
 
 from .BagReasons import BagReasons
 
@@ -94,14 +94,6 @@ from .ShipmentBagReasons import ShipmentBagReasons
 from .ShipmentReason import ShipmentReason
 
 from .ShipmentReasons import ShipmentReasons
-
-from .ProductsDataUpdatesFilters import ProductsDataUpdatesFilters
-
-from .ProductsDataUpdates import ProductsDataUpdates
-
-from .EntitiesDataUpdates import EntitiesDataUpdates
-
-from .DataUpdates import DataUpdates
 
 from .Products import Products
 
@@ -116,6 +108,14 @@ from .EntityReasonData import EntityReasonData
 from .EntitiesReasons import EntitiesReasons
 
 from .ReasonsData import ReasonsData
+
+from .ProductsDataUpdatesFilters import ProductsDataUpdatesFilters
+
+from .ProductsDataUpdates import ProductsDataUpdates
+
+from .EntitiesDataUpdates import EntitiesDataUpdates
+
+from .DataUpdates import DataUpdates
 
 from .ShipmentsRequest import ShipmentsRequest
 

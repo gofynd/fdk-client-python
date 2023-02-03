@@ -17,11 +17,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .LineItem import LineItem
-
-
-
 from .ProcessingDates import ProcessingDates
+
+
+
+from .LineItem import LineItem
 
 
 
@@ -29,15 +29,15 @@ class Shipment(BaseSchema):
     #  swagger.json
 
     
-    priority = fields.Int(required=False)
-    
     external_shipment_id = fields.Str(required=False)
     
     meta = fields.Dict(required=False)
     
+    priority = fields.Int(required=False)
+    
     location_id = fields.Int(required=False)
     
-    line_items = fields.List(fields.Nested(LineItem, required=False), required=False)
-    
     processing_dates = fields.Nested(ProcessingDates, required=False)
+    
+    line_items = fields.List(fields.Nested(LineItem, required=False), required=False)
     

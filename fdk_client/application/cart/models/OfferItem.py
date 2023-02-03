@@ -29,17 +29,17 @@ class OfferItem(BaseSchema):
     #  swagger.json
 
     
-    best = fields.Boolean(required=False)
+    margin = fields.Int(required=False)
     
     price = fields.Nested(OfferPrice, required=False)
     
-    margin = fields.Int(required=False)
-    
-    type = fields.Str(required=False)
-    
-    total = fields.Float(required=False)
+    quantity = fields.Int(required=False)
     
     auto_applied = fields.Boolean(required=False)
     
-    quantity = fields.Int(required=False)
+    type = fields.Str(required=False)
+    
+    best = fields.Boolean(required=False)
+    
+    total = fields.Float(required=False)
     

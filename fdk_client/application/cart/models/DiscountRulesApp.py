@@ -23,9 +23,9 @@ class DiscountRulesApp(BaseSchema):
     
     raw_offer = fields.Dict(required=False)
     
-    item_criteria = fields.Dict(required=False)
+    matched_buy_rules = fields.List(fields.Str(required=False), required=False)
     
     offer = fields.Dict(required=False)
     
-    matched_buy_rules = fields.List(fields.Str(required=False), required=False)
+    item_criteria = fields.Dict(required=False)
     

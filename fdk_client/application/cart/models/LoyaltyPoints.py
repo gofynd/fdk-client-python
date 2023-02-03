@@ -25,7 +25,7 @@ class LoyaltyPoints(BaseSchema):
     
     is_applied = fields.Boolean(required=False)
     
-    total = fields.Float(required=False)
-    
     description = fields.Str(required=False)
+    
+    total = fields.Float(required=False)
     

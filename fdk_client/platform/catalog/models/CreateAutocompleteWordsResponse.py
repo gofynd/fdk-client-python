@@ -25,7 +25,7 @@ class CreateAutocompleteWordsResponse(BaseSchema):
     
     app_id = fields.Str(required=False)
     
-    words = fields.List(fields.Str(required=False), required=False)
-    
     results = fields.List(fields.Dict(required=False), required=False)
+    
+    words = fields.List(fields.Str(required=False), required=False)
     

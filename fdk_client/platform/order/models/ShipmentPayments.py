@@ -21,7 +21,7 @@ class ShipmentPayments(BaseSchema):
     
     source = fields.Str(required=False)
     
-    logo = fields.Str(required=False)
-    
     mode = fields.Str(required=False)
+    
+    logo = fields.Str(required=False)
     

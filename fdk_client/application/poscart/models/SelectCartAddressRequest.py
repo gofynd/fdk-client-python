@@ -21,7 +21,7 @@ class SelectCartAddressRequest(BaseSchema):
     
     id = fields.Str(required=False)
     
-    cart_id = fields.Str(required=False)
-    
     billing_address_id = fields.Str(required=False)
+    
+    cart_id = fields.Str(required=False)
     
