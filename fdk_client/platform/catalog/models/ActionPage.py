@@ -17,7 +17,7 @@ class ActionPage(BaseSchema):
     #  swagger.json
 
     
-    query = fields.Dict(required=False)
-    
     type = fields.Str(required=False)
+    
+    query = fields.Dict(required=False)
     

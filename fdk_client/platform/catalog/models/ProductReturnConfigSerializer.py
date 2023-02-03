@@ -17,7 +17,7 @@ class ProductReturnConfigSerializer(BaseSchema):
     #  swagger.json
 
     
-    store_uid = fields.Int(required=False)
-    
     on_same_store = fields.Boolean(required=False)
+    
+    store_uid = fields.Int(required=False)
     

@@ -5,19 +5,19 @@ from .Website import Website
 
 from .BusinessDetails import BusinessDetails
 
+from .UserSerializer import UserSerializer
+
 from .SellerPhoneNumber import SellerPhoneNumber
 
 from .ContactDetails import ContactDetails
 
-from .CompanyTaxesSerializer import CompanyTaxesSerializer
-
-from .UserSerializer import UserSerializer
+from .Document import Document
 
 from .BusinessCountryInfo import BusinessCountryInfo
 
 from .GetAddressSerializer import GetAddressSerializer
 
-from .Document import Document
+from .CompanyTaxesSerializer import CompanyTaxesSerializer
 
 from .GetCompanyProfileSerializerResponse import GetCompanyProfileSerializerResponse
 
@@ -55,11 +55,11 @@ from .CompanyBrandListSerializer import CompanyBrandListSerializer
 
 from .CompanyBrandPostRequestSerializer import CompanyBrandPostRequestSerializer
 
+from .ProductReturnConfigSerializer import ProductReturnConfigSerializer
+
+from .LocationManagerSerializer import LocationManagerSerializer
+
 from .GetCompanySerializer import GetCompanySerializer
-
-from .InvoiceCredSerializer import InvoiceCredSerializer
-
-from .InvoiceDetailsSerializer import InvoiceDetailsSerializer
 
 from .HolidayDateSerializer import HolidayDateSerializer
 
@@ -69,9 +69,9 @@ from .LocationTimingSerializer import LocationTimingSerializer
 
 from .LocationDayWiseSerializer import LocationDayWiseSerializer
 
-from .ProductReturnConfigSerializer import ProductReturnConfigSerializer
+from .InvoiceCredSerializer import InvoiceCredSerializer
 
-from .LocationManagerSerializer import LocationManagerSerializer
+from .InvoiceDetailsSerializer import InvoiceDetailsSerializer
 
 from .GetLocationSerializer import GetLocationSerializer
 
@@ -81,9 +81,9 @@ from .LocationSerializer import LocationSerializer
 
 from .BulkLocationSerializer import BulkLocationSerializer
 
-from ._ArticleAssignment import _ArticleAssignment
-
 from ._ArticleQuery import _ArticleQuery
+
+from ._ArticleAssignment import _ArticleAssignment
 
 from ._AssignStoreArticle import _AssignStoreArticle
 
