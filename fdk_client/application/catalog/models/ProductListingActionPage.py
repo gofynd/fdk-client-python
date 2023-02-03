@@ -21,7 +21,7 @@ class ProductListingActionPage(BaseSchema):
     
     query = fields.Dict(required=False)
     
-    type = fields.Str(required=False)
-    
     params = fields.Dict(required=False)
+    
+    type = fields.Str(required=False)
     

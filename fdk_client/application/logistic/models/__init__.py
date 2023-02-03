@@ -19,13 +19,13 @@ from .TATLocationDetailsRequest import TATLocationDetailsRequest
 
 from .TATViewRequest import TATViewRequest
 
-from .TATErrorSchemaResponse import TATErrorSchemaResponse
-
 from .TATTimestampResponse import TATTimestampResponse
 
 from .TATFormattedResponse import TATFormattedResponse
 
 from .TATPromiseResponse import TATPromiseResponse
+
+from .TATErrorSchemaResponse import TATErrorSchemaResponse
 
 from .TATArticlesResponse import TATArticlesResponse
 

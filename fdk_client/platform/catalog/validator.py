@@ -752,7 +752,7 @@ class CatalogValidator:
          
         
     
-    class patchProduct(BaseSchema):
+    class editProduct(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -761,7 +761,7 @@ class CatalogValidator:
          
         
     
-    class editProduct(BaseSchema):
+    class patchProduct(BaseSchema):
         
         
         company_id = fields.Str(required=False)

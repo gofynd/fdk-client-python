@@ -11,11 +11,11 @@ from ...ApplicationModel import BaseSchema
 
 
 
+
+
+
+
 from .Meta import Meta
-
-
-
-
 
 
 
@@ -25,9 +25,9 @@ class Media(BaseSchema):
     
     url = fields.Str(required=False)
     
-    meta = fields.Nested(Meta, required=False)
-    
     type = fields.Str(required=False)
     
     alt = fields.Str(required=False)
+    
+    meta = fields.Nested(Meta, required=False)
     

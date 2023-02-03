@@ -21,7 +21,7 @@ class PaymentMethods(BaseSchema):
     
     mode = fields.Str(required=False)
     
-    refund_by = fields.Str(required=False)
-    
     collect_by = fields.Str(required=False)
+    
+    refund_by = fields.Str(required=False)
     

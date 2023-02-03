@@ -13,11 +13,11 @@ from .StoreDepartments import StoreDepartments
 
 
 
-from .AppStore import AppStore
-
-
-
 from .Page import Page
+
+
+
+from .AppStore import AppStore
 
 
 
@@ -27,7 +27,7 @@ class ApplicationStoreListing(BaseSchema):
     
     filters = fields.List(fields.Nested(StoreDepartments, required=False), required=False)
     
-    items = fields.List(fields.Nested(AppStore, required=False), required=False)
-    
     page = fields.Nested(Page, required=False)
+    
+    items = fields.List(fields.Nested(AppStore, required=False), required=False)
     

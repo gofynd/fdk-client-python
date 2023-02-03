@@ -31,9 +31,9 @@ class AutocompleteItem(BaseSchema):
     
     action = fields.Nested(ProductListingAction, required=False)
     
+    type = fields.Str(required=False)
+    
     display = fields.Str(required=False)
     
     _custom_json = fields.Dict(required=False)
-    
-    type = fields.Str(required=False)
     

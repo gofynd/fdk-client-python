@@ -21,11 +21,11 @@ class Tax(BaseSchema):
     #  swagger.json
 
     
+    amount = fields.Dict(required=False)
+    
     breakup = fields.List(fields.Dict(required=False), required=False)
     
     name = fields.Str(required=False)
     
     rate = fields.Float(required=False)
-    
-    amount = fields.Dict(required=False)
     

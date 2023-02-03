@@ -21,9 +21,9 @@ class TATArticlesRequest(BaseSchema):
     #  swagger.json
 
     
-    manufacturing_time = fields.Int(required=False)
-    
     manufacturing_time_unit = fields.Str(required=False)
+    
+    manufacturing_time = fields.Int(required=False)
     
     category = fields.Nested(TATCategoryRequest, required=False)
     

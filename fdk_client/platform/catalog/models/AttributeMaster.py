@@ -15,11 +15,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-
-
-
-
 from .AttributeSchemaRange import AttributeSchemaRange
+
+
+
+
 
 
 
@@ -33,9 +33,9 @@ class AttributeMaster(BaseSchema):
     
     format = fields.Str(required=False)
     
-    type = fields.Str(required=False)
+    range = fields.Nested(AttributeSchemaRange, required=False)
     
     mandatory = fields.Boolean(required=False)
     
-    range = fields.Nested(AttributeSchemaRange, required=False)
+    type = fields.Str(required=False)
     
