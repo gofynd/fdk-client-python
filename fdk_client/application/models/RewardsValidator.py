@@ -23,15 +23,15 @@ class RewardsValidator:
         page_size = fields.Int(required=False)
          
     
-    class getPoints(BaseSchema):
+    class getUserPoints(BaseSchema):
         
         pass 
     
-    class referral(BaseSchema):
+    class getUserReferralDetails(BaseSchema):
         
         pass 
     
-    class orderDiscount(BaseSchema):
+    class getOrderDiscount(BaseSchema):
         
         pass 
     

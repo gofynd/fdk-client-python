@@ -7002,9 +7002,9 @@ class Rewards:
             "getOfferByName": "/service/application/rewards/v1.0/offers/{name}/",
             "catalogueOrder": "/service/application/rewards/v1.0/catalogue/offer/order/",
             "getPointsHistory": "/service/application/rewards/v1.0/user/points/history/",
-            "getPoints": "/service/application/rewards/v1.0/user/points/",
-            "referral": "/service/application/rewards/v1.0/user/referral/",
-            "orderDiscount": "/service/application/rewards/v1.0/user/offer/order-discount/",
+            "getUserPoints": "/service/application/rewards/v1.0/user/points/",
+            "getUserReferralDetails": "/service/application/rewards/v1.0/user/referral/",
+            "getOrderDiscount": "/service/application/rewards/v1.0/user/offer/order-discount/",
             "redeemReferralCode": "/service/application/rewards/v1.0/user/referral/redeem/"
             
         }
@@ -7107,17 +7107,17 @@ class Rewards:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPointsHistory"]).netloc, "get", await create_url_without_domain("/service/application/rewards/v1.0/user/points/history/", page_id=page_id, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
-    async def getPoints(self, body=""):
+    async def getUserPoints(self, body=""):
         """Use this API to retrieve total available points of a user for current application
         """
         payload = {}
         
         # Parameter validation
-        schema = RewardsValidator.getPoints()
+        schema = RewardsValidator.getUserPoints()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getPoints"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        url_with_params = await create_url_with_params(api_url=self._urls["getUserPoints"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
         query_string = await create_query_string()
         headers = {
             "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
@@ -7130,19 +7130,19 @@ class Rewards:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPoints"]).netloc, "get", await create_url_without_domain("/service/application/rewards/v1.0/user/points/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getUserPoints"]).netloc, "get", await create_url_without_domain("/service/application/rewards/v1.0/user/points/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
-    async def referral(self, body=""):
+    async def getUserReferralDetails(self, body=""):
         """Use this API to retrieve the referral details a user has configured in the application.
         """
         payload = {}
         
         # Parameter validation
-        schema = RewardsValidator.referral()
+        schema = RewardsValidator.getUserReferralDetails()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["referral"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        url_with_params = await create_url_with_params(api_url=self._urls["getUserReferralDetails"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
         query_string = await create_query_string()
         headers = {
             "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
@@ -7155,15 +7155,15 @@ class Rewards:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["referral"]).netloc, "get", await create_url_without_domain("/service/application/rewards/v1.0/user/referral/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getUserReferralDetails"]).netloc, "get", await create_url_without_domain("/service/application/rewards/v1.0/user/referral/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
-    async def orderDiscount(self, body=""):
+    async def getOrderDiscount(self, body=""):
         """Use this API to calculate the discount on order-amount based on all the amount range configured in order_discount.
         """
         payload = {}
         
         # Parameter validation
-        schema = RewardsValidator.orderDiscount()
+        schema = RewardsValidator.getOrderDiscount()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -7172,7 +7172,7 @@ class Rewards:
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["orderDiscount"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        url_with_params = await create_url_with_params(api_url=self._urls["getOrderDiscount"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
         query_string = await create_query_string()
         headers = {
             "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
@@ -7185,7 +7185,7 @@ class Rewards:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["orderDiscount"]).netloc, "post", await create_url_without_domain("/service/application/rewards/v1.0/user/offer/order-discount/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getOrderDiscount"]).netloc, "post", await create_url_without_domain("/service/application/rewards/v1.0/user/offer/order-discount/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
     async def redeemReferralCode(self, body=""):
         """Use this API to enter a referral code following which, the configured points would be credited to a user's reward points account.
