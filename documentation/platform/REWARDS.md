@@ -16,7 +16,7 @@ Earn and redeem reward points
 * [updateOfferByName](#updateofferbyname)
 * [updateUserStatus](#updateuserstatus)
 * [user](#user)
-* [getPointsHistory](#getpointshistory)
+* [getUserPointsHistory](#getuserpointshistory)
 
 
 
@@ -589,7 +589,7 @@ Success. Check example below or refer `UserRes` for more details.
 ---
 
 
-### getPointsHistory
+### getUserPointsHistory
 Get all transactions of reward points
 
 
@@ -597,7 +597,7 @@ Get all transactions of reward points
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").rewards.getPointsHistory(userId=userId, pageId=pageId, pageSize=pageSize)
+    result = await client.application("<APPLICATION_ID>").rewards.getUserPointsHistory(userId=userId, pageId=pageId, pageSize=pageSize)
     # use result
 except Exception as e:
     print(e)

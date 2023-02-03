@@ -16,7 +16,7 @@ class RewardsValidator:
         
         pass 
     
-    class getPointsHistory(BaseSchema):
+    class getUserPointsHistory(BaseSchema):
         
         page_id = fields.Str(required=False)
         

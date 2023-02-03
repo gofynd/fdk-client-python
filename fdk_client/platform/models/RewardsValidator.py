@@ -97,7 +97,7 @@ class RewardsValidator:
         application_id = fields.Str(required=False)
          
     
-    class getPointsHistory(BaseSchema):
+    class getUserPointsHistory(BaseSchema):
         
         user_id = fields.Str(required=False)
         

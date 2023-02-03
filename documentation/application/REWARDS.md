@@ -8,7 +8,7 @@
 Earn and redeem reward points
 * [getOfferByName](#getofferbyname)
 * [catalogueOrder](#catalogueorder)
-* [getPointsHistory](#getpointshistory)
+* [getUserPointsHistory](#getuserpointshistory)
 * [getUserPoints](#getuserpoints)
 * [getUserReferralDetails](#getuserreferraldetails)
 * [getOrderDiscount](#getorderdiscount)
@@ -132,7 +132,7 @@ Success. Check example below or refer `CatalogueOrderResponse` for more details.
 ---
 
 
-### getPointsHistory
+### getUserPointsHistory
 Get all transactions of reward points
 
 
@@ -140,7 +140,7 @@ Get all transactions of reward points
 
 ```python
 try:
-    result = await client.rewards.getPointsHistory(pageId=pageId, pageSize=pageSize)
+    result = await client.rewards.getUserPointsHistory(pageId=pageId, pageSize=pageSize)
     # use result
 except Exception as e:
     print(e)
