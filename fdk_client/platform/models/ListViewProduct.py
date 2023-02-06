@@ -14,8 +14,8 @@ class ListViewProduct(BaseSchema):
     # Serviceability swagger.json
 
     
-    count = fields.Int(required=False)
-    
     type = fields.Str(required=False)
+    
+    count = fields.Int(required=False)
     
 

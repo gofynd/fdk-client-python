@@ -20,11 +20,11 @@ class RepaymentDetailsSerialiserPayAll(BaseSchema):
     # Payment swagger.json
 
     
-    extension_order_id = fields.Str(required=False)
+    aggregator_transaction_id = fields.Str(required=False)
     
     aggregator_order_id = fields.Str(required=False)
     
-    aggregator_transaction_id = fields.Str(required=False)
+    extension_order_id = fields.Str(required=False)
     
     shipment_details = fields.List(fields.Nested(RepaymentRequestDetails, required=False), required=False)
     

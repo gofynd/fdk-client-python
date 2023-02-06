@@ -9,9 +9,9 @@ from .ProductListingAction import ProductListingAction
 
 
 
+
+
 from .Media import Media
-
-
 
 
 
@@ -24,10 +24,10 @@ class AutocompleteItem(BaseSchema):
     
     display = fields.Str(required=False)
     
+    type = fields.Str(required=False)
+    
     logo = fields.Nested(Media, required=False)
     
     _custom_json = fields.Dict(required=False)
-    
-    type = fields.Str(required=False)
     
 

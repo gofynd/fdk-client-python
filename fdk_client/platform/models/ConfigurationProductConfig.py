@@ -11,11 +11,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
+
+
 from .ProductSize import ProductSize
-
-
-
-
 
 
 
@@ -30,12 +30,12 @@ class ConfigurationProductConfig(BaseSchema):
     
     priority = fields.Int(required=False)
     
-    size = fields.Nested(ProductSize, required=False)
-    
-    key = fields.Str(required=False)
-    
     logo = fields.Str(required=False)
     
     title = fields.Str(required=False)
+    
+    size = fields.Nested(ProductSize, required=False)
+    
+    key = fields.Str(required=False)
     
 

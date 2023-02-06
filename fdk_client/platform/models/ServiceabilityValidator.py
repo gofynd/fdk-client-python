@@ -7,14 +7,14 @@ from ..models.BaseSchema import BaseSchema
 
 class ServiceabilityValidator:
     
-    class getApplicationServiceability(BaseSchema):
+    class postApplicationServiceability(BaseSchema):
         
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
          
     
-    class postApplicationServiceability(BaseSchema):
+    class getApplicationServiceability(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -71,6 +71,13 @@ class ServiceabilityValidator:
         company_id = fields.Int(required=False)
          
     
+    class getZoneFromPincodeView(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+    
     class getZonesFromApplicationIdView(BaseSchema):
         
         company_id = fields.Int(required=False)
@@ -84,13 +91,6 @@ class ServiceabilityValidator:
         zone_id = fields.List(fields.Str(required=False), required=False)
         
         q = fields.Str(required=False)
-         
-    
-    class getZoneFromPincodeView(BaseSchema):
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
          
     
     class getZoneListView(BaseSchema):

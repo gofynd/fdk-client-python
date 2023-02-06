@@ -7,19 +7,19 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .SEO import SEO
-
-from .MOQ import MOQ
 
 
-class ApplicationItemResponse(BaseSchema):
+
+
+
+class MOQData(BaseSchema):
     # Catalog swagger.json
 
     
-    alt_text = fields.Dict(required=False)
+    increment_unit = fields.Int(required=False)
     
-    seo = fields.Nested(SEO, required=False)
+    maximum = fields.Int(required=False)
     
-    moq = fields.Nested(MOQ, required=False)
+    minimum = fields.Int(required=False)
     
 

@@ -32,6 +32,6 @@ class FaqSchema(BaseSchema):
     
     answer = fields.Str(required=False)
     
-    tags = fields.Raw(required=False)
+    tags = fields.List(fields.Str(required=False), required=False)
     
 

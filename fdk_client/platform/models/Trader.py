@@ -20,6 +20,6 @@ class Trader(BaseSchema):
     
     type = fields.Str(required=False)
     
-    name = fields.Str(required=False)
+    name = fields.Raw(required=False)
     
 

@@ -7,11 +7,11 @@ from ..models.BaseSchema import BaseSchema
 
 from .EntityRegionViewError import EntityRegionViewError
 
+
+
 from .EntityRegionViewItems import EntityRegionViewItems
 
 from .EntityRegionViewPage import EntityRegionViewPage
-
-
 
 
 class EntityRegionViewResponse(BaseSchema):
@@ -20,10 +20,10 @@ class EntityRegionViewResponse(BaseSchema):
     
     error = fields.Nested(EntityRegionViewError, required=False)
     
+    success = fields.Boolean(required=False)
+    
     data = fields.List(fields.Nested(EntityRegionViewItems, required=False), required=False)
     
     page = fields.Nested(EntityRegionViewPage, required=False)
-    
-    success = fields.Boolean(required=False)
     
 

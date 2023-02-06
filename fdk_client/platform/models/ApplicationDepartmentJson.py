@@ -8,18 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
-class MOQ(BaseSchema):
+class ApplicationDepartmentJson(BaseSchema):
     # Catalog swagger.json
 
     
-    minimum = fields.Int(required=False)
-    
-    maximum = fields.Int(required=False)
-    
-    increment_unit = fields.Int(required=False)
+    _custom_json = fields.Dict(required=False)
     
 

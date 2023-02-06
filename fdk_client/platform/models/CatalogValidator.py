@@ -103,14 +103,14 @@ class CatalogValidator:
         slug = fields.List(fields.Str(required=False), required=False)
          
     
-    class updateProductBundle(BaseSchema):
+    class getProductBundleDetail(BaseSchema):
         
         company_id = fields.Str(required=False)
         
         id = fields.Str(required=False)
          
     
-    class getProductBundleDetail(BaseSchema):
+    class updateProductBundle(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -137,13 +137,6 @@ class CatalogValidator:
         page_size = fields.Int(required=False)
          
     
-    class updateSizeGuide(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-         
-    
     class getSizeGuide(BaseSchema):
         
         company_id = fields.Str(required=False)
@@ -151,13 +144,11 @@ class CatalogValidator:
         id = fields.Str(required=False)
          
     
-    class updateAppProduct(BaseSchema):
+    class updateSizeGuide(BaseSchema):
         
         company_id = fields.Str(required=False)
         
-        application_id = fields.Str(required=False)
-        
-        item_id = fields.Str(required=False)
+        id = fields.Str(required=False)
          
     
     class getAppProduct(BaseSchema):
@@ -167,8 +158,15 @@ class CatalogValidator:
         application_id = fields.Str(required=False)
         
         item_id = fields.Str(required=False)
+         
+    
+    class updateAppProduct(BaseSchema):
         
-        slice_attr = fields.Str(required=False)
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        item_id = fields.Str(required=False)
          
     
     class getConfigurationMetadata(BaseSchema):
@@ -515,14 +513,14 @@ class CatalogValidator:
         is_active = fields.Boolean(required=False)
          
     
-    class updateDepartment(BaseSchema):
+    class getDepartmentData(BaseSchema):
         
         company_id = fields.Str(required=False)
         
         uid = fields.Str(required=False)
          
     
-    class getDepartmentData(BaseSchema):
+    class updateDepartment(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -601,14 +599,14 @@ class CatalogValidator:
         page_size = fields.Int(required=False)
          
     
-    class updateCategory(BaseSchema):
+    class getCategoryData(BaseSchema):
         
         company_id = fields.Str(required=False)
         
         uid = fields.Str(required=False)
          
     
-    class getCategoryData(BaseSchema):
+    class updateCategory(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -908,14 +906,14 @@ class CatalogValidator:
         q = fields.Str(required=False)
          
     
-    class updateHsnCode(BaseSchema):
+    class getHsnCode(BaseSchema):
         
         company_id = fields.Str(required=False)
         
         id = fields.Str(required=False)
          
     
-    class getHsnCode(BaseSchema):
+    class updateHsnCode(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -1105,6 +1103,8 @@ class CatalogValidator:
         
         application_id = fields.Str(required=False)
         
+        department_id = fields.Int(required=False)
+        
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
@@ -1119,6 +1119,28 @@ class CatalogValidator:
         application_id = fields.Str(required=False)
         
         category_uid = fields.Str(required=False)
+         
+    
+    class getApplicationDepartmentListing(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        q = fields.Str(required=False)
+         
+    
+    class updateAppDepartment(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        department_uid = fields.Str(required=False)
          
     
     class updateAppLocation(BaseSchema):
