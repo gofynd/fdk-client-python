@@ -11,9 +11,9 @@ from ...PlatformModel import BaseSchema
 
 
 
-
-
 from .SearchKeywordResult import SearchKeywordResult
+
+
 
 
 
@@ -27,11 +27,11 @@ class CreateSearchKeyword(BaseSchema):
     
     words = fields.List(fields.Str(required=False), required=False)
     
-    is_active = fields.Boolean(required=False)
-    
     result = fields.Nested(SearchKeywordResult, required=False)
+    
+    app_id = fields.Str(required=False)
     
     _custom_json = fields.Dict(required=False)
     
-    app_id = fields.Str(required=False)
+    is_active = fields.Boolean(required=False)
     

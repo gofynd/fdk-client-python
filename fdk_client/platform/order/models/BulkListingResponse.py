@@ -15,9 +15,9 @@ from .BulkListingPage import BulkListingPage
 
 
 
+
+
 from .bulkListingData import bulkListingData
-
-
 
 
 
@@ -29,7 +29,7 @@ class BulkListingResponse(BaseSchema):
     
     page = fields.Nested(BulkListingPage, required=False)
     
-    data = fields.List(fields.Nested(bulkListingData, required=False), required=False)
-    
     success = fields.Boolean(required=False)
+    
+    data = fields.List(fields.Nested(bulkListingData, required=False), required=False)
     

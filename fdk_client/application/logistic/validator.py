@@ -16,7 +16,7 @@ from ..ApplicationModel import BaseSchema
     
     
     
-        
+    
         
 
 class LogisticValidator:
@@ -39,12 +39,15 @@ class LogisticValidator:
         pass 
         
     
-    class upsertZoneControllerView(BaseSchema):
+    class assignLocations(BaseSchema):
+        
+        pass 
+        
+    
+    class getLocationDetails(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
+        pincode = fields.Str(required=False)
          
         
     

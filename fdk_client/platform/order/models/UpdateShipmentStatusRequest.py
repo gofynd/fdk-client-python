@@ -13,9 +13,9 @@ from ...PlatformModel import BaseSchema
 
 
 
+
+
 from .StatuesRequest import StatuesRequest
-
-
 
 
 
@@ -29,9 +29,9 @@ class UpdateShipmentStatusRequest(BaseSchema):
     
     force_transition = fields.Boolean(required=False)
     
-    statuses = fields.List(fields.Nested(StatuesRequest, required=False), required=False)
-    
     task = fields.Boolean(required=False)
+    
+    statuses = fields.List(fields.Nested(StatuesRequest, required=False), required=False)
     
     lock_after_transition = fields.Boolean(required=False)
     

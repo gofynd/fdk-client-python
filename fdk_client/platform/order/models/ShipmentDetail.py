@@ -13,11 +13,11 @@ from ...PlatformModel import BaseSchema
 
 
 
+
+
+
+
 from .Meta import Meta
-
-
-
-
 
 
 
@@ -29,13 +29,13 @@ class ShipmentDetail(BaseSchema):
     
     id = fields.Int(required=False)
     
-    bag_list = fields.List(fields.Int(required=False), required=False)
-    
-    meta = fields.Nested(Meta, required=False)
-    
     status = fields.Str(required=False)
     
     remarks = fields.Str(required=False)
+    
+    bag_list = fields.List(fields.Int(required=False), required=False)
+    
+    meta = fields.Nested(Meta, required=False)
     
     shipment_id = fields.Str(required=False)
     

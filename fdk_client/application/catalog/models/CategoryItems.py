@@ -11,13 +11,13 @@ from ...ApplicationModel import BaseSchema
 
 
 
+from .CategoryBanner import CategoryBanner
+
+
+
 
 
 from .Child import Child
-
-
-
-from .CategoryBanner import CategoryBanner
 
 
 
@@ -33,11 +33,11 @@ class CategoryItems(BaseSchema):
     
     uid = fields.Int(required=False)
     
+    banners = fields.Nested(CategoryBanner, required=False)
+    
     slug = fields.Str(required=False)
     
     childs = fields.List(fields.Nested(Child, required=False), required=False)
-    
-    banners = fields.Nested(CategoryBanner, required=False)
     
     name = fields.Str(required=False)
     

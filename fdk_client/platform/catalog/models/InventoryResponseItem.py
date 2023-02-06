@@ -9,11 +9,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .InventoryPayload import InventoryPayload
-
-
-
 from .InventoryFailedReason import InventoryFailedReason
+
+
+
+from .InventoryPayload import InventoryPayload
 
 
 
@@ -21,7 +21,7 @@ class InventoryResponseItem(BaseSchema):
     #  swagger.json
 
     
-    data = fields.Nested(InventoryPayload, required=False)
-    
     reason = fields.Nested(InventoryFailedReason, required=False)
+    
+    data = fields.Nested(InventoryPayload, required=False)
     

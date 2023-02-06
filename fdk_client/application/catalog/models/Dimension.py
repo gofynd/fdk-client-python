@@ -25,9 +25,9 @@ class Dimension(BaseSchema):
     
     height = fields.Float(required=False)
     
-    width = fields.Float(required=False)
-    
     unit = fields.Str(required=False)
+    
+    width = fields.Float(required=False)
     
     is_default = fields.Boolean(required=False)
     

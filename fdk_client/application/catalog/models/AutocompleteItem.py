@@ -13,11 +13,11 @@ from .Media import Media
 
 
 
+
+
+
+
 from .ProductListingAction import ProductListingAction
-
-
-
-
 
 
 
@@ -29,11 +29,11 @@ class AutocompleteItem(BaseSchema):
     
     logo = fields.Nested(Media, required=False)
     
-    action = fields.Nested(ProductListingAction, required=False)
-    
     type = fields.Str(required=False)
     
-    display = fields.Str(required=False)
-    
     _custom_json = fields.Dict(required=False)
+    
+    action = fields.Nested(ProductListingAction, required=False)
+    
+    display = fields.Str(required=False)
     
