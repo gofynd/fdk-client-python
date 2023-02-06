@@ -17,7 +17,7 @@ class LocationDetailResponse(BaseSchema):
     #  swagger.json
 
     
-    longitude = fields.Str(required=False)
-    
     latitude = fields.Str(required=False)
+    
+    longitude = fields.Str(required=False)
     

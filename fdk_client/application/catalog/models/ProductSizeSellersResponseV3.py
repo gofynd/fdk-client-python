@@ -9,7 +9,7 @@ from ...ApplicationModel import BaseSchema
 
 
 
-from .ProductSizeSellerFilterSchemaV2 import ProductSizeSellerFilterSchemaV2
+from .ProductSizePriceResponseV3 import ProductSizePriceResponseV3
 
 
 
@@ -17,7 +17,7 @@ from .Page import Page
 
 
 
-from .ProductSizePriceResponseV3 import ProductSizePriceResponseV3
+from .ProductSizeSellerFilterSchemaV2 import ProductSizeSellerFilterSchemaV2
 
 
 
@@ -25,9 +25,9 @@ class ProductSizeSellersResponseV3(BaseSchema):
     #  swagger.json
 
     
-    sort_on = fields.List(fields.Nested(ProductSizeSellerFilterSchemaV2, required=False), required=False)
+    items = fields.List(fields.Nested(ProductSizePriceResponseV3, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
     
-    items = fields.List(fields.Nested(ProductSizePriceResponseV3, required=False), required=False)
+    sort_on = fields.List(fields.Nested(ProductSizeSellerFilterSchemaV2, required=False), required=False)
     

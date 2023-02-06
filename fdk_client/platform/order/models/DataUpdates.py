@@ -9,11 +9,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .EntitiesDataUpdates import EntitiesDataUpdates
-
-
-
 from .ProductsDataUpdates import ProductsDataUpdates
+
+
+
+from .EntitiesDataUpdates import EntitiesDataUpdates
 
 
 
@@ -21,7 +21,7 @@ class DataUpdates(BaseSchema):
     #  swagger.json
 
     
-    entities = fields.List(fields.Nested(EntitiesDataUpdates, required=False), required=False)
-    
     products = fields.List(fields.Nested(ProductsDataUpdates, required=False), required=False)
+    
+    entities = fields.List(fields.Nested(EntitiesDataUpdates, required=False), required=False)
     

@@ -21,11 +21,11 @@ class StoreDetail(BaseSchema):
     #  swagger.json
 
     
-    name = fields.Str(required=False)
-    
-    city = fields.Str(required=False)
+    id = fields.Int(required=False)
     
     code = fields.Str(required=False)
     
-    id = fields.Int(required=False)
+    name = fields.Str(required=False)
+    
+    city = fields.Str(required=False)
     

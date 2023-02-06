@@ -31,13 +31,13 @@ class BagReasons(BaseSchema):
     
     question_set = fields.List(fields.Nested(QuestionSet, required=False), required=False)
     
-    id = fields.Int(required=False)
+    display_name = fields.Str(required=False)
     
     meta = fields.Nested(BagReasonMeta, required=False)
     
-    reasons = fields.List(fields.Nested(lambda: BagReasons(exclude=('reasons')), required=False), required=False)
-    
-    display_name = fields.Str(required=False)
+    id = fields.Int(required=False)
     
     qc_type = fields.List(fields.Str(required=False), required=False)
+    
+    reasons = fields.List(fields.Nested(lambda: BagReasons(exclude=('reasons')), required=False), required=False)
     

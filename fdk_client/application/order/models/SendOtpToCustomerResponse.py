@@ -21,9 +21,9 @@ class SendOtpToCustomerResponse(BaseSchema):
     #  swagger.json
 
     
-    success = fields.Boolean(required=False)
-    
     request_id = fields.Str(required=False)
+    
+    success = fields.Boolean(required=False)
     
     resend_timer = fields.Int(required=False)
     

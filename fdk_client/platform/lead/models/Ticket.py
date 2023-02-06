@@ -23,6 +23,8 @@ from .TicketContent import TicketContent
 
 
 
+from .TicketCategory import TicketCategory
+
 
 
 
@@ -69,7 +71,7 @@ class Ticket(BaseSchema):
     
     content = fields.Nested(TicketContent, required=False)
     
-    category = fields.Str(required=False)
+    category = fields.Nested(TicketCategory, required=False)
     
     sub_category = fields.Str(required=False)
     

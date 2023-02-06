@@ -21,9 +21,9 @@ class GetCatalogConfigurationDetailsProduct(BaseSchema):
     #  swagger.json
 
     
-    similar = fields.Dict(required=False)
-    
     variant = fields.Dict(required=False)
+    
+    similar = fields.Dict(required=False)
     
     detail = fields.Dict(required=False)
     
