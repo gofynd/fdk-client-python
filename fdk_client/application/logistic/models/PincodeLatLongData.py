@@ -13,11 +13,11 @@ from ...ApplicationModel import BaseSchema
 
 
 
-class LocationDetailResponse(BaseSchema):
+class PincodeLatLongData(BaseSchema):
     #  swagger.json
 
     
-    latitude = fields.Str(required=False)
+    coordinates = fields.List(fields.Str(required=False), required=False)
     
-    longitude = fields.Str(required=False)
+    type = fields.Str(required=False)
     

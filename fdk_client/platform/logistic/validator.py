@@ -24,6 +24,11 @@ from ..PlatformModel import BaseSchema
     
     
         
+        
+        
+        
+        
+        
     
     
         
@@ -76,6 +81,16 @@ class LogisticValidator:
         
         
         company_id = fields.Int(required=False)
+        
+        page_number = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        zone_id = fields.Str(required=False)
+        
+        enabled = fields.Str(required=False)
+        
+        q = fields.Str(required=False)
          
         
     

@@ -18,8 +18,7 @@ class Logistic:
             "getPincodeCity": "/service/application/logistics/v1.0/pincode/{pincode}",
             "getTatProduct": "/service/application/logistics/v1.0/",
             "getPincodeZones": "/service/application/logistics/v1.0/pincode/zones",
-            "assignLocations": "/service/application/logistics/v1.0/assign_stores",
-            "getLocationDetails": "/service/application/logistics/v1.0/location/{pincode}"
+            "assignLocations": "/service/application/logistics/v1.0/assign_stores"
             
         }
         self._urls = {
@@ -147,34 +146,5 @@ class Logistic:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["assignLocations"]).netloc, "post", await create_url_without_domain("/service/application/logistics/v1.0/assign_stores", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-    
-    async def getLocationDetails(self, pincode=None, body=""):
-        """Get location data
-        :param pincode : A `pincode` contains a specific address of a location. : type string
-        """
-        payload = {}
-        
-        if pincode:
-            payload["pincode"] = pincode
-        
-        # Parameter validation
-        schema = LogisticValidator.getLocationDetails()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getLocationDetails"], proccessed_params="""{"required":[{"in":"path","name":"pincode","description":"A `pincode` contains a specific address of a location.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"pincode","description":"A `pincode` contains a specific address of a location.","schema":{"type":"string"},"required":true}]}""", pincode=pincode)
-        query_string = await create_query_string(pincode=pincode)
-        headers = {
-            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
-        }
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getLocationDetails"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/location/{pincode}", pincode=pincode), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
 

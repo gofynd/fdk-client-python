@@ -15,9 +15,6 @@ from ..ApplicationModel import BaseSchema
     
     
     
-    
-    
-        
 
 class LogisticValidator:
     
@@ -42,13 +39,6 @@ class LogisticValidator:
     class assignLocations(BaseSchema):
         
         pass 
-        
-    
-    class getLocationDetails(BaseSchema):
-        
-        
-        pincode = fields.Str(required=False)
-         
         
     
     

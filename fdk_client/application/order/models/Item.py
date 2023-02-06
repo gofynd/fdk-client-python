@@ -9,9 +9,9 @@ from ...ApplicationModel import BaseSchema
 
 
 
+
+
 from .ItemBrand import ItemBrand
-
-
 
 
 
@@ -31,11 +31,11 @@ class Item(BaseSchema):
     #  swagger.json
 
     
+    name = fields.Str(required=False)
+    
     brand = fields.Nested(ItemBrand, required=False)
     
     size = fields.Str(required=False)
-    
-    slug_key = fields.Str(required=False)
     
     seller_identifier = fields.Str(required=False)
     
@@ -45,5 +45,5 @@ class Item(BaseSchema):
     
     id = fields.Float(required=False)
     
-    name = fields.Str(required=False)
+    slug_key = fields.Str(required=False)
     
