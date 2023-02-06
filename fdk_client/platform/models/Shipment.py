@@ -9,13 +9,13 @@ from .LineItem import LineItem
 
 
 
-
-
-
-
-
-
 from .ProcessingDates import ProcessingDates
+
+
+
+
+
+
 
 
 class Shipment(BaseSchema):
@@ -24,14 +24,14 @@ class Shipment(BaseSchema):
     
     line_items = fields.List(fields.Nested(LineItem, required=False), required=False)
     
-    location_id = fields.Int(required=False)
-    
-    meta = fields.Dict(required=False)
-    
     priority = fields.Int(required=False)
+    
+    processing_dates = fields.Nested(ProcessingDates, required=False)
+    
+    location_id = fields.Int(required=False)
     
     external_shipment_id = fields.Float(required=False)
     
-    processing_dates = fields.Nested(ProcessingDates, required=False)
+    meta = fields.Dict(required=False)
     
 

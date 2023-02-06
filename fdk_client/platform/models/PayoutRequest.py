@@ -24,11 +24,11 @@ class PayoutRequest(BaseSchema):
     
     aggregator = fields.Str(required=False)
     
-    is_active = fields.Boolean(required=False)
+    users = fields.Dict(required=False)
     
     bank_details = fields.Nested(PayoutBankDetails, required=False)
     
-    users = fields.Dict(required=False)
+    is_active = fields.Boolean(required=False)
     
     transfer_type = fields.Str(required=False)
     

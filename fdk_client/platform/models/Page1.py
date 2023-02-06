@@ -22,11 +22,11 @@ class Page1(BaseSchema):
     
     has_next = fields.Boolean(required=False)
     
-    current = fields.Int(required=False)
+    item_total = fields.Int(required=False)
     
     size = fields.Int(required=False)
     
-    item_total = fields.Int(required=False)
+    current = fields.Int(required=False)
     
     page_type = fields.Str(required=False)
     

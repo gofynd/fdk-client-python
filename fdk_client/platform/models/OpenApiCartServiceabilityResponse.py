@@ -11,9 +11,9 @@ from .CartBreakup import CartBreakup
 
 from .ShipmentPromise import ShipmentPromise
 
+
+
 from .CartProductInfo import CartProductInfo
-
-
 
 
 class OpenApiCartServiceabilityResponse(BaseSchema):
@@ -26,8 +26,8 @@ class OpenApiCartServiceabilityResponse(BaseSchema):
     
     delivery_promise = fields.Nested(ShipmentPromise, required=False)
     
-    items = fields.List(fields.Nested(CartProductInfo, required=False), required=False)
-    
     message = fields.Str(required=False)
+    
+    items = fields.List(fields.Nested(CartProductInfo, required=False), required=False)
     
 

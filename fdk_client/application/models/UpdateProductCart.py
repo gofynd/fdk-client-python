@@ -7,47 +7,47 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 from .CartProductIdentifer import CartProductIdentifer
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 class UpdateProductCart(BaseSchema):
     # Cart swagger.json
 
     
-    item_id = fields.Int(required=False)
-    
-    identifiers = fields.Nested(CartProductIdentifer, required=False)
+    item_index = fields.Int(required=False)
     
     quantity = fields.Int(required=False)
     
-    is_gift = fields.Boolean(required=False)
-    
     item_size = fields.Str(required=False)
-    
-    gift_message = fields.Str(required=False)
-    
-    item_index = fields.Int(required=False)
     
     article_id = fields.Str(required=False)
     
-    extra_meta = fields.Dict(required=False)
+    is_gift = fields.Boolean(required=False)
+    
+    gift_message = fields.Str(required=False)
+    
+    item_id = fields.Int(required=False)
     
     parent_item_identifiers = fields.Dict(required=False)
+    
+    extra_meta = fields.Dict(required=False)
+    
+    identifiers = fields.Nested(CartProductIdentifer, required=False)
     
 

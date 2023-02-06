@@ -24,10 +24,10 @@ class OfferPrice(BaseSchema):
     
     currency_symbol = fields.Str(required=False)
     
-    bulk_effective = fields.Float(required=False)
+    effective = fields.Int(required=False)
     
     currency_code = fields.Str(required=False)
     
-    effective = fields.Int(required=False)
+    bulk_effective = fields.Float(required=False)
     
 

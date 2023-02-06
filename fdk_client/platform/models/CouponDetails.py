@@ -16,9 +16,9 @@ class CouponDetails(BaseSchema):
     # Cart swagger.json
 
     
-    code = fields.Str(required=False)
-    
     discount_single_quantity = fields.Float(required=False)
+    
+    code = fields.Str(required=False)
     
     discount_total_quantity = fields.Float(required=False)
     
