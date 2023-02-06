@@ -9,6 +9,10 @@ from ...PlatformModel import BaseSchema
 
 
 
+from .OrderDict import OrderDict
+
+
+
 from .PlatformShipment import PlatformShipment
 
 
@@ -17,19 +21,15 @@ from .PlatformShipment import PlatformShipment
 
 
 
-from .OrderDict import OrderDict
-
-
-
 class ShipmentDetailsResponse(BaseSchema):
     #  swagger.json
 
     
-    shipments = fields.List(fields.Nested(PlatformShipment, required=False), required=False)
+    order = fields.Nested(OrderDict, required=False)
     
-    success = fields.Boolean(required=False)
+    shipments = fields.List(fields.Nested(PlatformShipment, required=False), required=False)
     
     custom_meta = fields.List(fields.Dict(required=False), required=False)
     
-    order = fields.Nested(OrderDict, required=False)
+    success = fields.Boolean(required=False)
     

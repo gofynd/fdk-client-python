@@ -25,9 +25,9 @@ class Page1(BaseSchema):
     
     size = fields.Int(required=False)
     
-    has_next = fields.Boolean(required=False)
-    
     page_type = fields.Str(required=False)
+    
+    has_next = fields.Boolean(required=False)
     
     current = fields.Int(required=False)
     
