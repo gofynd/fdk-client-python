@@ -9,6 +9,10 @@ from ...ApplicationModel import BaseSchema
 
 
 
+from .QuestionSet import QuestionSet
+
+
+
 
 
 from .BagReasonMeta import BagReasonMeta
@@ -19,25 +23,21 @@ from .BagReasonMeta import BagReasonMeta
 
 
 
-from .QuestionSet import QuestionSet
-
-
-
 
 
 class BagReasons(BaseSchema):
     #  swagger.json
 
     
+    question_set = fields.List(fields.Nested(QuestionSet, required=False), required=False)
+    
     id = fields.Int(required=False)
     
     meta = fields.Nested(BagReasonMeta, required=False)
     
-    display_name = fields.Str(required=False)
-    
     reasons = fields.List(fields.Nested(lambda: BagReasons(exclude=('reasons')), required=False), required=False)
     
-    question_set = fields.List(fields.Nested(QuestionSet, required=False), required=False)
+    display_name = fields.Str(required=False)
     
     qc_type = fields.List(fields.Str(required=False), required=False)
     

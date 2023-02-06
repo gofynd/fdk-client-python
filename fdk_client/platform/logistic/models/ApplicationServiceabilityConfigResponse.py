@@ -9,13 +9,13 @@ from ...PlatformModel import BaseSchema
 
 
 
+from .ApplicationServiceabilityConfig import ApplicationServiceabilityConfig
+
 
 
 from .ServiceabilityrErrorResponse import ServiceabilityrErrorResponse
 
 
-
-from .ApplicationServiceabilityConfig import ApplicationServiceabilityConfig
 
 
 
@@ -23,9 +23,9 @@ class ApplicationServiceabilityConfigResponse(BaseSchema):
     #  swagger.json
 
     
-    success = fields.Boolean(required=False)
+    data = fields.Nested(ApplicationServiceabilityConfig, required=False)
     
     error = fields.Nested(ServiceabilityrErrorResponse, required=False)
     
-    data = fields.Nested(ApplicationServiceabilityConfig, required=False)
+    success = fields.Boolean(required=False)
     

@@ -11,13 +11,13 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .GetCatalogConfigurationDetailsProduct import GetCatalogConfigurationDetailsProduct
-
-
-
 
 
 from .GetCatalogConfigurationDetailsSchemaListing import GetCatalogConfigurationDetailsSchemaListing
+
+
+
+from .GetCatalogConfigurationDetailsProduct import GetCatalogConfigurationDetailsProduct
 
 
 
@@ -31,11 +31,11 @@ class EntityConfiguration(BaseSchema):
     
     app_id = fields.Str(required=False)
     
-    product = fields.Nested(GetCatalogConfigurationDetailsProduct, required=False)
-    
     config_type = fields.Str(required=False)
     
     listing = fields.Nested(GetCatalogConfigurationDetailsSchemaListing, required=False)
+    
+    product = fields.Nested(GetCatalogConfigurationDetailsProduct, required=False)
     
     id = fields.Str(required=False)
     

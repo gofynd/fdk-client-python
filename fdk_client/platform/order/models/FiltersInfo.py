@@ -11,11 +11,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-
-
-
-
 from .FilterInfoOption import FilterInfoOption
+
+
+
+
 
 
 
@@ -25,9 +25,9 @@ class FiltersInfo(BaseSchema):
     
     text = fields.Str(required=False)
     
-    value = fields.Str(required=False)
+    options = fields.List(fields.Nested(FilterInfoOption, required=False), required=False)
     
     type = fields.Str(required=False)
     
-    options = fields.List(fields.Nested(FilterInfoOption, required=False), required=False)
+    value = fields.Str(required=False)
     
