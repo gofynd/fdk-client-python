@@ -10,6 +10,8 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 class ReqBodyPresignedPOST(BaseSchema):
     # Order swagger.json
 
@@ -17,5 +19,7 @@ class ReqBodyPresignedPOST(BaseSchema):
     event = fields.Str(required=False)
     
     media_type = fields.List(fields.Raw(required=False), required=False)
+    
+    expires_in = fields.Int(required=False)
     
 

@@ -12,6 +12,8 @@ from .SubLane import SubLane
 
 
 
+
+
 class SuperLane(BaseSchema):
     # Orders swagger.json
 
@@ -21,5 +23,7 @@ class SuperLane(BaseSchema):
     options = fields.List(fields.Nested(SubLane, required=False), required=False)
     
     value = fields.Str(required=False)
+    
+    total_items = fields.Int(required=False)
     
 

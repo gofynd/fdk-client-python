@@ -47,11 +47,13 @@ Content System
 * [deleteNavigation](#deletenavigation)
 * [getPageMeta](#getpagemeta)
 * [getPageSpec](#getpagespec)
-* [createPagePreview](#createpagepreview)
 * [updatePagePreview](#updatepagepreview)
 * [deletePage](#deletepage)
-* [updatePathRedirectionRules](#updatepathredirectionrules)
+* [addPathRedirectionRules](#addpathredirectionrules)
 * [getPathRedirectionRules](#getpathredirectionrules)
+* [getPathRedirectionRule](#getpathredirectionrule)
+* [updatePathRedirectionRules](#updatepathredirectionrules)
+* [deletePathRedirectionRules](#deletepathredirectionrules)
 * [getSEOConfiguration](#getseoconfiguration)
 * [updateSEOConfiguration](#updateseoconfiguration)
 * [getSlideshows](#getslideshows)
@@ -4820,7 +4822,7 @@ Get page meta
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.getPageMeta()
+    result = await client.application("<APPLICATION_ID>").content.getPageMeta(pageType=pageType, cartPages=cartPages)
     # use result
 except Exception as e:
     print(e)
@@ -4828,6 +4830,12 @@ except Exception as e:
 
 
 
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| pageType | String? | no | Fetch meta by page type. Acceptable values are: system, custom and all |   
+| cartPages | Boolean? | no | Pass this param value as `true` to fetch meta with cart pages |  
 
 
 
@@ -4994,124 +5002,6 @@ Success. Refer `PageSpec` for more details.
         "query": []
       }
     ]
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### createPagePreview
-Create a page preview
-
-
-
-
-```python
-try:
-    result = await client.application("<APPLICATION_ID>").content.createPagePreview(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [PageRequest](#PageRequest) | yes | Request body |
-
-
-Use this API to create a page preview to check the appearance of a custom page.
-
-*Returned Response:*
-
-
-
-
-[PageSchema](#PageSchema)
-
-Success. Refer `PageSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; default</i></summary>
-
-```json
-{
-  "value": {
-    "date_meta": {
-      "created_on": "2021-03-16T08:24:19.197Z",
-      "modified_on": "2021-03-16T08:24:19.197Z"
-    },
-    "tags": [
-      "my first page"
-    ],
-    "published": true,
-    "component_ids": [],
-    "archived": false,
-    "_id": "60506dcad18cb33946026862",
-    "title": "my first page",
-    "slug": "1st_page",
-    "feature_image": {
-      "secure_url": "https://google.com/some-image"
-    },
-    "content": [
-      {
-        "type": "html",
-        "value": "<div id=\"icfm\">Emtpy Page. Create Page here.</div><div id=\"izu5\" class=\"aa\">hello there!<div id=\"izzl\">how are you doing</div><div><br/></div></div><img id=\"ibgj\" src=\"https://hdn-1.addsale.com/x0/company/52/applications/614957b7e7a0ccc371e96094/pages/pictures/free-content/original/-zLi_CuyM-apple.jpeg\"/>"
-      },
-      {
-        "type": "css",
-        "value": "* { box-sizing: border-box; } body {margin: 0;}*{box-sizing:border-box;}body{margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;}*{box-sizing:border-box;}body{margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;}#icfm{text-align:center;padding-top:30px;padding-right:30px;padding-bottom:30px;padding-left:30px;}#izu5{padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;}#ibgj{color:black;}#izzl{float:none;display:flex;}.aa{float:right;}"
-      },
-      {
-        "type": "js",
-        "value": ""
-      }
-    ],
-    "content_path": "https://hdn-1.fynd.com/company/1526/applications/61012f6a9250ccd1b9ef8a1d/pages/content/page_slug.html",
-    "platform": "web",
-    "description": "hey this is my first page",
-    "visibility": {
-      "test": true
-    },
-    "_schedule": {
-      "start": "2021-04-23T23:50:00.000Z",
-      "next_schedule": [
-        {}
-      ]
-    },
-    "seo": {
-      "title": "my first page",
-      "description": "hey this is my first page",
-      "image": {
-        "url": ""
-      }
-    },
-    "type": "rawhtml",
-    "application": "000000000000000000000001",
-    "orientation": "portrait",
-    "page_meta": []
   }
 }
 ```
@@ -5368,7 +5258,7 @@ Success.
 ---
 
 
-### updatePathRedirectionRules
+### addPathRedirectionRules
 Save path based redirection rules
 
 
@@ -5376,7 +5266,7 @@ Save path based redirection rules
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.updatePathRedirectionRules(body=body)
+    result = await client.application("<APPLICATION_ID>").content.addPathRedirectionRules(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -5391,7 +5281,7 @@ except Exception as e:
 | body | [PathMappingSchema](#PathMappingSchema) | yes | Request body |
 
 
-Use this API to add, update or delete path-based redirection rules
+Use this API to add redirection rules
 
 *Returned Response:*
 
@@ -5406,18 +5296,26 @@ Success. Refer `PathMappingSchema` for more details.
 
 
 <details>
-<summary><i>&nbsp; Example:</i></summary>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; Success</i></summary>
 
 ```json
 {
-  "redirections": [
-    {
-      "redirect_from": "test.hostfynd.dev/redirect_from",
-      "redirect_to": "/redirect_to"
-    }
-  ]
+  "value": {
+    "_id": "615188e9db1e444cb0f40837",
+    "application": "000000000000000000000002",
+    "redirect_from": "/from",
+    "redirect_to": "/to",
+    "createdAt": "2021-09-27T09:03:37.053Z",
+    "updatedAt": "2021-09-27T09:09:25.587Z"
+  }
 }
 ```
+</details>
+
 </details>
 
 
@@ -5439,7 +5337,7 @@ Get path based redirection rules
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.getPathRedirectionRules()
+    result = await client.application("<APPLICATION_ID>").content.getPathRedirectionRules(pageSize=pageSize, pageNo=pageNo)
     # use result
 except Exception as e:
     print(e)
@@ -5447,6 +5345,12 @@ except Exception as e:
 
 
 
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| pageSize | Int? | no | The number of items to retrieve in each page. Default value is 5.  |   
+| pageNo | Int? | no | The page number to navigate through the given set of results. Default value is 1. |  
 
 
 
@@ -5476,12 +5380,8 @@ Success. Refer `PathMappingSchema` for more details.
   "value": {
     "_id": "615188e9db1e444cb0f40837",
     "application": "000000000000000000000002",
-    "redirections": [
-      {
-        "redirect_from": "/from",
-        "redirect_to": "/to"
-      }
-    ],
+    "redirect_from": "/from",
+    "redirect_to": "/to",
     "createdAt": "2021-09-27T09:03:37.053Z",
     "updatedAt": "2021-09-27T09:09:25.587Z"
   }
@@ -5489,6 +5389,209 @@ Success. Refer `PathMappingSchema` for more details.
 ```
 </details>
 
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getPathRedirectionRule
+Get path based redirection rule
+
+
+
+
+```python
+try:
+    result = await client.application("<APPLICATION_ID>").content.getPathRedirectionRule(pathId=pathId)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| pathId | String | yes | ID allotted to the path redirection rule. |  
+
+
+
+Use this API to get path based redirection rule.
+
+*Returned Response:*
+
+
+
+
+[PathMappingSchema](#PathMappingSchema)
+
+Success. Refer `PathMappingSchema` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; Success</i></summary>
+
+```json
+{
+  "value": {
+    "_id": "615188e9db1e444cb0f40837",
+    "application": "000000000000000000000002",
+    "redirect_from": "/from",
+    "redirect_to": "/to",
+    "createdAt": "2021-09-27T09:03:37.053Z",
+    "updatedAt": "2021-09-27T09:09:25.587Z"
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### updatePathRedirectionRules
+Update path based redirection rules
+
+
+
+
+```python
+try:
+    result = await client.application("<APPLICATION_ID>").content.updatePathRedirectionRules(pathId=pathId, body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| pathId | String | yes | ID allotted to the path redirection rule. |  
+| body | [PathMappingSchema](#PathMappingSchema) | yes | Request body |
+
+
+Use this API to update redirection rules
+
+*Returned Response:*
+
+
+
+
+[PathMappingSchema](#PathMappingSchema)
+
+Success. Refer `PathMappingSchema` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; Success</i></summary>
+
+```json
+{
+  "value": {
+    "_id": "615188e9db1e444cb0f40837",
+    "application": "000000000000000000000002",
+    "redirect_from": "/from",
+    "redirect_to": "/to",
+    "createdAt": "2021-09-27T09:03:37.053Z",
+    "updatedAt": "2021-09-27T09:09:25.587Z"
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### deletePathRedirectionRules
+Delete path based redirection rules
+
+
+
+
+```python
+try:
+    result = await client.application("<APPLICATION_ID>").content.deletePathRedirectionRules(pathId=pathId)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| pathId | String | yes | ID allotted to the path redirection rule. |  
+
+
+
+Use this API to delete redirection rules
+
+*Returned Response:*
+
+
+
+
+[HashMap<String,Any>](#HashMap<String,Any>)
+
+Success.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "message": "Redirection deleted successfully"
+}
+```
 </details>
 
 
@@ -7311,22 +7414,12 @@ Success. Returns a JSON object of components. Refer `PageSchema` for more detail
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | application | String? |  yes  |  |
- | redirections | ArrayList<[RedirectionSchema](#RedirectionSchema)>? |  yes  |  |
  | id | String? |  yes  |  |
- | updatedAt | String? |  yes  |  |
- | createdAt | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [RedirectionSchema](#RedirectionSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
  | redirectFrom | String? |  yes  |  |
  | redirectTo | String? |  yes  |  |
+ | updatedAt | String? |  yes  |  |
+ | createdAt | String? |  yes  |  |
+ | source | [TagSourceSchema](#TagSourceSchema)? |  yes  |  |
 
 ---
 
@@ -7769,6 +7862,26 @@ Success. Returns a JSON object of components. Refer `PageSchema` for more detail
  | active | Boolean? |  yes  |  |
  | display | String? |  yes  |  |
  | sortOrder | Int? |  yes  |  |
+ | subNavigation | ArrayList<[SubNavigationReference](#SubNavigationReference)>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [SubNavigationReference](#SubNavigationReference)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | acl | ArrayList<String>? |  yes  |  |
+ | tags | ArrayList<String>? |  yes  |  |
+ | localeLanguage | [LocaleLanguage](#LocaleLanguage)? |  yes  |  |
+ | image | String? |  yes  |  |
+ | type | String? |  yes  |  |
+ | action | [Action](#Action)? |  yes  |  |
+ | active | Boolean? |  yes  |  |
+ | display | String? |  yes  |  |
+ | sortOrder | Int? |  yes  |  |
  | subNavigation | ArrayList<[NavigationReference](#NavigationReference)>? |  yes  |  |
 
 ---
@@ -7904,6 +8017,7 @@ Success. Returns a JSON object of components. Refer `PageSchema` for more detail
  | url | String? |  yes  |  |
  | position | String? |  yes  |  |
  | attributes | HashMap<String,Any>? |  yes  |  |
+ | pages | ArrayList<HashMap<String,Any>>? |  yes  |  |
  | content | String? |  yes  |  |
 
 ---
@@ -8077,6 +8191,7 @@ Success. Returns a JSON object of components. Refer `PageSchema` for more detail
  | id | String? |  yes  |  |
  | question | String? |  yes  |  |
  | answer | String? |  yes  |  |
+ | tags | ArrayList<String>? |  yes  |  |
 
 ---
 
@@ -8688,6 +8803,7 @@ Success. Returns a JSON object of components. Refer `PageSchema` for more detail
  | position | String? |  yes  |  |
  | attributes | HashMap<String,Any>? |  yes  |  |
  | content | String? |  yes  |  |
+ | pages | ArrayList<HashMap<String,Any>>? |  yes  |  |
  | source | [TagSourceSchema](#TagSourceSchema)? |  yes  |  |
 
 ---
@@ -8762,6 +8878,8 @@ Success. Returns a JSON object of components. Refer `PageSchema` for more detail
  | cartReview | cart-review | Symbolic link for Cart Order Review: /cart/order-review |
  | login | login | Symbolic link for Login: /auth/login |
  | register | register | Symbolic link for Register: /auth/register |
+ | shippingPolicy | shipping-policy | Symbolic link for Shipping policy: /shipping-policy |
+ | returnPolicy | return-policy | Symbolic link for Return policy: /return-policy |
 
 ---
 

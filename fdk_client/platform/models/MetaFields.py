@@ -14,8 +14,8 @@ class MetaFields(BaseSchema):
     # Catalog swagger.json
 
     
-    value = fields.Str(required=False)
+    value = fields.Raw(required=False)
     
-    key = fields.Str(required=False)
+    key = fields.Raw(required=False)
     
 

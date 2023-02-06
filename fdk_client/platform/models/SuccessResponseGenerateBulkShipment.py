@@ -10,6 +10,8 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 class SuccessResponseGenerateBulkShipment(BaseSchema):
     # DocumentEngine swagger.json
 
@@ -17,5 +19,7 @@ class SuccessResponseGenerateBulkShipment(BaseSchema):
     success = fields.Boolean(required=False)
     
     job_id = fields.Float(required=False)
+    
+    trace_id = fields.Str(required=False)
     
 

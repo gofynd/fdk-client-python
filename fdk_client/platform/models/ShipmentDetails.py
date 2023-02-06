@@ -15,39 +15,27 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+from .ArticleDetails import ArticleDetails
 
 
-
-
-
-
-from .ShippingToAddress import ShippingToAddress
-
-from .SellerAddress import SellerAddress
 
 
 class ShipmentDetails(BaseSchema):
-    # DocumentEngine swagger.json
+    # OrderManage swagger.json
 
     
-    shipment_no = fields.Str(required=False)
+    affiliate_shipment_id = fields.Str(required=False)
     
-    appointment_no = fields.Str(required=False)
+    shipments = fields.Int(required=False)
     
-    total_sku = fields.Str(required=False)
+    meta = fields.Dict(required=False)
     
-    item_qty = fields.Str(required=False)
+    fulfillment_id = fields.Int(required=False)
     
-    no_of_boxes = fields.Str(required=False)
+    box_type = fields.Str(required=False)
     
-    shipping_to = fields.Str(required=False)
+    articles = fields.List(fields.Nested(ArticleDetails, required=False), required=False)
     
-    seller_name = fields.Str(required=False)
-    
-    gstin_number = fields.Str(required=False)
-    
-    shipping_address = fields.Nested(ShippingToAddress, required=False)
-    
-    seller_address = fields.Nested(SellerAddress, required=False)
+    dp_id = fields.Int(required=False)
     
 

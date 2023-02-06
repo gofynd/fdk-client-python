@@ -54,6 +54,8 @@ from .DeleteAccountReasons import DeleteAccountReasons
 
 
 
+
+
 class PlatformSchema(BaseSchema):
     # User swagger.json
 
@@ -105,5 +107,7 @@ class PlatformSchema(BaseSchema):
     delete_account_reasons = fields.List(fields.Nested(DeleteAccountReasons, required=False), required=False)
     
     delete_account_consent = fields.Dict(required=False)
+    
+    session_config = fields.Dict(required=False)
     
 

@@ -14,7 +14,7 @@ class Error(BaseSchema):
     # Orders swagger.json
 
     
-    reason = fields.Str(required=False)
+    message = fields.Str(required=False)
     
     success = fields.Boolean(required=False)
     

@@ -18,11 +18,11 @@ class SendOtpToCustomerResponse(BaseSchema):
     # Order swagger.json
 
     
-    success = fields.Boolean(required=False)
+    resend_timer = fields.Int(required=False)
     
     message = fields.Str(required=False)
     
-    resend_timer = fields.Int(required=False)
+    success = fields.Boolean(required=False)
     
     request_id = fields.Str(required=False)
     

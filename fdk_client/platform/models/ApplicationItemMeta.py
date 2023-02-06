@@ -7,7 +7,17 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 from .MetaFields import MetaFields
+
+from .ApplicationItemSEO import ApplicationItemSEO
+
+
+
+
+
+from .ApplicationItemMOQ import ApplicationItemMOQ
 
 
 class ApplicationItemMeta(BaseSchema):
@@ -16,6 +26,16 @@ class ApplicationItemMeta(BaseSchema):
     
     _custom_json = fields.Dict(required=False)
     
+    is_cod = fields.Boolean(required=False)
+    
     _custom_meta = fields.List(fields.Nested(MetaFields, required=False), required=False)
+    
+    seo = fields.Nested(ApplicationItemSEO, required=False)
+    
+    alt_text = fields.Dict(required=False)
+    
+    is_gift = fields.Boolean(required=False)
+    
+    moq = fields.Nested(ApplicationItemMOQ, required=False)
     
 

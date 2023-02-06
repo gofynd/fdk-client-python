@@ -12,17 +12,13 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
 class OrderDict(BaseSchema):
     # Orders swagger.json
 
     
-    order_date = fields.Str(required=False)
-    
     fynd_order_id = fields.Str(required=False)
     
-    is_validated = fields.Boolean(required=False)
+    order_date = fields.Str(required=False)
     
     shipment_count = fields.Int(required=False)
     

@@ -12,6 +12,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
+
+
 class PaymentStatusUpdateResponse(BaseSchema):
     # Payment swagger.json
 
@@ -20,6 +24,10 @@ class PaymentStatusUpdateResponse(BaseSchema):
     
     aggregator_name = fields.Str(required=False)
     
+    redirect_url = fields.Str(required=False)
+    
     retry = fields.Boolean(required=False)
+    
+    success = fields.Boolean(required=False)
     
 
