@@ -4,7 +4,7 @@ from typing import Dict
 
 from ..common.constants import APPLICATION_MIN_TOKEN_LENGTH, DEFAULT_DOMAIN
 from ..common.exceptions import FDKInvalidCredentialError
-from .models.LocationValidator import LocationValidator
+from .ApplicationValidator import LocationValidator
 
 
 class ApplicationConfig:
