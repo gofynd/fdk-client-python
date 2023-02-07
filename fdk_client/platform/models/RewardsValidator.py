@@ -97,16 +97,16 @@ class RewardsValidator:
         application_id = fields.Str(required=False)
          
     
-    class getPointsHistory(BaseSchema):
-        
-        page_id = fields.Str(required=False)
-        
-        page_size = fields.Int(required=False)
+    class getUserPointsHistory(BaseSchema):
         
         user_id = fields.Str(required=False)
         
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
+        
+        page_id = fields.Str(required=False)
+        
+        page_size = fields.Int(required=False)
          
     
