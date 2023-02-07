@@ -761,7 +761,7 @@ class CatalogValidator:
          
         
     
-    class patchProduct(BaseSchema):
+    class deleteProduct(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -783,7 +783,7 @@ class CatalogValidator:
          
         
     
-    class deleteProduct(BaseSchema):
+    class patchProduct(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -854,21 +854,21 @@ class CatalogValidator:
          
         
     
-    class createProductsInBulk(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        batch_id = fields.Str(required=False)
-         
-        
-    
     class deleteProductBulkJob(BaseSchema):
         
         
         company_id = fields.Str(required=False)
         
         batch_id = fields.Int(required=False)
+         
+        
+    
+    class createProductsInBulk(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        batch_id = fields.Str(required=False)
          
         
     
@@ -1011,19 +1011,19 @@ class CatalogValidator:
          
         
     
-    class createBulkInventory(BaseSchema):
+    class deleteBulkInventoryJob(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         batch_id = fields.Str(required=False)
          
         
     
-    class deleteBulkInventoryJob(BaseSchema):
+    class createBulkInventory(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
         batch_id = fields.Str(required=False)
          
@@ -1052,7 +1052,7 @@ class CatalogValidator:
          
         
     
-    class updateRealtimeInventory(BaseSchema):
+    class deleteRealtimeInventory(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -1063,7 +1063,7 @@ class CatalogValidator:
          
         
     
-    class deleteRealtimeInventory(BaseSchema):
+    class updateRealtimeInventory(BaseSchema):
         
         
         company_id = fields.Str(required=False)

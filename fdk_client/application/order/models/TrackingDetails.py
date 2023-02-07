@@ -9,15 +9,15 @@ from ...ApplicationModel import BaseSchema
 
 
 
-
-
-
-
-
-
-
-
 from .NestedTrackingDetails import NestedTrackingDetails
+
+
+
+
+
+
+
+
 
 
 
@@ -25,7 +25,7 @@ class TrackingDetails(BaseSchema):
     #  swagger.json
 
     
-    is_passed = fields.Boolean(required=False)
+    tracking_details = fields.List(fields.Nested(NestedTrackingDetails, required=False), required=False)
     
     time = fields.Str(required=False)
     
@@ -33,5 +33,5 @@ class TrackingDetails(BaseSchema):
     
     status = fields.Str(required=False)
     
-    tracking_details = fields.List(fields.Nested(NestedTrackingDetails, required=False), required=False)
+    is_passed = fields.Boolean(required=False)
     

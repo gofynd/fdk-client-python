@@ -17,7 +17,7 @@ class ShipmentTimeStamp(BaseSchema):
     #  swagger.json
 
     
-    t_min = fields.Str(required=False)
-    
     t_max = fields.Str(required=False)
+    
+    t_min = fields.Str(required=False)
     

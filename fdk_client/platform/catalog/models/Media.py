@@ -21,7 +21,7 @@ class Media(BaseSchema):
     
     url = fields.Str(required=False)
     
-    type = fields.Str(required=False)
-    
     aspect_ratio = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
     

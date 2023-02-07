@@ -9,11 +9,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .AdvanceFilterInfo import AdvanceFilterInfo
-
-
-
 from .FiltersInfo import FiltersInfo
+
+
+
+from .AdvanceFilterInfo import AdvanceFilterInfo
 
 
 
@@ -21,7 +21,7 @@ class FiltersResponse(BaseSchema):
     #  swagger.json
 
     
-    advance_filter = fields.Nested(AdvanceFilterInfo, required=False)
-    
     global_filter = fields.List(fields.Nested(FiltersInfo, required=False), required=False)
+    
+    advance_filter = fields.Nested(AdvanceFilterInfo, required=False)
     

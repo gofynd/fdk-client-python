@@ -19,9 +19,9 @@ class DetailsSchemaV2(BaseSchema):
     #  swagger.json
 
     
-    key = fields.Str(required=False)
-    
     type = fields.Str(required=False)
     
     value = fields.Str(required=False)
+    
+    key = fields.Str(required=False)
     

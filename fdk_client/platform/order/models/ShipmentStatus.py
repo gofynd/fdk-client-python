@@ -23,11 +23,11 @@ class ShipmentStatus(BaseSchema):
     #  swagger.json
 
     
-    hex_code = fields.Str(required=False)
+    ops_status = fields.Str(required=False)
     
     status = fields.Str(required=False)
     
-    ops_status = fields.Str(required=False)
+    hex_code = fields.Str(required=False)
     
     actual_status = fields.Str(required=False)
     

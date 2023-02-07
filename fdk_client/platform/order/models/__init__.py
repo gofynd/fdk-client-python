@@ -1,11 +1,19 @@
 """order Platform Models and Enums"""
 
 
-from .GSTDetailsData import GSTDetailsData
+from .FilterInfoOption import FilterInfoOption
+
+from .FiltersInfo import FiltersInfo
+
+from .PaymentModeInfo import PaymentModeInfo
+
+from .Prices import Prices
+
+from .UserDataInfo import UserDataInfo
 
 from .PlatformItem import PlatformItem
 
-from .Prices import Prices
+from .GSTDetailsData import GSTDetailsData
 
 from .BagUnit import BagUnit
 
@@ -13,67 +21,63 @@ from .ShipmentStatus import ShipmentStatus
 
 from .ShipmentItemFulFillingStore import ShipmentItemFulFillingStore
 
-from .PaymentModeInfo import PaymentModeInfo
-
-from .UserDataInfo import UserDataInfo
-
 from .ShipmentItem import ShipmentItem
-
-from .FilterInfoOption import FilterInfoOption
-
-from .FiltersInfo import FiltersInfo
 
 from .ShipmentInternalPlatformViewResponse import ShipmentInternalPlatformViewResponse
 
 from .Error import Error
 
-from .UserDetailsData import UserDetailsData
-
-from .ShipmentStatusData import ShipmentStatusData
-
-from .DPDetailsData import DPDetailsData
-
-from .TrackingList import TrackingList
+from .OrderDetailsData import OrderDetailsData
 
 from .BagStateMapper import BagStateMapper
 
 from .BagStatusHistory import BagStatusHistory
 
-from .FulfillingStore import FulfillingStore
+from .ItemCriterias import ItemCriterias
 
-from .ShipmentPayments import ShipmentPayments
+from .BuyRules import BuyRules
 
-from .OrderDetailsData import OrderDetailsData
+from .DiscountRules import DiscountRules
 
-from .BagGST import BagGST
+from .AppliedPromos import AppliedPromos
 
 from .OrderBagArticle import OrderBagArticle
 
 from .BagConfigs import BagConfigs
 
+from .PlatformDeliveryAddress import PlatformDeliveryAddress
+
 from .OrderBrandName import OrderBrandName
 
-from .PlatformDeliveryAddress import PlatformDeliveryAddress
+from .CurrentStatus import CurrentStatus
 
 from .Identifier import Identifier
 
 from .FinancialBreakup import FinancialBreakup
 
-from .DiscountRules import DiscountRules
-
-from .ItemCriterias import ItemCriterias
-
-from .BuyRules import BuyRules
-
-from .AppliedPromos import AppliedPromos
+from .BagGST import BagGST
 
 from .OrderBags import OrderBags
 
+from .UserDetailsData import UserDetailsData
+
+from .DPDetailsData import DPDetailsData
+
+from .ShipmentStatusData import ShipmentStatusData
+
+from .TrackingList import TrackingList
+
+from .ShipmentPayments import ShipmentPayments
+
+from .FulfillingStore import FulfillingStore
+
 from .ShipmentInfoResponse import ShipmentInfoResponse
 
-from .OrderDict import OrderDict
-
 from .PlatformShipment import PlatformShipment
+
+from .OrderMeta import OrderMeta
+
+from .OrderDict import OrderDict
 
 from .ShipmentDetailsResponse import ShipmentDetailsResponse
 
@@ -85,9 +89,9 @@ from .LaneConfigResponse import LaneConfigResponse
 
 from .Page import Page
 
-from .PlatformChannel import PlatformChannel
-
 from .PlatformBreakupValues import PlatformBreakupValues
+
+from .PlatformChannel import PlatformChannel
 
 from .PlatformOrderItems import PlatformOrderItems
 
@@ -149,49 +153,43 @@ from .BulkActionDetailsDataField import BulkActionDetailsDataField
 
 from .BulkActionDetailsResponse import BulkActionDetailsResponse
 
-from .StoreAddress import StoreAddress
-
-from .StoreEinvoice import StoreEinvoice
-
-from .StoreEwaybill import StoreEwaybill
-
-from .StoreGstCredentials import StoreGstCredentials
-
-from .Document import Document
-
-from .StoreDocuments import StoreDocuments
-
-from .EInvoicePortalDetails import EInvoicePortalDetails
-
-from .StoreMeta import StoreMeta
-
-from .Store import Store
-
-from .BagGSTDetails import BagGSTDetails
-
-from .Dates import Dates
-
-from .BagReturnableCancelableStatus import BagReturnableCancelableStatus
-
-from .Weight import Weight
-
-from .Dimensions import Dimensions
+from .ArticleDetails import ArticleDetails
 
 from .ReturnConfig import ReturnConfig
 
-from .Article import Article
+from .Dimensions import Dimensions
 
-from .PDFLinks import PDFLinks
+from .Weight import Weight
+
+from .Article import Article
 
 from .AffiliateMeta import AffiliateMeta
 
+from .AffiliateBagDetails import AffiliateBagDetails
+
+from .BagReturnableCancelableStatus import BagReturnableCancelableStatus
+
+from .B2BPODetails import B2BPODetails
+
+from .BagMeta import BagMeta
+
+from .Brand import Brand
+
+from .Attributes import Attributes
+
+from .Item import Item
+
+from .Dates import Dates
+
+from .BagGSTDetails import BagGSTDetails
+
 from .BuyerDetails import BuyerDetails
 
-from .ShipmentTimeStamp import ShipmentTimeStamp
+from .DebugInfo import DebugInfo
 
 from .Formatted import Formatted
 
-from .DebugInfo import DebugInfo
+from .ShipmentTimeStamp import ShipmentTimeStamp
 
 from .LockData import LockData
 
@@ -201,21 +199,27 @@ from .EinvoiceInfo import EinvoiceInfo
 
 from .ShipmentMeta import ShipmentMeta
 
+from .PDFLinks import PDFLinks
+
 from .AffiliateDetails import AffiliateDetails
 
-from .ArticleDetails import ArticleDetails
+from .EInvoicePortalDetails import EInvoicePortalDetails
 
-from .B2BPODetails import B2BPODetails
+from .Document import Document
 
-from .BagMeta import BagMeta
+from .StoreDocuments import StoreDocuments
 
-from .AffiliateBagDetails import AffiliateBagDetails
+from .StoreEinvoice import StoreEinvoice
 
-from .Brand import Brand
+from .StoreEwaybill import StoreEwaybill
 
-from .Attributes import Attributes
+from .StoreGstCredentials import StoreGstCredentials
 
-from .Item import Item
+from .StoreMeta import StoreMeta
+
+from .StoreAddress import StoreAddress
+
+from .Store import Store
 
 from .BagDetailsPlatformResponse import BagDetailsPlatformResponse
 
@@ -241,9 +245,9 @@ from .Entities import Entities
 
 from .UpdateShipmentLockPayload import UpdateShipmentLockPayload
 
-from .OriginalFilter import OriginalFilter
-
 from .Bags import Bags
+
+from .OriginalFilter import OriginalFilter
 
 from .CheckResponse import CheckResponse
 
@@ -259,17 +263,9 @@ from .Click2CallResponse import Click2CallResponse
 
 from .Products import Products
 
-from .ProductsDataUpdatesFilters import ProductsDataUpdatesFilters
-
-from .ProductsDataUpdates import ProductsDataUpdates
-
-from .EntitiesDataUpdates import EntitiesDataUpdates
-
-from .DataUpdates import DataUpdates
+from .ProductsReasonsData import ProductsReasonsData
 
 from .ProductsReasonsFilters import ProductsReasonsFilters
-
-from .ProductsReasonsData import ProductsReasonsData
 
 from .ProductsReasons import ProductsReasons
 
@@ -278,6 +274,14 @@ from .EntityReasonData import EntityReasonData
 from .EntitiesReasons import EntitiesReasons
 
 from .ReasonsData import ReasonsData
+
+from .ProductsDataUpdatesFilters import ProductsDataUpdatesFilters
+
+from .ProductsDataUpdates import ProductsDataUpdates
+
+from .EntitiesDataUpdates import EntitiesDataUpdates
+
+from .DataUpdates import DataUpdates
 
 from .ShipmentsRequest import ShipmentsRequest
 
@@ -291,11 +295,29 @@ from .StatuesResponse import StatuesResponse
 
 from .UpdateShipmentStatusResponseBody import UpdateShipmentStatusResponseBody
 
-from .OrderPriority import OrderPriority
+from .AffiliateStoreIdMapping import AffiliateStoreIdMapping
 
-from .OrderUser import OrderUser
+from .AffiliateAppConfigMeta import AffiliateAppConfigMeta
 
-from .UserData import UserData
+from .AffiliateAppConfig import AffiliateAppConfig
+
+from .AffiliateInventoryLogisticsConfig import AffiliateInventoryLogisticsConfig
+
+from .AffiliateInventoryStoreConfig import AffiliateInventoryStoreConfig
+
+from .AffiliateInventoryOrderConfig import AffiliateInventoryOrderConfig
+
+from .AffiliateInventoryPaymentConfig import AffiliateInventoryPaymentConfig
+
+from .AffiliateInventoryArticleAssignmentConfig import AffiliateInventoryArticleAssignmentConfig
+
+from .AffiliateInventoryConfig import AffiliateInventoryConfig
+
+from .AffiliateConfig import AffiliateConfig
+
+from .Affiliate import Affiliate
+
+from .OrderConfig import OrderConfig
 
 from .MarketPlacePdf import MarketPlacePdf
 
@@ -303,39 +325,21 @@ from .AffiliateBag import AffiliateBag
 
 from .ArticleDetails1 import ArticleDetails1
 
-from .LocationDetails import LocationDetails
-
 from .ShipmentDetails import ShipmentDetails
+
+from .LocationDetails import LocationDetails
 
 from .ShipmentConfig import ShipmentConfig
 
 from .ShipmentData import ShipmentData
 
+from .OrderUser import OrderUser
+
+from .UserData import UserData
+
+from .OrderPriority import OrderPriority
+
 from .OrderInfo import OrderInfo
-
-from .AffiliateStoreIdMapping import AffiliateStoreIdMapping
-
-from .AffiliateInventoryStoreConfig import AffiliateInventoryStoreConfig
-
-from .AffiliateInventoryPaymentConfig import AffiliateInventoryPaymentConfig
-
-from .AffiliateInventoryArticleAssignmentConfig import AffiliateInventoryArticleAssignmentConfig
-
-from .AffiliateInventoryOrderConfig import AffiliateInventoryOrderConfig
-
-from .AffiliateInventoryLogisticsConfig import AffiliateInventoryLogisticsConfig
-
-from .AffiliateInventoryConfig import AffiliateInventoryConfig
-
-from .AffiliateAppConfigMeta import AffiliateAppConfigMeta
-
-from .AffiliateAppConfig import AffiliateAppConfig
-
-from .AffiliateConfig import AffiliateConfig
-
-from .Affiliate import Affiliate
-
-from .OrderConfig import OrderConfig
 
 from .CreateOrderPayload import CreateOrderPayload
 
@@ -373,25 +377,25 @@ from .ManualAssignDPToShipment import ManualAssignDPToShipment
 
 from .ManualAssignDPToShipmentResponse import ManualAssignDPToShipmentResponse
 
-from .TaxInfo import TaxInfo
-
-from .ShippingInfo import ShippingInfo
-
-from .BillingInfo import BillingInfo
-
 from .Tax import Tax
 
 from .Charge import Charge
 
-from .LineItem import LineItem
+from .TaxInfo import TaxInfo
 
 from .ProcessingDates import ProcessingDates
+
+from .LineItem import LineItem
 
 from .Shipment import Shipment
 
 from .PaymentMethod import PaymentMethod
 
 from .PaymentInfo import PaymentInfo
+
+from .ShippingInfo import ShippingInfo
+
+from .BillingInfo import BillingInfo
 
 from .CreateOrderAPI import CreateOrderAPI
 
@@ -407,9 +411,9 @@ from .CreateChannelConfig import CreateChannelConfig
 
 from .CreateChannelConfigData import CreateChannelConfigData
 
-from .CreateChannelConifgErrorResponse import CreateChannelConifgErrorResponse
-
 from .CreateChannelConfigResponse import CreateChannelConfigResponse
+
+from .CreateChannelConifgErrorResponse import CreateChannelConifgErrorResponse
 
 from .UploadConsent import UploadConsent
 

@@ -21,9 +21,9 @@ class Price1(BaseSchema):
     #  swagger.json
 
     
-    min = fields.Float(required=False)
-    
     currency_symbol = fields.Str(required=False)
+    
+    min = fields.Float(required=False)
     
     max = fields.Float(required=False)
     
