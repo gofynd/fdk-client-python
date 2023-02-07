@@ -29,7 +29,7 @@ class OrderValidator:
         
         stores = fields.Str(required=False)
         
-        sales_channel = fields.Str(required=False)
+        sales_channels = fields.Str(required=False)
         
         request_by_ext = fields.Str(required=False)
         
@@ -146,7 +146,7 @@ class OrderValidator:
         
         stores = fields.Str(required=False)
         
-        sales_channel = fields.Str(required=False)
+        sales_channels = fields.Str(required=False)
         
         page_no = fields.Int(required=False)
         
@@ -296,50 +296,6 @@ class OrderValidator:
         customer_id = fields.Str(required=False)
         
         is_priority_sort = fields.Boolean(required=False)
-         
-    
-    class getManifestList(BaseSchema):
-        
-        company_id = fields.Int(required=False)
-        
-        status = fields.Str(required=False)
-        
-        store_id = fields.Int(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        search_value = fields.Str(required=False)
-        
-        from_date = fields.Str(required=False)
-        
-        to_date = fields.Str(required=False)
-         
-    
-    class getManifestDetailsWithShipments(BaseSchema):
-        
-        company_id = fields.Int(required=False)
-        
-        manifest_id = fields.Str(required=False)
-        
-        from_date = fields.Str(required=False)
-        
-        to_date = fields.Str(required=False)
-        
-        store_id = fields.Int(required=False)
-        
-        page = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        lane = fields.Str(required=False)
-        
-        dp_ids = fields.Int(required=False)
-        
-        search_type = fields.Str(required=False)
-        
-        search_value = fields.Str(required=False)
          
     
     class getBulkActionFailedReport(BaseSchema):
