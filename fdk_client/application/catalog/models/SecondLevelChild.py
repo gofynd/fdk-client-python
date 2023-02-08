@@ -9,6 +9,12 @@ from ...ApplicationModel import BaseSchema
 
 
 
+from .ThirdLevelChild import ThirdLevelChild
+
+
+
+from .ProductListingAction import ProductListingAction
+
 
 
 
@@ -21,19 +27,15 @@ from .ImageUrls import ImageUrls
 
 
 
-from .ProductListingAction import ProductListingAction
-
-
-
-from .ThirdLevelChild import ThirdLevelChild
-
 
 
 class SecondLevelChild(BaseSchema):
     #  swagger.json
 
     
-    name = fields.Str(required=False)
+    childs = fields.List(fields.Nested(ThirdLevelChild, required=False), required=False)
+    
+    action = fields.Nested(ProductListingAction, required=False)
     
     slug = fields.Str(required=False)
     
@@ -41,9 +43,7 @@ class SecondLevelChild(BaseSchema):
     
     uid = fields.Int(required=False)
     
+    name = fields.Str(required=False)
+    
     _custom_json = fields.Dict(required=False)
-    
-    action = fields.Nested(ProductListingAction, required=False)
-    
-    childs = fields.List(fields.Nested(ThirdLevelChild, required=False), required=False)
     

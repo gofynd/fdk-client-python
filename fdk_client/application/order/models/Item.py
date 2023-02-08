@@ -17,13 +17,13 @@ from ...ApplicationModel import BaseSchema
 
 
 
+
+
+
+
+
+
 from .ItemBrand import ItemBrand
-
-
-
-
-
-
 
 
 
@@ -37,13 +37,13 @@ class Item(BaseSchema):
     
     seller_identifier = fields.Str(required=False)
     
-    slug_key = fields.Str(required=False)
+    id = fields.Float(required=False)
     
-    brand = fields.Nested(ItemBrand, required=False)
+    slug_key = fields.Str(required=False)
     
     name = fields.Str(required=False)
     
-    id = fields.Float(required=False)
-    
     image = fields.List(fields.Str(required=False), required=False)
+    
+    brand = fields.Nested(ItemBrand, required=False)
     

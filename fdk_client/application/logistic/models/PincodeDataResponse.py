@@ -13,7 +13,7 @@ from .PincodeLatLongData import PincodeLatLongData
 
 
 
-from .PincodeErrorSchemaResponse import PincodeErrorSchemaResponse
+
 
 
 
@@ -25,11 +25,11 @@ from .PincodeParentsResponse import PincodeParentsResponse
 
 
 
+from .PincodeErrorSchemaResponse import PincodeErrorSchemaResponse
+
+
+
 from .PincodeMetaResponse import PincodeMetaResponse
-
-
-
-
 
 
 
@@ -39,7 +39,9 @@ class PincodeDataResponse(BaseSchema):
     
     lat_long = fields.Nested(PincodeLatLongData, required=False)
     
-    error = fields.Nested(PincodeErrorSchemaResponse, required=False)
+    uid = fields.Str(required=False)
+    
+    display_name = fields.Str(required=False)
     
     name = fields.Str(required=False)
     
@@ -47,9 +49,7 @@ class PincodeDataResponse(BaseSchema):
     
     sub_type = fields.Str(required=False)
     
+    error = fields.Nested(PincodeErrorSchemaResponse, required=False)
+    
     meta = fields.Nested(PincodeMetaResponse, required=False)
-    
-    uid = fields.Str(required=False)
-    
-    display_name = fields.Str(required=False)
     

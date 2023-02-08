@@ -140,20 +140,6 @@ from ..ApplicationModel import BaseSchema
         
         
         
-    
-    
-        
-        
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
         
     
     
@@ -457,42 +443,12 @@ class CatalogValidator:
         store_id = fields.Int(required=False)
         
         pincode = fields.Str(required=False)
-         
-        
-    
-    class getProductSellersBySlug(BaseSchema):
-        
-        
-        slug = fields.Str(required=False)
-        
-        size = fields.Str(required=False)
-        
-        pincode = fields.Str(required=False)
-        
-        strategy = fields.Str(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-         
-        
-    
-    class getProductPriceBySlugV3(BaseSchema):
-        
-        
-        slug = fields.Str(required=False)
-        
-        size = fields.Str(required=False)
-        
-        store_id = fields.Int(required=False)
-        
-        pincode = fields.Str(required=False)
         
         moq = fields.Int(required=False)
          
         
     
-    class getProductSellersBySlugV3(BaseSchema):
+    class getProductSellersBySlug(BaseSchema):
         
         
         slug = fields.Str(required=False)
