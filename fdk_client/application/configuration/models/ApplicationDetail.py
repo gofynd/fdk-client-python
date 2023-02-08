@@ -39,6 +39,8 @@ from .Domain import Domain
 
 
 
+
+
 class ApplicationDetail(BaseSchema):
     #  swagger.json
 
@@ -60,4 +62,6 @@ class ApplicationDetail(BaseSchema):
     domains = fields.List(fields.Nested(Domain, required=False), required=False)
     
     _id = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
     

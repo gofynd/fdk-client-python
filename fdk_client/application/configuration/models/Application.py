@@ -81,6 +81,8 @@ from .Domain import Domain
 
 
 
+
+
 class Application(BaseSchema):
     #  swagger.json
 
@@ -134,4 +136,6 @@ class Application(BaseSchema):
     mobile_logo = fields.Nested(SecureUrl, required=False)
     
     domain = fields.Nested(Domain, required=False)
+    
+    slug = fields.Str(required=False)
     

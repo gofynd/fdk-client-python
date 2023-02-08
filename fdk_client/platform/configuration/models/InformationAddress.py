@@ -31,7 +31,7 @@ class InformationAddress(BaseSchema):
     
     address_line = fields.List(fields.Str(required=False), required=False)
     
-    phone = fields.Nested(InformationPhone, required=False)
+    phone = fields.List(fields.Nested(InformationPhone, required=False), required=False)
     
     city = fields.Str(required=False)
     

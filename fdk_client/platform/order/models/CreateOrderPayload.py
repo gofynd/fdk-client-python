@@ -13,9 +13,9 @@ from .OrderConfig import OrderConfig
 
 
 
+
+
 from .OrderInfo import OrderInfo
-
-
 
 
 
@@ -25,7 +25,7 @@ class CreateOrderPayload(BaseSchema):
     
     order_config = fields.Nested(OrderConfig, required=False)
     
-    order_info = fields.Nested(OrderInfo, required=False)
-    
     affiliate_id = fields.Str(required=False)
+    
+    order_info = fields.Nested(OrderInfo, required=False)
     
