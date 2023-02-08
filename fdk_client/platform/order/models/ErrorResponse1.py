@@ -21,7 +21,7 @@ class ErrorResponse1(BaseSchema):
     
     status = fields.Int(required=False)
     
-    error_trace = fields.Str(required=False)
-    
     message = fields.Str(required=False)
+    
+    error_trace = fields.Str(required=False)
     

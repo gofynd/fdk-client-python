@@ -19,8 +19,6 @@ from ...PlatformModel import BaseSchema
 
 
 
-
-
 from .NetQuantity1 import NetQuantity1
 
 
@@ -107,13 +105,11 @@ from .ReturnConfig1 import ReturnConfig1
 
 
 
-class ProductCreateUpdateV2(BaseSchema):
+class ProductCreateUpdateRequest(BaseSchema):
     #  swagger.json
 
     
     action = fields.Str(required=False)
-    
-    attributes = fields.Dict(required=False)
     
     is_image_less_product = fields.Boolean(required=False)
     

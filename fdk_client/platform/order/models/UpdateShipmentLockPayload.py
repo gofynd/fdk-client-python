@@ -27,7 +27,7 @@ class UpdateShipmentLockPayload(BaseSchema):
     
     entity_type = fields.Str(required=False)
     
-    action = fields.Str(required=False)
-    
     action_type = fields.Str(required=False)
+    
+    action = fields.Str(required=False)
     

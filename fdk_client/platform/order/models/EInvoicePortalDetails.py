@@ -19,9 +19,9 @@ class EInvoicePortalDetails(BaseSchema):
     #  swagger.json
 
     
-    user = fields.Str(required=False)
-    
     password = fields.Str(required=False)
+    
+    user = fields.Str(required=False)
     
     username = fields.Str(required=False)
     
