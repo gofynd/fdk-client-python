@@ -1,49 +1,19 @@
 """order Application Models and Enums"""
 
 
-from .OrderStatuses import OrderStatuses
-
-from .OrderFilters import OrderFilters
-
-from .OrderPage import OrderPage
-
-from .UserInfo import UserInfo
-
 from .BreakupValues import BreakupValues
-
-from .BagsForReorderArticleAssignment import BagsForReorderArticleAssignment
-
-from .BagsForReorder import BagsForReorder
-
-from .NestedTrackingDetails import NestedTrackingDetails
-
-from .TrackingDetails import TrackingDetails
-
-from .ShipmentStatus import ShipmentStatus
-
-from .ShipmentUserInfo import ShipmentUserInfo
-
-from .FulfillingCompany import FulfillingCompany
-
-from .Prices import Prices
-
-from .ShipmentPayment import ShipmentPayment
-
-from .FulfillingStore import FulfillingStore
-
-from .DeliveryAddress import DeliveryAddress
-
-from .ShipmentTotalDetails import ShipmentTotalDetails
 
 from .Identifiers import Identifiers
 
 from .FinancialBreakup import FinancialBreakup
 
-from .CurrentStatus import CurrentStatus
+from .Prices import Prices
 
 from .ItemBrand import ItemBrand
 
 from .Item import Item
+
+from .CurrentStatus import CurrentStatus
 
 from .AppliedFreeArticles import AppliedFreeArticles
 
@@ -51,15 +21,45 @@ from .AppliedPromos import AppliedPromos
 
 from .Bags import Bags
 
-from .Invoice import Invoice
+from .FulfillingCompany import FulfillingCompany
+
+from .ShipmentUserInfo import ShipmentUserInfo
+
+from .ShipmentStatus import ShipmentStatus
+
+from .ShipmentTotalDetails import ShipmentTotalDetails
 
 from .TimeStampData import TimeStampData
 
 from .Promise import Promise
 
+from .ShipmentPayment import ShipmentPayment
+
+from .Invoice import Invoice
+
+from .FulfillingStore import FulfillingStore
+
+from .DeliveryAddress import DeliveryAddress
+
+from .NestedTrackingDetails import NestedTrackingDetails
+
+from .TrackingDetails import TrackingDetails
+
 from .Shipments import Shipments
 
+from .UserInfo import UserInfo
+
+from .BagsForReorderArticleAssignment import BagsForReorderArticleAssignment
+
+from .BagsForReorder import BagsForReorder
+
 from .OrderSchema import OrderSchema
+
+from .OrderPage import OrderPage
+
+from .OrderStatuses import OrderStatuses
+
+from .OrderFilters import OrderFilters
 
 from .OrderList import OrderList
 
@@ -95,13 +95,19 @@ from .ShipmentReason import ShipmentReason
 
 from .ShipmentReasons import ShipmentReasons
 
+from .EntitiesDataUpdates import EntitiesDataUpdates
+
 from .ProductsDataUpdatesFilters import ProductsDataUpdatesFilters
 
 from .ProductsDataUpdates import ProductsDataUpdates
 
-from .EntitiesDataUpdates import EntitiesDataUpdates
-
 from .DataUpdates import DataUpdates
+
+from .Products import Products
+
+from .EntityReasonData import EntityReasonData
+
+from .EntitiesReasons import EntitiesReasons
 
 from .ProductsReasonsData import ProductsReasonsData
 
@@ -109,13 +115,7 @@ from .ProductsReasonsFilters import ProductsReasonsFilters
 
 from .ProductsReasons import ProductsReasons
 
-from .EntityReasonData import EntityReasonData
-
-from .EntitiesReasons import EntitiesReasons
-
 from .ReasonsData import ReasonsData
-
-from .Products import Products
 
 from .ShipmentsRequest import ShipmentsRequest
 
