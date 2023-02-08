@@ -27,11 +27,11 @@ class ApplicationDepartment(BaseSchema):
     
     name = fields.Str(required=False)
     
+    logo = fields.Str(required=False)
+    
     is_active = fields.Boolean(required=False)
     
     uid = fields.Int(required=False)
-    
-    logo = fields.Str(required=False)
     
     app_id = fields.Str(required=False)
     

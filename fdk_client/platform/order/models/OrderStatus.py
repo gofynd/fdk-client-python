@@ -25,9 +25,9 @@ class OrderStatus(BaseSchema):
     
     order_details = fields.List(fields.Nested(FyndOrderIdList, required=False), required=False)
     
-    mobile = fields.Int(required=False)
-    
     start_date = fields.Str(required=False)
+    
+    mobile = fields.Int(required=False)
     
     end_date = fields.Str(required=False)
     

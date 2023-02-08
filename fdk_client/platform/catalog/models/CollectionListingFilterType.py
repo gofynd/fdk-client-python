@@ -19,9 +19,9 @@ class CollectionListingFilterType(BaseSchema):
     #  swagger.json
 
     
+    name = fields.Str(required=False)
+    
     display = fields.Str(required=False)
     
     is_selected = fields.Boolean(required=False)
-    
-    name = fields.Str(required=False)
     

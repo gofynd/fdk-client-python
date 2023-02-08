@@ -33,7 +33,11 @@ class DiscountOffer(BaseSchema):
     #  swagger.json
 
     
-    min_offer_quantity = fields.Int(required=False)
+    code = fields.Str(required=False)
+    
+    max_offer_quantity = fields.Int(required=False)
+    
+    apportion_discount = fields.Boolean(required=False)
     
     discount_price = fields.Float(required=False)
     
@@ -43,13 +47,9 @@ class DiscountOffer(BaseSchema):
     
     max_discount_amount = fields.Float(required=False)
     
-    code = fields.Str(required=False)
-    
-    max_offer_quantity = fields.Int(required=False)
-    
-    apportion_discount = fields.Boolean(required=False)
-    
-    discount_amount = fields.Float(required=False)
+    min_offer_quantity = fields.Int(required=False)
     
     partial_can_ret = fields.Boolean(required=False)
+    
+    discount_amount = fields.Float(required=False)
     

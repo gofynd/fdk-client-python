@@ -17,7 +17,7 @@ class OriginalFilter(BaseSchema):
     #  swagger.json
 
     
-    affiliate_shipment_id = fields.Str(required=False)
-    
     affiliate_id = fields.Str(required=False)
+    
+    affiliate_shipment_id = fields.Str(required=False)
     
