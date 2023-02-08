@@ -261,18 +261,6 @@ from .BaseResponse import BaseResponse
 
 from .Click2CallResponse import Click2CallResponse
 
-from .EntityReasonData import EntityReasonData
-
-from .EntitiesReasons import EntitiesReasons
-
-from .ProductsReasonsFilters import ProductsReasonsFilters
-
-from .ProductsReasonsData import ProductsReasonsData
-
-from .ProductsReasons import ProductsReasons
-
-from .ReasonsData import ReasonsData
-
 from .EntitiesDataUpdates import EntitiesDataUpdates
 
 from .ProductsDataUpdatesFilters import ProductsDataUpdatesFilters
@@ -282,6 +270,18 @@ from .ProductsDataUpdates import ProductsDataUpdates
 from .DataUpdates import DataUpdates
 
 from .Products import Products
+
+from .EntityReasonData import EntityReasonData
+
+from .EntitiesReasons import EntitiesReasons
+
+from .ProductsReasonsData import ProductsReasonsData
+
+from .ProductsReasonsFilters import ProductsReasonsFilters
+
+from .ProductsReasons import ProductsReasons
+
+from .ReasonsData import ReasonsData
 
 from .ShipmentsRequest import ShipmentsRequest
 
@@ -295,29 +295,11 @@ from .StatuesResponse import StatuesResponse
 
 from .UpdateShipmentStatusResponseBody import UpdateShipmentStatusResponseBody
 
-from .AffiliateStoreIdMapping import AffiliateStoreIdMapping
+from .OrderPriority import OrderPriority
 
-from .AffiliateAppConfigMeta import AffiliateAppConfigMeta
+from .MarketPlacePdf import MarketPlacePdf
 
-from .AffiliateAppConfig import AffiliateAppConfig
-
-from .AffiliateInventoryArticleAssignmentConfig import AffiliateInventoryArticleAssignmentConfig
-
-from .AffiliateInventoryStoreConfig import AffiliateInventoryStoreConfig
-
-from .AffiliateInventoryLogisticsConfig import AffiliateInventoryLogisticsConfig
-
-from .AffiliateInventoryOrderConfig import AffiliateInventoryOrderConfig
-
-from .AffiliateInventoryPaymentConfig import AffiliateInventoryPaymentConfig
-
-from .AffiliateInventoryConfig import AffiliateInventoryConfig
-
-from .AffiliateConfig import AffiliateConfig
-
-from .Affiliate import Affiliate
-
-from .OrderConfig import OrderConfig
+from .AffiliateBag import AffiliateBag
 
 from .OrderUser import OrderUser
 
@@ -325,21 +307,39 @@ from .UserData import UserData
 
 from .ArticleDetails1 import ArticleDetails1
 
-from .ShipmentDetails import ShipmentDetails
-
 from .LocationDetails import LocationDetails
+
+from .ShipmentDetails import ShipmentDetails
 
 from .ShipmentConfig import ShipmentConfig
 
 from .ShipmentData import ShipmentData
 
-from .OrderPriority import OrderPriority
-
-from .MarketPlacePdf import MarketPlacePdf
-
-from .AffiliateBag import AffiliateBag
-
 from .OrderInfo import OrderInfo
+
+from .AffiliateStoreIdMapping import AffiliateStoreIdMapping
+
+from .AffiliateInventoryOrderConfig import AffiliateInventoryOrderConfig
+
+from .AffiliateInventoryStoreConfig import AffiliateInventoryStoreConfig
+
+from .AffiliateInventoryLogisticsConfig import AffiliateInventoryLogisticsConfig
+
+from .AffiliateInventoryArticleAssignmentConfig import AffiliateInventoryArticleAssignmentConfig
+
+from .AffiliateInventoryPaymentConfig import AffiliateInventoryPaymentConfig
+
+from .AffiliateInventoryConfig import AffiliateInventoryConfig
+
+from .AffiliateAppConfigMeta import AffiliateAppConfigMeta
+
+from .AffiliateAppConfig import AffiliateAppConfig
+
+from .AffiliateConfig import AffiliateConfig
+
+from .Affiliate import Affiliate
+
+from .OrderConfig import OrderConfig
 
 from .CreateOrderPayload import CreateOrderPayload
 
@@ -387,13 +387,13 @@ from .ProcessingDates import ProcessingDates
 
 from .Shipment import Shipment
 
-from .BillingInfo import BillingInfo
-
-from .TaxInfo import TaxInfo
-
 from .PaymentMethod import PaymentMethod
 
 from .PaymentInfo import PaymentInfo
+
+from .BillingInfo import BillingInfo
+
+from .TaxInfo import TaxInfo
 
 from .ShippingInfo import ShippingInfo
 

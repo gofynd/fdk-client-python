@@ -19,9 +19,9 @@ class GetConfigMetadataResponse(BaseSchema):
     #  swagger.json
 
     
-    data = fields.List(fields.Dict(required=False), required=False)
-    
     values = fields.List(fields.Dict(required=False), required=False)
     
     condition = fields.List(fields.Dict(required=False), required=False)
+    
+    data = fields.List(fields.Dict(required=False), required=False)
     

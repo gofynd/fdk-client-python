@@ -21,9 +21,9 @@ class Logo(BaseSchema):
     #  swagger.json
 
     
-    aspect_ratio_f = fields.Int(required=False)
-    
     secure_url = fields.Str(required=False)
+    
+    aspect_ratio_f = fields.Int(required=False)
     
     aspect_ratio = fields.Str(required=False)
     

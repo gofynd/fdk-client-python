@@ -27,15 +27,15 @@ class AttributeMaster(BaseSchema):
     #  swagger.json
 
     
+    mandatory = fields.Boolean(required=False)
+    
+    format = fields.Str(required=False)
+    
+    range = fields.Nested(AttributeSchemaRange, required=False)
+    
     type = fields.Str(required=False)
     
     allowed_values = fields.List(fields.Str(required=False), required=False)
     
-    range = fields.Nested(AttributeSchemaRange, required=False)
-    
     multi = fields.Boolean(required=False)
-    
-    mandatory = fields.Boolean(required=False)
-    
-    format = fields.Str(required=False)
     

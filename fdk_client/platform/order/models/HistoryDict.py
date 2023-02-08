@@ -33,11 +33,11 @@ class HistoryDict(BaseSchema):
     #  swagger.json
 
     
-    user = fields.Str(required=False)
+    bag_id = fields.Int(required=False)
     
-    type = fields.Str(required=False)
+    createdat = fields.Str(required=False)
     
-    ticket_url = fields.Str(required=False)
+    ticket_id = fields.Str(required=False)
     
     message = fields.Str(required=False)
     
@@ -45,11 +45,11 @@ class HistoryDict(BaseSchema):
     
     l3_detail = fields.Str(required=False)
     
-    ticket_id = fields.Str(required=False)
-    
     l1_detail = fields.Str(required=False)
     
-    bag_id = fields.Int(required=False)
+    ticket_url = fields.Str(required=False)
     
-    createdat = fields.Str(required=False)
+    type = fields.Str(required=False)
+    
+    user = fields.Str(required=False)
     
