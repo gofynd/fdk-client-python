@@ -26,11 +26,7 @@ class AppConfigurationsSort(BaseSchema):
     # Catalog swagger.json
 
     
-    logo = fields.Str(required=False)
-    
-    is_default = fields.Boolean(required=False)
-    
-    default_key = fields.Str(required=False)
+    is_active = fields.Boolean(required=False)
     
     priority = fields.Int(required=False)
     
@@ -38,8 +34,12 @@ class AppConfigurationsSort(BaseSchema):
     
     key = fields.Str(required=False)
     
+    logo = fields.Str(required=False)
+    
+    is_default = fields.Boolean(required=False)
+    
     app_id = fields.Str(required=False)
     
-    is_active = fields.Boolean(required=False)
+    default_key = fields.Str(required=False)
     
 

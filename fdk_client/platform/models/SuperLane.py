@@ -7,11 +7,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
+
+
 from .SubLane import SubLane
-
-
-
-
 
 
 class SuperLane(BaseSchema):
@@ -20,10 +20,10 @@ class SuperLane(BaseSchema):
     
     text = fields.Str(required=False)
     
-    options = fields.List(fields.Nested(SubLane, required=False), required=False)
-    
     value = fields.Str(required=False)
     
     total_items = fields.Int(required=False)
+    
+    options = fields.List(fields.Nested(SubLane, required=False), required=False)
     
 

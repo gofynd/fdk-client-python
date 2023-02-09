@@ -16,9 +16,9 @@ class _ArticleQuery(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    size = fields.Str(required=False)
-    
     item_id = fields.Int(required=False)
+    
+    size = fields.Str(required=False)
     
     ignored_stores = fields.List(fields.Int(required=False), required=False)
     

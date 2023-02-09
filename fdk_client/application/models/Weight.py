@@ -16,10 +16,10 @@ class Weight(BaseSchema):
     # Catalog swagger.json
 
     
+    is_default = fields.Boolean(required=False)
+    
     unit = fields.Str(required=False)
     
     shipping = fields.Float(required=False)
-    
-    is_default = fields.Boolean(required=False)
     
 
