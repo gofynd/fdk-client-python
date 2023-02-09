@@ -13,9 +13,9 @@ from .OpeningClosing import OpeningClosing
 
 
 
+
+
 from .OpeningClosing import OpeningClosing
-
-
 
 
 
@@ -27,9 +27,9 @@ class TimmingResponse(BaseSchema):
     
     closing = fields.Nested(OpeningClosing, required=False)
     
+    open = fields.Boolean(required=False)
+    
     opening = fields.Nested(OpeningClosing, required=False)
     
     weekday = fields.Str(required=False)
-    
-    open = fields.Boolean(required=False)
     

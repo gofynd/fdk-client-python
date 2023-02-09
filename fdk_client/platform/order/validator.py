@@ -223,6 +223,9 @@ from ..PlatformModel import BaseSchema
     
     
         
+    
+    
+        
         
         
     
@@ -705,6 +708,13 @@ class OrderValidator:
         
     
     class getRoleBasedActions(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class postShipmentHistory(BaseSchema):
         
         
         company_id = fields.Int(required=False)

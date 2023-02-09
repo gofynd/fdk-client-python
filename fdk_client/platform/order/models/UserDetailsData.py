@@ -33,15 +33,15 @@ class UserDetailsData(BaseSchema):
     
     address = fields.Str(required=False)
     
-    country = fields.Str(required=False)
-    
-    city = fields.Str(required=False)
-    
-    email = fields.Str(required=False)
-    
     name = fields.Str(required=False)
+    
+    state = fields.Str(required=False)
     
     pincode = fields.Str(required=False)
     
-    state = fields.Str(required=False)
+    city = fields.Str(required=False)
+    
+    country = fields.Str(required=False)
+    
+    email = fields.Str(required=False)
     

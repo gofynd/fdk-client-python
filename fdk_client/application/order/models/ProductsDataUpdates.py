@@ -9,9 +9,9 @@ from ...ApplicationModel import BaseSchema
 
 
 
-
-
 from .ProductsDataUpdatesFilters import ProductsDataUpdatesFilters
+
+
 
 
 
@@ -19,7 +19,7 @@ class ProductsDataUpdates(BaseSchema):
     #  swagger.json
 
     
-    data = fields.Dict(required=False)
-    
     filters = fields.List(fields.Nested(ProductsDataUpdatesFilters, required=False), required=False)
+    
+    data = fields.Dict(required=False)
     
