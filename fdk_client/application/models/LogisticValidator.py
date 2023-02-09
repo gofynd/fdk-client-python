@@ -18,12 +18,9 @@ class LogisticValidator:
         
         pass 
     
-    class getEntityList(BaseSchema):
+    class getAllCountries(BaseSchema):
         
-        page = fields.Str(required=False)
-        
-        limit = fields.Str(required=False)
-         
+        pass 
     
     class getPincodeZones(BaseSchema):
         
