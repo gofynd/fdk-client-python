@@ -25,9 +25,9 @@ class ProductCompareResponse(BaseSchema):
     #  swagger.json
 
     
-    subtitle = fields.Str(required=False)
-    
     title = fields.Str(required=False)
+    
+    subtitle = fields.Str(required=False)
     
     items = fields.List(fields.Nested(ProductDetail, required=False), required=False)
     

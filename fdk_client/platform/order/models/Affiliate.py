@@ -9,9 +9,9 @@ from ...PlatformModel import BaseSchema
 
 
 
-
-
 from .AffiliateConfig import AffiliateConfig
+
+
 
 
 
@@ -21,9 +21,9 @@ class Affiliate(BaseSchema):
     #  swagger.json
 
     
-    token = fields.Str(required=False)
-    
     config = fields.Nested(AffiliateConfig, required=False)
+    
+    token = fields.Str(required=False)
     
     id = fields.Str(required=False)
     

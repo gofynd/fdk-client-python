@@ -17,7 +17,7 @@ class CountryMetaResponse(BaseSchema):
     #  swagger.json
 
     
-    country_code = fields.Str(required=False)
-    
     isd_code = fields.Str(required=False)
+    
+    country_code = fields.Str(required=False)
     

@@ -17,7 +17,7 @@ class PostHistoryData(BaseSchema):
     #  swagger.json
 
     
-    message = fields.Str(required=False)
-    
     user_name = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
     

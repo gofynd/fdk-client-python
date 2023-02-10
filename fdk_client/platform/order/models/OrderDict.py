@@ -9,13 +9,13 @@ from ...PlatformModel import BaseSchema
 
 
 
-
-
-
-
-
-
 from .OrderMeta import OrderMeta
+
+
+
+
+
+
 
 
 
@@ -25,13 +25,13 @@ class OrderDict(BaseSchema):
     #  swagger.json
 
     
-    fynd_order_id = fields.Str(required=False)
+    meta = fields.Nested(OrderMeta, required=False)
     
     order_date = fields.Str(required=False)
     
-    shipment_count = fields.Int(required=False)
-    
-    meta = fields.Nested(OrderMeta, required=False)
+    fynd_order_id = fields.Str(required=False)
     
     payment_methods = fields.Dict(required=False)
+    
+    shipment_count = fields.Int(required=False)
     

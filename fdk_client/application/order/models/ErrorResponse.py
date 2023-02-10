@@ -27,9 +27,9 @@ class ErrorResponse(BaseSchema):
     
     exception = fields.Str(required=False)
     
+    status = fields.Int(required=False)
+    
     stack_trace = fields.Str(required=False)
     
     message = fields.Str(required=False)
-    
-    status = fields.Int(required=False)
     

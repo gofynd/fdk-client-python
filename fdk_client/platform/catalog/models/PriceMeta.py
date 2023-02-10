@@ -25,13 +25,13 @@ class PriceMeta(BaseSchema):
     #  swagger.json
 
     
-    tp_notes = fields.Dict(required=False)
+    currency = fields.Str(required=False)
     
     marked = fields.Float(required=False)
     
-    effective = fields.Float(required=False)
+    tp_notes = fields.Dict(required=False)
     
-    currency = fields.Str(required=False)
+    effective = fields.Float(required=False)
     
     updated_at = fields.Str(required=False)
     

@@ -13,11 +13,11 @@ from .OrderFilters import OrderFilters
 
 
 
-from .OrderPage import OrderPage
-
-
-
 from .OrderSchema import OrderSchema
+
+
+
+from .OrderPage import OrderPage
 
 
 
@@ -27,7 +27,7 @@ class OrderList(BaseSchema):
     
     filters = fields.Nested(OrderFilters, required=False)
     
-    page = fields.Nested(OrderPage, required=False)
-    
     items = fields.List(fields.Nested(OrderSchema, required=False), required=False)
+    
+    page = fields.Nested(OrderPage, required=False)
     

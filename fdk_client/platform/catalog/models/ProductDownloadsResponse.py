@@ -9,11 +9,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .ProductDownloadsItems import ProductDownloadsItems
-
-
-
 from .Page import Page
+
+
+
+from .ProductDownloadsItems import ProductDownloadsItems
 
 
 
@@ -21,7 +21,7 @@ class ProductDownloadsResponse(BaseSchema):
     #  swagger.json
 
     
-    items = fields.Nested(ProductDownloadsItems, required=False)
-    
     page = fields.Nested(Page, required=False)
+    
+    items = fields.Nested(ProductDownloadsItems, required=False)
     

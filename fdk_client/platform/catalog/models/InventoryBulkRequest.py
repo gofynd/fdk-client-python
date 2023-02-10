@@ -13,9 +13,9 @@ from ...PlatformModel import BaseSchema
 
 
 
+
+
 from .InventoryJobPayload import InventoryJobPayload
-
-
 
 
 
@@ -27,7 +27,7 @@ class InventoryBulkRequest(BaseSchema):
     
     user = fields.Dict(required=False)
     
-    sizes = fields.List(fields.Nested(InventoryJobPayload, required=False), required=False)
-    
     company_id = fields.Int(required=False)
+    
+    sizes = fields.List(fields.Nested(InventoryJobPayload, required=False), required=False)
     
