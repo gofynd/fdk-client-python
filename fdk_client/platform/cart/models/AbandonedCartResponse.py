@@ -9,9 +9,9 @@ from ...PlatformModel import BaseSchema
 
 
 
-
-
 from .Page import Page
+
+
 
 
 
@@ -27,9 +27,9 @@ class AbandonedCartResponse(BaseSchema):
     #  swagger.json
 
     
-    result = fields.Dict(required=False)
-    
     page = fields.Nested(Page, required=False)
+    
+    result = fields.Dict(required=False)
     
     message = fields.Str(required=False)
     

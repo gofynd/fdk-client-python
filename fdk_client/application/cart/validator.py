@@ -16,7 +16,6 @@ from ..ApplicationModel import BaseSchema
         
         
         
-        
     
     
         
@@ -72,24 +71,27 @@ from ..ApplicationModel import BaseSchema
         
         
         
+        
     
     
     
+        
         
         
         
         
         
         
-        
     
     
         
     
     
         
+        
     
     
+        
         
         
         
@@ -154,8 +156,6 @@ class CartValidator:
         b = fields.Boolean(required=False)
         
         assign_card_id = fields.Int(required=False)
-        
-        area_code = fields.Str(required=False)
         
         buy_now = fields.Boolean(required=False)
          
@@ -278,6 +278,8 @@ class CartValidator:
         tags = fields.Str(required=False)
         
         is_default = fields.Boolean(required=False)
+        
+        user_id = fields.Str(required=False)
          
         
     
@@ -316,6 +318,8 @@ class CartValidator:
         
         
         id = fields.Str(required=False)
+        
+        user_id = fields.Str(required=False)
          
         
     
@@ -329,6 +333,8 @@ class CartValidator:
         i = fields.Boolean(required=False)
         
         b = fields.Boolean(required=False)
+        
+        user_id = fields.Str(required=False)
          
         
     

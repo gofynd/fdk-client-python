@@ -11,9 +11,9 @@ from ...PlatformModel import BaseSchema
 
 
 
+
+
 from .HolidayDateSerializer import HolidayDateSerializer
-
-
 
 
 
@@ -23,7 +23,7 @@ class HolidaySchemaSerializer(BaseSchema):
     
     title = fields.Str(required=False)
     
-    date = fields.Nested(HolidayDateSerializer, required=False)
-    
     holiday_type = fields.Str(required=False)
+    
+    date = fields.Nested(HolidayDateSerializer, required=False)
     

@@ -9,11 +9,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-
-
-
-
 from .ShipmentItem import ShipmentItem
+
+
+
+
 
 
 
@@ -25,11 +25,11 @@ class ShipmentInternalPlatformViewResponse(BaseSchema):
     #  swagger.json
 
     
+    items = fields.List(fields.Nested(ShipmentItem, required=False), required=False)
+    
     applied_filters = fields.Dict(required=False)
     
     page = fields.Dict(required=False)
-    
-    items = fields.List(fields.Nested(ShipmentItem, required=False), required=False)
     
     filters = fields.List(fields.Nested(FiltersInfo, required=False), required=False)
     

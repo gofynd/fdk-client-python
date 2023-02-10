@@ -21,7 +21,7 @@ class ProductBulkAssets(BaseSchema):
     
     user = fields.Dict(required=False)
     
-    company_id = fields.Int(required=False)
-    
     url = fields.Str(required=False)
+    
+    company_id = fields.Int(required=False)
     

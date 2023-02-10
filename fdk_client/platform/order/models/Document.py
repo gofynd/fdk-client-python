@@ -25,11 +25,11 @@ class Document(BaseSchema):
     
     ds_type = fields.Str(required=False)
     
-    verified = fields.Boolean(required=False)
-    
     url = fields.Str(required=False)
     
     legal_name = fields.Str(required=False)
+    
+    verified = fields.Boolean(required=False)
     
     value = fields.Str(required=False)
     

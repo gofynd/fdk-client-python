@@ -17,9 +17,9 @@ from .ProductSortOn import ProductSortOn
 
 
 
-
-
 from .ProductListingDetail import ProductListingDetail
+
+
 
 
 
@@ -35,9 +35,9 @@ class ApplicationProductListingResponse(BaseSchema):
     
     sort_on = fields.List(fields.Nested(ProductSortOn, required=False), required=False)
     
-    operators = fields.Dict(required=False)
-    
     items = fields.List(fields.Nested(ProductListingDetail, required=False), required=False)
+    
+    operators = fields.Dict(required=False)
     
     filters = fields.List(fields.Nested(ProductFilters, required=False), required=False)
     

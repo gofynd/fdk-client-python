@@ -27,9 +27,9 @@ class ShipmentStatusData(BaseSchema):
     
     id = fields.Int(required=False)
     
-    status = fields.Str(required=False)
+    bag_list = fields.List(fields.Str(required=False), required=False)
     
     shipment_id = fields.Str(required=False)
     
-    bag_list = fields.List(fields.Int(required=False), required=False)
+    status = fields.Str(required=False)
     

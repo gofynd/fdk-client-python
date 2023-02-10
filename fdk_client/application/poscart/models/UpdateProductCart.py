@@ -21,9 +21,9 @@ from ...ApplicationModel import BaseSchema
 
 
 
-
-
 from .CartProductIdentifer import CartProductIdentifer
+
+
 
 
 
@@ -37,13 +37,13 @@ class UpdateProductCart(BaseSchema):
     
     extra_meta = fields.Dict(required=False)
     
-    article_id = fields.Str(required=False)
-    
     parent_item_identifiers = fields.Dict(required=False)
-    
-    item_id = fields.Int(required=False)
     
     item_size = fields.Str(required=False)
     
+    item_id = fields.Int(required=False)
+    
     identifiers = fields.Nested(CartProductIdentifer, required=False)
+    
+    article_id = fields.Str(required=False)
     

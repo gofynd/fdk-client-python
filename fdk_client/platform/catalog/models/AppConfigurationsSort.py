@@ -29,9 +29,9 @@ class AppConfigurationsSort(BaseSchema):
     #  swagger.json
 
     
-    app_id = fields.Str(required=False)
+    priority = fields.Int(required=False)
     
-    key = fields.Str(required=False)
+    is_default = fields.Boolean(required=False)
     
     name = fields.Str(required=False)
     
@@ -39,9 +39,9 @@ class AppConfigurationsSort(BaseSchema):
     
     is_active = fields.Boolean(required=False)
     
-    priority = fields.Int(required=False)
+    app_id = fields.Str(required=False)
+    
+    key = fields.Str(required=False)
     
     logo = fields.Str(required=False)
-    
-    is_default = fields.Boolean(required=False)
     

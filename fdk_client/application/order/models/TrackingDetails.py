@@ -27,11 +27,11 @@ class TrackingDetails(BaseSchema):
     
     tracking_details = fields.List(fields.Nested(NestedTrackingDetails, required=False), required=False)
     
-    is_current = fields.Boolean(required=False)
-    
     time = fields.Str(required=False)
+    
+    is_passed = fields.Boolean(required=False)
     
     status = fields.Str(required=False)
     
-    is_passed = fields.Boolean(required=False)
+    is_current = fields.Boolean(required=False)
     

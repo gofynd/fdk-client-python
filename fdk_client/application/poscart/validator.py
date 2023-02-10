@@ -16,7 +16,6 @@ from ..ApplicationModel import BaseSchema
         
         
         
-        
     
     
         
@@ -72,24 +71,27 @@ from ..ApplicationModel import BaseSchema
         
         
         
+        
     
     
     
+        
         
         
         
         
         
         
-        
     
     
         
     
     
         
+        
     
     
+        
         
         
         
@@ -159,8 +161,6 @@ class PosCartValidator:
         b = fields.Boolean(required=False)
         
         assign_card_id = fields.Int(required=False)
-        
-        area_code = fields.Str(required=False)
         
         buy_now = fields.Boolean(required=False)
          
@@ -283,6 +283,8 @@ class PosCartValidator:
         tags = fields.Str(required=False)
         
         is_default = fields.Boolean(required=False)
+        
+        user_id = fields.Str(required=False)
          
         
     
@@ -321,6 +323,8 @@ class PosCartValidator:
         
         
         id = fields.Str(required=False)
+        
+        user_id = fields.Str(required=False)
          
         
     
@@ -334,6 +338,8 @@ class PosCartValidator:
         i = fields.Boolean(required=False)
         
         b = fields.Boolean(required=False)
+        
+        user_id = fields.Str(required=False)
          
         
     

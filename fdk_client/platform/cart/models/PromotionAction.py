@@ -17,7 +17,7 @@ class PromotionAction(BaseSchema):
     #  swagger.json
 
     
-    action_type = fields.Str(required=False)
-    
     action_date = fields.Str(required=False)
+    
+    action_type = fields.Str(required=False)
     

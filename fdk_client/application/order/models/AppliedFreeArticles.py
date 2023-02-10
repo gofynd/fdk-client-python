@@ -23,9 +23,9 @@ class AppliedFreeArticles(BaseSchema):
     
     article_id = fields.Str(required=False)
     
-    quantity = fields.Float(required=False)
-    
     free_gift_item_details = fields.Dict(required=False)
     
     parent_item_identifier = fields.Str(required=False)
+    
+    quantity = fields.Float(required=False)
     
