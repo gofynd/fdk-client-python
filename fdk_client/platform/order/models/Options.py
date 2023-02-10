@@ -17,7 +17,7 @@ class Options(BaseSchema):
     #  swagger.json
 
     
-    value = fields.Int(required=False)
-    
     text = fields.Str(required=False)
+    
+    value = fields.Int(required=False)
     

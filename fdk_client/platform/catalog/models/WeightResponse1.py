@@ -17,7 +17,7 @@ class WeightResponse1(BaseSchema):
     #  swagger.json
 
     
-    shipping = fields.Float(required=False)
-    
     unit = fields.Str(required=False)
+    
+    shipping = fields.Float(required=False)
     

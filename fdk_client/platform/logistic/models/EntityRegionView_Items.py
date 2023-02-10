@@ -21,7 +21,7 @@ class EntityRegionView_Items(BaseSchema):
     
     uid = fields.Str(required=False)
     
-    name = fields.Str(required=False)
-    
     sub_type = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
     

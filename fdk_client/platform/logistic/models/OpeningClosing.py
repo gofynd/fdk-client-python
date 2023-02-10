@@ -17,7 +17,7 @@ class OpeningClosing(BaseSchema):
     #  swagger.json
 
     
-    minute = fields.Int(required=False)
-    
     hour = fields.Int(required=False)
+    
+    minute = fields.Int(required=False)
     

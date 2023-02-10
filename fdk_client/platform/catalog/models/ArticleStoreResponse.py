@@ -25,7 +25,7 @@ class ArticleStoreResponse(BaseSchema):
     
     store_type = fields.Str(required=False)
     
-    store_code = fields.Str(required=False)
-    
     name = fields.Str(required=False)
+    
+    store_code = fields.Str(required=False)
     

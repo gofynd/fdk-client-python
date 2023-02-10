@@ -9,17 +9,67 @@ from ...PlatformModel import BaseSchema
 
 
 
+
+
+
+
+
+
+from .GstCredentialsResponse import GstCredentialsResponse
+
+
+
+from .ModifiedByResponse import ModifiedByResponse
+
+
+
+from .IntegrationTypeResponse import IntegrationTypeResponse
+
+
+
+from .AddressResponse import AddressResponse
+
+
+
 from .ModifiedByResponse import ModifiedByResponse
 
 
 
 
 
+from .ManagerResponse import ManagerResponse
 
 
 
 
-from .ModifiedByResponse import ModifiedByResponse
+
+from .DocumentsResponse import DocumentsResponse
+
+
+
+from .LogisticsResponse import LogisticsResponse
+
+
+
+
+
+
+
+
+
+from .TimmingResponse import TimmingResponse
+
+
+
+from .ContactNumberResponse import ContactNumberResponse
+
+
+
+
+
+from .ProductReturnConfigResponse import ProductReturnConfigResponse
+
+
 
 
 
@@ -33,46 +83,6 @@ from .CreatedByResponse import CreatedByResponse
 
 
 
-from .ContactNumberResponse import ContactNumberResponse
-
-
-
-from .LogisticsResponse import LogisticsResponse
-
-
-
-from .DocumentsResponse import DocumentsResponse
-
-
-
-
-
-
-
-from .GstCredentialsResponse import GstCredentialsResponse
-
-
-
-
-
-
-
-
-
-from .AddressResponse import AddressResponse
-
-
-
-
-
-
-
-from .IntegrationTypeResponse import IntegrationTypeResponse
-
-
-
-from .TimmingResponse import TimmingResponse
-
 
 
 from .WarningsResponse import WarningsResponse
@@ -81,73 +91,63 @@ from .WarningsResponse import WarningsResponse
 
 
 
-
-
-from .ProductReturnConfigResponse import ProductReturnConfigResponse
-
-
-
-from .ManagerResponse import ManagerResponse
-
-
-
 class ItemResponse(BaseSchema):
     #  swagger.json
 
     
-    verified_by = fields.Nested(ModifiedByResponse, required=False)
-    
-    stage = fields.Str(required=False)
-    
-    company_id = fields.Int(required=False)
+    verified_on = fields.Str(required=False)
     
     _custom_json = fields.Dict(required=False)
     
-    modified_by = fields.Nested(ModifiedByResponse, required=False)
-    
-    name = fields.Str(required=False)
-    
-    created_by = fields.Nested(CreatedByResponse, required=False)
-    
-    _cls = fields.Str(required=False)
-    
-    sub_type = fields.Str(required=False)
-    
-    contact_numbers = fields.List(fields.Nested(ContactNumberResponse, required=False), required=False)
-    
-    logistics = fields.Nested(LogisticsResponse, required=False)
-    
-    documents = fields.List(fields.Nested(DocumentsResponse, required=False), required=False)
-    
-    notification_emails = fields.List(fields.Str(required=False), required=False)
-    
-    created_on = fields.Str(required=False)
+    company = fields.Int(required=False)
     
     gst_credentials = fields.Nested(GstCredentialsResponse, required=False)
     
-    uid = fields.Int(required=False)
-    
-    store_type = fields.Str(required=False)
-    
-    verified_on = fields.Str(required=False)
-    
-    address = fields.Nested(AddressResponse, required=False)
-    
-    company = fields.Int(required=False)
-    
-    code = fields.Str(required=False)
+    modified_by = fields.Nested(ModifiedByResponse, required=False)
     
     integration_type = fields.Nested(IntegrationTypeResponse, required=False)
     
-    timing = fields.List(fields.Nested(TimmingResponse, required=False), required=False)
+    address = fields.Nested(AddressResponse, required=False)
     
-    warnings = fields.Nested(WarningsResponse, required=False)
+    verified_by = fields.Nested(ModifiedByResponse, required=False)
+    
+    notification_emails = fields.List(fields.Str(required=False), required=False)
+    
+    manager = fields.Nested(ManagerResponse, required=False)
     
     display_name = fields.Str(required=False)
     
+    documents = fields.List(fields.Nested(DocumentsResponse, required=False), required=False)
+    
+    logistics = fields.Nested(LogisticsResponse, required=False)
+    
+    name = fields.Str(required=False)
+    
+    stage = fields.Str(required=False)
+    
     modified_on = fields.Str(required=False)
+    
+    timing = fields.List(fields.Nested(TimmingResponse, required=False), required=False)
+    
+    contact_numbers = fields.List(fields.Nested(ContactNumberResponse, required=False), required=False)
+    
+    store_type = fields.Str(required=False)
     
     product_return_config = fields.Nested(ProductReturnConfigResponse, required=False)
     
-    manager = fields.Nested(ManagerResponse, required=False)
+    company_id = fields.Int(required=False)
+    
+    code = fields.Str(required=False)
+    
+    created_by = fields.Nested(CreatedByResponse, required=False)
+    
+    created_on = fields.Str(required=False)
+    
+    sub_type = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
+    
+    warnings = fields.Nested(WarningsResponse, required=False)
+    
+    _cls = fields.Str(required=False)
     

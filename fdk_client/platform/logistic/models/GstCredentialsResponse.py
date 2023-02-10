@@ -9,11 +9,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .EinvoiceResponse import EinvoiceResponse
-
-
-
 from .EwayBillResponse import EwayBillResponse
+
+
+
+from .EinvoiceResponse import EinvoiceResponse
 
 
 
@@ -21,7 +21,7 @@ class GstCredentialsResponse(BaseSchema):
     #  swagger.json
 
     
-    e_invoice = fields.Nested(EinvoiceResponse, required=False)
-    
     e_waybill = fields.Nested(EwayBillResponse, required=False)
+    
+    e_invoice = fields.Nested(EinvoiceResponse, required=False)
     
