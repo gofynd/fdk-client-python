@@ -1128,6 +1128,8 @@ class SubscriptionCustomer(BaseSchema):
     
     modified_at = fields.Str(required=False)
     
+    credit_balance = fields.Float(required=False)
+    
     data = fields.Dict(required=False)
     
 
