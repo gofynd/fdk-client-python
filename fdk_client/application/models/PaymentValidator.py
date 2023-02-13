@@ -96,6 +96,14 @@ class PaymentValidator:
         
         pass 
     
+    class renderHTML(BaseSchema):
+        
+        pass 
+    
+    class validateVPA(BaseSchema):
+        
+        pass 
+    
     class getActiveRefundTransferModes(BaseSchema):
         
         pass 
