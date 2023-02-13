@@ -7,27 +7,27 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
-
-
 from .Tax import Tax
+
+
+
+
+
+
 
 
 class Charge(BaseSchema):
     # OrderManage swagger.json
 
     
-    name = fields.Str(required=False)
-    
-    amount = fields.Dict(required=False)
-    
     type = fields.Str(required=False)
+    
+    tax = fields.Nested(Tax, required=False)
     
     code = fields.Str(required=False)
     
-    tax = fields.Nested(Tax, required=False)
+    name = fields.Str(required=False)
+    
+    amount = fields.Dict(required=False)
     
 

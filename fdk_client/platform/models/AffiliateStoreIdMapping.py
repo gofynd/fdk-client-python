@@ -14,8 +14,8 @@ class AffiliateStoreIdMapping(BaseSchema):
     # OrderManage swagger.json
 
     
-    store_id = fields.Int(required=False)
-    
     marketplace_store_id = fields.Str(required=False)
+    
+    store_id = fields.Int(required=False)
     
 

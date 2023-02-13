@@ -18,12 +18,12 @@ class CurrentStatus(BaseSchema):
     # Order swagger.json
 
     
-    name = fields.Str(required=False)
+    status = fields.Str(required=False)
     
     journey_type = fields.Str(required=False)
     
     updated_at = fields.Str(required=False)
     
-    status = fields.Str(required=False)
+    name = fields.Str(required=False)
     
 

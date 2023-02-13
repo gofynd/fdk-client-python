@@ -26,8 +26,8 @@ class TrackingDetails(BaseSchema):
     
     is_passed = fields.Boolean(required=False)
     
-    is_current = fields.Boolean(required=False)
-    
     time = fields.Str(required=False)
+    
+    is_current = fields.Boolean(required=False)
     
 

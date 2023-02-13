@@ -22,12 +22,12 @@ class Dimensions(BaseSchema):
     
     length = fields.Int(required=False)
     
-    width = fields.Int(required=False)
-    
-    is_default = fields.Boolean(required=False)
+    unit = fields.Str(required=False)
     
     height = fields.Int(required=False)
     
-    unit = fields.Str(required=False)
+    is_default = fields.Boolean(required=False)
+    
+    width = fields.Int(required=False)
     
 

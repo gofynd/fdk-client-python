@@ -22,8 +22,6 @@ class Entities(BaseSchema):
     # OrderManage swagger.json
 
     
-    affiliate_order_id = fields.Str(required=False)
-    
     affiliate_bag_id = fields.Str(required=False)
     
     affiliate_shipment_id = fields.Str(required=False)
@@ -33,5 +31,7 @@ class Entities(BaseSchema):
     id = fields.Str(required=False)
     
     affiliate_id = fields.Str(required=False)
+    
+    affiliate_order_id = fields.Str(required=False)
     
 
