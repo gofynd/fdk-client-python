@@ -5,13 +5,13 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .GiftDetail import GiftDetail
 
 
-
-class ActionPageParams(BaseSchema):
-    # Rewards swagger.json
+class ArticleGiftDetail(BaseSchema):
+    # Cart swagger.json
 
     
-    slug = fields.List(fields.Str(required=False), required=False)
+    article_id = fields.Nested(GiftDetail, required=False)
     
 

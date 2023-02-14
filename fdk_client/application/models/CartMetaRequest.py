@@ -11,6 +11,8 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+from .ArticleGiftDetail import ArticleGiftDetail
+
 
 
 
@@ -20,9 +22,11 @@ class CartMetaRequest(BaseSchema):
     
     pick_up_customer_details = fields.Dict(required=False)
     
+    comment = fields.Str(required=False)
+    
     checkout_mode = fields.Str(required=False)
     
-    comment = fields.Str(required=False)
+    gift_details = fields.Nested(ArticleGiftDetail, required=False)
     
     gstin = fields.Str(required=False)
     

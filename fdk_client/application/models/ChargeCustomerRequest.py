@@ -22,12 +22,12 @@ class ChargeCustomerRequest(BaseSchema):
     
     aggregator = fields.Str(required=False)
     
-    verified = fields.Boolean(required=False)
-    
-    transaction_token = fields.Str(required=False)
+    order_id = fields.Str(required=False)
     
     amount = fields.Int(required=False)
     
-    order_id = fields.Str(required=False)
+    transaction_token = fields.Str(required=False)
+    
+    verified = fields.Boolean(required=False)
     
 

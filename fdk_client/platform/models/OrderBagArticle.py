@@ -18,8 +18,8 @@ class OrderBagArticle(BaseSchema):
     
     uid = fields.Str(required=False)
     
-    identifiers = fields.Dict(required=False)
-    
     return_config = fields.Dict(required=False)
+    
+    identifiers = fields.Dict(required=False)
     
 

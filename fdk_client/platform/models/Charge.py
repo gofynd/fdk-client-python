@@ -9,9 +9,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
 from .Tax import Tax
+
+
 
 
 
@@ -24,10 +24,10 @@ class Charge(BaseSchema):
     
     amount = fields.Dict(required=False)
     
-    name = fields.Str(required=False)
-    
     tax = fields.Nested(Tax, required=False)
     
     code = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
     
 

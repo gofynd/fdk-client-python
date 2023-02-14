@@ -14,8 +14,8 @@ class BulkActionResponse(BaseSchema):
     # Order swagger.json
 
     
-    status = fields.Boolean(required=False)
-    
     message = fields.Str(required=False)
+    
+    status = fields.Boolean(required=False)
     
 

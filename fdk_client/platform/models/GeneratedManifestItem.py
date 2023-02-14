@@ -26,16 +26,16 @@ class GeneratedManifestItem(BaseSchema):
     
     filters = fields.Nested(ManifestFilter, required=False)
     
-    manifest_id = fields.Str(required=False)
-    
-    company_id = fields.Int(required=False)
+    created_by = fields.Str(required=False)
     
     status = fields.Str(required=False)
     
+    is_active = fields.Boolean(required=False)
+    
+    company_id = fields.Int(required=False)
+    
     created_at = fields.Str(required=False)
     
-    created_by = fields.Str(required=False)
-    
-    is_active = fields.Boolean(required=False)
+    manifest_id = fields.Str(required=False)
     
 
