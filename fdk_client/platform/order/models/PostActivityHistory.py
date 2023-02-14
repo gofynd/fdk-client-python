@@ -9,11 +9,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .PostHistoryData import PostHistoryData
-
-
-
 from .PostHistoryFilters import PostHistoryFilters
+
+
+
+from .PostHistoryData import PostHistoryData
 
 
 
@@ -21,7 +21,7 @@ class PostActivityHistory(BaseSchema):
     #  swagger.json
 
     
-    data = fields.Nested(PostHistoryData, required=False)
-    
     filters = fields.List(fields.Nested(PostHistoryFilters, required=False), required=False)
+    
+    data = fields.Nested(PostHistoryData, required=False)
     

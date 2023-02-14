@@ -9,6 +9,8 @@ from ...PlatformModel import BaseSchema
 
 
 
+from ._ArticleQuery import _ArticleQuery
+
 
 
 
@@ -16,8 +18,6 @@ from ...PlatformModel import BaseSchema
 from ._ArticleAssignment import _ArticleAssignment
 
 
-
-from ._ArticleQuery import _ArticleQuery
 
 
 
@@ -27,13 +27,13 @@ class _AssignStoreArticle(BaseSchema):
     #  swagger.json
 
     
-    meta = fields.Dict(required=False)
+    query = fields.Nested(_ArticleQuery, required=False)
     
-    group_id = fields.Str(required=False)
+    meta = fields.Dict(required=False)
     
     article_assignment = fields.Nested(_ArticleAssignment, required=False)
     
-    query = fields.Nested(_ArticleQuery, required=False)
+    group_id = fields.Str(required=False)
     
     quantity = fields.Int(required=False)
     

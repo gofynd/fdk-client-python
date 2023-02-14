@@ -121,6 +121,15 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
+        
+        
+    
+    
+        
+        
         
         
         
@@ -477,6 +486,26 @@ class CartValidator:
         cart_id = fields.Str(required=False)
         
         b = fields.Boolean(required=False)
+         
+        
+    
+    class getCartList(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class updateCartUser(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
          
         
     

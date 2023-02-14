@@ -17,9 +17,9 @@ from ...PlatformModel import BaseSchema
 
 
 
-
-
 from .AttributeSchemaRange import AttributeSchemaRange
+
+
 
 
 
@@ -35,7 +35,7 @@ class AttributeMaster(BaseSchema):
     
     allowed_values = fields.List(fields.Str(required=False), required=False)
     
-    mandatory = fields.Boolean(required=False)
-    
     range = fields.Nested(AttributeSchemaRange, required=False)
+    
+    mandatory = fields.Boolean(required=False)
     

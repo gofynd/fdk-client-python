@@ -33,7 +33,7 @@ class AdvanceFilterInfo(BaseSchema):
     #  swagger.json
 
     
-    filters = fields.List(fields.Nested(FiltersInfo, required=False), required=False)
+    processed = fields.List(fields.Nested(FiltersInfo, required=False), required=False)
     
     returned = fields.List(fields.Nested(FiltersInfo, required=False), required=False)
     
@@ -41,5 +41,5 @@ class AdvanceFilterInfo(BaseSchema):
     
     unfulfilled = fields.List(fields.Nested(FiltersInfo, required=False), required=False)
     
-    processed = fields.List(fields.Nested(FiltersInfo, required=False), required=False)
+    filters = fields.List(fields.Nested(FiltersInfo, required=False), required=False)
     

@@ -25,7 +25,7 @@ class DocumentsResponse(BaseSchema):
     
     value = fields.Str(required=False)
     
-    legal_name = fields.Str(required=False)
-    
     verified = fields.Boolean(required=False)
+    
+    legal_name = fields.Str(required=False)
     

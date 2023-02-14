@@ -13,15 +13,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-
-
-class ReturnConfig4(BaseSchema):
+class NetQuantityResponse(BaseSchema):
     #  swagger.json
 
     
-    returnable = fields.Boolean(required=False)
+    value = fields.Float(required=False)
     
     unit = fields.Str(required=False)
-    
-    time = fields.Int(required=False)
     

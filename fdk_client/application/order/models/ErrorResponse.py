@@ -23,11 +23,11 @@ class ErrorResponse(BaseSchema):
     #  swagger.json
 
     
-    message = fields.Str(required=False)
-    
     status = fields.Int(required=False)
     
     stack_trace = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
     
     code = fields.Str(required=False)
     

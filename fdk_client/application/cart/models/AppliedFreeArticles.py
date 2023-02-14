@@ -23,9 +23,9 @@ class AppliedFreeArticles(BaseSchema):
     #  swagger.json
 
     
-    quantity = fields.Int(required=False)
-    
     parent_item_identifier = fields.Str(required=False)
+    
+    quantity = fields.Int(required=False)
     
     free_gift_item_details = fields.Nested(FreeGiftItem, required=False)
     

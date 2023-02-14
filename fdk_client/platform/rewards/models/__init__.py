@@ -37,4 +37,8 @@ from .HistoryRes import HistoryRes
 
 from .PointsHistory import PointsHistory
 
+from .AndroidPathsRes import AndroidPathsRes
+
+from .AndroidPathReq import AndroidPathReq
+
 

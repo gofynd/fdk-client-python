@@ -19,9 +19,9 @@ class Trader1(BaseSchema):
     #  swagger.json
 
     
-    type = fields.Str(required=False)
-    
     name = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
     
     address = fields.List(fields.Str(required=False), required=False)
     

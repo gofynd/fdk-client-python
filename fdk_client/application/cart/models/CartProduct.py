@@ -11,16 +11,6 @@ from ...ApplicationModel import BaseSchema
 
 
 
-from .BaseInfo import BaseInfo
-
-
-
-from .NetQuantity import NetQuantity
-
-
-
-
-
 
 
 from .CategoryInfo import CategoryInfo
@@ -37,19 +27,23 @@ from .ProductAction import ProductAction
 
 
 
+from .NetQuantity import NetQuantity
+
+
+
+
+
+from .BaseInfo import BaseInfo
+
+
+
 class CartProduct(BaseSchema):
     #  swagger.json
 
     
-    name = fields.Str(required=False)
-    
-    brand = fields.Nested(BaseInfo, required=False)
-    
-    net_quantity = fields.Nested(NetQuantity, required=False)
-    
-    uid = fields.Int(required=False)
-    
     type = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
     
     categories = fields.List(fields.Nested(CategoryInfo, required=False), required=False)
     
@@ -57,5 +51,11 @@ class CartProduct(BaseSchema):
     
     action = fields.Nested(ProductAction, required=False)
     
-    slug = fields.Str(required=False)
+    name = fields.Str(required=False)
+    
+    net_quantity = fields.Nested(NetQuantity, required=False)
+    
+    uid = fields.Int(required=False)
+    
+    brand = fields.Nested(BaseInfo, required=False)
     

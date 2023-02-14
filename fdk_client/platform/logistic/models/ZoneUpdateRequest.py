@@ -9,9 +9,9 @@ from ...PlatformModel import BaseSchema
 
 
 
+
+
 from .UpdateZoneData import UpdateZoneData
-
-
 
 
 
@@ -19,7 +19,7 @@ class ZoneUpdateRequest(BaseSchema):
     #  swagger.json
 
     
-    data = fields.Nested(UpdateZoneData, required=False)
-    
     identifier = fields.Str(required=False)
+    
+    data = fields.Nested(UpdateZoneData, required=False)
     

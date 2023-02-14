@@ -15,7 +15,7 @@ from ...PlatformModel import BaseSchema
 
 
 
-class ServiceabilityErrorResponse(BaseSchema):
+class ServiceabilityrErrorResponse(BaseSchema):
     #  swagger.json
 
     

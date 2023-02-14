@@ -66,6 +66,14 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+    
+    
+        
+        
 
 class RewardsValidator:
     
@@ -192,6 +200,24 @@ class RewardsValidator:
         page_id = fields.Str(required=False)
         
         page_size = fields.Int(required=False)
+         
+        
+    
+    class getAndroidPaths(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class updateAndroidPaths(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
          
         
     
