@@ -103,11 +103,11 @@ except Exception as e:
 | entityId | String? | no | entity id |   
 | entityType | String? | no | entity type |   
 | userId | String? | no | user id |   
-| media | String? | no | media type e.g. image | video | video_file | video_link |   
+| media | String? | no | media type e.g. image \| video \| video_file \| video_link |   
 | rating | ArrayList<Double>? | no | rating filter, 1-5 |   
 | attributeRating | ArrayList<String>? | no | attribute rating filter with ma,e of attribute |   
-| facets | Boolean? | no | facets (true|false) |   
-| sort | String? | no | sort by : default | top | recent |   
+| facets | Boolean? | no | facets (true\|false) |   
+| sort | String? | no | sort by : default \| top \| recent |   
 | next | String? | no | pagination next |   
 | start | String? | no | pagination start |   
 | limit | String? | no | pagination limit |   
@@ -1068,7 +1068,7 @@ Success
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | active | Boolean |  no  |  |
- | enableMediaType | String? |  yes  | image | video | any |
+ | enableMediaType | String? |  yes  | image \| video \| any |
  | enableQna | Boolean? |  yes  |  |
  | enableRating | Boolean |  no  |  |
  | enableReview | Boolean |  no  |  |
@@ -1099,7 +1099,7 @@ Success
  | feedbackQuestion | ArrayList<String>? |  yes  |  |
  | icon | [UIIcon](#UIIcon)? |  yes  |  |
  | text | ArrayList<String>? |  yes  |  |
- | type | String? |  yes  | star | images | gifs | smileys |
+ | type | String? |  yes  | star \| images \| gifs \| smileys |
 
 ---
 
@@ -1172,7 +1172,7 @@ Success
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | active | Boolean |  no  |  |
- | enableMediaType | String? |  yes  | image | video | any |
+ | enableMediaType | String? |  yes  | image \| video \| any |
  | enableQna | Boolean? |  yes  |  |
  | enableRating | Boolean |  no  |  |
  | enableReview | Boolean |  no  |  |
