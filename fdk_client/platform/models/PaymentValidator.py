@@ -98,18 +98,7 @@ class PaymentValidator:
         company_id = fields.Int(required=False)
          
     
-    class getBankAccountDetailsOpenAPI(BaseSchema):
-        
-        order_id = fields.Str(required=False)
-        
-        request_hash = fields.Str(required=False)
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-    
-    class addRefundBankAccountUsingOTP(BaseSchema):
+    class addBeneficiaryDetails(BaseSchema):
         
         company_id = fields.Int(required=False)
         
@@ -142,24 +131,6 @@ class PaymentValidator:
          
     
     class confirmPayment(BaseSchema):
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-    
-    class getUserCODlimitRoutes(BaseSchema):
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        merchant_user_id = fields.Str(required=False)
-        
-        mobile_no = fields.Str(required=False)
-         
-    
-    class setUserCODlimitRoutes(BaseSchema):
         
         company_id = fields.Int(required=False)
         
