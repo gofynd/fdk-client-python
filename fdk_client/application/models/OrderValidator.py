@@ -85,22 +85,3 @@ class OrderValidator:
         shipment_id = fields.Str(required=False)
          
     
-    class updateShipmentStatus1(BaseSchema):
-        
-        shipment_id = fields.Str(required=False)
-         
-    
-    class getInvoiceByShipmentId1(BaseSchema):
-        
-        shipment_id = fields.Str(required=False)
-        
-        parameters = fields.Nested(invoiceParameter, required=False)
-         
-    
-    class getCreditNoteByShipmentId(BaseSchema):
-        
-        shipment_id = fields.Str(required=False)
-        
-        parameters = fields.Nested(creditNoteParameter, required=False)
-         
-    
