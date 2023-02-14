@@ -216,57 +216,65 @@ from .ProductSizeSellersResponseV2 import ProductSizeSellersResponseV2
     
 
     
+from .BaseInfo import BaseInfo
+    
+from .BasePrice import BasePrice
+    
+from .ArticlePriceInfo import ArticlePriceInfo
+    
+from .ProductArticle import ProductArticle
+    
+from .ProductAvailability import ProductAvailability
+    
+from .ProductPrice import ProductPrice
+    
+from .ProductPriceInfo import ProductPriceInfo
+    
+from .CartProductIdentifer import CartProductIdentifer
+    
+from .CategoryInfo import CategoryInfo
+    
+from .ActionQuery import ActionQuery
+    
+from .ProductAction import ProductAction
+    
+from .ProductImage import ProductImage
+    
+from .CartProduct import CartProduct
+    
+from .PromoMeta import PromoMeta
+    
+from .DiscountRulesApp import DiscountRulesApp
+    
+from .FreeGiftItem import FreeGiftItem
+    
+from .AppliedFreeArticles import AppliedFreeArticles
+    
+from .BuyRules import BuyRules
+    
+from .AppliedPromotion import AppliedPromotion
+    
+from .CartProductInfo import CartProductInfo
+    
 from .PromiseTimestamp import PromiseTimestamp
     
 from .PromiseFormatted import PromiseFormatted
     
 from .ShipmentPromise import ShipmentPromise
     
-from .PaymentSelectionLock import PaymentSelectionLock
-    
-from .DisplayBreakup import DisplayBreakup
+from .CouponBreakup import CouponBreakup
     
 from .RawBreakup import RawBreakup
     
-from .LoyaltyPoints import LoyaltyPoints
+from .DisplayBreakup import DisplayBreakup
     
-from .CouponBreakup import CouponBreakup
+from .LoyaltyPoints import LoyaltyPoints
     
 from .CartBreakup import CartBreakup
     
 from .CartCurrency import CartCurrency
     
-from .CartProductIdentifer import CartProductIdentifer
-    
-from .BasePrice import BasePrice
-    
-from .ArticlePriceInfo import ArticlePriceInfo
-    
-from .BaseInfo import BaseInfo
-    
-from .ProductArticle import ProductArticle
-    
-from .ProductPrice import ProductPrice
-    
-from .ProductPriceInfo import ProductPriceInfo
-    
-from .AppliedPromotion import AppliedPromotion
-    
-from .PromoMeta import PromoMeta
-    
-from .ProductAvailability import ProductAvailability
-    
-from .ProductImage import ProductImage
-    
-from .ActionQuery import ActionQuery
-    
-from .ProductAction import ProductAction
-    
-from .CategoryInfo import CategoryInfo
-    
-from .CartProduct import CartProduct
-    
-from .CartProductInfo import CartProductInfo
+from .PaymentSelectionLock import PaymentSelectionLock
     
 from .CartDetailResponse import CartDetailResponse
     
@@ -284,19 +292,19 @@ from .UpdateCartDetailResponse import UpdateCartDetailResponse
     
 from .CartItemCountResponse import CartItemCountResponse
     
-from .PageCoupon import PageCoupon
-    
 from .Coupon import Coupon
+    
+from .PageCoupon import PageCoupon
     
 from .GetCouponResponse import GetCouponResponse
     
 from .ApplyCouponRequest import ApplyCouponRequest
     
+from .OfferSeller import OfferSeller
+    
 from .OfferPrice import OfferPrice
     
 from .OfferItem import OfferItem
-    
-from .OfferSeller import OfferSeller
     
 from .BulkPriceOffer import BulkPriceOffer
     
@@ -328,9 +336,9 @@ from .ShipmentResponse import ShipmentResponse
     
 from .CartShipmentsResponse import CartShipmentsResponse
     
-from .CartCheckoutCustomMeta import CartCheckoutCustomMeta
-    
 from .StaffCheckout import StaffCheckout
+    
+from .CartCheckoutCustomMeta import CartCheckoutCustomMeta
     
 from .CartCheckoutDetailRequest import CartCheckoutDetailRequest
     
@@ -354,19 +362,21 @@ from .SharedCart import SharedCart
     
 from .SharedCartResponse import SharedCartResponse
     
+from .FreeGiftItems import FreeGiftItems
+    
 from .PromotionOffer import PromotionOffer
     
 from .PromotionOffersResponse import PromotionOffersResponse
     
 from .OperationErrorResponse import OperationErrorResponse
     
-from .CurrencyInfo import CurrencyInfo
-    
 from .LadderPrice import LadderPrice
     
 from .LadderOfferItem import LadderOfferItem
     
 from .LadderPriceOffer import LadderPriceOffer
+    
+from .CurrencyInfo import CurrencyInfo
     
 from .LadderPriceOffers import LadderPriceOffers
     
@@ -757,6 +767,8 @@ from .Facebook import Facebook
 from .Accountkit import Accountkit
     
 from .Google import Google
+    
+from .SessionExpiry import SessionExpiry
     
 from .UpdateUserRequestSchema import UpdateUserRequestSchema
     
@@ -1461,8 +1473,6 @@ from .Identifiers import Identifiers
 from .ItemBrand import ItemBrand
     
 from .AppliedPromos import AppliedPromos
-    
-from .AppliedFreeArticles import AppliedFreeArticles
     
 from .FreeGiftItemDetails import FreeGiftItemDetails
     
