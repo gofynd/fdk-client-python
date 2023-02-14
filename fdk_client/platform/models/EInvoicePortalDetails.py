@@ -13,7 +13,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class EInvoicePortalDetails(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     password = fields.Str(required=False)

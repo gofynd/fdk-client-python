@@ -23,7 +23,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class DPDetailsData(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     track_url = fields.Str(required=False)

@@ -29,7 +29,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class AffiliateMeta(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     box_type = fields.Str(required=False)

@@ -11,27 +11,27 @@ from .LineItem import LineItem
 
 
 
-
-
 from .ProcessingDates import ProcessingDates
 
 
 
 
+
+
 class Shipment(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     line_items = fields.List(fields.Nested(LineItem, required=False), required=False)
     
-    priority = fields.Int(required=False)
-    
-    external_shipment_id = fields.Float(required=False)
-    
     meta = fields.Dict(required=False)
+    
+    priority = fields.Int(required=False)
     
     processing_dates = fields.Nested(ProcessingDates, required=False)
     
     location_id = fields.Int(required=False)
+    
+    external_shipment_id = fields.Float(required=False)
     
 

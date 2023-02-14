@@ -13,7 +13,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class LockData(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     locked = fields.Boolean(required=False)

@@ -9,7 +9,7 @@ from .HistoryDict import HistoryDict
 
 
 class ShipmentHistoryResponse(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     activity_history = fields.List(fields.Nested(HistoryDict, required=False), required=False)

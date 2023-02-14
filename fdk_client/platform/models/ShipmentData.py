@@ -9,7 +9,7 @@ from .ShipmentConfig import ShipmentConfig
 
 
 class ShipmentData(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     shipment_data = fields.Nested(ShipmentConfig, required=False)

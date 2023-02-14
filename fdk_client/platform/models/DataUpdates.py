@@ -11,7 +11,7 @@ from .EntitiesDataUpdates import EntitiesDataUpdates
 
 
 class DataUpdates(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     products = fields.List(fields.Nested(ProductsDataUpdates, required=False), required=False)

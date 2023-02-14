@@ -17,7 +17,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class ManifestDetailItem(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     shipment_id = fields.Str(required=False)

@@ -15,7 +15,7 @@ from .OrderDict import OrderDict
 
 
 class ShipmentDetailsResponse(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     shipments = fields.List(fields.Nested(PlatformShipment, required=False), required=False)

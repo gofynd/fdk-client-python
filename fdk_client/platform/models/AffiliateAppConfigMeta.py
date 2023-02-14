@@ -11,7 +11,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class AffiliateAppConfigMeta(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     value = fields.Str(required=False)

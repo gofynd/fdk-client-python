@@ -25,7 +25,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class OrderDetailsData(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     source = fields.Str(required=False)

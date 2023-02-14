@@ -39,7 +39,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class BagGSTDetails(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     hsn_code = fields.Str(required=False)

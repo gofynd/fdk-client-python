@@ -33,7 +33,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class PDFLinks(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     label = fields.Str(required=False)

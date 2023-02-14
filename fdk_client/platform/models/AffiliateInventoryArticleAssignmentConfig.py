@@ -9,7 +9,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class AffiliateInventoryArticleAssignmentConfig(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     post_order_reassignment = fields.Boolean(required=False)

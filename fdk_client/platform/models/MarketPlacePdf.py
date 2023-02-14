@@ -11,11 +11,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 class MarketPlacePdf(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
-    label = fields.Str(required=False)
-    
     invoice = fields.Str(required=False)
+    
+    label = fields.Str(required=False)
     
 

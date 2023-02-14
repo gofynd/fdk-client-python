@@ -15,7 +15,7 @@ from .ShipmentItem import ShipmentItem
 
 
 class ShipmentInternalPlatformViewResponse(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     page = fields.Dict(required=False)

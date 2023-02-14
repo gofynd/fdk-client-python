@@ -21,7 +21,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class BulkActionDetailsDataField(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     processing_shipments_count = fields.Int(required=False)

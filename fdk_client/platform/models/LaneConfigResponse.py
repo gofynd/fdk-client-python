@@ -9,7 +9,7 @@ from .SuperLane import SuperLane
 
 
 class LaneConfigResponse(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     super_lanes = fields.List(fields.Nested(SuperLane, required=False), required=False)

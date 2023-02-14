@@ -9,7 +9,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class AffiliateInventoryStoreConfig(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     store = fields.Dict(required=False)

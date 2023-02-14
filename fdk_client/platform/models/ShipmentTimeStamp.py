@@ -11,7 +11,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class ShipmentTimeStamp(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     t_min = fields.Str(required=False)

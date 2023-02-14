@@ -11,7 +11,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class ProductsReasonsData(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     reason_text = fields.Str(required=False)

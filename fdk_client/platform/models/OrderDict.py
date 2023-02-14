@@ -13,7 +13,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class OrderDict(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     fynd_order_id = fields.Str(required=False)

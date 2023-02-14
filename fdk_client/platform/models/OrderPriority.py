@@ -13,7 +13,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class OrderPriority(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     fulfilment_priority = fields.Int(required=False)

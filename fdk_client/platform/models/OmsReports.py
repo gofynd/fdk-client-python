@@ -25,7 +25,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class OmsReports(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     status = fields.Str(required=False)

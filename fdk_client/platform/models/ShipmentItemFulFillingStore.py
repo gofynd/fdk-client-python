@@ -11,7 +11,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class ShipmentItemFulFillingStore(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     code = fields.Str(required=False)

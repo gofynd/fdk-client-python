@@ -11,7 +11,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class DateRange(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     to_date = fields.Str(required=False)

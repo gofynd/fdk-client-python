@@ -9,7 +9,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class CreateChannelConifgErrorResponse(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     error = fields.Str(required=False)

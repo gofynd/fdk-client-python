@@ -17,7 +17,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class GSTDetailsData(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     tax_collected_at_source = fields.Float(required=False)

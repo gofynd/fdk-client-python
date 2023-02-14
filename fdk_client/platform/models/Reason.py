@@ -15,7 +15,7 @@ from .QuestionSet import QuestionSet
 
 
 class Reason(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     display_name = fields.Str(required=False)

@@ -17,7 +17,7 @@ from .NestedErrorSchemaDataSet import NestedErrorSchemaDataSet
 
 
 class JioCodeUpsertResponse(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     trace_id = fields.Str(required=False)

@@ -9,7 +9,7 @@ from .CreateChannelConfig import CreateChannelConfig
 
 
 class CreateChannelConfigData(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     config_data = fields.Nested(CreateChannelConfig, required=False)

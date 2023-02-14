@@ -19,7 +19,7 @@ from .PlatformOrderItems import PlatformOrderItems
 
 
 class OrderListingResponse(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     lane = fields.Str(required=False)

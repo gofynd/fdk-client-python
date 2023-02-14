@@ -9,7 +9,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class AffiliateInventoryLogisticsConfig(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     dp_assignment = fields.Boolean(required=False)

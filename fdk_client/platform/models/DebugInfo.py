@@ -9,7 +9,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class DebugInfo(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     stormbreaker_uuid = fields.Str(required=False)

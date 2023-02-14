@@ -85,7 +85,7 @@ from .BagStatusHistory import BagStatusHistory
 
 
 class BagDetailsPlatformResponse(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     parent_promo_bags = fields.Dict(required=False)

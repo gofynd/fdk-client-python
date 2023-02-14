@@ -11,7 +11,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class PaymentModeInfo(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     logo = fields.Str(required=False)

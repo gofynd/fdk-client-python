@@ -5,25 +5,25 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .NotAvailable import NotAvailable
+from .QuantityBase import QuantityBase
 
-from .Sellable import Sellable
+from .QuantityBase import QuantityBase
 
-from .OrderCommitted import OrderCommitted
+from .QuantityBase import QuantityBase
 
-from .Damaged import Damaged
+from .QuantityBase import QuantityBase
 
 
 class Quantities(BaseSchema):
-    # Order swagger.json
+    # Catalog swagger.json
 
     
-    not_available = fields.Nested(NotAvailable, required=False)
+    order_committed = fields.Nested(QuantityBase, required=False)
     
-    sellable = fields.Nested(Sellable, required=False)
+    not_available = fields.Nested(QuantityBase, required=False)
     
-    order_committed = fields.Nested(OrderCommitted, required=False)
+    sellable = fields.Nested(QuantityBase, required=False)
     
-    damaged = fields.Nested(Damaged, required=False)
+    damaged = fields.Nested(QuantityBase, required=False)
     
 

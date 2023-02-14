@@ -17,7 +17,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class BagReturnableCancelableStatus(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     is_returnable = fields.Boolean(required=False)

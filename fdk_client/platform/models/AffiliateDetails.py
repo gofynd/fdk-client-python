@@ -27,7 +27,7 @@ from .PDFLinks import PDFLinks
 
 
 class AffiliateDetails(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     ad_id = fields.Str(required=False)

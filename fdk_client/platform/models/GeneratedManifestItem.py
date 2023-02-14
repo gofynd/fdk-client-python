@@ -21,7 +21,7 @@ from .ManifestFilter import ManifestFilter
 
 
 class GeneratedManifestItem(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     status = fields.Str(required=False)

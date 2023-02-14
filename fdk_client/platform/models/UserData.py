@@ -11,11 +11,11 @@ from .OrderUser import OrderUser
 
 
 class UserData(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
-    shipping_user = fields.Nested(OrderUser, required=False)
-    
     billing_user = fields.Nested(OrderUser, required=False)
+    
+    shipping_user = fields.Nested(OrderUser, required=False)
     
 

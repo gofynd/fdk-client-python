@@ -13,12 +13,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 class CreateChannelConfigResponse(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
-    is_inserted = fields.Boolean(required=False)
-    
     is_upserted = fields.Boolean(required=False)
+    
+    is_inserted = fields.Boolean(required=False)
     
     acknowledged = fields.Boolean(required=False)
     

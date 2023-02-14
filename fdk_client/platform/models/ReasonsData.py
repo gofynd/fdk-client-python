@@ -11,7 +11,7 @@ from .EntitiesReasons import EntitiesReasons
 
 
 class ReasonsData(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     products = fields.List(fields.Nested(ProductsReasons, required=False), required=False)

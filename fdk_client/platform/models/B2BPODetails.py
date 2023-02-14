@@ -19,7 +19,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class B2BPODetails(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     docker_number = fields.Str(required=False)

@@ -27,7 +27,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class BulkInvoiceLabelResponse(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     label = fields.Dict(required=False)

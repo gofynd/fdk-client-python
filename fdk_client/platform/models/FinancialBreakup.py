@@ -63,7 +63,7 @@ from .Identifier import Identifier
 
 
 class FinancialBreakup(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     cashback_applied = fields.Int(required=False)

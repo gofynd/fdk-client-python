@@ -11,7 +11,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class ManifestDetailTotalShipmentPricesCount(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     total_price = fields.Float(required=False)

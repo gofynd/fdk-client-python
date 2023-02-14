@@ -15,7 +15,7 @@ from .bulkListingData import bulkListingData
 
 
 class BulkListingResponse(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     error = fields.Str(required=False)

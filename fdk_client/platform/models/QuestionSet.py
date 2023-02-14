@@ -11,7 +11,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class QuestionSet(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     display_name = fields.Str(required=False)

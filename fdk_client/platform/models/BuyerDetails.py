@@ -21,7 +21,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class BuyerDetails(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     ajio_site_id = fields.Str(required=False)

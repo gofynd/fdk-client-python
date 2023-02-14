@@ -15,7 +15,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class JioCodeUpsertDataSet(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     article_id = fields.Str(required=False)

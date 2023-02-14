@@ -17,7 +17,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class TrackingList(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     status = fields.Str(required=False)

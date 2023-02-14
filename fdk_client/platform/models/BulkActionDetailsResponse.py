@@ -25,7 +25,7 @@ from .BulkActionDetailsDataField import BulkActionDetailsDataField
 
 
 class BulkActionDetailsResponse(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     status = fields.Boolean(required=False)

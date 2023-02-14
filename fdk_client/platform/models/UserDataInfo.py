@@ -25,7 +25,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class UserDataInfo(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     avis_user_id = fields.Str(required=False)

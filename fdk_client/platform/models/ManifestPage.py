@@ -19,7 +19,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class ManifestPage(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     has_next = fields.Boolean(required=False)

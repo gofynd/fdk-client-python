@@ -27,7 +27,7 @@ from .UserDataInfo import UserDataInfo
 
 
 class PlatformOrderItems(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     channel = fields.Nested(PlatformChannel, required=False)

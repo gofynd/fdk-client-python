@@ -11,7 +11,7 @@ from .Reason import Reason
 
 
 class PlatformShipmentReasonsResponse(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     reasons = fields.List(fields.Nested(Reason, required=False), required=False)

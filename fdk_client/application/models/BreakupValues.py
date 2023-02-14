@@ -18,8 +18,8 @@ class BreakupValues(BaseSchema):
     
     display = fields.Str(required=False)
     
-    name = fields.Str(required=False)
-    
     value = fields.Float(required=False)
+    
+    name = fields.Str(required=False)
     
 

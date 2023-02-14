@@ -13,7 +13,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class ShipmentPayments(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     logo = fields.Str(required=False)

@@ -11,11 +11,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 class OriginalFilter(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
-    affiliate_shipment_id = fields.Str(required=False)
-    
     affiliate_id = fields.Str(required=False)
+    
+    affiliate_shipment_id = fields.Str(required=False)
     
 

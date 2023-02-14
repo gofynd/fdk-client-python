@@ -13,7 +13,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class NestedErrorSchemaDataSet(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     type = fields.Str(required=False)

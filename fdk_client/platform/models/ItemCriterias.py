@@ -9,7 +9,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class ItemCriterias(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     item_brand = fields.List(fields.Int(required=False), required=False)

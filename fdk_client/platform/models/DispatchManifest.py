@@ -9,7 +9,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class DispatchManifest(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     manifest_id = fields.Str(required=False)

@@ -45,7 +45,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class StoreAddress(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     updated_at = fields.Str(required=False)

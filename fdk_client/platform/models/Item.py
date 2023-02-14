@@ -55,7 +55,7 @@ from .Attributes import Attributes
 
 
 class Item(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     can_cancel = fields.Boolean(required=False)

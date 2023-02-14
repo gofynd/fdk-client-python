@@ -45,7 +45,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class bulkListingData(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     store_id = fields.Int(required=False)

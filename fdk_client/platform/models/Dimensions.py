@@ -17,7 +17,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class Dimensions(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     length = fields.Int(required=False)

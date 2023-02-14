@@ -157,7 +157,7 @@ from .FulfillingStore import FulfillingStore
 
 
 class ShipmentInfoResponse(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     affiliate_shipment_id = fields.Str(required=False)

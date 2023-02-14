@@ -27,7 +27,7 @@ from .URL import URL
 
 
 class FileResponse(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     namespace = fields.Str(required=False)

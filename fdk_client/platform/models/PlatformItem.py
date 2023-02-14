@@ -33,7 +33,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class PlatformItem(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     can_return = fields.Boolean(required=False)

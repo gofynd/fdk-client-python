@@ -11,7 +11,7 @@ from .GeneratedManifestItem import GeneratedManifestItem
 
 
 class GeneratedManifestResponse(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     page = fields.Nested(ManifestPage, required=False)

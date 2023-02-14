@@ -11,11 +11,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 class Click2CallResponse(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
-    call_id = fields.Str(required=False)
-    
     status = fields.Boolean(required=False)
+    
+    call_id = fields.Str(required=False)
     
 

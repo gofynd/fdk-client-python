@@ -9,7 +9,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class DpConfiguration(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     shipping_by = fields.Str(required=False)

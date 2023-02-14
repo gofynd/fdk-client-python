@@ -25,7 +25,7 @@ from .PlatformItem import PlatformItem
 
 
 class BagUnit(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     total_shipment_bags = fields.Int(required=False)

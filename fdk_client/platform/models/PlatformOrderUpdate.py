@@ -9,7 +9,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class PlatformOrderUpdate(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     order_id = fields.Str(required=False)

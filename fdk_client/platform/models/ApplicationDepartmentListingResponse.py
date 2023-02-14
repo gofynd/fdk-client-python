@@ -5,17 +5,17 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .Page import Page
-
 from .ApplicationDepartment import ApplicationDepartment
+
+from .Page import Page
 
 
 class ApplicationDepartmentListingResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    page = fields.Nested(Page, required=False)
-    
     items = fields.List(fields.Nested(ApplicationDepartment, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
     
 

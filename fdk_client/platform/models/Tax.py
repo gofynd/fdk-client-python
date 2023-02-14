@@ -15,14 +15,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 class Tax(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
-    
-    rate = fields.Float(required=False)
     
     amount = fields.Dict(required=False)
     
     breakup = fields.List(fields.Dict(required=False), required=False)
+    
+    rate = fields.Float(required=False)
     
     name = fields.Str(required=False)
     

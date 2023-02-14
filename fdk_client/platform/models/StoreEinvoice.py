@@ -15,7 +15,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class StoreEinvoice(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     enabled = fields.Boolean(required=False)

@@ -15,7 +15,7 @@ from .FilterInfoOption import FilterInfoOption
 
 
 class FiltersInfo(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     options = fields.List(fields.Nested(FilterInfoOption, required=False), required=False)

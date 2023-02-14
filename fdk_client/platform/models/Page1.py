@@ -17,7 +17,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class Page1(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     has_next = fields.Boolean(required=False)

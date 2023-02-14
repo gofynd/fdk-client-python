@@ -11,7 +11,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class TaxInfo(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     gstin = fields.Str(required=False)

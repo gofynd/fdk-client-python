@@ -23,7 +23,7 @@ from .DateRange import DateRange
 
 
 class ManifestFilter(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     lane = fields.Str(required=False)

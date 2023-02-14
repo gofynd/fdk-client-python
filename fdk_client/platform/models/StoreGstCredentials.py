@@ -11,7 +11,7 @@ from .StoreEwaybill import StoreEwaybill
 
 
 class StoreGstCredentials(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     e_invoice = fields.Nested(StoreEinvoice, required=False)

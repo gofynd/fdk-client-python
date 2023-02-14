@@ -13,7 +13,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class OrderBagArticle(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     uid = fields.Str(required=False)

@@ -11,11 +11,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 class ProductsDataUpdatesFilters(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
-    line_number = fields.Int(required=False)
-    
     identifier = fields.Str(required=False)
+    
+    line_number = fields.Int(required=False)
     
 

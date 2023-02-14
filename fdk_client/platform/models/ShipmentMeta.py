@@ -79,7 +79,7 @@ from .DebugInfo import DebugInfo
 
 
 class ShipmentMeta(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     box_type = fields.Str(required=False)

@@ -11,7 +11,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class Formatted(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     f_max = fields.Str(required=False)

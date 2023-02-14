@@ -31,7 +31,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class FulfillingStore(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     country = fields.Str(required=False)

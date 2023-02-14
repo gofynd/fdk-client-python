@@ -13,7 +13,7 @@ from .PaymentMethods import PaymentMethods
 
 
 class CreateChannelPaymentInfo(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     source = fields.Str(required=False)

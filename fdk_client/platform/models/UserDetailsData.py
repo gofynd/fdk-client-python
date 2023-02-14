@@ -23,7 +23,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class UserDetailsData(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     city = fields.Str(required=False)

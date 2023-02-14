@@ -11,7 +11,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class ErrorDetail(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     success = fields.Boolean(required=False)

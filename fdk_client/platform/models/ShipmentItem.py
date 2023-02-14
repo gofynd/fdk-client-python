@@ -39,7 +39,7 @@ from .PaymentModeInfo import PaymentModeInfo
 
 
 class ShipmentItem(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     total_bags_count = fields.Int(required=False)

@@ -11,7 +11,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class Success(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     success = fields.Boolean(required=False)

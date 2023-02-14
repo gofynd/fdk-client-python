@@ -35,7 +35,7 @@ from .Weight import Weight
 
 
 class Article(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     is_set = fields.Boolean(required=False)

@@ -11,7 +11,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class ManualAssignDPToShipmentResponse(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     errors = fields.List(fields.Str(required=False), required=False)

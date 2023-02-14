@@ -15,7 +15,7 @@ from .Entities import Entities
 
 
 class UpdateShipmentLockPayload(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
     
     entity_type = fields.Str(required=False)

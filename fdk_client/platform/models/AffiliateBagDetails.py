@@ -17,7 +17,7 @@ from .AffiliateMeta import AffiliateMeta
 
 
 class AffiliateBagDetails(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     loyalty_discount = fields.Float(required=False)

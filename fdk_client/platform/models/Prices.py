@@ -39,7 +39,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class Prices(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     cashback_applied = fields.Float(required=False)

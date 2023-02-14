@@ -15,7 +15,7 @@ from .ManifestDetailItem import ManifestDetailItem
 
 
 class ManifestDetailResponse(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     additional_shipment_count = fields.Int(required=False)

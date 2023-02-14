@@ -41,7 +41,7 @@ from .BagStateMapper import BagStateMapper
 
 
 class BagStatusHistory(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     updated_at = fields.Str(required=False)

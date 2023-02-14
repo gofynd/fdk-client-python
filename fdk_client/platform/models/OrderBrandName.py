@@ -19,7 +19,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class OrderBrandName(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     brand_name = fields.Str(required=False)

@@ -11,7 +11,7 @@ from .BagDetailsPlatformResponse import BagDetailsPlatformResponse
 
 
 class GetBagsPlatformResponse(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     page = fields.Nested(Page1, required=False)

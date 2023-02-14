@@ -11,7 +11,7 @@ from .ManifestFilter import ManifestFilter
 
 
 class ManifestDetailMeta(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     total_shipment_prices_count = fields.Nested(ManifestDetailTotalShipmentPricesCount, required=False)

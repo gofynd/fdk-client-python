@@ -23,7 +23,7 @@ from .BuyRules import BuyRules
 
 
 class AppliedPromos(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     promo_id = fields.Str(required=False)

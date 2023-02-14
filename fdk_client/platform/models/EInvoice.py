@@ -21,7 +21,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 class EInvoice(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     error_message = fields.Str(required=False)

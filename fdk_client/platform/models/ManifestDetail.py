@@ -29,7 +29,7 @@ from .ManifestDetailMeta import ManifestDetailMeta
 
 
 class ManifestDetail(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     status = fields.Str(required=False)

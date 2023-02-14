@@ -15,7 +15,7 @@ from .Options import Options
 
 
 class MetricsCount(BaseSchema):
-    # Orders swagger.json
+    # Order swagger.json
 
     
     value = fields.Int(required=False)

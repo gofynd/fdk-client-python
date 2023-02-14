@@ -13,13 +13,13 @@ from ..models.BaseSchema import BaseSchema
 
 
 class PaymentMethods(BaseSchema):
-    # OrderManage swagger.json
+    # Order swagger.json
 
+    
+    refund_by = fields.Str(required=False)
     
     collect_by = fields.Str(required=False)
     
     mode = fields.Str(required=False)
-    
-    refund_by = fields.Str(required=False)
     
 
