@@ -450,6 +450,11 @@ class OrderValidator:
         company_id = fields.Int(required=False)
          
     
+    class postShipmentHistory(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    
     class getShipmentHistory(BaseSchema):
         
         company_id = fields.Int(required=False)
