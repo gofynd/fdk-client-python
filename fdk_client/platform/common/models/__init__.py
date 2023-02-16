@@ -19,7 +19,7 @@ from .ApplicationMeta import ApplicationMeta
 
 from .SecureUrl import SecureUrl
 
-from .Application import Application
+from .ApplicationData import ApplicationData
 
 from .NotFound import NotFound
 

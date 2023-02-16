@@ -1,10 +1,10 @@
-"""configuration Public Model"""
+"""common Application Model"""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
 
 
-from ...PublicModel import BaseSchema
+from ...ApplicationModel import BaseSchema
 
 
 
@@ -81,7 +81,9 @@ from .Domain import Domain
 
 
 
-class Application(BaseSchema):
+
+
+class ApplicationData(BaseSchema):
     #  swagger.json
 
     
@@ -134,4 +136,6 @@ class Application(BaseSchema):
     mobile_logo = fields.Nested(SecureUrl, required=False)
     
     domain = fields.Nested(Domain, required=False)
+    
+    slug = fields.Str(required=False)
     

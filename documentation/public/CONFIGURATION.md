@@ -200,7 +200,7 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | application | [Application](#Application)? |  yes  |  |
+ | application | [ApplicationData](#ApplicationData)? |  yes  |  |
 
 ---
 
@@ -311,7 +311,7 @@ Success
 
  
  
- #### [Application](#Application)
+ #### [ApplicationData](#ApplicationData)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
@@ -340,6 +340,7 @@ Success
  | appType | String? |  yes  | It shows whether application is live or in development mode |
  | mobileLogo | [SecureUrl](#SecureUrl)? |  yes  |  |
  | domain | [Domain](#Domain)? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 

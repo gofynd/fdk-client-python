@@ -11,9 +11,9 @@ from ...PlatformModel import BaseSchema
 
 
 
-
-
 from .OrderMeta import OrderMeta
+
+
 
 
 
@@ -29,11 +29,11 @@ class OrderDict(BaseSchema):
     
     payment_methods = fields.Dict(required=False)
     
-    order_date = fields.Str(required=False)
-    
     meta = fields.Nested(OrderMeta, required=False)
     
     fynd_order_id = fields.Str(required=False)
+    
+    order_date = fields.Str(required=False)
     
     prices = fields.Nested(Prices, required=False)
     

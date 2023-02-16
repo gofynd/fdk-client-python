@@ -9,7 +9,7 @@ from ...PublicModel import BaseSchema
 
 
 
-from .Application import Application
+from .ApplicationData import ApplicationData
 
 
 
@@ -17,5 +17,5 @@ class ApplicationResponse(BaseSchema):
     #  swagger.json
 
     
-    application = fields.Nested(Application, required=False)
+    application = fields.Nested(ApplicationData, required=False)
     
