@@ -21,9 +21,9 @@ class DateMeta(BaseSchema):
     #  swagger.json
 
     
-    added_on_store = fields.Str(required=False)
-    
     modified_on = fields.Str(required=False)
+    
+    added_on_store = fields.Str(required=False)
     
     created_on = fields.Str(required=False)
     

@@ -33,11 +33,11 @@ class CreateChannelConfig(BaseSchema):
     
     location_reassignment = fields.Boolean(required=False)
     
-    logo_url = fields.Dict(required=False)
+    lock_states = fields.List(fields.Str(required=False), required=False)
     
     dp_configuration = fields.Nested(DpConfiguration, required=False)
     
-    lock_states = fields.List(fields.Str(required=False), required=False)
-    
     shipment_assignment = fields.Str(required=False)
+    
+    logo_url = fields.Dict(required=False)
     

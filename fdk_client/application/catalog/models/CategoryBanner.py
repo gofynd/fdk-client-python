@@ -21,7 +21,7 @@ class CategoryBanner(BaseSchema):
     #  swagger.json
 
     
-    portrait = fields.Nested(Media, required=False)
-    
     landscape = fields.Nested(Media, required=False)
+    
+    portrait = fields.Nested(Media, required=False)
     

@@ -25,7 +25,7 @@ class CreateSearchKeyword(BaseSchema):
     #  swagger.json
 
     
-    words = fields.List(fields.Str(required=False), required=False)
+    _custom_json = fields.Dict(required=False)
     
     result = fields.Nested(SearchKeywordResult, required=False)
     
@@ -33,5 +33,5 @@ class CreateSearchKeyword(BaseSchema):
     
     app_id = fields.Str(required=False)
     
-    _custom_json = fields.Dict(required=False)
+    words = fields.List(fields.Str(required=False), required=False)
     

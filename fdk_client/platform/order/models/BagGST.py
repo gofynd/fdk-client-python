@@ -33,15 +33,15 @@ class BagGST(BaseSchema):
     
     hsn_code = fields.Str(required=False)
     
+    gst_tag = fields.Str(required=False)
+    
+    brand_calculated_amount = fields.Float(required=False)
+    
+    gst_tax_percentage = fields.Int(required=False)
+    
     value_of_good = fields.Float(required=False)
     
     gst_fee = fields.Float(required=False)
     
-    gst_tax_percentage = fields.Int(required=False)
-    
     is_default_hsn_code = fields.Boolean(required=False)
-    
-    gst_tag = fields.Str(required=False)
-    
-    brand_calculated_amount = fields.Float(required=False)
     

@@ -9,9 +9,11 @@ from ...ApplicationModel import BaseSchema
 
 
 
-
-
 from .Child import Child
+
+
+
+from .CategoryBanner import CategoryBanner
 
 
 
@@ -23,17 +25,15 @@ from .ProductListingAction import ProductListingAction
 
 
 
-from .CategoryBanner import CategoryBanner
-
 
 
 class CategoryItems(BaseSchema):
     #  swagger.json
 
     
-    name = fields.Str(required=False)
-    
     childs = fields.List(fields.Nested(Child, required=False), required=False)
+    
+    banners = fields.Nested(CategoryBanner, required=False)
     
     uid = fields.Int(required=False)
     
@@ -41,5 +41,5 @@ class CategoryItems(BaseSchema):
     
     action = fields.Nested(ProductListingAction, required=False)
     
-    banners = fields.Nested(CategoryBanner, required=False)
+    name = fields.Str(required=False)
     
