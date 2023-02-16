@@ -35,11 +35,11 @@ class AdvanceFilterInfo(BaseSchema):
     
     returned = fields.List(fields.Nested(FiltersInfo, required=False), required=False)
     
-    action_centre = fields.List(fields.Nested(FiltersInfo, required=False), required=False)
-    
     unfulfilled = fields.List(fields.Nested(FiltersInfo, required=False), required=False)
+    
+    processed = fields.List(fields.Nested(FiltersInfo, required=False), required=False)
     
     filters = fields.List(fields.Nested(FiltersInfo, required=False), required=False)
     
-    processed = fields.List(fields.Nested(FiltersInfo, required=False), required=False)
+    action_centre = fields.List(fields.Nested(FiltersInfo, required=False), required=False)
     

@@ -5,13 +5,13 @@ from .FilterInfoOption import FilterInfoOption
 
 from .FiltersInfo import FiltersInfo
 
-from .UserDataInfo import UserDataInfo
+from .ShipmentStatus import ShipmentStatus
 
 from .ShipmentItemFulFillingStore import ShipmentItemFulFillingStore
 
-from .ShipmentStatus import ShipmentStatus
-
 from .PaymentModeInfo import PaymentModeInfo
+
+from .UserDataInfo import UserDataInfo
 
 from .Prices import Prices
 
@@ -27,13 +27,33 @@ from .ShipmentInternalPlatformViewResponse import ShipmentInternalPlatformViewRe
 
 from .Error import Error
 
-from .TrackingList import TrackingList
+from .ShipmentPayments import ShipmentPayments
 
-from .DPDetailsData import DPDetailsData
+from .UserDetailsData import UserDetailsData
 
 from .BagStateMapper import BagStateMapper
 
+from .BagStatusHistory import BagStatusHistory
+
+from .ShipmentStatusData import ShipmentStatusData
+
+from .FulfillingStore import FulfillingStore
+
+from .DPDetailsData import DPDetailsData
+
+from .TrackingList import TrackingList
+
+from .OrderDetailsData import OrderDetailsData
+
+from .BagConfigs import BagConfigs
+
 from .CurrentStatus import CurrentStatus
+
+from .PlatformDeliveryAddress import PlatformDeliveryAddress
+
+from .Identifier import Identifier
+
+from .FinancialBreakup import FinancialBreakup
 
 from .ItemCriterias import ItemCriterias
 
@@ -43,41 +63,21 @@ from .DiscountRules import DiscountRules
 
 from .AppliedPromos import AppliedPromos
 
-from .BagConfigs import BagConfigs
-
-from .PlatformDeliveryAddress import PlatformDeliveryAddress
+from .OrderBrandName import OrderBrandName
 
 from .BagGST import BagGST
 
-from .OrderBrandName import OrderBrandName
-
 from .OrderBagArticle import OrderBagArticle
-
-from .Identifier import Identifier
-
-from .FinancialBreakup import FinancialBreakup
 
 from .OrderBags import OrderBags
 
-from .ShipmentStatusData import ShipmentStatusData
-
-from .ShipmentPayments import ShipmentPayments
-
-from .UserDetailsData import UserDetailsData
-
-from .FulfillingStore import FulfillingStore
-
-from .OrderDetailsData import OrderDetailsData
-
-from .BagStatusHistory import BagStatusHistory
-
 from .ShipmentInfoResponse import ShipmentInfoResponse
+
+from .PlatformShipment import PlatformShipment
 
 from .OrderMeta import OrderMeta
 
 from .OrderDict import OrderDict
-
-from .PlatformShipment import PlatformShipment
 
 from .ShipmentDetailsResponse import ShipmentDetailsResponse
 
@@ -87,13 +87,13 @@ from .SuperLane import SuperLane
 
 from .LaneConfigResponse import LaneConfigResponse
 
+from .Page import Page
+
 from .PlatformBreakupValues import PlatformBreakupValues
 
 from .PlatformChannel import PlatformChannel
 
 from .PlatformOrderItems import PlatformOrderItems
-
-from .Page import Page
 
 from .OrderListingResponse import OrderListingResponse
 
@@ -127,9 +127,9 @@ from .BulkInvoicingResponse import BulkInvoicingResponse
 
 from .BulkInvoiceLabelResponse import BulkInvoiceLabelResponse
 
-from .FileUploadResponse import FileUploadResponse
-
 from .URL import URL
+
+from .FileUploadResponse import FileUploadResponse
 
 from .FileResponse import FileResponse
 
@@ -153,14 +153,6 @@ from .BulkActionDetailsDataField import BulkActionDetailsDataField
 
 from .BulkActionDetailsResponse import BulkActionDetailsResponse
 
-from .Attributes import Attributes
-
-from .Item import Item
-
-from .StoreAddress import StoreAddress
-
-from .EInvoicePortalDetails import EInvoicePortalDetails
-
 from .Document import Document
 
 from .StoreDocuments import StoreDocuments
@@ -171,35 +163,13 @@ from .StoreEwaybill import StoreEwaybill
 
 from .StoreGstCredentials import StoreGstCredentials
 
+from .EInvoicePortalDetails import EInvoicePortalDetails
+
 from .StoreMeta import StoreMeta
 
+from .StoreAddress import StoreAddress
+
 from .Store import Store
-
-from .Dates import Dates
-
-from .ShipmentTimeStamp import ShipmentTimeStamp
-
-from .EInvoice import EInvoice
-
-from .EinvoiceInfo import EinvoiceInfo
-
-from .BuyerDetails import BuyerDetails
-
-from .LockData import LockData
-
-from .Formatted import Formatted
-
-from .DebugInfo import DebugInfo
-
-from .ShipmentMeta import ShipmentMeta
-
-from .AffiliateMeta import AffiliateMeta
-
-from .PDFLinks import PDFLinks
-
-from .AffiliateDetails import AffiliateDetails
-
-from .AffiliateBagDetails import AffiliateBagDetails
 
 from .BagReturnableCancelableStatus import BagReturnableCancelableStatus
 
@@ -207,17 +177,47 @@ from .B2BPODetails import B2BPODetails
 
 from .BagMeta import BagMeta
 
-from .BagGSTDetails import BagGSTDetails
+from .ArticleDetails import ArticleDetails
+
+from .AffiliateMeta import AffiliateMeta
+
+from .AffiliateBagDetails import AffiliateBagDetails
+
+from .Formatted import Formatted
+
+from .BuyerDetails import BuyerDetails
+
+from .DebugInfo import DebugInfo
+
+from .ShipmentTimeStamp import ShipmentTimeStamp
+
+from .LockData import LockData
+
+from .EInvoice import EInvoice
+
+from .EinvoiceInfo import EinvoiceInfo
+
+from .ShipmentMeta import ShipmentMeta
+
+from .PDFLinks import PDFLinks
+
+from .AffiliateDetails import AffiliateDetails
 
 from .Brand import Brand
 
-from .ArticleDetails import ArticleDetails
+from .Dates import Dates
+
+from .BagGSTDetails import BagGSTDetails
+
+from .Attributes import Attributes
+
+from .Item import Item
+
+from .Weight import Weight
 
 from .ReturnConfig import ReturnConfig
 
 from .Dimensions import Dimensions
-
-from .Weight import Weight
 
 from .Article import Article
 
