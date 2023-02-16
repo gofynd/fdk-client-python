@@ -9,9 +9,9 @@ from ...PlatformModel import BaseSchema
 
 
 
+
+
 from .ProductSizeDeleteDataResponse import ProductSizeDeleteDataResponse
-
-
 
 
 
@@ -19,7 +19,7 @@ class ProductSizeDeleteResponse(BaseSchema):
     #  swagger.json
 
     
-    data = fields.Nested(ProductSizeDeleteDataResponse, required=False)
-    
     success = fields.Boolean(required=False)
+    
+    data = fields.Nested(ProductSizeDeleteDataResponse, required=False)
     

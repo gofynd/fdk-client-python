@@ -23,7 +23,7 @@ class ProductFiltersKey(BaseSchema):
     #  swagger.json
 
     
-    kind = fields.Str(required=False)
+    name = fields.Str(required=False)
     
     logo = fields.Str(required=False)
     
@@ -31,5 +31,5 @@ class ProductFiltersKey(BaseSchema):
     
     operators = fields.List(fields.Str(required=False), required=False)
     
-    name = fields.Str(required=False)
+    kind = fields.Str(required=False)
     

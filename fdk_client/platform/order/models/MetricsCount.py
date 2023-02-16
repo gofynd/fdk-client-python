@@ -23,9 +23,9 @@ class MetricsCount(BaseSchema):
     #  swagger.json
 
     
-    key = fields.Str(required=False)
-    
     value = fields.Int(required=False)
+    
+    key = fields.Str(required=False)
     
     text = fields.Str(required=False)
     

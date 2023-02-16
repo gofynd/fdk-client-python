@@ -25,10 +25,6 @@ class Page(BaseSchema):
     #  swagger.json
 
     
-    has_next = fields.Boolean(required=False)
-    
-    current = fields.Int(required=False)
-    
     type = fields.Str(required=False)
     
     total = fields.Int(required=False)
@@ -36,4 +32,8 @@ class Page(BaseSchema):
     size = fields.Int(required=False)
     
     has_previous = fields.Boolean(required=False)
+    
+    has_next = fields.Boolean(required=False)
+    
+    current = fields.Int(required=False)
     

@@ -31,19 +31,19 @@ class OmsReports(BaseSchema):
     #  swagger.json
 
     
-    report_requested_at = fields.Str(required=False)
+    status = fields.Str(required=False)
     
     request_details = fields.Dict(required=False)
     
+    report_requested_at = fields.Str(required=False)
+    
     report_created_at = fields.Str(required=False)
-    
-    report_name = fields.Str(required=False)
-    
-    report_type = fields.Str(required=False)
     
     report_id = fields.Str(required=False)
     
-    status = fields.Str(required=False)
+    report_type = fields.Str(required=False)
+    
+    report_name = fields.Str(required=False)
     
     display_name = fields.Str(required=False)
     

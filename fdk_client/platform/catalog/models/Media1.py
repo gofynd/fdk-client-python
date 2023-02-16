@@ -19,9 +19,9 @@ class Media1(BaseSchema):
     #  swagger.json
 
     
-    url = fields.Str(required=False)
-    
     meta = fields.Dict(required=False)
     
     type = fields.Str(required=False)
+    
+    url = fields.Str(required=False)
     

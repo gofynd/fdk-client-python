@@ -9,41 +9,13 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .AppliedPromos import AppliedPromos
-
-
-
-
-
-from .OrderBagArticle import OrderBagArticle
+from .PlatformItem import PlatformItem
 
 
 
 from .BagGST import BagGST
 
 
-
-
-
-from .PlatformItem import PlatformItem
-
-
-
-from .Prices import Prices
-
-
-
-
-
-from .OrderBrandName import OrderBrandName
-
-
-
-from .FinancialBreakup import FinancialBreakup
-
-
-
-from .BagConfigs import BagConfigs
 
 
 
@@ -57,9 +29,33 @@ from .CurrentStatus import CurrentStatus
 
 
 
+from .Prices import Prices
 
 
 
+from .OrderBrandName import OrderBrandName
+
+
+
+
+
+from .AppliedPromos import AppliedPromos
+
+
+
+
+
+
+
+from .BagConfigs import BagConfigs
+
+
+
+from .FinancialBreakup import FinancialBreakup
+
+
+
+from .OrderBagArticle import OrderBagArticle
 
 
 
@@ -69,47 +65,51 @@ from .PlatformDeliveryAddress import PlatformDeliveryAddress
 
 
 
+
+
+
+
 class OrderBags(BaseSchema):
     #  swagger.json
 
     
-    applied_promos = fields.List(fields.Nested(AppliedPromos, required=False), required=False)
-    
-    line_number = fields.Int(required=False)
-    
-    article = fields.Nested(OrderBagArticle, required=False)
+    item = fields.Nested(PlatformItem, required=False)
     
     gst_details = fields.Nested(BagGST, required=False)
     
-    entity_type = fields.Str(required=False)
-    
-    item = fields.Nested(PlatformItem, required=False)
-    
-    prices = fields.Nested(Prices, required=False)
-    
-    seller_identifier = fields.Str(required=False)
-    
-    brand = fields.Nested(OrderBrandName, required=False)
-    
-    financial_breakup = fields.Nested(FinancialBreakup, required=False)
-    
-    bag_configs = fields.Nested(BagConfigs, required=False)
+    can_return = fields.Boolean(required=False)
     
     bag_id = fields.Int(required=False)
     
     current_status = fields.Nested(CurrentStatus, required=False)
     
+    display_name = fields.Str(required=False)
+    
     parent_promo_bags = fields.Dict(required=False)
     
-    identifier = fields.Str(required=False)
+    prices = fields.Nested(Prices, required=False)
     
-    quantity = fields.Int(required=False)
-    
-    can_return = fields.Boolean(required=False)
+    brand = fields.Nested(OrderBrandName, required=False)
     
     can_cancel = fields.Boolean(required=False)
     
+    applied_promos = fields.List(fields.Nested(AppliedPromos, required=False), required=False)
+    
+    quantity = fields.Int(required=False)
+    
+    line_number = fields.Int(required=False)
+    
+    bag_configs = fields.Nested(BagConfigs, required=False)
+    
+    financial_breakup = fields.Nested(FinancialBreakup, required=False)
+    
+    article = fields.Nested(OrderBagArticle, required=False)
+    
     delivery_address = fields.Nested(PlatformDeliveryAddress, required=False)
     
-    display_name = fields.Str(required=False)
+    entity_type = fields.Str(required=False)
+    
+    seller_identifier = fields.Str(required=False)
+    
+    identifier = fields.Str(required=False)
     

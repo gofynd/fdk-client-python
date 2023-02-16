@@ -35,7 +35,7 @@ class GetAddressSerializer(BaseSchema):
     #  swagger.json
 
     
-    address_type = fields.Str(required=False)
+    country = fields.Str(required=False)
     
     address1 = fields.Str(required=False)
     
@@ -43,17 +43,17 @@ class GetAddressSerializer(BaseSchema):
     
     pincode = fields.Int(required=False)
     
+    city = fields.Str(required=False)
+    
     longitude = fields.Float(required=False)
     
     landmark = fields.Str(required=False)
     
-    latitude = fields.Float(required=False)
+    country_code = fields.Str(required=False)
+    
+    address_type = fields.Str(required=False)
     
     state = fields.Str(required=False)
     
-    country = fields.Str(required=False)
-    
-    country_code = fields.Str(required=False)
-    
-    city = fields.Str(required=False)
+    latitude = fields.Float(required=False)
     

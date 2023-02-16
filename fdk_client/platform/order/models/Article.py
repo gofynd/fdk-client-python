@@ -13,25 +13,13 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .Weight import Weight
+
+
+
 
 
 
 from .ReturnConfig import ReturnConfig
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -45,35 +33,47 @@ from .Dimensions import Dimensions
 
 
 
+
+
+
+
+from .Weight import Weight
+
+
+
+
+
+
+
 class Article(BaseSchema):
     #  swagger.json
 
     
-    child_details = fields.Dict(required=False)
-    
     esp_modified = fields.Raw(required=False)
-    
-    weight = fields.Nested(Weight, required=False)
-    
-    return_config = fields.Nested(ReturnConfig, required=False)
-    
-    a_set = fields.Dict(required=False)
-    
-    raw_meta = fields.Raw(required=False)
-    
-    seller_identifier = fields.Str(required=False)
-    
-    code = fields.Str(required=False)
-    
-    is_set = fields.Boolean(required=False)
-    
-    uid = fields.Str(required=False)
     
     _id = fields.Str(required=False)
     
-    identifiers = fields.Nested(Identifier, required=False)
+    uid = fields.Str(required=False)
     
     size = fields.Str(required=False)
     
+    seller_identifier = fields.Str(required=False)
+    
+    return_config = fields.Nested(ReturnConfig, required=False)
+    
+    identifiers = fields.Nested(Identifier, required=False)
+    
+    is_set = fields.Boolean(required=False)
+    
     dimensions = fields.Nested(Dimensions, required=False)
+    
+    child_details = fields.Dict(required=False)
+    
+    code = fields.Str(required=False)
+    
+    weight = fields.Nested(Weight, required=False)
+    
+    raw_meta = fields.Raw(required=False)
+    
+    a_set = fields.Dict(required=False)
     
