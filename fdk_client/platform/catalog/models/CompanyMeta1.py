@@ -1,0 +1,19 @@
+"""catalog Platform Model"""
+
+from marshmallow import fields, Schema
+from marshmallow.validate import OneOf
+
+
+from ...PlatformModel import BaseSchema
+
+
+
+
+
+
+class CompanyMeta1(BaseSchema):
+    #  swagger.json
+
+    
+    id = fields.Int(required=False)
+    
