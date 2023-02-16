@@ -43,7 +43,7 @@ class SecureUrl(BaseSchema):
     pass
 
 
-class Application(BaseSchema):
+class ApplicationData(BaseSchema):
     pass
 
 
@@ -80,7 +80,7 @@ class ApplicationResponse(BaseSchema):
     # Common swagger.json
 
     
-    application = fields.Nested(Application, required=False)
+    application = fields.Nested(ApplicationData, required=False)
     
 
 
@@ -180,7 +180,7 @@ class SecureUrl(BaseSchema):
     
 
 
-class Application(BaseSchema):
+class ApplicationData(BaseSchema):
     # Common swagger.json
 
     
@@ -233,6 +233,8 @@ class Application(BaseSchema):
     mobile_logo = fields.Nested(SecureUrl, required=False)
     
     domain = fields.Nested(Domain, required=False)
+    
+    slug = fields.Str(required=False)
     
 
 

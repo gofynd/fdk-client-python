@@ -681,14 +681,14 @@ class CatalogValidator:
         item_code = fields.Str(required=False)
          
     
-    class editProduct(BaseSchema):
+    class patchProduct(BaseSchema):
         
         company_id = fields.Str(required=False)
         
         item_id = fields.Int(required=False)
          
     
-    class patchProduct(BaseSchema):
+    class editProduct(BaseSchema):
         
         company_id = fields.Str(required=False)
         
