@@ -37,8 +37,10 @@ from .HistoryRes import HistoryRes
 
 from .PointsHistory import PointsHistory
 
-from .AndroidPathsRes import AndroidPathsRes
+from .ConfigurationRes import ConfigurationRes
 
-from .AndroidPathReq import AndroidPathReq
+from .SetConfigurationRes import SetConfigurationRes
+
+from .ConfigurationRequest import ConfigurationRequest
 
 

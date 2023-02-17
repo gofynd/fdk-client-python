@@ -25,13 +25,13 @@ class JioCodeUpsertResponse(BaseSchema):
     #  swagger.json
 
     
-    success = fields.Boolean(required=False)
-    
-    data = fields.List(fields.Dict(required=False), required=False)
+    identifier = fields.Str(required=False)
     
     trace_id = fields.Str(required=False)
     
+    success = fields.Boolean(required=False)
+    
     error = fields.List(fields.Nested(NestedErrorSchemaDataSet, required=False), required=False)
     
-    identifier = fields.Str(required=False)
+    data = fields.List(fields.Dict(required=False), required=False)
     

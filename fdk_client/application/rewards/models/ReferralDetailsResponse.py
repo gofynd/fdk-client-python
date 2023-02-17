@@ -23,6 +23,8 @@ from .ReferralDetailsUser import ReferralDetailsUser
 
 
 
+
+
 class ReferralDetailsResponse(BaseSchema):
     #  swagger.json
 
@@ -34,4 +36,6 @@ class ReferralDetailsResponse(BaseSchema):
     user = fields.Nested(ReferralDetailsUser, required=False)
     
     referrer_info = fields.Str(required=False)
+    
+    terms_conditions_link = fields.Str(required=False)
     

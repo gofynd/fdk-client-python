@@ -11,13 +11,9 @@ from ...PlatformModel import BaseSchema
 
 
 
-
-
-class AndroidPathsRes(BaseSchema):
+class SetConfigurationRes(BaseSchema):
     #  swagger.json
 
-    
-    data = fields.List(fields.Str(required=False), required=False)
     
     success = fields.Boolean(required=False)
     

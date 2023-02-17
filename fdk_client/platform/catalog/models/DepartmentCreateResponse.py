@@ -17,7 +17,7 @@ class DepartmentCreateResponse(BaseSchema):
     #  swagger.json
 
     
-    uid = fields.Int(required=False)
-    
     message = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
     

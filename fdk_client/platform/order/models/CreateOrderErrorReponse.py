@@ -37,11 +37,11 @@ class CreateOrderErrorReponse(BaseSchema):
     
     exception = fields.Str(required=False)
     
-    request_id = fields.Str(required=False)
-    
     status = fields.Int(required=False)
     
-    message = fields.Str(required=False)
-    
     code = fields.Str(required=False)
+    
+    request_id = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
     

@@ -25,9 +25,9 @@ class BagConfigs(BaseSchema):
     #  swagger.json
 
     
-    is_returnable = fields.Boolean(required=False)
-    
     is_customer_return_allowed = fields.Boolean(required=False)
+    
+    is_returnable = fields.Boolean(required=False)
     
     can_be_cancelled = fields.Boolean(required=False)
     

@@ -21,7 +21,7 @@ class CollectionListingFilterType(BaseSchema):
     
     display = fields.Str(required=False)
     
-    is_selected = fields.Boolean(required=False)
-    
     name = fields.Str(required=False)
+    
+    is_selected = fields.Boolean(required=False)
     

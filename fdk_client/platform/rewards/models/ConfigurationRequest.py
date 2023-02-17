@@ -11,9 +11,13 @@ from ...PlatformModel import BaseSchema
 
 
 
-class AndroidPathReq(BaseSchema):
+
+
+class ConfigurationRequest(BaseSchema):
     #  swagger.json
 
     
-    paths = fields.List(fields.Str(required=False), required=False)
+    valid_android_packages = fields.List(fields.Str(required=False), required=False)
+    
+    terms_conditions_link = fields.Str(required=False)
     

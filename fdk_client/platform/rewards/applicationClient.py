@@ -383,8 +383,8 @@ class Rewards:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AndroidPathReq import AndroidPathReq
-        schema = AndroidPathReq()
+        from .models.ConfigurationRequest import ConfigurationRequest
+        schema = ConfigurationRequest()
         schema.dump(schema.load(body))
         
 

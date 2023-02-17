@@ -21,7 +21,7 @@ class GetConfigMetadataResponse(BaseSchema):
     
     condition = fields.List(fields.Dict(required=False), required=False)
     
-    values = fields.List(fields.Dict(required=False), required=False)
-    
     data = fields.List(fields.Dict(required=False), required=False)
+    
+    values = fields.List(fields.Dict(required=False), required=False)
     
