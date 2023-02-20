@@ -182,6 +182,8 @@ class PaymentValidator:
     
     class edcDevice(BaseSchema):
         
+        terminal_serial_no = fields.Str(required=False)
+        
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
@@ -202,6 +204,34 @@ class PaymentValidator:
          
     
     class edcDeviceList(BaseSchema):
+        
+        page_number = fields.Int(required=False)
+        
+        is_active = fields.Boolean(required=False)
+        
+        store_id = fields.Int(required=False)
+        
+        device_tag = fields.Str(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+    
+    class getPaymentModeRoutesPos(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        refresh = fields.Boolean(required=False)
+        
+        request_type = fields.Str(required=False)
+         
+    
+    class checkAndUpdatePaymentStatus(BaseSchema):
         
         company_id = fields.Int(required=False)
         
