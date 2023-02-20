@@ -25,9 +25,9 @@ class InventoryExportRequest(BaseSchema):
     
     filters = fields.Nested(InventoryExportFilter, required=False)
     
+    notification_emails = fields.List(fields.Str(required=False), required=False)
+    
     data = fields.List(fields.Str(required=False), required=False)
     
     type = fields.Str(required=False)
-    
-    notification_emails = fields.List(fields.Str(required=False), required=False)
     

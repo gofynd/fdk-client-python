@@ -23,6 +23,8 @@ class Document(BaseSchema):
     #  swagger.json
 
     
+    verified = fields.Boolean(required=False)
+    
     url = fields.Str(required=False)
     
     type = fields.Str(required=False)
@@ -30,6 +32,4 @@ class Document(BaseSchema):
     value = fields.Str(required=False)
     
     legal_name = fields.Str(required=False)
-    
-    verified = fields.Boolean(required=False)
     

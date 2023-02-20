@@ -21,7 +21,7 @@ class ZoneResponse(BaseSchema):
     
     success = fields.Boolean(required=False)
     
-    zone_id = fields.Str(required=False)
-    
     status_code = fields.Int(required=False)
+    
+    zone_id = fields.Str(required=False)
     

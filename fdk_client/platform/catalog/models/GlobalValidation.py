@@ -11,15 +11,15 @@ from ...PlatformModel import BaseSchema
 
 
 
-
-
-
-
-
-
-
-
 from .Properties import Properties
+
+
+
+
+
+
+
+
 
 
 
@@ -27,7 +27,9 @@ class GlobalValidation(BaseSchema):
     #  swagger.json
 
     
-    title = fields.Str(required=False)
+    required = fields.List(fields.Str(required=False), required=False)
+    
+    properties = fields.Nested(Properties, required=False)
     
     type = fields.Str(required=False)
     
@@ -35,7 +37,5 @@ class GlobalValidation(BaseSchema):
     
     description = fields.Str(required=False)
     
-    required = fields.List(fields.Str(required=False), required=False)
-    
-    properties = fields.Nested(Properties, required=False)
+    title = fields.Str(required=False)
     

@@ -84,10 +84,30 @@ class Logistic:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/zones", page_number=page_number, page_size=page_size, name=name, is_active=is_active, channel_ids=channel_ids), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
-    async def getCompanyStoreView(self, ):
+    async def getCompanyStoreView(self, page_number=None, page_size=None, zone_id=None, enabled=None, q=None):
         """This API returns Company Store View of the application.
+        :param page_number : index of the item to start returning with : type integer
+        :param page_size : determines the items to be displayed in a page : type integer
+        :param zone_id : A `zone_id` is a unique identifier for a particular zone. : type string
+        :param enabled : select enabled/all stores. : type string
+        :param q : search with name as a free text : type string
         """
         payload = {}
+        
+        if page_number:
+            payload["page_number"] = page_number
+        
+        if page_size:
+            payload["page_size"] = page_size
+        
+        if zone_id:
+            payload["zone_id"] = zone_id
+        
+        if enabled:
+            payload["enabled"] = enabled
+        
+        if q:
+            payload["q"] = q
         
 
         # Parameter validation
@@ -95,8 +115,8 @@ class Logistic:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/all-stores", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular company.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular company.","schema":{"type":"integer"},"required":true}]}""", )
-        query_string = await create_query_string()
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/all-stores", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular company.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"page_number","description":"index of the item to start returning with","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"zone_id","description":"A `zone_id` is a unique identifier for a particular zone.","schema":{"type":"string"}},{"in":"query","name":"enabled","description":"select enabled/all stores.","schema":{"type":"string"}},{"in":"query","name":"q","description":"search with name as a free text","schema":{"type":"string"}}],"query":[{"in":"query","name":"page_number","description":"index of the item to start returning with","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"zone_id","description":"A `zone_id` is a unique identifier for a particular zone.","schema":{"type":"string"}},{"in":"query","name":"enabled","description":"select enabled/all stores.","schema":{"type":"string"}},{"in":"query","name":"q","description":"search with name as a free text","schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular company.","schema":{"type":"integer"},"required":true}]}""", page_number=page_number, page_size=page_size, zone_id=zone_id, enabled=enabled, q=q)
+        query_string = await create_query_string(page_number=page_number, page_size=page_size, zone_id=zone_id, enabled=enabled, q=q)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -106,7 +126,7 @@ class Logistic:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/all-stores", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/all-stores", page_number=page_number, page_size=page_size, zone_id=zone_id, enabled=enabled, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def updateZoneControllerView(self, zone_id=None, body=""):
         """This API returns response of updation of zone in mongo database.
@@ -170,7 +190,7 @@ class Logistic:
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/zone/{zone_id}", zone_id=zone_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def insertZoneControllerView(self, body=""):
-        """This API returns response of insertion of zone in mongo database.<br>Correction- `zone_id` in the path must be removed.<br> path is `/service/platform/logistics-internal/v1.0/company/{}/zone/`
+        """This API returns response of insertion of zone in mongo database.<br>Correction- `zone_id` in the path must be removed.<br> path is `/service/platform/logistics-internal/v1.0/company/{company_id}/zone/`
         """
         payload = {}
         

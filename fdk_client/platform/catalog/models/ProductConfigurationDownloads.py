@@ -17,7 +17,7 @@ class ProductConfigurationDownloads(BaseSchema):
     #  swagger.json
 
     
-    data = fields.List(fields.Dict(required=False), required=False)
-    
     multivalue = fields.Boolean(required=False)
+    
+    data = fields.List(fields.Dict(required=False), required=False)
     

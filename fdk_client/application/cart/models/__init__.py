@@ -3,53 +3,43 @@
 
 from .CartCurrency import CartCurrency
 
-from .PromiseTimestamp import PromiseTimestamp
-
-from .PromiseFormatted import PromiseFormatted
-
-from .ShipmentPromise import ShipmentPromise
-
-from .DisplayBreakup import DisplayBreakup
-
-from .CouponBreakup import CouponBreakup
+from .PaymentSelectionLock import PaymentSelectionLock
 
 from .RawBreakup import RawBreakup
 
+from .CouponBreakup import CouponBreakup
+
 from .LoyaltyPoints import LoyaltyPoints
+
+from .DisplayBreakup import DisplayBreakup
 
 from .CartBreakup import CartBreakup
 
-from .PaymentSelectionLock import PaymentSelectionLock
+from .PromiseFormatted import PromiseFormatted
 
-from .ProductPrice import ProductPrice
+from .PromiseTimestamp import PromiseTimestamp
 
-from .ProductPriceInfo import ProductPriceInfo
+from .ShipmentPromise import ShipmentPromise
 
-from .FreeGiftItem import FreeGiftItem
-
-from .AppliedFreeArticles import AppliedFreeArticles
-
-from .Ownership import Ownership
-
-from .BuyRules import BuyRules
-
-from .DiscountRulesApp import DiscountRulesApp
-
-from .AppliedPromotion import AppliedPromotion
-
-from .CartProductIdentifer import CartProductIdentifer
-
-from .ProductAvailability import ProductAvailability
-
-from .PromoMeta import PromoMeta
+from .BaseInfo import BaseInfo
 
 from .BasePrice import BasePrice
 
 from .ArticlePriceInfo import ArticlePriceInfo
 
-from .BaseInfo import BaseInfo
-
 from .ProductArticle import ProductArticle
+
+from .ProductAvailability import ProductAvailability
+
+from .PromoMeta import PromoMeta
+
+from .ProductPrice import ProductPrice
+
+from .ProductPriceInfo import ProductPriceInfo
+
+from .CartProductIdentifer import CartProductIdentifer
+
+from .ProductImage import ProductImage
 
 from .NetQuantity import NetQuantity
 
@@ -59,9 +49,19 @@ from .ProductAction import ProductAction
 
 from .CategoryInfo import CategoryInfo
 
-from .ProductImage import ProductImage
-
 from .CartProduct import CartProduct
+
+from .Ownership import Ownership
+
+from .BuyRules import BuyRules
+
+from .FreeGiftItem import FreeGiftItem
+
+from .AppliedFreeArticles import AppliedFreeArticles
+
+from .DiscountRulesApp import DiscountRulesApp
+
+from .AppliedPromotion import AppliedPromotion
 
 from .CartProductInfo import CartProductInfo
 

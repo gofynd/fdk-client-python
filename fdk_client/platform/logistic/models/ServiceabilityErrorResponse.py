@@ -13,11 +13,15 @@ from ...PlatformModel import BaseSchema
 
 
 
-class PincodeCodStatusListingSummary(BaseSchema):
+
+
+class ServiceabilityErrorResponse(BaseSchema):
     #  swagger.json
 
     
-    total_active_pincodes = fields.Int(required=False)
+    message = fields.Str(required=False)
     
-    total_inactive_pincodes = fields.Int(required=False)
+    type = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
     

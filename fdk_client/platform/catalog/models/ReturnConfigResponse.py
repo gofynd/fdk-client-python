@@ -19,9 +19,9 @@ class ReturnConfigResponse(BaseSchema):
     #  swagger.json
 
     
-    returnable = fields.Boolean(required=False)
-    
     unit = fields.Str(required=False)
+    
+    returnable = fields.Boolean(required=False)
     
     time = fields.Int(required=False)
     

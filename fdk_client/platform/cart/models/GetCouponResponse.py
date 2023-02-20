@@ -9,11 +9,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .Coupon import Coupon
-
-
-
 from .PageCoupon import PageCoupon
+
+
+
+from .Coupon import Coupon
 
 
 
@@ -21,7 +21,7 @@ class GetCouponResponse(BaseSchema):
     #  swagger.json
 
     
-    available_coupon_list = fields.List(fields.Nested(Coupon, required=False), required=False)
-    
     page = fields.Nested(PageCoupon, required=False)
+    
+    available_coupon_list = fields.List(fields.Nested(Coupon, required=False), required=False)
     

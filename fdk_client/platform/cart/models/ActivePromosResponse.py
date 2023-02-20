@@ -33,17 +33,9 @@ class ActivePromosResponse(BaseSchema):
     #  swagger.json
 
     
-    subtitle = fields.Str(required=False)
-    
-    modified_on = fields.Str(required=False)
-    
-    created_on = fields.Str(required=False)
-    
-    entity_slug = fields.Str(required=False)
-    
-    description = fields.Str(required=False)
-    
     entity_type = fields.Str(required=False)
+    
+    subtitle = fields.Str(required=False)
     
     is_hidden = fields.Boolean(required=False)
     
@@ -51,5 +43,13 @@ class ActivePromosResponse(BaseSchema):
     
     example = fields.Str(required=False)
     
+    description = fields.Str(required=False)
+    
+    modified_on = fields.Str(required=False)
+    
     title = fields.Str(required=False)
+    
+    created_on = fields.Str(required=False)
+    
+    entity_slug = fields.Str(required=False)
     

@@ -9,7 +9,7 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .PageResponse import PageResponse
+from .ServiceabilityPageResponse import ServiceabilityPageResponse
 
 
 
@@ -21,7 +21,7 @@ class GetStoresViewResponse(BaseSchema):
     #  swagger.json
 
     
-    page = fields.Nested(PageResponse, required=False)
+    page = fields.Nested(ServiceabilityPageResponse, required=False)
     
     items = fields.List(fields.Nested(ItemResponse, required=False), required=False)
     

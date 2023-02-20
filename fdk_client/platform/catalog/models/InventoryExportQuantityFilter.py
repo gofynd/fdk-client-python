@@ -21,7 +21,7 @@ class InventoryExportQuantityFilter(BaseSchema):
     
     operators = fields.Str(required=False)
     
-    max = fields.Int(required=False)
-    
     min = fields.Int(required=False)
+    
+    max = fields.Int(required=False)
     
