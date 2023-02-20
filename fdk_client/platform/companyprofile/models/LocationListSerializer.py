@@ -9,11 +9,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .GetLocationSerializer import GetLocationSerializer
-
-
-
 from .Page import Page
+
+
+
+from .GetLocationSerializer import GetLocationSerializer
 
 
 
@@ -21,7 +21,7 @@ class LocationListSerializer(BaseSchema):
     #  swagger.json
 
     
-    items = fields.List(fields.Nested(GetLocationSerializer, required=False), required=False)
-    
     page = fields.Nested(Page, required=False)
+    
+    items = fields.List(fields.Nested(GetLocationSerializer, required=False), required=False)
     

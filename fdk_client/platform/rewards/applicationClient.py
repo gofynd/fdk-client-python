@@ -348,14 +348,14 @@ class Rewards:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/users/{user_id}/points/history/", user_id=user_id, page_id=page_id, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
-    async def getAndroidPaths(self, ):
+    async def getRewardsConfiguration(self, ):
         """Use this API to get a list of valid android paths required by the Rewards INIT API to validate a fradualent device.
         """
         payload = {}
         
 
         # Parameter validation
-        schema = RewardsValidator.getAndroidPaths()
+        schema = RewardsValidator.getRewardsConfiguration()
         schema.dump(schema.load(payload))
         
 
@@ -372,14 +372,14 @@ class Rewards:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/configuration/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
-    async def updateAndroidPaths(self, body=""):
+    async def setRewardsConfiguration(self, body=""):
         """Updates the configuration or inserts new records.
         """
         payload = {}
         
 
         # Parameter validation
-        schema = RewardsValidator.updateAndroidPaths()
+        schema = RewardsValidator.setRewardsConfiguration()
         schema.dump(schema.load(payload))
         
         # Body validation

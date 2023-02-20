@@ -23,23 +23,19 @@ from .InventoryExportQuantityFilter import InventoryExportQuantityFilter
 
 
 
-
-
 class InventoryExportAdvanceOption(BaseSchema):
     #  swagger.json
 
     
     brand_ids = fields.List(fields.Int(required=False), required=False)
     
-    type = fields.Str(required=False)
-    
     from_date = fields.Str(required=False)
-    
-    quantity = fields.Nested(InventoryExportQuantityFilter, required=False)
     
     to_date = fields.Str(required=False)
     
-    notification = fields.Boolean(required=False)
+    quantity = fields.Nested(InventoryExportQuantityFilter, required=False)
     
     store_ids = fields.List(fields.Int(required=False), required=False)
+    
+    notification = fields.Boolean(required=False)
     

@@ -9,19 +9,17 @@ from ...PlatformModel import BaseSchema
 
 
 
+from .SharedCart import SharedCart
 
 
 
 
 
-
-class UpdateCartShipmentItem(BaseSchema):
+class SharedCartResponse(BaseSchema):
     #  swagger.json
 
     
-    quantity = fields.Int(required=False)
+    cart = fields.Nested(SharedCart, required=False)
     
-    shipment_type = fields.Str(required=False)
-    
-    article_uid = fields.Str(required=False)
+    error = fields.Str(required=False)
     

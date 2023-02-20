@@ -19,9 +19,9 @@ class EntityRegionView_Error(BaseSchema):
     #  swagger.json
 
     
+    value = fields.Str(required=False)
+    
     type = fields.Str(required=False)
     
     message = fields.Str(required=False)
-    
-    value = fields.Str(required=False)
     

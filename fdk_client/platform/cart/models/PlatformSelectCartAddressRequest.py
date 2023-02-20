@@ -15,13 +15,17 @@ from ...PlatformModel import BaseSchema
 
 
 
-class SelectCartAddressRequest(BaseSchema):
+
+
+class PlatformSelectCartAddressRequest(BaseSchema):
     #  swagger.json
 
-    
-    billing_address_id = fields.Str(required=False)
     
     cart_id = fields.Str(required=False)
     
     id = fields.Str(required=False)
+    
+    checkout_mode = fields.Str(required=False)
+    
+    billing_address_id = fields.Str(required=False)
     

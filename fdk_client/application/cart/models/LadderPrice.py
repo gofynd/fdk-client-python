@@ -27,9 +27,9 @@ class LadderPrice(BaseSchema):
     
     effective = fields.Int(required=False)
     
-    currency_symbol = fields.Str(required=False)
+    marked = fields.Int(required=False)
     
     offer_price = fields.Float(required=False)
     
-    marked = fields.Int(required=False)
+    currency_symbol = fields.Str(required=False)
     

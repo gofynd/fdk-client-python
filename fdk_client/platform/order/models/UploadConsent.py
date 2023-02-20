@@ -17,7 +17,7 @@ class UploadConsent(BaseSchema):
     #  swagger.json
 
     
-    consent_url = fields.Str(required=False)
-    
     manifest_id = fields.Str(required=False)
+    
+    consent_url = fields.Str(required=False)
     

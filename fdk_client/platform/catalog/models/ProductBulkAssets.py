@@ -19,9 +19,9 @@ class ProductBulkAssets(BaseSchema):
     #  swagger.json
 
     
-    company_id = fields.Int(required=False)
-    
     url = fields.Str(required=False)
     
     user = fields.Dict(required=False)
+    
+    company_id = fields.Int(required=False)
     

@@ -17,7 +17,7 @@ class DeleteAddressResponse(BaseSchema):
     #  swagger.json
 
     
-    is_deleted = fields.Boolean(required=False)
-    
     id = fields.Str(required=False)
+    
+    is_deleted = fields.Boolean(required=False)
     

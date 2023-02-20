@@ -13,11 +13,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-class CartCheckoutCustomMeta(BaseSchema):
+class GetShareCartLinkResponse(BaseSchema):
     #  swagger.json
 
     
-    value = fields.Str(required=False)
+    share_url = fields.Str(required=False)
     
-    key = fields.Str(required=False)
+    token = fields.Str(required=False)
     

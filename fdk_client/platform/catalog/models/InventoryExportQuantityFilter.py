@@ -13,9 +13,13 @@ from ...PlatformModel import BaseSchema
 
 
 
+
+
 class InventoryExportQuantityFilter(BaseSchema):
     #  swagger.json
 
+    
+    operators = fields.Str(required=False)
     
     max = fields.Int(required=False)
     

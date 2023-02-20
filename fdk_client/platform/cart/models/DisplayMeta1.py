@@ -23,9 +23,9 @@ class DisplayMeta1(BaseSchema):
     
     offer_label = fields.Str(required=False)
     
-    offer_text = fields.Str(required=False)
+    description = fields.Str(required=False)
     
     name = fields.Str(required=False)
     
-    description = fields.Str(required=False)
+    offer_text = fields.Str(required=False)
     

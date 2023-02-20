@@ -27,11 +27,11 @@ class InventoryExportFilter(BaseSchema):
     
     brand_ids = fields.List(fields.Int(required=False), required=False)
     
-    from_date = fields.Str(required=False)
+    to_date = fields.Str(required=False)
     
     quantity = fields.Nested(InventoryExportQuantityFilter, required=False)
     
-    to_date = fields.Str(required=False)
-    
     store_ids = fields.List(fields.Int(required=False), required=False)
+    
+    from_date = fields.Str(required=False)
     

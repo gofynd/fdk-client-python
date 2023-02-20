@@ -17,9 +17,9 @@ from .OrderMeta import OrderMeta
 
 
 
-
-
 from .Prices import Prices
+
+
 
 
 
@@ -33,7 +33,7 @@ class OrderDict(BaseSchema):
     
     order_date = fields.Str(required=False)
     
-    payment_methods = fields.Dict(required=False)
-    
     prices = fields.Nested(Prices, required=False)
+    
+    payment_methods = fields.Dict(required=False)
     

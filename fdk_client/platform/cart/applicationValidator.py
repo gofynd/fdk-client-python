@@ -130,21 +130,8 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
-        
-        
-        
-        
     
     
-        
-        
-        
-    
-    
-        
-        
-        
         
         
         
@@ -163,20 +150,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
-        
         
     
     
@@ -186,11 +159,9 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
-        
-        
     
     
+        
         
         
         
@@ -224,6 +195,13 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
+        
+        
+        
+        
         
         
         
@@ -246,8 +224,53 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+        
     
     
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
         
         
         
@@ -489,6 +512,26 @@ class CartValidator:
          
         
     
+    class getCartShareLink(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getCartSharedItems(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        token = fields.Str(required=False)
+         
+        
+    
     class getCartList(BaseSchema):
         
         
@@ -528,17 +571,6 @@ class CartValidator:
          
         
     
-    class getCartLastModified(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-         
-        
-    
     class addItems(BaseSchema):
         
         
@@ -549,8 +581,6 @@ class CartValidator:
         i = fields.Boolean(required=False)
         
         b = fields.Boolean(required=False)
-        
-        area_code = fields.Str(required=False)
         
         buy_now = fields.Boolean(required=False)
          
@@ -569,8 +599,6 @@ class CartValidator:
         
         b = fields.Boolean(required=False)
         
-        area_code = fields.Str(required=False)
-        
         buy_now = fields.Boolean(required=False)
          
         
@@ -581,6 +609,38 @@ class CartValidator:
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+        
+        buy_now = fields.Boolean(required=False)
+         
+        
+    
+    class getCoupons(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+        
+        buy_now = fields.Boolean(required=False)
+         
+        
+    
+    class applyCoupon(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        i = fields.Boolean(required=False)
+        
+        b = fields.Boolean(required=False)
+        
+        p = fields.Boolean(required=False)
         
         id = fields.Str(required=False)
         
@@ -640,6 +700,8 @@ class CartValidator:
         tags = fields.Str(required=False)
         
         is_default = fields.Boolean(required=False)
+        
+        user_id = fields.Str(required=False)
          
         
     
@@ -681,8 +743,6 @@ class CartValidator:
         i = fields.Boolean(required=False)
         
         b = fields.Boolean(required=False)
-        
-        user_id = fields.Str(required=False)
          
         
     
@@ -693,49 +753,15 @@ class CartValidator:
         
         application_id = fields.Str(required=False)
         
-        pick_at_store_uid = fields.Int(required=False)
-        
-        ordering_store_id = fields.Int(required=False)
-        
         p = fields.Boolean(required=False)
         
         id = fields.Str(required=False)
+        
+        buy_now = fields.Boolean(required=False)
         
         address_id = fields.Str(required=False)
         
         area_code = fields.Str(required=False)
-        
-        order_type = fields.Str(required=False)
-         
-        
-    
-    class updateShipments(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        i = fields.Boolean(required=False)
-        
-        p = fields.Boolean(required=False)
-        
-        id = fields.Str(required=False)
-        
-        address_id = fields.Str(required=False)
-        
-        order_type = fields.Str(required=False)
-         
-        
-    
-    class checkoutCart(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
          
         
     
@@ -747,6 +773,17 @@ class CartValidator:
         application_id = fields.Str(required=False)
         
         id = fields.Str(required=False)
+        
+        buy_now = fields.Boolean(required=False)
+         
+        
+    
+    class checkoutCart(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
         
         buy_now = fields.Boolean(required=False)
          
@@ -773,6 +810,42 @@ class CartValidator:
         application_id = fields.Str(required=False)
         
         store_uid = fields.Int(required=False)
+         
+        
+    
+    class selectPaymentMode(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+        
+        buy_now = fields.Boolean(required=False)
+         
+        
+    
+    class validateCouponForPayment(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+        
+        buy_now = fields.Boolean(required=False)
+        
+        address_id = fields.Str(required=False)
+        
+        payment_mode = fields.Str(required=False)
+        
+        payment_identifier = fields.Str(required=False)
+        
+        aggregator_name = fields.Str(required=False)
+        
+        merchant_code = fields.Str(required=False)
          
         
     

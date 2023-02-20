@@ -17,8 +17,8 @@ Earn and redeem reward points
 * [updateUserStatus](#updateuserstatus)
 * [user](#user)
 * [getUserPointsHistory](#getuserpointshistory)
-* [getAndroidPaths](#getandroidpaths)
-* [updateAndroidPaths](#updateandroidpaths)
+* [getRewardsConfiguration](#getrewardsconfiguration)
+* [setRewardsConfiguration](#setrewardsconfiguration)
 
 
 
@@ -650,7 +650,7 @@ Success. Check example below or refer `HistoryRes` for more details.
 ---
 
 
-### getAndroidPaths
+### getRewardsConfiguration
 Get all valid android paths
 
 
@@ -658,7 +658,7 @@ Get all valid android paths
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").rewards.getAndroidPaths()
+    result = await client.application("<APPLICATION_ID>").rewards.getRewardsConfiguration()
     # use result
 except Exception as e:
     print(e)
@@ -702,7 +702,7 @@ Success. Refer `ConfigurationRes` for more details.
 ---
 
 
-### updateAndroidPaths
+### setRewardsConfiguration
 Updates the collection with given android paths.
 
 
@@ -710,7 +710,7 @@ Updates the collection with given android paths.
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").rewards.updateAndroidPaths(body=body)
+    result = await client.application("<APPLICATION_ID>").rewards.setRewardsConfiguration(body=body)
     # use result
 except Exception as e:
     print(e)

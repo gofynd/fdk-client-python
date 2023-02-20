@@ -13,11 +13,11 @@ from ...PlatformModel import BaseSchema
 
 
 
-class Files(BaseSchema):
+class GetShareCartLinkRequest(BaseSchema):
     #  swagger.json
 
     
-    values = fields.List(fields.Str(required=False), required=False)
+    id = fields.Str(required=False)
     
-    key = fields.Str(required=False)
+    meta = fields.Dict(required=False)
     

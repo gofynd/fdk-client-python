@@ -203,7 +203,7 @@ class RewardsValidator:
          
         
     
-    class getAndroidPaths(BaseSchema):
+    class getRewardsConfiguration(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -212,7 +212,7 @@ class RewardsValidator:
          
         
     
-    class updateAndroidPaths(BaseSchema):
+    class setRewardsConfiguration(BaseSchema):
         
         
         company_id = fields.Str(required=False)

@@ -9,9 +9,39 @@ from ...PlatformModel import BaseSchema
 
 
 
+
+
+from .OrderUser import OrderUser
+
+
+
+
+
+
+
+from .OrderUser import OrderUser
+
+
+
+from .OrderPriority import OrderPriority
+
+
+
+from .UserData import UserData
+
+
+
+
+
+
+
+
+
+
+
+
+
 from .AffiliateBag import AffiliateBag
-
-
 
 
 
@@ -21,57 +51,25 @@ from .ShipmentData import ShipmentData
 
 
 
-
-
-from .UserData import UserData
-
-
-
-from .OrderUser import OrderUser
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-from .OrderPriority import OrderPriority
-
-
-
-from .OrderUser import OrderUser
-
-
-
 class OrderInfo(BaseSchema):
     #  swagger.json
 
     
-    bags = fields.List(fields.Nested(AffiliateBag, required=False), required=False)
+    discount = fields.Float(required=False)
     
-    payment_mode = fields.Str(required=False)
-    
-    coupon = fields.Str(required=False)
-    
-    shipment = fields.Nested(ShipmentData, required=False)
+    shipping_address = fields.Nested(OrderUser, required=False)
     
     order_value = fields.Float(required=False)
     
-    user = fields.Nested(UserData, required=False)
+    affiliate_order_id = fields.Str(required=False)
     
     billing_address = fields.Nested(OrderUser, required=False)
     
-    delivery_charges = fields.Float(required=False)
+    order_priority = fields.Nested(OrderPriority, required=False)
     
-    affiliate_order_id = fields.Str(required=False)
+    user = fields.Nested(UserData, required=False)
+    
+    delivery_charges = fields.Float(required=False)
     
     payment = fields.Dict(required=False)
     
@@ -79,9 +77,11 @@ class OrderInfo(BaseSchema):
     
     cod_charges = fields.Float(required=False)
     
-    discount = fields.Float(required=False)
+    payment_mode = fields.Str(required=False)
     
-    order_priority = fields.Nested(OrderPriority, required=False)
+    bags = fields.List(fields.Nested(AffiliateBag, required=False), required=False)
     
-    shipping_address = fields.Nested(OrderUser, required=False)
+    coupon = fields.Str(required=False)
+    
+    shipment = fields.Nested(ShipmentData, required=False)
     
