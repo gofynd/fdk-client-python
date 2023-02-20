@@ -21,7 +21,7 @@ class PostHistoryFilters(BaseSchema):
     
     identifier = fields.Str(required=False)
     
-    shipment_id = fields.Str(required=False)
-    
     line_number = fields.Str(required=False)
+    
+    shipment_id = fields.Str(required=False)
     

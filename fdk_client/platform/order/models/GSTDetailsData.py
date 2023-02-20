@@ -23,13 +23,13 @@ class GSTDetailsData(BaseSchema):
     #  swagger.json
 
     
-    brand_calculated_amount = fields.Float(required=False)
-    
-    gst_fee = fields.Float(required=False)
-    
     value_of_good = fields.Float(required=False)
+    
+    gstin_code = fields.Str(required=False)
+    
+    brand_calculated_amount = fields.Float(required=False)
     
     tax_collected_at_source = fields.Float(required=False)
     
-    gstin_code = fields.Str(required=False)
+    gst_fee = fields.Float(required=False)
     

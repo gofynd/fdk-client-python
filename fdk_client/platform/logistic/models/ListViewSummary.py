@@ -19,9 +19,9 @@ class ListViewSummary(BaseSchema):
     #  swagger.json
 
     
-    total_zones = fields.Int(required=False)
+    total_active_zones = fields.Int(required=False)
     
     total_pincodes_served = fields.Int(required=False)
     
-    total_active_zones = fields.Int(required=False)
+    total_zones = fields.Int(required=False)
     

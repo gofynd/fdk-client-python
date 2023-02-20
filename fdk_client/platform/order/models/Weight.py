@@ -21,7 +21,7 @@ class Weight(BaseSchema):
     
     unit = fields.Str(required=False)
     
-    is_default = fields.Boolean(required=False)
-    
     shipping = fields.Int(required=False)
+    
+    is_default = fields.Boolean(required=False)
     
