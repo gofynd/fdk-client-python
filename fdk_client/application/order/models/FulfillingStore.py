@@ -23,6 +23,8 @@ class FulfillingStore(BaseSchema):
     #  swagger.json
 
     
+    company_id = fields.Int(required=False)
+    
     code = fields.Str(required=False)
     
     name = fields.Str(required=False)
@@ -30,6 +32,4 @@ class FulfillingStore(BaseSchema):
     company_name = fields.Str(required=False)
     
     id = fields.Int(required=False)
-    
-    company_id = fields.Int(required=False)
     

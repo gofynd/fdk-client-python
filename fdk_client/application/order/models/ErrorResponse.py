@@ -25,11 +25,11 @@ class ErrorResponse(BaseSchema):
     
     code = fields.Str(required=False)
     
+    status = fields.Int(required=False)
+    
     message = fields.Str(required=False)
     
     stack_trace = fields.Str(required=False)
-    
-    status = fields.Int(required=False)
     
     exception = fields.Str(required=False)
     

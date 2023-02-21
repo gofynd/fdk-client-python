@@ -9,7 +9,9 @@ from ...PlatformModel import BaseSchema
 
 
 
-from .BagStatusHistory import BagStatusHistory
+
+
+
 
 
 
@@ -23,41 +25,17 @@ from .Prices import Prices
 
 
 
-from .FinancialBreakup import FinancialBreakup
+from .Article import Article
+
+
+
+from .BagGSTDetails import BagGSTDetails
+
+
 
 
 
 from .BagStatusHistory import BagStatusHistory
-
-
-
-from .BagStatusHistory import BagStatusHistory
-
-
-
-from .BagReturnableCancelableStatus import BagReturnableCancelableStatus
-
-
-
-
-
-
-
-
-
-from .ArticleDetails import ArticleDetails
-
-
-
-
-
-from .AffiliateBagDetails import AffiliateBagDetails
-
-
-
-
-
-from .BagMeta import BagMeta
 
 
 
@@ -67,11 +45,53 @@ from .Store import Store
 
 
 
-from .BagGSTDetails import BagGSTDetails
+from .AffiliateDetails import AffiliateDetails
 
 
 
-from .Dates import Dates
+from .Item import Item
+
+
+
+from .AffiliateBagDetails import AffiliateBagDetails
+
+
+
+from .BagMeta import BagMeta
+
+
+
+from .BagReturnableCancelableStatus import BagReturnableCancelableStatus
+
+
+
+from .BagStatusHistory import BagStatusHistory
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+from .FinancialBreakup import FinancialBreakup
+
+
+
+from .ArticleDetails import ArticleDetails
+
+
+
+
+
+
 
 
 
@@ -83,15 +103,7 @@ from .Brand import Brand
 
 
 
-from .Article import Article
-
-
-
-
-
-from .Item import Item
-
-
+from .BagStatusHistory import BagStatusHistory
 
 
 
@@ -105,19 +117,7 @@ from .BagStatusHistory import BagStatusHistory
 
 
 
-
-
-
-
-
-
-
-
-from .AffiliateDetails import AffiliateDetails
-
-
-
-
+from .Dates import Dates
 
 
 
@@ -125,81 +125,81 @@ class BagDetailsPlatformResponse(BaseSchema):
     #  swagger.json
 
     
-    current_status = fields.Nested(BagStatusHistory, required=False)
-    
-    order_integration_id = fields.Str(required=False)
-    
-    restore_promos = fields.Dict(required=False)
-    
-    prices = fields.Nested(Prices, required=False)
-    
-    display_name = fields.Str(required=False)
-    
-    financial_breakup = fields.List(fields.Nested(FinancialBreakup, required=False), required=False)
-    
-    bag_status = fields.List(fields.Nested(BagStatusHistory, required=False), required=False)
-    
-    bag_status_history = fields.Nested(BagStatusHistory, required=False)
-    
-    status = fields.Nested(BagReturnableCancelableStatus, required=False)
-    
-    original_bag_list = fields.List(fields.Int(required=False), required=False)
-    
-    no_of_bags_order = fields.Int(required=False)
-    
-    restore_coupon = fields.Boolean(required=False)
-    
-    article_details = fields.Nested(ArticleDetails, required=False)
-    
     quantity = fields.Float(required=False)
     
-    affiliate_bag_details = fields.Nested(AffiliateBagDetails, required=False)
+    tags = fields.List(fields.Str(required=False), required=False)
     
     line_number = fields.Int(required=False)
     
-    meta = fields.Nested(BagMeta, required=False)
-    
-    ordering_store = fields.Nested(Store, required=False)
-    
-    bag_update_time = fields.Float(required=False)
-    
-    gst_details = fields.Nested(BagGSTDetails, required=False)
-    
-    dates = fields.Nested(Dates, required=False)
-    
-    parent_promo_bags = fields.Dict(required=False)
+    restore_promos = fields.Dict(required=False)
     
     seller_identifier = fields.Str(required=False)
     
-    brand = fields.Nested(Brand, required=False)
+    prices = fields.Nested(Prices, required=False)
+    
+    b_id = fields.Int(required=False)
     
     article = fields.Nested(Article, required=False)
     
-    entity_type = fields.Str(required=False)
+    gst_details = fields.Nested(BagGSTDetails, required=False)
+    
+    bag_update_time = fields.Float(required=False)
+    
+    current_status = fields.Nested(BagStatusHistory, required=False)
+    
+    ordering_store = fields.Nested(Store, required=False)
+    
+    reasons = fields.List(fields.Dict(required=False), required=False)
+    
+    affiliate_details = fields.Nested(AffiliateDetails, required=False)
     
     item = fields.Nested(Item, required=False)
+    
+    affiliate_bag_details = fields.Nested(AffiliateBagDetails, required=False)
+    
+    meta = fields.Nested(BagMeta, required=False)
+    
+    status = fields.Nested(BagReturnableCancelableStatus, required=False)
+    
+    current_operational_status = fields.Nested(BagStatusHistory, required=False)
+    
+    display_name = fields.Str(required=False)
+    
+    qc_required = fields.Raw(required=False)
+    
+    no_of_bags_order = fields.Int(required=False)
+    
+    operational_status = fields.Str(required=False)
+    
+    restore_coupon = fields.Boolean(required=False)
+    
+    identifier = fields.Str(required=False)
+    
+    financial_breakup = fields.List(fields.Nested(FinancialBreakup, required=False), required=False)
+    
+    article_details = fields.Nested(ArticleDetails, required=False)
+    
+    order_integration_id = fields.Str(required=False)
+    
+    shipment_id = fields.Str(required=False)
+    
+    applied_promos = fields.List(fields.Dict(required=False), required=False)
+    
+    entity_type = fields.Str(required=False)
+    
+    parent_promo_bags = fields.Dict(required=False)
+    
+    brand = fields.Nested(Brand, required=False)
+    
+    bag_status_history = fields.Nested(BagStatusHistory, required=False)
     
     journey_type = fields.Str(required=False)
     
     b_type = fields.Str(required=False)
     
-    reasons = fields.List(fields.Dict(required=False), required=False)
+    original_bag_list = fields.List(fields.Int(required=False), required=False)
     
-    applied_promos = fields.List(fields.Dict(required=False), required=False)
+    bag_status = fields.List(fields.Nested(BagStatusHistory, required=False), required=False)
     
-    current_operational_status = fields.Nested(BagStatusHistory, required=False)
-    
-    operational_status = fields.Str(required=False)
-    
-    b_id = fields.Int(required=False)
-    
-    identifier = fields.Str(required=False)
-    
-    tags = fields.List(fields.Str(required=False), required=False)
-    
-    affiliate_details = fields.Nested(AffiliateDetails, required=False)
-    
-    qc_required = fields.Raw(required=False)
-    
-    shipment_id = fields.Str(required=False)
+    dates = fields.Nested(Dates, required=False)
     

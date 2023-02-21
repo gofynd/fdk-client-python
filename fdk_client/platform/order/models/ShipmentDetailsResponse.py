@@ -13,9 +13,9 @@ from .PlatformShipment import PlatformShipment
 
 
 
-
-
 from .OrderDict import OrderDict
+
+
 
 
 
@@ -25,7 +25,7 @@ class ShipmentDetailsResponse(BaseSchema):
     
     shipments = fields.List(fields.Nested(PlatformShipment, required=False), required=False)
     
-    success = fields.Boolean(required=False)
-    
     order = fields.Nested(OrderDict, required=False)
+    
+    success = fields.Boolean(required=False)
     
