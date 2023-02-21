@@ -444,6 +444,10 @@ class CartValidator:
         address_id = fields.Str(required=False)
         
         area_code = fields.Str(required=False)
+        
+        ordering_store_id = fields.Int(required=False)
+        
+        order_type = fields.Str(required=False)
          
     
     class getShipmentDelivery(BaseSchema):
