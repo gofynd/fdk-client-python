@@ -220,18 +220,44 @@ class PaymentValidator:
         application_id = fields.Str(required=False)
          
     
-    class getPaymentModeRoutesPos(BaseSchema):
+    class getPosPaymentModeRoutes(BaseSchema):
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         
+        amount = fields.Int(required=False)
+        
+        cart_id = fields.Str(required=False)
+        
+        pincode = fields.Str(required=False)
+        
+        checkout_mode = fields.Str(required=False)
+        
         refresh = fields.Boolean(required=False)
         
-        request_type = fields.Str(required=False)
+        card_reference = fields.Str(required=False)
+        
+        order_type = fields.Str(required=False)
+        
+        user_details = fields.Str(required=False)
+         
+    
+    class initialisePayment(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
          
     
     class checkAndUpdatePaymentStatus(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+    
+    class resendOrCancelPayment(BaseSchema):
         
         company_id = fields.Int(required=False)
         
