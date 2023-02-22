@@ -7,16 +7,16 @@ from ..models.BaseSchema import BaseSchema
 
 class LogisticValidator:
     
-    class getTatProduct(BaseSchema):
-        
-        pass 
-    
-    class getPincodeZones(BaseSchema):
-        
-        pass 
-    
     class getPincodeCity(BaseSchema):
         
         pincode = fields.Str(required=False)
          
+    
+    class getTatProduct(BaseSchema):
+        
+        pass 
+    
+    class upsertZoneControllerView(BaseSchema):
+        
+        pass 
     
