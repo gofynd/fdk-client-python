@@ -9,8 +9,6 @@ class PaymentValidator:
     
     class getAggregatorsConfig(BaseSchema):
         
-        x__api__token = fields.Str(required=False)
-        
         refresh = fields.Boolean(required=False)
          
     
