@@ -190,7 +190,7 @@ class Logistic:
         return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/zone/{zone_id}", zone_id=zone_id, ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
     async def insertZoneControllerView(self, body=""):
-        """This API returns response of insertion of zone in mongo database.<br>Correction- `zone_id` in the path must be removed.<br> path is `/service/platform/logistics-internal/v1.0/company/{company_id}/zone/`
+        """This API returns response of insertion of zone in mongo database.<br />Correction- `zone_id` in the path must be removed.<br /> path is `/service/platform/logistics-internal/v1.0/company/{company_id}/zone/`
         """
         payload = {}
         
