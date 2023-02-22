@@ -23,13 +23,13 @@ class CartList(BaseSchema):
     #  swagger.json
 
     
-    item_counts = fields.Str(required=False)
+    cart_value = fields.Str(required=False)
     
-    user_id = fields.Str(required=False)
+    item_counts = fields.Str(required=False)
     
     created_on = fields.Str(required=False)
     
-    cart_id = fields.Str(required=False)
+    user_id = fields.Str(required=False)
     
-    cart_value = fields.Str(required=False)
+    cart_id = fields.Str(required=False)
     

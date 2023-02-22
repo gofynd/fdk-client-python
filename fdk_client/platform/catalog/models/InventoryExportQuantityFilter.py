@@ -19,9 +19,9 @@ class InventoryExportQuantityFilter(BaseSchema):
     #  swagger.json
 
     
-    operators = fields.Str(required=False)
-    
     min = fields.Int(required=False)
+    
+    operators = fields.Str(required=False)
     
     max = fields.Int(required=False)
     

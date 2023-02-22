@@ -9,11 +9,11 @@ from ...PlatformModel import BaseSchema
 
 
 
+
+
+
+
 from .MobileNo import MobileNo
-
-
-
-
 
 
 
@@ -21,9 +21,9 @@ class ManagerResponse(BaseSchema):
     #  swagger.json
 
     
-    mobile_no = fields.Nested(MobileNo, required=False)
+    email = fields.Str(required=False)
     
     name = fields.Str(required=False)
     
-    email = fields.Str(required=False)
+    mobile_no = fields.Nested(MobileNo, required=False)
     

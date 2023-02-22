@@ -21,7 +21,7 @@ class ManufacturerResponse(BaseSchema):
     
     address = fields.Str(required=False)
     
-    is_default = fields.Boolean(required=False)
-    
     name = fields.Str(required=False)
+    
+    is_default = fields.Boolean(required=False)
     

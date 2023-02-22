@@ -21,7 +21,7 @@ class EInvoicePortalDetails(BaseSchema):
     
     username = fields.Str(required=False)
     
-    user = fields.Str(required=False)
-    
     password = fields.Str(required=False)
+    
+    user = fields.Str(required=False)
     

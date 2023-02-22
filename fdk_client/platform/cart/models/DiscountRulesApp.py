@@ -21,11 +21,11 @@ class DiscountRulesApp(BaseSchema):
     #  swagger.json
 
     
-    item_criteria = fields.Dict(required=False)
-    
     offer = fields.Dict(required=False)
     
-    matched_buy_rules = fields.List(fields.Str(required=False), required=False)
-    
     raw_offer = fields.Dict(required=False)
+    
+    item_criteria = fields.Dict(required=False)
+    
+    matched_buy_rules = fields.List(fields.Str(required=False), required=False)
     

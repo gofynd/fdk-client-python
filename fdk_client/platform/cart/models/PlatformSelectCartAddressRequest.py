@@ -21,9 +21,9 @@ class PlatformSelectCartAddressRequest(BaseSchema):
     #  swagger.json
 
     
-    cart_id = fields.Str(required=False)
-    
     id = fields.Str(required=False)
+    
+    cart_id = fields.Str(required=False)
     
     checkout_mode = fields.Str(required=False)
     

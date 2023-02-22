@@ -17,7 +17,7 @@ class ProductPublished(BaseSchema):
     #  swagger.json
 
     
-    product_online_date = fields.Str(required=False)
-    
     is_set = fields.Boolean(required=False)
+    
+    product_online_date = fields.Str(required=False)
     

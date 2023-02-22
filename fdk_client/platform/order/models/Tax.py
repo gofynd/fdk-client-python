@@ -25,7 +25,7 @@ class Tax(BaseSchema):
     
     name = fields.Str(required=False)
     
-    breakup = fields.List(fields.Dict(required=False), required=False)
-    
     rate = fields.Float(required=False)
+    
+    breakup = fields.List(fields.Dict(required=False), required=False)
     

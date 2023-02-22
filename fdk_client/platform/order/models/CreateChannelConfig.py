@@ -9,6 +9,10 @@ from ...PlatformModel import BaseSchema
 
 
 
+from .DpConfiguration import DpConfiguration
+
+
+
 
 
 from .CreateChannelPaymentInfo import CreateChannelPaymentInfo
@@ -19,25 +23,21 @@ from .CreateChannelPaymentInfo import CreateChannelPaymentInfo
 
 
 
-from .DpConfiguration import DpConfiguration
-
-
-
 
 
 class CreateChannelConfig(BaseSchema):
     #  swagger.json
 
     
-    shipment_assignment = fields.Str(required=False)
+    dp_configuration = fields.Nested(DpConfiguration, required=False)
+    
+    logo_url = fields.Dict(required=False)
     
     payment_info = fields.Nested(CreateChannelPaymentInfo, required=False)
     
     lock_states = fields.List(fields.Str(required=False), required=False)
     
-    logo_url = fields.Dict(required=False)
-    
-    dp_configuration = fields.Nested(DpConfiguration, required=False)
+    shipment_assignment = fields.Str(required=False)
     
     location_reassignment = fields.Boolean(required=False)
     

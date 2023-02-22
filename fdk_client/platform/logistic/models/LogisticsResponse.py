@@ -9,9 +9,9 @@ from ...PlatformModel import BaseSchema
 
 
 
-
-
 from .Dp import Dp
+
+
 
 
 
@@ -19,7 +19,7 @@ class LogisticsResponse(BaseSchema):
     #  swagger.json
 
     
-    override = fields.Boolean(required=False)
-    
     dp = fields.Nested(Dp, required=False)
+    
+    override = fields.Boolean(required=False)
     

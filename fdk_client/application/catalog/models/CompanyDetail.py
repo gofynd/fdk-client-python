@@ -17,7 +17,7 @@ class CompanyDetail(BaseSchema):
     #  swagger.json
 
     
-    name = fields.Str(required=False)
-    
     id = fields.Int(required=False)
+    
+    name = fields.Str(required=False)
     

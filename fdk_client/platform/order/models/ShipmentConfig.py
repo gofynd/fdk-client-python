@@ -9,15 +9,7 @@ from ...PlatformModel import BaseSchema
 
 
 
-
-
-
-
-
-
 from .LocationDetails import LocationDetails
-
-
 
 
 
@@ -29,9 +21,25 @@ from .ShipmentDetails import ShipmentDetails
 
 
 
+
+
+
+
+
+
+
+
 class ShipmentConfig(BaseSchema):
     #  swagger.json
 
+    
+    location_details = fields.Nested(LocationDetails, required=False)
+    
+    shipment = fields.List(fields.Nested(ShipmentDetails, required=False), required=False)
+    
+    source = fields.Str(required=False)
+    
+    identifier = fields.Str(required=False)
     
     action = fields.Str(required=False)
     
@@ -39,13 +47,5 @@ class ShipmentConfig(BaseSchema):
     
     journey = fields.Str(required=False)
     
-    location_details = fields.Nested(LocationDetails, required=False)
-    
-    identifier = fields.Str(required=False)
-    
-    shipment = fields.List(fields.Nested(ShipmentDetails, required=False), required=False)
-    
     payment_mode = fields.Str(required=False)
-    
-    source = fields.Str(required=False)
     

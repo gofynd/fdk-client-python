@@ -19,9 +19,9 @@ class PostHistoryFilters(BaseSchema):
     #  swagger.json
 
     
-    identifier = fields.Str(required=False)
-    
     line_number = fields.Str(required=False)
     
     shipment_id = fields.Str(required=False)
+    
+    identifier = fields.Str(required=False)
     

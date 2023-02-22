@@ -11,8 +11,6 @@ from ...PlatformModel import BaseSchema
 
 
 
-
-
 from .CartProductInfo import CartProductInfo
 
 
@@ -25,11 +23,11 @@ from .CartBreakup import CartBreakup
 
 
 
+
+
 class OpenApiCartServiceabilityResponse(BaseSchema):
     #  swagger.json
 
-    
-    is_valid = fields.Boolean(required=False)
     
     message = fields.Str(required=False)
     
@@ -38,4 +36,6 @@ class OpenApiCartServiceabilityResponse(BaseSchema):
     delivery_promise = fields.Nested(ShipmentPromise, required=False)
     
     breakup_values = fields.Nested(CartBreakup, required=False)
+    
+    is_valid = fields.Boolean(required=False)
     

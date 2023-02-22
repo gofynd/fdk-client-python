@@ -13,11 +13,19 @@ from ...PlatformModel import BaseSchema
 
 
 
-class BulkInvoicingResponse(BaseSchema):
+
+
+
+
+class GeneratePosOrderReceiptResponse(BaseSchema):
     #  swagger.json
 
     
-    message = fields.Str(required=False)
-    
     success = fields.Boolean(required=False)
+    
+    invoice_receipt = fields.Str(required=False)
+    
+    payment_receipt = fields.Str(required=False)
+    
+    order_id = fields.Str(required=False)
     

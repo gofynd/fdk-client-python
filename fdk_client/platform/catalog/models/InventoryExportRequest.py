@@ -9,9 +9,9 @@ from ...PlatformModel import BaseSchema
 
 
 
+
+
 from .InventoryExportFilter import InventoryExportFilter
-
-
 
 
 
@@ -23,9 +23,9 @@ class InventoryExportRequest(BaseSchema):
     #  swagger.json
 
     
-    filters = fields.Nested(InventoryExportFilter, required=False)
-    
     notification_emails = fields.List(fields.Str(required=False), required=False)
+    
+    filters = fields.Nested(InventoryExportFilter, required=False)
     
     data = fields.List(fields.Str(required=False), required=False)
     

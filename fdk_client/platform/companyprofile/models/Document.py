@@ -23,11 +23,11 @@ class Document(BaseSchema):
     #  swagger.json
 
     
+    url = fields.Str(required=False)
+    
     type = fields.Str(required=False)
     
     value = fields.Str(required=False)
-    
-    url = fields.Str(required=False)
     
     legal_name = fields.Str(required=False)
     

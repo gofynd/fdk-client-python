@@ -1306,13 +1306,15 @@ class Cart:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/select-address", cart_id=cart_id, buy_now=buy_now, i=i, b=b), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
-    async def getShipments(self, p=None, id=None, buy_now=None, address_id=None, area_code=None):
+    async def getShipments(self, p=None, id=None, buy_now=None, address_id=None, area_code=None, ordering_store_id=None, order_type=None):
         """Use this API to get shipment details, expected delivery date, items and price breakup of the shipment.
         :param p : This is a boolean value. Select `true` for getting a payment option in response. : type boolean
         :param id : The unique identifier of the cart : type string
         :param buy_now :  : type boolean
         :param address_id : ID allotted to the selected address : type string
         :param area_code : The PIN Code of the destination address, e.g. 400059 : type string
+        :param ordering_store_id :  : type integer
+        :param order_type : The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself. : type string
         """
         payload = {}
         
@@ -1331,14 +1333,20 @@ class Cart:
         if area_code:
             payload["area_code"] = area_code
         
+        if ordering_store_id:
+            payload["ordering_store_id"] = ordering_store_id
+        
+        if order_type:
+            payload["order_type"] = order_type
+        
 
         # Parameter validation
         schema = CartValidator.getShipments()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/shipment", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"p","description":"This is a boolean value. Select `true` for getting a payment option in response.","in":"query","schema":{"type":"boolean"}},{"name":"id","description":"The unique identifier of the cart","in":"query","schema":{"type":"string"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"name":"address_id","description":"ID allotted to the selected address","in":"query","schema":{"type":"string"}},{"name":"area_code","description":"The PIN Code of the destination address, e.g. 400059","in":"query","schema":{"type":"string"}}],"query":[{"name":"p","description":"This is a boolean value. Select `true` for getting a payment option in response.","in":"query","schema":{"type":"boolean"}},{"name":"id","description":"The unique identifier of the cart","in":"query","schema":{"type":"string"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"name":"address_id","description":"ID allotted to the selected address","in":"query","schema":{"type":"string"}},{"name":"area_code","description":"The PIN Code of the destination address, e.g. 400059","in":"query","schema":{"type":"string"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", p=p, id=id, buy_now=buy_now, address_id=address_id, area_code=area_code)
-        query_string = await create_query_string(p=p, id=id, buy_now=buy_now, address_id=address_id, area_code=area_code)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/shipment", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"p","description":"This is a boolean value. Select `true` for getting a payment option in response.","in":"query","schema":{"type":"boolean"}},{"name":"id","description":"The unique identifier of the cart","in":"query","schema":{"type":"string"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"name":"address_id","description":"ID allotted to the selected address","in":"query","schema":{"type":"string"}},{"name":"area_code","description":"The PIN Code of the destination address, e.g. 400059","in":"query","schema":{"type":"string"}},{"name":"ordering_store_id","in":"query","required":false,"schema":{"type":"integer","description":"ID of the store where the customer is ordering from."}},{"name":"order_type","description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself.","in":"query","schema":{"type":"string","enum":["HomeDelivery","PickAtStore"]}}],"query":[{"name":"p","description":"This is a boolean value. Select `true` for getting a payment option in response.","in":"query","schema":{"type":"boolean"}},{"name":"id","description":"The unique identifier of the cart","in":"query","schema":{"type":"string"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"name":"address_id","description":"ID allotted to the selected address","in":"query","schema":{"type":"string"}},{"name":"area_code","description":"The PIN Code of the destination address, e.g. 400059","in":"query","schema":{"type":"string"}},{"name":"ordering_store_id","in":"query","required":false,"schema":{"type":"integer","description":"ID of the store where the customer is ordering from."}},{"name":"order_type","description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself.","in":"query","schema":{"type":"string","enum":["HomeDelivery","PickAtStore"]}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", p=p, id=id, buy_now=buy_now, address_id=address_id, area_code=area_code, ordering_store_id=ordering_store_id, order_type=order_type)
+        query_string = await create_query_string(p=p, id=id, buy_now=buy_now, address_id=address_id, area_code=area_code, ordering_store_id=ordering_store_id, order_type=order_type)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -1348,7 +1356,7 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/shipment", p=p, id=id, buy_now=buy_now, address_id=address_id, area_code=area_code), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/shipment", p=p, id=id, buy_now=buy_now, address_id=address_id, area_code=area_code, ordering_store_id=ordering_store_id, order_type=order_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def getShipmentDelivery(self, i=None, p=None, id=None, address_id=None, order_type=None):
         """Use this API to get shipment details, expected delivery date, items and price breakup of the shipment.

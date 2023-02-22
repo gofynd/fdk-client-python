@@ -9,9 +9,19 @@ from ...PlatformModel import BaseSchema
 
 
 
+from .PriceRange import PriceRange
 
 
-from .UsesRestriction import UsesRestriction
+
+
+
+from .PostOrder import PostOrder
+
+
+
+
+
+
 
 
 
@@ -23,17 +33,7 @@ from .BulkBundleRestriction import BulkBundleRestriction
 
 
 
-
-
-
-
-from .PriceRange import PriceRange
-
-
-
-from .PostOrder import PostOrder
-
-
+from .UsesRestriction import UsesRestriction
 
 
 
@@ -41,23 +41,23 @@ class Restrictions(BaseSchema):
     #  swagger.json
 
     
-    ordering_stores = fields.List(fields.Int(required=False), required=False)
-    
-    uses = fields.Nested(UsesRestriction, required=False)
+    price_range = fields.Nested(PriceRange, required=False)
     
     user_type = fields.Str(required=False)
+    
+    post_order = fields.Nested(PostOrder, required=False)
+    
+    payments = fields.Dict(required=False)
+    
+    ordering_stores = fields.List(fields.Int(required=False), required=False)
+    
+    platforms = fields.List(fields.Str(required=False), required=False)
+    
+    coupon_allowed = fields.Boolean(required=False)
     
     user_groups = fields.List(fields.Int(required=False), required=False)
     
     bulk_bundle = fields.Nested(BulkBundleRestriction, required=False)
     
-    coupon_allowed = fields.Boolean(required=False)
-    
-    payments = fields.Dict(required=False)
-    
-    price_range = fields.Nested(PriceRange, required=False)
-    
-    post_order = fields.Nested(PostOrder, required=False)
-    
-    platforms = fields.List(fields.Str(required=False), required=False)
+    uses = fields.Nested(UsesRestriction, required=False)
     

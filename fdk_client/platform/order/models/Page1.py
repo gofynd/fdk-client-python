@@ -27,9 +27,9 @@ class Page1(BaseSchema):
     
     item_total = fields.Int(required=False)
     
-    page_type = fields.Str(required=False)
+    size = fields.Int(required=False)
     
     has_next = fields.Boolean(required=False)
     
-    size = fields.Int(required=False)
+    page_type = fields.Str(required=False)
     
