@@ -58,7 +58,7 @@ class Webhook:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SubscriberConfig import SubscriberConfig
+        from .models import SubscriberConfig
         schema = SubscriberConfig()
         schema.dump(schema.load(body))
         
@@ -87,7 +87,7 @@ class Webhook:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SubscriberConfig import SubscriberConfig
+        from .models import SubscriberConfig
         schema = SubscriberConfig()
         schema.dump(schema.load(body))
         

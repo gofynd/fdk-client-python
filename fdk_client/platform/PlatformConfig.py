@@ -3,6 +3,7 @@
 from typing import Dict
 
 from ..common.constants import DEFAULT_DOMAIN
+
 from .OAuthClient import OAuthClient
 
 class PlatformConfig:

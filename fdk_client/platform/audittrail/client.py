@@ -50,7 +50,7 @@ class AuditTrail:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.RequestBodyAuditLog import RequestBodyAuditLog
+        from .models import RequestBodyAuditLog
         schema = RequestBodyAuditLog()
         schema.dump(schema.load(body))
         

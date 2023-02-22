@@ -79,6 +79,6 @@ class PlatformClient:
 
     async def setExtraHeaders(self, header):
         if header and type(header) == dict:
-            self._conf.extraHeaders.append(header) 
+            self.config.extraHeaders.append(header)
         else:
             raise FDKClientValidationError("Context value should be an dict")

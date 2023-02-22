@@ -87,7 +87,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CreateUserRequestSchema import CreateUserRequestSchema
+        from .models import CreateUserRequestSchema
         schema = CreateUserRequestSchema()
         schema.dump(schema.load(body))
         
@@ -116,7 +116,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.BlockUserRequestSchema import BlockUserRequestSchema
+        from .models import BlockUserRequestSchema
         schema = BlockUserRequestSchema()
         schema.dump(schema.load(body))
         
@@ -145,7 +145,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ArchiveUserRequestSchema import ArchiveUserRequestSchema
+        from .models import ArchiveUserRequestSchema
         schema = ArchiveUserRequestSchema()
         schema.dump(schema.load(body))
         
@@ -174,7 +174,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.UnDeleteUserRequestSchema import UnDeleteUserRequestSchema
+        from .models import UnDeleteUserRequestSchema
         schema = UnDeleteUserRequestSchema()
         schema.dump(schema.load(body))
         
@@ -207,7 +207,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.UpdateUserRequestSchema import UpdateUserRequestSchema
+        from .models import UpdateUserRequestSchema
         schema = UpdateUserRequestSchema()
         schema.dump(schema.load(body))
         
@@ -236,7 +236,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CreateUserSessionRequestSchema import CreateUserSessionRequestSchema
+        from .models import CreateUserSessionRequestSchema
         schema = CreateUserSessionRequestSchema()
         schema.dump(schema.load(body))
         
@@ -317,7 +317,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PlatformSchema import PlatformSchema
+        from .models import PlatformSchema
         schema = PlatformSchema()
         schema.dump(schema.load(body))
         

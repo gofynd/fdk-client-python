@@ -62,7 +62,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CommunicationConsentReq import CommunicationConsentReq
+        from .models import CommunicationConsentReq
         schema = CommunicationConsentReq()
         schema.dump(schema.load(body))
         
@@ -92,7 +92,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PushtokenReq import PushtokenReq
+        from .models import PushtokenReq
         schema = PushtokenReq()
         schema.dump(schema.load(body))
         

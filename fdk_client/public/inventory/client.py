@@ -103,7 +103,7 @@ class Inventory:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.EmailJobMetrics import EmailJobMetrics
+        from .models import EmailJobMetrics
         schema = EmailJobMetrics()
         schema.dump(schema.load(body))
         

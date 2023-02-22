@@ -55,7 +55,7 @@ class Rewards:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.Giveaway import Giveaway
+        from .models import Giveaway
         schema = Giveaway()
         schema.dump(schema.load(body))
         
@@ -116,7 +116,7 @@ class Rewards:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.Giveaway import Giveaway
+        from .models import Giveaway
         schema = Giveaway()
         schema.dump(schema.load(body))
         
@@ -233,7 +233,7 @@ class Rewards:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.Offer import Offer
+        from .models import Offer
         schema = Offer()
         schema.dump(schema.load(body))
         
@@ -266,7 +266,7 @@ class Rewards:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AppUser import AppUser
+        from .models import AppUser
         schema = AppUser()
         schema.dump(schema.load(body))
         
@@ -383,7 +383,7 @@ class Rewards:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ConfigurationRequest import ConfigurationRequest
+        from .models import ConfigurationRequest
         schema = ConfigurationRequest()
         schema.dump(schema.load(body))
         

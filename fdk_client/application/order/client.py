@@ -314,7 +314,7 @@ class Order:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.VerifyOtp import VerifyOtp
+        from .models import VerifyOtp
         schema = VerifyOtp()
         schema.dump(schema.load(body))
         
@@ -410,7 +410,7 @@ class Order:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.UpdateShipmentStatusRequest import UpdateShipmentStatusRequest
+        from .models import UpdateShipmentStatusRequest
         schema = UpdateShipmentStatusRequest()
         schema.dump(schema.load(body))
         

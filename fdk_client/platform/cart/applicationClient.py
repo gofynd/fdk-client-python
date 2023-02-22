@@ -79,7 +79,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CouponAdd import CouponAdd
+        from .models import CouponAdd
         schema = CouponAdd()
         schema.dump(schema.load(body))
         
@@ -140,7 +140,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CouponUpdate import CouponUpdate
+        from .models import CouponUpdate
         schema = CouponUpdate()
         schema.dump(schema.load(body))
         
@@ -173,7 +173,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CouponPartialUpdate import CouponPartialUpdate
+        from .models import CouponPartialUpdate
         schema = CouponPartialUpdate()
         schema.dump(schema.load(body))
         
@@ -258,7 +258,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PromotionAdd import PromotionAdd
+        from .models import PromotionAdd
         schema = PromotionAdd()
         schema.dump(schema.load(body))
         
@@ -319,7 +319,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PromotionUpdate import PromotionUpdate
+        from .models import PromotionUpdate
         schema = PromotionUpdate()
         schema.dump(schema.load(body))
         
@@ -352,7 +352,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PromotionPartialUpdate import PromotionPartialUpdate
+        from .models import PromotionPartialUpdate
         schema = PromotionPartialUpdate()
         schema.dump(schema.load(body))
         
@@ -405,7 +405,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.OpenapiCartDetailsRequest import OpenapiCartDetailsRequest
+        from .models import OpenapiCartDetailsRequest
         schema = OpenapiCartDetailsRequest()
         schema.dump(schema.load(body))
         
@@ -434,7 +434,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.OpenApiCartServiceabilityRequest import OpenApiCartServiceabilityRequest
+        from .models import OpenApiCartServiceabilityRequest
         schema = OpenApiCartServiceabilityRequest()
         schema.dump(schema.load(body))
         
@@ -463,7 +463,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.OpenApiPlatformCheckoutReq import OpenApiPlatformCheckoutReq
+        from .models import OpenApiPlatformCheckoutReq
         schema = OpenApiPlatformCheckoutReq()
         schema.dump(schema.load(body))
         
@@ -588,7 +588,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AddCartRequest import AddCartRequest
+        from .models import AddCartRequest
         schema = AddCartRequest()
         schema.dump(schema.load(body))
         
@@ -625,7 +625,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.UpdateCartRequest import UpdateCartRequest
+        from .models import UpdateCartRequest
         schema = UpdateCartRequest()
         schema.dump(schema.load(body))
         
@@ -654,7 +654,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.GetShareCartLinkRequest import GetShareCartLinkRequest
+        from .models import GetShareCartLinkRequest
         schema = GetShareCartLinkRequest()
         schema.dump(schema.load(body))
         
@@ -851,7 +851,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AddCartRequest import AddCartRequest
+        from .models import AddCartRequest
         schema = AddCartRequest()
         schema.dump(schema.load(body))
         
@@ -896,7 +896,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.UpdateCartRequest import UpdateCartRequest
+        from .models import UpdateCartRequest
         schema = UpdateCartRequest()
         schema.dump(schema.load(body))
         
@@ -1009,7 +1009,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ApplyCouponRequest import ApplyCouponRequest
+        from .models import ApplyCouponRequest
         schema = ApplyCouponRequest()
         schema.dump(schema.load(body))
         
@@ -1122,7 +1122,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PlatformAddress import PlatformAddress
+        from .models import PlatformAddress
         schema = PlatformAddress()
         schema.dump(schema.load(body))
         
@@ -1211,7 +1211,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PlatformAddress import PlatformAddress
+        from .models import PlatformAddress
         schema = PlatformAddress()
         schema.dump(schema.load(body))
         
@@ -1288,7 +1288,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PlatformSelectCartAddressRequest import PlatformSelectCartAddressRequest
+        from .models import PlatformSelectCartAddressRequest
         schema = PlatformSelectCartAddressRequest()
         schema.dump(schema.load(body))
         
@@ -1433,7 +1433,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.UpdateCartShipmentRequest import UpdateCartShipmentRequest
+        from .models import UpdateCartShipmentRequest
         schema = UpdateCartShipmentRequest()
         schema.dump(schema.load(body))
         
@@ -1470,7 +1470,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CartMetaRequest import CartMetaRequest
+        from .models import CartMetaRequest
         schema = CartMetaRequest()
         schema.dump(schema.load(body))
         
@@ -1503,7 +1503,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PlatformCartCheckoutDetailRequest import PlatformCartCheckoutDetailRequest
+        from .models import PlatformCartCheckoutDetailRequest
         schema = PlatformCartCheckoutDetailRequest()
         schema.dump(schema.load(body))
         
@@ -1600,7 +1600,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.UpdateCartPaymentRequest import UpdateCartPaymentRequest
+        from .models import UpdateCartPaymentRequest
         schema = UpdateCartPaymentRequest()
         schema.dump(schema.load(body))
         

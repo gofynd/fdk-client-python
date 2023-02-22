@@ -103,7 +103,7 @@ class Lead:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.EditTicketPayload import EditTicketPayload
+        from .models import EditTicketPayload
         schema = EditTicketPayload()
         schema.dump(schema.load(body))
         
@@ -136,7 +136,7 @@ class Lead:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.TicketHistoryPayload import TicketHistoryPayload
+        from .models import TicketHistoryPayload
         schema = TicketHistoryPayload()
         schema.dump(schema.load(body))
         
@@ -225,7 +225,7 @@ class Lead:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.EditCustomFormPayload import EditCustomFormPayload
+        from .models import EditCustomFormPayload
         schema = EditCustomFormPayload()
         schema.dump(schema.load(body))
         
@@ -278,7 +278,7 @@ class Lead:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CreateCustomFormPayload import CreateCustomFormPayload
+        from .models import CreateCustomFormPayload
         schema = CreateCustomFormPayload()
         schema.dump(schema.load(body))
         
@@ -363,7 +363,7 @@ class Lead:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CreateVideoRoomPayload import CreateVideoRoomPayload
+        from .models import CreateVideoRoomPayload
         schema = CreateVideoRoomPayload()
         schema.dump(schema.load(body))
         

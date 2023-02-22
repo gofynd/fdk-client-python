@@ -70,7 +70,7 @@ class Rewards:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CatalogueOrderRequest import CatalogueOrderRequest
+        from .models import CatalogueOrderRequest
         schema = CatalogueOrderRequest()
         schema.dump(schema.load(body))
         
@@ -183,7 +183,7 @@ class Rewards:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.OrderDiscountRequest import OrderDiscountRequest
+        from .models import OrderDiscountRequest
         schema = OrderDiscountRequest()
         schema.dump(schema.load(body))
         
@@ -213,7 +213,7 @@ class Rewards:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.RedeemReferralCodeRequest import RedeemReferralCodeRequest
+        from .models import RedeemReferralCodeRequest
         schema = RedeemReferralCodeRequest()
         schema.dump(schema.load(body))
         

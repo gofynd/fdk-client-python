@@ -50,7 +50,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PayoutRequest import PayoutRequest
+        from .models import PayoutRequest
         schema = PayoutRequest()
         schema.dump(schema.load(body))
         
@@ -83,7 +83,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PayoutRequest import PayoutRequest
+        from .models import PayoutRequest
         schema = PayoutRequest()
         schema.dump(schema.load(body))
         
@@ -116,7 +116,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.UpdatePayoutRequest import UpdatePayoutRequest
+        from .models import UpdatePayoutRequest
         schema = UpdatePayoutRequest()
         schema.dump(schema.load(body))
         
@@ -257,7 +257,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SaveSubscriptionSetupIntentRequest import SaveSubscriptionSetupIntentRequest
+        from .models import SaveSubscriptionSetupIntentRequest
         schema = SaveSubscriptionSetupIntentRequest()
         schema.dump(schema.load(body))
         

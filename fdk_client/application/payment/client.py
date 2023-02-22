@@ -104,7 +104,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AttachCardRequest import AttachCardRequest
+        from .models import AttachCardRequest
         schema = AttachCardRequest()
         schema.dump(schema.load(body))
         
@@ -192,7 +192,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.DeletehCardRequest import DeletehCardRequest
+        from .models import DeletehCardRequest
         schema = DeletehCardRequest()
         schema.dump(schema.load(body))
         
@@ -222,7 +222,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ValidateCustomerRequest import ValidateCustomerRequest
+        from .models import ValidateCustomerRequest
         schema = ValidateCustomerRequest()
         schema.dump(schema.load(body))
         
@@ -252,7 +252,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ChargeCustomerRequest import ChargeCustomerRequest
+        from .models import ChargeCustomerRequest
         schema = ChargeCustomerRequest()
         schema.dump(schema.load(body))
         
@@ -282,7 +282,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PaymentInitializationRequest import PaymentInitializationRequest
+        from .models import PaymentInitializationRequest
         schema = PaymentInitializationRequest()
         schema.dump(schema.load(body))
         
@@ -312,7 +312,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PaymentStatusUpdateRequest import PaymentStatusUpdateRequest
+        from .models import PaymentStatusUpdateRequest
         schema = PaymentStatusUpdateRequest()
         schema.dump(schema.load(body))
         
@@ -502,7 +502,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ResendOrCancelPaymentRequest import ResendOrCancelPaymentRequest
+        from .models import ResendOrCancelPaymentRequest
         schema = ResendOrCancelPaymentRequest()
         schema.dump(schema.load(body))
         
@@ -557,7 +557,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.UpdateRefundTransferModeRequest import UpdateRefundTransferModeRequest
+        from .models import UpdateRefundTransferModeRequest
         schema = UpdateRefundTransferModeRequest()
         schema.dump(schema.load(body))
         
@@ -674,7 +674,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AddBeneficiaryViaOtpVerificationRequest import AddBeneficiaryViaOtpVerificationRequest
+        from .models import AddBeneficiaryViaOtpVerificationRequest
         schema = AddBeneficiaryViaOtpVerificationRequest()
         schema.dump(schema.load(body))
         
@@ -704,7 +704,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AddBeneficiaryDetailsRequest import AddBeneficiaryDetailsRequest
+        from .models import AddBeneficiaryDetailsRequest
         schema = AddBeneficiaryDetailsRequest()
         schema.dump(schema.load(body))
         
@@ -734,7 +734,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AddBeneficiaryDetailsOTPRequest import AddBeneficiaryDetailsOTPRequest
+        from .models import AddBeneficiaryDetailsOTPRequest
         schema = AddBeneficiaryDetailsOTPRequest()
         schema.dump(schema.load(body))
         
@@ -764,7 +764,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.WalletOtpRequest import WalletOtpRequest
+        from .models import WalletOtpRequest
         schema = WalletOtpRequest()
         schema.dump(schema.load(body))
         
@@ -794,7 +794,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SetDefaultBeneficiaryRequest import SetDefaultBeneficiaryRequest
+        from .models import SetDefaultBeneficiaryRequest
         schema = SetDefaultBeneficiaryRequest()
         schema.dump(schema.load(body))
         
@@ -853,7 +853,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CreatePaymentLinkRequest import CreatePaymentLinkRequest
+        from .models import CreatePaymentLinkRequest
         schema = CreatePaymentLinkRequest()
         schema.dump(schema.load(body))
         
@@ -883,7 +883,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CancelOrResendPaymentLinkRequest import CancelOrResendPaymentLinkRequest
+        from .models import CancelOrResendPaymentLinkRequest
         schema = CancelOrResendPaymentLinkRequest()
         schema.dump(schema.load(body))
         
@@ -913,7 +913,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CancelOrResendPaymentLinkRequest import CancelOrResendPaymentLinkRequest
+        from .models import CancelOrResendPaymentLinkRequest
         schema = CancelOrResendPaymentLinkRequest()
         schema.dump(schema.load(body))
         
@@ -1001,7 +1001,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CreateOrderUserRequest import CreateOrderUserRequest
+        from .models import CreateOrderUserRequest
         schema = CreateOrderUserRequest()
         schema.dump(schema.load(body))
         
@@ -1031,7 +1031,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PaymentInitializationRequest import PaymentInitializationRequest
+        from .models import PaymentInitializationRequest
         schema = PaymentInitializationRequest()
         schema.dump(schema.load(body))
         
@@ -1061,7 +1061,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PaymentStatusUpdateRequest import PaymentStatusUpdateRequest
+        from .models import PaymentStatusUpdateRequest
         schema = PaymentStatusUpdateRequest()
         schema.dump(schema.load(body))
         
@@ -1182,7 +1182,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CustomerOnboardingRequest import CustomerOnboardingRequest
+        from .models import CustomerOnboardingRequest
         schema = CustomerOnboardingRequest()
         schema.dump(schema.load(body))
         

@@ -55,7 +55,7 @@ class Theme:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AvailablePageSchema import AvailablePageSchema
+        from .models import AvailablePageSchema
         schema = AvailablePageSchema()
         schema.dump(schema.load(body))
         
@@ -88,7 +88,7 @@ class Theme:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AllAvailablePageSchema import AllAvailablePageSchema
+        from .models import AllAvailablePageSchema
         schema = AllAvailablePageSchema()
         schema.dump(schema.load(body))
         
@@ -157,7 +157,7 @@ class Theme:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AvailablePageSchema import AvailablePageSchema
+        from .models import AvailablePageSchema
         schema = AvailablePageSchema()
         schema.dump(schema.load(body))
         
@@ -250,7 +250,7 @@ class Theme:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AddThemeRequestSchema import AddThemeRequestSchema
+        from .models import AddThemeRequestSchema
         schema = AddThemeRequestSchema()
         schema.dump(schema.load(body))
         
@@ -279,7 +279,7 @@ class Theme:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AddThemeRequestSchema import AddThemeRequestSchema
+        from .models import AddThemeRequestSchema
         schema = AddThemeRequestSchema()
         schema.dump(schema.load(body))
         
@@ -396,7 +396,7 @@ class Theme:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ThemesSchema import ThemesSchema
+        from .models import ThemesSchema
         schema = ThemesSchema()
         schema.dump(schema.load(body))
         
@@ -505,7 +505,7 @@ class Theme:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ThemesSchema import ThemesSchema
+        from .models import ThemesSchema
         schema = ThemesSchema()
         schema.dump(schema.load(body))
         

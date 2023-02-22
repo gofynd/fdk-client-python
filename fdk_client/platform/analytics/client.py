@@ -26,7 +26,7 @@ class Analytics:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ExportJobReq import ExportJobReq
+        from .models import ExportJobReq
         schema = ExportJobReq()
         schema.dump(schema.load(body))
         
@@ -99,7 +99,7 @@ class Analytics:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.GetLogsListReq import GetLogsListReq
+        from .models import GetLogsListReq
         schema = GetLogsListReq()
         schema.dump(schema.load(body))
         
@@ -140,7 +140,7 @@ class Analytics:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SearchLogReq import SearchLogReq
+        from .models import SearchLogReq
         schema = SearchLogReq()
         schema.dump(schema.load(body))
         

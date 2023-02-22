@@ -82,7 +82,7 @@ class Discount:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CreateUpdateDiscount import CreateUpdateDiscount
+        from .models import CreateUpdateDiscount
         schema = CreateUpdateDiscount()
         schema.dump(schema.load(body))
         
@@ -143,7 +143,7 @@ class Discount:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CreateUpdateDiscount import CreateUpdateDiscount
+        from .models import CreateUpdateDiscount
         schema = CreateUpdateDiscount()
         schema.dump(schema.load(body))
         
@@ -176,7 +176,7 @@ class Discount:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.BulkDiscount import BulkDiscount
+        from .models import BulkDiscount
         schema = BulkDiscount()
         schema.dump(schema.load(body))
         
@@ -209,7 +209,7 @@ class Discount:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.DiscountJob import DiscountJob
+        from .models import DiscountJob
         schema = DiscountJob()
         schema.dump(schema.load(body))
         
@@ -242,7 +242,7 @@ class Discount:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.DownloadFileJob import DownloadFileJob
+        from .models import DownloadFileJob
         schema = DownloadFileJob()
         schema.dump(schema.load(body))
         

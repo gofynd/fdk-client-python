@@ -54,7 +54,7 @@ class Inventory:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.JobConfigDTO import JobConfigDTO
+        from .models import JobConfigDTO
         schema = JobConfigDTO()
         schema.dump(schema.load(body))
         
@@ -83,7 +83,7 @@ class Inventory:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.JobConfigDTO import JobConfigDTO
+        from .models import JobConfigDTO
         schema = JobConfigDTO()
         schema.dump(schema.load(body))
         

@@ -47,7 +47,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PaymentGatewayConfigRequest import PaymentGatewayConfigRequest
+        from .models import PaymentGatewayConfigRequest
         schema = PaymentGatewayConfigRequest()
         schema.dump(schema.load(body))
         
@@ -76,7 +76,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PaymentGatewayConfigRequest import PaymentGatewayConfigRequest
+        from .models import PaymentGatewayConfigRequest
         schema = PaymentGatewayConfigRequest()
         schema.dump(schema.load(body))
         
@@ -169,7 +169,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AddBeneficiaryDetailsOTPRequest import AddBeneficiaryDetailsOTPRequest
+        from .models import AddBeneficiaryDetailsOTPRequest
         schema = AddBeneficiaryDetailsOTPRequest()
         schema.dump(schema.load(body))
         
@@ -254,7 +254,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PaymentConfirmationRequest import PaymentConfirmationRequest
+        from .models import PaymentConfirmationRequest
         schema = PaymentConfirmationRequest()
         schema.dump(schema.load(body))
         
@@ -315,7 +315,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SetCODForUserRequest import SetCODForUserRequest
+        from .models import SetCODForUserRequest
         schema = SetCODForUserRequest()
         schema.dump(schema.load(body))
         

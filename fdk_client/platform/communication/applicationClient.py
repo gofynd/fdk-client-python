@@ -59,7 +59,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CampaignReq import CampaignReq
+        from .models import CampaignReq
         schema = CampaignReq()
         schema.dump(schema.load(body))
         
@@ -120,7 +120,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CampaignReq import CampaignReq
+        from .models import CampaignReq
         schema = CampaignReq()
         schema.dump(schema.load(body))
         
@@ -213,7 +213,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AudienceReq import AudienceReq
+        from .models import AudienceReq
         schema = AudienceReq()
         schema.dump(schema.load(body))
         
@@ -242,7 +242,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.BigqueryHeadersReq import BigqueryHeadersReq
+        from .models import BigqueryHeadersReq
         schema = BigqueryHeadersReq()
         schema.dump(schema.load(body))
         
@@ -303,7 +303,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AudienceReq import AudienceReq
+        from .models import AudienceReq
         schema = AudienceReq()
         schema.dump(schema.load(body))
         
@@ -332,7 +332,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.GetNRecordsCsvReq import GetNRecordsCsvReq
+        from .models import GetNRecordsCsvReq
         schema = GetNRecordsCsvReq()
         schema.dump(schema.load(body))
         
@@ -397,7 +397,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.EmailProviderReq import EmailProviderReq
+        from .models import EmailProviderReq
         schema = EmailProviderReq()
         schema.dump(schema.load(body))
         
@@ -458,7 +458,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.EmailProviderReq import EmailProviderReq
+        from .models import EmailProviderReq
         schema = EmailProviderReq()
         schema.dump(schema.load(body))
         
@@ -523,7 +523,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.EmailTemplateReq import EmailTemplateReq
+        from .models import EmailTemplateReq
         schema = EmailTemplateReq()
         schema.dump(schema.load(body))
         
@@ -620,7 +620,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.EmailTemplateReq import EmailTemplateReq
+        from .models import EmailTemplateReq
         schema = EmailTemplateReq()
         schema.dump(schema.load(body))
         
@@ -677,7 +677,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.EngineRequest import EngineRequest
+        from .models import EngineRequest
         schema = EngineRequest()
         schema.dump(schema.load(body))
         
@@ -706,7 +706,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.EngineRequest import EngineRequest
+        from .models import EngineRequest
         schema = EngineRequest()
         schema.dump(schema.load(body))
         
@@ -807,7 +807,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.TriggerJobRequest import TriggerJobRequest
+        from .models import TriggerJobRequest
         schema = TriggerJobRequest()
         schema.dump(schema.load(body))
         
@@ -912,7 +912,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SendOtpCommsReq import SendOtpCommsReq
+        from .models import SendOtpCommsReq
         schema = SendOtpCommsReq()
         schema.dump(schema.load(body))
         
@@ -941,7 +941,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.VerifyOtpCommsReq import VerifyOtpCommsReq
+        from .models import VerifyOtpCommsReq
         schema = VerifyOtpCommsReq()
         schema.dump(schema.load(body))
         
@@ -1006,7 +1006,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SmsProviderReq import SmsProviderReq
+        from .models import SmsProviderReq
         schema = SmsProviderReq()
         schema.dump(schema.load(body))
         
@@ -1067,7 +1067,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SmsProviderReq import SmsProviderReq
+        from .models import SmsProviderReq
         schema = SmsProviderReq()
         schema.dump(schema.load(body))
         
@@ -1132,7 +1132,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SmsTemplateReq import SmsTemplateReq
+        from .models import SmsTemplateReq
         schema = SmsTemplateReq()
         schema.dump(schema.load(body))
         
@@ -1193,7 +1193,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SmsTemplateReq import SmsTemplateReq
+        from .models import SmsTemplateReq
         schema = SmsTemplateReq()
         schema.dump(schema.load(body))
         

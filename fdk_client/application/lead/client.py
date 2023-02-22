@@ -74,7 +74,7 @@ class Lead:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.TicketHistoryPayload import TicketHistoryPayload
+        from .models import TicketHistoryPayload
         schema = TicketHistoryPayload()
         schema.dump(schema.load(body))
         
@@ -104,7 +104,7 @@ class Lead:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AddTicketPayload import AddTicketPayload
+        from .models import AddTicketPayload
         schema = AddTicketPayload()
         schema.dump(schema.load(body))
         
@@ -167,7 +167,7 @@ class Lead:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CustomFormSubmissionPayload import CustomFormSubmissionPayload
+        from .models import CustomFormSubmissionPayload
         schema = CustomFormSubmissionPayload()
         schema.dump(schema.load(body))
         

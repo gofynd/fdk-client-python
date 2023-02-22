@@ -59,7 +59,7 @@ This operation will return the URL of the uploaded file.
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.StartRequest import StartRequest
+        from .models import StartRequest
         schema = StartRequest()
         schema.dump(schema.load(body))
         
@@ -111,7 +111,7 @@ This operation will return the URL of the uploaded file.
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.StartResponse import StartResponse
+        from .models import StartResponse
         schema = StartResponse()
         schema.dump(schema.load(body))
         
@@ -141,7 +141,7 @@ This operation will return the URL of the uploaded file.
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SignUrlRequest import SignUrlRequest
+        from .models import SignUrlRequest
         schema = SignUrlRequest()
         schema.dump(schema.load(body))
         

@@ -73,7 +73,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.OAuthRequestSchema import OAuthRequestSchema
+        from .models import OAuthRequestSchema
         schema = OAuthRequestSchema()
         schema.dump(schema.load(body))
         
@@ -107,7 +107,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.OAuthRequestSchema import OAuthRequestSchema
+        from .models import OAuthRequestSchema
         schema = OAuthRequestSchema()
         schema.dump(schema.load(body))
         
@@ -141,7 +141,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.OAuthRequestSchema import OAuthRequestSchema
+        from .models import OAuthRequestSchema
         schema = OAuthRequestSchema()
         schema.dump(schema.load(body))
         
@@ -175,7 +175,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.OAuthRequestSchema import OAuthRequestSchema
+        from .models import OAuthRequestSchema
         schema = OAuthRequestSchema()
         schema.dump(schema.load(body))
         
@@ -209,7 +209,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.OAuthRequestAppleSchema import OAuthRequestAppleSchema
+        from .models import OAuthRequestAppleSchema
         schema = OAuthRequestAppleSchema()
         schema.dump(schema.load(body))
         
@@ -243,7 +243,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SendOtpRequestSchema import SendOtpRequestSchema
+        from .models import SendOtpRequestSchema
         schema = SendOtpRequestSchema()
         schema.dump(schema.load(body))
         
@@ -273,7 +273,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PasswordLoginRequestSchema import PasswordLoginRequestSchema
+        from .models import PasswordLoginRequestSchema
         schema = PasswordLoginRequestSchema()
         schema.dump(schema.load(body))
         
@@ -307,7 +307,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SendResetPasswordEmailRequestSchema import SendResetPasswordEmailRequestSchema
+        from .models import SendResetPasswordEmailRequestSchema
         schema = SendResetPasswordEmailRequestSchema()
         schema.dump(schema.load(body))
         
@@ -341,7 +341,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SendResetPasswordMobileRequestSchema import SendResetPasswordMobileRequestSchema
+        from .models import SendResetPasswordMobileRequestSchema
         schema = SendResetPasswordMobileRequestSchema()
         schema.dump(schema.load(body))
         
@@ -371,7 +371,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ForgotPasswordRequestSchema import ForgotPasswordRequestSchema
+        from .models import ForgotPasswordRequestSchema
         schema = ForgotPasswordRequestSchema()
         schema.dump(schema.load(body))
         
@@ -401,7 +401,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CodeRequestBodySchema import CodeRequestBodySchema
+        from .models import CodeRequestBodySchema
         schema = CodeRequestBodySchema()
         schema.dump(schema.load(body))
         
@@ -431,7 +431,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.TokenRequestBodySchema import TokenRequestBodySchema
+        from .models import TokenRequestBodySchema
         schema = TokenRequestBodySchema()
         schema.dump(schema.load(body))
         
@@ -465,7 +465,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.FormRegisterRequestSchema import FormRegisterRequestSchema
+        from .models import FormRegisterRequestSchema
         schema = FormRegisterRequestSchema()
         schema.dump(schema.load(body))
         
@@ -495,7 +495,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CodeRequestBodySchema import CodeRequestBodySchema
+        from .models import CodeRequestBodySchema
         schema = CodeRequestBodySchema()
         schema.dump(schema.load(body))
         
@@ -525,7 +525,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CodeRequestBodySchema import CodeRequestBodySchema
+        from .models import CodeRequestBodySchema
         schema = CodeRequestBodySchema()
         schema.dump(schema.load(body))
         
@@ -580,7 +580,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.UpdatePasswordRequestSchema import UpdatePasswordRequestSchema
+        from .models import UpdatePasswordRequestSchema
         schema = UpdatePasswordRequestSchema()
         schema.dump(schema.load(body))
         
@@ -610,7 +610,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.DeleteApplicationUserRequestSchema import DeleteApplicationUserRequestSchema
+        from .models import DeleteApplicationUserRequestSchema
         schema = DeleteApplicationUserRequestSchema()
         schema.dump(schema.load(body))
         
@@ -669,7 +669,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SendMobileOtpRequestSchema import SendMobileOtpRequestSchema
+        from .models import SendMobileOtpRequestSchema
         schema = SendMobileOtpRequestSchema()
         schema.dump(schema.load(body))
         
@@ -703,7 +703,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.VerifyOtpRequestSchema import VerifyOtpRequestSchema
+        from .models import VerifyOtpRequestSchema
         schema = VerifyOtpRequestSchema()
         schema.dump(schema.load(body))
         
@@ -737,7 +737,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SendEmailOtpRequestSchema import SendEmailOtpRequestSchema
+        from .models import SendEmailOtpRequestSchema
         schema = SendEmailOtpRequestSchema()
         schema.dump(schema.load(body))
         
@@ -771,7 +771,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.VerifyEmailOtpRequestSchema import VerifyEmailOtpRequestSchema
+        from .models import VerifyEmailOtpRequestSchema
         schema = VerifyEmailOtpRequestSchema()
         schema.dump(schema.load(body))
         
@@ -884,7 +884,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.EditProfileRequestSchema import EditProfileRequestSchema
+        from .models import EditProfileRequestSchema
         schema = EditProfileRequestSchema()
         schema.dump(schema.load(body))
         
@@ -918,7 +918,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.EditMobileRequestSchema import EditMobileRequestSchema
+        from .models import EditMobileRequestSchema
         schema = EditMobileRequestSchema()
         schema.dump(schema.load(body))
         
@@ -997,7 +997,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SendVerificationLinkMobileRequestSchema import SendVerificationLinkMobileRequestSchema
+        from .models import SendVerificationLinkMobileRequestSchema
         schema = SendVerificationLinkMobileRequestSchema()
         schema.dump(schema.load(body))
         
@@ -1031,7 +1031,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SendVerificationLinkMobileRequestSchema import SendVerificationLinkMobileRequestSchema
+        from .models import SendVerificationLinkMobileRequestSchema
         schema = SendVerificationLinkMobileRequestSchema()
         schema.dump(schema.load(body))
         
@@ -1065,7 +1065,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.EditEmailRequestSchema import EditEmailRequestSchema
+        from .models import EditEmailRequestSchema
         schema = EditEmailRequestSchema()
         schema.dump(schema.load(body))
         
@@ -1140,7 +1140,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.EditEmailRequestSchema import EditEmailRequestSchema
+        from .models import EditEmailRequestSchema
         schema = EditEmailRequestSchema()
         schema.dump(schema.load(body))
         
@@ -1174,7 +1174,7 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.EditEmailRequestSchema import EditEmailRequestSchema
+        from .models import EditEmailRequestSchema
         schema = EditEmailRequestSchema()
         schema.dump(schema.load(body))
         

@@ -55,7 +55,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AdminAnnouncementSchema import AdminAnnouncementSchema
+        from .models import AdminAnnouncementSchema
         schema = AdminAnnouncementSchema()
         schema.dump(schema.load(body))
         
@@ -116,7 +116,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AdminAnnouncementSchema import AdminAnnouncementSchema
+        from .models import AdminAnnouncementSchema
         schema = AdminAnnouncementSchema()
         schema.dump(schema.load(body))
         
@@ -149,7 +149,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ScheduleSchema import ScheduleSchema
+        from .models import ScheduleSchema
         schema = ScheduleSchema()
         schema.dump(schema.load(body))
         
@@ -206,7 +206,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.BlogRequest import BlogRequest
+        from .models import BlogRequest
         schema = BlogRequest()
         schema.dump(schema.load(body))
         
@@ -271,7 +271,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.BlogRequest import BlogRequest
+        from .models import BlogRequest
         schema = BlogRequest()
         schema.dump(schema.load(body))
         
@@ -356,7 +356,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.DataLoaderSchema import DataLoaderSchema
+        from .models import DataLoaderSchema
         schema = DataLoaderSchema()
         schema.dump(schema.load(body))
         
@@ -441,7 +441,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.DataLoaderSchema import DataLoaderSchema
+        from .models import DataLoaderSchema
         schema = DataLoaderSchema()
         schema.dump(schema.load(body))
         
@@ -582,7 +582,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CreateFaqCategoryRequestSchema import CreateFaqCategoryRequestSchema
+        from .models import CreateFaqCategoryRequestSchema
         schema = CreateFaqCategoryRequestSchema()
         schema.dump(schema.load(body))
         
@@ -615,7 +615,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.UpdateFaqCategoryRequestSchema import UpdateFaqCategoryRequestSchema
+        from .models import UpdateFaqCategoryRequestSchema
         schema = UpdateFaqCategoryRequestSchema()
         schema.dump(schema.load(body))
         
@@ -704,7 +704,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CreateFaqSchema import CreateFaqSchema
+        from .models import CreateFaqSchema
         schema = CreateFaqSchema()
         schema.dump(schema.load(body))
         
@@ -741,7 +741,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CreateFaqSchema import CreateFaqSchema
+        from .models import CreateFaqSchema
         schema = CreateFaqSchema()
         schema.dump(schema.load(body))
         
@@ -862,7 +862,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.LandingPageSchema import LandingPageSchema
+        from .models import LandingPageSchema
         schema = LandingPageSchema()
         schema.dump(schema.load(body))
         
@@ -895,7 +895,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.LandingPageSchema import LandingPageSchema
+        from .models import LandingPageSchema
         schema = LandingPageSchema()
         schema.dump(schema.load(body))
         
@@ -976,7 +976,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ApplicationLegal import ApplicationLegal
+        from .models import ApplicationLegal
         schema = ApplicationLegal()
         schema.dump(schema.load(body))
         
@@ -1041,7 +1041,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.NavigationRequest import NavigationRequest
+        from .models import NavigationRequest
         schema = NavigationRequest()
         schema.dump(schema.load(body))
         
@@ -1130,7 +1130,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.NavigationRequest import NavigationRequest
+        from .models import NavigationRequest
         schema = NavigationRequest()
         schema.dump(schema.load(body))
         
@@ -1247,7 +1247,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PagePublishRequest import PagePublishRequest
+        from .models import PagePublishRequest
         schema = PagePublishRequest()
         schema.dump(schema.load(body))
         
@@ -1304,7 +1304,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PathMappingSchema import PathMappingSchema
+        from .models import PathMappingSchema
         schema = PathMappingSchema()
         schema.dump(schema.load(body))
         
@@ -1397,7 +1397,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PathMappingSchema import PathMappingSchema
+        from .models import PathMappingSchema
         schema = PathMappingSchema()
         schema.dump(schema.load(body))
         
@@ -1478,7 +1478,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SeoComponent import SeoComponent
+        from .models import SeoComponent
         schema = SeoComponent()
         schema.dump(schema.load(body))
         
@@ -1543,7 +1543,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SlideshowRequest import SlideshowRequest
+        from .models import SlideshowRequest
         schema = SlideshowRequest()
         schema.dump(schema.load(body))
         
@@ -1608,7 +1608,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SlideshowRequest import SlideshowRequest
+        from .models import SlideshowRequest
         schema = SlideshowRequest()
         schema.dump(schema.load(body))
         
@@ -1689,7 +1689,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.Support import Support
+        from .models import Support
         schema = Support()
         schema.dump(schema.load(body))
         
@@ -1718,7 +1718,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CreateTagRequestSchema import CreateTagRequestSchema
+        from .models import CreateTagRequestSchema
         schema = CreateTagRequestSchema()
         schema.dump(schema.load(body))
         
@@ -1795,7 +1795,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CreateTagRequestSchema import CreateTagRequestSchema
+        from .models import CreateTagRequestSchema
         schema = CreateTagRequestSchema()
         schema.dump(schema.load(body))
         
@@ -1824,7 +1824,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.RemoveHandpickedSchema import RemoveHandpickedSchema
+        from .models import RemoveHandpickedSchema
         schema = RemoveHandpickedSchema()
         schema.dump(schema.load(body))
         
@@ -1857,7 +1857,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.UpdateHandpickedSchema import UpdateHandpickedSchema
+        from .models import UpdateHandpickedSchema
         schema = UpdateHandpickedSchema()
         schema.dump(schema.load(body))
         
@@ -1886,7 +1886,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PageRequest import PageRequest
+        from .models import PageRequest
         schema = PageRequest()
         schema.dump(schema.load(body))
         
@@ -1951,7 +1951,7 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PageSchema import PageSchema
+        from .models import PageSchema
         schema = PageSchema()
         schema.dump(schema.load(body))
         

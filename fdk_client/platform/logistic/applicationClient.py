@@ -47,7 +47,7 @@ class Logistic:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.GetZoneFromPincodeViewRequest import GetZoneFromPincodeViewRequest
+        from .models import GetZoneFromPincodeViewRequest
         schema = GetZoneFromPincodeViewRequest()
         schema.dump(schema.load(body))
         

@@ -150,7 +150,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AddCartRequest import AddCartRequest
+        from .models import AddCartRequest
         schema = AddCartRequest()
         schema.dump(schema.load(body))
         
@@ -200,7 +200,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.UpdateCartRequest import UpdateCartRequest
+        from .models import UpdateCartRequest
         schema = UpdateCartRequest()
         schema.dump(schema.load(body))
         
@@ -316,7 +316,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ApplyCouponRequest import ApplyCouponRequest
+        from .models import ApplyCouponRequest
         schema = ApplyCouponRequest()
         schema.dump(schema.load(body))
         
@@ -436,7 +436,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.RewardPointRequest import RewardPointRequest
+        from .models import RewardPointRequest
         schema = RewardPointRequest()
         schema.dump(schema.load(body))
         
@@ -515,7 +515,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.Address import Address
+        from .models import Address
         schema = Address()
         schema.dump(schema.load(body))
         
@@ -602,7 +602,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.Address import Address
+        from .models import Address
         schema = Address()
         schema.dump(schema.load(body))
         
@@ -677,7 +677,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SelectCartAddressRequest import SelectCartAddressRequest
+        from .models import SelectCartAddressRequest
         schema = SelectCartAddressRequest()
         schema.dump(schema.load(body))
         
@@ -715,7 +715,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.UpdateCartPaymentRequest import UpdateCartPaymentRequest
+        from .models import UpdateCartPaymentRequest
         schema = UpdateCartPaymentRequest()
         schema.dump(schema.load(body))
         
@@ -847,7 +847,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CartCheckoutDetailRequest import CartCheckoutDetailRequest
+        from .models import CartCheckoutDetailRequest
         schema = CartCheckoutDetailRequest()
         schema.dump(schema.load(body))
         
@@ -885,7 +885,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CartMetaRequest import CartMetaRequest
+        from .models import CartMetaRequest
         schema = CartMetaRequest()
         schema.dump(schema.load(body))
         
@@ -915,7 +915,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.GetShareCartLinkRequest import GetShareCartLinkRequest
+        from .models import GetShareCartLinkRequest
         schema = GetShareCartLinkRequest()
         schema.dump(schema.load(body))
         

@@ -18,7 +18,7 @@ from ..PlatformModel import BaseSchema
         
         
                 
-from .models.PriorityEnum import PriorityEnum
+from .models import PriorityEnum
 
         
         

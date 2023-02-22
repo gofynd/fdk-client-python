@@ -46,7 +46,7 @@ class CompanyProfile:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.UpdateCompany import UpdateCompany
+        from .models import UpdateCompany
         schema = UpdateCompany()
         schema.dump(schema.load(body))
         
@@ -131,7 +131,7 @@ class CompanyProfile:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CreateUpdateBrandRequestSerializer import CreateUpdateBrandRequestSerializer
+        from .models import CreateUpdateBrandRequestSerializer
         schema = CreateUpdateBrandRequestSerializer()
         schema.dump(schema.load(body))
         
@@ -160,7 +160,7 @@ class CompanyProfile:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CreateUpdateBrandRequestSerializer import CreateUpdateBrandRequestSerializer
+        from .models import CreateUpdateBrandRequestSerializer
         schema = CreateUpdateBrandRequestSerializer()
         schema.dump(schema.load(body))
         
@@ -225,7 +225,7 @@ class CompanyProfile:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CompanyBrandPostRequestSerializer import CompanyBrandPostRequestSerializer
+        from .models import CompanyBrandPostRequestSerializer
         schema = CompanyBrandPostRequestSerializer()
         schema.dump(schema.load(body))
         
@@ -302,7 +302,7 @@ class CompanyProfile:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.LocationSerializer import LocationSerializer
+        from .models import LocationSerializer
         schema = LocationSerializer()
         schema.dump(schema.load(body))
         
@@ -363,7 +363,7 @@ class CompanyProfile:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.LocationSerializer import LocationSerializer
+        from .models import LocationSerializer
         schema = LocationSerializer()
         schema.dump(schema.load(body))
         
@@ -392,7 +392,7 @@ class CompanyProfile:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.BulkLocationSerializer import BulkLocationSerializer
+        from .models import BulkLocationSerializer
         schema = BulkLocationSerializer()
         schema.dump(schema.load(body))
         
@@ -421,7 +421,7 @@ class CompanyProfile:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AssignStoreRequestValidator import AssignStoreRequestValidator
+        from .models import AssignStoreRequestValidator
         schema = AssignStoreRequestValidator()
         schema.dump(schema.load(body))
         

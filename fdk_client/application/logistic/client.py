@@ -72,7 +72,7 @@ class Logistic:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.TATViewRequest import TATViewRequest
+        from .models import TATViewRequest
         schema = TATViewRequest()
         schema.dump(schema.load(body))
         
@@ -110,7 +110,7 @@ class Logistic:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.EntityListRequest import EntityListRequest
+        from .models import EntityListRequest
         schema = EntityListRequest()
         schema.dump(schema.load(body))
         
@@ -140,7 +140,7 @@ class Logistic:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.GetZoneFromPincodeViewRequest import GetZoneFromPincodeViewRequest
+        from .models import GetZoneFromPincodeViewRequest
         schema = GetZoneFromPincodeViewRequest()
         schema.dump(schema.load(body))
         
@@ -170,7 +170,7 @@ class Logistic:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AssignStoreRequest import AssignStoreRequest
+        from .models import AssignStoreRequest
         schema = AssignStoreRequest()
         schema.dump(schema.load(body))
         

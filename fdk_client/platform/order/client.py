@@ -450,7 +450,7 @@ class Order:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.JioCodeUpsertPayload import JioCodeUpsertPayload
+        from .models import JioCodeUpsertPayload
         schema = JioCodeUpsertPayload()
         schema.dump(schema.load(body))
         
@@ -767,7 +767,7 @@ class Order:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.BulkActionPayload import BulkActionPayload
+        from .models import BulkActionPayload
         schema = BulkActionPayload()
         schema.dump(schema.load(body))
         
@@ -948,7 +948,7 @@ class Order:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.InvalidateShipmentCachePayload import InvalidateShipmentCachePayload
+        from .models import InvalidateShipmentCachePayload
         schema = InvalidateShipmentCachePayload()
         schema.dump(schema.load(body))
         
@@ -977,7 +977,7 @@ class Order:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.StoreReassign import StoreReassign
+        from .models import StoreReassign
         schema = StoreReassign()
         schema.dump(schema.load(body))
         
@@ -1006,7 +1006,7 @@ class Order:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.UpdateShipmentLockPayload import UpdateShipmentLockPayload
+        from .models import UpdateShipmentLockPayload
         schema = UpdateShipmentLockPayload()
         schema.dump(schema.load(body))
         
@@ -1179,7 +1179,7 @@ class Order:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.UpdateShipmentStatusRequest import UpdateShipmentStatusRequest
+        from .models import UpdateShipmentStatusRequest
         schema = UpdateShipmentStatusRequest()
         schema.dump(schema.load(body))
         
@@ -1208,7 +1208,7 @@ class Order:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CreateOrderPayload import CreateOrderPayload
+        from .models import CreateOrderPayload
         schema = CreateOrderPayload()
         schema.dump(schema.load(body))
         
@@ -1237,7 +1237,7 @@ class Order:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.DispatchManifest import DispatchManifest
+        from .models import DispatchManifest
         schema = DispatchManifest()
         schema.dump(schema.load(body))
         
@@ -1322,7 +1322,7 @@ class Order:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PostShipmentHistory import PostShipmentHistory
+        from .models import PostShipmentHistory
         schema = PostShipmentHistory()
         schema.dump(schema.load(body))
         
@@ -1351,7 +1351,7 @@ class Order:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SendSmsPayload import SendSmsPayload
+        from .models import SendSmsPayload
         schema = SendSmsPayload()
         schema.dump(schema.load(body))
         
@@ -1380,7 +1380,7 @@ class Order:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ManualAssignDPToShipment import ManualAssignDPToShipment
+        from .models import ManualAssignDPToShipment
         schema = ManualAssignDPToShipment()
         schema.dump(schema.load(body))
         
@@ -1409,7 +1409,7 @@ class Order:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CreateOrderPayload import CreateOrderPayload
+        from .models import CreateOrderPayload
         schema = CreateOrderPayload()
         schema.dump(schema.load(body))
         
@@ -1438,7 +1438,7 @@ class Order:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CreateOrderAPI import CreateOrderAPI
+        from .models import CreateOrderAPI
         schema = CreateOrderAPI()
         schema.dump(schema.load(body))
         
@@ -1491,7 +1491,7 @@ class Order:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CreateChannelConfigData import CreateChannelConfigData
+        from .models import CreateChannelConfigData
         schema = CreateChannelConfigData()
         schema.dump(schema.load(body))
         
@@ -1520,7 +1520,7 @@ class Order:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.UploadConsent import UploadConsent
+        from .models import UploadConsent
         schema = UploadConsent()
         schema.dump(schema.load(body))
         
@@ -1549,7 +1549,7 @@ class Order:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.PlatformOrderUpdate import PlatformOrderUpdate
+        from .models import PlatformOrderUpdate
         schema = PlatformOrderUpdate()
         schema.dump(schema.load(body))
         
@@ -1578,7 +1578,7 @@ class Order:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.OrderStatus import OrderStatus
+        from .models import OrderStatus
         schema = OrderStatus()
         schema.dump(schema.load(body))
         

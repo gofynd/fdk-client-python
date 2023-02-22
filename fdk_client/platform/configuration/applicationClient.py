@@ -55,7 +55,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.MobileAppConfigRequest import MobileAppConfigRequest
+        from .models import MobileAppConfigRequest
         schema = MobileAppConfigRequest()
         schema.dump(schema.load(body))
         
@@ -136,7 +136,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AppFeatureRequest import AppFeatureRequest
+        from .models import AppFeatureRequest
         schema = AppFeatureRequest()
         schema.dump(schema.load(body))
         
@@ -189,7 +189,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ApplicationDetail import ApplicationDetail
+        from .models import ApplicationDetail
         schema = ApplicationDetail()
         schema.dump(schema.load(body))
         
@@ -242,7 +242,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ApplicationInformation import ApplicationInformation
+        from .models import ApplicationInformation
         schema = ApplicationInformation()
         schema.dump(schema.load(body))
         
@@ -295,7 +295,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.TokenResponse import TokenResponse
+        from .models import TokenResponse
         schema = TokenResponse()
         schema.dump(schema.load(body))
         
@@ -416,7 +416,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ApplicationInventory import ApplicationInventory
+        from .models import ApplicationInventory
         schema = ApplicationInventory()
         schema.dump(schema.load(body))
         
@@ -445,7 +445,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AppInventoryPartialUpdate import AppInventoryPartialUpdate
+        from .models import AppInventoryPartialUpdate
         schema = AppInventoryPartialUpdate()
         schema.dump(schema.load(body))
         
@@ -498,7 +498,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.AppSupportedCurrency import AppSupportedCurrency
+        from .models import AppSupportedCurrency
         schema = AppSupportedCurrency()
         schema.dump(schema.load(body))
         
@@ -559,7 +559,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.FilterOrderingStoreRequest import FilterOrderingStoreRequest
+        from .models import FilterOrderingStoreRequest
         schema = FilterOrderingStoreRequest()
         schema.dump(schema.load(body))
         
@@ -588,7 +588,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.OrderingStoreConfig import OrderingStoreConfig
+        from .models import OrderingStoreConfig
         schema = OrderingStoreConfig()
         schema.dump(schema.load(body))
         
@@ -677,7 +677,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.DomainAddRequest import DomainAddRequest
+        from .models import DomainAddRequest
         schema = DomainAddRequest()
         schema.dump(schema.load(body))
         
@@ -734,7 +734,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.UpdateDomainTypeRequest import UpdateDomainTypeRequest
+        from .models import UpdateDomainTypeRequest
         schema = UpdateDomainTypeRequest()
         schema.dump(schema.load(body))
         
@@ -763,7 +763,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.DomainStatusRequest import DomainStatusRequest
+        from .models import DomainStatusRequest
         schema = DomainStatusRequest()
         schema.dump(schema.load(body))
         

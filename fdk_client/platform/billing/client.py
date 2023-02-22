@@ -58,7 +58,7 @@ class Billing:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CreateSubscriptionCharge import CreateSubscriptionCharge
+        from .models import CreateSubscriptionCharge
         schema = CreateSubscriptionCharge()
         schema.dump(schema.load(body))
         
@@ -155,7 +155,7 @@ class Billing:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CreateOneTimeCharge import CreateOneTimeCharge
+        from .models import CreateOneTimeCharge
         schema = CreateOneTimeCharge()
         schema.dump(schema.load(body))
         
@@ -292,7 +292,7 @@ class Billing:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SubscriptionCustomerCreate import SubscriptionCustomerCreate
+        from .models import SubscriptionCustomerCreate
         schema = SubscriptionCustomerCreate()
         schema.dump(schema.load(body))
         
@@ -370,7 +370,7 @@ class Billing:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.SubscriptionActivateReq import SubscriptionActivateReq
+        from .models import SubscriptionActivateReq
         schema = SubscriptionActivateReq()
         schema.dump(schema.load(body))
         
@@ -399,7 +399,7 @@ class Billing:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CancelSubscriptionReq import CancelSubscriptionReq
+        from .models import CancelSubscriptionReq
         schema = CancelSubscriptionReq()
         schema.dump(schema.load(body))
         

@@ -370,7 +370,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.OrderingStoreSelectRequest import OrderingStoreSelectRequest
+        from .models import OrderingStoreSelectRequest
         schema = OrderingStoreSelectRequest()
         schema.dump(schema.load(body))
         

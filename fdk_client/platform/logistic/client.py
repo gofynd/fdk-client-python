@@ -22,7 +22,7 @@ class Logistic:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.EntityRegionView_Request import EntityRegionView_Request
+        from .models import EntityRegionView_Request
         schema = EntityRegionView_Request()
         schema.dump(schema.load(body))
         
@@ -171,7 +171,7 @@ class Logistic:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ZoneUpdateRequest import ZoneUpdateRequest
+        from .models import ZoneUpdateRequest
         schema = ZoneUpdateRequest()
         schema.dump(schema.load(body))
         
@@ -200,7 +200,7 @@ class Logistic:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.ZoneRequest import ZoneRequest
+        from .models import ZoneRequest
         schema = ZoneRequest()
         schema.dump(schema.load(body))
         

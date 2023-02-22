@@ -22,7 +22,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CreateApplicationRequest import CreateApplicationRequest
+        from .models import CreateApplicationRequest
         schema = CreateApplicationRequest()
         schema.dump(schema.load(body))
         
@@ -111,7 +111,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.DomainSuggestionsRequest import DomainSuggestionsRequest
+        from .models import DomainSuggestionsRequest
         schema = DomainSuggestionsRequest()
         schema.dump(schema.load(body))
         
@@ -328,7 +328,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.IntegrationLevel import IntegrationLevel
+        from .models import IntegrationLevel
         schema = IntegrationLevel()
         schema.dump(schema.load(body))
         
@@ -405,7 +405,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.UpdateIntegrationLevelRequest import UpdateIntegrationLevelRequest
+        from .models import UpdateIntegrationLevelRequest
         schema = UpdateIntegrationLevelRequest()
         schema.dump(schema.load(body))
         
@@ -470,7 +470,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.CompanyByBrandsRequest import CompanyByBrandsRequest
+        from .models import CompanyByBrandsRequest
         schema = CompanyByBrandsRequest()
         schema.dump(schema.load(body))
         
@@ -507,7 +507,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.StoreByBrandsRequest import StoreByBrandsRequest
+        from .models import StoreByBrandsRequest
         schema = StoreByBrandsRequest()
         schema.dump(schema.load(body))
         
@@ -600,7 +600,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.OptOutInventory import OptOutInventory
+        from .models import OptOutInventory
         schema = OptOutInventory()
         schema.dump(schema.load(body))
         
