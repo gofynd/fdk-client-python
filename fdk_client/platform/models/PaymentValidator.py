@@ -180,6 +180,20 @@ class PaymentValidator:
         application_id = fields.Str(required=False)
          
     
+    class edcAggregatorsList(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+    
+    class edcDeviceStats(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+    
     class edcDevice(BaseSchema):
         
         terminal_serial_no = fields.Str(required=False)
@@ -205,15 +219,15 @@ class PaymentValidator:
     
     class edcDeviceList(BaseSchema):
         
-        page_number = fields.Int(required=False)
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
         
         is_active = fields.Boolean(required=False)
         
         store_id = fields.Int(required=False)
         
         device_tag = fields.Str(required=False)
-        
-        page_size = fields.Int(required=False)
         
         company_id = fields.Int(required=False)
         
