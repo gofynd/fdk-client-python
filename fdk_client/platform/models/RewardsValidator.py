@@ -110,3 +110,17 @@ class RewardsValidator:
         page_size = fields.Int(required=False)
          
     
+    class getRewardsConfiguration(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+    
+    class setRewardsConfiguration(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+    
