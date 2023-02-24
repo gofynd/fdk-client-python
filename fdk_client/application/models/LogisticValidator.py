@@ -7,6 +7,11 @@ from ..models.BaseSchema import BaseSchema
 
 class LogisticValidator:
     
+    class getPincodeCity(BaseSchema):
+        
+        pincode = fields.Str(required=False)
+         
+    
     class getTatProduct(BaseSchema):
         
         pass 
@@ -14,9 +19,4 @@ class LogisticValidator:
     class getPincodeZones(BaseSchema):
         
         pass 
-    
-    class getPincodeCity(BaseSchema):
-        
-        pincode = fields.Str(required=False)
-         
     

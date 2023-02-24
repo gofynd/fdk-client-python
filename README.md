@@ -100,7 +100,7 @@ async def setAccessToken(platformConfig, cookies):
     }
     url = f"{platformConfig.domain}/service/panel/authentication/v1.0/company/{platformConfig.companyId}/oauth/token"
     url_without_domain = await create_url_without_domain(f"/service/panel/authentication/v1.0/company/{platformConfig.companyId}/oauth/token")
-    headers = get_headers_with_signature(platformConfig.domain, "post", url_without_domain, "", {}, reqData)
+    headers = await get_headers_with_signature(platformConfig.domain, "post", url_without_domain, "", {}, reqData)
     res = await AiohttpHelper().aiohttp_request("POST", url, reqData, headers, cookies=cookies)
     return res["json"]
 
@@ -112,7 +112,7 @@ async def loginUser(platformConfig):
         "g-recaptcha-response": "_skip_"
     }
     url_without_domain = "/service/panel/authentication/v1.0/auth/login/password"
-    headers = get_headers_with_signature(platformConfig.domain, "post", url_without_domain, "", {}, userData)
+    headers = await get_headers_with_signature(platformConfig.domain, "post", url_without_domain, "", {}, userData)
     res = await AiohttpHelper().aiohttp_request("POST", skywarpURL, userData, headers)
     return res
 
