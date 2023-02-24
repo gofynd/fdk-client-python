@@ -276,6 +276,8 @@ class CartValidator:
         b = fields.Boolean(required=False)
         
         buy_now = fields.Boolean(required=False)
+        
+        id = fields.Str(required=False)
          
     
     class updateCart(BaseSchema):

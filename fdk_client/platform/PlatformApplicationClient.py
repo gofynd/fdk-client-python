@@ -9626,7 +9626,7 @@ class Cart:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart-list", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
-    async def updateCartUser(self, id=None):
+    async def updateCartUser(self, id=None, body=""):
         """Update user id for store os customer after creating customer
         :param id :  : type string
         """
@@ -9640,6 +9640,11 @@ class Cart:
         schema = CartValidator.updateCartUser()
         schema.dump(schema.load(payload))
         
+        # Body validation
+        from .models import UpdateUserCartMapping
+        schema = UpdateUserCartMapping()
+        schema.dump(schema.load(body))
+        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/update-user", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"id","in":"query","schema":{"type":"string","description":"cart id"}}],"query":[{"name":"id","in":"query","schema":{"type":"string","description":"cart id"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", id=id)
         query_string = await create_query_string(id=id)
@@ -9652,7 +9657,7 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/update-user", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/update-user", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
     async def getCart(self, id=None, i=None, b=None, assign_card_id=None, buy_now=None):
         """Use this API to get details of all the items added to a cart.
@@ -9698,11 +9703,12 @@ class Cart:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", id=id, i=i, b=b, assign_card_id=assign_card_id, buy_now=buy_now), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
-    async def addItems(self, i=None, b=None, buy_now=None, body=""):
+    async def addItems(self, i=None, b=None, buy_now=None, id=None, body=""):
         """Use this API to add items to the cart.
         :param i :  : type boolean
         :param b :  : type boolean
         :param buy_now :  : type boolean
+        :param id :  : type string
         """
         payload = {}
         
@@ -9715,6 +9721,9 @@ class Cart:
         if buy_now:
             payload["buy_now"] = buy_now
         
+        if id:
+            payload["id"] = id
+        
 
         # Parameter validation
         schema = CartValidator.addItems()
@@ -9726,8 +9735,8 @@ class Cart:
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"query","name":"i","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."}},{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is a boolen value. Select `true` to set/initialize buy now cart"}}],"query":[{"in":"query","name":"i","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."}},{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is a boolen value. Select `true` to set/initialize buy now cart"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", i=i, b=b, buy_now=buy_now)
-        query_string = await create_query_string(i=i, b=b, buy_now=buy_now)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"query","name":"i","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."}},{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is a boolen value. Select `true` to set/initialize buy now cart"}},{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}}],"query":[{"in":"query","name":"i","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."}},{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is a boolen value. Select `true` to set/initialize buy now cart"}},{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", i=i, b=b, buy_now=buy_now, id=id)
+        query_string = await create_query_string(i=i, b=b, buy_now=buy_now, id=id)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -9737,7 +9746,7 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", i=i, b=b, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", i=i, b=b, buy_now=buy_now, id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
     async def updateCart(self, id=None, i=None, b=None, buy_now=None, body=""):
         """<p>Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size. These attributes will be fetched from the following APIs</p> <ul> <li><font color="monochrome">operation</font> Operation for current api call. <b>update_item</b> for update items. <b>remove_item</b> for removing items.</li> <li> <font color="monochrome">item_id</font>  "/platform/content/v1/products/"</li> <li> <font color="monochrome">item_size</font>   "/platform/content/v1/products/:slug/sizes/"</li> <li> <font color="monochrome">quantity</font>  item quantity (must be greater than or equal to 1)</li> <li> <font color="monochrome">article_id</font>   "/content​/v1​/products​/:identifier​/sizes​/price​/"</li> <li> <font color="monochrome">item_index</font>  item position in the cart (must be greater than or equal to 0)</li> </ul>
@@ -10296,8 +10305,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CartMetaRequest
-        schema = CartMetaRequest()
+        from .models import PlatformCartMetaRequest
+        schema = PlatformCartMetaRequest()
         schema.dump(schema.load(body))
         
 
