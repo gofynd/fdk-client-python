@@ -192,6 +192,8 @@ class CartValidator:
         network = fields.Str(required=False)
         
         type = fields.Str(required=False)
+        
+        card_id = fields.Str(required=False)
          
     
     class getShipments(BaseSchema):

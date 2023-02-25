@@ -106,7 +106,7 @@ class PaymentValidator:
     
     class cardDetails(BaseSchema):
         
-        card_bin = fields.Str(required=False)
+        card_info = fields.Str(required=False)
         
         aggregator = fields.Str(required=False)
          
