@@ -180,7 +180,7 @@ class PaymentValidator:
         application_id = fields.Str(required=False)
          
     
-    class edcAggregatorsList(BaseSchema):
+    class edcAggregatorsAndModelList(BaseSchema):
         
         company_id = fields.Int(required=False)
         

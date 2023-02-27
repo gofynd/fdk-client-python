@@ -295,6 +295,15 @@ class CartValidator:
         buy_now = fields.Boolean(required=False)
          
     
+    class deleteCart(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Int(required=False)
+         
+    
     class getItemCount(BaseSchema):
         
         company_id = fields.Str(required=False)
@@ -486,7 +495,7 @@ class CartValidator:
         
         application_id = fields.Str(required=False)
         
-        buy_now = fields.Boolean(required=False)
+        id = fields.Str(required=False)
          
     
     class getAvailableDeliveryModes(BaseSchema):

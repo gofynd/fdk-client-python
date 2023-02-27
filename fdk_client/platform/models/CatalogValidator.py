@@ -130,6 +130,8 @@ class CatalogValidator:
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
+        
+        brand_id = fields.Int(required=False)
          
     
     class createSizeGuide(BaseSchema):
@@ -506,6 +508,8 @@ class CatalogValidator:
         search = fields.Str(required=False)
         
         is_active = fields.Boolean(required=False)
+        
+        item_type = fields.Str(required=False)
          
     
     class createDepartments(BaseSchema):
@@ -570,6 +574,14 @@ class CatalogValidator:
     class listProductTemplateExportDetails(BaseSchema):
         
         company_id = fields.Str(required=False)
+        
+        status = fields.Str(required=False)
+        
+        from_date = fields.Str(required=False)
+        
+        to_date = fields.Str(required=False)
+        
+        q = fields.Str(required=False)
          
     
     class listTemplateBrandTypeValues(BaseSchema):
@@ -577,6 +589,10 @@ class CatalogValidator:
         company_id = fields.Str(required=False)
         
         filter = fields.Str(required=False)
+        
+        template_tag = fields.Str(required=False)
+        
+        item_type = fields.Str(required=False)
          
     
     class listCategories(BaseSchema):
@@ -891,6 +907,14 @@ class CatalogValidator:
     class getInventoryExport(BaseSchema):
         
         company_id = fields.Int(required=False)
+        
+        status = fields.Str(required=False)
+        
+        from_date = fields.Str(required=False)
+        
+        to_date = fields.Str(required=False)
+        
+        q = fields.Str(required=False)
          
     
     class createInventoryExportJob(BaseSchema):

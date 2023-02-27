@@ -5487,14 +5487,14 @@ class Payment:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/user-cod", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
-    async def edcAggregatorsList(self, ):
+    async def edcAggregatorsAndModelList(self, ):
         """Use this API to get info of devices linked to a particular app.
         """
         payload = {}
         
 
         # Parameter validation
-        schema = PaymentValidator.edcAggregatorsList()
+        schema = PaymentValidator.edcAggregatorsAndModelList()
         schema.dump(schema.load(payload))
         
 
@@ -9793,6 +9793,34 @@ class Cart:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", id=id, i=i, b=b, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
+    async def deleteCart(self, id=None):
+        """Use this API to delete the cart.
+        :param id : The unique identifier of the cart. : type integer
+        """
+        payload = {}
+        
+        if id:
+            payload["id"] = id
+        
+
+        # Parameter validation
+        schema = CartValidator.deleteCart()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart_archive", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"id","in":"query","description":"The unique identifier of the cart.","schema":{"type":"integer"}}],"query":[{"name":"id","in":"query","description":"The unique identifier of the cart.","schema":{"type":"integer"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", id=id)
+        query_string = await create_query_string(id=id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart_archive", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+    
     async def getItemCount(self, id=None, buy_now=None):
         """Use this API to get the total number of items present in cart.
         :param id : The unique identifier of the cart. : type string
@@ -10323,14 +10351,14 @@ class Cart:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/meta", id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
-    async def checkoutCart(self, buy_now=None, body=""):
-        """Use this API to checkout all items in the cart for payment and order generation. For COD, order will be directly generated, whereas for other checkout modes, user will be redirected to a payment gateway.
-        :param buy_now : This indicates the type of cart to checkout : type boolean
+    async def checkoutCart(self, id=None, body=""):
+        """Use this API to checkout all items in the cart for payment and order generation. For COD, order will be generated directly, whereas for other checkout modes, user will be redirected to a payment gateway.
+        :param id :  : type string
         """
         payload = {}
         
-        if buy_now:
-            payload["buy_now"] = buy_now
+        if id:
+            payload["id"] = id
         
 
         # Parameter validation
@@ -10343,8 +10371,8 @@ class Cart:
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/checkout", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"query","name":"buy_now","description":"This indicates the type of cart to checkout","schema":{"type":"boolean"}}],"query":[{"in":"query","name":"buy_now","description":"This indicates the type of cart to checkout","schema":{"type":"boolean"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", buy_now=buy_now)
-        query_string = await create_query_string(buy_now=buy_now)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/checkout", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"query","name":"id","required":false,"schema":{"type":"string","description":"The unique identifier of the cart"}}],"query":[{"in":"query","name":"id","required":false,"schema":{"type":"string","description":"The unique identifier of the cart"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", id=id)
+        query_string = await create_query_string(id=id)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -10354,7 +10382,7 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/checkout", buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/checkout", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
     async def getAvailableDeliveryModes(self, area_code=None, id=None):
         """Use this API to get the delivery modes (home-delivery/store-pickup) along with a list of pickup stores available for a given cart at a given PIN Code. User can then view the address of a pickup store with the help of store-address API.

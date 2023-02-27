@@ -2930,13 +2930,14 @@ class Catalog:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
-    async def getSizeGuides(self, active=None, q=None, tag=None, page_no=None, page_size=None):
+    async def getSizeGuides(self, active=None, q=None, tag=None, page_no=None, page_size=None, brand_id=None):
         """This API allows to view all the size guides associated to the seller.
         :param active : filter size guide on basis of active, in-active : type boolean
         :param q : Query that is to be searched. : type string
         :param tag : to filter size guide on basis of tag. : type string
         :param page_no : The page number to navigate through the given set of results : type integer
         :param page_size : Number of items to retrieve in each page. Default is 10. : type integer
+        :param brand_id : to filter size guide on basis of brand_id. : type integer
         """
         payload = {}
         
@@ -2955,14 +2956,17 @@ class Catalog:
         if page_size:
             payload["page_size"] = page_size
         
+        if brand_id:
+            payload["brand_id"] = brand_id
+        
 
         # Parameter validation
         schema = CatalogValidator.getSizeGuides()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide", """{"required":[{"in":"path","name":"company_id","description":"Id of the company for which the size guides are to be fetched.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"active","description":"filter size guide on basis of active, in-active","schema":{"type":"boolean"},"required":false},{"in":"query","name":"q","description":"Query that is to be searched.","schema":{"type":"string"},"required":false},{"in":"query","name":"tag","description":"to filter size guide on basis of tag.","schema":{"type":"string"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer","default":10},"required":false}],"query":[{"in":"query","name":"active","description":"filter size guide on basis of active, in-active","schema":{"type":"boolean"},"required":false},{"in":"query","name":"q","description":"Query that is to be searched.","schema":{"type":"string"},"required":false},{"in":"query","name":"tag","description":"to filter size guide on basis of tag.","schema":{"type":"string"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer","default":10},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company for which the size guides are to be fetched.","schema":{"type":"string"},"required":true}]}""", active=active, q=q, tag=tag, page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(active=active, q=q, tag=tag, page_no=page_no, page_size=page_size)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide", """{"required":[{"in":"path","name":"company_id","description":"Id of the company for which the size guides are to be fetched.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"active","description":"filter size guide on basis of active, in-active","schema":{"type":"boolean"},"required":false},{"in":"query","name":"q","description":"Query that is to be searched.","schema":{"type":"string"},"required":false},{"in":"query","name":"tag","description":"to filter size guide on basis of tag.","schema":{"type":"string"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer","default":10},"required":false},{"in":"query","name":"brand_id","description":"to filter size guide on basis of brand_id.","schema":{"type":"integer","default":10},"required":false}],"query":[{"in":"query","name":"active","description":"filter size guide on basis of active, in-active","schema":{"type":"boolean"},"required":false},{"in":"query","name":"q","description":"Query that is to be searched.","schema":{"type":"string"},"required":false},{"in":"query","name":"tag","description":"to filter size guide on basis of tag.","schema":{"type":"string"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer","default":10},"required":false},{"in":"query","name":"brand_id","description":"to filter size guide on basis of brand_id.","schema":{"type":"integer","default":10},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company for which the size guides are to be fetched.","schema":{"type":"string"},"required":true}]}""", active=active, q=q, tag=tag, page_no=page_no, page_size=page_size, brand_id=brand_id)
+        query_string = await create_query_string(active=active, q=q, tag=tag, page_no=page_no, page_size=page_size, brand_id=brand_id)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -2972,7 +2976,7 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide", active=active, q=q, tag=tag, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide", active=active, q=q, tag=tag, page_no=page_no, page_size=page_size, brand_id=brand_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def createSizeGuide(self, body=""):
         """This API allows to create a size guide associated to a brand.
@@ -3337,13 +3341,14 @@ class Catalog:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/categories/", departments=departments, item_type=item_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
-    async def listDepartmentsData(self, page_no=None, page_size=None, name=None, search=None, is_active=None):
+    async def listDepartmentsData(self, page_no=None, page_size=None, name=None, search=None, is_active=None, item_type=None):
         """Allows you to list all departments, also can search using name and filter active and incative departments, and item type.
         :param page_no : The page number to navigate through the given set of results : type integer
         :param page_size : Number of items to retrieve in each page. Default is 10. : type integer
         :param name : Can search departments by passing name. : type string
         :param search : Can search departments by passing name of the department in search parameter. : type string
         :param is_active : Can query for departments based on whether they are active or inactive. : type boolean
+        :param item_type : Can query for departments based on their item_type. : type string
         """
         payload = {}
         
@@ -3362,14 +3367,17 @@ class Catalog:
         if is_active:
             payload["is_active"] = is_active
         
+        if item_type:
+            payload["item_type"] = item_type
+        
 
         # Parameter validation
         schema = CatalogValidator.listDepartmentsData()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer"},"required":false},{"in":"query","name":"name","description":"Can search departments by passing name.","schema":{"type":"string"},"required":false},{"in":"query","name":"search","description":"Can search departments by passing name of the department in search parameter.","schema":{"type":"string"},"required":false},{"in":"query","name":"is_active","description":"Can query for departments based on whether they are active or inactive.","schema":{"type":"boolean"},"required":false}],"query":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer"},"required":false},{"in":"query","name":"name","description":"Can search departments by passing name.","schema":{"type":"string"},"required":false},{"in":"query","name":"search","description":"Can search departments by passing name of the department in search parameter.","schema":{"type":"string"},"required":false},{"in":"query","name":"is_active","description":"Can query for departments based on whether they are active or inactive.","schema":{"type":"boolean"},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}]}""", page_no=page_no, page_size=page_size, name=name, search=search, is_active=is_active)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, name=name, search=search, is_active=is_active)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer"},"required":false},{"in":"query","name":"name","description":"Can search departments by passing name.","schema":{"type":"string"},"required":false},{"in":"query","name":"search","description":"Can search departments by passing name of the department in search parameter.","schema":{"type":"string"},"required":false},{"in":"query","name":"is_active","description":"Can query for departments based on whether they are active or inactive.","schema":{"type":"boolean"},"required":false},{"in":"query","name":"item_type","description":"Can query for departments based on their item_type.","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer"},"required":false},{"in":"query","name":"name","description":"Can search departments by passing name.","schema":{"type":"string"},"required":false},{"in":"query","name":"search","description":"Can search departments by passing name of the department in search parameter.","schema":{"type":"string"},"required":false},{"in":"query","name":"is_active","description":"Can query for departments based on whether they are active or inactive.","schema":{"type":"boolean"},"required":false},{"in":"query","name":"item_type","description":"Can query for departments based on their item_type.","schema":{"type":"string"},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}]}""", page_no=page_no, page_size=page_size, name=name, search=search, is_active=is_active, item_type=item_type)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, name=name, search=search, is_active=is_active, item_type=item_type)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -3379,7 +3387,7 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/", page_no=page_no, page_size=page_size, name=name, search=search, is_active=is_active), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/", page_no=page_no, page_size=page_size, name=name, search=search, is_active=is_active, item_type=item_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def createDepartments(self, body=""):
         """Create departments using the API.
@@ -3635,10 +3643,26 @@ class Catalog:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/hsn/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
-    async def listProductTemplateExportDetails(self, ):
+    async def listProductTemplateExportDetails(self, status=None, from_date=None, to_date=None, q=None):
         """Can view details including trigger data, task id , etc.
+        :param status : This is a parameter used to find all the jobs with the specified status. : type string
+        :param from_date : This is a parameter used to find the job from the date specified to the current date. : type string
+        :param to_date : This is a parameter used to find the job from the from_date specified to the to_date. : type string
+        :param q : It is a query parameter to search the export job with the task ID. : type string
         """
         payload = {}
+        
+        if status:
+            payload["status"] = status
+        
+        if from_date:
+            payload["from_date"] = from_date
+        
+        if to_date:
+            payload["to_date"] = to_date
+        
+        if q:
+            payload["q"] = q
         
 
         # Parameter validation
@@ -3646,8 +3670,8 @@ class Catalog:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/downloads/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}]}""", )
-        query_string = await create_query_string()
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/downloads/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"status","description":"This is a parameter used to find all the jobs with the specified status.","schema":{"type":"string"},"required":false},{"in":"query","name":"from_date","description":"This is a parameter used to find the job from the date specified to the current date.","schema":{"type":"string","format":"date"},"required":false},{"in":"query","name":"to_date","description":"This is a parameter used to find the job from the from_date specified to the to_date.","schema":{"type":"string","format":"date"},"required":false},{"in":"query","name":"q","description":"It is a query parameter to search the export job with the task ID.","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"status","description":"This is a parameter used to find all the jobs with the specified status.","schema":{"type":"string"},"required":false},{"in":"query","name":"from_date","description":"This is a parameter used to find the job from the date specified to the current date.","schema":{"type":"string","format":"date"},"required":false},{"in":"query","name":"to_date","description":"This is a parameter used to find the job from the from_date specified to the to_date.","schema":{"type":"string","format":"date"},"required":false},{"in":"query","name":"q","description":"It is a query parameter to search the export job with the task ID.","schema":{"type":"string"},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}]}""", status=status, from_date=from_date, to_date=to_date, q=q)
+        query_string = await create_query_string(status=status, from_date=from_date, to_date=to_date, q=q)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -3657,16 +3681,24 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/downloads/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/downloads/", status=status, from_date=from_date, to_date=to_date, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
-    async def listTemplateBrandTypeValues(self, filter=None):
+    async def listTemplateBrandTypeValues(self, filter=None, template_tag=None, item_type=None):
         """The filter type query parameter defines what type of data to return. The type of query returns the valid values for the same
         :param filter : A `filter` is the unique identifier of the type of value required. : type string
+        :param template_tag : A `template_tag` is the identifier of the type of template required. : type string
+        :param item_type : A `item_type` is the identifier of the type of template required. : type string
         """
         payload = {}
         
         if filter:
             payload["filter"] = filter
+        
+        if template_tag:
+            payload["template_tag"] = template_tag
+        
+        if item_type:
+            payload["item_type"] = item_type
         
 
         # Parameter validation
@@ -3674,8 +3706,8 @@ class Catalog:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/downloads/configuration/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"query","name":"filter","description":"A `filter` is the unique identifier of the type of value required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[{"in":"query","name":"filter","description":"A `filter` is the unique identifier of the type of value required.","schema":{"type":"string"},"required":true}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}]}""", filter=filter)
-        query_string = await create_query_string(filter=filter)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/downloads/configuration/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"query","name":"filter","description":"A `filter` is the unique identifier of the type of value required.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"template_tag","description":"A `template_tag` is the identifier of the type of template required.","schema":{"type":"string"},"required":false},{"in":"query","name":"item_type","description":"A `item_type` is the identifier of the type of template required.","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"filter","description":"A `filter` is the unique identifier of the type of value required.","schema":{"type":"string"},"required":true},{"in":"query","name":"template_tag","description":"A `template_tag` is the identifier of the type of template required.","schema":{"type":"string"},"required":false},{"in":"query","name":"item_type","description":"A `item_type` is the identifier of the type of template required.","schema":{"type":"string"},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}]}""", filter=filter, template_tag=template_tag, item_type=item_type)
+        query_string = await create_query_string(filter=filter, template_tag=template_tag, item_type=item_type)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -3685,7 +3717,7 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/downloads/configuration/", filter=filter), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/downloads/configuration/", filter=filter, template_tag=template_tag, item_type=item_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def listCategories(self, level=None, departments=None, q=None, page_no=None, page_size=None):
         """This API gets meta associated to product categories.
@@ -4775,10 +4807,26 @@ class Catalog:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/{batch_id}/", batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
-    async def getInventoryExport(self, ):
+    async def getInventoryExport(self, status=None, from_date=None, to_date=None, q=None):
         """This API helps to get Inventory export history.
+        :param status : Status of the export job. : type string
+        :param from_date : Inventory export history filtered according to from_date. : type string
+        :param to_date : Inventory export history filtered according to from_date. : type string
+        :param q : Inventory export history filtered according to task ID. : type string
         """
         payload = {}
+        
+        if status:
+            payload["status"] = status
+        
+        if from_date:
+            payload["from_date"] = from_date
+        
+        if to_date:
+            payload["to_date"] = to_date
+        
+        if q:
+            payload["q"] = q
         
 
         # Parameter validation
@@ -4786,8 +4834,8 @@ class Catalog:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/download/", """{"required":[{"in":"path","name":"company_id","description":"Company Id in which assets to be uploaded.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id in which assets to be uploaded.","schema":{"type":"integer"},"required":true}]}""", )
-        query_string = await create_query_string()
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/download/", """{"required":[{"in":"path","name":"company_id","description":"Company Id in which assets to be uploaded.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"status","description":"Status of the export job.","schema":{"type":"string"},"required":false},{"in":"query","name":"from_date","description":"Inventory export history filtered according to from_date.","schema":{"type":"string"},"required":false},{"in":"query","name":"to_date","description":"Inventory export history filtered according to from_date.","schema":{"type":"string"},"required":false},{"in":"query","name":"q","description":"Inventory export history filtered according to task ID.","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"status","description":"Status of the export job.","schema":{"type":"string"},"required":false},{"in":"query","name":"from_date","description":"Inventory export history filtered according to from_date.","schema":{"type":"string"},"required":false},{"in":"query","name":"to_date","description":"Inventory export history filtered according to from_date.","schema":{"type":"string"},"required":false},{"in":"query","name":"q","description":"Inventory export history filtered according to task ID.","schema":{"type":"string"},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id in which assets to be uploaded.","schema":{"type":"integer"},"required":true}]}""", status=status, from_date=from_date, to_date=to_date, q=q)
+        query_string = await create_query_string(status=status, from_date=from_date, to_date=to_date, q=q)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -4797,7 +4845,7 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/download/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/download/", status=status, from_date=from_date, to_date=to_date, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def createInventoryExportJob(self, body=""):
         """This API helps to create a Inventory export job.
