@@ -157,62 +157,9 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
-        
-        
-        
-        
         
     
     
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
-        
         
         
         
@@ -236,6 +183,19 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
         
         
     
@@ -251,6 +211,43 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
         
         
         
@@ -628,6 +625,8 @@ class CartValidator:
         b = fields.Boolean(required=False)
         
         buy_now = fields.Boolean(required=False)
+        
+        id = fields.Str(required=False)
          
         
     
@@ -645,6 +644,17 @@ class CartValidator:
         b = fields.Boolean(required=False)
         
         buy_now = fields.Boolean(required=False)
+         
+        
+    
+    class deleteCart(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Int(required=False)
          
         
     
@@ -811,36 +821,17 @@ class CartValidator:
         
         application_id = fields.Str(required=False)
         
+        pick_at_store_uid = fields.Int(required=False)
+        
+        ordering_store_id = fields.Int(required=False)
+        
         p = fields.Boolean(required=False)
         
         id = fields.Str(required=False)
-        
-        buy_now = fields.Boolean(required=False)
         
         address_id = fields.Str(required=False)
         
         area_code = fields.Str(required=False)
-        
-        ordering_store_id = fields.Int(required=False)
-        
-        order_type = fields.Str(required=False)
-         
-        
-    
-    class getShipmentDelivery(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        i = fields.Boolean(required=False)
-        
-        p = fields.Boolean(required=False)
-        
-        id = fields.Str(required=False)
-        
-        address_id = fields.Str(required=False)
         
         order_type = fields.Str(required=False)
          
