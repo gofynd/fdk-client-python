@@ -16,7 +16,7 @@ class LogisticValidator:
         
         pass 
     
-    class upsertZoneControllerView(BaseSchema):
+    class getPincodeZones(BaseSchema):
         
         pass 
     

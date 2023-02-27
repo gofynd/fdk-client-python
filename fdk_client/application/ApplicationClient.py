@@ -8042,7 +8042,7 @@ class Logistic:
         self._relativeUrls = {
             "getPincodeCity": "/service/application/logistics/v1.0/pincode/{pincode}",
             "getTatProduct": "/service/application/logistics/v1.0/",
-            "upsertZoneControllerView": "/service/application/logistics/v1.0/pincode/zones"
+            "getPincodeZones": "/service/application/logistics/v1.0/pincode/zones"
             
         }
         self._urls = {
@@ -8111,13 +8111,13 @@ class Logistic:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getTatProduct"]).netloc, "post", await create_url_without_domain("/service/application/logistics/v1.0/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
-    async def upsertZoneControllerView(self, body=""):
+    async def getPincodeZones(self, body=""):
         """This API returns zone from the Pincode View.
         """
         payload = {}
         
         # Parameter validation
-        schema = LogisticValidator.upsertZoneControllerView()
+        schema = LogisticValidator.getPincodeZones()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -8126,7 +8126,7 @@ class Logistic:
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["upsertZoneControllerView"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        url_with_params = await create_url_with_params(api_url=self._urls["getPincodeZones"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
         query_string = await create_query_string()
         headers = {
             "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
@@ -8139,7 +8139,7 @@ class Logistic:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["upsertZoneControllerView"]).netloc, "post", await create_url_without_domain("/service/application/logistics/v1.0/pincode/zones", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPincodeZones"]).netloc, "post", await create_url_without_domain("/service/application/logistics/v1.0/pincode/zones", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
 
 
