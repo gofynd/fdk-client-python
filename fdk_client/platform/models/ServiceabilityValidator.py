@@ -39,13 +39,6 @@ class ServiceabilityValidator:
         company_id = fields.Int(required=False)
          
     
-    class getZoneDataView(BaseSchema):
-        
-        company_id = fields.Int(required=False)
-        
-        zone_id = fields.Str(required=False)
-         
-    
     class updateZoneControllerView(BaseSchema):
         
         zone_id = fields.Str(required=False)
@@ -53,12 +46,34 @@ class ServiceabilityValidator:
         company_id = fields.Int(required=False)
          
     
-    class insertZoneControllerView(BaseSchema):
+    class getZoneDataView(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        zone_id = fields.Str(required=False)
+         
+    
+    class createZone(BaseSchema):
         
         company_id = fields.Int(required=False)
          
     
-    class upsertZoneControllerView(BaseSchema):
+    class getZonesFromApplicationIdView(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        zone_id = fields.List(fields.Str(required=False), required=False)
+        
+        q = fields.Str(required=False)
+         
+    
+    class getZoneFromPincodeView(BaseSchema):
         
         company_id = fields.Int(required=False)
         
