@@ -196,11 +196,11 @@ class PaymentValidator:
     
     class edcDevice(BaseSchema):
         
-        terminal_serial_no = fields.Str(required=False)
-        
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
+        
+        terminal_unique_identifier = fields.Str(required=False)
          
     
     class edcDevice(BaseSchema):
@@ -208,6 +208,8 @@ class PaymentValidator:
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
+        
+        terminal_unique_identifier = fields.Str(required=False)
          
     
     class edcDevice(BaseSchema):
@@ -215,6 +217,8 @@ class PaymentValidator:
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
+        
+        terminal_unique_identifier = fields.Str(required=False)
          
     
     class edcDeviceList(BaseSchema):
