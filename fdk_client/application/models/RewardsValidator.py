@@ -16,22 +16,22 @@ class RewardsValidator:
         
         pass 
     
-    class getPointsHistory(BaseSchema):
+    class getUserPointsHistory(BaseSchema):
         
         page_id = fields.Str(required=False)
         
         page_size = fields.Int(required=False)
          
     
-    class getPoints(BaseSchema):
+    class getUserPoints(BaseSchema):
         
         pass 
     
-    class referral(BaseSchema):
+    class getUserReferralDetails(BaseSchema):
         
         pass 
     
-    class orderDiscount(BaseSchema):
+    class getOrderDiscount(BaseSchema):
         
         pass 
     
