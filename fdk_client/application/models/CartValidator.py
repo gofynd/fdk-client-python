@@ -53,7 +53,7 @@ class CartValidator:
     
     class deleteCart(BaseSchema):
         
-        id = fields.Int(required=False)
+        id = fields.Str(required=False)
          
     
     class getItemCount(BaseSchema):

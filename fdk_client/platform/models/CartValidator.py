@@ -301,7 +301,7 @@ class CartValidator:
         
         application_id = fields.Str(required=False)
         
-        id = fields.Int(required=False)
+        id = fields.Str(required=False)
          
     
     class getItemCount(BaseSchema):
