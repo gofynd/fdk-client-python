@@ -136,6 +136,14 @@ class OrderValidator:
         
         search_type = fields.Str(required=False)
         
+        bag_status = fields.Str(required=False)
+        
+        time_to_dispatch = fields.Str(required=False)
+        
+        payment_methods = fields.Str(required=False)
+        
+        tags = fields.Str(required=False)
+        
         search_value = fields.Str(required=False)
         
         from_date = fields.Str(required=False)
