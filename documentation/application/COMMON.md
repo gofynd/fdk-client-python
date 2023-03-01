@@ -411,7 +411,7 @@ Success
 
  
  
- #### [LocationCountry](#LocationCountry)
+ #### [LocationDetails](#LocationDetails)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
@@ -428,6 +428,10 @@ Success
  | id | String? |  yes  |  |
  | defaultCurrency | [LocationDefaultCurrency](#LocationDefaultCurrency)? |  yes  |  |
  | defaultLanguage | [LocationDefaultLanguage](#LocationDefaultLanguage)? |  yes  |  |
+ | stateCode | String? |  yes  |  |
+ | countryCode | String? |  yes  |  |
+ | latitude | String? |  yes  |  |
+ | longitude | String? |  yes  |  |
 
 ---
 
@@ -438,7 +442,7 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | items | ArrayList<HashMap<String,Any>>? |  yes  |  |
+ | items | ArrayList<[LocationDetails](#LocationDetails)>? |  yes  |  |
 
 ---
 

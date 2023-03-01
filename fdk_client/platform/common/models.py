@@ -70,7 +70,7 @@ class LocationDefaultCurrency(BaseSchema):
     pass
 
 
-class LocationCountry(BaseSchema):
+class LocationDetails(BaseSchema):
     pass
 
 
@@ -301,7 +301,7 @@ class LocationDefaultCurrency(BaseSchema):
     
 
 
-class LocationCountry(BaseSchema):
+class LocationDetails(BaseSchema):
     # Common swagger.json
 
     
@@ -331,13 +331,21 @@ class LocationCountry(BaseSchema):
     
     default_language = fields.Nested(LocationDefaultLanguage, required=False)
     
+    state_code = fields.Str(required=False)
+    
+    country_code = fields.Str(required=False)
+    
+    latitude = fields.Str(required=False)
+    
+    longitude = fields.Str(required=False)
+    
 
 
 class Locations(BaseSchema):
     # Common swagger.json
 
     
-    items = fields.List(fields.Dict(required=False), required=False)
+    items = fields.List(fields.Nested(LocationDetails, required=False), required=False)
     
 
 
