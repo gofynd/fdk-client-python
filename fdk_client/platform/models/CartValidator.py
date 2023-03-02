@@ -230,6 +230,8 @@ class CartValidator:
         token = fields.Str(required=False)
         
         action = fields.Str(required=False)
+        
+        cart_id = fields.Str(required=False)
          
     
     class getCartList(BaseSchema):

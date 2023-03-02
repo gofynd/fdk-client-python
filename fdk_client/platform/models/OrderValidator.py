@@ -458,6 +458,11 @@ class OrderValidator:
         company_id = fields.Int(required=False)
          
     
+    class postShipmentHistory(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    
     class getShipmentHistory(BaseSchema):
         
         company_id = fields.Int(required=False)
@@ -465,11 +470,6 @@ class OrderValidator:
         shipment_id = fields.Int(required=False)
         
         bag_id = fields.Int(required=False)
-         
-    
-    class postShipmentHistory(BaseSchema):
-        
-        company_id = fields.Int(required=False)
          
     
     class sendSmsNinja(BaseSchema):
@@ -492,12 +492,12 @@ class OrderValidator:
         company_id = fields.Int(required=False)
          
     
-    class getChannelConfig(BaseSchema):
+    class createChannelConfig(BaseSchema):
         
         company_id = fields.Int(required=False)
          
     
-    class createChannelConfig(BaseSchema):
+    class getChannelConfig(BaseSchema):
         
         company_id = fields.Int(required=False)
          
