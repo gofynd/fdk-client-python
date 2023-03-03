@@ -146,6 +146,18 @@ class NotFound(BaseSchema):
     pass
 
 
+class CommunicationConfig(BaseSchema):
+    pass
+
+
+class CommsConfig(BaseSchema):
+    pass
+
+
+class PanCardConfig(BaseSchema):
+    pass
+
+
 class CreateApplicationRequest(BaseSchema):
     pass
 
@@ -769,6 +781,8 @@ class ApplicationInventory(BaseSchema):
     
     comms_enabled = fields.Boolean(required=False)
     
+    communication = fields.Nested(CommunicationConfig, required=False)
+    
     platforms = fields.List(fields.Str(required=False), required=False)
     
     _id = fields.Str(required=False)
@@ -930,6 +944,8 @@ class AppCartConfig(BaseSchema):
     revenue_engine_coupon = fields.Boolean(required=False)
     
     empty_cart = fields.Boolean(required=False)
+    
+    pan_card = fields.Nested(PanCardConfig, required=False)
     
 
 
@@ -1101,6 +1117,8 @@ class AppInventoryPartialUpdate(BaseSchema):
     
     comms_enabled = fields.Boolean(required=False)
     
+    communication = fields.Nested(CommunicationConfig, required=False)
+    
 
 
 class BrandCompanyInfo(BaseSchema):
@@ -1210,6 +1228,36 @@ class NotFound(BaseSchema):
 
     
     message = fields.Str(required=False)
+    
+
+
+class CommunicationConfig(BaseSchema):
+    # Configuration swagger.json
+
+    
+    email = fields.Nested(CommsConfig, required=False)
+    
+    sms = fields.Nested(CommsConfig, required=False)
+    
+    voice = fields.Nested(CommsConfig, required=False)
+    
+
+
+class CommsConfig(BaseSchema):
+    # Configuration swagger.json
+
+    
+    enabled = fields.Boolean(required=False)
+    
+
+
+class PanCardConfig(BaseSchema):
+    # Configuration swagger.json
+
+    
+    enabled = fields.Boolean(required=False)
+    
+    threshold_amount = fields.Float(required=False)
     
 
 

@@ -132,6 +132,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -571,6 +572,8 @@ class CartValidator:
         token = fields.Str(required=False)
         
         action = fields.Str(required=False)
+        
+        cart_id = fields.Str(required=False)
          
         
     
@@ -654,7 +657,7 @@ class CartValidator:
         
         application_id = fields.Str(required=False)
         
-        id = fields.Int(required=False)
+        id = fields.Str(required=False)
          
         
     
@@ -876,7 +879,7 @@ class CartValidator:
         
         application_id = fields.Str(required=False)
         
-        buy_now = fields.Boolean(required=False)
+        id = fields.Str(required=False)
          
         
     
