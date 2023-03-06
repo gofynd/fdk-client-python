@@ -1335,7 +1335,7 @@ Get a list of staff.
 
 ```python
 try:
-    result = await client.configuration.getAppStaffList(pageNo=pageNo, pageSize=pageSize, orderIncent=orderIncent, orderingStore=orderingStore, user=user)
+    result = await client.configuration.getAppStaffList(pageNo=pageNo, pageSize=pageSize, orderIncent=orderIncent, orderingStore=orderingStore, user=user, userName=userName)
     # use result
 except Exception as e:
     print(e)
@@ -1351,7 +1351,8 @@ except Exception as e:
 | pageSize | Int? | no |  |   
 | orderIncent | Boolean? | no | This is a boolean value. Select `true` to retrieve the staff members eligible for getting incentives on orders. |   
 | orderingStore | Int? | no | ID of the ordering store. Helps in retrieving staff members working at a particular ordering store. |   
-| user | String? | no | Mongo ID of the staff. Helps in retrieving the details of a particular staff member. |  
+| user | String? | no | Mongo ID of the staff. Helps in retrieving the details of a particular staff member. |   
+| userName | String? | no | user name of the member |  
 
 
 

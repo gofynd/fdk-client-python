@@ -16,6 +16,7 @@ from ..ApplicationModel import BaseSchema
         
         
         
+        
     
     
         
@@ -156,6 +157,8 @@ class CartValidator:
         b = fields.Boolean(required=False)
         
         assign_card_id = fields.Int(required=False)
+        
+        area_code = fields.Str(required=False)
         
         buy_now = fields.Boolean(required=False)
          

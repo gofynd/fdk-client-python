@@ -36,7 +36,7 @@ class LogisticValidator:
         pass 
         
     
-    class reassignStore(BaseSchema):
+    class getOptimalLocations(BaseSchema):
         
         pass 
         
