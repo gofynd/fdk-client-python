@@ -5006,6 +5006,7 @@ Success
  | bulkCoupons | Boolean? |  yes  |  |
  | revenueEngineCoupon | Boolean? |  yes  |  |
  | emptyCart | Boolean? |  yes  | Enable/disable to allow adding cart items added before login to user's cart once user is logged in |
+ | panCard | [PanCardConfig](#PanCardConfig)? |  yes  |  |
 
 ---
 
@@ -5270,6 +5271,18 @@ Success
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | brands | [CompanyBrandInfo](#CompanyBrandInfo)? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [PanCardConfig](#PanCardConfig)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | enabled | Boolean? |  yes  | If pan card accepting is enabled on cart |
+ | thresholdAmount | Double? |  yes  | On which amount pan card number is expected from customer for order |
 
 ---
 
