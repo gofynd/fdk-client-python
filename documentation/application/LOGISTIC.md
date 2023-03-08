@@ -103,14 +103,7 @@ Get pincode data
             "display_name": "Thane",
             "uid": "city:INDIA|MAHARASHTRA|MUMBAI"
           }
-        ],
-        "lat_long": {
-          "type": "Point",
-          "coordinates": [
-            3.8858955,
-            7.2272335
-          ]
-        }
+        ]
       }
     ],
     "request_uuid": "fce9f431215e71c9ee0e86e792ae1dce4",
@@ -449,33 +442,9 @@ Response status_code
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | type | String? |  yes  |  |
  | value | String? |  yes  |  |
- | message | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [PincodeLatLongData](#PincodeLatLongData)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
  | type | String? |  yes  |  |
- | coordinates | ArrayList<String>? |  yes  |  |
-
----
-
-
- 
- 
- #### [PincodeMetaResponse](#PincodeMetaResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | internalZoneId | Int? |  yes  |  |
- | zone | String? |  yes  |  |
+ | message | String? |  yes  |  |
 
 ---
 
@@ -486,10 +455,10 @@ Response status_code
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | String? |  yes  |  |
+ | name | String? |  yes  |  |
  | displayName | String? |  yes  |  |
  | subType | String? |  yes  |  |
- | name | String? |  yes  |  |
+ | uid | String? |  yes  |  |
 
 ---
 
@@ -508,19 +477,30 @@ Response status_code
 
  
  
+ #### [PincodeMetaResponse](#PincodeMetaResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | internalZoneId | Int? |  yes  |  |
+ | zone | String? |  yes  |  |
+
+---
+
+
+ 
+ 
  #### [PincodeDataResponse](#PincodeDataResponse)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | displayName | String? |  yes  |  |
- | latLong | [PincodeLatLongData](#PincodeLatLongData)? |  yes  |  |
- | meta | [PincodeMetaResponse](#PincodeMetaResponse)? |  yes  |  |
- | error | [PincodeErrorSchemaResponse](#PincodeErrorSchemaResponse) |  no  |  |
- | subType | String? |  yes  |  |
  | name | String? |  yes  |  |
  | parents | ArrayList<[PincodeParentsResponse](#PincodeParentsResponse)>? |  yes  |  |
- | uid | String? |  yes  |  |
+ | displayName | String? |  yes  |  |
+ | error | [PincodeErrorSchemaResponse](#PincodeErrorSchemaResponse) |  no  |  |
+ | subType | String? |  yes  |  |
  | metaCode | [CountryMetaResponse](#CountryMetaResponse)? |  yes  |  |
+ | meta | [PincodeMetaResponse](#PincodeMetaResponse)? |  yes  |  |
+ | uid | String? |  yes  |  |
 
 ---
 
@@ -531,9 +511,9 @@ Response status_code
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | success | Boolean |  no  |  |
  | error | [PincodeErrorSchemaResponse](#PincodeErrorSchemaResponse) |  no  |  |
  | data | ArrayList<[PincodeDataResponse](#PincodeDataResponse)>? |  yes  |  |
- | success | Boolean |  no  |  |
 
 ---
 
@@ -544,8 +524,8 @@ Response status_code
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | level | String? |  yes  |  |
  | id | Int? |  yes  |  |
+ | level | String? |  yes  |  |
 
 ---
 
@@ -556,8 +536,8 @@ Response status_code
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | manufacturingTimeUnit | String? |  yes  |  |
  | category | [TATCategoryRequest](#TATCategoryRequest)? |  yes  |  |
+ | manufacturingTimeUnit | String? |  yes  |  |
  | manufacturingTime | Int? |  yes  |  |
 
 ---
@@ -569,9 +549,9 @@ Response status_code
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | fromPincode | String? |  yes  |  |
  | fulfillmentId | Int? |  yes  |  |
  | articles | ArrayList<[TATArticlesRequest](#TATArticlesRequest)>? |  yes  |  |
+ | fromPincode | String? |  yes  |  |
 
 ---
 
@@ -582,13 +562,12 @@ Response status_code
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | action | String? |  yes  |  |
- | locationDetails | ArrayList<[TATLocationDetailsRequest](#TATLocationDetailsRequest)>? |  yes  |  |
- | source | String? |  yes  |  |
- | paymentMode | String? |  yes  |  |
- | journey | String? |  yes  |  |
  | toPincode | String? |  yes  |  |
+ | journey | String? |  yes  |  |
+ | source | String? |  yes  |  |
  | identifier | String? |  yes  |  |
+ | locationDetails | ArrayList<[TATLocationDetailsRequest](#TATLocationDetailsRequest)>? |  yes  |  |
+ | action | String? |  yes  |  |
 
 ---
 
@@ -599,8 +578,8 @@ Response status_code
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | type | String? |  yes  |  |
  | value | String? |  yes  |  |
+ | type | String? |  yes  |  |
  | message | String? |  yes  |  |
 
 ---
@@ -612,8 +591,8 @@ Response status_code
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | min | String? |  yes  |  |
  | max | String? |  yes  |  |
+ | min | String? |  yes  |  |
 
 ---
 
@@ -624,8 +603,8 @@ Response status_code
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | min | Int? |  yes  |  |
  | max | Int? |  yes  |  |
+ | min | Int? |  yes  |  |
 
 ---
 
@@ -648,13 +627,13 @@ Response status_code
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | promise | [TATPromiseResponse](#TATPromiseResponse)? |  yes  |  |
  | manufacturingTimeSeconds | Int? |  yes  |  |
- | isCodAvailable | Boolean? |  yes  |  |
- | manufacturingTimeUnit | String? |  yes  |  |
+ | manufacturingTime | Int? |  yes  |  |
  | category | [TATCategoryRequest](#TATCategoryRequest)? |  yes  |  |
  | error | [TATErrorSchemaResponse](#TATErrorSchemaResponse)? |  yes  |  |
- | promise | [TATPromiseResponse](#TATPromiseResponse)? |  yes  |  |
- | manufacturingTime | Int? |  yes  |  |
+ | manufacturingTimeUnit | String? |  yes  |  |
+ | isCodAvailable | Boolean? |  yes  |  |
 
 ---
 
@@ -665,9 +644,9 @@ Response status_code
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | fromPincode | String? |  yes  |  |
  | fulfillmentId | Int? |  yes  |  |
  | articles | ArrayList<[TATArticlesResponse](#TATArticlesResponse)>? |  yes  |  |
+ | fromPincode | String? |  yes  |  |
 
 ---
 
@@ -678,19 +657,19 @@ Response status_code
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | action | String? |  yes  |  |
  | isCodAvailable | Boolean? |  yes  |  |
- | locationDetails | ArrayList<[TATLocationDetailsResponse](#TATLocationDetailsResponse)>? |  yes  |  |
- | success | Boolean? |  yes  |  |
+ | stormbreakerUuid | String? |  yes  |  |
+ | toPincode | String? |  yes  |  |
+ | requestUuid | String? |  yes  |  |
+ | journey | String? |  yes  |  |
+ | error | [TATErrorSchemaResponse](#TATErrorSchemaResponse)? |  yes  |  |
  | source | String? |  yes  |  |
  | paymentMode | String? |  yes  |  |
- | error | [TATErrorSchemaResponse](#TATErrorSchemaResponse)? |  yes  |  |
- | journey | String? |  yes  |  |
- | toPincode | String? |  yes  |  |
+ | success | Boolean? |  yes  |  |
  | identifier | String? |  yes  |  |
- | requestUuid | String? |  yes  |  |
  | toCity | String? |  yes  |  |
- | stormbreakerUuid | String? |  yes  |  |
+ | locationDetails | ArrayList<[TATLocationDetailsResponse](#TATLocationDetailsResponse)>? |  yes  |  |
+ | action | String? |  yes  |  |
 
 ---
 
@@ -732,15 +711,15 @@ Response status_code
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | displayName | String? |  yes  |  |
- | isActive | Boolean? |  yes  |  |
- | meta | [CountryMetaResponse](#CountryMetaResponse)? |  yes  |  |
- | logistics | [LogisticsResponse](#LogisticsResponse)? |  yes  |  |
- | type | String? |  yes  |  |
- | subType | String? |  yes  |  |
- | parentId | String? |  yes  |  |
  | name | String? |  yes  |  |
+ | parentId | String? |  yes  |  |
+ | logistics | [LogisticsResponse](#LogisticsResponse)? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
+ | displayName | String? |  yes  |  |
+ | subType | String? |  yes  |  |
+ | meta | [CountryMetaResponse](#CountryMetaResponse)? |  yes  |  |
  | uid | String? |  yes  |  |
+ | type | String? |  yes  |  |
 
 ---
 
