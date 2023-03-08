@@ -10,12 +10,16 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class LogisticResponseCategory(BaseSchema):
-    # Logistic swagger.json
+
+
+class Weight(BaseSchema):
+    # Catalog swagger.json
 
     
-    id = fields.Int(required=False)
+    shipping = fields.Float(required=False)
     
-    level = fields.Str(required=False)
+    is_default = fields.Boolean(required=False)
+    
+    unit = fields.Str(required=False)
     
 

@@ -14,8 +14,8 @@ class BuyRules(BaseSchema):
     # Cart swagger.json
 
     
-    cart_conditions = fields.Dict(required=False)
-    
     item_criteria = fields.Dict(required=False)
+    
+    cart_conditions = fields.Dict(required=False)
     
 

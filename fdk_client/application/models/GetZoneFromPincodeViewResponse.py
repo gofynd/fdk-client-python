@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class Formatted(BaseSchema):
+class GetZoneFromPincodeViewResponse(BaseSchema):
     # Logistic swagger.json
 
     
-    min = fields.Str(required=False)
+    serviceability_type = fields.Str(required=False)
     
-    max = fields.Str(required=False)
+    zones = fields.List(fields.Str(required=False), required=False)
     
 

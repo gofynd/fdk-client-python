@@ -22,8 +22,8 @@ class ProductVariantResponse(BaseSchema):
     
     header = fields.Str(required=False)
     
-    key = fields.Str(required=False)
-    
     display_type = fields.Str(required=False)
+    
+    key = fields.Str(required=False)
     
 

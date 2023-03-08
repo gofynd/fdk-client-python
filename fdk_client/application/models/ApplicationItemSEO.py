@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class LogisticRequestCategory(BaseSchema):
-    # Logistic swagger.json
+class ApplicationItemSEO(BaseSchema):
+    # Catalog swagger.json
 
     
-    id = fields.Int(required=False)
+    description = fields.Raw(required=False)
     
-    level = fields.Str(required=False)
+    title = fields.Raw(required=False)
     
 

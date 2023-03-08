@@ -5,6 +5,8 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .MetaFields import MetaFields
+
 from .ApplicationItemMOQ import ApplicationItemMOQ
 
 
@@ -13,16 +15,16 @@ from .ApplicationItemMOQ import ApplicationItemMOQ
 
 
 
-from .MetaFields import MetaFields
+
 
 from .ApplicationItemSEO import ApplicationItemSEO
-
-
 
 
 class ApplicationItemMeta(BaseSchema):
     # Catalog swagger.json
 
+    
+    _custom_meta = fields.List(fields.Nested(MetaFields, required=False), required=False)
     
     moq = fields.Nested(ApplicationItemMOQ, required=False)
     
@@ -32,10 +34,8 @@ class ApplicationItemMeta(BaseSchema):
     
     _custom_json = fields.Dict(required=False)
     
-    _custom_meta = fields.List(fields.Nested(MetaFields, required=False), required=False)
+    alt_text = fields.Dict(required=False)
     
     seo = fields.Nested(ApplicationItemSEO, required=False)
-    
-    alt_text = fields.Dict(required=False)
     
 

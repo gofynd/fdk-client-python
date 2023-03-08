@@ -14,8 +14,8 @@ class ZoneProductTypes(BaseSchema):
     # Serviceability swagger.json
 
     
-    tags = fields.List(fields.Str(required=False), required=False)
-    
     type = fields.Str(required=False)
+    
+    tags = fields.List(fields.Str(required=False), required=False)
     
 

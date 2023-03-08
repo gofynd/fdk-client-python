@@ -8040,9 +8040,9 @@ class Logistic:
     def __init__(self, config):
         self._conf = config
         self._relativeUrls = {
-            "getTatProduct": "/service/application/logistics/v1.0",
-            "getPincodeZones": "/service/application/logistics/v1.0/pincode/zones",
-            "getPincodeCity": "/service/application/logistics/v1.0/pincode/{pincode}"
+            "getPincodeCity": "/service/application/logistics/v1.0/pincode/{pincode}",
+            "getTatProduct": "/service/application/logistics/v1.0/",
+            "getPincodeZones": "/service/application/logistics/v1.0/pincode/zones"
             
         }
         self._urls = {
@@ -8052,8 +8052,37 @@ class Logistic:
     async def updateUrls(self, urls):
         self._urls.update(urls)
     
+    async def getPincodeCity(self, pincode=None, body=""):
+        """Get pincode data
+        :param pincode : A `pincode` contains a specific address of a location. : type string
+        """
+        payload = {}
+        
+        if pincode:
+            payload["pincode"] = pincode
+        
+        # Parameter validation
+        schema = LogisticValidator.getPincodeCity()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getPincodeCity"], proccessed_params="""{"required":[{"in":"path","name":"pincode","description":"A `pincode` contains a specific address of a location.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"pincode","description":"A `pincode` contains a specific address of a location.","schema":{"type":"string"},"required":true}]}""", pincode=pincode)
+        query_string = await create_query_string(pincode=pincode)
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getPincodeCity"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/pincode/{pincode}", pincode=pincode), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+    
     async def getTatProduct(self, body=""):
-        """Use this API to know the delivery turnaround time (TAT) by entering the product details along with the PIN Code of the location.
+        """Get TAT data
         """
         payload = {}
         
@@ -8062,8 +8091,8 @@ class Logistic:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.GetTatProductReqBody import GetTatProductReqBody
-        schema = GetTatProductReqBody()
+        from .models.TATViewRequest import TATViewRequest
+        schema = TATViewRequest()
         schema.dump(schema.load(body))
         
 
@@ -8080,10 +8109,10 @@ class Logistic:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getTatProduct"]).netloc, "post", await create_url_without_domain("/service/application/logistics/v1.0", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getTatProduct"]).netloc, "post", await create_url_without_domain("/service/application/logistics/v1.0/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
     async def getPincodeZones(self, body=""):
-        """Get to know the zones of a specefic pincode
+        """This API returns zone from the Pincode View.
         """
         payload = {}
         
@@ -8092,8 +8121,8 @@ class Logistic:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models.GetPincodeZonesReqBody import GetPincodeZonesReqBody
-        schema = GetPincodeZonesReqBody()
+        from .models.GetZoneFromPincodeViewRequest import GetZoneFromPincodeViewRequest
+        schema = GetZoneFromPincodeViewRequest()
         schema.dump(schema.load(body))
         
 
@@ -8111,35 +8140,6 @@ class Logistic:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getPincodeZones"]).netloc, "post", await create_url_without_domain("/service/application/logistics/v1.0/pincode/zones", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-    
-    async def getPincodeCity(self, pincode=None, body=""):
-        """Use this API to retrieve a city by its PIN Code.
-        :param pincode : The PIN Code of the area, e.g. 400059 : type string
-        """
-        payload = {}
-        
-        if pincode:
-            payload["pincode"] = pincode
-        
-        # Parameter validation
-        schema = LogisticValidator.getPincodeCity()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getPincodeCity"], proccessed_params="""{"required":[{"name":"pincode","in":"path","description":"The PIN Code of the area, e.g. 400059","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"pincode","in":"path","description":"The PIN Code of the area, e.g. 400059","required":true,"schema":{"type":"string"}}]}""", pincode=pincode)
-        query_string = await create_query_string(pincode=pincode)
-        headers = {
-            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
-        }
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=await get_headers_with_signature(urlparse(self._urls["getPincodeCity"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/pincode/{pincode}", pincode=pincode), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
 
 

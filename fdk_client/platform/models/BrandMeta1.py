@@ -1,4 +1,4 @@
-"""Application Models."""
+"""Platform Models."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class LogisticTimestamp(BaseSchema):
-    # Logistic swagger.json
+class BrandMeta1(BaseSchema):
+    # Catalog swagger.json
 
     
-    min = fields.Int(required=False)
+    name = fields.Str(required=False)
     
-    max = fields.Int(required=False)
+    id = fields.Int(required=False)
     
 

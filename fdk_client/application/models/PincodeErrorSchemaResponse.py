@@ -10,12 +10,16 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class GetPincodeZonesReqBody(BaseSchema):
+
+
+class PincodeErrorSchemaResponse(BaseSchema):
     # Logistic swagger.json
 
     
-    country = fields.Str(required=False)
+    message = fields.Str(required=False)
     
-    pincode = fields.Str(required=False)
+    type = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
     
 

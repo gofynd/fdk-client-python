@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class GetPincodeZonesResponse(BaseSchema):
+class TATCategoryRequest(BaseSchema):
     # Logistic swagger.json
 
     
-    zones = fields.List(fields.Raw(required=False), required=False)
+    level = fields.Str(required=False)
     
-    serviceability_type = fields.Str(required=False)
+    id = fields.Int(required=False)
     
 

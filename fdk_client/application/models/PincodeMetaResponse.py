@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class LogisticError(BaseSchema):
+class PincodeMetaResponse(BaseSchema):
     # Logistic swagger.json
 
     
-    type = fields.Str(required=False)
+    zone = fields.Str(required=False)
     
-    value = fields.Str(required=False)
-    
-    message = fields.Str(required=False)
+    internal_zone_id = fields.Int(required=False)
     
 
