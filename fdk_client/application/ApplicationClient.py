@@ -36,6 +36,8 @@ from .poscart.client import PosCart
 
 from .logistic.client import Logistic
 
+from .documentengine.client import DocumentEngine
+
 
 class ApplicationClient:
     def __init__(self, config):
@@ -56,6 +58,7 @@ class ApplicationClient:
         self.rewards = Rewards(config)
         self.posCart = PosCart(config)
         self.logistic = Logistic(config)
+        self.documentEngine = DocumentEngine(config)
         
 
     async def setCookie(self, cookie):
