@@ -36,8 +36,6 @@ from .audittrail.client import AuditTrail
 
 from .logistic.client import Logistic
 
-from .documentengine.client import DocumentEngine
-
 
 class PlatformClient:
     def __init__(self, config):
@@ -74,8 +72,6 @@ class PlatformClient:
         self.auditTrail = AuditTrail(config)
         
         self.logistic = Logistic(config)
-        
-        self.documentEngine = DocumentEngine(config)
         
 
     def application(self, applicationId):
