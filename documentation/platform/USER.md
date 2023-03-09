@@ -2281,8 +2281,6 @@ Success. Returns a JSON object with the updated platform configurations. Refer `
  | profilePicUrl | String? |  yes  |  |
  | username | String? |  yes  |  |
  | accountType | String? |  yes  |  |
- | debug | [Debug](#Debug)? |  yes  |  |
- | hasOldPasswordHash | Boolean? |  yes  |  |
  | id | String? |  yes  |  |
  | createdAt | String? |  yes  |  |
  | updatedAt | String? |  yes  |  |
@@ -2315,18 +2313,6 @@ Success. Returns a JSON object with the updated platform configurations. Refer `
  | verified | Boolean? |  yes  |  |
  | email | String? |  yes  |  |
  | active | Boolean? |  yes  |  |
-
----
-
-
- 
- 
- #### [Debug](#Debug)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | source | String? |  yes  |  |
- | platform | String? |  yes  |  |
 
 ---
 
