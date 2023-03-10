@@ -14,13 +14,6 @@ class ServiceabilityValidator:
         application_id = fields.Str(required=False)
          
     
-    class postApplicationServiceability(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-    
     class getEntityRegionView(BaseSchema):
         
         company_id = fields.Int(required=False)
@@ -32,8 +25,6 @@ class ServiceabilityValidator:
         
         page_number = fields.Int(required=False)
         
-        page_no = fields.Int(required=False)
-        
         page_size = fields.Int(required=False)
         
         name = fields.Str(required=False)
@@ -41,10 +32,6 @@ class ServiceabilityValidator:
         is_active = fields.Boolean(required=False)
         
         channel_ids = fields.Str(required=False)
-        
-        q = fields.Str(required=False)
-        
-        zone_id = fields.List(fields.Str(required=False), required=False)
          
     
     class getCompanyStoreView(BaseSchema):
@@ -66,53 +53,55 @@ class ServiceabilityValidator:
         company_id = fields.Int(required=False)
          
     
+    class insertZoneControllerView(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    
     class upsertZoneControllerView(BaseSchema):
         
         company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
          
     
-    class getZonesFromApplicationIdView(BaseSchema):
+    class getStore(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        store_uid = fields.Int(required=False)
+         
+    
+    class getAllStores(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+         
+    
+    class updatePincodeMopView(BaseSchema):
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        zone_id = fields.List(fields.Str(required=False), required=False)
-        
-        q = fields.Str(required=False)
          
     
-    class getZoneFromPincodeView(BaseSchema):
+    class updatePincodeBulkView(BaseSchema):
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
-        
-        country = fields.Str(required=False)
          
     
-    class getZoneListView(BaseSchema):
+    class updatePincodeCoDListing(BaseSchema):
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
-        page_number = fields.Int(required=False)
+        application_id = fields.Str(required=False)
+         
+    
+    class updatePincodeAuditHistory(BaseSchema):
         
-        page_no = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
-        page_size = fields.Int(required=False)
-        
-        name = fields.Str(required=False)
-        
-        is_active = fields.Boolean(required=False)
-        
-        channel_ids = fields.Str(required=False)
-        
-        q = fields.Str(required=False)
-        
-        zone_id = fields.List(fields.Str(required=False), required=False)
+        application_id = fields.Str(required=False)
          
     

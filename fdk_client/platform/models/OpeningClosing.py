@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class EntityRegionViewItems(BaseSchema):
+class OpeningClosing(BaseSchema):
     # Serviceability swagger.json
 
     
-    uid = fields.Str(required=False)
+    hour = fields.Int(required=False)
     
-    sub_type = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
+    minute = fields.Int(required=False)
     
 

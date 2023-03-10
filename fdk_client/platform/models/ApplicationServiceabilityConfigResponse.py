@@ -5,21 +5,21 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .ServiceabilityErrorResponse import ServiceabilityErrorResponse
-
-from .ApplicationServiceabilityResponse import ApplicationServiceabilityResponse
+from .ApplicationServiceabilityConfig import ApplicationServiceabilityConfig
 
 
+
+from .ServiceabilityrErrorResponse import ServiceabilityrErrorResponse
 
 
 class ApplicationServiceabilityConfigResponse(BaseSchema):
     # Serviceability swagger.json
 
     
-    error = fields.Nested(ServiceabilityErrorResponse, required=False)
-    
-    data = fields.Nested(ApplicationServiceabilityResponse, required=False)
+    data = fields.Nested(ApplicationServiceabilityConfig, required=False)
     
     success = fields.Boolean(required=False)
+    
+    error = fields.Nested(ServiceabilityrErrorResponse, required=False)
     
 

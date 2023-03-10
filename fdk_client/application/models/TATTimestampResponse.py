@@ -14,8 +14,8 @@ class TATTimestampResponse(BaseSchema):
     # Logistic swagger.json
 
     
-    max = fields.Int(required=False)
-    
     min = fields.Int(required=False)
+    
+    max = fields.Int(required=False)
     
 

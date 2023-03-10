@@ -18,9 +18,9 @@ class ProductStockUnitPriceV2(BaseSchema):
     # Catalog swagger.json
 
     
-    price = fields.Float(required=False)
-    
     currency_code = fields.Str(required=False)
+    
+    price = fields.Float(required=False)
     
     currency_symbol = fields.Str(required=False)
     

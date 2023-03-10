@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class ServiceabilityErrorResponse(BaseSchema):
+class PincodeBulkViewResponse(BaseSchema):
     # Serviceability swagger.json
 
     
-    message = fields.Str(required=False)
+    batch_id = fields.Str(required=False)
     
-    type = fields.Str(required=False)
-    
-    value = fields.Str(required=False)
+    s3_url = fields.Str(required=False)
     
 

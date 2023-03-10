@@ -12,14 +12,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ApplicationServiceabilityResponse(BaseSchema):
+class PincodeMopData(BaseSchema):
     # Serviceability swagger.json
 
     
-    channel_id = fields.Str(required=False)
+    pincodes = fields.List(fields.Int(required=False), required=False)
     
-    channel_type = fields.Str(required=False)
+    country = fields.Str(required=False)
     
-    serviceability_type = fields.Str(required=False)
+    action = fields.Str(required=False)
     
 

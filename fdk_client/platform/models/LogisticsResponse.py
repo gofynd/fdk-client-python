@@ -5,21 +5,17 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+from .Dp import Dp
 
 
 
 
-
-
-
-class EntityRegionViewError(BaseSchema):
+class LogisticsResponse(BaseSchema):
     # Serviceability swagger.json
 
     
-    message = fields.Str(required=False)
+    dp = fields.Nested(Dp, required=False)
     
-    type = fields.Str(required=False)
-    
-    value = fields.Str(required=False)
+    override = fields.Boolean(required=False)
     
 

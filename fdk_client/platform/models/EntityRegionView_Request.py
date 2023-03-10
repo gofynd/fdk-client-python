@@ -10,7 +10,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class EntityRegionViewRequest(BaseSchema):
+class EntityRegionView_Request(BaseSchema):
     # Serviceability swagger.json
 
     

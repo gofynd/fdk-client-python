@@ -18,9 +18,9 @@ class PincodeParentsResponse(BaseSchema):
     # Logistic swagger.json
 
     
-    uid = fields.Str(required=False)
-    
     sub_type = fields.Str(required=False)
+    
+    uid = fields.Str(required=False)
     
     display_name = fields.Str(required=False)
     

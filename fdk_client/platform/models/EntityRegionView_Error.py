@@ -12,21 +12,13 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
-class EntityRegionViewPage(BaseSchema):
+class EntityRegionView_Error(BaseSchema):
     # Serviceability swagger.json
 
     
-    current = fields.Int(required=False)
+    value = fields.Str(required=False)
     
-    item_total = fields.Int(required=False)
-    
-    has_next = fields.Boolean(required=False)
-    
-    size = fields.Int(required=False)
+    message = fields.Str(required=False)
     
     type = fields.Str(required=False)
     
