@@ -16,6 +16,9 @@ from ..ApplicationModel import BaseSchema
     
     
     
+        
+        
+    
 
 class LogisticValidator:
     
@@ -36,7 +39,11 @@ class LogisticValidator:
     
     class getAllCountries(BaseSchema):
         
-        pass 
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
         
     
     class getPincodeZones(BaseSchema):
