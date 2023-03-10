@@ -12,22 +12,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
-class PincodeCodStatusListingPage(BaseSchema):
+class ServiceabilityErrorResponse(BaseSchema):
     # Serviceability swagger.json
 
     
-    item_total = fields.Int(required=False)
-    
-    size = fields.Int(required=False)
-    
     type = fields.Str(required=False)
     
-    has_next = fields.Boolean(required=False)
+    value = fields.Str(required=False)
     
-    current_page_number = fields.Int(required=False)
+    message = fields.Str(required=False)
     
 

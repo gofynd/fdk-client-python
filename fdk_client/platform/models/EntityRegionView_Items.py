@@ -18,8 +18,8 @@ class EntityRegionView_Items(BaseSchema):
     
     name = fields.Str(required=False)
     
-    sub_type = fields.Str(required=False)
-    
     uid = fields.Str(required=False)
+    
+    sub_type = fields.Str(required=False)
     
 
