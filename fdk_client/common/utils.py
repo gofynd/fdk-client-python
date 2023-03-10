@@ -65,7 +65,7 @@ async def create_query_string(**kwargs):
     return query_string
 
 
-async def get_headers_with_signature(domain: Text, method: Text, url: Text, query_string: Text, headers: Dict, body="",
+def get_headers_with_signature(domain: Text, method: Text, url: Text, query_string: Text, headers: Dict, body="",
                                      exclude_headers=[], sign_query=False):
     """Returns headers with signature."""
     query_string = parse.unquote(query_string)
