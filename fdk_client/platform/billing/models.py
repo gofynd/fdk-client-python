@@ -1239,6 +1239,8 @@ class SubscriptionStatus(BaseSchema):
     # Billing swagger.json
 
     
+    mandate_amount = fields.Float(required=False)
+    
     is_enabled = fields.Boolean(required=False)
     
     subscription = fields.Nested(Subscription, required=False)
