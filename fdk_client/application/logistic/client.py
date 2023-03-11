@@ -17,7 +17,7 @@ class Logistic:
         self._relativeUrls = {
             "getPincodeCity": "/service/application/logistics/v1.0/pincode/{pincode}",
             "getTatProduct": "/service/application/logistics/v1.0/",
-            "getAllCountries": "/service/application/logistics/v1.0/country-list/company/{company_id}/application/{application_id}",
+            "getAllCountries": "/service/application/logistics/v1.0/country-list",
             "getPincodeZones": "/service/application/logistics/v1.0/pincode/zones"
             
         }
@@ -91,26 +91,18 @@ class Logistic:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getTatProduct"]).netloc, "post", await create_url_without_domain("/service/application/logistics/v1.0/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
-    async def getAllCountries(self, company_id=None, application_id=None, body=""):
+    async def getAllCountries(self, body=""):
         """Get all countries
-        :param company_id : A `company id` unique id for the company. : type string
-        :param application_id : A `application id` is unique id for the application. : type string
         """
         payload = {}
-        
-        if company_id:
-            payload["company_id"] = company_id
-        
-        if application_id:
-            payload["application_id"] = application_id
         
         # Parameter validation
         schema = LogisticValidator.getAllCountries()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getAllCountries"], proccessed_params="""{"required":[{"in":"path","name":"company_id","description":"A `company id` unique id for the company.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application id` is unique id for the application.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company id` unique id for the company.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application id` is unique id for the application.","schema":{"type":"string"},"required":true}]}""", company_id=company_id, application_id=application_id)
-        query_string = await create_query_string(company_id=company_id, application_id=application_id)
+        url_with_params = await create_url_with_params(api_url=self._urls["getAllCountries"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        query_string = await create_query_string()
         headers = {
             "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
         }
@@ -122,7 +114,7 @@ class Logistic:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAllCountries"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/country-list/company/{company_id}/application/{application_id}", company_id=company_id, application_id=application_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAllCountries"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/country-list", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
     
     async def getPincodeZones(self, body=""):
         """This API returns zone from the Pincode View.
