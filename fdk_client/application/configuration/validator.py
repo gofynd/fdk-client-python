@@ -38,6 +38,7 @@ from ..ApplicationModel import BaseSchema
         
         
         
+        
     
     
         
@@ -139,6 +140,8 @@ class ConfigurationValidator:
         ordering_store = fields.Int(required=False)
         
         user = fields.Str(required=False)
+        
+        user_name = fields.Str(required=False)
          
         
     

@@ -189,10 +189,10 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
         
         
+    
+    
         
         
     
@@ -643,7 +643,7 @@ class CatalogValidator:
         
         level = fields.Str(required=False)
         
-        departments = fields.Str(required=False)
+        department = fields.Str(required=False)
         
         q = fields.Str(required=False)
         
@@ -745,15 +745,6 @@ class CatalogValidator:
          
         
     
-    class deleteProduct(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        item_id = fields.Int(required=False)
-         
-        
-    
     class getProduct(BaseSchema):
         
         
@@ -764,6 +755,15 @@ class CatalogValidator:
         brand_uid = fields.Int(required=False)
         
         item_code = fields.Str(required=False)
+         
+        
+    
+    class deleteProduct(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        item_id = fields.Int(required=False)
          
         
     
@@ -907,7 +907,7 @@ class CatalogValidator:
         
         company_id = fields.Str(required=False)
         
-        item_id = fields.Float(required=False)
+        item_id = fields.Int(required=False)
         
         size = fields.Str(required=False)
          
@@ -1032,7 +1032,7 @@ class CatalogValidator:
         
         company_id = fields.Str(required=False)
         
-        item_id = fields.Float(required=False)
+        item_id = fields.Int(required=False)
         
         seller_identifier = fields.Str(required=False)
          
@@ -1043,7 +1043,7 @@ class CatalogValidator:
         
         company_id = fields.Str(required=False)
         
-        item_id = fields.Float(required=False)
+        item_id = fields.Int(required=False)
         
         seller_identifier = fields.Str(required=False)
          
