@@ -205,10 +205,10 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
         
         
+    
+    
         
         
     
@@ -413,7 +413,7 @@ class CatalogValidator:
          
         
     
-    class updateProductBundle(BaseSchema):
+    class getProductBundleDetail(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -422,7 +422,7 @@ class CatalogValidator:
          
         
     
-    class getProductBundleDetail(BaseSchema):
+    class updateProductBundle(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -455,7 +455,7 @@ class CatalogValidator:
          
         
     
-    class updateSizeGuide(BaseSchema):
+    class getSizeGuide(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -464,7 +464,7 @@ class CatalogValidator:
          
         
     
-    class getSizeGuide(BaseSchema):
+    class updateSizeGuide(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -588,7 +588,7 @@ class CatalogValidator:
          
         
     
-    class updateDepartment(BaseSchema):
+    class getDepartmentData(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -597,7 +597,7 @@ class CatalogValidator:
          
         
     
-    class getDepartmentData(BaseSchema):
+    class updateDepartment(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -687,19 +687,19 @@ class CatalogValidator:
          
         
     
-    class updateProductExportJob(BaseSchema):
+    class getProductTemplateExportDetail(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         job_id = fields.Str(required=False)
          
         
     
-    class getProductTemplateExportDetail(BaseSchema):
+    class updateProductExportJob(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
         job_id = fields.Str(required=False)
          
@@ -742,7 +742,7 @@ class CatalogValidator:
          
         
     
-    class updateCategory(BaseSchema):
+    class getCategoryData(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -751,7 +751,7 @@ class CatalogValidator:
          
         
     
-    class getCategoryData(BaseSchema):
+    class updateCategory(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -818,15 +818,6 @@ class CatalogValidator:
          
         
     
-    class editProduct(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        item_id = fields.Int(required=False)
-         
-        
-    
     class getProduct(BaseSchema):
         
         
@@ -841,6 +832,15 @@ class CatalogValidator:
         
     
     class deleteProduct(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        item_id = fields.Int(required=False)
+         
+        
+    
+    class editProduct(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -1122,7 +1122,7 @@ class CatalogValidator:
          
         
     
-    class updateInventoryExportJob(BaseSchema):
+    class getInventoryExportJobDetail(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -1131,7 +1131,7 @@ class CatalogValidator:
          
         
     
-    class getInventoryExportJobDetail(BaseSchema):
+    class updateInventoryExportJob(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -1178,7 +1178,7 @@ class CatalogValidator:
          
         
     
-    class updateHsnCode(BaseSchema):
+    class getHsnCode(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -1187,7 +1187,7 @@ class CatalogValidator:
          
         
     
-    class getHsnCode(BaseSchema):
+    class updateHsnCode(BaseSchema):
         
         
         company_id = fields.Str(required=False)

@@ -987,7 +987,7 @@ class Cart:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/basic", id=id, buy_now=buy_now), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
-    async def getCoupons(self, id=None, buy_now=None):
+    async def getPlatformPOSCoupons(self, id=None, buy_now=None):
         """Use this API to get a list of available coupons along with their details.
         :param id :  : type string
         :param buy_now :  : type boolean
@@ -1002,7 +1002,7 @@ class Cart:
         
 
         # Parameter validation
-        schema = CartValidator.getCoupons()
+        schema = CartValidator.getPlatformPOSCoupons()
         schema.dump(schema.load(payload))
         
 

@@ -674,7 +674,7 @@ class CartValidator:
          
         
     
-    class getCoupons(BaseSchema):
+    class getPlatformPOSCoupons(BaseSchema):
         
         
         company_id = fields.Str(required=False)
