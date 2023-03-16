@@ -837,7 +837,7 @@ class Cart:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", id=id, i=i, b=b, assign_card_id=assign_card_id, buy_now=buy_now), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
-    async def addItems(self, i=None, b=None, buy_now=None, id=None, body=""):
+    async def platformAddItems(self, i=None, b=None, buy_now=None, id=None, body=""):
         """Use this API to add items to the cart.
         :param i :  : type boolean
         :param b :  : type boolean
@@ -860,7 +860,7 @@ class Cart:
         
 
         # Parameter validation
-        schema = CartValidator.addItems()
+        schema = CartValidator.platformAddItems()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -882,7 +882,7 @@ class Cart:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", i=i, b=b, buy_now=buy_now, id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
-    async def updateCart(self, id=None, i=None, b=None, buy_now=None, body=""):
+    async def platformUpdateCart(self, id=None, i=None, b=None, buy_now=None, body=""):
         """<p>Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size. These attributes will be fetched from the following APIs</p> <ul> <li><font color="monochrome">operation</font> Operation for current api call. <b>update_item</b> for update items. <b>remove_item</b> for removing items.</li> <li> <font color="monochrome">item_id</font>  "/platform/content/v1/products/"</li> <li> <font color="monochrome">item_size</font>   "/platform/content/v1/products/:slug/sizes/"</li> <li> <font color="monochrome">quantity</font>  item quantity (must be greater than or equal to 1)</li> <li> <font color="monochrome">article_id</font>   "/content​/v1​/products​/:identifier​/sizes​/price​/"</li> <li> <font color="monochrome">item_index</font>  item position in the cart (must be greater than or equal to 0)</li> </ul>
         :param id :  : type string
         :param i :  : type boolean
@@ -905,7 +905,7 @@ class Cart:
         
 
         # Parameter validation
-        schema = CartValidator.updateCart()
+        schema = CartValidator.platformUpdateCart()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -987,7 +987,7 @@ class Cart:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/basic", id=id, buy_now=buy_now), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
-    async def getPlatformPOSCoupons(self, id=None, buy_now=None):
+    async def getAppCoupons(self, id=None, buy_now=None):
         """Use this API to get a list of available coupons along with their details.
         :param id :  : type string
         :param buy_now :  : type boolean
@@ -1002,7 +1002,7 @@ class Cart:
         
 
         # Parameter validation
-        schema = CartValidator.getPlatformPOSCoupons()
+        schema = CartValidator.getAppCoupons()
         schema.dump(schema.load(payload))
         
 
@@ -1485,7 +1485,7 @@ class Cart:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/meta", id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
-    async def checkoutCart(self, id=None, body=""):
+    async def platformCheckoutCart(self, id=None, body=""):
         """Use this API to checkout all items in the cart for payment and order generation. For COD, order will be generated directly, whereas for other checkout modes, user will be redirected to a payment gateway.
         :param id :  : type string
         """
@@ -1496,7 +1496,7 @@ class Cart:
         
 
         # Parameter validation
-        schema = CartValidator.checkoutCart()
+        schema = CartValidator.platformCheckoutCart()
         schema.dump(schema.load(payload))
         
         # Body validation

@@ -280,7 +280,7 @@ class PaymentValidator:
          
         
     
-    class edcDevice(BaseSchema):
+    class updateEdcDevice(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -291,7 +291,7 @@ class PaymentValidator:
          
         
     
-    class edcDevice(BaseSchema):
+    class getEdcDevice(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -302,7 +302,7 @@ class PaymentValidator:
          
         
     
-    class edcDevice(BaseSchema):
+    class addEdcDevice(BaseSchema):
         
         
         company_id = fields.Int(required=False)

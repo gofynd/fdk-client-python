@@ -434,7 +434,7 @@ class Payment:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/edc-device-stats", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
-    async def edcDevice(self, terminal_unique_identifier=None, body=""):
+    async def updateEdcDevice(self, terminal_unique_identifier=None, body=""):
         """Use this API to map new edc device to the terminal
         :param terminal_unique_identifier : Terminal unique identifier : type string
         """
@@ -445,7 +445,7 @@ class Payment:
         
 
         # Parameter validation
-        schema = PaymentValidator.edcDevice()
+        schema = PaymentValidator.updateEdcDevice()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -467,7 +467,7 @@ class Payment:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/edc-device", terminal_unique_identifier=terminal_unique_identifier), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
-    async def edcDevice(self, terminal_unique_identifier=None):
+    async def getEdcDevice(self, terminal_unique_identifier=None):
         """Use this API to get details of a single edc device
         :param terminal_unique_identifier : Terminal unique identifier : type string
         """
@@ -478,7 +478,7 @@ class Payment:
         
 
         # Parameter validation
-        schema = PaymentValidator.edcDevice()
+        schema = PaymentValidator.getEdcDevice()
         schema.dump(schema.load(payload))
         
 
@@ -495,7 +495,7 @@ class Payment:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/edc-device/{terminal_unique_identifier}", terminal_unique_identifier=terminal_unique_identifier), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
-    async def edcDevice(self, terminal_unique_identifier=None, body=""):
+    async def addEdcDevice(self, terminal_unique_identifier=None, body=""):
         """Use this API to Update store id and device tag of edc device
         :param terminal_unique_identifier : Terminal unique identifier : type string
         """
@@ -506,7 +506,7 @@ class Payment:
         
 
         # Parameter validation
-        schema = PaymentValidator.edcDevice()
+        schema = PaymentValidator.addEdcDevice()
         schema.dump(schema.load(payload))
         
         # Body validation
