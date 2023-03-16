@@ -62,9 +62,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
-        
 
 
 
@@ -182,13 +179,6 @@ class CompanyProfileValidator:
         
     
     class createLocationBulk(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-         
-        
-    
-    class getOptimalLocations(BaseSchema):
         
         
         company_id = fields.Str(required=False)

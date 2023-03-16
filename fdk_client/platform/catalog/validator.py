@@ -188,10 +188,10 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
         
         
+    
+    
         
         
     
@@ -355,9 +355,9 @@ from ..PlatformModel import BaseSchema
     
     
         
+        
     
     
-        
         
 
 
@@ -751,15 +751,6 @@ class CatalogValidator:
          
         
     
-    class deleteProduct(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        item_id = fields.Int(required=False)
-         
-        
-    
     class getProduct(BaseSchema):
         
         
@@ -770,6 +761,15 @@ class CatalogValidator:
         brand_uid = fields.Int(required=False)
         
         item_code = fields.Str(required=False)
+         
+        
+    
+    class deleteProduct(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        item_id = fields.Int(required=False)
          
         
     
@@ -1122,19 +1122,19 @@ class CatalogValidator:
          
         
     
-    class getOptimalLocations(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-         
-        
-    
     class getSingleProductHSNCode(BaseSchema):
         
         
         reporting_hsn = fields.Str(required=False)
         
         company_id = fields.Int(required=False)
+         
+        
+    
+    class getOptimalLocations(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
          
         
     
