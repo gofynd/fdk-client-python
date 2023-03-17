@@ -205,10 +205,10 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
-        
     
     
+        
+        
         
         
     
@@ -818,6 +818,15 @@ class CatalogValidator:
          
         
     
+    class deleteProduct(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        item_id = fields.Int(required=False)
+         
+        
+    
     class getProduct(BaseSchema):
         
         
@@ -828,15 +837,6 @@ class CatalogValidator:
         brand_uid = fields.Int(required=False)
         
         item_code = fields.Str(required=False)
-         
-        
-    
-    class deleteProduct(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        item_id = fields.Int(required=False)
          
         
     
