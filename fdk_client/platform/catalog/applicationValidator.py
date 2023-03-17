@@ -309,7 +309,7 @@ from ..PlatformModel import BaseSchema
 class CatalogValidator:
     
     
-    class getSearchKeywords(BaseSchema):
+    class deleteSearchKeywords(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -320,7 +320,7 @@ class CatalogValidator:
          
         
     
-    class deleteSearchKeywords(BaseSchema):
+    class getSearchKeywords(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -360,7 +360,7 @@ class CatalogValidator:
          
         
     
-    class getAutocompleteKeywordDetail(BaseSchema):
+    class deleteAutocompleteKeyword(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -371,7 +371,7 @@ class CatalogValidator:
          
         
     
-    class deleteAutocompleteKeyword(BaseSchema):
+    class getAutocompleteKeywordDetail(BaseSchema):
         
         
         company_id = fields.Str(required=False)

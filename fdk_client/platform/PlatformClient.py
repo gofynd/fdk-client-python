@@ -39,7 +39,7 @@ from .logistic.client import Logistic
 
 class PlatformClient:
     def __init__(self, config):
-        self._conf = config
+        self.config = config
         
         self.common = Common(config)
         
@@ -75,9 +75,9 @@ class PlatformClient:
         
 
     def application(self, applicationId):
-        return PlatformApplicationClient(applicationId, self._conf)
+        return PlatformApplicationClient(applicationId, self.config)
 
-    async def setExtraHeaders(self, header):
+    def setExtraHeaders(self, header):
         if header and type(header) == dict:
             self.config.extraHeaders.append(header)
         else:

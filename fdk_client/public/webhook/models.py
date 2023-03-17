@@ -3,9 +3,7 @@
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
 
-
 from ..PublicModel import BaseSchema
-
 
 
 from .enums import *

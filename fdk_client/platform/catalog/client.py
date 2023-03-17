@@ -862,7 +862,7 @@ class Catalog:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/downloads/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
-    async def listAllProductTemplateExportDetails(self, status=None, from_date=None, to_date=None, q=None):
+    async def getProductExportJobs(self, status=None, from_date=None, to_date=None, q=None):
         """Can view details including trigger data, task id , etc.
         :param status : This is a parameter used to find all the jobs with the specified status. : type string
         :param from_date : This is a parameter used to find the job from the date specified to the current date. : type string
@@ -885,7 +885,7 @@ class Catalog:
         
 
         # Parameter validation
-        schema = CatalogValidator.listAllProductTemplateExportDetails()
+        schema = CatalogValidator.getProductExportJobs()
         schema.dump(schema.load(payload))
         
 
@@ -930,67 +930,6 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/downloads/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-    
-    async def getProductTemplateExportDetail(self, job_id=None):
-        """Can view details including export data, task id , etc for a job.
-        :param job_id : A `job_id` is a unique identifier for a particular job. : type string
-        """
-        payload = {}
-        
-        if job_id:
-            payload["job_id"] = job_id
-        
-
-        # Parameter validation
-        schema = CatalogValidator.getProductTemplateExportDetail()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/downloads/{job_id}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"job_id","description":"A `job_id` is a unique identifier for a particular job.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"job_id","description":"A `job_id` is a unique identifier for a particular job.","schema":{"type":"string"},"required":true}]}""", job_id=job_id)
-        query_string = await create_query_string(job_id=job_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/downloads/{job_id}", job_id=job_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-    
-    async def updateProductExportJob(self, job_id=None, body=""):
-        """This API helps to update a Product export job.
-        :param job_id : A `job_id` is a unique identifier for a particular job. : type string
-        """
-        payload = {}
-        
-        if job_id:
-            payload["job_id"] = job_id
-        
-
-        # Parameter validation
-        schema = CatalogValidator.updateProductExportJob()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import ProductPartialExportRequest
-        schema = ProductPartialExportRequest()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/downloads/{job_id}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"integer"},"required":true},{"in":"path","name":"job_id","description":"A `job_id` is a unique identifier for a particular job.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"integer"},"required":true},{"in":"path","name":"job_id","description":"A `job_id` is a unique identifier for a particular job.","schema":{"type":"string"},"required":true}]}""", job_id=job_id)
-        query_string = await create_query_string(job_id=job_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/downloads/{job_id}", job_id=job_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
     async def listTemplateBrandTypeValues(self, filter=None, template_tag=None, item_type=None):
         """The filter type query parameter defines what type of data to return. The type of query returns the valid values for the same
@@ -1323,6 +1262,34 @@ class Catalog:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-attributes/", category=category, filter=filter), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
+    async def deleteProduct(self, item_id=None):
+        """This API allows to delete product.
+        :param item_id : Id of the product to be updated. : type integer
+        """
+        payload = {}
+        
+        if item_id:
+            payload["item_id"] = item_id
+        
+
+        # Parameter validation
+        schema = CatalogValidator.deleteProduct()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", """{"required":[{"in":"path","name":"company_id","description":"Company Id of the company associated to product that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Id of the product to be updated.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of the company associated to product that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Id of the product to be updated.","schema":{"type":"integer"},"required":true}]}""", item_id=item_id)
+        query_string = await create_query_string(item_id=item_id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+    
     async def getProduct(self, item_id=None, brand_uid=None, item_code=None):
         """This API helps to get data associated to a particular product.
         :param item_id : Item Id of the product. : type integer
@@ -1358,34 +1325,6 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id, brand_uid=brand_uid, item_code=item_code), query_string, headers, "", exclude_headers=exclude_headers), data="")
-    
-    async def deleteProduct(self, item_id=None):
-        """This API allows to delete product.
-        :param item_id : Id of the product to be updated. : type integer
-        """
-        payload = {}
-        
-        if item_id:
-            payload["item_id"] = item_id
-        
-
-        # Parameter validation
-        schema = CatalogValidator.deleteProduct()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", """{"required":[{"in":"path","name":"company_id","description":"Company Id of the company associated to product that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Id of the product to be updated.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of the company associated to product that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Id of the product to be updated.","schema":{"type":"integer"},"required":true}]}""", item_id=item_id)
-        query_string = await create_query_string(item_id=item_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def editProduct(self, item_id=None, body=""):
         """This API allows to edit product.
@@ -2260,67 +2199,6 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/inventory/download/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-    
-    async def getInventoryExportJobDetail(self, job_id=None):
-        """This API gives you the details information of an invnetory export job by their job id.
-        :param job_id : This is the id of the job. : type string
-        """
-        payload = {}
-        
-        if job_id:
-            payload["job_id"] = job_id
-        
-
-        # Parameter validation
-        schema = CatalogValidator.getInventoryExportJobDetail()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/inventory/download/{job_id}", """{"required":[{"in":"path","name":"company_id","description":"This is the uid of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"job_id","description":"This is the id of the job.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"This is the uid of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"job_id","description":"This is the id of the job.","schema":{"type":"string"},"required":true}]}""", job_id=job_id)
-        query_string = await create_query_string(job_id=job_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/inventory/download/{job_id}", job_id=job_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-    
-    async def updateInventoryExportJob(self, job_id=None, body=""):
-        """This API helps to update the status and the notification email of the running export jobs.
-        :param job_id : Job Id in which assets to be uploaded. : type string
-        """
-        payload = {}
-        
-        if job_id:
-            payload["job_id"] = job_id
-        
-
-        # Parameter validation
-        schema = CatalogValidator.updateInventoryExportJob()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import InventoryPartialExportRequest
-        schema = InventoryPartialExportRequest()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/inventory/download/{job_id}", """{"required":[{"in":"path","name":"company_id","description":"Company Id in which assets to be uploaded.","schema":{"type":"integer"},"required":true},{"in":"path","name":"job_id","description":"Job Id in which assets to be uploaded.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id in which assets to be uploaded.","schema":{"type":"integer"},"required":true},{"in":"path","name":"job_id","description":"Job Id in which assets to be uploaded.","schema":{"type":"string"},"required":true}]}""", job_id=job_id)
-        query_string = await create_query_string(job_id=job_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/inventory/download/{job_id}", job_id=job_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
     async def exportInventoryConfig(self, filter_type=None):
         """This API allows get List of different filters like brand, store, and type for inventory export.
