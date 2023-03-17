@@ -14,7 +14,9 @@ Authentication Service
 * [unDeleteUser](#undeleteuser)
 * [updateUser](#updateuser)
 * [createUserSession](#createusersession)
+* [deleteSession](#deletesession)
 * [getActiveSessions](#getactivesessions)
+* [deleteActiveSessions](#deleteactivesessions)
 * [getPlatformConfig](#getplatformconfig)
 * [updatePlatformConfig](#updateplatformconfig)
 
@@ -671,6 +673,78 @@ Create user session
 ---
 
 
+### deleteSession
+Delete a session for a user
+
+
+
+
+```python
+try:
+    result = await client.application("<APPLICATION_ID>").user.deleteSession(id=id, sessionId=sessionId, reason=reason)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | ID of a customer. |   
+| sessionId | String | yes | Session ID of a customer. |   
+| reason | String | yes | Reason for deleting session. |  
+
+
+
+Use this API to Delete a session of customers who have registered in the application.
+
+*Returned Response:*
+
+
+
+
+[SessionDeleteResponseSchema](#SessionDeleteResponseSchema)
+
+Success. Refer `SessionDeleteResponseSchema` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; Success</i></summary>
+
+```json
+{
+  "value": {
+    "items": [
+      "sess:123",
+      "sess:456"
+    ]
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
 ### getActiveSessions
 Get a list of all session with info for a user
 
@@ -705,6 +779,77 @@ Use this API to retrieve a list of session with info of customers who have regis
 [SessionListResponseSchema](#SessionListResponseSchema)
 
 Success. Refer `SessionListResponseSchema` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; Success</i></summary>
+
+```json
+{
+  "value": {
+    "items": [
+      "sess:123",
+      "sess:456"
+    ]
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### deleteActiveSessions
+Delete a list of all session for a user
+
+
+
+
+```python
+try:
+    result = await client.application("<APPLICATION_ID>").user.deleteActiveSessions(id=id, reason=reason)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | ID of a customer. |   
+| reason | String | yes | Reason to delete sessions. |  
+
+
+
+Use this API to Delete a list of session of customers who have registered in the application.
+
+*Returned Response:*
+
+
+
+
+[SessionDeleteResponseSchema](#SessionDeleteResponseSchema)
+
+Success. Refer `SessionDeleteResponseSchema` for more details.
 
 
 
@@ -2203,7 +2348,7 @@ Success. Returns a JSON object with the updated platform configurations. Refer `
  | externalId | String? |  yes  |  |
  | meta | HashMap<String,Any>? |  yes  |  |
  | phoneNumbers | ArrayList<[UserPhoneNumbers](#UserPhoneNumbers)>? |  yes  |  |
- | emails | HashMap<String,Any>? |  yes  |  |
+ | emails | ArrayList<[UserEmails](#UserEmails)>? |  yes  |  |
 
 ---
 

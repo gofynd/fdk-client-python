@@ -12,6 +12,14 @@ from .enums import *
 
 
 
+class GenerateSEOContent(BaseSchema):
+    pass
+
+
+class GeneratedSEOContent(BaseSchema):
+    pass
+
+
 class ApplicationLegal(BaseSchema):
     pass
 
@@ -417,6 +425,24 @@ class TagSourceSchema(BaseSchema):
 
 
 
+
+
+class GenerateSEOContent(BaseSchema):
+    # Content swagger.json
+
+    
+    text = fields.Str(required=False)
+    
+
+
+class GeneratedSEOContent(BaseSchema):
+    # Content swagger.json
+
+    
+    title = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
 
 
 class ApplicationLegal(BaseSchema):

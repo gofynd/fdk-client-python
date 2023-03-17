@@ -1517,7 +1517,7 @@ class UpdateUserRequestSchema(BaseSchema):
     
     phone_numbers = fields.List(fields.Nested(UserPhoneNumbers, required=False), required=False)
     
-    emails = fields.Dict(required=False)
+    emails = fields.List(fields.Nested(UserEmails, required=False), required=False)
     
 
 

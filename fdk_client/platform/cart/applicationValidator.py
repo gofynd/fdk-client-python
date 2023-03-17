@@ -616,7 +616,7 @@ class CartValidator:
          
         
     
-    class addItems(BaseSchema):
+    class platformAddItems(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -633,7 +633,7 @@ class CartValidator:
          
         
     
-    class updateCart(BaseSchema):
+    class platformUpdateCart(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -674,7 +674,7 @@ class CartValidator:
          
         
     
-    class getCoupons(BaseSchema):
+    class getAppCoupons(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -872,7 +872,7 @@ class CartValidator:
          
         
     
-    class checkoutCart(BaseSchema):
+    class platformCheckoutCart(BaseSchema):
         
         
         company_id = fields.Str(required=False)
