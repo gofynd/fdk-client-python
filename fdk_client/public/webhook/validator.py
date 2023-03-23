@@ -12,7 +12,6 @@ from ..PublicModel import BaseSchema
     
     
 
-
 class WebhookValidator:
     
     
