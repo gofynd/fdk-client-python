@@ -53,7 +53,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
     
     
         
@@ -66,9 +65,9 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
         
-    
-    
         
         
         
@@ -189,6 +188,17 @@ class ConfigurationValidator:
          
         
     
+    class updateLevelIntegration(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+        
+        level = fields.Str(required=False)
+         
+        
+    
     class getIntegrationByLevelId(BaseSchema):
         
         
@@ -225,19 +235,6 @@ class ConfigurationValidator:
         level = fields.Str(required=False)
         
         uid = fields.Int(required=False)
-        
-        permission = fields.Str(required=False)
-         
-        
-    
-    class updateLevelIntegration(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-        
-        level = fields.Str(required=False)
          
         
     

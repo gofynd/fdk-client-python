@@ -534,7 +534,7 @@ except Exception as e:
 | body | [UpdateUserRequestSchema](#UpdateUserRequestSchema) | yes | Request body |
 
 
-Update user
+Use this API to update user details, Note: Existing emails and phone numbers of user will be replaced directly if phone_numbers or emails field sent in request data.
 
 *Returned Response:*
 

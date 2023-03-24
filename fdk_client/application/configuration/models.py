@@ -1047,8 +1047,6 @@ class ListingPriceFeature(BaseSchema):
     
     value = fields.Str(required=False)
     
-    sort = fields.Str(required=False)
-    
 
 
 class CurrencyFeature(BaseSchema):
@@ -1297,8 +1295,6 @@ class Application(BaseSchema):
     
     domain = fields.Nested(Domain, required=False)
     
-    slug = fields.Str(required=False)
-    
 
 
 class NotFound(BaseSchema):
@@ -1509,7 +1505,7 @@ class InformationAddress(BaseSchema):
     
     address_line = fields.List(fields.Str(required=False), required=False)
     
-    phone = fields.List(fields.Nested(InformationPhone, required=False), required=False)
+    phone = fields.Nested(InformationPhone, required=False)
     
     city = fields.Str(required=False)
     
@@ -1718,8 +1714,6 @@ class ApplicationDetail(BaseSchema):
     domains = fields.List(fields.Nested(Domain, required=False), required=False)
     
     _id = fields.Str(required=False)
-    
-    slug = fields.Str(required=False)
     
 
 
