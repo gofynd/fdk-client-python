@@ -3,7 +3,9 @@
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
 
+
 from ..ApplicationModel import BaseSchema
+
 
 
 from .enums import *
@@ -143,6 +145,10 @@ class ActionPage(BaseSchema):
 
 
 class NavigationReference(BaseSchema):
+    pass
+
+
+class SubNavigationReference(BaseSchema):
     pass
 
 
@@ -919,7 +925,33 @@ class NavigationReference(BaseSchema):
     
     sort_order = fields.Int(required=False)
     
-    sub_navigation = fields.List(fields.Nested(lambda: NavigationReference(exclude=('sub_navigation')), required=False), required=False)
+    sub_navigation = fields.List(fields.Nested(SubNavigationReference, required=False), required=False)
+    
+
+
+class SubNavigationReference(BaseSchema):
+    # Content swagger.json
+
+    
+    acl = fields.List(fields.Str(required=False), required=False)
+    
+    tags = fields.List(fields.Str(required=False), required=False)
+    
+    _locale_language = fields.Nested(LocaleLanguage, required=False)
+    
+    image = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    action = fields.Nested(Action, required=False)
+    
+    active = fields.Boolean(required=False)
+    
+    display = fields.Str(required=False)
+    
+    sort_order = fields.Int(required=False)
+    
+    sub_navigation = fields.List(fields.Nested(NavigationReference, required=False), required=False)
     
 
 

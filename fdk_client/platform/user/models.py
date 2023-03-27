@@ -3,7 +3,9 @@
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
 
+
 from ..PlatformModel import BaseSchema
+
 
 
 
@@ -356,10 +358,6 @@ class Google(BaseSchema):
     pass
 
 
-class SessionExpiry(BaseSchema):
-    pass
-
-
 class UpdateUserRequestSchema(BaseSchema):
     pass
 
@@ -373,6 +371,10 @@ class PhoneNumber(BaseSchema):
 
 
 class Email(BaseSchema):
+    pass
+
+
+class Debug(BaseSchema):
     pass
 
 
@@ -1285,8 +1287,6 @@ class PlatformSchema(BaseSchema):
     
     delete_account_consent = fields.Dict(required=False)
     
-    session_config = fields.Dict(required=False)
-    
 
 
 class LookAndFeel(BaseSchema):
@@ -1459,18 +1459,6 @@ class Google(BaseSchema):
     
 
 
-class SessionExpiry(BaseSchema):
-    # User swagger.json
-
-    
-    duration = fields.Int(required=False)
-    
-    type = fields.Str(required=False)
-    
-    is_rolling = fields.Boolean(required=False)
-    
-
-
 class UpdateUserRequestSchema(BaseSchema):
     # User swagger.json
 
@@ -1517,6 +1505,10 @@ class UserSchema(BaseSchema):
     
     account_type = fields.Str(required=False)
     
+    debug = fields.Nested(Debug, required=False)
+    
+    has_old_password_hash = fields.Boolean(required=False)
+    
     _id = fields.Str(required=False)
     
     created_at = fields.Str(required=False)
@@ -1552,6 +1544,16 @@ class Email(BaseSchema):
     email = fields.Str(required=False)
     
     active = fields.Boolean(required=False)
+    
+
+
+class Debug(BaseSchema):
+    # User swagger.json
+
+    
+    source = fields.Str(required=False)
+    
+    platform = fields.Str(required=False)
     
 
 

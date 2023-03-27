@@ -36,7 +36,6 @@ from .partner.applicationClient import Partner
 
 class PlatformApplicationClient:
     def __init__(self, applicationId, config):
-        self._conf = config
         
         self.lead = Lead(config, applicationId)
         

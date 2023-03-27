@@ -13,13 +13,13 @@ from ..PlatformModel import BaseSchema
     
     
         
-        
-        
     
     
         
     
     
+        
+        
         
     
     
@@ -68,6 +68,20 @@ from ..PlatformModel import BaseSchema
 class InventoryValidator:
     
     
+    class getConfigByCompany(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class suppressStores(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
     class getJobsByCompany(BaseSchema):
         
         
@@ -87,20 +101,6 @@ class InventoryValidator:
         
     
     class createJob(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class suppressStores(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class getConfigByCompany(BaseSchema):
         
         
         company_id = fields.Int(required=False)

@@ -3,7 +3,9 @@
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
 
+
 from ..PlatformModel import BaseSchema
+
 
 
 
@@ -77,18 +79,6 @@ class HistoryRes(BaseSchema):
 
 
 class PointsHistory(BaseSchema):
-    pass
-
-
-class ConfigurationRes(BaseSchema):
-    pass
-
-
-class SetConfigurationRes(BaseSchema):
-    pass
-
-
-class ConfigurationRequest(BaseSchema):
     pass
 
 
@@ -392,38 +382,6 @@ class PointsHistory(BaseSchema):
     updated_at = fields.Str(required=False)
     
     user_id = fields.Str(required=False)
-    
-
-
-class ConfigurationRes(BaseSchema):
-    # Rewards swagger.json
-
-    
-    valid_android_packages = fields.List(fields.Str(required=False), required=False)
-    
-    terms_conditions_link = fields.Str(required=False)
-    
-    application_id = fields.Str(required=False)
-    
-    success = fields.Boolean(required=False)
-    
-
-
-class SetConfigurationRes(BaseSchema):
-    # Rewards swagger.json
-
-    
-    success = fields.Boolean(required=False)
-    
-
-
-class ConfigurationRequest(BaseSchema):
-    # Rewards swagger.json
-
-    
-    valid_android_packages = fields.List(fields.Str(required=False), required=False)
-    
-    terms_conditions_link = fields.Str(required=False)
     
 
 

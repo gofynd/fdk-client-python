@@ -70,10 +70,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
-        
-        
-        
     
     
         
@@ -145,6 +141,29 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
     
     
         
@@ -170,42 +189,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
-        
-        
-        
-        
-        
-    
-    
-        
-    
-    
-        
-    
-    
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
         
         
         
@@ -224,13 +207,46 @@ from ..PlatformModel import BaseSchema
     
     
         
+        
     
     
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
     
+        
+        
+        
+        
+        
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+        
         
     
     
@@ -370,14 +386,6 @@ class OrderValidator:
         lane = fields.Str(required=False)
         
         search_type = fields.Str(required=False)
-        
-        bag_status = fields.Str(required=False)
-        
-        time_to_dispatch = fields.Str(required=False)
-        
-        payment_methods = fields.Str(required=False)
-        
-        tags = fields.Str(required=False)
         
         search_value = fields.Str(required=False)
         
@@ -539,6 +547,54 @@ class OrderValidator:
         customer_id = fields.Str(required=False)
         
         is_priority_sort = fields.Boolean(required=False)
+         
+        
+    
+    class getManifestList(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        status = fields.Str(required=False)
+        
+        store_id = fields.Int(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        search_value = fields.Str(required=False)
+        
+        from_date = fields.Str(required=False)
+        
+        to_date = fields.Str(required=False)
+         
+        
+    
+    class getManifestDetailsWithShipments(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        manifest_id = fields.Str(required=False)
+        
+        from_date = fields.Str(required=False)
+        
+        to_date = fields.Str(required=False)
+        
+        store_id = fields.Int(required=False)
+        
+        page = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        lane = fields.Str(required=False)
+        
+        dp_ids = fields.Int(required=False)
+        
+        search_type = fields.Str(required=False)
+        
+        search_value = fields.Str(required=False)
          
         
     
@@ -737,13 +793,6 @@ class OrderValidator:
          
         
     
-    class postShipmentHistory(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
     class sendSmsNinja(BaseSchema):
         
         
@@ -772,14 +821,14 @@ class OrderValidator:
          
         
     
-    class getChannelConfig(BaseSchema):
+    class createChannelConfig(BaseSchema):
         
         
         company_id = fields.Int(required=False)
          
         
     
-    class createChannelConfig(BaseSchema):
+    class getChannelConfig(BaseSchema):
         
         
         company_id = fields.Int(required=False)

@@ -65,6 +65,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -234,8 +235,6 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
-        
         
         
         
@@ -246,22 +245,14 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
         
         
         
     
     
-        
-        
         
         
         
-        
-        
-        
-        
     
     
         
@@ -283,6 +274,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -290,14 +282,11 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
         
         
         
     
     
-        
         
         
         
@@ -329,6 +318,17 @@ from ..PlatformModel import BaseSchema
 class CatalogValidator:
     
     
+    class getSearchKeywords(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
     class updateSearchKeywords(BaseSchema):
         
         
@@ -341,17 +341,6 @@ class CatalogValidator:
         
     
     class deleteSearchKeywords(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-         
-        
-    
-    class getSearchKeywords(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -380,6 +369,17 @@ class CatalogValidator:
          
         
     
+    class getAutocompleteKeywordDetail(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
     class updateAutocompleteKeyword(BaseSchema):
         
         
@@ -392,17 +392,6 @@ class CatalogValidator:
         
     
     class deleteAutocompleteKeyword(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-         
-        
-    
-    class getAutocompleteKeywordDetail(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -450,6 +439,8 @@ class CatalogValidator:
         application_id = fields.Str(required=False)
         
         item_id = fields.Str(required=False)
+        
+        slice_attr = fields.Str(required=False)
          
         
     
@@ -831,6 +822,8 @@ class CatalogValidator:
         
         filters = fields.Boolean(required=False)
         
+        is_dependent = fields.Boolean(required=False)
+        
         sort_on = fields.Str(required=False)
         
         page_id = fields.Str(required=False)
@@ -956,8 +949,6 @@ class CatalogValidator:
         
         application_id = fields.Str(required=False)
         
-        department_id = fields.Int(required=False)
-        
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
@@ -974,32 +965,6 @@ class CatalogValidator:
         application_id = fields.Str(required=False)
         
         category_uid = fields.Str(required=False)
-         
-        
-    
-    class getApplicationDepartmentListing(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        q = fields.Str(required=False)
-         
-        
-    
-    class updateAppDepartment(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        department_uid = fields.Str(required=False)
          
         
     

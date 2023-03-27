@@ -17,7 +17,7 @@ refresh_token_request_cache = {}
 
 class OAuthClient:
     def __init__(self, config):
-        self.config = config
+        self._conf = config
         self.token = None
         self.refreshToken = None
         self.retryOAuthTokenTimer: Timer = None
@@ -76,27 +76,27 @@ class OAuthClient:
     def startAuthorization(self, options: Dict):
         query = {
             "access_mode": options.get("access_mode", ""),
-            "client_id": self.config.apiKey,
+            "client_id": self._conf.apiKey,
             "redirect_uri": options.get("redirectUri", ""),
             "response_type": "code",
             "scope": ",".join(options.get("scope", [])),
             "state": options.get("state", "")
         }
         queryString = parse.urlencode(query)
-        reqPath = f"/service/panel/authentication/v1.0/company/{self.config.companyId}/oauth/authorize"
+        reqPath = f"/service/panel/authentication/v1.0/company/{self._conf.companyId}/oauth/authorize"
         signingOptions = {
           "method": "GET",
-          "host": self.config.domain,
+          "host": self._conf.domain,
           "path": reqPath,
           "body": None,
           "headers": {},
           "signQuery": True
         }
-        queryString = get_headers_with_signature(self.config.domain, "get",
+        queryString = get_headers_with_signature(self._conf.domain, "get",
                                                             f"/service/panel/authentication/v1.0/company/"
-                                                            f"{self.config.companyId}/oauth/authorize",
+                                                            f"{self._conf.companyId}/oauth/authorize",
                                                             queryString, {}, sign_query=True)
-        return f"{self.config.domain}{signingOptions['path']}?{queryString}"
+        return f"{self._conf.domain}{signingOptions['path']}?{queryString}"
 
     async def verifyCallback(self, query):
         if query.get("error"):
@@ -111,7 +111,7 @@ class OAuthClient:
     # cache refresh token request
     async def renewAccessToken(self, is_offline_token=False):
         if is_offline_token:
-            request_cache_key = f"{self.config.apiKey}:{self.config.companyId}"
+            request_cache_key = f"{self._conf.apiKey}:{self._conf.companyId}"
             if not refresh_token_request_cache[request_cache_key]:
                 refresh_token_request_cache[request_cache_key] = self.getAccesstokenObj(
                     grant_type='refresh_token',
@@ -140,13 +140,13 @@ class OAuthClient:
         elif grant_type == "authorization_code":
             reqData = {**reqData, "code": code}
 
-        token = base64.b64encode(f"{self.config.apiKey}:{self.config.apiSecret}".encode()).decode()
-        url = f"{self.config.domain}/service/panel/authentication/v1.0/company/{self.config.companyId}/oauth/token"
+        token = base64.b64encode(f"{self._conf.apiKey}:{self._conf.apiSecret}".encode()).decode()
+        url = f"{self._conf.domain}/service/panel/authentication/v1.0/company/{self._conf.companyId}/oauth/token"
         headers = {
             "Authorization": f"Basic {token}"
         }
-        headers = get_headers_with_signature(self.config.domain, "post",
-                                             f"/service/panel/authentication/v1.0/company/{self.config.companyId}/oauth/token",
+        headers = get_headers_with_signature(self._conf.domain, "post",
+                                             f"/service/panel/authentication/v1.0/company/{self._conf.companyId}/oauth/token",
                                              "", headers, reqData, ["Authorization"])
         response = await AiohttpHelper().aiohttp_request("POST", url, reqData, headers)
         return response["json"]
@@ -163,24 +163,24 @@ class OAuthClient:
 
     
     async def getOfflineAccessTokenObj(self, scopes, code):
-        url = f"{self.config.domain}/service/panel/authentication/v1.0/company/{self.config.companyId}/oauth/offline-token"
+        url = f"{self._conf.domain}/service/panel/authentication/v1.0/company/{self._conf.companyId}/oauth/offline-token"
         data = {
-            "client_id": self.config.apiKey,
-            "client_secret": self.config.apiSecret,
+            "client_id": self._conf.apiKey,
+            "client_secret": self._conf.apiSecret,
             "grant_type": "authorization_code",
             "scope": scopes,
             "code": code
         }
-        token = base64.b64encode(f"{self.config.apiKey}:{self.config.apiSecret}".encode()).decode()
+        token = base64.b64encode(f"{self._conf.apiKey}:{self._conf.apiSecret}".encode()).decode()
         headers = {
             "Authorization": f"Basic {token}",
             "Content-Type": "application/json"
         }
         # getting x-fp-signature 
         headers = get_headers_with_signature(
-            domain=self.config.domain,
+            domain=self._conf.domain,
             method="post",
-            url=f"/service/panel/authentication/v1.0/company/{self.config.companyId}/oauth/offline-token",
+            url=f"/service/panel/authentication/v1.0/company/{self._conf.companyId}/oauth/offline-token",
             query_string="",
             headers=headers,
             body=data,

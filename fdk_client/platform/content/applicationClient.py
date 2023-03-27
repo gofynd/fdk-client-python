@@ -1176,10 +1176,18 @@ class Content:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/navigations/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
-    async def getPageMeta(self, ):
+    async def getPageMeta(self, page_type=None, cart_pages=None):
         """Use this API to get the meta of custom pages (blog, page) and default system pages (e.g. home/brand/category/collection).
+        :param page_type : Fetch meta by page type. Acceptable values are: system, custom and all : type string
+        :param cart_pages : Pass this param value as `true` to fetch meta with cart pages : type boolean
         """
         payload = {}
+        
+        if page_type:
+            payload["page_type"] = page_type
+        
+        if cart_pages:
+            payload["cart_pages"] = cart_pages
         
 
         # Parameter validation
@@ -1187,8 +1195,8 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pages/meta", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", )
-        query_string = await create_query_string()
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pages/meta", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"page_type","in":"query","description":"Fetch meta by page type. Acceptable values are: system, custom and all","required":false,"schema":{"type":"string","default":"all"}},{"name":"cart_pages","in":"query","description":"Pass this param value as `true` to fetch meta with cart pages","required":false,"schema":{"type":"boolean","default":"false"}}],"query":[{"name":"page_type","in":"query","description":"Fetch meta by page type. Acceptable values are: system, custom and all","required":false,"schema":{"type":"string","default":"all"}},{"name":"cart_pages","in":"query","description":"Pass this param value as `true` to fetch meta with cart pages","required":false,"schema":{"type":"boolean","default":"false"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", page_type=page_type, cart_pages=cart_pages)
+        query_string = await create_query_string(page_type=page_type, cart_pages=cart_pages)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -1198,7 +1206,7 @@ class Content:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pages/meta", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pages/meta", page_type=page_type, cart_pages=cart_pages), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def getPageSpec(self, ):
         """Use this API to get the specifications of a page, such as page type, display name, params and query.
