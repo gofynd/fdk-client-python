@@ -11,6 +11,8 @@ from ..models.BaseSchema import BaseSchema
 
 from .SendOtpEmailCommsTemplate import SendOtpEmailCommsTemplate
 
+from .SendOtpEmailCommsProvider import SendOtpEmailCommsProvider
+
 
 class SendOtpCommsReqEmail(BaseSchema):
     # Communication swagger.json
@@ -21,5 +23,7 @@ class SendOtpCommsReqEmail(BaseSchema):
     expiry = fields.Int(required=False)
     
     template = fields.Nested(SendOtpEmailCommsTemplate, required=False)
+    
+    provider = fields.Nested(SendOtpEmailCommsProvider, required=False)
     
 

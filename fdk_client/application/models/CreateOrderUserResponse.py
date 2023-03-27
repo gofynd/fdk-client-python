@@ -26,7 +26,7 @@ class CreateOrderUserResponse(BaseSchema):
     
     message = fields.Str(required=False)
     
-    callback_url = fields.Str(required=False)
+    success = fields.Boolean(required=False)
     
     status_code = fields.Int(required=False)
     
@@ -36,6 +36,6 @@ class CreateOrderUserResponse(BaseSchema):
     
     data = fields.Nested(CreateOrderUserData, required=False)
     
-    success = fields.Boolean(required=False)
+    callback_url = fields.Str(required=False)
     
 

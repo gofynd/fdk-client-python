@@ -24,9 +24,9 @@ class PaymentMethod(BaseSchema):
     
     payment_meta = fields.Nested(PaymentMeta, required=False)
     
-    mode = fields.Str(required=False)
-    
     amount = fields.Float(required=False)
+    
+    mode = fields.Str(required=False)
     
     payment = fields.Str(required=False)
     

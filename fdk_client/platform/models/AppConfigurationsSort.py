@@ -26,13 +26,13 @@ class AppConfigurationsSort(BaseSchema):
     # Catalog swagger.json
 
     
-    default_key = fields.Str(required=False)
-    
     name = fields.Str(required=False)
     
     key = fields.Str(required=False)
     
     is_active = fields.Boolean(required=False)
+    
+    default_key = fields.Str(required=False)
     
     app_id = fields.Str(required=False)
     

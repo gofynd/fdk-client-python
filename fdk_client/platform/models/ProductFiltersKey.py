@@ -26,8 +26,8 @@ class ProductFiltersKey(BaseSchema):
     
     display = fields.Str(required=False)
     
-    kind = fields.Str(required=False)
-    
     logo = fields.Str(required=False)
+    
+    kind = fields.Str(required=False)
     
 
