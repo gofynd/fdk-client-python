@@ -1113,11 +1113,11 @@ class Products(BaseSchema):
     # Order swagger.json
 
     
-    quantity = fields.Int(required=False)
+    line_number = fields.Int(required=False)
     
     identifier = fields.Str(required=False)
     
-    line_number = fields.Int(required=False)
+    quantity = fields.Int(required=False)
     
 
 
@@ -1135,11 +1135,11 @@ class ProductsReasonsFilters(BaseSchema):
     # Order swagger.json
 
     
-    quantity = fields.Int(required=False)
+    line_number = fields.Int(required=False)
     
     identifier = fields.Str(required=False)
     
-    line_number = fields.Int(required=False)
+    quantity = fields.Int(required=False)
     
 
 
@@ -1187,9 +1187,9 @@ class ProductsDataUpdatesFilters(BaseSchema):
     # Order swagger.json
 
     
-    identifier = fields.Str(required=False)
-    
     line_number = fields.Int(required=False)
+    
+    identifier = fields.Str(required=False)
     
 
 
@@ -1229,9 +1229,9 @@ class ShipmentsRequest(BaseSchema):
     
     products = fields.List(fields.Nested(Products, required=False), required=False)
     
-    reasons = fields.Nested(ReasonsData, required=False)
-    
     identifier = fields.Str(required=False)
+    
+    reasons = fields.Nested(ReasonsData, required=False)
     
     data_updates = fields.Nested(DataUpdates, required=False)
     
@@ -1241,11 +1241,11 @@ class StatuesRequest(BaseSchema):
     # Order swagger.json
 
     
+    status = fields.Str(required=False)
+    
     exclude_bags_next_state = fields.Str(required=False)
     
     shipments = fields.List(fields.Nested(ShipmentsRequest, required=False), required=False)
-    
-    status = fields.Str(required=False)
     
 
 
@@ -1253,15 +1253,15 @@ class UpdateShipmentStatusRequest(BaseSchema):
     # Order swagger.json
 
     
-    force_transition = fields.Boolean(required=False)
-    
-    lock_after_transition = fields.Boolean(required=False)
-    
     task = fields.Boolean(required=False)
     
     statuses = fields.List(fields.Nested(StatuesRequest, required=False), required=False)
     
+    force_transition = fields.Boolean(required=False)
+    
     unlock_before_transition = fields.Boolean(required=False)
+    
+    lock_after_transition = fields.Boolean(required=False)
     
 
 
