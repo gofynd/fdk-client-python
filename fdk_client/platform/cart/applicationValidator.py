@@ -591,7 +591,7 @@ class CartValidator:
         
         to_date = fields.Str(required=False)
         
-        sort_on = fields.Str(required=False)
+        filter_on = fields.Str(required=False)
          
         
     
