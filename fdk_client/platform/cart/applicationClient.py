@@ -736,10 +736,22 @@ class Cart:
                 exclude_headers.append(key)
         return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/share-cart/{token}/{action}", token=token, action=action, cart_id=cart_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
-    async def getCartList(self, ):
+    async def getCartList(self, from_date=None, to_date=None, sort_on=None):
         """Get all carts for the store os user which is created for customer
+        :param from_date :  : type string
+        :param to_date :  : type string
+        :param sort_on :  : type string
         """
         payload = {}
+        
+        if from_date:
+            payload["from_date"] = from_date
+        
+        if to_date:
+            payload["to_date"] = to_date
+        
+        if sort_on:
+            payload["sort_on"] = sort_on
         
 
         # Parameter validation
@@ -747,8 +759,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart-list", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", )
-        query_string = await create_query_string()
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart-list", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"from_date","in":"query","schema":{"type":"string","description":"Cart which are created on or after from_date. Supports ISO date format."}},{"name":"to_date","in":"query","schema":{"type":"string","description":"Cart which are created on or before to_date. Supports ISO date format."}},{"name":"sort_on","in":"query","schema":{"type":"string","description":"on which column to sort on i.e created_on or last_modified"}}],"query":[{"name":"from_date","in":"query","schema":{"type":"string","description":"Cart which are created on or after from_date. Supports ISO date format."}},{"name":"to_date","in":"query","schema":{"type":"string","description":"Cart which are created on or before to_date. Supports ISO date format."}},{"name":"sort_on","in":"query","schema":{"type":"string","description":"on which column to sort on i.e created_on or last_modified"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", from_date=from_date, to_date=to_date, sort_on=sort_on)
+        query_string = await create_query_string(from_date=from_date, to_date=to_date, sort_on=sort_on)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -758,7 +770,7 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart-list", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart-list", from_date=from_date, to_date=to_date, sort_on=sort_on), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def updateCartUser(self, id=None, body=""):
         """Update user id for store os customer after creating customer
