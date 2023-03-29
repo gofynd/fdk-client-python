@@ -27,9 +27,3 @@ class FDKClientValidationError(Exception):
     def __init__(self, message=""):
         """Initialize function __init__."""
         super(FDKClientValidationError, self).__init__(message)
-
-class FDKTokenIssueError(Exception):
-    """FDK Token Issue Error"""
-    def __ini__(self, message=""):
-        """Initialize function __init__."""
-        super(FDKTokenIssueError, self).__init__(message)

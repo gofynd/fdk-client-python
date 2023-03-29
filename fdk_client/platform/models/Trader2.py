@@ -1,0 +1,25 @@
+"""Platform Models."""
+
+from marshmallow import fields, Schema
+from marshmallow.validate import OneOf
+from ..enums import *
+from ..models.BaseSchema import BaseSchema
+
+
+
+
+
+
+
+
+class Trader2(BaseSchema):
+    # Catalog swagger.json
+
+    
+    address = fields.List(fields.Str(required=False), required=False)
+    
+    name = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+
