@@ -7,15 +7,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ActionPageParams(BaseSchema):
-    pass
-
-
-class Asset(BaseSchema):
-    pass
-
-
-class CatalogueOrderRequest(BaseSchema):
+class RewardsArticle(BaseSchema):
     pass
 
 
@@ -23,11 +15,15 @@ class CatalogueOrderResponse(BaseSchema):
     pass
 
 
-class DiscountProperties(BaseSchema):
+class CatalogueOrderRequest(BaseSchema):
     pass
 
 
-class Error(BaseSchema):
+class PointsResponse(BaseSchema):
+    pass
+
+
+class ReferralDetailsUser(BaseSchema):
     pass
 
 
@@ -35,11 +31,27 @@ class Offer(BaseSchema):
     pass
 
 
-class OrderDiscountRequest(BaseSchema):
+class Schedule(BaseSchema):
     pass
 
 
-class OrderDiscountResponse(BaseSchema):
+class Error(BaseSchema):
+    pass
+
+
+class Asset(BaseSchema):
+    pass
+
+
+class ShareMessages(BaseSchema):
+    pass
+
+
+class ReferralDetailsResponse(BaseSchema):
+    pass
+
+
+class OrderDiscountRequest(BaseSchema):
     pass
 
 
@@ -47,19 +59,11 @@ class OrderDiscountRuleBucket(BaseSchema):
     pass
 
 
-class Page(BaseSchema):
+class DiscountProperties(BaseSchema):
     pass
 
 
-class PointsHistory(BaseSchema):
-    pass
-
-
-class PointsHistoryResponse(BaseSchema):
-    pass
-
-
-class PointsResponse(BaseSchema):
+class OrderDiscountResponse(BaseSchema):
     pass
 
 
@@ -71,52 +75,28 @@ class RedeemReferralCodeResponse(BaseSchema):
     pass
 
 
-class ReferralDetailsResponse(BaseSchema):
+class PointsHistoryResponse(BaseSchema):
     pass
 
 
-class ReferralDetailsUser(BaseSchema):
+class PointsHistory(BaseSchema):
     pass
+
+
+class Page(BaseSchema):
+    pass
+
 
 
 class RewardsArticle(BaseSchema):
-    pass
-
-
-class Schedule(BaseSchema):
-    pass
-
-
-class ShareMessages(BaseSchema):
-    pass
-
-
-
-class ActionPageParams(BaseSchema):
     # Rewards swagger.json
 
-    
-    slug = fields.List(fields.Str(required=False), required=False)
-    
-
-
-class Asset(BaseSchema):
-    # Rewards swagger.json
-
-    
-    aspect_ratio = fields.Str(required=False)
     
     id = fields.Str(required=False)
     
-    secure_url = fields.Str(required=False)
+    points = fields.Float(required=False)
     
-
-
-class CatalogueOrderRequest(BaseSchema):
-    # Rewards swagger.json
-
-    
-    articles = fields.List(fields.Nested(RewardsArticle, required=False), required=False)
+    price = fields.Float(required=False)
     
 
 
@@ -128,33 +108,33 @@ class CatalogueOrderResponse(BaseSchema):
     
 
 
-class DiscountProperties(BaseSchema):
+class CatalogueOrderRequest(BaseSchema):
     # Rewards swagger.json
 
     
-    absolute = fields.Float(required=False)
-    
-    currency = fields.Str(required=False)
-    
-    display_absolute = fields.Str(required=False)
-    
-    display_percent = fields.Str(required=False)
-    
-    percent = fields.Float(required=False)
+    articles = fields.List(fields.Nested(RewardsArticle, required=False), required=False)
     
 
 
-class Error(BaseSchema):
+class PointsResponse(BaseSchema):
     # Rewards swagger.json
 
     
-    code = fields.Int(required=False)
+    points = fields.Float(required=False)
     
-    exception = fields.Str(required=False)
+
+
+class ReferralDetailsUser(BaseSchema):
+    # Rewards swagger.json
+
     
-    info = fields.Str(required=False)
+    blocked = fields.Boolean(required=False)
     
-    message = fields.Str(required=False)
+    points = fields.Float(required=False)
+    
+    redeemed = fields.Boolean(required=False)
+    
+    referral_code = fields.Str(required=False)
     
 
 
@@ -192,29 +172,93 @@ class Offer(BaseSchema):
     
 
 
+class Schedule(BaseSchema):
+    # Rewards swagger.json
+
+    
+    duration = fields.Int(required=False)
+    
+    end = fields.Str(required=False)
+    
+    start = fields.Str(required=False)
+    
+    cron = fields.Str(required=False)
+    
+
+
+class Error(BaseSchema):
+    # Rewards swagger.json
+
+    
+    code = fields.Int(required=False)
+    
+    exception = fields.Str(required=False)
+    
+    info = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
+    
+
+
+class Asset(BaseSchema):
+    # Rewards swagger.json
+
+    
+    aspect_ratio = fields.Str(required=False)
+    
+    id = fields.Str(required=False)
+    
+    secure_url = fields.Str(required=False)
+    
+
+
+class ShareMessages(BaseSchema):
+    # Rewards swagger.json
+
+    
+    email = fields.Int(required=False)
+    
+    facebook = fields.Str(required=False)
+    
+    fallback = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
+    
+    messenger = fields.Str(required=False)
+    
+    sms = fields.Str(required=False)
+    
+    text = fields.Str(required=False)
+    
+    twitter = fields.Str(required=False)
+    
+    whatsapp = fields.Str(required=False)
+    
+
+
+class ReferralDetailsResponse(BaseSchema):
+    # Rewards swagger.json
+
+    
+    referral = fields.Nested(Offer, required=False)
+    
+    share = fields.Nested(ShareMessages, required=False)
+    
+    user = fields.Nested(ReferralDetailsUser, required=False)
+    
+    referrer_info = fields.Str(required=False)
+    
+    terms_conditions_link = fields.Str(required=False)
+    
+
+
 class OrderDiscountRequest(BaseSchema):
     # Rewards swagger.json
 
     
+    order_amount = fields.Float(required=False)
+    
     currency = fields.Str(required=False)
-    
-    order_amount = fields.Float(required=False)
-    
-
-
-class OrderDiscountResponse(BaseSchema):
-    # Rewards swagger.json
-
-    
-    applied_rule_bucket = fields.Nested(OrderDiscountRuleBucket, required=False)
-    
-    base_discount = fields.Nested(DiscountProperties, required=False)
-    
-    discount = fields.Nested(DiscountProperties, required=False)
-    
-    order_amount = fields.Float(required=False)
-    
-    points = fields.Float(required=False)
     
 
 
@@ -234,23 +278,71 @@ class OrderDiscountRuleBucket(BaseSchema):
     
 
 
-class Page(BaseSchema):
+class DiscountProperties(BaseSchema):
     # Rewards swagger.json
 
     
-    current = fields.Int(required=False)
+    absolute = fields.Float(required=False)
     
-    has_next = fields.Boolean(required=False)
+    currency = fields.Str(required=False)
     
-    has_previous = fields.Boolean(required=False)
+    display_absolute = fields.Str(required=False)
     
-    item_total = fields.Int(required=False)
+    display_percent = fields.Str(required=False)
     
-    next_id = fields.Str(required=False)
+    percent = fields.Float(required=False)
     
-    size = fields.Int(required=False)
+
+
+class OrderDiscountResponse(BaseSchema):
+    # Rewards swagger.json
+
     
-    type = fields.Str(required=False)
+    order_amount = fields.Float(required=False)
+    
+    points = fields.Float(required=False)
+    
+    discount = fields.Nested(DiscountProperties, required=False)
+    
+    base_discount = fields.Nested(DiscountProperties, required=False)
+    
+    applied_rule_bucket = fields.Nested(OrderDiscountRuleBucket, required=False)
+    
+
+
+class RedeemReferralCodeRequest(BaseSchema):
+    # Rewards swagger.json
+
+    
+    device_id = fields.Str(required=False)
+    
+    referral_code = fields.Str(required=False)
+    
+
+
+class RedeemReferralCodeResponse(BaseSchema):
+    # Rewards swagger.json
+
+    
+    redeemed = fields.Boolean(required=False)
+    
+    message = fields.Str(required=False)
+    
+    referrer_info = fields.Str(required=False)
+    
+    referrer_id = fields.Str(required=False)
+    
+    points = fields.Float(required=False)
+    
+
+
+class PointsHistoryResponse(BaseSchema):
+    # Rewards swagger.json
+
+    
+    items = fields.List(fields.Nested(PointsHistory, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
     
 
 
@@ -288,125 +380,23 @@ class PointsHistory(BaseSchema):
     
 
 
-class PointsHistoryResponse(BaseSchema):
+class Page(BaseSchema):
     # Rewards swagger.json
 
     
-    items = fields.List(fields.Nested(PointsHistory, required=False), required=False)
+    current = fields.Int(required=False)
     
-    page = fields.Nested(Page, required=False)
+    has_next = fields.Boolean(required=False)
     
-
-
-class PointsResponse(BaseSchema):
-    # Rewards swagger.json
-
+    has_previous = fields.Boolean(required=False)
     
-    points = fields.Float(required=False)
+    item_total = fields.Int(required=False)
     
-
-
-class RedeemReferralCodeRequest(BaseSchema):
-    # Rewards swagger.json
-
+    next_id = fields.Str(required=False)
     
-    device_id = fields.Str(required=False)
+    size = fields.Int(required=False)
     
-    referral_code = fields.Str(required=False)
-    
-
-
-class RedeemReferralCodeResponse(BaseSchema):
-    # Rewards swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-    points = fields.Float(required=False)
-    
-    redeemed = fields.Boolean(required=False)
-    
-    referrer_id = fields.Str(required=False)
-    
-    referrer_info = fields.Str(required=False)
-    
-
-
-class ReferralDetailsResponse(BaseSchema):
-    # Rewards swagger.json
-
-    
-    referral = fields.Nested(Offer, required=False)
-    
-    referrer_info = fields.Str(required=False)
-    
-    share = fields.Nested(ShareMessages, required=False)
-    
-    user = fields.Nested(ReferralDetailsUser, required=False)
-    
-
-
-class ReferralDetailsUser(BaseSchema):
-    # Rewards swagger.json
-
-    
-    blocked = fields.Boolean(required=False)
-    
-    points = fields.Float(required=False)
-    
-    redeemed = fields.Boolean(required=False)
-    
-    referral_code = fields.Str(required=False)
-    
-
-
-class RewardsArticle(BaseSchema):
-    # Rewards swagger.json
-
-    
-    id = fields.Str(required=False)
-    
-    points = fields.Float(required=False)
-    
-    price = fields.Float(required=False)
-    
-
-
-class Schedule(BaseSchema):
-    # Rewards swagger.json
-
-    
-    cron = fields.Str(required=False)
-    
-    duration = fields.Int(required=False)
-    
-    end = fields.Str(required=False)
-    
-    start = fields.Str(required=False)
-    
-
-
-class ShareMessages(BaseSchema):
-    # Rewards swagger.json
-
-    
-    email = fields.Str(required=False)
-    
-    facebook = fields.Str(required=False)
-    
-    fallback = fields.Str(required=False)
-    
-    message = fields.Str(required=False)
-    
-    messenger = fields.Str(required=False)
-    
-    sms = fields.Str(required=False)
-    
-    text = fields.Str(required=False)
-    
-    twitter = fields.Str(required=False)
-    
-    whatsapp = fields.Str(required=False)
+    type = fields.Str(required=False)
     
 
 

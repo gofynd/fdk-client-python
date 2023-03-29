@@ -32,6 +32,8 @@ class ServiceabilityValidator:
         is_active = fields.Boolean(required=False)
         
         channel_ids = fields.Str(required=False)
+        
+        q = fields.Str(required=False)
          
     
     class getCompanyStoreView(BaseSchema):
@@ -58,6 +60,13 @@ class ServiceabilityValidator:
         company_id = fields.Int(required=False)
          
     
+    class getZoneFromPincodeView(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+    
     class getZonesFromApplicationIdView(BaseSchema):
         
         company_id = fields.Int(required=False)
@@ -71,13 +80,6 @@ class ServiceabilityValidator:
         zone_id = fields.List(fields.Str(required=False), required=False)
         
         q = fields.Str(required=False)
-         
-    
-    class getZoneFromPincodeView(BaseSchema):
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
          
     
     class getStore(BaseSchema):
