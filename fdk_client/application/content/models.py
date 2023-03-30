@@ -24,7 +24,7 @@ class PathMappingSchema(BaseSchema):
     pass
 
 
-class RedirectionSchema(BaseSchema):
+class PathSourceSchema(BaseSchema):
     pass
 
 
@@ -463,23 +463,27 @@ class PathMappingSchema(BaseSchema):
     
     application = fields.Str(required=False)
     
-    redirections = fields.List(fields.Nested(RedirectionSchema, required=False), required=False)
-    
     _id = fields.Str(required=False)
+    
+    redirect_from = fields.Str(required=False)
+    
+    redirect_to = fields.Str(required=False)
     
     updated_at = fields.Str(required=False)
     
     created_at = fields.Str(required=False)
     
+    __source = fields.Nested(PathSourceSchema, required=False)
+    
 
 
-class RedirectionSchema(BaseSchema):
+class PathSourceSchema(BaseSchema):
     # Content swagger.json
 
     
-    redirect_from = fields.Str(required=False)
+    type = fields.Str(required=False)
     
-    redirect_to = fields.Str(required=False)
+    id = fields.Str(required=False)
     
 
 
@@ -931,7 +935,7 @@ class NavigationReference(BaseSchema):
     
     sort_order = fields.Int(required=False)
     
-    sub_navigation = fields.List(fields.Raw(required=False), required=False)
+    sub_navigation = fields.List(fields.Nested(lambda: NavigationReference(exclude=('sub_navigation')), required=False), required=False)
     
 
 
@@ -1060,6 +1064,8 @@ class CreateTagSchema(BaseSchema):
     position = fields.Str(required=False)
     
     attributes = fields.Dict(required=False)
+    
+    pages = fields.List(fields.Dict(required=False), required=False)
     
     content = fields.Str(required=False)
     
@@ -1846,6 +1852,8 @@ class TagSchema(BaseSchema):
     attributes = fields.Dict(required=False)
     
     content = fields.Str(required=False)
+    
+    pages = fields.List(fields.Dict(required=False), required=False)
     
     __source = fields.Nested(TagSourceSchema, required=False)
     

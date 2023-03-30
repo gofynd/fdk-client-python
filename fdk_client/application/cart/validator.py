@@ -118,6 +118,7 @@ from ..ApplicationModel import BaseSchema
         
         
         
+        
     
     
         
@@ -374,6 +375,8 @@ class CartValidator:
         page_size = fields.Int(required=False)
         
         promotion_group = fields.Str(required=False)
+        
+        store_id = fields.Int(required=False)
          
         
     

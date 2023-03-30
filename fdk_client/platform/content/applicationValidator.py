@@ -232,6 +232,23 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
     
     
         
@@ -798,7 +815,7 @@ class ContentValidator:
          
         
     
-    class updatePathRedirectionRules(BaseSchema):
+    class addPathRedirectionRules(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -813,6 +830,43 @@ class ContentValidator:
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        page_no = fields.Int(required=False)
+         
+        
+    
+    class getPathRedirectionRule(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        path_id = fields.Str(required=False)
+         
+        
+    
+    class updatePathRedirectionRules(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        path_id = fields.Str(required=False)
+         
+        
+    
+    class deletePathRedirectionRules(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        path_id = fields.Str(required=False)
          
         
     
