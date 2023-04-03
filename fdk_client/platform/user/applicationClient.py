@@ -46,7 +46,21 @@ class User:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/list", q=q, page_size=page_size, page_no=page_no), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/list", q=q, page_size=page_size, page_no=page_no), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        from .models import CustomerListResponseSchema
+        schema = CustomerListResponseSchema()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getCustomers")
+            print(e)
+            
+        
+
+        return response
     
     async def searchUsers(self, q=None):
         """Use this API to retrieve an existing user from a list.
@@ -74,7 +88,21 @@ class User:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/search", q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/search", q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        from .models import UserSearchResponseSchema
+        schema = UserSearchResponseSchema()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for searchUsers")
+            print(e)
+            
+        
+
+        return response
     
     async def createUser(self, body=""):
         """Create user
@@ -103,7 +131,21 @@ class User:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        
+        
+
+        from .models import CreateUserResponseSchema
+        schema = CreateUserResponseSchema()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for createUser")
+            print(e)
+            
+        
+
+        return response
     
     async def blockOrUnblockUsers(self, body=""):
         """Block/Unblock user
@@ -132,7 +174,21 @@ class User:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/activation", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/activation", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        
+        
+
+        from .models import BlockUserSuccess
+        schema = BlockUserSuccess()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for blockOrUnblockUsers")
+            print(e)
+            
+        
+
+        return response
     
     async def archiveUser(self, body=""):
         """archive user
@@ -161,7 +217,21 @@ class User:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/archive", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/archive", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        
+        
+
+        from .models import ArchiveUserSuccess
+        schema = ArchiveUserSuccess()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for archiveUser")
+            print(e)
+            
+        
+
+        return response
     
     async def unDeleteUser(self, body=""):
         """undelete user who deleted from application and have not elapsed the platform configured delete days
@@ -190,7 +260,21 @@ class User:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/undelete", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/undelete", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        
+        
+
+        from .models import UnDeleteUserSuccess
+        schema = UnDeleteUserSuccess()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for unDeleteUser")
+            print(e)
+            
+        
+
+        return response
     
     async def updateUser(self, user_id=None, body=""):
         """Update user
@@ -223,7 +307,21 @@ class User:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/{user_id}", user_id=user_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/{user_id}", user_id=user_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        
+        
+
+        from .models import CreateUserResponseSchema
+        schema = CreateUserResponseSchema()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for updateUser")
+            print(e)
+            
+        
+
+        return response
     
     async def createUserSession(self, body=""):
         """Create user session
@@ -252,7 +350,21 @@ class User:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/session", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/session", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        
+        
+
+        from .models import CreateUserSessionResponseSchema
+        schema = CreateUserSessionResponseSchema()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for createUserSession")
+            print(e)
+            
+        
+
+        return response
     
     async def getActiveSessions(self, id=None):
         """Use this API to retrieve a list of session of customers who have registered in the application.
@@ -280,7 +392,21 @@ class User:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/sesions", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/sesions", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        from .models import SessionListResponseSchema
+        schema = SessionListResponseSchema()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getActiveSessions")
+            print(e)
+            
+        
+
+        return response
     
     async def deleteActiveSessions(self, id=None):
         """Use this API to Delete a list of session of customers who have registered in the application.
@@ -308,7 +434,21 @@ class User:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/sesions", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/sesions", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        from .models import SessionDeleteResponseSchema
+        schema = SessionDeleteResponseSchema()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for deleteActiveSessions")
+            print(e)
+            
+        
+
+        return response
     
     async def getPlatformConfig(self, ):
         """Use this API to get all the platform configurations such as mobile image, desktop image, social logins, and all other text.
@@ -332,7 +472,21 @@ class User:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/platform/config", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/platform/config", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        from .models import PlatformSchema
+        schema = PlatformSchema()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getPlatformConfig")
+            print(e)
+            
+        
+
+        return response
     
     async def updatePlatformConfig(self, body=""):
         """Use this API to edit the existing platform configurations such as mobile image, desktop image, social logins, and all other text.
@@ -361,6 +515,20 @@ class User:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/platform/config", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/platform/config", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        
+        
+
+        from .models import PlatformSchema
+        schema = PlatformSchema()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for updatePlatformConfig")
+            print(e)
+            
+        
+
+        return response
     
 

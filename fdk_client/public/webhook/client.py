@@ -49,7 +49,21 @@ class Webhook:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["fetchAllWebhookEvents"]).netloc, "get", await create_url_without_domain("/service/common/webhook/v1.0/events", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["fetchAllWebhookEvents"]).netloc, "get", await create_url_without_domain("/service/common/webhook/v1.0/events", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        from .models import EventConfigResponse
+        schema = EventConfigResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for fetchAllWebhookEvents")
+            print(e)
+            
+        
+
+        return response
     
     async def queryWebhookEventDetails(self, body=""):
         """Get Webhook Event Details for provided events
@@ -74,6 +88,20 @@ class Webhook:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["queryWebhookEventDetails"]).netloc, "post", await create_url_without_domain("/service/common/webhook/v1.0/events/query-event-details", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["queryWebhookEventDetails"]).netloc, "post", await create_url_without_domain("/service/common/webhook/v1.0/events/query-event-details", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        from .models import EventConfigResponse
+        schema = EventConfigResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for queryWebhookEventDetails")
+            print(e)
+            
+        
+
+        return response
     
 

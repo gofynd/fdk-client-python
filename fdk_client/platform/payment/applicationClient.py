@@ -34,7 +34,21 @@ class Payment:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/aggregator/request", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/aggregator/request", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        from .models import PaymentGatewayConfigResponse
+        schema = PaymentGatewayConfigResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getBrandPaymentGatewayConfig")
+            print(e)
+            
+        
+
+        return response
     
     async def saveBrandPaymentGatewayConfig(self, body=""):
         """Save Config Secret For Brand Payment Gateway
@@ -63,7 +77,21 @@ class Payment:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/aggregator/request", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/aggregator/request", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        
+        
+
+        from .models import PaymentGatewayToBeReviewed
+        schema = PaymentGatewayToBeReviewed()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for saveBrandPaymentGatewayConfig")
+            print(e)
+            
+        
+
+        return response
     
     async def updateBrandPaymentGatewayConfig(self, body=""):
         """Save Config Secret For Brand Payment Gateway
@@ -92,7 +120,21 @@ class Payment:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/aggregator/request", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/aggregator/request", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        
+        
+
+        from .models import PaymentGatewayToBeReviewed
+        schema = PaymentGatewayToBeReviewed()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for updateBrandPaymentGatewayConfig")
+            print(e)
+            
+        
+
+        return response
     
     async def getPaymentModeRoutes(self, refresh=None, request_type=None):
         """Use this API to get Get All Valid Payment Options for making payment
@@ -124,7 +166,21 @@ class Payment:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options", refresh=refresh, request_type=request_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options", refresh=refresh, request_type=request_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        from .models import PaymentOptionsResponse
+        schema = PaymentOptionsResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getPaymentModeRoutes")
+            print(e)
+            
+        
+
+        return response
     
     async def getBankAccountDetailsOpenAPI(self, order_id=None, request_hash=None):
         """Use this API to get saved bank details for returned/cancelled order using order id.
@@ -156,7 +212,21 @@ class Payment:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund/account", order_id=order_id, request_hash=request_hash, ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund/account", order_id=order_id, request_hash=request_hash, ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        from .models import RefundAccountResponse
+        schema = RefundAccountResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getBankAccountDetailsOpenAPI")
+            print(e)
+            
+        
+
+        return response
     
     async def addRefundBankAccountUsingOTP(self, body=""):
         """Use this API to save bank details for returned/cancelled order to refund amount in his account.
@@ -185,7 +255,21 @@ class Payment:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund/account", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund/account", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        
+        
+
+        from .models import RefundAccountResponse
+        schema = RefundAccountResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for addRefundBankAccountUsingOTP")
+            print(e)
+            
+        
+
+        return response
     
     async def getUserOrderBeneficiaries(self, order_id=None):
         """Get all active  beneficiary details added by the user for refund
@@ -213,7 +297,21 @@ class Payment:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund/accounts/order", order_id=order_id, ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund/accounts/order", order_id=order_id, ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        from .models import OrderBeneficiaryResponse
+        schema = OrderBeneficiaryResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getUserOrderBeneficiaries")
+            print(e)
+            
+        
+
+        return response
     
     async def getUserBeneficiaries(self, order_id=None):
         """Get all active  beneficiary details added by the user for refund
@@ -241,7 +339,21 @@ class Payment:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund/accounts/user", order_id=order_id, ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund/accounts/user", order_id=order_id, ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        from .models import OrderBeneficiaryResponse
+        schema = OrderBeneficiaryResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getUserBeneficiaries")
+            print(e)
+            
+        
+
+        return response
     
     async def confirmPayment(self, body=""):
         """Use this API to confirm payment after payment gateway accepted payment.
@@ -270,7 +382,21 @@ class Payment:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/confirm", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/confirm", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        
+        
+
+        from .models import PaymentConfirmationResponse
+        schema = PaymentConfirmationResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for confirmPayment")
+            print(e)
+            
+        
+
+        return response
     
     async def getUserCODlimitRoutes(self, merchant_user_id=None, mobile_no=None):
         """Use this API to get user cod limit and reamining limit for the payment
@@ -302,7 +428,21 @@ class Payment:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/user-cod", merchant_user_id=merchant_user_id, mobile_no=mobile_no), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/user-cod", merchant_user_id=merchant_user_id, mobile_no=mobile_no), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        from .models import GetUserCODLimitResponse
+        schema = GetUserCODLimitResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getUserCODlimitRoutes")
+            print(e)
+            
+        
+
+        return response
     
     async def setUserCODlimitRoutes(self, body=""):
         """Use this API to set cod option as true or false for the payment
@@ -331,6 +471,20 @@ class Payment:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/user-cod", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/user-cod", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        
+        
+
+        from .models import SetCODOptionResponse
+        schema = SetCODOptionResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for setUserCODlimitRoutes")
+            print(e)
+            
+        
+
+        return response
     
 

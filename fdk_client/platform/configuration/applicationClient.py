@@ -38,7 +38,21 @@ class Configuration:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/build/{platform_type}/configuration", platform_type=platform_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/build/{platform_type}/configuration", platform_type=platform_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        from .models import MobileAppConfiguration
+        schema = MobileAppConfiguration()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getBuildConfig")
+            print(e)
+            
+        
+
+        return response
     
     async def updateBuildConfig(self, platform_type=None, body=""):
         """Update build config for next build
@@ -71,7 +85,21 @@ class Configuration:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/build/{platform_type}/configuration", platform_type=platform_type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/build/{platform_type}/configuration", platform_type=platform_type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        
+        
+
+        from .models import MobileAppConfiguration
+        schema = MobileAppConfiguration()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for updateBuildConfig")
+            print(e)
+            
+        
+
+        return response
     
     async def getPreviousVersions(self, platform_type=None):
         """Get previous build versions
@@ -99,7 +127,21 @@ class Configuration:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/build/{platform_type}/versions", platform_type=platform_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/build/{platform_type}/versions", platform_type=platform_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        from .models import BuildVersionHistory
+        schema = BuildVersionHistory()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getPreviousVersions")
+            print(e)
+            
+        
+
+        return response
     
     async def getAppFeatures(self, ):
         """Get features of application
@@ -123,7 +165,21 @@ class Configuration:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/feature", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/feature", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        from .models import AppFeatureResponse
+        schema = AppFeatureResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getAppFeatures")
+            print(e)
+            
+        
+
+        return response
     
     async def updateAppFeatures(self, body=""):
         """Update features of application
@@ -152,7 +208,21 @@ class Configuration:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/feature", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/feature", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        
+        
+
+        from .models import AppFeature
+        schema = AppFeature()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for updateAppFeatures")
+            print(e)
+            
+        
+
+        return response
     
     async def getAppBasicDetails(self, ):
         """Get basic application details like name
@@ -176,7 +246,21 @@ class Configuration:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        from .models import ApplicationDetail
+        schema = ApplicationDetail()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getAppBasicDetails")
+            print(e)
+            
+        
+
+        return response
     
     async def updateAppBasicDetails(self, body=""):
         """Add or update application's basic details
@@ -205,7 +289,21 @@ class Configuration:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        
+        
+
+        from .models import ApplicationDetail
+        schema = ApplicationDetail()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for updateAppBasicDetails")
+            print(e)
+            
+        
+
+        return response
     
     async def getAppContactInfo(self, ):
         """Get Application Current Information. This includes information about social links, address and contact information of company/seller/brand of the application.
@@ -229,7 +327,21 @@ class Configuration:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/information", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/information", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        from .models import ApplicationInformation
+        schema = ApplicationInformation()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getAppContactInfo")
+            print(e)
+            
+        
+
+        return response
     
     async def updateAppContactInfo(self, body=""):
         """Save Application Current Information. This includes information about social links, address and contact information of an application.
@@ -258,7 +370,21 @@ class Configuration:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/information", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/information", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        
+        
+
+        from .models import ApplicationInformation
+        schema = ApplicationInformation()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for updateAppContactInfo")
+            print(e)
+            
+        
+
+        return response
     
     async def getAppApiTokens(self, ):
         """Get social tokens.
@@ -282,7 +408,21 @@ class Configuration:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/token", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/token", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        from .models import TokenResponse
+        schema = TokenResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getAppApiTokens")
+            print(e)
+            
+        
+
+        return response
     
     async def updateAppApiTokens(self, body=""):
         """Add social tokens.
@@ -311,7 +451,21 @@ class Configuration:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/token", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/token", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        
+        
+
+        from .models import TokenResponse
+        schema = TokenResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for updateAppApiTokens")
+            print(e)
+            
+        
+
+        return response
     
     async def getAppCompanies(self, uid=None, page_no=None, page_size=None):
         """Application inventory enabled companies.
@@ -347,7 +501,21 @@ class Configuration:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/companies", uid=uid, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/companies", uid=uid, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        from .models import CompaniesResponse
+        schema = CompaniesResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getAppCompanies")
+            print(e)
+            
+        
+
+        return response
     
     async def getAppStores(self, page_no=None, page_size=None):
         """Application inventory enabled stores.
@@ -379,7 +547,21 @@ class Configuration:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/stores", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/stores", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        from .models import StoresResponse
+        schema = StoresResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getAppStores")
+            print(e)
+            
+        
+
+        return response
     
     async def getInventoryConfig(self, ):
         """Get application configuration for various features and data
@@ -403,7 +585,21 @@ class Configuration:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/configuration", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/configuration", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        from .models import ApplicationInventory
+        schema = ApplicationInventory()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getInventoryConfig")
+            print(e)
+            
+        
+
+        return response
     
     async def updateInventoryConfig(self, body=""):
         """Update application configuration for various features and data
@@ -432,7 +628,21 @@ class Configuration:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/configuration", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/configuration", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        
+        
+
+        from .models import ApplicationInventory
+        schema = ApplicationInventory()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for updateInventoryConfig")
+            print(e)
+            
+        
+
+        return response
     
     async def partiallyUpdateInventoryConfig(self, body=""):
         """Partially update application configuration for various features and data
@@ -461,7 +671,21 @@ class Configuration:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/configuration", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/configuration", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        
+        
+
+        from .models import ApplicationInventory
+        schema = ApplicationInventory()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for partiallyUpdateInventoryConfig")
+            print(e)
+            
+        
+
+        return response
     
     async def getAppCurrencyConfig(self, ):
         """Get application enabled currency list
@@ -485,7 +709,21 @@ class Configuration:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/currency", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/currency", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        from .models import AppSupportedCurrency
+        schema = AppSupportedCurrency()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getAppCurrencyConfig")
+            print(e)
+            
+        
+
+        return response
     
     async def updateAppCurrencyConfig(self, body=""):
         """Add initial application supported currency for various features and data. Default INR will be enabled.
@@ -514,7 +752,21 @@ class Configuration:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/currency", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/currency", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        
+        
+
+        from .models import AppSupportedCurrency
+        schema = AppSupportedCurrency()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for updateAppCurrencyConfig")
+            print(e)
+            
+        
+
+        return response
     
     async def getAppSupportedCurrency(self, ):
         """Use this API to get a list of currencies allowed in the current application. Moreover, get the name, code, symbol, and the decimal digits of the currencies.
@@ -538,7 +790,21 @@ class Configuration:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/currency/supported", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/currency/supported", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        from .models import AppCurrencyResponse
+        schema = AppCurrencyResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getAppSupportedCurrency")
+            print(e)
+            
+        
+
+        return response
     
     async def getOrderingStoresByFilter(self, page_no=None, page_size=None, body=""):
         """Get ordering store by filter
@@ -575,7 +841,21 @@ class Configuration:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ordering-store/stores/filter", page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ordering-store/stores/filter", page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        
+        
+
+        from .models import OrderingStores
+        schema = OrderingStores()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getOrderingStoresByFilter")
+            print(e)
+            
+        
+
+        return response
     
     async def updateOrderingStoreConfig(self, body=""):
         """Add/Update ordering store config.
@@ -604,7 +884,21 @@ class Configuration:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ordering-store", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ordering-store", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        
+        
+
+        from .models import DeploymentMeta
+        schema = DeploymentMeta()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for updateOrderingStoreConfig")
+            print(e)
+            
+        
+
+        return response
     
     async def getStaffOrderingStores(self, page_no=None, page_size=None, q=None):
         """Use this API to retrieve the details of all stores access given to the staff member (the selling locations where the application will be utilized for placing orders).
@@ -640,7 +934,21 @@ class Configuration:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ordering-store/staff-stores", page_no=page_no, page_size=page_size, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ordering-store/staff-stores", page_no=page_no, page_size=page_size, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        from .models import OrderingStoresResponse
+        schema = OrderingStoresResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getStaffOrderingStores")
+            print(e)
+            
+        
+
+        return response
     
     async def getDomains(self, ):
         """Get attached domain list.
@@ -664,7 +972,21 @@ class Configuration:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/domain", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/domain", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        from .models import DomainsResponse
+        schema = DomainsResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getDomains")
+            print(e)
+            
+        
+
+        return response
     
     async def addDomain(self, body=""):
         """Add new domain to application.
@@ -693,7 +1015,21 @@ class Configuration:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/domain", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/domain", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        
+        
+
+        from .models import Domain
+        schema = Domain()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for addDomain")
+            print(e)
+            
+        
+
+        return response
     
     async def removeDomainById(self, id=None):
         """Remove attached domain.
@@ -721,7 +1057,21 @@ class Configuration:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/domain/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/domain/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        from .models import SuccessMessageResponse
+        schema = SuccessMessageResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for removeDomainById")
+            print(e)
+            
+        
+
+        return response
     
     async def changeDomainType(self, body=""):
         """Change a domain to Primary or Shortlink domain
@@ -750,7 +1100,21 @@ class Configuration:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/domain/set-domain", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/domain/set-domain", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        
+        
+
+        from .models import DomainsResponse
+        schema = DomainsResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for changeDomainType")
+            print(e)
+            
+        
+
+        return response
     
     async def getDomainStatus(self, body=""):
         """Get domain connected status. Check if domain is live and mapped to appropriate IP to fynd servers.
@@ -779,7 +1143,21 @@ class Configuration:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/domain/domain-status", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/domain/domain-status", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        
+        
+
+        from .models import DomainStatusResponse
+        schema = DomainStatusResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getDomainStatus")
+            print(e)
+            
+        
+
+        return response
     
     async def getApplicationById(self, ):
         """Get application data from id
@@ -803,6 +1181,20 @@ class Configuration:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        from .models import Application
+        schema = Application()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getApplicationById")
+            print(e)
+            
+        
+
+        return response
     
 

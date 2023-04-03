@@ -58,7 +58,21 @@ class Lead:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getTicket"]).netloc, "get", await create_url_without_domain("/service/application/lead/v1.0/ticket/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getTicket"]).netloc, "get", await create_url_without_domain("/service/application/lead/v1.0/ticket/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+                
+        
+
+        from .models import Ticket
+        schema = Ticket()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getTicket")
+            print(e)
+
+        
+
+        return response
     
     async def createHistory(self, id=None, body=""):
         """Create history for specific Ticket, this history is seen on ticket detail page, this can be comment, log or rating.
@@ -92,7 +106,21 @@ class Lead:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["createHistory"]).netloc, "post", await create_url_without_domain("/service/application/lead/v1.0/ticket/{id}/history", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["createHistory"]).netloc, "post", await create_url_without_domain("/service/application/lead/v1.0/ticket/{id}/history", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+                
+        
+
+        from .models import TicketHistory
+        schema = TicketHistory()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for createHistory")
+            print(e)
+
+        
+
+        return response
     
     async def createTicket(self, body=""):
         """This is used to Create Ticket.
@@ -122,7 +150,21 @@ class Lead:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["createTicket"]).netloc, "post", await create_url_without_domain("/service/application/lead/v1.0/ticket/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["createTicket"]).netloc, "post", await create_url_without_domain("/service/application/lead/v1.0/ticket/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+                
+        
+
+        from .models import Ticket
+        schema = Ticket()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for createTicket")
+            print(e)
+
+        
+
+        return response
     
     async def getCustomForm(self, slug=None, body=""):
         """Get specific Custom Form using it's slug, this is used to view the form.
@@ -151,7 +193,21 @@ class Lead:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCustomForm"]).netloc, "get", await create_url_without_domain("/service/application/lead/v1.0/form/{slug}", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCustomForm"]).netloc, "get", await create_url_without_domain("/service/application/lead/v1.0/form/{slug}", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+                
+        
+
+        from .models import CustomForm
+        schema = CustomForm()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getCustomForm")
+            print(e)
+
+        
+
+        return response
     
     async def submitCustomForm(self, slug=None, body=""):
         """Submit Response for a specific Custom Form using it's slug, this response is then used to create a ticket on behalf of the user.
@@ -185,7 +241,21 @@ class Lead:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["submitCustomForm"]).netloc, "post", await create_url_without_domain("/service/application/lead/v1.0/form/{slug}/submit", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["submitCustomForm"]).netloc, "post", await create_url_without_domain("/service/application/lead/v1.0/form/{slug}/submit", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+                
+        
+
+        from .models import SubmitCustomFormResponse
+        schema = SubmitCustomFormResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for submitCustomForm")
+            print(e)
+
+        
+
+        return response
     
     async def getParticipantsInsideVideoRoom(self, unique_name=None, body=""):
         """Get participants of a specific Video Room using it's unique name, this can be used to check if people are already there in the room and also to show their names.
@@ -214,7 +284,21 @@ class Lead:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getParticipantsInsideVideoRoom"]).netloc, "get", await create_url_without_domain("/service/application/lead/v1.0/video/room/{unique_name}/participants", unique_name=unique_name), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getParticipantsInsideVideoRoom"]).netloc, "get", await create_url_without_domain("/service/application/lead/v1.0/video/room/{unique_name}/participants", unique_name=unique_name), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+                
+        
+
+        from .models import GetParticipantsInsideVideoRoomResponse
+        schema = GetParticipantsInsideVideoRoomResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getParticipantsInsideVideoRoom")
+            print(e)
+
+        
+
+        return response
     
     async def getTokenForVideoRoom(self, unique_name=None, body=""):
         """Get Token to join a specific Video Room using it's unqiue name, this Token is your ticket to Room and also creates your identity there.
@@ -243,6 +327,20 @@ class Lead:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getTokenForVideoRoom"]).netloc, "get", await create_url_without_domain("/service/application/lead/v1.0/video/room/{unique_name}/token", unique_name=unique_name), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getTokenForVideoRoom"]).netloc, "get", await create_url_without_domain("/service/application/lead/v1.0/video/room/{unique_name}/token", unique_name=unique_name), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+                
+        
+
+        from .models import GetTokenForVideoRoomResponse
+        schema = GetTokenForVideoRoomResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getTokenForVideoRoom")
+            print(e)
+
+        
+
+        return response
     
 
