@@ -21,6 +21,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -69,6 +70,8 @@ class ServiceabilityValidator:
         is_active = fields.Boolean(required=False)
         
         channel_ids = fields.Str(required=False)
+        
+        q = fields.Str(required=False)
          
         
     
