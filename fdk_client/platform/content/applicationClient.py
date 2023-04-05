@@ -1197,6 +1197,53 @@ class Content:
 
         return response
     
+    async def generateSEOTitle(self, type=None, body=""):
+        """Use this API to get GPT3 generated SEO meta tag title for content
+        :param type : String representing the type of SEO content to be generated. Possible values are: title, description : type 
+        """
+        payload = {}
+        
+        if type:
+            payload["type"] = type
+        
+
+        # Parameter validation
+        schema = ContentValidator.generateSEOTitle()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import GenerateSEOContent
+        schema = GenerateSEOContent()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/generate-seo/{type}", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"type","in":"path","description":"String representing the type of SEO content to be generated. Possible values are: title, description","required":true,"schema":{"$ref":"#/components/schemas/GenerationEntityType"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"type","in":"path","description":"String representing the type of SEO content to be generated. Possible values are: title, description","required":true,"schema":{"$ref":"#/components/schemas/GenerationEntityType"}}]}""", type=type)
+        query_string = await create_query_string(type=type)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/generate-seo/{type}", type=type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        
+        
+
+        from .models import GeneratedSEOContent
+        schema = GeneratedSEOContent()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for generateSEOTitle")
+            print(e)
+            
+        
+
+        return response
+    
     async def getLandingPages(self, page_no=None, page_size=None):
         """Landing page is the first page that a prospect lands upon while visiting a website. Use this API to fetch a list of landing pages.
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
