@@ -42,7 +42,21 @@ class Feedback:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/feedback/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/attributes/", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/feedback/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/attributes/", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        from .models import FeedbackAttributes
+        schema = FeedbackAttributes()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getAttributes")
+            print(e)
+            
+        
+
+        return response
     
     async def getCustomerReviews(self, id=None, entity_id=None, entity_type=None, user_id=None, media=None, rating=None, attribute_rating=None, facets=None, sort=None, next=None, start=None, limit=None, count=None, page_id=None, page_size=None):
         """The endpoint provides a list of customer reviews based on entity and provided filters
@@ -126,7 +140,21 @@ class Feedback:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/feedback/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/reviews/", id=id, entity_id=entity_id, entity_type=entity_type, user_id=user_id, media=media, rating=rating, attribute_rating=attribute_rating, facets=facets, sort=sort, next=next, start=start, limit=limit, count=count, page_id=page_id, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/feedback/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/reviews/", id=id, entity_id=entity_id, entity_type=entity_type, user_id=user_id, media=media, rating=rating, attribute_rating=attribute_rating, facets=facets, sort=sort, next=next, start=start, limit=limit, count=count, page_id=page_id, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        from .models import GetReviewResponse
+        schema = GetReviewResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getCustomerReviews")
+            print(e)
+            
+        
+
+        return response
     
     async def updateApprove(self, review_id=None, body=""):
         """The is used to update approve details like status and description text
@@ -159,7 +187,21 @@ class Feedback:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/feedback/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/reviews/{review_id}/approve/", review_id=review_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/feedback/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/reviews/{review_id}/approve/", review_id=review_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        
+        
+
+        from .models import UpdateResponse
+        schema = UpdateResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for updateApprove")
+            print(e)
+            
+        
+
+        return response
     
     async def getHistory(self, review_id=None):
         """The is used to get the history details like status and description text
@@ -187,7 +229,11 @@ class Feedback:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/feedback/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/reviews/{review_id}/history/", review_id=review_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/feedback/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/reviews/{review_id}/history/", review_id=review_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        return response
     
     async def getApplicationTemplates(self, page_id=None, page_size=None):
         """Get all templates of application
@@ -219,7 +265,21 @@ class Feedback:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/feedback/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/templates/", page_id=page_id, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/feedback/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/templates/", page_id=page_id, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        from .models import TemplateGetResponse
+        schema = TemplateGetResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getApplicationTemplates")
+            print(e)
+            
+        
+
+        return response
     
     async def createTemplate(self, body=""):
         """Create a new template for review with following data:
@@ -251,7 +311,21 @@ class Feedback:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/feedback/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/templates/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/feedback/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/templates/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        
+        
+
+        from .models import InsertResponse
+        schema = InsertResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for createTemplate")
+            print(e)
+            
+        
+
+        return response
     
     async def getTemplateById(self, id=None):
         """Get the template for product or l3 type by ID
@@ -279,7 +353,21 @@ class Feedback:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/feedback/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/templates/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/feedback/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/templates/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        from .models import Template
+        schema = Template()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getTemplateById")
+            print(e)
+            
+        
+
+        return response
     
     async def updateTemplate(self, id=None, body=""):
         """Update existing template status, active/archive
@@ -312,7 +400,21 @@ class Feedback:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/feedback/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/templates/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/feedback/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/templates/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        
+        
+
+        from .models import UpdateResponse
+        schema = UpdateResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for updateTemplate")
+            print(e)
+            
+        
+
+        return response
     
     async def updateTemplateStatus(self, id=None, body=""):
         """Update existing template status, active/archive
@@ -345,6 +447,20 @@ class Feedback:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/feedback/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/templates/{id}/status/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/feedback/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/templates/{id}/status/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        
+        
+
+        from .models import UpdateResponse
+        schema = UpdateResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for updateTemplateStatus")
+            print(e)
+            
+        
+
+        return response
     
 
