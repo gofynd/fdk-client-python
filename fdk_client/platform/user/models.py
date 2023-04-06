@@ -270,6 +270,18 @@ class AuthSuccessUserEmails(BaseSchema):
     pass
 
 
+class UserGroupResponseSchema(BaseSchema):
+    pass
+
+
+class UserGroupListResponseSchema(BaseSchema):
+    pass
+
+
+class CreateUserGroupSchema(BaseSchema):
+    pass
+
+
 class CreateUserRequestSchema(BaseSchema):
     pass
 
@@ -358,6 +370,14 @@ class Google(BaseSchema):
     pass
 
 
+class SessionExpiry(BaseSchema):
+    pass
+
+
+class UpdateUserGroupSchema(BaseSchema):
+    pass
+
+
 class UpdateUserRequestSchema(BaseSchema):
     pass
 
@@ -371,10 +391,6 @@ class PhoneNumber(BaseSchema):
 
 
 class Email(BaseSchema):
-    pass
-
-
-class Debug(BaseSchema):
     pass
 
 
@@ -660,6 +676,8 @@ class SendOtpRequestSchema(BaseSchema):
     captcha_code = fields.Str(required=False)
     
     mobile = fields.Str(required=False)
+    
+    android_hash = fields.Str(required=False)
     
 
 
@@ -1177,6 +1195,54 @@ class AuthSuccessUserEmails(BaseSchema):
     
 
 
+class UserGroupResponseSchema(BaseSchema):
+    # User swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+    file_url = fields.Str(required=False)
+    
+    _id = fields.Str(required=False)
+    
+    status = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
+    
+    application_id = fields.Str(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    modified_at = fields.Str(required=False)
+    
+    __v = fields.Int(required=False)
+    
+
+
+class UserGroupListResponseSchema(BaseSchema):
+    # User swagger.json
+
+    
+    items = fields.List(fields.Nested(UserGroupResponseSchema, required=False), required=False)
+    
+    page = fields.Nested(PaginationSchema, required=False)
+    
+
+
+class CreateUserGroupSchema(BaseSchema):
+    # User swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+    file_url = fields.Str(required=False)
+    
+
+
 class CreateUserRequestSchema(BaseSchema):
     # User swagger.json
 
@@ -1284,6 +1350,8 @@ class PlatformSchema(BaseSchema):
     delete_account_reasons = fields.List(fields.Nested(DeleteAccountReasons, required=False), required=False)
     
     delete_account_consent = fields.Dict(required=False)
+    
+    session_config = fields.Dict(required=False)
     
 
 
@@ -1457,6 +1525,30 @@ class Google(BaseSchema):
     
 
 
+class SessionExpiry(BaseSchema):
+    # User swagger.json
+
+    
+    duration = fields.Int(required=False)
+    
+    type = fields.Str(required=False)
+    
+    is_rolling = fields.Boolean(required=False)
+    
+
+
+class UpdateUserGroupSchema(BaseSchema):
+    # User swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+    file_url = fields.Str(required=False)
+    
+
+
 class UpdateUserRequestSchema(BaseSchema):
     # User swagger.json
 
@@ -1503,10 +1595,6 @@ class UserSchema(BaseSchema):
     
     account_type = fields.Str(required=False)
     
-    debug = fields.Nested(Debug, required=False)
-    
-    has_old_password_hash = fields.Boolean(required=False)
-    
     _id = fields.Str(required=False)
     
     created_at = fields.Str(required=False)
@@ -1542,16 +1630,6 @@ class Email(BaseSchema):
     email = fields.Str(required=False)
     
     active = fields.Boolean(required=False)
-    
-
-
-class Debug(BaseSchema):
-    # User swagger.json
-
-    
-    source = fields.Str(required=False)
-    
-    platform = fields.Str(required=False)
     
 
 
