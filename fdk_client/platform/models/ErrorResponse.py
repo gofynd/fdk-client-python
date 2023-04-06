@@ -14,8 +14,8 @@ class ErrorResponse(BaseSchema):
     # Order swagger.json
 
     
-    error = fields.Str(required=False)
-    
     message = fields.Str(required=False)
+    
+    error = fields.Str(required=False)
     
 

@@ -28,18 +28,18 @@ class Item(BaseSchema):
     
     brand = fields.Nested(ItemBrand, required=False)
     
-    size = fields.Str(required=False)
-    
-    id = fields.Float(required=False)
-    
     image = fields.List(fields.Str(required=False), required=False)
     
-    slug_key = fields.Str(required=False)
+    name = fields.Str(required=False)
+    
+    id = fields.Float(required=False)
     
     seller_identifier = fields.Str(required=False)
     
     code = fields.Str(required=False)
     
-    name = fields.Str(required=False)
+    slug_key = fields.Str(required=False)
+    
+    size = fields.Str(required=False)
     
 

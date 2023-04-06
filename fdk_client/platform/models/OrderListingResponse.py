@@ -5,11 +5,11 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
+
+
+
+
 from .Page import Page
-
-
-
-
 
 
 
@@ -22,15 +22,15 @@ class OrderListingResponse(BaseSchema):
     # Order swagger.json
 
     
+    message = fields.Str(required=False)
+    
+    success = fields.Boolean(required=False)
+    
     page = fields.Nested(Page, required=False)
     
     lane = fields.Str(required=False)
     
-    message = fields.Str(required=False)
-    
     total_count = fields.Int(required=False)
-    
-    success = fields.Boolean(required=False)
     
     items = fields.List(fields.Nested(PlatformOrderItems, required=False), required=False)
     

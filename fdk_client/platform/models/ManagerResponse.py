@@ -18,8 +18,8 @@ class ManagerResponse(BaseSchema):
     
     mobile_no = fields.Nested(MobileNo, required=False)
     
-    email = fields.Str(required=False)
-    
     name = fields.Str(required=False)
+    
+    email = fields.Str(required=False)
     
 

@@ -22,8 +22,8 @@ class Media(BaseSchema):
     
     alt = fields.Str(required=False)
     
-    type = fields.Str(required=False)
-    
     url = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
     
 

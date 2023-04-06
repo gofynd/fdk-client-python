@@ -14,8 +14,8 @@ class HolidayDateSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    end_date = fields.Str(required=False)
-    
     start_date = fields.Str(required=False)
+    
+    end_date = fields.Str(required=False)
     
 

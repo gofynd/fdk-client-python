@@ -7,19 +7,19 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 from .PlatformShipment import PlatformShipment
-
-
 
 
 class ShipmentInfoResponse(BaseSchema):
     # Order swagger.json
 
     
+    message = fields.Str(required=False)
+    
     success = fields.Boolean(required=False)
     
     shipments = fields.List(fields.Nested(PlatformShipment, required=False), required=False)
-    
-    message = fields.Str(required=False)
     
 
