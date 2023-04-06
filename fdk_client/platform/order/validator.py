@@ -48,64 +48,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-    
-    
-        
-        
         
     
     
@@ -113,11 +55,6 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
-        
-        
-        
-        
         
         
         
@@ -145,6 +82,75 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
     
         
@@ -237,10 +243,10 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
         
         
+    
+    
         
     
     
@@ -348,6 +354,17 @@ class OrderValidator:
          
         
     
+    class getAssetByShipmentIds(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        shipment_ids = fields.Str(required=False)
+        
+        invoice = fields.Boolean(required=False)
+         
+        
+    
     class getOrderById(BaseSchema):
         
         
@@ -410,6 +427,8 @@ class OrderValidator:
         stores = fields.Str(required=False)
         
         sales_channels = fields.Str(required=False)
+        
+        ordering_store = fields.Int(required=False)
         
         page_no = fields.Int(required=False)
         
@@ -757,13 +776,6 @@ class OrderValidator:
          
         
     
-    class postShipmentHistory(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
     class getShipmentHistory(BaseSchema):
         
         
@@ -772,6 +784,13 @@ class OrderValidator:
         shipment_id = fields.Int(required=False)
         
         bag_id = fields.Int(required=False)
+         
+        
+    
+    class postShipmentHistory(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
          
         
     
@@ -803,14 +822,14 @@ class OrderValidator:
          
         
     
-    class createChannelConfig(BaseSchema):
+    class getChannelConfig(BaseSchema):
         
         
         company_id = fields.Int(required=False)
          
         
     
-    class getChannelConfig(BaseSchema):
+    class createChannelConfig(BaseSchema):
         
         
         company_id = fields.Int(required=False)

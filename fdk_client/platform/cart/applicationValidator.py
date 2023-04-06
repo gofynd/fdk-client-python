@@ -137,6 +137,9 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
+        
+        
     
     
         
@@ -583,6 +586,12 @@ class CartValidator:
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
+        
+        from_date = fields.Str(required=False)
+        
+        to_date = fields.Str(required=False)
+        
+        filter_on = fields.Str(required=False)
          
         
     

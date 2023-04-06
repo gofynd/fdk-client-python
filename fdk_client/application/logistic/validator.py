@@ -12,6 +12,10 @@ from ..ApplicationModel import BaseSchema
     
     
         
+        
+    
+    
+    
     
     
 
@@ -22,6 +26,8 @@ class LogisticValidator:
         
         
         pincode = fields.Str(required=False)
+        
+        country_code = fields.Str(required=False)
          
         
     
@@ -30,7 +36,22 @@ class LogisticValidator:
         pass 
         
     
+    class getAllCountries(BaseSchema):
+        
+        pass 
+        
+    
     class getPincodeZones(BaseSchema):
+        
+        pass 
+        
+    
+    class assignLocations(BaseSchema):
+        
+        pass 
+        
+    
+    class getOptimalLocations(BaseSchema):
         
         pass 
         
