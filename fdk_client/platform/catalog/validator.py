@@ -886,9 +886,9 @@ class CatalogValidator:
     class getInventoryBySize(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
-        item_id = fields.Str(required=False)
+        item_id = fields.Int(required=False)
         
         size = fields.Str(required=False)
         
@@ -905,9 +905,9 @@ class CatalogValidator:
     class addInventory(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
-        item_id = fields.Float(required=False)
+        item_id = fields.Int(required=False)
         
         size = fields.Str(required=False)
          
@@ -916,9 +916,9 @@ class CatalogValidator:
     class getInventoryBySizeIdentifier(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
-        item_id = fields.Str(required=False)
+        item_id = fields.Int(required=False)
         
         size_identifier = fields.Str(required=False)
         
@@ -958,7 +958,7 @@ class CatalogValidator:
     class deleteInventory(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
         size = fields.Str(required=False)
         
@@ -1030,9 +1030,9 @@ class CatalogValidator:
     class updateRealtimeInventory(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
-        item_id = fields.Float(required=False)
+        item_id = fields.Int(required=False)
         
         seller_identifier = fields.Str(required=False)
          
@@ -1041,9 +1041,9 @@ class CatalogValidator:
     class deleteRealtimeInventory(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
-        item_id = fields.Float(required=False)
+        item_id = fields.Int(required=False)
         
         seller_identifier = fields.Str(required=False)
          
@@ -1052,7 +1052,7 @@ class CatalogValidator:
     class updateInventories(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
          
         
     
