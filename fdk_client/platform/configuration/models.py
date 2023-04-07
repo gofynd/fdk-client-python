@@ -923,6 +923,8 @@ class AppCartConfig(BaseSchema):
     
     revenue_engine_coupon = fields.Boolean(required=False)
     
+    empty_cart = fields.Boolean(required=False)
+    
 
 
 class DeliveryCharges(BaseSchema):

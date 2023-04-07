@@ -34,21 +34,7 @@ class Analytics:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/stats/group", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
-        
-
-        from .models import StatsGroups
-        schema = StatsGroups()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getStatiscticsGroups")
-            print(e)
-            
-        
-
-        return response
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/stats/group", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def getStatiscticsGroupComponents(self, group_name=None):
         """Get statistics group components
@@ -76,21 +62,7 @@ class Analytics:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/stats/group/{group_name}", group_name=group_name), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
-        
-
-        from .models import StatsGroupComponents
-        schema = StatsGroupComponents()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getStatiscticsGroupComponents")
-            print(e)
-            
-        
-
-        return response
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/stats/group/{group_name}", group_name=group_name), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def getComponentStatsCSV(self, component_name=None):
         """Get component statistics csv
@@ -118,11 +90,7 @@ class Analytics:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/stats/component/{component_name}.csv", component_name=component_name), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
-        
-
-        return response
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/stats/component/{component_name}.csv", component_name=component_name), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def getComponentStatsPDF(self, component_name=None):
         """Get component statistics pdf
@@ -150,11 +118,7 @@ class Analytics:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/stats/component/{component_name}.pdf", component_name=component_name), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
-        
-
-        return response
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/stats/component/{component_name}.pdf", component_name=component_name), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def getComponentStats(self, component_name=None):
         """Get component statistics
@@ -182,21 +146,7 @@ class Analytics:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/stats/component/{component_name}", component_name=component_name), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
-        
-
-        from .models import StatsRes
-        schema = StatsRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getComponentStats")
-            print(e)
-            
-        
-
-        return response
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/stats/component/{component_name}", component_name=component_name), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def getAbandonCartList(self, from_date=None, to_date=None, page_no=None, page_size=None):
         """Get abandon carts list
@@ -236,21 +186,7 @@ class Analytics:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/from/{from_date}/to/{to_date}/abandon-cart/", from_date=from_date, to_date=to_date, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
-        
-
-        from .models import AbandonCartsList
-        schema = AbandonCartsList()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAbandonCartList")
-            print(e)
-            
-        
-
-        return response
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/from/{from_date}/to/{to_date}/abandon-cart/", from_date=from_date, to_date=to_date, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def getAbandonCartsCSV(self, from_date=None, to_date=None):
         """Get abandon carts csv
@@ -282,11 +218,7 @@ class Analytics:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/{from_date}/to/{to_date}/abandon-cart.csv", from_date=from_date, to_date=to_date), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
-        
-
-        return response
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/{from_date}/to/{to_date}/abandon-cart.csv", from_date=from_date, to_date=to_date), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def getAbandonCartDetail(self, cart_id=None):
         """Get abandon cart details
@@ -314,20 +246,6 @@ class Analytics:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/abandon-cart/{cart_id}", cart_id=cart_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
-        
-
-        from .models import AbandonCartDetail
-        schema = AbandonCartDetail()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAbandonCartDetail")
-            print(e)
-            
-        
-
-        return response
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/abandon-cart/{cart_id}", cart_id=cart_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
 

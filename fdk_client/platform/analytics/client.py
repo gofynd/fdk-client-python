@@ -42,21 +42,7 @@ class Analytics:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/export/{export_type}", export_type=export_type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        
-        
-        from .models import ExportJobRes
-        schema = ExportJobRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createExportJob")
-            print(e)
-            
-        
-
-        return response
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/export/{export_type}", export_type=export_type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
     async def getExportJobStatus(self, export_type=None, job_id=None):
         """Get data export job status
@@ -88,21 +74,7 @@ class Analytics:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/export/{export_type}/job/{job_id}", export_type=export_type, job_id=job_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-        
-        from .models import ExportJobStatusRes
-        schema = ExportJobStatusRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getExportJobStatus")
-            print(e)
-            
-        
-
-        return response
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/export/{export_type}/job/{job_id}", export_type=export_type, job_id=job_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def getLogsList(self, log_type=None, page_no=None, page_size=None, body=""):
         """Get logs list
@@ -143,21 +115,7 @@ class Analytics:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/logs/{log_type}", log_type=log_type, page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        
-        
-        from .models import GetLogsListRes
-        schema = GetLogsListRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getLogsList")
-            print(e)
-            
-        
-
-        return response
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/logs/{log_type}", log_type=log_type, page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
     async def searchLogs(self, page_no=None, page_size=None, log_type=None, body=""):
         """Search logs
@@ -198,20 +156,6 @@ class Analytics:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/logs/{log_type}/search", page_no=page_no, page_size=page_size, log_type=log_type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        
-        
-        from .models import SearchLogRes
-        schema = SearchLogRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for searchLogs")
-            print(e)
-            
-        
-
-        return response
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/logs/{log_type}/search", page_no=page_no, page_size=page_size, log_type=log_type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
 

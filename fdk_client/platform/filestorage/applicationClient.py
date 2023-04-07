@@ -61,21 +61,7 @@ This operation will return the url for the uploaded file.
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/namespaces/{namespace}/upload/start/", namespace=namespace, ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
-        
-
-        from .models import StartResponse
-        schema = StartResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for appStartUpload")
-            print(e)
-            
-        
-
-        return response
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/namespaces/{namespace}/upload/start/", namespace=namespace, ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
     async def appCompleteUpload(self, namespace=None, body=""):
         """Uploads an arbitrarily sized buffer or blob.
@@ -126,21 +112,7 @@ This operation will return the url for the uploaded file.
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/namespaces/{namespace}/upload/complete/", namespace=namespace, ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
-        
-
-        from .models import CompleteResponse
-        schema = CompleteResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for appCompleteUpload")
-            print(e)
-            
-        
-
-        return response
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/namespaces/{namespace}/upload/complete/", namespace=namespace, ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
     async def appCopyFiles(self, sync=None, body=""):
         """Copy Files
@@ -173,21 +145,7 @@ This operation will return the url for the uploaded file.
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/uploads/copy/", sync=sync, ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
-        
-
-        from .models import BulkUploadResponse
-        schema = BulkUploadResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for appCopyFiles")
-            print(e)
-            
-        
-
-        return response
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/uploads/copy/", sync=sync, ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
     async def browse(self, namespace=None, page_no=None):
         """Browse Files
@@ -219,20 +177,6 @@ This operation will return the url for the uploaded file.
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/namespaces/{namespace}/browse/", namespace=namespace, page_no=page_no), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
-        
-
-        from .models import BrowseResponse
-        schema = BrowseResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for browse")
-            print(e)
-            
-        
-
-        return response
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/namespaces/{namespace}/browse/", namespace=namespace, page_no=page_no), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
 
