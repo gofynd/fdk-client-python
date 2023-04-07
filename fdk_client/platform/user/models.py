@@ -523,6 +523,8 @@ class SendEmailOtpRequestSchema(BaseSchema):
     
     register_token = fields.Str(required=False)
     
+    captcha_code = fields.Str(required=False)
+    
 
 
 class VerifyEmailOtpRequestSchema(BaseSchema):
