@@ -22,9 +22,9 @@ class ConfigurationListingFilterValue(BaseSchema):
     # Catalog swagger.json
 
     
-    value = fields.Str(required=False)
-    
     map_values = fields.List(fields.Dict(required=False), required=False)
+    
+    value = fields.Str(required=False)
     
     sort = fields.Str(required=False)
     

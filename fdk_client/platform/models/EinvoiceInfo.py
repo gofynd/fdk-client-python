@@ -14,8 +14,8 @@ class EinvoiceInfo(BaseSchema):
     # Order swagger.json
 
     
-    credit_note = fields.Dict(required=False)
-    
     invoice = fields.Dict(required=False)
+    
+    credit_note = fields.Dict(required=False)
     
 

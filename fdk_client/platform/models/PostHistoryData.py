@@ -10,12 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class _ArticleAssignment(BaseSchema):
-    # CompanyProfile swagger.json
+class PostHistoryData(BaseSchema):
+    # Order swagger.json
 
     
-    strategy = fields.Str(required=False)
+    message = fields.Str(required=False)
     
-    level = fields.Str(required=False)
+    user_name = fields.Str(required=False)
     
 

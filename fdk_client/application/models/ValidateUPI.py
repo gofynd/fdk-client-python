@@ -18,12 +18,12 @@ class ValidateUPI(BaseSchema):
     # Payment swagger.json
 
     
-    customer_name = fields.Str(required=False)
+    status = fields.Str(required=False)
     
     is_valid = fields.Boolean(required=False)
     
     upi_vpa = fields.Str(required=False)
     
-    status = fields.Str(required=False)
+    customer_name = fields.Str(required=False)
     
 

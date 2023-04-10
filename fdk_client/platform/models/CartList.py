@@ -22,16 +22,16 @@ class CartList(BaseSchema):
     # Cart swagger.json
 
     
-    item_counts = fields.Int(required=False)
-    
-    created_on = fields.Str(required=False)
-    
-    cart_id = fields.Str(required=False)
-    
     user_id = fields.Str(required=False)
     
     pick_up_customer_details = fields.Dict(required=False)
     
     cart_value = fields.Float(required=False)
+    
+    item_counts = fields.Int(required=False)
+    
+    created_on = fields.Str(required=False)
+    
+    cart_id = fields.Str(required=False)
     
 

@@ -5,17 +5,17 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-from .TATFormattedResponse import TATFormattedResponse
-
 from .TATTimestampResponse import TATTimestampResponse
+
+from .TATFormattedResponse import TATFormattedResponse
 
 
 class TATPromiseResponse(BaseSchema):
     # Logistic swagger.json
 
     
-    formatted = fields.Nested(TATFormattedResponse, required=False)
-    
     timestamp = fields.Nested(TATTimestampResponse, required=False)
+    
+    formatted = fields.Nested(TATFormattedResponse, required=False)
     
 

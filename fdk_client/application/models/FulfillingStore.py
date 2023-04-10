@@ -26,8 +26,8 @@ class FulfillingStore(BaseSchema):
     
     company_id = fields.Int(required=False)
     
-    id = fields.Int(required=False)
-    
     code = fields.Str(required=False)
+    
+    id = fields.Int(required=False)
     
 

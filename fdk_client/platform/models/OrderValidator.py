@@ -13,6 +13,10 @@ class OrderValidator:
         
         lane = fields.Str(required=False)
         
+        bag_status = fields.Str(required=False)
+        
+        status_override_lane = fields.Boolean(required=False)
+        
         search_type = fields.Str(required=False)
         
         search_value = fields.Str(required=False)
@@ -39,6 +43,8 @@ class OrderValidator:
         
         is_priority_sort = fields.Boolean(required=False)
         
+        fetch_active_shipment = fields.Boolean(required=False)
+        
         exclude_locked_shipments = fields.Boolean(required=False)
         
         payment_methods = fields.Str(required=False)
@@ -48,6 +54,10 @@ class OrderValidator:
         channel_order_id = fields.Str(required=False)
         
         custom_meta = fields.Str(required=False)
+        
+        ordering_channel = fields.Str(required=False)
+        
+        company_affiliate_tag = fields.Str(required=False)
          
     
     class getShipmentById(BaseSchema):
@@ -372,6 +382,15 @@ class OrderValidator:
         page_size = fields.Int(required=False)
          
     
+    class generatePOSReceiptByOrderId(BaseSchema):
+        
+        company_id = fields.Int(required=False)
+        
+        order_id = fields.Str(required=False)
+        
+        document_type = fields.Str(required=False)
+         
+    
     class invalidateShipmentCache(BaseSchema):
         
         company_id = fields.Int(required=False)
@@ -465,6 +484,11 @@ class OrderValidator:
         shipment_id = fields.Int(required=False)
         
         bag_id = fields.Int(required=False)
+         
+    
+    class postShipmentHistory(BaseSchema):
+        
+        company_id = fields.Int(required=False)
          
     
     class sendSmsNinja(BaseSchema):

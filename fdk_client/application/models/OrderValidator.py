@@ -40,6 +40,8 @@ class OrderValidator:
     class getInvoiceByShipmentId(BaseSchema):
         
         shipment_id = fields.Str(required=False)
+        
+        document_type = fields.Str(required=False)
          
     
     class trackShipment(BaseSchema):

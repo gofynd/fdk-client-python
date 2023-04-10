@@ -20,14 +20,14 @@ class InvoiceInfo(BaseSchema):
     # Order swagger.json
 
     
-    credit_note_id = fields.Str(required=False)
-    
     label_url = fields.Str(required=False)
     
-    invoice_url = fields.Str(required=False)
+    updated_date = fields.Str(required=False)
+    
+    credit_note_id = fields.Str(required=False)
     
     store_invoice_id = fields.Str(required=False)
     
-    updated_date = fields.Str(required=False)
+    invoice_url = fields.Str(required=False)
     
 

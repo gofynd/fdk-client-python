@@ -5,9 +5,9 @@ from marshmallow.validate import OneOf
 from ..enums import *
 from ..models.BaseSchema import BaseSchema
 
-
-
 from .TATArticlesRequest import TATArticlesRequest
+
+
 
 
 
@@ -16,9 +16,9 @@ class TATLocationDetailsRequest(BaseSchema):
     # Logistic swagger.json
 
     
-    fulfillment_id = fields.Int(required=False)
-    
     articles = fields.List(fields.Nested(TATArticlesRequest, required=False), required=False)
+    
+    fulfillment_id = fields.Int(required=False)
     
     from_pincode = fields.Str(required=False)
     

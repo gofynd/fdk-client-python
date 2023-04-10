@@ -16,10 +16,10 @@ class ManufacturerResponse1(BaseSchema):
     # Catalog swagger.json
 
     
+    is_default = fields.Boolean(required=False)
+    
     address = fields.Str(required=False)
     
     name = fields.Str(required=False)
-    
-    is_default = fields.Boolean(required=False)
     
 

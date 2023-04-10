@@ -14,8 +14,8 @@ class GiftDetail(BaseSchema):
     # Cart swagger.json
 
     
-    gift_message = fields.Str(required=False)
-    
     is_gift_applied = fields.Boolean(required=False)
+    
+    gift_message = fields.Str(required=False)
     
 

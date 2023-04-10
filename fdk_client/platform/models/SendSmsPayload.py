@@ -16,10 +16,10 @@ class SendSmsPayload(BaseSchema):
     # Order swagger.json
 
     
-    slug = fields.Str(required=False)
+    bag_id = fields.Int(required=False)
     
     data = fields.Nested(SmsDataPayload, required=False)
     
-    bag_id = fields.Int(required=False)
+    slug = fields.Str(required=False)
     
 

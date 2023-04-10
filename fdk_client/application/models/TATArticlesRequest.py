@@ -7,11 +7,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
+
+
 from .TATCategoryRequest import TATCategoryRequest
-
-
-
-
 
 
 class TATArticlesRequest(BaseSchema):
@@ -20,10 +20,10 @@ class TATArticlesRequest(BaseSchema):
     
     available_quantity = fields.Int(required=False)
     
-    category = fields.Nested(TATCategoryRequest, required=False)
+    manufacturing_time_unit = fields.Str(required=False)
     
     manufacturing_time = fields.Int(required=False)
     
-    manufacturing_time_unit = fields.Str(required=False)
+    category = fields.Nested(TATCategoryRequest, required=False)
     
 

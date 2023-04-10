@@ -24,10 +24,10 @@ class PriceArticle(BaseSchema):
     
     currency = fields.Str(required=False)
     
-    tp_notes = fields.Dict(required=False)
-    
     effective = fields.Float(required=False)
     
     transfer = fields.Float(required=False)
+    
+    tp_notes = fields.Dict(required=False)
     
 

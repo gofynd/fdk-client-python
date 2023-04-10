@@ -14,8 +14,8 @@ class GetZoneFromPincodeViewResponse(BaseSchema):
     # Logistic swagger.json
 
     
-    zones = fields.List(fields.Str(required=False), required=False)
-    
     serviceability_type = fields.Str(required=False)
+    
+    zones = fields.List(fields.Str(required=False), required=False)
     
 

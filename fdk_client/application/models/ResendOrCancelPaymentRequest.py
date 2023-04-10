@@ -10,11 +10,15 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 class ResendOrCancelPaymentRequest(BaseSchema):
     # Payment swagger.json
 
     
     request_type = fields.Str(required=False)
+    
+    device_id = fields.Str(required=False)
     
     order_id = fields.Str(required=False)
     

@@ -7,15 +7,31 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .CompanySocialAccounts import CompanySocialAccounts
+
+
+
+
+
+
+
+
+from .ContactDetails import ContactDetails
 
 
 class CompanyDetails(BaseSchema):
-    # CompanyProfile swagger.json
+    # Order swagger.json
 
     
-    website_url = fields.Str(required=False)
+    company_gst = fields.Str(required=False)
     
-    socials = fields.List(fields.Nested(CompanySocialAccounts, required=False), required=False)
+    address = fields.Dict(required=False)
+    
+    company_id = fields.Int(required=False)
+    
+    company_cin = fields.Str(required=False)
+    
+    company_name = fields.Str(required=False)
+    
+    company_contact = fields.Nested(ContactDetails, required=False)
     
 
