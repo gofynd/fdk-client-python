@@ -22,8 +22,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
-        
     
     
         
@@ -42,12 +40,8 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
-        
-        
-        
-        
-        
+    
+    
         
 
 
@@ -69,8 +63,6 @@ class ServiceabilityValidator:
         
         page_number = fields.Int(required=False)
         
-        page_no = fields.Int(required=False)
-        
         page_size = fields.Int(required=False)
         
         name = fields.Str(required=False)
@@ -80,8 +72,6 @@ class ServiceabilityValidator:
         channel_ids = fields.Str(required=False)
         
         q = fields.Str(required=False)
-        
-        zone_id = fields.List(fields.Str(required=False), required=False)
          
         
     
@@ -110,33 +100,26 @@ class ServiceabilityValidator:
          
         
     
-    class upsertZoneControllerView(BaseSchema):
+    class createZone(BaseSchema):
         
         
         company_id = fields.Int(required=False)
          
         
     
-    class getZoneListView(BaseSchema):
+    class getStore(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
-        page_number = fields.Int(required=False)
+        store_uid = fields.Int(required=False)
+         
         
-        page_no = fields.Int(required=False)
+    
+    class getAllStores(BaseSchema):
         
-        page_size = fields.Int(required=False)
         
-        name = fields.Str(required=False)
-        
-        is_active = fields.Boolean(required=False)
-        
-        channel_ids = fields.Str(required=False)
-        
-        q = fields.Str(required=False)
-        
-        zone_id = fields.List(fields.Str(required=False), required=False)
+        company_id = fields.Int(required=False)
          
         
     
