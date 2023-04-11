@@ -1,4 +1,4 @@
-"""Application Models."""
+"""Platform Models."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -8,10 +8,10 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class ActionPageParams(BaseSchema):
+class SetConfigurationRes(BaseSchema):
     # Rewards swagger.json
 
     
-    slug = fields.List(fields.Str(required=False), required=False)
+    success = fields.Boolean(required=False)
     
 

@@ -32,7 +32,9 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class HistoryPretty(BaseSchema):
+
+
+class PointsHistory(BaseSchema):
     # Rewards swagger.json
 
     
@@ -45,6 +47,8 @@ class HistoryPretty(BaseSchema):
     created_at = fields.Str(required=False)
     
     expires_on = fields.Str(required=False)
+    
+    meta = fields.Dict(required=False)
     
     points = fields.Float(required=False)
     

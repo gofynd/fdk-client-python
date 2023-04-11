@@ -14,8 +14,8 @@ class ProductSetDistributionSizeV3(BaseSchema):
     # Catalog swagger.json
 
     
-    size = fields.Str(required=False)
-    
     pieces = fields.Int(required=False)
+    
+    size = fields.Str(required=False)
     
 

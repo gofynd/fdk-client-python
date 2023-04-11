@@ -7,7 +7,7 @@ from ..models.BaseSchema import BaseSchema
 
 class RewardsValidator:
     
-    class getGiveaways(BaseSchema):
+    class showGiveaways(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -18,23 +18,14 @@ class RewardsValidator:
         page_size = fields.Int(required=False)
          
     
-    class createGiveaway(BaseSchema):
+    class saveGiveAway(BaseSchema):
         
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
          
     
-    class getGiveawayByID(BaseSchema):
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-         
-    
-    class updateGiveaway(BaseSchema):
+    class getGiveawayById(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -43,7 +34,25 @@ class RewardsValidator:
         id = fields.Str(required=False)
          
     
-    class getOffers(BaseSchema):
+    class updateGiveAway(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+    
+    class getGiveawayAudienceStatus(BaseSchema):
+        
+        audience_id = fields.Str(required=False)
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+    
+    class showOffers(BaseSchema):
         
         company_id = fields.Str(required=False)
         
@@ -52,54 +61,66 @@ class RewardsValidator:
     
     class getOfferByName(BaseSchema):
         
+        name = fields.Str(required=False)
+        
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
         
         cookie = fields.Str(required=False)
-        
-        name = fields.Str(required=False)
          
     
     class updateOfferByName(BaseSchema):
         
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
         name = fields.Str(required=False)
-         
-    
-    class getUserAvailablePoints(BaseSchema):
         
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
-        
-        user_id = fields.Str(required=False)
          
     
     class updateUserStatus(BaseSchema):
         
+        user_id = fields.Str(required=False)
+        
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
+         
+    
+    class user(BaseSchema):
         
         user_id = fields.Str(required=False)
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
          
     
     class getUserPointsHistory(BaseSchema):
         
+        user_id = fields.Str(required=False)
+        
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
         
-        user_id = fields.Str(required=False)
-        
         page_id = fields.Str(required=False)
         
-        page_limit = fields.Int(required=False)
-        
         page_size = fields.Int(required=False)
+         
+    
+    class getRewardsConfiguration(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+    
+    class setRewardsConfiguration(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
          
     

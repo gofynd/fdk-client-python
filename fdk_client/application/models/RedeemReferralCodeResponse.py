@@ -20,14 +20,14 @@ class RedeemReferralCodeResponse(BaseSchema):
     # Rewards swagger.json
 
     
+    redeemed = fields.Boolean(required=False)
+    
     message = fields.Str(required=False)
     
-    points = fields.Float(required=False)
-    
-    redeemed = fields.Boolean(required=False)
+    referrer_info = fields.Str(required=False)
     
     referrer_id = fields.Str(required=False)
     
-    referrer_info = fields.Str(required=False)
+    points = fields.Float(required=False)
     
 

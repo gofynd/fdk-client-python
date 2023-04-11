@@ -14,8 +14,8 @@ class OrderDiscountRequest(BaseSchema):
     # Rewards swagger.json
 
     
-    currency = fields.Str(required=False)
-    
     order_amount = fields.Float(required=False)
+    
+    currency = fields.Str(required=False)
     
 

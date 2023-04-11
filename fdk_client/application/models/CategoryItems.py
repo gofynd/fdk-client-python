@@ -11,11 +11,11 @@ from .CategoryBanner import CategoryBanner
 
 
 
-
-
-
-
 from .ProductListingAction import ProductListingAction
+
+
+
+
 
 
 class CategoryItems(BaseSchema):
@@ -26,12 +26,12 @@ class CategoryItems(BaseSchema):
     
     banners = fields.Nested(CategoryBanner, required=False)
     
-    name = fields.Str(required=False)
-    
-    slug = fields.Str(required=False)
-    
     uid = fields.Int(required=False)
     
     action = fields.Nested(ProductListingAction, required=False)
+    
+    name = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
     
 

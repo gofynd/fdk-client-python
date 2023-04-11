@@ -18,8 +18,8 @@ class ValidateIdentifier(BaseSchema):
     
     gtin_type = fields.Str(required=False)
     
-    primary = fields.Boolean(required=False)
-    
     gtin_value = fields.Str(required=False)
+    
+    primary = fields.Boolean(required=False)
     
 
