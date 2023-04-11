@@ -43,8 +43,8 @@ class Catalog:
             "getInStockLocations": "/service/application/catalog/v1.0/in-stock/locations/",
             "getLocationDetailsById": "/service/application/catalog/v1.0/locations/{location_id}/",
             "getProductBundlesBySlug": "/service/application/catalog/v1.0/product-grouping/",
-            "getProductPriceBySlug": "/service/application/catalog/v2.0/products/{slug}/sizes/{size}/price/",
-            "getProductSellersBySlug": "/service/application/catalog/v2.0/products/{slug}/sizes/{size}/sellers/"
+            "getProductPriceBySlug": "/service/application/catalog/v3.0/products/{slug}/sizes/{size}/price/",
+            "getProductSellersBySlug": "/service/application/catalog/v3.0/products/{slug}/sizes/{size}/sellers/"
             
         }
         self._urls = {
@@ -1469,12 +1469,12 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductPriceBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v2.0/products/{slug}/sizes/{size}/price/", slug=slug, size=size, store_id=store_id, pincode=pincode, moq=moq), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductPriceBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v3.0/products/{slug}/sizes/{size}/price/", slug=slug, size=size, store_id=store_id, pincode=pincode, moq=moq), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
                 
         
 
-        from .models import ProductSizePriceResponseV2
-        schema = ProductSizePriceResponseV2()
+        from .models import ProductSizePriceResponseV3
+        schema = ProductSizePriceResponseV3()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
@@ -1532,12 +1532,12 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductSellersBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v2.0/products/{slug}/sizes/{size}/sellers/", slug=slug, size=size, pincode=pincode, strategy=strategy, page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductSellersBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v3.0/products/{slug}/sizes/{size}/sellers/", slug=slug, size=size, pincode=pincode, strategy=strategy, page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
                 
         
 
-        from .models import ProductSizeSellersResponseV2
-        schema = ProductSizeSellersResponseV2()
+        from .models import ProductSizeSellersResponseV3
+        schema = ProductSizeSellersResponseV3()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
