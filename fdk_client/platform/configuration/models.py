@@ -136,6 +136,10 @@ class BrandsByCompanyResponse(BaseSchema):
     pass
 
 
+class PanCardConfig(BaseSchema):
+    pass
+
+
 class CreateApplicationRequest(BaseSchema):
     pass
 
@@ -923,6 +927,8 @@ class AppCartConfig(BaseSchema):
     
     revenue_engine_coupon = fields.Boolean(required=False)
     
+    pan_card = fields.Nested(PanCardConfig, required=False)
+    
 
 
 class DeliveryCharges(BaseSchema):
@@ -1184,6 +1190,18 @@ class BrandsByCompanyResponse(BaseSchema):
 
     
     brands = fields.Nested(CompanyBrandInfo, required=False)
+    
+
+
+class PanCardConfig(BaseSchema):
+    # Configuration swagger.json
+
+    
+    enabled = fields.Boolean(required=False)
+    
+    cod_threshold_amount = fields.Float(required=False)
+    
+    online_threshold_amount = fields.Float(required=False)
     
 
 
