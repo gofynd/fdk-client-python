@@ -459,6 +459,10 @@ class UserSchema(BaseSchema):
     
     account_type = fields.Str(required=False)
     
+    debug = fields.Nested(Debug, required=False)
+    
+    has_old_password_hash = fields.Boolean(required=False)
+    
     _id = fields.Str(required=False)
     
     created_at = fields.Str(required=False)
@@ -869,7 +873,7 @@ class Ticket(BaseSchema):
     
     content = fields.Nested(TicketContent, required=False)
     
-    category = fields.Nested(TicketCategory, required=False)
+    category = fields.Str(required=False)
     
     sub_category = fields.Str(required=False)
     

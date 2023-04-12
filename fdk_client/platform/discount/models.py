@@ -24,14 +24,6 @@ class ListOrCalender(BaseSchema):
     pass
 
 
-class DiscountItems(BaseSchema):
-    pass
-
-
-class BulkDiscount(BaseSchema):
-    pass
-
-
 class FileJobResponse(BaseSchema):
     pass
 
@@ -150,32 +142,6 @@ class ListOrCalender(BaseSchema):
     items = fields.List(fields.Nested(DiscountJob, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
-    
-
-
-class DiscountItems(BaseSchema):
-    # Discount swagger.json
-
-    
-    item_code = fields.Str(required=False)
-    
-    brand_uid = fields.Int(required=False)
-    
-    seller_identifier = fields.Str(required=False)
-    
-    discount_type = fields.Str(required=False)
-    
-    value = fields.Float(required=False)
-    
-
-
-class BulkDiscount(BaseSchema):
-    # Discount swagger.json
-
-    
-    company_id = fields.Int(required=False)
-    
-    items = fields.List(fields.Nested(DiscountItems, required=False), required=False)
     
 
 

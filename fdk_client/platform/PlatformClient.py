@@ -14,15 +14,11 @@ from .communication.client import Communication
 
 from .payment.client import Payment
 
-from .order.client import Order
-
 from .catalog.client import Catalog
 
 from .companyprofile.client import CompanyProfile
 
 from .filestorage.client import FileStorage
-
-from .inventory.client import Inventory
 
 from .configuration.client import Configuration
 
@@ -49,15 +45,11 @@ class PlatformClient:
         
         self.payment = Payment(config)
         
-        self.order = Order(config)
-        
         self.catalog = Catalog(config)
         
         self.companyProfile = CompanyProfile(config)
         
         self.fileStorage = FileStorage(config)
-        
-        self.inventory = Inventory(config)
         
         self.configuration = Configuration(config)
         

@@ -12,7 +12,7 @@ class AuditTrail:
         self._conf = config
     
     async def getAuditLogs(self, qs=None):
-        """Get a paginated set of logs that can be filtered using the available set of parameters and get the relevant group of logs
+        """Get audit logs
         :param qs : Logs Query : type string
         """
         payload = {}
@@ -54,7 +54,7 @@ class AuditTrail:
         return response
     
     async def createAuditLog(self, body=""):
-        """Create a log instance that stores all the relevant info to be logged
+        """Create a Audit log
         """
         payload = {}
         
@@ -97,7 +97,7 @@ class AuditTrail:
         return response
     
     async def getAuditLog(self, id=None):
-        """Get detailed log information by their id
+        """Get audit logs by logs uuid
         :param id : log uuid : type string
         """
         payload = {}
@@ -139,7 +139,7 @@ class AuditTrail:
         return response
     
     async def getEntityTypes(self, ):
-        """Get a consolidated list of entity types from all the logs stored on the db, which further helps to filter the logs better
+        """Get entity types
         """
         payload = {}
         
