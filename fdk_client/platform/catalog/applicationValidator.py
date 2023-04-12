@@ -262,6 +262,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -870,6 +871,8 @@ class CatalogValidator:
         department_ids = fields.List(fields.Int(required=False), required=False)
         
         tags = fields.List(fields.Str(required=False), required=False)
+        
+        item_ids = fields.List(fields.Int(required=False), required=False)
         
         page_no = fields.Int(required=False)
         
