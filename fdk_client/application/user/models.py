@@ -260,6 +260,10 @@ class AuthSuccessUser(BaseSchema):
     pass
 
 
+class SessionListResponseInfo(BaseSchema):
+    pass
+
+
 class AuthSuccessUserDebug(BaseSchema):
     pass
 
@@ -1031,7 +1035,7 @@ class SessionListResponseSchema(BaseSchema):
     # User swagger.json
 
     
-    items = fields.List(fields.Str(required=False), required=False)
+    items = fields.List(fields.Nested(SessionListResponseInfo, required=False), required=False)
     
 
 
@@ -1176,6 +1180,22 @@ class AuthSuccessUser(BaseSchema):
     active = fields.Boolean(required=False)
     
     emails = fields.Nested(AuthSuccessUserEmails, required=False)
+    
+
+
+class SessionListResponseInfo(BaseSchema):
+    # User swagger.json
+
+    
+    session_id = fields.Str(required=False)
+    
+    user_agent = fields.Str(required=False)
+    
+    ip = fields.Str(required=False)
+    
+    domain = fields.Str(required=False)
+    
+    expire_in = fields.Str(required=False)
     
 
 

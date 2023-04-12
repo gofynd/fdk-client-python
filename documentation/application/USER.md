@@ -3737,7 +3737,7 @@ Request body must contain an email ID. Refer `EditEmailRequestSchema` for more d
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | items | ArrayList<String>? |  yes  |  |
+ | items | ArrayList<[SessionListResponseInfo](#SessionListResponseInfo)>? |  yes  |  |
 
 ---
 
@@ -3901,6 +3901,21 @@ Request body must contain an email ID. Refer `EditEmailRequestSchema` for more d
  | debug | [AuthSuccessUserDebug](#AuthSuccessUserDebug)? |  yes  |  |
  | active | Boolean? |  yes  |  |
  | emails | [AuthSuccessUserEmails](#AuthSuccessUserEmails)? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [SessionListResponseInfo](#SessionListResponseInfo)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | sessionId | String? |  yes  |  |
+ | userAgent | String? |  yes  |  |
+ | ip | String? |  yes  |  |
+ | domain | String? |  yes  |  |
+ | expireIn | String? |  yes  |  |
 
 ---
 
