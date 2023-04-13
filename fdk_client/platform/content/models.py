@@ -537,6 +537,8 @@ class SeoSchema(BaseSchema):
     
     sitemap_enabled = fields.Boolean(required=False)
     
+    cannonical_enabled = fields.Boolean(required=False)
+    
     custom_meta_tags = fields.List(fields.Dict(required=False), required=False)
     
     details = fields.Nested(Detail, required=False)
