@@ -24,6 +24,10 @@ class PathMappingSchema(BaseSchema):
     pass
 
 
+class PathSourceSchema(BaseSchema):
+    pass
+
+
 class SeoComponent(BaseSchema):
     pass
 
@@ -469,7 +473,17 @@ class PathMappingSchema(BaseSchema):
     
     created_at = fields.Str(required=False)
     
-    __source = fields.Nested(TagSourceSchema, required=False)
+    __source = fields.Nested(PathSourceSchema, required=False)
+    
+
+
+class PathSourceSchema(BaseSchema):
+    # Content swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    id = fields.Str(required=False)
     
 
 
