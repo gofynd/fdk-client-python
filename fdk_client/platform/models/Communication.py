@@ -223,14 +223,6 @@ class EventSubscriptions(BaseSchema):
     pass
 
 
-class TriggerJobResponse(BaseSchema):
-    pass
-
-
-class TriggerJobRequest(BaseSchema):
-    pass
-
-
 class Job(BaseSchema):
     pass
 
@@ -244,6 +236,14 @@ class JobLog(BaseSchema):
 
 
 class JobLogs(BaseSchema):
+    pass
+
+
+class TriggerJobResponse(BaseSchema):
+    pass
+
+
+class TriggerJobRequest(BaseSchema):
     pass
 
 
@@ -276,6 +276,10 @@ class SendOtpSmsCommsProvider(BaseSchema):
 
 
 class SendOtpEmailCommsTemplate(BaseSchema):
+    pass
+
+
+class SendOtpEmailCommsProvider(BaseSchema):
     pass
 
 
@@ -1210,22 +1214,6 @@ class EventSubscriptions(BaseSchema):
     
 
 
-class TriggerJobResponse(BaseSchema):
-    # Communication swagger.json
-
-    
-    status = fields.Int(required=False)
-    
-
-
-class TriggerJobRequest(BaseSchema):
-    # Communication swagger.json
-
-    
-    job_id = fields.Str(required=False)
-    
-
-
 class Job(BaseSchema):
     # Communication swagger.json
 
@@ -1287,6 +1275,22 @@ class JobLogs(BaseSchema):
     items = fields.List(fields.Nested(JobLog, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
+    
+
+
+class TriggerJobResponse(BaseSchema):
+    # Communication swagger.json
+
+    
+    status = fields.Int(required=False)
+    
+
+
+class TriggerJobRequest(BaseSchema):
+    # Communication swagger.json
+
+    
+    job_id = fields.Str(required=False)
     
 
 
@@ -1392,6 +1396,16 @@ class SendOtpEmailCommsTemplate(BaseSchema):
     
 
 
+class SendOtpEmailCommsProvider(BaseSchema):
+    # Communication swagger.json
+
+    
+    slug = fields.Str(required=False)
+    
+    _id = fields.Str(required=False)
+    
+
+
 class SendOtpCommsReqData(BaseSchema):
     # Communication swagger.json
 
@@ -1429,6 +1443,8 @@ class SendOtpCommsReqEmail(BaseSchema):
     expiry = fields.Int(required=False)
     
     template = fields.Nested(SendOtpEmailCommsTemplate, required=False)
+    
+    provider = fields.Nested(SendOtpEmailCommsProvider, required=False)
     
 
 
