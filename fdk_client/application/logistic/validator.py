@@ -16,6 +16,7 @@ from ..ApplicationModel import BaseSchema
     
     
     
+    
 
 class LogisticValidator:
     
@@ -40,6 +41,11 @@ class LogisticValidator:
         
     
     class getPincodeZones(BaseSchema):
+        
+        pass 
+        
+    
+    class getOptimalLocations(BaseSchema):
         
         pass 
         

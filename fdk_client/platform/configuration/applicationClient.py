@@ -224,6 +224,49 @@ class Configuration:
 
         return response
     
+    async def modifyAppFeatures(self, body=""):
+        """Update features of application
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ConfigurationValidator.modifyAppFeatures()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import AppFeatureRequest
+        schema = AppFeatureRequest()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/feature", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current application id","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current application id","in":"path","required":true,"name":"application_id"}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/feature", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        
+        
+
+        from .models import AppFeature
+        schema = AppFeature()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for modifyAppFeatures")
+            print(e)
+            
+        
+
+        return response
+    
     async def getAppBasicDetails(self, ):
         """Get basic application details like name
         """

@@ -60,6 +60,10 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
+        
         
         
         
@@ -182,6 +186,15 @@ class ConfigurationValidator:
         
     
     class updateAppFeatures(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class modifyAppFeatures(BaseSchema):
         
         
         company_id = fields.Str(required=False)
