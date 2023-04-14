@@ -252,8 +252,10 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
+        
         
         
         
@@ -815,6 +817,8 @@ class CartValidator:
         
         ordering_store_id = fields.Int(required=False)
         
+        i = fields.Boolean(required=False)
+        
         p = fields.Boolean(required=False)
         
         id = fields.Str(required=False)
@@ -841,6 +845,8 @@ class CartValidator:
         id = fields.Str(required=False)
         
         address_id = fields.Str(required=False)
+        
+        area_code = fields.Str(required=False)
         
         order_type = fields.Str(required=False)
          
