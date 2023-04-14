@@ -243,10 +243,10 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
         
         
+    
+    
         
     
     
@@ -776,13 +776,6 @@ class OrderValidator:
          
         
     
-    class postShipmentHistory(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
     class getShipmentHistory(BaseSchema):
         
         
@@ -791,6 +784,13 @@ class OrderValidator:
         shipment_id = fields.Int(required=False)
         
         bag_id = fields.Int(required=False)
+         
+        
+    
+    class postShipmentHistory(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
          
         
     
@@ -822,14 +822,14 @@ class OrderValidator:
          
         
     
-    class createChannelConfig(BaseSchema):
+    class getChannelConfig(BaseSchema):
         
         
         company_id = fields.Int(required=False)
          
         
     
-    class getChannelConfig(BaseSchema):
+    class createChannelConfig(BaseSchema):
         
         
         company_id = fields.Int(required=False)

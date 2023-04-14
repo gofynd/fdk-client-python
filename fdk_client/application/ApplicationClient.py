@@ -20,8 +20,6 @@ from .content.client import Content
 
 from .communication.client import Communication
 
-from .share.client import Share
-
 from .filestorage.client import FileStorage
 
 from .configuration.client import Configuration
@@ -48,7 +46,6 @@ class ApplicationClient:
         self.user = User(config)
         self.content = Content(config)
         self.communication = Communication(config)
-        self.share = Share(config)
         self.fileStorage = FileStorage(config)
         self.configuration = Configuration(config)
         self.payment = Payment(config)

@@ -21,8 +21,6 @@ from .catalog.applicationClient import Catalog
 
 from .filestorage.applicationClient import FileStorage
 
-from .share.applicationClient import Share
-
 from .configuration.applicationClient import Configuration
 
 from .cart.applicationClient import Cart
@@ -55,8 +53,6 @@ class PlatformApplicationClient:
         self.catalog = Catalog(config, applicationId)
         
         self.fileStorage = FileStorage(config, applicationId)
-        
-        self.share = Share(config, applicationId)
         
         self.configuration = Configuration(config, applicationId)
         
