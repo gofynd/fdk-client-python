@@ -7,11 +7,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
 from .Media1 import Media1
+
+
+
+
 
 
 
@@ -22,16 +22,16 @@ class ProductVariants(BaseSchema):
     # Catalog swagger.json
 
     
-    uid = fields.Int(required=False)
-    
-    brand_uid = fields.Int(required=False)
-    
-    name = fields.Str(required=False)
+    category_uid = fields.Int(required=False)
     
     media = fields.List(fields.Nested(Media1, required=False), required=False)
     
+    name = fields.Str(required=False)
+    
     item_code = fields.Str(required=False)
     
-    category_uid = fields.Int(required=False)
+    brand_uid = fields.Int(required=False)
+    
+    uid = fields.Int(required=False)
     
 

@@ -24,9 +24,9 @@ class ConfigurationListingSortConfig(BaseSchema):
     
     logo = fields.Str(required=False)
     
-    is_active = fields.Boolean(required=False)
-    
     key = fields.Str(required=False)
+    
+    is_active = fields.Boolean(required=False)
     
     name = fields.Str(required=False)
     

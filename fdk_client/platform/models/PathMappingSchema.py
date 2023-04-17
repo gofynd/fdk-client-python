@@ -17,7 +17,7 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-from .TagSourceSchema import TagSourceSchema
+from .PathSourceSchema import PathSourceSchema
 
 
 class PathMappingSchema(BaseSchema):
@@ -36,6 +36,6 @@ class PathMappingSchema(BaseSchema):
     
     created_at = fields.Str(required=False)
     
-    __source = fields.Nested(TagSourceSchema, required=False)
+    __source = fields.Nested(PathSourceSchema, required=False)
     
 

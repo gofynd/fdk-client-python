@@ -15,6 +15,8 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+
+
 from .Detail import Detail
 
 
@@ -33,6 +35,8 @@ class SeoSchema(BaseSchema):
     robots_txt = fields.Str(required=False)
     
     sitemap_enabled = fields.Boolean(required=False)
+    
+    cannonical_enabled = fields.Boolean(required=False)
     
     custom_meta_tags = fields.List(fields.Dict(required=False), required=False)
     

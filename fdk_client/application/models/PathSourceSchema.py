@@ -10,16 +10,12 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-class SellerV3(BaseSchema):
-    # Catalog swagger.json
+class PathSourceSchema(BaseSchema):
+    # Content swagger.json
 
     
-    uid = fields.Int(required=False)
+    type = fields.Str(required=False)
     
-    name = fields.Str(required=False)
-    
-    count = fields.Int(required=False)
+    id = fields.Str(required=False)
     
 

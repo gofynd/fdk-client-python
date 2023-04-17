@@ -14,8 +14,8 @@ class CategoryBanner(BaseSchema):
     # Catalog swagger.json
 
     
-    landscape = fields.Nested(Media, required=False)
-    
     portrait = fields.Nested(Media, required=False)
+    
+    landscape = fields.Nested(Media, required=False)
     
 

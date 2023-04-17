@@ -28,13 +28,13 @@ class ConfigurationProductVariantConfig(BaseSchema):
     
     logo = fields.Str(required=False)
     
-    is_active = fields.Boolean(required=False)
-    
     key = fields.Str(required=False)
     
-    display_type = fields.Str(required=False)
+    is_active = fields.Boolean(required=False)
     
     name = fields.Str(required=False)
+    
+    display_type = fields.Str(required=False)
     
     size = fields.Nested(ProductSize, required=False)
     
