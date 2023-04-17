@@ -11,9 +11,8 @@ with open('README.md', 'r') as fh:
 
 setup(
     name='fdk_client',
-    version='0.1.35',
+    version='1.0.3',
     author='Manish Magnani',
-    author_email='manishmagnani@gofynd.com',
     description=description,
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -22,10 +21,10 @@ setup(
         exclude=('tests*', 'documentation', '_macros')),
     license='',
     install_requires=[
-        "aiohttp>=3.8.0",
+        "aiohttp>=3.7.4",
         "marshmallow>=3.12.2",
-        "pytz>=2021.3",
-        "ujson>=5.4.0",
+        "pytz>=2020.1",
+        "ujson>=1.35",
     ],
     classifiers=[
         'Programming Language :: Python :: 3.8.2'
