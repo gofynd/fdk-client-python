@@ -1213,7 +1213,9 @@ class PanCardConfig(BaseSchema):
     
     enabled = fields.Boolean(required=False)
     
-    threshold_amount = fields.Float(required=False)
+    cod_threshold_amount = fields.Float(required=False)
+    
+    online_threshold_amount = fields.Float(required=False)
     
 
 
