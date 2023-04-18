@@ -20,14 +20,14 @@ class PriceArticle(BaseSchema):
     # Catalog swagger.json
 
     
+    effective = fields.Float(required=False)
+    
     currency = fields.Str(required=False)
     
-    effective = fields.Float(required=False)
+    tp_notes = fields.Dict(required=False)
     
     transfer = fields.Float(required=False)
     
     marked = fields.Float(required=False)
-    
-    tp_notes = fields.Dict(required=False)
     
 

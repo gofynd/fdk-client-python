@@ -20,14 +20,14 @@ class Dimension(BaseSchema):
     # Catalog swagger.json
 
     
-    width = fields.Float(required=False)
-    
-    unit = fields.Str(required=False)
-    
     height = fields.Float(required=False)
     
     length = fields.Float(required=False)
     
+    width = fields.Float(required=False)
+    
     is_default = fields.Boolean(required=False)
+    
+    unit = fields.Str(required=False)
     
 

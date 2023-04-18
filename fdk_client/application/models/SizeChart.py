@@ -15,9 +15,9 @@ from .SizeChartValues import SizeChartValues
 
 
 
+
+
 from .ColumnHeaders import ColumnHeaders
-
-
 
 
 class SizeChart(BaseSchema):
@@ -28,14 +28,14 @@ class SizeChart(BaseSchema):
     
     size_tip = fields.Str(required=False)
     
+    image = fields.Str(required=False)
+    
+    title = fields.Str(required=False)
+    
     unit = fields.Str(required=False)
     
     description = fields.Str(required=False)
     
-    title = fields.Str(required=False)
-    
     headers = fields.Nested(ColumnHeaders, required=False)
-    
-    image = fields.Str(required=False)
     
 

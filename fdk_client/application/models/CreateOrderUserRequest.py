@@ -26,12 +26,12 @@ class CreateOrderUserRequest(BaseSchema):
     
     meta = fields.Dict(required=False)
     
-    payment_link_id = fields.Str(required=False)
+    success_callback_url = fields.Str(required=False)
     
-    failure_callback_url = fields.Str(required=False)
+    payment_link_id = fields.Str(required=False)
     
     currency = fields.Str(required=False)
     
-    success_callback_url = fields.Str(required=False)
+    failure_callback_url = fields.Str(required=False)
     
 

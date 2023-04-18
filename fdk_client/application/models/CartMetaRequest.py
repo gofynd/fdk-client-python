@@ -9,11 +9,11 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-
-
-
-
 from .RevenueTaxDetail import RevenueTaxDetail
+
+
+
+
 
 
 class CartMetaRequest(BaseSchema):
@@ -22,12 +22,12 @@ class CartMetaRequest(BaseSchema):
     
     pick_up_customer_details = fields.Dict(required=False)
     
-    comment = fields.Str(required=False)
-    
-    checkout_mode = fields.Str(required=False)
-    
     gstin = fields.Str(required=False)
     
     revenue_tax = fields.Nested(RevenueTaxDetail, required=False)
+    
+    checkout_mode = fields.Str(required=False)
+    
+    comment = fields.Str(required=False)
     
 

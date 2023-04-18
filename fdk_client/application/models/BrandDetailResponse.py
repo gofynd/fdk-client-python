@@ -24,14 +24,14 @@ class BrandDetailResponse(BaseSchema):
     
     _custom_json = fields.Dict(required=False)
     
-    description = fields.Str(required=False)
+    name = fields.Str(required=False)
     
     logo = fields.Nested(Media, required=False)
     
     banners = fields.Nested(ImageUrls, required=False)
     
-    name = fields.Str(required=False)
-    
     uid = fields.Int(required=False)
+    
+    description = fields.Str(required=False)
     
 

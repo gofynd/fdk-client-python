@@ -18,8 +18,8 @@ class CreateOrderUserPaymentMethods(BaseSchema):
     
     meta = fields.Nested(PaymentMethodsMeta, required=False)
     
-    mode = fields.Str(required=False)
-    
     name = fields.Str(required=False)
+    
+    mode = fields.Str(required=False)
     
 

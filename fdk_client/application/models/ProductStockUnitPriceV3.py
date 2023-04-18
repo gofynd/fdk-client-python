@@ -22,8 +22,8 @@ class ProductStockUnitPriceV3(BaseSchema):
     
     currency_symbol = fields.Str(required=False)
     
-    unit = fields.Str(required=False)
-    
     currency_code = fields.Str(required=False)
+    
+    unit = fields.Str(required=False)
     
 

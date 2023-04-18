@@ -14,8 +14,8 @@ class NetQuantityResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    unit = fields.Str(required=False)
-    
     value = fields.Float(required=False)
+    
+    unit = fields.Str(required=False)
     
 
