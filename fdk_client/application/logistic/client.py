@@ -18,7 +18,8 @@ class Logistic:
             "getPincodeCity": "/service/application/logistics/v1.0/pincode/{pincode}",
             "getTatProduct": "/service/application/logistics/v1.0/",
             "getAllCountries": "/service/application/logistics/v1.0/country-list",
-            "getPincodeZones": "/service/application/logistics/v1.0/pincode/zones"
+            "getPincodeZones": "/service/application/logistics/v1.0/pincode/zones",
+            "getOptimalLocations": "/service/application/logistics/v1.0/reassign_stores"
             
         }
         self._urls = {
@@ -28,26 +29,22 @@ class Logistic:
     async def updateUrls(self, urls):
         self._urls.update(urls)
     
-    async def getPincodeCity(self, pincode=None, country_code=None, body=""):
+    async def getPincodeCity(self, pincode=None, body=""):
         """Get pincode data
         :param pincode : A `pincode` contains a specific address of a location. : type string
-        :param country_code : A 3 alphabetic country code : type string
         """
         payload = {}
         
         if pincode:
             payload["pincode"] = pincode
         
-        if country_code:
-            payload["country_code"] = country_code
-        
         # Parameter validation
         schema = LogisticValidator.getPincodeCity()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getPincodeCity"], proccessed_params="""{"required":[{"in":"path","name":"pincode","description":"A `pincode` contains a specific address of a location.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"country_code","description":"A 3 alphabetic country code","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"country_code","description":"A 3 alphabetic country code","schema":{"type":"string"},"required":false}],"headers":[],"path":[{"in":"path","name":"pincode","description":"A `pincode` contains a specific address of a location.","schema":{"type":"string"},"required":true}]}""", pincode=pincode, country_code=country_code)
-        query_string = await create_query_string(pincode=pincode, country_code=country_code)
+        url_with_params = await create_url_with_params(api_url=self._urls["getPincodeCity"], proccessed_params="""{"required":[{"in":"path","name":"pincode","description":"A `pincode` contains a specific address of a location.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"pincode","description":"A `pincode` contains a specific address of a location.","schema":{"type":"string"},"required":true}]}""", pincode=pincode)
+        query_string = await create_query_string(pincode=pincode)
         headers = {
             "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
         }
@@ -59,7 +56,21 @@ class Logistic:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPincodeCity"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/pincode/{pincode}", pincode=pincode, country_code=country_code), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPincodeCity"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/pincode/{pincode}", pincode=pincode), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+                
+        
+
+        from .models import PincodeApiResponse
+        schema = PincodeApiResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getPincodeCity")
+            print(e)
+
+        
+
+        return response
     
     async def getTatProduct(self, body=""):
         """Get TAT data
@@ -89,7 +100,21 @@ class Logistic:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getTatProduct"]).netloc, "post", await create_url_without_domain("/service/application/logistics/v1.0/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getTatProduct"]).netloc, "post", await create_url_without_domain("/service/application/logistics/v1.0/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+                
+        
+
+        from .models import TATViewResponse
+        schema = TATViewResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getTatProduct")
+            print(e)
+
+        
+
+        return response
     
     async def getAllCountries(self, body=""):
         """Get all countries
@@ -114,7 +139,21 @@ class Logistic:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAllCountries"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/country-list", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAllCountries"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/country-list", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+                
+        
+
+        from .models import CountryListResponse
+        schema = CountryListResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getAllCountries")
+            print(e)
+
+        
+
+        return response
     
     async def getPincodeZones(self, body=""):
         """This API returns zone from the Pincode View.
@@ -144,6 +183,64 @@ class Logistic:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPincodeZones"]).netloc, "post", await create_url_without_domain("/service/application/logistics/v1.0/pincode/zones", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPincodeZones"]).netloc, "post", await create_url_without_domain("/service/application/logistics/v1.0/pincode/zones", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+                
+        
+
+        from .models import GetZoneFromPincodeViewResponse
+        schema = GetZoneFromPincodeViewResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getPincodeZones")
+            print(e)
+
+        
+
+        return response
+    
+    async def getOptimalLocations(self, body=""):
+        """This API returns zone from the Pincode View.
+        """
+        payload = {}
+        
+        # Parameter validation
+        schema = LogisticValidator.getOptimalLocations()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import ReAssignStoreRequest
+        schema = ReAssignStoreRequest()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getOptimalLocations"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getOptimalLocations"]).netloc, "post", await create_url_without_domain("/service/application/logistics/v1.0/reassign_stores", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+                
+        
+
+        from .models import ReAssignStoreResponse
+        schema = ReAssignStoreResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getOptimalLocations")
+            print(e)
+
+        
+
+        return response
     
 

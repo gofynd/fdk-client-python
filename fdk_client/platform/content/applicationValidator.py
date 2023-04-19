@@ -147,6 +147,13 @@ from ..PlatformModel import BaseSchema
     
         
         
+                
+from .models import GenerationEntityType
+
+    
+    
+        
+        
         
         
     
@@ -633,6 +640,17 @@ class ContentValidator:
         application_id = fields.Str(required=False)
         
         id_or_slug = fields.Str(required=False)
+         
+        
+    
+    class generateSEOTitle(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        type = fields.Nested(GenerationEntityType, required=False)
          
         
     

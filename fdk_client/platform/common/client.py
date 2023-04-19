@@ -41,7 +41,21 @@ class Common:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/common/configuration/v1.0/application/search-application", authorization=authorization, query=query), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/common/configuration/v1.0/application/search-application", authorization=authorization, query=query), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+        
+        from .models import ApplicationResponse
+        schema = ApplicationResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for searchApplication")
+            print(e)
+            
+        
+
+        return response
     
     async def getLocations(self, location_type=None, id=None):
         """
@@ -73,6 +87,20 @@ class Common:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/common/configuration/v1.0/location", location_type=location_type, id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/common/configuration/v1.0/location", location_type=location_type, id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+        
+        from .models import Locations
+        schema = Locations()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getLocations")
+            print(e)
+            
+        
+
+        return response
     
 

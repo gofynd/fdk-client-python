@@ -32,24 +32,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
-        
-        
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
-        
-        
         
         
         
@@ -62,57 +44,12 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-    
-    
-        
-        
-        
     
     
         
         
     
     
-        
-        
-        
-        
-        
         
         
         
@@ -140,6 +77,74 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
     
         
@@ -227,10 +232,10 @@ from ..PlatformModel import BaseSchema
     
     
         
-        
-        
     
     
+        
+        
         
     
     
@@ -275,6 +280,10 @@ class OrderValidator:
         
         lane = fields.Str(required=False)
         
+        bag_status = fields.Str(required=False)
+        
+        status_override_lane = fields.Boolean(required=False)
+        
         search_type = fields.Str(required=False)
         
         search_value = fields.Str(required=False)
@@ -301,6 +310,8 @@ class OrderValidator:
         
         is_priority_sort = fields.Boolean(required=False)
         
+        fetch_active_shipment = fields.Boolean(required=False)
+        
         exclude_locked_shipments = fields.Boolean(required=False)
         
         payment_methods = fields.Str(required=False)
@@ -310,6 +321,10 @@ class OrderValidator:
         channel_order_id = fields.Str(required=False)
         
         custom_meta = fields.Str(required=False)
+        
+        ordering_channel = fields.Str(required=False)
+        
+        company_affiliate_tag = fields.Str(required=False)
          
         
     
@@ -726,6 +741,13 @@ class OrderValidator:
          
         
     
+    class postShipmentHistory(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
     class getShipmentHistory(BaseSchema):
         
         
@@ -734,13 +756,6 @@ class OrderValidator:
         shipment_id = fields.Int(required=False)
         
         bag_id = fields.Int(required=False)
-         
-        
-    
-    class postShipmentHistory(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
          
         
     
@@ -772,14 +787,14 @@ class OrderValidator:
          
         
     
-    class getChannelConfig(BaseSchema):
+    class createChannelConfig(BaseSchema):
         
         
         company_id = fields.Int(required=False)
          
         
     
-    class createChannelConfig(BaseSchema):
+    class getChannelConfig(BaseSchema):
         
         
         company_id = fields.Int(required=False)

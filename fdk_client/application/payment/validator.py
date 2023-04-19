@@ -51,6 +51,8 @@ from ..ApplicationModel import BaseSchema
     
     
     
+    
+    
         
     
     
@@ -197,6 +199,16 @@ class PaymentValidator:
         
     
     class resendOrCancelPayment(BaseSchema):
+        
+        pass 
+        
+    
+    class renderHTML(BaseSchema):
+        
+        pass 
+        
+    
+    class validateVPA(BaseSchema):
         
         pass 
         

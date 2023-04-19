@@ -10,6 +10,8 @@ Handle platform subscription
 * [createSubscriptionCharge](#createsubscriptioncharge)
 * [getSubscriptionCharge](#getsubscriptioncharge)
 * [cancelSubscriptionCharge](#cancelsubscriptioncharge)
+* [createOneTimeCharge](#createonetimecharge)
+* [getChargeDetails](#getchargedetails)
 * [getInvoices](#getinvoices)
 * [getInvoiceById](#getinvoicebyid)
 * [getCustomerDetail](#getcustomerdetail)
@@ -230,6 +232,121 @@ Cancel subscription and attached charges.
 
 
 [EntitySubscription](#EntitySubscription)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### createOneTimeCharge
+Create one time subscription charge
+
+
+
+
+```python
+try:
+    result = await client.billing.createOneTimeCharge(extensionId=extensionId, body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| extensionId | String | yes | Extension _id |  
+| body | [CreateOneTimeCharge](#CreateOneTimeCharge) | yes | Request body |
+
+
+Register one time subscription charge for a seller of your extension.
+
+*Returned Response:*
+
+
+
+
+[CreateOneTimeChargeResponse](#CreateOneTimeChargeResponse)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getChargeDetails
+Get subscription charge details
+
+
+
+
+```python
+try:
+    result = await client.billing.getChargeDetails(extensionId=extensionId, chargeId=chargeId)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| extensionId | String | yes | Extension _id |   
+| chargeId | String | yes | Standalone charge _id |  
+
+
+
+Get created subscription charge details
+
+*Returned Response:*
+
+
+
+
+[OneTimeChargeEntity](#OneTimeChargeEntity)
 
 Success
 
@@ -1054,6 +1171,7 @@ Success
 {
   "value": {
     "is_enabled": true,
+    "mandate_amount": 150000,
     "subscription": {
       "current_period": {
         "start": "2020-12-17T13:45:36.722Z",
@@ -1694,6 +1812,37 @@ Success
 
  
  
+ #### [OneTimeChargeItem](#OneTimeChargeItem)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | name | String |  no  |  |
+ | term | String? |  yes  |  |
+ | pricingType | String |  no  |  |
+ | price | [EntityChargePrice](#EntityChargePrice) |  no  |  |
+ | cappedAmount | Double? |  yes  |  |
+ | isTest | Boolean? |  yes  |  |
+ | metadata | HashMap<String,Any>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [CreateOneTimeCharge](#CreateOneTimeCharge)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | name | String |  no  |  |
+ | charge | [OneTimeChargeItem](#OneTimeChargeItem) |  no  |  |
+ | isTest | Boolean? |  yes  |  |
+ | returnUrl | String |  no  |  |
+
+---
+
+
+ 
+ 
  #### [CurrentPeriod](#CurrentPeriod)
 
  | Properties | Type | Nullable | Description |
@@ -1712,7 +1861,7 @@ Success
  | ---------- | ---- | -------- | ----------- |
  | id | String? |  yes  |  |
  | name | String? |  yes  |  |
- | term | String? |  yes  |  |
+ | term | String? |  yes  | Brief description for a charge |
  | pricingType | String? |  yes  |  |
  | price | [EntityChargePrice](#EntityChargePrice)? |  yes  |  |
  | recurring | [EntityChargeRecurring](#EntityChargeRecurring)? |  yes  |  |
@@ -1744,6 +1893,42 @@ Success
  | trialPeriod | [SubscriptionTrialPeriod](#SubscriptionTrialPeriod)? |  yes  |  |
  | metadata | HashMap<String,Any>? |  yes  |  |
  | lineItems | ArrayList<[SubscriptionCharge](#SubscriptionCharge)>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [OneTimeChargeEntity](#OneTimeChargeEntity)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | id | String? |  yes  |  |
+ | name | String? |  yes  |  |
+ | status | String? |  yes  |  |
+ | activatedOn | String? |  yes  |  |
+ | cancelledOn | String? |  yes  |  |
+ | metadata | HashMap<String,Any>? |  yes  |  |
+ | returnUrl | String? |  yes  |  |
+ | isTest | Boolean? |  yes  |  |
+ | pricingType | String? |  yes  |  |
+ | subscriberId | String? |  yes  |  |
+ | entityType | String? |  yes  |  |
+ | entityId | String? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
+ | price | [EntityChargePrice](#EntityChargePrice)? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [CreateOneTimeChargeResponse](#CreateOneTimeChargeResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | charge | [OneTimeChargeEntity](#OneTimeChargeEntity)? |  yes  |  |
+ | confirmUrl | String? |  yes  |  |
 
 ---
 
@@ -2237,6 +2422,7 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | mandateAmount | Double? |  yes  |  |
  | isEnabled | Boolean? |  yes  |  |
  | subscription | [Subscription](#Subscription)? |  yes  |  |
 

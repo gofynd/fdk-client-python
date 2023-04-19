@@ -54,7 +54,21 @@ class Share:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getApplicationQRCode"]).netloc, "post", await create_url_without_domain("/service/application/share/v1.0/qr/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getApplicationQRCode"]).netloc, "post", await create_url_without_domain("/service/application/share/v1.0/qr/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+                
+        
+
+        from .models import QRCodeResp
+        schema = QRCodeResp()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getApplicationQRCode")
+            print(e)
+
+        
+
+        return response
     
     async def getProductQRCodeBySlug(self, slug=None, body=""):
         """Use this API to create a QR code of a product for sharing it with users who want to view/purchase the product.
@@ -83,7 +97,21 @@ class Share:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductQRCodeBySlug"]).netloc, "post", await create_url_without_domain("/service/application/share/v1.0/qr/products/{slug}/", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductQRCodeBySlug"]).netloc, "post", await create_url_without_domain("/service/application/share/v1.0/qr/products/{slug}/", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+                
+        
+
+        from .models import QRCodeResp
+        schema = QRCodeResp()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getProductQRCodeBySlug")
+            print(e)
+
+        
+
+        return response
     
     async def getCollectionQRCodeBySlug(self, slug=None, body=""):
         """Use this API to create a QR code of a collection of products for sharing it with users who want to view/purchase the collection.
@@ -112,7 +140,21 @@ class Share:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCollectionQRCodeBySlug"]).netloc, "post", await create_url_without_domain("/service/application/share/v1.0/qr/collection/{slug}/", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCollectionQRCodeBySlug"]).netloc, "post", await create_url_without_domain("/service/application/share/v1.0/qr/collection/{slug}/", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+                
+        
+
+        from .models import QRCodeResp
+        schema = QRCodeResp()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getCollectionQRCodeBySlug")
+            print(e)
+
+        
+
+        return response
     
     async def getUrlQRCode(self, url=None, body=""):
         """Use this API to create a QR code of a URL for sharing it with users who want to visit the link.
@@ -141,7 +183,21 @@ class Share:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getUrlQRCode"]).netloc, "post", await create_url_without_domain("/service/application/share/v1.0/qr/url/", url=url), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getUrlQRCode"]).netloc, "post", await create_url_without_domain("/service/application/share/v1.0/qr/url/", url=url), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+                
+        
+
+        from .models import QRCodeResp
+        schema = QRCodeResp()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getUrlQRCode")
+            print(e)
+
+        
+
+        return response
     
     async def createShortLink(self, body=""):
         """Use this API to create a short link that is easy to write/share/read as compared to long URLs.
@@ -171,7 +227,21 @@ class Share:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["createShortLink"]).netloc, "post", await create_url_without_domain("/service/application/share/v1.0/links/short-link/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["createShortLink"]).netloc, "post", await create_url_without_domain("/service/application/share/v1.0/links/short-link/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+                
+        
+
+        from .models import ShortLinkRes
+        schema = ShortLinkRes()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for createShortLink")
+            print(e)
+
+        
+
+        return response
     
     async def getShortLinkByHash(self, hash=None, body=""):
         """Use this API to get a short link by using a hash value.
@@ -200,7 +270,21 @@ class Share:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getShortLinkByHash"]).netloc, "get", await create_url_without_domain("/service/application/share/v1.0/links/short-link/{hash}/", hash=hash), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getShortLinkByHash"]).netloc, "get", await create_url_without_domain("/service/application/share/v1.0/links/short-link/{hash}/", hash=hash), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+                
+        
+
+        from .models import ShortLinkRes
+        schema = ShortLinkRes()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getShortLinkByHash")
+            print(e)
+
+        
+
+        return response
     
     async def getOriginalShortLinkByHash(self, hash=None, body=""):
         """Use this API to retrieve the original link from a short-link by using a hash value.
@@ -229,6 +313,20 @@ class Share:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getOriginalShortLinkByHash"]).netloc, "get", await create_url_without_domain("/service/application/share/v1.0/links/short-link/{hash}/original/", hash=hash), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getOriginalShortLinkByHash"]).netloc, "get", await create_url_without_domain("/service/application/share/v1.0/links/short-link/{hash}/original/", hash=hash), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+                
+        
+
+        from .models import ShortLinkRes
+        schema = ShortLinkRes()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getOriginalShortLinkByHash")
+            print(e)
+
+        
+
+        return response
     
 

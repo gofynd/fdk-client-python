@@ -14,10 +14,15 @@ Authentication Service
 * [unDeleteUser](#undeleteuser)
 * [updateUser](#updateuser)
 * [createUserSession](#createusersession)
+* [deleteSession](#deletesession)
 * [getActiveSessions](#getactivesessions)
 * [deleteActiveSessions](#deleteactivesessions)
 * [getPlatformConfig](#getplatformconfig)
 * [updatePlatformConfig](#updateplatformconfig)
+* [createUserGroup](#createusergroup)
+* [getUserGroups](#getusergroups)
+* [updateUserGroup](#updateusergroup)
+* [getUserGroupById](#getusergroupbyid)
 
 
 
@@ -533,7 +538,7 @@ except Exception as e:
 | body | [UpdateUserRequestSchema](#UpdateUserRequestSchema) | yes | Request body |
 
 
-Update user
+Use this API to update user details, Note: Existing emails and phone numbers of user will be replaced directly if phone_numbers or emails field sent in request data.
 
 *Returned Response:*
 
@@ -672,8 +677,80 @@ Create user session
 ---
 
 
+### deleteSession
+Delete a session for a user
+
+
+
+
+```python
+try:
+    result = await client.application("<APPLICATION_ID>").user.deleteSession(id=id, sessionId=sessionId, reason=reason)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | ID of a customer. |   
+| sessionId | String | yes | Session ID of a customer. |   
+| reason | String | yes | Reason for deleting session. |  
+
+
+
+Use this API to Delete a session of customers who have registered in the application.
+
+*Returned Response:*
+
+
+
+
+[SessionDeleteResponseSchema](#SessionDeleteResponseSchema)
+
+Success. Refer `SessionDeleteResponseSchema` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; Success</i></summary>
+
+```json
+{
+  "value": {
+    "items": [
+      "sess:123",
+      "sess:456"
+    ]
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
 ### getActiveSessions
-Get a list of all session for a user
+Get a list of all session with info for a user
 
 
 
@@ -696,7 +773,7 @@ except Exception as e:
 
 
 
-Use this API to retrieve a list of session of customers who have registered in the application.
+Use this API to retrieve a list of session with info of customers who have registered in the application.
 
 *Returned Response:*
 
@@ -750,7 +827,7 @@ Delete a list of all session for a user
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").user.deleteActiveSessions(id=id)
+    result = await client.application("<APPLICATION_ID>").user.deleteActiveSessions(id=id, reason=reason)
     # use result
 except Exception as e:
     print(e)
@@ -762,7 +839,8 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| id | String | yes | ID of a customer. |  
+| id | String | yes | ID of a customer. |   
+| reason | String | yes | Reason to delete sessions. |  
 
 
 
@@ -1066,6 +1144,309 @@ Success. Returns a JSON object with the updated platform configurations. Refer `
   "_id": "5e04a5e5220bc15839ad9bc0",
   "created_at": "2019-12-26T12:21:57.878Z",
   "updated_at": "2020-08-13T14:31:09.878Z",
+  "__v": 0
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### createUserGroup
+Create an User Group
+
+
+
+
+```python
+try:
+    result = await client.application("<APPLICATION_ID>").user.createUserGroup(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [CreateUserGroupSchema](#CreateUserGroupSchema) | yes | Request body |
+
+
+Use this API to create new user Group
+
+*Returned Response:*
+
+
+
+
+[UserGroupResponseSchema](#UserGroupResponseSchema)
+
+Success. returns created User Group. `UserGroupResponseSchema` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "is_active": true,
+  "_id": "6345677535474fbb6944b7ce",
+  "name": "Group 1",
+  "description": "description",
+  "file_url": "url",
+  "status": "pending",
+  "uid": 1,
+  "application_id": "000000000000000000000001",
+  "created_at": "2022-10-11T12:54:13.539Z",
+  "modified_at": "2022-10-11T12:54:13.539Z",
+  "__v": 0
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getUserGroups
+Get User Groups mathcing criteria
+
+
+
+
+```python
+try:
+    result = await client.application("<APPLICATION_ID>").user.getUserGroups(pageNo=pageNo, pageSize=pageSize, name=name, status=status, groupUid=groupUid)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| pageNo | String? | no | page number for pagination result |   
+| pageSize | String? | no | page size for pagination result |   
+| name | String? | no | to seartch for User Groups which contains given string in their name |   
+| status | String? | no | to get User Groups with given status |   
+| groupUid | Int? | no | to get User Groups with given uid |  
+
+
+
+Use this API to get User Groups mathing criteria passed in query
+
+*Returned Response:*
+
+
+
+
+[UserGroupListResponseSchema](#UserGroupListResponseSchema)
+
+Success. User Group details. `UserGroupListResponseSchema` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "items": [
+    {
+      "is_active": true,
+      "_id": "6345677535474fbb6944b7ce",
+      "name": "Group 1",
+      "description": "description",
+      "file_url": "url",
+      "status": "pending",
+      "uid": 1,
+      "application_id": "000000000000000000000001",
+      "created_at": "2022-10-11T12:54:13.539Z",
+      "modified_at": "2022-10-11T12:54:13.539Z",
+      "__v": 0
+    },
+    {
+      "is_active": true,
+      "_id": "6345677535474fbb6944b7ced",
+      "name": "Group 2",
+      "description": "description",
+      "file_url": "url2",
+      "status": "pending",
+      "uid": 1,
+      "application_id": "000000000000000000000001",
+      "created_at": "2022-10-11T12:54:13.539Z",
+      "modified_at": "2022-10-11T12:54:13.539Z",
+      "__v": 0
+    }
+  ],
+  "page": {
+    "type": "number",
+    "current": 1,
+    "size": 10,
+    "item_total": 0,
+    "has_next": false
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### updateUserGroup
+Update an User Group
+
+
+
+
+```python
+try:
+    result = await client.application("<APPLICATION_ID>").user.updateUserGroup(groupId=groupId, body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| groupId | String | yes | Numeric ID allotted to a User Group |  
+| body | [UpdateUserGroupSchema](#UpdateUserGroupSchema) | yes | Request body |
+
+
+Use this API to update an existing user Group
+
+*Returned Response:*
+
+
+
+
+[UserGroupResponseSchema](#UserGroupResponseSchema)
+
+Success. returns updated User Group. `UserGroupResponseSchema` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "is_active": true,
+  "_id": "6345677535474fbb6944b7ce",
+  "name": "Group 1",
+  "description": "description",
+  "file_url": "url",
+  "status": "pending",
+  "uid": 1,
+  "application_id": "000000000000000000000001",
+  "created_at": "2022-10-11T12:54:13.539Z",
+  "modified_at": "2022-10-11T12:54:13.539Z",
+  "__v": 0
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getUserGroupById
+Get an User Group by Id
+
+
+
+
+```python
+try:
+    result = await client.application("<APPLICATION_ID>").user.getUserGroupById(groupId=groupId)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| groupId | String | yes | Numeric ID allotted to a User Group |  
+
+
+
+Use this API to get details of an existing user Group
+
+*Returned Response:*
+
+
+
+
+[UserGroupResponseSchema](#UserGroupResponseSchema)
+
+Success. User Group details. `UserGroupResponseSchema` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "is_active": true,
+  "_id": "6345677535474fbb6944b7ce",
+  "name": "Group 1",
+  "description": "description",
+  "file_url": "url",
+  "status": "pending",
+  "uid": 1,
+  "application_id": "000000000000000000000001",
+  "created_at": "2022-10-11T12:54:13.539Z",
+  "modified_at": "2022-10-11T12:54:13.539Z",
   "__v": 0
 }
 ```
@@ -1746,7 +2127,7 @@ Success. Returns a JSON object with the updated platform configurations. Refer `
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | items | ArrayList<String>? |  yes  |  |
+ | items | ArrayList<[SessionListResponseInfo](#SessionListResponseInfo)>? |  yes  |  |
 
 ---
 
@@ -1916,6 +2297,21 @@ Success. Returns a JSON object with the updated platform configurations. Refer `
 
  
  
+ #### [SessionListResponseInfo](#SessionListResponseInfo)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | sessionId | String? |  yes  |  |
+ | userAgent | String? |  yes  |  |
+ | ip | String? |  yes  |  |
+ | domain | String? |  yes  |  |
+ | expireIn | String? |  yes  |  |
+
+---
+
+
+ 
+ 
  #### [AuthSuccessUserDebug](#AuthSuccessUserDebug)
 
  | Properties | Type | Nullable | Description |
@@ -1935,6 +2331,51 @@ Success. Returns a JSON object with the updated platform configurations. Refer `
  | verified | Boolean? |  yes  |  |
  | primary | Boolean? |  yes  |  |
  | active | Boolean? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [UserGroupResponseSchema](#UserGroupResponseSchema)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | name | String? |  yes  |  |
+ | description | String? |  yes  |  |
+ | fileUrl | String? |  yes  |  |
+ | id | String? |  yes  |  |
+ | status | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | applicationId | String? |  yes  |  |
+ | createdAt | String? |  yes  |  |
+ | modifiedAt | String? |  yes  |  |
+ | v | Int? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [UserGroupListResponseSchema](#UserGroupListResponseSchema)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | items | ArrayList<[UserGroupResponseSchema](#UserGroupResponseSchema)>? |  yes  |  |
+ | page | [PaginationSchema](#PaginationSchema)? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [CreateUserGroupSchema](#CreateUserGroupSchema)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | name | String |  no  |  |
+ | description | String |  no  |  |
+ | fileUrl | String |  no  |  |
 
 ---
 
@@ -2249,6 +2690,19 @@ Success. Returns a JSON object with the updated platform configurations. Refer `
 
  
  
+ #### [UpdateUserGroupSchema](#UpdateUserGroupSchema)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | name | String? |  yes  |  |
+ | description | String? |  yes  |  |
+ | fileUrl | String? |  yes  |  |
+
+---
+
+
+ 
+ 
  #### [UpdateUserRequestSchema](#UpdateUserRequestSchema)
 
  | Properties | Type | Nullable | Description |
@@ -2258,6 +2712,37 @@ Success. Returns a JSON object with the updated platform configurations. Refer `
  | gender | String? |  yes  |  |
  | externalId | String? |  yes  |  |
  | meta | HashMap<String,Any>? |  yes  |  |
+ | phoneNumbers | ArrayList<[UserPhoneNumbers](#UserPhoneNumbers)>? |  yes  |  |
+ | emails | ArrayList<[UserEmails](#UserEmails)>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [UserEmails](#UserEmails)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | active | Boolean? |  yes  |  |
+ | primary | Boolean? |  yes  |  |
+ | verified | Boolean? |  yes  |  |
+ | email | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [UserPhoneNumbers](#UserPhoneNumbers)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | active | Boolean? |  yes  |  |
+ | primary | Boolean? |  yes  |  |
+ | verified | Boolean? |  yes  |  |
+ | phone | String? |  yes  |  |
+ | countryCode | String? |  yes  |  |
 
 ---
 
