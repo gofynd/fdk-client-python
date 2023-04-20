@@ -202,6 +202,14 @@ class ShipmentPayment(BaseSchema):
     pass
 
 
+class ReturnMetaData(BaseSchema):
+    pass
+
+
+class ReturnMetaDataImages(BaseSchema):
+    pass
+
+
 class Track(BaseSchema):
     pass
 
@@ -973,6 +981,8 @@ class Shipments(BaseSchema):
     
     total_details = fields.Nested(ShipmentTotalDetails, required=False)
     
+    return_meta = fields.Nested(ReturnMetaData, required=False)
+    
 
 
 class ShipmentTotalDetails(BaseSchema):
@@ -998,6 +1008,22 @@ class ShipmentPayment(BaseSchema):
     mop = fields.Str(required=False)
     
     status = fields.Str(required=False)
+    
+
+
+class ReturnMetaData(BaseSchema):
+    # Order swagger.json
+
+    
+    images = fields.List(fields.Nested(ReturnMetaDataImages, required=False), required=False)
+    
+
+
+class ReturnMetaDataImages(BaseSchema):
+    # Order swagger.json
+
+    
+    url = fields.Str(required=False)
     
 
 

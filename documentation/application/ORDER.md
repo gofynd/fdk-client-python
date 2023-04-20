@@ -1471,6 +1471,7 @@ Success, the code is valid and returns a SignedUrl
  | userInfo | [ShipmentUserInfo](#ShipmentUserInfo)? |  yes  |  |
  | sizeInfo | HashMap<String,Any>? |  yes  |  |
  | totalDetails | [ShipmentTotalDetails](#ShipmentTotalDetails)? |  yes  |  |
+ | returnMeta | [ReturnMetaData](#ReturnMetaData)? |  yes  |  |
 
 ---
 
@@ -1498,6 +1499,28 @@ Success, the code is valid and returns a SignedUrl
  | mode | String? |  yes  |  |
  | mop | String? |  yes  |  |
  | status | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [ReturnMetaData](#ReturnMetaData)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | images | ArrayList<[ReturnMetaDataImages](#ReturnMetaDataImages)>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [ReturnMetaDataImages](#ReturnMetaDataImages)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | url | String? |  yes  |  |
 
 ---
 
