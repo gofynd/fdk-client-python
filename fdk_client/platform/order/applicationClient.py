@@ -148,7 +148,7 @@ class Order:
 
         return response
     
-    async def trackShipmentPlatform(self, shipment_id=None):
+    async def trackPlatformShipment(self, shipment_id=None):
         """Track Shipment by shipment id, for application based on application Id
         :param shipment_id :  : type string
         """
@@ -159,7 +159,7 @@ class Order:
         
 
         # Parameter validation
-        schema = OrderValidator.trackShipmentPlatform()
+        schema = OrderValidator.trackPlatformShipment()
         schema.dump(schema.load(payload))
         
 
@@ -183,7 +183,7 @@ class Order:
         try:
             schema.dump(schema.load(response))
         except Exception as e:
-            print("Response Validation failed for trackShipmentPlatform")
+            print("Response Validation failed for trackPlatformShipment")
             print(e)
             
         

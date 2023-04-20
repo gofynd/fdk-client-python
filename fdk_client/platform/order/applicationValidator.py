@@ -89,7 +89,7 @@ class OrderValidator:
          
         
     
-    class trackShipmentPlatform(BaseSchema):
+    class trackPlatformShipment(BaseSchema):
         
         
         company_id = fields.Str(required=False)
