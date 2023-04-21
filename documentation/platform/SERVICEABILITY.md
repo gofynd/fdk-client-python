@@ -30,7 +30,7 @@ Zone configuration of application.
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").serviceability.getApplicationServiceability()
+    result = await platformClient.application("<APPLICATION_ID>").serviceability.getApplicationServiceability()
     # use result
 except Exception as e:
     print(e)
@@ -94,7 +94,7 @@ Get country and state list
 
 ```python
 try:
-    result = await client.serviceability.getEntityRegionView(body=body)
+    result = await platformClient.serviceability.getEntityRegionView(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -150,7 +150,7 @@ Zone List of application.
 
 ```python
 try:
-    result = await client.serviceability.getListView(pageNumber=pageNumber, pageSize=pageSize, name=name, isActive=isActive, channelIds=channelIds)
+    result = await platformClient.serviceability.getListView(pageNumber=pageNumber, pageSize=pageSize, name=name, isActive=isActive, channelIds=channelIds)
     # use result
 except Exception as e:
     print(e)
@@ -211,7 +211,7 @@ Company Store View of application.
 
 ```python
 try:
-    result = await client.serviceability.getCompanyStoreView(pageNumber=pageNumber, pageSize=pageSize)
+    result = await platformClient.serviceability.getCompanyStoreView(pageNumber=pageNumber, pageSize=pageSize)
     # use result
 except Exception as e:
     print(e)
@@ -269,7 +269,7 @@ Updation of zone collections in database.
 
 ```python
 try:
-    result = await client.serviceability.updateZoneControllerView(zoneId=zoneId, body=body)
+    result = await platformClient.serviceability.updateZoneControllerView(zoneId=zoneId, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -326,7 +326,7 @@ Zone Data View of application.
 
 ```python
 try:
-    result = await client.serviceability.getZoneDataView(zoneId=zoneId)
+    result = await platformClient.serviceability.getZoneDataView(zoneId=zoneId)
     # use result
 except Exception as e:
     print(e)
@@ -383,7 +383,7 @@ Insertion of zone in database.
 
 ```python
 try:
-    result = await client.serviceability.insertZoneControllerView(body=body)
+    result = await platformClient.serviceability.insertZoneControllerView(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -439,7 +439,7 @@ GET zone from the Pincode.
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").serviceability.upsertZoneControllerView(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").serviceability.upsertZoneControllerView(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -495,7 +495,7 @@ GET stores data
 
 ```python
 try:
-    result = await client.serviceability.getStore(storeUid=storeUid)
+    result = await platformClient.serviceability.getStore(storeUid=storeUid)
     # use result
 except Exception as e:
     print(e)
@@ -772,7 +772,7 @@ GET stores data
 
 ```python
 try:
-    result = await client.serviceability.getAllStores()
+    result = await platformClient.serviceability.getAllStores()
     # use result
 except Exception as e:
     print(e)

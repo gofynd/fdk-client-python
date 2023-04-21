@@ -1,6 +1,6 @@
 
 
-"""Rewards Platform Client."""
+"""Rewards Platform Client"""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -11,6 +11,7 @@ class Rewards:
     def __init__(self, config, applicationId):
         self._conf = config
         self.applicationId = applicationId
+
     
     async def showGiveaways(self, page_id=None, page_size=None):
         """List of giveaways of the current application.
@@ -43,7 +44,7 @@ class Rewards:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/giveaways", page_id=page_id, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import GiveawayResponse
@@ -53,7 +54,7 @@ class Rewards:
         except Exception as e:
             print("Response Validation failed for showGiveaways")
             print(e)
-            
+
         
 
         return response
@@ -86,7 +87,7 @@ class Rewards:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/giveaways", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import Giveaway
@@ -96,7 +97,7 @@ class Rewards:
         except Exception as e:
             print("Response Validation failed for saveGiveAway")
             print(e)
-            
+
         
 
         return response
@@ -128,7 +129,7 @@ class Rewards:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/giveaways/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import Giveaway
@@ -138,7 +139,7 @@ class Rewards:
         except Exception as e:
             print("Response Validation failed for getGiveawayById")
             print(e)
-            
+
         
 
         return response
@@ -175,7 +176,7 @@ class Rewards:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/giveaways/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import Giveaway
@@ -185,7 +186,7 @@ class Rewards:
         except Exception as e:
             print("Response Validation failed for updateGiveAway")
             print(e)
-            
+
         
 
         return response
@@ -217,7 +218,7 @@ class Rewards:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/giveaways/audience/{audience_id}/status", audience_id=audience_id, ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import GiveawayAudience
@@ -227,7 +228,7 @@ class Rewards:
         except Exception as e:
             print("Response Validation failed for getGiveawayAudienceStatus")
             print(e)
-            
+
         
 
         return response
@@ -255,7 +256,7 @@ class Rewards:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/offers/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         return response
@@ -291,7 +292,7 @@ class Rewards:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/offers/{name}/", name=name, cookie=cookie), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import Offer
@@ -301,7 +302,7 @@ class Rewards:
         except Exception as e:
             print("Response Validation failed for getOfferByName")
             print(e)
-            
+
         
 
         return response
@@ -338,7 +339,7 @@ class Rewards:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/offers/{name}/", name=name, ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import Offer
@@ -348,7 +349,7 @@ class Rewards:
         except Exception as e:
             print("Response Validation failed for updateOfferByName")
             print(e)
-            
+
         
 
         return response
@@ -385,7 +386,7 @@ class Rewards:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/users/{user_id}/", user_id=user_id, ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import AppUser
@@ -395,7 +396,7 @@ class Rewards:
         except Exception as e:
             print("Response Validation failed for updateUserStatus")
             print(e)
-            
+
         
 
         return response
@@ -427,7 +428,7 @@ class Rewards:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/users/{user_id}/", user_id=user_id, ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import UserRes
@@ -437,7 +438,7 @@ class Rewards:
         except Exception as e:
             print("Response Validation failed for user")
             print(e)
-            
+
         
 
         return response
@@ -477,7 +478,7 @@ class Rewards:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/users/{user_id}/points/history/", user_id=user_id, page_id=page_id, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import HistoryRes
@@ -487,7 +488,7 @@ class Rewards:
         except Exception as e:
             print("Response Validation failed for getUserPointsHistory")
             print(e)
-            
+
         
 
         return response

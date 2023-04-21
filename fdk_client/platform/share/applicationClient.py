@@ -1,6 +1,6 @@
 
 
-"""Share Platform Client."""
+"""Share Platform Client"""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -11,6 +11,7 @@ class Share:
     def __init__(self, config, applicationId):
         self._conf = config
         self.applicationId = applicationId
+
     
     async def createShortLink(self, body=""):
         """Create short link
@@ -40,7 +41,7 @@ class Share:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/share/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/links/short-link/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import ShortLinkRes
@@ -50,7 +51,7 @@ class Share:
         except Exception as e:
             print("Response Validation failed for createShortLink")
             print(e)
-            
+
         
 
         return response
@@ -98,7 +99,7 @@ class Share:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/share/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/links/short-link/", page_no=page_no, page_size=page_size, created_by=created_by, active=active, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import ShortLinkList
@@ -108,7 +109,7 @@ class Share:
         except Exception as e:
             print("Response Validation failed for getShortLinks")
             print(e)
-            
+
         
 
         return response
@@ -140,7 +141,7 @@ class Share:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/share/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/links/short-link/{hash}/", hash=hash), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import ShortLinkRes
@@ -150,7 +151,7 @@ class Share:
         except Exception as e:
             print("Response Validation failed for getShortLinkByHash")
             print(e)
-            
+
         
 
         return response
@@ -187,7 +188,7 @@ class Share:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/share/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/links/short-link/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import ShortLinkRes
@@ -197,7 +198,7 @@ class Share:
         except Exception as e:
             print("Response Validation failed for updateShortLinkById")
             print(e)
-            
+
         
 
         return response

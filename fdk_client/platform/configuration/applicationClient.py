@@ -1,6 +1,6 @@
 
 
-"""Configuration Platform Client."""
+"""Configuration Platform Client"""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -11,6 +11,7 @@ class Configuration:
     def __init__(self, config, applicationId):
         self._conf = config
         self.applicationId = applicationId
+
     
     async def getBuildConfig(self, platform_type=None):
         """Get latest build config
@@ -39,7 +40,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/build/{platform_type}/configuration", platform_type=platform_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import MobileAppConfiguration
@@ -49,7 +50,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for getBuildConfig")
             print(e)
-            
+
         
 
         return response
@@ -86,7 +87,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/build/{platform_type}/configuration", platform_type=platform_type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import MobileAppConfiguration
@@ -96,7 +97,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for updateBuildConfig")
             print(e)
-            
+
         
 
         return response
@@ -128,7 +129,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/build/{platform_type}/versions", platform_type=platform_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import BuildVersionHistory
@@ -138,7 +139,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for getPreviousVersions")
             print(e)
-            
+
         
 
         return response
@@ -166,7 +167,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/feature", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import AppFeatureResponse
@@ -176,7 +177,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for getAppFeatures")
             print(e)
-            
+
         
 
         return response
@@ -209,7 +210,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/feature", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import AppFeature
@@ -219,7 +220,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for updateAppFeatures")
             print(e)
-            
+
         
 
         return response
@@ -247,7 +248,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import ApplicationDetail
@@ -257,7 +258,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for getAppBasicDetails")
             print(e)
-            
+
         
 
         return response
@@ -290,7 +291,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import ApplicationDetail
@@ -300,7 +301,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for updateAppBasicDetails")
             print(e)
-            
+
         
 
         return response
@@ -328,7 +329,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/information", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import ApplicationInformation
@@ -338,7 +339,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for getAppContactInfo")
             print(e)
-            
+
         
 
         return response
@@ -371,7 +372,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/information", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import ApplicationInformation
@@ -381,7 +382,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for updateAppContactInfo")
             print(e)
-            
+
         
 
         return response
@@ -409,7 +410,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/token", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import TokenResponse
@@ -419,7 +420,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for getAppApiTokens")
             print(e)
-            
+
         
 
         return response
@@ -452,7 +453,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/token", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import TokenResponse
@@ -462,7 +463,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for updateAppApiTokens")
             print(e)
-            
+
         
 
         return response
@@ -502,7 +503,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/companies", uid=uid, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import CompaniesResponse
@@ -512,7 +513,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for getAppCompanies")
             print(e)
-            
+
         
 
         return response
@@ -548,7 +549,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/stores", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import StoresResponse
@@ -558,7 +559,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for getAppStores")
             print(e)
-            
+
         
 
         return response
@@ -586,7 +587,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/configuration", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import ApplicationInventory
@@ -596,7 +597,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for getInventoryConfig")
             print(e)
-            
+
         
 
         return response
@@ -629,7 +630,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/configuration", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import ApplicationInventory
@@ -639,7 +640,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for updateInventoryConfig")
             print(e)
-            
+
         
 
         return response
@@ -672,7 +673,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/configuration", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import ApplicationInventory
@@ -682,7 +683,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for partiallyUpdateInventoryConfig")
             print(e)
-            
+
         
 
         return response
@@ -710,7 +711,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/currency", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import AppSupportedCurrency
@@ -720,7 +721,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for getAppCurrencyConfig")
             print(e)
-            
+
         
 
         return response
@@ -753,7 +754,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/currency", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import AppSupportedCurrency
@@ -763,7 +764,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for updateAppCurrencyConfig")
             print(e)
-            
+
         
 
         return response
@@ -791,7 +792,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/currency/supported", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import AppCurrencyResponse
@@ -801,7 +802,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for getAppSupportedCurrency")
             print(e)
-            
+
         
 
         return response
@@ -842,7 +843,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ordering-store/stores/filter", page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import OrderingStores
@@ -852,7 +853,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for getOrderingStoresByFilter")
             print(e)
-            
+
         
 
         return response
@@ -885,7 +886,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ordering-store", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import DeploymentMeta
@@ -895,7 +896,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for updateOrderingStoreConfig")
             print(e)
-            
+
         
 
         return response
@@ -935,7 +936,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ordering-store/staff-stores", page_no=page_no, page_size=page_size, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import OrderingStoresResponse
@@ -945,7 +946,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for getStaffOrderingStores")
             print(e)
-            
+
         
 
         return response
@@ -973,7 +974,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/domain", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import DomainsResponse
@@ -983,7 +984,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for getDomains")
             print(e)
-            
+
         
 
         return response
@@ -1016,7 +1017,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/domain", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import Domain
@@ -1026,7 +1027,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for addDomain")
             print(e)
-            
+
         
 
         return response
@@ -1058,7 +1059,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/domain/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import SuccessMessageResponse
@@ -1068,7 +1069,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for removeDomainById")
             print(e)
-            
+
         
 
         return response
@@ -1101,7 +1102,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/domain/set-domain", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import DomainsResponse
@@ -1111,7 +1112,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for changeDomainType")
             print(e)
-            
+
         
 
         return response
@@ -1144,7 +1145,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/domain/domain-status", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import DomainStatusResponse
@@ -1154,7 +1155,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for getDomainStatus")
             print(e)
-            
+
         
 
         return response
@@ -1182,7 +1183,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import Application
@@ -1192,7 +1193,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for getApplicationById")
             print(e)
-            
+
         
 
         return response

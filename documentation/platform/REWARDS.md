@@ -31,7 +31,7 @@ List of giveaways of the current application.
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").rewards.showGiveaways(pageId=pageId, pageSize=pageSize)
+    result = await platformClient.application("<APPLICATION_ID>").rewards.showGiveaways(pageId=pageId, pageSize=pageSize)
     # use result
 except Exception as e:
     print(e)
@@ -89,7 +89,7 @@ List of giveaways of the current application.
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").rewards.saveGiveAway(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").rewards.saveGiveAway(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -145,7 +145,7 @@ Get giveaway by ID.
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").rewards.getGiveawayById(id=id)
+    result = await platformClient.application("<APPLICATION_ID>").rewards.getGiveawayById(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -202,7 +202,7 @@ Updates the giveaway by it's ID.
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").rewards.updateGiveAway(id=id, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").rewards.updateGiveAway(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -259,7 +259,7 @@ Get the Giveaway audience status
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").rewards.getGiveawayAudienceStatus(audienceId=audienceId)
+    result = await platformClient.application("<APPLICATION_ID>").rewards.getGiveawayAudienceStatus(audienceId=audienceId)
     # use result
 except Exception as e:
     print(e)
@@ -316,7 +316,7 @@ List of offers of the current application.
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").rewards.showOffers()
+    result = await platformClient.application("<APPLICATION_ID>").rewards.showOffers()
     # use result
 except Exception as e:
     print(e)
@@ -368,7 +368,7 @@ Get offer by name
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").rewards.getOfferByName(name=name, cookie=cookie)
+    result = await platformClient.application("<APPLICATION_ID>").rewards.getOfferByName(name=name, cookie=cookie)
     # use result
 except Exception as e:
     print(e)
@@ -426,7 +426,7 @@ Update offer by name
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").rewards.updateOfferByName(name=name, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").rewards.updateOfferByName(name=name, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -483,7 +483,7 @@ Update user status
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").rewards.updateUserStatus(userId=userId, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").rewards.updateUserStatus(userId=userId, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -540,7 +540,7 @@ Get user reward details
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").rewards.user(userId=userId)
+    result = await platformClient.application("<APPLICATION_ID>").rewards.user(userId=userId)
     # use result
 except Exception as e:
     print(e)
@@ -597,7 +597,7 @@ Get all transactions of reward points
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").rewards.getUserPointsHistory(userId=userId, pageId=pageId, pageSize=pageSize)
+    result = await platformClient.application("<APPLICATION_ID>").rewards.getUserPointsHistory(userId=userId, pageId=pageId, pageSize=pageSize)
     # use result
 except Exception as e:
     print(e)

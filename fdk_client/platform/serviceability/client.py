@@ -1,6 +1,6 @@
 
 
-""" Serviceability Platform Client."""
+"""Serviceability Platform Client"""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -10,6 +10,7 @@ from .validator import ServiceabilityValidator
 class Serviceability:
     def __init__(self, config):
         self._conf = config
+
     
     async def getEntityRegionView(self, body=""):
         """This API returns response for Entity Region View.
@@ -41,7 +42,7 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/regions", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import EntityRegionView_Response
         schema = EntityRegionView_Response()
         try:
@@ -49,7 +50,7 @@ class Serviceability:
         except Exception as e:
             print("Response Validation failed for getEntityRegionView")
             print(e)
-            
+
         
 
         return response
@@ -99,7 +100,7 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/zones", page_number=page_number, page_size=page_size, name=name, is_active=is_active, channel_ids=channel_ids), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import ListViewResponse
         schema = ListViewResponse()
         try:
@@ -107,7 +108,7 @@ class Serviceability:
         except Exception as e:
             print("Response Validation failed for getListView")
             print(e)
-            
+
         
 
         return response
@@ -145,7 +146,7 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/all-stores", page_number=page_number, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import CompanyStoreView_Response
         schema = CompanyStoreView_Response()
         try:
@@ -153,7 +154,7 @@ class Serviceability:
         except Exception as e:
             print("Response Validation failed for getCompanyStoreView")
             print(e)
-            
+
         
 
         return response
@@ -192,7 +193,7 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/zone/{zone_id}", zone_id=zone_id, ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import ZoneSuccessResponse
         schema = ZoneSuccessResponse()
         try:
@@ -200,7 +201,7 @@ class Serviceability:
         except Exception as e:
             print("Response Validation failed for updateZoneControllerView")
             print(e)
-            
+
         
 
         return response
@@ -234,7 +235,7 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/zone/{zone_id}", zone_id=zone_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import GetSingleZoneDataViewResponse
         schema = GetSingleZoneDataViewResponse()
         try:
@@ -242,7 +243,7 @@ class Serviceability:
         except Exception as e:
             print("Response Validation failed for getZoneDataView")
             print(e)
-            
+
         
 
         return response
@@ -277,7 +278,7 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/zone/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import ZoneResponse
         schema = ZoneResponse()
         try:
@@ -285,7 +286,7 @@ class Serviceability:
         except Exception as e:
             print("Response Validation failed for insertZoneControllerView")
             print(e)
-            
+
         
 
         return response
@@ -319,7 +320,7 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/stores/{store_uid}", store_uid=store_uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import GetStoresViewResponse
         schema = GetStoresViewResponse()
         try:
@@ -327,7 +328,7 @@ class Serviceability:
         except Exception as e:
             print("Response Validation failed for getStore")
             print(e)
-            
+
         
 
         return response
@@ -357,7 +358,7 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/logistics/stores", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import GetStoresViewResponse
         schema = GetStoresViewResponse()
         try:
@@ -365,7 +366,7 @@ class Serviceability:
         except Exception as e:
             print("Response Validation failed for getAllStores")
             print(e)
-            
+
         
 
         return response
