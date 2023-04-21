@@ -14,8 +14,6 @@ from .communication.client import Communication
 
 from .payment.client import Payment
 
-from .order.client import Order
-
 from .filestorage.client import FileStorage
 
 from .inventory.client import Inventory
@@ -42,8 +40,6 @@ class PlatformClient:
         self.communication = Communication(config)
         
         self.payment = Payment(config)
-        
-        self.order = Order(config)
         
         self.fileStorage = FileStorage(config)
         
