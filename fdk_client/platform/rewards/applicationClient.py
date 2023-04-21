@@ -442,7 +442,7 @@ class Rewards:
 
         return response
     
-    async def getPointsHistory(self, user_id=None, page_id=None, page_size=None):
+    async def getUserPointsHistory(self, user_id=None, page_id=None, page_size=None):
         """Use this API to get a list of points transactions.
         :param user_id : user id : type string
         :param page_id : PageID is the ID of the requested page. For first request it should be kept empty. : type string
@@ -461,7 +461,7 @@ class Rewards:
         
 
         # Parameter validation
-        schema = RewardsValidator.getPointsHistory()
+        schema = RewardsValidator.getUserPointsHistory()
         schema.dump(schema.load(payload))
         
 
@@ -485,7 +485,88 @@ class Rewards:
         try:
             schema.dump(schema.load(response))
         except Exception as e:
-            print("Response Validation failed for getPointsHistory")
+            print("Response Validation failed for getUserPointsHistory")
+            print(e)
+            
+        
+
+        return response
+    
+    async def getRewardsConfiguration(self, ):
+        """Use this API to get a list of valid android paths required by the Rewards INIT API to validate a fradualent device.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = RewardsValidator.getRewardsConfiguration()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/configuration/", """{"required":[{"name":"company_id","in":"path","description":"company id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"application id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"company id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"application id","required":true,"schema":{"type":"string"}}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/configuration/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        from .models import ConfigurationRes
+        schema = ConfigurationRes()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getRewardsConfiguration")
+            print(e)
+            
+        
+
+        return response
+    
+    async def setRewardsConfiguration(self, body=""):
+        """Updates the configuration or inserts new records.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = RewardsValidator.setRewardsConfiguration()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import ConfigurationRequest
+        schema = ConfigurationRequest()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/configuration/", """{"required":[{"name":"company_id","in":"path","description":"company id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"application id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"company id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"application id","required":true,"schema":{"type":"string"}}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/configuration/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        
+        
+
+        from .models import SetConfigurationRes
+        schema = SetConfigurationRes()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for setRewardsConfiguration")
             print(e)
             
         

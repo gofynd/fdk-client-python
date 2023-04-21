@@ -8,10 +8,10 @@
 Earn and redeem reward points
 * [getOfferByName](#getofferbyname)
 * [catalogueOrder](#catalogueorder)
-* [getPointsHistory](#getpointshistory)
-* [getPoints](#getpoints)
-* [referral](#referral)
-* [orderDiscount](#orderdiscount)
+* [getUserPointsHistory](#getuserpointshistory)
+* [getUserPoints](#getuserpoints)
+* [getUserReferralDetails](#getuserreferraldetails)
+* [getOrderDiscount](#getorderdiscount)
 * [redeemReferralCode](#redeemreferralcode)
 
 
@@ -132,7 +132,7 @@ Success. Check example below or refer `CatalogueOrderResponse` for more details.
 ---
 
 
-### getPointsHistory
+### getUserPointsHistory
 Get all transactions of reward points
 
 
@@ -140,7 +140,7 @@ Get all transactions of reward points
 
 ```python
 try:
-    result = await client.rewards.getPointsHistory(pageId=pageId, pageSize=pageSize)
+    result = await client.rewards.getUserPointsHistory(pageId=pageId, pageSize=pageSize)
     # use result
 except Exception as e:
     print(e)
@@ -190,7 +190,7 @@ Success. Check example below or refer `PointsHistoryResponse` for more details.
 ---
 
 
-### getPoints
+### getUserPoints
 Get referral details of a user
 
 
@@ -198,7 +198,7 @@ Get referral details of a user
 
 ```python
 try:
-    result = await client.rewards.getPoints()
+    result = await client.rewards.getUserPoints()
     # use result
 except Exception as e:
     print(e)
@@ -242,7 +242,7 @@ Success. Check example below or refer `PointsResponse` for more details.
 ---
 
 
-### referral
+### getUserReferralDetails
 Get referral details of a user
 
 
@@ -250,7 +250,7 @@ Get referral details of a user
 
 ```python
 try:
-    result = await client.rewards.referral()
+    result = await client.rewards.getUserReferralDetails()
     # use result
 except Exception as e:
     print(e)
@@ -294,7 +294,7 @@ Success. Check example below or refer `ReferralDetailsResponse` for more details
 ---
 
 
-### orderDiscount
+### getOrderDiscount
 Calculates the discount on order-amount
 
 
@@ -302,7 +302,7 @@ Calculates the discount on order-amount
 
 ```python
 try:
-    result = await client.rewards.orderDiscount(body=body)
+    result = await client.rewards.getOrderDiscount(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -563,6 +563,7 @@ Success. Check example below or refer `RedeemReferralCodeResponse` for more deta
  | share | [ShareMessages](#ShareMessages)? |  yes  |  |
  | user | [ReferralDetailsUser](#ReferralDetailsUser)? |  yes  |  |
  | referrerInfo | String? |  yes  |  |
+ | termsConditionsLink | String? |  yes  |  |
 
 ---
 

@@ -66,6 +66,14 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+    
+    
+        
+        
 
 class RewardsValidator:
     
@@ -180,7 +188,7 @@ class RewardsValidator:
          
         
     
-    class getPointsHistory(BaseSchema):
+    class getUserPointsHistory(BaseSchema):
         
         
         user_id = fields.Str(required=False)
@@ -192,6 +200,24 @@ class RewardsValidator:
         page_id = fields.Str(required=False)
         
         page_size = fields.Int(required=False)
+         
+        
+    
+    class getRewardsConfiguration(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class setRewardsConfiguration(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
          
         
     

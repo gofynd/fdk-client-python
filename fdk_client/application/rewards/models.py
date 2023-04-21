@@ -251,6 +251,8 @@ class ReferralDetailsResponse(BaseSchema):
     
     referrer_info = fields.Str(required=False)
     
+    terms_conditions_link = fields.Str(required=False)
+    
 
 
 class OrderDiscountRequest(BaseSchema):
