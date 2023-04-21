@@ -44,7 +44,7 @@ Gets the list of company level tickets and/or ticket filters depending on query 
 
 ```python
 try:
-    result = await client.lead.getTickets(items=items, filters=filters, q=q, status=status, priority=priority, category=category, pageNo=pageNo, pageSize=pageSize)
+    result = await platformClient.lead.getTickets(items=items, filters=filters, q=q, status=status, priority=priority, category=category, pageNo=pageNo, pageSize=pageSize)
     # use result
 except Exception as e:
     print(e)
@@ -482,7 +482,7 @@ Creates a company level ticket
 
 ```python
 try:
-    result = await client.lead.createTicket(body=body)
+    result = await platformClient.lead.createTicket(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -736,7 +736,7 @@ Gets the list of Application level Tickets and/or ticket filters depending on qu
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").lead.getTickets(items=items, filters=filters, q=q, status=status, priority=priority, category=category)
+    result = await platformClient.application("<APPLICATION_ID>").lead.getTickets(items=items, filters=filters, q=q, status=status, priority=priority, category=category)
     # use result
 except Exception as e:
     print(e)
@@ -1172,7 +1172,7 @@ Retreives ticket details of a company level ticket with ticket ID
 
 ```python
 try:
-    result = await client.lead.getTicket(id=id)
+    result = await platformClient.lead.getTicket(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -1427,7 +1427,7 @@ Edits ticket details of a company level ticket
 
 ```python
 try:
-    result = await client.lead.editTicket(id=id, body=body)
+    result = await platformClient.lead.editTicket(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1682,7 +1682,7 @@ Retreives ticket details of a application level ticket
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").lead.getTicket(id=id)
+    result = await platformClient.application("<APPLICATION_ID>").lead.getTicket(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -1938,7 +1938,7 @@ Edits ticket details of a application level ticket
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").lead.editTicket(id=id, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").lead.editTicket(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2194,7 +2194,7 @@ Create history for specific company level ticket
 
 ```python
 try:
-    result = await client.lead.createHistory(id=id, body=body)
+    result = await platformClient.lead.createHistory(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2293,7 +2293,7 @@ Gets history list for specific company level ticket
 
 ```python
 try:
-    result = await client.lead.getTicketHistory(id=id)
+    result = await platformClient.lead.getTicketHistory(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -2496,7 +2496,7 @@ Gets a list of feedback submitted against that ticket
 
 ```python
 try:
-    result = await client.lead.getFeedbacks(id=id)
+    result = await platformClient.lead.getFeedbacks(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -2582,7 +2582,7 @@ Submit a response for feeback form against that ticket
 
 ```python
 try:
-    result = await client.lead.submitFeedback(id=id, body=body)
+    result = await platformClient.lead.submitFeedback(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2664,7 +2664,7 @@ Create history for specific application level ticket
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").lead.createHistory(id=id, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").lead.createHistory(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2763,7 +2763,7 @@ Gets history list for specific application level ticket
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").lead.getTicketHistory(id=id)
+    result = await platformClient.application("<APPLICATION_ID>").lead.getTicketHistory(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -2966,7 +2966,7 @@ Get specific custom form using it's slug
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").lead.getCustomForm(slug=slug)
+    result = await platformClient.application("<APPLICATION_ID>").lead.getCustomForm(slug=slug)
     # use result
 except Exception as e:
     print(e)
@@ -3075,7 +3075,7 @@ Edit the given custom form
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").lead.editCustomForm(slug=slug, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").lead.editCustomForm(slug=slug, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -3194,7 +3194,7 @@ Get list of custom form
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").lead.getCustomForms()
+    result = await platformClient.application("<APPLICATION_ID>").lead.getCustomForms()
     # use result
 except Exception as e:
     print(e)
@@ -3387,7 +3387,7 @@ Creates a new custom form
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").lead.createCustomForm(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").lead.createCustomForm(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -3505,7 +3505,7 @@ Get Token to join a specific Video Room using it's unqiue name
 
 ```python
 try:
-    result = await client.lead.getTokenForVideoRoom(uniqueName=uniqueName)
+    result = await platformClient.lead.getTokenForVideoRoom(uniqueName=uniqueName)
     # use result
 except Exception as e:
     print(e)
@@ -3572,7 +3572,7 @@ Get Token to join a specific Video Room using it's unqiue name
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").lead.getTokenForVideoRoom(uniqueName=uniqueName)
+    result = await platformClient.application("<APPLICATION_ID>").lead.getTokenForVideoRoom(uniqueName=uniqueName)
     # use result
 except Exception as e:
     print(e)
@@ -3639,7 +3639,7 @@ Get participants of a specific Video Room using it's unique name
 
 ```python
 try:
-    result = await client.lead.getVideoParticipants(uniqueName=uniqueName)
+    result = await platformClient.lead.getVideoParticipants(uniqueName=uniqueName)
     # use result
 except Exception as e:
     print(e)
@@ -3706,7 +3706,7 @@ Get participants of a specific Video Room using it's unique name
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").lead.getVideoParticipants(uniqueName=uniqueName)
+    result = await platformClient.application("<APPLICATION_ID>").lead.getVideoParticipants(uniqueName=uniqueName)
     # use result
 except Exception as e:
     print(e)
@@ -3773,7 +3773,7 @@ Open a video room.
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").lead.openVideoRoom(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").lead.openVideoRoom(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -3839,7 +3839,7 @@ Close the video room and force all participants to leave.
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").lead.closeVideoRoom(uniqueName=uniqueName)
+    result = await platformClient.application("<APPLICATION_ID>").lead.closeVideoRoom(uniqueName=uniqueName)
     # use result
 except Exception as e:
     print(e)
@@ -3906,7 +3906,7 @@ Get general support configuration.
 
 ```python
 try:
-    result = await client.lead.getGeneralConfig()
+    result = await platformClient.lead.getGeneralConfig()
     # use result
 except Exception as e:
     print(e)

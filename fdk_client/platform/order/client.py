@@ -1,6 +1,6 @@
 
 
-""" Order Platform Client."""
+"""Order Platform Client"""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -10,6 +10,7 @@ from .validator import OrderValidator
 class Order:
     def __init__(self, config):
         self._conf = config
+
     
     async def getShipments(self, lane=None, bag_status=None, status_override_lane=None, search_type=None, search_value=None, search_id=None, from_date=None, to_date=None, dp_ids=None, ordering_company_id=None, stores=None, sales_channel=None, request_by_ext=None, page_no=None, page_size=None, is_priority_sort=None, fetch_active_shipment=None, exclude_locked_shipments=None, payment_methods=None, channel_shipment_id=None, channel_order_id=None, custom_meta=None, ordering_channel=None, company_affiliate_tag=None):
         """
@@ -132,7 +133,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipments-listing", lane=lane, bag_status=bag_status, status_override_lane=status_override_lane, search_type=search_type, search_value=search_value, search_id=search_id, from_date=from_date, to_date=to_date, dp_ids=dp_ids, ordering_company_id=ordering_company_id, stores=stores, sales_channel=sales_channel, request_by_ext=request_by_ext, page_no=page_no, page_size=page_size, is_priority_sort=is_priority_sort, fetch_active_shipment=fetch_active_shipment, exclude_locked_shipments=exclude_locked_shipments, payment_methods=payment_methods, channel_shipment_id=channel_shipment_id, channel_order_id=channel_order_id, custom_meta=custom_meta, ordering_channel=ordering_channel, company_affiliate_tag=company_affiliate_tag), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import ShipmentInternalPlatformViewResponse
         schema = ShipmentInternalPlatformViewResponse()
         try:
@@ -140,7 +141,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getShipments")
             print(e)
-            
+
         
 
         return response
@@ -186,7 +187,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipment-details", channel_shipment_id=channel_shipment_id, shipment_id=shipment_id, ordering_company_id=ordering_company_id, request_by_ext=request_by_ext), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import ShipmentInfoResponse
         schema = ShipmentInfoResponse()
         try:
@@ -194,7 +195,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getShipmentById")
             print(e)
-            
+
         
 
         return response
@@ -228,7 +229,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/order-details", order_id=order_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import ShipmentDetailsResponse
         schema = ShipmentDetailsResponse()
         try:
@@ -236,7 +237,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getOrderById")
             print(e)
-            
+
         
 
         return response
@@ -302,7 +303,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/lane-config/", super_lane=super_lane, group_entity=group_entity, from_date=from_date, to_date=to_date, dp_ids=dp_ids, stores=stores, sales_channel=sales_channel, payment_mode=payment_mode, bag_status=bag_status), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import LaneConfigResponse
         schema = LaneConfigResponse()
         try:
@@ -310,7 +311,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getLaneConfig")
             print(e)
-            
+
         
 
         return response
@@ -404,7 +405,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/orders-listing", lane=lane, search_type=search_type, bag_status=bag_status, time_to_dispatch=time_to_dispatch, payment_methods=payment_methods, tags=tags, search_value=search_value, from_date=from_date, to_date=to_date, dp_ids=dp_ids, stores=stores, sales_channel=sales_channel, page_no=page_no, page_size=page_size, is_priority_sort=is_priority_sort, custom_meta=custom_meta), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import OrderListingResponse
         schema = OrderListingResponse()
         try:
@@ -412,7 +413,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getOrders")
             print(e)
-            
+
         
 
         return response
@@ -450,7 +451,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipment/metrics-count/", from_date=from_date, to_date=to_date), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import MetricCountResponse
         schema = MetricCountResponse()
         try:
@@ -458,7 +459,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getMetricCount")
             print(e)
-            
+
         
 
         return response
@@ -496,7 +497,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/filter-listing", view=view, group_entity=group_entity), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import FiltersResponse
         schema = FiltersResponse()
         try:
@@ -504,7 +505,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getfilters")
             print(e)
-            
+
         
 
         return response
@@ -542,7 +543,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/reports/shipment", from_date=from_date, to_date=to_date), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import Success
         schema = Success()
         try:
@@ -550,7 +551,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for createShipmentReport")
             print(e)
-            
+
         
 
         return response
@@ -588,7 +589,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/reports/shipment-listing", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import OmsReports
         schema = OmsReports()
         try:
@@ -596,7 +597,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getReportsShipmentListing")
             print(e)
-            
+
         
 
         return response
@@ -631,7 +632,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/upsert/jiocode/article", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import JioCodeUpsertResponse
         schema = JioCodeUpsertResponse()
         try:
@@ -639,7 +640,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for upsertJioCode")
             print(e)
-            
+
         
 
         return response
@@ -677,7 +678,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/bulk-action/invoice", batch_id=batch_id, doc_type=doc_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import BulkInvoicingResponse
         schema = BulkInvoicingResponse()
         try:
@@ -685,7 +686,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getBulkInvoice")
             print(e)
-            
+
         
 
         return response
@@ -719,7 +720,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/invoice-label-external", batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import BulkInvoiceLabelResponse
         schema = BulkInvoiceLabelResponse()
         try:
@@ -727,7 +728,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getBulkInvoiceLabel")
             print(e)
-            
+
         
 
         return response
@@ -813,7 +814,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/generate/file", lane=lane, search_type=search_type, search_id=search_id, from_date=from_date, to_date=to_date, dp_ids=dp_ids, ordering_company_id=ordering_company_id, stores=stores, sales_channel=sales_channel, request_by_ext=request_by_ext, page_no=page_no, page_size=page_size, customer_id=customer_id, is_priority_sort=is_priority_sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import FileResponse
         schema = FileResponse()
         try:
@@ -821,7 +822,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getBulkShipmentExcelFile")
             print(e)
-            
+
         
 
         return response
@@ -907,7 +908,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/bulk-action/listing", lane=lane, search_type=search_type, search_id=search_id, from_date=from_date, to_date=to_date, dp_ids=dp_ids, ordering_company_id=ordering_company_id, stores=stores, sales_channel=sales_channel, request_by_ext=request_by_ext, page_no=page_no, page_size=page_size, customer_id=customer_id, is_priority_sort=is_priority_sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import BulkListingResponse
         schema = BulkListingResponse()
         try:
@@ -915,7 +916,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getBulkList")
             print(e)
-            
+
         
 
         return response
@@ -953,7 +954,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/bulk-action-failed-report/", batch_id=batch_id, report_type=report_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import FileResponse
         schema = FileResponse()
         try:
@@ -961,7 +962,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getBulkActionFailedReport")
             print(e)
-            
+
         
 
         return response
@@ -1003,7 +1004,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipments/{shipment_id}/bags/{bag_id}/state/{state}/reasons", shipment_id=shipment_id, bag_id=bag_id, state=state), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import PlatformShipmentReasonsResponse
         schema = PlatformShipmentReasonsResponse()
         try:
@@ -1011,7 +1012,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getShipmentReasons")
             print(e)
-            
+
         
 
         return response
@@ -1046,7 +1047,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/orders/v2.0/company/{self._conf.companyId}/bulk-action/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import BulkActionResponse
         schema = BulkActionResponse()
         try:
@@ -1054,7 +1055,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for bulkActionProcessXlsxFile")
             print(e)
-            
+
         
 
         return response
@@ -1088,7 +1089,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v2.0/company/{self._conf.companyId}/bulk-action/{batch_id}", batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import BulkActionDetailsResponse
         schema = BulkActionDetailsResponse()
         try:
@@ -1096,7 +1097,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for bulkActionDetails")
             print(e)
-            
+
         
 
         return response
@@ -1138,7 +1139,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/bag-details/", bag_id=bag_id, channel_bag_id=channel_bag_id, channel_id=channel_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import BagDetailsPlatformResponse
         schema = BagDetailsPlatformResponse()
         try:
@@ -1146,7 +1147,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getBagById")
             print(e)
-            
+
         
 
         return response
@@ -1212,7 +1213,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/bags", bag_ids=bag_ids, shipment_ids=shipment_ids, order_ids=order_ids, channel_bag_ids=channel_bag_ids, channel_shipment_ids=channel_shipment_ids, channel_order_ids=channel_order_ids, channel_id=channel_id, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import GetBagsPlatformResponse
         schema = GetBagsPlatformResponse()
         try:
@@ -1220,7 +1221,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getBags")
             print(e)
-            
+
         
 
         return response
@@ -1255,7 +1256,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/update-cache", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import InvalidateShipmentCacheResponse
         schema = InvalidateShipmentCacheResponse()
         try:
@@ -1263,7 +1264,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for invalidateShipmentCache")
             print(e)
-            
+
         
 
         return response
@@ -1298,7 +1299,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/store/reassign-internal", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import StoreReassignResponse
         schema = StoreReassignResponse()
         try:
@@ -1306,7 +1307,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for reassignLocation")
             print(e)
-            
+
         
 
         return response
@@ -1341,7 +1342,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/entity/lock-manager", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import UpdateShipmentLockResponse
         schema = UpdateShipmentLockResponse()
         try:
@@ -1349,7 +1350,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for updateShipmentLock")
             print(e)
-            
+
         
 
         return response
@@ -1383,7 +1384,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/announcements", date=date), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import AnnouncementsResponse
         schema = AnnouncementsResponse()
         try:
@@ -1391,7 +1392,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getAnnouncements")
             print(e)
-            
+
         
 
         return response
@@ -1469,7 +1470,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/delight/update-address", shipment_id=shipment_id, name=name, address=address, address_type=address_type, pincode=pincode, phone=phone, email=email, landmark=landmark, address_category=address_category, city=city, state=state, country=country, ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import BaseResponse
         schema = BaseResponse()
         try:
@@ -1477,7 +1478,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for updateAddress")
             print(e)
-            
+
         
 
         return response
@@ -1527,7 +1528,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/ninja/click2call", caller=caller, receiver=receiver, bag_id=bag_id, calling_to=calling_to, caller_id=caller_id, ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import Click2CallResponse
         schema = Click2CallResponse()
         try:
@@ -1535,7 +1536,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for click2Call")
             print(e)
-            
+
         
 
         return response
@@ -1570,7 +1571,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/status-internal", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import UpdateShipmentStatusResponseBody
         schema = UpdateShipmentStatusResponseBody()
         try:
@@ -1578,7 +1579,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for updateShipmentStatus")
             print(e)
-            
+
         
 
         return response
@@ -1613,7 +1614,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/process-manifest", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import CreateOrderResponse
         schema = CreateOrderResponse()
         try:
@@ -1621,7 +1622,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for processManifest")
             print(e)
-            
+
         
 
         return response
@@ -1656,7 +1657,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifest/dispatch", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import SuccessResponse
         schema = SuccessResponse()
         try:
@@ -1664,7 +1665,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for dispatchManifest")
             print(e)
-            
+
         
 
         return response
@@ -1694,7 +1695,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/roles", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import GetActionsResponse
         schema = GetActionsResponse()
         try:
@@ -1702,7 +1703,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getRoleBasedActions")
             print(e)
-            
+
         
 
         return response
@@ -1737,7 +1738,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/history", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import ShipmentHistoryResponse
         schema = ShipmentHistoryResponse()
         try:
@@ -1745,7 +1746,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for postShipmentHistory")
             print(e)
-            
+
         
 
         return response
@@ -1783,7 +1784,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/history", shipment_id=shipment_id, bag_id=bag_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import ShipmentHistoryResponse
         schema = ShipmentHistoryResponse()
         try:
@@ -1791,7 +1792,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getShipmentHistory")
             print(e)
-            
+
         
 
         return response
@@ -1826,7 +1827,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/ninja/send-sms", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import OrderStatusResult
         schema = OrderStatusResult()
         try:
@@ -1834,7 +1835,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for sendSmsNinja")
             print(e)
-            
+
         
 
         return response
@@ -1869,7 +1870,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/oms/manual-place-shipment", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import ManualAssignDPToShipmentResponse
         schema = ManualAssignDPToShipmentResponse()
         try:
@@ -1877,7 +1878,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for platformManualAssignDPToShipment")
             print(e)
-            
+
         
 
         return response
@@ -1912,7 +1913,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/update-packaging-dimension", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import CreateOrderResponse
         schema = CreateOrderResponse()
         try:
@@ -1920,7 +1921,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for updatePackagingDimensions")
             print(e)
-            
+
         
 
         return response
@@ -1955,7 +1956,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/create-order", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import CreateOrderResponse
         schema = CreateOrderResponse()
         try:
@@ -1963,7 +1964,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for createOrder")
             print(e)
-            
+
         
 
         return response
@@ -1998,7 +1999,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/order-config", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import CreateChannelConfigResponse
         schema = CreateChannelConfigResponse()
         try:
@@ -2006,7 +2007,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for createChannelConfig")
             print(e)
-            
+
         
 
         return response
@@ -2036,7 +2037,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/order-config", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import CreateChannelConfigData
         schema = CreateChannelConfigData()
         try:
@@ -2044,7 +2045,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getChannelConfig")
             print(e)
-            
+
         
 
         return response
@@ -2079,7 +2080,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifest/uploadConsent", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import SuccessResponse
         schema = SuccessResponse()
         try:
@@ -2087,7 +2088,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for uploadConsent")
             print(e)
-            
+
         
 
         return response
@@ -2122,7 +2123,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/order/validation", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import ResponseDetail
         schema = ResponseDetail()
         try:
@@ -2130,7 +2131,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for orderUpdate")
             print(e)
-            
+
         
 
         return response
@@ -2165,7 +2166,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/debug/order_status", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import OrderStatusResult
         schema = OrderStatusResult()
         try:
@@ -2173,7 +2174,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for checkOrderStatus")
             print(e)
-            
+
         
 
         return response
@@ -2203,7 +2204,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/bag/state/transition", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import OrderStatusResult
         schema = OrderStatusResult()
         try:
@@ -2211,7 +2212,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for sendSmsNinjaPlatform")
             print(e)
-            
+
         
 
         return response
