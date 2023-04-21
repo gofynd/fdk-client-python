@@ -78,7 +78,7 @@ This operation will return the URL of the uploaded file.
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["startUpload"]).netloc, "post", await create_url_without_domain("/service/application/assets/v1.0/namespaces/{namespace}/upload/start/", namespace=namespace), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-                
+
         
 
         from .models import StartResponse
@@ -144,7 +144,7 @@ This operation will return the URL of the uploaded file.
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["completeUpload"]).netloc, "post", await create_url_without_domain("/service/application/assets/v1.0/namespaces/{namespace}/upload/complete/", namespace=namespace), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-                
+
         
 
         from .models import CompleteResponse
@@ -188,7 +188,7 @@ This operation will return the URL of the uploaded file.
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["signUrls"]).netloc, "post", await create_url_without_domain("/service/application/assets/v1.0/sign-urls/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-                
+
         
 
         from .models import SignUrlResponse

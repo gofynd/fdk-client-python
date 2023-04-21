@@ -1,6 +1,6 @@
 
 
-"""Communication Platform Client."""
+"""Communication Platform Client"""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -11,6 +11,7 @@ class Communication:
     def __init__(self, config, applicationId):
         self._conf = config
         self.applicationId = applicationId
+
     
     async def getCampaigns(self, page_no=None, page_size=None, sort=None):
         """Get campaigns
@@ -47,7 +48,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/campaigns/campaigns", page_no=page_no, page_size=page_size, sort=sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import Campaigns
@@ -57,7 +58,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for getCampaigns")
             print(e)
-            
+
         
 
         return response
@@ -90,7 +91,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/campaigns/campaigns", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import Campaign
@@ -100,7 +101,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for createCampaign")
             print(e)
-            
+
         
 
         return response
@@ -132,7 +133,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/campaigns/campaigns/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import Campaign
@@ -142,7 +143,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for getCampaignById")
             print(e)
-            
+
         
 
         return response
@@ -179,7 +180,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/campaigns/campaigns/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import Campaign
@@ -189,7 +190,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for updateCampaignById")
             print(e)
-            
+
         
 
         return response
@@ -221,7 +222,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/campaigns/get-stats/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import GetStats
@@ -231,7 +232,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for getStatsOfCampaignById")
             print(e)
-            
+
         
 
         return response
@@ -271,7 +272,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sources/datasources", page_no=page_no, page_size=page_size, sort=sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import Audiences
@@ -281,7 +282,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for getAudiences")
             print(e)
-            
+
         
 
         return response
@@ -314,7 +315,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sources/datasources", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import Audience
@@ -324,7 +325,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for createAudience")
             print(e)
-            
+
         
 
         return response
@@ -357,7 +358,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sources/bigquery-headers", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import BigqueryHeadersRes
@@ -367,7 +368,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for getBigqueryHeaders")
             print(e)
-            
+
         
 
         return response
@@ -399,7 +400,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sources/datasources/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import Audience
@@ -409,7 +410,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for getAudienceById")
             print(e)
-            
+
         
 
         return response
@@ -446,7 +447,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sources/datasources/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import Audience
@@ -456,7 +457,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for updateAudienceById")
             print(e)
-            
+
         
 
         return response
@@ -489,7 +490,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sources/get-n-records", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import GetNRecordsCsvRes
@@ -499,7 +500,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for getNSampleRecordsFromCsv")
             print(e)
-            
+
         
 
         return response
@@ -539,7 +540,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/providers", page_no=page_no, page_size=page_size, sort=sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import EmailProviders
@@ -549,7 +550,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for getEmailProviders")
             print(e)
-            
+
         
 
         return response
@@ -582,7 +583,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/providers", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import EmailProvider
@@ -592,7 +593,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for createEmailProvider")
             print(e)
-            
+
         
 
         return response
@@ -624,7 +625,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/providers/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import EmailProvider
@@ -634,7 +635,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for getEmailProviderById")
             print(e)
-            
+
         
 
         return response
@@ -671,7 +672,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/providers/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import EmailProvider
@@ -681,7 +682,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for updateEmailProviderById")
             print(e)
-            
+
         
 
         return response
@@ -721,7 +722,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/templates", page_no=page_no, page_size=page_size, sort=sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import EmailTemplates
@@ -731,7 +732,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for getEmailTemplates")
             print(e)
-            
+
         
 
         return response
@@ -764,7 +765,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/templates", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import EmailTemplateRes
@@ -774,7 +775,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for createEmailTemplate")
             print(e)
-            
+
         
 
         return response
@@ -814,7 +815,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/system-templates", page_no=page_no, page_size=page_size, sort=sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import SystemEmailTemplates
@@ -824,7 +825,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for getSystemEmailTemplates")
             print(e)
-            
+
         
 
         return response
@@ -856,7 +857,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/templates/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import EmailTemplate
@@ -866,7 +867,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for getEmailTemplateById")
             print(e)
-            
+
         
 
         return response
@@ -903,7 +904,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/templates/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import EmailTemplateRes
@@ -913,7 +914,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for updateEmailTemplateById")
             print(e)
-            
+
         
 
         return response
@@ -945,7 +946,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/templates/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import EmailTemplateDeleteSuccessRes
@@ -955,7 +956,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for deleteEmailTemplateById")
             print(e)
-            
+
         
 
         return response
@@ -988,7 +989,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/engine/send-instant", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import EngineResponse
@@ -998,7 +999,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for sendCommunicationSynchronously")
             print(e)
-            
+
         
 
         return response
@@ -1031,7 +1032,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/engine/send-async", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import EngineResponse
@@ -1041,7 +1042,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for sendCommunicationAsynchronously")
             print(e)
-            
+
         
 
         return response
@@ -1081,7 +1082,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/event/event-subscriptions", page_no=page_no, page_size=page_size, populate=populate), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import EventSubscriptions
@@ -1091,7 +1092,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for getEventSubscriptions")
             print(e)
-            
+
         
 
         return response
@@ -1131,7 +1132,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/jobs/jobs", page_no=page_no, page_size=page_size, sort=sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import Jobs
@@ -1141,7 +1142,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for getJobs")
             print(e)
-            
+
         
 
         return response
@@ -1174,7 +1175,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/jobs/trigger-job", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import TriggerJobResponse
@@ -1184,7 +1185,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for triggerCampaignJob")
             print(e)
-            
+
         
 
         return response
@@ -1224,7 +1225,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/jobs/logs", page_no=page_no, page_size=page_size, sort=sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import JobLogs
@@ -1234,7 +1235,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for getJobLogs")
             print(e)
-            
+
         
 
         return response
@@ -1278,7 +1279,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/log", page_id=page_id, page_size=page_size, sort=sort, query=query), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import Logs
@@ -1288,7 +1289,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for getCommunicationLogs")
             print(e)
-            
+
         
 
         return response
@@ -1321,7 +1322,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/otp/send-otp-comms", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import SendOtpCommsRes
@@ -1331,7 +1332,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for sendOtp")
             print(e)
-            
+
         
 
         return response
@@ -1364,7 +1365,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/otp/verify-otp-comms", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import VerifyOtpCommsSuccessRes
@@ -1374,7 +1375,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for verfiyOtp")
             print(e)
-            
+
         
 
         return response
@@ -1414,7 +1415,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/providers", page_no=page_no, page_size=page_size, sort=sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import SmsProviders
@@ -1424,7 +1425,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for getSmsProviders")
             print(e)
-            
+
         
 
         return response
@@ -1457,7 +1458,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/providers", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import SmsProvider
@@ -1467,7 +1468,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for createSmsProvider")
             print(e)
-            
+
         
 
         return response
@@ -1499,7 +1500,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/providers/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import SmsProvider
@@ -1509,7 +1510,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for getSmsProviderById")
             print(e)
-            
+
         
 
         return response
@@ -1546,7 +1547,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/providers/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import SmsProvider
@@ -1556,7 +1557,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for updateSmsProviderById")
             print(e)
-            
+
         
 
         return response
@@ -1596,7 +1597,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/templates", page_no=page_no, page_size=page_size, sort=sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import SmsTemplates
@@ -1606,7 +1607,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for getSmsTemplates")
             print(e)
-            
+
         
 
         return response
@@ -1639,7 +1640,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/templates", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import SmsTemplateRes
@@ -1649,7 +1650,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for createSmsTemplate")
             print(e)
-            
+
         
 
         return response
@@ -1681,7 +1682,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/templates/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import SmsTemplate
@@ -1691,7 +1692,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for getSmsTemplateById")
             print(e)
-            
+
         
 
         return response
@@ -1728,7 +1729,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/templates/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import SmsTemplateRes
@@ -1738,7 +1739,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for updateSmsTemplateById")
             print(e)
-            
+
         
 
         return response
@@ -1770,7 +1771,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/templates/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import SmsTemplateDeleteSuccessRes
@@ -1780,7 +1781,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for deleteSmsTemplateById")
             print(e)
-            
+
         
 
         return response
@@ -1820,7 +1821,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/system-templates", page_no=page_no, page_size=page_size, sort=sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import SystemSmsTemplates
@@ -1830,7 +1831,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for getSystemSystemTemplates")
             print(e)
-            
+
         
 
         return response

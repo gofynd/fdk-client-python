@@ -300,7 +300,7 @@ class OrderValidator:
         
         stores = fields.Str(required=False)
         
-        sales_channel = fields.Str(required=False)
+        sales_channels = fields.Str(required=False)
         
         request_by_ext = fields.Str(required=False)
         
@@ -404,7 +404,7 @@ class OrderValidator:
         
         stores = fields.Str(required=False)
         
-        sales_channel = fields.Str(required=False)
+        sales_channels = fields.Str(required=False)
         
         page_no = fields.Int(required=False)
         

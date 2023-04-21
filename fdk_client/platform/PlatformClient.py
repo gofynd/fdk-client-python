@@ -16,10 +16,6 @@ from .payment.client import Payment
 
 from .order.client import Order
 
-from .catalog.client import Catalog
-
-from .companyprofile.client import CompanyProfile
-
 from .filestorage.client import FileStorage
 
 from .inventory.client import Inventory
@@ -27,8 +23,6 @@ from .inventory.client import Inventory
 from .configuration.client import Configuration
 
 from .analytics.client import Analytics
-
-from .discount.client import Discount
 
 from .webhook.client import Webhook
 
@@ -51,10 +45,6 @@ class PlatformClient:
         
         self.order = Order(config)
         
-        self.catalog = Catalog(config)
-        
-        self.companyProfile = CompanyProfile(config)
-        
         self.fileStorage = FileStorage(config)
         
         self.inventory = Inventory(config)
@@ -62,8 +52,6 @@ class PlatformClient:
         self.configuration = Configuration(config)
         
         self.analytics = Analytics(config)
-        
-        self.discount = Discount(config)
         
         self.webhook = Webhook(config)
         

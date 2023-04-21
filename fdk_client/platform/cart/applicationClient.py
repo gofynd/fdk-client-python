@@ -1,6 +1,6 @@
 
 
-"""Cart Platform Client."""
+"""Cart Platform Client"""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -11,6 +11,7 @@ class Cart:
     def __init__(self, config, applicationId):
         self._conf = config
         self.applicationId = applicationId
+
     
     async def getCoupons(self, page_no=None, page_size=None, is_archived=None, title=None, is_public=None, is_display=None, type_slug=None, code=None):
         """Get coupon list with pagination
@@ -67,7 +68,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/coupon", page_no=page_no, page_size=page_size, is_archived=is_archived, title=title, is_public=is_public, is_display=is_display, type_slug=type_slug, code=code), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import CouponsResponse
@@ -77,7 +78,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for getCoupons")
             print(e)
-            
+
         
 
         return response
@@ -110,7 +111,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/coupon", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import SuccessMessage
@@ -120,7 +121,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for createCoupon")
             print(e)
-            
+
         
 
         return response
@@ -152,7 +153,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/coupon/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import CouponUpdate
@@ -162,7 +163,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for getCouponById")
             print(e)
-            
+
         
 
         return response
@@ -199,7 +200,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/coupon/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import SuccessMessage
@@ -209,7 +210,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for updateCoupon")
             print(e)
-            
+
         
 
         return response
@@ -246,7 +247,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/coupon/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import SuccessMessage
@@ -256,7 +257,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for updateCouponPartially")
             print(e)
-            
+
         
 
         return response
@@ -316,7 +317,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion", page_no=page_no, page_size=page_size, q=q, status=status, promo_group=promo_group, promotion_type=promotion_type, fp_panel=fp_panel, promotion_id=promotion_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import PromotionsResponse
@@ -326,7 +327,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for getPromotions")
             print(e)
-            
+
         
 
         return response
@@ -359,7 +360,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import PromotionAdd
@@ -369,7 +370,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for createPromotion")
             print(e)
-            
+
         
 
         return response
@@ -401,7 +402,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import PromotionUpdate
@@ -411,7 +412,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for getPromotionById")
             print(e)
-            
+
         
 
         return response
@@ -448,7 +449,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import PromotionUpdate
@@ -458,7 +459,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for updatePromotion")
             print(e)
-            
+
         
 
         return response
@@ -495,7 +496,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import SuccessMessage
@@ -505,7 +506,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for updatePromotionPartially")
             print(e)
-            
+
         
 
         return response
@@ -533,7 +534,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promo-coupons", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import ActivePromosResponse
@@ -543,7 +544,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for getPromosCouponConfig")
             print(e)
-            
+
         
 
         return response
@@ -576,7 +577,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/validate", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import OpenapiCartDetailsResponse
@@ -586,7 +587,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for fetchAndvalidateCartItems")
             print(e)
-            
+
         
 
         return response
@@ -619,7 +620,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/serviceability", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import OpenApiCartServiceabilityResponse
@@ -629,7 +630,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for checkCartServiceability")
             print(e)
-            
+
         
 
         return response
@@ -662,7 +663,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/checkout", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import OpenApiCheckoutResponse
@@ -672,7 +673,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for checkoutCart")
             print(e)
-            
+
         
 
         return response
@@ -728,7 +729,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/abandoned/carts", page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, anonymous_cart=anonymous_cart, last_id=last_id, sort_on=sort_on), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import AbandonedCartResponse
@@ -738,7 +739,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for getAbandonedCart")
             print(e)
-            
+
         
 
         return response
@@ -778,7 +779,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/abandoned/cart/detail", id=id, i=i, b=b), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import CartDetailResponse
@@ -788,7 +789,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for getAbandonedCartDetails")
             print(e)
-            
+
         
 
         return response
@@ -829,7 +830,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/abandoned/carts/{cart_id}", cart_id=cart_id, b=b), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import AddCartDetailResponse
@@ -839,7 +840,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for addItems")
             print(e)
-            
+
         
 
         return response
@@ -880,7 +881,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/abandoned/carts/{cart_id}", cart_id=cart_id, b=b), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import UpdateCartDetailResponse
@@ -890,7 +891,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for updateCart")
             print(e)
-            
+
         
 
         return response
@@ -923,7 +924,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/share-cart", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import GetShareCartLinkResponse
@@ -933,7 +934,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for getCartShareLink")
             print(e)
-            
+
         
 
         return response
@@ -965,7 +966,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/share-cart/{token}", token=token), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import SharedCartResponse
@@ -975,7 +976,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for getCartSharedItems")
             print(e)
-            
+
         
 
         return response
@@ -1015,7 +1016,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/share-cart/{token}/{action}", token=token, action=action, cart_id=cart_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import SharedCartResponse
@@ -1025,7 +1026,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for updateCartWithSharedItems")
             print(e)
-            
+
         
 
         return response
@@ -1065,7 +1066,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart-list", from_date=from_date, to_date=to_date, filter_on=filter_on), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import MultiCartResponse
@@ -1075,7 +1076,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for getCartList")
             print(e)
-            
+
         
 
         return response
@@ -1112,7 +1113,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/update-user", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import UserCartMappingResponse
@@ -1122,7 +1123,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for updateCartUser")
             print(e)
-            
+
         
 
         return response
@@ -1170,7 +1171,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", id=id, i=i, b=b, assign_card_id=assign_card_id, buy_now=buy_now), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import CartDetailResponse
@@ -1180,7 +1181,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for getCart")
             print(e)
-            
+
         
 
         return response
@@ -1229,7 +1230,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", i=i, b=b, buy_now=buy_now, id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import AddCartDetailResponse
@@ -1239,7 +1240,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for platformAddItems")
             print(e)
-            
+
         
 
         return response
@@ -1288,7 +1289,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", id=id, i=i, b=b, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import UpdateCartDetailResponse
@@ -1298,7 +1299,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for platformUpdateCart")
             print(e)
-            
+
         
 
         return response
@@ -1335,7 +1336,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart_archive", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import DeleteCartDetailResponse
@@ -1345,7 +1346,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for deleteCart")
             print(e)
-            
+
         
 
         return response
@@ -1381,7 +1382,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/basic", id=id, buy_now=buy_now), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import CartItemCountResponse
@@ -1391,7 +1392,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for getItemCount")
             print(e)
-            
+
         
 
         return response
@@ -1427,7 +1428,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/platform-pos-coupon", id=id, buy_now=buy_now), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import GetCouponResponse
@@ -1437,7 +1438,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for getAppCoupons")
             print(e)
-            
+
         
 
         return response
@@ -1490,7 +1491,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/platform-pos-coupon", i=i, b=b, p=p, id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import CartDetailResponse
@@ -1500,7 +1501,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for applyCoupon")
             print(e)
-            
+
         
 
         return response
@@ -1536,7 +1537,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/platform-pos-coupon", uid=uid, buy_now=buy_now), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import CartDetailResponse
@@ -1546,7 +1547,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for removeCoupon")
             print(e)
-            
+
         
 
         return response
@@ -1602,7 +1603,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/address", cart_id=cart_id, buy_now=buy_now, mobile_no=mobile_no, checkout_mode=checkout_mode, tags=tags, is_default=is_default, user_id=user_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import PlatformGetAddressesResponse
@@ -1612,7 +1613,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for getAddresses")
             print(e)
-            
+
         
 
         return response
@@ -1645,7 +1646,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/address", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import SaveAddressResponse
@@ -1655,7 +1656,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for addAddress")
             print(e)
-            
+
         
 
         return response
@@ -1715,7 +1716,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/address/{id}", id=id, cart_id=cart_id, buy_now=buy_now, mobile_no=mobile_no, checkout_mode=checkout_mode, tags=tags, is_default=is_default, user_id=user_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import PlatformAddress
@@ -1725,7 +1726,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for getAddressById")
             print(e)
-            
+
         
 
         return response
@@ -1762,7 +1763,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/address/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import UpdateAddressResponse
@@ -1772,7 +1773,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for updateAddress")
             print(e)
-            
+
         
 
         return response
@@ -1808,7 +1809,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/address/{id}", id=id, user_id=user_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import DeleteAddressResponse
@@ -1818,7 +1819,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for removeAddress")
             print(e)
-            
+
         
 
         return response
@@ -1867,7 +1868,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/select-address", cart_id=cart_id, buy_now=buy_now, i=i, b=b), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import CartDetailResponse
@@ -1877,7 +1878,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for selectAddress")
             print(e)
-            
+
         
 
         return response
@@ -1937,7 +1938,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/shipment", pick_at_store_uid=pick_at_store_uid, ordering_store_id=ordering_store_id, i=i, p=p, id=id, address_id=address_id, area_code=area_code, order_type=order_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import CartShipmentsResponse
@@ -1947,7 +1948,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for getShipments")
             print(e)
-            
+
         
 
         return response
@@ -2004,7 +2005,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/shipment", i=i, p=p, id=id, address_id=address_id, area_code=area_code, order_type=order_type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import CartShipmentsResponse
@@ -2014,7 +2015,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for updateShipments")
             print(e)
-            
+
         
 
         return response
@@ -2055,7 +2056,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/meta", id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import CartMetaResponse
@@ -2065,7 +2066,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for updateCartMeta")
             print(e)
-            
+
         
 
         return response
@@ -2102,7 +2103,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/checkout", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import CartCheckoutResponse
@@ -2112,7 +2113,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for platformCheckoutCart")
             print(e)
-            
+
         
 
         return response
@@ -2148,7 +2149,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/available-delivery-mode", area_code=area_code, id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import CartDeliveryModesResponse
@@ -2158,7 +2159,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for getAvailableDeliveryModes")
             print(e)
-            
+
         
 
         return response
@@ -2190,7 +2191,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/store-address", store_uid=store_uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import StoreDetailsResponse
@@ -2200,7 +2201,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for getStoreAddressByUid")
             print(e)
-            
+
         
 
         return response
@@ -2241,7 +2242,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment", id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import CartDetailResponse
@@ -2251,7 +2252,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for selectPaymentMode")
             print(e)
-            
+
         
 
         return response
@@ -2307,7 +2308,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/validate/", id=id, buy_now=buy_now, address_id=address_id, payment_mode=payment_mode, payment_identifier=payment_identifier, aggregator_name=aggregator_name, merchant_code=merchant_code), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import PaymentCouponValidate
@@ -2317,7 +2318,7 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for validateCouponForPayment")
             print(e)
-            
+
         
 
         return response

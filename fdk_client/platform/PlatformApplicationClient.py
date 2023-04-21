@@ -5,8 +5,6 @@ from ..common.exceptions import FDKClientValidationError
 
 from .lead.applicationClient import Lead
 
-from .feedback.applicationClient import Feedback
-
 from .theme.applicationClient import Theme
 
 from .user.applicationClient import User
@@ -18,8 +16,6 @@ from .communication.applicationClient import Communication
 from .payment.applicationClient import Payment
 
 from .order.applicationClient import Order
-
-from .catalog.applicationClient import Catalog
 
 from .filestorage.applicationClient import FileStorage
 
@@ -42,8 +38,6 @@ class PlatformApplicationClient:
         
         self.lead = Lead(config, applicationId)
         
-        self.feedback = Feedback(config, applicationId)
-        
         self.theme = Theme(config, applicationId)
         
         self.user = User(config, applicationId)
@@ -55,8 +49,6 @@ class PlatformApplicationClient:
         self.payment = Payment(config, applicationId)
         
         self.order = Order(config, applicationId)
-        
-        self.catalog = Catalog(config, applicationId)
         
         self.fileStorage = FileStorage(config, applicationId)
         

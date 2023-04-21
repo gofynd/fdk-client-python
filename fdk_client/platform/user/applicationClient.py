@@ -1,6 +1,6 @@
 
 
-"""User Platform Client."""
+"""User Platform Client"""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -11,6 +11,7 @@ class User:
     def __init__(self, config, applicationId):
         self._conf = config
         self.applicationId = applicationId
+
     
     async def getCustomers(self, q=None, page_size=None, page_no=None):
         """Use this API to retrieve a list of customers who have registered in the application.
@@ -47,7 +48,7 @@ class User:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/list", q=q, page_size=page_size, page_no=page_no), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import CustomerListResponseSchema
@@ -57,7 +58,7 @@ class User:
         except Exception as e:
             print("Response Validation failed for getCustomers")
             print(e)
-            
+
         
 
         return response
@@ -89,7 +90,7 @@ class User:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/search", q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import UserSearchResponseSchema
@@ -99,7 +100,7 @@ class User:
         except Exception as e:
             print("Response Validation failed for searchUsers")
             print(e)
-            
+
         
 
         return response
@@ -132,7 +133,7 @@ class User:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import CreateUserResponseSchema
@@ -142,7 +143,7 @@ class User:
         except Exception as e:
             print("Response Validation failed for createUser")
             print(e)
-            
+
         
 
         return response
@@ -175,7 +176,7 @@ class User:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/activation", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import BlockUserSuccess
@@ -185,7 +186,7 @@ class User:
         except Exception as e:
             print("Response Validation failed for blockOrUnblockUsers")
             print(e)
-            
+
         
 
         return response
@@ -218,7 +219,7 @@ class User:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/archive", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import ArchiveUserSuccess
@@ -228,7 +229,7 @@ class User:
         except Exception as e:
             print("Response Validation failed for archiveUser")
             print(e)
-            
+
         
 
         return response
@@ -261,7 +262,7 @@ class User:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/undelete", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import UnDeleteUserSuccess
@@ -271,7 +272,7 @@ class User:
         except Exception as e:
             print("Response Validation failed for unDeleteUser")
             print(e)
-            
+
         
 
         return response
@@ -308,7 +309,7 @@ class User:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/{user_id}", user_id=user_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import CreateUserResponseSchema
@@ -318,7 +319,7 @@ class User:
         except Exception as e:
             print("Response Validation failed for updateUser")
             print(e)
-            
+
         
 
         return response
@@ -351,7 +352,7 @@ class User:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/session", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import CreateUserSessionResponseSchema
@@ -361,7 +362,7 @@ class User:
         except Exception as e:
             print("Response Validation failed for createUserSession")
             print(e)
-            
+
         
 
         return response
@@ -401,7 +402,7 @@ class User:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/session", id=id, session_id=session_id, reason=reason), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import SessionDeleteResponseSchema
@@ -411,7 +412,7 @@ class User:
         except Exception as e:
             print("Response Validation failed for deleteSession")
             print(e)
-            
+
         
 
         return response
@@ -443,7 +444,7 @@ class User:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/sessions", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import SessionListResponseSchema
@@ -453,7 +454,7 @@ class User:
         except Exception as e:
             print("Response Validation failed for getActiveSessions")
             print(e)
-            
+
         
 
         return response
@@ -489,7 +490,7 @@ class User:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/sessions", id=id, reason=reason), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import SessionDeleteResponseSchema
@@ -499,7 +500,7 @@ class User:
         except Exception as e:
             print("Response Validation failed for deleteActiveSessions")
             print(e)
-            
+
         
 
         return response
@@ -527,7 +528,7 @@ class User:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/platform/config", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import PlatformSchema
@@ -537,7 +538,7 @@ class User:
         except Exception as e:
             print("Response Validation failed for getPlatformConfig")
             print(e)
-            
+
         
 
         return response
@@ -570,7 +571,7 @@ class User:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/platform/config", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import PlatformSchema
@@ -580,7 +581,7 @@ class User:
         except Exception as e:
             print("Response Validation failed for updatePlatformConfig")
             print(e)
-            
+
         
 
         return response
@@ -613,7 +614,7 @@ class User:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_group", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import UserGroupResponseSchema
@@ -623,7 +624,7 @@ class User:
         except Exception as e:
             print("Response Validation failed for createUserGroup")
             print(e)
-            
+
         
 
         return response
@@ -671,7 +672,7 @@ class User:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_group", page_no=page_no, page_size=page_size, name=name, status=status, group_uid=group_uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import UserGroupListResponseSchema
@@ -681,7 +682,7 @@ class User:
         except Exception as e:
             print("Response Validation failed for getUserGroups")
             print(e)
-            
+
         
 
         return response
@@ -718,7 +719,7 @@ class User:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_group/{group_id}", group_id=group_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import UserGroupResponseSchema
@@ -728,7 +729,7 @@ class User:
         except Exception as e:
             print("Response Validation failed for updateUserGroup")
             print(e)
-            
+
         
 
         return response
@@ -760,7 +761,7 @@ class User:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_group/{group_id}", group_id=group_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import UserGroupResponseSchema
@@ -770,7 +771,7 @@ class User:
         except Exception as e:
             print("Response Validation failed for getUserGroupById")
             print(e)
-            
+
         
 
         return response

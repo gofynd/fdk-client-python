@@ -1,6 +1,6 @@
 
 
-"""Content Platform Client."""
+"""Content Platform Client"""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -11,6 +11,7 @@ class Content:
     def __init__(self, config, applicationId):
         self._conf = config
         self.applicationId = applicationId
+
     
     async def getAnnouncementsList(self, page_no=None, page_size=None):
         """Announcements are useful to highlight a message or information on top of a webpage. Use this API to retrieve a list of announcements.	
@@ -43,7 +44,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/announcements", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import GetAnnouncementListSchema
@@ -53,7 +54,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for getAnnouncementsList")
             print(e)
-            
+
         
 
         return response
@@ -86,7 +87,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/announcements", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import CreateAnnouncementSchema
@@ -96,7 +97,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for createAnnouncement")
             print(e)
-            
+
         
 
         return response
@@ -128,7 +129,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/announcements/{announcement_id}", announcement_id=announcement_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import AdminAnnouncementSchema
@@ -138,7 +139,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for getAnnouncementById")
             print(e)
-            
+
         
 
         return response
@@ -175,7 +176,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/announcements/{announcement_id}", announcement_id=announcement_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import CreateAnnouncementSchema
@@ -185,7 +186,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for updateAnnouncement")
             print(e)
-            
+
         
 
         return response
@@ -222,7 +223,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/announcements/{announcement_id}", announcement_id=announcement_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import CreateAnnouncementSchema
@@ -232,7 +233,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for updateAnnouncementSchedule")
             print(e)
-            
+
         
 
         return response
@@ -264,7 +265,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/announcements/{announcement_id}", announcement_id=announcement_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import CreateAnnouncementSchema
@@ -274,7 +275,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for deleteAnnouncement")
             print(e)
-            
+
         
 
         return response
@@ -307,7 +308,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/blogs/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import BlogSchema
@@ -317,7 +318,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for createBlog")
             print(e)
-            
+
         
 
         return response
@@ -353,7 +354,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/blogs/", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import BlogGetResponse
@@ -363,7 +364,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for getBlogs")
             print(e)
-            
+
         
 
         return response
@@ -400,7 +401,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/blogs/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import BlogSchema
@@ -410,7 +411,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for updateBlog")
             print(e)
-            
+
         
 
         return response
@@ -442,7 +443,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/blogs/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import BlogSchema
@@ -452,7 +453,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for deleteBlog")
             print(e)
-            
+
         
 
         return response
@@ -484,7 +485,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/blogs/{slug}", slug=slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import BlogSchema
@@ -494,7 +495,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for getComponentById")
             print(e)
-            
+
         
 
         return response
@@ -527,7 +528,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/data-loader", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import DataLoaderResponseSchema
@@ -537,7 +538,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for addDataLoader")
             print(e)
-            
+
         
 
         return response
@@ -565,7 +566,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/data-loader", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import DataLoadersSchema
@@ -575,7 +576,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for getDataLoaders")
             print(e)
-            
+
         
 
         return response
@@ -607,7 +608,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/data-loader/{data_loader_id}", data_loader_id=data_loader_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import DataLoaderResponseSchema
@@ -617,7 +618,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for deleteDataLoader")
             print(e)
-            
+
         
 
         return response
@@ -654,7 +655,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/data-loader/{data_loader_id}", data_loader_id=data_loader_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import DataLoaderResponseSchema
@@ -664,7 +665,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for editDataLoader")
             print(e)
-            
+
         
 
         return response
@@ -696,7 +697,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/data-loader/{data_loader_id}/select", data_loader_id=data_loader_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import DataLoaderResponseSchema
@@ -706,7 +707,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for selectDataLoader")
             print(e)
-            
+
         
 
         return response
@@ -742,7 +743,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/data-loader/{service}/{operation_id}/reset", service=service, operation_id=operation_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import DataLoaderResetResponseSchema
@@ -752,7 +753,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for resetDataLoader")
             print(e)
-            
+
         
 
         return response
@@ -780,7 +781,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/faq/categories", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import GetFaqCategoriesSchema
@@ -790,7 +791,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for getFaqCategories")
             print(e)
-            
+
         
 
         return response
@@ -822,7 +823,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/faq/category/{id_or_slug}", id_or_slug=id_or_slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import GetFaqCategoryBySlugSchema
@@ -832,7 +833,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for getFaqCategoryBySlugOrId")
             print(e)
-            
+
         
 
         return response
@@ -865,7 +866,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/faq/category", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import CreateFaqCategorySchema
@@ -875,7 +876,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for createFaqCategory")
             print(e)
-            
+
         
 
         return response
@@ -912,7 +913,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/faq/category/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import CreateFaqCategorySchema
@@ -922,7 +923,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for updateFaqCategory")
             print(e)
-            
+
         
 
         return response
@@ -954,7 +955,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/faq/category/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import FaqSchema
@@ -964,7 +965,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for deleteFaqCategory")
             print(e)
-            
+
         
 
         return response
@@ -996,7 +997,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/faq/category/{id_or_slug}/faqs", id_or_slug=id_or_slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import GetFaqSchema
@@ -1006,7 +1007,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for getFaqsByCategoryIdOrSlug")
             print(e)
-            
+
         
 
         return response
@@ -1043,7 +1044,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/faq/category/{category_id}/faqs", category_id=category_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import CreateFaqResponseSchema
@@ -1053,7 +1054,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for addFaq")
             print(e)
-            
+
         
 
         return response
@@ -1094,7 +1095,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/faq/category/{category_id}/faq/{faq_id}", category_id=category_id, faq_id=faq_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import CreateFaqResponseSchema
@@ -1104,7 +1105,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for updateFaq")
             print(e)
-            
+
         
 
         return response
@@ -1140,7 +1141,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/faq/category/{category_id}/faq/{faq_id}", category_id=category_id, faq_id=faq_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import CreateFaqResponseSchema
@@ -1150,7 +1151,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for deleteFaq")
             print(e)
-            
+
         
 
         return response
@@ -1182,7 +1183,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/faq/{id_or_slug}", id_or_slug=id_or_slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import CreateFaqResponseSchema
@@ -1192,7 +1193,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for getFaqByIdOrSlug")
             print(e)
-            
+
         
 
         return response
@@ -1229,7 +1230,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/generate-seo/{type}", type=type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import GeneratedSEOContent
@@ -1239,7 +1240,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for generateSEOTitle")
             print(e)
-            
+
         
 
         return response
@@ -1275,7 +1276,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/landing-page/", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import LandingPageGetResponse
@@ -1285,7 +1286,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for getLandingPages")
             print(e)
-            
+
         
 
         return response
@@ -1318,7 +1319,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/landing-page/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import LandingPageSchema
@@ -1328,7 +1329,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for createLandingPage")
             print(e)
-            
+
         
 
         return response
@@ -1365,7 +1366,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/landing-page/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import LandingPageSchema
@@ -1375,7 +1376,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for updateLandingPage")
             print(e)
-            
+
         
 
         return response
@@ -1407,7 +1408,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/landing-page/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import LandingPageSchema
@@ -1417,7 +1418,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for deleteLandingPage")
             print(e)
-            
+
         
 
         return response
@@ -1445,7 +1446,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/legal", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import ApplicationLegal
@@ -1455,7 +1456,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for getLegalInformation")
             print(e)
-            
+
         
 
         return response
@@ -1488,7 +1489,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/legal", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import ApplicationLegal
@@ -1498,7 +1499,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for updateLegalInformation")
             print(e)
-            
+
         
 
         return response
@@ -1538,7 +1539,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/navigations/", device_platform=device_platform, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import NavigationGetResponse
@@ -1548,7 +1549,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for getNavigations")
             print(e)
-            
+
         
 
         return response
@@ -1581,7 +1582,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/navigations/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import NavigationSchema
@@ -1591,7 +1592,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for createNavigation")
             print(e)
-            
+
         
 
         return response
@@ -1619,7 +1620,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/navigations/default", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import DefaultNavigationResponse
@@ -1629,7 +1630,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for getDefaultNavigations")
             print(e)
-            
+
         
 
         return response
@@ -1665,7 +1666,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/navigations/{slug}", slug=slug, device_platform=device_platform), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import NavigationSchema
@@ -1675,7 +1676,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for getNavigationBySlug")
             print(e)
-            
+
         
 
         return response
@@ -1712,7 +1713,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/navigations/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import NavigationSchema
@@ -1722,7 +1723,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for updateNavigation")
             print(e)
-            
+
         
 
         return response
@@ -1754,7 +1755,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/navigations/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import NavigationSchema
@@ -1764,7 +1765,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for deleteNavigation")
             print(e)
-            
+
         
 
         return response
@@ -1792,7 +1793,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pages/meta", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import PageMetaSchema
@@ -1802,7 +1803,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for getPageMeta")
             print(e)
-            
+
         
 
         return response
@@ -1830,7 +1831,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pages/spec", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import PageSpec
@@ -1840,7 +1841,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for getPageSpec")
             print(e)
-            
+
         
 
         return response
@@ -1873,7 +1874,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pages/preview/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import PageSchema
@@ -1883,7 +1884,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for createPagePreview")
             print(e)
-            
+
         
 
         return response
@@ -1920,7 +1921,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pages/publish/{slug}", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import PageSchema
@@ -1930,7 +1931,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for updatePagePreview")
             print(e)
-            
+
         
 
         return response
@@ -1962,7 +1963,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pages/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import PageSchema
@@ -1972,7 +1973,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for deletePage")
             print(e)
-            
+
         
 
         return response
@@ -2005,7 +2006,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/path-mappings", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import PathMappingSchema
@@ -2015,7 +2016,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for addPathRedirectionRules")
             print(e)
-            
+
         
 
         return response
@@ -2051,7 +2052,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/path-mappings", page_size=page_size, page_no=page_no), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import PathMappingSchema
@@ -2061,7 +2062,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for getPathRedirectionRules")
             print(e)
-            
+
         
 
         return response
@@ -2093,7 +2094,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/path-mappings/{path_id}", path_id=path_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import PathMappingSchema
@@ -2103,7 +2104,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for getPathRedirectionRule")
             print(e)
-            
+
         
 
         return response
@@ -2140,7 +2141,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/path-mappings/{path_id}", path_id=path_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import PathMappingSchema
@@ -2150,7 +2151,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for updatePathRedirectionRules")
             print(e)
-            
+
         
 
         return response
@@ -2182,7 +2183,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/path-mappings/{path_id}", path_id=path_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         return response
@@ -2210,7 +2211,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/seo", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import SeoComponent
@@ -2220,7 +2221,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for getSEOConfiguration")
             print(e)
-            
+
         
 
         return response
@@ -2253,7 +2254,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/seo", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import SeoSchema
@@ -2263,7 +2264,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for updateSEOConfiguration")
             print(e)
-            
+
         
 
         return response
@@ -2303,7 +2304,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/slideshows/", device_platform=device_platform, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import SlideshowGetResponse
@@ -2313,7 +2314,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for getSlideshows")
             print(e)
-            
+
         
 
         return response
@@ -2346,7 +2347,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/slideshows/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import SlideshowSchema
@@ -2356,7 +2357,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for createSlideshow")
             print(e)
-            
+
         
 
         return response
@@ -2392,7 +2393,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/slideshows/{slug}", slug=slug, device_platform=device_platform), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import SlideshowSchema
@@ -2402,7 +2403,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for getSlideshowBySlug")
             print(e)
-            
+
         
 
         return response
@@ -2439,7 +2440,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/slideshows/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import SlideshowSchema
@@ -2449,7 +2450,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for updateSlideshow")
             print(e)
-            
+
         
 
         return response
@@ -2481,7 +2482,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/slideshows/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import SlideshowSchema
@@ -2491,7 +2492,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for deleteSlideshow")
             print(e)
-            
+
         
 
         return response
@@ -2519,7 +2520,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/support", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import Support
@@ -2529,7 +2530,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for getSupportInformation")
             print(e)
-            
+
         
 
         return response
@@ -2562,7 +2563,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/support", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import Support
@@ -2572,7 +2573,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for updateSupportInformation")
             print(e)
-            
+
         
 
         return response
@@ -2605,7 +2606,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/tags", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import TagsSchema
@@ -2615,7 +2616,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for updateInjectableTag")
             print(e)
-            
+
         
 
         return response
@@ -2643,7 +2644,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/tags", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import TagsSchema
@@ -2653,7 +2654,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for deleteAllInjectableTags")
             print(e)
-            
+
         
 
         return response
@@ -2681,7 +2682,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/tags", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import TagsSchema
@@ -2691,7 +2692,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for getInjectableTags")
             print(e)
-            
+
         
 
         return response
@@ -2724,7 +2725,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/tags/add", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import TagsSchema
@@ -2734,7 +2735,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for addInjectableTag")
             print(e)
-            
+
         
 
         return response
@@ -2767,7 +2768,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/tags/remove/handpicked", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import TagDeleteSuccessResponse
@@ -2777,7 +2778,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for removeInjectableTag")
             print(e)
-            
+
         
 
         return response
@@ -2814,7 +2815,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/tags/edit/handpicked/{tag_id}", tag_id=tag_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import TagsSchema
@@ -2824,7 +2825,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for editInjectableTag")
             print(e)
-            
+
         
 
         return response
@@ -2857,7 +2858,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/pages/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import PageSchema
@@ -2867,7 +2868,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for createPage")
             print(e)
-            
+
         
 
         return response
@@ -2903,7 +2904,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/pages/", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import PageGetResponse
@@ -2913,7 +2914,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for getPages")
             print(e)
-            
+
         
 
         return response
@@ -2950,7 +2951,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/pages/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import PageSchema
@@ -2960,7 +2961,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for updatePage")
             print(e)
-            
+
         
 
         return response
@@ -2992,7 +2993,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/pages/{slug}", slug=slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import PageSchema
@@ -3002,7 +3003,7 @@ class Content:
         except Exception as e:
             print("Response Validation failed for getPageBySlug")
             print(e)
-            
+
         
 
         return response
