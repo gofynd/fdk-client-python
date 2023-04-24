@@ -15,6 +15,10 @@ from .communication.applicationClient import Communication
 
 from .payment.applicationClient import Payment
 
+from .order.applicationClient import Order
+
+from .catalog.applicationClient import Catalog
+
 from .filestorage.applicationClient import FileStorage
 
 from .share.applicationClient import Share
@@ -45,6 +49,10 @@ class PlatformApplicationClient:
         self.communication = Communication(config, applicationId)
         
         self.payment = Payment(config, applicationId)
+        
+        self.order = Order(config, applicationId)
+        
+        self.catalog = Catalog(config, applicationId)
         
         self.fileStorage = FileStorage(config, applicationId)
         
