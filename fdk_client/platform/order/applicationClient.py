@@ -1,6 +1,6 @@
 
 
-"""Order Platform Client."""
+"""Order Platform Client"""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -11,6 +11,7 @@ class Order:
     def __init__(self, config, applicationId):
         self._conf = config
         self.applicationId = applicationId
+
     
     async def getApplicationShipments(self, lane=None, search_type=None, search_id=None, from_date=None, to_date=None, dp_ids=None, ordering_company_id=None, stores=None, sales_channel=None, request_by_ext=None, page_no=None, page_size=None, customer_id=None, is_priority_sort=None):
         """
@@ -91,7 +92,7 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/shipments/", lane=lane, search_type=search_type, search_id=search_id, from_date=from_date, to_date=to_date, dp_ids=dp_ids, ordering_company_id=ordering_company_id, stores=stores, sales_channel=sales_channel, request_by_ext=request_by_ext, page_no=page_no, page_size=page_size, customer_id=customer_id, is_priority_sort=is_priority_sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import ShipmentInternalPlatformViewResponse
@@ -101,7 +102,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getApplicationShipments")
             print(e)
-            
+
         
 
         return response
@@ -133,7 +134,7 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/order-details", order_id=order_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import ShipmentDetailsResponse
@@ -143,7 +144,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getAppOrderShipmentDetails")
             print(e)
-            
+
         
 
         return response
@@ -175,7 +176,7 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/orders/shipments/{shipment_id}/track", shipment_id=shipment_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import PlatformShipmentTrack
@@ -185,7 +186,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for trackPlatformShipment")
             print(e)
-            
+
         
 
         return response

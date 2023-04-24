@@ -25,7 +25,7 @@ Get Pincode API
 
 ```python
 try:
-    result = await client.logistic.getPincodeCity(pincode=pincode, countryCode=countryCode)
+    result = await applicationClient.logistic.getPincodeCity(pincode=pincode, countryCode=countryCode)
     # use result
 except Exception as e:
     print(e)
@@ -178,7 +178,7 @@ Get TAT API
 
 ```python
 try:
-    result = await client.logistic.getTatProduct(body=body)
+    result = await applicationClient.logistic.getTatProduct(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -341,7 +341,7 @@ Get Country List
 
 ```python
 try:
-    result = await client.logistic.getAllCountries()
+    result = await applicationClient.logistic.getAllCountries()
     # use result
 except Exception as e:
     print(e)
@@ -393,7 +393,7 @@ GET zone from the Pincode.
 
 ```python
 try:
-    result = await client.logistic.getPincodeZones(body=body)
+    result = await applicationClient.logistic.getPincodeZones(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -449,7 +449,7 @@ GET zone from the Pincode.
 
 ```python
 try:
-    result = await client.logistic.getOptimalLocations(body=body)
+    result = await applicationClient.logistic.getOptimalLocations(body=body)
     # use result
 except Exception as e:
     print(e)

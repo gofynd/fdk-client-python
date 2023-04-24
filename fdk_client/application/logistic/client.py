@@ -61,7 +61,7 @@ class Logistic:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPincodeCity"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/pincode/{pincode}", pincode=pincode, country_code=country_code), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-                
+
         
 
         from .models import PincodeApiResponse
@@ -105,7 +105,7 @@ class Logistic:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getTatProduct"]).netloc, "post", await create_url_without_domain("/service/application/logistics/v1.0/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-                
+
         
 
         from .models import TATViewResponse
@@ -144,7 +144,7 @@ class Logistic:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAllCountries"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/country-list", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-                
+
         
 
         from .models import CountryListResponse
@@ -188,7 +188,7 @@ class Logistic:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPincodeZones"]).netloc, "post", await create_url_without_domain("/service/application/logistics/v1.0/pincode/zones", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-                
+
         
 
         from .models import GetZoneFromPincodeViewResponse
@@ -232,7 +232,7 @@ class Logistic:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getOptimalLocations"]).netloc, "post", await create_url_without_domain("/service/application/logistics/v1.0/reassign_stores", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-                
+
         
 
         from .models import ReAssignStoreResponse

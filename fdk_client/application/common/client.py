@@ -58,7 +58,7 @@ class Common:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["searchApplication"]).netloc, "get", await create_url_without_domain("/service/common/configuration/v1.0/application/search-application", authorization=authorization, query=query), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-                
+
         
 
         from .models import ApplicationResponse
@@ -105,7 +105,7 @@ class Common:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getLocations"]).netloc, "get", await create_url_without_domain("/service/common/configuration/v1.0/location", location_type=location_type, id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-                
+
         
 
         from .models import Locations
