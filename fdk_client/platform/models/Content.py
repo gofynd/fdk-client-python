@@ -7,6 +7,14 @@ from ..models.BaseSchema import BaseSchema
 
 
 
+class GenerateSEOContent(BaseSchema):
+    pass
+
+
+class GeneratedSEOContent(BaseSchema):
+    pass
+
+
 class ApplicationLegal(BaseSchema):
     pass
 
@@ -16,6 +24,10 @@ class ApplicationLegalFAQ(BaseSchema):
 
 
 class PathMappingSchema(BaseSchema):
+    pass
+
+
+class PathSourceSchema(BaseSchema):
     pass
 
 
@@ -140,10 +152,6 @@ class ActionPage(BaseSchema):
 
 
 class NavigationReference(BaseSchema):
-    pass
-
-
-class SubNavigationReference(BaseSchema):
     pass
 
 
@@ -416,6 +424,30 @@ class TagSourceSchema(BaseSchema):
 
 
 
+class GenerateSEOContent(BaseSchema):
+    # Content swagger.json
+
+    
+    text = fields.Str(required=False)
+    
+    existing_text = fields.Str(required=False)
+    
+    keywords = fields.List(fields.Str(required=False), required=False)
+    
+    type = fields.Str(required=False)
+    
+
+
+class GeneratedSEOContent(BaseSchema):
+    # Content swagger.json
+
+    
+    title = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+
+
 class ApplicationLegal(BaseSchema):
     # Content swagger.json
 
@@ -466,7 +498,17 @@ class PathMappingSchema(BaseSchema):
     
     created_at = fields.Str(required=False)
     
-    __source = fields.Nested(TagSourceSchema, required=False)
+    __source = fields.Nested(PathSourceSchema, required=False)
+    
+
+
+class PathSourceSchema(BaseSchema):
+    # Content swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    id = fields.Str(required=False)
     
 
 
@@ -489,6 +531,8 @@ class SeoSchema(BaseSchema):
     robots_txt = fields.Str(required=False)
     
     sitemap_enabled = fields.Boolean(required=False)
+    
+    cannonical_enabled = fields.Boolean(required=False)
     
     custom_meta_tags = fields.List(fields.Dict(required=False), required=False)
     
@@ -918,33 +962,7 @@ class NavigationReference(BaseSchema):
     
     sort_order = fields.Int(required=False)
     
-    sub_navigation = fields.List(fields.Nested(SubNavigationReference, required=False), required=False)
-    
-
-
-class SubNavigationReference(BaseSchema):
-    # Content swagger.json
-
-    
-    acl = fields.List(fields.Str(required=False), required=False)
-    
-    tags = fields.List(fields.Str(required=False), required=False)
-    
-    _locale_language = fields.Nested(LocaleLanguage, required=False)
-    
-    image = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
-    
-    action = fields.Nested(Action, required=False)
-    
-    active = fields.Boolean(required=False)
-    
-    display = fields.Str(required=False)
-    
-    sort_order = fields.Int(required=False)
-    
-    sub_navigation = fields.List(fields.Nested(NavigationReference, required=False), required=False)
+    sub_navigation = fields.List(fields.Nested(lambda: NavigationReference(exclude=('sub_navigation')), required=False), required=False)
     
 
 

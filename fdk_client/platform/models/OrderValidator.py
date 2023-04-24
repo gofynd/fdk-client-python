@@ -13,6 +13,10 @@ class OrderValidator:
         
         lane = fields.Str(required=False)
         
+        bag_status = fields.Str(required=False)
+        
+        status_override_lane = fields.Boolean(required=False)
+        
         search_type = fields.Str(required=False)
         
         search_value = fields.Str(required=False)
@@ -39,6 +43,8 @@ class OrderValidator:
         
         is_priority_sort = fields.Boolean(required=False)
         
+        fetch_active_shipment = fields.Boolean(required=False)
+        
         exclude_locked_shipments = fields.Boolean(required=False)
         
         payment_methods = fields.Str(required=False)
@@ -48,6 +54,10 @@ class OrderValidator:
         channel_order_id = fields.Str(required=False)
         
         custom_meta = fields.Str(required=False)
+        
+        ordering_channel = fields.Str(required=False)
+        
+        company_affiliate_tag = fields.Str(required=False)
          
     
     class getShipmentById(BaseSchema):
@@ -135,6 +145,14 @@ class OrderValidator:
         lane = fields.Str(required=False)
         
         search_type = fields.Str(required=False)
+        
+        bag_status = fields.Str(required=False)
+        
+        time_to_dispatch = fields.Str(required=False)
+        
+        payment_methods = fields.Str(required=False)
+        
+        tags = fields.Str(required=False)
         
         search_value = fields.Str(required=False)
         
@@ -298,50 +316,6 @@ class OrderValidator:
         is_priority_sort = fields.Boolean(required=False)
          
     
-    class getManifestList(BaseSchema):
-        
-        company_id = fields.Int(required=False)
-        
-        status = fields.Str(required=False)
-        
-        store_id = fields.Int(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        search_value = fields.Str(required=False)
-        
-        from_date = fields.Str(required=False)
-        
-        to_date = fields.Str(required=False)
-         
-    
-    class getManifestDetailsWithShipments(BaseSchema):
-        
-        company_id = fields.Int(required=False)
-        
-        manifest_id = fields.Str(required=False)
-        
-        from_date = fields.Str(required=False)
-        
-        to_date = fields.Str(required=False)
-        
-        store_id = fields.Int(required=False)
-        
-        page = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        lane = fields.Str(required=False)
-        
-        dp_ids = fields.Int(required=False)
-        
-        search_type = fields.Str(required=False)
-        
-        search_value = fields.Str(required=False)
-         
-    
     class getBulkActionFailedReport(BaseSchema):
         
         company_id = fields.Str(required=False)
@@ -501,6 +475,11 @@ class OrderValidator:
         shipment_id = fields.Int(required=False)
         
         bag_id = fields.Int(required=False)
+         
+    
+    class postShipmentHistory(BaseSchema):
+        
+        company_id = fields.Int(required=False)
          
     
     class sendSmsNinja(BaseSchema):

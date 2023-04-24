@@ -48,6 +48,13 @@ class ConfigurationValidator:
         application_id = fields.Str(required=False)
          
     
+    class modifyAppFeatures(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+    
     class getAppBasicDetails(BaseSchema):
         
         company_id = fields.Str(required=False)

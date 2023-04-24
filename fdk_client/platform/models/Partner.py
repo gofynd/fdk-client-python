@@ -15,11 +15,11 @@ class AddProxyResponse(BaseSchema):
     pass
 
 
-class APIError(BaseSchema):
+class RemoveProxyResponse(BaseSchema):
     pass
 
 
-class RemoveProxyResponse(BaseSchema):
+class APIError(BaseSchema):
     pass
 
 
@@ -56,6 +56,16 @@ class AddProxyResponse(BaseSchema):
     
 
 
+class RemoveProxyResponse(BaseSchema):
+    # Partner swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+    data = fields.Dict(required=False)
+    
+
+
 class APIError(BaseSchema):
     # Partner swagger.json
 
@@ -69,16 +79,6 @@ class APIError(BaseSchema):
     request_id = fields.Str(required=False)
     
     meta = fields.Dict(required=False)
-    
-
-
-class RemoveProxyResponse(BaseSchema):
-    # Partner swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-    data = fields.Dict(required=False)
     
 
 

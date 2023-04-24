@@ -248,6 +248,15 @@ class ContentValidator:
         id_or_slug = fields.Str(required=False)
          
     
+    class generateSEOTitle(BaseSchema):
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        type = fields.Str(required=False, validate=OneOf([val.value for val in GenerationEntityType.__members__.values()]))
+         
+    
     class getLandingPages(BaseSchema):
         
         company_id = fields.Str(required=False)

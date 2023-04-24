@@ -259,11 +259,27 @@ class AuthSuccessUser(BaseSchema):
     pass
 
 
+class SessionListResponseInfo(BaseSchema):
+    pass
+
+
 class AuthSuccessUserDebug(BaseSchema):
     pass
 
 
 class AuthSuccessUserEmails(BaseSchema):
+    pass
+
+
+class UserGroupResponseSchema(BaseSchema):
+    pass
+
+
+class UserGroupListResponseSchema(BaseSchema):
+    pass
+
+
+class CreateUserGroupSchema(BaseSchema):
     pass
 
 
@@ -359,7 +375,19 @@ class SessionExpiry(BaseSchema):
     pass
 
 
+class UpdateUserGroupSchema(BaseSchema):
+    pass
+
+
 class UpdateUserRequestSchema(BaseSchema):
+    pass
+
+
+class UserEmails(BaseSchema):
+    pass
+
+
+class UserPhoneNumbers(BaseSchema):
     pass
 
 
@@ -372,10 +400,6 @@ class PhoneNumber(BaseSchema):
 
 
 class Email(BaseSchema):
-    pass
-
-
-class Debug(BaseSchema):
     pass
 
 
@@ -1008,7 +1032,7 @@ class SessionListResponseSchema(BaseSchema):
     # User swagger.json
 
     
-    items = fields.List(fields.Str(required=False), required=False)
+    items = fields.List(fields.Nested(SessionListResponseInfo, required=False), required=False)
     
 
 
@@ -1156,6 +1180,22 @@ class AuthSuccessUser(BaseSchema):
     
 
 
+class SessionListResponseInfo(BaseSchema):
+    # User swagger.json
+
+    
+    session_id = fields.Str(required=False)
+    
+    user_agent = fields.Str(required=False)
+    
+    ip = fields.Str(required=False)
+    
+    domain = fields.Str(required=False)
+    
+    expire_in = fields.Str(required=False)
+    
+
+
 class AuthSuccessUserDebug(BaseSchema):
     # User swagger.json
 
@@ -1175,6 +1215,54 @@ class AuthSuccessUserEmails(BaseSchema):
     primary = fields.Boolean(required=False)
     
     active = fields.Boolean(required=False)
+    
+
+
+class UserGroupResponseSchema(BaseSchema):
+    # User swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+    file_url = fields.Str(required=False)
+    
+    _id = fields.Str(required=False)
+    
+    status = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
+    
+    application_id = fields.Str(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    modified_at = fields.Str(required=False)
+    
+    __v = fields.Int(required=False)
+    
+
+
+class UserGroupListResponseSchema(BaseSchema):
+    # User swagger.json
+
+    
+    items = fields.List(fields.Nested(UserGroupResponseSchema, required=False), required=False)
+    
+    page = fields.Nested(PaginationSchema, required=False)
+    
+
+
+class CreateUserGroupSchema(BaseSchema):
+    # User swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+    file_url = fields.Str(required=False)
     
 
 
@@ -1472,6 +1560,18 @@ class SessionExpiry(BaseSchema):
     
 
 
+class UpdateUserGroupSchema(BaseSchema):
+    # User swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+    file_url = fields.Str(required=False)
+    
+
+
 class UpdateUserRequestSchema(BaseSchema):
     # User swagger.json
 
@@ -1485,6 +1585,40 @@ class UpdateUserRequestSchema(BaseSchema):
     external_id = fields.Str(required=False)
     
     meta = fields.Dict(required=False)
+    
+    phone_numbers = fields.List(fields.Nested(UserPhoneNumbers, required=False), required=False)
+    
+    emails = fields.List(fields.Nested(UserEmails, required=False), required=False)
+    
+
+
+class UserEmails(BaseSchema):
+    # User swagger.json
+
+    
+    active = fields.Boolean(required=False)
+    
+    primary = fields.Boolean(required=False)
+    
+    verified = fields.Boolean(required=False)
+    
+    email = fields.Str(required=False)
+    
+
+
+class UserPhoneNumbers(BaseSchema):
+    # User swagger.json
+
+    
+    active = fields.Boolean(required=False)
+    
+    primary = fields.Boolean(required=False)
+    
+    verified = fields.Boolean(required=False)
+    
+    phone = fields.Str(required=False)
+    
+    country_code = fields.Str(required=False)
     
 
 
@@ -1517,10 +1651,6 @@ class UserSchema(BaseSchema):
     username = fields.Str(required=False)
     
     account_type = fields.Str(required=False)
-    
-    debug = fields.Nested(Debug, required=False)
-    
-    has_old_password_hash = fields.Boolean(required=False)
     
     _id = fields.Str(required=False)
     
@@ -1557,16 +1687,6 @@ class Email(BaseSchema):
     email = fields.Str(required=False)
     
     active = fields.Boolean(required=False)
-    
-
-
-class Debug(BaseSchema):
-    # User swagger.json
-
-    
-    source = fields.Str(required=False)
-    
-    platform = fields.Str(required=False)
     
 
 
