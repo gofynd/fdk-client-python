@@ -309,6 +309,20 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
 
 class CartValidator:
     
@@ -955,6 +969,37 @@ class CartValidator:
         aggregator_name = fields.Str(required=False)
         
         merchant_code = fields.Str(required=False)
+         
+        
+    
+    class getCouponOptionValues(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getCouponCodeExists(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        code = fields.Str(required=False)
+         
+        
+    
+    class getPromotionCodeExists(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        code = fields.Str(required=False)
          
         
     

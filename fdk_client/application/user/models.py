@@ -587,6 +587,8 @@ class SendMobileOtpRequestSchema(BaseSchema):
     
     captcha_code = fields.Str(required=False)
     
+    type = fields.Str(required=False)
+    
 
 
 class UpdatePasswordRequestSchema(BaseSchema):
@@ -690,6 +692,8 @@ class SendOtpRequestSchema(BaseSchema):
     mobile = fields.Str(required=False)
     
     android_hash = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
     
 
 
@@ -1400,6 +1404,8 @@ class Login(BaseSchema):
     password = fields.Boolean(required=False)
     
     otp = fields.Boolean(required=False)
+    
+    voice_otp = fields.Boolean(required=False)
     
 
 

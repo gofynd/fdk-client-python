@@ -76,10 +76,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
-        
-        
         
         
         
@@ -221,15 +217,6 @@ class UserValidator:
         
     
     class getPlatformConfig(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class updatePlatformConfig(BaseSchema):
         
         
         company_id = fields.Str(required=False)

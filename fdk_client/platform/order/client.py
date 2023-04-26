@@ -200,6 +200,56 @@ class Order:
 
         return response
     
+    async def getAssetByShipmentIds(self, shipment_ids=None, invoice=None, expires_in=None):
+        """Use this API to retrieve shipments invoice, label and pos.
+        :param shipment_ids :  : type string
+        :param invoice :  : type boolean
+        :param expires_in :  : type string
+        """
+        payload = {}
+        
+        if shipment_ids:
+            payload["shipment_ids"] = shipment_ids
+        
+        if invoice:
+            payload["invoice"] = invoice
+        
+        if expires_in:
+            payload["expires_in"] = expires_in
+        
+
+        # Parameter validation
+        schema = OrderValidator.getAssetByShipmentIds()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipments-invoice", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"query","name":"shipment_ids","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"invoice","required":false,"schema":{"type":"boolean","default":true}},{"in":"query","name":"expires_in","required":false,"schema":{"type":"string","default":300}}],"query":[{"in":"query","name":"shipment_ids","required":true,"schema":{"type":"string"}},{"in":"query","name":"invoice","required":false,"schema":{"type":"boolean","default":true}},{"in":"query","name":"expires_in","required":false,"schema":{"type":"string","default":300}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", shipment_ids=shipment_ids, invoice=invoice, expires_in=expires_in)
+        query_string = await create_query_string(shipment_ids=shipment_ids, invoice=invoice, expires_in=expires_in)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipments-invoice", shipment_ids=shipment_ids, invoice=invoice, expires_in=expires_in), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        from .models import ResponseGetAssetShipment
+        schema = ResponseGetAssetShipment()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getAssetByShipmentIds")
+            print(e)
+
+        
+
+        return response
+    
     async def getOrderById(self, order_id=None):
         """
         :param order_id :  : type string

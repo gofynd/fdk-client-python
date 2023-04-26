@@ -48,6 +48,12 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
+        
+    
+    
+        
+        
     
     
         
@@ -340,6 +346,19 @@ class OrderValidator:
         ordering_company_id = fields.Str(required=False)
         
         request_by_ext = fields.Str(required=False)
+         
+        
+    
+    class getAssetByShipmentIds(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        shipment_ids = fields.Str(required=False)
+        
+        invoice = fields.Boolean(required=False)
+        
+        expires_in = fields.Str(required=False)
          
         
     
