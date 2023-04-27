@@ -15,7 +15,7 @@ Earn and redeem reward points
 * [getOfferByName](#getofferbyname)
 * [updateOfferByName](#updateofferbyname)
 * [updateUserStatus](#updateuserstatus)
-* [user](#user)
+* [getUserDetails](#getuserdetails)
 * [getUserPointsHistory](#getuserpointshistory)
 * [getRewardsConfiguration](#getrewardsconfiguration)
 * [setRewardsConfiguration](#setrewardsconfiguration)
@@ -261,7 +261,7 @@ Get the Giveaway audience status
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").rewards.getGiveawayAudienceStatus(audienceId=audienceId)
+    result = await platformClient.application("<APPLICATION_ID>").rewards.getGiveawayAudienceStatus(id=id, audienceId=audienceId)
     # use result
 except Exception as e:
     print(e)
@@ -273,6 +273,7 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
+| id | String | yes | Giveaway ID |   
 | audienceId | String | yes | audience id |  
 
 
@@ -370,7 +371,7 @@ Get offer by name
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").rewards.getOfferByName(name=name, cookie=cookie)
+    result = await platformClient.application("<APPLICATION_ID>").rewards.getOfferByName(name=name)
     # use result
 except Exception as e:
     print(e)
@@ -382,8 +383,7 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| name | String | yes | The name given to the offer. |   
-| cookie | String | yes | User's session cookie. This cookie is set in browser cookie when logged-in to fynd's authentication system i.e. `Grimlock` or by using grimlock-backend SDK for backend implementation. |  
+| name | String | yes | The name given to the offer. |  
 
 
 
@@ -534,7 +534,7 @@ Success
 ---
 
 
-### user
+### getUserDetails
 Get user reward details
 
 
@@ -542,7 +542,7 @@ Get user reward details
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").rewards.user(userId=userId)
+    result = await platformClient.application("<APPLICATION_ID>").rewards.getUserDetails(userId=userId)
     # use result
 except Exception as e:
     print(e)
