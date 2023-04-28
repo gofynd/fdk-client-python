@@ -1276,6 +1276,52 @@ class Order:
 
         return response
     
+    async def generatePOSReceiptByOrderId(self, order_id=None, document_type=None):
+        """
+        :param order_id :  : type string
+        :param document_type :  : type string
+        """
+        payload = {}
+        
+        if order_id:
+            payload["order_id"] = order_id
+        
+        if document_type:
+            payload["document_type"] = document_type
+        
+
+        # Parameter validation
+        schema = OrderValidator.generatePOSReceiptByOrderId()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/orders/{order_id}/generate/pos-receipt", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"order_id","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"document_type","required":false,"schema":{"type":"string","default":"invoice_receipt"}}],"query":[{"in":"query","name":"document_type","required":false,"schema":{"type":"string","default":"invoice_receipt"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"order_id","required":true,"schema":{"type":"string"}}]}""", order_id=order_id, document_type=document_type)
+        query_string = await create_query_string(order_id=order_id, document_type=document_type)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/orders/{order_id}/generate/pos-receipt", order_id=order_id, document_type=document_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        from .models import GeneratePosOrderReceiptResponse
+        schema = GeneratePosOrderReceiptResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for generatePOSReceiptByOrderId")
+            print(e)
+
+        
+
+        return response
+    
     async def invalidateShipmentCache(self, body=""):
         """Invalidate shipment Cache
         """

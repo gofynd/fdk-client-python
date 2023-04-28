@@ -29,6 +29,7 @@ from ..ApplicationModel import BaseSchema
     
     
         
+        
     
     
         
@@ -109,6 +110,8 @@ class OrderValidator:
         
         
         shipment_id = fields.Str(required=False)
+        
+        document_type = fields.Str(required=False)
          
         
     

@@ -190,6 +190,11 @@ from ..PlatformModel import BaseSchema
     
     
         
+        
+        
+    
+    
+        
     
     
         
@@ -651,6 +656,17 @@ class OrderValidator:
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
+         
+        
+    
+    class generatePOSReceiptByOrderId(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        order_id = fields.Str(required=False)
+        
+        document_type = fields.Str(required=False)
          
         
     
