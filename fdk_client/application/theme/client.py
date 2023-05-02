@@ -18,7 +18,9 @@ class Theme:
             "getAllPages": "/service/application/theme/v1.0/{theme_id}/page",
             "getPage": "/service/application/theme/v1.0/{theme_id}/{page_value}",
             "getAppliedTheme": "/service/application/theme/v1.0/applied-theme",
-            "getThemeForPreview": "/service/application/theme/v1.0/{theme_id}/preview"
+            "getThemeForPreview": "/service/application/theme/v1.0/{theme_id}/preview",
+            "getAppliedThemeV2": "/service/application/theme/v2.0/applied-theme",
+            "getThemeForPreviewV2": "/service/application/theme/v2.0/{theme_id}/preview"
             
         }
         self._urls = {
@@ -194,6 +196,88 @@ class Theme:
             schema.dump(schema.load(response))
         except Exception as e:
             print("Response Validation failed for getThemeForPreview")
+            print(e)
+
+        
+
+        return response
+    
+    async def getAppliedThemeV2(self, body=""):
+        """An application has multiple themes, but only one theme can be applied at a time. Use this API to retrieve the theme currently applied to the application.
+        """
+        payload = {}
+        
+        # Parameter validation
+        schema = ThemeValidator.getAppliedThemeV2()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getAppliedThemeV2"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAppliedThemeV2"]).netloc, "get", await create_url_without_domain("/service/application/theme/v2.0/applied-theme", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+
+        from .models import ThemesSchema
+        schema = ThemesSchema()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getAppliedThemeV2")
+            print(e)
+
+        
+
+        return response
+    
+    async def getThemeForPreviewV2(self, theme_id=None, body=""):
+        """A theme can be previewed before applying it. Use this API to retrieve the preview of a theme by its ID.
+        :param theme_id : ID of the theme to be retrieved : type string
+        """
+        payload = {}
+        
+        if theme_id:
+            payload["theme_id"] = theme_id
+        
+        # Parameter validation
+        schema = ThemeValidator.getThemeForPreviewV2()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getThemeForPreviewV2"], proccessed_params="""{"required":[{"name":"theme_id","in":"path","description":"ID of the theme to be retrieved","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"theme_id","in":"path","description":"ID of the theme to be retrieved","required":true,"schema":{"type":"string"}}]}""", theme_id=theme_id)
+        query_string = await create_query_string(theme_id=theme_id)
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getThemeForPreviewV2"]).netloc, "get", await create_url_without_domain("/service/application/theme/v2.0/{theme_id}/preview", theme_id=theme_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+
+        from .models import ThemesSchema
+        schema = ThemesSchema()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getThemeForPreviewV2")
             print(e)
 
         
