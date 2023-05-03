@@ -557,8 +557,8 @@ class PosCart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import RewardPointRequest
-        schema = RewardPointRequest()
+        from .models import RewardPointRequestSchema
+        schema = RewardPointRequestSchema()
         schema.dump(schema.load(body))
         
 
@@ -1023,8 +1023,8 @@ class PosCart:
 
         
 
-        from .models import PaymentCouponValidate
-        schema = PaymentCouponValidate()
+        from .models import PaymentCouponValidateSchema
+        schema = PaymentCouponValidateSchema()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
@@ -1206,8 +1206,8 @@ class PosCart:
 
         
 
-        from .models import CartCheckoutResponse
-        schema = CartCheckoutResponse()
+        from .models import CartCheckoutResponseSchema
+        schema = CartCheckoutResponseSchema()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
