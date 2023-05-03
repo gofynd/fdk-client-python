@@ -264,10 +264,6 @@ from .models import GenerationEntityType
     
         
         
-    
-    
-        
-        
         
         
         
@@ -889,15 +885,6 @@ class ContentValidator:
         
     
     class getSEOConfiguration(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class updateSEOConfiguration(BaseSchema):
         
         
         company_id = fields.Str(required=False)

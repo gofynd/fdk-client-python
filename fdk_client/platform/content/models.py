@@ -569,6 +569,8 @@ class Detail(BaseSchema):
     
     description = fields.Str(required=False)
     
+    image_url = fields.Str(required=False)
+    
 
 
 class AnnouncementPageSchema(BaseSchema):
