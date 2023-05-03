@@ -94,8 +94,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CouponAdd
-        schema = CouponAdd()
+        from .models import CouponAddSchema
+        schema = CouponAddSchema()
         schema.dump(schema.load(body))
         
 
@@ -156,8 +156,8 @@ class Cart:
 
         
 
-        from .models import CouponUpdate
-        schema = CouponUpdate()
+        from .models import CouponUpdateSchema
+        schema = CouponUpdateSchema()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
@@ -183,8 +183,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CouponUpdate
-        schema = CouponUpdate()
+        from .models import CouponUpdateSchema
+        schema = CouponUpdateSchema()
         schema.dump(schema.load(body))
         
 
@@ -343,8 +343,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PromotionAdd
-        schema = PromotionAdd()
+        from .models import PromotionAddSchema
+        schema = PromotionAddSchema()
         schema.dump(schema.load(body))
         
 
@@ -363,8 +363,8 @@ class Cart:
 
         
 
-        from .models import PromotionAdd
-        schema = PromotionAdd()
+        from .models import PromotionAddSchema
+        schema = PromotionAddSchema()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
@@ -405,8 +405,8 @@ class Cart:
 
         
 
-        from .models import PromotionUpdate
-        schema = PromotionUpdate()
+        from .models import PromotionUpdateSchema
+        schema = PromotionUpdateSchema()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
@@ -432,8 +432,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PromotionUpdate
-        schema = PromotionUpdate()
+        from .models import PromotionUpdateSchema
+        schema = PromotionUpdateSchema()
         schema.dump(schema.load(body))
         
 
@@ -452,8 +452,8 @@ class Cart:
 
         
 
-        from .models import PromotionUpdate
-        schema = PromotionUpdate()
+        from .models import PromotionUpdateSchema
+        schema = PromotionUpdateSchema()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
@@ -646,8 +646,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import OpenApiPlatformCheckoutReq
-        schema = OpenApiPlatformCheckoutReq()
+        from .models import OpenApiPlatformCheckoutReqSchema
+        schema = OpenApiPlatformCheckoutReqSchema()
         schema.dump(schema.load(body))
         
 
@@ -732,8 +732,8 @@ class Cart:
 
         
 
-        from .models import AbandonedCartResponse
-        schema = AbandonedCartResponse()
+        from .models import AbandonedCartResponseSchema
+        schema = AbandonedCartResponseSchema()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
@@ -1069,8 +1069,8 @@ class Cart:
 
         
 
-        from .models import MultiCartResponse
-        schema = MultiCartResponse()
+        from .models import MultiCartResponseSchema
+        schema = MultiCartResponseSchema()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
@@ -2106,8 +2106,8 @@ class Cart:
 
         
 
-        from .models import CartCheckoutResponse
-        schema = CartCheckoutResponse()
+        from .models import CartCheckoutResponseSchema
+        schema = CartCheckoutResponseSchema()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
@@ -2311,12 +2311,110 @@ class Cart:
 
         
 
-        from .models import PaymentCouponValidate
-        schema = PaymentCouponValidate()
+        from .models import PaymentCouponValidateSchema
+        schema = PaymentCouponValidateSchema()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
             print("Response Validation failed for validateCouponForPayment")
+            print(e)
+
+        
+
+        return response
+    
+    async def platformCheckoutCartV2(self, id=None, body=""):
+        """Use this API to checkout all items in the cart for payment and order generation. For COD, order will be directly generated, whereas for other checkout modes, user will be redirected to a payment gateway.
+        :param id :  : type string
+        """
+        payload = {}
+        
+        if id:
+            payload["id"] = id
+        
+
+        # Parameter validation
+        schema = CartValidator.platformCheckoutCartV2()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import PlatformCartCheckoutDetailV2Request
+        schema = PlatformCartCheckoutDetailV2Request()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/checkout", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"query","name":"id","required":false,"schema":{"type":"string","description":"The unique identifier of the cart"}}],"query":[{"in":"query","name":"id","required":false,"schema":{"type":"string","description":"The unique identifier of the cart"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", id=id)
+        query_string = await create_query_string(id=id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/checkout", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        from .models import CartCheckoutResponseSchema
+        schema = CartCheckoutResponseSchema()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for platformCheckoutCartV2")
+            print(e)
+
+        
+
+        return response
+    
+    async def selectPaymentModeV2(self, id=None, buy_now=None, body=""):
+        """Use this API to update cart payment.
+        :param id :  : type string
+        :param buy_now :  : type boolean
+        """
+        payload = {}
+        
+        if id:
+            payload["id"] = id
+        
+        if buy_now:
+            payload["buy_now"] = buy_now
+        
+
+        # Parameter validation
+        schema = CartValidator.selectPaymentModeV2()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import UpdateCartPaymentRequestV2
+        schema = UpdateCartPaymentRequestV2()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/payment", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}}],"query":[{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", id=id, buy_now=buy_now)
+        query_string = await create_query_string(id=id, buy_now=buy_now)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/payment", id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        from .models import CartDetailResponse
+        schema = CartDetailResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for selectPaymentModeV2")
             print(e)
 
         
