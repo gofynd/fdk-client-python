@@ -191,11 +191,15 @@ class Rewards:
 
         return response
     
-    async def getGiveawayAudienceStatus(self, audience_id=None):
+    async def getGiveawayAudienceStatus(self, id=None, audience_id=None):
         """Get giveaway audience status
+        :param id : Giveaway ID : type string
         :param audience_id : audience id : type string
         """
         payload = {}
+        
+        if id:
+            payload["id"] = id
         
         if audience_id:
             payload["audience_id"] = audience_id
@@ -206,8 +210,8 @@ class Rewards:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/giveaways/audience/{audience_id}/status", """{"required":[{"name":"audience_id","in":"path","description":"audience id","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","description":"company id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"application id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"audience_id","in":"path","description":"audience id","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","description":"company id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"application id","required":true,"schema":{"type":"string"}}]}""", audience_id=audience_id, )
-        query_string = await create_query_string(audience_id=audience_id, )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/giveaways/:id/audience/{audience_id}/status", """{"required":[{"name":"id","in":"path","description":"Giveaway ID","required":true,"schema":{"type":"string"}},{"name":"audience_id","in":"path","description":"audience id","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","description":"company id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"application id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"id","in":"path","description":"Giveaway ID","required":true,"schema":{"type":"string"}},{"name":"audience_id","in":"path","description":"audience id","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","description":"company id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"application id","required":true,"schema":{"type":"string"}}]}""", id=id, audience_id=audience_id, )
+        query_string = await create_query_string(id=id, audience_id=audience_id, )
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -217,7 +221,7 @@ class Rewards:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/giveaways/audience/{audience_id}/status", audience_id=audience_id, ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/giveaways/:id/audience/{audience_id}/status", id=id, audience_id=audience_id, ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
 
@@ -261,18 +265,14 @@ class Rewards:
 
         return response
     
-    async def getOfferByName(self, name=None, cookie=None):
+    async def getOfferByName(self, name=None):
         """Use this API to get the offer details and configuration by entering the name of the offer.
         :param name : The name given to the offer. : type string
-        :param cookie : User's session cookie. This cookie is set in browser cookie when logged-in to fynd's authentication system i.e. `Grimlock` or by using grimlock-backend SDK for backend implementation. : type string
         """
         payload = {}
         
         if name:
             payload["name"] = name
-        
-        if cookie:
-            payload["cookie"] = cookie
         
 
         # Parameter validation
@@ -280,8 +280,8 @@ class Rewards:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/offers/{name}/", """{"required":[{"name":"name","in":"path","description":"The name given to the offer.","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","description":"company id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"application id","required":true,"schema":{"type":"string"}},{"name":"cookie","in":"header","description":"User's session cookie. This cookie is set in browser cookie when logged-in to fynd's authentication system i.e. `Grimlock` or by using grimlock-backend SDK for backend implementation.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[{"name":"cookie","in":"header","description":"User's session cookie. This cookie is set in browser cookie when logged-in to fynd's authentication system i.e. `Grimlock` or by using grimlock-backend SDK for backend implementation.","required":true,"schema":{"type":"string"}}],"path":[{"name":"name","in":"path","description":"The name given to the offer.","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","description":"company id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"application id","required":true,"schema":{"type":"string"}}]}""", name=name, cookie=cookie)
-        query_string = await create_query_string(name=name, cookie=cookie)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/offers/{name}/", """{"required":[{"name":"name","in":"path","description":"The name given to the offer.","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","description":"company id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"application id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"name","in":"path","description":"The name given to the offer.","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","description":"company id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"application id","required":true,"schema":{"type":"string"}}]}""", name=name, )
+        query_string = await create_query_string(name=name, )
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -291,7 +291,7 @@ class Rewards:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/offers/{name}/", name=name, cookie=cookie), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/offers/{name}/", name=name, ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
 
@@ -401,7 +401,7 @@ class Rewards:
 
         return response
     
-    async def user(self, user_id=None):
+    async def getUserDetails(self, user_id=None):
         """Use this API to get the user reward details
         :param user_id : user id : type string
         """
@@ -412,7 +412,7 @@ class Rewards:
         
 
         # Parameter validation
-        schema = RewardsValidator.user()
+        schema = RewardsValidator.getUserDetails()
         schema.dump(schema.load(payload))
         
 
@@ -436,7 +436,7 @@ class Rewards:
         try:
             schema.dump(schema.load(response))
         except Exception as e:
-            print("Response Validation failed for user")
+            print("Response Validation failed for getUserDetails")
             print(e)
 
         
