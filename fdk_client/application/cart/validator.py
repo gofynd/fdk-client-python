@@ -26,7 +26,6 @@ from ..ApplicationModel import BaseSchema
         
         
         
-        
     
     
         
@@ -135,7 +134,6 @@ from ..ApplicationModel import BaseSchema
         
     
     
-        
         
         
         
@@ -186,8 +184,6 @@ class CartValidator:
         area_code = fields.Str(required=False)
         
         buy_now = fields.Boolean(required=False)
-        
-        id = fields.Str(required=False)
          
         
     
@@ -437,8 +433,6 @@ class CartValidator:
         page_size = fields.Int(required=False)
         
         promotion_group = fields.Str(required=False)
-        
-        store_id = fields.Int(required=False)
          
         
     

@@ -995,4 +995,47 @@ class Payment:
 
         return response
     
+    async def paymentStatusBulk(self, body=""):
+        """Use this API to get Payment status and information for a list of order_ids
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = PaymentValidator.paymentStatusBulk()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import PaymentStatusBulkHandlerRequest
+        schema = PaymentStatusBulkHandlerRequest()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/payment-status-bulk/", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/payment-status-bulk/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        from .models import PaymentStatusBulkHandlerResponse
+        schema = PaymentStatusBulkHandlerResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for paymentStatusBulk")
+            print(e)
+
+        
+
+        return response
+    
 
