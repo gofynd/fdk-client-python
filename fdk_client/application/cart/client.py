@@ -601,8 +601,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import RewardPointRequestSchema
-        schema = RewardPointRequestSchema()
+        from .models import RewardPointRequest
+        schema = RewardPointRequest()
         schema.dump(schema.load(body))
         
 
@@ -1067,8 +1067,8 @@ class Cart:
 
         
 
-        from .models import PaymentCouponValidateSchema
-        schema = PaymentCouponValidateSchema()
+        from .models import PaymentCouponValidate
+        schema = PaymentCouponValidate()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
@@ -1174,8 +1174,8 @@ class Cart:
 
         
 
-        from .models import CartCheckoutResponseSchema
-        schema = CartCheckoutResponseSchema()
+        from .models import CartCheckoutResponse
+        schema = CartCheckoutResponse()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
@@ -1514,8 +1514,8 @@ class Cart:
 
         
 
-        from .models import CartCheckoutResponseSchema
-        schema = CartCheckoutResponseSchema()
+        from .models import CartCheckoutResponse
+        schema = CartCheckoutResponse()
         try:
             schema.dump(schema.load(response))
         except Exception as e:

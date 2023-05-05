@@ -94,8 +94,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CouponAddSchema
-        schema = CouponAddSchema()
+        from .models import CouponAdd
+        schema = CouponAdd()
         schema.dump(schema.load(body))
         
 
@@ -156,8 +156,8 @@ class Cart:
 
         
 
-        from .models import CouponUpdateSchema
-        schema = CouponUpdateSchema()
+        from .models import CouponUpdate
+        schema = CouponUpdate()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
@@ -183,8 +183,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CouponUpdateSchema
-        schema = CouponUpdateSchema()
+        from .models import CouponUpdate
+        schema = CouponUpdate()
         schema.dump(schema.load(body))
         
 
@@ -343,8 +343,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PromotionAddSchema
-        schema = PromotionAddSchema()
+        from .models import PromotionAdd
+        schema = PromotionAdd()
         schema.dump(schema.load(body))
         
 
@@ -363,8 +363,8 @@ class Cart:
 
         
 
-        from .models import PromotionAddSchema
-        schema = PromotionAddSchema()
+        from .models import PromotionAdd
+        schema = PromotionAdd()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
@@ -405,8 +405,8 @@ class Cart:
 
         
 
-        from .models import PromotionUpdateSchema
-        schema = PromotionUpdateSchema()
+        from .models import PromotionUpdate
+        schema = PromotionUpdate()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
@@ -432,8 +432,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PromotionUpdateSchema
-        schema = PromotionUpdateSchema()
+        from .models import PromotionUpdate
+        schema = PromotionUpdate()
         schema.dump(schema.load(body))
         
 
@@ -452,8 +452,8 @@ class Cart:
 
         
 
-        from .models import PromotionUpdateSchema
-        schema = PromotionUpdateSchema()
+        from .models import PromotionUpdate
+        schema = PromotionUpdate()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
@@ -646,8 +646,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import OpenApiPlatformCheckoutReqSchema
-        schema = OpenApiPlatformCheckoutReqSchema()
+        from .models import OpenApiPlatformCheckoutReq
+        schema = OpenApiPlatformCheckoutReq()
         schema.dump(schema.load(body))
         
 
@@ -732,8 +732,8 @@ class Cart:
 
         
 
-        from .models import AbandonedCartResponseSchema
-        schema = AbandonedCartResponseSchema()
+        from .models import AbandonedCartResponse
+        schema = AbandonedCartResponse()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
@@ -1019,8 +1019,8 @@ class Cart:
 
         
 
-        from .models import MultiCartResponseSchema
-        schema = MultiCartResponseSchema()
+        from .models import MultiCartResponse
+        schema = MultiCartResponse()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
@@ -1891,8 +1891,8 @@ class Cart:
 
         
 
-        from .models import CartShipmentsResponse
-        schema = CartShipmentsResponse()
+        from .models import PlatformCartShipmentsResponse
+        schema = PlatformCartShipmentsResponse()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
@@ -1958,8 +1958,8 @@ class Cart:
 
         
 
-        from .models import CartShipmentsResponse
-        schema = CartShipmentsResponse()
+        from .models import PlatformCartShipmentsResponse
+        schema = PlatformCartShipmentsResponse()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
@@ -2056,8 +2056,8 @@ class Cart:
 
         
 
-        from .models import CartCheckoutResponseSchema
-        schema = CartCheckoutResponseSchema()
+        from .models import CartCheckoutResponse
+        schema = CartCheckoutResponse()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
@@ -2261,8 +2261,8 @@ class Cart:
 
         
 
-        from .models import PaymentCouponValidateSchema
-        schema = PaymentCouponValidateSchema()
+        from .models import PaymentCouponValidate
+        schema = PaymentCouponValidate()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
@@ -2308,8 +2308,8 @@ class Cart:
 
         
 
-        from .models import CartCheckoutResponseSchema
-        schema = CartCheckoutResponseSchema()
+        from .models import CartCheckoutResponse
+        schema = CartCheckoutResponse()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
