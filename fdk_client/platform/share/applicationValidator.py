@@ -32,6 +32,11 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+        
 
 class ShareValidator:
     
@@ -83,6 +88,17 @@ class ShareValidator:
         application_id = fields.Str(required=False)
         
         id = fields.Str(required=False)
+         
+        
+    
+    class getShortLinkClickStats(BaseSchema):
+        
+        
+        surl_id = fields.Str(required=False)
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
          
         
     
