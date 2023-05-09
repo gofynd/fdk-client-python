@@ -400,6 +400,54 @@ class SystemNotifications(BaseSchema):
     pass
 
 
+class VoiceProviderReq(BaseSchema):
+    pass
+
+
+class VoiceProvider(BaseSchema):
+    pass
+
+
+class VoiceProviders(BaseSchema):
+    pass
+
+
+class VoiceTemplateDeleteSuccessRes(BaseSchema):
+    pass
+
+
+class VoiceTemplateDeleteFailureRes(BaseSchema):
+    pass
+
+
+class VoiceTemplateMessage(BaseSchema):
+    pass
+
+
+class VoiceTemplateReq(BaseSchema):
+    pass
+
+
+class VoiceTemplateRes(BaseSchema):
+    pass
+
+
+class VoiceTemplate(BaseSchema):
+    pass
+
+
+class SystemVoiceTemplate(BaseSchema):
+    pass
+
+
+class VoiceTemplates(BaseSchema):
+    pass
+
+
+class SystemVoiceTemplates(BaseSchema):
+    pass
+
+
 class Page(BaseSchema):
     pass
 
@@ -1882,6 +1930,244 @@ class SystemNotifications(BaseSchema):
     items = fields.List(fields.Nested(SystemNotification, required=False), required=False)
     
     last_read_anchor = fields.Int(required=False)
+    
+    page = fields.Nested(Page, required=False)
+    
+
+
+class VoiceProviderReq(BaseSchema):
+    # Communication swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+    sender = fields.Str(required=False)
+    
+    username = fields.Str(required=False)
+    
+    authkey = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    provider = fields.Str(required=False)
+    
+
+
+class VoiceProvider(BaseSchema):
+    # Communication swagger.json
+
+    
+    _id = fields.Str(required=False)
+    
+    application = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    provider = fields.Str(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    updated_at = fields.Str(required=False)
+    
+    __v = fields.Float(required=False)
+    
+    discriminator = fields.Str(required=False)
+    
+    username = fields.Str(required=False)
+    
+    password = fields.Str(required=False)
+    
+    caller_id = fields.Str(required=False)
+    
+    applet_url = fields.Str(required=False)
+    
+    whitelisted_ip = fields.List(fields.Str(required=False), required=False)
+    
+
+
+class VoiceProviders(BaseSchema):
+    # Communication swagger.json
+
+    
+    items = fields.List(fields.Nested(VoiceProvider, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
+    
+
+
+class VoiceTemplateDeleteSuccessRes(BaseSchema):
+    # Communication swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+    message = fields.Str(required=False)
+    
+
+
+class VoiceTemplateDeleteFailureRes(BaseSchema):
+    # Communication swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+    message = fields.Str(required=False)
+    
+
+
+class VoiceTemplateMessage(BaseSchema):
+    # Communication swagger.json
+
+    
+    template_type = fields.Str(required=False)
+    
+    template = fields.Str(required=False)
+    
+
+
+class VoiceTemplateReq(BaseSchema):
+    # Communication swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+    message = fields.Nested(VoiceTemplateMessage, required=False)
+    
+    template_variables = fields.Raw(required=False)
+    
+    attachments = fields.List(fields.Raw(required=False), required=False)
+    
+    priority = fields.Str(required=False)
+    
+
+
+class VoiceTemplateRes(BaseSchema):
+    # Communication swagger.json
+
+    
+    is_system = fields.Boolean(required=False)
+    
+    is_internal = fields.Boolean(required=False)
+    
+    description = fields.Str(required=False)
+    
+    tags = fields.List(fields.Raw(required=False), required=False)
+    
+    priority = fields.Str(required=False)
+    
+    published = fields.Boolean(required=False)
+    
+    _id = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    message = fields.Nested(VoiceTemplateMessage, required=False)
+    
+    template_variables = fields.Raw(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    updated_at = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    __v = fields.Int(required=False)
+    
+
+
+class VoiceTemplate(BaseSchema):
+    # Communication swagger.json
+
+    
+    is_system = fields.Boolean(required=False)
+    
+    is_internal = fields.Boolean(required=False)
+    
+    description = fields.Str(required=False)
+    
+    priority = fields.Str(required=False)
+    
+    tags = fields.List(fields.Raw(required=False), required=False)
+    
+    published = fields.Boolean(required=False)
+    
+    _id = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    message = fields.Nested(VoiceTemplateMessage, required=False)
+    
+    template_variables = fields.Raw(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    updated_at = fields.Str(required=False)
+    
+    __v = fields.Int(required=False)
+    
+
+
+class SystemVoiceTemplate(BaseSchema):
+    # Communication swagger.json
+
+    
+    is_system = fields.Boolean(required=False)
+    
+    is_internal = fields.Boolean(required=False)
+    
+    description = fields.Str(required=False)
+    
+    tags = fields.List(fields.Raw(required=False), required=False)
+    
+    priority = fields.Str(required=False)
+    
+    published = fields.Boolean(required=False)
+    
+    _id = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    message = fields.Nested(VoiceTemplateMessage, required=False)
+    
+    template_variables = fields.Raw(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    updated_at = fields.Str(required=False)
+    
+    __v = fields.Int(required=False)
+    
+
+
+class VoiceTemplates(BaseSchema):
+    # Communication swagger.json
+
+    
+    items = fields.List(fields.Nested(VoiceTemplate, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
+    
+
+
+class SystemVoiceTemplates(BaseSchema):
+    # Communication swagger.json
+
+    
+    items = fields.List(fields.Nested(SystemVoiceTemplate, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
     
