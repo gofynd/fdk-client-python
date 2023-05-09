@@ -19,6 +19,10 @@ class PathMappingSchema(BaseSchema):
     pass
 
 
+class PathSourceSchema(BaseSchema):
+    pass
+
+
 class SeoComponent(BaseSchema):
     pass
 
@@ -462,7 +466,17 @@ class PathMappingSchema(BaseSchema):
     
     created_at = fields.Str(required=False)
     
-    __source = fields.Nested(TagSourceSchema, required=False)
+    __source = fields.Nested(PathSourceSchema, required=False)
+    
+
+
+class PathSourceSchema(BaseSchema):
+    # Content swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    id = fields.Str(required=False)
     
 
 
@@ -485,6 +499,8 @@ class SeoSchema(BaseSchema):
     robots_txt = fields.Str(required=False)
     
     sitemap_enabled = fields.Boolean(required=False)
+    
+    cannonical_enabled = fields.Boolean(required=False)
     
     custom_meta_tags = fields.List(fields.Dict(required=False), required=False)
     

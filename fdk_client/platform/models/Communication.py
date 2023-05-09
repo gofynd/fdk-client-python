@@ -59,6 +59,14 @@ class Campaigns(BaseSchema):
     pass
 
 
+class BadRequestSchema(BaseSchema):
+    pass
+
+
+class NotFound(BaseSchema):
+    pass
+
+
 class BigqueryHeadersReq(BaseSchema):
     pass
 
@@ -566,6 +574,24 @@ class Campaigns(BaseSchema):
     
 
 
+class BadRequestSchema(BaseSchema):
+    # Communication swagger.json
+
+    
+    status = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
+    
+
+
+class NotFound(BaseSchema):
+    # Communication swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+
+
 class BigqueryHeadersReq(BaseSchema):
     # Communication swagger.json
 
@@ -1052,7 +1078,7 @@ class PayloadSmsTemplateStructure(BaseSchema):
     
     key = fields.Str(required=False)
     
-    value = fields.Str(required=False)
+    value = fields.Raw(required=False)
     
 
 

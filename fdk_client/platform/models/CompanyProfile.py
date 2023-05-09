@@ -7,30 +7,6 @@ from ..models.BaseSchema import BaseSchema
 
 
 
-class BusinessCountryInfo(BaseSchema):
-    pass
-
-
-class UserSerializer(BaseSchema):
-    pass
-
-
-class GetAddressSerializer(BaseSchema):
-    pass
-
-
-class Website(BaseSchema):
-    pass
-
-
-class BusinessDetails(BaseSchema):
-    pass
-
-
-class CompanyTaxesSerializer(BaseSchema):
-    pass
-
-
 class SellerPhoneNumber(BaseSchema):
     pass
 
@@ -39,7 +15,31 @@ class ContactDetails(BaseSchema):
     pass
 
 
+class GetAddressSerializer(BaseSchema):
+    pass
+
+
+class CompanyTaxesSerializer(BaseSchema):
+    pass
+
+
+class UserSerializer(BaseSchema):
+    pass
+
+
+class BusinessCountryInfo(BaseSchema):
+    pass
+
+
 class Document(BaseSchema):
+    pass
+
+
+class Website(BaseSchema):
+    pass
+
+
+class BusinessDetails(BaseSchema):
     pass
 
 
@@ -115,11 +115,7 @@ class CompanyBrandPostRequestSerializer(BaseSchema):
     pass
 
 
-class InvoiceCredSerializer(BaseSchema):
-    pass
-
-
-class InvoiceDetailsSerializer(BaseSchema):
+class LocationManagerSerializer(BaseSchema):
     pass
 
 
@@ -131,11 +127,15 @@ class LocationDayWiseSerializer(BaseSchema):
     pass
 
 
-class GetCompanySerializer(BaseSchema):
+class InvoiceCredSerializer(BaseSchema):
     pass
 
 
-class LocationManagerSerializer(BaseSchema):
+class InvoiceDetailsSerializer(BaseSchema):
+    pass
+
+
+class GetCompanySerializer(BaseSchema):
     pass
 
 
@@ -188,13 +188,63 @@ class AssignStoreResponseSerializer(BaseSchema):
 
 
 
-class BusinessCountryInfo(BaseSchema):
+class SellerPhoneNumber(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    country = fields.Str(required=False)
+    country_code = fields.Int(required=False)
+    
+    number = fields.Str(required=False)
+    
+
+
+class ContactDetails(BaseSchema):
+    # CompanyProfile swagger.json
+
+    
+    phone = fields.List(fields.Nested(SellerPhoneNumber, required=False), required=False)
+    
+    emails = fields.List(fields.Str(required=False), required=False)
+    
+
+
+class GetAddressSerializer(BaseSchema):
+    # CompanyProfile swagger.json
+
     
     country_code = fields.Str(required=False)
+    
+    address2 = fields.Str(required=False)
+    
+    pincode = fields.Int(required=False)
+    
+    city = fields.Str(required=False)
+    
+    longitude = fields.Float(required=False)
+    
+    landmark = fields.Str(required=False)
+    
+    address1 = fields.Str(required=False)
+    
+    country = fields.Str(required=False)
+    
+    state = fields.Str(required=False)
+    
+    address_type = fields.Str(required=False)
+    
+    latitude = fields.Float(required=False)
+    
+
+
+class CompanyTaxesSerializer(BaseSchema):
+    # CompanyProfile swagger.json
+
+    
+    enable = fields.Boolean(required=False)
+    
+    effective_date = fields.Str(required=False)
+    
+    rate = fields.Float(required=False)
     
 
 
@@ -210,31 +260,29 @@ class UserSerializer(BaseSchema):
     
 
 
-class GetAddressSerializer(BaseSchema):
+class BusinessCountryInfo(BaseSchema):
     # CompanyProfile swagger.json
 
-    
-    address_type = fields.Str(required=False)
-    
-    landmark = fields.Str(required=False)
-    
-    pincode = fields.Int(required=False)
-    
-    longitude = fields.Float(required=False)
-    
-    city = fields.Str(required=False)
-    
-    address2 = fields.Str(required=False)
-    
-    address1 = fields.Str(required=False)
-    
-    latitude = fields.Float(required=False)
     
     country_code = fields.Str(required=False)
     
     country = fields.Str(required=False)
     
-    state = fields.Str(required=False)
+
+
+class Document(BaseSchema):
+    # CompanyProfile swagger.json
+
+    
+    url = fields.Str(required=False)
+    
+    legal_name = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    verified = fields.Boolean(required=False)
     
 
 
@@ -254,103 +302,55 @@ class BusinessDetails(BaseSchema):
     
 
 
-class CompanyTaxesSerializer(BaseSchema):
-    # CompanyProfile swagger.json
-
-    
-    effective_date = fields.Str(required=False)
-    
-    enable = fields.Boolean(required=False)
-    
-    rate = fields.Float(required=False)
-    
-
-
-class SellerPhoneNumber(BaseSchema):
-    # CompanyProfile swagger.json
-
-    
-    number = fields.Str(required=False)
-    
-    country_code = fields.Int(required=False)
-    
-
-
-class ContactDetails(BaseSchema):
-    # CompanyProfile swagger.json
-
-    
-    phone = fields.List(fields.Nested(SellerPhoneNumber, required=False), required=False)
-    
-    emails = fields.List(fields.Str(required=False), required=False)
-    
-
-
-class Document(BaseSchema):
-    # CompanyProfile swagger.json
-
-    
-    legal_name = fields.Str(required=False)
-    
-    value = fields.Str(required=False)
-    
-    verified = fields.Boolean(required=False)
-    
-    url = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
-    
-
-
 class GetCompanyProfileSerializerResponse(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    business_country_info = fields.Nested(BusinessCountryInfo, required=False)
-    
-    verified_by = fields.Nested(UserSerializer, required=False)
-    
-    stage = fields.Str(required=False)
+    contact_details = fields.Nested(ContactDetails, required=False)
     
     _custom_json = fields.Dict(required=False)
     
     name = fields.Str(required=False)
     
-    uid = fields.Int(required=False)
-    
-    modified_by = fields.Nested(UserSerializer, required=False)
-    
-    notification_emails = fields.List(fields.Str(required=False), required=False)
-    
     addresses = fields.List(fields.Nested(GetAddressSerializer, required=False), required=False)
-    
-    business_type = fields.Str(required=False)
-    
-    created_by = fields.Nested(UserSerializer, required=False)
-    
-    warnings = fields.Dict(required=False)
-    
-    business_details = fields.Nested(BusinessDetails, required=False)
-    
-    verified_on = fields.Str(required=False)
-    
-    taxes = fields.List(fields.Nested(CompanyTaxesSerializer, required=False), required=False)
-    
-    company_type = fields.Str(required=False)
     
     franchise_enabled = fields.Boolean(required=False)
     
-    mode = fields.Str(required=False)
+    business_type = fields.Str(required=False)
     
     business_info = fields.Str(required=False)
     
-    modified_on = fields.Str(required=False)
+    warnings = fields.Dict(required=False)
     
-    contact_details = fields.Nested(ContactDetails, required=False)
+    notification_emails = fields.List(fields.Str(required=False), required=False)
+    
+    taxes = fields.List(fields.Nested(CompanyTaxesSerializer, required=False), required=False)
+    
+    modified_by = fields.Nested(UserSerializer, required=False)
+    
+    business_country_info = fields.Nested(BusinessCountryInfo, required=False)
+    
+    created_by = fields.Nested(UserSerializer, required=False)
+    
+    stage = fields.Str(required=False)
     
     created_on = fields.Str(required=False)
     
     documents = fields.List(fields.Nested(Document, required=False), required=False)
+    
+    uid = fields.Int(required=False)
+    
+    verified_on = fields.Str(required=False)
+    
+    verified_by = fields.Nested(UserSerializer, required=False)
+    
+    modified_on = fields.Str(required=False)
+    
+    mode = fields.Str(required=False)
+    
+    business_details = fields.Nested(BusinessDetails, required=False)
+    
+    company_type = fields.Str(required=False)
     
 
 
@@ -358,11 +358,11 @@ class ErrorResponse(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    status = fields.Int(required=False)
-    
     meta = fields.Dict(required=False)
     
     code = fields.Str(required=False)
+    
+    status = fields.Int(required=False)
     
     message = fields.Str(required=False)
     
@@ -372,9 +372,9 @@ class CompanyTaxesSerializer1(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    effective_date = fields.Str(required=False)
-    
     enable = fields.Boolean(required=False)
+    
+    effective_date = fields.Str(required=False)
     
     rate = fields.Float(required=False)
     
@@ -384,27 +384,27 @@ class CreateUpdateAddressSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    landmark = fields.Str(required=False)
+    country_code = fields.Str(required=False)
     
-    address_type = fields.Str(required=False)
-    
-    pincode = fields.Int(required=False)
+    address2 = fields.Str(required=False)
     
     longitude = fields.Float(required=False)
     
     city = fields.Str(required=False)
     
+    landmark = fields.Str(required=False)
+    
+    address_type = fields.Str(required=False)
+    
     address1 = fields.Str(required=False)
-    
-    address2 = fields.Str(required=False)
-    
-    latitude = fields.Float(required=False)
-    
-    country_code = fields.Str(required=False)
     
     country = fields.Str(required=False)
     
     state = fields.Str(required=False)
+    
+    pincode = fields.Int(required=False)
+    
+    latitude = fields.Float(required=False)
     
 
 
@@ -412,33 +412,33 @@ class UpdateCompany(BaseSchema):
     # CompanyProfile swagger.json
 
     
+    contact_details = fields.Nested(ContactDetails, required=False)
+    
+    reject_reason = fields.Str(required=False)
+    
+    warnings = fields.Dict(required=False)
+    
+    notification_emails = fields.List(fields.Str(required=False), required=False)
+    
     business_details = fields.Nested(BusinessDetails, required=False)
     
     taxes = fields.List(fields.Nested(CompanyTaxesSerializer1, required=False), required=False)
     
-    contact_details = fields.Nested(ContactDetails, required=False)
+    business_type = fields.Str(required=False)
     
     _custom_json = fields.Dict(required=False)
     
-    business_info = fields.Str(required=False)
-    
-    company_type = fields.Str(required=False)
-    
     name = fields.Str(required=False)
     
-    notification_emails = fields.List(fields.Str(required=False), required=False)
+    business_info = fields.Str(required=False)
+    
+    addresses = fields.List(fields.Nested(CreateUpdateAddressSerializer, required=False), required=False)
     
     franchise_enabled = fields.Boolean(required=False)
     
     documents = fields.List(fields.Nested(Document, required=False), required=False)
     
-    addresses = fields.List(fields.Nested(CreateUpdateAddressSerializer, required=False), required=False)
-    
-    business_type = fields.Str(required=False)
-    
-    warnings = fields.Dict(required=False)
-    
-    reject_reason = fields.Str(required=False)
+    company_type = fields.Str(required=False)
     
 
 
@@ -446,9 +446,9 @@ class ProfileSuccessResponse(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    uid = fields.Int(required=False)
-    
     success = fields.Boolean(required=False)
+    
+    uid = fields.Int(required=False)
     
 
 
@@ -468,17 +468,17 @@ class MetricsSerializer(BaseSchema):
     
     store = fields.Nested(DocumentsObj, required=False)
     
-    product = fields.Nested(DocumentsObj, required=False)
-    
-    stage = fields.Str(required=False)
+    company_documents = fields.Nested(DocumentsObj, required=False)
     
     store_documents = fields.Nested(DocumentsObj, required=False)
     
-    company_documents = fields.Nested(DocumentsObj, required=False)
+    brand = fields.Nested(DocumentsObj, required=False)
     
     uid = fields.Int(required=False)
     
-    brand = fields.Nested(DocumentsObj, required=False)
+    stage = fields.Str(required=False)
+    
+    product = fields.Nested(DocumentsObj, required=False)
     
 
 
@@ -486,9 +486,9 @@ class BrandBannerSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    landscape = fields.Str(required=False)
-    
     portrait = fields.Str(required=False)
+    
+    landscape = fields.Str(required=False)
     
 
 
@@ -496,41 +496,41 @@ class GetBrandResponseSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    verified_by = fields.Nested(UserSerializer, required=False)
-    
-    stage = fields.Str(required=False)
+    banner = fields.Nested(BrandBannerSerializer, required=False)
     
     _custom_json = fields.Dict(required=False)
     
     name = fields.Str(required=False)
     
-    uid = fields.Int(required=False)
+    _locale_language = fields.Dict(required=False)
     
     description = fields.Str(required=False)
     
-    _locale_language = fields.Dict(required=False)
-    
     logo = fields.Str(required=False)
     
-    modified_by = fields.Nested(UserSerializer, required=False)
-    
-    banner = fields.Nested(BrandBannerSerializer, required=False)
-    
-    created_by = fields.Nested(UserSerializer, required=False)
+    slug_key = fields.Str(required=False)
     
     warnings = fields.Dict(required=False)
     
+    modified_by = fields.Nested(UserSerializer, required=False)
+    
+    created_by = fields.Nested(UserSerializer, required=False)
+    
+    stage = fields.Str(required=False)
+    
+    created_on = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
+    
     verified_on = fields.Str(required=False)
     
-    mode = fields.Str(required=False)
-    
-    slug_key = fields.Str(required=False)
+    verified_by = fields.Nested(UserSerializer, required=False)
     
     modified_on = fields.Str(required=False)
     
     reject_reason = fields.Str(required=False)
     
-    created_on = fields.Str(required=False)
+    mode = fields.Str(required=False)
     
     synonyms = fields.List(fields.Str(required=False), required=False)
     
@@ -540,25 +540,25 @@ class CreateUpdateBrandRequestSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    company_id = fields.Int(required=False)
+    description = fields.Str(required=False)
     
-    brand_tier = fields.Str(required=False)
+    logo = fields.Str(required=False)
+    
+    banner = fields.Nested(BrandBannerSerializer, required=False)
     
     _custom_json = fields.Dict(required=False)
     
     name = fields.Str(required=False)
     
-    uid = fields.Int(required=False)
+    _locale_language = fields.Dict(required=False)
+    
+    company_id = fields.Int(required=False)
+    
+    brand_tier = fields.Str(required=False)
     
     synonyms = fields.List(fields.Str(required=False), required=False)
     
-    description = fields.Str(required=False)
-    
-    banner = fields.Nested(BrandBannerSerializer, required=False)
-    
-    _locale_language = fields.Dict(required=False)
-    
-    logo = fields.Str(required=False)
+    uid = fields.Int(required=False)
     
 
 
@@ -568,17 +568,17 @@ class Page(BaseSchema):
     
     has_next = fields.Boolean(required=False)
     
-    current = fields.Int(required=False)
-    
     item_total = fields.Int(required=False)
     
     size = fields.Int(required=False)
     
+    type = fields.Str(required=False)
+    
+    current = fields.Int(required=False)
+    
     next_id = fields.Str(required=False)
     
     has_previous = fields.Boolean(required=False)
-    
-    type = fields.Str(required=False)
     
 
 
@@ -586,9 +586,9 @@ class CompanySocialAccounts(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    url = fields.Str(required=False)
-    
     name = fields.Str(required=False)
+    
+    url = fields.Str(required=False)
     
 
 
@@ -606,41 +606,41 @@ class CompanySerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    market_channels = fields.List(fields.Str(required=False), required=False)
-    
-    business_country_info = fields.Nested(BusinessCountryInfo, required=False)
+    verified_on = fields.Str(required=False)
     
     verified_by = fields.Nested(UserSerializer, required=False)
     
-    verified_on = fields.Str(required=False)
-    
-    business_type = fields.Str(required=False)
-    
-    modified_by = fields.Nested(UserSerializer, required=False)
-    
-    stage = fields.Str(required=False)
-    
-    _custom_json = fields.Dict(required=False)
-    
-    notification_emails = fields.List(fields.Str(required=False), required=False)
-    
-    company_type = fields.Str(required=False)
-    
-    created_on = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    uid = fields.Int(required=False)
-    
-    addresses = fields.List(fields.Nested(GetAddressSerializer, required=False), required=False)
-    
     details = fields.Nested(CompanyDetails, required=False)
-    
-    created_by = fields.Nested(UserSerializer, required=False)
     
     modified_on = fields.Str(required=False)
     
     reject_reason = fields.Str(required=False)
+    
+    company_type = fields.Str(required=False)
+    
+    notification_emails = fields.List(fields.Str(required=False), required=False)
+    
+    modified_by = fields.Nested(UserSerializer, required=False)
+    
+    business_type = fields.Str(required=False)
+    
+    business_country_info = fields.Nested(BusinessCountryInfo, required=False)
+    
+    created_by = fields.Nested(UserSerializer, required=False)
+    
+    name = fields.Str(required=False)
+    
+    market_channels = fields.List(fields.Str(required=False), required=False)
+    
+    _custom_json = fields.Dict(required=False)
+    
+    stage = fields.Str(required=False)
+    
+    created_on = fields.Str(required=False)
+    
+    addresses = fields.List(fields.Nested(GetAddressSerializer, required=False), required=False)
+    
+    uid = fields.Int(required=False)
     
 
 
@@ -648,29 +648,29 @@ class CompanyBrandSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    verified_by = fields.Nested(UserSerializer, required=False)
-    
     verified_on = fields.Str(required=False)
     
-    company = fields.Nested(CompanySerializer, required=False)
-    
-    stage = fields.Str(required=False)
-    
-    modified_by = fields.Nested(UserSerializer, required=False)
-    
-    created_on = fields.Str(required=False)
-    
-    uid = fields.Int(required=False)
-    
-    created_by = fields.Nested(UserSerializer, required=False)
-    
-    brand = fields.Nested(GetBrandResponseSerializer, required=False)
-    
-    warnings = fields.Dict(required=False)
+    verified_by = fields.Nested(UserSerializer, required=False)
     
     modified_on = fields.Str(required=False)
     
     reject_reason = fields.Str(required=False)
+    
+    warnings = fields.Dict(required=False)
+    
+    modified_by = fields.Nested(UserSerializer, required=False)
+    
+    brand = fields.Nested(GetBrandResponseSerializer, required=False)
+    
+    company = fields.Nested(CompanySerializer, required=False)
+    
+    created_by = fields.Nested(UserSerializer, required=False)
+    
+    stage = fields.Str(required=False)
+    
+    created_on = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
     
 
 
@@ -690,31 +690,21 @@ class CompanyBrandPostRequestSerializer(BaseSchema):
     
     brands = fields.List(fields.Int(required=False), required=False)
     
-    uid = fields.Int(required=False)
-    
     company = fields.Int(required=False)
     
+    uid = fields.Int(required=False)
+    
 
 
-class InvoiceCredSerializer(BaseSchema):
+class LocationManagerSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    password = fields.Str(required=False)
+    name = fields.Str(required=False)
     
-    enabled = fields.Boolean(required=False)
+    email = fields.Str(required=False)
     
-    username = fields.Str(required=False)
-    
-
-
-class InvoiceDetailsSerializer(BaseSchema):
-    # CompanyProfile swagger.json
-
-    
-    e_waybill = fields.Nested(InvoiceCredSerializer, required=False)
-    
-    e_invoice = fields.Nested(InvoiceCredSerializer, required=False)
+    mobile_no = fields.Nested(SellerPhoneNumber, required=False)
     
 
 
@@ -734,11 +724,33 @@ class LocationDayWiseSerializer(BaseSchema):
     
     open = fields.Boolean(required=False)
     
-    closing = fields.Nested(LocationTimingSerializer, required=False)
+    weekday = fields.Str(required=False)
     
     opening = fields.Nested(LocationTimingSerializer, required=False)
     
-    weekday = fields.Str(required=False)
+    closing = fields.Nested(LocationTimingSerializer, required=False)
+    
+
+
+class InvoiceCredSerializer(BaseSchema):
+    # CompanyProfile swagger.json
+
+    
+    password = fields.Str(required=False)
+    
+    username = fields.Str(required=False)
+    
+    enabled = fields.Boolean(required=False)
+    
+
+
+class InvoiceDetailsSerializer(BaseSchema):
+    # CompanyProfile swagger.json
+
+    
+    e_invoice = fields.Nested(InvoiceCredSerializer, required=False)
+    
+    e_waybill = fields.Nested(InvoiceCredSerializer, required=False)
     
 
 
@@ -746,43 +758,31 @@ class GetCompanySerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    verified_by = fields.Nested(UserSerializer, required=False)
-    
     verified_on = fields.Str(required=False)
     
-    business_type = fields.Str(required=False)
-    
-    modified_by = fields.Nested(UserSerializer, required=False)
-    
-    stage = fields.Str(required=False)
-    
-    company_type = fields.Str(required=False)
-    
-    created_on = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    uid = fields.Int(required=False)
-    
-    addresses = fields.List(fields.Nested(GetAddressSerializer, required=False), required=False)
-    
-    created_by = fields.Nested(UserSerializer, required=False)
+    verified_by = fields.Nested(UserSerializer, required=False)
     
     modified_on = fields.Str(required=False)
     
     reject_reason = fields.Str(required=False)
     
-
-
-class LocationManagerSerializer(BaseSchema):
-    # CompanyProfile swagger.json
-
+    company_type = fields.Str(required=False)
     
-    email = fields.Str(required=False)
+    modified_by = fields.Nested(UserSerializer, required=False)
     
-    mobile_no = fields.Nested(SellerPhoneNumber, required=False)
+    business_type = fields.Str(required=False)
+    
+    created_by = fields.Nested(UserSerializer, required=False)
     
     name = fields.Str(required=False)
+    
+    stage = fields.Str(required=False)
+    
+    created_on = fields.Str(required=False)
+    
+    addresses = fields.List(fields.Nested(GetAddressSerializer, required=False), required=False)
+    
+    uid = fields.Int(required=False)
     
 
 
@@ -822,53 +822,53 @@ class GetLocationSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    verified_by = fields.Nested(UserSerializer, required=False)
-    
-    phone_number = fields.Str(required=False)
-    
-    stage = fields.Str(required=False)
-    
     _custom_json = fields.Dict(required=False)
     
     name = fields.Str(required=False)
     
-    uid = fields.Int(required=False)
-    
-    gst_credentials = fields.Nested(InvoiceDetailsSerializer, required=False)
-    
-    address = fields.Nested(GetAddressSerializer, required=False)
-    
-    modified_by = fields.Nested(UserSerializer, required=False)
-    
-    store_type = fields.Str(required=False)
-    
-    timing = fields.List(fields.Nested(LocationDayWiseSerializer, required=False), required=False)
-    
-    notification_emails = fields.List(fields.Str(required=False), required=False)
-    
-    code = fields.Str(required=False)
-    
-    created_by = fields.Nested(UserSerializer, required=False)
-    
-    warnings = fields.Dict(required=False)
-    
-    verified_on = fields.Str(required=False)
-    
-    company = fields.Nested(GetCompanySerializer, required=False)
-    
     manager = fields.Nested(LocationManagerSerializer, required=False)
-    
-    modified_on = fields.Str(required=False)
     
     contact_numbers = fields.List(fields.Nested(SellerPhoneNumber, required=False), required=False)
     
-    holiday = fields.List(fields.Nested(HolidaySchemaSerializer, required=False), required=False)
+    code = fields.Str(required=False)
+    
+    store_type = fields.Str(required=False)
+    
+    address = fields.Nested(GetAddressSerializer, required=False)
+    
+    warnings = fields.Dict(required=False)
+    
+    notification_emails = fields.List(fields.Str(required=False), required=False)
+    
+    modified_by = fields.Nested(UserSerializer, required=False)
+    
+    created_by = fields.Nested(UserSerializer, required=False)
     
     display_name = fields.Str(required=False)
+    
+    stage = fields.Str(required=False)
     
     created_on = fields.Str(required=False)
     
     documents = fields.List(fields.Nested(Document, required=False), required=False)
+    
+    uid = fields.Int(required=False)
+    
+    verified_on = fields.Str(required=False)
+    
+    verified_by = fields.Nested(UserSerializer, required=False)
+    
+    modified_on = fields.Str(required=False)
+    
+    timing = fields.List(fields.Nested(LocationDayWiseSerializer, required=False), required=False)
+    
+    gst_credentials = fields.Nested(InvoiceDetailsSerializer, required=False)
+    
+    company = fields.Nested(GetCompanySerializer, required=False)
+    
+    holiday = fields.List(fields.Nested(HolidaySchemaSerializer, required=False), required=False)
+    
+    phone_number = fields.Str(required=False)
     
     product_return_config = fields.Nested(ProductReturnConfigSerializer, required=False)
     
@@ -888,41 +888,41 @@ class LocationSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    contact_numbers = fields.List(fields.Nested(SellerPhoneNumber, required=False), required=False)
-    
-    holiday = fields.List(fields.Nested(HolidaySchemaSerializer, required=False), required=False)
-    
-    company = fields.Int(required=False)
-    
     address = fields.Nested(GetAddressSerializer, required=False)
-    
-    manager = fields.Nested(LocationManagerSerializer, required=False)
-    
-    stage = fields.Str(required=False)
-    
-    gst_credentials = fields.Nested(InvoiceDetailsSerializer, required=False)
-    
-    store_type = fields.Str(required=False)
     
     timing = fields.List(fields.Nested(LocationDayWiseSerializer, required=False), required=False)
     
+    gst_credentials = fields.Nested(InvoiceDetailsSerializer, required=False)
+    
+    warnings = fields.Dict(required=False)
+    
     notification_emails = fields.List(fields.Str(required=False), required=False)
     
-    display_name = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
+    company = fields.Int(required=False)
     
     _custom_json = fields.Dict(required=False)
     
-    documents = fields.List(fields.Nested(Document, required=False), required=False)
+    name = fields.Str(required=False)
     
-    uid = fields.Int(required=False)
+    display_name = fields.Str(required=False)
     
     code = fields.Str(required=False)
     
+    manager = fields.Nested(LocationManagerSerializer, required=False)
+    
+    holiday = fields.List(fields.Nested(HolidaySchemaSerializer, required=False), required=False)
+    
+    contact_numbers = fields.List(fields.Nested(SellerPhoneNumber, required=False), required=False)
+    
+    stage = fields.Str(required=False)
+    
     product_return_config = fields.Nested(ProductReturnConfigSerializer, required=False)
     
-    warnings = fields.Dict(required=False)
+    documents = fields.List(fields.Nested(Document, required=False), required=False)
+    
+    store_type = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
     
 
 
@@ -940,9 +940,9 @@ class _ArticleQuery(BaseSchema):
     
     ignored_stores = fields.List(fields.Int(required=False), required=False)
     
-    size = fields.Str(required=False)
-    
     item_id = fields.Int(required=False)
+    
+    size = fields.Str(required=False)
     
 
 
@@ -960,15 +960,15 @@ class _AssignStoreArticle(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    meta = fields.Dict(required=False)
-    
-    group_id = fields.Str(required=False)
-    
     quantity = fields.Int(required=False)
     
     query = fields.Nested(_ArticleQuery, required=False)
     
+    meta = fields.Dict(required=False)
+    
     article_assignment = fields.Nested(_ArticleAssignment, required=False)
+    
+    group_id = fields.Str(required=False)
     
 
 
@@ -976,19 +976,19 @@ class AssignStoreRequestValidator(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    pincode = fields.Str(required=False)
-    
-    channel_identifier = fields.Str(required=False)
-    
-    store_ids = fields.List(fields.Int(required=False), required=False)
+    channel_type = fields.Str(required=False)
     
     articles = fields.List(fields.Nested(_AssignStoreArticle, required=False), required=False)
     
+    pincode = fields.Str(required=False)
+    
     company_id = fields.Int(required=False)
     
-    channel_type = fields.Str(required=False)
+    channel_identifier = fields.Str(required=False)
     
     app_id = fields.Str(required=False)
+    
+    store_ids = fields.List(fields.Int(required=False), required=False)
     
 
 
@@ -996,35 +996,35 @@ class AssignStoreResponseSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    meta = fields.Dict(required=False)
+    preice_effective = fields.Float(required=False)
     
     price_marked = fields.Float(required=False)
+    
+    store_id = fields.Int(required=False)
+    
+    size = fields.Str(required=False)
+    
+    quantity = fields.Int(required=False)
+    
+    store_pincode = fields.Str(required=False)
+    
+    item_id = fields.Int(required=False)
+    
+    meta = fields.Dict(required=False)
+    
+    s_city = fields.Str(required=False)
+    
+    article_assignment = fields.Nested(_ArticleAssignment, required=False)
+    
+    index = fields.Int(required=False)
     
     _id = fields.Str(required=False)
     
     status = fields.Boolean(required=False)
     
-    item_id = fields.Int(required=False)
-    
-    preice_effective = fields.Float(required=False)
-    
-    s_city = fields.Str(required=False)
-    
-    store_id = fields.Int(required=False)
-    
-    uid = fields.Str(required=False)
-    
-    quantity = fields.Int(required=False)
-    
-    size = fields.Str(required=False)
-    
-    store_pincode = fields.Str(required=False)
-    
     company_id = fields.Int(required=False)
     
-    index = fields.Int(required=False)
-    
-    article_assignment = fields.Nested(_ArticleAssignment, required=False)
+    uid = fields.Str(required=False)
     
 
 

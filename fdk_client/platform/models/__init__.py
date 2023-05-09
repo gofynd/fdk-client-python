@@ -17,6 +17,8 @@ from .Communication import *
 
 from .Payment import *
 
+from .Order import *
+
 from .Catalog import *
 
 from .CompanyProfile import *
@@ -62,6 +64,8 @@ from .BillingValidator import BillingValidator
 from .CommunicationValidator import CommunicationValidator
 
 from .PaymentValidator import PaymentValidator
+
+from .OrderValidator import OrderValidator
 
 from .CatalogValidator import CatalogValidator
 
