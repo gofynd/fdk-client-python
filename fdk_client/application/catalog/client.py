@@ -43,8 +43,8 @@ class Catalog:
             "getInStockLocations": "/service/application/catalog/v1.0/in-stock/locations/",
             "getLocationDetailsById": "/service/application/catalog/v1.0/locations/{location_id}/",
             "getProductBundlesBySlug": "/service/application/catalog/v1.0/product-grouping/",
-            "getProductPriceBySlug": "/service/application/catalog/v3.0/products/{slug}/sizes/{size}/price/",
-            "getProductSellersBySlug": "/service/application/catalog/v3.0/products/{slug}/sizes/{size}/sellers/"
+            "getProductPriceBySlug": "/service/application/catalog/v2.0/products/{slug}/sizes/{size}/price/",
+            "getProductSellersBySlug": "/service/application/catalog/v2.0/products/{slug}/sizes/{size}/sellers/"
             
         }
         self._urls = {
@@ -861,7 +861,7 @@ class Catalog:
 
         return response
     
-    async def getCollectionItemsBySlug(self, slug=None, f=None, filters=None, sort_on=None, page_id=None, page_size=None, body=""):
+    async def getCollectionItemsBySlug(self, slug=None, f=None, filters=None, sort_on=None, page_id=None, page_size=None, page_no=None, page_type=None, body=""):
         """Get items in a collection specified by its `slug`.
         :param slug : A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint /service/application/catalog/v1.0/collections/. : type string
         :param f : The search filter parameters. Filter parameters will be passed in f parameter as shown in the example below. Double Pipe (||) denotes the OR condition, whereas Triple-colon (:::) indicates a new filter paramater applied as an AND condition. : type string
@@ -869,6 +869,8 @@ class Catalog:
         :param sort_on : The order in which the list of products should be sorted, e.g. popularity, price, latest and discount, in either ascending or descending order. See the supported values below. : type string
         :param page_id : Page ID to retrieve next set of results. : type string
         :param page_size : The number of items to retrieve in each page. : type integer
+        :param page_no : Page Number to retrieve next set of results. : type integer
+        :param page_type : Page Type to retrieve set of results can be cursor or number. : type string
         """
         payload = {}
         
@@ -890,13 +892,19 @@ class Catalog:
         if page_size:
             payload["page_size"] = page_size
         
+        if page_no:
+            payload["page_no"] = page_no
+        
+        if page_type:
+            payload["page_type"] = page_type
+        
         # Parameter validation
         schema = CatalogValidator.getCollectionItemsBySlug()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getCollectionItemsBySlug"], proccessed_params="""{"required":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint /service/application/catalog/v1.0/collections/.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"f","description":"The search filter parameters. Filter parameters will be passed in f parameter as shown in the example below. Double Pipe (||) denotes the OR condition, whereas Triple-colon (:::) indicates a new filter paramater applied as an AND condition.","schema":{"type":"string","example":"brand:voi-jeans||reliance:::l3_categories:t-shirts||shirts"},"required":false},{"in":"query","name":"filters","description":"This is a boolean value, True for fetching all filter parameters and False for disabling the filter parameters.","schema":{"type":"boolean","default":true},"required":false},{"in":"query","name":"sort_on","description":"The order in which the list of products should be sorted, e.g. popularity, price, latest and discount, in either ascending or descending order. See the supported values below.","schema":{"type":"string","enum":["latest","popular","price_asc","price_dsc","discount_asc","discount_dsc"]},"required":false},{"in":"query","name":"page_id","description":"Page ID to retrieve next set of results.","schema":{"type":"string","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false}],"query":[{"in":"query","name":"f","description":"The search filter parameters. Filter parameters will be passed in f parameter as shown in the example below. Double Pipe (||) denotes the OR condition, whereas Triple-colon (:::) indicates a new filter paramater applied as an AND condition.","schema":{"type":"string","example":"brand:voi-jeans||reliance:::l3_categories:t-shirts||shirts"},"required":false},{"in":"query","name":"filters","description":"This is a boolean value, True for fetching all filter parameters and False for disabling the filter parameters.","schema":{"type":"boolean","default":true},"required":false},{"in":"query","name":"sort_on","description":"The order in which the list of products should be sorted, e.g. popularity, price, latest and discount, in either ascending or descending order. See the supported values below.","schema":{"type":"string","enum":["latest","popular","price_asc","price_dsc","discount_asc","discount_dsc"]},"required":false},{"in":"query","name":"page_id","description":"Page ID to retrieve next set of results.","schema":{"type":"string","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false}],"headers":[],"path":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint /service/application/catalog/v1.0/collections/.","schema":{"type":"string"},"required":true}]}""", slug=slug, f=f, filters=filters, sort_on=sort_on, page_id=page_id, page_size=page_size)
-        query_string = await create_query_string(slug=slug, f=f, filters=filters, sort_on=sort_on, page_id=page_id, page_size=page_size)
+        url_with_params = await create_url_with_params(api_url=self._urls["getCollectionItemsBySlug"], proccessed_params="""{"required":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint /service/application/catalog/v1.0/collections/.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"f","description":"The search filter parameters. Filter parameters will be passed in f parameter as shown in the example below. Double Pipe (||) denotes the OR condition, whereas Triple-colon (:::) indicates a new filter paramater applied as an AND condition.","schema":{"type":"string","example":"brand:voi-jeans||reliance:::l3_categories:t-shirts||shirts"},"required":false},{"in":"query","name":"filters","description":"This is a boolean value, True for fetching all filter parameters and False for disabling the filter parameters.","schema":{"type":"boolean","default":true},"required":false},{"in":"query","name":"sort_on","description":"The order in which the list of products should be sorted, e.g. popularity, price, latest and discount, in either ascending or descending order. See the supported values below.","schema":{"type":"string","enum":["latest","popular","price_asc","price_dsc","discount_asc","discount_dsc"]},"required":false},{"in":"query","name":"page_id","description":"Page ID to retrieve next set of results.","schema":{"type":"string","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false},{"in":"query","name":"page_no","description":"Page Number to retrieve next set of results.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_type","description":"Page Type to retrieve set of results can be cursor or number.","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"f","description":"The search filter parameters. Filter parameters will be passed in f parameter as shown in the example below. Double Pipe (||) denotes the OR condition, whereas Triple-colon (:::) indicates a new filter paramater applied as an AND condition.","schema":{"type":"string","example":"brand:voi-jeans||reliance:::l3_categories:t-shirts||shirts"},"required":false},{"in":"query","name":"filters","description":"This is a boolean value, True for fetching all filter parameters and False for disabling the filter parameters.","schema":{"type":"boolean","default":true},"required":false},{"in":"query","name":"sort_on","description":"The order in which the list of products should be sorted, e.g. popularity, price, latest and discount, in either ascending or descending order. See the supported values below.","schema":{"type":"string","enum":["latest","popular","price_asc","price_dsc","discount_asc","discount_dsc"]},"required":false},{"in":"query","name":"page_id","description":"Page ID to retrieve next set of results.","schema":{"type":"string","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false},{"in":"query","name":"page_no","description":"Page Number to retrieve next set of results.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_type","description":"Page Type to retrieve set of results can be cursor or number.","schema":{"type":"string"},"required":false}],"headers":[],"path":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint /service/application/catalog/v1.0/collections/.","schema":{"type":"string"},"required":true}]}""", slug=slug, f=f, filters=filters, sort_on=sort_on, page_id=page_id, page_size=page_size, page_no=page_no, page_type=page_type)
+        query_string = await create_query_string(slug=slug, f=f, filters=filters, sort_on=sort_on, page_id=page_id, page_size=page_size, page_no=page_no, page_type=page_type)
         headers = {
             "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
         }
@@ -908,7 +916,7 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCollectionItemsBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/collections/{slug}/items/", slug=slug, f=f, filters=filters, sort_on=sort_on, page_id=page_id, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCollectionItemsBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/collections/{slug}/items/", slug=slug, f=f, filters=filters, sort_on=sort_on, page_id=page_id, page_size=page_size, page_no=page_no, page_type=page_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
 
@@ -1469,12 +1477,12 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductPriceBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v3.0/products/{slug}/sizes/{size}/price/", slug=slug, size=size, store_id=store_id, pincode=pincode, moq=moq), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductPriceBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v2.0/products/{slug}/sizes/{size}/price/", slug=slug, size=size, store_id=store_id, pincode=pincode, moq=moq), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
 
-        from .models import ProductSizePriceResponseV3
-        schema = ProductSizePriceResponseV3()
+        from .models import ProductSizePriceResponseV2
+        schema = ProductSizePriceResponseV2()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
@@ -1532,12 +1540,12 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductSellersBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v3.0/products/{slug}/sizes/{size}/sellers/", slug=slug, size=size, pincode=pincode, strategy=strategy, page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductSellersBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v2.0/products/{slug}/sizes/{size}/sellers/", slug=slug, size=size, pincode=pincode, strategy=strategy, page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
 
-        from .models import ProductSizeSellersResponseV3
-        schema = ProductSizeSellersResponseV3()
+        from .models import ProductSizeSellersResponseV2
+        schema = ProductSizeSellersResponseV2()
         try:
             schema.dump(schema.load(response))
         except Exception as e:

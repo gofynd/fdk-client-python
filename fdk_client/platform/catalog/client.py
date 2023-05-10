@@ -1530,7 +1530,7 @@ class Catalog:
         return response
     
     async def updateCategory(self, uid=None, body=""):
-        """Update a product category using this apu
+        """Update a product category using this api
         :param uid : Category unique id : type string
         """
         payload = {}
