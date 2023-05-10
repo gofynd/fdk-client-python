@@ -86,8 +86,6 @@ from ..ApplicationModel import BaseSchema
         
         
         
-        
-        
     
     
         
@@ -326,10 +324,6 @@ class CatalogValidator:
         page_id = fields.Str(required=False)
         
         page_size = fields.Int(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_type = fields.Str(required=False)
          
         
     
