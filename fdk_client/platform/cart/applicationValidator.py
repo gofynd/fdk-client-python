@@ -87,6 +87,10 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
+        
         
         
         
@@ -100,30 +104,9 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
     
     
         
-        
-        
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
-    
-    
         
         
         
@@ -211,7 +194,7 @@ class CartValidator:
         
         q = fields.Str(required=False)
         
-        is_active = fields.Boolean(required=False)
+        status = fields.Str(required=False)
         
         promo_group = fields.Str(required=False)
         
@@ -265,6 +248,15 @@ class CartValidator:
          
         
     
+    class getPromosCouponConfig(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
     class fetchAndvalidateCartItems(BaseSchema):
         
         
@@ -315,21 +307,6 @@ class CartValidator:
          
         
     
-    class getAbandonedCartDetails(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-        
-        i = fields.Boolean(required=False)
-        
-        b = fields.Boolean(required=False)
-         
-        
-    
     class addItems(BaseSchema):
         
         
@@ -353,37 +330,6 @@ class CartValidator:
         cart_id = fields.Str(required=False)
         
         b = fields.Boolean(required=False)
-         
-        
-    
-    class getCouponOptionValues(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getCouponCodeExists(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        code = fields.Str(required=False)
-         
-        
-    
-    class getPromotionCodeExists(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        code = fields.Str(required=False)
          
         
     

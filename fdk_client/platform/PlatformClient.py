@@ -34,6 +34,8 @@ from .webhook.client import Webhook
 
 from .audittrail.client import AuditTrail
 
+from .serviceability.client import Serviceability
+
 
 class PlatformClient:
     def __init__(self, config):
@@ -68,6 +70,8 @@ class PlatformClient:
         self.webhook = Webhook(config)
         
         self.auditTrail = AuditTrail(config)
+        
+        self.serviceability = Serviceability(config)
         
 
     def application(self, applicationId):

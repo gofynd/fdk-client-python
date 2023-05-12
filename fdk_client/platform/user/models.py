@@ -260,10 +260,6 @@ class AuthSuccessUser(BaseSchema):
     pass
 
 
-class SessionListResponseInfo(BaseSchema):
-    pass
-
-
 class AuthSuccessUserDebug(BaseSchema):
     pass
 
@@ -381,14 +377,6 @@ class UpdateUserGroupSchema(BaseSchema):
 
 
 class UpdateUserRequestSchema(BaseSchema):
-    pass
-
-
-class UserEmails(BaseSchema):
-    pass
-
-
-class UserPhoneNumbers(BaseSchema):
     pass
 
 
@@ -1035,7 +1023,7 @@ class SessionListResponseSchema(BaseSchema):
     # User swagger.json
 
     
-    items = fields.List(fields.Nested(SessionListResponseInfo, required=False), required=False)
+    items = fields.List(fields.Str(required=False), required=False)
     
 
 
@@ -1180,22 +1168,6 @@ class AuthSuccessUser(BaseSchema):
     active = fields.Boolean(required=False)
     
     emails = fields.Nested(AuthSuccessUserEmails, required=False)
-    
-
-
-class SessionListResponseInfo(BaseSchema):
-    # User swagger.json
-
-    
-    session_id = fields.Str(required=False)
-    
-    user_agent = fields.Str(required=False)
-    
-    ip = fields.Str(required=False)
-    
-    domain = fields.Str(required=False)
-    
-    expire_in = fields.Str(required=False)
     
 
 
@@ -1588,40 +1560,6 @@ class UpdateUserRequestSchema(BaseSchema):
     external_id = fields.Str(required=False)
     
     meta = fields.Dict(required=False)
-    
-    phone_numbers = fields.List(fields.Nested(UserPhoneNumbers, required=False), required=False)
-    
-    emails = fields.List(fields.Nested(UserEmails, required=False), required=False)
-    
-
-
-class UserEmails(BaseSchema):
-    # User swagger.json
-
-    
-    active = fields.Boolean(required=False)
-    
-    primary = fields.Boolean(required=False)
-    
-    verified = fields.Boolean(required=False)
-    
-    email = fields.Str(required=False)
-    
-
-
-class UserPhoneNumbers(BaseSchema):
-    # User swagger.json
-
-    
-    active = fields.Boolean(required=False)
-    
-    primary = fields.Boolean(required=False)
-    
-    verified = fields.Boolean(required=False)
-    
-    phone = fields.Str(required=False)
-    
-    country_code = fields.Str(required=False)
     
 
 

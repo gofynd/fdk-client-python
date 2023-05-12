@@ -72,14 +72,6 @@ class CreateSubscriptionCharge(BaseSchema):
     pass
 
 
-class OneTimeChargeItem(BaseSchema):
-    pass
-
-
-class CreateOneTimeCharge(BaseSchema):
-    pass
-
-
 class CurrentPeriod(BaseSchema):
     pass
 
@@ -89,14 +81,6 @@ class SubscriptionCharge(BaseSchema):
 
 
 class EntitySubscription(BaseSchema):
-    pass
-
-
-class OneTimeChargeEntity(BaseSchema):
-    pass
-
-
-class CreateOneTimeChargeResponse(BaseSchema):
     pass
 
 
@@ -537,40 +521,6 @@ class CreateSubscriptionCharge(BaseSchema):
     
 
 
-class OneTimeChargeItem(BaseSchema):
-    # Billing swagger.json
-
-    
-    name = fields.Str(required=False)
-    
-    term = fields.Str(required=False)
-    
-    pricing_type = fields.Str(required=False)
-    
-    price = fields.Nested(EntityChargePrice, required=False)
-    
-    capped_amount = fields.Float(required=False)
-    
-    is_test = fields.Boolean(required=False)
-    
-    metadata = fields.Dict(required=False)
-    
-
-
-class CreateOneTimeCharge(BaseSchema):
-    # Billing swagger.json
-
-    
-    name = fields.Str(required=False)
-    
-    charge = fields.Nested(OneTimeChargeItem, required=False)
-    
-    is_test = fields.Boolean(required=False)
-    
-    return_url = fields.Str(required=False)
-    
-
-
 class CurrentPeriod(BaseSchema):
     # Billing swagger.json
 
@@ -638,50 +588,6 @@ class EntitySubscription(BaseSchema):
     metadata = fields.Dict(required=False)
     
     line_items = fields.List(fields.Nested(SubscriptionCharge, required=False), required=False)
-    
-
-
-class OneTimeChargeEntity(BaseSchema):
-    # Billing swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    status = fields.Str(required=False)
-    
-    activated_on = fields.Str(required=False)
-    
-    cancelled_on = fields.Str(required=False)
-    
-    metadata = fields.Dict(required=False)
-    
-    return_url = fields.Str(required=False)
-    
-    is_test = fields.Boolean(required=False)
-    
-    pricing_type = fields.Str(required=False)
-    
-    subscriber_id = fields.Str(required=False)
-    
-    entity_type = fields.Str(required=False)
-    
-    entity_id = fields.Str(required=False)
-    
-    meta = fields.Dict(required=False)
-    
-    price = fields.Nested(EntityChargePrice, required=False)
-    
-
-
-class CreateOneTimeChargeResponse(BaseSchema):
-    # Billing swagger.json
-
-    
-    charge = fields.Nested(OneTimeChargeEntity, required=False)
-    
-    confirm_url = fields.Str(required=False)
     
 
 
@@ -1234,8 +1140,6 @@ class Subscription(BaseSchema):
 class SubscriptionStatus(BaseSchema):
     # Billing swagger.json
 
-    
-    mandate_amount = fields.Float(required=False)
     
     is_enabled = fields.Boolean(required=False)
     

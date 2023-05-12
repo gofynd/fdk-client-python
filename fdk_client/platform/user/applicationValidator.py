@@ -51,16 +51,8 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
-        
     
     
-        
-        
-        
-    
-    
-        
         
         
         
@@ -181,21 +173,6 @@ class UserValidator:
          
         
     
-    class deleteSession(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-        
-        session_id = fields.Str(required=False)
-        
-        reason = fields.Str(required=False)
-         
-        
-    
     class getActiveSessions(BaseSchema):
         
         
@@ -215,8 +192,6 @@ class UserValidator:
         application_id = fields.Str(required=False)
         
         id = fields.Str(required=False)
-        
-        reason = fields.Str(required=False)
          
         
     
