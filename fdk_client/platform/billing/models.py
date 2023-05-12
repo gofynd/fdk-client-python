@@ -421,6 +421,8 @@ class DetailedPlanComponents(BaseSchema):
     
     display_text = fields.Str(required=False)
     
+    config = fields.Dict(required=False)
+    
 
 
 class DetailedPlan(BaseSchema):

@@ -1038,4 +1038,46 @@ class Payment:
 
         return response
     
+    async def revokeOauthToken(self, aggregator=None):
+        """Use this API to Revoke oauth for razorpay partnership
+        :param aggregator : aggregator_slug : type string
+        """
+        payload = {}
+        
+        if aggregator:
+            payload["aggregator"] = aggregator
+        
+
+        # Parameter validation
+        schema = PaymentValidator.revokeOauthToken()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/revoke/{aggregator}/", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"aggregator","in":"path","description":"aggregator_slug","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"aggregator","in":"path","description":"aggregator_slug","schema":{"type":"string"},"required":true}]}""", aggregator=aggregator)
+        query_string = await create_query_string(aggregator=aggregator)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/revoke/{aggregator}/", aggregator=aggregator), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        from .models import RevokeOAuthToken
+        schema = RevokeOAuthToken()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for revokeOauthToken")
+            print(e)
+
+        
+
+        return response
+    
 

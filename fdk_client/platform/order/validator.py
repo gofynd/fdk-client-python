@@ -113,32 +113,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
-        
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
-        
-        
-        
         
         
         
@@ -155,18 +129,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-    
-    
         
         
     
@@ -509,26 +471,6 @@ class OrderValidator:
          
         
     
-    class getBulkInvoice(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        batch_id = fields.Str(required=False)
-        
-        doc_type = fields.Str(required=False)
-         
-        
-    
-    class getBulkInvoiceLabel(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        batch_id = fields.Str(required=False)
-         
-        
-    
     class getBulkShipmentExcelFile(BaseSchema):
         
         
@@ -564,52 +506,6 @@ class OrderValidator:
          
         
     
-    class getBulkList(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        lane = fields.Str(required=False)
-        
-        search_type = fields.Str(required=False)
-        
-        search_id = fields.Str(required=False)
-        
-        from_date = fields.Str(required=False)
-        
-        to_date = fields.Str(required=False)
-        
-        dp_ids = fields.Str(required=False)
-        
-        ordering_company_id = fields.Str(required=False)
-        
-        stores = fields.Str(required=False)
-        
-        sales_channel = fields.Str(required=False)
-        
-        request_by_ext = fields.Str(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        customer_id = fields.Str(required=False)
-        
-        is_priority_sort = fields.Boolean(required=False)
-         
-        
-    
-    class getBulkActionFailedReport(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        batch_id = fields.Str(required=False)
-        
-        report_type = fields.Str(required=False)
-         
-        
-    
     class getShipmentReasons(BaseSchema):
         
         
@@ -620,22 +516,6 @@ class OrderValidator:
         bag_id = fields.Str(required=False)
         
         state = fields.Str(required=False)
-         
-        
-    
-    class bulkActionProcessXlsxFile(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-         
-        
-    
-    class bulkActionDetails(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        batch_id = fields.Str(required=False)
          
         
     
