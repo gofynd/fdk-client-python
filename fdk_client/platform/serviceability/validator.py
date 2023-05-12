@@ -42,6 +42,9 @@ from ..PlatformModel import BaseSchema
     
     
         
+    
+    
+        
 
 
 
@@ -114,6 +117,13 @@ class ServiceabilityValidator:
         
     
     class getAllStores(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class getOptimalLocations(BaseSchema):
         
         
         company_id = fields.Int(required=False)
