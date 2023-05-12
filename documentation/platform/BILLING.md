@@ -32,7 +32,7 @@ Check coupon validity
 
 ```python
 try:
-    result = await client.billing.checkCouponValidity(plan=plan, couponCode=couponCode)
+    result = await platformClient.billing.checkCouponValidity(plan=plan, couponCode=couponCode)
     # use result
 except Exception as e:
     print(e)
@@ -90,7 +90,7 @@ Create subscription charge
 
 ```python
 try:
-    result = await client.billing.createSubscriptionCharge(extensionId=extensionId, body=body)
+    result = await platformClient.billing.createSubscriptionCharge(extensionId=extensionId, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -147,7 +147,7 @@ Get subscription charge details
 
 ```python
 try:
-    result = await client.billing.getSubscriptionCharge(extensionId=extensionId, subscriptionId=subscriptionId)
+    result = await platformClient.billing.getSubscriptionCharge(extensionId=extensionId, subscriptionId=subscriptionId)
     # use result
 except Exception as e:
     print(e)
@@ -205,7 +205,7 @@ Cancel subscription charge
 
 ```python
 try:
-    result = await client.billing.cancelSubscriptionCharge(extensionId=extensionId, subscriptionId=subscriptionId)
+    result = await platformClient.billing.cancelSubscriptionCharge(extensionId=extensionId, subscriptionId=subscriptionId)
     # use result
 except Exception as e:
     print(e)
@@ -263,7 +263,7 @@ Get invoices
 
 ```python
 try:
-    result = await client.billing.getInvoices()
+    result = await platformClient.billing.getInvoices()
     # use result
 except Exception as e:
     print(e)
@@ -555,7 +555,7 @@ Get invoice by id
 
 ```python
 try:
-    result = await client.billing.getInvoiceById(invoiceId=invoiceId)
+    result = await platformClient.billing.getInvoiceById(invoiceId=invoiceId)
     # use result
 except Exception as e:
     print(e)
@@ -845,7 +845,7 @@ Get subscription customer detail
 
 ```python
 try:
-    result = await client.billing.getCustomerDetail()
+    result = await platformClient.billing.getCustomerDetail()
     # use result
 except Exception as e:
     print(e)
@@ -929,7 +929,7 @@ Upsert subscription customer detail
 
 ```python
 try:
-    result = await client.billing.upsertCustomerDetail(body=body)
+    result = await platformClient.billing.upsertCustomerDetail(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1017,7 +1017,7 @@ Get current subscription detail
 
 ```python
 try:
-    result = await client.billing.getSubscription()
+    result = await platformClient.billing.getSubscription()
     # use result
 except Exception as e:
     print(e)
@@ -1140,7 +1140,7 @@ Get subscription subscription limits
 
 ```python
 try:
-    result = await client.billing.getFeatureLimitConfig()
+    result = await platformClient.billing.getFeatureLimitConfig()
     # use result
 except Exception as e:
     print(e)
@@ -1228,7 +1228,7 @@ Activate subscription
 
 ```python
 try:
-    result = await client.billing.activateSubscriptionPlan(body=body)
+    result = await platformClient.billing.activateSubscriptionPlan(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1340,7 +1340,7 @@ Cancel subscription
 
 ```python
 try:
-    result = await client.billing.cancelSubscriptionPlan(body=body)
+    result = await platformClient.billing.cancelSubscriptionPlan(body=body)
     # use result
 except Exception as e:
     print(e)

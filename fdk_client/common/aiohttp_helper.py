@@ -90,7 +90,7 @@ class AiohttpHelper:
                 # verify_ssl, ssl_context, fingerprint and ssl parameters are mutually exclusive
                 # Jiopos doesnt use ssl; it uses an IP in production whereas Amazon uses SSL Certificate and those combined
                 # usage in aiohttp session_obj contradict each other thereby raising a ValueError Exception
-                if protocol == "HTTP" and request_type.upper() in ["GET", "POST", "PUT", "DELETE"]:
+                if protocol == "HTTP" and request_type.upper() in ["GET", "POST", "PUT", "DELETE", "PATCH"]:
                     filters = {}
                     if data and headers.get("Content-Type") == "application/x-www-form-urlencoded":
                         form_data = aiohttp.FormData()
