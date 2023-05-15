@@ -1096,7 +1096,7 @@ class Order:
         return response
     
     async def updateShipmentLock(self, body=""):
-        """update shipment lock
+        """update shipment/bag lock and check status
         """
         payload = {}
         
@@ -1140,7 +1140,7 @@ class Order:
     
     async def getAnnouncements(self, date=None):
         """
-        :param date :  : type string
+        :param date : Date On which the announcement is Active (Date should in ISO Datetime format IST Time) : type string
         """
         payload = {}
         
@@ -1153,7 +1153,7 @@ class Order:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/announcements", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"date","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","name":"date","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", date=date)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/announcements", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"date","required":false,"description":"Date On which the announcement is Active (Date should in ISO Datetime format IST Time)","schema":{"type":"string"}}],"query":[{"in":"query","name":"date","required":false,"description":"Date On which the announcement is Active (Date should in ISO Datetime format IST Time)","schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", date=date)
         query_string = await create_query_string(date=date)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -1491,6 +1491,49 @@ class Order:
 
         return response
     
+    async def postShipmentHistory(self, body=""):
+        """
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = OrderValidator.postShipmentHistory()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import PostShipmentHistory
+        schema = PostShipmentHistory()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/history", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/history", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        from .models import ShipmentHistoryResponse
+        schema = ShipmentHistoryResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for postShipmentHistory")
+            print(e)
+
+        
+
+        return response
+    
     async def getShipmentHistory(self, shipment_id=None, bag_id=None):
         """
         :param shipment_id :  : type string
@@ -1531,49 +1574,6 @@ class Order:
             schema.dump(schema.load(response))
         except Exception as e:
             print("Response Validation failed for getShipmentHistory")
-            print(e)
-
-        
-
-        return response
-    
-    async def postShipmentHistory(self, body=""):
-        """
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = OrderValidator.postShipmentHistory()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import PostShipmentHistory
-        schema = PostShipmentHistory()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/history", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
-        query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/history", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        
-
-        from .models import ShipmentHistoryResponse
-        schema = ShipmentHistoryResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for postShipmentHistory")
             print(e)
 
         
@@ -1752,44 +1752,6 @@ class Order:
 
         return response
     
-    async def getChannelConfig(self, ):
-        """getChannelConfig
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = OrderValidator.getChannelConfig()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/order-config", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
-        query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/order-config", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        from .models import CreateChannelConfigData
-        schema = CreateChannelConfigData()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getChannelConfig")
-            print(e)
-
-        
-
-        return response
-    
     async def createChannelConfig(self, body=""):
         """createChannelConfig
         """
@@ -1827,6 +1789,44 @@ class Order:
             schema.dump(schema.load(response))
         except Exception as e:
             print("Response Validation failed for createChannelConfig")
+            print(e)
+
+        
+
+        return response
+    
+    async def getChannelConfig(self, ):
+        """getChannelConfig
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = OrderValidator.getChannelConfig()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/order-config", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/order-config", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        from .models import CreateChannelConfigData
+        schema = CreateChannelConfigData()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getChannelConfig")
             print(e)
 
         
