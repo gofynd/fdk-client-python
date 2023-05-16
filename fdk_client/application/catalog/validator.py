@@ -78,6 +78,7 @@ from ..ApplicationModel import BaseSchema
         
         
         
+        
     
     
         
@@ -309,6 +310,8 @@ class CatalogValidator:
         page_size = fields.Int(required=False)
         
         tag = fields.List(fields.Str(required=False), required=False)
+        
+        q = fields.Str(required=False)
          
         
     
@@ -351,7 +354,7 @@ class CatalogValidator:
          
         
     
-    class followById(BaseSchema):
+    class unfollowById(BaseSchema):
         
         
         collection_type = fields.Str(required=False)
@@ -360,7 +363,7 @@ class CatalogValidator:
          
         
     
-    class unfollowById(BaseSchema):
+    class followById(BaseSchema):
         
         
         collection_type = fields.Str(required=False)

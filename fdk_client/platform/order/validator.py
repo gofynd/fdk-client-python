@@ -123,6 +123,11 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+    
+    
         
         
     
@@ -476,33 +481,45 @@ class OrderValidator:
         
         company_id = fields.Int(required=False)
         
-        lane = fields.Str(required=False)
+        sales_channels = fields.Str(required=False)
         
-        search_type = fields.Str(required=False)
-        
-        search_id = fields.Str(required=False)
+        dp_ids = fields.Str(required=False)
         
         from_date = fields.Str(required=False)
         
         to_date = fields.Str(required=False)
         
-        dp_ids = fields.Str(required=False)
-        
-        ordering_company_id = fields.Str(required=False)
-        
         stores = fields.Str(required=False)
         
-        sales_channel = fields.Str(required=False)
+        tags = fields.Str(required=False)
         
-        request_by_ext = fields.Str(required=False)
+        bag_status = fields.Str(required=False)
+        
+        payment_methods = fields.Str(required=False)
+        
+        file_type = fields.Str(required=False)
+        
+        time_to_dispatch = fields.Int(required=False)
         
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
+         
         
-        customer_id = fields.Str(required=False)
+    
+    class getBulkActionTemplate(BaseSchema):
         
-        is_priority_sort = fields.Boolean(required=False)
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class downloadBulkActionTemplate(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        template_slug = fields.Str(required=False)
          
         
     
