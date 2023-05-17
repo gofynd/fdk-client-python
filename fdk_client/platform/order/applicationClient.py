@@ -107,49 +107,7 @@ class Order:
 
         return response
     
-    async def getAppOrderShipmentDetails(self, order_id=None):
-        """
-        :param order_id :  : type string
-        """
-        payload = {}
-        
-        if order_id:
-            payload["order_id"] = order_id
-        
-
-        # Parameter validation
-        schema = OrderValidator.getAppOrderShipmentDetails()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/order-details", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"in":"query","name":"order_id","required":true,"schema":{"type":"string","default":"FY6299E19701B4EAEFC2"}}],"optional":[],"query":[{"in":"query","name":"order_id","required":true,"schema":{"type":"string","default":"FY6299E19701B4EAEFC2"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", order_id=order_id)
-        query_string = await create_query_string(order_id=order_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/order-details", order_id=order_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        from .models import ShipmentDetailsResponse
-        schema = ShipmentDetailsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAppOrderShipmentDetails")
-            print(e)
-
-        
-
-        return response
-    
-    async def trackPlatformShipment(self, shipment_id=None):
+    async def trackShipmentPlatform(self, shipment_id=None):
         """Track Shipment by shipment id, for application based on application Id
         :param shipment_id :  : type string
         """
@@ -160,7 +118,7 @@ class Order:
         
 
         # Parameter validation
-        schema = OrderValidator.trackPlatformShipment()
+        schema = OrderValidator.trackShipmentPlatform()
         schema.dump(schema.load(payload))
         
 
@@ -184,7 +142,7 @@ class Order:
         try:
             schema.dump(schema.load(response))
         except Exception as e:
-            print("Response Validation failed for trackPlatformShipment")
+            print("Response Validation failed for trackShipmentPlatform")
             print(e)
 
         
