@@ -37,30 +37,9 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
-        
-        
-        
         
     
     
-        
-        
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
-        
-        
         
         
         
@@ -72,74 +51,8 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     
     
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
         
         
     
@@ -159,6 +72,94 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
     
     
         
@@ -210,10 +211,10 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
         
         
+    
+    
         
     
     
@@ -279,6 +280,8 @@ class OrderValidator:
         bag_status = fields.Str(required=False)
         
         status_override_lane = fields.Boolean(required=False)
+        
+        time_to_dispatch = fields.Str(required=False)
         
         search_type = fields.Str(required=False)
         
@@ -691,13 +694,6 @@ class OrderValidator:
          
         
     
-    class postShipmentHistory(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
     class getShipmentHistory(BaseSchema):
         
         
@@ -706,6 +702,13 @@ class OrderValidator:
         shipment_id = fields.Str(required=False)
         
         bag_id = fields.Int(required=False)
+         
+        
+    
+    class postShipmentHistory(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
          
         
     
@@ -737,14 +740,14 @@ class OrderValidator:
          
         
     
-    class createChannelConfig(BaseSchema):
+    class getChannelConfig(BaseSchema):
         
         
         company_id = fields.Int(required=False)
          
         
     
-    class getChannelConfig(BaseSchema):
+    class createChannelConfig(BaseSchema):
         
         
         company_id = fields.Int(required=False)
