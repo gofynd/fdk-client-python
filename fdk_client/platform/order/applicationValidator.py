@@ -32,6 +32,11 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+        
 
 class OrderValidator:
     
@@ -73,7 +78,18 @@ class OrderValidator:
          
         
     
-    class trackShipmentPlatform(BaseSchema):
+    class getAppOrderShipmentDetails(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        order_id = fields.Str(required=False)
+         
+        
+    
+    class trackPlatformShipment(BaseSchema):
         
         
         company_id = fields.Str(required=False)
