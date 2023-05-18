@@ -163,7 +163,7 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| q | String? | no | The search query. Mobile number or email ID of a customer. |  
+| q | HashMap<String,Any>? | no | The search query. Mobile number, email ID or user ID of a customer. |  
 
 
 
