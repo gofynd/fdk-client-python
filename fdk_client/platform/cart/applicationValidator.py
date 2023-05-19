@@ -131,6 +131,20 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
         
         
     
@@ -317,20 +331,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-        
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
-    
-    
         
         
         
@@ -569,6 +569,37 @@ class CartValidator:
         cart_id = fields.Str(required=False)
         
         b = fields.Boolean(required=False)
+         
+        
+    
+    class getCouponOptionValues(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getCouponCodeExists(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        code = fields.Str(required=False)
+         
+        
+    
+    class getPromotionCodeExists(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        code = fields.Str(required=False)
          
         
     
@@ -1004,37 +1035,6 @@ class CartValidator:
         id = fields.Str(required=False)
         
         buy_now = fields.Boolean(required=False)
-         
-        
-    
-    class getCouponOptionValues(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getCouponCodeExists(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        code = fields.Str(required=False)
-         
-        
-    
-    class getPromotionCodeExists(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        code = fields.Str(required=False)
          
         
     

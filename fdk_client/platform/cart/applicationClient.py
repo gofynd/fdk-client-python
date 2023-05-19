@@ -94,8 +94,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CouponAddSchema
-        schema = CouponAddSchema()
+        from .models import CouponAdd
+        schema = CouponAdd()
         schema.dump(schema.load(body))
         
 
@@ -156,8 +156,8 @@ class Cart:
 
         
 
-        from .models import CouponUpdateSchema
-        schema = CouponUpdateSchema()
+        from .models import CouponUpdate
+        schema = CouponUpdate()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
@@ -183,8 +183,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CouponUpdateSchema
-        schema = CouponUpdateSchema()
+        from .models import CouponUpdate
+        schema = CouponUpdate()
         schema.dump(schema.load(body))
         
 
@@ -343,8 +343,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PromotionAddSchema
-        schema = PromotionAddSchema()
+        from .models import PromotionAdd
+        schema = PromotionAdd()
         schema.dump(schema.load(body))
         
 
@@ -363,8 +363,8 @@ class Cart:
 
         
 
-        from .models import PromotionAddSchema
-        schema = PromotionAddSchema()
+        from .models import PromotionAdd
+        schema = PromotionAdd()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
@@ -405,8 +405,8 @@ class Cart:
 
         
 
-        from .models import PromotionUpdateSchema
-        schema = PromotionUpdateSchema()
+        from .models import PromotionUpdate
+        schema = PromotionUpdate()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
@@ -432,8 +432,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PromotionUpdateSchema
-        schema = PromotionUpdateSchema()
+        from .models import PromotionUpdate
+        schema = PromotionUpdate()
         schema.dump(schema.load(body))
         
 
@@ -452,8 +452,8 @@ class Cart:
 
         
 
-        from .models import PromotionUpdateSchema
-        schema = PromotionUpdateSchema()
+        from .models import PromotionUpdate
+        schema = PromotionUpdate()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
@@ -646,8 +646,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import OpenApiPlatformCheckoutReqSchema
-        schema = OpenApiPlatformCheckoutReqSchema()
+        from .models import OpenApiPlatformCheckoutReq
+        schema = OpenApiPlatformCheckoutReq()
         schema.dump(schema.load(body))
         
 
@@ -732,8 +732,8 @@ class Cart:
 
         
 
-        from .models import AbandonedCartResponseSchema
-        schema = AbandonedCartResponseSchema()
+        from .models import AbandonedCartResponse
+        schema = AbandonedCartResponse()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
@@ -891,6 +891,98 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for updateCart")
             print(e)
+
+        
+
+        return response
+    
+    async def getCouponOptionValues(self, ):
+        """Get coupon enum values for fields in valid coupon object. Used for front end to create, update and filter coupon lists via fields
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = CartValidator.getCouponOptionValues()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/coupon_options", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/coupon_options", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        return response
+    
+    async def getCouponCodeExists(self, code=None):
+        """Check if sent coupon code is already existing coupon code. As coupon code is to be unique.
+        :param code :  : type string
+        """
+        payload = {}
+        
+        if code:
+            payload["code"] = code
+        
+
+        # Parameter validation
+        schema = CartValidator.getCouponCodeExists()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/coupon_code_exists", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"code","in":"query","schema":{"type":"string","description":"Coupon code"}}],"query":[{"name":"code","in":"query","schema":{"type":"string","description":"Coupon code"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", code=code)
+        query_string = await create_query_string(code=code)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/coupon_code_exists", code=code), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        return response
+    
+    async def getPromotionCodeExists(self, code=None):
+        """Check if sent promotion code is already existing promotion code. As promotion code is to be unique.
+        :param code :  : type string
+        """
+        payload = {}
+        
+        if code:
+            payload["code"] = code
+        
+
+        # Parameter validation
+        schema = CartValidator.getPromotionCodeExists()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion_code_exists", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"code","in":"query","schema":{"type":"string","description":"Promotion code"}}],"query":[{"name":"code","in":"query","schema":{"type":"string","description":"Promotion code"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", code=code)
+        query_string = await create_query_string(code=code)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion_code_exists", code=code), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
 
@@ -1069,8 +1161,8 @@ class Cart:
 
         
 
-        from .models import MultiCartResponseSchema
-        schema = MultiCartResponseSchema()
+        from .models import MultiCartResponse
+        schema = MultiCartResponse()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
@@ -1941,8 +2033,8 @@ class Cart:
 
         
 
-        from .models import CartShipmentsResponse
-        schema = CartShipmentsResponse()
+        from .models import PlatformCartShipmentsResponse
+        schema = PlatformCartShipmentsResponse()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
@@ -2008,8 +2100,8 @@ class Cart:
 
         
 
-        from .models import CartShipmentsResponse
-        schema = CartShipmentsResponse()
+        from .models import PlatformCartShipmentsResponse
+        schema = PlatformCartShipmentsResponse()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
@@ -2106,8 +2198,8 @@ class Cart:
 
         
 
-        from .models import CartCheckoutResponseSchema
-        schema = CartCheckoutResponseSchema()
+        from .models import CartCheckoutResponse
+        schema = CartCheckoutResponse()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
@@ -2311,8 +2403,8 @@ class Cart:
 
         
 
-        from .models import PaymentCouponValidateSchema
-        schema = PaymentCouponValidateSchema()
+        from .models import PaymentCouponValidate
+        schema = PaymentCouponValidate()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
@@ -2358,8 +2450,8 @@ class Cart:
 
         
 
-        from .models import CartCheckoutResponseSchema
-        schema = CartCheckoutResponseSchema()
+        from .models import CartCheckoutResponse
+        schema = CartCheckoutResponse()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
@@ -2416,98 +2508,6 @@ class Cart:
         except Exception as e:
             print("Response Validation failed for selectPaymentModeV2")
             print(e)
-
-        
-
-        return response
-    
-    async def getCouponOptionValues(self, ):
-        """Get coupon enum values for fields in valid coupon object. Used for front end to create, update and filter coupon lists via fields
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = CartValidator.getCouponOptionValues()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/coupon_options", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", )
-        query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/coupon_options", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        return response
-    
-    async def getCouponCodeExists(self, code=None):
-        """Check if sent coupon code is already existing coupon code. As coupon code is to be unique.
-        :param code :  : type string
-        """
-        payload = {}
-        
-        if code:
-            payload["code"] = code
-        
-
-        # Parameter validation
-        schema = CartValidator.getCouponCodeExists()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/coupon_code_exists", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"code","in":"query","schema":{"type":"string","description":"Coupon code"}}],"query":[{"name":"code","in":"query","schema":{"type":"string","description":"Coupon code"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", code=code)
-        query_string = await create_query_string(code=code)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/coupon_code_exists", code=code), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        return response
-    
-    async def getPromotionCodeExists(self, code=None):
-        """Check if sent promotion code is already existing promotion code. As promotion code is to be unique.
-        :param code :  : type string
-        """
-        payload = {}
-        
-        if code:
-            payload["code"] = code
-        
-
-        # Parameter validation
-        schema = CartValidator.getPromotionCodeExists()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion_code_exists", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"code","in":"query","schema":{"type":"string","description":"Promotion code"}}],"query":[{"name":"code","in":"query","schema":{"type":"string","description":"Promotion code"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", code=code)
-        query_string = await create_query_string(code=code)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion_code_exists", code=code), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
 
