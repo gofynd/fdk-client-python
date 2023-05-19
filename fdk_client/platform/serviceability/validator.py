@@ -21,6 +21,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -71,6 +72,8 @@ class ServiceabilityValidator:
         is_active = fields.Boolean(required=False)
         
         channel_ids = fields.Str(required=False)
+        
+        q = fields.Str(required=False)
          
         
     
@@ -85,15 +88,6 @@ class ServiceabilityValidator:
          
         
     
-    class getZoneDataView(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        zone_id = fields.Str(required=False)
-         
-        
-    
     class updateZoneControllerView(BaseSchema):
         
         
@@ -103,7 +97,16 @@ class ServiceabilityValidator:
          
         
     
-    class insertZoneControllerView(BaseSchema):
+    class getZoneDataView(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        zone_id = fields.Str(required=False)
+         
+        
+    
+    class createZone(BaseSchema):
         
         
         company_id = fields.Int(required=False)

@@ -810,10 +810,11 @@ class Catalog:
 
         return response
     
-    async def getCollections(self, page_no=None, page_size=None, tag=None, body=""):
+    async def getCollections(self, page_no=None, page_size=None, q=None, tag=None, body=""):
         """Collections are a great way to organize your products and can improve the ability for customers to find items quickly and efficiently.
         :param page_no : The page number to navigate through the given set of results. : type integer
         :param page_size : The number of items to retrieve in each page. : type integer
+        :param q : Name of the collection to filter collection : type string
         :param tag : List of tags  to filter collections : type array
         """
         payload = {}
@@ -824,6 +825,9 @@ class Catalog:
         if page_size:
             payload["page_size"] = page_size
         
+        if q:
+            payload["q"] = q
+        
         if tag:
             payload["tag"] = tag
         
@@ -832,8 +836,8 @@ class Catalog:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getCollections"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false},{"in":"query","name":"tag","description":"List of tags  to filter collections","schema":{"type":"array","items":{"type":"string"},"minItems":1},"required":false}],"query":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false},{"in":"query","name":"tag","description":"List of tags  to filter collections","schema":{"type":"array","items":{"type":"string"},"minItems":1},"required":false}],"headers":[],"path":[]}""", page_no=page_no, page_size=page_size, tag=tag)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, tag=tag)
+        url_with_params = await create_url_with_params(api_url=self._urls["getCollections"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false},{"in":"query","name":"q","description":"Name of the collection to filter collection","schema":{"type":"string"},"required":false},{"in":"query","name":"tag","description":"List of tags  to filter collections","schema":{"type":"array","items":{"type":"string"},"minItems":1},"required":false}],"query":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false},{"in":"query","name":"q","description":"Name of the collection to filter collection","schema":{"type":"string"},"required":false},{"in":"query","name":"tag","description":"List of tags  to filter collections","schema":{"type":"array","items":{"type":"string"},"minItems":1},"required":false}],"headers":[],"path":[]}""", page_no=page_no, page_size=page_size, q=q, tag=tag)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, q=q, tag=tag)
         headers = {
             "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
         }
@@ -845,7 +849,7 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCollections"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/collections/", page_no=page_no, page_size=page_size, tag=tag), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCollections"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/collections/", page_no=page_no, page_size=page_size, q=q, tag=tag), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
 
