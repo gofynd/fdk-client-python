@@ -1130,4 +1130,47 @@ class Payment:
 
         return response
     
+    async def verifyCustomerForPayment(self, body=""):
+        """Use this API to check if the customer is eligible to use credit-line facilities such as Simpl Pay Later and Rupifi.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = PaymentValidator.verifyCustomerForPayment()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import ValidateCustomerRequest
+        schema = ValidateCustomerRequest()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/customer/validation", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/customer/validation", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        from .models import ValidateCustomerResponse
+        schema = ValidateCustomerResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for verifyCustomerForPayment")
+            print(e)
+
+        
+
+        return response
+    
 

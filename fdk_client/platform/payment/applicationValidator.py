@@ -137,6 +137,10 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
 
 class PaymentValidator:
     
@@ -419,6 +423,15 @@ class PaymentValidator:
         application_id = fields.Str(required=False)
         
         aggregator = fields.Str(required=False)
+         
+        
+    
+    class verifyCustomerForPayment(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
          
         
     
