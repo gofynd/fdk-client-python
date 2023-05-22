@@ -1,13 +1,13 @@
 
 
-"""Serviceability Platform Client"""
+"""Logistics Platform Client"""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
 
-from .validator import ServiceabilityValidator
+from .validator import LogisticsValidator
 
-class Serviceability:
+class Logistics:
     def __init__(self, config):
         self._conf = config
 
@@ -19,7 +19,7 @@ class Serviceability:
         
 
         # Parameter validation
-        schema = ServiceabilityValidator.getEntityRegionView()
+        schema = LogisticsValidator.getEntityRegionView()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -86,7 +86,7 @@ class Serviceability:
         
 
         # Parameter validation
-        schema = ServiceabilityValidator.getListView()
+        schema = LogisticsValidator.getListView()
         schema.dump(schema.load(payload))
         
 
@@ -124,7 +124,7 @@ class Serviceability:
         
 
         # Parameter validation
-        schema = ServiceabilityValidator.getCompanyStoreView()
+        schema = LogisticsValidator.getCompanyStoreView()
         schema.dump(schema.load(payload))
         
 
@@ -166,7 +166,7 @@ class Serviceability:
         
 
         # Parameter validation
-        schema = ServiceabilityValidator.updateZoneControllerView()
+        schema = LogisticsValidator.updateZoneControllerView()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -213,7 +213,7 @@ class Serviceability:
         
 
         # Parameter validation
-        schema = ServiceabilityValidator.getZoneDataView()
+        schema = LogisticsValidator.getZoneDataView()
         schema.dump(schema.load(payload))
         
 
@@ -251,7 +251,7 @@ class Serviceability:
         
 
         # Parameter validation
-        schema = ServiceabilityValidator.createZone()
+        schema = LogisticsValidator.createZone()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -298,7 +298,7 @@ class Serviceability:
         
 
         # Parameter validation
-        schema = ServiceabilityValidator.getStore()
+        schema = LogisticsValidator.getStore()
         schema.dump(schema.load(payload))
         
 
@@ -336,7 +336,7 @@ class Serviceability:
         
 
         # Parameter validation
-        schema = ServiceabilityValidator.getAllStores()
+        schema = LogisticsValidator.getAllStores()
         schema.dump(schema.load(payload))
         
 

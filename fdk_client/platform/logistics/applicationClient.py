@@ -1,13 +1,13 @@
 
 
-"""Serviceability Platform Client"""
+"""Logistics Platform Client"""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
 
-from .applicationValidator import ServiceabilityValidator
+from .applicationValidator import LogisticsValidator
 
-class Serviceability:
+class Logistics:
     def __init__(self, config, applicationId):
         self._conf = config
         self.applicationId = applicationId
@@ -20,7 +20,7 @@ class Serviceability:
         
 
         # Parameter validation
-        schema = ServiceabilityValidator.getApplicationServiceability()
+        schema = LogisticsValidator.getApplicationServiceability()
         schema.dump(schema.load(payload))
         
 
@@ -58,7 +58,7 @@ class Serviceability:
         
 
         # Parameter validation
-        schema = ServiceabilityValidator.getZoneFromPincodeView()
+        schema = LogisticsValidator.getZoneFromPincodeView()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -117,7 +117,7 @@ class Serviceability:
         
 
         # Parameter validation
-        schema = ServiceabilityValidator.getZonesFromApplicationIdView()
+        schema = LogisticsValidator.getZonesFromApplicationIdView()
         schema.dump(schema.load(payload))
         
 
@@ -155,7 +155,7 @@ class Serviceability:
         
 
         # Parameter validation
-        schema = ServiceabilityValidator.updatePincodeMopView()
+        schema = LogisticsValidator.updatePincodeMopView()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -198,7 +198,7 @@ class Serviceability:
         
 
         # Parameter validation
-        schema = ServiceabilityValidator.updatePincodeBulkView()
+        schema = LogisticsValidator.updatePincodeBulkView()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -241,7 +241,7 @@ class Serviceability:
         
 
         # Parameter validation
-        schema = ServiceabilityValidator.updatePincodeCoDListing()
+        schema = LogisticsValidator.updatePincodeCoDListing()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -284,7 +284,7 @@ class Serviceability:
         
 
         # Parameter validation
-        schema = ServiceabilityValidator.updatePincodeAuditHistory()
+        schema = LogisticsValidator.updatePincodeAuditHistory()
         schema.dump(schema.load(payload))
         
         # Body validation

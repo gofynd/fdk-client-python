@@ -1,4 +1,4 @@
-"""Serviceability Platform Model"""
+"""Logistics Platform Model"""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -276,7 +276,7 @@ class PincodeMopUpdateAuditHistoryResponseData(BaseSchema):
 
 
 class ApplicationServiceabilityConfig(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     channel_type = fields.Str(required=False)
@@ -288,7 +288,7 @@ class ApplicationServiceabilityConfig(BaseSchema):
 
 
 class ServiceabilityrErrorResponse(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     value = fields.Str(required=False)
@@ -300,7 +300,7 @@ class ServiceabilityrErrorResponse(BaseSchema):
 
 
 class ApplicationServiceabilityConfigResponse(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     data = fields.Nested(ApplicationServiceabilityConfig, required=False)
@@ -312,7 +312,7 @@ class ApplicationServiceabilityConfigResponse(BaseSchema):
 
 
 class EntityRegionView_Request(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     parent_id = fields.List(fields.Str(required=False), required=False)
@@ -322,7 +322,7 @@ class EntityRegionView_Request(BaseSchema):
 
 
 class EntityRegionView_Items(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     uid = fields.Str(required=False)
@@ -334,7 +334,7 @@ class EntityRegionView_Items(BaseSchema):
 
 
 class EntityRegionView_Error(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     value = fields.Str(required=False)
@@ -346,7 +346,7 @@ class EntityRegionView_Error(BaseSchema):
 
 
 class EntityRegionView_page(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     item_total = fields.Int(required=False)
@@ -362,7 +362,7 @@ class EntityRegionView_page(BaseSchema):
 
 
 class EntityRegionView_Response(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     data = fields.List(fields.Nested(EntityRegionView_Items, required=False), required=False)
@@ -376,7 +376,7 @@ class EntityRegionView_Response(BaseSchema):
 
 
 class ZoneDataItem(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     item_total = fields.Int(required=False)
@@ -392,7 +392,7 @@ class ZoneDataItem(BaseSchema):
 
 
 class ListViewChannels(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     channel_type = fields.Str(required=False)
@@ -402,7 +402,7 @@ class ListViewChannels(BaseSchema):
 
 
 class ListViewProduct(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     type = fields.Str(required=False)
@@ -412,7 +412,7 @@ class ListViewProduct(BaseSchema):
 
 
 class ListViewItems(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     name = fields.Str(required=False)
@@ -436,7 +436,7 @@ class ListViewItems(BaseSchema):
 
 
 class ListViewSummary(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     total_active_zones = fields.Int(required=False)
@@ -448,7 +448,7 @@ class ListViewSummary(BaseSchema):
 
 
 class ListViewResponse(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     page = fields.List(fields.Nested(ZoneDataItem, required=False), required=False)
@@ -460,7 +460,7 @@ class ListViewResponse(BaseSchema):
 
 
 class CompanyStoreView_PageItems(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     item_total = fields.Int(required=False)
@@ -476,7 +476,7 @@ class CompanyStoreView_PageItems(BaseSchema):
 
 
 class CompanyStoreView_Response(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     page = fields.List(fields.Nested(CompanyStoreView_PageItems, required=False), required=False)
@@ -486,7 +486,7 @@ class CompanyStoreView_Response(BaseSchema):
 
 
 class GetZoneDataViewChannels(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     channel_type = fields.Str(required=False)
@@ -496,7 +496,7 @@ class GetZoneDataViewChannels(BaseSchema):
 
 
 class ZoneProductTypes(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     tags = fields.List(fields.Str(required=False), required=False)
@@ -506,7 +506,7 @@ class ZoneProductTypes(BaseSchema):
 
 
 class ZoneMappingType(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     pincode = fields.List(fields.Str(required=False), required=False)
@@ -518,7 +518,7 @@ class ZoneMappingType(BaseSchema):
 
 
 class UpdateZoneData(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     zone_id = fields.Str(required=False)
@@ -546,7 +546,7 @@ class UpdateZoneData(BaseSchema):
 
 
 class ZoneUpdateRequest(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     identifier = fields.Str(required=False)
@@ -556,7 +556,7 @@ class ZoneUpdateRequest(BaseSchema):
 
 
 class ZoneSuccessResponse(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     status_code = fields.Int(required=False)
@@ -566,7 +566,7 @@ class ZoneSuccessResponse(BaseSchema):
 
 
 class GetZoneDataViewItems(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     zone_id = fields.Str(required=False)
@@ -598,7 +598,7 @@ class GetZoneDataViewItems(BaseSchema):
 
 
 class GetSingleZoneDataViewResponse(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     data = fields.Nested(GetZoneDataViewItems, required=False)
@@ -606,7 +606,7 @@ class GetSingleZoneDataViewResponse(BaseSchema):
 
 
 class CreateZoneData(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     name = fields.Str(required=False)
@@ -632,7 +632,7 @@ class CreateZoneData(BaseSchema):
 
 
 class ZoneRequest(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     identifier = fields.Str(required=False)
@@ -642,7 +642,7 @@ class ZoneRequest(BaseSchema):
 
 
 class ZoneResponse(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     status_code = fields.Int(required=False)
@@ -654,7 +654,7 @@ class ZoneResponse(BaseSchema):
 
 
 class GetZoneFromPincodeViewRequest(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     pincode = fields.Str(required=False)
@@ -664,7 +664,7 @@ class GetZoneFromPincodeViewRequest(BaseSchema):
 
 
 class GetZoneFromPincodeViewResponse(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     serviceability_type = fields.Str(required=False)
@@ -674,7 +674,7 @@ class GetZoneFromPincodeViewResponse(BaseSchema):
 
 
 class GetZoneFromApplicationIdViewResponse(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     page = fields.List(fields.Nested(ZoneDataItem, required=False), required=False)
@@ -684,7 +684,7 @@ class GetZoneFromApplicationIdViewResponse(BaseSchema):
 
 
 class ServiceabilityErrorResponse(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     value = fields.Str(required=False)
@@ -696,7 +696,7 @@ class ServiceabilityErrorResponse(BaseSchema):
 
 
 class PageResponse(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     item_total = fields.Int(required=False)
@@ -712,7 +712,7 @@ class PageResponse(BaseSchema):
 
 
 class WarningsResponse(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     store_address = fields.Str(required=False)
@@ -720,7 +720,7 @@ class WarningsResponse(BaseSchema):
 
 
 class Dp(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     external_account_id = fields.Str(required=False)
@@ -746,7 +746,7 @@ class Dp(BaseSchema):
 
 
 class LogisticsResponse(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     dp = fields.Nested(Dp, required=False)
@@ -756,7 +756,7 @@ class LogisticsResponse(BaseSchema):
 
 
 class ContactNumberResponse(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     country_code = fields.Int(required=False)
@@ -766,7 +766,7 @@ class ContactNumberResponse(BaseSchema):
 
 
 class ProductReturnConfigResponse(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     on_same_store = fields.Boolean(required=False)
@@ -774,7 +774,7 @@ class ProductReturnConfigResponse(BaseSchema):
 
 
 class CreatedByResponse(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     user_id = fields.Str(required=False)
@@ -784,7 +784,7 @@ class CreatedByResponse(BaseSchema):
 
 
 class EinvoiceResponse(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     enabled = fields.Boolean(required=False)
@@ -792,7 +792,7 @@ class EinvoiceResponse(BaseSchema):
 
 
 class EwayBillResponse(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     enabled = fields.Boolean(required=False)
@@ -800,7 +800,7 @@ class EwayBillResponse(BaseSchema):
 
 
 class GstCredentialsResponse(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     e_invoice = fields.Nested(EinvoiceResponse, required=False)
@@ -810,7 +810,7 @@ class GstCredentialsResponse(BaseSchema):
 
 
 class MobileNo(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     country_code = fields.Int(required=False)
@@ -820,7 +820,7 @@ class MobileNo(BaseSchema):
 
 
 class ManagerResponse(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     name = fields.Str(required=False)
@@ -832,7 +832,7 @@ class ManagerResponse(BaseSchema):
 
 
 class IntegrationTypeResponse(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     order = fields.Str(required=False)
@@ -842,7 +842,7 @@ class IntegrationTypeResponse(BaseSchema):
 
 
 class ModifiedByResponse(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     user_id = fields.Str(required=False)
@@ -852,7 +852,7 @@ class ModifiedByResponse(BaseSchema):
 
 
 class OpeningClosing(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     minute = fields.Int(required=False)
@@ -862,7 +862,7 @@ class OpeningClosing(BaseSchema):
 
 
 class TimmingResponse(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     open = fields.Boolean(required=False)
@@ -876,7 +876,7 @@ class TimmingResponse(BaseSchema):
 
 
 class DocumentsResponse(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     verified = fields.Boolean(required=False)
@@ -890,7 +890,7 @@ class DocumentsResponse(BaseSchema):
 
 
 class AddressResponse(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     city = fields.Str(required=False)
@@ -914,7 +914,7 @@ class AddressResponse(BaseSchema):
 
 
 class ItemResponse(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     display_name = fields.Str(required=False)
@@ -976,7 +976,7 @@ class ItemResponse(BaseSchema):
 
 
 class GetStoresViewResponse(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     page = fields.Nested(PageResponse, required=False)
@@ -986,7 +986,7 @@ class GetStoresViewResponse(BaseSchema):
 
 
 class PincodeMopData(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     pincodes = fields.List(fields.Int(required=False), required=False)
@@ -998,7 +998,7 @@ class PincodeMopData(BaseSchema):
 
 
 class PincodeMopUpdateResponse(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     pincode = fields.Int(required=False)
@@ -1012,7 +1012,7 @@ class PincodeMopUpdateResponse(BaseSchema):
 
 
 class PincodeMOPresponse(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     success = fields.Boolean(required=False)
@@ -1032,7 +1032,7 @@ class PincodeMOPresponse(BaseSchema):
 
 
 class CommonError(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     status_code = fields.Str(required=False)
@@ -1044,7 +1044,7 @@ class CommonError(BaseSchema):
 
 
 class PincodeMopBulkData(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     batch_id = fields.Str(required=False)
@@ -1054,7 +1054,7 @@ class PincodeMopBulkData(BaseSchema):
 
 
 class PincodeBulkViewResponse(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     batch_id = fields.Str(required=False)
@@ -1064,7 +1064,7 @@ class PincodeBulkViewResponse(BaseSchema):
 
 
 class PincodeCodStatusListingRequest(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     country = fields.Str(required=False)
@@ -1080,7 +1080,7 @@ class PincodeCodStatusListingRequest(BaseSchema):
 
 
 class PincodeCodStatusListingResponse(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     country = fields.Str(required=False)
@@ -1098,7 +1098,7 @@ class PincodeCodStatusListingResponse(BaseSchema):
 
 
 class Error(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     type = fields.Str(required=False)
@@ -1110,7 +1110,7 @@ class Error(BaseSchema):
 
 
 class PincodeCodStatusListingPage(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     item_total = fields.Int(required=False)
@@ -1126,7 +1126,7 @@ class PincodeCodStatusListingPage(BaseSchema):
 
 
 class PincodeCodStatusListingSummary(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     total_active_pincodes = fields.Int(required=False)
@@ -1136,7 +1136,7 @@ class PincodeCodStatusListingSummary(BaseSchema):
 
 
 class PincodeMopUpdateAuditHistoryRequest(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     entity_type = fields.Str(required=False)
@@ -1146,7 +1146,7 @@ class PincodeMopUpdateAuditHistoryRequest(BaseSchema):
 
 
 class PincodeMopUpdateAuditHistoryPaging(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     type = fields.Str(required=False)
@@ -1162,7 +1162,7 @@ class PincodeMopUpdateAuditHistoryPaging(BaseSchema):
 
 
 class PincodeMopUpdateAuditHistoryResponse(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     batch_id = fields.Str(required=False)
@@ -1184,7 +1184,7 @@ class PincodeMopUpdateAuditHistoryResponse(BaseSchema):
 
 
 class PincodeMopUpdateAuditHistoryResponseData(BaseSchema):
-    # Serviceability swagger.json
+    # Logistics swagger.json
 
     
     entity_type = fields.Str(required=False)

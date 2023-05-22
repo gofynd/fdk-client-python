@@ -4,7 +4,7 @@
 
 ##### [Back to Platform docs](./README.md)
 
-## Serviceability Methods
+## Logistics Methods
 Logistics Configuration API's allows you to configure zone, application logistics and many more useful features. 
 * [getApplicationServiceability](#getapplicationserviceability)
 * [getEntityRegionView](#getentityregionview)
@@ -35,7 +35,7 @@ Zone configuration of application.
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").serviceability.getApplicationServiceability()
+    result = await platformClient.application("<APPLICATION_ID>").logistics.getApplicationServiceability()
     # use result
 except Exception as e:
     print(e)
@@ -99,7 +99,7 @@ Get country and state list
 
 ```python
 try:
-    result = await platformClient.serviceability.getEntityRegionView(body=body)
+    result = await platformClient.logistics.getEntityRegionView(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -155,7 +155,7 @@ Zone List of application.
 
 ```python
 try:
-    result = await platformClient.serviceability.getListView(pageNumber=pageNumber, pageSize=pageSize, name=name, isActive=isActive, channelIds=channelIds, q=q)
+    result = await platformClient.logistics.getListView(pageNumber=pageNumber, pageSize=pageSize, name=name, isActive=isActive, channelIds=channelIds, q=q)
     # use result
 except Exception as e:
     print(e)
@@ -217,7 +217,7 @@ Company Store View of application.
 
 ```python
 try:
-    result = await platformClient.serviceability.getCompanyStoreView()
+    result = await platformClient.logistics.getCompanyStoreView()
     # use result
 except Exception as e:
     print(e)
@@ -269,7 +269,7 @@ Updation of zone collections in database.
 
 ```python
 try:
-    result = await platformClient.serviceability.updateZoneControllerView(zoneId=zoneId, body=body)
+    result = await platformClient.logistics.updateZoneControllerView(zoneId=zoneId, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -326,7 +326,7 @@ Zone Data View of application.
 
 ```python
 try:
-    result = await platformClient.serviceability.getZoneDataView(zoneId=zoneId)
+    result = await platformClient.logistics.getZoneDataView(zoneId=zoneId)
     # use result
 except Exception as e:
     print(e)
@@ -383,7 +383,7 @@ Insertion of zone in database.
 
 ```python
 try:
-    result = await platformClient.serviceability.createZone(body=body)
+    result = await platformClient.logistics.createZone(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -439,7 +439,7 @@ GET zone from the Pincode.
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").serviceability.getZoneFromPincodeView(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").logistics.getZoneFromPincodeView(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -495,7 +495,7 @@ GET zones from the application_id.
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").serviceability.getZonesFromApplicationIdView(pageNo=pageNo, pageSize=pageSize, zoneId=zoneId, q=q)
+    result = await platformClient.application("<APPLICATION_ID>").logistics.getZonesFromApplicationIdView(pageNo=pageNo, pageSize=pageSize, zoneId=zoneId, q=q)
     # use result
 except Exception as e:
     print(e)
@@ -555,7 +555,7 @@ GET stores data
 
 ```python
 try:
-    result = await platformClient.serviceability.getStore(storeUid=storeUid)
+    result = await platformClient.logistics.getStore(storeUid=storeUid)
     # use result
 except Exception as e:
     print(e)
@@ -821,7 +821,7 @@ GET stores data
 
 ```python
 try:
-    result = await platformClient.serviceability.getAllStores()
+    result = await platformClient.logistics.getAllStores()
     # use result
 except Exception as e:
     print(e)
@@ -873,7 +873,7 @@ PincodeView update of MOP.
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").serviceability.updatePincodeMopView(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").logistics.updatePincodeMopView(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -929,7 +929,7 @@ Bulk Update of pincode in the application.
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").serviceability.updatePincodeBulkView(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").logistics.updatePincodeBulkView(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -988,7 +988,7 @@ Pincode count view of application.
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").serviceability.updatePincodeCoDListing(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").logistics.updatePincodeCoDListing(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1044,7 +1044,7 @@ Auditlog configuration of application.
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").serviceability.updatePincodeAuditHistory(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").logistics.updatePincodeAuditHistory(body=body)
     # use result
 except Exception as e:
     print(e)
