@@ -549,6 +549,134 @@ class Cart:
 
         return response
     
+    async def updateCartMetaConfig(self, cart_meta_id=None, body=""):
+        """Update cart meta configuration
+        :param cart_meta_id :  : type string
+        """
+        payload = {}
+        
+        if cart_meta_id:
+            payload["cart_meta_id"] = cart_meta_id
+        
+
+        # Parameter validation
+        schema = CartValidator.updateCartMetaConfig()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import CartMetaConfigUpdate
+        schema = CartMetaConfigUpdate()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart_configuration/{cart_meta_id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"cart_meta_id","in":"path","schema":{"type":"string","description":"CartMeta mongo _id for fetching single cart meta data for editing"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"cart_meta_id","in":"path","schema":{"type":"string","description":"CartMeta mongo _id for fetching single cart meta data for editing"},"required":true}]}""", cart_meta_id=cart_meta_id)
+        query_string = await create_query_string(cart_meta_id=cart_meta_id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart_configuration/{cart_meta_id}", cart_meta_id=cart_meta_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        from .models import CartMetaConfigUpdate
+        schema = CartMetaConfigUpdate()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for updateCartMetaConfig")
+            print(e)
+
+        
+
+        return response
+    
+    async def fetchCartMetaConfig(self, ):
+        """Fetch cart meta configuration
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = CartValidator.fetchCartMetaConfig()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart_configuration", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart_configuration", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        from .models import CartMetaConfigAdd
+        schema = CartMetaConfigAdd()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for fetchCartMetaConfig")
+            print(e)
+
+        
+
+        return response
+    
+    async def createCartMetaConfig(self, body=""):
+        """Create new cart meta configuration
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = CartValidator.createCartMetaConfig()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import CartMetaConfigAdd
+        schema = CartMetaConfigAdd()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart_configuration", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart_configuration", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        from .models import CartMetaConfigAdd
+        schema = CartMetaConfigAdd()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for createCartMetaConfig")
+            print(e)
+
+        
+
+        return response
+    
     async def fetchAndvalidateCartItems(self, body=""):
         """Get all the details of cart for a list of provided `cart_items`
         """

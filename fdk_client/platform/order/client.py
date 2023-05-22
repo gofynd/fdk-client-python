@@ -1342,13 +1342,13 @@ class Order:
 
         return response
     
-    async def click2Call(self, caller=None, receiver=None, bag_id=None, calling_to=None, caller_id=None):
+    async def click2Call(self, caller=None, receiver=None, bag_id=None, caller_id=None, method=None):
         """
-        :param caller :  : type string
-        :param receiver :  : type string
-        :param bag_id :  : type string
-        :param calling_to :  : type string
-        :param caller_id :  : type string
+        :param caller : Call Number : type string
+        :param receiver : Receiver Number : type string
+        :param bag_id : Bag Id for the query : type string
+        :param caller_id : Caller Id : type string
+        :param method : Provider Method to Call : type string
         """
         payload = {}
         
@@ -1361,11 +1361,11 @@ class Order:
         if bag_id:
             payload["bag_id"] = bag_id
         
-        if calling_to:
-            payload["calling_to"] = calling_to
-        
         if caller_id:
             payload["caller_id"] = caller_id
+        
+        if method:
+            payload["method"] = method
         
 
         # Parameter validation
@@ -1373,8 +1373,8 @@ class Order:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/ninja/click2call", """{"required":[{"in":"query","name":"caller","required":true,"schema":{"type":"string"}},{"in":"query","name":"receiver","required":true,"schema":{"type":"string"}},{"in":"query","name":"bag_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"calling_to","required":false,"schema":{"type":"string"}},{"in":"query","name":"caller_id","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","name":"caller","required":true,"schema":{"type":"string"}},{"in":"query","name":"receiver","required":true,"schema":{"type":"string"}},{"in":"query","name":"bag_id","required":true,"schema":{"type":"string"}},{"in":"query","name":"calling_to","required":false,"schema":{"type":"string"}},{"in":"query","name":"caller_id","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", caller=caller, receiver=receiver, bag_id=bag_id, calling_to=calling_to, caller_id=caller_id, )
-        query_string = await create_query_string(caller=caller, receiver=receiver, bag_id=bag_id, calling_to=calling_to, caller_id=caller_id, )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/ninja/click2call", """{"required":[{"in":"query","name":"caller","required":true,"description":"Call Number","schema":{"type":"string"}},{"in":"query","name":"receiver","required":true,"description":"Receiver Number","schema":{"type":"string"}},{"in":"query","name":"bag_id","required":true,"description":"Bag Id for the query","schema":{"type":"string"}},{"in":"path","name":"company_id","required":true,"description":"Company Id","schema":{"type":"integer"}}],"optional":[{"in":"query","name":"caller_id","required":false,"description":"Caller Id","schema":{"type":"string"}},{"in":"query","name":"method","required":false,"description":"Provider Method to Call","schema":{"type":"string","example":"dial.click2call"}}],"query":[{"in":"query","name":"caller","required":true,"description":"Call Number","schema":{"type":"string"}},{"in":"query","name":"receiver","required":true,"description":"Receiver Number","schema":{"type":"string"}},{"in":"query","name":"bag_id","required":true,"description":"Bag Id for the query","schema":{"type":"string"}},{"in":"query","name":"caller_id","required":false,"description":"Caller Id","schema":{"type":"string"}},{"in":"query","name":"method","required":false,"description":"Provider Method to Call","schema":{"type":"string","example":"dial.click2call"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"description":"Company Id","schema":{"type":"integer"}}]}""", caller=caller, receiver=receiver, bag_id=bag_id, caller_id=caller_id, method=method, )
+        query_string = await create_query_string(caller=caller, receiver=receiver, bag_id=bag_id, caller_id=caller_id, method=method, )
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -1384,7 +1384,7 @@ class Order:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/ninja/click2call", caller=caller, receiver=receiver, bag_id=bag_id, calling_to=calling_to, caller_id=caller_id, ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/ninja/click2call", caller=caller, receiver=receiver, bag_id=bag_id, caller_id=caller_id, method=method, ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
 
@@ -1612,8 +1612,8 @@ class Order:
     
     async def getShipmentHistory(self, shipment_id=None, bag_id=None):
         """
-        :param shipment_id :  : type string
-        :param bag_id :  : type integer
+        :param shipment_id : Shipment Id : type integer
+        :param bag_id : Bag/Product Id : type integer
         """
         payload = {}
         
@@ -1629,7 +1629,7 @@ class Order:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/history", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"shipment_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"bag_id","required":false,"schema":{"type":"integer"}}],"query":[{"in":"query","name":"shipment_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"bag_id","required":false,"schema":{"type":"integer"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", shipment_id=shipment_id, bag_id=bag_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/history", """{"required":[{"in":"path","name":"company_id","required":true,"description":"Company Id","schema":{"type":"integer"}}],"optional":[{"in":"query","name":"shipment_id","description":"Shipment Id","required":false,"schema":{"type":"integer"}},{"in":"query","name":"bag_id","description":"Bag/Product Id","required":false,"schema":{"type":"integer"}}],"query":[{"in":"query","name":"shipment_id","description":"Shipment Id","required":false,"schema":{"type":"integer"}},{"in":"query","name":"bag_id","description":"Bag/Product Id","required":false,"schema":{"type":"integer"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"description":"Company Id","schema":{"type":"integer"}}]}""", shipment_id=shipment_id, bag_id=bag_id)
         query_string = await create_query_string(shipment_id=shipment_id, bag_id=bag_id)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -1672,7 +1672,7 @@ class Order:
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/ninja/send-sms", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/ninja/send-sms", """{"required":[{"in":"path","name":"company_id","required":true,"description":"Company Id","schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"description":"Company Id","schema":{"type":"integer"}}]}""", )
         query_string = await create_query_string()
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -1753,8 +1753,8 @@ class Order:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CreateOrderPayload
-        schema = CreateOrderPayload()
+        from .models import UpdatePackagingDimensionsPayload
+        schema = UpdatePackagingDimensionsPayload()
         schema.dump(schema.load(body))
         
 

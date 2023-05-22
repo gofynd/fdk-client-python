@@ -79,6 +79,19 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
     
     
         
@@ -473,6 +486,35 @@ class CartValidator:
         
     
     class getPromosCouponConfig(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class updateCartMetaConfig(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        cart_meta_id = fields.Str(required=False)
+         
+        
+    
+    class fetchCartMetaConfig(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class createCartMetaConfig(BaseSchema):
         
         
         company_id = fields.Str(required=False)

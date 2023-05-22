@@ -658,9 +658,9 @@ class OrderValidator:
         
         bag_id = fields.Str(required=False)
         
-        calling_to = fields.Str(required=False)
-        
         caller_id = fields.Str(required=False)
+        
+        method = fields.Str(required=False)
         
         company_id = fields.Int(required=False)
          
@@ -706,7 +706,7 @@ class OrderValidator:
         
         company_id = fields.Int(required=False)
         
-        shipment_id = fields.Str(required=False)
+        shipment_id = fields.Int(required=False)
         
         bag_id = fields.Int(required=False)
          
