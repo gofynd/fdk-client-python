@@ -64,6 +64,9 @@ from ..ApplicationModel import BaseSchema
         
         
         
+    
+    
+        
 
 class OrderValidator:
     
@@ -188,6 +191,13 @@ class OrderValidator:
         to_date = fields.Str(required=False)
         
         search_value = fields.Str(required=False)
+         
+        
+    
+    class updateShipmentStatus1(BaseSchema):
+        
+        
+        shipment_id = fields.Str(required=False)
          
         
     

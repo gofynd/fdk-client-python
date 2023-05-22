@@ -140,4 +140,6 @@ except Exception as e:
 - [Public Front](documentation/public/README.md)
 - [Application Front](documentation/application/README.md)
 - [Platform Front](documentation/platform/README.md)
+- [Admin Front](documentation/admin/README.md)
+- [Partner Front](documentation/partner/README.md)
 
