@@ -344,7 +344,7 @@ class CatalogValidator:
          
         
     
-    class unfollowById(BaseSchema):
+    class followById(BaseSchema):
         
         
         collection_type = fields.Str(required=False)
@@ -353,7 +353,7 @@ class CatalogValidator:
          
         
     
-    class followById(BaseSchema):
+    class unfollowById(BaseSchema):
         
         
         collection_type = fields.Str(required=False)

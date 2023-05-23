@@ -10,6 +10,14 @@ from .enums import *
 
 
 
+class GenerateSEOContent(BaseSchema):
+    pass
+
+
+class GeneratedSEOContent(BaseSchema):
+    pass
+
+
 class ApplicationLegal(BaseSchema):
     pass
 
@@ -19,6 +27,10 @@ class ApplicationLegalFAQ(BaseSchema):
 
 
 class PathMappingSchema(BaseSchema):
+    pass
+
+
+class PathSourceSchema(BaseSchema):
     pass
 
 
@@ -417,6 +429,30 @@ class TagSourceSchema(BaseSchema):
 
 
 
+class GenerateSEOContent(BaseSchema):
+    # Content swagger.json
+
+    
+    text = fields.Str(required=False)
+    
+    existing_text = fields.Str(required=False)
+    
+    keywords = fields.List(fields.Str(required=False), required=False)
+    
+    type = fields.Str(required=False)
+    
+
+
+class GeneratedSEOContent(BaseSchema):
+    # Content swagger.json
+
+    
+    title = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+
+
 class ApplicationLegal(BaseSchema):
     # Content swagger.json
 
@@ -467,7 +503,17 @@ class PathMappingSchema(BaseSchema):
     
     created_at = fields.Str(required=False)
     
-    __source = fields.Nested(TagSourceSchema, required=False)
+    __source = fields.Nested(PathSourceSchema, required=False)
+    
+
+
+class PathSourceSchema(BaseSchema):
+    # Content swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    id = fields.Str(required=False)
     
 
 
@@ -490,6 +536,8 @@ class SeoSchema(BaseSchema):
     robots_txt = fields.Str(required=False)
     
     sitemap_enabled = fields.Boolean(required=False)
+    
+    cannonical_enabled = fields.Boolean(required=False)
     
     custom_meta_tags = fields.List(fields.Dict(required=False), required=False)
     

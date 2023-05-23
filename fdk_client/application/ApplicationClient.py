@@ -30,6 +30,8 @@ from .payment.client import Payment
 
 from .order.client import Order
 
+from .rewards.client import Rewards
+
 from .poscart.client import PosCart
 
 from .logistic.client import Logistic
@@ -51,6 +53,7 @@ class ApplicationClient:
         self.configuration = Configuration(config)
         self.payment = Payment(config)
         self.order = Order(config)
+        self.rewards = Rewards(config)
         self.posCart = PosCart(config)
         self.logistic = Logistic(config)
         

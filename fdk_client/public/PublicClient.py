@@ -7,6 +7,8 @@ from .configuration.client import Configuration
 
 from .webhook.client import Webhook
 
+from .inventory.client import Inventory
+
 
 class PublicClient:
     def __init__(self, config):
@@ -15,6 +17,8 @@ class PublicClient:
         self.configuration = Configuration(config)
         
         self.webhook = Webhook(config)
+        
+        self.inventory = Inventory(config)
         
     
     def setExtraHeaders(self, header):

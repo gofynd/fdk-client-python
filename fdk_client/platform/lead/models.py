@@ -459,10 +459,6 @@ class UserSchema(BaseSchema):
     
     account_type = fields.Str(required=False)
     
-    debug = fields.Nested(Debug, required=False)
-    
-    has_old_password_hash = fields.Boolean(required=False)
-    
     _id = fields.Str(required=False)
     
     created_at = fields.Str(required=False)

@@ -1,6 +1,6 @@
 
 
-"""Partner Platform Client."""
+"""Partner Platform Client"""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -11,6 +11,7 @@ class Partner:
     def __init__(self, config, applicationId):
         self._conf = config
         self.applicationId = applicationId
+
     
     async def addProxyPath(self, extension_id=None, body=""):
         """Add proxy path for external url
@@ -44,7 +45,7 @@ class Partner:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/partners/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/proxy/{extension_id}", extension_id=extension_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
         from .models import AddProxyResponse
@@ -54,7 +55,7 @@ class Partner:
         except Exception as e:
             print("Response Validation failed for addProxyPath")
             print(e)
-            
+
         
 
         return response
@@ -90,7 +91,7 @@ class Partner:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/partners/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/proxy/{extension_id}/{attached_path}", extension_id=extension_id, attached_path=attached_path), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         from .models import RemoveProxyResponse
@@ -100,7 +101,7 @@ class Partner:
         except Exception as e:
             print("Response Validation failed for removeProxyPath")
             print(e)
-            
+
         
 
         return response

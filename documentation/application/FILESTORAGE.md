@@ -23,7 +23,7 @@ Initiates an upload and returns a storage link that is valid for 30 minutes. You
 
 ```python
 try:
-    result = await client.filestorage.startUpload(namespace=namespace, body=body)
+    result = await applicationClient.filestorage.startUpload(namespace=namespace, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -98,7 +98,7 @@ Completes the upload process. After successfully uploading a file, call this API
 
 ```python
 try:
-    result = await client.filestorage.completeUpload(namespace=namespace, body=body)
+    result = await applicationClient.filestorage.completeUpload(namespace=namespace, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -173,7 +173,7 @@ Explain here
 
 ```python
 try:
-    result = await client.filestorage.signUrls(body=body)
+    result = await applicationClient.filestorage.signUrls(body=body)
     # use result
 except Exception as e:
     print(e)

@@ -30,7 +30,7 @@ Get all orders
 
 ```python
 try:
-    result = await client.order.getOrders(pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, status=status)
+    result = await applicationClient.order.getOrders(pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, status=status)
     # use result
 except Exception as e:
     print(e)
@@ -91,7 +91,7 @@ Get details of an order
 
 ```python
 try:
-    result = await client.order.getOrderById(orderId=orderId)
+    result = await applicationClient.order.getOrderById(orderId=orderId)
     # use result
 except Exception as e:
     print(e)
@@ -148,7 +148,7 @@ Get details of a shipment
 
 ```python
 try:
-    result = await client.order.getShipmentById(shipmentId=shipmentId)
+    result = await applicationClient.order.getShipmentById(shipmentId=shipmentId)
     # use result
 except Exception as e:
     print(e)
@@ -205,7 +205,7 @@ Get reasons behind full or partial cancellation of a shipment
 
 ```python
 try:
-    result = await client.order.getShipmentReasons(shipmentId=shipmentId)
+    result = await applicationClient.order.getShipmentReasons(shipmentId=shipmentId)
     # use result
 except Exception as e:
     print(e)
@@ -262,7 +262,7 @@ Update the shipment status
 
 ```python
 try:
-    result = await client.order.updateShipmentStatus(shipmentId=shipmentId, body=body)
+    result = await applicationClient.order.updateShipmentStatus(shipmentId=shipmentId, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -319,7 +319,7 @@ Track shipment
 
 ```python
 try:
-    result = await client.order.trackShipment(shipmentId=shipmentId)
+    result = await applicationClient.order.trackShipment(shipmentId=shipmentId)
     # use result
 except Exception as e:
     print(e)
@@ -376,7 +376,7 @@ Get POS Order
 
 ```python
 try:
-    result = await client.order.getPosOrderById(orderId=orderId)
+    result = await applicationClient.order.getPosOrderById(orderId=orderId)
     # use result
 except Exception as e:
     print(e)
@@ -433,7 +433,7 @@ Get Customer Details by Shipment Id
 
 ```python
 try:
-    result = await client.order.getCustomerDetailsByShipmentId(orderId=orderId, shipmentId=shipmentId)
+    result = await applicationClient.order.getCustomerDetailsByShipmentId(orderId=orderId, shipmentId=shipmentId)
     # use result
 except Exception as e:
     print(e)
@@ -491,7 +491,7 @@ Send and Resend Otp code to Order-Shipment customer
 
 ```python
 try:
-    result = await client.order.sendOtpToShipmentCustomer(orderId=orderId, shipmentId=shipmentId)
+    result = await applicationClient.order.sendOtpToShipmentCustomer(orderId=orderId, shipmentId=shipmentId)
     # use result
 except Exception as e:
     print(e)
@@ -549,7 +549,7 @@ Verify Otp code
 
 ```python
 try:
-    result = await client.order.verifyOtpShipmentCustomer(orderId=orderId, shipmentId=shipmentId, body=body)
+    result = await applicationClient.order.verifyOtpShipmentCustomer(orderId=orderId, shipmentId=shipmentId, body=body)
     # use result
 except Exception as e:
     print(e)

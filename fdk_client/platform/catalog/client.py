@@ -1,6 +1,6 @@
 
 
-""" Catalog Platform Client."""
+"""Catalog Platform Client"""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -10,6 +10,7 @@ from .validator import CatalogValidator
 class Catalog:
     def __init__(self, config):
         self._conf = config
+
     
     async def createProductBundle(self, body=""):
         """Create Product Bundle. See `ProductBundleRequest` for the request body parameter need to create a product bundle. On successful request, returns in `ProductBundleRequest` with id
@@ -41,7 +42,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import GetProductBundleCreateResponse
         schema = GetProductBundleCreateResponse()
         try:
@@ -49,7 +50,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for createProductBundle")
             print(e)
-            
+
         
 
         return response
@@ -87,7 +88,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/", q=q, slug=slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import GetProductBundleListingResponse
         schema = GetProductBundleListingResponse()
         try:
@@ -95,7 +96,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getProductBundle")
             print(e)
-            
+
         
 
         return response
@@ -134,7 +135,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import GetProductBundleCreateResponse
         schema = GetProductBundleCreateResponse()
         try:
@@ -142,7 +143,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for updateProductBundle")
             print(e)
-            
+
         
 
         return response
@@ -176,7 +177,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import GetProductBundleResponse
         schema = GetProductBundleResponse()
         try:
@@ -184,7 +185,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getProductBundleDetail")
             print(e)
-            
+
         
 
         return response
@@ -219,7 +220,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import SuccessResponse
         schema = SuccessResponse()
         try:
@@ -227,7 +228,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for createSizeGuide")
             print(e)
-            
+
         
 
         return response
@@ -277,7 +278,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide", active=active, q=q, tag=tag, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import ListSizeGuide
         schema = ListSizeGuide()
         try:
@@ -285,7 +286,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getSizeGuides")
             print(e)
-            
+
         
 
         return response
@@ -324,7 +325,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import SuccessResponse
         schema = SuccessResponse()
         try:
@@ -332,7 +333,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for updateSizeGuide")
             print(e)
-            
+
         
 
         return response
@@ -366,7 +367,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import SizeGuideResponse
         schema = SizeGuideResponse()
         try:
@@ -374,7 +375,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getSizeGuide")
             print(e)
-            
+
         
 
         return response
@@ -408,7 +409,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/cross-selling/{seller_app_id}/analytics/insights/", seller_app_id=seller_app_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import CrossSellingResponse
         schema = CrossSellingResponse()
         try:
@@ -416,7 +417,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getSellerInsights")
             print(e)
-            
+
         
 
         return response
@@ -455,7 +456,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/{marketplace}/optin/", marketplace=marketplace), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import UpdatedResponse
         schema = UpdatedResponse()
         try:
@@ -463,7 +464,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for createMarketplaceOptin")
             print(e)
-            
+
         
 
         return response
@@ -493,7 +494,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import GetOptInPlatform
         schema = GetOptInPlatform()
         try:
@@ -501,7 +502,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getMarketplaceOptinDetail")
             print(e)
-            
+
         
 
         return response
@@ -531,7 +532,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/company-details/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import OptinCompanyDetail
         schema = OptinCompanyDetail()
         try:
@@ -539,7 +540,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getCompanyDetail")
             print(e)
-            
+
         
 
         return response
@@ -589,7 +590,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/company-brand-details/", is_active=is_active, q=q, page_no=page_no, page_size=page_size, marketplace=marketplace), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import OptinCompanyBrandDetailsView
         schema = OptinCompanyBrandDetailsView()
         try:
@@ -597,7 +598,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getCompanyBrandDetail")
             print(e)
-            
+
         
 
         return response
@@ -627,7 +628,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/company-metrics/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import OptinCompanyMetrics
         schema = OptinCompanyMetrics()
         try:
@@ -635,7 +636,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getCompanyMetrics")
             print(e)
-            
+
         
 
         return response
@@ -677,7 +678,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/location-details/", q=q, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import OptinStoreDetails
         schema = OptinStoreDetails()
         try:
@@ -685,7 +686,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getStoreDetail")
             print(e)
-            
+
         
 
         return response
@@ -719,7 +720,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-attributes/{attribute_slug}", attribute_slug=attribute_slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import GenderDetail
         schema = GenderDetail()
         try:
@@ -727,7 +728,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getGenderAttribute")
             print(e)
-            
+
         
 
         return response
@@ -765,7 +766,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/categories/", departments=departments, item_type=item_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import ProdcutTemplateCategoriesResponse
         schema = ProdcutTemplateCategoriesResponse()
         try:
@@ -773,7 +774,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for listProductTemplateCategories")
             print(e)
-            
+
         
 
         return response
@@ -808,7 +809,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import DepartmentCreateResponse
         schema = DepartmentCreateResponse()
         try:
@@ -816,7 +817,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for createDepartments")
             print(e)
-            
+
         
 
         return response
@@ -866,7 +867,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/", page_no=page_no, page_size=page_size, name=name, search=search, is_active=is_active), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import DepartmentsResponse
         schema = DepartmentsResponse()
         try:
@@ -874,7 +875,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for listDepartmentsData")
             print(e)
-            
+
         
 
         return response
@@ -913,7 +914,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/{uid}/", uid=uid), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import DepartmentModel
         schema = DepartmentModel()
         try:
@@ -921,7 +922,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for updateDepartment")
             print(e)
-            
+
         
 
         return response
@@ -955,7 +956,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/{uid}/", uid=uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import DepartmentsResponse
         schema = DepartmentsResponse()
         try:
@@ -963,7 +964,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getDepartmentData")
             print(e)
-            
+
         
 
         return response
@@ -997,7 +998,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/", department=department), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import TemplatesResponse
         schema = TemplatesResponse()
         try:
@@ -1005,7 +1006,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for listProductTemplate")
             print(e)
-            
+
         
 
         return response
@@ -1039,7 +1040,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/{slug}/validation/schema/", slug=slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import TemplatesValidationResponse
         schema = TemplatesValidationResponse()
         try:
@@ -1047,7 +1048,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for validateProductTemplate")
             print(e)
-            
+
         
 
         return response
@@ -1145,7 +1146,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/templates/validation/schema/", item_type=item_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import InventoryValidationResponse
         schema = InventoryValidationResponse()
         try:
@@ -1153,7 +1154,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for validateProductTemplateSchema")
             print(e)
-            
+
         
 
         return response
@@ -1183,7 +1184,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/hsn/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import HSNCodesResponse
         schema = HSNCodesResponse()
         try:
@@ -1191,7 +1192,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for listHSNCodes")
             print(e)
-            
+
         
 
         return response
@@ -1221,7 +1222,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/downloads/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import ProductDownloadsResponse
         schema = ProductDownloadsResponse()
         try:
@@ -1229,7 +1230,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for listProductTemplateExportDetails")
             print(e)
-            
+
         
 
         return response
@@ -1263,7 +1264,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/downloads/configuration/", filter=filter), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import ProductConfigurationDownloads
         schema = ProductConfigurationDownloads()
         try:
@@ -1271,7 +1272,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for listTemplateBrandTypeValues")
             print(e)
-            
+
         
 
         return response
@@ -1306,7 +1307,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import CategoryCreateResponse
         schema = CategoryCreateResponse()
         try:
@@ -1314,7 +1315,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for createCategories")
             print(e)
-            
+
         
 
         return response
@@ -1364,7 +1365,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/", level=level, departments=departments, q=q, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import CategoryResponse
         schema = CategoryResponse()
         try:
@@ -1372,7 +1373,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for listCategories")
             print(e)
-            
+
         
 
         return response
@@ -1411,7 +1412,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/{uid}/", uid=uid), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import CategoryUpdateResponse
         schema = CategoryUpdateResponse()
         try:
@@ -1419,7 +1420,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for updateCategory")
             print(e)
-            
+
         
 
         return response
@@ -1453,7 +1454,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/{uid}/", uid=uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import SingleCategoryResponse
         schema = SingleCategoryResponse()
         try:
@@ -1461,7 +1462,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getCategoryData")
             print(e)
-            
+
         
 
         return response
@@ -1496,7 +1497,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import SuccessResponse
         schema = SuccessResponse()
         try:
@@ -1504,7 +1505,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for createProduct")
             print(e)
-            
+
         
 
         return response
@@ -1570,7 +1571,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/", brand_ids=brand_ids, category_ids=category_ids, item_ids=item_ids, department_ids=department_ids, item_code=item_code, q=q, tags=tags, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import ProductListingResponse
         schema = ProductListingResponse()
         try:
@@ -1578,7 +1579,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getProducts")
             print(e)
-            
+
         
 
         return response
@@ -1624,7 +1625,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/variants/{variant_type}", item_id=item_id, variant_type=variant_type, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import ProductVariantsResponse
         schema = ProductVariantsResponse()
         try:
@@ -1632,7 +1633,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getVariantsOfProducts")
             print(e)
-            
+
         
 
         return response
@@ -1670,7 +1671,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-attributes/", category=category, filter=filter), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import ProductAttributesResponse
         schema = ProductAttributesResponse()
         try:
@@ -1678,7 +1679,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getProductAttributes")
             print(e)
-            
+
         
 
         return response
@@ -1717,7 +1718,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import SuccessResponse
         schema = SuccessResponse()
         try:
@@ -1725,7 +1726,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for editProduct")
             print(e)
-            
+
         
 
         return response
@@ -1767,7 +1768,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/", item_code=item_code, item_id=item_id, brand_uid=brand_uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import Product
         schema = Product()
         try:
@@ -1775,7 +1776,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getProduct")
             print(e)
-            
+
         
 
         return response
@@ -1809,7 +1810,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import SuccessResponse
         schema = SuccessResponse()
         try:
@@ -1817,7 +1818,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for deleteProduct")
             print(e)
-            
+
         
 
         return response
@@ -1847,7 +1848,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/validation/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import ValidateProduct
         schema = ValidateProduct()
         try:
@@ -1855,7 +1856,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getProductValidation")
             print(e)
-            
+
         
 
         return response
@@ -1901,7 +1902,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/", item_code=item_code, item_id=item_id, brand_uid=brand_uid, uid=uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import ProductListingResponse
         schema = ProductListingResponse()
         try:
@@ -1909,7 +1910,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getProductSize")
             print(e)
-            
+
         
 
         return response
@@ -1944,7 +1945,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import BulkResponse
         schema = BulkResponse()
         try:
@@ -1952,7 +1953,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for createBulkProductUploadJob")
             print(e)
-            
+
         
 
         return response
@@ -1994,7 +1995,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk", search=search, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import ProductBulkRequestList
         schema = ProductBulkRequestList()
         try:
@@ -2002,7 +2003,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getProductBulkUploadHistory")
             print(e)
-            
+
         
 
         return response
@@ -2045,7 +2046,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/bulk", department=department, product_type=product_type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import BulkResponse
         schema = BulkResponse()
         try:
@@ -2053,7 +2054,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for uploadBulkProducts")
             print(e)
-            
+
         
 
         return response
@@ -2092,7 +2093,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk/{batch_id}", batch_id=batch_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import SuccessResponse
         schema = SuccessResponse()
         try:
@@ -2100,7 +2101,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for createProductsInBulk")
             print(e)
-            
+
         
 
         return response
@@ -2134,7 +2135,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk/{batch_id}", batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import SuccessResponse
         schema = SuccessResponse()
         try:
@@ -2142,7 +2143,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for deleteProductBulkJob")
             print(e)
-            
+
         
 
         return response
@@ -2172,7 +2173,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/tags", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import ProductTagsViewResponse
         schema = ProductTagsViewResponse()
         try:
@@ -2180,7 +2181,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getProductTags")
             print(e)
-            
+
         
 
         return response
@@ -2215,7 +2216,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/assets/bulk/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import SuccessResponse
         schema = SuccessResponse()
         try:
@@ -2223,7 +2224,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for createProductAssetsInBulk")
             print(e)
-            
+
         
 
         return response
@@ -2261,7 +2262,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/assets/bulk/", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import BulkAssetResponse
         schema = BulkAssetResponse()
         try:
@@ -2269,7 +2270,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getProductAssetsInBulk")
             print(e)
-            
+
         
 
         return response
@@ -2307,7 +2308,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/{size}", item_id=item_id, size=size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import ProductSizeDeleteResponse
         schema = ProductSizeDeleteResponse()
         try:
@@ -2315,7 +2316,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for deleteSize")
             print(e)
-            
+
         
 
         return response
@@ -2358,7 +2359,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/{size}", item_id=item_id, size=size), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import SuccessResponse
         schema = SuccessResponse()
         try:
@@ -2366,7 +2367,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for addInventory")
             print(e)
-            
+
         
 
         return response
@@ -2420,7 +2421,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/{size}", item_id=item_id, size=size, page_no=page_no, page_size=page_size, q=q, sellable=sellable), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import InventoryResponsePaginated
         schema = InventoryResponsePaginated()
         try:
@@ -2428,7 +2429,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getInventoryBySize")
             print(e)
-            
+
         
 
         return response
@@ -2482,7 +2483,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/inventory/{size_identifier}", item_id=item_id, size_identifier=size_identifier, page_no=page_no, page_size=page_size, q=q, location_ids=location_ids), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import InventorySellerIdentifierResponsePaginated
         schema = InventorySellerIdentifierResponsePaginated()
         try:
@@ -2490,7 +2491,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getInventoryBySizeIdentifier")
             print(e)
-            
+
         
 
         return response
@@ -2532,7 +2533,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/{size}/location/{location_id}/", size=size, item_id=item_id, location_id=location_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import SuccessResponse
         schema = SuccessResponse()
         try:
@@ -2540,7 +2541,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for deleteInventory")
             print(e)
-            
+
         
 
         return response
@@ -2575,7 +2576,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import BulkResponse
         schema = BulkResponse()
         try:
@@ -2583,7 +2584,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for createBulkInventoryJob")
             print(e)
-            
+
         
 
         return response
@@ -2621,7 +2622,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import BulkInventoryGet
         schema = BulkInventoryGet()
         try:
@@ -2629,7 +2630,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getInventoryBulkUploadHistory")
             print(e)
-            
+
         
 
         return response
@@ -2668,7 +2669,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/{batch_id}/", batch_id=batch_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import SuccessResponse
         schema = SuccessResponse()
         try:
@@ -2676,7 +2677,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for createBulkInventory")
             print(e)
-            
+
         
 
         return response
@@ -2710,7 +2711,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/{batch_id}/", batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import SuccessResponse
         schema = SuccessResponse()
         try:
@@ -2718,7 +2719,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for deleteBulkInventoryJob")
             print(e)
-            
+
         
 
         return response
@@ -2753,7 +2754,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/download/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import InventoryExportResponse
         schema = InventoryExportResponse()
         try:
@@ -2761,7 +2762,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for createInventoryExportJob")
             print(e)
-            
+
         
 
         return response
@@ -2791,7 +2792,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/download/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import InventoryExportJob
         schema = InventoryExportJob()
         try:
@@ -2799,7 +2800,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getInventoryExport")
             print(e)
-            
+
         
 
         return response
@@ -2833,7 +2834,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/download/configuration/", filter_type=filter_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import InventoryConfig
         schema = InventoryConfig()
         try:
@@ -2841,7 +2842,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for exportInventoryConfig")
             print(e)
-            
+
         
 
         return response
@@ -2884,7 +2885,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/inventory/{seller_identifier}/", item_id=item_id, seller_identifier=seller_identifier), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import InventoryUpdateResponse
         schema = InventoryUpdateResponse()
         try:
@@ -2892,7 +2893,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for updateRealtimeInventory")
             print(e)
-            
+
         
 
         return response
@@ -2935,7 +2936,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/inventory/{seller_identifier}/", item_id=item_id, seller_identifier=seller_identifier), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import InventoryUpdateResponse
         schema = InventoryUpdateResponse()
         try:
@@ -2943,7 +2944,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for deleteRealtimeInventory")
             print(e)
-            
+
         
 
         return response
@@ -2978,7 +2979,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/inventory/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import InventoryUpdateResponse
         schema = InventoryUpdateResponse()
         try:
@@ -2986,7 +2987,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for updateInventories")
             print(e)
-            
+
         
 
         return response
@@ -3021,7 +3022,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/hsn/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import HsnCode
         schema = HsnCode()
         try:
@@ -3029,7 +3030,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for createHsnCode")
             print(e)
-            
+
         
 
         return response
@@ -3071,7 +3072,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/hsn/", page_no=page_no, page_size=page_size, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import HsnCodesListingResponse
         schema = HsnCodesListingResponse()
         try:
@@ -3079,7 +3080,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getAllHsnCodes")
             print(e)
-            
+
         
 
         return response
@@ -3118,7 +3119,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/hsn/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import HsnCode
         schema = HsnCode()
         try:
@@ -3126,7 +3127,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for updateHsnCode")
             print(e)
-            
+
         
 
         return response
@@ -3160,7 +3161,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/hsn/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import HsnCode
         schema = HsnCode()
         try:
@@ -3168,7 +3169,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getHsnCode")
             print(e)
-            
+
         
 
         return response
@@ -3203,7 +3204,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/hsn/bulk/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import BulkHsnResponse
         schema = BulkHsnResponse()
         try:
@@ -3211,7 +3212,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for bulkHsnCode")
             print(e)
-            
+
         
 
         return response
@@ -3257,7 +3258,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/hsn/", page_no=page_no, page_size=page_size, q=q, type=type, ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import HsnCodesListingResponseSchemaV2
         schema = HsnCodesListingResponseSchemaV2()
         try:
@@ -3265,7 +3266,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getAllProductHsnCodes")
             print(e)
-            
+
         
 
         return response
@@ -3299,7 +3300,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/hsn/{reporting_hsn}", reporting_hsn=reporting_hsn, ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import HSNDataInsertV2
         schema = HSNDataInsertV2()
         try:
@@ -3307,7 +3308,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getSingleProductHSNCode")
             print(e)
-            
+
         
 
         return response
@@ -3342,7 +3343,7 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/location/reassign/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import StoreAssignResponse
         schema = StoreAssignResponse()
         try:
@@ -3350,7 +3351,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getOptimalLocations")
             print(e)
-            
+
         
 
         return response
