@@ -121,7 +121,7 @@ class UserValidator:
         
         application_id = fields.Str(required=False)
         
-        q = fields.Dict(required=False)
+        q = fields.Str(required=False)
          
         
     
