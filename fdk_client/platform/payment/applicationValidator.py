@@ -21,10 +21,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
-        
-        
         
         
     
@@ -75,15 +71,6 @@ class PaymentValidator:
         
     
     class saveBrandPaymentGatewayConfig(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class updateBrandPaymentGatewayConfig(BaseSchema):
         
         
         company_id = fields.Int(required=False)
