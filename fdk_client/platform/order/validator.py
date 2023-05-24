@@ -261,9 +261,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
-        
 
 
 
@@ -713,13 +710,6 @@ class OrderValidator:
         
     
     class sendSmsNinja(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class platformManualAssignDPToShipment(BaseSchema):
         
         
         company_id = fields.Int(required=False)

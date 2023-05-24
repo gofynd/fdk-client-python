@@ -141,6 +141,28 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
 
 class PaymentValidator:
     
@@ -427,6 +449,55 @@ class PaymentValidator:
         
     
     class verifyCustomerForPayment(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getPaymentLink(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        payment_link_id = fields.Str(required=False)
+         
+        
+    
+    class createPaymentLink(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class pollingPaymentLink(BaseSchema):
+        
+        
+        payment_link_id = fields.Str(required=False)
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class resendPaymentLink(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class cancelPaymentLink(BaseSchema):
         
         
         company_id = fields.Int(required=False)
