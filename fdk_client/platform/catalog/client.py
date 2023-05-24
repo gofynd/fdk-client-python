@@ -779,22 +779,19 @@ class Catalog:
 
         return response
     
-    async def listDepartmentsData(self, page_no=None, item_type=None, page_size=None, name=None, search=None, is_active=None):
-        """Allows you to list all departments, also can search using name and filter active and incative departments, and item type.
-        :param page_no : The page number to navigate through the given set of results : type integer
-        :param item_type : A `item_type` is a type of product eg. set, standard, digital : type string
-        :param page_size : Number of items to retrieve in each page. Default is 10. : type integer
-        :param name : Can search departments by passing name. : type string
-        :param search : Can search departments by passing name of the department in search parameter. : type string
-        :param is_active : Can query for departments based on whether they are active or inactive. : type boolean
+    async def listDepartments(self, page_no=None, page_size=None, name=None, search=None, is_active=None, item_type=None):
+        """This API endpoint allows you to retrieve a paginated list of departments based on different filters, such as name, search term, and department status (active or inactive).
+        :param page_no : The page number of results to retrieve. Defaults to 1 if not provided. : type integer
+        :param page_size : The number of results to retrieve per page. Defaults to 12 if not provided. : type integer
+        :param name : Filter departments by name. Performs a case-insensitive search across department names. If provided, only departments with matching names will be returned. : type string
+        :param search : Filter departments by a search term. Performs a case-insensitive search across department names. If provided, departments with names containing the search term will be returned. : type string
+        :param is_active : Filter departments by active status. If set to `true`, only active departments will be returned. If set to `false`, only inactive departments will be returned. : type boolean
+        :param item_type : Filter departments by the type of product. : type string
         """
         payload = {}
         
         if page_no:
             payload["page_no"] = page_no
-        
-        if item_type:
-            payload["item_type"] = item_type
         
         if page_size:
             payload["page_size"] = page_size
@@ -808,14 +805,17 @@ class Catalog:
         if is_active:
             payload["is_active"] = is_active
         
+        if item_type:
+            payload["item_type"] = item_type
+        
 
         # Parameter validation
-        schema = CatalogValidator.listDepartmentsData()
+        schema = CatalogValidator.listDepartments()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"item_type","description":"A `item_type` is a type of product eg. set, standard, digital","schema":{"type":"string"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer"},"required":false},{"in":"query","name":"name","description":"Can search departments by passing name.","schema":{"type":"string"},"required":false},{"in":"query","name":"search","description":"Can search departments by passing name of the department in search parameter.","schema":{"type":"string"},"required":false},{"in":"query","name":"is_active","description":"Can query for departments based on whether they are active or inactive.","schema":{"type":"boolean"},"required":false}],"query":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"item_type","description":"A `item_type` is a type of product eg. set, standard, digital","schema":{"type":"string"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer"},"required":false},{"in":"query","name":"name","description":"Can search departments by passing name.","schema":{"type":"string"},"required":false},{"in":"query","name":"search","description":"Can search departments by passing name of the department in search parameter.","schema":{"type":"string"},"required":false},{"in":"query","name":"is_active","description":"Can query for departments based on whether they are active or inactive.","schema":{"type":"boolean"},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}]}""", page_no=page_no, item_type=item_type, page_size=page_size, name=name, search=search, is_active=is_active)
-        query_string = await create_query_string(page_no=page_no, item_type=item_type, page_size=page_size, name=name, search=search, is_active=is_active)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1},"example":1,"required":true}],"optional":[{"in":"query","name":"page_no","description":"The page number of results to retrieve. Defaults to 1 if not provided.","schema":{"type":"integer","format":"int32","minimum":1,"default":1},"example":1,"required":false},{"in":"query","name":"page_size","description":"The number of results to retrieve per page. Defaults to 12 if not provided.","schema":{"type":"integer","format":"int32","minimum":0,"default":12},"example":10,"required":false},{"in":"query","name":"name","description":"Filter departments by name. Performs a case-insensitive search across department names. If provided, only departments with matching names will be returned.","schema":{"type":"string"},"example":"Fashion","required":false},{"in":"query","name":"search","description":"Filter departments by a search term. Performs a case-insensitive search across department names. If provided, departments with names containing the search term will be returned.","schema":{"type":"string"},"example":"men","required":false},{"in":"query","name":"is_active","description":"Filter departments by active status. If set to `true`, only active departments will be returned. If set to `false`, only inactive departments will be returned.","schema":{"type":"boolean"},"example":false,"required":false},{"in":"query","name":"item_type","description":"Filter departments by the type of product.","schema":{"type":"string","enum":["standard","set","composite","digital"]},"examples":{"Unique department of standard type products":{"summary":"Unique department of standard type products","value":"standard"},"Unique department of set type products":{"summary":"Unique department of set type products","value":"set"},"Unique department of composite type products":{"summary":"Unique department of composite type products","value":"composite"},"Unique department of digital type products":{"summary":"Unique department of digital type products","value":"digital"}},"required":false}],"query":[{"in":"query","name":"page_no","description":"The page number of results to retrieve. Defaults to 1 if not provided.","schema":{"type":"integer","format":"int32","minimum":1,"default":1},"example":1,"required":false},{"in":"query","name":"page_size","description":"The number of results to retrieve per page. Defaults to 12 if not provided.","schema":{"type":"integer","format":"int32","minimum":0,"default":12},"example":10,"required":false},{"in":"query","name":"name","description":"Filter departments by name. Performs a case-insensitive search across department names. If provided, only departments with matching names will be returned.","schema":{"type":"string"},"example":"Fashion","required":false},{"in":"query","name":"search","description":"Filter departments by a search term. Performs a case-insensitive search across department names. If provided, departments with names containing the search term will be returned.","schema":{"type":"string"},"example":"men","required":false},{"in":"query","name":"is_active","description":"Filter departments by active status. If set to `true`, only active departments will be returned. If set to `false`, only inactive departments will be returned.","schema":{"type":"boolean"},"example":false,"required":false},{"in":"query","name":"item_type","description":"Filter departments by the type of product.","schema":{"type":"string","enum":["standard","set","composite","digital"]},"examples":{"Unique department of standard type products":{"summary":"Unique department of standard type products","value":"standard"},"Unique department of set type products":{"summary":"Unique department of set type products","value":"set"},"Unique department of composite type products":{"summary":"Unique department of composite type products","value":"composite"},"Unique department of digital type products":{"summary":"Unique department of digital type products","value":"digital"}},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1},"example":1,"required":true}]}""", page_no=page_no, page_size=page_size, name=name, search=search, is_active=is_active, item_type=item_type)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, name=name, search=search, is_active=is_active, item_type=item_type)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -825,68 +825,25 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/", page_no=page_no, item_type=item_type, page_size=page_size, name=name, search=search, is_active=is_active), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/", page_no=page_no, page_size=page_size, name=name, search=search, is_active=is_active, item_type=item_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
 
-        from .models import DepartmentsResponse
-        schema = DepartmentsResponse()
+        from .models import DepartmentListResponse
+        schema = DepartmentListResponse()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
-            print("Response Validation failed for listDepartmentsData")
+            print("Response Validation failed for listDepartments")
             print(e)
 
         
 
         return response
     
-    async def createDepartments(self, body=""):
-        """Create departments using the API.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = CatalogValidator.createDepartments()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import DepartmentCreateUpdate
-        schema = DepartmentCreateUpdate()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}]}""", )
-        query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        
-
-        from .models import DepartmentCreateResponse
-        schema = DepartmentCreateResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createDepartments")
-            print(e)
-
-        
-
-        return response
-    
-    async def getDepartmentData(self, uid=None):
-        """Allows you to get department data, by uid.
-        :param uid : A `uid` is a unique identifier of a department. : type string
+    async def getDepartment(self, uid=None):
+        """This API is used to retrieve detailed information about a specific department based on its UID.
+        :param uid : A unique identifier of a department. Retrieve the department with the specified UID. : type integer
         """
         payload = {}
         
@@ -895,11 +852,11 @@ class Catalog:
         
 
         # Parameter validation
-        schema = CatalogValidator.getDepartmentData()
+        schema = CatalogValidator.getDepartment()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/{uid}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"uid","description":"A `uid` is a unique identifier of a department.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"uid","description":"A `uid` is a unique identifier of a department.","schema":{"type":"string"},"required":true}]}""", uid=uid)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/{uid}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1},"example":1,"required":true},{"in":"path","name":"uid","description":"A unique identifier of a department. Retrieve the department with the specified UID.","schema":{"type":"integer","format":"int32"},"example":1,"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1},"example":1,"required":true},{"in":"path","name":"uid","description":"A unique identifier of a department. Retrieve the department with the specified UID.","schema":{"type":"integer","format":"int32"},"example":1,"required":true}]}""", uid=uid)
         query_string = await create_query_string(uid=uid)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -914,59 +871,12 @@ class Catalog:
 
         
 
-        from .models import DepartmentsResponse
-        schema = DepartmentsResponse()
+        from .models import DepartmentUpdate
+        schema = DepartmentUpdate()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
-            print("Response Validation failed for getDepartmentData")
-            print(e)
-
-        
-
-        return response
-    
-    async def updateDepartment(self, uid=None, body=""):
-        """Update the department by their uid using this API.
-        :param uid : A `uid` is a unique identifier of a department. : type string
-        """
-        payload = {}
-        
-        if uid:
-            payload["uid"] = uid
-        
-
-        # Parameter validation
-        schema = CatalogValidator.updateDepartment()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import DepartmentCreateUpdate
-        schema = DepartmentCreateUpdate()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/{uid}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"uid","description":"A `uid` is a unique identifier of a department.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"uid","description":"A `uid` is a unique identifier of a department.","schema":{"type":"string"},"required":true}]}""", uid=uid)
-        query_string = await create_query_string(uid=uid)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/{uid}/", uid=uid), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        
-
-        from .models import DepartmentModel
-        schema = DepartmentModel()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateDepartment")
+            print("Response Validation failed for getDepartment")
             print(e)
 
         
@@ -1793,6 +1703,48 @@ class Catalog:
 
         return response
     
+    async def deleteProduct(self, item_id=None):
+        """This API allows to delete product.
+        :param item_id : Id of the product to be updated. : type integer
+        """
+        payload = {}
+        
+        if item_id:
+            payload["item_id"] = item_id
+        
+
+        # Parameter validation
+        schema = CatalogValidator.deleteProduct()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", """{"required":[{"in":"path","name":"company_id","description":"Company Id of the company associated to product that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Id of the product to be updated.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of the company associated to product that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Id of the product to be updated.","schema":{"type":"integer"},"required":true}]}""", item_id=item_id)
+        query_string = await create_query_string(item_id=item_id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        from .models import SuccessResponse
+        schema = SuccessResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for deleteProduct")
+            print(e)
+
+        
+
+        return response
+    
     async def getProduct(self, item_id=None, brand_uid=None, item_code=None):
         """This API helps to get data associated to a particular product.
         :param item_id : Item Id of the product. : type integer
@@ -1884,48 +1836,6 @@ class Catalog:
             schema.dump(schema.load(response))
         except Exception as e:
             print("Response Validation failed for editProduct")
-            print(e)
-
-        
-
-        return response
-    
-    async def deleteProduct(self, item_id=None):
-        """This API allows to delete product.
-        :param item_id : Id of the product to be updated. : type integer
-        """
-        payload = {}
-        
-        if item_id:
-            payload["item_id"] = item_id
-        
-
-        # Parameter validation
-        schema = CatalogValidator.deleteProduct()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", """{"required":[{"in":"path","name":"company_id","description":"Company Id of the company associated to product that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Id of the product to be updated.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of the company associated to product that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Id of the product to be updated.","schema":{"type":"integer"},"required":true}]}""", item_id=item_id)
-        query_string = await create_query_string(item_id=item_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        from .models import SuccessResponse
-        schema = SuccessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteProduct")
             print(e)
 
         

@@ -97,13 +97,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
-        
-        
-    
-    
-        
         
     
     
@@ -197,10 +190,10 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
-        
     
     
+        
+        
         
         
     
@@ -546,14 +539,12 @@ class CatalogValidator:
          
         
     
-    class listDepartmentsData(BaseSchema):
+    class listDepartments(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
         page_no = fields.Int(required=False)
-        
-        item_type = fields.Str(required=False)
         
         page_size = fields.Int(required=False)
         
@@ -562,31 +553,17 @@ class CatalogValidator:
         search = fields.Str(required=False)
         
         is_active = fields.Boolean(required=False)
+        
+        item_type = fields.Str(required=False)
          
         
     
-    class createDepartments(BaseSchema):
+    class getDepartment(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
-         
+        company_id = fields.Int(required=False)
         
-    
-    class getDepartmentData(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        uid = fields.Str(required=False)
-         
-        
-    
-    class updateDepartment(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        uid = fields.Str(required=False)
+        uid = fields.Int(required=False)
          
         
     
@@ -784,6 +761,15 @@ class CatalogValidator:
          
         
     
+    class deleteProduct(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        item_id = fields.Int(required=False)
+         
+        
+    
     class getProduct(BaseSchema):
         
         
@@ -798,15 +784,6 @@ class CatalogValidator:
         
     
     class editProduct(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        item_id = fields.Int(required=False)
-         
-        
-    
-    class deleteProduct(BaseSchema):
         
         
         company_id = fields.Str(required=False)
