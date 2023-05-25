@@ -27,6 +27,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -75,6 +76,8 @@ class OrderValidator:
         customer_id = fields.Str(required=False)
         
         is_priority_sort = fields.Boolean(required=False)
+        
+        exclude_locked_shipments = fields.Boolean(required=False)
          
         
     
