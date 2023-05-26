@@ -23,7 +23,7 @@ Get communication consent
 
 ```python
 try:
-    result = await client.communication.getCommunicationConsent()
+    result = await applicationClient.communication.getCommunicationConsent()
     # use result
 except Exception as e:
     print(e)
@@ -102,7 +102,7 @@ Upsert communication consent
 
 ```python
 try:
-    result = await client.communication.upsertCommunicationConsent(body=body)
+    result = await applicationClient.communication.upsertCommunicationConsent(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -183,7 +183,7 @@ Upsert push token of a user
 
 ```python
 try:
-    result = await client.communication.upsertAppPushtoken(body=body)
+    result = await applicationClient.communication.upsertAppPushtoken(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -382,6 +382,29 @@ Success. Check the example shown below or refer `PushtokenRes` for more details.
  | appId | String? |  yes  |  |
  | userId | String? |  yes  |  |
  | channels | [CommunicationConsentChannels](#CommunicationConsentChannels)? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [BadRequestSchema](#BadRequestSchema)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | status | String? |  yes  | Response status. |
+ | message | String? |  yes  | Failure message. |
+
+---
+
+
+ 
+ 
+ #### [NotFound](#NotFound)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | message | String? |  yes  | Failure message. |
 
 ---
 

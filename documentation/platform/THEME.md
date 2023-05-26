@@ -44,7 +44,7 @@ Get all pages of a theme
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").theme.getAllPages(themeId=themeId)
+    result = await platformClient.application("<APPLICATION_ID>").theme.getAllPages(themeId=themeId)
     # use result
 except Exception as e:
     print(e)
@@ -161,6 +161,21 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "__v": 9
       },
       {
+        "path": "product/:slug/reviews",
+        "type": "system",
+        "seo": {
+          "title": "",
+          "description": "",
+          "_id": "60ab5ca6d572fed64294eb24"
+        },
+        "_id": "60ab5ca6d572fed64294eb25",
+        "sections_meta": [],
+        "value": "product-reviews",
+        "text": "Product Reviews",
+        "theme": "5fb3ee4194a5181feeeba8e5",
+        "__v": 9
+      },
+      {
         "path": "blog",
         "type": "system",
         "seo": {
@@ -233,6 +248,21 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "text": "Wishlist",
         "theme": "5fb3ee4194a5181feeeba8e5",
         "sections_meta": [],
+        "__v": 9
+      },
+      {
+        "path": "product/:slug/add-review",
+        "type": "system",
+        "seo": {
+          "title": "",
+          "description": "",
+          "_id": "60ab5ca6d572fed64294eb26"
+        },
+        "_id": "60ab5ca6d572fed64294eb27",
+        "sections_meta": [],
+        "value": "add-product-review",
+        "text": "Add Product Review",
+        "theme": "5fb3ee4194a5181feeeba8e5",
         "__v": 9
       },
       {
@@ -367,7 +397,7 @@ Create a page
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").theme.createPage(themeId=themeId, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").theme.createPage(themeId=themeId, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -792,7 +822,7 @@ Update multiple pages of a theme
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").theme.updateMultiplePages(themeId=themeId, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").theme.updateMultiplePages(themeId=themeId, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -909,6 +939,21 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "__v": 9
       },
       {
+        "path": "product/:slug/reviews",
+        "type": "system",
+        "seo": {
+          "title": "",
+          "description": "",
+          "_id": "60ab5ca6d572fed64294eb24"
+        },
+        "_id": "60ab5ca6d572fed64294eb25",
+        "sections_meta": [],
+        "value": "product-reviews",
+        "text": "Product Reviews",
+        "theme": "5fb3ee4194a5181feeeba8e5",
+        "__v": 9
+      },
+      {
         "path": "blog",
         "type": "system",
         "seo": {
@@ -981,6 +1026,21 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "text": "Wishlist",
         "theme": "5fb3ee4194a5181feeeba8e5",
         "sections_meta": [],
+        "__v": 9
+      },
+      {
+        "path": "product/:slug/add-review",
+        "type": "system",
+        "seo": {
+          "title": "",
+          "description": "",
+          "_id": "60ab5ca6d572fed64294eb26"
+        },
+        "_id": "60ab5ca6d572fed64294eb27",
+        "sections_meta": [],
+        "value": "add-product-review",
+        "text": "Add Product Review",
+        "theme": "5fb3ee4194a5181feeeba8e5",
         "__v": 9
       },
       {
@@ -1115,7 +1175,7 @@ Get page of a theme
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").theme.getPage(themeId=themeId, pageValue=pageValue)
+    result = await platformClient.application("<APPLICATION_ID>").theme.getPage(themeId=themeId, pageValue=pageValue)
     # use result
 except Exception as e:
     print(e)
@@ -1541,7 +1601,7 @@ Updates a page
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").theme.updatePage(themeId=themeId, pageValue=pageValue, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").theme.updatePage(themeId=themeId, pageValue=pageValue, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1967,7 +2027,7 @@ Deletes a page
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").theme.deletePage(themeId=themeId, pageValue=pageValue)
+    result = await platformClient.application("<APPLICATION_ID>").theme.deletePage(themeId=themeId, pageValue=pageValue)
     # use result
 except Exception as e:
     print(e)
@@ -2393,7 +2453,7 @@ Get a list of themes from the theme library
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").theme.getThemeLibrary(pageSize=pageSize, pageNo=pageNo)
+    result = await platformClient.application("<APPLICATION_ID>").theme.getThemeLibrary(pageSize=pageSize, pageNo=pageNo)
     # use result
 except Exception as e:
     print(e)
@@ -4358,7 +4418,7 @@ Add a theme to the theme library
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").theme.addToThemeLibrary(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").theme.addToThemeLibrary(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -4824,6 +4884,11 @@ Success. Refer `ThemesSchema` for more details.
       "page_schema": [
         {
           "props": [],
+          "_id": "5fe182f763d26d042fd205c4",
+          "page": "add-product-review"
+        },
+        {
+          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -5033,6 +5098,11 @@ Success. Refer `ThemesSchema` for more details.
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
+        },
+        {
+          "props": [],
+          "_id": "5fe182f763d26d3d18d205d4",
+          "page": "product-reviews"
         },
         {
           "props": [],
@@ -6544,7 +6614,7 @@ Apply a theme
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").theme.applyTheme(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").theme.applyTheme(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -7010,6 +7080,11 @@ Success. Refer `ThemesSchema` for more details.
       "page_schema": [
         {
           "props": [],
+          "_id": "5fe182f763d26d042fd205c4",
+          "page": "add-product-review"
+        },
+        {
+          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -7219,6 +7294,11 @@ Success. Refer `ThemesSchema` for more details.
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
+        },
+        {
+          "props": [],
+          "_id": "5fe182f763d26d3d18d205d4",
+          "page": "product-reviews"
         },
         {
           "props": [],
@@ -8730,7 +8810,7 @@ Checks if theme is upgradable
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").theme.isUpgradable(themeId=themeId)
+    result = await platformClient.application("<APPLICATION_ID>").theme.isUpgradable(themeId=themeId)
     # use result
 except Exception as e:
     print(e)
@@ -8799,7 +8879,7 @@ Upgrade a theme
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").theme.upgradeTheme(themeId=themeId)
+    result = await platformClient.application("<APPLICATION_ID>").theme.upgradeTheme(themeId=themeId)
     # use result
 except Exception as e:
     print(e)
@@ -9266,6 +9346,11 @@ Success. Upgrades the theme and shares the details of the new version in the res
       "page_schema": [
         {
           "props": [],
+          "_id": "5fe182f763d26d042fd205c4",
+          "page": "add-product-review"
+        },
+        {
+          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -9475,6 +9560,11 @@ Success. Upgrades the theme and shares the details of the new version in the res
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
+        },
+        {
+          "props": [],
+          "_id": "5fe182f763d26d3d18d205d4",
+          "page": "product-reviews"
         },
         {
           "props": [],
@@ -10986,7 +11076,7 @@ Get all public themes
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").theme.getPublicThemes(pageSize=pageSize, pageNo=pageNo)
+    result = await platformClient.application("<APPLICATION_ID>").theme.getPublicThemes(pageSize=pageSize, pageNo=pageNo)
     # use result
 except Exception as e:
     print(e)
@@ -12951,7 +13041,7 @@ Create a new theme
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").theme.createTheme(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").theme.createTheme(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -13417,6 +13507,11 @@ Theme
       "page_schema": [
         {
           "props": [],
+          "_id": "5fe182f763d26d042fd205c4",
+          "page": "add-product-review"
+        },
+        {
+          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -13626,6 +13721,11 @@ Theme
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
+        },
+        {
+          "props": [],
+          "_id": "5fe182f763d26d3d18d205d4",
+          "page": "product-reviews"
         },
         {
           "props": [],
@@ -15137,7 +15237,7 @@ Get the applied theme
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").theme.getAppliedTheme()
+    result = await platformClient.application("<APPLICATION_ID>").theme.getAppliedTheme()
     # use result
 except Exception as e:
     print(e)
@@ -15599,6 +15699,11 @@ Success. Refer `ThemesSchema` for more details.
       "page_schema": [
         {
           "props": [],
+          "_id": "5fe182f763d26d042fd205c4",
+          "page": "add-product-review"
+        },
+        {
+          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -15808,6 +15913,11 @@ Success. Refer `ThemesSchema` for more details.
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
+        },
+        {
+          "props": [],
+          "_id": "5fe182f763d26d3d18d205d4",
+          "page": "product-reviews"
         },
         {
           "props": [],
@@ -17319,7 +17429,7 @@ Get all the supported fonts in a theme
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").theme.getFonts()
+    result = await platformClient.application("<APPLICATION_ID>").theme.getFonts()
     # use result
 except Exception as e:
     print(e)
@@ -17401,7 +17511,7 @@ Gets theme by id
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").theme.getThemeById(themeId=themeId)
+    result = await platformClient.application("<APPLICATION_ID>").theme.getThemeById(themeId=themeId)
     # use result
 except Exception as e:
     print(e)
@@ -17868,6 +17978,11 @@ Success. Refer `ThemesSchema` for more details.
       "page_schema": [
         {
           "props": [],
+          "_id": "5fe182f763d26d042fd205c4",
+          "page": "add-product-review"
+        },
+        {
+          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -18077,6 +18192,11 @@ Success. Refer `ThemesSchema` for more details.
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
+        },
+        {
+          "props": [],
+          "_id": "5fe182f763d26d3d18d205d4",
+          "page": "product-reviews"
         },
         {
           "props": [],
@@ -19588,7 +19708,7 @@ Update a theme
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").theme.updateTheme(themeId=themeId, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").theme.updateTheme(themeId=themeId, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -20055,6 +20175,11 @@ Success. Refer `ThemesSchema` for more details.
       "page_schema": [
         {
           "props": [],
+          "_id": "5fe182f763d26d042fd205c4",
+          "page": "add-product-review"
+        },
+        {
+          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -20264,6 +20389,11 @@ Success. Refer `ThemesSchema` for more details.
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
+        },
+        {
+          "props": [],
+          "_id": "5fe182f763d26d3d18d205d4",
+          "page": "product-reviews"
         },
         {
           "props": [],
@@ -21775,7 +21905,7 @@ Delete a theme
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").theme.deleteTheme(themeId=themeId)
+    result = await platformClient.application("<APPLICATION_ID>").theme.deleteTheme(themeId=themeId)
     # use result
 except Exception as e:
     print(e)
@@ -22242,6 +22372,11 @@ Success. Refer `ThemesSchema` for more details.
       "page_schema": [
         {
           "props": [],
+          "_id": "5fe182f763d26d042fd205c4",
+          "page": "add-product-review"
+        },
+        {
+          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -22451,6 +22586,11 @@ Success. Refer `ThemesSchema` for more details.
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
+        },
+        {
+          "props": [],
+          "_id": "5fe182f763d26d3d18d205d4",
+          "page": "product-reviews"
         },
         {
           "props": [],
@@ -23962,7 +24102,7 @@ Get a theme preview
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").theme.getThemeForPreview(themeId=themeId)
+    result = await platformClient.application("<APPLICATION_ID>").theme.getThemeForPreview(themeId=themeId)
     # use result
 except Exception as e:
     print(e)
@@ -24429,6 +24569,11 @@ Success. Refer `ThemesSchema` for more details.
       "page_schema": [
         {
           "props": [],
+          "_id": "5fe182f763d26d042fd205c4",
+          "page": "add-product-review"
+        },
+        {
+          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -24638,6 +24783,11 @@ Success. Refer `ThemesSchema` for more details.
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
+        },
+        {
+          "props": [],
+          "_id": "5fe182f763d26d3d18d205d4",
+          "page": "product-reviews"
         },
         {
           "props": [],
@@ -26149,7 +26299,7 @@ Publish a theme
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").theme.publishTheme(themeId=themeId)
+    result = await platformClient.application("<APPLICATION_ID>").theme.publishTheme(themeId=themeId)
     # use result
 except Exception as e:
     print(e)
@@ -26616,6 +26766,11 @@ Success. Refer `ThemesSchema` for more details.
       "page_schema": [
         {
           "props": [],
+          "_id": "5fe182f763d26d042fd205c4",
+          "page": "add-product-review"
+        },
+        {
+          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -26825,6 +26980,11 @@ Success. Refer `ThemesSchema` for more details.
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
+        },
+        {
+          "props": [],
+          "_id": "5fe182f763d26d3d18d205d4",
+          "page": "product-reviews"
         },
         {
           "props": [],
@@ -28336,7 +28496,7 @@ Unpublish a theme
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").theme.unpublishTheme(themeId=themeId)
+    result = await platformClient.application("<APPLICATION_ID>").theme.unpublishTheme(themeId=themeId)
     # use result
 except Exception as e:
     print(e)
@@ -28803,6 +28963,11 @@ Success. Refer `ThemesSchema` for more details.
       "page_schema": [
         {
           "props": [],
+          "_id": "5fe182f763d26d042fd205c4",
+          "page": "add-product-review"
+        },
+        {
+          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -29012,6 +29177,11 @@ Success. Refer `ThemesSchema` for more details.
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
+        },
+        {
+          "props": [],
+          "_id": "5fe182f763d26d3d18d205d4",
+          "page": "product-reviews"
         },
         {
           "props": [],
@@ -30523,7 +30693,7 @@ Archive a theme
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").theme.archiveTheme(themeId=themeId)
+    result = await platformClient.application("<APPLICATION_ID>").theme.archiveTheme(themeId=themeId)
     # use result
 except Exception as e:
     print(e)
@@ -30990,6 +31160,11 @@ Success. Refer `ThemesSchema` for more details.
       "page_schema": [
         {
           "props": [],
+          "_id": "5fe182f763d26d042fd205c4",
+          "page": "add-product-review"
+        },
+        {
+          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -31199,6 +31374,11 @@ Success. Refer `ThemesSchema` for more details.
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
+        },
+        {
+          "props": [],
+          "_id": "5fe182f763d26d3d18d205d4",
+          "page": "product-reviews"
         },
         {
           "props": [],
@@ -32710,7 +32890,7 @@ Unarchive a theme
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").theme.unarchiveTheme(themeId=themeId)
+    result = await platformClient.application("<APPLICATION_ID>").theme.unarchiveTheme(themeId=themeId)
     # use result
 except Exception as e:
     print(e)
@@ -33177,6 +33357,11 @@ Success. Refer `ThemesSchema` for more details.
       "page_schema": [
         {
           "props": [],
+          "_id": "5fe182f763d26d042fd205c4",
+          "page": "add-product-review"
+        },
+        {
+          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -33386,6 +33571,11 @@ Success. Refer `ThemesSchema` for more details.
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
+        },
+        {
+          "props": [],
+          "_id": "5fe182f763d26d3d18d205d4",
+          "page": "product-reviews"
         },
         {
           "props": [],
@@ -34897,7 +35087,7 @@ Fetch last modified timestamp
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").theme.getThemeLastModified(themeId=themeId)
+    result = await platformClient.application("<APPLICATION_ID>").theme.getThemeLastModified(themeId=themeId)
     # use result
 except Exception as e:
     print(e)

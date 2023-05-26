@@ -26,7 +26,7 @@ Get Subscribers By Company ID
 
 ```python
 try:
-    result = await client.webhook.getSubscribersByCompany(pageNo=pageNo, pageSize=pageSize, extensionId=extensionId)
+    result = await platformClient.webhook.getSubscribersByCompany(pageNo=pageNo, pageSize=pageSize, extensionId=extensionId)
     # use result
 except Exception as e:
     print(e)
@@ -85,7 +85,7 @@ Register Subscriber
 
 ```python
 try:
-    result = await client.webhook.registerSubscriberToEvent(body=body)
+    result = await platformClient.webhook.registerSubscriberToEvent(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -141,7 +141,7 @@ Update Subscriber
 
 ```python
 try:
-    result = await client.webhook.updateSubscriberConfig(body=body)
+    result = await platformClient.webhook.updateSubscriberConfig(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -197,7 +197,7 @@ Get Subscribers By Extension ID
 
 ```python
 try:
-    result = await client.webhook.getSubscribersByExtensionId(pageNo=pageNo, pageSize=pageSize, extensionId=extensionId)
+    result = await platformClient.webhook.getSubscribersByExtensionId(pageNo=pageNo, pageSize=pageSize, extensionId=extensionId)
     # use result
 except Exception as e:
     print(e)
@@ -256,7 +256,7 @@ Get Subscriber By Subscriber ID
 
 ```python
 try:
-    result = await client.webhook.getSubscriberById(subscriberId=subscriberId)
+    result = await platformClient.webhook.getSubscriberById(subscriberId=subscriberId)
     # use result
 except Exception as e:
     print(e)
@@ -313,7 +313,7 @@ Success
 
 ```python
 try:
-    result = await client.webhook.fetchAllEventConfigurations()
+    result = await platformClient.webhook.fetchAllEventConfigurations()
     # use result
 except Exception as e:
     print(e)

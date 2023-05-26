@@ -17,7 +17,6 @@ from ..ApplicationModel import BaseSchema
         
         
         
-        
     
     
         
@@ -33,9 +32,6 @@ from ..ApplicationModel import BaseSchema
         
         
         
-        
-    
-    
         
     
     
@@ -113,7 +109,6 @@ from ..ApplicationModel import BaseSchema
         
     
     
-        
         
         
         
@@ -163,8 +158,6 @@ class CartValidator:
         area_code = fields.Str(required=False)
         
         buy_now = fields.Boolean(required=False)
-        
-        empty_cart = fields.Boolean(required=False)
          
         
     
@@ -200,13 +193,6 @@ class CartValidator:
         area_code = fields.Str(required=False)
         
         buy_now = fields.Boolean(required=False)
-         
-        
-    
-    class deleteCart(BaseSchema):
-        
-        
-        id = fields.Int(required=False)
          
         
     
@@ -386,8 +372,6 @@ class CartValidator:
         address_id = fields.Str(required=False)
         
         area_code = fields.Str(required=False)
-        
-        order_type = fields.Str(required=False)
          
         
     

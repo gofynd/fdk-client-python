@@ -60,6 +60,14 @@ class Campaigns(BaseSchema):
     pass
 
 
+class BadRequestSchema(BaseSchema):
+    pass
+
+
+class NotFound(BaseSchema):
+    pass
+
+
 class BigqueryHeadersReq(BaseSchema):
     pass
 
@@ -566,6 +574,24 @@ class Campaigns(BaseSchema):
     items = fields.List(fields.Nested(Campaign, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
+    
+
+
+class BadRequestSchema(BaseSchema):
+    # Communication swagger.json
+
+    
+    status = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
+    
+
+
+class NotFound(BaseSchema):
+    # Communication swagger.json
+
+    
+    message = fields.Str(required=False)
     
 
 

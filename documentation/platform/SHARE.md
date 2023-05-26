@@ -10,6 +10,7 @@ Short link and QR Code
 * [getShortLinks](#getshortlinks)
 * [getShortLinkByHash](#getshortlinkbyhash)
 * [updateShortLinkById](#updateshortlinkbyid)
+* [getShortLinkClickStats](#getshortlinkclickstats)
 
 
 
@@ -24,7 +25,7 @@ Create short link
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").share.createShortLink(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").share.createShortLink(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -118,7 +119,7 @@ Get short links
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").share.getShortLinks(pageNo=pageNo, pageSize=pageSize, createdBy=createdBy, active=active, q=q)
+    result = await platformClient.application("<APPLICATION_ID>").share.getShortLinks(pageNo=pageNo, pageSize=pageSize, createdBy=createdBy, active=active, q=q)
     # use result
 except Exception as e:
     print(e)
@@ -228,7 +229,7 @@ Get short link by hash
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").share.getShortLinkByHash(hash=hash)
+    result = await platformClient.application("<APPLICATION_ID>").share.getShortLinkByHash(hash=hash)
     # use result
 except Exception as e:
     print(e)
@@ -323,7 +324,7 @@ Update short link by id
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").share.updateShortLinkById(id=id, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").share.updateShortLinkById(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -410,8 +411,88 @@ Success
 ---
 
 
+### getShortLinkClickStats
+Get click statistics for a short link
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").share.getShortLinkClickStats(surlId=surlId)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| surlId | String | yes | Short link ID for which click statistics are to be retrieved. |  
+
+
+
+Retrieve click statistics for a given short link ID.
+
+*Returned Response:*
+
+
+
+
+[ClickStatsResponse](#ClickStatsResponse)
+
+Successful retrieval of click statistics.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
 
 ### Schemas
+
+ 
+ 
+ #### [ClickStatsResponse](#ClickStatsResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | clickStats | ArrayList<[ClickStatsItem](#ClickStatsItem)> |  no  | An array of click statistics for the short link. |
+
+---
+
+
+ 
+ 
+ #### [ClickStatsItem](#ClickStatsItem)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | display | String? |  yes  | The display name of the click statistic. |
+ | total | Int? |  yes  | The total number of clicks for the statistic. |
+
+---
+
 
  
  

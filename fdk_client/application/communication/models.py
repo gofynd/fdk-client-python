@@ -36,6 +36,14 @@ class CommunicationConsent(BaseSchema):
     pass
 
 
+class BadRequestSchema(BaseSchema):
+    pass
+
+
+class NotFound(BaseSchema):
+    pass
+
+
 class PushtokenReq(BaseSchema):
     pass
 
@@ -130,6 +138,24 @@ class CommunicationConsent(BaseSchema):
     user_id = fields.Str(required=False)
     
     channels = fields.Nested(CommunicationConsentChannels, required=False)
+    
+
+
+class BadRequestSchema(BaseSchema):
+    # Communication swagger.json
+
+    
+    status = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
+    
+
+
+class NotFound(BaseSchema):
+    # Communication swagger.json
+
+    
+    message = fields.Str(required=False)
     
 
 

@@ -1,6 +1,6 @@
 
 
-""" Order Platform Client."""
+"""Order Platform Client"""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -10,6 +10,7 @@ from .validator import OrderValidator
 class Order:
     def __init__(self, config):
         self._conf = config
+
     
     async def getShipments(self, lane=None, bag_status=None, status_override_lane=None, search_type=None, search_value=None, search_id=None, from_date=None, to_date=None, dp_ids=None, ordering_company_id=None, stores=None, sales_channel=None, request_by_ext=None, page_no=None, page_size=None, is_priority_sort=None, fetch_active_shipment=None, exclude_locked_shipments=None, payment_methods=None, channel_shipment_id=None, channel_order_id=None, custom_meta=None, ordering_channel=None, company_affiliate_tag=None):
         """
@@ -132,7 +133,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipments-listing", lane=lane, bag_status=bag_status, status_override_lane=status_override_lane, search_type=search_type, search_value=search_value, search_id=search_id, from_date=from_date, to_date=to_date, dp_ids=dp_ids, ordering_company_id=ordering_company_id, stores=stores, sales_channel=sales_channel, request_by_ext=request_by_ext, page_no=page_no, page_size=page_size, is_priority_sort=is_priority_sort, fetch_active_shipment=fetch_active_shipment, exclude_locked_shipments=exclude_locked_shipments, payment_methods=payment_methods, channel_shipment_id=channel_shipment_id, channel_order_id=channel_order_id, custom_meta=custom_meta, ordering_channel=ordering_channel, company_affiliate_tag=company_affiliate_tag), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import ShipmentInternalPlatformViewResponse
         schema = ShipmentInternalPlatformViewResponse()
         try:
@@ -140,7 +141,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getShipments")
             print(e)
-            
+
         
 
         return response
@@ -186,7 +187,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipment-details", channel_shipment_id=channel_shipment_id, shipment_id=shipment_id, ordering_company_id=ordering_company_id, request_by_ext=request_by_ext), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import ShipmentInfoResponse
         schema = ShipmentInfoResponse()
         try:
@@ -194,7 +195,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getShipmentById")
             print(e)
-            
+
         
 
         return response
@@ -228,7 +229,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/order-details", order_id=order_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import ShipmentDetailsResponse
         schema = ShipmentDetailsResponse()
         try:
@@ -236,7 +237,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getOrderById")
             print(e)
-            
+
         
 
         return response
@@ -302,7 +303,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/lane-config/", super_lane=super_lane, group_entity=group_entity, from_date=from_date, to_date=to_date, dp_ids=dp_ids, stores=stores, sales_channel=sales_channel, payment_mode=payment_mode, bag_status=bag_status), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import LaneConfigResponse
         schema = LaneConfigResponse()
         try:
@@ -310,7 +311,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getLaneConfig")
             print(e)
-            
+
         
 
         return response
@@ -404,7 +405,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/orders-listing", lane=lane, search_type=search_type, bag_status=bag_status, time_to_dispatch=time_to_dispatch, payment_methods=payment_methods, tags=tags, search_value=search_value, from_date=from_date, to_date=to_date, dp_ids=dp_ids, stores=stores, sales_channel=sales_channel, page_no=page_no, page_size=page_size, is_priority_sort=is_priority_sort, custom_meta=custom_meta), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import OrderListingResponse
         schema = OrderListingResponse()
         try:
@@ -412,53 +413,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getOrders")
             print(e)
-            
-        
 
-        return response
-    
-    async def getMetricCount(self, from_date=None, to_date=None):
-        """
-        :param from_date :  : type string
-        :param to_date :  : type string
-        """
-        payload = {}
-        
-        if from_date:
-            payload["from_date"] = from_date
-        
-        if to_date:
-            payload["to_date"] = to_date
-        
-
-        # Parameter validation
-        schema = OrderValidator.getMetricCount()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipment/metrics-count/", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", from_date=from_date, to_date=to_date)
-        query_string = await create_query_string(from_date=from_date, to_date=to_date)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipment/metrics-count/", from_date=from_date, to_date=to_date), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-        
-        from .models import MetricCountResponse
-        schema = MetricCountResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getMetricCount")
-            print(e)
-            
         
 
         return response
@@ -496,7 +451,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/filter-listing", view=view, group_entity=group_entity), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import FiltersResponse
         schema = FiltersResponse()
         try:
@@ -504,17 +459,33 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getfilters")
             print(e)
-            
+
         
 
         return response
     
-    async def createShipmentReport(self, from_date=None, to_date=None):
+    async def getBulkShipmentExcelFile(self, sales_channels=None, dp_ids=None, from_date=None, to_date=None, stores=None, tags=None, bag_status=None, payment_methods=None, file_type=None, time_to_dispatch=None, page_no=None, page_size=None):
         """
-        :param from_date :  : type string
-        :param to_date :  : type string
+        :param sales_channels : Comma seperated values of sales channel ids : type string
+        :param dp_ids : Comma seperated values of delivery partner ids : type string
+        :param from_date : Start Date in DD-MM-YYYY format : type string
+        :param to_date : End Date in DD-MM-YYYY format : type string
+        :param stores : Comma seperated values of store ids : type string
+        :param tags : Comma seperated values of tags : type string
+        :param bag_status : Comma seperated values of bag statuses : type string
+        :param payment_methods : Comma seperated values of payment methods : type string
+        :param file_type : File type to be downloaded : type string
+        :param time_to_dispatch : Sla breached or not breached : type integer
+        :param page_no :  : type integer
+        :param page_size :  : type integer
         """
         payload = {}
+        
+        if sales_channels:
+            payload["sales_channels"] = sales_channels
+        
+        if dp_ids:
+            payload["dp_ids"] = dp_ids
         
         if from_date:
             payload["from_date"] = from_date
@@ -522,45 +493,23 @@ class Order:
         if to_date:
             payload["to_date"] = to_date
         
-
-        # Parameter validation
-        schema = OrderValidator.createShipmentReport()
-        schema.dump(schema.load(payload))
+        if stores:
+            payload["stores"] = stores
         
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/reports/shipment", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", from_date=from_date, to_date=to_date)
-        query_string = await create_query_string(from_date=from_date, to_date=to_date)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/reports/shipment", from_date=from_date, to_date=to_date), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        if tags:
+            payload["tags"] = tags
         
+        if bag_status:
+            payload["bag_status"] = bag_status
         
-        from .models import Success
-        schema = Success()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createShipmentReport")
-            print(e)
-            
+        if payment_methods:
+            payload["payment_methods"] = payment_methods
         
-
-        return response
-    
-    async def getReportsShipmentListing(self, page_no=None, page_size=None):
-        """
-        :param page_no :  : type integer
-        :param page_size :  : type integer
-        """
-        payload = {}
+        if file_type:
+            payload["file_type"] = file_type
+        
+        if time_to_dispatch:
+            payload["time_to_dispatch"] = time_to_dispatch
         
         if page_no:
             payload["page_no"] = page_no
@@ -570,12 +519,12 @@ class Order:
         
 
         # Parameter validation
-        schema = OrderValidator.getReportsShipmentListing()
+        schema = OrderValidator.getBulkShipmentExcelFile()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/reports/shipment-listing", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}}],"query":[{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/generate/file", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"sales_channels","description":"Comma seperated values of sales channel ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","description":"Comma seperated values of delivery partner ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"from_date","description":"Start Date in DD-MM-YYYY format","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","description":"End Date in DD-MM-YYYY format","required":false,"schema":{"type":"string"}},{"in":"query","name":"stores","description":"Comma seperated values of store ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"tags","description":"Comma seperated values of tags","required":false,"schema":{"type":"string"}},{"in":"query","name":"bag_status","description":"Comma seperated values of bag statuses","required":false,"schema":{"type":"string"}},{"in":"query","name":"payment_methods","description":"Comma seperated values of payment methods","required":false,"schema":{"type":"string"}},{"in":"query","name":"file_type","description":"File type to be downloaded","required":false,"schema":{"type":"string"}},{"in":"query","name":"time_to_dispatch","description":"Sla breached or not breached","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":10}}],"query":[{"in":"query","name":"sales_channels","description":"Comma seperated values of sales channel ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","description":"Comma seperated values of delivery partner ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"from_date","description":"Start Date in DD-MM-YYYY format","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","description":"End Date in DD-MM-YYYY format","required":false,"schema":{"type":"string"}},{"in":"query","name":"stores","description":"Comma seperated values of store ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"tags","description":"Comma seperated values of tags","required":false,"schema":{"type":"string"}},{"in":"query","name":"bag_status","description":"Comma seperated values of bag statuses","required":false,"schema":{"type":"string"}},{"in":"query","name":"payment_methods","description":"Comma seperated values of payment methods","required":false,"schema":{"type":"string"}},{"in":"query","name":"file_type","description":"File type to be downloaded","required":false,"schema":{"type":"string"}},{"in":"query","name":"time_to_dispatch","description":"Sla breached or not breached","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":10}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}]}""", sales_channels=sales_channels, dp_ids=dp_ids, from_date=from_date, to_date=to_date, stores=stores, tags=tags, bag_status=bag_status, payment_methods=payment_methods, file_type=file_type, time_to_dispatch=time_to_dispatch, page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(sales_channels=sales_channels, dp_ids=dp_ids, from_date=from_date, to_date=to_date, stores=stores, tags=tags, bag_status=bag_status, payment_methods=payment_methods, file_type=file_type, time_to_dispatch=time_to_dispatch, page_no=page_no, page_size=page_size)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -585,39 +534,34 @@ class Order:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/reports/shipment-listing", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/generate/file", sales_channels=sales_channels, dp_ids=dp_ids, from_date=from_date, to_date=to_date, stores=stores, tags=tags, bag_status=bag_status, payment_methods=payment_methods, file_type=file_type, time_to_dispatch=time_to_dispatch, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
-        from .models import OmsReports
-        schema = OmsReports()
+
+        from .models import FileResponse
+        schema = FileResponse()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
-            print("Response Validation failed for getReportsShipmentListing")
+            print("Response Validation failed for getBulkShipmentExcelFile")
             print(e)
-            
+
         
 
         return response
     
-    async def upsertJioCode(self, body=""):
+    async def getBulkActionTemplate(self, ):
         """
         """
         payload = {}
         
 
         # Parameter validation
-        schema = OrderValidator.upsertJioCode()
+        schema = OrderValidator.getBulkActionTemplate()
         schema.dump(schema.load(payload))
         
-        # Body validation
-        from .models import JioCodeUpsertPayload
-        schema = JioCodeUpsertPayload()
-        schema.dump(schema.load(body))
-        
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/upsert/jiocode/article", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/bulk-action/get-seller-templates", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}]}""", )
         query_string = await create_query_string()
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -628,43 +572,39 @@ class Order:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/upsert/jiocode/article", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/bulk-action/get-seller-templates", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
-        from .models import JioCodeUpsertResponse
-        schema = JioCodeUpsertResponse()
+
+        from .models import BulkActionTemplateResponse
+        schema = BulkActionTemplateResponse()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
-            print("Response Validation failed for upsertJioCode")
+            print("Response Validation failed for getBulkActionTemplate")
             print(e)
-            
+
         
 
         return response
     
-    async def getBulkInvoice(self, batch_id=None, doc_type=None):
+    async def downloadBulkActionTemplate(self, template_slug=None):
         """
-        :param batch_id :  : type string
-        :param doc_type :  : type string
+        :param template_slug : Slug name of template to be downloaded : type string
         """
         payload = {}
         
-        if batch_id:
-            payload["batch_id"] = batch_id
-        
-        if doc_type:
-            payload["doc_type"] = doc_type
+        if template_slug:
+            payload["template_slug"] = template_slug
         
 
         # Parameter validation
-        schema = OrderValidator.getBulkInvoice()
+        schema = OrderValidator.downloadBulkActionTemplate()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/bulk-action/invoice", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"query","name":"batch_id","required":true,"schema":{"type":"string"}},{"in":"query","name":"doc_type","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"in":"query","name":"batch_id","required":true,"schema":{"type":"string"}},{"in":"query","name":"doc_type","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", batch_id=batch_id, doc_type=doc_type)
-        query_string = await create_query_string(batch_id=batch_id, doc_type=doc_type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/bulk-action/download-seller-templates", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"template_slug","description":"Slug name of template to be downloaded","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","name":"template_slug","description":"Slug name of template to be downloaded","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}]}""", template_slug=template_slug)
+        query_string = await create_query_string(template_slug=template_slug)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -674,294 +614,18 @@ class Order:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/bulk-action/invoice", batch_id=batch_id, doc_type=doc_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/bulk-action/download-seller-templates", template_slug=template_slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
-        from .models import BulkInvoicingResponse
-        schema = BulkInvoicingResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getBulkInvoice")
-            print(e)
-            
-        
 
-        return response
-    
-    async def getBulkInvoiceLabel(self, batch_id=None):
-        """
-        :param batch_id :  : type string
-        """
-        payload = {}
-        
-        if batch_id:
-            payload["batch_id"] = batch_id
-        
-
-        # Parameter validation
-        schema = OrderValidator.getBulkInvoiceLabel()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/invoice-label-external", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"query","name":"batch_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"in":"query","name":"batch_id","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", batch_id=batch_id)
-        query_string = await create_query_string(batch_id=batch_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/invoice-label-external", batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-        
-        from .models import BulkInvoiceLabelResponse
-        schema = BulkInvoiceLabelResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getBulkInvoiceLabel")
-            print(e)
-            
-        
-
-        return response
-    
-    async def getBulkShipmentExcelFile(self, lane=None, search_type=None, search_id=None, from_date=None, to_date=None, dp_ids=None, ordering_company_id=None, stores=None, sales_channel=None, request_by_ext=None, page_no=None, page_size=None, customer_id=None, is_priority_sort=None):
-        """
-        :param lane :  : type string
-        :param search_type :  : type string
-        :param search_id :  : type string
-        :param from_date :  : type string
-        :param to_date :  : type string
-        :param dp_ids :  : type string
-        :param ordering_company_id :  : type string
-        :param stores :  : type string
-        :param sales_channel :  : type string
-        :param request_by_ext :  : type string
-        :param page_no :  : type integer
-        :param page_size :  : type integer
-        :param customer_id :  : type string
-        :param is_priority_sort :  : type boolean
-        """
-        payload = {}
-        
-        if lane:
-            payload["lane"] = lane
-        
-        if search_type:
-            payload["search_type"] = search_type
-        
-        if search_id:
-            payload["search_id"] = search_id
-        
-        if from_date:
-            payload["from_date"] = from_date
-        
-        if to_date:
-            payload["to_date"] = to_date
-        
-        if dp_ids:
-            payload["dp_ids"] = dp_ids
-        
-        if ordering_company_id:
-            payload["ordering_company_id"] = ordering_company_id
-        
-        if stores:
-            payload["stores"] = stores
-        
-        if sales_channel:
-            payload["sales_channel"] = sales_channel
-        
-        if request_by_ext:
-            payload["request_by_ext"] = request_by_ext
-        
-        if page_no:
-            payload["page_no"] = page_no
-        
-        if page_size:
-            payload["page_size"] = page_size
-        
-        if customer_id:
-            payload["customer_id"] = customer_id
-        
-        if is_priority_sort:
-            payload["is_priority_sort"] = is_priority_sort
-        
-
-        # Parameter validation
-        schema = OrderValidator.getBulkShipmentExcelFile()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/generate/file", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"lane","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"ordering_company_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"stores","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channel","required":false,"schema":{"type":"string"}},{"in":"query","name":"request_by_ext","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","name":"customer_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"is_priority_sort","required":false,"schema":{"type":"boolean","default":false}}],"query":[{"in":"query","name":"lane","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"ordering_company_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"stores","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channel","required":false,"schema":{"type":"string"}},{"in":"query","name":"request_by_ext","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","name":"customer_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"is_priority_sort","required":false,"schema":{"type":"boolean","default":false}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", lane=lane, search_type=search_type, search_id=search_id, from_date=from_date, to_date=to_date, dp_ids=dp_ids, ordering_company_id=ordering_company_id, stores=stores, sales_channel=sales_channel, request_by_ext=request_by_ext, page_no=page_no, page_size=page_size, customer_id=customer_id, is_priority_sort=is_priority_sort)
-        query_string = await create_query_string(lane=lane, search_type=search_type, search_id=search_id, from_date=from_date, to_date=to_date, dp_ids=dp_ids, ordering_company_id=ordering_company_id, stores=stores, sales_channel=sales_channel, request_by_ext=request_by_ext, page_no=page_no, page_size=page_size, customer_id=customer_id, is_priority_sort=is_priority_sort)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/generate/file", lane=lane, search_type=search_type, search_id=search_id, from_date=from_date, to_date=to_date, dp_ids=dp_ids, ordering_company_id=ordering_company_id, stores=stores, sales_channel=sales_channel, request_by_ext=request_by_ext, page_no=page_no, page_size=page_size, customer_id=customer_id, is_priority_sort=is_priority_sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-        
         from .models import FileResponse
         schema = FileResponse()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
-            print("Response Validation failed for getBulkShipmentExcelFile")
+            print("Response Validation failed for downloadBulkActionTemplate")
             print(e)
-            
-        
 
-        return response
-    
-    async def getBulkList(self, lane=None, search_type=None, search_id=None, from_date=None, to_date=None, dp_ids=None, ordering_company_id=None, stores=None, sales_channel=None, request_by_ext=None, page_no=None, page_size=None, customer_id=None, is_priority_sort=None):
-        """
-        :param lane :  : type string
-        :param search_type :  : type string
-        :param search_id :  : type string
-        :param from_date :  : type string
-        :param to_date :  : type string
-        :param dp_ids :  : type string
-        :param ordering_company_id :  : type string
-        :param stores :  : type string
-        :param sales_channel :  : type string
-        :param request_by_ext :  : type string
-        :param page_no :  : type integer
-        :param page_size :  : type integer
-        :param customer_id :  : type string
-        :param is_priority_sort :  : type boolean
-        """
-        payload = {}
-        
-        if lane:
-            payload["lane"] = lane
-        
-        if search_type:
-            payload["search_type"] = search_type
-        
-        if search_id:
-            payload["search_id"] = search_id
-        
-        if from_date:
-            payload["from_date"] = from_date
-        
-        if to_date:
-            payload["to_date"] = to_date
-        
-        if dp_ids:
-            payload["dp_ids"] = dp_ids
-        
-        if ordering_company_id:
-            payload["ordering_company_id"] = ordering_company_id
-        
-        if stores:
-            payload["stores"] = stores
-        
-        if sales_channel:
-            payload["sales_channel"] = sales_channel
-        
-        if request_by_ext:
-            payload["request_by_ext"] = request_by_ext
-        
-        if page_no:
-            payload["page_no"] = page_no
-        
-        if page_size:
-            payload["page_size"] = page_size
-        
-        if customer_id:
-            payload["customer_id"] = customer_id
-        
-        if is_priority_sort:
-            payload["is_priority_sort"] = is_priority_sort
-        
-
-        # Parameter validation
-        schema = OrderValidator.getBulkList()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/bulk-action/listing", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"lane","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"ordering_company_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"stores","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channel","required":false,"schema":{"type":"string"}},{"in":"query","name":"request_by_ext","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","name":"customer_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"is_priority_sort","required":false,"schema":{"type":"boolean","default":false}}],"query":[{"in":"query","name":"lane","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"ordering_company_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"stores","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channel","required":false,"schema":{"type":"string"}},{"in":"query","name":"request_by_ext","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","name":"customer_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"is_priority_sort","required":false,"schema":{"type":"boolean","default":false}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", lane=lane, search_type=search_type, search_id=search_id, from_date=from_date, to_date=to_date, dp_ids=dp_ids, ordering_company_id=ordering_company_id, stores=stores, sales_channel=sales_channel, request_by_ext=request_by_ext, page_no=page_no, page_size=page_size, customer_id=customer_id, is_priority_sort=is_priority_sort)
-        query_string = await create_query_string(lane=lane, search_type=search_type, search_id=search_id, from_date=from_date, to_date=to_date, dp_ids=dp_ids, ordering_company_id=ordering_company_id, stores=stores, sales_channel=sales_channel, request_by_ext=request_by_ext, page_no=page_no, page_size=page_size, customer_id=customer_id, is_priority_sort=is_priority_sort)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/bulk-action/listing", lane=lane, search_type=search_type, search_id=search_id, from_date=from_date, to_date=to_date, dp_ids=dp_ids, ordering_company_id=ordering_company_id, stores=stores, sales_channel=sales_channel, request_by_ext=request_by_ext, page_no=page_no, page_size=page_size, customer_id=customer_id, is_priority_sort=is_priority_sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-        
-        from .models import BulkListingResponse
-        schema = BulkListingResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getBulkList")
-            print(e)
-            
-        
-
-        return response
-    
-    async def getBulkActionFailedReport(self, batch_id=None, report_type=None):
-        """
-        :param batch_id :  : type string
-        :param report_type :  : type string
-        """
-        payload = {}
-        
-        if batch_id:
-            payload["batch_id"] = batch_id
-        
-        if report_type:
-            payload["report_type"] = report_type
-        
-
-        # Parameter validation
-        schema = OrderValidator.getBulkActionFailedReport()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/bulk-action-failed-report/", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"in":"query","name":"batch_id","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"report_type","required":false,"schema":{"type":"string","default":"generation_report"}}],"query":[{"in":"query","name":"batch_id","required":true,"schema":{"type":"string"}},{"in":"query","name":"report_type","required":false,"schema":{"type":"string","default":"generation_report"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", batch_id=batch_id, report_type=report_type)
-        query_string = await create_query_string(batch_id=batch_id, report_type=report_type)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/bulk-action-failed-report/", batch_id=batch_id, report_type=report_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-        
-        from .models import FileResponse
-        schema = FileResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getBulkActionFailedReport")
-            print(e)
-            
         
 
         return response
@@ -1003,7 +667,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/shipments/{shipment_id}/bags/{bag_id}/state/{state}/reasons", shipment_id=shipment_id, bag_id=bag_id, state=state), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import PlatformShipmentReasonsResponse
         schema = PlatformShipmentReasonsResponse()
         try:
@@ -1011,92 +675,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getShipmentReasons")
             print(e)
-            
-        
 
-        return response
-    
-    async def bulkActionProcessXlsxFile(self, body=""):
-        """Use this API to start processing Xlsx file.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = OrderValidator.bulkActionProcessXlsxFile()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import BulkActionPayload
-        schema = BulkActionPayload()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v2.0/company/{self._conf.companyId}/bulk-action/", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", )
-        query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/orders/v2.0/company/{self._conf.companyId}/bulk-action/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        
-        
-        from .models import BulkActionResponse
-        schema = BulkActionResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for bulkActionProcessXlsxFile")
-            print(e)
-            
-        
-
-        return response
-    
-    async def bulkActionDetails(self, batch_id=None):
-        """Returns failed, processing and successfully processed shipments along with their counts and failed reasons.
-        :param batch_id :  : type string
-        """
-        payload = {}
-        
-        if batch_id:
-            payload["batch_id"] = batch_id
-        
-
-        # Parameter validation
-        schema = OrderValidator.bulkActionDetails()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v2.0/company/{self._conf.companyId}/bulk-action/{batch_id}", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"batch_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"batch_id","required":true,"schema":{"type":"string"}}]}""", batch_id=batch_id)
-        query_string = await create_query_string(batch_id=batch_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v2.0/company/{self._conf.companyId}/bulk-action/{batch_id}", batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-        
-        from .models import BulkActionDetailsResponse
-        schema = BulkActionDetailsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for bulkActionDetails")
-            print(e)
-            
         
 
         return response
@@ -1138,7 +717,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/bag-details/", bag_id=bag_id, channel_bag_id=channel_bag_id, channel_id=channel_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import BagDetailsPlatformResponse
         schema = BagDetailsPlatformResponse()
         try:
@@ -1146,7 +725,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getBagById")
             print(e)
-            
+
         
 
         return response
@@ -1212,7 +791,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/bags", bag_ids=bag_ids, shipment_ids=shipment_ids, order_ids=order_ids, channel_bag_ids=channel_bag_ids, channel_shipment_ids=channel_shipment_ids, channel_order_ids=channel_order_ids, channel_id=channel_id, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import GetBagsPlatformResponse
         schema = GetBagsPlatformResponse()
         try:
@@ -1220,7 +799,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getBags")
             print(e)
-            
+
         
 
         return response
@@ -1255,7 +834,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/update-cache", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import InvalidateShipmentCacheResponse
         schema = InvalidateShipmentCacheResponse()
         try:
@@ -1263,7 +842,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for invalidateShipmentCache")
             print(e)
-            
+
         
 
         return response
@@ -1298,7 +877,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/store/reassign-internal", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import StoreReassignResponse
         schema = StoreReassignResponse()
         try:
@@ -1306,7 +885,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for reassignLocation")
             print(e)
-            
+
         
 
         return response
@@ -1341,7 +920,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/entity/lock-manager", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import UpdateShipmentLockResponse
         schema = UpdateShipmentLockResponse()
         try:
@@ -1349,7 +928,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for updateShipmentLock")
             print(e)
-            
+
         
 
         return response
@@ -1383,7 +962,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/announcements", date=date), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import AnnouncementsResponse
         schema = AnnouncementsResponse()
         try:
@@ -1391,7 +970,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getAnnouncements")
             print(e)
-            
+
         
 
         return response
@@ -1469,7 +1048,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/delight/update-address", shipment_id=shipment_id, name=name, address=address, address_type=address_type, pincode=pincode, phone=phone, email=email, landmark=landmark, address_category=address_category, city=city, state=state, country=country, ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import BaseResponse
         schema = BaseResponse()
         try:
@@ -1477,7 +1056,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for updateAddress")
             print(e)
-            
+
         
 
         return response
@@ -1527,7 +1106,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/ninja/click2call", caller=caller, receiver=receiver, bag_id=bag_id, calling_to=calling_to, caller_id=caller_id, ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import Click2CallResponse
         schema = Click2CallResponse()
         try:
@@ -1535,7 +1114,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for click2Call")
             print(e)
-            
+
         
 
         return response
@@ -1570,7 +1149,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/status-internal", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import UpdateShipmentStatusResponseBody
         schema = UpdateShipmentStatusResponseBody()
         try:
@@ -1578,7 +1157,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for updateShipmentStatus")
             print(e)
-            
+
         
 
         return response
@@ -1613,7 +1192,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/process-manifest", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import CreateOrderResponse
         schema = CreateOrderResponse()
         try:
@@ -1621,7 +1200,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for processManifest")
             print(e)
-            
+
         
 
         return response
@@ -1656,7 +1235,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifest/dispatch", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import SuccessResponse
         schema = SuccessResponse()
         try:
@@ -1664,7 +1243,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for dispatchManifest")
             print(e)
-            
+
         
 
         return response
@@ -1694,7 +1273,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/roles", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import GetActionsResponse
         schema = GetActionsResponse()
         try:
@@ -1702,7 +1281,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getRoleBasedActions")
             print(e)
-            
+
         
 
         return response
@@ -1737,7 +1316,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/history", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import ShipmentHistoryResponse
         schema = ShipmentHistoryResponse()
         try:
@@ -1745,7 +1324,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for postShipmentHistory")
             print(e)
-            
+
         
 
         return response
@@ -1783,7 +1362,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/history", shipment_id=shipment_id, bag_id=bag_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import ShipmentHistoryResponse
         schema = ShipmentHistoryResponse()
         try:
@@ -1791,7 +1370,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getShipmentHistory")
             print(e)
-            
+
         
 
         return response
@@ -1826,7 +1405,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/ninja/send-sms", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import OrderStatusResult
         schema = OrderStatusResult()
         try:
@@ -1834,7 +1413,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for sendSmsNinja")
             print(e)
-            
+
         
 
         return response
@@ -1869,7 +1448,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/oms/manual-place-shipment", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import ManualAssignDPToShipmentResponse
         schema = ManualAssignDPToShipmentResponse()
         try:
@@ -1877,7 +1456,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for platformManualAssignDPToShipment")
             print(e)
-            
+
         
 
         return response
@@ -1912,7 +1491,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/update-packaging-dimension", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import CreateOrderResponse
         schema = CreateOrderResponse()
         try:
@@ -1920,7 +1499,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for updatePackagingDimensions")
             print(e)
-            
+
         
 
         return response
@@ -1955,7 +1534,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/create-order", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import CreateOrderResponse
         schema = CreateOrderResponse()
         try:
@@ -1963,7 +1542,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for createOrder")
             print(e)
-            
+
         
 
         return response
@@ -1998,7 +1577,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/order-config", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import CreateChannelConfigResponse
         schema = CreateChannelConfigResponse()
         try:
@@ -2006,7 +1585,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for createChannelConfig")
             print(e)
-            
+
         
 
         return response
@@ -2036,7 +1615,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/order-config", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import CreateChannelConfigData
         schema = CreateChannelConfigData()
         try:
@@ -2044,7 +1623,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for getChannelConfig")
             print(e)
-            
+
         
 
         return response
@@ -2079,7 +1658,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifest/uploadConsent", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import SuccessResponse
         schema = SuccessResponse()
         try:
@@ -2087,7 +1666,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for uploadConsent")
             print(e)
-            
+
         
 
         return response
@@ -2122,7 +1701,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/order/validation", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import ResponseDetail
         schema = ResponseDetail()
         try:
@@ -2130,7 +1709,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for orderUpdate")
             print(e)
-            
+
         
 
         return response
@@ -2165,7 +1744,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/debug/order_status", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
+
         from .models import OrderStatusResult
         schema = OrderStatusResult()
         try:
@@ -2173,7 +1752,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for checkOrderStatus")
             print(e)
-            
+
         
 
         return response
@@ -2203,7 +1782,7 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/bag/state/transition", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
+
         from .models import OrderStatusResult
         schema = OrderStatusResult()
         try:
@@ -2211,7 +1790,7 @@ class Order:
         except Exception as e:
             print("Response Validation failed for sendSmsNinjaPlatform")
             print(e)
-            
+
         
 
         return response
