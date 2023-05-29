@@ -33,12 +33,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
-        
-    
-    
-        
-        
     
     
         
@@ -119,19 +113,6 @@ class RewardsValidator:
         application_id = fields.Str(required=False)
         
         id = fields.Str(required=False)
-         
-        
-    
-    class getGiveawayAudienceStatus(BaseSchema):
-        
-        
-        id = fields.Str(required=False)
-        
-        audience_id = fields.Str(required=False)
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
          
         
     

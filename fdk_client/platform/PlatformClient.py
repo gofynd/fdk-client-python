@@ -28,11 +28,13 @@ from .configuration.client import Configuration
 
 from .discount.client import Discount
 
+from .partner.client import Partner
+
 from .webhook.client import Webhook
 
 from .audittrail.client import AuditTrail
 
-from .logistics.client import Logistics
+from .serviceability.client import Serviceability
 
 
 class PlatformClient:
@@ -63,11 +65,13 @@ class PlatformClient:
         
         self.discount = Discount(config)
         
+        self.partner = Partner(config)
+        
         self.webhook = Webhook(config)
         
         self.auditTrail = AuditTrail(config)
         
-        self.logistics = Logistics(config)
+        self.serviceability = Serviceability(config)
         
 
     def application(self, applicationId):

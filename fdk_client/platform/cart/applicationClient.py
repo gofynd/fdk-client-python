@@ -262,12 +262,12 @@ class Cart:
 
         return response
     
-    async def getPromotions(self, page_no=None, page_size=None, q=None, status=None, promo_group=None, promotion_type=None, fp_panel=None, promotion_id=None):
+    async def getPromotions(self, page_no=None, page_size=None, q=None, is_active=None, promo_group=None, promotion_type=None, fp_panel=None, promotion_id=None):
         """Get promotion list with pagination
         :param page_no :  : type integer
         :param page_size :  : type integer
         :param q :  : type string
-        :param status :  : type string
+        :param is_active :  : type boolean
         :param promo_group :  : type string
         :param promotion_type :  : type string
         :param fp_panel :  : type string
@@ -284,8 +284,8 @@ class Cart:
         if q:
             payload["q"] = q
         
-        if status:
-            payload["status"] = status
+        if is_active:
+            payload["is_active"] = is_active
         
         if promo_group:
             payload["promo_group"] = promo_group
@@ -305,8 +305,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer","default":0,"description":"current page no as per pagination"}},{"name":"page_size","in":"query","schema":{"type":"integer","default":10,"description":"Promotion max records fetched in single request"}},{"name":"q","in":"query","schema":{"type":"string","description":"Filter by name"}},{"name":"status","in":"query","schema":{"type":"string","description":"Filter by active, inactive or expired promotion","enum":["active","inactive","expired"]}},{"name":"promo_group","in":"query","schema":{"type":"string","description":"Filter promotion group","enum":["product","cart","contract","ladder_price","limited_timer"]}},{"name":"promotion_type","in":"query","schema":{"type":"string","description":"Filter promotion type"}},{"name":"fp_panel","in":"query","schema":{"type":"string","description":"Filter non extension promotions"}},{"name":"promotion_id","in":"query","schema":{"type":"string","description":"Filter by promotion _id"}}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer","default":0,"description":"current page no as per pagination"}},{"name":"page_size","in":"query","schema":{"type":"integer","default":10,"description":"Promotion max records fetched in single request"}},{"name":"q","in":"query","schema":{"type":"string","description":"Filter by name"}},{"name":"status","in":"query","schema":{"type":"string","description":"Filter by active, inactive or expired promotion","enum":["active","inactive","expired"]}},{"name":"promo_group","in":"query","schema":{"type":"string","description":"Filter promotion group","enum":["product","cart","contract","ladder_price","limited_timer"]}},{"name":"promotion_type","in":"query","schema":{"type":"string","description":"Filter promotion type"}},{"name":"fp_panel","in":"query","schema":{"type":"string","description":"Filter non extension promotions"}},{"name":"promotion_id","in":"query","schema":{"type":"string","description":"Filter by promotion _id"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", page_no=page_no, page_size=page_size, q=q, status=status, promo_group=promo_group, promotion_type=promotion_type, fp_panel=fp_panel, promotion_id=promotion_id)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, q=q, status=status, promo_group=promo_group, promotion_type=promotion_type, fp_panel=fp_panel, promotion_id=promotion_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer","default":0,"description":"current page no as per pagination"}},{"name":"page_size","in":"query","schema":{"type":"integer","default":10,"description":"Promotion max records fetched in single request"}},{"name":"q","in":"query","schema":{"type":"string","description":"Filter by name"}},{"name":"is_active","in":"query","schema":{"type":"boolean","description":"Filter by active or inactive promotion","default":true}},{"name":"promo_group","in":"query","schema":{"type":"string","description":"Filter promotion group","enum":["product","cart","contract","ladder_price","limited_timer"]}},{"name":"promotion_type","in":"query","schema":{"type":"string","description":"Filter promotion type"}},{"name":"fp_panel","in":"query","schema":{"type":"string","description":"Filter non extension promotions"}},{"name":"promotion_id","in":"query","schema":{"type":"string","description":"Filter by promotion _id"}}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer","default":0,"description":"current page no as per pagination"}},{"name":"page_size","in":"query","schema":{"type":"integer","default":10,"description":"Promotion max records fetched in single request"}},{"name":"q","in":"query","schema":{"type":"string","description":"Filter by name"}},{"name":"is_active","in":"query","schema":{"type":"boolean","description":"Filter by active or inactive promotion","default":true}},{"name":"promo_group","in":"query","schema":{"type":"string","description":"Filter promotion group","enum":["product","cart","contract","ladder_price","limited_timer"]}},{"name":"promotion_type","in":"query","schema":{"type":"string","description":"Filter promotion type"}},{"name":"fp_panel","in":"query","schema":{"type":"string","description":"Filter non extension promotions"}},{"name":"promotion_id","in":"query","schema":{"type":"string","description":"Filter by promotion _id"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", page_no=page_no, page_size=page_size, q=q, is_active=is_active, promo_group=promo_group, promotion_type=promotion_type, fp_panel=fp_panel, promotion_id=promotion_id)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, q=q, is_active=is_active, promo_group=promo_group, promotion_type=promotion_type, fp_panel=fp_panel, promotion_id=promotion_id)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -316,7 +316,7 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion", page_no=page_no, page_size=page_size, q=q, status=status, promo_group=promo_group, promotion_type=promotion_type, fp_panel=fp_panel, promotion_id=promotion_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion", page_no=page_no, page_size=page_size, q=q, is_active=is_active, promo_group=promo_group, promotion_type=promotion_type, fp_panel=fp_panel, promotion_id=promotion_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
 
@@ -806,8 +806,9 @@ class Cart:
 
         return response
     
-    async def getAbandonedCart(self, page_no=None, page_size=None, from_date=None, to_date=None, anonymous_cart=None, last_id=None, sort_on=None):
+    async def getAbandonedCart(self, user_id=None, page_no=None, page_size=None, from_date=None, to_date=None, anonymous_cart=None, last_id=None, sort_on=None):
         """Get abandoned cart list with pagination
+        :param user_id :  : type string
         :param page_no :  : type integer
         :param page_size :  : type integer
         :param from_date :  : type string
@@ -817,6 +818,9 @@ class Cart:
         :param sort_on :  : type string
         """
         payload = {}
+        
+        if user_id:
+            payload["user_id"] = user_id
         
         if page_no:
             payload["page_no"] = page_no
@@ -845,8 +849,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/abandoned/carts", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer","default":0,"description":"current page no as per pagination"}},{"name":"page_size","in":"query","schema":{"type":"integer","default":10,"description":"Coupon max records fetched in single request"}},{"name":"from_date","in":"query","schema":{"type":"string","description":"Cart which are created on or after from_date"}},{"name":"to_date","in":"query","schema":{"type":"string","description":"Cart which are created on or before to_date"}},{"name":"anonymous_cart","in":"query","schema":{"type":"boolean","description":"Filter by `anonymous_cart`"}},{"name":"last_id","in":"query","schema":{"type":"string","description":"pagination is done based on the last_object_id"}},{"name":"sort_on","in":"query","schema":{"type":"string","description":"on which column to sort on i.e created_on or last_modified"}}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer","default":0,"description":"current page no as per pagination"}},{"name":"page_size","in":"query","schema":{"type":"integer","default":10,"description":"Coupon max records fetched in single request"}},{"name":"from_date","in":"query","schema":{"type":"string","description":"Cart which are created on or after from_date"}},{"name":"to_date","in":"query","schema":{"type":"string","description":"Cart which are created on or before to_date"}},{"name":"anonymous_cart","in":"query","schema":{"type":"boolean","description":"Filter by `anonymous_cart`"}},{"name":"last_id","in":"query","schema":{"type":"string","description":"pagination is done based on the last_object_id"}},{"name":"sort_on","in":"query","schema":{"type":"string","description":"on which column to sort on i.e created_on or last_modified"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, anonymous_cart=anonymous_cart, last_id=last_id, sort_on=sort_on)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, anonymous_cart=anonymous_cart, last_id=last_id, sort_on=sort_on)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/abandoned/carts", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"user_id","in":"query","schema":{"type":"string","description":"Filter by `user_id`"}},{"name":"page_no","in":"query","schema":{"type":"integer","default":0,"description":"current page no as per pagination"}},{"name":"page_size","in":"query","schema":{"type":"integer","default":10,"description":"Coupon max records fetched in single request"}},{"name":"from_date","in":"query","schema":{"type":"string","description":"Cart which are created on or after from_date"}},{"name":"to_date","in":"query","schema":{"type":"string","description":"Cart which are created on or before to_date"}},{"name":"anonymous_cart","in":"query","schema":{"type":"boolean","description":"Filter by `anonymous_cart`"}},{"name":"last_id","in":"query","schema":{"type":"string","description":"pagination is done based on the last_object_id"}},{"name":"sort_on","in":"query","schema":{"type":"string","description":"on which column to sort on i.e created_on or last_modified"}}],"query":[{"name":"user_id","in":"query","schema":{"type":"string","description":"Filter by `user_id`"}},{"name":"page_no","in":"query","schema":{"type":"integer","default":0,"description":"current page no as per pagination"}},{"name":"page_size","in":"query","schema":{"type":"integer","default":10,"description":"Coupon max records fetched in single request"}},{"name":"from_date","in":"query","schema":{"type":"string","description":"Cart which are created on or after from_date"}},{"name":"to_date","in":"query","schema":{"type":"string","description":"Cart which are created on or before to_date"}},{"name":"anonymous_cart","in":"query","schema":{"type":"boolean","description":"Filter by `anonymous_cart`"}},{"name":"last_id","in":"query","schema":{"type":"string","description":"pagination is done based on the last_object_id"}},{"name":"sort_on","in":"query","schema":{"type":"string","description":"on which column to sort on i.e created_on or last_modified"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", user_id=user_id, page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, anonymous_cart=anonymous_cart, last_id=last_id, sort_on=sort_on)
+        query_string = await create_query_string(user_id=user_id, page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, anonymous_cart=anonymous_cart, last_id=last_id, sort_on=sort_on)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -856,7 +860,7 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/abandoned/carts", page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, anonymous_cart=anonymous_cart, last_id=last_id, sort_on=sort_on), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/abandoned/carts", user_id=user_id, page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, anonymous_cart=anonymous_cart, last_id=last_id, sort_on=sort_on), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
 
@@ -872,13 +876,17 @@ class Cart:
 
         return response
     
-    async def getAbandonedCartDetails(self, id=None, i=None, b=None):
+    async def getAbandonedCartDetails(self, user_id=None, id=None, i=None, b=None):
         """Use this API to get details of all the items added to a cart.
+        :param user_id :  : type string
         :param id :  : type string
         :param i :  : type boolean
         :param b :  : type boolean
         """
         payload = {}
+        
+        if user_id:
+            payload["user_id"] = user_id
         
         if id:
             payload["id"] = id
@@ -895,8 +903,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/abandoned/cart/detail", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"i","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."}},{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}}],"query":[{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"i","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."}},{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", id=id, i=i, b=b)
-        query_string = await create_query_string(id=id, i=i, b=b)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/abandoned/cart/detail", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"query","name":"user_id","schema":{"type":"string","description":"Filter by `user_id`"}},{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"i","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."}},{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}}],"query":[{"in":"query","name":"user_id","schema":{"type":"string","description":"Filter by `user_id`"}},{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"i","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."}},{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", user_id=user_id, id=id, i=i, b=b)
+        query_string = await create_query_string(user_id=user_id, id=id, i=i, b=b)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -906,7 +914,7 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/abandoned/cart/detail", id=id, i=i, b=b), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/abandoned/cart/detail", user_id=user_id, id=id, i=i, b=b), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
 
@@ -922,10 +930,11 @@ class Cart:
 
         return response
     
-    async def addItems(self, cart_id=None, b=None, body=""):
+    async def addItems(self, cart_id=None, b=None, user_id=None, body=""):
         """Use this API to add items to the abandoned cart.
         :param cart_id : Current Cart _id : type string
         :param b :  : type boolean
+        :param user_id :  : type string
         """
         payload = {}
         
@@ -934,6 +943,9 @@ class Cart:
         
         if b:
             payload["b"] = b
+        
+        if user_id:
+            payload["user_id"] = user_id
         
 
         # Parameter validation
@@ -946,8 +958,8 @@ class Cart:
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/abandoned/carts/{cart_id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"schema":{"type":"string"},"description":"Current Cart _id","in":"path","required":true,"name":"cart_id"}],"optional":[{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}}],"query":[{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"schema":{"type":"string"},"description":"Current Cart _id","in":"path","required":true,"name":"cart_id"}]}""", cart_id=cart_id, b=b)
-        query_string = await create_query_string(cart_id=cart_id, b=b)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/abandoned/carts/{cart_id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"schema":{"type":"string"},"description":"Current Cart _id","in":"path","required":true,"name":"cart_id"}],"optional":[{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}},{"in":"query","name":"user_id","schema":{"type":"string","description":"The id of the user"}}],"query":[{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}},{"in":"query","name":"user_id","schema":{"type":"string","description":"The id of the user"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"schema":{"type":"string"},"description":"Current Cart _id","in":"path","required":true,"name":"cart_id"}]}""", cart_id=cart_id, b=b, user_id=user_id)
+        query_string = await create_query_string(cart_id=cart_id, b=b, user_id=user_id)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -957,7 +969,7 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/abandoned/carts/{cart_id}", cart_id=cart_id, b=b), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/abandoned/carts/{cart_id}", cart_id=cart_id, b=b, user_id=user_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
 
@@ -973,10 +985,11 @@ class Cart:
 
         return response
     
-    async def updateCart(self, cart_id=None, b=None, body=""):
+    async def updateCart(self, cart_id=None, b=None, user_id=None, body=""):
         """<p>Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size. These attributes will be fetched from the following APIs</p> <ul> <li><font color="monochrome">operation</font> Operation for current api call. <b>update_item</b> for update items. <b>remove_item</b> for removing items.</li> <li> <font color="monochrome">item_id</font>  "/platform/content/v1/products/"</li> <li> <font color="monochrome">item_size</font>   "/platform/content/v1/products/:slug/sizes/"</li> <li> <font color="monochrome">quantity</font>  item quantity (must be greater than or equal to 1)</li> <li> <font color="monochrome">article_id</font>   "/content​/v1​/products​/:identifier​/sizes​/price​/"</li> <li> <font color="monochrome">item_index</font>  item position in the cart (must be greater than or equal to 0)</li> </ul>
         :param cart_id : Current Cart _id : type string
         :param b :  : type boolean
+        :param user_id :  : type string
         """
         payload = {}
         
@@ -985,6 +998,9 @@ class Cart:
         
         if b:
             payload["b"] = b
+        
+        if user_id:
+            payload["user_id"] = user_id
         
 
         # Parameter validation
@@ -997,8 +1013,8 @@ class Cart:
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/abandoned/carts/{cart_id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"schema":{"type":"string"},"description":"Current Cart _id","in":"path","required":true,"name":"cart_id"}],"optional":[{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}}],"query":[{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"schema":{"type":"string"},"description":"Current Cart _id","in":"path","required":true,"name":"cart_id"}]}""", cart_id=cart_id, b=b)
-        query_string = await create_query_string(cart_id=cart_id, b=b)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/abandoned/carts/{cart_id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"schema":{"type":"string"},"description":"Current Cart _id","in":"path","required":true,"name":"cart_id"}],"optional":[{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}},{"in":"query","name":"user_id","schema":{"type":"string","description":"The id of the user."}}],"query":[{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}},{"in":"query","name":"user_id","schema":{"type":"string","description":"The id of the user."}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"schema":{"type":"string"},"description":"Current Cart _id","in":"path","required":true,"name":"cart_id"}]}""", cart_id=cart_id, b=b, user_id=user_id)
+        query_string = await create_query_string(cart_id=cart_id, b=b, user_id=user_id)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -1008,7 +1024,7 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/abandoned/carts/{cart_id}", cart_id=cart_id, b=b), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/abandoned/carts/{cart_id}", cart_id=cart_id, b=b, user_id=user_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
 
@@ -1111,6 +1127,49 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion_code_exists", code=code), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        return response
+    
+    async def overrideCart(self, body=""):
+        """Generate Fynd order while overriding cart details sent with provided `cart_items`
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = CartValidator.overrideCart()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import OverrideCheckoutReq
+        schema = OverrideCheckoutReq()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/checkout/over-ride", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/checkout/over-ride", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        from .models import OverrideCheckoutResponse
+        schema = OverrideCheckoutResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for overrideCart")
+            print(e)
 
         
 

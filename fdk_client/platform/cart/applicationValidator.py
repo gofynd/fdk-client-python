@@ -111,6 +111,15 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+    
+    
+        
+        
+        
+        
+        
+        
     
     
         
@@ -124,11 +133,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
-        
-        
         
     
     
@@ -142,6 +146,10 @@ from ..PlatformModel import BaseSchema
     
     
         
+        
+        
+    
+    
         
         
     
@@ -431,7 +439,7 @@ class CartValidator:
         
         q = fields.Str(required=False)
         
-        status = fields.Str(required=False)
+        is_active = fields.Boolean(required=False)
         
         promo_group = fields.Str(required=False)
         
@@ -557,6 +565,8 @@ class CartValidator:
         
         application_id = fields.Str(required=False)
         
+        user_id = fields.Str(required=False)
+        
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
@@ -580,6 +590,8 @@ class CartValidator:
         
         application_id = fields.Str(required=False)
         
+        user_id = fields.Str(required=False)
+        
         id = fields.Str(required=False)
         
         i = fields.Boolean(required=False)
@@ -598,6 +610,8 @@ class CartValidator:
         cart_id = fields.Str(required=False)
         
         b = fields.Boolean(required=False)
+        
+        user_id = fields.Str(required=False)
          
         
     
@@ -611,6 +625,8 @@ class CartValidator:
         cart_id = fields.Str(required=False)
         
         b = fields.Boolean(required=False)
+        
+        user_id = fields.Str(required=False)
          
         
     
@@ -642,6 +658,15 @@ class CartValidator:
         application_id = fields.Str(required=False)
         
         code = fields.Str(required=False)
+         
+        
+    
+    class overrideCart(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
          
         
     

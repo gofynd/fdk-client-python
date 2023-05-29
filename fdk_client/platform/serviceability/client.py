@@ -1,13 +1,13 @@
 
 
-"""Logistics Platform Client"""
+"""Serviceability Platform Client"""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
 
-from .validator import LogisticsValidator
+from .validator import ServiceabilityValidator
 
-class Logistics:
+class Serviceability:
     def __init__(self, config):
         self._conf = config
 
@@ -19,7 +19,7 @@ class Logistics:
         
 
         # Parameter validation
-        schema = LogisticsValidator.getEntityRegionView()
+        schema = ServiceabilityValidator.getEntityRegionView()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -86,7 +86,7 @@ class Logistics:
         
 
         # Parameter validation
-        schema = LogisticsValidator.getListView()
+        schema = ServiceabilityValidator.getListView()
         schema.dump(schema.load(payload))
         
 
@@ -124,7 +124,7 @@ class Logistics:
         
 
         # Parameter validation
-        schema = LogisticsValidator.getCompanyStoreView()
+        schema = ServiceabilityValidator.getCompanyStoreView()
         schema.dump(schema.load(payload))
         
 
@@ -166,7 +166,7 @@ class Logistics:
         
 
         # Parameter validation
-        schema = LogisticsValidator.updateZoneControllerView()
+        schema = ServiceabilityValidator.updateZoneControllerView()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -213,7 +213,7 @@ class Logistics:
         
 
         # Parameter validation
-        schema = LogisticsValidator.getZoneDataView()
+        schema = ServiceabilityValidator.getZoneDataView()
         schema.dump(schema.load(payload))
         
 
@@ -251,7 +251,7 @@ class Logistics:
         
 
         # Parameter validation
-        schema = LogisticsValidator.createZone()
+        schema = ServiceabilityValidator.createZone()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -298,7 +298,7 @@ class Logistics:
         
 
         # Parameter validation
-        schema = LogisticsValidator.getStore()
+        schema = ServiceabilityValidator.getStore()
         schema.dump(schema.load(payload))
         
 
@@ -336,7 +336,7 @@ class Logistics:
         
 
         # Parameter validation
-        schema = LogisticsValidator.getAllStores()
+        schema = ServiceabilityValidator.getAllStores()
         schema.dump(schema.load(payload))
         
 
@@ -361,6 +361,49 @@ class Logistics:
             schema.dump(schema.load(response))
         except Exception as e:
             print("Response Validation failed for getAllStores")
+            print(e)
+
+        
+
+        return response
+    
+    async def getOptimalLocations(self, body=""):
+        """This API returns serviceable store of the item.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ServiceabilityValidator.getOptimalLocations()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import ReAssignStoreRequest
+        schema = ReAssignStoreRequest()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/reassign", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/reassign", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        from .models import ReAssignStoreResponse
+        schema = ReAssignStoreResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getOptimalLocations")
             print(e)
 
         

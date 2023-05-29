@@ -1,6 +1,6 @@
 
 
-"""Logistics Platform Application Validators."""
+"""Serviceability Platform Application Validators."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -33,6 +33,15 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
+    
+    
+        
+        
+    
+    
+        
+        
     
     
         
@@ -42,7 +51,7 @@ from ..PlatformModel import BaseSchema
         
         
 
-class LogisticsValidator:
+class ServiceabilityValidator:
     
     
     class getApplicationServiceability(BaseSchema):
@@ -77,6 +86,26 @@ class LogisticsValidator:
         zone_id = fields.List(fields.Str(required=False), required=False)
         
         q = fields.Str(required=False)
+         
+        
+    
+    class addAppDp(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class deleteAppDp(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        courier_partner_id = fields.Int(required=False)
          
         
     

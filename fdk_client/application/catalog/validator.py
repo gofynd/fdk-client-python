@@ -89,6 +89,7 @@ from ..ApplicationModel import BaseSchema
         
         
         
+        
     
     
         
@@ -322,6 +323,8 @@ class CatalogValidator:
         
         f = fields.Str(required=False)
         
+        q = fields.Str(required=False)
+        
         filters = fields.Boolean(required=False)
         
         sort_on = fields.Str(required=False)
@@ -354,7 +357,7 @@ class CatalogValidator:
          
         
     
-    class unfollowById(BaseSchema):
+    class followById(BaseSchema):
         
         
         collection_type = fields.Str(required=False)
@@ -363,7 +366,7 @@ class CatalogValidator:
          
         
     
-    class followById(BaseSchema):
+    class unfollowById(BaseSchema):
         
         
         collection_type = fields.Str(required=False)

@@ -1,13 +1,13 @@
 
 
-"""Logistics Platform Client"""
+"""Serviceability Platform Client"""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
 
-from .applicationValidator import LogisticsValidator
+from .applicationValidator import ServiceabilityValidator
 
-class Logistics:
+class Serviceability:
     def __init__(self, config, applicationId):
         self._conf = config
         self.applicationId = applicationId
@@ -20,7 +20,7 @@ class Logistics:
         
 
         # Parameter validation
-        schema = LogisticsValidator.getApplicationServiceability()
+        schema = ServiceabilityValidator.getApplicationServiceability()
         schema.dump(schema.load(payload))
         
 
@@ -58,7 +58,7 @@ class Logistics:
         
 
         # Parameter validation
-        schema = LogisticsValidator.getZoneFromPincodeView()
+        schema = ServiceabilityValidator.getZoneFromPincodeView()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -117,7 +117,7 @@ class Logistics:
         
 
         # Parameter validation
-        schema = LogisticsValidator.getZonesFromApplicationIdView()
+        schema = ServiceabilityValidator.getZonesFromApplicationIdView()
         schema.dump(schema.load(payload))
         
 
@@ -148,6 +148,91 @@ class Logistics:
 
         return response
     
+    async def addAppDp(self, body=""):
+        """This API add application dp data.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ServiceabilityValidator.addAppDp()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import ApplicationCompanyDpViewRequest
+        schema = ApplicationCompanyDpViewRequest()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier of a particular sale channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier of a particular sale channel.","schema":{"type":"string"},"required":true}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        from .models import ApplicationCompanyDpViewResponse
+        schema = ApplicationCompanyDpViewResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for addAppDp")
+            print(e)
+
+        
+
+        return response
+    
+    async def deleteAppDp(self, courier_partner_id=None):
+        """This API remove application dp data.
+        :param courier_partner_id : A `courier_partner_id` is a unique identifier of a particular delivery partner. : type integer
+        """
+        payload = {}
+        
+        if courier_partner_id:
+            payload["courier_partner_id"] = courier_partner_id
+        
+
+        # Parameter validation
+        schema = ServiceabilityValidator.deleteAppDp()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/courier-partner/{courier_partner_id}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier of a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"courier_partner_id","description":"A `courier_partner_id` is a unique identifier of a particular delivery partner.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier of a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"courier_partner_id","description":"A `courier_partner_id` is a unique identifier of a particular delivery partner.","schema":{"type":"integer"},"required":true}]}""", courier_partner_id=courier_partner_id)
+        query_string = await create_query_string(courier_partner_id=courier_partner_id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/courier-partner/{courier_partner_id}", courier_partner_id=courier_partner_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        from .models import ApplicationCompanyDpViewResponse
+        schema = ApplicationCompanyDpViewResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for deleteAppDp")
+            print(e)
+
+        
+
+        return response
+    
     async def updatePincodeMopView(self, body=""):
         """This API updates Pincode method of payment.
         """
@@ -155,7 +240,7 @@ class Logistics:
         
 
         # Parameter validation
-        schema = LogisticsValidator.updatePincodeMopView()
+        schema = ServiceabilityValidator.updatePincodeMopView()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -198,7 +283,7 @@ class Logistics:
         
 
         # Parameter validation
-        schema = LogisticsValidator.updatePincodeBulkView()
+        schema = ServiceabilityValidator.updatePincodeBulkView()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -241,7 +326,7 @@ class Logistics:
         
 
         # Parameter validation
-        schema = LogisticsValidator.updatePincodeCoDListing()
+        schema = ServiceabilityValidator.updatePincodeCoDListing()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -284,7 +369,7 @@ class Logistics:
         
 
         # Parameter validation
-        schema = LogisticsValidator.updatePincodeAuditHistory()
+        schema = ServiceabilityValidator.updatePincodeAuditHistory()
         schema.dump(schema.load(payload))
         
         # Body validation

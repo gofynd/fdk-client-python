@@ -31,7 +31,7 @@ from .rewards.applicationClient import Rewards
 
 from .partner.applicationClient import Partner
 
-from .logistics.applicationClient import Logistics
+from .serviceability.applicationClient import Serviceability
 
 
 class PlatformApplicationClient:
@@ -66,7 +66,7 @@ class PlatformApplicationClient:
         
         self.partner = Partner(config, applicationId)
         
-        self.logistics = Logistics(config, applicationId)
+        self.serviceability = Serviceability(config, applicationId)
         
 
     async def setExtraHeaders(self, header):

@@ -1,6 +1,6 @@
 
 
-"""Logistics Platform Validators."""
+"""Serviceability Platform Validators."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -43,10 +43,13 @@ from ..PlatformModel import BaseSchema
     
     
         
+    
+    
+        
 
 
 
-class LogisticsValidator:
+class ServiceabilityValidator:
     
     
     class getEntityRegionView(BaseSchema):
@@ -117,6 +120,13 @@ class LogisticsValidator:
         
     
     class getAllStores(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class getOptimalLocations(BaseSchema):
         
         
         company_id = fields.Int(required=False)
