@@ -14,6 +14,7 @@ Authentication Service
 * [loginWithOTP](#loginwithotp)
 * [loginWithEmailAndPassword](#loginwithemailandpassword)
 * [sendResetPasswordEmail](#sendresetpasswordemail)
+* [sendResetPasswordMobile](#sendresetpasswordmobile)
 * [forgotPassword](#forgotpassword)
 * [sendResetToken](#sendresettoken)
 * [loginWithToken](#loginwithtoken)
@@ -22,6 +23,7 @@ Authentication Service
 * [verifyMobile](#verifymobile)
 * [hasPassword](#haspassword)
 * [updatePassword](#updatepassword)
+* [deleteUser](#deleteuser)
 * [logout](#logout)
 * [sendOTPOnMobile](#sendotponmobile)
 * [verifyMobileOTP](#verifymobileotp)
@@ -53,7 +55,7 @@ Login or Register using Facebook
 
 ```python
 try:
-    result = await client.user.loginWithFacebook(platform=platform, body=body)
+    result = await applicationClient.user.loginWithFacebook(platform=platform, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -138,7 +140,7 @@ Login or Register using Google
 
 ```python
 try:
-    result = await client.user.loginWithGoogle(platform=platform, body=body)
+    result = await applicationClient.user.loginWithGoogle(platform=platform, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -223,7 +225,7 @@ Login or Register using Google on Android
 
 ```python
 try:
-    result = await client.user.loginWithGoogleAndroid(platform=platform, body=body)
+    result = await applicationClient.user.loginWithGoogleAndroid(platform=platform, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -308,7 +310,7 @@ Login or Register using Google on iOS
 
 ```python
 try:
-    result = await client.user.loginWithGoogleIOS(platform=platform, body=body)
+    result = await applicationClient.user.loginWithGoogleIOS(platform=platform, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -393,7 +395,7 @@ Login or Register using Apple on iOS
 
 ```python
 try:
-    result = await client.user.loginWithAppleIOS(platform=platform, body=body)
+    result = await applicationClient.user.loginWithAppleIOS(platform=platform, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -478,7 +480,7 @@ Login or Register with OTP
 
 ```python
 try:
-    result = await client.user.loginWithOTP(platform=platform, body=body)
+    result = await applicationClient.user.loginWithOTP(platform=platform, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -551,7 +553,7 @@ Login or Register with password
 
 ```python
 try:
-    result = await client.user.loginWithEmailAndPassword(body=body)
+    result = await applicationClient.user.loginWithEmailAndPassword(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -662,7 +664,7 @@ Reset Password
 
 ```python
 try:
-    result = await client.user.sendResetPasswordEmail(platform=platform, body=body)
+    result = await applicationClient.user.sendResetPasswordEmail(platform=platform, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -713,6 +715,65 @@ Success. Check the example shown below or refer `ResetPasswordSuccess` for more 
 ---
 
 
+### sendResetPasswordMobile
+Reset Password
+
+
+
+
+```python
+try:
+    result = await applicationClient.user.sendResetPasswordMobile(platform=platform, body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| platform | String? | no | ID of the application |  
+| body | [SendResetPasswordMobileRequestSchema](#SendResetPasswordMobileRequestSchema) | yes | Request body |
+
+
+Use this API to reset a password using the link sent on mobile.
+
+*Returned Response:*
+
+
+
+
+[ResetPasswordSuccess](#ResetPasswordSuccess)
+
+Success. Check the example shown below or refer `ResetPasswordSuccess` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "status": "sent"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
 ### forgotPassword
 Forgot Password
 
@@ -721,7 +782,7 @@ Forgot Password
 
 ```python
 try:
-    result = await client.user.forgotPassword(body=body)
+    result = await applicationClient.user.forgotPassword(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -832,7 +893,7 @@ Reset Password using token
 
 ```python
 try:
-    result = await client.user.sendResetToken(body=body)
+    result = await applicationClient.user.sendResetToken(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -890,7 +951,7 @@ Login or Register with token
 
 ```python
 try:
-    result = await client.user.loginWithToken(body=body)
+    result = await applicationClient.user.loginWithToken(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1001,7 +1062,7 @@ Registration using a form
 
 ```python
 try:
-    result = await client.user.registerWithForm(platform=platform, body=body)
+    result = await applicationClient.user.registerWithForm(platform=platform, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1069,7 +1130,7 @@ Verify email
 
 ```python
 try:
-    result = await client.user.verifyEmail(body=body)
+    result = await applicationClient.user.verifyEmail(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1127,7 +1188,7 @@ Verify mobile
 
 ```python
 try:
-    result = await client.user.verifyMobile(body=body)
+    result = await applicationClient.user.verifyMobile(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1185,7 +1246,7 @@ Check password
 
 ```python
 try:
-    result = await client.user.hasPassword()
+    result = await applicationClient.user.hasPassword()
     # use result
 except Exception as e:
     print(e)
@@ -1237,7 +1298,7 @@ Update user password
 
 ```python
 try:
-    result = await client.user.updatePassword(body=body)
+    result = await applicationClient.user.updatePassword(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1287,6 +1348,64 @@ Success. Returns a success message. Refer `VerifyEmailSuccess` for more details.
 ---
 
 
+### deleteUser
+verify otp and delete user
+
+
+
+
+```python
+try:
+    result = await applicationClient.user.deleteUser(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [DeleteApplicationUserRequestSchema](#DeleteApplicationUserRequestSchema) | yes | Request body |
+
+
+verify otp and delete user
+
+*Returned Response:*
+
+
+
+
+[DeleteUserSuccess](#DeleteUserSuccess)
+
+Success. Returns a success message. Refer `DeleteUserSuccess` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
 ### logout
 Logs out currently logged in user
 
@@ -1295,7 +1414,7 @@ Logs out currently logged in user
 
 ```python
 try:
-    result = await client.user.logout()
+    result = await applicationClient.user.logout()
     # use result
 except Exception as e:
     print(e)
@@ -1347,7 +1466,7 @@ Send OTP on mobile
 
 ```python
 try:
-    result = await client.user.sendOTPOnMobile(platform=platform, body=body)
+    result = await applicationClient.user.sendOTPOnMobile(platform=platform, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1412,7 +1531,7 @@ Verify OTP on mobile
 
 ```python
 try:
-    result = await client.user.verifyMobileOTP(platform=platform, body=body)
+    result = await applicationClient.user.verifyMobileOTP(platform=platform, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1525,7 +1644,7 @@ Send OTP on email
 
 ```python
 try:
-    result = await client.user.sendOTPOnEmail(platform=platform, body=body)
+    result = await applicationClient.user.sendOTPOnEmail(platform=platform, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1584,7 +1703,7 @@ Verify OTP on email
 
 ```python
 try:
-    result = await client.user.verifyEmailOTP(platform=platform, body=body)
+    result = await applicationClient.user.verifyEmailOTP(platform=platform, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1697,7 +1816,7 @@ Get logged in user
 
 ```python
 try:
-    result = await client.user.getLoggedInUser()
+    result = await applicationClient.user.getLoggedInUser()
     # use result
 except Exception as e:
     print(e)
@@ -1804,7 +1923,7 @@ Get list of sessions
 
 ```python
 try:
-    result = await client.user.getListOfActiveSessions()
+    result = await applicationClient.user.getListOfActiveSessions()
     # use result
 except Exception as e:
     print(e)
@@ -1861,7 +1980,7 @@ Get platform configurations
 
 ```python
 try:
-    result = await client.user.getPlatformConfig(name=name)
+    result = await applicationClient.user.getPlatformConfig(name=name)
     # use result
 except Exception as e:
     print(e)
@@ -1956,6 +2075,22 @@ Success. Returns a JSON object containing the all the platform configurations. R
       "appId": "548529975557631"
     }
   },
+  "delete_account_reasons": [
+    {
+      "reason_text": "test",
+      "reason_id": "123",
+      "show_text_area": true
+    }
+  ],
+  "delete_account_day": 7,
+  "delete_account_consent": {
+    "consent_text": ""
+  },
+  "session_config": {
+    "duration": "30",
+    "type": "Days",
+    "is_rolling": false
+  },
   "_id": "5e04a5e5220bc15839ad9bc0",
   "created_at": "2019-12-26T12:21:57.878Z",
   "updated_at": "2020-08-13T14:31:09.878Z",
@@ -1983,7 +2118,7 @@ Edit Profile Details
 
 ```python
 try:
-    result = await client.user.updateProfile(platform=platform, body=body)
+    result = await applicationClient.user.updateProfile(platform=platform, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2095,7 +2230,7 @@ Add mobile number to profile
 
 ```python
 try:
-    result = await client.user.addMobileNumber(platform=platform, body=body)
+    result = await applicationClient.user.addMobileNumber(platform=platform, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2208,7 +2343,7 @@ Delete mobile number from profile
 
 ```python
 try:
-    result = await client.user.deleteMobileNumber(platform=platform, active=active, primary=primary, verified=verified, countryCode=countryCode, phone=phone)
+    result = await applicationClient.user.deleteMobileNumber(platform=platform, active=active, primary=primary, verified=verified, countryCode=countryCode, phone=phone)
     # use result
 except Exception as e:
     print(e)
@@ -2325,7 +2460,7 @@ Set mobile as primary
 
 ```python
 try:
-    result = await client.user.setMobileNumberAsPrimary(body=body)
+    result = await applicationClient.user.setMobileNumberAsPrimary(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2436,7 +2571,7 @@ Send verification link to mobile
 
 ```python
 try:
-    result = await client.user.sendVerificationLinkToMobile(platform=platform, body=body)
+    result = await applicationClient.user.sendVerificationLinkToMobile(platform=platform, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2549,7 +2684,7 @@ Add email to profile
 
 ```python
 try:
-    result = await client.user.addEmail(platform=platform, body=body)
+    result = await applicationClient.user.addEmail(platform=platform, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2662,7 +2797,7 @@ Delete email from profile
 
 ```python
 try:
-    result = await client.user.deleteEmail(platform=platform, active=active, primary=primary, verified=verified, email=email)
+    result = await applicationClient.user.deleteEmail(platform=platform, active=active, primary=primary, verified=verified, email=email)
     # use result
 except Exception as e:
     print(e)
@@ -2778,7 +2913,7 @@ Set email as primary
 
 ```python
 try:
-    result = await client.user.setEmailAsPrimary(body=body)
+    result = await applicationClient.user.setEmailAsPrimary(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2889,7 +3024,7 @@ Send verification link to email
 
 ```python
 try:
-    result = await client.user.sendVerificationLinkToEmail(platform=platform, body=body)
+    result = await applicationClient.user.sendVerificationLinkToEmail(platform=platform, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2961,6 +3096,34 @@ Request body must contain an email ID. Refer `EditEmailRequestSchema` for more d
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | userId | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [DeleteApplicationUserRequestSchema](#DeleteApplicationUserRequestSchema)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | userId | String? |  yes  |  |
+ | reason | String? |  yes  |  |
+ | reasonId | String? |  yes  |  |
+ | requestId | String? |  yes  |  |
+ | otp | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [UnDeleteUserRequestSchema](#UnDeleteUserRequestSchema)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | userId | String? |  yes  |  |
+ | reason | String? |  yes  |  |
+ | reasonId | String? |  yes  |  |
 
 ---
 
@@ -3171,6 +3334,19 @@ Request body must contain an email ID. Refer `EditEmailRequestSchema` for more d
 
  
  
+ #### [SendResetPasswordMobileRequestSchema](#SendResetPasswordMobileRequestSchema)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | countryCode | String? |  yes  |  |
+ | mobile | String? |  yes  |  |
+ | captchaCode | String? |  yes  |  |
+
+---
+
+
+ 
+ 
  #### [PasswordLoginRequestSchema](#PasswordLoginRequestSchema)
 
  | Properties | Type | Nullable | Description |
@@ -3191,6 +3367,7 @@ Request body must contain an email ID. Refer `EditEmailRequestSchema` for more d
  | countryCode | String? |  yes  |  |
  | captchaCode | String? |  yes  |  |
  | mobile | String? |  yes  |  |
+ | androidHash | String? |  yes  |  |
 
 ---
 
@@ -3400,6 +3577,28 @@ Request body must contain an email ID. Refer `EditEmailRequestSchema` for more d
  
  
  #### [ArchiveUserSuccess](#ArchiveUserSuccess)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | success | Boolean? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [DeleteUserSuccess](#DeleteUserSuccess)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | success | Boolean? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [UnDeleteUserSuccess](#UnDeleteUserSuccess)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
@@ -3814,6 +4013,10 @@ Request body must contain an email ID. Refer `EditEmailRequestSchema` for more d
  | register | Boolean? |  yes  |  |
  | mobileImage | String? |  yes  |  |
  | desktopImage | String? |  yes  |  |
+ | deleteAccountDay | Int? |  yes  |  |
+ | deleteAccountReasons | ArrayList<[DeleteAccountReasons](#DeleteAccountReasons)>? |  yes  |  |
+ | deleteAccountConsent | HashMap<String,Any>? |  yes  |  |
+ | sessionConfig | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -3967,6 +4170,30 @@ Request body must contain an email ID. Refer `EditEmailRequestSchema` for more d
 
  
  
+ #### [DeleteAccountReasons](#DeleteAccountReasons)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | reasonText | String? |  yes  |  |
+ | reasonId | String? |  yes  |  |
+ | showTextArea | Boolean? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [DeleteAccountConsent](#DeleteAccountConsent)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | consentText | String? |  yes  |  |
+
+---
+
+
+ 
+ 
  #### [Facebook](#Facebook)
 
  | Properties | Type | Nullable | Description |
@@ -3994,6 +4221,19 @@ Request body must contain an email ID. Refer `EditEmailRequestSchema` for more d
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | appId | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [SessionExpiry](#SessionExpiry)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | duration | Int? |  yes  |  |
+ | type | String? |  yes  |  |
+ | isRolling | Boolean? |  yes  |  |
 
 ---
 
@@ -4032,8 +4272,6 @@ Request body must contain an email ID. Refer `EditEmailRequestSchema` for more d
  | profilePicUrl | String? |  yes  |  |
  | username | String? |  yes  |  |
  | accountType | String? |  yes  |  |
- | debug | [Debug](#Debug)? |  yes  |  |
- | hasOldPasswordHash | Boolean? |  yes  |  |
  | id | String? |  yes  |  |
  | createdAt | String? |  yes  |  |
  | updatedAt | String? |  yes  |  |
@@ -4066,18 +4304,6 @@ Request body must contain an email ID. Refer `EditEmailRequestSchema` for more d
  | verified | Boolean? |  yes  |  |
  | email | String? |  yes  |  |
  | active | Boolean? |  yes  |  |
-
----
-
-
- 
- 
- #### [Debug](#Debug)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | source | String? |  yes  |  |
- | platform | String? |  yes  |  |
 
 ---
 

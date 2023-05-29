@@ -11,6 +11,7 @@ Authentication Service
 * [createUser](#createuser)
 * [blockOrUnblockUsers](#blockorunblockusers)
 * [archiveUser](#archiveuser)
+* [unDeleteUser](#undeleteuser)
 * [updateUser](#updateuser)
 * [createUserSession](#createusersession)
 * [getActiveSessions](#getactivesessions)
@@ -31,7 +32,7 @@ Get a list of customers
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").user.getCustomers(q=q, pageSize=pageSize, pageNo=pageNo)
+    result = await platformClient.application("<APPLICATION_ID>").user.getCustomers(q=q, pageSize=pageSize, pageNo=pageNo)
     # use result
 except Exception as e:
     print(e)
@@ -145,7 +146,7 @@ Search an existing user.
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").user.searchUsers(q=q)
+    result = await platformClient.application("<APPLICATION_ID>").user.searchUsers(q=q)
     # use result
 except Exception as e:
     print(e)
@@ -244,7 +245,7 @@ Create user
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").user.createUser(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").user.createUser(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -342,7 +343,7 @@ Block/Unblock user
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").user.blockOrUnblockUsers(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").user.blockOrUnblockUsers(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -400,7 +401,7 @@ archive user
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").user.archiveUser(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").user.archiveUser(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -450,6 +451,64 @@ Success
 ---
 
 
+### unDeleteUser
+undelete user who deleted from application and have not elapsed the platform configured delete days
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").user.unDeleteUser(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [UnDeleteUserRequestSchema](#UnDeleteUserRequestSchema) | yes | Request body |
+
+
+undelete user who deleted from application and have not elapsed the platform configured delete days
+
+*Returned Response:*
+
+
+
+
+[UnDeleteUserSuccess](#UnDeleteUserSuccess)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
 ### updateUser
 Update user
 
@@ -458,7 +517,7 @@ Update user
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").user.updateUser(userId=userId, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").user.updateUser(userId=userId, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -557,7 +616,7 @@ Create user session
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").user.createUserSession(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").user.createUserSession(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -621,7 +680,7 @@ Get a list of all session for a user
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").user.getActiveSessions(id=id)
+    result = await platformClient.application("<APPLICATION_ID>").user.getActiveSessions(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -691,7 +750,7 @@ Delete a list of all session for a user
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").user.deleteActiveSessions(id=id)
+    result = await platformClient.application("<APPLICATION_ID>").user.deleteActiveSessions(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -761,7 +820,7 @@ Get platform configurations
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").user.getPlatformConfig()
+    result = await platformClient.application("<APPLICATION_ID>").user.getPlatformConfig()
     # use result
 except Exception as e:
     print(e)
@@ -851,6 +910,22 @@ Success. Returns a JSON object containing the all the platform configurations. R
       "appId": "token_123"
     }
   },
+  "session_config": {
+    "duration": 30,
+    "type": "Days",
+    "is_rolling": false
+  },
+  "delete_account_reasons": [
+    {
+      "reason_text": "test",
+      "reason_id": "123",
+      "show_text_area": true
+    }
+  ],
+  "delete_account_day": 7,
+  "delete_account_consent": {
+    "consent_text": ""
+  },
   "_id": "5e04a5e5220bc15839ad9bc0",
   "created_at": "2019-12-26T12:21:57.878Z",
   "updated_at": "2020-08-13T14:31:09.878Z",
@@ -878,7 +953,7 @@ Update platform configurations
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").user.updatePlatformConfig(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").user.updatePlatformConfig(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -972,6 +1047,22 @@ Success. Returns a JSON object with the updated platform configurations. Refer `
       "appId": "token_123"
     }
   },
+  "session_config": {
+    "duration": 30,
+    "type": "Days",
+    "is_rolling": false
+  },
+  "delete_account_reasons": [
+    {
+      "reason_text": "test",
+      "reason_id": "123",
+      "show_text_area": true
+    }
+  ],
+  "delete_account_day": 7,
+  "delete_account_consent": {
+    "consent_text": ""
+  },
   "_id": "5e04a5e5220bc15839ad9bc0",
   "created_at": "2019-12-26T12:21:57.878Z",
   "updated_at": "2020-08-13T14:31:09.878Z",
@@ -1014,6 +1105,34 @@ Success. Returns a JSON object with the updated platform configurations. Refer `
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | userId | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [DeleteApplicationUserRequestSchema](#DeleteApplicationUserRequestSchema)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | userId | String? |  yes  |  |
+ | reason | String? |  yes  |  |
+ | reasonId | String? |  yes  |  |
+ | requestId | String? |  yes  |  |
+ | otp | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [UnDeleteUserRequestSchema](#UnDeleteUserRequestSchema)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | userId | String? |  yes  |  |
+ | reason | String? |  yes  |  |
+ | reasonId | String? |  yes  |  |
 
 ---
 
@@ -1224,6 +1343,19 @@ Success. Returns a JSON object with the updated platform configurations. Refer `
 
  
  
+ #### [SendResetPasswordMobileRequestSchema](#SendResetPasswordMobileRequestSchema)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | countryCode | String? |  yes  |  |
+ | mobile | String? |  yes  |  |
+ | captchaCode | String? |  yes  |  |
+
+---
+
+
+ 
+ 
  #### [PasswordLoginRequestSchema](#PasswordLoginRequestSchema)
 
  | Properties | Type | Nullable | Description |
@@ -1244,6 +1376,7 @@ Success. Returns a JSON object with the updated platform configurations. Refer `
  | countryCode | String? |  yes  |  |
  | captchaCode | String? |  yes  |  |
  | mobile | String? |  yes  |  |
+ | androidHash | String? |  yes  |  |
 
 ---
 
@@ -1453,6 +1586,28 @@ Success. Returns a JSON object with the updated platform configurations. Refer `
  
  
  #### [ArchiveUserSuccess](#ArchiveUserSuccess)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | success | Boolean? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [DeleteUserSuccess](#DeleteUserSuccess)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | success | Boolean? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [UnDeleteUserSuccess](#UnDeleteUserSuccess)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
@@ -1867,6 +2022,10 @@ Success. Returns a JSON object with the updated platform configurations. Refer `
  | register | Boolean? |  yes  |  |
  | mobileImage | String? |  yes  |  |
  | desktopImage | String? |  yes  |  |
+ | deleteAccountDay | Int? |  yes  |  |
+ | deleteAccountReasons | ArrayList<[DeleteAccountReasons](#DeleteAccountReasons)>? |  yes  |  |
+ | deleteAccountConsent | HashMap<String,Any>? |  yes  |  |
+ | sessionConfig | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -2020,6 +2179,30 @@ Success. Returns a JSON object with the updated platform configurations. Refer `
 
  
  
+ #### [DeleteAccountReasons](#DeleteAccountReasons)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | reasonText | String? |  yes  |  |
+ | reasonId | String? |  yes  |  |
+ | showTextArea | Boolean? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [DeleteAccountConsent](#DeleteAccountConsent)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | consentText | String? |  yes  |  |
+
+---
+
+
+ 
+ 
  #### [Facebook](#Facebook)
 
  | Properties | Type | Nullable | Description |
@@ -2047,6 +2230,19 @@ Success. Returns a JSON object with the updated platform configurations. Refer `
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | appId | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [SessionExpiry](#SessionExpiry)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | duration | Int? |  yes  |  |
+ | type | String? |  yes  |  |
+ | isRolling | Boolean? |  yes  |  |
 
 ---
 
@@ -2085,8 +2281,6 @@ Success. Returns a JSON object with the updated platform configurations. Refer `
  | profilePicUrl | String? |  yes  |  |
  | username | String? |  yes  |  |
  | accountType | String? |  yes  |  |
- | debug | [Debug](#Debug)? |  yes  |  |
- | hasOldPasswordHash | Boolean? |  yes  |  |
  | id | String? |  yes  |  |
  | createdAt | String? |  yes  |  |
  | updatedAt | String? |  yes  |  |
@@ -2119,18 +2313,6 @@ Success. Returns a JSON object with the updated platform configurations. Refer `
  | verified | Boolean? |  yes  |  |
  | email | String? |  yes  |  |
  | active | Boolean? |  yes  |  |
-
----
-
-
- 
- 
- #### [Debug](#Debug)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | source | String? |  yes  |  |
- | platform | String? |  yes  |  |
 
 ---
 

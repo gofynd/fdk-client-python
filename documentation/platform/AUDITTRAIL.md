@@ -24,7 +24,7 @@ Get paginated audit logs
 
 ```python
 try:
-    result = await client.audittrail.getAuditLogs(qs=qs)
+    result = await platformClient.audittrail.getAuditLogs(qs=qs)
     # use result
 except Exception as e:
     print(e)
@@ -114,7 +114,7 @@ Create logs for auditing later on
 
 ```python
 try:
-    result = await client.audittrail.createAuditLog(body=body)
+    result = await platformClient.audittrail.createAuditLog(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -181,7 +181,7 @@ Get audit log
 
 ```python
 try:
-    result = await client.audittrail.getAuditLog(id=id)
+    result = await platformClient.audittrail.getAuditLog(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -316,7 +316,7 @@ Get entity types
 
 ```python
 try:
-    result = await client.audittrail.getEntityTypes()
+    result = await platformClient.audittrail.getEntityTypes()
     # use result
 except Exception as e:
     print(e)

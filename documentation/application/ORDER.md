@@ -16,8 +16,6 @@ Handles all platform order and shipment api(s)
 * [getPosOrderById](#getposorderbyid)
 * [trackShipment](#trackshipment)
 * [updateShipmentStatus](#updateshipmentstatus)
-* [getInvoiceByShipmentId](#getinvoicebyshipmentid)
-* [getCreditNoteByShipmentId](#getcreditnotebyshipmentid)
 
 
 
@@ -32,7 +30,7 @@ Get details of a shipment
 
 ```python
 try:
-    result = await client.order.getShipmentById(shipmentId=shipmentId)
+    result = await applicationClient.order.getShipmentById(shipmentId=shipmentId)
     # use result
 except Exception as e:
     print(e)
@@ -447,7 +445,7 @@ Get Customer Details by Shipment Id
 
 ```python
 try:
-    result = await client.order.getCustomerDetailsByShipmentId(orderId=orderId, shipmentId=shipmentId)
+    result = await applicationClient.order.getCustomerDetailsByShipmentId(orderId=orderId, shipmentId=shipmentId)
     # use result
 except Exception as e:
     print(e)
@@ -511,7 +509,7 @@ Send and Resend Otp code to Order-Shipment customer
 
 ```python
 try:
-    result = await client.order.sendOtpToShipmentCustomer(orderId=orderId, shipmentId=shipmentId)
+    result = await applicationClient.order.sendOtpToShipmentCustomer(orderId=orderId, shipmentId=shipmentId)
     # use result
 except Exception as e:
     print(e)
@@ -574,7 +572,7 @@ Get reasons behind full or partial cancellation of a shipment
 
 ```python
 try:
-    result = await client.order.getShipmentReasons(shipmentId=shipmentId, bagId=bagId)
+    result = await applicationClient.order.getShipmentReasons(shipmentId=shipmentId, bagId=bagId)
     # use result
 except Exception as e:
     print(e)
@@ -639,7 +637,7 @@ Verify Otp code
 
 ```python
 try:
-    result = await client.order.verifyOtpShipmentCustomer(orderId=orderId, shipmentId=shipmentId, body=body)
+    result = await applicationClient.order.verifyOtpShipmentCustomer(orderId=orderId, shipmentId=shipmentId, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -699,7 +697,7 @@ Get all orders
 
 ```python
 try:
-    result = await client.order.getOrders(status=status, pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate)
+    result = await applicationClient.order.getOrders(status=status, pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate)
     # use result
 except Exception as e:
     print(e)
@@ -760,7 +758,7 @@ Get details of an order
 
 ```python
 try:
-    result = await client.order.getOrderById(orderId=orderId)
+    result = await applicationClient.order.getOrderById(orderId=orderId)
     # use result
 except Exception as e:
     print(e)
@@ -1752,7 +1750,7 @@ Get POS Order
 
 ```python
 try:
-    result = await client.order.getPosOrderById(orderId=orderId)
+    result = await applicationClient.order.getPosOrderById(orderId=orderId)
     # use result
 except Exception as e:
     print(e)
@@ -2096,7 +2094,7 @@ Track shipment
 
 ```python
 try:
-    result = await client.order.trackShipment(shipmentId=shipmentId)
+    result = await applicationClient.order.trackShipment(shipmentId=shipmentId)
     # use result
 except Exception as e:
     print(e)
@@ -2166,7 +2164,7 @@ Update the shipment status
 
 ```python
 try:
-    result = await client.order.updateShipmentStatus(shipmentId=shipmentId, body=body)
+    result = await applicationClient.order.updateShipmentStatus(shipmentId=shipmentId, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2215,131 +2213,31 @@ Success. Check the example shown below or refer `ShipmentStatusUpdateBody` for m
 ---
 
 
-### getInvoiceByShipmentId
-Get Presigned URL to download Invoice
-
-
-
-
-```python
-try:
-    result = await client.order.getInvoiceByShipmentId(shipmentId=shipmentId, parameters=parameters)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| shipmentId | String | yes | Shiment ID |   
-| parameters | invoiceParameter? | no |  |  
-
-
-
-Use this API to generate Presigned URLs for downloading Invoice
-
-*Returned Response:*
-
-
-
-
-[getInvoiceByShipmentId200Response](#getInvoiceByShipmentId200Response)
-
-Success Response, Presigned URL of Invoice
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getCreditNoteByShipmentId
-Get Presigned URL to download Invoice
-
-
-
-
-```python
-try:
-    result = await client.order.getCreditNoteByShipmentId(shipmentId=shipmentId, parameters=parameters)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| shipmentId | String | yes | Shiment ID |   
-| parameters | creditNoteParameter? | no |  |  
-
-
-
-Use this API to generate Presigned URLs for downloading Invoice
-
-*Returned Response:*
-
-
-
-
-[getInvoiceByShipmentId200Response](#getInvoiceByShipmentId200Response)
-
-Success Response, Presigned URL of Invoice
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
 
 ### Schemas
 
  
  
- #### [FulfillingCompany](#FulfillingCompany)
+ #### [UserInfo](#UserInfo)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | mobile | String? |  yes  |  |
+ | gender | String? |  yes  |  |
+ | name | String? |  yes  |  |
+ | email | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [FulfillingStore](#FulfillingStore)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | code | String? |  yes  |  |
+ | companyId | Int? |  yes  |  |
  | id | Int? |  yes  |  |
  | name | String? |  yes  |  |
 
@@ -2352,67 +2250,35 @@ Success Response, Presigned URL of Invoice
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | display | String? |  yes  |  |
  | name | String? |  yes  |  |
  | value | Int? |  yes  |  |
+ | display | String? |  yes  |  |
 
 ---
 
 
  
  
- #### [UserInfo](#UserInfo)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | email | String? |  yes  |  |
- | gender | String? |  yes  |  |
- | name | String? |  yes  |  |
- | mobile | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [Prices](#Prices)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | couponValue | Int? |  yes  |  |
- | transferPrice | Int? |  yes  |  |
- | pmPriceSplit | HashMap<String,Any>? |  yes  |  |
- | gstTaxPercentage | Int? |  yes  |  |
- | cashbackApplied | Int? |  yes  |  |
- | codCharges | Int? |  yes  |  |
- | priceMarked | Int? |  yes  |  |
- | priceEffective | Int? |  yes  |  |
- | valueOfGood | Int? |  yes  |  |
- | cashback | Int? |  yes  |  |
- | addedToFyndCash | Int? |  yes  |  |
- | refundCredit | Int? |  yes  |  |
- | refundAmount | Int? |  yes  |  |
- | discount | Int? |  yes  |  |
- | amountPaid | Int? |  yes  |  |
- | fyndCredits | Int? |  yes  |  |
- | deliveryCharge | Int? |  yes  |  |
- | promotionEffectiveDiscount | Int? |  yes  |  |
- | brandCalculatedAmount | Int? |  yes  |  |
- | couponEffectiveDiscount | Int? |  yes  |  |
-
----
-
-
- 
- 
- #### [CurrentStatus](#CurrentStatus)
+ #### [PaymentInfo](#PaymentInfo)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | status | String? |  yes  |  |
- | updatedAt | String? |  yes  |  |
+ | logo | String? |  yes  |  |
+ | mop | String? |  yes  |  |
+ | mode | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [FulfillingCompany](#FulfillingCompany)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
  | name | String? |  yes  |  |
- | journeyType | String? |  yes  |  |
+ | id | Int? |  yes  |  |
 
 ---
 
@@ -2435,14 +2301,58 @@ Success Response, Presigned URL of Invoice
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | code | String? |  yes  |  |
  | image | ArrayList<String>? |  yes  |  |
- | slugKey | String? |  yes  |  |
- | sellerIdentifier | String? |  yes  |  |
  | id | Int? |  yes  |  |
- | size | String? |  yes  |  |
  | brand | [ItemBrand](#ItemBrand)? |  yes  |  |
+ | size | String? |  yes  |  |
+ | sellerIdentifier | String? |  yes  |  |
+ | slugKey | String? |  yes  |  |
+ | code | String? |  yes  |  |
  | name | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [CurrentStatus](#CurrentStatus)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | name | String? |  yes  |  |
+ | journeyType | String? |  yes  |  |
+ | status | String? |  yes  |  |
+ | updatedAt | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [Prices](#Prices)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | refundCredit | Int? |  yes  |  |
+ | couponValue | Int? |  yes  |  |
+ | valueOfGood | Int? |  yes  |  |
+ | gstTaxPercentage | Int? |  yes  |  |
+ | promotionEffectiveDiscount | Int? |  yes  |  |
+ | refundAmount | Int? |  yes  |  |
+ | amountPaid | Int? |  yes  |  |
+ | addedToFyndCash | Int? |  yes  |  |
+ | cashback | Int? |  yes  |  |
+ | deliveryCharge | Int? |  yes  |  |
+ | brandCalculatedAmount | Int? |  yes  |  |
+ | transferPrice | Int? |  yes  |  |
+ | codCharges | Int? |  yes  |  |
+ | pmPriceSplit | HashMap<String,Any>? |  yes  |  |
+ | priceMarked | Int? |  yes  |  |
+ | couponEffectiveDiscount | Int? |  yes  |  |
+ | fyndCredits | Int? |  yes  |  |
+ | priceEffective | Int? |  yes  |  |
+ | cashbackApplied | Int? |  yes  |  |
+ | discount | Int? |  yes  |  |
 
 ---
 
@@ -2453,42 +2363,14 @@ Success Response, Presigned URL of Invoice
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | prices | [Prices](#Prices)? |  yes  |  |
- | canCancel | Boolean? |  yes  |  |
  | canReturn | Boolean? |  yes  |  |
- | financialBreakup | ArrayList<HashMap<String,Any>>? |  yes  |  |
- | quantity | Int? |  yes  |  |
+ | item | [Item](#Item)? |  yes  |  |
  | currentStatus | [CurrentStatus](#CurrentStatus)? |  yes  |  |
  | id | Int? |  yes  |  |
- | item | [Item](#Item)? |  yes  |  |
-
----
-
-
- 
- 
- #### [FulfillingStore](#FulfillingStore)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | id | Int? |  yes  |  |
- | companyId | Int? |  yes  |  |
- | code | String? |  yes  |  |
- | name | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [PaymentInfo](#PaymentInfo)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | status | String? |  yes  |  |
- | logo | String? |  yes  |  |
- | mode | String? |  yes  |  |
- | mop | String? |  yes  |  |
+ | canCancel | Boolean? |  yes  |  |
+ | financialBreakup | ArrayList<HashMap<String,Any>>? |  yes  |  |
+ | quantity | Int? |  yes  |  |
+ | prices | [Prices](#Prices)? |  yes  |  |
 
 ---
 
@@ -2499,39 +2381,39 @@ Success Response, Presigned URL of Invoice
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | comment | String? |  yes  |  |
- | fulfillingCompany | [FulfillingCompany](#FulfillingCompany)? |  yes  |  |
- | promise | HashMap<String,Any>? |  yes  |  |
- | invoice | HashMap<String,Any>? |  yes  |  |
- | shipmentId | String? |  yes  |  |
+ | orderId | String? |  yes  |  |
+ | userInfo | [UserInfo](#UserInfo)? |  yes  |  |
+ | returnableDate | String? |  yes  |  |
+ | fulfillingStore | [FulfillingStore](#FulfillingStore)? |  yes  |  |
  | needHelpUrl | String? |  yes  |  |
+ | beneficiaryDetails | Boolean? |  yes  |  |
+ | deliveryAddress | HashMap<String,Any>? |  yes  |  |
+ | dpName | String? |  yes  |  |
+ | comment | String? |  yes  |  |
+ | breakupValues | ArrayList<[PricesBreakup](#PricesBreakup)>? |  yes  |  |
  | sizeInfo | HashMap<String,Any>? |  yes  |  |
+ | trackUrl | String? |  yes  |  |
+ | promise | HashMap<String,Any>? |  yes  |  |
+ | canReturn | Boolean? |  yes  |  |
  | deliveryDate | String? |  yes  |  |
  | shipmentCreatedAt | String? |  yes  |  |
- | returnableDate | String? |  yes  |  |
- | trackUrl | String? |  yes  |  |
- | breakupValues | ArrayList<[PricesBreakup](#PricesBreakup)>? |  yes  |  |
- | canBreak | HashMap<String,Any>? |  yes  |  |
- | totalBags | Int? |  yes  |  |
- | trackingDetails | HashMap<String,Any>? |  yes  |  |
- | userInfo | [UserInfo](#UserInfo)? |  yes  |  |
- | canCancel | Boolean? |  yes  |  |
- | prices | HashMap<String,Any>? |  yes  |  |
- | deliveryAddress | HashMap<String,Any>? |  yes  |  |
- | refundDetails | HashMap<String,Any>? |  yes  |  |
- | trakingNo | String? |  yes  |  |
  | shipmentStatus | HashMap<String,Any>? |  yes  |  |
- | bags | ArrayList<[BagsData](#BagsData)>? |  yes  |  |
- | dpName | String? |  yes  |  |
- | canReturn | Boolean? |  yes  |  |
- | fulfillingStore | [FulfillingStore](#FulfillingStore)? |  yes  |  |
- | payment | [PaymentInfo](#PaymentInfo)? |  yes  |  |
- | totalDetails | HashMap<String,Any>? |  yes  |  |
- | beneficiaryDetails | Boolean? |  yes  |  |
+ | totalBags | Int? |  yes  |  |
+ | trakingNo | String? |  yes  |  |
+ | trackingDetails | HashMap<String,Any>? |  yes  |  |
+ | awbNo | String? |  yes  |  |
+ | invoice | HashMap<String,Any>? |  yes  |  |
  | showDownloadInvoice | Boolean? |  yes  |  |
  | showTrackLink | Boolean? |  yes  |  |
- | orderId | String? |  yes  |  |
- | awbNo | String? |  yes  |  |
+ | payment | [PaymentInfo](#PaymentInfo)? |  yes  |  |
+ | refundDetails | HashMap<String,Any>? |  yes  |  |
+ | canBreak | HashMap<String,Any>? |  yes  |  |
+ | canCancel | Boolean? |  yes  |  |
+ | fulfillingCompany | [FulfillingCompany](#FulfillingCompany)? |  yes  |  |
+ | totalDetails | HashMap<String,Any>? |  yes  |  |
+ | prices | HashMap<String,Any>? |  yes  |  |
+ | bags | ArrayList<[BagsData](#BagsData)>? |  yes  |  |
+ | shipmentId | String? |  yes  |  |
 
 ---
 
@@ -2564,10 +2446,10 @@ Success Response, Presigned URL of Invoice
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | shipmentId | String? |  yes  |  |
  | country | String? |  yes  |  |
- | orderId | String? |  yes  |  |
  | phone | String? |  yes  |  |
+ | orderId | String? |  yes  |  |
+ | shipmentId | String? |  yes  |  |
  | name | String? |  yes  |  |
 
 ---
@@ -2580,9 +2462,9 @@ Success Response, Presigned URL of Invoice
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | message | String? |  yes  |  |
- | success | Boolean? |  yes  |  |
- | resendTimer | Int? |  yes  |  |
  | requestId | String? |  yes  |  |
+ | resendTimer | Int? |  yes  |  |
+ | success | Boolean? |  yes  |  |
 
 ---
 
@@ -2593,12 +2475,12 @@ Success Response, Presigned URL of Invoice
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | reasonText | String? |  yes  |  |
- | priority | Int? |  yes  |  |
- | reasonId | Int? |  yes  |  |
- | feedbackType | String? |  yes  |  |
- | showTextArea | Boolean? |  yes  |  |
  | flow | String? |  yes  |  |
+ | feedbackType | String? |  yes  |  |
+ | priority | Int? |  yes  |  |
+ | reasonText | String? |  yes  |  |
+ | reasonId | Int? |  yes  |  |
+ | showTextArea | Boolean? |  yes  |  |
 
 ---
 
@@ -2609,8 +2491,8 @@ Success Response, Presigned URL of Invoice
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | otpCode | Int? |  yes  |  |
  | requestId | String? |  yes  |  |
+ | otpCode | Int? |  yes  |  |
 
 ---
 
@@ -2628,13 +2510,29 @@ Success Response, Presigned URL of Invoice
 
  
  
+ #### [OrderItems](#OrderItems)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | shipments | ArrayList<[ShipmentResponse](#ShipmentResponse)>? |  yes  |  |
+ | orderCreatedTime | String? |  yes  |  |
+ | orderId | String? |  yes  |  |
+ | userInfo | HashMap<String,Any>? |  yes  |  |
+ | totalShipmentsInOrder | Int? |  yes  |  |
+ | bagsForReorder | ArrayList<HashMap<String,Any>>? |  yes  |  |
+
+---
+
+
+ 
+ 
  #### [Statuses](#Statuses)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | isSelected | Boolean? |  yes  |  |
- | display | String? |  yes  |  |
  | value | Int? |  yes  |  |
+ | display | String? |  yes  |  |
 
 ---
 
@@ -2657,26 +2555,10 @@ Success Response, Presigned URL of Invoice
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | hasNext | Boolean? |  yes  |  |
- | itemTotal | Int? |  yes  |  |
+ | size | Int? |  yes  |  |
  | current | Int? |  yes  |  |
  | type | String? |  yes  |  |
- | size | Int? |  yes  |  |
-
----
-
-
- 
- 
- #### [OrderItems](#OrderItems)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | totalShipmentsInOrder | Int? |  yes  |  |
- | bagsForReorder | ArrayList<HashMap<String,Any>>? |  yes  |  |
- | orderId | String? |  yes  |  |
- | shipments | ArrayList<[ShipmentResponse](#ShipmentResponse)>? |  yes  |  |
- | orderCreatedTime | String? |  yes  |  |
- | userInfo | HashMap<String,Any>? |  yes  |  |
+ | itemTotal | Int? |  yes  |  |
 
 ---
 
@@ -2687,9 +2569,9 @@ Success Response, Presigned URL of Invoice
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | items | ArrayList<[OrderItems](#OrderItems)>? |  yes  |  |
  | filters | [Filters](#Filters)? |  yes  |  |
  | page | [Page](#Page)? |  yes  |  |
- | items | ArrayList<[OrderItems](#OrderItems)>? |  yes  |  |
 
 ---
 
@@ -2700,14 +2582,14 @@ Success Response, Presigned URL of Invoice
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | awb | String? |  yes  |  |
- | lastLocationRecievedAt | String? |  yes  |  |
  | accountName | String? |  yes  |  |
- | updatedTime | String? |  yes  |  |
- | status | String? |  yes  |  |
- | reason | String? |  yes  |  |
+ | awb | String? |  yes  |  |
  | updatedAt | String? |  yes  |  |
+ | updatedTime | String? |  yes  |  |
+ | reason | String? |  yes  |  |
  | shipmentType | String? |  yes  |  |
+ | status | String? |  yes  |  |
+ | lastLocationRecievedAt | String? |  yes  |  |
 
 ---
 
@@ -2729,8 +2611,8 @@ Success Response, Presigned URL of Invoice
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | quantity | Int? |  yes  |  |
  | identifier | String? |  yes  |  |
+ | quantity | Int? |  yes  |  |
 
 ---
 
@@ -2741,11 +2623,11 @@ Success Response, Presigned URL of Invoice
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | reason | ArrayList<Int>? |  yes  |  |
+ | storeInvoiceId | String? |  yes  |  |
  | products | ArrayList<[ProductDetail](#ProductDetail)>? |  yes  |  |
  | bags | ArrayList<Int>? |  yes  |  |
- | reason | ArrayList<Int>? |  yes  |  |
  | dataUpdate | HashMap<String,Any>? |  yes  |  |
- | storeInvoiceId | String? |  yes  |  |
 
 ---
 
@@ -2767,9 +2649,9 @@ Success Response, Presigned URL of Invoice
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | excludeBagsNextState | String? |  yes  |  |
  | status | String |  no  |  |
  | shipments | [ShipmentDetail](#ShipmentDetail)? |  yes  |  |
- | excludeBagsNextState | String? |  yes  |  |
 
 ---
 
@@ -2780,9 +2662,9 @@ Success Response, Presigned URL of Invoice
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | forceTransition | Boolean? |  yes  |  |
  | statuses | ArrayList<[Statuses1](#Statuses1)>? |  yes  |  |
  | task | Boolean? |  yes  |  |
+ | forceTransition | Boolean? |  yes  |  |
 
 ---
 
@@ -2793,8 +2675,8 @@ Success Response, Presigned URL of Invoice
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | success | Boolean |  no  |  |
  | message | ArrayList<HashMap<String,Any>> |  no  |  |
+ | success | Boolean |  no  |  |
 
 ---
 
@@ -2806,119 +2688,6 @@ Success Response, Presigned URL of Invoice
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | message | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [creditNoteParameter](#creditNoteParameter)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | expiresIn | Int? |  yes  |  |
-
----
-
-
- 
- 
- #### [invoiceParameter](#invoiceParameter)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | documentType | String? |  yes  |  |
- | expiresIn | Int? |  yes  |  |
-
----
-
-
- 
- 
- #### [getInvoiceByShipmentId200Response](#getInvoiceByShipmentId200Response)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | success | Boolean |  no  |  |
- | presignedType | String |  no  |  |
- | shipmentId | String |  no  |  |
- | presignedUrl | String |  no  |  |
-
----
-
-
- 
- 
- #### [getInvoiceByShipmentId400Response](#getInvoiceByShipmentId400Response)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | success | Boolean |  no  |  |
- | message | String |  no  |  |
-
----
-
-
- 
- 
- #### [getInvoiceByShipmentId500Response](#getInvoiceByShipmentId500Response)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | success | Boolean |  no  |  |
- | presignedType | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [ReqBodyPresignedPOST](#ReqBodyPresignedPOST)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | event | String |  no  |  |
- | mediaType | ArrayList<Any> |  no  |  |
-
----
-
-
- 
- 
- #### [ResponsePresignedPOST](#ResponsePresignedPOST)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | success | Boolean |  no  |  |
- | method | String |  no  |  |
- | event | String |  no  |  |
- | payload | ArrayList<Any> |  no  |  |
-
----
-
-
- 
- 
- #### [ResponsePresignedGETURL](#ResponsePresignedGETURL)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | success | Boolean |  no  |  |
- | presignedType | String |  no  |  |
- | shipmentId | String |  no  |  |
- | presignedUrl | String |  no  |  |
-
----
-
-
- 
- 
- #### [OrderInvoiceEngineError](#OrderInvoiceEngineError)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | message | String? |  yes  |  |
- | success | Boolean? |  yes  |  |
 
 ---
 
