@@ -32,7 +32,7 @@ class Rewards:
         self._urls.update(urls)
     
     async def getOfferByName(self, name=None, body=""):
-        """Use this API to get the offer details and configuration by entering the name of the offer.
+        """Use this API to get fetch the specific offer details and configuration by the name of the offer.
         :param name : The name given to the offer. : type string
         """
         payload = {}
@@ -119,7 +119,7 @@ class Rewards:
         return response
     
     async def getUserPointsHistory(self, page_id=None, page_size=None, body=""):
-        """Use this API to get a list of points transactions.
+        """Use this API to fetch a list of points transactions like giveaway points, signup points, referral points, order earn points, redeem points and expired points.
         :param page_id : PageID is the ID of the requested page. For first request it should be kept empty. : type string
         :param page_size : The number of items to retrieve in each page. : type integer
         """
@@ -166,7 +166,7 @@ class Rewards:
         return response
     
     async def getUserPoints(self, body=""):
-        """Use this API to retrieve total available points of a user for current application
+        """Use this API to retrieve total available points of a user for current application.
         """
         payload = {}
         
@@ -205,7 +205,7 @@ class Rewards:
         return response
     
     async def getUserReferralDetails(self, body=""):
-        """Use this API to retrieve the referral details a user has configured in the application.
+        """Use this API to retrieve the referral details like referral code of a user.
         """
         payload = {}
         
@@ -244,7 +244,7 @@ class Rewards:
         return response
     
     async def getOrderDiscount(self, body=""):
-        """Use this API to calculate the discount on order-amount based on all the amount range configured in order_discount.
+        """Use this API to calculate the discount on the order amount, based on all the amount range configured in Order Discount offer.
         """
         payload = {}
         

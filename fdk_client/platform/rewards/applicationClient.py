@@ -14,7 +14,7 @@ class Rewards:
 
     
     async def showGiveaways(self, page_id=None, page_size=None):
-        """List of giveaways of the current application.
+        """Fetch the detailed compilation of live, completed, and scheduled point-based giveaways created.
         :param page_id : pagination page id : type string
         :param page_size : pagination page size : type integer
         """
@@ -60,7 +60,7 @@ class Rewards:
         return response
     
     async def saveGiveAway(self, body=""):
-        """Adds a new giveaway.
+        """Creates a new giveaway in the current application, specifying the target audience, points allocation, as well as the name and display name of the giveaway.
         """
         payload = {}
         
@@ -103,7 +103,7 @@ class Rewards:
         return response
     
     async def getGiveawayById(self, id=None):
-        """Get giveaway by ID.
+        """Retrieve the specific giveaway by giveaway ID. It will show all the details of the requested giveaway.
         :param id : Giveaway ID : type string
         """
         payload = {}
@@ -145,7 +145,7 @@ class Rewards:
         return response
     
     async def updateGiveAway(self, id=None, body=""):
-        """Updates the giveaway by it's ID.
+        """Make the necessary updates to the giveaway based on its giveaway ID.
         :param id : Giveaway ID : type string
         """
         payload = {}
@@ -191,54 +191,8 @@ class Rewards:
 
         return response
     
-    async def getGiveawayAudienceStatus(self, id=None, audience_id=None):
-        """Get giveaway audience status
-        :param id : Giveaway ID : type string
-        :param audience_id : audience id : type string
-        """
-        payload = {}
-        
-        if id:
-            payload["id"] = id
-        
-        if audience_id:
-            payload["audience_id"] = audience_id
-        
-
-        # Parameter validation
-        schema = RewardsValidator.getGiveawayAudienceStatus()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/giveaways/:id/audience/{audience_id}/status", """{"required":[{"name":"id","in":"path","description":"Giveaway ID","required":true,"schema":{"type":"string"}},{"name":"audience_id","in":"path","description":"audience id","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","description":"company id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"application id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"id","in":"path","description":"Giveaway ID","required":true,"schema":{"type":"string"}},{"name":"audience_id","in":"path","description":"audience id","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","description":"company id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"application id","required":true,"schema":{"type":"string"}}]}""", id=id, audience_id=audience_id, )
-        query_string = await create_query_string(id=id, audience_id=audience_id, )
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/giveaways/:id/audience/{audience_id}/status", id=id, audience_id=audience_id, ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        from .models import GiveawayAudience
-        schema = GiveawayAudience()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getGiveawayAudienceStatus")
-            print(e)
-
-        
-
-        return response
-    
     async def showOffers(self, ):
-        """List of offers of the current application.
+        """Retrieve the list of offers within the current application, including order_discount, order, sign_up, and referral, along with their respective details.
         """
         payload = {}
         
@@ -266,7 +220,7 @@ class Rewards:
         return response
     
     async def getOfferByName(self, name=None):
-        """Use this API to get the offer details and configuration by entering the name of the offer.
+        """Fetch the specific offer details and configuration by the name of the offer.
         :param name : The name given to the offer. : type string
         """
         payload = {}
@@ -308,7 +262,7 @@ class Rewards:
         return response
     
     async def updateOfferByName(self, name=None, body=""):
-        """Use this API to update the offer details
+        """Update the specific offer details and its configuration by offer name.
         :param name : The name given to the offer. : type string
         """
         payload = {}
@@ -355,7 +309,7 @@ class Rewards:
         return response
     
     async def updateUserStatus(self, user_id=None, body=""):
-        """Use this API to update the user status active/archive
+        """Update the user status by marking them as a block or unblock. It can be done by changing the active flag in request body.
         :param user_id : user id : type string
         """
         payload = {}
@@ -402,7 +356,7 @@ class Rewards:
         return response
     
     async def getUserDetails(self, user_id=None):
-        """Use this API to get the user reward details
+        """Fetches the user details and the user reward details with their current reward points for the specific user.
         :param user_id : user id : type string
         """
         payload = {}
@@ -444,7 +398,7 @@ class Rewards:
         return response
     
     async def getUserPointsHistory(self, user_id=None, page_id=None, page_size=None):
-        """Use this API to get a list of points transactions.
+        """Fetches a list of points transactions like giveaway points, signup points, referral points, order earn points, redeem points and expired points.
         :param user_id : user id : type string
         :param page_id : PageID is the ID of the requested page. For first request it should be kept empty. : type string
         :param page_size : The number of items to retrieve in each page. : type integer
@@ -494,7 +448,7 @@ class Rewards:
         return response
     
     async def getRewardsConfiguration(self, ):
-        """Use this API to get a list of valid android paths required by the Rewards INIT API to validate a fradualent device.
+        """Use this API to get a list of valid android paths required by the Rewards INIT API to validate a fraudulent device.
         """
         payload = {}
         
@@ -532,7 +486,7 @@ class Rewards:
         return response
     
     async def setRewardsConfiguration(self, body=""):
-        """Updates the configuration or inserts new records.
+        """Updates the configuration or inserts new records with the given android paths.
         """
         payload = {}
         
