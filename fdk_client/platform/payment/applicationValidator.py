@@ -21,10 +21,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
-        
-        
         
         
     
@@ -59,6 +55,18 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
+        
+    
+    
+        
+        
+        
+        
+        
+    
+    
+        
         
         
 
@@ -75,15 +83,6 @@ class PaymentValidator:
         
     
     class saveBrandPaymentGatewayConfig(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class updateBrandPaymentGatewayConfig(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -177,6 +176,32 @@ class PaymentValidator:
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
+         
+        
+    
+    class oauthGetUrl(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        aggregator = fields.Str(required=False)
+        
+        success_redirect_url = fields.Str(required=False)
+        
+        failure_redirect_url = fields.Str(required=False)
+         
+        
+    
+    class revokeOauthToken(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        aggregator = fields.Str(required=False)
          
         
     

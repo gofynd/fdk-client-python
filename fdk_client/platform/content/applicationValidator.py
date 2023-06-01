@@ -328,6 +328,11 @@ from .models import GenerationEntityType
     
         
         
+        
+    
+    
+        
+        
     
     
         
@@ -1036,6 +1041,17 @@ class ContentValidator:
         application_id = fields.Str(required=False)
         
         tag_id = fields.Str(required=False)
+         
+        
+    
+    class getBlogBySlug(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        slug = fields.Str(required=False)
          
         
     

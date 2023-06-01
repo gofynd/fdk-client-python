@@ -8,6 +8,14 @@ from ..PlatformModel import BaseSchema
 
 
 
+class ClickStatsResponse(BaseSchema):
+    pass
+
+
+class ClickStatsItem(BaseSchema):
+    pass
+
+
 class RedirectDevice(BaseSchema):
     pass
 
@@ -57,6 +65,24 @@ class ErrorRes(BaseSchema):
 
 
 
+
+
+class ClickStatsResponse(BaseSchema):
+    # Share swagger.json
+
+    
+    click_stats = fields.List(fields.Nested(ClickStatsItem, required=False), required=False)
+    
+
+
+class ClickStatsItem(BaseSchema):
+    # Share swagger.json
+
+    
+    display = fields.Str(required=False)
+    
+    total = fields.Int(required=False)
+    
 
 
 class RedirectDevice(BaseSchema):
