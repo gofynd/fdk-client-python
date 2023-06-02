@@ -38,106 +38,10 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
-        
-        
-        
         
     
     
         
-        
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
-        
-    
-    
-        
-        
-    
-    
         
         
         
@@ -152,34 +56,10 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
-        
-        
-        
-        
-        
-        
-        
     
     
         
         
-        
-    
-    
-        
-    
-    
-        
-    
-    
-        
-    
-    
-        
-        
-    
-    
         
         
         
@@ -201,8 +81,127 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
     
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
         
     
     
@@ -219,10 +218,10 @@ from ..PlatformModel import BaseSchema
     
     
         
-        
-        
     
     
+        
+        
         
     
     
@@ -311,6 +310,8 @@ class OrderValidator:
         ordering_channel = fields.Str(required=False)
         
         company_affiliate_tag = fields.Str(required=False)
+        
+        platform_user_id = fields.Str(required=False)
          
         
     
@@ -422,6 +423,8 @@ class OrderValidator:
         is_priority_sort = fields.Boolean(required=False)
         
         custom_meta = fields.Str(required=False)
+        
+        platform_user_id = fields.Str(required=False)
          
         
     
@@ -655,9 +658,9 @@ class OrderValidator:
         
         bag_id = fields.Str(required=False)
         
-        calling_to = fields.Str(required=False)
-        
         caller_id = fields.Str(required=False)
+        
+        method = fields.Str(required=False)
         
         company_id = fields.Int(required=False)
          
@@ -703,20 +706,13 @@ class OrderValidator:
         
         company_id = fields.Int(required=False)
         
-        shipment_id = fields.Int(required=False)
+        shipment_id = fields.Str(required=False)
         
         bag_id = fields.Int(required=False)
          
         
     
     class sendSmsNinja(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class platformManualAssignDPToShipment(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -772,7 +768,7 @@ class OrderValidator:
          
         
     
-    class sendSmsNinjaPlatform(BaseSchema):
+    class getStateTransitionMap(BaseSchema):
         
         
         company_id = fields.Int(required=False)

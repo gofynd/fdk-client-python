@@ -13,6 +13,53 @@ class Catalog:
         self.applicationId = applicationId
 
     
+    async def updateSearchKeywords(self, id=None, body=""):
+        """Thist API allows you to update the search keyword configuration by their ID.
+        :param id : A `id` is a unique identifier for a specific keyword search configuration. : type string
+        """
+        payload = {}
+        
+        if id:
+            payload["id"] = id
+        
+
+        # Parameter validation
+        schema = CatalogValidator.updateSearchKeywords()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import CreateSearchKeyword
+        schema = CreateSearchKeyword()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/{id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a specific keyword search configuration.","schema":{"type":"string","example":"602fa1e9a596ce349563f6b9"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a specific keyword search configuration.","schema":{"type":"string","example":"602fa1e9a596ce349563f6b9"},"required":true}]}""", id=id)
+        query_string = await create_query_string(id=id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        from .models import GetSearchWordsData
+        schema = GetSearchWordsData()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for updateSearchKeywords")
+            print(e)
+
+        
+
+        return response
+    
     async def getSearchKeywords(self, id=None):
         """The API allows you to get the details of a words by its `id`. If successful, returns a Collection resource in the response body specified in `GetSearchWordsDetailResponseSchema`
         :param id : A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to retrieve. : type string
@@ -97,18 +144,14 @@ class Catalog:
 
         return response
     
-    async def updateSearchKeywords(self, id=None, body=""):
-        """Thist API allows you to update the search keyword configuration by their ID.
-        :param id : A `id` is a unique identifier for a specific keyword search configuration. : type string
+    async def createCustomKeyword(self, body=""):
+        """Custom Search Keyword allows you to map conditions with keywords to give you the ultimate results. This API allows you to add a rule for the custom keyword to a search behaviour for an application. See `CreateSearchKeywordSchema` for the list of attributes needed to create a mapping and /collections/query-options for the available options to create a rule. On successful request, returns a paginated list of collections specified in `CreateSearchKeywordSchema`
         """
         payload = {}
         
-        if id:
-            payload["id"] = id
-        
 
         # Parameter validation
-        schema = CatalogValidator.updateSearchKeywords()
+        schema = CatalogValidator.createCustomKeyword()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -117,8 +160,8 @@ class Catalog:
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/{id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a specific keyword search configuration.","schema":{"type":"string","example":"602fa1e9a596ce349563f6b9"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a specific keyword search configuration.","schema":{"type":"string","example":"602fa1e9a596ce349563f6b9"},"required":true}]}""", id=id)
-        query_string = await create_query_string(id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true}]}""", )
+        query_string = await create_query_string()
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -128,7 +171,7 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
 
@@ -137,7 +180,7 @@ class Catalog:
         try:
             schema.dump(schema.load(response))
         except Exception as e:
-            print("Response Validation failed for updateSearchKeywords")
+            print("Response Validation failed for createCustomKeyword")
             print(e)
 
         
@@ -190,24 +233,28 @@ class Catalog:
 
         return response
     
-    async def createCustomKeyword(self, body=""):
-        """Custom Search Keyword allows you to map conditions with keywords to give you the ultimate results. This API allows you to add a rule for the custom keyword to a search behaviour for an application. See `CreateSearchKeywordSchema` for the list of attributes needed to create a mapping and /collections/query-options for the available options to create a rule. On successful request, returns a paginated list of collections specified in `CreateSearchKeywordSchema`
+    async def updateAutocompleteKeyword(self, id=None, body=""):
+        """Autocomplete keywords configuration help you to extend and customize the behaviour of autocomplete search results in Fynd Platform. This API allows you to update a mapping by it's `id`.
+        :param id : A `id` is a unique identifier for a specific autocomplete keyword map. Pass the `id` of the keywords which you want to delete. : type string
         """
         payload = {}
         
+        if id:
+            payload["id"] = id
+        
 
         # Parameter validation
-        schema = CatalogValidator.createCustomKeyword()
+        schema = CatalogValidator.updateAutocompleteKeyword()
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CreateSearchKeyword
-        schema = CreateSearchKeyword()
+        from .models import GetAutocompleteWordsData
+        schema = GetAutocompleteWordsData()
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true}]}""", )
-        query_string = await create_query_string()
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete/{id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a specific autocomplete keyword map. Pass the `id` of the keywords which you want to delete.","schema":{"type":"string","example":"602fa1e9a596ce349563f6b9"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a specific autocomplete keyword map. Pass the `id` of the keywords which you want to delete.","schema":{"type":"string","example":"602fa1e9a596ce349563f6b9"},"required":true}]}""", id=id)
+        query_string = await create_query_string(id=id)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -217,16 +264,16 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
 
-        from .models import GetSearchWordsData
-        schema = GetSearchWordsData()
+        from .models import UpdateAutocompleteWordData
+        schema = UpdateAutocompleteWordData()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
-            print("Response Validation failed for createCustomKeyword")
+            print("Response Validation failed for updateAutocompleteKeyword")
             print(e)
 
         
@@ -317,28 +364,24 @@ class Catalog:
 
         return response
     
-    async def updateAutocompleteKeyword(self, id=None, body=""):
-        """Autocomplete keywords configuration help you to extend and customize the behaviour of autocomplete search results in Fynd Platform. This API allows you to update a mapping by it's `id`.
-        :param id : A `id` is a unique identifier for a specific autocomplete keyword map. Pass the `id` of the keywords which you want to delete. : type string
+    async def createCustomAutocompleteRule(self, body=""):
+        """Autocomplete keywords configuration help you to extend and customize the behaviour of autocomplete search results in Fynd Platform. This API allows to create the auto-complete configuration for the application.
         """
         payload = {}
         
-        if id:
-            payload["id"] = id
-        
 
         # Parameter validation
-        schema = CatalogValidator.updateAutocompleteKeyword()
+        schema = CatalogValidator.createCustomAutocompleteRule()
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import GetAutocompleteWordsData
-        schema = GetAutocompleteWordsData()
+        from .models import CreateAutocompleteKeyword
+        schema = CreateAutocompleteKeyword()
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete/{id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a specific autocomplete keyword map. Pass the `id` of the keywords which you want to delete.","schema":{"type":"string","example":"602fa1e9a596ce349563f6b9"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a specific autocomplete keyword map. Pass the `id` of the keywords which you want to delete.","schema":{"type":"string","example":"602fa1e9a596ce349563f6b9"},"required":true}]}""", id=id)
-        query_string = await create_query_string(id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true}]}""", )
+        query_string = await create_query_string()
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -348,16 +391,16 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
 
-        from .models import UpdateAutocompleteWordData
-        schema = UpdateAutocompleteWordData()
+        from .models import GetAutocompleteWordsData
+        schema = GetAutocompleteWordsData()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
-            print("Response Validation failed for updateAutocompleteKeyword")
+            print("Response Validation failed for createCustomAutocompleteRule")
             print(e)
 
         
@@ -402,23 +445,23 @@ class Catalog:
 
         return response
     
-    async def createCustomAutocompleteRule(self, body=""):
-        """Autocomplete keywords configuration help you to extend and customize the behaviour of autocomplete search results in Fynd Platform. This API allows to create the auto-complete configuration for the application.
+    async def createSearchRerankingConfig(self, body=""):
+        """Search Reranking allows you rank and boost the search of the keywords and products in the product listing. Create a Custom Search Reranking rule. This API allows you to create a custom search re rank rule to re-rank the search in the listing of an application.
         """
         payload = {}
         
 
         # Parameter validation
-        schema = CatalogValidator.createCustomAutocompleteRule()
+        schema = CatalogValidator.createSearchRerankingConfig()
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CreateAutocompleteKeyword
-        schema = CreateAutocompleteKeyword()
+        from .models import CreateSearchReranking
+        schema = CreateSearchReranking()
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/rerank/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true}]}""", )
         query_string = await create_query_string()
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -429,16 +472,16 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/rerank/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
 
-        from .models import GetAutocompleteWordsData
-        schema = GetAutocompleteWordsData()
+        from .models import SearchRerankingModel
+        schema = SearchRerankingModel()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
-            print("Response Validation failed for createCustomAutocompleteRule")
+            print("Response Validation failed for createSearchRerankingConfig")
             print(e)
 
         
@@ -491,14 +534,18 @@ class Catalog:
 
         return response
     
-    async def createSearchRerankingConfig(self, body=""):
-        """Search Reranking allows you rank and boost the search of the keywords and products in the product listing. Create a Custom Search Reranking rule. This API allows you to create a custom search re rank rule to re-rank the search in the listing of an application.
+    async def updateSearchRerankConfig(self, id=None, body=""):
+        """Search Reranking allows you rank and boost the search of the keywords and products in the product listing. This API allows you to update the search re-ranking configured for the application.
+        :param id : A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to retrieve. : type string
         """
         payload = {}
         
+        if id:
+            payload["id"] = id
+        
 
         # Parameter validation
-        schema = CatalogValidator.createSearchRerankingConfig()
+        schema = CatalogValidator.updateSearchRerankConfig()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -507,8 +554,8 @@ class Catalog:
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/rerank/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true}]}""", )
-        query_string = await create_query_string()
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/rerank/{id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to retrieve.","schema":{"type":"string","example":"602fa1e9a596ce349563f6b9"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to retrieve.","schema":{"type":"string","example":"602fa1e9a596ce349563f6b9"},"required":true}]}""", id=id)
+        query_string = await create_query_string(id=id)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -518,7 +565,7 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/rerank/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/rerank/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
 
@@ -527,7 +574,7 @@ class Catalog:
         try:
             schema.dump(schema.load(response))
         except Exception as e:
-            print("Response Validation failed for createSearchRerankingConfig")
+            print("Response Validation failed for updateSearchRerankConfig")
             print(e)
 
         
@@ -612,53 +659,6 @@ class Catalog:
             schema.dump(schema.load(response))
         except Exception as e:
             print("Response Validation failed for deleteSearchRerankConfig")
-            print(e)
-
-        
-
-        return response
-    
-    async def updateSearchRerankConfig(self, id=None, body=""):
-        """Search Reranking allows you rank and boost the search of the keywords and products in the product listing. This API allows you to update the search re-ranking configured for the application.
-        :param id : A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to retrieve. : type string
-        """
-        payload = {}
-        
-        if id:
-            payload["id"] = id
-        
-
-        # Parameter validation
-        schema = CatalogValidator.updateSearchRerankConfig()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import CreateSearchReranking
-        schema = CreateSearchReranking()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/rerank/{id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to retrieve.","schema":{"type":"string","example":"602fa1e9a596ce349563f6b9"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to retrieve.","schema":{"type":"string","example":"602fa1e9a596ce349563f6b9"},"required":true}]}""", id=id)
-        query_string = await create_query_string(id=id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/rerank/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        
-
-        from .models import SearchRerankingModel
-        schema = SearchRerankingModel()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateSearchRerankConfig")
             print(e)
 
         
@@ -800,6 +800,53 @@ class Catalog:
 
         return response
     
+    async def createGroupConfiguration(self, config_type=None, body=""):
+        """Create configuration for Group config types.
+        :param config_type : A `config_type` is a unique identifier for a particular group configuration type. : type string
+        """
+        payload = {}
+        
+        if config_type:
+            payload["config_type"] = config_type
+        
+
+        # Parameter validation
+        schema = CatalogValidator.createGroupConfiguration()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import AppConfigurationDetail
+        schema = AppConfigurationDetail()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/groups", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"config_type","description":"A `config_type` is a unique identifier for a particular group configuration type.","schema":{"type":"string","enum":["comparisons_groups","details_groups","seller_groups"]},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"config_type","description":"A `config_type` is a unique identifier for a particular group configuration type.","schema":{"type":"string","enum":["comparisons_groups","details_groups","seller_groups"]},"required":true}]}""", config_type=config_type)
+        query_string = await create_query_string(config_type=config_type)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/groups", config_type=config_type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        from .models import AppConfigurationDetail
+        schema = AppConfigurationDetail()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for createGroupConfiguration")
+            print(e)
+
+        
+
+        return response
+    
     async def getGroupConfigurations(self, config_type=None, page_no=None, page_size=None, search=None, template_slug=None):
         """Get the details of the application configured configurations of group config types.
         :param config_type : A `config_type` is an identifier that defines a specific type of configuration. : type string
@@ -858,18 +905,22 @@ class Catalog:
 
         return response
     
-    async def createGroupConfiguration(self, config_type=None, body=""):
-        """Create configuration for Group config types.
+    async def updateGroupConfiguration(self, config_type=None, group_slug=None, body=""):
+        """Update the group configurations for the application.
         :param config_type : A `config_type` is a unique identifier for a particular group configuration type. : type string
+        :param group_slug : A `group_slug` is a unique identifier of a particular configuration. : type string
         """
         payload = {}
         
         if config_type:
             payload["config_type"] = config_type
         
+        if group_slug:
+            payload["group_slug"] = group_slug
+        
 
         # Parameter validation
-        schema = CatalogValidator.createGroupConfiguration()
+        schema = CatalogValidator.updateGroupConfiguration()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -878,8 +929,8 @@ class Catalog:
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/groups", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"config_type","description":"A `config_type` is a unique identifier for a particular group configuration type.","schema":{"type":"string","enum":["comparisons_groups","details_groups","seller_groups"]},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"config_type","description":"A `config_type` is a unique identifier for a particular group configuration type.","schema":{"type":"string","enum":["comparisons_groups","details_groups","seller_groups"]},"required":true}]}""", config_type=config_type)
-        query_string = await create_query_string(config_type=config_type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/groups/{group_slug}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"config_type","description":"A `config_type` is a unique identifier for a particular group configuration type.","schema":{"type":"string","enum":["comparisons_groups","details_groups","seller_groups"]},"required":true},{"in":"path","name":"group_slug","description":"A `group_slug` is a unique identifier of a particular configuration.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"config_type","description":"A `config_type` is a unique identifier for a particular group configuration type.","schema":{"type":"string","enum":["comparisons_groups","details_groups","seller_groups"]},"required":true},{"in":"path","name":"group_slug","description":"A `group_slug` is a unique identifier of a particular configuration.","schema":{"type":"string"},"required":true}]}""", config_type=config_type, group_slug=group_slug)
+        query_string = await create_query_string(config_type=config_type, group_slug=group_slug)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -889,7 +940,7 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/groups", config_type=config_type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/groups/{group_slug}", config_type=config_type, group_slug=group_slug), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
 
@@ -898,7 +949,7 @@ class Catalog:
         try:
             schema.dump(schema.load(response))
         except Exception as e:
-            print("Response Validation failed for createGroupConfiguration")
+            print("Response Validation failed for updateGroupConfiguration")
             print(e)
 
         
@@ -951,32 +1002,28 @@ class Catalog:
 
         return response
     
-    async def updateGroupConfiguration(self, config_type=None, group_slug=None, body=""):
-        """Update the group configurations for the application.
-        :param config_type : A `config_type` is a unique identifier for a particular group configuration type. : type string
-        :param group_slug : A `group_slug` is a unique identifier of a particular configuration. : type string
+    async def createListingConfiguration(self, config_type=None, body=""):
+        """Add configuration for listing.
+        :param config_type : A `config_type` is a unique identifier for a particular listing configuration type. : type string
         """
         payload = {}
         
         if config_type:
             payload["config_type"] = config_type
         
-        if group_slug:
-            payload["group_slug"] = group_slug
-        
 
         # Parameter validation
-        schema = CatalogValidator.updateGroupConfiguration()
+        schema = CatalogValidator.createListingConfiguration()
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import AppConfigurationDetail
-        schema = AppConfigurationDetail()
+        from .models import AppConfigurationsSort
+        schema = AppConfigurationsSort()
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/groups/{group_slug}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"config_type","description":"A `config_type` is a unique identifier for a particular group configuration type.","schema":{"type":"string","enum":["comparisons_groups","details_groups","seller_groups"]},"required":true},{"in":"path","name":"group_slug","description":"A `group_slug` is a unique identifier of a particular configuration.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"config_type","description":"A `config_type` is a unique identifier for a particular group configuration type.","schema":{"type":"string","enum":["comparisons_groups","details_groups","seller_groups"]},"required":true},{"in":"path","name":"group_slug","description":"A `group_slug` is a unique identifier of a particular configuration.","schema":{"type":"string"},"required":true}]}""", config_type=config_type, group_slug=group_slug)
-        query_string = await create_query_string(config_type=config_type, group_slug=group_slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"config_type","description":"A `config_type` is a unique identifier for a particular listing configuration type.","schema":{"type":"string","enum":["filter","sort","brands","categories","variant","similar"]},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"config_type","description":"A `config_type` is a unique identifier for a particular listing configuration type.","schema":{"type":"string","enum":["filter","sort","brands","categories","variant","similar"]},"required":true}]}""", config_type=config_type)
+        query_string = await create_query_string(config_type=config_type)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -986,16 +1033,16 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/groups/{group_slug}", config_type=config_type, group_slug=group_slug), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/", config_type=config_type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
 
-        from .models import AppConfigurationDetail
-        schema = AppConfigurationDetail()
+        from .models import AppConfigurationsSort
+        schema = AppConfigurationsSort()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
-            print("Response Validation failed for updateGroupConfiguration")
+            print("Response Validation failed for createListingConfiguration")
             print(e)
 
         
@@ -1056,18 +1103,22 @@ class Catalog:
 
         return response
     
-    async def createListingConfiguration(self, config_type=None, body=""):
-        """Add configuration for listing.
+    async def updateListingConfiguration(self, config_type=None, config_id=None, body=""):
+        """Update configuration for listing.
         :param config_type : A `config_type` is a unique identifier for a particular listing configuration type. : type string
+        :param config_id : A `config_id` is a unique identifier of a particular configuration. : type string
         """
         payload = {}
         
         if config_type:
             payload["config_type"] = config_type
         
+        if config_id:
+            payload["config_id"] = config_id
+        
 
         # Parameter validation
-        schema = CatalogValidator.createListingConfiguration()
+        schema = CatalogValidator.updateListingConfiguration()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -1076,8 +1127,8 @@ class Catalog:
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"config_type","description":"A `config_type` is a unique identifier for a particular listing configuration type.","schema":{"type":"string","enum":["filter","sort","brands","categories","variant","similar"]},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"config_type","description":"A `config_type` is a unique identifier for a particular listing configuration type.","schema":{"type":"string","enum":["filter","sort","brands","categories","variant","similar"]},"required":true}]}""", config_type=config_type)
-        query_string = await create_query_string(config_type=config_type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/item/{config_id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"config_type","description":"A `config_type` is a unique identifier for a particular listing configuration type.","schema":{"type":"string","enum":["filter","sort","brands","categories","variant","similar"]},"required":true},{"in":"path","name":"config_id","description":"A `config_id` is a unique identifier of a particular configuration.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"config_type","description":"A `config_type` is a unique identifier for a particular listing configuration type.","schema":{"type":"string","enum":["filter","sort","brands","categories","variant","similar"]},"required":true},{"in":"path","name":"config_id","description":"A `config_id` is a unique identifier of a particular configuration.","schema":{"type":"string"},"required":true}]}""", config_type=config_type, config_id=config_id)
+        query_string = await create_query_string(config_type=config_type, config_id=config_id)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -1087,7 +1138,7 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/", config_type=config_type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/item/{config_id}/", config_type=config_type, config_id=config_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
 
@@ -1096,7 +1147,7 @@ class Catalog:
         try:
             schema.dump(schema.load(response))
         except Exception as e:
-            print("Response Validation failed for createListingConfiguration")
+            print("Response Validation failed for updateListingConfiguration")
             print(e)
 
         
@@ -1143,57 +1194,6 @@ class Catalog:
             schema.dump(schema.load(response))
         except Exception as e:
             print("Response Validation failed for deleteListingConfiguration")
-            print(e)
-
-        
-
-        return response
-    
-    async def updateListingConfiguration(self, config_type=None, config_id=None, body=""):
-        """Update configuration for listing.
-        :param config_type : A `config_type` is a unique identifier for a particular listing configuration type. : type string
-        :param config_id : A `config_id` is a unique identifier of a particular configuration. : type string
-        """
-        payload = {}
-        
-        if config_type:
-            payload["config_type"] = config_type
-        
-        if config_id:
-            payload["config_id"] = config_id
-        
-
-        # Parameter validation
-        schema = CatalogValidator.updateListingConfiguration()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import AppConfigurationsSort
-        schema = AppConfigurationsSort()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/item/{config_id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"config_type","description":"A `config_type` is a unique identifier for a particular listing configuration type.","schema":{"type":"string","enum":["filter","sort","brands","categories","variant","similar"]},"required":true},{"in":"path","name":"config_id","description":"A `config_id` is a unique identifier of a particular configuration.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"config_type","description":"A `config_type` is a unique identifier for a particular listing configuration type.","schema":{"type":"string","enum":["filter","sort","brands","categories","variant","similar"]},"required":true},{"in":"path","name":"config_id","description":"A `config_id` is a unique identifier of a particular configuration.","schema":{"type":"string"},"required":true}]}""", config_type=config_type, config_id=config_id)
-        query_string = await create_query_string(config_type=config_type, config_id=config_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/item/{config_id}/", config_type=config_type, config_id=config_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        
-
-        from .models import AppConfigurationsSort
-        schema = AppConfigurationsSort()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateListingConfiguration")
             print(e)
 
         
@@ -1324,44 +1324,6 @@ class Catalog:
 
         return response
     
-    async def getConfigurations(self, ):
-        """configured details for catalog.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = CatalogValidator.getConfigurations()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}]}""", )
-        query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        from .models import GetAppCatalogConfiguration
-        schema = GetAppCatalogConfiguration()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getConfigurations")
-            print(e)
-
-        
-
-        return response
-    
     async def createConfigurationProductListing(self, body=""):
         """Add configuration for products & listing.
         """
@@ -1405,23 +1367,19 @@ class Catalog:
 
         return response
     
-    async def getConfigurationByType(self, type=None):
+    async def getConfigurations(self, ):
         """configured details for catalog.
-        :param type : type can be brands, categories etc. : type string
         """
         payload = {}
         
-        if type:
-            payload["type"] = type
-        
 
         # Parameter validation
-        schema = CatalogValidator.getConfigurationByType()
+        schema = CatalogValidator.getConfigurations()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{type}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"type","description":"type can be brands, categories etc.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"type","description":"type can be brands, categories etc.","schema":{"type":"string"},"required":true}]}""", type=type)
-        query_string = await create_query_string(type=type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}]}""", )
+        query_string = await create_query_string()
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -1431,16 +1389,16 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{type}/", type=type), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
 
-        from .models import GetAppCatalogEntityConfiguration
-        schema = GetAppCatalogEntityConfiguration()
+        from .models import GetAppCatalogConfiguration
+        schema = GetAppCatalogConfiguration()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
-            print("Response Validation failed for getConfigurationByType")
+            print("Response Validation failed for getConfigurations")
             print(e)
 
         
@@ -1494,6 +1452,48 @@ class Catalog:
 
         return response
     
+    async def getConfigurationByType(self, type=None):
+        """configured details for catalog.
+        :param type : type can be brands, categories etc. : type string
+        """
+        payload = {}
+        
+        if type:
+            payload["type"] = type
+        
+
+        # Parameter validation
+        schema = CatalogValidator.getConfigurationByType()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{type}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"type","description":"type can be brands, categories etc.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"type","description":"type can be brands, categories etc.","schema":{"type":"string"},"required":true}]}""", type=type)
+        query_string = await create_query_string(type=type)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{type}/", type=type), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        from .models import GetAppCatalogEntityConfiguration
+        schema = GetAppCatalogEntityConfiguration()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getConfigurationByType")
+            print(e)
+
+        
+
+        return response
+    
     async def getQueryFilters(self, f=None, sort_on=None):
         """A Collection allows you to organize your products into hierarchical groups. This API retrieves the query filters that can be used to configure a collection for a specific seller account and sale channel.
         :param f : Filter the products in the collection using key-value pairs. : type string
@@ -1534,6 +1534,49 @@ class Catalog:
             schema.dump(schema.load(response))
         except Exception as e:
             print("Response Validation failed for getQueryFilters")
+            print(e)
+
+        
+
+        return response
+    
+    async def createCollection(self, body=""):
+        """A Collection allows you to organize your products into hierarchical groups. This API helps you in creating the collection.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = CatalogValidator.createCollection()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import CreateCollection
+        schema = CreateCollection()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1},"example":1,"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24},"example":"000000000000000000000001","required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1},"example":1,"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24},"example":"000000000000000000000001","required":true}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        from .models import CollectionCreateResponse
+        schema = CollectionCreateResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for createCollection")
             print(e)
 
         
@@ -1606,49 +1649,6 @@ class Catalog:
 
         return response
     
-    async def createCollection(self, body=""):
-        """A Collection allows you to organize your products into hierarchical groups. This API helps you in creating the collection.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = CatalogValidator.createCollection()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import CreateCollection
-        schema = CreateCollection()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1},"example":1,"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24},"example":"000000000000000000000001","required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1},"example":1,"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24},"example":"000000000000000000000001","required":true}]}""", )
-        query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        
-
-        from .models import CollectionCreateResponse
-        schema = CollectionCreateResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createCollection")
-            print(e)
-
-        
-
-        return response
-    
     async def getCollectionDetail(self, slug=None):
         """This API retrieves the detail of the collection in an application.
         :param slug : A `slug` is a human readable, URL friendly unique identifier of an object. Pass the `slug` of the collection which you want to retrieve. : type string
@@ -1685,6 +1685,53 @@ class Catalog:
             schema.dump(schema.load(response))
         except Exception as e:
             print("Response Validation failed for getCollectionDetail")
+            print(e)
+
+        
+
+        return response
+    
+    async def updateCollection(self, id=None, body=""):
+        """This API enables you to update a collection by specifying its unique identifier (`ID`). By utilizing this endpoint, you can easily modify and refine the attributes, settings, and contents of a specific collection, ensuring it remains relevant and aligned with your business goals.
+        :param id : An `id` is a unique identifier of a collection. : type string
+        """
+        payload = {}
+        
+        if id:
+            payload["id"] = id
+        
+
+        # Parameter validation
+        schema = CatalogValidator.updateCollection()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import UpdateCollection
+        schema = UpdateCollection()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/{id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1},"example":1,"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24},"example":"000000000000000000000001","required":true},{"in":"path","name":"id","description":"An `id` is a unique identifier of a collection.","schema":{"type":"string","minLength":24,"maxLength":24},"example":"63b277d1a3d0fe0891479741","required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1},"example":1,"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24},"example":"000000000000000000000001","required":true},{"in":"path","name":"id","description":"An `id` is a unique identifier of a collection.","schema":{"type":"string","minLength":24,"maxLength":24},"example":"63b277d1a3d0fe0891479741","required":true}]}""", id=id)
+        query_string = await create_query_string(id=id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        from .models import CollectionUpdateResponse
+        schema = CollectionUpdateResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for updateCollection")
             print(e)
 
         
@@ -1733,8 +1780,8 @@ class Catalog:
 
         return response
     
-    async def updateCollection(self, id=None, body=""):
-        """This API enables you to update a collection by specifying its unique identifier (`ID`). By utilizing this endpoint, you can easily modify and refine the attributes, settings, and contents of a specific collection, ensuring it remains relevant and aligned with your business goals.
+    async def addCollectionItems(self, id=None, body=""):
+        """Adds items to a collection specified by its `id`. This API allows you to add items to a specific collection identified by its unique `id`. By utilizing this endpoint, you can expand and enhance the product offerings within a collection, providing users with a wider range of options and choices.
         :param id : An `id` is a unique identifier of a collection. : type string
         """
         payload = {}
@@ -1744,16 +1791,16 @@ class Catalog:
         
 
         # Parameter validation
-        schema = CatalogValidator.updateCollection()
+        schema = CatalogValidator.addCollectionItems()
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import UpdateCollection
-        schema = UpdateCollection()
+        from .models import CollectionItemUpdate
+        schema = CollectionItemUpdate()
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/{id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1},"example":1,"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24},"example":"000000000000000000000001","required":true},{"in":"path","name":"id","description":"An `id` is a unique identifier of a collection.","schema":{"type":"string","minLength":24,"maxLength":24},"example":"63b277d1a3d0fe0891479741","required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1},"example":1,"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24},"example":"000000000000000000000001","required":true},{"in":"path","name":"id","description":"An `id` is a unique identifier of a collection.","schema":{"type":"string","minLength":24,"maxLength":24},"example":"63b277d1a3d0fe0891479741","required":true}]}""", id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/{id}/items/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1},"example":1,"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24},"example":"000000000000000000000001","required":true},{"in":"path","name":"id","description":"An `id` is a unique identifier of a collection.","schema":{"type":"string","minLength":24,"maxLength":24},"example":"63b277d1a3d0fe0891479741","required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1},"example":1,"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24},"example":"000000000000000000000001","required":true},{"in":"path","name":"id","description":"An `id` is a unique identifier of a collection.","schema":{"type":"string","minLength":24,"maxLength":24},"example":"63b277d1a3d0fe0891479741","required":true}]}""", id=id)
         query_string = await create_query_string(id=id)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -1764,16 +1811,16 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/{id}/items/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
 
-        from .models import CollectionUpdateResponse
-        schema = CollectionUpdateResponse()
+        from .models import UpdatedResponse
+        schema = UpdatedResponse()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
-            print("Response Validation failed for updateCollection")
+            print("Response Validation failed for addCollectionItems")
             print(e)
 
         
@@ -1836,53 +1883,6 @@ class Catalog:
             schema.dump(schema.load(response))
         except Exception as e:
             print("Response Validation failed for getCollectionItems")
-            print(e)
-
-        
-
-        return response
-    
-    async def addCollectionItems(self, id=None, body=""):
-        """Adds items to a collection specified by its `id`. This API allows you to add items to a specific collection identified by its unique `id`. By utilizing this endpoint, you can expand and enhance the product offerings within a collection, providing users with a wider range of options and choices.
-        :param id : An `id` is a unique identifier of a collection. : type string
-        """
-        payload = {}
-        
-        if id:
-            payload["id"] = id
-        
-
-        # Parameter validation
-        schema = CatalogValidator.addCollectionItems()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import CollectionItemUpdate
-        schema = CollectionItemUpdate()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/{id}/items/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1},"example":1,"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24},"example":"000000000000000000000001","required":true},{"in":"path","name":"id","description":"An `id` is a unique identifier of a collection.","schema":{"type":"string","minLength":24,"maxLength":24},"example":"63b277d1a3d0fe0891479741","required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1},"example":1,"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24},"example":"000000000000000000000001","required":true},{"in":"path","name":"id","description":"An `id` is a unique identifier of a collection.","schema":{"type":"string","minLength":24,"maxLength":24},"example":"63b277d1a3d0fe0891479741","required":true}]}""", id=id)
-        query_string = await create_query_string(id=id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/{id}/items/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        
-
-        from .models import UpdatedResponse
-        schema = UpdatedResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for addCollectionItems")
             print(e)
 
         
