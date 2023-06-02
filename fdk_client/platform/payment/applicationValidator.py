@@ -77,7 +77,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
     
     
         
@@ -315,8 +314,6 @@ class PaymentValidator:
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
-        
-        terminal_unique_identifier = fields.Str(required=False)
          
         
     
@@ -480,11 +477,11 @@ class PaymentValidator:
     class pollingPaymentLink(BaseSchema):
         
         
-        payment_link_id = fields.Str(required=False)
-        
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
+        
+        payment_link_id = fields.Str(required=False)
          
         
     

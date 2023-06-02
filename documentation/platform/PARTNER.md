@@ -96,7 +96,7 @@ Get the list of all the extensions
 
 ```python
 try:
-    result = await platformClient.partner.getExtensionsForCompany(pageSize=pageSize, tag=tag, currentPage=currentPage, pageNo=pageNo, filterBy=filterBy)
+    result = await platformClient.partner.getExtensionsForCompany(pageSize=pageSize, tag=tag, currentPage=currentPage, pageNo=pageNo, filterBy=filterBy, query=query)
     # use result
 except Exception as e:
     print(e)
@@ -112,7 +112,8 @@ except Exception as e:
 | tag | String? | no | tag |   
 | currentPage | String? | no | tag |   
 | pageNo | Double? | no | Current page number |   
-| filterBy | String? | no | Filter by |  
+| filterBy | String? | no | Filter by |   
+| query | String? | no | query |  
 
 
 

@@ -24,6 +24,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -99,6 +100,8 @@ class PartnerValidator:
         page_no = fields.Float(required=False)
         
         filter_by = fields.Str(required=False)
+        
+        query = fields.Str(required=False)
          
         
     

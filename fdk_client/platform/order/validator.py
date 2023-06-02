@@ -67,20 +67,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         
         
@@ -91,60 +77,10 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-    
-    
         
         
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-    
-    
         
         
         
@@ -163,15 +99,20 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
+        
         
     
     
         
+        
+        
     
     
         
+        
+        
+    
+    
         
     
     
@@ -191,6 +132,29 @@ from ..PlatformModel import BaseSchema
     
     
         
+    
+    
+        
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
         
         
         
@@ -199,21 +163,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
-        
-    
-    
-        
-    
-    
-        
-    
-    
-        
-    
-    
-        
         
         
     
@@ -228,8 +177,49 @@ from ..PlatformModel import BaseSchema
     
     
         
+        
     
     
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+        
         
     
     
@@ -378,11 +368,21 @@ class OrderValidator:
         
         stores = fields.Str(required=False)
         
-        sales_channel = fields.Str(required=False)
+        sales_channels = fields.Str(required=False)
         
         payment_mode = fields.Str(required=False)
         
         bag_status = fields.Str(required=False)
+        
+        search_type = fields.Str(required=False)
+        
+        search_value = fields.Str(required=False)
+        
+        tags = fields.Str(required=False)
+        
+        time_to_dispatch = fields.Str(required=False)
+        
+        payment_methods = fields.Str(required=False)
          
         
     
@@ -655,9 +655,9 @@ class OrderValidator:
         
         bag_id = fields.Str(required=False)
         
-        caller_id = fields.Str(required=False)
+        calling_to = fields.Str(required=False)
         
-        method = fields.Str(required=False)
+        caller_id = fields.Str(required=False)
         
         company_id = fields.Int(required=False)
          
@@ -703,13 +703,20 @@ class OrderValidator:
         
         company_id = fields.Int(required=False)
         
-        shipment_id = fields.Str(required=False)
+        shipment_id = fields.Int(required=False)
         
         bag_id = fields.Int(required=False)
          
         
     
     class sendSmsNinja(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class platformManualAssignDPToShipment(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -765,49 +772,7 @@ class OrderValidator:
          
         
     
-    class getStateTransitionMap(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class fetchCreditBalanceDetail(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class fetchRefundModeConfig(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class attachOrderUser(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class sendUserMobileOTP(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class verifyMobileOTP(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class eInvoiceRetry(BaseSchema):
+    class sendSmsNinjaPlatform(BaseSchema):
         
         
         company_id = fields.Int(required=False)
