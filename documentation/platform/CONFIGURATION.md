@@ -3347,7 +3347,7 @@ except Exception as e:
 | --------- | -----  | -------- | ----------- | 
 | pageNo | Int? | no |  |   
 | pageSize | Int? | no |  |   
-| q | String? | no | Search string to search saleschannel by name |  
+| q | String? | no | Search param by name or domain |  
 
 
 

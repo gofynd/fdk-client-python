@@ -356,4 +356,133 @@ class Finance:
 
         return response
     
+    async def getInvoiceList(self, body=""):
+        """
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = FinanceValidator.getInvoiceList()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import GetInvoiceListRequest
+        schema = GetInvoiceListRequest()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/get-invoice-type", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/get-invoice-type", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        from .models import GetInvoiceListResponse
+        schema = GetInvoiceListResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getInvoiceList")
+            print(e)
+
+        
+
+        return response
+    
+    async def invoiceListing(self, body=""):
+        """
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = FinanceValidator.invoiceListing()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import InvoiceListingRequest
+        schema = InvoiceListingRequest()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice/listing", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice/listing", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        from .models import InvoiceListingResponse
+        schema = InvoiceListingResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for invoiceListing")
+            print(e)
+
+        
+
+        return response
+    
+    async def invoicePDF(self, body=""):
+        """
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = FinanceValidator.invoicePDF()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import InvoicePdfRequest
+        schema = InvoicePdfRequest()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice/pdf-view", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice/pdf-view", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        from .models import InvoicePdfResponse
+        schema = InvoicePdfResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for invoicePDF")
+            print(e)
+
+        
+
+        return response
+    
 

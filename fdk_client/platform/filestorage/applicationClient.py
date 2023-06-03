@@ -33,7 +33,7 @@ Make a `PUT` request on storage link received from `appStartUpload` api with fil
 After successfully upload, call `appCompleteUpload` api to complete the upload process.
 This operation will return the url for the uploaded file.
 
-        :param namespace : bucket name : type string
+        :param namespace : Segregation of different types of files(prodcuts, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. : type string
         """
         payload = {}
         
@@ -51,7 +51,7 @@ This operation will return the url for the uploaded file.
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/assets/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/namespaces/{namespace}/upload/start/", """{"required":[{"name":"namespace","in":"path","description":"bucket name","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}},{"name":"application_id","in":"path","description":"application id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"namespace","in":"path","description":"bucket name","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}},{"name":"application_id","in":"path","description":"application id","required":true,"schema":{"type":"string"}}]}""", namespace=namespace, )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/assets/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/namespaces/{namespace}/upload/start/", """{"required":[{"name":"namespace","in":"path","description":"Segregation of different types of files(prodcuts, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}},{"name":"application_id","in":"path","description":"application id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"namespace","in":"path","description":"Segregation of different types of files(prodcuts, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}},{"name":"application_id","in":"path","description":"application id","required":true,"schema":{"type":"string"}}]}""", namespace=namespace, )
         query_string = await create_query_string(namespace=namespace, )
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -98,7 +98,7 @@ Make a `PUT` request on storage link received from `appStartUpload` api with fil
 After successfully upload, call `appCompleteUpload` api to complete the upload process.
 This operation will return the url for the uploaded file.
 
-        :param namespace : bucket name : type string
+        :param namespace : Segregation of different types of files(prodcuts, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. : type string
         """
         payload = {}
         
@@ -116,7 +116,7 @@ This operation will return the url for the uploaded file.
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/assets/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/namespaces/{namespace}/upload/complete/", """{"required":[{"name":"namespace","in":"path","description":"bucket name","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}},{"name":"application_id","in":"path","description":"application id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"namespace","in":"path","description":"bucket name","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}},{"name":"application_id","in":"path","description":"application id","required":true,"schema":{"type":"string"}}]}""", namespace=namespace, )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/assets/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/namespaces/{namespace}/upload/complete/", """{"required":[{"name":"namespace","in":"path","description":"Segregation of different types of files(prodcuts, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}},{"name":"application_id","in":"path","description":"application id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"namespace","in":"path","description":"Segregation of different types of files(prodcuts, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}},{"name":"application_id","in":"path","description":"application id","required":true,"schema":{"type":"string"}}]}""", namespace=namespace, )
         query_string = await create_query_string(namespace=namespace, )
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -190,7 +190,7 @@ This operation will return the url for the uploaded file.
 
         return response
     
-    async def browse(self, namespace=None, page_no=None):
+    async def appbrowse(self, namespace=None, page_no=None):
         """Browse Files
         :param namespace : bucket name : type string
         :param page_no : page no : type integer
@@ -205,7 +205,7 @@ This operation will return the url for the uploaded file.
         
 
         # Parameter validation
-        schema = FileStorageValidator.browse()
+        schema = FileStorageValidator.appbrowse()
         schema.dump(schema.load(payload))
         
 
@@ -229,7 +229,7 @@ This operation will return the url for the uploaded file.
         try:
             schema.dump(schema.load(response))
         except Exception as e:
-            print("Response Validation failed for browse")
+            print("Response Validation failed for appbrowse")
             print(e)
 
         

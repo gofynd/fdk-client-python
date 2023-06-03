@@ -137,8 +137,8 @@ class Order:
 
         
 
-        from .models import ShipmentDetailsResponse
-        schema = ShipmentDetailsResponse()
+        from .models import OrderDetailsResponse
+        schema = OrderDetailsResponse()
         try:
             schema.dump(schema.load(response))
         except Exception as e:

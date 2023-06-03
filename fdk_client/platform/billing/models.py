@@ -1221,7 +1221,7 @@ class Subscription(BaseSchema):
     
     product_suite_id = fields.Str(required=False)
     
-    plan_data = fields.Nested(Plan, required=False)
+    plan_data = fields.Dict(required=False)
     
     current_status = fields.Str(required=False)
     

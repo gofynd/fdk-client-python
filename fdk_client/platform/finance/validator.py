@@ -34,6 +34,15 @@ from ..PlatformModel import BaseSchema
     
     
         
+    
+    
+        
+    
+    
+        
+    
+    
+        
 
 
 
@@ -90,6 +99,27 @@ class FinanceValidator:
         
     
     class paymentProcess(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class getInvoiceList(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class invoiceListing(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class invoicePDF(BaseSchema):
         
         
         company_id = fields.Str(required=False)
