@@ -32,7 +32,7 @@ Get statistics groups
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").analytics.getStatiscticsGroups()
+    result = await platformClient.application("<APPLICATION_ID>").analytics.getStatiscticsGroups()
     # use result
 except Exception as e:
     print(e)
@@ -92,7 +92,7 @@ Get statistics group components
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").analytics.getStatiscticsGroupComponents(groupName=groupName)
+    result = await platformClient.application("<APPLICATION_ID>").analytics.getStatiscticsGroupComponents(groupName=groupName)
     # use result
 except Exception as e:
     print(e)
@@ -160,7 +160,7 @@ Get component statistics csv
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").analytics.getComponentStatsCSV(componentName=componentName)
+    result = await platformClient.application("<APPLICATION_ID>").analytics.getComponentStatsCSV(componentName=componentName)
     # use result
 except Exception as e:
     print(e)
@@ -217,7 +217,7 @@ Get component statistics pdf
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").analytics.getComponentStatsPDF(componentName=componentName)
+    result = await platformClient.application("<APPLICATION_ID>").analytics.getComponentStatsPDF(componentName=componentName)
     # use result
 except Exception as e:
     print(e)
@@ -274,7 +274,7 @@ Get component statistics
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").analytics.getComponentStats(componentName=componentName)
+    result = await platformClient.application("<APPLICATION_ID>").analytics.getComponentStats(componentName=componentName)
     # use result
 except Exception as e:
     print(e)
@@ -378,7 +378,7 @@ Get abandon carts list
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").analytics.getAbandonCartList(fromDate=fromDate, toDate=toDate, pageNo=pageNo, pageSize=pageSize)
+    result = await platformClient.application("<APPLICATION_ID>").analytics.getAbandonCartList(fromDate=fromDate, toDate=toDate, pageNo=pageNo, pageSize=pageSize)
     # use result
 except Exception as e:
     print(e)
@@ -458,7 +458,7 @@ Get abandon carts csv
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").analytics.getAbandonCartsCSV(fromDate=fromDate, toDate=toDate)
+    result = await platformClient.application("<APPLICATION_ID>").analytics.getAbandonCartsCSV(fromDate=fromDate, toDate=toDate)
     # use result
 except Exception as e:
     print(e)
@@ -516,7 +516,7 @@ Get abandon carts details
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").analytics.getAbandonCartDetail(cartId=cartId)
+    result = await platformClient.application("<APPLICATION_ID>").analytics.getAbandonCartDetail(cartId=cartId)
     # use result
 except Exception as e:
     print(e)
@@ -573,7 +573,7 @@ Create data export job in required format
 
 ```python
 try:
-    result = await client.analytics.createExportJob(exportType=exportType, body=body)
+    result = await platformClient.analytics.createExportJob(exportType=exportType, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -633,7 +633,7 @@ Get data export job status
 
 ```python
 try:
-    result = await client.analytics.getExportJobStatus(exportType=exportType, jobId=jobId)
+    result = await platformClient.analytics.getExportJobStatus(exportType=exportType, jobId=jobId)
     # use result
 except Exception as e:
     print(e)
@@ -695,7 +695,7 @@ Get logs list
 
 ```python
 try:
-    result = await client.analytics.getLogsList(logType=logType, pageNo=pageNo, pageSize=pageSize, body=body)
+    result = await platformClient.analytics.getLogsList(logType=logType, pageNo=pageNo, pageSize=pageSize, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -772,7 +772,7 @@ Search logs
 
 ```python
 try:
-    result = await client.analytics.searchLogs(pageNo=pageNo, pageSize=pageSize, logType=logType, body=body)
+    result = await platformClient.analytics.searchLogs(pageNo=pageNo, pageSize=pageSize, logType=logType, body=body)
     # use result
 except Exception as e:
     print(e)

@@ -39,7 +39,7 @@ Get live announcements
 
 ```python
 try:
-    result = await client.content.getAnnouncements()
+    result = await applicationClient.content.getAnnouncements()
     # use result
 except Exception as e:
     print(e)
@@ -126,7 +126,7 @@ Get a blog
 
 ```python
 try:
-    result = await client.content.getBlog(slug=slug, rootId=rootId)
+    result = await applicationClient.content.getBlog(slug=slug, rootId=rootId)
     # use result
 except Exception as e:
     print(e)
@@ -229,7 +229,7 @@ Get a list of blogs
 
 ```python
 try:
-    result = await client.content.getBlogs(pageNo=pageNo, pageSize=pageSize)
+    result = await applicationClient.content.getBlogs(pageNo=pageNo, pageSize=pageSize)
     # use result
 except Exception as e:
     print(e)
@@ -336,7 +336,7 @@ Get the data loaders associated with an application
 
 ```python
 try:
-    result = await client.content.getDataLoaders()
+    result = await applicationClient.content.getDataLoaders()
     # use result
 except Exception as e:
     print(e)
@@ -409,7 +409,7 @@ Get a list of FAQs
 
 ```python
 try:
-    result = await client.content.getFaqs()
+    result = await applicationClient.content.getFaqs()
     # use result
 except Exception as e:
     print(e)
@@ -479,7 +479,7 @@ Get a list of FAQ categories
 
 ```python
 try:
-    result = await client.content.getFaqCategories()
+    result = await applicationClient.content.getFaqCategories()
     # use result
 except Exception as e:
     print(e)
@@ -544,7 +544,7 @@ Get an FAQ
 
 ```python
 try:
-    result = await client.content.getFaqBySlug(slug=slug)
+    result = await applicationClient.content.getFaqBySlug(slug=slug)
     # use result
 except Exception as e:
     print(e)
@@ -607,7 +607,7 @@ Get the FAQ category
 
 ```python
 try:
-    result = await client.content.getFaqCategoryBySlug(slug=slug)
+    result = await applicationClient.content.getFaqCategoryBySlug(slug=slug)
     # use result
 except Exception as e:
     print(e)
@@ -681,7 +681,7 @@ Get FAQs using the slug of FAQ category
 
 ```python
 try:
-    result = await client.content.getFaqsByCategorySlug(slug=slug)
+    result = await applicationClient.content.getFaqsByCategorySlug(slug=slug)
     # use result
 except Exception as e:
     print(e)
@@ -748,7 +748,7 @@ Get the landing page
 
 ```python
 try:
-    result = await client.content.getLandingPage()
+    result = await applicationClient.content.getLandingPage()
     # use result
 except Exception as e:
     print(e)
@@ -831,7 +831,7 @@ Get legal information
 
 ```python
 try:
-    result = await client.content.getLegalInformation()
+    result = await applicationClient.content.getLegalInformation()
     # use result
 except Exception as e:
     print(e)
@@ -923,7 +923,7 @@ Get the navigation
 
 ```python
 try:
-    result = await client.content.getNavigations(pageNo=pageNo, pageSize=pageSize)
+    result = await applicationClient.content.getNavigations(pageNo=pageNo, pageSize=pageSize)
     # use result
 except Exception as e:
     print(e)
@@ -1176,7 +1176,7 @@ Get the SEO of an application
 
 ```python
 try:
-    result = await client.content.getSEOConfiguration()
+    result = await applicationClient.content.getSEOConfiguration()
     # use result
 except Exception as e:
     print(e)
@@ -1213,7 +1213,9 @@ Success. Returns a JSON object SEO details such as robots.txt, meta-tags, and si
   "value": {
     "seo": {
       "details": {
-        "title": "Zyosa Zyosa"
+        "title": "Zyosa Zyosa",
+        "description": "",
+        "image_url": ""
       },
       "robots_txt": "User-agent: * \nAllow: / \nsancisciasn xwsaixjowqnxwsiwjs",
       "sitemap_enabled": false,
@@ -1262,7 +1264,7 @@ Get the slideshows
 
 ```python
 try:
-    result = await client.content.getSlideshows(pageNo=pageNo, pageSize=pageSize)
+    result = await applicationClient.content.getSlideshows(pageNo=pageNo, pageSize=pageSize)
     # use result
 except Exception as e:
     print(e)
@@ -1379,7 +1381,7 @@ Get a slideshow
 
 ```python
 try:
-    result = await client.content.getSlideshow(slug=slug)
+    result = await applicationClient.content.getSlideshow(slug=slug)
     # use result
 except Exception as e:
     print(e)
@@ -1483,7 +1485,7 @@ Get the support information
 
 ```python
 try:
-    result = await client.content.getSupportInformation()
+    result = await applicationClient.content.getSupportInformation()
     # use result
 except Exception as e:
     print(e)
@@ -1566,7 +1568,7 @@ Get the tags associated with an application
 
 ```python
 try:
-    result = await client.content.getTags()
+    result = await applicationClient.content.getTags()
     # use result
 except Exception as e:
     print(e)
@@ -1634,7 +1636,7 @@ Get a page
 
 ```python
 try:
-    result = await client.content.getPage(slug=slug, rootId=rootId)
+    result = await applicationClient.content.getPage(slug=slug, rootId=rootId)
     # use result
 except Exception as e:
     print(e)
@@ -1740,7 +1742,7 @@ Get all pages
 
 ```python
 try:
-    result = await client.content.getPages(pageNo=pageNo, pageSize=pageSize)
+    result = await applicationClient.content.getPages(pageNo=pageNo, pageSize=pageSize)
     # use result
 except Exception as e:
     print(e)
@@ -1957,6 +1959,7 @@ Success. Returns a list of pages along with their details. Check the example sho
  | ---------- | ---- | -------- | ----------- |
  | title | String? |  yes  |  |
  | description | String? |  yes  |  |
+ | imageUrl | String? |  yes  |  |
 
 ---
 
@@ -3318,8 +3321,6 @@ Success. Returns a list of pages along with their details. Check the example sho
  | page | page | Symbolic link for Page: /page/:slug |
  | policy | policy | Symbolic link for Privacy Policy: /privacy-policy |
  | product | product | Symbolic link for Product: /product/:slug |
- | productReviews | product-reviews | Symbolic link for Product Reviews: /product/:slug/reviews |
- | addProductReview | add-product-review | Symbolic link for Add Product review: /product/:slug/add-review |
  | productRequest | product-request | Symbolic link for Product Request: /product-request/ |
  | products | products | Symbolic link for Products: /products/ |
  | profile | profile | Symbolic link for Profile: /profile |

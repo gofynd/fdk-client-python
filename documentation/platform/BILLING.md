@@ -10,6 +10,8 @@ Handle platform subscription
 * [createSubscriptionCharge](#createsubscriptioncharge)
 * [getSubscriptionCharge](#getsubscriptioncharge)
 * [cancelSubscriptionCharge](#cancelsubscriptioncharge)
+* [createOneTimeCharge](#createonetimecharge)
+* [getChargeDetails](#getchargedetails)
 * [getInvoices](#getinvoices)
 * [getInvoiceById](#getinvoicebyid)
 * [getCustomerDetail](#getcustomerdetail)
@@ -32,7 +34,7 @@ Check coupon validity
 
 ```python
 try:
-    result = await client.billing.checkCouponValidity(plan=plan, couponCode=couponCode)
+    result = await platformClient.billing.checkCouponValidity(plan=plan, couponCode=couponCode)
     # use result
 except Exception as e:
     print(e)
@@ -90,7 +92,7 @@ Create subscription charge
 
 ```python
 try:
-    result = await client.billing.createSubscriptionCharge(extensionId=extensionId, body=body)
+    result = await platformClient.billing.createSubscriptionCharge(extensionId=extensionId, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -147,7 +149,7 @@ Get subscription charge details
 
 ```python
 try:
-    result = await client.billing.getSubscriptionCharge(extensionId=extensionId, subscriptionId=subscriptionId)
+    result = await platformClient.billing.getSubscriptionCharge(extensionId=extensionId, subscriptionId=subscriptionId)
     # use result
 except Exception as e:
     print(e)
@@ -205,7 +207,7 @@ Cancel subscription charge
 
 ```python
 try:
-    result = await client.billing.cancelSubscriptionCharge(extensionId=extensionId, subscriptionId=subscriptionId)
+    result = await platformClient.billing.cancelSubscriptionCharge(extensionId=extensionId, subscriptionId=subscriptionId)
     # use result
 except Exception as e:
     print(e)
@@ -255,6 +257,121 @@ Success
 ---
 
 
+### createOneTimeCharge
+Create one time subscription charge
+
+
+
+
+```python
+try:
+    result = await platformClient.billing.createOneTimeCharge(extensionId=extensionId, body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| extensionId | String | yes | Extension _id |  
+| body | [CreateOneTimeCharge](#CreateOneTimeCharge) | yes | Request body |
+
+
+Register one time subscription charge for a seller of your extension.
+
+*Returned Response:*
+
+
+
+
+[CreateOneTimeChargeResponse](#CreateOneTimeChargeResponse)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getChargeDetails
+Get subscription charge details
+
+
+
+
+```python
+try:
+    result = await platformClient.billing.getChargeDetails(extensionId=extensionId, chargeId=chargeId)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| extensionId | String | yes | Extension _id |   
+| chargeId | String | yes | Standalone charge _id |  
+
+
+
+Get created subscription charge details
+
+*Returned Response:*
+
+
+
+
+[OneTimeChargeEntity](#OneTimeChargeEntity)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
 ### getInvoices
 Get invoices
 
@@ -263,7 +380,7 @@ Get invoices
 
 ```python
 try:
-    result = await client.billing.getInvoices()
+    result = await platformClient.billing.getInvoices()
     # use result
 except Exception as e:
     print(e)
@@ -555,7 +672,7 @@ Get invoice by id
 
 ```python
 try:
-    result = await client.billing.getInvoiceById(invoiceId=invoiceId)
+    result = await platformClient.billing.getInvoiceById(invoiceId=invoiceId)
     # use result
 except Exception as e:
     print(e)
@@ -845,7 +962,7 @@ Get subscription customer detail
 
 ```python
 try:
-    result = await client.billing.getCustomerDetail()
+    result = await platformClient.billing.getCustomerDetail()
     # use result
 except Exception as e:
     print(e)
@@ -929,7 +1046,7 @@ Upsert subscription customer detail
 
 ```python
 try:
-    result = await client.billing.upsertCustomerDetail(body=body)
+    result = await platformClient.billing.upsertCustomerDetail(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1017,7 +1134,7 @@ Get current subscription detail
 
 ```python
 try:
-    result = await client.billing.getSubscription()
+    result = await platformClient.billing.getSubscription()
     # use result
 except Exception as e:
     print(e)
@@ -1054,6 +1171,7 @@ Success
 {
   "value": {
     "is_enabled": true,
+    "mandate_amount": 150000,
     "subscription": {
       "current_period": {
         "start": "2020-12-17T13:45:36.722Z",
@@ -1140,7 +1258,7 @@ Get subscription subscription limits
 
 ```python
 try:
-    result = await client.billing.getFeatureLimitConfig()
+    result = await platformClient.billing.getFeatureLimitConfig()
     # use result
 except Exception as e:
     print(e)
@@ -1228,7 +1346,7 @@ Activate subscription
 
 ```python
 try:
-    result = await client.billing.activateSubscriptionPlan(body=body)
+    result = await platformClient.billing.activateSubscriptionPlan(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1340,7 +1458,7 @@ Cancel subscription
 
 ```python
 try:
-    result = await client.billing.cancelSubscriptionPlan(body=body)
+    result = await platformClient.billing.cancelSubscriptionPlan(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1694,6 +1812,37 @@ Success
 
  
  
+ #### [OneTimeChargeItem](#OneTimeChargeItem)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | name | String |  no  |  |
+ | term | String? |  yes  |  |
+ | pricingType | String |  no  |  |
+ | price | [EntityChargePrice](#EntityChargePrice) |  no  |  |
+ | cappedAmount | Double? |  yes  |  |
+ | isTest | Boolean? |  yes  |  |
+ | metadata | HashMap<String,Any>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [CreateOneTimeCharge](#CreateOneTimeCharge)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | name | String |  no  |  |
+ | charge | [OneTimeChargeItem](#OneTimeChargeItem) |  no  |  |
+ | isTest | Boolean? |  yes  |  |
+ | returnUrl | String |  no  |  |
+
+---
+
+
+ 
+ 
  #### [CurrentPeriod](#CurrentPeriod)
 
  | Properties | Type | Nullable | Description |
@@ -1712,7 +1861,7 @@ Success
  | ---------- | ---- | -------- | ----------- |
  | id | String? |  yes  |  |
  | name | String? |  yes  |  |
- | term | String? |  yes  |  |
+ | term | String? |  yes  | Brief description for a charge |
  | pricingType | String? |  yes  |  |
  | price | [EntityChargePrice](#EntityChargePrice)? |  yes  |  |
  | recurring | [EntityChargeRecurring](#EntityChargeRecurring)? |  yes  |  |
@@ -1744,6 +1893,42 @@ Success
  | trialPeriod | [SubscriptionTrialPeriod](#SubscriptionTrialPeriod)? |  yes  |  |
  | metadata | HashMap<String,Any>? |  yes  |  |
  | lineItems | ArrayList<[SubscriptionCharge](#SubscriptionCharge)>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [OneTimeChargeEntity](#OneTimeChargeEntity)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | id | String? |  yes  |  |
+ | name | String? |  yes  |  |
+ | status | String? |  yes  |  |
+ | activatedOn | String? |  yes  |  |
+ | cancelledOn | String? |  yes  |  |
+ | metadata | HashMap<String,Any>? |  yes  |  |
+ | returnUrl | String? |  yes  |  |
+ | isTest | Boolean? |  yes  |  |
+ | pricingType | String? |  yes  |  |
+ | subscriberId | String? |  yes  |  |
+ | entityType | String? |  yes  |  |
+ | entityId | String? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
+ | price | [EntityChargePrice](#EntityChargePrice)? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [CreateOneTimeChargeResponse](#CreateOneTimeChargeResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | charge | [OneTimeChargeEntity](#OneTimeChargeEntity)? |  yes  |  |
+ | confirmUrl | String? |  yes  |  |
 
 ---
 
@@ -2237,6 +2422,7 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | mandateAmount | Double? |  yes  |  |
  | isEnabled | Boolean? |  yes  |  |
  | subscription | [Subscription](#Subscription)? |  yes  |  |
 
