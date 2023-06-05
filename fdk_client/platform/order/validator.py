@@ -89,6 +89,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -420,6 +421,8 @@ class OrderValidator:
         to_date = fields.Str(required=False)
         
         dp_ids = fields.Str(required=False)
+        
+        sales_channel = fields.Str(required=False)
         
         page_no = fields.Int(required=False)
         
