@@ -174,8 +174,8 @@ class Order:
 
         
 
-        from .models import OrderList
-        schema = OrderList()
+        from .models import OrderById
+        schema = OrderById()
         try:
             schema.dump(schema.load(response))
         except Exception as e:

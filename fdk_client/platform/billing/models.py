@@ -1133,8 +1133,6 @@ class SubscriptionCustomer(BaseSchema):
     
     modified_at = fields.Str(required=False)
     
-    credit_balance = fields.Float(required=False)
-    
     data = fields.Dict(required=False)
     
 
@@ -1221,7 +1219,7 @@ class Subscription(BaseSchema):
     
     product_suite_id = fields.Str(required=False)
     
-    plan_data = fields.Dict(required=False)
+    plan_data = fields.Nested(Plan, required=False)
     
     current_status = fields.Str(required=False)
     
@@ -1233,17 +1231,25 @@ class Subscription(BaseSchema):
     
     latest_invoice = fields.Str(required=False)
     
+    channel_type = fields.Str(required=False)
+    
 
 
 class SubscriptionStatus(BaseSchema):
     # Billing swagger.json
 
     
-    mandate_amount = fields.Float(required=False)
-    
     is_enabled = fields.Boolean(required=False)
     
     subscription = fields.Nested(Subscription, required=False)
+    
+    latest_invoice = fields.Nested(InvoicesData, required=False)
+    
+    next_plan = fields.Nested(Plan, required=False)
+    
+    current_subscriptions = fields.List(fields.Nested(Subscription, required=False), required=False)
+    
+    mandate_amount = fields.Str(required=False)
     
 
 
