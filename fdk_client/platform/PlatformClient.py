@@ -26,9 +26,9 @@ from .inventory.client import Inventory
 
 from .configuration.client import Configuration
 
-from .analytics.client import Analytics
-
 from .discount.client import Discount
+
+from .partner.client import Partner
 
 from .webhook.client import Webhook
 
@@ -61,9 +61,9 @@ class PlatformClient:
         
         self.configuration = Configuration(config)
         
-        self.analytics = Analytics(config)
-        
         self.discount = Discount(config)
+        
+        self.partner = Partner(config)
         
         self.webhook = Webhook(config)
         
