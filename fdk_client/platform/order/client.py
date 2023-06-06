@@ -378,7 +378,7 @@ class Order:
 
         return response
     
-    async def getOrders(self, lane=None, search_type=None, bag_status=None, time_to_dispatch=None, payment_methods=None, tags=None, search_value=None, from_date=None, to_date=None, dp_ids=None, sales_channel=None, page_no=None, page_size=None, is_priority_sort=None, custom_meta=None, platform_user_id=None):
+    async def getOrders(self, lane=None, search_type=None, bag_status=None, time_to_dispatch=None, payment_methods=None, tags=None, search_value=None, from_date=None, to_date=None, dp_ids=None, sales_channels=None, page_no=None, page_size=None, is_priority_sort=None, custom_meta=None, platform_user_id=None):
         """
         :param lane : lane refers to a section where orders are assigned, indicating its grouping : type string
         :param search_type : search_type refers to the specific field that will be used as the target for the search operation : type string
@@ -390,7 +390,7 @@ class Order:
         :param from_date :  : type string
         :param to_date :  : type string
         :param dp_ids : Delivery Partner IDs to which shipments are assigned. : type string
-        :param sales_channel :  : type string
+        :param sales_channels :  : type string
         :param page_no :  : type integer
         :param page_size :  : type integer
         :param is_priority_sort :  : type boolean
@@ -429,8 +429,8 @@ class Order:
         if dp_ids:
             payload["dp_ids"] = dp_ids
         
-        if sales_channel:
-            payload["sales_channel"] = sales_channel
+        if sales_channels:
+            payload["sales_channels"] = sales_channels
         
         if page_no:
             payload["page_no"] = page_no
@@ -453,8 +453,8 @@ class Order:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/orders-listing", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer","default":37}}],"optional":[{"in":"query","name":"lane","description":"lane refers to a section where orders are assigned, indicating its grouping","required":false,"schema":{"type":"string","default":"new"}},{"in":"query","name":"search_type","description":"search_type refers to the specific field that will be used as the target for the search operation","required":false,"schema":{"type":"string","default":"shipment_id"}},{"in":"query","name":"bag_status","description":"bag_status refers to status of the entity. Filters orders based on the status.","required":false,"schema":{"type":"string"}},{"in":"query","name":"time_to_dispatch","description":"time_to_dispatch refers to estimated SLA time.","required":false,"schema":{"type":"string"}},{"in":"query","name":"payment_methods","required":false,"schema":{"type":"string"}},{"in":"query","name":"tags","description":"tags refers to additional descriptive labels associated with the order","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_value","description":"search_value is matched against the field specified by the search_type","required":false,"schema":{"type":"string","default":16854460524441037000}},{"in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","description":"Delivery Partner IDs to which shipments are assigned.","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channel","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","name":"is_priority_sort","required":false,"schema":{"type":"boolean","default":true}},{"in":"query","name":"custom_meta","required":false,"schema":{"type":"string","default":{"store_id":"6388422a5ebd6a6cf4a8ede6"}}},{"in":"query","name":"platform_user_id","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","name":"lane","description":"lane refers to a section where orders are assigned, indicating its grouping","required":false,"schema":{"type":"string","default":"new"}},{"in":"query","name":"search_type","description":"search_type refers to the specific field that will be used as the target for the search operation","required":false,"schema":{"type":"string","default":"shipment_id"}},{"in":"query","name":"bag_status","description":"bag_status refers to status of the entity. Filters orders based on the status.","required":false,"schema":{"type":"string"}},{"in":"query","name":"time_to_dispatch","description":"time_to_dispatch refers to estimated SLA time.","required":false,"schema":{"type":"string"}},{"in":"query","name":"payment_methods","required":false,"schema":{"type":"string"}},{"in":"query","name":"tags","description":"tags refers to additional descriptive labels associated with the order","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_value","description":"search_value is matched against the field specified by the search_type","required":false,"schema":{"type":"string","default":16854460524441037000}},{"in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","description":"Delivery Partner IDs to which shipments are assigned.","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channel","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","name":"is_priority_sort","required":false,"schema":{"type":"boolean","default":true}},{"in":"query","name":"custom_meta","required":false,"schema":{"type":"string","default":{"store_id":"6388422a5ebd6a6cf4a8ede6"}}},{"in":"query","name":"platform_user_id","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer","default":37}}]}""", lane=lane, search_type=search_type, bag_status=bag_status, time_to_dispatch=time_to_dispatch, payment_methods=payment_methods, tags=tags, search_value=search_value, from_date=from_date, to_date=to_date, dp_ids=dp_ids, sales_channel=sales_channel, page_no=page_no, page_size=page_size, is_priority_sort=is_priority_sort, custom_meta=custom_meta, platform_user_id=platform_user_id)
-        query_string = await create_query_string(lane=lane, search_type=search_type, bag_status=bag_status, time_to_dispatch=time_to_dispatch, payment_methods=payment_methods, tags=tags, search_value=search_value, from_date=from_date, to_date=to_date, dp_ids=dp_ids, sales_channel=sales_channel, page_no=page_no, page_size=page_size, is_priority_sort=is_priority_sort, custom_meta=custom_meta, platform_user_id=platform_user_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/orders/v1.0/company/{self._conf.companyId}/orders-listing", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer","default":37}}],"optional":[{"in":"query","name":"lane","description":"lane refers to a section where orders are assigned, indicating its grouping","required":false,"schema":{"type":"string","default":"new"}},{"in":"query","name":"search_type","description":"search_type refers to the specific field that will be used as the target for the search operation","required":false,"schema":{"type":"string","default":"shipment_id"}},{"in":"query","name":"bag_status","description":"bag_status refers to status of the entity. Filters orders based on the status.","required":false,"schema":{"type":"string"}},{"in":"query","name":"time_to_dispatch","description":"time_to_dispatch refers to estimated SLA time.","required":false,"schema":{"type":"string"}},{"in":"query","name":"payment_methods","required":false,"schema":{"type":"string"}},{"in":"query","name":"tags","description":"tags refers to additional descriptive labels associated with the order","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_value","description":"search_value is matched against the field specified by the search_type","required":false,"schema":{"type":"string","default":16854460524441037000}},{"in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","description":"Delivery Partner IDs to which shipments are assigned.","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channels","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","name":"is_priority_sort","required":false,"schema":{"type":"boolean","default":true}},{"in":"query","name":"custom_meta","required":false,"schema":{"type":"string","default":{"store_id":"6388422a5ebd6a6cf4a8ede6"}}},{"in":"query","name":"platform_user_id","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","name":"lane","description":"lane refers to a section where orders are assigned, indicating its grouping","required":false,"schema":{"type":"string","default":"new"}},{"in":"query","name":"search_type","description":"search_type refers to the specific field that will be used as the target for the search operation","required":false,"schema":{"type":"string","default":"shipment_id"}},{"in":"query","name":"bag_status","description":"bag_status refers to status of the entity. Filters orders based on the status.","required":false,"schema":{"type":"string"}},{"in":"query","name":"time_to_dispatch","description":"time_to_dispatch refers to estimated SLA time.","required":false,"schema":{"type":"string"}},{"in":"query","name":"payment_methods","required":false,"schema":{"type":"string"}},{"in":"query","name":"tags","description":"tags refers to additional descriptive labels associated with the order","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_value","description":"search_value is matched against the field specified by the search_type","required":false,"schema":{"type":"string","default":16854460524441037000}},{"in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","description":"Delivery Partner IDs to which shipments are assigned.","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channels","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","name":"is_priority_sort","required":false,"schema":{"type":"boolean","default":true}},{"in":"query","name":"custom_meta","required":false,"schema":{"type":"string","default":{"store_id":"6388422a5ebd6a6cf4a8ede6"}}},{"in":"query","name":"platform_user_id","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer","default":37}}]}""", lane=lane, search_type=search_type, bag_status=bag_status, time_to_dispatch=time_to_dispatch, payment_methods=payment_methods, tags=tags, search_value=search_value, from_date=from_date, to_date=to_date, dp_ids=dp_ids, sales_channels=sales_channels, page_no=page_no, page_size=page_size, is_priority_sort=is_priority_sort, custom_meta=custom_meta, platform_user_id=platform_user_id)
+        query_string = await create_query_string(lane=lane, search_type=search_type, bag_status=bag_status, time_to_dispatch=time_to_dispatch, payment_methods=payment_methods, tags=tags, search_value=search_value, from_date=from_date, to_date=to_date, dp_ids=dp_ids, sales_channels=sales_channels, page_no=page_no, page_size=page_size, is_priority_sort=is_priority_sort, custom_meta=custom_meta, platform_user_id=platform_user_id)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -464,7 +464,7 @@ class Order:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/orders-listing", lane=lane, search_type=search_type, bag_status=bag_status, time_to_dispatch=time_to_dispatch, payment_methods=payment_methods, tags=tags, search_value=search_value, from_date=from_date, to_date=to_date, dp_ids=dp_ids, sales_channel=sales_channel, page_no=page_no, page_size=page_size, is_priority_sort=is_priority_sort, custom_meta=custom_meta, platform_user_id=platform_user_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/orders/v1.0/company/{self._conf.companyId}/orders-listing", lane=lane, search_type=search_type, bag_status=bag_status, time_to_dispatch=time_to_dispatch, payment_methods=payment_methods, tags=tags, search_value=search_value, from_date=from_date, to_date=to_date, dp_ids=dp_ids, sales_channels=sales_channels, page_no=page_no, page_size=page_size, is_priority_sort=is_priority_sort, custom_meta=custom_meta, platform_user_id=platform_user_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
 
@@ -1575,6 +1575,49 @@ class Order:
 
         return response
     
+    async def postShipmentHistory(self, body=""):
+        """
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = OrderValidator.postShipmentHistory()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import PostShipmentHistory
+        schema = PostShipmentHistory()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/history", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/history", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        from .models import ShipmentHistoryResponse
+        schema = ShipmentHistoryResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for postShipmentHistory")
+            print(e)
+
+        
+
+        return response
+    
     async def getShipmentHistory(self, shipment_id=None, bag_id=None):
         """
         :param shipment_id : Shipment Id : type string
@@ -1615,49 +1658,6 @@ class Order:
             schema.dump(schema.load(response))
         except Exception as e:
             print("Response Validation failed for getShipmentHistory")
-            print(e)
-
-        
-
-        return response
-    
-    async def postShipmentHistory(self, body=""):
-        """
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = OrderValidator.postShipmentHistory()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import PostShipmentHistory
-        schema = PostShipmentHistory()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/history", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
-        query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/history", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        
-
-        from .models import ShipmentHistoryResponse
-        schema = ShipmentHistoryResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for postShipmentHistory")
             print(e)
 
         
@@ -1718,8 +1718,8 @@ class Order:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CreateOrderPayload
-        schema = CreateOrderPayload()
+        from .models import UpdatePackagingDimensionsPayload
+        schema = UpdatePackagingDimensionsPayload()
         schema.dump(schema.load(body))
         
 
@@ -1738,8 +1738,8 @@ class Order:
 
         
 
-        from .models import CreateOrderResponse
-        schema = CreateOrderResponse()
+        from .models import UpdatePackagingDimensionsResponse
+        schema = UpdatePackagingDimensionsResponse()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
@@ -1793,44 +1793,6 @@ class Order:
 
         return response
     
-    async def getChannelConfig(self, ):
-        """getChannelConfig
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = OrderValidator.getChannelConfig()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/order-config", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
-        query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/order-config", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        from .models import CreateChannelConfigData
-        schema = CreateChannelConfigData()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getChannelConfig")
-            print(e)
-
-        
-
-        return response
-    
     async def createChannelConfig(self, body=""):
         """createChannelConfig
         """
@@ -1868,6 +1830,44 @@ class Order:
             schema.dump(schema.load(response))
         except Exception as e:
             print("Response Validation failed for createChannelConfig")
+            print(e)
+
+        
+
+        return response
+    
+    async def getChannelConfig(self, ):
+        """getChannelConfig
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = OrderValidator.getChannelConfig()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/order-config", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/order-config", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        from .models import CreateChannelConfigData
+        schema = CreateChannelConfigData()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getChannelConfig")
             print(e)
 
         
@@ -2035,6 +2035,221 @@ class Order:
             schema.dump(schema.load(response))
         except Exception as e:
             print("Response Validation failed for getStateTransitionMap")
+            print(e)
+
+        
+
+        return response
+    
+    async def fetchCreditBalanceDetail(self, body=""):
+        """
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = OrderValidator.fetchCreditBalanceDetail()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import FetchCreditBalanceRequestPayload
+        schema = FetchCreditBalanceRequestPayload()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/customer-credit-balance", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/customer-credit-balance", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        from .models import FetchCreditBalanceResponsePayload
+        schema = FetchCreditBalanceResponsePayload()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for fetchCreditBalanceDetail")
+            print(e)
+
+        
+
+        return response
+    
+    async def fetchRefundModeConfig(self, body=""):
+        """
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = OrderValidator.fetchRefundModeConfig()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import RefundModeConfigRequestPayload
+        schema = RefundModeConfigRequestPayload()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/refund-mode-config", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/refund-mode-config", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        from .models import RefundModeConfigResponsePayload
+        schema = RefundModeConfigResponsePayload()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for fetchRefundModeConfig")
+            print(e)
+
+        
+
+        return response
+    
+    async def attachOrderUser(self, body=""):
+        """
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = OrderValidator.attachOrderUser()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import AttachOrderUser
+        schema = AttachOrderUser()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/user/attach", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/user/attach", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        from .models import AttachOrderUserResponse
+        schema = AttachOrderUserResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for attachOrderUser")
+            print(e)
+
+        
+
+        return response
+    
+    async def sendUserMobileOTP(self, body=""):
+        """
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = OrderValidator.sendUserMobileOTP()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import SendUserMobileOTP
+        schema = SendUserMobileOTP()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/user/send/otp/mobile", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/user/send/otp/mobile", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        from .models import SendUserMobileOtpResponse
+        schema = SendUserMobileOtpResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for sendUserMobileOTP")
+            print(e)
+
+        
+
+        return response
+    
+    async def verifyMobileOTP(self, body=""):
+        """
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = OrderValidator.verifyMobileOTP()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import VerifyMobileOTP
+        schema = VerifyMobileOTP()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/user/verify/otp", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/user/verify/otp", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        from .models import PointBlankOtpData
+        schema = PointBlankOtpData()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for verifyMobileOTP")
             print(e)
 
         
