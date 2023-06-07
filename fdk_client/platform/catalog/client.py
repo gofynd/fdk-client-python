@@ -12,6 +12,53 @@ class Catalog:
         self._conf = config
 
     
+    async def getProductBundle(self, q=None, slug=None):
+        """Get all product bundles for a particular company
+        :param q : A search string that is searched with product bundle name. : type string
+        :param slug : slugs of bundles to be retrieved. : type array
+        """
+        payload = {}
+        
+        if q is not None:
+            payload["q"] = q
+        
+        if slug is not None:
+            payload["slug"] = slug
+        
+
+        # Parameter validation
+        schema = CatalogValidator.getProductBundle()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"q","description":"A search string that is searched with product bundle name.","schema":{"type":"string"},"required":false},{"in":"query","name":"slug","description":"slugs of bundles to be retrieved.","schema":{"type":"array","items":{"type":"string"}},"required":false}],"query":[{"in":"query","name":"q","description":"A search string that is searched with product bundle name.","schema":{"type":"string"},"required":false},{"in":"query","name":"slug","description":"slugs of bundles to be retrieved.","schema":{"type":"array","items":{"type":"string"}},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}]}""", q=q, slug=slug)
+        query_string = await create_query_string(q=q, slug=slug)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/", q=q, slug=slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetProductBundleListingResponse
+            schema = GetProductBundleListingResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProductBundle")
+                print(e)
+
+        
+
+        return response
+    
     async def createProductBundle(self, body=""):
         """Create Product Bundle. See `ProductBundleRequest` for the request body parameter need to create a product bundle. On successful request, returns in `ProductBundleRequest` with id
         """
@@ -43,39 +90,36 @@ class Catalog:
 
         
 
-        from .models import GetProductBundleCreateResponse
-        schema = GetProductBundleCreateResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createProductBundle")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetProductBundleCreateResponse
+            schema = GetProductBundleCreateResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createProductBundle")
+                print(e)
 
         
 
         return response
     
-    async def getProductBundle(self, q=None, slug=None):
-        """Get all product bundles for a particular company
-        :param q : A search string that is searched with product bundle name. : type string
-        :param slug : slugs of bundles to be retrieved. : type array
+    async def getProductBundleDetail(self, id=None):
+        """Get a particular Bundle details by its `id`. If successful, returns a Product bundle resource in the response body specified in `GetProductBundleResponse`
+        :param id : A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. : type string
         """
         payload = {}
         
-        if q:
-            payload["q"] = q
-        
-        if slug:
-            payload["slug"] = slug
+        if id is not None:
+            payload["id"] = id
         
 
         # Parameter validation
-        schema = CatalogValidator.getProductBundle()
+        schema = CatalogValidator.getProductBundleDetail()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"q","description":"A search string that is searched with product bundle name.","schema":{"type":"string"},"required":false},{"in":"query","name":"slug","description":"slugs of bundles to be retrieved.","schema":{"type":"array","items":{"type":"string"}},"required":false}],"query":[{"in":"query","name":"q","description":"A search string that is searched with product bundle name.","schema":{"type":"string"},"required":false},{"in":"query","name":"slug","description":"slugs of bundles to be retrieved.","schema":{"type":"array","items":{"type":"string"}},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}]}""", q=q, slug=slug)
-        query_string = await create_query_string(q=q, slug=slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/{id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve.","schema":{"type":"string"},"required":true}]}""", id=id)
+        query_string = await create_query_string(id=id)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -85,17 +129,18 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/", q=q, slug=slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
 
-        from .models import GetProductBundleListingResponse
-        schema = GetProductBundleListingResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getProductBundle")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetProductBundleResponse
+            schema = GetProductBundleResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProductBundleDetail")
+                print(e)
 
         
 
@@ -107,7 +152,7 @@ class Catalog:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -136,35 +181,52 @@ class Catalog:
 
         
 
-        from .models import GetProductBundleCreateResponse
-        schema = GetProductBundleCreateResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateProductBundle")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetProductBundleCreateResponse
+            schema = GetProductBundleCreateResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateProductBundle")
+                print(e)
 
         
 
         return response
     
-    async def getProductBundleDetail(self, id=None):
-        """Get a particular Bundle details by its `id`. If successful, returns a Product bundle resource in the response body specified in `GetProductBundleResponse`
-        :param id : A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. : type string
+    async def getSizeGuides(self, active=None, q=None, tag=None, page_no=None, page_size=None):
+        """This API allows to view all the size guides associated to the seller.
+        :param active : filter size guide on basis of active, in-active : type boolean
+        :param q : Query that is to be searched. : type string
+        :param tag : to filter size guide on basis of tag. : type string
+        :param page_no : The page number to navigate through the given set of results : type integer
+        :param page_size : Number of items to retrieve in each page. Default is 10. : type integer
         """
         payload = {}
         
-        if id:
-            payload["id"] = id
+        if active is not None:
+            payload["active"] = active
+        
+        if q is not None:
+            payload["q"] = q
+        
+        if tag is not None:
+            payload["tag"] = tag
+        
+        if page_no is not None:
+            payload["page_no"] = page_no
+        
+        if page_size is not None:
+            payload["page_size"] = page_size
         
 
         # Parameter validation
-        schema = CatalogValidator.getProductBundleDetail()
+        schema = CatalogValidator.getSizeGuides()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/{id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve.","schema":{"type":"string"},"required":true}]}""", id=id)
-        query_string = await create_query_string(id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide", """{"required":[{"in":"path","name":"company_id","description":"Id of the company for which the size guides are to be fetched.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"active","description":"filter size guide on basis of active, in-active","schema":{"type":"boolean"},"required":false},{"in":"query","name":"q","description":"Query that is to be searched.","schema":{"type":"string"},"required":false},{"in":"query","name":"tag","description":"to filter size guide on basis of tag.","schema":{"type":"string"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer","default":10},"required":false}],"query":[{"in":"query","name":"active","description":"filter size guide on basis of active, in-active","schema":{"type":"boolean"},"required":false},{"in":"query","name":"q","description":"Query that is to be searched.","schema":{"type":"string"},"required":false},{"in":"query","name":"tag","description":"to filter size guide on basis of tag.","schema":{"type":"string"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer","default":10},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company for which the size guides are to be fetched.","schema":{"type":"string"},"required":true}]}""", active=active, q=q, tag=tag, page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(active=active, q=q, tag=tag, page_no=page_no, page_size=page_size)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -174,17 +236,18 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide", active=active, q=q, tag=tag, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
 
-        from .models import GetProductBundleResponse
-        schema = GetProductBundleResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getProductBundleDetail")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ListSizeGuide
+            schema = ListSizeGuide()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSizeGuides")
+                print(e)
 
         
 
@@ -221,51 +284,36 @@ class Catalog:
 
         
 
-        from .models import SuccessResponse
-        schema = SuccessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createSizeGuide")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse
+            schema = SuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createSizeGuide")
+                print(e)
 
         
 
         return response
     
-    async def getSizeGuides(self, active=None, q=None, tag=None, page_no=None, page_size=None):
-        """This API allows to view all the size guides associated to the seller.
-        :param active : filter size guide on basis of active, in-active : type boolean
-        :param q : Query that is to be searched. : type string
-        :param tag : to filter size guide on basis of tag. : type string
-        :param page_no : The page number to navigate through the given set of results : type integer
-        :param page_size : Number of items to retrieve in each page. Default is 10. : type integer
+    async def getSizeGuide(self, id=None):
+        """This API helps to get data associated to a size guide.
+        :param id : Id of the size guide to be viewed. : type string
         """
         payload = {}
         
-        if active:
-            payload["active"] = active
-        
-        if q:
-            payload["q"] = q
-        
-        if tag:
-            payload["tag"] = tag
-        
-        if page_no:
-            payload["page_no"] = page_no
-        
-        if page_size:
-            payload["page_size"] = page_size
+        if id is not None:
+            payload["id"] = id
         
 
         # Parameter validation
-        schema = CatalogValidator.getSizeGuides()
+        schema = CatalogValidator.getSizeGuide()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide", """{"required":[{"in":"path","name":"company_id","description":"Id of the company for which the size guides are to be fetched.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"active","description":"filter size guide on basis of active, in-active","schema":{"type":"boolean"},"required":false},{"in":"query","name":"q","description":"Query that is to be searched.","schema":{"type":"string"},"required":false},{"in":"query","name":"tag","description":"to filter size guide on basis of tag.","schema":{"type":"string"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer","default":10},"required":false}],"query":[{"in":"query","name":"active","description":"filter size guide on basis of active, in-active","schema":{"type":"boolean"},"required":false},{"in":"query","name":"q","description":"Query that is to be searched.","schema":{"type":"string"},"required":false},{"in":"query","name":"tag","description":"to filter size guide on basis of tag.","schema":{"type":"string"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer","default":10},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company for which the size guides are to be fetched.","schema":{"type":"string"},"required":true}]}""", active=active, q=q, tag=tag, page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(active=active, q=q, tag=tag, page_no=page_no, page_size=page_size)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide/{id}/", """{"required":[{"in":"path","name":"company_id","description":"Id of the company associated to size guide.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"Id of the size guide to be viewed.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company associated to size guide.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"Id of the size guide to be viewed.","schema":{"type":"string"},"required":true}]}""", id=id)
+        query_string = await create_query_string(id=id)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -275,17 +323,18 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide", active=active, q=q, tag=tag, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
 
-        from .models import ListSizeGuide
-        schema = ListSizeGuide()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getSizeGuides")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SizeGuideResponse
+            schema = SizeGuideResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSizeGuide")
+                print(e)
 
         
 
@@ -297,7 +346,7 @@ class Catalog:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -326,55 +375,14 @@ class Catalog:
 
         
 
-        from .models import SuccessResponse
-        schema = SuccessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateSizeGuide")
-            print(e)
-
-        
-
-        return response
-    
-    async def getSizeGuide(self, id=None):
-        """This API helps to get data associated to a size guide.
-        :param id : Id of the size guide to be viewed. : type string
-        """
-        payload = {}
-        
-        if id:
-            payload["id"] = id
-        
-
-        # Parameter validation
-        schema = CatalogValidator.getSizeGuide()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide/{id}/", """{"required":[{"in":"path","name":"company_id","description":"Id of the company associated to size guide.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"Id of the size guide to be viewed.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company associated to size guide.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"Id of the size guide to be viewed.","schema":{"type":"string"},"required":true}]}""", id=id)
-        query_string = await create_query_string(id=id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        from .models import SizeGuideResponse
-        schema = SizeGuideResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getSizeGuide")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse
+            schema = SuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateSizeGuide")
+                print(e)
 
         
 
@@ -386,7 +394,7 @@ class Catalog:
         """
         payload = {}
         
-        if seller_app_id:
+        if seller_app_id is not None:
             payload["seller_app_id"] = seller_app_id
         
 
@@ -410,13 +418,14 @@ class Catalog:
 
         
 
-        from .models import CrossSellingDataResponse
-        schema = CrossSellingDataResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getSellerInsights")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CrossSellingDataResponse
+            schema = CrossSellingDataResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSellerInsights")
+                print(e)
 
         
 
@@ -428,7 +437,7 @@ class Catalog:
         """
         payload = {}
         
-        if marketplace:
+        if marketplace is not None:
             payload["marketplace"] = marketplace
         
 
@@ -457,13 +466,14 @@ class Catalog:
 
         
 
-        from .models import UpdatedResponse
-        schema = UpdatedResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createMarketplaceOptin")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UpdatedResponse
+            schema = UpdatedResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createMarketplaceOptin")
+                print(e)
 
         
 
@@ -495,13 +505,14 @@ class Catalog:
 
         
 
-        from .models import GetOptInPlatform
-        schema = GetOptInPlatform()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getMarketplaceOptinDetail")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetOptInPlatform
+            schema = GetOptInPlatform()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getMarketplaceOptinDetail")
+                print(e)
 
         
 
@@ -533,13 +544,14 @@ class Catalog:
 
         
 
-        from .models import OptinCompanyDetail
-        schema = OptinCompanyDetail()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCompanyDetail")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OptinCompanyDetail
+            schema = OptinCompanyDetail()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCompanyDetail")
+                print(e)
 
         
 
@@ -555,19 +567,19 @@ class Catalog:
         """
         payload = {}
         
-        if is_active:
+        if is_active is not None:
             payload["is_active"] = is_active
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if marketplace:
+        if marketplace is not None:
             payload["marketplace"] = marketplace
         
 
@@ -591,13 +603,14 @@ class Catalog:
 
         
 
-        from .models import OptinCompanyBrandDetailsView
-        schema = OptinCompanyBrandDetailsView()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCompanyBrandDetail")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OptinCompanyBrandDetailsView
+            schema = OptinCompanyBrandDetailsView()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCompanyBrandDetail")
+                print(e)
 
         
 
@@ -629,13 +642,14 @@ class Catalog:
 
         
 
-        from .models import OptinCompanyMetrics
-        schema = OptinCompanyMetrics()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCompanyMetrics")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OptinCompanyMetrics
+            schema = OptinCompanyMetrics()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCompanyMetrics")
+                print(e)
 
         
 
@@ -649,13 +663,13 @@ class Catalog:
         """
         payload = {}
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -679,13 +693,14 @@ class Catalog:
 
         
 
-        from .models import OptinStoreDetails
-        schema = OptinStoreDetails()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getStoreDetail")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OptinStoreDetails
+            schema = OptinStoreDetails()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getStoreDetail")
+                print(e)
 
         
 
@@ -697,7 +712,7 @@ class Catalog:
         """
         payload = {}
         
-        if attribute_slug:
+        if attribute_slug is not None:
             payload["attribute_slug"] = attribute_slug
         
 
@@ -721,13 +736,14 @@ class Catalog:
 
         
 
-        from .models import GenderDetail
-        schema = GenderDetail()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getGenderAttribute")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GenderDetail
+            schema = GenderDetail()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getGenderAttribute")
+                print(e)
 
         
 
@@ -740,10 +756,10 @@ class Catalog:
         """
         payload = {}
         
-        if departments:
+        if departments is not None:
             payload["departments"] = departments
         
-        if item_type:
+        if item_type is not None:
             payload["item_type"] = item_type
         
 
@@ -767,13 +783,77 @@ class Catalog:
 
         
 
-        from .models import ProdcutTemplateCategoriesResponse
-        schema = ProdcutTemplateCategoriesResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for listProductTemplateCategories")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProdcutTemplateCategoriesResponse
+            schema = ProdcutTemplateCategoriesResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for listProductTemplateCategories")
+                print(e)
+
+        
+
+        return response
+    
+    async def listDepartmentsData(self, page_no=None, item_type=None, page_size=None, name=None, search=None, is_active=None):
+        """Allows you to list all departments, also can search using name and filter active and incative departments, and item type.
+        :param page_no : The page number to navigate through the given set of results : type integer
+        :param item_type : A `item_type` is a type of product eg. set, standard, digital : type string
+        :param page_size : Number of items to retrieve in each page. Default is 10. : type integer
+        :param name : Can search departments by passing name. : type string
+        :param search : Can search departments by passing name of the department in search parameter. : type string
+        :param is_active : Can query for departments based on whether they are active or inactive. : type boolean
+        """
+        payload = {}
+        
+        if page_no is not None:
+            payload["page_no"] = page_no
+        
+        if item_type is not None:
+            payload["item_type"] = item_type
+        
+        if page_size is not None:
+            payload["page_size"] = page_size
+        
+        if name is not None:
+            payload["name"] = name
+        
+        if search is not None:
+            payload["search"] = search
+        
+        if is_active is not None:
+            payload["is_active"] = is_active
+        
+
+        # Parameter validation
+        schema = CatalogValidator.listDepartmentsData()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"item_type","description":"A `item_type` is a type of product eg. set, standard, digital","schema":{"type":"string"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer"},"required":false},{"in":"query","name":"name","description":"Can search departments by passing name.","schema":{"type":"string"},"required":false},{"in":"query","name":"search","description":"Can search departments by passing name of the department in search parameter.","schema":{"type":"string"},"required":false},{"in":"query","name":"is_active","description":"Can query for departments based on whether they are active or inactive.","schema":{"type":"boolean"},"required":false}],"query":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"item_type","description":"A `item_type` is a type of product eg. set, standard, digital","schema":{"type":"string"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer"},"required":false},{"in":"query","name":"name","description":"Can search departments by passing name.","schema":{"type":"string"},"required":false},{"in":"query","name":"search","description":"Can search departments by passing name of the department in search parameter.","schema":{"type":"string"},"required":false},{"in":"query","name":"is_active","description":"Can query for departments based on whether they are active or inactive.","schema":{"type":"boolean"},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}]}""", page_no=page_no, item_type=item_type, page_size=page_size, name=name, search=search, is_active=is_active)
+        query_string = await create_query_string(page_no=page_no, item_type=item_type, page_size=page_size, name=name, search=search, is_active=is_active)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/", page_no=page_no, item_type=item_type, page_size=page_size, name=name, search=search, is_active=is_active), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DepartmentsResponse
+            schema = DepartmentsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for listDepartmentsData")
+                print(e)
 
         
 
@@ -810,55 +890,36 @@ class Catalog:
 
         
 
-        from .models import DepartmentCreateResponse
-        schema = DepartmentCreateResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createDepartments")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DepartmentCreateResponse
+            schema = DepartmentCreateResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createDepartments")
+                print(e)
 
         
 
         return response
     
-    async def listDepartmentsData(self, page_no=None, item_type=None, page_size=None, name=None, search=None, is_active=None):
-        """Allows you to list all departments, also can search using name and filter active and incative departments, and item type.
-        :param page_no : The page number to navigate through the given set of results : type integer
-        :param item_type : A `item_type` is a type of product eg. set, standard, digital : type string
-        :param page_size : Number of items to retrieve in each page. Default is 10. : type integer
-        :param name : Can search departments by passing name. : type string
-        :param search : Can search departments by passing name of the department in search parameter. : type string
-        :param is_active : Can query for departments based on whether they are active or inactive. : type boolean
+    async def getDepartmentData(self, uid=None):
+        """Allows you to get department data, by uid.
+        :param uid : A `uid` is a unique identifier of a department. : type string
         """
         payload = {}
         
-        if page_no:
-            payload["page_no"] = page_no
-        
-        if item_type:
-            payload["item_type"] = item_type
-        
-        if page_size:
-            payload["page_size"] = page_size
-        
-        if name:
-            payload["name"] = name
-        
-        if search:
-            payload["search"] = search
-        
-        if is_active:
-            payload["is_active"] = is_active
+        if uid is not None:
+            payload["uid"] = uid
         
 
         # Parameter validation
-        schema = CatalogValidator.listDepartmentsData()
+        schema = CatalogValidator.getDepartmentData()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"item_type","description":"A `item_type` is a type of product eg. set, standard, digital","schema":{"type":"string"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer"},"required":false},{"in":"query","name":"name","description":"Can search departments by passing name.","schema":{"type":"string"},"required":false},{"in":"query","name":"search","description":"Can search departments by passing name of the department in search parameter.","schema":{"type":"string"},"required":false},{"in":"query","name":"is_active","description":"Can query for departments based on whether they are active or inactive.","schema":{"type":"boolean"},"required":false}],"query":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"item_type","description":"A `item_type` is a type of product eg. set, standard, digital","schema":{"type":"string"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer"},"required":false},{"in":"query","name":"name","description":"Can search departments by passing name.","schema":{"type":"string"},"required":false},{"in":"query","name":"search","description":"Can search departments by passing name of the department in search parameter.","schema":{"type":"string"},"required":false},{"in":"query","name":"is_active","description":"Can query for departments based on whether they are active or inactive.","schema":{"type":"boolean"},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}]}""", page_no=page_no, item_type=item_type, page_size=page_size, name=name, search=search, is_active=is_active)
-        query_string = await create_query_string(page_no=page_no, item_type=item_type, page_size=page_size, name=name, search=search, is_active=is_active)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/{uid}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"uid","description":"A `uid` is a unique identifier of a department.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"uid","description":"A `uid` is a unique identifier of a department.","schema":{"type":"string"},"required":true}]}""", uid=uid)
+        query_string = await create_query_string(uid=uid)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -868,17 +929,18 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/", page_no=page_no, item_type=item_type, page_size=page_size, name=name, search=search, is_active=is_active), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/{uid}/", uid=uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
 
-        from .models import DepartmentsResponse
-        schema = DepartmentsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for listDepartmentsData")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DepartmentsResponse
+            schema = DepartmentsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getDepartmentData")
+                print(e)
 
         
 
@@ -890,7 +952,7 @@ class Catalog:
         """
         payload = {}
         
-        if uid:
+        if uid is not None:
             payload["uid"] = uid
         
 
@@ -919,55 +981,14 @@ class Catalog:
 
         
 
-        from .models import DepartmentModel
-        schema = DepartmentModel()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateDepartment")
-            print(e)
-
-        
-
-        return response
-    
-    async def getDepartmentData(self, uid=None):
-        """Allows you to get department data, by uid.
-        :param uid : A `uid` is a unique identifier of a department. : type string
-        """
-        payload = {}
-        
-        if uid:
-            payload["uid"] = uid
-        
-
-        # Parameter validation
-        schema = CatalogValidator.getDepartmentData()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/{uid}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"uid","description":"A `uid` is a unique identifier of a department.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"uid","description":"A `uid` is a unique identifier of a department.","schema":{"type":"string"},"required":true}]}""", uid=uid)
-        query_string = await create_query_string(uid=uid)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/{uid}/", uid=uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        from .models import DepartmentsResponse
-        schema = DepartmentsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getDepartmentData")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DepartmentModel
+            schema = DepartmentModel()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateDepartment")
+                print(e)
 
         
 
@@ -979,7 +1000,7 @@ class Catalog:
         """
         payload = {}
         
-        if department:
+        if department is not None:
             payload["department"] = department
         
 
@@ -1003,13 +1024,14 @@ class Catalog:
 
         
 
-        from .models import TemplatesResponse
-        schema = TemplatesResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for listProductTemplate")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TemplatesResponse
+            schema = TemplatesResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for listProductTemplate")
+                print(e)
 
         
 
@@ -1021,7 +1043,7 @@ class Catalog:
         """
         payload = {}
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
 
@@ -1045,13 +1067,14 @@ class Catalog:
 
         
 
-        from .models import TemplatesValidationResponse
-        schema = TemplatesValidationResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for validateProductTemplate")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TemplatesValidationResponse
+            schema = TemplatesValidationResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for validateProductTemplate")
+                print(e)
 
         
 
@@ -1063,7 +1086,7 @@ class Catalog:
         """
         payload = {}
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
 
@@ -1095,7 +1118,7 @@ class Catalog:
         """
         payload = {}
         
-        if item_type:
+        if item_type is not None:
             payload["item_type"] = item_type
         
 
@@ -1127,7 +1150,7 @@ class Catalog:
         """
         payload = {}
         
-        if item_type:
+        if item_type is not None:
             payload["item_type"] = item_type
         
 
@@ -1151,13 +1174,14 @@ class Catalog:
 
         
 
-        from .models import InventoryValidationResponse
-        schema = InventoryValidationResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for validateProductTemplateSchema")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import InventoryValidationResponse
+            schema = InventoryValidationResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for validateProductTemplateSchema")
+                print(e)
 
         
 
@@ -1189,13 +1213,14 @@ class Catalog:
 
         
 
-        from .models import HSNCodesResponse
-        schema = HSNCodesResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for listHSNCodes")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import HSNCodesResponse
+            schema = HSNCodesResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for listHSNCodes")
+                print(e)
 
         
 
@@ -1227,13 +1252,69 @@ class Catalog:
 
         
 
-        from .models import ProductDownloadsResponse
-        schema = ProductDownloadsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for listProductTemplateExportDetails")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductDownloadsResponse
+            schema = ProductDownloadsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for listProductTemplateExportDetails")
+                print(e)
+
+        
+
+        return response
+    
+    async def getProductExportJobs(self, status=None, from_date=None, to_date=None, q=None):
+        """Can view details including trigger data, task id , etc.
+        :param status : This is a parameter used to find all the jobs with the specified status. : type string
+        :param from_date : This is a parameter used to find the job from the date specified to the current date. : type string
+        :param to_date : This is a parameter used to find the job from the from_date specified to the to_date. : type string
+        :param q : It is a query parameter to search the export job with the task ID. : type string
+        """
+        payload = {}
+        
+        if status is not None:
+            payload["status"] = status
+        
+        if from_date is not None:
+            payload["from_date"] = from_date
+        
+        if to_date is not None:
+            payload["to_date"] = to_date
+        
+        if q is not None:
+            payload["q"] = q
+        
+
+        # Parameter validation
+        schema = CatalogValidator.getProductExportJobs()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/downloads/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"status","description":"This is a parameter used to find all the jobs with the specified status.","schema":{"type":"string"},"required":false},{"in":"query","name":"from_date","description":"This is a parameter used to find the job from the date specified to the current date.","schema":{"type":"string","format":"date"},"required":false},{"in":"query","name":"to_date","description":"This is a parameter used to find the job from the from_date specified to the to_date.","schema":{"type":"string","format":"date"},"required":false},{"in":"query","name":"q","description":"It is a query parameter to search the export job with the task ID.","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"status","description":"This is a parameter used to find all the jobs with the specified status.","schema":{"type":"string"},"required":false},{"in":"query","name":"from_date","description":"This is a parameter used to find the job from the date specified to the current date.","schema":{"type":"string","format":"date"},"required":false},{"in":"query","name":"to_date","description":"This is a parameter used to find the job from the from_date specified to the to_date.","schema":{"type":"string","format":"date"},"required":false},{"in":"query","name":"q","description":"It is a query parameter to search the export job with the task ID.","schema":{"type":"string"},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}]}""", status=status, from_date=from_date, to_date=to_date, q=q)
+        query_string = await create_query_string(status=status, from_date=from_date, to_date=to_date, q=q)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/downloads/", status=status, from_date=from_date, to_date=to_date, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductDownloadsResponse
+            schema = ProductDownloadsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProductExportJobs")
+                print(e)
 
         
 
@@ -1270,67 +1351,14 @@ class Catalog:
 
         
 
-        from .models import ProductDownloadsResponse
-        schema = ProductDownloadsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createProductExportJob")
-            print(e)
-
-        
-
-        return response
-    
-    async def getProductExportJobs(self, status=None, from_date=None, to_date=None, q=None):
-        """Can view details including trigger data, task id , etc.
-        :param status : This is a parameter used to find all the jobs with the specified status. : type string
-        :param from_date : This is a parameter used to find the job from the date specified to the current date. : type string
-        :param to_date : This is a parameter used to find the job from the from_date specified to the to_date. : type string
-        :param q : It is a query parameter to search the export job with the task ID. : type string
-        """
-        payload = {}
-        
-        if status:
-            payload["status"] = status
-        
-        if from_date:
-            payload["from_date"] = from_date
-        
-        if to_date:
-            payload["to_date"] = to_date
-        
-        if q:
-            payload["q"] = q
-        
-
-        # Parameter validation
-        schema = CatalogValidator.getProductExportJobs()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/downloads/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"status","description":"This is a parameter used to find all the jobs with the specified status.","schema":{"type":"string"},"required":false},{"in":"query","name":"from_date","description":"This is a parameter used to find the job from the date specified to the current date.","schema":{"type":"string","format":"date"},"required":false},{"in":"query","name":"to_date","description":"This is a parameter used to find the job from the from_date specified to the to_date.","schema":{"type":"string","format":"date"},"required":false},{"in":"query","name":"q","description":"It is a query parameter to search the export job with the task ID.","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"status","description":"This is a parameter used to find all the jobs with the specified status.","schema":{"type":"string"},"required":false},{"in":"query","name":"from_date","description":"This is a parameter used to find the job from the date specified to the current date.","schema":{"type":"string","format":"date"},"required":false},{"in":"query","name":"to_date","description":"This is a parameter used to find the job from the from_date specified to the to_date.","schema":{"type":"string","format":"date"},"required":false},{"in":"query","name":"q","description":"It is a query parameter to search the export job with the task ID.","schema":{"type":"string"},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}]}""", status=status, from_date=from_date, to_date=to_date, q=q)
-        query_string = await create_query_string(status=status, from_date=from_date, to_date=to_date, q=q)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/downloads/", status=status, from_date=from_date, to_date=to_date, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        from .models import ProductDownloadsResponse
-        schema = ProductDownloadsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getProductExportJobs")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductDownloadsResponse
+            schema = ProductDownloadsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createProductExportJob")
+                print(e)
 
         
 
@@ -1344,13 +1372,13 @@ class Catalog:
         """
         payload = {}
         
-        if filter:
+        if filter is not None:
             payload["filter"] = filter
         
-        if template_tag:
+        if template_tag is not None:
             payload["template_tag"] = template_tag
         
-        if item_type:
+        if item_type is not None:
             payload["item_type"] = item_type
         
 
@@ -1374,13 +1402,73 @@ class Catalog:
 
         
 
-        from .models import ProductConfigurationDownloads
-        schema = ProductConfigurationDownloads()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for listTemplateBrandTypeValues")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductConfigurationDownloads
+            schema = ProductConfigurationDownloads()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for listTemplateBrandTypeValues")
+                print(e)
+
+        
+
+        return response
+    
+    async def listCategories(self, level=None, departments=None, q=None, page_no=None, page_size=None):
+        """This API gets meta associated to product categories.
+        :param level : Get category for multiple levels : type string
+        :param departments : Get category for multiple departments filtered : type string
+        :param q : Get multiple categories filtered by search string : type string
+        :param page_no : The page number to navigate through the given set of results : type integer
+        :param page_size : Number of items to retrieve in each page. Default is 10. : type integer
+        """
+        payload = {}
+        
+        if level is not None:
+            payload["level"] = level
+        
+        if departments is not None:
+            payload["departments"] = departments
+        
+        if q is not None:
+            payload["q"] = q
+        
+        if page_no is not None:
+            payload["page_no"] = page_no
+        
+        if page_size is not None:
+            payload["page_size"] = page_size
+        
+
+        # Parameter validation
+        schema = CatalogValidator.listCategories()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"level","description":"Get category for multiple levels","schema":{"type":"string"},"required":false},{"in":"query","name":"departments","description":"Get category for multiple departments filtered","schema":{"type":"string"},"required":false},{"in":"query","name":"q","description":"Get multiple categories filtered by search string","schema":{"type":"string"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer","default":12},"required":false}],"query":[{"in":"query","name":"level","description":"Get category for multiple levels","schema":{"type":"string"},"required":false},{"in":"query","name":"departments","description":"Get category for multiple departments filtered","schema":{"type":"string"},"required":false},{"in":"query","name":"q","description":"Get multiple categories filtered by search string","schema":{"type":"string"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer","default":12},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}]}""", level=level, departments=departments, q=q, page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(level=level, departments=departments, q=q, page_no=page_no, page_size=page_size)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/", level=level, departments=departments, q=q, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CategoryResponse
+            schema = CategoryResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for listCategories")
+                print(e)
 
         
 
@@ -1417,51 +1505,36 @@ class Catalog:
 
         
 
-        from .models import CategoryCreateResponse
-        schema = CategoryCreateResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createCategories")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CategoryCreateResponse
+            schema = CategoryCreateResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createCategories")
+                print(e)
 
         
 
         return response
     
-    async def listCategories(self, level=None, departments=None, q=None, page_no=None, page_size=None):
+    async def getCategoryData(self, uid=None):
         """This API gets meta associated to product categories.
-        :param level : Get category for multiple levels : type string
-        :param departments : Get category for multiple departments filtered : type string
-        :param q : Get multiple categories filtered by search string : type string
-        :param page_no : The page number to navigate through the given set of results : type integer
-        :param page_size : Number of items to retrieve in each page. Default is 10. : type integer
+        :param uid : Category unique id : type string
         """
         payload = {}
         
-        if level:
-            payload["level"] = level
-        
-        if departments:
-            payload["departments"] = departments
-        
-        if q:
-            payload["q"] = q
-        
-        if page_no:
-            payload["page_no"] = page_no
-        
-        if page_size:
-            payload["page_size"] = page_size
+        if uid is not None:
+            payload["uid"] = uid
         
 
         # Parameter validation
-        schema = CatalogValidator.listCategories()
+        schema = CatalogValidator.getCategoryData()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"level","description":"Get category for multiple levels","schema":{"type":"string"},"required":false},{"in":"query","name":"departments","description":"Get category for multiple departments filtered","schema":{"type":"string"},"required":false},{"in":"query","name":"q","description":"Get multiple categories filtered by search string","schema":{"type":"string"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer","default":12},"required":false}],"query":[{"in":"query","name":"level","description":"Get category for multiple levels","schema":{"type":"string"},"required":false},{"in":"query","name":"departments","description":"Get category for multiple departments filtered","schema":{"type":"string"},"required":false},{"in":"query","name":"q","description":"Get multiple categories filtered by search string","schema":{"type":"string"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer","default":12},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}]}""", level=level, departments=departments, q=q, page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(level=level, departments=departments, q=q, page_no=page_no, page_size=page_size)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/{uid}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"uid","description":"Category unique id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"uid","description":"Category unique id","schema":{"type":"string"},"required":true}]}""", uid=uid)
+        query_string = await create_query_string(uid=uid)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -1471,17 +1544,18 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/", level=level, departments=departments, q=q, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/{uid}/", uid=uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
 
-        from .models import CategoryResponse
-        schema = CategoryResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for listCategories")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SingleCategoryResponse
+            schema = SingleCategoryResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCategoryData")
+                print(e)
 
         
 
@@ -1493,7 +1567,7 @@ class Catalog:
         """
         payload = {}
         
-        if uid:
+        if uid is not None:
             payload["uid"] = uid
         
 
@@ -1522,35 +1596,68 @@ class Catalog:
 
         
 
-        from .models import CategoryUpdateResponse
-        schema = CategoryUpdateResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateCategory")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CategoryUpdateResponse
+            schema = CategoryUpdateResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateCategory")
+                print(e)
 
         
 
         return response
     
-    async def getCategoryData(self, uid=None):
-        """This API gets meta associated to product categories.
-        :param uid : Category unique id : type string
+    async def getProducts(self, brand_ids=None, category_ids=None, item_ids=None, department_ids=None, item_code=None, q=None, tags=None, page_no=None, page_size=None):
+        """This API gets meta associated to products.
+        :param brand_ids : Get multiple products filtered by Brand Ids : type array
+        :param category_ids : Get multiple products filtered by Category Ids : type array
+        :param item_ids : Get multiple products filtered by Item Ids : type array
+        :param department_ids : Get multiple products filtered by Department Ids : type array
+        :param item_code : Get multiple products filtered by Item Code : type array
+        :param q : Get multiple products filtered by q string : type string
+        :param tags : Get multiple products filtered by tags : type array
+        :param page_no : The page number to navigate through the given set of results : type integer
+        :param page_size : Number of items to retrieve in each page. Default is 10. : type integer
         """
         payload = {}
         
-        if uid:
-            payload["uid"] = uid
+        if brand_ids is not None:
+            payload["brand_ids"] = brand_ids
+        
+        if category_ids is not None:
+            payload["category_ids"] = category_ids
+        
+        if item_ids is not None:
+            payload["item_ids"] = item_ids
+        
+        if department_ids is not None:
+            payload["department_ids"] = department_ids
+        
+        if item_code is not None:
+            payload["item_code"] = item_code
+        
+        if q is not None:
+            payload["q"] = q
+        
+        if tags is not None:
+            payload["tags"] = tags
+        
+        if page_no is not None:
+            payload["page_no"] = page_no
+        
+        if page_size is not None:
+            payload["page_size"] = page_size
         
 
         # Parameter validation
-        schema = CatalogValidator.getCategoryData()
+        schema = CatalogValidator.getProducts()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/{uid}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"uid","description":"Category unique id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"uid","description":"Category unique id","schema":{"type":"string"},"required":true}]}""", uid=uid)
-        query_string = await create_query_string(uid=uid)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/", """{"required":[{"in":"path","name":"company_id","description":"Get list of products filtered by company Id","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"brand_ids","description":"Get multiple products filtered by Brand Ids","schema":{"type":"array","items":{"type":"integer"}},"required":false},{"in":"query","name":"category_ids","description":"Get multiple products filtered by Category Ids","schema":{"type":"array","items":{"type":"integer"}},"required":false},{"in":"query","name":"item_ids","description":"Get multiple products filtered by Item Ids","schema":{"type":"array","items":{"type":"integer"}},"required":false},{"in":"query","name":"department_ids","description":"Get multiple products filtered by Department Ids","schema":{"type":"array","items":{"type":"integer"}},"required":false},{"in":"query","name":"item_code","description":"Get multiple products filtered by Item Code","schema":{"type":"array","items":{"type":"string"}},"required":false},{"in":"query","name":"q","description":"Get multiple products filtered by q string","schema":{"type":"string"},"required":false},{"in":"query","name":"tags","description":"Get multiple products filtered by tags","schema":{"type":"array","items":{"type":"string"}},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer","default":10},"required":false}],"query":[{"in":"query","name":"brand_ids","description":"Get multiple products filtered by Brand Ids","schema":{"type":"array","items":{"type":"integer"}},"required":false},{"in":"query","name":"category_ids","description":"Get multiple products filtered by Category Ids","schema":{"type":"array","items":{"type":"integer"}},"required":false},{"in":"query","name":"item_ids","description":"Get multiple products filtered by Item Ids","schema":{"type":"array","items":{"type":"integer"}},"required":false},{"in":"query","name":"department_ids","description":"Get multiple products filtered by Department Ids","schema":{"type":"array","items":{"type":"integer"}},"required":false},{"in":"query","name":"item_code","description":"Get multiple products filtered by Item Code","schema":{"type":"array","items":{"type":"string"}},"required":false},{"in":"query","name":"q","description":"Get multiple products filtered by q string","schema":{"type":"string"},"required":false},{"in":"query","name":"tags","description":"Get multiple products filtered by tags","schema":{"type":"array","items":{"type":"string"}},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer","default":10},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Get list of products filtered by company Id","schema":{"type":"integer"},"required":true}]}""", brand_ids=brand_ids, category_ids=category_ids, item_ids=item_ids, department_ids=department_ids, item_code=item_code, q=q, tags=tags, page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(brand_ids=brand_ids, category_ids=category_ids, item_ids=item_ids, department_ids=department_ids, item_code=item_code, q=q, tags=tags, page_no=page_no, page_size=page_size)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -1560,17 +1667,18 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/{uid}/", uid=uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/", brand_ids=brand_ids, category_ids=category_ids, item_ids=item_ids, department_ids=department_ids, item_code=item_code, q=q, tags=tags, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
 
-        from .models import SingleCategoryResponse
-        schema = SingleCategoryResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCategoryData")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductListingResponseV2
+            schema = ProductListingResponseV2()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProducts")
+                print(e)
 
         
 
@@ -1607,87 +1715,14 @@ class Catalog:
 
         
 
-        from .models import SuccessResponse
-        schema = SuccessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createProduct")
-            print(e)
-
-        
-
-        return response
-    
-    async def getProducts(self, brand_ids=None, category_ids=None, item_ids=None, department_ids=None, item_code=None, q=None, tags=None, page_no=None, page_size=None):
-        """This API gets meta associated to products.
-        :param brand_ids : Get multiple products filtered by Brand Ids : type array
-        :param category_ids : Get multiple products filtered by Category Ids : type array
-        :param item_ids : Get multiple products filtered by Item Ids : type array
-        :param department_ids : Get multiple products filtered by Department Ids : type array
-        :param item_code : Get multiple products filtered by Item Code : type array
-        :param q : Get multiple products filtered by q string : type string
-        :param tags : Get multiple products filtered by tags : type array
-        :param page_no : The page number to navigate through the given set of results : type integer
-        :param page_size : Number of items to retrieve in each page. Default is 10. : type integer
-        """
-        payload = {}
-        
-        if brand_ids:
-            payload["brand_ids"] = brand_ids
-        
-        if category_ids:
-            payload["category_ids"] = category_ids
-        
-        if item_ids:
-            payload["item_ids"] = item_ids
-        
-        if department_ids:
-            payload["department_ids"] = department_ids
-        
-        if item_code:
-            payload["item_code"] = item_code
-        
-        if q:
-            payload["q"] = q
-        
-        if tags:
-            payload["tags"] = tags
-        
-        if page_no:
-            payload["page_no"] = page_no
-        
-        if page_size:
-            payload["page_size"] = page_size
-        
-
-        # Parameter validation
-        schema = CatalogValidator.getProducts()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/", """{"required":[{"in":"path","name":"company_id","description":"Get list of products filtered by company Id","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"brand_ids","description":"Get multiple products filtered by Brand Ids","schema":{"type":"array","items":{"type":"integer"}},"required":false},{"in":"query","name":"category_ids","description":"Get multiple products filtered by Category Ids","schema":{"type":"array","items":{"type":"integer"}},"required":false},{"in":"query","name":"item_ids","description":"Get multiple products filtered by Item Ids","schema":{"type":"array","items":{"type":"integer"}},"required":false},{"in":"query","name":"department_ids","description":"Get multiple products filtered by Department Ids","schema":{"type":"array","items":{"type":"integer"}},"required":false},{"in":"query","name":"item_code","description":"Get multiple products filtered by Item Code","schema":{"type":"array","items":{"type":"string"}},"required":false},{"in":"query","name":"q","description":"Get multiple products filtered by q string","schema":{"type":"string"},"required":false},{"in":"query","name":"tags","description":"Get multiple products filtered by tags","schema":{"type":"array","items":{"type":"string"}},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer","default":10},"required":false}],"query":[{"in":"query","name":"brand_ids","description":"Get multiple products filtered by Brand Ids","schema":{"type":"array","items":{"type":"integer"}},"required":false},{"in":"query","name":"category_ids","description":"Get multiple products filtered by Category Ids","schema":{"type":"array","items":{"type":"integer"}},"required":false},{"in":"query","name":"item_ids","description":"Get multiple products filtered by Item Ids","schema":{"type":"array","items":{"type":"integer"}},"required":false},{"in":"query","name":"department_ids","description":"Get multiple products filtered by Department Ids","schema":{"type":"array","items":{"type":"integer"}},"required":false},{"in":"query","name":"item_code","description":"Get multiple products filtered by Item Code","schema":{"type":"array","items":{"type":"string"}},"required":false},{"in":"query","name":"q","description":"Get multiple products filtered by q string","schema":{"type":"string"},"required":false},{"in":"query","name":"tags","description":"Get multiple products filtered by tags","schema":{"type":"array","items":{"type":"string"}},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer","default":10},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Get list of products filtered by company Id","schema":{"type":"integer"},"required":true}]}""", brand_ids=brand_ids, category_ids=category_ids, item_ids=item_ids, department_ids=department_ids, item_code=item_code, q=q, tags=tags, page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(brand_ids=brand_ids, category_ids=category_ids, item_ids=item_ids, department_ids=department_ids, item_code=item_code, q=q, tags=tags, page_no=page_no, page_size=page_size)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/", brand_ids=brand_ids, category_ids=category_ids, item_ids=item_ids, department_ids=department_ids, item_code=item_code, q=q, tags=tags, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        from .models import ProductListingResponseV2
-        schema = ProductListingResponseV2()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getProducts")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse
+            schema = SuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createProduct")
+                print(e)
 
         
 
@@ -1702,16 +1737,16 @@ class Catalog:
         """
         payload = {}
         
-        if item_id:
+        if item_id is not None:
             payload["item_id"] = item_id
         
-        if variant_type:
+        if variant_type is not None:
             payload["variant_type"] = variant_type
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -1735,13 +1770,14 @@ class Catalog:
 
         
 
-        from .models import ProductVariantsResponse
-        schema = ProductVariantsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getVariantsOfProducts")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductVariantsResponse
+            schema = ProductVariantsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getVariantsOfProducts")
+                print(e)
 
         
 
@@ -1754,10 +1790,10 @@ class Catalog:
         """
         payload = {}
         
-        if category:
+        if category is not None:
             payload["category"] = category
         
-        if filter:
+        if filter is not None:
             payload["filter"] = filter
         
 
@@ -1781,13 +1817,108 @@ class Catalog:
 
         
 
-        from .models import ProductAttributesResponse
-        schema = ProductAttributesResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getProductAttributes")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductAttributesResponse
+            schema = ProductAttributesResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProductAttributes")
+                print(e)
+
+        
+
+        return response
+    
+    async def getProduct(self, item_id=None, brand_uid=None, item_code=None):
+        """This API helps to get data associated to a particular product.
+        :param item_id : Item Id of the product. : type integer
+        :param brand_uid : Brand Id of the product. : type integer
+        :param item_code : Item code of the product. : type string
+        """
+        payload = {}
+        
+        if item_id is not None:
+            payload["item_id"] = item_id
+        
+        if brand_uid is not None:
+            payload["brand_uid"] = brand_uid
+        
+        if item_code is not None:
+            payload["item_code"] = item_code
+        
+
+        # Parameter validation
+        schema = CatalogValidator.getProduct()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", """{"required":[{"in":"path","name":"company_id","description":"Company Id of the product.","schema":{"type":"integer"},"required":true},{"in":"path","name":"item_id","description":"Item Id of the product.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"brand_uid","description":"Brand Id of the product.","schema":{"type":"integer"},"required":false},{"in":"query","name":"item_code","description":"Item code of the product.","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"brand_uid","description":"Brand Id of the product.","schema":{"type":"integer"},"required":false},{"in":"query","name":"item_code","description":"Item code of the product.","schema":{"type":"string"},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of the product.","schema":{"type":"integer"},"required":true},{"in":"path","name":"item_id","description":"Item Id of the product.","schema":{"type":"integer"},"required":true}]}""", item_id=item_id, brand_uid=brand_uid, item_code=item_code)
+        query_string = await create_query_string(item_id=item_id, brand_uid=brand_uid, item_code=item_code)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id, brand_uid=brand_uid, item_code=item_code), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SingleProductResponse
+            schema = SingleProductResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProduct")
+                print(e)
+
+        
+
+        return response
+    
+    async def deleteProduct(self, item_id=None):
+        """This API allows to delete product.
+        :param item_id : Id of the product to be updated. : type integer
+        """
+        payload = {}
+        
+        if item_id is not None:
+            payload["item_id"] = item_id
+        
+
+        # Parameter validation
+        schema = CatalogValidator.deleteProduct()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", """{"required":[{"in":"path","name":"company_id","description":"Company Id of the company associated to product that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Id of the product to be updated.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of the company associated to product that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Id of the product to be updated.","schema":{"type":"integer"},"required":true}]}""", item_id=item_id)
+        query_string = await create_query_string(item_id=item_id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse
+            schema = SuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteProduct")
+                print(e)
 
         
 
@@ -1799,7 +1930,7 @@ class Catalog:
         """
         payload = {}
         
-        if item_id:
+        if item_id is not None:
             payload["item_id"] = item_id
         
 
@@ -1828,105 +1959,14 @@ class Catalog:
 
         
 
-        from .models import SuccessResponse
-        schema = SuccessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for editProduct")
-            print(e)
-
-        
-
-        return response
-    
-    async def getProduct(self, item_id=None, brand_uid=None, item_code=None):
-        """This API helps to get data associated to a particular product.
-        :param item_id : Item Id of the product. : type integer
-        :param brand_uid : Brand Id of the product. : type integer
-        :param item_code : Item code of the product. : type string
-        """
-        payload = {}
-        
-        if item_id:
-            payload["item_id"] = item_id
-        
-        if brand_uid:
-            payload["brand_uid"] = brand_uid
-        
-        if item_code:
-            payload["item_code"] = item_code
-        
-
-        # Parameter validation
-        schema = CatalogValidator.getProduct()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", """{"required":[{"in":"path","name":"company_id","description":"Company Id of the product.","schema":{"type":"integer"},"required":true},{"in":"path","name":"item_id","description":"Item Id of the product.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"brand_uid","description":"Brand Id of the product.","schema":{"type":"integer"},"required":false},{"in":"query","name":"item_code","description":"Item code of the product.","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"brand_uid","description":"Brand Id of the product.","schema":{"type":"integer"},"required":false},{"in":"query","name":"item_code","description":"Item code of the product.","schema":{"type":"string"},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of the product.","schema":{"type":"integer"},"required":true},{"in":"path","name":"item_id","description":"Item Id of the product.","schema":{"type":"integer"},"required":true}]}""", item_id=item_id, brand_uid=brand_uid, item_code=item_code)
-        query_string = await create_query_string(item_id=item_id, brand_uid=brand_uid, item_code=item_code)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id, brand_uid=brand_uid, item_code=item_code), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        from .models import SingleProductResponse
-        schema = SingleProductResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getProduct")
-            print(e)
-
-        
-
-        return response
-    
-    async def deleteProduct(self, item_id=None):
-        """This API allows to delete product.
-        :param item_id : Id of the product to be updated. : type integer
-        """
-        payload = {}
-        
-        if item_id:
-            payload["item_id"] = item_id
-        
-
-        # Parameter validation
-        schema = CatalogValidator.deleteProduct()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", """{"required":[{"in":"path","name":"company_id","description":"Company Id of the company associated to product that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Id of the product to be updated.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of the company associated to product that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Id of the product to be updated.","schema":{"type":"integer"},"required":true}]}""", item_id=item_id)
-        query_string = await create_query_string(item_id=item_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        from .models import SuccessResponse
-        schema = SuccessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteProduct")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse
+            schema = SuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for editProduct")
+                print(e)
 
         
 
@@ -1938,7 +1978,7 @@ class Catalog:
         """
         payload = {}
         
-        if item_id:
+        if item_id is not None:
             payload["item_id"] = item_id
         
 
@@ -1962,13 +2002,14 @@ class Catalog:
 
         
 
-        from .models import GetAllSizes
-        schema = GetAllSizes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for allSizes")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetAllSizes
+            schema = GetAllSizes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for allSizes")
+                print(e)
 
         
 
@@ -2000,13 +2041,14 @@ class Catalog:
 
         
 
-        from .models import ValidateProduct
-        schema = ValidateProduct()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getProductValidation")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ValidateProduct
+            schema = ValidateProduct()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProductValidation")
+                print(e)
 
         
 
@@ -2021,16 +2063,16 @@ class Catalog:
         """
         payload = {}
         
-        if item_code:
+        if item_code is not None:
             payload["item_code"] = item_code
         
-        if item_id:
+        if item_id is not None:
             payload["item_id"] = item_id
         
-        if brand_uid:
+        if brand_uid is not None:
             payload["brand_uid"] = brand_uid
         
-        if uid:
+        if uid is not None:
             payload["uid"] = uid
         
 
@@ -2054,13 +2096,65 @@ class Catalog:
 
         
 
-        from .models import ProductListingResponse
-        schema = ProductListingResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getProductSize")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductListingResponse
+            schema = ProductListingResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProductSize")
+                print(e)
+
+        
+
+        return response
+    
+    async def getProductBulkUploadHistory(self, search=None, page_no=None, page_size=None):
+        """This API helps to get bulk product upload jobs data.
+        :param search : Search string to filter the results by batch id : type string
+        :param page_no : The page number to navigate through the given set of results : type integer
+        :param page_size : Number of items to retrieve in each page. Default is 12. : type integer
+        """
+        payload = {}
+        
+        if search is not None:
+            payload["search"] = search
+        
+        if page_no is not None:
+            payload["page_no"] = page_no
+        
+        if page_size is not None:
+            payload["page_size"] = page_size
+        
+
+        # Parameter validation
+        schema = CatalogValidator.getProductBulkUploadHistory()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk", """{"required":[{"in":"path","name":"company_id","description":"Company Id of of which Product Bulk Upload History to be obtained.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"search","description":"Search string to filter the results by batch id","schema":{"type":"string"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 12.","schema":{"type":"integer","default":12},"required":false}],"query":[{"in":"query","name":"search","description":"Search string to filter the results by batch id","schema":{"type":"string"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 12.","schema":{"type":"integer","default":12},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of of which Product Bulk Upload History to be obtained.","schema":{"type":"integer"},"required":true}]}""", search=search, page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(search=search, page_no=page_no, page_size=page_size)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk", search=search, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductBulkRequestList
+            schema = ProductBulkRequestList()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProductBulkUploadHistory")
+                print(e)
 
         
 
@@ -2097,63 +2191,14 @@ class Catalog:
 
         
 
-        from .models import BulkResponse
-        schema = BulkResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createBulkProductUploadJob")
-            print(e)
-
-        
-
-        return response
-    
-    async def getProductBulkUploadHistory(self, search=None, page_no=None, page_size=None):
-        """This API helps to get bulk product upload jobs data.
-        :param search : Search string to filter the results by batch id : type string
-        :param page_no : The page number to navigate through the given set of results : type integer
-        :param page_size : Number of items to retrieve in each page. Default is 12. : type integer
-        """
-        payload = {}
-        
-        if search:
-            payload["search"] = search
-        
-        if page_no:
-            payload["page_no"] = page_no
-        
-        if page_size:
-            payload["page_size"] = page_size
-        
-
-        # Parameter validation
-        schema = CatalogValidator.getProductBulkUploadHistory()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk", """{"required":[{"in":"path","name":"company_id","description":"Company Id of of which Product Bulk Upload History to be obtained.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"search","description":"Search string to filter the results by batch id","schema":{"type":"string"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 12.","schema":{"type":"integer","default":12},"required":false}],"query":[{"in":"query","name":"search","description":"Search string to filter the results by batch id","schema":{"type":"string"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 12.","schema":{"type":"integer","default":12},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of of which Product Bulk Upload History to be obtained.","schema":{"type":"integer"},"required":true}]}""", search=search, page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(search=search, page_no=page_no, page_size=page_size)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk", search=search, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        from .models import ProductBulkRequestList
-        schema = ProductBulkRequestList()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getProductBulkUploadHistory")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BulkResponse
+            schema = BulkResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createBulkProductUploadJob")
+                print(e)
 
         
 
@@ -2166,10 +2211,10 @@ class Catalog:
         """
         payload = {}
         
-        if department:
+        if department is not None:
             payload["department"] = department
         
-        if product_type:
+        if product_type is not None:
             payload["product_type"] = product_type
         
 
@@ -2198,13 +2243,57 @@ class Catalog:
 
         
 
-        from .models import BulkResponse
-        schema = BulkResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for uploadBulkProducts")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BulkResponse
+            schema = BulkResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for uploadBulkProducts")
+                print(e)
+
+        
+
+        return response
+    
+    async def deleteProductBulkJob(self, batch_id=None):
+        """This API allows to delete bulk product job associated with company.
+        :param batch_id : Batch Id of the bulk product job to be deleted. : type integer
+        """
+        payload = {}
+        
+        if batch_id is not None:
+            payload["batch_id"] = batch_id
+        
+
+        # Parameter validation
+        schema = CatalogValidator.deleteProductBulkJob()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk/{batch_id}", """{"required":[{"in":"path","name":"company_id","description":"Company Id of the company associated to size that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"Batch Id of the bulk product job to be deleted.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of the company associated to size that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"Batch Id of the bulk product job to be deleted.","schema":{"type":"integer"},"required":true}]}""", batch_id=batch_id)
+        query_string = await create_query_string(batch_id=batch_id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk/{batch_id}", batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse
+            schema = SuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteProductBulkJob")
+                print(e)
 
         
 
@@ -2216,7 +2305,7 @@ class Catalog:
         """
         payload = {}
         
-        if batch_id:
+        if batch_id is not None:
             payload["batch_id"] = batch_id
         
 
@@ -2245,55 +2334,14 @@ class Catalog:
 
         
 
-        from .models import SuccessResponse
-        schema = SuccessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createProductsInBulk")
-            print(e)
-
-        
-
-        return response
-    
-    async def deleteProductBulkJob(self, batch_id=None):
-        """This API allows to delete bulk product job associated with company.
-        :param batch_id : Batch Id of the bulk product job to be deleted. : type integer
-        """
-        payload = {}
-        
-        if batch_id:
-            payload["batch_id"] = batch_id
-        
-
-        # Parameter validation
-        schema = CatalogValidator.deleteProductBulkJob()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk/{batch_id}", """{"required":[{"in":"path","name":"company_id","description":"Company Id of the company associated to size that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"Batch Id of the bulk product job to be deleted.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of the company associated to size that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"Batch Id of the bulk product job to be deleted.","schema":{"type":"integer"},"required":true}]}""", batch_id=batch_id)
-        query_string = await create_query_string(batch_id=batch_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk/{batch_id}", batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        from .models import SuccessResponse
-        schema = SuccessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteProductBulkJob")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse
+            schema = SuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createProductsInBulk")
+                print(e)
 
         
 
@@ -2325,13 +2373,61 @@ class Catalog:
 
         
 
-        from .models import ProductTagsViewResponse
-        schema = ProductTagsViewResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getProductTags")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductTagsViewResponse
+            schema = ProductTagsViewResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProductTags")
+                print(e)
+
+        
+
+        return response
+    
+    async def getProductAssetsInBulk(self, page_no=None, page_size=None):
+        """This API helps to get bulk asset jobs data associated to a particular company.
+        :param page_no : The page number to navigate through the given set of results : type integer
+        :param page_size : Number of items to retrieve in each page. Default is 12. : type integer
+        """
+        payload = {}
+        
+        if page_no is not None:
+            payload["page_no"] = page_no
+        
+        if page_size is not None:
+            payload["page_size"] = page_size
+        
+
+        # Parameter validation
+        schema = CatalogValidator.getProductAssetsInBulk()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/assets/bulk/", """{"required":[{"in":"path","name":"company_id","description":"Company Id of the product size.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 12.","schema":{"type":"integer","default":12},"required":false}],"query":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 12.","schema":{"type":"integer","default":12},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of the product size.","schema":{"type":"integer"},"required":true}]}""", page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/assets/bulk/", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BulkAssetResponse
+            schema = BulkAssetResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProductAssetsInBulk")
+                print(e)
 
         
 
@@ -2368,59 +2464,14 @@ class Catalog:
 
         
 
-        from .models import SuccessResponse
-        schema = SuccessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createProductAssetsInBulk")
-            print(e)
-
-        
-
-        return response
-    
-    async def getProductAssetsInBulk(self, page_no=None, page_size=None):
-        """This API helps to get bulk asset jobs data associated to a particular company.
-        :param page_no : The page number to navigate through the given set of results : type integer
-        :param page_size : Number of items to retrieve in each page. Default is 12. : type integer
-        """
-        payload = {}
-        
-        if page_no:
-            payload["page_no"] = page_no
-        
-        if page_size:
-            payload["page_size"] = page_size
-        
-
-        # Parameter validation
-        schema = CatalogValidator.getProductAssetsInBulk()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/assets/bulk/", """{"required":[{"in":"path","name":"company_id","description":"Company Id of the product size.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 12.","schema":{"type":"integer","default":12},"required":false}],"query":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 12.","schema":{"type":"integer","default":12},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of the product size.","schema":{"type":"integer"},"required":true}]}""", page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/assets/bulk/", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        from .models import BulkAssetResponse
-        schema = BulkAssetResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getProductAssetsInBulk")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse
+            schema = SuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createProductAssetsInBulk")
+                print(e)
 
         
 
@@ -2433,10 +2484,10 @@ class Catalog:
         """
         payload = {}
         
-        if item_id:
+        if item_id is not None:
             payload["item_id"] = item_id
         
-        if size:
+        if size is not None:
             payload["size"] = size
         
 
@@ -2460,13 +2511,77 @@ class Catalog:
 
         
 
-        from .models import ProductSizeDeleteResponse
-        schema = ProductSizeDeleteResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteSize")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductSizeDeleteResponse
+            schema = ProductSizeDeleteResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteSize")
+                print(e)
+
+        
+
+        return response
+    
+    async def getInventoryBySize(self, item_id=None, size=None, page_no=None, page_size=None, q=None, sellable=None):
+        """This API allows get Inventory data for particular company grouped by size and store.
+        :param item_id : Item code of the product of which size is to be get. : type integer
+        :param size : Size of which inventory is to get. : type string
+        :param page_no : The page number to navigate through the given set of results : type integer
+        :param page_size : Number of items to retrieve in each page. Default is 12. : type integer
+        :param q : Search with help of store code. : type string
+        :param sellable : Filter on whether product is in stock or not. : type boolean
+        """
+        payload = {}
+        
+        if item_id is not None:
+            payload["item_id"] = item_id
+        
+        if size is not None:
+            payload["size"] = size
+        
+        if page_no is not None:
+            payload["page_no"] = page_no
+        
+        if page_size is not None:
+            payload["page_size"] = page_size
+        
+        if q is not None:
+            payload["q"] = q
+        
+        if sellable is not None:
+            payload["sellable"] = sellable
+        
+
+        # Parameter validation
+        schema = CatalogValidator.getInventoryBySize()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/{size}", """{"required":[{"in":"path","name":"company_id","description":"Id of the company associated to product that is to be viewed.","schema":{"type":"integer"},"required":true},{"in":"path","name":"item_id","description":"Item code of the product of which size is to be get.","schema":{"type":"integer"},"required":true},{"in":"path","name":"size","description":"Size of which inventory is to get.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 12.","schema":{"type":"integer","default":12},"required":false},{"in":"query","name":"q","description":"Search with help of store code.","schema":{"type":"string"},"required":false},{"in":"query","name":"sellable","description":"Filter on whether product is in stock or not.","schema":{"type":"boolean","default":false},"required":false}],"query":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 12.","schema":{"type":"integer","default":12},"required":false},{"in":"query","name":"q","description":"Search with help of store code.","schema":{"type":"string"},"required":false},{"in":"query","name":"sellable","description":"Filter on whether product is in stock or not.","schema":{"type":"boolean","default":false},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company associated to product that is to be viewed.","schema":{"type":"integer"},"required":true},{"in":"path","name":"item_id","description":"Item code of the product of which size is to be get.","schema":{"type":"integer"},"required":true},{"in":"path","name":"size","description":"Size of which inventory is to get.","schema":{"type":"string"},"required":true}]}""", item_id=item_id, size=size, page_no=page_no, page_size=page_size, q=q, sellable=sellable)
+        query_string = await create_query_string(item_id=item_id, size=size, page_no=page_no, page_size=page_size, q=q, sellable=sellable)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/{size}", item_id=item_id, size=size, page_no=page_no, page_size=page_size, q=q, sellable=sellable), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import InventoryResponsePaginated
+            schema = InventoryResponsePaginated()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getInventoryBySize")
+                print(e)
 
         
 
@@ -2479,10 +2594,10 @@ class Catalog:
         """
         payload = {}
         
-        if item_id:
+        if item_id is not None:
             payload["item_id"] = item_id
         
-        if size:
+        if size is not None:
             payload["size"] = size
         
 
@@ -2511,75 +2626,14 @@ class Catalog:
 
         
 
-        from .models import SuccessResponse
-        schema = SuccessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for addInventory")
-            print(e)
-
-        
-
-        return response
-    
-    async def getInventoryBySize(self, item_id=None, size=None, page_no=None, page_size=None, q=None, sellable=None):
-        """This API allows get Inventory data for particular company grouped by size and store.
-        :param item_id : Item code of the product of which size is to be get. : type integer
-        :param size : Size of which inventory is to get. : type string
-        :param page_no : The page number to navigate through the given set of results : type integer
-        :param page_size : Number of items to retrieve in each page. Default is 12. : type integer
-        :param q : Search with help of store code. : type string
-        :param sellable : Filter on whether product is in stock or not. : type boolean
-        """
-        payload = {}
-        
-        if item_id:
-            payload["item_id"] = item_id
-        
-        if size:
-            payload["size"] = size
-        
-        if page_no:
-            payload["page_no"] = page_no
-        
-        if page_size:
-            payload["page_size"] = page_size
-        
-        if q:
-            payload["q"] = q
-        
-        if sellable:
-            payload["sellable"] = sellable
-        
-
-        # Parameter validation
-        schema = CatalogValidator.getInventoryBySize()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/{size}", """{"required":[{"in":"path","name":"company_id","description":"Id of the company associated to product that is to be viewed.","schema":{"type":"integer"},"required":true},{"in":"path","name":"item_id","description":"Item code of the product of which size is to be get.","schema":{"type":"integer"},"required":true},{"in":"path","name":"size","description":"Size of which inventory is to get.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 12.","schema":{"type":"integer","default":12},"required":false},{"in":"query","name":"q","description":"Search with help of store code.","schema":{"type":"string"},"required":false},{"in":"query","name":"sellable","description":"Filter on whether product is in stock or not.","schema":{"type":"boolean","default":false},"required":false}],"query":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 12.","schema":{"type":"integer","default":12},"required":false},{"in":"query","name":"q","description":"Search with help of store code.","schema":{"type":"string"},"required":false},{"in":"query","name":"sellable","description":"Filter on whether product is in stock or not.","schema":{"type":"boolean","default":false},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company associated to product that is to be viewed.","schema":{"type":"integer"},"required":true},{"in":"path","name":"item_id","description":"Item code of the product of which size is to be get.","schema":{"type":"integer"},"required":true},{"in":"path","name":"size","description":"Size of which inventory is to get.","schema":{"type":"string"},"required":true}]}""", item_id=item_id, size=size, page_no=page_no, page_size=page_size, q=q, sellable=sellable)
-        query_string = await create_query_string(item_id=item_id, size=size, page_no=page_no, page_size=page_size, q=q, sellable=sellable)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/{size}", item_id=item_id, size=size, page_no=page_no, page_size=page_size, q=q, sellable=sellable), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        from .models import InventoryResponsePaginated
-        schema = InventoryResponsePaginated()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getInventoryBySize")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse
+            schema = SuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for addInventory")
+                print(e)
 
         
 
@@ -2596,22 +2650,22 @@ class Catalog:
         """
         payload = {}
         
-        if item_id:
+        if item_id is not None:
             payload["item_id"] = item_id
         
-        if size_identifier:
+        if size_identifier is not None:
             payload["size_identifier"] = size_identifier
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
-        if location_ids:
+        if location_ids is not None:
             payload["location_ids"] = location_ids
         
 
@@ -2635,13 +2689,14 @@ class Catalog:
 
         
 
-        from .models import InventorySellerIdentifierResponsePaginated
-        schema = InventorySellerIdentifierResponsePaginated()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getInventoryBySizeIdentifier")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import InventorySellerIdentifierResponsePaginated
+            schema = InventorySellerIdentifierResponsePaginated()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getInventoryBySizeIdentifier")
+                print(e)
 
         
 
@@ -2660,28 +2715,28 @@ class Catalog:
         """
         payload = {}
         
-        if item_id:
+        if item_id is not None:
             payload["item_id"] = item_id
         
-        if size:
+        if size is not None:
             payload["size"] = size
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
-        if sellable:
+        if sellable is not None:
             payload["sellable"] = sellable
         
-        if store_ids:
+        if store_ids is not None:
             payload["store_ids"] = store_ids
         
-        if size_identifier:
+        if size_identifier is not None:
             payload["size_identifier"] = size_identifier
         
 
@@ -2705,13 +2760,14 @@ class Catalog:
 
         
 
-        from .models import GetInventoriesResponse
-        schema = GetInventoriesResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getInventories")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetInventoriesResponse
+            schema = GetInventoriesResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getInventories")
+                print(e)
 
         
 
@@ -2725,13 +2781,13 @@ class Catalog:
         """
         payload = {}
         
-        if size:
+        if size is not None:
             payload["size"] = size
         
-        if item_id:
+        if item_id is not None:
             payload["item_id"] = item_id
         
-        if location_id:
+        if location_id is not None:
             payload["location_id"] = location_id
         
 
@@ -2755,13 +2811,61 @@ class Catalog:
 
         
 
-        from .models import SuccessResponse
-        schema = SuccessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteInventory")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse
+            schema = SuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteInventory")
+                print(e)
+
+        
+
+        return response
+    
+    async def getInventoryBulkUploadHistory(self, page_no=None, page_size=None):
+        """This API helps to get bulk Inventory upload jobs data.
+        :param page_no : The page number to navigate through the given set of results : type integer
+        :param page_size : Number of items to retrieve in each page. Default is 12. : type integer
+        """
+        payload = {}
+        
+        if page_no is not None:
+            payload["page_no"] = page_no
+        
+        if page_size is not None:
+            payload["page_size"] = page_size
+        
+
+        # Parameter validation
+        schema = CatalogValidator.getInventoryBulkUploadHistory()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/", """{"required":[{"in":"path","name":"company_id","description":"Company Id of of which Inventory Bulk Upload History to be obtained.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 12.","schema":{"type":"integer","default":12},"required":false}],"query":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 12.","schema":{"type":"integer","default":12},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of of which Inventory Bulk Upload History to be obtained.","schema":{"type":"integer"},"required":true}]}""", page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BulkInventoryGet
+            schema = BulkInventoryGet()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getInventoryBulkUploadHistory")
+                print(e)
 
         
 
@@ -2798,39 +2902,36 @@ class Catalog:
 
         
 
-        from .models import BulkResponse
-        schema = BulkResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createBulkInventoryJob")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BulkResponse
+            schema = BulkResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createBulkInventoryJob")
+                print(e)
 
         
 
         return response
     
-    async def getInventoryBulkUploadHistory(self, page_no=None, page_size=None):
-        """This API helps to get bulk Inventory upload jobs data.
-        :param page_no : The page number to navigate through the given set of results : type integer
-        :param page_size : Number of items to retrieve in each page. Default is 12. : type integer
+    async def deleteBulkInventoryJob(self, batch_id=None):
+        """This API allows to delete bulk Inventory job associated with company.
+        :param batch_id : Batch Id of the bulk delete job. : type string
         """
         payload = {}
         
-        if page_no:
-            payload["page_no"] = page_no
-        
-        if page_size:
-            payload["page_size"] = page_size
+        if batch_id is not None:
+            payload["batch_id"] = batch_id
         
 
         # Parameter validation
-        schema = CatalogValidator.getInventoryBulkUploadHistory()
+        schema = CatalogValidator.deleteBulkInventoryJob()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/", """{"required":[{"in":"path","name":"company_id","description":"Company Id of of which Inventory Bulk Upload History to be obtained.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 12.","schema":{"type":"integer","default":12},"required":false}],"query":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 12.","schema":{"type":"integer","default":12},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of of which Inventory Bulk Upload History to be obtained.","schema":{"type":"integer"},"required":true}]}""", page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/{batch_id}/", """{"required":[{"in":"path","name":"company_id","description":"Company Id of the company of which bulk Inventory job is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"Batch Id of the bulk delete job.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of the company of which bulk Inventory job is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"Batch Id of the bulk delete job.","schema":{"type":"string"},"required":true}]}""", batch_id=batch_id)
+        query_string = await create_query_string(batch_id=batch_id)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -2840,17 +2941,18 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/{batch_id}/", batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
 
-        from .models import BulkInventoryGet
-        schema = BulkInventoryGet()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getInventoryBulkUploadHistory")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse
+            schema = SuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteBulkInventoryJob")
+                print(e)
 
         
 
@@ -2862,7 +2964,7 @@ class Catalog:
         """
         payload = {}
         
-        if batch_id:
+        if batch_id is not None:
             payload["batch_id"] = batch_id
         
 
@@ -2891,35 +2993,32 @@ class Catalog:
 
         
 
-        from .models import SuccessResponse
-        schema = SuccessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createBulkInventory")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse
+            schema = SuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createBulkInventory")
+                print(e)
 
         
 
         return response
     
-    async def deleteBulkInventoryJob(self, batch_id=None):
-        """This API allows to delete bulk Inventory job associated with company.
-        :param batch_id : Batch Id of the bulk delete job. : type string
+    async def getInventoryExport(self, ):
+        """This API helps to get Inventory export history.
         """
         payload = {}
         
-        if batch_id:
-            payload["batch_id"] = batch_id
-        
 
         # Parameter validation
-        schema = CatalogValidator.deleteBulkInventoryJob()
+        schema = CatalogValidator.getInventoryExport()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/{batch_id}/", """{"required":[{"in":"path","name":"company_id","description":"Company Id of the company of which bulk Inventory job is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"Batch Id of the bulk delete job.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of the company of which bulk Inventory job is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"Batch Id of the bulk delete job.","schema":{"type":"string"},"required":true}]}""", batch_id=batch_id)
-        query_string = await create_query_string(batch_id=batch_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/download/", """{"required":[{"in":"path","name":"company_id","description":"Company Id in which assets to be uploaded.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id in which assets to be uploaded.","schema":{"type":"integer"},"required":true}]}""", )
+        query_string = await create_query_string()
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -2929,17 +3028,18 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/{batch_id}/", batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/download/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
 
-        from .models import SuccessResponse
-        schema = SuccessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteBulkInventoryJob")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import InventoryExportJob
+            schema = InventoryExportJob()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getInventoryExport")
+                print(e)
 
         
 
@@ -2976,31 +3076,48 @@ class Catalog:
 
         
 
-        from .models import InventoryExportResponse
-        schema = InventoryExportResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createInventoryExportJob")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import InventoryExportResponse
+            schema = InventoryExportResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createInventoryExportJob")
+                print(e)
 
         
 
         return response
     
-    async def getInventoryExport(self, ):
-        """This API helps to get Inventory export history.
+    async def listInventoryExport(self, status=None, from_date=None, to_date=None, q=None):
+        """This API helps you the get the history of inventory jobs depending on the filtered criteria.
+        :param status : Status of the export job. : type string
+        :param from_date : Inventory export history filtered according to from_date. : type string
+        :param to_date : Inventory export history filtered according to from_date. : type string
+        :param q : Inventory export history filtered according to task ID. : type string
         """
         payload = {}
         
+        if status is not None:
+            payload["status"] = status
+        
+        if from_date is not None:
+            payload["from_date"] = from_date
+        
+        if to_date is not None:
+            payload["to_date"] = to_date
+        
+        if q is not None:
+            payload["q"] = q
+        
 
         # Parameter validation
-        schema = CatalogValidator.getInventoryExport()
+        schema = CatalogValidator.listInventoryExport()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/download/", """{"required":[{"in":"path","name":"company_id","description":"Company Id in which assets to be uploaded.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id in which assets to be uploaded.","schema":{"type":"integer"},"required":true}]}""", )
-        query_string = await create_query_string()
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/inventory/download/", """{"required":[{"in":"path","name":"company_id","description":"It is the unique identifier of the company.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"status","description":"Status of the export job.","schema":{"type":"string"},"required":false},{"in":"query","name":"from_date","description":"Inventory export history filtered according to from_date.","schema":{"type":"string"},"required":false},{"in":"query","name":"to_date","description":"Inventory export history filtered according to from_date.","schema":{"type":"string"},"required":false},{"in":"query","name":"q","description":"Inventory export history filtered according to task ID.","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"status","description":"Status of the export job.","schema":{"type":"string"},"required":false},{"in":"query","name":"from_date","description":"Inventory export history filtered according to from_date.","schema":{"type":"string"},"required":false},{"in":"query","name":"to_date","description":"Inventory export history filtered according to from_date.","schema":{"type":"string"},"required":false},{"in":"query","name":"q","description":"Inventory export history filtered according to task ID.","schema":{"type":"string"},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"It is the unique identifier of the company.","schema":{"type":"integer"},"required":true}]}""", status=status, from_date=from_date, to_date=to_date, q=q)
+        query_string = await create_query_string(status=status, from_date=from_date, to_date=to_date, q=q)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -3010,17 +3127,18 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/download/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/inventory/download/", status=status, from_date=from_date, to_date=to_date, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
 
-        from .models import InventoryExportJob
-        schema = InventoryExportJob()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getInventoryExport")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import InventoryExportJobListResponse
+            schema = InventoryExportJobListResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for listInventoryExport")
+                print(e)
 
         
 
@@ -3057,67 +3175,14 @@ class Catalog:
 
         
 
-        from .models import InventoryExportResponse
-        schema = InventoryExportResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createInventoryExport")
-            print(e)
-
-        
-
-        return response
-    
-    async def listInventoryExport(self, status=None, from_date=None, to_date=None, q=None):
-        """This API helps you the get the history of inventory jobs depending on the filtered criteria.
-        :param status : Status of the export job. : type string
-        :param from_date : Inventory export history filtered according to from_date. : type string
-        :param to_date : Inventory export history filtered according to from_date. : type string
-        :param q : Inventory export history filtered according to task ID. : type string
-        """
-        payload = {}
-        
-        if status:
-            payload["status"] = status
-        
-        if from_date:
-            payload["from_date"] = from_date
-        
-        if to_date:
-            payload["to_date"] = to_date
-        
-        if q:
-            payload["q"] = q
-        
-
-        # Parameter validation
-        schema = CatalogValidator.listInventoryExport()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/inventory/download/", """{"required":[{"in":"path","name":"company_id","description":"It is the unique identifier of the company.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"status","description":"Status of the export job.","schema":{"type":"string"},"required":false},{"in":"query","name":"from_date","description":"Inventory export history filtered according to from_date.","schema":{"type":"string"},"required":false},{"in":"query","name":"to_date","description":"Inventory export history filtered according to from_date.","schema":{"type":"string"},"required":false},{"in":"query","name":"q","description":"Inventory export history filtered according to task ID.","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"status","description":"Status of the export job.","schema":{"type":"string"},"required":false},{"in":"query","name":"from_date","description":"Inventory export history filtered according to from_date.","schema":{"type":"string"},"required":false},{"in":"query","name":"to_date","description":"Inventory export history filtered according to from_date.","schema":{"type":"string"},"required":false},{"in":"query","name":"q","description":"Inventory export history filtered according to task ID.","schema":{"type":"string"},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"It is the unique identifier of the company.","schema":{"type":"integer"},"required":true}]}""", status=status, from_date=from_date, to_date=to_date, q=q)
-        query_string = await create_query_string(status=status, from_date=from_date, to_date=to_date, q=q)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/inventory/download/", status=status, from_date=from_date, to_date=to_date, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        from .models import InventoryExportJobListResponse
-        schema = InventoryExportJobListResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for listInventoryExport")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import InventoryExportResponse
+            schema = InventoryExportResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createInventoryExport")
+                print(e)
 
         
 
@@ -3129,7 +3194,7 @@ class Catalog:
         """
         payload = {}
         
-        if filter_type:
+        if filter_type is not None:
             payload["filter_type"] = filter_type
         
 
@@ -3153,64 +3218,14 @@ class Catalog:
 
         
 
-        from .models import InventoryConfig
-        schema = InventoryConfig()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for exportInventoryConfig")
-            print(e)
-
-        
-
-        return response
-    
-    async def updateRealtimeInventory(self, item_id=None, seller_identifier=None, body=""):
-        """This API allows add Inventory for particular size and store.
-        :param item_id : Item code of the product of which size is to be get. : type integer
-        :param seller_identifier : Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get. : type string
-        """
-        payload = {}
-        
-        if item_id:
-            payload["item_id"] = item_id
-        
-        if seller_identifier:
-            payload["seller_identifier"] = seller_identifier
-        
-
-        # Parameter validation
-        schema = CatalogValidator.updateRealtimeInventory()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import InventoryRequestSchemaV2
-        schema = InventoryRequestSchemaV2()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/inventory/{seller_identifier}/", """{"required":[{"in":"path","name":"company_id","description":"Id of the company associated to product that is to be viewed.","schema":{"type":"integer"},"required":true},{"in":"path","name":"item_id","description":"Item code of the product of which size is to be get.","schema":{"type":"integer"},"required":true},{"in":"path","name":"seller_identifier","description":"Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company associated to product that is to be viewed.","schema":{"type":"integer"},"required":true},{"in":"path","name":"item_id","description":"Item code of the product of which size is to be get.","schema":{"type":"integer"},"required":true},{"in":"path","name":"seller_identifier","description":"Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get.","schema":{"type":"string"},"required":true}]}""", item_id=item_id, seller_identifier=seller_identifier)
-        query_string = await create_query_string(item_id=item_id, seller_identifier=seller_identifier)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/inventory/{seller_identifier}/", item_id=item_id, seller_identifier=seller_identifier), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        
-
-        from .models import InventoryUpdateResponse
-        schema = InventoryUpdateResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateRealtimeInventory")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import InventoryConfig
+            schema = InventoryConfig()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for exportInventoryConfig")
+                print(e)
 
         
 
@@ -3223,10 +3238,10 @@ class Catalog:
         """
         payload = {}
         
-        if item_id:
+        if item_id is not None:
             payload["item_id"] = item_id
         
-        if seller_identifier:
+        if seller_identifier is not None:
             payload["seller_identifier"] = seller_identifier
         
 
@@ -3255,13 +3270,66 @@ class Catalog:
 
         
 
-        from .models import InventoryUpdateResponse
-        schema = InventoryUpdateResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteRealtimeInventory")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import InventoryUpdateResponse
+            schema = InventoryUpdateResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteRealtimeInventory")
+                print(e)
+
+        
+
+        return response
+    
+    async def updateRealtimeInventory(self, item_id=None, seller_identifier=None, body=""):
+        """This API allows add Inventory for particular size and store.
+        :param item_id : Item code of the product of which size is to be get. : type integer
+        :param seller_identifier : Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get. : type string
+        """
+        payload = {}
+        
+        if item_id is not None:
+            payload["item_id"] = item_id
+        
+        if seller_identifier is not None:
+            payload["seller_identifier"] = seller_identifier
+        
+
+        # Parameter validation
+        schema = CatalogValidator.updateRealtimeInventory()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import InventoryRequestSchemaV2
+        schema = InventoryRequestSchemaV2()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/inventory/{seller_identifier}/", """{"required":[{"in":"path","name":"company_id","description":"Id of the company associated to product that is to be viewed.","schema":{"type":"integer"},"required":true},{"in":"path","name":"item_id","description":"Item code of the product of which size is to be get.","schema":{"type":"integer"},"required":true},{"in":"path","name":"seller_identifier","description":"Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company associated to product that is to be viewed.","schema":{"type":"integer"},"required":true},{"in":"path","name":"item_id","description":"Item code of the product of which size is to be get.","schema":{"type":"integer"},"required":true},{"in":"path","name":"seller_identifier","description":"Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get.","schema":{"type":"string"},"required":true}]}""", item_id=item_id, seller_identifier=seller_identifier)
+        query_string = await create_query_string(item_id=item_id, seller_identifier=seller_identifier)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/inventory/{seller_identifier}/", item_id=item_id, seller_identifier=seller_identifier), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import InventoryUpdateResponse
+            schema = InventoryUpdateResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateRealtimeInventory")
+                print(e)
 
         
 
@@ -3298,13 +3366,57 @@ class Catalog:
 
         
 
-        from .models import InventoryUpdateResponse
-        schema = InventoryUpdateResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateInventories")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import InventoryUpdateResponse
+            schema = InventoryUpdateResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateInventories")
+                print(e)
+
+        
+
+        return response
+    
+    async def getHsnCode(self, id=None):
+        """Fetch Hsn Code.
+        :param id : Unique id : type string
+        """
+        payload = {}
+        
+        if id is not None:
+            payload["id"] = id
+        
+
+        # Parameter validation
+        schema = CatalogValidator.getHsnCode()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/hsn/{id}/", """{"required":[{"in":"path","name":"company_id","description":"company id","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"Unique id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"company id","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"Unique id","schema":{"type":"string"},"required":true}]}""", id=id)
+        query_string = await create_query_string(id=id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/hsn/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import HsnCode
+            schema = HsnCode()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getHsnCode")
+                print(e)
 
         
 
@@ -3316,7 +3428,7 @@ class Catalog:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -3345,55 +3457,14 @@ class Catalog:
 
         
 
-        from .models import HsnCode
-        schema = HsnCode()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateHsnCode")
-            print(e)
-
-        
-
-        return response
-    
-    async def getHsnCode(self, id=None):
-        """Fetch Hsn Code.
-        :param id : Unique id : type string
-        """
-        payload = {}
-        
-        if id:
-            payload["id"] = id
-        
-
-        # Parameter validation
-        schema = CatalogValidator.getHsnCode()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/hsn/{id}/", """{"required":[{"in":"path","name":"company_id","description":"company id","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"Unique id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"company id","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"Unique id","schema":{"type":"string"},"required":true}]}""", id=id)
-        query_string = await create_query_string(id=id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/hsn/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        from .models import HsnCode
-        schema = HsnCode()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getHsnCode")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import HsnCode
+            schema = HsnCode()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateHsnCode")
+                print(e)
 
         
 
@@ -3430,13 +3501,14 @@ class Catalog:
 
         
 
-        from .models import BulkHsnResponse
-        schema = BulkHsnResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for bulkHsnCode")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BulkHsnResponse
+            schema = BulkHsnResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for bulkHsnCode")
+                print(e)
 
         
 
@@ -3451,16 +3523,16 @@ class Catalog:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
-        if type:
+        if type is not None:
             payload["type"] = type
         
 
@@ -3484,13 +3556,14 @@ class Catalog:
 
         
 
-        from .models import HsnCodesListingResponseSchemaV2
-        schema = HsnCodesListingResponseSchemaV2()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAllProductHsnCodes")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import HsnCodesListingResponseSchemaV2
+            schema = HsnCodesListingResponseSchemaV2()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAllProductHsnCodes")
+                print(e)
 
         
 
@@ -3502,7 +3575,7 @@ class Catalog:
         """
         payload = {}
         
-        if reporting_hsn:
+        if reporting_hsn is not None:
             payload["reporting_hsn"] = reporting_hsn
         
 
@@ -3526,13 +3599,14 @@ class Catalog:
 
         
 
-        from .models import HSNDataInsertV2
-        schema = HSNDataInsertV2()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getSingleProductHSNCode")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import HSNDataInsertV2
+            schema = HSNDataInsertV2()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSingleProductHSNCode")
+                print(e)
 
         
 
@@ -3569,13 +3643,14 @@ class Catalog:
 
         
 
-        from .models import StoreAssignResponse
-        schema = StoreAssignResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getOptimalLocations")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import StoreAssignResponse
+            schema = StoreAssignResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getOptimalLocations")
+                print(e)
 
         
 

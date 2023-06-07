@@ -19,10 +19,10 @@ class Communication:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -46,13 +46,14 @@ class Communication:
 
         
 
-        from .models import SystemNotifications
-        schema = SystemNotifications()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getSystemNotifications")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SystemNotifications
+            schema = SystemNotifications()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSystemNotifications")
+                print(e)
 
         
 

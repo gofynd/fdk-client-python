@@ -20,13 +20,13 @@ class Partner:
         """
         payload = {}
         
-        if entity:
+        if entity is not None:
             payload["entity"] = entity
         
-        if extension_id:
+        if extension_id is not None:
             payload["extension_id"] = extension_id
         
-        if entity_id:
+        if entity_id is not None:
             payload["entity_id"] = entity_id
         
 
@@ -55,13 +55,14 @@ class Partner:
 
         
 
-        from .models import SubscriptionRes
-        schema = SubscriptionRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for subscribeExtension")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SubscriptionRes
+            schema = SubscriptionRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for subscribeExtension")
+                print(e)
 
         
 
@@ -78,22 +79,22 @@ class Partner:
         """
         payload = {}
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if tag:
+        if tag is not None:
             payload["tag"] = tag
         
-        if current_page:
+        if current_page is not None:
             payload["current_page"] = current_page
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if filter_by:
+        if filter_by is not None:
             payload["filter_by"] = filter_by
         
-        if query:
+        if query is not None:
             payload["query"] = query
         
 
@@ -117,13 +118,14 @@ class Partner:
 
         
 
-        from .models import ExtensionList
-        schema = ExtensionList()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getExtensionsForCompany")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ExtensionList
+            schema = ExtensionList()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getExtensionsForCompany")
+                print(e)
 
         
 
@@ -135,7 +137,7 @@ class Partner:
         """
         payload = {}
         
-        if extension_id:
+        if extension_id is not None:
             payload["extension_id"] = extension_id
         
 
@@ -159,13 +161,14 @@ class Partner:
 
         
 
-        from .models import PublicExtension
-        schema = PublicExtension()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getPublicExtension")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PublicExtension
+            schema = PublicExtension()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPublicExtension")
+                print(e)
 
         
 
@@ -177,7 +180,7 @@ class Partner:
         """
         payload = {}
         
-        if extension_id:
+        if extension_id is not None:
             payload["extension_id"] = extension_id
         
 
@@ -201,13 +204,14 @@ class Partner:
 
         
 
-        from .models import ExtensionCommon
-        schema = ExtensionCommon()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getExtensionById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ExtensionCommon
+            schema = ExtensionCommon()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getExtensionById")
+                print(e)
 
         
 
@@ -221,13 +225,13 @@ class Partner:
         """
         payload = {}
         
-        if extension_id:
+        if extension_id is not None:
             payload["extension_id"] = extension_id
         
-        if message:
+        if message is not None:
             payload["message"] = message
         
-        if uninstall_reason_type:
+        if uninstall_reason_type is not None:
             payload["uninstall_reason_type"] = uninstall_reason_type
         
 
@@ -251,13 +255,14 @@ class Partner:
 
         
 
-        from .models import UninstallExtension
-        schema = UninstallExtension()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteExtensionById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UninstallExtension
+            schema = UninstallExtension()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteExtensionById")
+                print(e)
 
         
 
@@ -271,13 +276,13 @@ class Partner:
         """
         payload = {}
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if query:
+        if query is not None:
             payload["query"] = query
         
 
@@ -301,13 +306,14 @@ class Partner:
 
         
 
-        from .models import ExtensionResponse
-        schema = ExtensionResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getPrivateExtensions")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ExtensionResponse
+            schema = ExtensionResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPrivateExtensions")
+                print(e)
 
         
 
@@ -319,7 +325,7 @@ class Partner:
         """
         payload = {}
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -343,13 +349,14 @@ class Partner:
 
         
 
-        from .models import ExtensionSuggestionList
-        schema = ExtensionSuggestionList()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getExtensionsSuggestions")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ExtensionSuggestionList
+            schema = ExtensionSuggestionList()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getExtensionsSuggestions")
+                print(e)
 
         
 
@@ -363,13 +370,13 @@ class Partner:
         """
         payload = {}
         
-        if request_status:
+        if request_status is not None:
             payload["request_status"] = request_status
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
 
@@ -393,13 +400,14 @@ class Partner:
 
         
 
-        from .models import PartnerRequestList
-        schema = PartnerRequestList()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getPartnerInvites")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PartnerRequestList
+            schema = PartnerRequestList()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPartnerInvites")
+                print(e)
 
         
 
@@ -411,7 +419,7 @@ class Partner:
         """
         payload = {}
         
-        if invite_id:
+        if invite_id is not None:
             payload["invite_id"] = invite_id
         
 
@@ -435,13 +443,14 @@ class Partner:
 
         
 
-        from .models import PartnerInviteDetails
-        schema = PartnerInviteDetails()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getPartnerRequestDetails")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PartnerInviteDetails
+            schema = PartnerInviteDetails()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPartnerRequestDetails")
+                print(e)
 
         
 
@@ -453,7 +462,7 @@ class Partner:
         """
         payload = {}
         
-        if invite_id:
+        if invite_id is not None:
             payload["invite_id"] = invite_id
         
 
@@ -482,13 +491,14 @@ class Partner:
 
         
 
-        from .models import PartnerInviteDetails
-        schema = PartnerInviteDetails()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for modifyPartnerRequest")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PartnerInviteDetails
+            schema = PartnerInviteDetails()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for modifyPartnerRequest")
+                print(e)
 
         
 
@@ -500,7 +510,7 @@ class Partner:
         """
         payload = {}
         
-        if request_id:
+        if request_id is not None:
             payload["request_id"] = request_id
         
 
@@ -524,13 +534,14 @@ class Partner:
 
         
 
-        from .models import SetupProductRes
-        schema = SetupProductRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for setupProducts")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SetupProductRes
+            schema = SetupProductRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for setupProducts")
+                print(e)
 
         
 

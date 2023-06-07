@@ -21,13 +21,13 @@ class User:
         """
         payload = {}
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
 
@@ -51,13 +51,14 @@ class User:
 
         
 
-        from .models import CustomerListResponseSchema
-        schema = CustomerListResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCustomers")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CustomerListResponseSchema
+            schema = CustomerListResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCustomers")
+                print(e)
 
         
 
@@ -69,7 +70,7 @@ class User:
         """
         payload = {}
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
 
@@ -93,13 +94,14 @@ class User:
 
         
 
-        from .models import UserSearchResponseSchema
-        schema = UserSearchResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for searchUsers")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UserSearchResponseSchema
+            schema = UserSearchResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for searchUsers")
+                print(e)
 
         
 
@@ -136,13 +138,14 @@ class User:
 
         
 
-        from .models import CreateUserResponseSchema
-        schema = CreateUserResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createUser")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateUserResponseSchema
+            schema = CreateUserResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createUser")
+                print(e)
 
         
 
@@ -179,13 +182,14 @@ class User:
 
         
 
-        from .models import BlockUserSuccess
-        schema = BlockUserSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for blockOrUnblockUsers")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BlockUserSuccess
+            schema = BlockUserSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for blockOrUnblockUsers")
+                print(e)
 
         
 
@@ -222,13 +226,14 @@ class User:
 
         
 
-        from .models import ArchiveUserSuccess
-        schema = ArchiveUserSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for archiveUser")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ArchiveUserSuccess
+            schema = ArchiveUserSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for archiveUser")
+                print(e)
 
         
 
@@ -265,13 +270,14 @@ class User:
 
         
 
-        from .models import UnDeleteUserSuccess
-        schema = UnDeleteUserSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for unDeleteUser")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UnDeleteUserSuccess
+            schema = UnDeleteUserSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for unDeleteUser")
+                print(e)
 
         
 
@@ -283,7 +289,7 @@ class User:
         """
         payload = {}
         
-        if user_id:
+        if user_id is not None:
             payload["user_id"] = user_id
         
 
@@ -312,13 +318,14 @@ class User:
 
         
 
-        from .models import CreateUserResponseSchema
-        schema = CreateUserResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateUser")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateUserResponseSchema
+            schema = CreateUserResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateUser")
+                print(e)
 
         
 
@@ -355,13 +362,14 @@ class User:
 
         
 
-        from .models import CreateUserSessionResponseSchema
-        schema = CreateUserSessionResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createUserSession")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateUserSessionResponseSchema
+            schema = CreateUserSessionResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createUserSession")
+                print(e)
 
         
 
@@ -375,13 +383,13 @@ class User:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
-        if session_id:
+        if session_id is not None:
             payload["session_id"] = session_id
         
-        if reason:
+        if reason is not None:
             payload["reason"] = reason
         
 
@@ -405,13 +413,14 @@ class User:
 
         
 
-        from .models import SessionDeleteResponseSchema
-        schema = SessionDeleteResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteSession")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SessionDeleteResponseSchema
+            schema = SessionDeleteResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteSession")
+                print(e)
 
         
 
@@ -423,7 +432,7 @@ class User:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -447,13 +456,14 @@ class User:
 
         
 
-        from .models import SessionListResponseSchema
-        schema = SessionListResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getActiveSessions")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SessionListResponseSchema
+            schema = SessionListResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getActiveSessions")
+                print(e)
 
         
 
@@ -466,10 +476,10 @@ class User:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
-        if reason:
+        if reason is not None:
             payload["reason"] = reason
         
 
@@ -493,13 +503,14 @@ class User:
 
         
 
-        from .models import SessionDeleteResponseSchema
-        schema = SessionDeleteResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteActiveSessions")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SessionDeleteResponseSchema
+            schema = SessionDeleteResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteActiveSessions")
+                print(e)
 
         
 
@@ -531,13 +542,14 @@ class User:
 
         
 
-        from .models import PlatformSchema
-        schema = PlatformSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getPlatformConfig")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PlatformSchema
+            schema = PlatformSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPlatformConfig")
+                print(e)
 
         
 
@@ -574,13 +586,14 @@ class User:
 
         
 
-        from .models import PlatformSchema
-        schema = PlatformSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updatePlatformConfig")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PlatformSchema
+            schema = PlatformSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updatePlatformConfig")
+                print(e)
 
         
 
@@ -617,13 +630,14 @@ class User:
 
         
 
-        from .models import UserGroupResponseSchema
-        schema = UserGroupResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createUserGroup")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UserGroupResponseSchema
+            schema = UserGroupResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createUserGroup")
+                print(e)
 
         
 
@@ -639,19 +653,19 @@ class User:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if name:
+        if name is not None:
             payload["name"] = name
         
-        if status:
+        if status is not None:
             payload["status"] = status
         
-        if group_uid:
+        if group_uid is not None:
             payload["group_uid"] = group_uid
         
 
@@ -675,13 +689,14 @@ class User:
 
         
 
-        from .models import UserGroupListResponseSchema
-        schema = UserGroupListResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getUserGroups")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UserGroupListResponseSchema
+            schema = UserGroupListResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getUserGroups")
+                print(e)
 
         
 
@@ -693,7 +708,7 @@ class User:
         """
         payload = {}
         
-        if group_id:
+        if group_id is not None:
             payload["group_id"] = group_id
         
 
@@ -722,13 +737,14 @@ class User:
 
         
 
-        from .models import UserGroupResponseSchema
-        schema = UserGroupResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateUserGroup")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UserGroupResponseSchema
+            schema = UserGroupResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateUserGroup")
+                print(e)
 
         
 
@@ -740,7 +756,7 @@ class User:
         """
         payload = {}
         
-        if group_id:
+        if group_id is not None:
             payload["group_id"] = group_id
         
 
@@ -764,13 +780,14 @@ class User:
 
         
 
-        from .models import UserGroupResponseSchema
-        schema = UserGroupResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getUserGroupById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UserGroupResponseSchema
+            schema = UserGroupResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getUserGroupById")
+                print(e)
 
         
 

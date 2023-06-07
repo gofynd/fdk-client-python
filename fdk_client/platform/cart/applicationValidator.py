@@ -75,6 +75,14 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
+        
+        
+    
+    
+        
         
     
     
@@ -96,10 +104,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
-        
-        
         
         
         
@@ -110,12 +114,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-        
-        
-        
-        
-    
-    
         
         
         
@@ -130,6 +128,12 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
+        
+    
+    
+        
+        
     
     
         
@@ -138,6 +142,10 @@ from ..PlatformModel import BaseSchema
     
     
         
+        
+        
+    
+    
         
         
 
@@ -275,6 +283,15 @@ class CartValidator:
         application_id = fields.Str(required=False)
         
         id = fields.Str(required=False)
+         
+        
+    
+    class getPromosCouponConfig(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
          
         
     
@@ -426,6 +443,15 @@ class CartValidator:
         application_id = fields.Str(required=False)
         
         code = fields.Str(required=False)
+         
+        
+    
+    class overrideCart(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
          
         
     

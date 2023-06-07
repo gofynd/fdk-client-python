@@ -26,31 +26,31 @@ class Discount:
         """
         payload = {}
         
-        if view:
+        if view is not None:
             payload["view"] = view
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if archived:
+        if archived is not None:
             payload["archived"] = archived
         
-        if month:
+        if month is not None:
             payload["month"] = month
         
-        if year:
+        if year is not None:
             payload["year"] = year
         
-        if type:
+        if type is not None:
             payload["type"] = type
         
-        if app_ids:
+        if app_ids is not None:
             payload["app_ids"] = app_ids
         
 
@@ -74,13 +74,14 @@ class Discount:
 
         
 
-        from .models import ListOrCalender
-        schema = ListOrCalender()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getDiscounts")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ListOrCalender
+            schema = ListOrCalender()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getDiscounts")
+                print(e)
 
         
 
@@ -117,13 +118,14 @@ class Discount:
 
         
 
-        from .models import DiscountJob
-        schema = DiscountJob()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createDiscount")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DiscountJob
+            schema = DiscountJob()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createDiscount")
+                print(e)
 
         
 
@@ -135,7 +137,7 @@ class Discount:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -159,13 +161,14 @@ class Discount:
 
         
 
-        from .models import DiscountJob
-        schema = DiscountJob()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getDiscount")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DiscountJob
+            schema = DiscountJob()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getDiscount")
+                print(e)
 
         
 
@@ -177,7 +180,7 @@ class Discount:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -206,13 +209,14 @@ class Discount:
 
         
 
-        from .models import DiscountJob
-        schema = DiscountJob()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateDiscount")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DiscountJob
+            schema = DiscountJob()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateDiscount")
+                print(e)
 
         
 
@@ -224,7 +228,7 @@ class Discount:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -261,7 +265,7 @@ class Discount:
         """
         payload = {}
         
-        if discount:
+        if discount is not None:
             payload["discount"] = discount
         
 
@@ -290,13 +294,14 @@ class Discount:
 
         
 
-        from .models import FileJobResponse
-        schema = FileJobResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for validateDiscountFile")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import FileJobResponse
+            schema = FileJobResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for validateDiscountFile")
+                print(e)
 
         
 
@@ -308,7 +313,7 @@ class Discount:
         """
         payload = {}
         
-        if type:
+        if type is not None:
             payload["type"] = type
         
 
@@ -337,13 +342,14 @@ class Discount:
 
         
 
-        from .models import FileJobResponse
-        schema = FileJobResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for downloadDiscountFile")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import FileJobResponse
+            schema = FileJobResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for downloadDiscountFile")
+                print(e)
 
         
 
@@ -355,7 +361,7 @@ class Discount:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -379,13 +385,14 @@ class Discount:
 
         
 
-        from .models import FileJobResponse
-        schema = FileJobResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getValidationJob")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import FileJobResponse
+            schema = FileJobResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getValidationJob")
+                print(e)
 
         
 
@@ -397,7 +404,7 @@ class Discount:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -421,13 +428,14 @@ class Discount:
 
         
 
-        from .models import CancelJobResponse
-        schema = CancelJobResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for cancelValidationJob")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CancelJobResponse
+            schema = CancelJobResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for cancelValidationJob")
+                print(e)
 
         
 
@@ -439,7 +447,7 @@ class Discount:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -463,13 +471,14 @@ class Discount:
 
         
 
-        from .models import FileJobResponse
-        schema = FileJobResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getDownloadJob")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import FileJobResponse
+            schema = FileJobResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getDownloadJob")
+                print(e)
 
         
 
@@ -481,7 +490,7 @@ class Discount:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -505,13 +514,14 @@ class Discount:
 
         
 
-        from .models import CancelJobResponse
-        schema = CancelJobResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for cancelDownloadJob")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CancelJobResponse
+            schema = CancelJobResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for cancelDownloadJob")
+                print(e)
 
         
 

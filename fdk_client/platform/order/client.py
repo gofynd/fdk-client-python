@@ -41,76 +41,76 @@ class Order:
         """
         payload = {}
         
-        if lane:
+        if lane is not None:
             payload["lane"] = lane
         
-        if bag_status:
+        if bag_status is not None:
             payload["bag_status"] = bag_status
         
-        if status_override_lane:
+        if status_override_lane is not None:
             payload["status_override_lane"] = status_override_lane
         
-        if search_type:
+        if search_type is not None:
             payload["search_type"] = search_type
         
-        if search_value:
+        if search_value is not None:
             payload["search_value"] = search_value
         
-        if search_id:
+        if search_id is not None:
             payload["search_id"] = search_id
         
-        if from_date:
+        if from_date is not None:
             payload["from_date"] = from_date
         
-        if to_date:
+        if to_date is not None:
             payload["to_date"] = to_date
         
-        if dp_ids:
+        if dp_ids is not None:
             payload["dp_ids"] = dp_ids
         
-        if ordering_company_id:
+        if ordering_company_id is not None:
             payload["ordering_company_id"] = ordering_company_id
         
-        if stores:
+        if stores is not None:
             payload["stores"] = stores
         
-        if sales_channel:
+        if sales_channel is not None:
             payload["sales_channel"] = sales_channel
         
-        if request_by_ext:
+        if request_by_ext is not None:
             payload["request_by_ext"] = request_by_ext
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if is_priority_sort:
+        if is_priority_sort is not None:
             payload["is_priority_sort"] = is_priority_sort
         
-        if fetch_active_shipment:
+        if fetch_active_shipment is not None:
             payload["fetch_active_shipment"] = fetch_active_shipment
         
-        if exclude_locked_shipments:
+        if exclude_locked_shipments is not None:
             payload["exclude_locked_shipments"] = exclude_locked_shipments
         
-        if payment_methods:
+        if payment_methods is not None:
             payload["payment_methods"] = payment_methods
         
-        if channel_shipment_id:
+        if channel_shipment_id is not None:
             payload["channel_shipment_id"] = channel_shipment_id
         
-        if channel_order_id:
+        if channel_order_id is not None:
             payload["channel_order_id"] = channel_order_id
         
-        if custom_meta:
+        if custom_meta is not None:
             payload["custom_meta"] = custom_meta
         
-        if ordering_channel:
+        if ordering_channel is not None:
             payload["ordering_channel"] = ordering_channel
         
-        if company_affiliate_tag:
+        if company_affiliate_tag is not None:
             payload["company_affiliate_tag"] = company_affiliate_tag
         
 
@@ -134,13 +134,14 @@ class Order:
 
         
 
-        from .models import ShipmentInternalPlatformViewResponse
-        schema = ShipmentInternalPlatformViewResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getShipments")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ShipmentInternalPlatformViewResponse
+            schema = ShipmentInternalPlatformViewResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getShipments")
+                print(e)
 
         
 
@@ -155,16 +156,16 @@ class Order:
         """
         payload = {}
         
-        if channel_shipment_id:
+        if channel_shipment_id is not None:
             payload["channel_shipment_id"] = channel_shipment_id
         
-        if shipment_id:
+        if shipment_id is not None:
             payload["shipment_id"] = shipment_id
         
-        if ordering_company_id:
+        if ordering_company_id is not None:
             payload["ordering_company_id"] = ordering_company_id
         
-        if request_by_ext:
+        if request_by_ext is not None:
             payload["request_by_ext"] = request_by_ext
         
 
@@ -188,13 +189,14 @@ class Order:
 
         
 
-        from .models import ShipmentInfoResponse
-        schema = ShipmentInfoResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getShipmentById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ShipmentInfoResponse
+            schema = ShipmentInfoResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getShipmentById")
+                print(e)
 
         
 
@@ -206,7 +208,7 @@ class Order:
         """
         payload = {}
         
-        if order_id:
+        if order_id is not None:
             payload["order_id"] = order_id
         
 
@@ -230,13 +232,14 @@ class Order:
 
         
 
-        from .models import ShipmentDetailsResponse
-        schema = ShipmentDetailsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getOrderById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ShipmentDetailsResponse
+            schema = ShipmentDetailsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getOrderById")
+                print(e)
 
         
 
@@ -256,31 +259,31 @@ class Order:
         """
         payload = {}
         
-        if super_lane:
+        if super_lane is not None:
             payload["super_lane"] = super_lane
         
-        if group_entity:
+        if group_entity is not None:
             payload["group_entity"] = group_entity
         
-        if from_date:
+        if from_date is not None:
             payload["from_date"] = from_date
         
-        if to_date:
+        if to_date is not None:
             payload["to_date"] = to_date
         
-        if dp_ids:
+        if dp_ids is not None:
             payload["dp_ids"] = dp_ids
         
-        if stores:
+        if stores is not None:
             payload["stores"] = stores
         
-        if sales_channel:
+        if sales_channel is not None:
             payload["sales_channel"] = sales_channel
         
-        if payment_mode:
+        if payment_mode is not None:
             payload["payment_mode"] = payment_mode
         
-        if bag_status:
+        if bag_status is not None:
             payload["bag_status"] = bag_status
         
 
@@ -304,13 +307,14 @@ class Order:
 
         
 
-        from .models import LaneConfigResponse
-        schema = LaneConfigResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getLaneConfig")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import LaneConfigResponse
+            schema = LaneConfigResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getLaneConfig")
+                print(e)
 
         
 
@@ -337,52 +341,52 @@ class Order:
         """
         payload = {}
         
-        if lane:
+        if lane is not None:
             payload["lane"] = lane
         
-        if search_type:
+        if search_type is not None:
             payload["search_type"] = search_type
         
-        if bag_status:
+        if bag_status is not None:
             payload["bag_status"] = bag_status
         
-        if time_to_dispatch:
+        if time_to_dispatch is not None:
             payload["time_to_dispatch"] = time_to_dispatch
         
-        if payment_methods:
+        if payment_methods is not None:
             payload["payment_methods"] = payment_methods
         
-        if tags:
+        if tags is not None:
             payload["tags"] = tags
         
-        if search_value:
+        if search_value is not None:
             payload["search_value"] = search_value
         
-        if from_date:
+        if from_date is not None:
             payload["from_date"] = from_date
         
-        if to_date:
+        if to_date is not None:
             payload["to_date"] = to_date
         
-        if dp_ids:
+        if dp_ids is not None:
             payload["dp_ids"] = dp_ids
         
-        if stores:
+        if stores is not None:
             payload["stores"] = stores
         
-        if sales_channels:
+        if sales_channels is not None:
             payload["sales_channels"] = sales_channels
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if is_priority_sort:
+        if is_priority_sort is not None:
             payload["is_priority_sort"] = is_priority_sort
         
-        if custom_meta:
+        if custom_meta is not None:
             payload["custom_meta"] = custom_meta
         
 
@@ -406,13 +410,14 @@ class Order:
 
         
 
-        from .models import OrderListingResponse
-        schema = OrderListingResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getOrders")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OrderListingResponse
+            schema = OrderListingResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getOrders")
+                print(e)
 
         
 
@@ -425,10 +430,10 @@ class Order:
         """
         payload = {}
         
-        if from_date:
+        if from_date is not None:
             payload["from_date"] = from_date
         
-        if to_date:
+        if to_date is not None:
             payload["to_date"] = to_date
         
 
@@ -452,13 +457,14 @@ class Order:
 
         
 
-        from .models import MetricCountResponse
-        schema = MetricCountResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getMetricCount")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import MetricCountResponse
+            schema = MetricCountResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getMetricCount")
+                print(e)
 
         
 
@@ -471,10 +477,10 @@ class Order:
         """
         payload = {}
         
-        if view:
+        if view is not None:
             payload["view"] = view
         
-        if group_entity:
+        if group_entity is not None:
             payload["group_entity"] = group_entity
         
 
@@ -498,13 +504,14 @@ class Order:
 
         
 
-        from .models import FiltersResponse
-        schema = FiltersResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getfilters")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import FiltersResponse
+            schema = FiltersResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getfilters")
+                print(e)
 
         
 
@@ -517,10 +524,10 @@ class Order:
         """
         payload = {}
         
-        if from_date:
+        if from_date is not None:
             payload["from_date"] = from_date
         
-        if to_date:
+        if to_date is not None:
             payload["to_date"] = to_date
         
 
@@ -544,13 +551,14 @@ class Order:
 
         
 
-        from .models import Success
-        schema = Success()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createShipmentReport")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Success
+            schema = Success()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createShipmentReport")
+                print(e)
 
         
 
@@ -563,10 +571,10 @@ class Order:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -590,13 +598,14 @@ class Order:
 
         
 
-        from .models import OmsReports
-        schema = OmsReports()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getReportsShipmentListing")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OmsReports
+            schema = OmsReports()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getReportsShipmentListing")
+                print(e)
 
         
 
@@ -633,13 +642,14 @@ class Order:
 
         
 
-        from .models import JioCodeUpsertResponse
-        schema = JioCodeUpsertResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for upsertJioCode")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import JioCodeUpsertResponse
+            schema = JioCodeUpsertResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for upsertJioCode")
+                print(e)
 
         
 
@@ -652,10 +662,10 @@ class Order:
         """
         payload = {}
         
-        if batch_id:
+        if batch_id is not None:
             payload["batch_id"] = batch_id
         
-        if doc_type:
+        if doc_type is not None:
             payload["doc_type"] = doc_type
         
 
@@ -679,13 +689,14 @@ class Order:
 
         
 
-        from .models import BulkInvoicingResponse
-        schema = BulkInvoicingResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getBulkInvoice")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BulkInvoicingResponse
+            schema = BulkInvoicingResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getBulkInvoice")
+                print(e)
 
         
 
@@ -697,7 +708,7 @@ class Order:
         """
         payload = {}
         
-        if batch_id:
+        if batch_id is not None:
             payload["batch_id"] = batch_id
         
 
@@ -721,13 +732,14 @@ class Order:
 
         
 
-        from .models import BulkInvoiceLabelResponse
-        schema = BulkInvoiceLabelResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getBulkInvoiceLabel")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BulkInvoiceLabelResponse
+            schema = BulkInvoiceLabelResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getBulkInvoiceLabel")
+                print(e)
 
         
 
@@ -752,46 +764,46 @@ class Order:
         """
         payload = {}
         
-        if lane:
+        if lane is not None:
             payload["lane"] = lane
         
-        if search_type:
+        if search_type is not None:
             payload["search_type"] = search_type
         
-        if search_id:
+        if search_id is not None:
             payload["search_id"] = search_id
         
-        if from_date:
+        if from_date is not None:
             payload["from_date"] = from_date
         
-        if to_date:
+        if to_date is not None:
             payload["to_date"] = to_date
         
-        if dp_ids:
+        if dp_ids is not None:
             payload["dp_ids"] = dp_ids
         
-        if ordering_company_id:
+        if ordering_company_id is not None:
             payload["ordering_company_id"] = ordering_company_id
         
-        if stores:
+        if stores is not None:
             payload["stores"] = stores
         
-        if sales_channel:
+        if sales_channel is not None:
             payload["sales_channel"] = sales_channel
         
-        if request_by_ext:
+        if request_by_ext is not None:
             payload["request_by_ext"] = request_by_ext
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if customer_id:
+        if customer_id is not None:
             payload["customer_id"] = customer_id
         
-        if is_priority_sort:
+        if is_priority_sort is not None:
             payload["is_priority_sort"] = is_priority_sort
         
 
@@ -815,13 +827,14 @@ class Order:
 
         
 
-        from .models import FileResponse
-        schema = FileResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getBulkShipmentExcelFile")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import FileResponse
+            schema = FileResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getBulkShipmentExcelFile")
+                print(e)
 
         
 
@@ -846,46 +859,46 @@ class Order:
         """
         payload = {}
         
-        if lane:
+        if lane is not None:
             payload["lane"] = lane
         
-        if search_type:
+        if search_type is not None:
             payload["search_type"] = search_type
         
-        if search_id:
+        if search_id is not None:
             payload["search_id"] = search_id
         
-        if from_date:
+        if from_date is not None:
             payload["from_date"] = from_date
         
-        if to_date:
+        if to_date is not None:
             payload["to_date"] = to_date
         
-        if dp_ids:
+        if dp_ids is not None:
             payload["dp_ids"] = dp_ids
         
-        if ordering_company_id:
+        if ordering_company_id is not None:
             payload["ordering_company_id"] = ordering_company_id
         
-        if stores:
+        if stores is not None:
             payload["stores"] = stores
         
-        if sales_channel:
+        if sales_channel is not None:
             payload["sales_channel"] = sales_channel
         
-        if request_by_ext:
+        if request_by_ext is not None:
             payload["request_by_ext"] = request_by_ext
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if customer_id:
+        if customer_id is not None:
             payload["customer_id"] = customer_id
         
-        if is_priority_sort:
+        if is_priority_sort is not None:
             payload["is_priority_sort"] = is_priority_sort
         
 
@@ -909,13 +922,14 @@ class Order:
 
         
 
-        from .models import BulkListingResponse
-        schema = BulkListingResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getBulkList")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BulkListingResponse
+            schema = BulkListingResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getBulkList")
+                print(e)
 
         
 
@@ -928,10 +942,10 @@ class Order:
         """
         payload = {}
         
-        if batch_id:
+        if batch_id is not None:
             payload["batch_id"] = batch_id
         
-        if report_type:
+        if report_type is not None:
             payload["report_type"] = report_type
         
 
@@ -955,13 +969,14 @@ class Order:
 
         
 
-        from .models import FileResponse
-        schema = FileResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getBulkActionFailedReport")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import FileResponse
+            schema = FileResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getBulkActionFailedReport")
+                print(e)
 
         
 
@@ -975,13 +990,13 @@ class Order:
         """
         payload = {}
         
-        if shipment_id:
+        if shipment_id is not None:
             payload["shipment_id"] = shipment_id
         
-        if bag_id:
+        if bag_id is not None:
             payload["bag_id"] = bag_id
         
-        if state:
+        if state is not None:
             payload["state"] = state
         
 
@@ -1005,13 +1020,14 @@ class Order:
 
         
 
-        from .models import PlatformShipmentReasonsResponse
-        schema = PlatformShipmentReasonsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getShipmentReasons")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PlatformShipmentReasonsResponse
+            schema = PlatformShipmentReasonsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getShipmentReasons")
+                print(e)
 
         
 
@@ -1048,13 +1064,14 @@ class Order:
 
         
 
-        from .models import BulkActionResponse
-        schema = BulkActionResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for bulkActionProcessXlsxFile")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BulkActionResponse
+            schema = BulkActionResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for bulkActionProcessXlsxFile")
+                print(e)
 
         
 
@@ -1066,7 +1083,7 @@ class Order:
         """
         payload = {}
         
-        if batch_id:
+        if batch_id is not None:
             payload["batch_id"] = batch_id
         
 
@@ -1090,13 +1107,14 @@ class Order:
 
         
 
-        from .models import BulkActionDetailsResponse
-        schema = BulkActionDetailsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for bulkActionDetails")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BulkActionDetailsResponse
+            schema = BulkActionDetailsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for bulkActionDetails")
+                print(e)
 
         
 
@@ -1110,13 +1128,13 @@ class Order:
         """
         payload = {}
         
-        if bag_id:
+        if bag_id is not None:
             payload["bag_id"] = bag_id
         
-        if channel_bag_id:
+        if channel_bag_id is not None:
             payload["channel_bag_id"] = channel_bag_id
         
-        if channel_id:
+        if channel_id is not None:
             payload["channel_id"] = channel_id
         
 
@@ -1140,13 +1158,14 @@ class Order:
 
         
 
-        from .models import BagDetailsPlatformResponse
-        schema = BagDetailsPlatformResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getBagById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BagDetailsPlatformResponse
+            schema = BagDetailsPlatformResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getBagById")
+                print(e)
 
         
 
@@ -1166,31 +1185,31 @@ class Order:
         """
         payload = {}
         
-        if bag_ids:
+        if bag_ids is not None:
             payload["bag_ids"] = bag_ids
         
-        if shipment_ids:
+        if shipment_ids is not None:
             payload["shipment_ids"] = shipment_ids
         
-        if order_ids:
+        if order_ids is not None:
             payload["order_ids"] = order_ids
         
-        if channel_bag_ids:
+        if channel_bag_ids is not None:
             payload["channel_bag_ids"] = channel_bag_ids
         
-        if channel_shipment_ids:
+        if channel_shipment_ids is not None:
             payload["channel_shipment_ids"] = channel_shipment_ids
         
-        if channel_order_ids:
+        if channel_order_ids is not None:
             payload["channel_order_ids"] = channel_order_ids
         
-        if channel_id:
+        if channel_id is not None:
             payload["channel_id"] = channel_id
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -1214,13 +1233,14 @@ class Order:
 
         
 
-        from .models import GetBagsPlatformResponse
-        schema = GetBagsPlatformResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getBags")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetBagsPlatformResponse
+            schema = GetBagsPlatformResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getBags")
+                print(e)
 
         
 
@@ -1257,13 +1277,14 @@ class Order:
 
         
 
-        from .models import InvalidateShipmentCacheResponse
-        schema = InvalidateShipmentCacheResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for invalidateShipmentCache")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import InvalidateShipmentCacheResponse
+            schema = InvalidateShipmentCacheResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for invalidateShipmentCache")
+                print(e)
 
         
 
@@ -1300,13 +1321,14 @@ class Order:
 
         
 
-        from .models import StoreReassignResponse
-        schema = StoreReassignResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for reassignLocation")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import StoreReassignResponse
+            schema = StoreReassignResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for reassignLocation")
+                print(e)
 
         
 
@@ -1343,13 +1365,14 @@ class Order:
 
         
 
-        from .models import UpdateShipmentLockResponse
-        schema = UpdateShipmentLockResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateShipmentLock")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UpdateShipmentLockResponse
+            schema = UpdateShipmentLockResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateShipmentLock")
+                print(e)
 
         
 
@@ -1361,7 +1384,7 @@ class Order:
         """
         payload = {}
         
-        if date:
+        if date is not None:
             payload["date"] = date
         
 
@@ -1385,13 +1408,14 @@ class Order:
 
         
 
-        from .models import AnnouncementsResponse
-        schema = AnnouncementsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAnnouncements")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AnnouncementsResponse
+            schema = AnnouncementsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAnnouncements")
+                print(e)
 
         
 
@@ -1414,40 +1438,40 @@ class Order:
         """
         payload = {}
         
-        if shipment_id:
+        if shipment_id is not None:
             payload["shipment_id"] = shipment_id
         
-        if name:
+        if name is not None:
             payload["name"] = name
         
-        if address:
+        if address is not None:
             payload["address"] = address
         
-        if address_type:
+        if address_type is not None:
             payload["address_type"] = address_type
         
-        if pincode:
+        if pincode is not None:
             payload["pincode"] = pincode
         
-        if phone:
+        if phone is not None:
             payload["phone"] = phone
         
-        if email:
+        if email is not None:
             payload["email"] = email
         
-        if landmark:
+        if landmark is not None:
             payload["landmark"] = landmark
         
-        if address_category:
+        if address_category is not None:
             payload["address_category"] = address_category
         
-        if city:
+        if city is not None:
             payload["city"] = city
         
-        if state:
+        if state is not None:
             payload["state"] = state
         
-        if country:
+        if country is not None:
             payload["country"] = country
         
 
@@ -1471,13 +1495,14 @@ class Order:
 
         
 
-        from .models import BaseResponse
-        schema = BaseResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateAddress")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BaseResponse
+            schema = BaseResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateAddress")
+                print(e)
 
         
 
@@ -1493,19 +1518,19 @@ class Order:
         """
         payload = {}
         
-        if caller:
+        if caller is not None:
             payload["caller"] = caller
         
-        if receiver:
+        if receiver is not None:
             payload["receiver"] = receiver
         
-        if bag_id:
+        if bag_id is not None:
             payload["bag_id"] = bag_id
         
-        if caller_id:
+        if caller_id is not None:
             payload["caller_id"] = caller_id
         
-        if method:
+        if method is not None:
             payload["method"] = method
         
 
@@ -1529,13 +1554,14 @@ class Order:
 
         
 
-        from .models import Click2CallResponse
-        schema = Click2CallResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for click2Call")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Click2CallResponse
+            schema = Click2CallResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for click2Call")
+                print(e)
 
         
 
@@ -1572,13 +1598,14 @@ class Order:
 
         
 
-        from .models import UpdateShipmentStatusResponseBody
-        schema = UpdateShipmentStatusResponseBody()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateShipmentStatus")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UpdateShipmentStatusResponseBody
+            schema = UpdateShipmentStatusResponseBody()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateShipmentStatus")
+                print(e)
 
         
 
@@ -1615,13 +1642,14 @@ class Order:
 
         
 
-        from .models import CreateOrderResponse
-        schema = CreateOrderResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for processManifest")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateOrderResponse
+            schema = CreateOrderResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for processManifest")
+                print(e)
 
         
 
@@ -1658,13 +1686,14 @@ class Order:
 
         
 
-        from .models import SuccessResponse
-        schema = SuccessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for dispatchManifest")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse
+            schema = SuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for dispatchManifest")
+                print(e)
 
         
 
@@ -1696,13 +1725,14 @@ class Order:
 
         
 
-        from .models import GetActionsResponse
-        schema = GetActionsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getRoleBasedActions")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetActionsResponse
+            schema = GetActionsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getRoleBasedActions")
+                print(e)
 
         
 
@@ -1739,13 +1769,14 @@ class Order:
 
         
 
-        from .models import ShipmentHistoryResponse
-        schema = ShipmentHistoryResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for postShipmentHistory")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ShipmentHistoryResponse
+            schema = ShipmentHistoryResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for postShipmentHistory")
+                print(e)
 
         
 
@@ -1758,10 +1789,10 @@ class Order:
         """
         payload = {}
         
-        if shipment_id:
+        if shipment_id is not None:
             payload["shipment_id"] = shipment_id
         
-        if bag_id:
+        if bag_id is not None:
             payload["bag_id"] = bag_id
         
 
@@ -1785,13 +1816,14 @@ class Order:
 
         
 
-        from .models import ShipmentHistoryResponse
-        schema = ShipmentHistoryResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getShipmentHistory")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ShipmentHistoryResponse
+            schema = ShipmentHistoryResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getShipmentHistory")
+                print(e)
 
         
 
@@ -1828,13 +1860,14 @@ class Order:
 
         
 
-        from .models import OrderStatusResult
-        schema = OrderStatusResult()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for sendSmsNinja")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OrderStatusResult
+            schema = OrderStatusResult()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for sendSmsNinja")
+                print(e)
 
         
 
@@ -1871,13 +1904,14 @@ class Order:
 
         
 
-        from .models import CreateOrderResponse
-        schema = CreateOrderResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updatePackagingDimensions")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateOrderResponse
+            schema = CreateOrderResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updatePackagingDimensions")
+                print(e)
 
         
 
@@ -1914,13 +1948,14 @@ class Order:
 
         
 
-        from .models import CreateOrderResponse
-        schema = CreateOrderResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createOrder")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateOrderResponse
+            schema = CreateOrderResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createOrder")
+                print(e)
 
         
 
@@ -1957,13 +1992,14 @@ class Order:
 
         
 
-        from .models import CreateChannelConfigResponse
-        schema = CreateChannelConfigResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createChannelConfig")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateChannelConfigResponse
+            schema = CreateChannelConfigResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createChannelConfig")
+                print(e)
 
         
 
@@ -1995,13 +2031,14 @@ class Order:
 
         
 
-        from .models import CreateChannelConfigData
-        schema = CreateChannelConfigData()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getChannelConfig")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateChannelConfigData
+            schema = CreateChannelConfigData()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getChannelConfig")
+                print(e)
 
         
 
@@ -2038,13 +2075,14 @@ class Order:
 
         
 
-        from .models import SuccessResponse
-        schema = SuccessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for uploadConsent")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse
+            schema = SuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for uploadConsent")
+                print(e)
 
         
 
@@ -2081,13 +2119,14 @@ class Order:
 
         
 
-        from .models import ResponseDetail
-        schema = ResponseDetail()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for orderUpdate")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResponseDetail
+            schema = ResponseDetail()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for orderUpdate")
+                print(e)
 
         
 
@@ -2124,13 +2163,14 @@ class Order:
 
         
 
-        from .models import OrderStatusResult
-        schema = OrderStatusResult()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for checkOrderStatus")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OrderStatusResult
+            schema = OrderStatusResult()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for checkOrderStatus")
+                print(e)
 
         
 
@@ -2162,13 +2202,14 @@ class Order:
 
         
 
-        from .models import BagStateTransitionMap
-        schema = BagStateTransitionMap()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getStateTransitionMap")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BagStateTransitionMap
+            schema = BagStateTransitionMap()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getStateTransitionMap")
+                print(e)
 
         
 
