@@ -32,46 +32,46 @@ class Order:
         """
         payload = {}
         
-        if lane:
+        if lane is not None:
             payload["lane"] = lane
         
-        if search_type:
+        if search_type is not None:
             payload["search_type"] = search_type
         
-        if search_id:
+        if search_id is not None:
             payload["search_id"] = search_id
         
-        if from_date:
+        if from_date is not None:
             payload["from_date"] = from_date
         
-        if to_date:
+        if to_date is not None:
             payload["to_date"] = to_date
         
-        if dp_ids:
+        if dp_ids is not None:
             payload["dp_ids"] = dp_ids
         
-        if ordering_company_id:
+        if ordering_company_id is not None:
             payload["ordering_company_id"] = ordering_company_id
         
-        if stores:
+        if stores is not None:
             payload["stores"] = stores
         
-        if sales_channel:
+        if sales_channel is not None:
             payload["sales_channel"] = sales_channel
         
-        if request_by_ext:
+        if request_by_ext is not None:
             payload["request_by_ext"] = request_by_ext
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if customer_id:
+        if customer_id is not None:
             payload["customer_id"] = customer_id
         
-        if is_priority_sort:
+        if is_priority_sort is not None:
             payload["is_priority_sort"] = is_priority_sort
         
 
@@ -95,13 +95,14 @@ class Order:
 
         
 
-        from .models import ShipmentInternalPlatformViewResponse
-        schema = ShipmentInternalPlatformViewResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getApplicationShipments")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ShipmentInternalPlatformViewResponse
+            schema = ShipmentInternalPlatformViewResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getApplicationShipments")
+                print(e)
 
         
 
@@ -113,7 +114,7 @@ class Order:
         """
         payload = {}
         
-        if order_id:
+        if order_id is not None:
             payload["order_id"] = order_id
         
 
@@ -137,13 +138,14 @@ class Order:
 
         
 
-        from .models import OrderDetailsResponse
-        schema = OrderDetailsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAppOrderShipmentDetails")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OrderDetailsResponse
+            schema = OrderDetailsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAppOrderShipmentDetails")
+                print(e)
 
         
 
@@ -155,7 +157,7 @@ class Order:
         """
         payload = {}
         
-        if shipment_id:
+        if shipment_id is not None:
             payload["shipment_id"] = shipment_id
         
 
@@ -179,13 +181,14 @@ class Order:
 
         
 
-        from .models import PlatformShipmentTrack
-        schema = PlatformShipmentTrack()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for trackShipmentPlatform")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PlatformShipmentTrack
+            schema = PlatformShipmentTrack()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for trackShipmentPlatform")
+                print(e)
 
         
 

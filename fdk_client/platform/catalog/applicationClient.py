@@ -19,7 +19,7 @@ class Catalog:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -48,13 +48,14 @@ class Catalog:
 
         
 
-        from .models import GetSearchWordsData
-        schema = GetSearchWordsData()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateSearchKeywords")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetSearchWordsData
+            schema = GetSearchWordsData()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateSearchKeywords")
+                print(e)
 
         
 
@@ -66,7 +67,7 @@ class Catalog:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -90,13 +91,14 @@ class Catalog:
 
         
 
-        from .models import DeleteResponse
-        schema = DeleteResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteSearchKeywords")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DeleteResponse
+            schema = DeleteResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteSearchKeywords")
+                print(e)
 
         
 
@@ -108,7 +110,7 @@ class Catalog:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -132,13 +134,14 @@ class Catalog:
 
         
 
-        from .models import GetSearchWordsData
-        schema = GetSearchWordsData()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getSearchKeywords")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetSearchWordsData
+            schema = GetSearchWordsData()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSearchKeywords")
+                print(e)
 
         
 
@@ -151,10 +154,10 @@ class Catalog:
         """
         payload = {}
         
-        if is_active:
+        if is_active is not None:
             payload["is_active"] = is_active
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
 
@@ -178,13 +181,14 @@ class Catalog:
 
         
 
-        from .models import GetSearchWordsResponse
-        schema = GetSearchWordsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAllSearchKeyword")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetSearchWordsResponse
+            schema = GetSearchWordsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAllSearchKeyword")
+                print(e)
 
         
 
@@ -221,13 +225,14 @@ class Catalog:
 
         
 
-        from .models import GetSearchWordsData
-        schema = GetSearchWordsData()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createCustomKeyword")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetSearchWordsData
+            schema = GetSearchWordsData()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createCustomKeyword")
+                print(e)
 
         
 
@@ -239,7 +244,7 @@ class Catalog:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -268,13 +273,14 @@ class Catalog:
 
         
 
-        from .models import UpdateAutocompleteWordData
-        schema = UpdateAutocompleteWordData()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateAutocompleteKeyword")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UpdateAutocompleteWordData
+            schema = UpdateAutocompleteWordData()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateAutocompleteKeyword")
+                print(e)
 
         
 
@@ -286,7 +292,7 @@ class Catalog:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -310,13 +316,14 @@ class Catalog:
 
         
 
-        from .models import DeleteResponse
-        schema = DeleteResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteAutocompleteKeyword")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DeleteResponse
+            schema = DeleteResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteAutocompleteKeyword")
+                print(e)
 
         
 
@@ -328,7 +335,7 @@ class Catalog:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -352,13 +359,14 @@ class Catalog:
 
         
 
-        from .models import GetAutocompleteWordsData
-        schema = GetAutocompleteWordsData()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAutocompleteKeywordDetail")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetAutocompleteWordsData
+            schema = GetAutocompleteWordsData()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAutocompleteKeywordDetail")
+                print(e)
 
         
 
@@ -390,13 +398,14 @@ class Catalog:
 
         
 
-        from .models import GetAutocompleteWordsResponse
-        schema = GetAutocompleteWordsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAutocompleteConfig")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetAutocompleteWordsResponse
+            schema = GetAutocompleteWordsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAutocompleteConfig")
+                print(e)
 
         
 
@@ -433,13 +442,14 @@ class Catalog:
 
         
 
-        from .models import GetAutocompleteWordsData
-        schema = GetAutocompleteWordsData()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createCustomAutocompleteRule")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetAutocompleteWordsData
+            schema = GetAutocompleteWordsData()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createCustomAutocompleteRule")
+                print(e)
 
         
 
@@ -452,10 +462,10 @@ class Catalog:
         """
         payload = {}
         
-        if is_active:
+        if is_active is not None:
             payload["is_active"] = is_active
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
 
@@ -479,13 +489,14 @@ class Catalog:
 
         
 
-        from .models import SearchRerankListing
-        schema = SearchRerankListing()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for listSearchRerankConfig")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SearchRerankListing
+            schema = SearchRerankListing()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for listSearchRerankConfig")
+                print(e)
 
         
 
@@ -522,13 +533,14 @@ class Catalog:
 
         
 
-        from .models import SearchRerankingModel
-        schema = SearchRerankingModel()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createSearchRerankingConfig")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SearchRerankingModel
+            schema = SearchRerankingModel()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createSearchRerankingConfig")
+                print(e)
 
         
 
@@ -540,7 +552,7 @@ class Catalog:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -569,13 +581,14 @@ class Catalog:
 
         
 
-        from .models import SearchRerankingModel
-        schema = SearchRerankingModel()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateSearchRerankConfig")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SearchRerankingModel
+            schema = SearchRerankingModel()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateSearchRerankConfig")
+                print(e)
 
         
 
@@ -587,7 +600,7 @@ class Catalog:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -611,13 +624,14 @@ class Catalog:
 
         
 
-        from .models import DeleteRerankResponse
-        schema = DeleteRerankResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteSearchRerankConfig")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DeleteRerankResponse
+            schema = DeleteRerankResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteSearchRerankConfig")
+                print(e)
 
         
 
@@ -629,7 +643,7 @@ class Catalog:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -653,13 +667,14 @@ class Catalog:
 
         
 
-        from .models import SearchRerankingModel
-        schema = SearchRerankingModel()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getSearchRerankingConfig")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SearchRerankingModel
+            schema = SearchRerankingModel()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSearchRerankingConfig")
+                print(e)
 
         
 
@@ -671,7 +686,7 @@ class Catalog:
         """
         payload = {}
         
-        if item_id:
+        if item_id is not None:
             payload["item_id"] = item_id
         
 
@@ -695,13 +710,14 @@ class Catalog:
 
         
 
-        from .models import OwnerAppItemResponse
-        schema = OwnerAppItemResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAppProduct")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OwnerAppItemResponse
+            schema = OwnerAppItemResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAppProduct")
+                print(e)
 
         
 
@@ -713,7 +729,7 @@ class Catalog:
         """
         payload = {}
         
-        if item_id:
+        if item_id is not None:
             payload["item_id"] = item_id
         
 
@@ -742,13 +758,14 @@ class Catalog:
 
         
 
-        from .models import SuccessResponse1
-        schema = SuccessResponse1()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateAppProduct")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse1
+            schema = SuccessResponse1()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateAppProduct")
+                print(e)
 
         
 
@@ -761,10 +778,10 @@ class Catalog:
         """
         payload = {}
         
-        if config_type:
+        if config_type is not None:
             payload["config_type"] = config_type
         
-        if template_slug:
+        if template_slug is not None:
             payload["template_slug"] = template_slug
         
 
@@ -788,13 +805,14 @@ class Catalog:
 
         
 
-        from .models import GetConfigMetadataResponse
-        schema = GetConfigMetadataResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getConfigurationMetadata")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetConfigMetadataResponse
+            schema = GetConfigMetadataResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getConfigurationMetadata")
+                print(e)
 
         
 
@@ -810,19 +828,19 @@ class Catalog:
         """
         payload = {}
         
-        if config_type:
+        if config_type is not None:
             payload["config_type"] = config_type
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if search:
+        if search is not None:
             payload["search"] = search
         
-        if template_slug:
+        if template_slug is not None:
             payload["template_slug"] = template_slug
         
 
@@ -846,13 +864,14 @@ class Catalog:
 
         
 
-        from .models import GetConfigResponse
-        schema = GetConfigResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getGroupConfigurations")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetConfigResponse
+            schema = GetConfigResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getGroupConfigurations")
+                print(e)
 
         
 
@@ -864,7 +883,7 @@ class Catalog:
         """
         payload = {}
         
-        if config_type:
+        if config_type is not None:
             payload["config_type"] = config_type
         
 
@@ -893,13 +912,14 @@ class Catalog:
 
         
 
-        from .models import AppConfigurationDetail
-        schema = AppConfigurationDetail()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createGroupConfiguration")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AppConfigurationDetail
+            schema = AppConfigurationDetail()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createGroupConfiguration")
+                print(e)
 
         
 
@@ -912,10 +932,10 @@ class Catalog:
         """
         payload = {}
         
-        if config_type:
+        if config_type is not None:
             payload["config_type"] = config_type
         
-        if group_slug:
+        if group_slug is not None:
             payload["group_slug"] = group_slug
         
 
@@ -944,13 +964,14 @@ class Catalog:
 
         
 
-        from .models import AppConfigurationDetail
-        schema = AppConfigurationDetail()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateGroupConfiguration")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AppConfigurationDetail
+            schema = AppConfigurationDetail()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateGroupConfiguration")
+                print(e)
 
         
 
@@ -963,10 +984,10 @@ class Catalog:
         """
         payload = {}
         
-        if config_type:
+        if config_type is not None:
             payload["config_type"] = config_type
         
-        if group_slug:
+        if group_slug is not None:
             payload["group_slug"] = group_slug
         
 
@@ -990,13 +1011,14 @@ class Catalog:
 
         
 
-        from .models import ConfigSuccessResponse
-        schema = ConfigSuccessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteGroupConfiguration")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ConfigSuccessResponse
+            schema = ConfigSuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteGroupConfiguration")
+                print(e)
 
         
 
@@ -1011,16 +1033,16 @@ class Catalog:
         """
         payload = {}
         
-        if config_type:
+        if config_type is not None:
             payload["config_type"] = config_type
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if search:
+        if search is not None:
             payload["search"] = search
         
 
@@ -1044,13 +1066,14 @@ class Catalog:
 
         
 
-        from .models import GetConfigResponse
-        schema = GetConfigResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getListingConfigurations")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetConfigResponse
+            schema = GetConfigResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getListingConfigurations")
+                print(e)
 
         
 
@@ -1062,7 +1085,7 @@ class Catalog:
         """
         payload = {}
         
-        if config_type:
+        if config_type is not None:
             payload["config_type"] = config_type
         
 
@@ -1091,13 +1114,14 @@ class Catalog:
 
         
 
-        from .models import AppConfigurationsSort
-        schema = AppConfigurationsSort()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createListingConfiguration")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AppConfigurationsSort
+            schema = AppConfigurationsSort()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createListingConfiguration")
+                print(e)
 
         
 
@@ -1110,10 +1134,10 @@ class Catalog:
         """
         payload = {}
         
-        if config_type:
+        if config_type is not None:
             payload["config_type"] = config_type
         
-        if config_id:
+        if config_id is not None:
             payload["config_id"] = config_id
         
 
@@ -1142,13 +1166,14 @@ class Catalog:
 
         
 
-        from .models import AppConfigurationsSort
-        schema = AppConfigurationsSort()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateListingConfiguration")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AppConfigurationsSort
+            schema = AppConfigurationsSort()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateListingConfiguration")
+                print(e)
 
         
 
@@ -1161,10 +1186,10 @@ class Catalog:
         """
         payload = {}
         
-        if config_type:
+        if config_type is not None:
             payload["config_type"] = config_type
         
-        if config_id:
+        if config_id is not None:
             payload["config_id"] = config_id
         
 
@@ -1188,13 +1213,14 @@ class Catalog:
 
         
 
-        from .models import ConfigSuccessResponse
-        schema = ConfigSuccessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteListingConfiguration")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ConfigSuccessResponse
+            schema = ConfigSuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteListingConfiguration")
+                print(e)
 
         
 
@@ -1231,13 +1257,14 @@ class Catalog:
 
         
 
-        from .models import ConfigSuccessResponse
-        schema = ConfigSuccessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateAllowSingle")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ConfigSuccessResponse
+            schema = ConfigSuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateAllowSingle")
+                print(e)
 
         
 
@@ -1274,13 +1301,14 @@ class Catalog:
 
         
 
-        from .models import ConfigSuccessResponse
-        schema = ConfigSuccessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateDefaultSort")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ConfigSuccessResponse
+            schema = ConfigSuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateDefaultSort")
+                print(e)
 
         
 
@@ -1312,13 +1340,14 @@ class Catalog:
 
         
 
-        from .models import GetCatalogConfigurationMetaData
-        schema = GetCatalogConfigurationMetaData()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCatalogConfiguration")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetCatalogConfigurationMetaData
+            schema = GetCatalogConfigurationMetaData()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCatalogConfiguration")
+                print(e)
 
         
 
@@ -1350,13 +1379,14 @@ class Catalog:
 
         
 
-        from .models import GetAppCatalogConfiguration
-        schema = GetAppCatalogConfiguration()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getConfigurations")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetAppCatalogConfiguration
+            schema = GetAppCatalogConfiguration()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getConfigurations")
+                print(e)
 
         
 
@@ -1393,13 +1423,14 @@ class Catalog:
 
         
 
-        from .models import GetAppCatalogConfiguration
-        schema = GetAppCatalogConfiguration()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createConfigurationProductListing")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetAppCatalogConfiguration
+            schema = GetAppCatalogConfiguration()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createConfigurationProductListing")
+                print(e)
 
         
 
@@ -1411,7 +1442,7 @@ class Catalog:
         """
         payload = {}
         
-        if type:
+        if type is not None:
             payload["type"] = type
         
 
@@ -1435,13 +1466,14 @@ class Catalog:
 
         
 
-        from .models import GetAppCatalogEntityConfiguration
-        schema = GetAppCatalogEntityConfiguration()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getConfigurationByType")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetAppCatalogEntityConfiguration
+            schema = GetAppCatalogEntityConfiguration()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getConfigurationByType")
+                print(e)
 
         
 
@@ -1453,7 +1485,7 @@ class Catalog:
         """
         payload = {}
         
-        if type:
+        if type is not None:
             payload["type"] = type
         
 
@@ -1482,13 +1514,14 @@ class Catalog:
 
         
 
-        from .models import GetAppCatalogConfiguration
-        schema = GetAppCatalogConfiguration()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createConfigurationByType")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetAppCatalogConfiguration
+            schema = GetAppCatalogConfiguration()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createConfigurationByType")
+                print(e)
 
         
 
@@ -1501,10 +1534,10 @@ class Catalog:
         """
         payload = {}
         
-        if f:
+        if f is not None:
             payload["f"] = f
         
-        if sort_on:
+        if sort_on is not None:
             payload["sort_on"] = sort_on
         
 
@@ -1528,13 +1561,14 @@ class Catalog:
 
         
 
-        from .models import GetCollectionQueryOptionResponse
-        schema = GetCollectionQueryOptionResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getQueryFilters")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetCollectionQueryOptionResponse
+            schema = GetCollectionQueryOptionResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getQueryFilters")
+                print(e)
 
         
 
@@ -1552,25 +1586,25 @@ class Catalog:
         """
         payload = {}
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
-        if schedule_status:
+        if schedule_status is not None:
             payload["schedule_status"] = schedule_status
         
-        if type:
+        if type is not None:
             payload["type"] = type
         
-        if tag:
+        if tag is not None:
             payload["tag"] = tag
         
-        if is_active:
+        if is_active is not None:
             payload["is_active"] = is_active
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -1594,13 +1628,14 @@ class Catalog:
 
         
 
-        from .models import GetCollectionListingResponse
-        schema = GetCollectionListingResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAllCollections")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetCollectionListingResponse
+            schema = GetCollectionListingResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAllCollections")
+                print(e)
 
         
 
@@ -1637,13 +1672,14 @@ class Catalog:
 
         
 
-        from .models import CollectionCreateResponse
-        schema = CollectionCreateResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createCollection")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CollectionCreateResponse
+            schema = CollectionCreateResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createCollection")
+                print(e)
 
         
 
@@ -1655,7 +1691,7 @@ class Catalog:
         """
         payload = {}
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
 
@@ -1679,13 +1715,14 @@ class Catalog:
 
         
 
-        from .models import CollectionDetailResponse
-        schema = CollectionDetailResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCollectionDetail")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CollectionDetailResponse
+            schema = CollectionDetailResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCollectionDetail")
+                print(e)
 
         
 
@@ -1697,7 +1734,7 @@ class Catalog:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -1726,13 +1763,14 @@ class Catalog:
 
         
 
-        from .models import CollectionUpdateResponse
-        schema = CollectionUpdateResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateCollection")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CollectionUpdateResponse
+            schema = CollectionUpdateResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateCollection")
+                print(e)
 
         
 
@@ -1744,7 +1782,7 @@ class Catalog:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -1768,13 +1806,14 @@ class Catalog:
 
         
 
-        from .models import DeleteResponse
-        schema = DeleteResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteCollection")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DeleteResponse
+            schema = DeleteResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteCollection")
+                print(e)
 
         
 
@@ -1791,22 +1830,22 @@ class Catalog:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
-        if f:
+        if f is not None:
             payload["f"] = f
         
-        if sort_on:
+        if sort_on is not None:
             payload["sort_on"] = sort_on
         
-        if page_id:
+        if page_id is not None:
             payload["page_id"] = page_id
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if x_currency_code:
+        if x_currency_code is not None:
             payload["x_currency_code"] = x_currency_code
         
 
@@ -1830,13 +1869,14 @@ class Catalog:
 
         
 
-        from .models import GetCollectionItemsResponse
-        schema = GetCollectionItemsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCollectionItems")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetCollectionItemsResponse
+            schema = GetCollectionItemsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCollectionItems")
+                print(e)
 
         
 
@@ -1848,7 +1888,7 @@ class Catalog:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -1877,13 +1917,14 @@ class Catalog:
 
         
 
-        from .models import UpdatedResponse
-        schema = UpdatedResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for addCollectionItems")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UpdatedResponse
+            schema = UpdatedResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for addCollectionItems")
+                print(e)
 
         
 
@@ -1895,7 +1936,7 @@ class Catalog:
         """
         payload = {}
         
-        if brand:
+        if brand is not None:
             payload["brand"] = brand
         
 
@@ -1919,13 +1960,14 @@ class Catalog:
 
         
 
-        from .models import CatalogInsightResponse
-        schema = CatalogInsightResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCatalogInsights")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CatalogInsightResponse
+            schema = CatalogInsightResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCatalogInsights")
+                print(e)
 
         
 
@@ -1942,22 +1984,22 @@ class Catalog:
         """
         payload = {}
         
-        if item_id:
+        if item_id is not None:
             payload["item_id"] = item_id
         
-        if size_identifier:
+        if size_identifier is not None:
             payload["size_identifier"] = size_identifier
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
-        if location_ids:
+        if location_ids is not None:
             payload["location_ids"] = location_ids
         
 
@@ -1981,13 +2023,14 @@ class Catalog:
 
         
 
-        from .models import InventorySellerIdentifierResponsePaginated
-        schema = InventorySellerIdentifierResponsePaginated()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getDiscountedInventoryBySizeIdentifier")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import InventorySellerIdentifierResponsePaginated
+            schema = InventorySellerIdentifierResponsePaginated()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getDiscountedInventoryBySizeIdentifier")
+                print(e)
 
         
 
@@ -2003,19 +2046,19 @@ class Catalog:
         """
         payload = {}
         
-        if department:
+        if department is not None:
             payload["department"] = department
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
-        if brand_id:
+        if brand_id is not None:
             payload["brand_id"] = brand_id
         
 
@@ -2039,13 +2082,14 @@ class Catalog:
 
         
 
-        from .models import BrandListingResponse
-        schema = BrandListingResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getApplicationBrands")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BrandListingResponse
+            schema = BrandListingResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getApplicationBrands")
+                print(e)
 
         
 
@@ -2077,13 +2121,14 @@ class Catalog:
 
         
 
-        from .models import DepartmentResponse
-        schema = DepartmentResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getDepartments")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DepartmentResponse
+            schema = DepartmentResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getDepartments")
+                print(e)
 
         
 
@@ -2095,7 +2140,7 @@ class Catalog:
         """
         payload = {}
         
-        if department:
+        if department is not None:
             payload["department"] = department
         
 
@@ -2119,13 +2164,14 @@ class Catalog:
 
         
 
-        from .models import CategoryListingResponse
-        schema = CategoryListingResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCategories")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CategoryListingResponse
+            schema = CategoryListingResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCategories")
+                print(e)
 
         
 
@@ -2147,37 +2193,37 @@ class Catalog:
         """
         payload = {}
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
-        if f:
+        if f is not None:
             payload["f"] = f
         
-        if c:
+        if c is not None:
             payload["c"] = c
         
-        if filters:
+        if filters is not None:
             payload["filters"] = filters
         
-        if is_dependent:
+        if is_dependent is not None:
             payload["is_dependent"] = is_dependent
         
-        if sort_on:
+        if sort_on is not None:
             payload["sort_on"] = sort_on
         
-        if page_id:
+        if page_id is not None:
             payload["page_id"] = page_id
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_type:
+        if page_type is not None:
             payload["page_type"] = page_type
         
-        if item_ids:
+        if item_ids is not None:
             payload["item_ids"] = item_ids
         
 
@@ -2201,13 +2247,14 @@ class Catalog:
 
         
 
-        from .models import ApplicationProductListingResponse
-        schema = ApplicationProductListingResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAppicationProducts")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ApplicationProductListingResponse
+            schema = ApplicationProductListingResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAppicationProducts")
+                print(e)
 
         
 
@@ -2219,7 +2266,7 @@ class Catalog:
         """
         payload = {}
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
 
@@ -2243,13 +2290,14 @@ class Catalog:
 
         
 
-        from .models import ProductDetail
-        schema = ProductDetail()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getProductDetailBySlug")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductDetail
+            schema = ProductDetail()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProductDetailBySlug")
+                print(e)
 
         
 
@@ -2269,31 +2317,31 @@ class Catalog:
         """
         payload = {}
         
-        if brand_ids:
+        if brand_ids is not None:
             payload["brand_ids"] = brand_ids
         
-        if category_ids:
+        if category_ids is not None:
             payload["category_ids"] = category_ids
         
-        if department_ids:
+        if department_ids is not None:
             payload["department_ids"] = department_ids
         
-        if tags:
+        if tags is not None:
             payload["tags"] = tags
         
-        if is_dependent:
+        if is_dependent is not None:
             payload["is_dependent"] = is_dependent
         
-        if item_ids:
+        if item_ids is not None:
             payload["item_ids"] = item_ids
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
 
@@ -2317,13 +2365,14 @@ class Catalog:
 
         
 
-        from .models import ProductListingResponse
-        schema = ProductListingResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAppProducts")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductListingResponse
+            schema = ProductListingResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAppProducts")
+                print(e)
 
         
 
@@ -2341,25 +2390,25 @@ class Catalog:
         """
         payload = {}
         
-        if item_ids:
+        if item_ids is not None:
             payload["item_ids"] = item_ids
         
-        if store_ids:
+        if store_ids is not None:
             payload["store_ids"] = store_ids
         
-        if brand_ids:
+        if brand_ids is not None:
             payload["brand_ids"] = brand_ids
         
-        if seller_identifiers:
+        if seller_identifiers is not None:
             payload["seller_identifiers"] = seller_identifiers
         
-        if timestamp:
+        if timestamp is not None:
             payload["timestamp"] = timestamp
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if page_id:
+        if page_id is not None:
             payload["page_id"] = page_id
         
 
@@ -2383,13 +2432,14 @@ class Catalog:
 
         
 
-        from .models import InventoryStockResponse
-        schema = InventoryStockResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAppInventory")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import InventoryStockResponse
+            schema = InventoryStockResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAppInventory")
+                print(e)
 
         
 
@@ -2406,22 +2456,22 @@ class Catalog:
         """
         payload = {}
         
-        if store_type:
+        if store_type is not None:
             payload["store_type"] = store_type
         
-        if uid:
+        if uid is not None:
             payload["uid"] = uid
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
-        if stage:
+        if stage is not None:
             payload["stage"] = stage
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -2445,13 +2495,14 @@ class Catalog:
 
         
 
-        from .models import LocationListSerializer
-        schema = LocationListSerializer()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAppLocations")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import LocationListSerializer
+            schema = LocationListSerializer()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAppLocations")
+                print(e)
 
         
 
@@ -2465,13 +2516,13 @@ class Catalog:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
 
@@ -2495,13 +2546,14 @@ class Catalog:
 
         
 
-        from .models import BrandListingResponse
-        schema = BrandListingResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getApplicationBrandListing")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BrandListingResponse
+            schema = BrandListingResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getApplicationBrandListing")
+                print(e)
 
         
 
@@ -2513,7 +2565,7 @@ class Catalog:
         """
         payload = {}
         
-        if brand_uid:
+        if brand_uid is not None:
             payload["brand_uid"] = brand_uid
         
 
@@ -2542,13 +2594,14 @@ class Catalog:
 
         
 
-        from .models import SuccessResponse1
-        schema = SuccessResponse1()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateAppBrand")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse1
+            schema = SuccessResponse1()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateAppBrand")
+                print(e)
 
         
 
@@ -2563,16 +2616,16 @@ class Catalog:
         """
         payload = {}
         
-        if department_id:
+        if department_id is not None:
             payload["department_id"] = department_id
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
 
@@ -2596,13 +2649,14 @@ class Catalog:
 
         
 
-        from .models import BrandListingResponse
-        schema = BrandListingResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getApplicationCategoryListing")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BrandListingResponse
+            schema = BrandListingResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getApplicationCategoryListing")
+                print(e)
 
         
 
@@ -2614,7 +2668,7 @@ class Catalog:
         """
         payload = {}
         
-        if category_uid:
+        if category_uid is not None:
             payload["category_uid"] = category_uid
         
 
@@ -2643,13 +2697,14 @@ class Catalog:
 
         
 
-        from .models import SuccessResponse1
-        schema = SuccessResponse1()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateAppCategory")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse1
+            schema = SuccessResponse1()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateAppCategory")
+                print(e)
 
         
 
@@ -2663,13 +2718,13 @@ class Catalog:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
 
@@ -2693,13 +2748,14 @@ class Catalog:
 
         
 
-        from .models import ApplicationDepartmentListingResponse
-        schema = ApplicationDepartmentListingResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getApplicationDepartmentListing")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ApplicationDepartmentListingResponse
+            schema = ApplicationDepartmentListingResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getApplicationDepartmentListing")
+                print(e)
 
         
 
@@ -2711,7 +2767,7 @@ class Catalog:
         """
         payload = {}
         
-        if department_uid:
+        if department_uid is not None:
             payload["department_uid"] = department_uid
         
 
@@ -2740,13 +2796,14 @@ class Catalog:
 
         
 
-        from .models import SuccessResponse1
-        schema = SuccessResponse1()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateAppDepartment")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse1
+            schema = SuccessResponse1()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateAppDepartment")
+                print(e)
 
         
 
@@ -2758,7 +2815,7 @@ class Catalog:
         """
         payload = {}
         
-        if store_uid:
+        if store_uid is not None:
             payload["store_uid"] = store_uid
         
 
@@ -2787,13 +2844,14 @@ class Catalog:
 
         
 
-        from .models import SuccessResponse1
-        schema = SuccessResponse1()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateAppLocation")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse1
+            schema = SuccessResponse1()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateAppLocation")
+                print(e)
 
         
 

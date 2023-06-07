@@ -37,7 +37,7 @@ This operation will return the url for the uploaded file.
         """
         payload = {}
         
-        if namespace:
+        if namespace is not None:
             payload["namespace"] = namespace
         
 
@@ -66,13 +66,14 @@ This operation will return the url for the uploaded file.
 
         
 
-        from .models import StartResponse
-        schema = StartResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for appStartUpload")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import StartResponse
+            schema = StartResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for appStartUpload")
+                print(e)
 
         
 
@@ -102,7 +103,7 @@ This operation will return the url for the uploaded file.
         """
         payload = {}
         
-        if namespace:
+        if namespace is not None:
             payload["namespace"] = namespace
         
 
@@ -131,13 +132,14 @@ This operation will return the url for the uploaded file.
 
         
 
-        from .models import CompleteResponse
-        schema = CompleteResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for appCompleteUpload")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CompleteResponse
+            schema = CompleteResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for appCompleteUpload")
+                print(e)
 
         
 
@@ -149,7 +151,7 @@ This operation will return the url for the uploaded file.
         """
         payload = {}
         
-        if sync:
+        if sync is not None:
             payload["sync"] = sync
         
 
@@ -178,13 +180,14 @@ This operation will return the url for the uploaded file.
 
         
 
-        from .models import BulkUploadResponse
-        schema = BulkUploadResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for appCopyFiles")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BulkUploadResponse
+            schema = BulkUploadResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for appCopyFiles")
+                print(e)
 
         
 
@@ -197,10 +200,10 @@ This operation will return the url for the uploaded file.
         """
         payload = {}
         
-        if namespace:
+        if namespace is not None:
             payload["namespace"] = namespace
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
 
@@ -224,13 +227,14 @@ This operation will return the url for the uploaded file.
 
         
 
-        from .models import BrowseResponse
-        schema = BrowseResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for appbrowse")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BrowseResponse
+            schema = BrowseResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for appbrowse")
+                print(e)
 
         
 

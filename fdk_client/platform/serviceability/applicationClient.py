@@ -39,13 +39,14 @@ class Serviceability:
 
         
 
-        from .models import ApplicationServiceabilityConfigResponse
-        schema = ApplicationServiceabilityConfigResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getApplicationServiceability")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ApplicationServiceabilityConfigResponse
+            schema = ApplicationServiceabilityConfigResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getApplicationServiceability")
+                print(e)
 
         
 
@@ -60,16 +61,16 @@ class Serviceability:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if zone_id:
+        if zone_id is not None:
             payload["zone_id"] = zone_id
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
 
@@ -93,13 +94,14 @@ class Serviceability:
 
         
 
-        from .models import GetZoneFromApplicationIdViewResponse
-        schema = GetZoneFromApplicationIdViewResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getZonesFromApplicationIdView")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetZoneFromApplicationIdViewResponse
+            schema = GetZoneFromApplicationIdViewResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getZonesFromApplicationIdView")
+                print(e)
 
         
 
@@ -136,13 +138,14 @@ class Serviceability:
 
         
 
-        from .models import GetZoneFromPincodeViewResponse
-        schema = GetZoneFromPincodeViewResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getZoneFromPincodeView")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetZoneFromPincodeViewResponse
+            schema = GetZoneFromPincodeViewResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getZoneFromPincodeView")
+                print(e)
 
         
 
@@ -179,13 +182,14 @@ class Serviceability:
 
         
 
-        from .models import ApplicationCompanyDpViewResponse
-        schema = ApplicationCompanyDpViewResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for addAppDp")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ApplicationCompanyDpViewResponse
+            schema = ApplicationCompanyDpViewResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for addAppDp")
+                print(e)
 
         
 
@@ -197,7 +201,7 @@ class Serviceability:
         """
         payload = {}
         
-        if courier_partner_id:
+        if courier_partner_id is not None:
             payload["courier_partner_id"] = courier_partner_id
         
 
@@ -221,13 +225,14 @@ class Serviceability:
 
         
 
-        from .models import ApplicationCompanyDpViewResponse
-        schema = ApplicationCompanyDpViewResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteAppDp")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ApplicationCompanyDpViewResponse
+            schema = ApplicationCompanyDpViewResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteAppDp")
+                print(e)
 
         
 
@@ -264,13 +269,14 @@ class Serviceability:
 
         
 
-        from .models import PincodeMOPresponse
-        schema = PincodeMOPresponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updatePincodeMopView")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PincodeMOPresponse
+            schema = PincodeMOPresponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updatePincodeMopView")
+                print(e)
 
         
 
@@ -307,13 +313,14 @@ class Serviceability:
 
         
 
-        from .models import PincodeBulkViewResponse
-        schema = PincodeBulkViewResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updatePincodeBulkView")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PincodeBulkViewResponse
+            schema = PincodeBulkViewResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updatePincodeBulkView")
+                print(e)
 
         
 
@@ -350,13 +357,14 @@ class Serviceability:
 
         
 
-        from .models import PincodeCodStatusListingResponse
-        schema = PincodeCodStatusListingResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updatePincodeCoDListing")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PincodeCodStatusListingResponse
+            schema = PincodeCodStatusListingResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updatePincodeCoDListing")
+                print(e)
 
         
 
@@ -393,13 +401,14 @@ class Serviceability:
 
         
 
-        from .models import PincodeMopUpdateAuditHistoryResponseData
-        schema = PincodeMopUpdateAuditHistoryResponseData()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updatePincodeAuditHistory")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PincodeMopUpdateAuditHistoryResponseData
+            schema = PincodeMopUpdateAuditHistoryResponseData()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updatePincodeAuditHistory")
+                print(e)
 
         
 
@@ -436,13 +445,14 @@ class Serviceability:
 
         
 
-        from .models import DPApplicationRuleResponse
-        schema = DPApplicationRuleResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for upsertDpApplicationRulesView")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DPApplicationRuleResponse
+            schema = DPApplicationRuleResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for upsertDpApplicationRulesView")
+                print(e)
 
         
 
@@ -474,13 +484,14 @@ class Serviceability:
 
         
 
-        from .models import DPApplicationRuleResponse
-        schema = DPApplicationRuleResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getDpApplicationRulesView")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DPApplicationRuleResponse
+            schema = DPApplicationRuleResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getDpApplicationRulesView")
+                print(e)
 
         
 

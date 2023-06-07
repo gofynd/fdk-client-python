@@ -44,13 +44,14 @@ class Share:
 
         
 
-        from .models import ShortLinkRes
-        schema = ShortLinkRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createShortLink")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ShortLinkRes
+            schema = ShortLinkRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createShortLink")
+                print(e)
 
         
 
@@ -66,19 +67,19 @@ class Share:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if created_by:
+        if created_by is not None:
             payload["created_by"] = created_by
         
-        if active:
+        if active is not None:
             payload["active"] = active
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
 
@@ -102,13 +103,14 @@ class Share:
 
         
 
-        from .models import ShortLinkList
-        schema = ShortLinkList()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getShortLinks")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ShortLinkList
+            schema = ShortLinkList()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getShortLinks")
+                print(e)
 
         
 
@@ -120,7 +122,7 @@ class Share:
         """
         payload = {}
         
-        if hash:
+        if hash is not None:
             payload["hash"] = hash
         
 
@@ -144,13 +146,14 @@ class Share:
 
         
 
-        from .models import ShortLinkRes
-        schema = ShortLinkRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getShortLinkByHash")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ShortLinkRes
+            schema = ShortLinkRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getShortLinkByHash")
+                print(e)
 
         
 
@@ -162,7 +165,7 @@ class Share:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -191,13 +194,14 @@ class Share:
 
         
 
-        from .models import ShortLinkRes
-        schema = ShortLinkRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateShortLinkById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ShortLinkRes
+            schema = ShortLinkRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateShortLinkById")
+                print(e)
 
         
 
@@ -209,7 +213,7 @@ class Share:
         """
         payload = {}
         
-        if surl_id:
+        if surl_id is not None:
             payload["surl_id"] = surl_id
         
 
@@ -233,13 +237,14 @@ class Share:
 
         
 
-        from .models import ClickStatsResponse
-        schema = ClickStatsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getShortLinkClickStats")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ClickStatsResponse
+            schema = ClickStatsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getShortLinkClickStats")
+                print(e)
 
         
 

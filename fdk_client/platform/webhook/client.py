@@ -20,13 +20,13 @@ class Webhook:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if extension_id:
+        if extension_id is not None:
             payload["extension_id"] = extension_id
         
 
@@ -50,13 +50,14 @@ class Webhook:
 
         
 
-        from .models import SubscriberResponse
-        schema = SubscriberResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getSubscribersByCompany")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SubscriberResponse
+            schema = SubscriberResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSubscribersByCompany")
+                print(e)
 
         
 
@@ -93,13 +94,14 @@ class Webhook:
 
         
 
-        from .models import SubscriberConfig
-        schema = SubscriberConfig()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for registerSubscriberToEvent")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SubscriberConfig
+            schema = SubscriberConfig()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for registerSubscriberToEvent")
+                print(e)
 
         
 
@@ -136,13 +138,14 @@ class Webhook:
 
         
 
-        from .models import SubscriberConfig
-        schema = SubscriberConfig()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateSubscriberConfig")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SubscriberConfig
+            schema = SubscriberConfig()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateSubscriberConfig")
+                print(e)
 
         
 
@@ -156,13 +159,13 @@ class Webhook:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if extension_id:
+        if extension_id is not None:
             payload["extension_id"] = extension_id
         
 
@@ -186,13 +189,14 @@ class Webhook:
 
         
 
-        from .models import SubscriberConfigList
-        schema = SubscriberConfigList()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getSubscribersByExtensionId")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SubscriberConfigList
+            schema = SubscriberConfigList()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSubscribersByExtensionId")
+                print(e)
 
         
 
@@ -204,7 +208,7 @@ class Webhook:
         """
         payload = {}
         
-        if subscriber_id:
+        if subscriber_id is not None:
             payload["subscriber_id"] = subscriber_id
         
 
@@ -228,13 +232,14 @@ class Webhook:
 
         
 
-        from .models import SubscriberResponse
-        schema = SubscriberResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getSubscriberById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SubscriberResponse
+            schema = SubscriberResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSubscriberById")
+                print(e)
 
         
 
@@ -266,13 +271,14 @@ class Webhook:
 
         
 
-        from .models import EventConfigResponse
-        schema = EventConfigResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for fetchAllEventConfigurations")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EventConfigResponse
+            schema = EventConfigResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for fetchAllEventConfigurations")
+                print(e)
 
         
 

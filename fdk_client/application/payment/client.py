@@ -70,10 +70,10 @@ class Payment:
         """
         payload = {}
         
-        if x_api_token:
+        if x_api_token is not None:
             payload["x_api_token"] = x_api_token
         
-        if refresh:
+        if refresh is not None:
             payload["refresh"] = refresh
         
         # Parameter validation
@@ -97,14 +97,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAggregatorsConfig"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/config/aggregators/key", x_api_token=x_api_token, refresh=refresh), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import AggregatorsConfigDetailResponse
-        schema = AggregatorsConfigDetailResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAggregatorsConfig")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AggregatorsConfigDetailResponse
+            schema = AggregatorsConfigDetailResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAggregatorsConfig")
+                print(e)
 
         
 
@@ -141,14 +141,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["attachCardToCustomer"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/card/attach", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import AttachCardsResponse
-        schema = AttachCardsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for attachCardToCustomer")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AttachCardsResponse
+            schema = AttachCardsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for attachCardToCustomer")
+                print(e)
 
         
 
@@ -160,7 +160,7 @@ class Payment:
         """
         payload = {}
         
-        if refresh:
+        if refresh is not None:
             payload["refresh"] = refresh
         
         # Parameter validation
@@ -184,14 +184,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getActiveCardAggregator"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/card/aggregator", refresh=refresh), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import ActiveCardPaymentGatewayResponse
-        schema = ActiveCardPaymentGatewayResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getActiveCardAggregator")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ActiveCardPaymentGatewayResponse
+            schema = ActiveCardPaymentGatewayResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getActiveCardAggregator")
+                print(e)
 
         
 
@@ -203,7 +203,7 @@ class Payment:
         """
         payload = {}
         
-        if force_refresh:
+        if force_refresh is not None:
             payload["force_refresh"] = force_refresh
         
         # Parameter validation
@@ -227,14 +227,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getActiveUserCards"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/cards", force_refresh=force_refresh), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import ListCardsResponse
-        schema = ListCardsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getActiveUserCards")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ListCardsResponse
+            schema = ListCardsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getActiveUserCards")
+                print(e)
 
         
 
@@ -271,14 +271,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["deleteUserCard"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/card/remove", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import DeleteCardsResponse
-        schema = DeleteCardsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteUserCard")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DeleteCardsResponse
+            schema = DeleteCardsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteUserCard")
+                print(e)
 
         
 
@@ -315,14 +315,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["verifyCustomerForPayment"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/customer/validation", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import ValidateCustomerResponse
-        schema = ValidateCustomerResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for verifyCustomerForPayment")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ValidateCustomerResponse
+            schema = ValidateCustomerResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for verifyCustomerForPayment")
+                print(e)
 
         
 
@@ -359,14 +359,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["verifyAndChargePayment"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/confirm/charge", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import ChargeCustomerResponse
-        schema = ChargeCustomerResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for verifyAndChargePayment")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ChargeCustomerResponse
+            schema = ChargeCustomerResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for verifyAndChargePayment")
+                print(e)
 
         
 
@@ -403,14 +403,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["initialisePayment"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/request", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import PaymentInitializationResponse
-        schema = PaymentInitializationResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for initialisePayment")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PaymentInitializationResponse
+            schema = PaymentInitializationResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for initialisePayment")
+                print(e)
 
         
 
@@ -447,14 +447,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["checkAndUpdatePaymentStatus"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/confirm/polling", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import PaymentStatusUpdateResponse
-        schema = PaymentStatusUpdateResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for checkAndUpdatePaymentStatus")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PaymentStatusUpdateResponse
+            schema = PaymentStatusUpdateResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for checkAndUpdatePaymentStatus")
+                print(e)
 
         
 
@@ -472,25 +472,25 @@ class Payment:
         """
         payload = {}
         
-        if amount:
+        if amount is not None:
             payload["amount"] = amount
         
-        if cart_id:
+        if cart_id is not None:
             payload["cart_id"] = cart_id
         
-        if pincode:
+        if pincode is not None:
             payload["pincode"] = pincode
         
-        if checkout_mode:
+        if checkout_mode is not None:
             payload["checkout_mode"] = checkout_mode
         
-        if refresh:
+        if refresh is not None:
             payload["refresh"] = refresh
         
-        if card_reference:
+        if card_reference is not None:
             payload["card_reference"] = card_reference
         
-        if user_details:
+        if user_details is not None:
             payload["user_details"] = user_details
         
         # Parameter validation
@@ -514,14 +514,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPaymentModeRoutes"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/payment/options", amount=amount, cart_id=cart_id, pincode=pincode, checkout_mode=checkout_mode, refresh=refresh, card_reference=card_reference, user_details=user_details), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import PaymentModeRouteResponse
-        schema = PaymentModeRouteResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getPaymentModeRoutes")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PaymentModeRouteResponse
+            schema = PaymentModeRouteResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPaymentModeRoutes")
+                print(e)
 
         
 
@@ -540,28 +540,28 @@ class Payment:
         """
         payload = {}
         
-        if amount:
+        if amount is not None:
             payload["amount"] = amount
         
-        if cart_id:
+        if cart_id is not None:
             payload["cart_id"] = cart_id
         
-        if pincode:
+        if pincode is not None:
             payload["pincode"] = pincode
         
-        if checkout_mode:
+        if checkout_mode is not None:
             payload["checkout_mode"] = checkout_mode
         
-        if refresh:
+        if refresh is not None:
             payload["refresh"] = refresh
         
-        if card_reference:
+        if card_reference is not None:
             payload["card_reference"] = card_reference
         
-        if order_type:
+        if order_type is not None:
             payload["order_type"] = order_type
         
-        if user_details:
+        if user_details is not None:
             payload["user_details"] = user_details
         
         # Parameter validation
@@ -585,14 +585,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPosPaymentModeRoutes"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/payment/options/pos", amount=amount, cart_id=cart_id, pincode=pincode, checkout_mode=checkout_mode, refresh=refresh, card_reference=card_reference, order_type=order_type, user_details=user_details), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import PaymentModeRouteResponse
-        schema = PaymentModeRouteResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getPosPaymentModeRoutes")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PaymentModeRouteResponse
+            schema = PaymentModeRouteResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPosPaymentModeRoutes")
+                print(e)
 
         
 
@@ -624,14 +624,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getRupifiBannerDetails"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/rupifi/banner", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import RupifiBannerResponse
-        schema = RupifiBannerResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getRupifiBannerDetails")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import RupifiBannerResponse
+            schema = RupifiBannerResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getRupifiBannerDetails")
+                print(e)
 
         
 
@@ -663,14 +663,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getEpaylaterBannerDetails"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/epaylater/banner", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import EpaylaterBannerResponse
-        schema = EpaylaterBannerResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getEpaylaterBannerDetails")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EpaylaterBannerResponse
+            schema = EpaylaterBannerResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getEpaylaterBannerDetails")
+                print(e)
 
         
 
@@ -707,14 +707,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["resendOrCancelPayment"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/resend_or_cancel", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import ResendOrCancelPaymentResponse
-        schema = ResendOrCancelPaymentResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for resendOrCancelPayment")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResendOrCancelPaymentResponse
+            schema = ResendOrCancelPaymentResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for resendOrCancelPayment")
+                print(e)
 
         
 
@@ -751,14 +751,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["renderHTML"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/html/render/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import renderHTMLResponse
-        schema = renderHTMLResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for renderHTML")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import renderHTMLResponse
+            schema = renderHTMLResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for renderHTML")
+                print(e)
 
         
 
@@ -795,14 +795,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["validateVPA"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/validate-vpa", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import ValidateVPAResponse
-        schema = ValidateVPAResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for validateVPA")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ValidateVPAResponse
+            schema = ValidateVPAResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for validateVPA")
+                print(e)
 
         
 
@@ -834,14 +834,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getActiveRefundTransferModes"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/refund/transfer-mode", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import TransferModeResponse
-        schema = TransferModeResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getActiveRefundTransferModes")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TransferModeResponse
+            schema = TransferModeResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getActiveRefundTransferModes")
+                print(e)
 
         
 
@@ -878,14 +878,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["enableOrDisableRefundTransferMode"]).netloc, "put", await create_url_without_domain("/service/application/payment/v1.0/refund/transfer-mode", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import UpdateRefundTransferModeResponse
-        schema = UpdateRefundTransferModeResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for enableOrDisableRefundTransferMode")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UpdateRefundTransferModeResponse
+            schema = UpdateRefundTransferModeResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for enableOrDisableRefundTransferMode")
+                print(e)
 
         
 
@@ -897,7 +897,7 @@ class Payment:
         """
         payload = {}
         
-        if order_id:
+        if order_id is not None:
             payload["order_id"] = order_id
         
         # Parameter validation
@@ -921,14 +921,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getUserBeneficiariesDetail"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/refund/user/beneficiary", order_id=order_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import OrderBeneficiaryResponse
-        schema = OrderBeneficiaryResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getUserBeneficiariesDetail")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OrderBeneficiaryResponse
+            schema = OrderBeneficiaryResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getUserBeneficiariesDetail")
+                print(e)
 
         
 
@@ -940,7 +940,7 @@ class Payment:
         """
         payload = {}
         
-        if ifsc_code:
+        if ifsc_code is not None:
             payload["ifsc_code"] = ifsc_code
         
         # Parameter validation
@@ -964,14 +964,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["verifyIfscCode"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/ifsc-code/verify", ifsc_code=ifsc_code), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import IfscCodeResponse
-        schema = IfscCodeResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for verifyIfscCode")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import IfscCodeResponse
+            schema = IfscCodeResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for verifyIfscCode")
+                print(e)
 
         
 
@@ -983,7 +983,7 @@ class Payment:
         """
         payload = {}
         
-        if order_id:
+        if order_id is not None:
             payload["order_id"] = order_id
         
         # Parameter validation
@@ -1007,14 +1007,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getOrderBeneficiariesDetail"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/refund/order/beneficiaries", order_id=order_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import OrderBeneficiaryResponse
-        schema = OrderBeneficiaryResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getOrderBeneficiariesDetail")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OrderBeneficiaryResponse
+            schema = OrderBeneficiaryResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getOrderBeneficiariesDetail")
+                print(e)
 
         
 
@@ -1051,14 +1051,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["verifyOtpAndAddBeneficiaryForBank"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/refund/verification/bank", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import AddBeneficiaryViaOtpVerificationResponse
-        schema = AddBeneficiaryViaOtpVerificationResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for verifyOtpAndAddBeneficiaryForBank")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AddBeneficiaryViaOtpVerificationResponse
+            schema = AddBeneficiaryViaOtpVerificationResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for verifyOtpAndAddBeneficiaryForBank")
+                print(e)
 
         
 
@@ -1095,14 +1095,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["addBeneficiaryDetails"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/refund/account", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import RefundAccountResponse
-        schema = RefundAccountResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for addBeneficiaryDetails")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import RefundAccountResponse
+            schema = RefundAccountResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for addBeneficiaryDetails")
+                print(e)
 
         
 
@@ -1139,14 +1139,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["addRefundBankAccountUsingOTP"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/refund/account/otp", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import RefundAccountResponse
-        schema = RefundAccountResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for addRefundBankAccountUsingOTP")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import RefundAccountResponse
+            schema = RefundAccountResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for addRefundBankAccountUsingOTP")
+                print(e)
 
         
 
@@ -1183,14 +1183,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["verifyOtpAndAddBeneficiaryForWallet"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/refund/verification/wallet", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import WalletOtpResponse
-        schema = WalletOtpResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for verifyOtpAndAddBeneficiaryForWallet")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import WalletOtpResponse
+            schema = WalletOtpResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for verifyOtpAndAddBeneficiaryForWallet")
+                print(e)
 
         
 
@@ -1227,14 +1227,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["updateDefaultBeneficiary"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/refund/beneficiary/default", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import SetDefaultBeneficiaryResponse
-        schema = SetDefaultBeneficiaryResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateDefaultBeneficiary")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SetDefaultBeneficiaryResponse
+            schema = SetDefaultBeneficiaryResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateDefaultBeneficiary")
+                print(e)
 
         
 
@@ -1246,7 +1246,7 @@ class Payment:
         """
         payload = {}
         
-        if payment_link_id:
+        if payment_link_id is not None:
             payload["payment_link_id"] = payment_link_id
         
         # Parameter validation
@@ -1270,14 +1270,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPaymentLink"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/create-payment-link/", payment_link_id=payment_link_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import GetPaymentLinkResponse
-        schema = GetPaymentLinkResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getPaymentLink")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetPaymentLinkResponse
+            schema = GetPaymentLinkResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPaymentLink")
+                print(e)
 
         
 
@@ -1314,14 +1314,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["createPaymentLink"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/create-payment-link/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import CreatePaymentLinkResponse
-        schema = CreatePaymentLinkResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createPaymentLink")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreatePaymentLinkResponse
+            schema = CreatePaymentLinkResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createPaymentLink")
+                print(e)
 
         
 
@@ -1358,14 +1358,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["resendPaymentLink"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/resend-payment-link/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import ResendPaymentLinkResponse
-        schema = ResendPaymentLinkResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for resendPaymentLink")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResendPaymentLinkResponse
+            schema = ResendPaymentLinkResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for resendPaymentLink")
+                print(e)
 
         
 
@@ -1402,14 +1402,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["cancelPaymentLink"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/cancel-payment-link/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import CancelPaymentLinkResponse
-        schema = CancelPaymentLinkResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for cancelPaymentLink")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CancelPaymentLinkResponse
+            schema = CancelPaymentLinkResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for cancelPaymentLink")
+                print(e)
 
         
 
@@ -1421,7 +1421,7 @@ class Payment:
         """
         payload = {}
         
-        if payment_link_id:
+        if payment_link_id is not None:
             payload["payment_link_id"] = payment_link_id
         
         # Parameter validation
@@ -1445,14 +1445,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPaymentModeRoutesPaymentLink"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/payment/options/link/", payment_link_id=payment_link_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import PaymentModeRouteResponse
-        schema = PaymentModeRouteResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getPaymentModeRoutesPaymentLink")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PaymentModeRouteResponse
+            schema = PaymentModeRouteResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPaymentModeRoutesPaymentLink")
+                print(e)
 
         
 
@@ -1464,7 +1464,7 @@ class Payment:
         """
         payload = {}
         
-        if payment_link_id:
+        if payment_link_id is not None:
             payload["payment_link_id"] = payment_link_id
         
         # Parameter validation
@@ -1488,14 +1488,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["pollingPaymentLink"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/polling-payment-link/", payment_link_id=payment_link_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import PollingPaymentLinkResponse
-        schema = PollingPaymentLinkResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for pollingPaymentLink")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PollingPaymentLinkResponse
+            schema = PollingPaymentLinkResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for pollingPaymentLink")
+                print(e)
 
         
 
@@ -1532,14 +1532,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["createOrderHandlerPaymentLink"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/create-order/link/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import CreateOrderUserResponse
-        schema = CreateOrderUserResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createOrderHandlerPaymentLink")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateOrderUserResponse
+            schema = CreateOrderUserResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createOrderHandlerPaymentLink")
+                print(e)
 
         
 
@@ -1576,14 +1576,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["initialisePaymentPaymentLink"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/request/link/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import PaymentInitializationResponse
-        schema = PaymentInitializationResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for initialisePaymentPaymentLink")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PaymentInitializationResponse
+            schema = PaymentInitializationResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for initialisePaymentPaymentLink")
+                print(e)
 
         
 
@@ -1620,14 +1620,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["checkAndUpdatePaymentStatusPaymentLink"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/confirm/polling/link/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import PaymentStatusUpdateResponse
-        schema = PaymentStatusUpdateResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for checkAndUpdatePaymentStatusPaymentLink")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PaymentStatusUpdateResponse
+            schema = PaymentStatusUpdateResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for checkAndUpdatePaymentStatusPaymentLink")
+                print(e)
 
         
 
@@ -1639,7 +1639,7 @@ class Payment:
         """
         payload = {}
         
-        if aggregator:
+        if aggregator is not None:
             payload["aggregator"] = aggregator
         
         # Parameter validation
@@ -1663,14 +1663,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["customerCreditSummary"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/payment/credit-summary/", aggregator=aggregator), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import CustomerCreditSummaryResponse
-        schema = CustomerCreditSummaryResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for customerCreditSummary")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CustomerCreditSummaryResponse
+            schema = CustomerCreditSummaryResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for customerCreditSummary")
+                print(e)
 
         
 
@@ -1683,10 +1683,10 @@ class Payment:
         """
         payload = {}
         
-        if source:
+        if source is not None:
             payload["source"] = source
         
-        if aggregator:
+        if aggregator is not None:
             payload["aggregator"] = aggregator
         
         # Parameter validation
@@ -1710,14 +1710,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["redirectToAggregator"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/payment/redirect-to-aggregator/", source=source, aggregator=aggregator), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import RedirectToAggregatorResponse
-        schema = RedirectToAggregatorResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for redirectToAggregator")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import RedirectToAggregatorResponse
+            schema = RedirectToAggregatorResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for redirectToAggregator")
+                print(e)
 
         
 
@@ -1729,7 +1729,7 @@ class Payment:
         """
         payload = {}
         
-        if aggregator:
+        if aggregator is not None:
             payload["aggregator"] = aggregator
         
         # Parameter validation
@@ -1753,14 +1753,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["checkCredit"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/check-credits/", aggregator=aggregator), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import CheckCreditResponse
-        schema = CheckCreditResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for checkCredit")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CheckCreditResponse
+            schema = CheckCreditResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for checkCredit")
+                print(e)
 
         
 
@@ -1797,14 +1797,14 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["customerOnboard"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/credit-onboard/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import CustomerOnboardingResponse
-        schema = CustomerOnboardingResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for customerOnboard")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CustomerOnboardingResponse
+            schema = CustomerOnboardingResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for customerOnboard")
+                print(e)
 
         
 

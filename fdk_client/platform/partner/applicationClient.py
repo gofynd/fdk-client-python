@@ -19,7 +19,7 @@ class Partner:
         """
         payload = {}
         
-        if extension_id:
+        if extension_id is not None:
             payload["extension_id"] = extension_id
         
 
@@ -43,13 +43,14 @@ class Partner:
 
         
 
-        from .models import getProxyPathRes
-        schema = getProxyPathRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getProxyPath")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import getProxyPathRes
+            schema = getProxyPathRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProxyPath")
+                print(e)
 
         
 
@@ -61,7 +62,7 @@ class Partner:
         """
         payload = {}
         
-        if extension_id:
+        if extension_id is not None:
             payload["extension_id"] = extension_id
         
 
@@ -90,13 +91,14 @@ class Partner:
 
         
 
-        from .models import AddProxyResponse
-        schema = AddProxyResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for addProxyPath")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AddProxyResponse
+            schema = AddProxyResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for addProxyPath")
+                print(e)
 
         
 
@@ -109,10 +111,10 @@ class Partner:
         """
         payload = {}
         
-        if extension_id:
+        if extension_id is not None:
             payload["extension_id"] = extension_id
         
-        if attached_path:
+        if attached_path is not None:
             payload["attached_path"] = attached_path
         
 
@@ -136,13 +138,14 @@ class Partner:
 
         
 
-        from .models import AddProxyResponse
-        schema = AddProxyResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getProxyPathAttachedPath")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AddProxyResponse
+            schema = AddProxyResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProxyPathAttachedPath")
+                print(e)
 
         
 
@@ -155,10 +158,10 @@ class Partner:
         """
         payload = {}
         
-        if extension_id:
+        if extension_id is not None:
             payload["extension_id"] = extension_id
         
-        if attached_path:
+        if attached_path is not None:
             payload["attached_path"] = attached_path
         
 
@@ -182,13 +185,14 @@ class Partner:
 
         
 
-        from .models import RemoveProxyResponse
-        schema = RemoveProxyResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for removeProxyPath")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import RemoveProxyResponse
+            schema = RemoveProxyResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for removeProxyPath")
+                print(e)
 
         
 

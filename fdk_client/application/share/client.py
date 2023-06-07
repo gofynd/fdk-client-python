@@ -57,14 +57,14 @@ class Share:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getApplicationQRCode"]).netloc, "post", await create_url_without_domain("/service/application/share/v1.0/qr/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import QRCodeResp
-        schema = QRCodeResp()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getApplicationQRCode")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import QRCodeResp
+            schema = QRCodeResp()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getApplicationQRCode")
+                print(e)
 
         
 
@@ -76,7 +76,7 @@ class Share:
         """
         payload = {}
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
         # Parameter validation
@@ -100,14 +100,14 @@ class Share:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductQRCodeBySlug"]).netloc, "post", await create_url_without_domain("/service/application/share/v1.0/qr/products/{slug}/", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import QRCodeResp
-        schema = QRCodeResp()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getProductQRCodeBySlug")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import QRCodeResp
+            schema = QRCodeResp()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProductQRCodeBySlug")
+                print(e)
 
         
 
@@ -119,7 +119,7 @@ class Share:
         """
         payload = {}
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
         # Parameter validation
@@ -143,14 +143,14 @@ class Share:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCollectionQRCodeBySlug"]).netloc, "post", await create_url_without_domain("/service/application/share/v1.0/qr/collection/{slug}/", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import QRCodeResp
-        schema = QRCodeResp()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCollectionQRCodeBySlug")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import QRCodeResp
+            schema = QRCodeResp()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCollectionQRCodeBySlug")
+                print(e)
 
         
 
@@ -162,7 +162,7 @@ class Share:
         """
         payload = {}
         
-        if url:
+        if url is not None:
             payload["url"] = url
         
         # Parameter validation
@@ -186,14 +186,14 @@ class Share:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getUrlQRCode"]).netloc, "post", await create_url_without_domain("/service/application/share/v1.0/qr/url/", url=url), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import QRCodeResp
-        schema = QRCodeResp()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getUrlQRCode")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import QRCodeResp
+            schema = QRCodeResp()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getUrlQRCode")
+                print(e)
 
         
 
@@ -230,14 +230,14 @@ class Share:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["createShortLink"]).netloc, "post", await create_url_without_domain("/service/application/share/v1.0/links/short-link/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import ShortLinkRes
-        schema = ShortLinkRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createShortLink")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ShortLinkRes
+            schema = ShortLinkRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createShortLink")
+                print(e)
 
         
 
@@ -249,7 +249,7 @@ class Share:
         """
         payload = {}
         
-        if hash:
+        if hash is not None:
             payload["hash"] = hash
         
         # Parameter validation
@@ -273,14 +273,14 @@ class Share:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getShortLinkByHash"]).netloc, "get", await create_url_without_domain("/service/application/share/v1.0/links/short-link/{hash}/", hash=hash), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import ShortLinkRes
-        schema = ShortLinkRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getShortLinkByHash")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ShortLinkRes
+            schema = ShortLinkRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getShortLinkByHash")
+                print(e)
 
         
 
@@ -292,7 +292,7 @@ class Share:
         """
         payload = {}
         
-        if hash:
+        if hash is not None:
             payload["hash"] = hash
         
         # Parameter validation
@@ -316,14 +316,14 @@ class Share:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getOriginalShortLinkByHash"]).netloc, "get", await create_url_without_domain("/service/application/share/v1.0/links/short-link/{hash}/original/", hash=hash), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import ShortLinkRes
-        schema = ShortLinkRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getOriginalShortLinkByHash")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ShortLinkRes
+            schema = ShortLinkRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getOriginalShortLinkByHash")
+                print(e)
 
         
 

@@ -63,22 +63,22 @@ class Cart:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
-        if i:
+        if i is not None:
             payload["i"] = i
         
-        if b:
+        if b is not None:
             payload["b"] = b
         
-        if assign_card_id:
+        if assign_card_id is not None:
             payload["assign_card_id"] = assign_card_id
         
-        if area_code:
+        if area_code is not None:
             payload["area_code"] = area_code
         
-        if buy_now:
+        if buy_now is not None:
             payload["buy_now"] = buy_now
         
         # Parameter validation
@@ -102,14 +102,14 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCart"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/detail", id=id, i=i, b=b, assign_card_id=assign_card_id, area_code=area_code, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import CartDetailResponse
-        schema = CartDetailResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCart")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CartDetailResponse
+            schema = CartDetailResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCart")
+                print(e)
 
         
 
@@ -121,7 +121,7 @@ class Cart:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
         # Parameter validation
@@ -158,19 +158,19 @@ class Cart:
         """
         payload = {}
         
-        if i:
+        if i is not None:
             payload["i"] = i
         
-        if b:
+        if b is not None:
             payload["b"] = b
         
-        if area_code:
+        if area_code is not None:
             payload["area_code"] = area_code
         
-        if buy_now:
+        if buy_now is not None:
             payload["buy_now"] = buy_now
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
         # Parameter validation
@@ -199,14 +199,14 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["addItems"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/detail", i=i, b=b, area_code=area_code, buy_now=buy_now, id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import AddCartDetailResponse
-        schema = AddCartDetailResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for addItems")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AddCartDetailResponse
+            schema = AddCartDetailResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for addItems")
+                print(e)
 
         
 
@@ -222,19 +222,19 @@ class Cart:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
-        if i:
+        if i is not None:
             payload["i"] = i
         
-        if b:
+        if b is not None:
             payload["b"] = b
         
-        if area_code:
+        if area_code is not None:
             payload["area_code"] = area_code
         
-        if buy_now:
+        if buy_now is not None:
             payload["buy_now"] = buy_now
         
         # Parameter validation
@@ -263,14 +263,14 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["updateCart"]).netloc, "put", await create_url_without_domain("/service/application/cart/v1.0/detail", id=id, i=i, b=b, area_code=area_code, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import UpdateCartDetailResponse
-        schema = UpdateCartDetailResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateCart")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UpdateCartDetailResponse
+            schema = UpdateCartDetailResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateCart")
+                print(e)
 
         
 
@@ -282,7 +282,7 @@ class Cart:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
         # Parameter validation
@@ -306,14 +306,14 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["deleteCart"]).netloc, "put", await create_url_without_domain("/service/application/cart/v1.0/cart_archive", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import DeleteCartDetailResponse
-        schema = DeleteCartDetailResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteCart")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DeleteCartDetailResponse
+            schema = DeleteCartDetailResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteCart")
+                print(e)
 
         
 
@@ -326,10 +326,10 @@ class Cart:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
-        if buy_now:
+        if buy_now is not None:
             payload["buy_now"] = buy_now
         
         # Parameter validation
@@ -353,14 +353,14 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getItemCount"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/basic", id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import CartItemCountResponse
-        schema = CartItemCountResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getItemCount")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CartItemCountResponse
+            schema = CartItemCountResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getItemCount")
+                print(e)
 
         
 
@@ -373,10 +373,10 @@ class Cart:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
-        if buy_now:
+        if buy_now is not None:
             payload["buy_now"] = buy_now
         
         # Parameter validation
@@ -400,14 +400,14 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCoupons"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/coupon", id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import GetCouponResponse
-        schema = GetCouponResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCoupons")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetCouponResponse
+            schema = GetCouponResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCoupons")
+                print(e)
 
         
 
@@ -423,19 +423,19 @@ class Cart:
         """
         payload = {}
         
-        if i:
+        if i is not None:
             payload["i"] = i
         
-        if b:
+        if b is not None:
             payload["b"] = b
         
-        if p:
+        if p is not None:
             payload["p"] = p
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
-        if buy_now:
+        if buy_now is not None:
             payload["buy_now"] = buy_now
         
         # Parameter validation
@@ -464,14 +464,14 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["applyCoupon"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/coupon", i=i, b=b, p=p, id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import CartDetailResponse
-        schema = CartDetailResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for applyCoupon")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CartDetailResponse
+            schema = CartDetailResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for applyCoupon")
+                print(e)
 
         
 
@@ -484,10 +484,10 @@ class Cart:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
-        if buy_now:
+        if buy_now is not None:
             payload["buy_now"] = buy_now
         
         # Parameter validation
@@ -511,14 +511,14 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["removeCoupon"]).netloc, "delete", await create_url_without_domain("/service/application/cart/v1.0/coupon", id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import CartDetailResponse
-        schema = CartDetailResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for removeCoupon")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CartDetailResponse
+            schema = CartDetailResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for removeCoupon")
+                print(e)
 
         
 
@@ -533,16 +533,16 @@ class Cart:
         """
         payload = {}
         
-        if item_id:
+        if item_id is not None:
             payload["item_id"] = item_id
         
-        if article_id:
+        if article_id is not None:
             payload["article_id"] = article_id
         
-        if uid:
+        if uid is not None:
             payload["uid"] = uid
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
         # Parameter validation
@@ -566,14 +566,14 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getBulkDiscountOffers"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/bulk-price", item_id=item_id, article_id=article_id, uid=uid, slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import BulkPriceResponse
-        schema = BulkPriceResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getBulkDiscountOffers")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BulkPriceResponse
+            schema = BulkPriceResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getBulkDiscountOffers")
+                print(e)
 
         
 
@@ -588,16 +588,16 @@ class Cart:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
-        if i:
+        if i is not None:
             payload["i"] = i
         
-        if b:
+        if b is not None:
             payload["b"] = b
         
-        if buy_now:
+        if buy_now is not None:
             payload["buy_now"] = buy_now
         
         # Parameter validation
@@ -626,14 +626,14 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["applyRewardPoints"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/redeem/points/", id=id, i=i, b=b, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import CartDetailResponse
-        schema = CartDetailResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for applyRewardPoints")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CartDetailResponse
+            schema = CartDetailResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for applyRewardPoints")
+                print(e)
 
         
 
@@ -650,22 +650,22 @@ class Cart:
         """
         payload = {}
         
-        if cart_id:
+        if cart_id is not None:
             payload["cart_id"] = cart_id
         
-        if buy_now:
+        if buy_now is not None:
             payload["buy_now"] = buy_now
         
-        if mobile_no:
+        if mobile_no is not None:
             payload["mobile_no"] = mobile_no
         
-        if checkout_mode:
+        if checkout_mode is not None:
             payload["checkout_mode"] = checkout_mode
         
-        if tags:
+        if tags is not None:
             payload["tags"] = tags
         
-        if is_default:
+        if is_default is not None:
             payload["is_default"] = is_default
         
         # Parameter validation
@@ -689,14 +689,14 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAddresses"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/address", cart_id=cart_id, buy_now=buy_now, mobile_no=mobile_no, checkout_mode=checkout_mode, tags=tags, is_default=is_default), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import GetAddressesResponse
-        schema = GetAddressesResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAddresses")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetAddressesResponse
+            schema = GetAddressesResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAddresses")
+                print(e)
 
         
 
@@ -733,14 +733,14 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["addAddress"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/address", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import SaveAddressResponse
-        schema = SaveAddressResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for addAddress")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SaveAddressResponse
+            schema = SaveAddressResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for addAddress")
+                print(e)
 
         
 
@@ -758,25 +758,25 @@ class Cart:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
-        if cart_id:
+        if cart_id is not None:
             payload["cart_id"] = cart_id
         
-        if buy_now:
+        if buy_now is not None:
             payload["buy_now"] = buy_now
         
-        if mobile_no:
+        if mobile_no is not None:
             payload["mobile_no"] = mobile_no
         
-        if checkout_mode:
+        if checkout_mode is not None:
             payload["checkout_mode"] = checkout_mode
         
-        if tags:
+        if tags is not None:
             payload["tags"] = tags
         
-        if is_default:
+        if is_default is not None:
             payload["is_default"] = is_default
         
         # Parameter validation
@@ -800,14 +800,14 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAddressById"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/address/{id}", id=id, cart_id=cart_id, buy_now=buy_now, mobile_no=mobile_no, checkout_mode=checkout_mode, tags=tags, is_default=is_default), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import Address
-        schema = Address()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAddressById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Address
+            schema = Address()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAddressById")
+                print(e)
 
         
 
@@ -819,7 +819,7 @@ class Cart:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
         # Parameter validation
@@ -848,14 +848,14 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["updateAddress"]).netloc, "put", await create_url_without_domain("/service/application/cart/v1.0/address/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import UpdateAddressResponse
-        schema = UpdateAddressResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateAddress")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UpdateAddressResponse
+            schema = UpdateAddressResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateAddress")
+                print(e)
 
         
 
@@ -867,7 +867,7 @@ class Cart:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
         # Parameter validation
@@ -891,14 +891,14 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["removeAddress"]).netloc, "delete", await create_url_without_domain("/service/application/cart/v1.0/address/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import DeleteAddressResponse
-        schema = DeleteAddressResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for removeAddress")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DeleteAddressResponse
+            schema = DeleteAddressResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for removeAddress")
+                print(e)
 
         
 
@@ -913,16 +913,16 @@ class Cart:
         """
         payload = {}
         
-        if cart_id:
+        if cart_id is not None:
             payload["cart_id"] = cart_id
         
-        if buy_now:
+        if buy_now is not None:
             payload["buy_now"] = buy_now
         
-        if i:
+        if i is not None:
             payload["i"] = i
         
-        if b:
+        if b is not None:
             payload["b"] = b
         
         # Parameter validation
@@ -951,14 +951,14 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["selectAddress"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/select-address", cart_id=cart_id, buy_now=buy_now, i=i, b=b), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import CartDetailResponse
-        schema = CartDetailResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for selectAddress")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CartDetailResponse
+            schema = CartDetailResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for selectAddress")
+                print(e)
 
         
 
@@ -971,10 +971,10 @@ class Cart:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
-        if buy_now:
+        if buy_now is not None:
             payload["buy_now"] = buy_now
         
         # Parameter validation
@@ -1003,14 +1003,14 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["selectPaymentMode"]).netloc, "put", await create_url_without_domain("/service/application/cart/v1.0/payment", id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import CartDetailResponse
-        schema = CartDetailResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for selectPaymentMode")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CartDetailResponse
+            schema = CartDetailResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for selectPaymentMode")
+                print(e)
 
         
 
@@ -1028,25 +1028,25 @@ class Cart:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
-        if buy_now:
+        if buy_now is not None:
             payload["buy_now"] = buy_now
         
-        if address_id:
+        if address_id is not None:
             payload["address_id"] = address_id
         
-        if payment_mode:
+        if payment_mode is not None:
             payload["payment_mode"] = payment_mode
         
-        if payment_identifier:
+        if payment_identifier is not None:
             payload["payment_identifier"] = payment_identifier
         
-        if aggregator_name:
+        if aggregator_name is not None:
             payload["aggregator_name"] = aggregator_name
         
-        if merchant_code:
+        if merchant_code is not None:
             payload["merchant_code"] = merchant_code
         
         # Parameter validation
@@ -1070,14 +1070,14 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["validateCouponForPayment"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/payment/validate/", id=id, buy_now=buy_now, address_id=address_id, payment_mode=payment_mode, payment_identifier=payment_identifier, aggregator_name=aggregator_name, merchant_code=merchant_code), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import PaymentCouponValidate
-        schema = PaymentCouponValidate()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for validateCouponForPayment")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PaymentCouponValidate
+            schema = PaymentCouponValidate()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for validateCouponForPayment")
+                print(e)
 
         
 
@@ -1093,19 +1093,19 @@ class Cart:
         """
         payload = {}
         
-        if p:
+        if p is not None:
             payload["p"] = p
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
-        if buy_now:
+        if buy_now is not None:
             payload["buy_now"] = buy_now
         
-        if address_id:
+        if address_id is not None:
             payload["address_id"] = address_id
         
-        if area_code:
+        if area_code is not None:
             payload["area_code"] = area_code
         
         # Parameter validation
@@ -1129,14 +1129,14 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getShipments"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/shipment", p=p, id=id, buy_now=buy_now, address_id=address_id, area_code=area_code), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import CartShipmentsResponse
-        schema = CartShipmentsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getShipments")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CartShipmentsResponse
+            schema = CartShipmentsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getShipments")
+                print(e)
 
         
 
@@ -1148,7 +1148,7 @@ class Cart:
         """
         payload = {}
         
-        if buy_now:
+        if buy_now is not None:
             payload["buy_now"] = buy_now
         
         # Parameter validation
@@ -1177,14 +1177,14 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["checkoutCart"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/checkout", buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import CartCheckoutResponse
-        schema = CartCheckoutResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for checkoutCart")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CartCheckoutResponse
+            schema = CartCheckoutResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for checkoutCart")
+                print(e)
 
         
 
@@ -1197,10 +1197,10 @@ class Cart:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
-        if buy_now:
+        if buy_now is not None:
             payload["buy_now"] = buy_now
         
         # Parameter validation
@@ -1229,14 +1229,14 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["updateCartMeta"]).netloc, "put", await create_url_without_domain("/service/application/cart/v1.0/meta", id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import CartMetaResponse
-        schema = CartMetaResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateCartMeta")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CartMetaResponse
+            schema = CartMetaResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateCartMeta")
+                print(e)
 
         
 
@@ -1273,14 +1273,14 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCartShareLink"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/share-cart", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import GetShareCartLinkResponse
-        schema = GetShareCartLinkResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCartShareLink")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetShareCartLinkResponse
+            schema = GetShareCartLinkResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCartShareLink")
+                print(e)
 
         
 
@@ -1292,7 +1292,7 @@ class Cart:
         """
         payload = {}
         
-        if token:
+        if token is not None:
             payload["token"] = token
         
         # Parameter validation
@@ -1316,14 +1316,14 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCartSharedItems"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/share-cart/{token}", token=token), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import SharedCartResponse
-        schema = SharedCartResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCartSharedItems")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SharedCartResponse
+            schema = SharedCartResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCartSharedItems")
+                print(e)
 
         
 
@@ -1336,10 +1336,10 @@ class Cart:
         """
         payload = {}
         
-        if token:
+        if token is not None:
             payload["token"] = token
         
-        if action:
+        if action is not None:
             payload["action"] = action
         
         # Parameter validation
@@ -1363,14 +1363,14 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["updateCartWithSharedItems"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/share-cart/{token}/{action}", token=token, action=action), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import SharedCartResponse
-        schema = SharedCartResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateCartWithSharedItems")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SharedCartResponse
+            schema = SharedCartResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateCartWithSharedItems")
+                print(e)
 
         
 
@@ -1385,16 +1385,16 @@ class Cart:
         """
         payload = {}
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if promotion_group:
+        if promotion_group is not None:
             payload["promotion_group"] = promotion_group
         
-        if store_id:
+        if store_id is not None:
             payload["store_id"] = store_id
         
         # Parameter validation
@@ -1418,14 +1418,14 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPromotionOffers"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/available-promotions", slug=slug, page_size=page_size, promotion_group=promotion_group, store_id=store_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import PromotionOffersResponse
-        schema = PromotionOffersResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getPromotionOffers")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PromotionOffersResponse
+            schema = PromotionOffersResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPromotionOffers")
+                print(e)
 
         
 
@@ -1440,16 +1440,16 @@ class Cart:
         """
         payload = {}
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
-        if store_id:
+        if store_id is not None:
             payload["store_id"] = store_id
         
-        if promotion_id:
+        if promotion_id is not None:
             payload["promotion_id"] = promotion_id
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
         # Parameter validation
@@ -1473,14 +1473,14 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getLadderOffers"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/available-ladder-prices", slug=slug, store_id=store_id, promotion_id=promotion_id, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import LadderPriceOffers
-        schema = LadderPriceOffers()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getLadderOffers")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import LadderPriceOffers
+            schema = LadderPriceOffers()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getLadderOffers")
+                print(e)
 
         
 
@@ -1492,7 +1492,7 @@ class Cart:
         """
         payload = {}
         
-        if buy_now:
+        if buy_now is not None:
             payload["buy_now"] = buy_now
         
         # Parameter validation
@@ -1521,14 +1521,14 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["checkoutCartV2"]).netloc, "post", await create_url_without_domain("/service/application/cart/v2.0/checkout", buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import CartCheckoutResponse
-        schema = CartCheckoutResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for checkoutCartV2")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CartCheckoutResponse
+            schema = CartCheckoutResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for checkoutCartV2")
+                print(e)
 
         
 

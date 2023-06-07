@@ -19,7 +19,7 @@ class Configuration:
         """
         payload = {}
         
-        if platform_type:
+        if platform_type is not None:
             payload["platform_type"] = platform_type
         
 
@@ -43,13 +43,14 @@ class Configuration:
 
         
 
-        from .models import MobileAppConfiguration
-        schema = MobileAppConfiguration()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getBuildConfig")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import MobileAppConfiguration
+            schema = MobileAppConfiguration()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getBuildConfig")
+                print(e)
 
         
 
@@ -61,7 +62,7 @@ class Configuration:
         """
         payload = {}
         
-        if platform_type:
+        if platform_type is not None:
             payload["platform_type"] = platform_type
         
 
@@ -90,13 +91,14 @@ class Configuration:
 
         
 
-        from .models import MobileAppConfiguration
-        schema = MobileAppConfiguration()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateBuildConfig")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import MobileAppConfiguration
+            schema = MobileAppConfiguration()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateBuildConfig")
+                print(e)
 
         
 
@@ -108,7 +110,7 @@ class Configuration:
         """
         payload = {}
         
-        if platform_type:
+        if platform_type is not None:
             payload["platform_type"] = platform_type
         
 
@@ -132,13 +134,14 @@ class Configuration:
 
         
 
-        from .models import BuildVersionHistory
-        schema = BuildVersionHistory()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getPreviousVersions")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BuildVersionHistory
+            schema = BuildVersionHistory()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPreviousVersions")
+                print(e)
 
         
 
@@ -170,13 +173,14 @@ class Configuration:
 
         
 
-        from .models import AppFeatureResponse
-        schema = AppFeatureResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAppFeatures")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AppFeatureResponse
+            schema = AppFeatureResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAppFeatures")
+                print(e)
 
         
 
@@ -213,13 +217,14 @@ class Configuration:
 
         
 
-        from .models import AppFeature
-        schema = AppFeature()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateAppFeatures")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AppFeature
+            schema = AppFeature()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateAppFeatures")
+                print(e)
 
         
 
@@ -256,13 +261,14 @@ class Configuration:
 
         
 
-        from .models import AppFeature
-        schema = AppFeature()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for modifyAppFeatures")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AppFeature
+            schema = AppFeature()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for modifyAppFeatures")
+                print(e)
 
         
 
@@ -294,13 +300,14 @@ class Configuration:
 
         
 
-        from .models import ApplicationDetail
-        schema = ApplicationDetail()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAppBasicDetails")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ApplicationDetail
+            schema = ApplicationDetail()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAppBasicDetails")
+                print(e)
 
         
 
@@ -337,13 +344,14 @@ class Configuration:
 
         
 
-        from .models import ApplicationDetail
-        schema = ApplicationDetail()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateAppBasicDetails")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ApplicationDetail
+            schema = ApplicationDetail()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateAppBasicDetails")
+                print(e)
 
         
 
@@ -375,13 +383,14 @@ class Configuration:
 
         
 
-        from .models import ApplicationInformation
-        schema = ApplicationInformation()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAppContactInfo")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ApplicationInformation
+            schema = ApplicationInformation()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAppContactInfo")
+                print(e)
 
         
 
@@ -418,13 +427,14 @@ class Configuration:
 
         
 
-        from .models import ApplicationInformation
-        schema = ApplicationInformation()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateAppContactInfo")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ApplicationInformation
+            schema = ApplicationInformation()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateAppContactInfo")
+                print(e)
 
         
 
@@ -456,13 +466,14 @@ class Configuration:
 
         
 
-        from .models import TokenResponse
-        schema = TokenResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAppApiTokens")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TokenResponse
+            schema = TokenResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAppApiTokens")
+                print(e)
 
         
 
@@ -499,13 +510,14 @@ class Configuration:
 
         
 
-        from .models import TokenResponse
-        schema = TokenResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateAppApiTokens")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TokenResponse
+            schema = TokenResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateAppApiTokens")
+                print(e)
 
         
 
@@ -519,13 +531,13 @@ class Configuration:
         """
         payload = {}
         
-        if uid:
+        if uid is not None:
             payload["uid"] = uid
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -549,13 +561,14 @@ class Configuration:
 
         
 
-        from .models import CompaniesResponse
-        schema = CompaniesResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAppCompanies")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CompaniesResponse
+            schema = CompaniesResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAppCompanies")
+                print(e)
 
         
 
@@ -568,10 +581,10 @@ class Configuration:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -595,13 +608,14 @@ class Configuration:
 
         
 
-        from .models import StoresResponse
-        schema = StoresResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAppStores")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import StoresResponse
+            schema = StoresResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAppStores")
+                print(e)
 
         
 
@@ -633,13 +647,14 @@ class Configuration:
 
         
 
-        from .models import ApplicationInventory
-        schema = ApplicationInventory()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getInventoryConfig")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ApplicationInventory
+            schema = ApplicationInventory()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getInventoryConfig")
+                print(e)
 
         
 
@@ -676,13 +691,14 @@ class Configuration:
 
         
 
-        from .models import ApplicationInventory
-        schema = ApplicationInventory()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateInventoryConfig")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ApplicationInventory
+            schema = ApplicationInventory()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateInventoryConfig")
+                print(e)
 
         
 
@@ -719,13 +735,14 @@ class Configuration:
 
         
 
-        from .models import ApplicationInventory
-        schema = ApplicationInventory()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for partiallyUpdateInventoryConfig")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ApplicationInventory
+            schema = ApplicationInventory()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for partiallyUpdateInventoryConfig")
+                print(e)
 
         
 
@@ -757,13 +774,14 @@ class Configuration:
 
         
 
-        from .models import AppSupportedCurrency
-        schema = AppSupportedCurrency()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAppCurrencyConfig")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AppSupportedCurrency
+            schema = AppSupportedCurrency()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAppCurrencyConfig")
+                print(e)
 
         
 
@@ -800,13 +818,14 @@ class Configuration:
 
         
 
-        from .models import AppSupportedCurrency
-        schema = AppSupportedCurrency()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateAppCurrencyConfig")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AppSupportedCurrency
+            schema = AppSupportedCurrency()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateAppCurrencyConfig")
+                print(e)
 
         
 
@@ -838,13 +857,14 @@ class Configuration:
 
         
 
-        from .models import AppCurrencyResponse
-        schema = AppCurrencyResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAppSupportedCurrency")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AppCurrencyResponse
+            schema = AppCurrencyResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAppSupportedCurrency")
+                print(e)
 
         
 
@@ -857,10 +877,10 @@ class Configuration:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -889,13 +909,14 @@ class Configuration:
 
         
 
-        from .models import OrderingStores
-        schema = OrderingStores()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getOrderingStoresByFilter")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OrderingStores
+            schema = OrderingStores()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getOrderingStoresByFilter")
+                print(e)
 
         
 
@@ -932,13 +953,14 @@ class Configuration:
 
         
 
-        from .models import DeploymentMeta
-        schema = DeploymentMeta()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateOrderingStoreConfig")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DeploymentMeta
+            schema = DeploymentMeta()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateOrderingStoreConfig")
+                print(e)
 
         
 
@@ -952,13 +974,13 @@ class Configuration:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
 
@@ -982,13 +1004,14 @@ class Configuration:
 
         
 
-        from .models import OrderingStoresResponse
-        schema = OrderingStoresResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getStaffOrderingStores")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OrderingStoresResponse
+            schema = OrderingStoresResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getStaffOrderingStores")
+                print(e)
 
         
 
@@ -1020,13 +1043,14 @@ class Configuration:
 
         
 
-        from .models import DomainsResponse
-        schema = DomainsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getDomains")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DomainsResponse
+            schema = DomainsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getDomains")
+                print(e)
 
         
 
@@ -1063,13 +1087,14 @@ class Configuration:
 
         
 
-        from .models import Domain
-        schema = Domain()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for addDomain")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Domain
+            schema = Domain()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for addDomain")
+                print(e)
 
         
 
@@ -1081,7 +1106,7 @@ class Configuration:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -1105,13 +1130,14 @@ class Configuration:
 
         
 
-        from .models import SuccessMessageResponse
-        schema = SuccessMessageResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for removeDomainById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessMessageResponse
+            schema = SuccessMessageResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for removeDomainById")
+                print(e)
 
         
 
@@ -1148,13 +1174,14 @@ class Configuration:
 
         
 
-        from .models import DomainsResponse
-        schema = DomainsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for changeDomainType")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DomainsResponse
+            schema = DomainsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for changeDomainType")
+                print(e)
 
         
 
@@ -1191,13 +1218,14 @@ class Configuration:
 
         
 
-        from .models import DomainStatusResponse
-        schema = DomainStatusResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getDomainStatus")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DomainStatusResponse
+            schema = DomainStatusResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getDomainStatus")
+                print(e)
 
         
 
@@ -1229,13 +1257,14 @@ class Configuration:
 
         
 
-        from .models import Application
-        schema = Application()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getApplicationById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Application
+            schema = Application()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getApplicationById")
+                print(e)
 
         
 

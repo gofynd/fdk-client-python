@@ -43,13 +43,14 @@ class Finance:
 
         
 
-        from .models import GenerateReportJson
-        schema = GenerateReportJson()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for generateReport")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GenerateReportJson
+            schema = GenerateReportJson()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for generateReport")
+                print(e)
 
         
 
@@ -86,13 +87,14 @@ class Finance:
 
         
 
-        from .models import DownloadReportList
-        schema = DownloadReportList()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for downloadReport")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DownloadReportList
+            schema = DownloadReportList()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for downloadReport")
+                print(e)
 
         
 
@@ -129,13 +131,14 @@ class Finance:
 
         
 
-        from .models import GetEngineResponse
-        schema = GetEngineResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getData")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetEngineResponse
+            schema = GetEngineResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getData")
+                print(e)
 
         
 
@@ -172,13 +175,14 @@ class Finance:
 
         
 
-        from .models import GetReasonResponse
-        schema = GetReasonResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getReason")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetReasonResponse
+            schema = GetReasonResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getReason")
+                print(e)
 
         
 
@@ -215,13 +219,14 @@ class Finance:
 
         
 
-        from .models import GetEngineResponse
-        schema = GetEngineResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getReportList")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetEngineResponse
+            schema = GetEngineResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getReportList")
+                print(e)
 
         
 
@@ -258,13 +263,14 @@ class Finance:
 
         
 
-        from .models import GetAffiliateResponse
-        schema = GetAffiliateResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAffiliate")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetAffiliateResponse
+            schema = GetAffiliateResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAffiliate")
+                print(e)
 
         
 
@@ -301,13 +307,14 @@ class Finance:
 
         
 
-        from .models import DownloadCreditDebitNoteResponse
-        schema = DownloadCreditDebitNoteResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for downloadCreditDebitNote")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DownloadCreditDebitNoteResponse
+            schema = DownloadCreditDebitNoteResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for downloadCreditDebitNote")
+                print(e)
 
         
 
@@ -344,13 +351,14 @@ class Finance:
 
         
 
-        from .models import PaymentProcessResponse
-        schema = PaymentProcessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for paymentProcess")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PaymentProcessResponse
+            schema = PaymentProcessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for paymentProcess")
+                print(e)
 
         
 
@@ -387,13 +395,14 @@ class Finance:
 
         
 
-        from .models import GetInvoiceListResponse
-        schema = GetInvoiceListResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getInvoiceList")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetInvoiceListResponse
+            schema = GetInvoiceListResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getInvoiceList")
+                print(e)
 
         
 
@@ -430,13 +439,14 @@ class Finance:
 
         
 
-        from .models import InvoiceListingResponse
-        schema = InvoiceListingResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for invoiceListing")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import InvoiceListingResponse
+            schema = InvoiceListingResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for invoiceListing")
+                print(e)
 
         
 
@@ -473,13 +483,14 @@ class Finance:
 
         
 
-        from .models import InvoicePdfResponse
-        schema = InvoicePdfResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for invoicePDF")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import InvoicePdfResponse
+            schema = InvoicePdfResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for invoicePDF")
+                print(e)
 
         
 
