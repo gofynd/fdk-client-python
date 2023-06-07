@@ -86,10 +86,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
-        
         
     
     
@@ -109,19 +105,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         
     
@@ -131,20 +114,7 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
         
-        
-        
-        
-    
-    
-        
-        
-        
-        
-    
-    
         
         
         
@@ -157,6 +127,38 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
         
         
         
@@ -408,6 +410,8 @@ class OrderValidator:
         
         dp_ids = fields.Str(required=False)
         
+        stores = fields.Str(required=False)
+        
         sales_channels = fields.Str(required=False)
         
         page_no = fields.Int(required=False)
@@ -577,6 +581,8 @@ class OrderValidator:
         company_id = fields.Int(required=False)
         
         order_id = fields.Str(required=False)
+        
+        shipment_id = fields.Str(required=False)
         
         document_type = fields.Str(required=False)
          
