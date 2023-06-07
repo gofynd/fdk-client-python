@@ -1061,13 +1061,13 @@ class Order:
 
         return response
     
-    async def click2Call(self, caller=None, receiver=None, bag_id=None, calling_to=None, caller_id=None):
+    async def click2Call(self, caller=None, receiver=None, bag_id=None, caller_id=None, method=None):
         """
-        :param caller :  : type string
-        :param receiver :  : type string
-        :param bag_id :  : type string
-        :param calling_to :  : type string
-        :param caller_id :  : type string
+        :param caller : Call Number : type string
+        :param receiver : Receiver Number : type string
+        :param bag_id : Bag Id for the query : type string
+        :param caller_id : Caller Id : type string
+        :param method : Provider Method to Call : type string
         """
         payload = {}
         
@@ -1080,11 +1080,11 @@ class Order:
         if bag_id:
             payload["bag_id"] = bag_id
         
-        if calling_to:
-            payload["calling_to"] = calling_to
-        
         if caller_id:
             payload["caller_id"] = caller_id
+        
+        if method:
+            payload["method"] = method
         
 
         # Parameter validation
@@ -1092,8 +1092,8 @@ class Order:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/ninja/click2call", """{"required":[{"in":"query","name":"caller","required":true,"schema":{"type":"string"}},{"in":"query","name":"receiver","required":true,"schema":{"type":"string"}},{"in":"query","name":"bag_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"calling_to","required":false,"schema":{"type":"string"}},{"in":"query","name":"caller_id","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","name":"caller","required":true,"schema":{"type":"string"}},{"in":"query","name":"receiver","required":true,"schema":{"type":"string"}},{"in":"query","name":"bag_id","required":true,"schema":{"type":"string"}},{"in":"query","name":"calling_to","required":false,"schema":{"type":"string"}},{"in":"query","name":"caller_id","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", caller=caller, receiver=receiver, bag_id=bag_id, calling_to=calling_to, caller_id=caller_id, )
-        query_string = await create_query_string(caller=caller, receiver=receiver, bag_id=bag_id, calling_to=calling_to, caller_id=caller_id, )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/ninja/click2call", """{"required":[{"in":"query","name":"caller","required":true,"description":"Call Number","schema":{"type":"string"}},{"in":"query","name":"receiver","required":true,"description":"Receiver Number","schema":{"type":"string"}},{"in":"query","name":"bag_id","required":true,"description":"Bag Id for the query","schema":{"type":"string"}},{"in":"path","name":"company_id","required":true,"description":"Company Id","schema":{"type":"integer"}}],"optional":[{"in":"query","name":"caller_id","required":false,"description":"Caller Id","schema":{"type":"string"}},{"in":"query","name":"method","required":false,"description":"Provider Method to Call","schema":{"type":"string","example":"dial.click2call"}}],"query":[{"in":"query","name":"caller","required":true,"description":"Call Number","schema":{"type":"string"}},{"in":"query","name":"receiver","required":true,"description":"Receiver Number","schema":{"type":"string"}},{"in":"query","name":"bag_id","required":true,"description":"Bag Id for the query","schema":{"type":"string"}},{"in":"query","name":"caller_id","required":false,"description":"Caller Id","schema":{"type":"string"}},{"in":"query","name":"method","required":false,"description":"Provider Method to Call","schema":{"type":"string","example":"dial.click2call"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"description":"Company Id","schema":{"type":"integer"}}]}""", caller=caller, receiver=receiver, bag_id=bag_id, caller_id=caller_id, method=method, )
+        query_string = await create_query_string(caller=caller, receiver=receiver, bag_id=bag_id, caller_id=caller_id, method=method, )
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -1103,7 +1103,7 @@ class Order:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/ninja/click2call", caller=caller, receiver=receiver, bag_id=bag_id, calling_to=calling_to, caller_id=caller_id, ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/ninja/click2call", caller=caller, receiver=receiver, bag_id=bag_id, caller_id=caller_id, method=method, ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
 
@@ -1286,6 +1286,52 @@ class Order:
 
         return response
     
+    async def getShipmentHistory(self, shipment_id=None, bag_id=None):
+        """
+        :param shipment_id : Shipment Id : type string
+        :param bag_id : Bag/Product Id : type integer
+        """
+        payload = {}
+        
+        if shipment_id:
+            payload["shipment_id"] = shipment_id
+        
+        if bag_id:
+            payload["bag_id"] = bag_id
+        
+
+        # Parameter validation
+        schema = OrderValidator.getShipmentHistory()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/history", """{"required":[{"in":"path","name":"company_id","required":true,"description":"Company Id","schema":{"type":"integer"}}],"optional":[{"in":"query","name":"shipment_id","description":"Shipment Id","required":false,"schema":{"type":"string"}},{"in":"query","name":"bag_id","description":"Bag/Product Id","required":false,"schema":{"type":"integer"}}],"query":[{"in":"query","name":"shipment_id","description":"Shipment Id","required":false,"schema":{"type":"string"}},{"in":"query","name":"bag_id","description":"Bag/Product Id","required":false,"schema":{"type":"integer"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"description":"Company Id","schema":{"type":"integer"}}]}""", shipment_id=shipment_id, bag_id=bag_id)
+        query_string = await create_query_string(shipment_id=shipment_id, bag_id=bag_id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/history", shipment_id=shipment_id, bag_id=bag_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        from .models import ShipmentHistoryResponse
+        schema = ShipmentHistoryResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getShipmentHistory")
+            print(e)
+
+        
+
+        return response
+    
     async def postShipmentHistory(self, body=""):
         """
         """
@@ -1329,52 +1375,6 @@ class Order:
 
         return response
     
-    async def getShipmentHistory(self, shipment_id=None, bag_id=None):
-        """
-        :param shipment_id :  : type integer
-        :param bag_id :  : type integer
-        """
-        payload = {}
-        
-        if shipment_id:
-            payload["shipment_id"] = shipment_id
-        
-        if bag_id:
-            payload["bag_id"] = bag_id
-        
-
-        # Parameter validation
-        schema = OrderValidator.getShipmentHistory()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/history", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"shipment_id","required":false,"schema":{"type":"integer"}},{"in":"query","name":"bag_id","required":false,"schema":{"type":"integer"}}],"query":[{"in":"query","name":"shipment_id","required":false,"schema":{"type":"integer"}},{"in":"query","name":"bag_id","required":false,"schema":{"type":"integer"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", shipment_id=shipment_id, bag_id=bag_id)
-        query_string = await create_query_string(shipment_id=shipment_id, bag_id=bag_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/history", shipment_id=shipment_id, bag_id=bag_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        from .models import ShipmentHistoryResponse
-        schema = ShipmentHistoryResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getShipmentHistory")
-            print(e)
-
-        
-
-        return response
-    
     async def sendSmsNinja(self, body=""):
         """
         """
@@ -1391,7 +1391,7 @@ class Order:
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/ninja/send-sms", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/ninja/send-sms", """{"required":[{"in":"path","name":"company_id","required":true,"description":"Company Id","schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"description":"Company Id","schema":{"type":"integer"}}]}""", )
         query_string = await create_query_string()
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -1412,49 +1412,6 @@ class Order:
             schema.dump(schema.load(response))
         except Exception as e:
             print("Response Validation failed for sendSmsNinja")
-            print(e)
-
-        
-
-        return response
-    
-    async def platformManualAssignDPToShipment(self, body=""):
-        """
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = OrderValidator.platformManualAssignDPToShipment()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import ManualAssignDPToShipment
-        schema = ManualAssignDPToShipment()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/oms/manual-place-shipment", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
-        query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/oms/manual-place-shipment", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        
-
-        from .models import ManualAssignDPToShipmentResponse
-        schema = ManualAssignDPToShipmentResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for platformManualAssignDPToShipment")
             print(e)
 
         
@@ -1547,6 +1504,44 @@ class Order:
 
         return response
     
+    async def getChannelConfig(self, ):
+        """getChannelConfig
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = OrderValidator.getChannelConfig()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/order-config", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/order-config", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        from .models import CreateChannelConfigData
+        schema = CreateChannelConfigData()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getChannelConfig")
+            print(e)
+
+        
+
+        return response
+    
     async def createChannelConfig(self, body=""):
         """createChannelConfig
         """
@@ -1584,44 +1579,6 @@ class Order:
             schema.dump(schema.load(response))
         except Exception as e:
             print("Response Validation failed for createChannelConfig")
-            print(e)
-
-        
-
-        return response
-    
-    async def getChannelConfig(self, ):
-        """getChannelConfig
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = OrderValidator.getChannelConfig()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/order-config", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
-        query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/order-config", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        from .models import CreateChannelConfigData
-        schema = CreateChannelConfigData()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getChannelConfig")
             print(e)
 
         
@@ -1757,14 +1714,14 @@ class Order:
 
         return response
     
-    async def sendSmsNinjaPlatform(self, ):
+    async def getStateTransitionMap(self, ):
         """
         """
         payload = {}
         
 
         # Parameter validation
-        schema = OrderValidator.sendSmsNinjaPlatform()
+        schema = OrderValidator.getStateTransitionMap()
         schema.dump(schema.load(payload))
         
 
@@ -1783,12 +1740,12 @@ class Order:
 
         
 
-        from .models import OrderStatusResult
-        schema = OrderStatusResult()
+        from .models import BagStateTransitionMap
+        schema = BagStateTransitionMap()
         try:
             schema.dump(schema.load(response))
         except Exception as e:
-            print("Response Validation failed for sendSmsNinjaPlatform")
+            print("Response Validation failed for getStateTransitionMap")
             print(e)
 
         
