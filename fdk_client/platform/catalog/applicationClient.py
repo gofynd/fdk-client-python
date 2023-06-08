@@ -61,49 +61,6 @@ class Catalog:
 
         return response
     
-    async def deleteSearchKeywords(self, id=None):
-        """This API allows you to delete a custom keyword mapping by their ID within an application. Returns an object that tells whether the keywords was deleted successfully
-        :param id : A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to delete. : type string
-        """
-        payload = {}
-        
-        if id is not None:
-            payload["id"] = id
-        
-
-        # Parameter validation
-        schema = CatalogValidator.deleteSearchKeywords()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/{id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to delete.","schema":{"type":"string","example":"602fa1e9a596ce349563f6b9"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to delete.","schema":{"type":"string","example":"602fa1e9a596ce349563f6b9"},"required":true}]}""", id=id)
-        query_string = await create_query_string(id=id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import DeleteResponse
-            schema = DeleteResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for deleteSearchKeywords")
-                print(e)
-
-        
-
-        return response
-    
     async def getSearchKeywords(self, id=None):
         """The API allows you to get the details of a words by its `id`. If successful, returns a Collection resource in the response body specified in `GetSearchWordsDetailResponseSchema`
         :param id : A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to retrieve. : type string
@@ -141,6 +98,49 @@ class Catalog:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getSearchKeywords")
+                print(e)
+
+        
+
+        return response
+    
+    async def deleteSearchKeywords(self, id=None):
+        """This API allows you to delete a custom keyword mapping by their ID within an application. Returns an object that tells whether the keywords was deleted successfully
+        :param id : A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to delete. : type string
+        """
+        payload = {}
+        
+        if id is not None:
+            payload["id"] = id
+        
+
+        # Parameter validation
+        schema = CatalogValidator.deleteSearchKeywords()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/{id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to delete.","schema":{"type":"string","example":"602fa1e9a596ce349563f6b9"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to delete.","schema":{"type":"string","example":"602fa1e9a596ce349563f6b9"},"required":true}]}""", id=id)
+        query_string = await create_query_string(id=id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DeleteResponse
+            schema = DeleteResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteSearchKeywords")
                 print(e)
 
         
@@ -286,49 +286,6 @@ class Catalog:
 
         return response
     
-    async def deleteAutocompleteKeyword(self, id=None):
-        """Autocomplete keywords configuration help you to extend and customize the behaviour of autocomplete search results in Fynd Platform. This API allows you to delete a keywords by it's `id`.
-        :param id : A `id` is a unique identifier for a specific autocomplete keyword map. Pass the `id` of the keywords which you want to delete. : type string
-        """
-        payload = {}
-        
-        if id is not None:
-            payload["id"] = id
-        
-
-        # Parameter validation
-        schema = CatalogValidator.deleteAutocompleteKeyword()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete/{id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a specific autocomplete keyword map. Pass the `id` of the keywords which you want to delete.","schema":{"type":"string","example":"602fa1e9a596ce349563f6b9"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a specific autocomplete keyword map. Pass the `id` of the keywords which you want to delete.","schema":{"type":"string","example":"602fa1e9a596ce349563f6b9"},"required":true}]}""", id=id)
-        query_string = await create_query_string(id=id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import DeleteResponse
-            schema = DeleteResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for deleteAutocompleteKeyword")
-                print(e)
-
-        
-
-        return response
-    
     async def getAutocompleteKeywordDetail(self, id=None):
         """Autocomplete keywords configuration help you to extend and customize the behaviour of autocomplete search results in Fynd Platform. This API allows you to get the details of a words by its `id`.
         :param id : A `id` is a unique identifier for a specific autocomplete keyword map. Pass the `id` of the keywords which you want to retrieve. : type string
@@ -366,6 +323,49 @@ class Catalog:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getAutocompleteKeywordDetail")
+                print(e)
+
+        
+
+        return response
+    
+    async def deleteAutocompleteKeyword(self, id=None):
+        """Autocomplete keywords configuration help you to extend and customize the behaviour of autocomplete search results in Fynd Platform. This API allows you to delete a keywords by it's `id`.
+        :param id : A `id` is a unique identifier for a specific autocomplete keyword map. Pass the `id` of the keywords which you want to delete. : type string
+        """
+        payload = {}
+        
+        if id is not None:
+            payload["id"] = id
+        
+
+        # Parameter validation
+        schema = CatalogValidator.deleteAutocompleteKeyword()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete/{id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a specific autocomplete keyword map. Pass the `id` of the keywords which you want to delete.","schema":{"type":"string","example":"602fa1e9a596ce349563f6b9"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a specific autocomplete keyword map. Pass the `id` of the keywords which you want to delete.","schema":{"type":"string","example":"602fa1e9a596ce349563f6b9"},"required":true}]}""", id=id)
+        query_string = await create_query_string(id=id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DeleteResponse
+            schema = DeleteResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteAutocompleteKeyword")
                 print(e)
 
         
@@ -594,49 +594,6 @@ class Catalog:
 
         return response
     
-    async def deleteSearchRerankConfig(self, id=None):
-        """Search Reranking allows you rank and boost the search of the keywords and products in the product listing. This API allows you to delete a search re-ranking configured for the application.
-        :param id : A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to delete. : type string
-        """
-        payload = {}
-        
-        if id is not None:
-            payload["id"] = id
-        
-
-        # Parameter validation
-        schema = CatalogValidator.deleteSearchRerankConfig()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/rerank/{id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to delete.","schema":{"type":"string","example":"602fa1e9a596ce349563f6b9"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to delete.","schema":{"type":"string","example":"602fa1e9a596ce349563f6b9"},"required":true}]}""", id=id)
-        query_string = await create_query_string(id=id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/rerank/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import DeleteRerankResponse
-            schema = DeleteRerankResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for deleteSearchRerankConfig")
-                print(e)
-
-        
-
-        return response
-    
     async def getSearchRerankingConfig(self, id=None):
         """Search Reranking allows you rank and boost the search of the keywords and products in the product listing. This API allows you to get the data of a search re-ranking configured for the application by their ID.
         :param id : A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to retrieve. : type string
@@ -674,6 +631,49 @@ class Catalog:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getSearchRerankingConfig")
+                print(e)
+
+        
+
+        return response
+    
+    async def deleteSearchRerankConfig(self, id=None):
+        """Search Reranking allows you rank and boost the search of the keywords and products in the product listing. This API allows you to delete a search re-ranking configured for the application.
+        :param id : A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to delete. : type string
+        """
+        payload = {}
+        
+        if id is not None:
+            payload["id"] = id
+        
+
+        # Parameter validation
+        schema = CatalogValidator.deleteSearchRerankConfig()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/rerank/{id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to delete.","schema":{"type":"string","example":"602fa1e9a596ce349563f6b9"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a numeric ID allotted to a business account on Fynd Platform.","schema":{"type":"integer","minimum":1,"example":1},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account.","schema":{"type":"string","minLength":24,"maxLength":24,"example":"000000000000000000000001"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to delete.","schema":{"type":"string","example":"602fa1e9a596ce349563f6b9"},"required":true}]}""", id=id)
+        query_string = await create_query_string(id=id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/rerank/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DeleteRerankResponse
+            schema = DeleteRerankResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteSearchRerankConfig")
                 print(e)
 
         
