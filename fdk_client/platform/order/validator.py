@@ -37,73 +37,11 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
-        
-        
-        
         
     
     
         
         
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-    
-    
         
         
         
@@ -145,6 +83,74 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
     
         
@@ -232,10 +238,10 @@ from ..PlatformModel import BaseSchema
     
     
         
-        
-        
     
     
+        
+        
         
     
     
@@ -281,6 +287,8 @@ class OrderValidator:
         
         status_override_lane = fields.Boolean(required=False)
         
+        time_to_dispatch = fields.Str(required=False)
+        
         search_type = fields.Str(required=False)
         
         search_value = fields.Str(required=False)
@@ -297,7 +305,7 @@ class OrderValidator:
         
         stores = fields.Str(required=False)
         
-        sales_channel = fields.Str(required=False)
+        sales_channels = fields.Str(required=False)
         
         request_by_ext = fields.Str(required=False)
         
@@ -366,11 +374,21 @@ class OrderValidator:
         
         stores = fields.Str(required=False)
         
-        sales_channel = fields.Str(required=False)
+        sales_channels = fields.Str(required=False)
         
         payment_mode = fields.Str(required=False)
         
         bag_status = fields.Str(required=False)
+        
+        search_type = fields.Str(required=False)
+        
+        search_value = fields.Str(required=False)
+        
+        tags = fields.Str(required=False)
+        
+        time_to_dispatch = fields.Str(required=False)
+        
+        payment_methods = fields.Str(required=False)
          
         
     
@@ -738,6 +756,13 @@ class OrderValidator:
          
         
     
+    class postShipmentHistory(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
     class getShipmentHistory(BaseSchema):
         
         
@@ -746,13 +771,6 @@ class OrderValidator:
         shipment_id = fields.Str(required=False)
         
         bag_id = fields.Int(required=False)
-         
-        
-    
-    class postShipmentHistory(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
          
         
     
@@ -777,14 +795,14 @@ class OrderValidator:
          
         
     
-    class getChannelConfig(BaseSchema):
+    class createChannelConfig(BaseSchema):
         
         
         company_id = fields.Int(required=False)
          
         
     
-    class createChannelConfig(BaseSchema):
+    class getChannelConfig(BaseSchema):
         
         
         company_id = fields.Int(required=False)
