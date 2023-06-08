@@ -25,28 +25,28 @@ class Lead:
         """
         payload = {}
         
-        if items:
+        if items is not None:
             payload["items"] = items
         
-        if filters:
+        if filters is not None:
             payload["filters"] = filters
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
-        if status:
+        if status is not None:
             payload["status"] = status
         
-        if priority:
+        if priority is not None:
             payload["priority"] = priority
         
-        if category:
+        if category is not None:
             payload["category"] = category
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -70,13 +70,14 @@ class Lead:
 
         
 
-        from .models import TicketList
-        schema = TicketList()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getTickets")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TicketList
+            schema = TicketList()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getTickets")
+                print(e)
 
         
 
@@ -113,13 +114,14 @@ class Lead:
 
         
 
-        from .models import Ticket
-        schema = Ticket()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createTicket")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Ticket
+            schema = Ticket()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createTicket")
+                print(e)
 
         
 
@@ -131,7 +133,7 @@ class Lead:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -155,13 +157,14 @@ class Lead:
 
         
 
-        from .models import Ticket
-        schema = Ticket()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getTicket")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Ticket
+            schema = Ticket()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getTicket")
+                print(e)
 
         
 
@@ -173,7 +176,7 @@ class Lead:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -202,13 +205,14 @@ class Lead:
 
         
 
-        from .models import Ticket
-        schema = Ticket()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for editTicket")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Ticket
+            schema = Ticket()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for editTicket")
+                print(e)
 
         
 
@@ -220,7 +224,7 @@ class Lead:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -249,13 +253,14 @@ class Lead:
 
         
 
-        from .models import TicketHistory
-        schema = TicketHistory()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createHistory")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TicketHistory
+            schema = TicketHistory()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createHistory")
+                print(e)
 
         
 
@@ -267,7 +272,7 @@ class Lead:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -291,13 +296,14 @@ class Lead:
 
         
 
-        from .models import TicketHistoryList
-        schema = TicketHistoryList()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getTicketHistory")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TicketHistoryList
+            schema = TicketHistoryList()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getTicketHistory")
+                print(e)
 
         
 
@@ -309,7 +315,7 @@ class Lead:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -333,13 +339,14 @@ class Lead:
 
         
 
-        from .models import TicketFeedbackList
-        schema = TicketFeedbackList()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getFeedbacks")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TicketFeedbackList
+            schema = TicketFeedbackList()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getFeedbacks")
+                print(e)
 
         
 
@@ -351,7 +358,7 @@ class Lead:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -380,13 +387,14 @@ class Lead:
 
         
 
-        from .models import TicketFeedback
-        schema = TicketFeedback()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for submitFeedback")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TicketFeedback
+            schema = TicketFeedback()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for submitFeedback")
+                print(e)
 
         
 
@@ -398,7 +406,7 @@ class Lead:
         """
         payload = {}
         
-        if unique_name:
+        if unique_name is not None:
             payload["unique_name"] = unique_name
         
 
@@ -422,13 +430,14 @@ class Lead:
 
         
 
-        from .models import GetTokenForVideoRoomResponse
-        schema = GetTokenForVideoRoomResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getTokenForVideoRoom")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetTokenForVideoRoomResponse
+            schema = GetTokenForVideoRoomResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getTokenForVideoRoom")
+                print(e)
 
         
 
@@ -440,7 +449,7 @@ class Lead:
         """
         payload = {}
         
-        if unique_name:
+        if unique_name is not None:
             payload["unique_name"] = unique_name
         
 
@@ -464,13 +473,14 @@ class Lead:
 
         
 
-        from .models import GetParticipantsInsideVideoRoomResponse
-        schema = GetParticipantsInsideVideoRoomResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getVideoParticipants")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetParticipantsInsideVideoRoomResponse
+            schema = GetParticipantsInsideVideoRoomResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getVideoParticipants")
+                print(e)
 
         
 
@@ -502,13 +512,14 @@ class Lead:
 
         
 
-        from .models import CloseVideoRoomResponse
-        schema = CloseVideoRoomResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getGeneralConfig")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CloseVideoRoomResponse
+            schema = CloseVideoRoomResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getGeneralConfig")
+                print(e)
 
         
 

@@ -38,13 +38,14 @@ class CompanyProfile:
 
         
 
-        from .models import GetCompanyProfileSerializerResponse
-        schema = GetCompanyProfileSerializerResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for cbsOnboardGet")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetCompanyProfileSerializerResponse
+            schema = GetCompanyProfileSerializerResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for cbsOnboardGet")
+                print(e)
 
         
 
@@ -81,13 +82,14 @@ class CompanyProfile:
 
         
 
-        from .models import ProfileSuccessResponse
-        schema = ProfileSuccessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateCompany")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProfileSuccessResponse
+            schema = ProfileSuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateCompany")
+                print(e)
 
         
 
@@ -119,13 +121,14 @@ class CompanyProfile:
 
         
 
-        from .models import MetricsSerializer
-        schema = MetricsSerializer()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCompanyMetrics")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import MetricsSerializer
+            schema = MetricsSerializer()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCompanyMetrics")
+                print(e)
 
         
 
@@ -137,7 +140,7 @@ class CompanyProfile:
         """
         payload = {}
         
-        if brand_id:
+        if brand_id is not None:
             payload["brand_id"] = brand_id
         
 
@@ -161,13 +164,14 @@ class CompanyProfile:
 
         
 
-        from .models import GetBrandResponseSerializer
-        schema = GetBrandResponseSerializer()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getBrand")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetBrandResponseSerializer
+            schema = GetBrandResponseSerializer()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getBrand")
+                print(e)
 
         
 
@@ -179,7 +183,7 @@ class CompanyProfile:
         """
         payload = {}
         
-        if brand_id:
+        if brand_id is not None:
             payload["brand_id"] = brand_id
         
 
@@ -208,13 +212,14 @@ class CompanyProfile:
 
         
 
-        from .models import ProfileSuccessResponse
-        schema = ProfileSuccessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for editBrand")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProfileSuccessResponse
+            schema = ProfileSuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for editBrand")
+                print(e)
 
         
 
@@ -251,13 +256,14 @@ class CompanyProfile:
 
         
 
-        from .models import ProfileSuccessResponse
-        schema = ProfileSuccessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createBrand")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProfileSuccessResponse
+            schema = ProfileSuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createBrand")
+                print(e)
 
         
 
@@ -271,13 +277,13 @@ class CompanyProfile:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
 
@@ -301,13 +307,14 @@ class CompanyProfile:
 
         
 
-        from .models import CompanyBrandListSerializer
-        schema = CompanyBrandListSerializer()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getBrands")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CompanyBrandListSerializer
+            schema = CompanyBrandListSerializer()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getBrands")
+                print(e)
 
         
 
@@ -344,13 +351,14 @@ class CompanyProfile:
 
         
 
-        from .models import ProfileSuccessResponse
-        schema = ProfileSuccessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createCompanyBrandMapping")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProfileSuccessResponse
+            schema = ProfileSuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createCompanyBrandMapping")
+                print(e)
 
         
 
@@ -367,22 +375,22 @@ class CompanyProfile:
         """
         payload = {}
         
-        if store_type:
+        if store_type is not None:
             payload["store_type"] = store_type
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
-        if stage:
+        if stage is not None:
             payload["stage"] = stage
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if location_ids:
+        if location_ids is not None:
             payload["location_ids"] = location_ids
         
 
@@ -406,13 +414,14 @@ class CompanyProfile:
 
         
 
-        from .models import LocationListSerializer
-        schema = LocationListSerializer()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getLocations")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import LocationListSerializer
+            schema = LocationListSerializer()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getLocations")
+                print(e)
 
         
 
@@ -449,13 +458,14 @@ class CompanyProfile:
 
         
 
-        from .models import ProfileSuccessResponse
-        schema = ProfileSuccessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createLocation")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProfileSuccessResponse
+            schema = ProfileSuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createLocation")
+                print(e)
 
         
 
@@ -467,7 +477,7 @@ class CompanyProfile:
         """
         payload = {}
         
-        if location_id:
+        if location_id is not None:
             payload["location_id"] = location_id
         
 
@@ -491,13 +501,14 @@ class CompanyProfile:
 
         
 
-        from .models import GetLocationSerializer
-        schema = GetLocationSerializer()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getLocationDetail")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetLocationSerializer
+            schema = GetLocationSerializer()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getLocationDetail")
+                print(e)
 
         
 
@@ -509,7 +520,7 @@ class CompanyProfile:
         """
         payload = {}
         
-        if location_id:
+        if location_id is not None:
             payload["location_id"] = location_id
         
 
@@ -538,13 +549,14 @@ class CompanyProfile:
 
         
 
-        from .models import ProfileSuccessResponse
-        schema = ProfileSuccessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateLocation")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProfileSuccessResponse
+            schema = ProfileSuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateLocation")
+                print(e)
 
         
 
@@ -581,13 +593,58 @@ class CompanyProfile:
 
         
 
-        from .models import ProfileSuccessResponse
-        schema = ProfileSuccessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createLocationBulk")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProfileSuccessResponse
+            schema = ProfileSuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createLocationBulk")
+                print(e)
+
+        
+
+        return response
+    
+    async def getOptimalLocations(self, body=""):
+        """
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = CompanyProfileValidator.getOptimalLocations()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import AssignStoreRequestValidator
+        schema = AssignStoreRequestValidator()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/location/reassign", """{"required":[{"in":"path","name":"company_id","description":"Id of the company inside which the location is to be created.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company inside which the location is to be created.","schema":{"type":"string"},"required":true}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/location/reassign", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AssignStoreResponseSerializer
+            schema = AssignStoreResponseSerializer()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getOptimalLocations")
+                print(e)
 
         
 

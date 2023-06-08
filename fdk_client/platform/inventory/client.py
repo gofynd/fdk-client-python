@@ -12,69 +12,18 @@ class Inventory:
         self._conf = config
 
     
-    async def getJobsByCompany(self, page_no=None, page_size=None):
-        """REST Endpoint that returns all job configs for a company
-        :param page_no : Page Number : type integer
-        :param page_size : Page Size : type integer
-        """
-        payload = {}
-        
-        if page_no:
-            payload["page_no"] = page_no
-        
-        if page_size:
-            payload["page_size"] = page_size
-        
-
-        # Parameter validation
-        schema = InventoryValidator.getJobsByCompany()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}}],"optional":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer","format":"int32","default":1}},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32","default":10}}],"query":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer","format":"int32","default":1}},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32","default":10}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}}]}""", page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        from .models import ResponseEnvelopeListJobConfigRawDTO
-        schema = ResponseEnvelopeListJobConfigRawDTO()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getJobsByCompany")
-            print(e)
-
-        
-
-        return response
-    
-    async def updateJob(self, body=""):
-        """REST Endpoint that updates a job config
+    async def getConfigByCompany(self, ):
+        """REST Endpoint that returns all configuration detail of a company
         """
         payload = {}
         
 
         # Parameter validation
-        schema = InventoryValidator.updateJob()
+        schema = InventoryValidator.getConfigByCompany()
         schema.dump(schema.load(payload))
         
-        # Body validation
-        from .models import JobConfigDTO
-        schema = JobConfigDTO()
-        schema.dump(schema.load(body))
-        
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/slingshot", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}}]}""", )
         query_string = await create_query_string()
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -85,60 +34,18 @@ class Inventory:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/slingshot", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
 
-        from .models import ResponseEnvelopeString
-        schema = ResponseEnvelopeString()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateJob")
-            print(e)
-
-        
-
-        return response
-    
-    async def createJob(self, body=""):
-        """REST Endpoint that creates a new job config
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = InventoryValidator.createJob()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import JobConfigDTO
-        schema = JobConfigDTO()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}}]}""", )
-        query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        
-
-        from .models import ResponseEnvelopeString
-        schema = ResponseEnvelopeString()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createJob")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResponseEnvelopeListSlingshotConfigurationDetail
+            schema = ResponseEnvelopeListSlingshotConfigurationDetail()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getConfigByCompany")
+                print(e)
 
         
 
@@ -175,30 +82,83 @@ class Inventory:
 
         
 
-        from .models import ResponseEnvelopeKafkaResponse
-        schema = ResponseEnvelopeKafkaResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for suppressStores")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResponseEnvelopeKafkaResponse
+            schema = ResponseEnvelopeKafkaResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for suppressStores")
+                print(e)
 
         
 
         return response
     
-    async def getConfigByCompany(self, ):
-        """REST Endpoint that returns all configuration detail of a company
+    async def getJobsByCompany(self, page_no=None, page_size=None):
+        """REST Endpoint that returns all job configs for a company
+        :param page_no : Page Number : type integer
+        :param page_size : Page Size : type integer
+        """
+        payload = {}
+        
+        if page_no is not None:
+            payload["page_no"] = page_no
+        
+        if page_size is not None:
+            payload["page_size"] = page_size
+        
+
+        # Parameter validation
+        schema = InventoryValidator.getJobsByCompany()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}}],"optional":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer","format":"int32","default":1}},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32","default":10}}],"query":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer","format":"int32","default":1}},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32","default":10}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}}]}""", page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResponseEnvelopeListJobConfigRawDTO
+            schema = ResponseEnvelopeListJobConfigRawDTO()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getJobsByCompany")
+                print(e)
+
+        
+
+        return response
+    
+    async def updateJob(self, body=""):
+        """REST Endpoint that updates a job config
         """
         payload = {}
         
 
         # Parameter validation
-        schema = InventoryValidator.getConfigByCompany()
+        schema = InventoryValidator.updateJob()
         schema.dump(schema.load(payload))
         
+        # Body validation
+        from .models import JobConfigDTO
+        schema = JobConfigDTO()
+        schema.dump(schema.load(body))
+        
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/slingshot", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}}]}""", )
         query_string = await create_query_string()
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -209,17 +169,62 @@ class Inventory:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/slingshot", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
 
-        from .models import ResponseEnvelopeListSlingshotConfigurationDetail
-        schema = ResponseEnvelopeListSlingshotConfigurationDetail()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getConfigByCompany")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResponseEnvelopeString
+            schema = ResponseEnvelopeString()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateJob")
+                print(e)
+
+        
+
+        return response
+    
+    async def createJob(self, body=""):
+        """REST Endpoint that creates a new job config
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = InventoryValidator.createJob()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import JobConfigDTO
+        schema = JobConfigDTO()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"integer","format":"int32"}}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResponseEnvelopeString
+            schema = ResponseEnvelopeString()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createJob")
+                print(e)
 
         
 
@@ -231,7 +236,7 @@ class Inventory:
         """
         payload = {}
         
-        if job_id:
+        if job_id is not None:
             payload["job_id"] = job_id
         
 
@@ -255,13 +260,14 @@ class Inventory:
 
         
 
-        from .models import ResponseEnvelopeListJobStepsDTO
-        schema = ResponseEnvelopeListJobStepsDTO()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getJobSteps")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResponseEnvelopeListJobStepsDTO
+            schema = ResponseEnvelopeListJobStepsDTO()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getJobSteps")
+                print(e)
 
         
 
@@ -275,13 +281,13 @@ class Inventory:
         """
         payload = {}
         
-        if integration_id:
+        if integration_id is not None:
             payload["integration_id"] = integration_id
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -305,13 +311,14 @@ class Inventory:
 
         
 
-        from .models import ResponseEnvelopeListJobConfigDTO
-        schema = ResponseEnvelopeListJobConfigDTO()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getJobByCompanyAndIntegration")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResponseEnvelopeListJobConfigDTO
+            schema = ResponseEnvelopeListJobConfigDTO()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getJobByCompanyAndIntegration")
+                print(e)
 
         
 
@@ -323,7 +330,7 @@ class Inventory:
         """
         payload = {}
         
-        if integration_id:
+        if integration_id is not None:
             payload["integration_id"] = integration_id
         
 
@@ -347,13 +354,14 @@ class Inventory:
 
         
 
-        from .models import ResponseEnvelopeString
-        schema = ResponseEnvelopeString()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for disable")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResponseEnvelopeString
+            schema = ResponseEnvelopeString()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for disable")
+                print(e)
 
         
 
@@ -385,13 +393,14 @@ class Inventory:
 
         
 
-        from .models import ResponseEnvelopeJobConfigDTO
-        schema = ResponseEnvelopeJobConfigDTO()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getJobConfigDefaults")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResponseEnvelopeJobConfigDTO
+            schema = ResponseEnvelopeJobConfigDTO()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getJobConfigDefaults")
+                print(e)
 
         
 
@@ -403,7 +412,7 @@ class Inventory:
         """
         payload = {}
         
-        if code:
+        if code is not None:
             payload["code"] = code
         
 
@@ -427,13 +436,14 @@ class Inventory:
 
         
 
-        from .models import ResponseEnvelopeJobConfigDTO
-        schema = ResponseEnvelopeJobConfigDTO()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getJobByCode")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResponseEnvelopeJobConfigDTO
+            schema = ResponseEnvelopeJobConfigDTO()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getJobByCode")
+                print(e)
 
         
 
@@ -449,19 +459,19 @@ class Inventory:
         """
         payload = {}
         
-        if code:
+        if code is not None:
             payload["code"] = code
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if status:
+        if status is not None:
             payload["status"] = status
         
-        if date:
+        if date is not None:
             payload["date"] = date
         
 
@@ -485,13 +495,14 @@ class Inventory:
 
         
 
-        from .models import ResponseEnvelopeJobMetricsDto
-        schema = ResponseEnvelopeJobMetricsDto()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getJobCodeMetrics")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResponseEnvelopeJobMetricsDto
+            schema = ResponseEnvelopeJobMetricsDto()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getJobCodeMetrics")
+                print(e)
 
         
 
@@ -505,13 +516,13 @@ class Inventory:
         """
         payload = {}
         
-        if integration_id:
+        if integration_id is not None:
             payload["integration_id"] = integration_id
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -535,13 +546,14 @@ class Inventory:
 
         
 
-        from .models import ResponseEnvelopeListJobConfigListDTO
-        schema = ResponseEnvelopeListJobConfigListDTO()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getJobCodesByCompanyAndIntegration")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResponseEnvelopeListJobConfigListDTO
+            schema = ResponseEnvelopeListJobConfigListDTO()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getJobCodesByCompanyAndIntegration")
+                print(e)
 
         
 

@@ -19,10 +19,10 @@ class Billing:
         """
         payload = {}
         
-        if plan:
+        if plan is not None:
             payload["plan"] = plan
         
-        if coupon_code:
+        if coupon_code is not None:
             payload["coupon_code"] = coupon_code
         
 
@@ -46,13 +46,14 @@ class Billing:
 
         
 
-        from .models import CheckValidityResponse
-        schema = CheckValidityResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for checkCouponValidity")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CheckValidityResponse
+            schema = CheckValidityResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for checkCouponValidity")
+                print(e)
 
         
 
@@ -64,7 +65,7 @@ class Billing:
         """
         payload = {}
         
-        if extension_id:
+        if extension_id is not None:
             payload["extension_id"] = extension_id
         
 
@@ -93,13 +94,14 @@ class Billing:
 
         
 
-        from .models import CreateSubscriptionResponse
-        schema = CreateSubscriptionResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createSubscriptionCharge")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateSubscriptionResponse
+            schema = CreateSubscriptionResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createSubscriptionCharge")
+                print(e)
 
         
 
@@ -112,10 +114,10 @@ class Billing:
         """
         payload = {}
         
-        if extension_id:
+        if extension_id is not None:
             payload["extension_id"] = extension_id
         
-        if subscription_id:
+        if subscription_id is not None:
             payload["subscription_id"] = subscription_id
         
 
@@ -139,13 +141,14 @@ class Billing:
 
         
 
-        from .models import EntitySubscription
-        schema = EntitySubscription()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getSubscriptionCharge")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EntitySubscription
+            schema = EntitySubscription()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSubscriptionCharge")
+                print(e)
 
         
 
@@ -158,10 +161,10 @@ class Billing:
         """
         payload = {}
         
-        if extension_id:
+        if extension_id is not None:
             payload["extension_id"] = extension_id
         
-        if subscription_id:
+        if subscription_id is not None:
             payload["subscription_id"] = subscription_id
         
 
@@ -185,106 +188,14 @@ class Billing:
 
         
 
-        from .models import EntitySubscription
-        schema = EntitySubscription()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for cancelSubscriptionCharge")
-            print(e)
-
-        
-
-        return response
-    
-    async def createOneTimeCharge(self, extension_id=None, body=""):
-        """Register one time subscription charge for a seller of your extension.
-        :param extension_id : Extension _id : type string
-        """
-        payload = {}
-        
-        if extension_id:
-            payload["extension_id"] = extension_id
-        
-
-        # Parameter validation
-        schema = BillingValidator.createOneTimeCharge()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import CreateOneTimeCharge
-        schema = CreateOneTimeCharge()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/extension/{extension_id}/one_time_charge", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}},{"in":"path","name":"extension_id","description":"Extension _id","required":true,"schema":{"type":"string","example":"5f7acb709e76da30e3b92cdb"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}},{"in":"path","name":"extension_id","description":"Extension _id","required":true,"schema":{"type":"string","example":"5f7acb709e76da30e3b92cdb"}}]}""", extension_id=extension_id)
-        query_string = await create_query_string(extension_id=extension_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/extension/{extension_id}/one_time_charge", extension_id=extension_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        
-
-        from .models import CreateOneTimeChargeResponse
-        schema = CreateOneTimeChargeResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createOneTimeCharge")
-            print(e)
-
-        
-
-        return response
-    
-    async def getChargeDetails(self, extension_id=None, charge_id=None):
-        """Get created subscription charge details
-        :param extension_id : Extension _id : type string
-        :param charge_id : Standalone charge _id : type string
-        """
-        payload = {}
-        
-        if extension_id:
-            payload["extension_id"] = extension_id
-        
-        if charge_id:
-            payload["charge_id"] = charge_id
-        
-
-        # Parameter validation
-        schema = BillingValidator.getChargeDetails()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/extension/{extension_id}/charge/{charge_id}", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}},{"in":"path","name":"extension_id","description":"Extension _id","required":true,"schema":{"type":"string","example":"5f7acb709e76da30e3b92cdb"}},{"in":"path","name":"charge_id","description":"Standalone charge _id","required":true,"schema":{"type":"string","example":"5f7acb709e76da30e3b92cdb"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}},{"in":"path","name":"extension_id","description":"Extension _id","required":true,"schema":{"type":"string","example":"5f7acb709e76da30e3b92cdb"}},{"in":"path","name":"charge_id","description":"Standalone charge _id","required":true,"schema":{"type":"string","example":"5f7acb709e76da30e3b92cdb"}}]}""", extension_id=extension_id, charge_id=charge_id)
-        query_string = await create_query_string(extension_id=extension_id, charge_id=charge_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/extension/{extension_id}/charge/{charge_id}", extension_id=extension_id, charge_id=charge_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        from .models import OneTimeChargeEntity
-        schema = OneTimeChargeEntity()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getChargeDetails")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EntitySubscription
+            schema = EntitySubscription()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for cancelSubscriptionCharge")
+                print(e)
 
         
 
@@ -316,13 +227,14 @@ class Billing:
 
         
 
-        from .models import Invoices
-        schema = Invoices()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getInvoices")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Invoices
+            schema = Invoices()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getInvoices")
+                print(e)
 
         
 
@@ -334,7 +246,7 @@ class Billing:
         """
         payload = {}
         
-        if invoice_id:
+        if invoice_id is not None:
             payload["invoice_id"] = invoice_id
         
 
@@ -358,13 +270,14 @@ class Billing:
 
         
 
-        from .models import Invoice
-        schema = Invoice()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getInvoiceById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Invoice
+            schema = Invoice()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getInvoiceById")
+                print(e)
 
         
 
@@ -396,13 +309,14 @@ class Billing:
 
         
 
-        from .models import SubscriptionCustomer
-        schema = SubscriptionCustomer()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCustomerDetail")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SubscriptionCustomer
+            schema = SubscriptionCustomer()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCustomerDetail")
+                print(e)
 
         
 
@@ -439,13 +353,14 @@ class Billing:
 
         
 
-        from .models import SubscriptionCustomer
-        schema = SubscriptionCustomer()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for upsertCustomerDetail")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SubscriptionCustomer
+            schema = SubscriptionCustomer()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for upsertCustomerDetail")
+                print(e)
 
         
 
@@ -478,13 +393,14 @@ class Billing:
 
         
 
-        from .models import SubscriptionStatus
-        schema = SubscriptionStatus()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getSubscription")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SubscriptionStatus
+            schema = SubscriptionStatus()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSubscription")
+                print(e)
 
         
 
@@ -516,13 +432,14 @@ class Billing:
 
         
 
-        from .models import SubscriptionLimit
-        schema = SubscriptionLimit()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getFeatureLimitConfig")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SubscriptionLimit
+            schema = SubscriptionLimit()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getFeatureLimitConfig")
+                print(e)
 
         
 
@@ -559,13 +476,14 @@ class Billing:
 
         
 
-        from .models import SubscriptionActivateRes
-        schema = SubscriptionActivateRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for activateSubscriptionPlan")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SubscriptionActivateRes
+            schema = SubscriptionActivateRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for activateSubscriptionPlan")
+                print(e)
 
         
 
@@ -602,13 +520,14 @@ class Billing:
 
         
 
-        from .models import CancelSubscriptionRes
-        schema = CancelSubscriptionRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for cancelSubscriptionPlan")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CancelSubscriptionRes
+            schema = CancelSubscriptionRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for cancelSubscriptionPlan")
+                print(e)
 
         
 

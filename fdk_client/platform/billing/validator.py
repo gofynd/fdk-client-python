@@ -32,15 +32,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-        
-    
-    
-        
-        
-        
-    
-    
-        
     
     
         
@@ -108,26 +99,6 @@ class BillingValidator:
         extension_id = fields.Str(required=False)
         
         subscription_id = fields.Str(required=False)
-         
-        
-    
-    class createOneTimeCharge(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        extension_id = fields.Str(required=False)
-         
-        
-    
-    class getChargeDetails(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        extension_id = fields.Str(required=False)
-        
-        charge_id = fields.Str(required=False)
          
         
     

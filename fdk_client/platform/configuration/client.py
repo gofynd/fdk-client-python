@@ -43,13 +43,14 @@ class Configuration:
 
         
 
-        from .models import CreateAppResponse
-        schema = CreateAppResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createApplication")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateAppResponse
+            schema = CreateAppResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createApplication")
+                print(e)
 
         
 
@@ -63,13 +64,13 @@ class Configuration:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
 
@@ -93,13 +94,14 @@ class Configuration:
 
         
 
-        from .models import ApplicationsResponse
-        schema = ApplicationsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getApplications")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ApplicationsResponse
+            schema = ApplicationsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getApplications")
+                print(e)
 
         
 
@@ -131,13 +133,14 @@ class Configuration:
 
         
 
-        from .models import CurrenciesResponse
-        schema = CurrenciesResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCurrencies")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CurrenciesResponse
+            schema = CurrenciesResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCurrencies")
+                print(e)
 
         
 
@@ -174,13 +177,14 @@ class Configuration:
 
         
 
-        from .models import DomainSuggestionsResponse
-        schema = DomainSuggestionsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getDomainAvailibility")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DomainSuggestionsResponse
+            schema = DomainSuggestionsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getDomainAvailibility")
+                print(e)
 
         
 
@@ -192,7 +196,7 @@ class Configuration:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -216,13 +220,14 @@ class Configuration:
 
         
 
-        from .models import Integration
-        schema = Integration()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getIntegrationById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Integration
+            schema = Integration()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getIntegrationById")
+                print(e)
 
         
 
@@ -235,10 +240,10 @@ class Configuration:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -262,13 +267,14 @@ class Configuration:
 
         
 
-        from .models import GetIntegrationsOptInsResponse
-        schema = GetIntegrationsOptInsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAvailableOptIns")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetIntegrationsOptInsResponse
+            schema = GetIntegrationsOptInsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAvailableOptIns")
+                print(e)
 
         
 
@@ -283,16 +289,16 @@ class Configuration:
         """
         payload = {}
         
-        if level:
+        if level is not None:
             payload["level"] = level
         
-        if uid:
+        if uid is not None:
             payload["uid"] = uid
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -316,13 +322,14 @@ class Configuration:
 
         
 
-        from .models import GetIntegrationsOptInsResponse
-        schema = GetIntegrationsOptInsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getSelectedOptIns")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetIntegrationsOptInsResponse
+            schema = GetIntegrationsOptInsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSelectedOptIns")
+                print(e)
 
         
 
@@ -337,16 +344,16 @@ class Configuration:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
-        if level:
+        if level is not None:
             payload["level"] = level
         
-        if opted:
+        if opted is not None:
             payload["opted"] = opted
         
-        if check_permission:
+        if check_permission is not None:
             payload["check_permission"] = check_permission
         
 
@@ -370,13 +377,14 @@ class Configuration:
 
         
 
-        from .models import IntegrationConfigResponse
-        schema = IntegrationConfigResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getIntegrationLevelConfig")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import IntegrationConfigResponse
+            schema = IntegrationConfigResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getIntegrationLevelConfig")
+                print(e)
 
         
 
@@ -389,10 +397,10 @@ class Configuration:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
-        if level:
+        if level is not None:
             payload["level"] = level
         
 
@@ -421,13 +429,14 @@ class Configuration:
 
         
 
-        from .models import IntegrationLevel
-        schema = IntegrationLevel()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateLevelIntegration")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import IntegrationLevel
+            schema = IntegrationLevel()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateLevelIntegration")
+                print(e)
 
         
 
@@ -441,13 +450,13 @@ class Configuration:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
-        if level:
+        if level is not None:
             payload["level"] = level
         
-        if uid:
+        if uid is not None:
             payload["uid"] = uid
         
 
@@ -471,13 +480,14 @@ class Configuration:
 
         
 
-        from .models import IntegrationLevel
-        schema = IntegrationLevel()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getIntegrationByLevelId")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import IntegrationLevel
+            schema = IntegrationLevel()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getIntegrationByLevelId")
+                print(e)
 
         
 
@@ -491,13 +501,13 @@ class Configuration:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
-        if level:
+        if level is not None:
             payload["level"] = level
         
-        if uid:
+        if uid is not None:
             payload["uid"] = uid
         
 
@@ -526,13 +536,14 @@ class Configuration:
 
         
 
-        from .models import IntegrationLevel
-        schema = IntegrationLevel()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateLevelUidIntegration")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import IntegrationLevel
+            schema = IntegrationLevel()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateLevelUidIntegration")
+                print(e)
 
         
 
@@ -546,13 +557,13 @@ class Configuration:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
-        if level:
+        if level is not None:
             payload["level"] = level
         
-        if uid:
+        if uid is not None:
             payload["uid"] = uid
         
 
@@ -576,13 +587,14 @@ class Configuration:
 
         
 
-        from .models import OptedStoreIntegration
-        schema = OptedStoreIntegration()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getLevelActiveIntegrations")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OptedStoreIntegration
+            schema = OptedStoreIntegration()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getLevelActiveIntegrations")
+                print(e)
 
         
 
@@ -594,7 +606,7 @@ class Configuration:
         """
         payload = {}
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
 
@@ -618,13 +630,14 @@ class Configuration:
 
         
 
-        from .models import BrandsByCompanyResponse
-        schema = BrandsByCompanyResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getBrandsByCompany")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BrandsByCompanyResponse
+            schema = BrandsByCompanyResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getBrandsByCompany")
+                print(e)
 
         
 
@@ -637,10 +650,10 @@ class Configuration:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -669,13 +682,14 @@ class Configuration:
 
         
 
-        from .models import CompanyByBrandsResponse
-        schema = CompanyByBrandsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCompanyByBrands")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CompanyByBrandsResponse
+            schema = CompanyByBrandsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCompanyByBrands")
+                print(e)
 
         
 
@@ -688,10 +702,10 @@ class Configuration:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -720,13 +734,14 @@ class Configuration:
 
         
 
-        from .models import StoreByBrandsResponse
-        schema = StoreByBrandsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getStoreByBrands")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import StoreByBrandsResponse
+            schema = StoreByBrandsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getStoreByBrands")
+                print(e)
 
         
 
@@ -739,10 +754,10 @@ class Configuration:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -766,13 +781,14 @@ class Configuration:
 
         
 
-        from .models import OtherSellerApplications
-        schema = OtherSellerApplications()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getOtherSellerApplications")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OtherSellerApplications
+            schema = OtherSellerApplications()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getOtherSellerApplications")
+                print(e)
 
         
 
@@ -784,7 +800,7 @@ class Configuration:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -808,13 +824,14 @@ class Configuration:
 
         
 
-        from .models import OptedApplicationResponse
-        schema = OptedApplicationResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getOtherSellerApplicationById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OptedApplicationResponse
+            schema = OptedApplicationResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getOtherSellerApplicationById")
+                print(e)
 
         
 
@@ -826,7 +843,7 @@ class Configuration:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -855,13 +872,14 @@ class Configuration:
 
         
 
-        from .models import SuccessMessageResponse
-        schema = SuccessMessageResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for optOutFromApplication")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessMessageResponse
+            schema = SuccessMessageResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for optOutFromApplication")
+                print(e)
 
         
 

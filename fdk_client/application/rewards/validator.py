@@ -11,19 +11,24 @@ from ..ApplicationModel import BaseSchema
 
     
     
-        
-    
-    
     
         
+    
+    
+    
+    
         
-    
-    
+        
     
     
 
 class RewardsValidator:
     
+    
+    class getPointsOnProduct(BaseSchema):
+        
+        pass 
+        
     
     class getOfferByName(BaseSchema):
         
@@ -32,7 +37,12 @@ class RewardsValidator:
          
         
     
-    class catalogueOrder(BaseSchema):
+    class getOrderDiscount(BaseSchema):
+        
+        pass 
+        
+    
+    class getUserPoints(BaseSchema):
         
         pass 
         
@@ -46,17 +56,7 @@ class RewardsValidator:
          
         
     
-    class getUserPoints(BaseSchema):
-        
-        pass 
-        
-    
     class getUserReferralDetails(BaseSchema):
-        
-        pass 
-        
-    
-    class getOrderDiscount(BaseSchema):
         
         pass 
         

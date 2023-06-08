@@ -13,12 +13,12 @@ class AuditTrail:
 
     
     async def getAuditLogs(self, qs=None):
-        """Get a paginated set of logs that can be filtered using the available set of parameters and get the relevant group of logs
+        """Get audit logs
         :param qs : Logs Query : type string
         """
         payload = {}
         
-        if qs:
+        if qs is not None:
             payload["qs"] = qs
         
 
@@ -42,20 +42,21 @@ class AuditTrail:
 
         
 
-        from .models import LogSchemaResponse
-        schema = LogSchemaResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAuditLogs")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import LogSchemaResponse
+            schema = LogSchemaResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAuditLogs")
+                print(e)
 
         
 
         return response
     
     async def createAuditLog(self, body=""):
-        """Create a log instance that stores all the relevant info to be logged
+        """Create a Audit log
         """
         payload = {}
         
@@ -85,25 +86,26 @@ class AuditTrail:
 
         
 
-        from .models import CreateLogResponse
-        schema = CreateLogResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createAuditLog")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateLogResponse
+            schema = CreateLogResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createAuditLog")
+                print(e)
 
         
 
         return response
     
     async def getAuditLog(self, id=None):
-        """Get detailed log information by their id
+        """Get audit logs by logs uuid
         :param id : log uuid : type string
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -127,20 +129,21 @@ class AuditTrail:
 
         
 
-        from .models import LogSchemaResponse
-        schema = LogSchemaResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAuditLog")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import LogSchemaResponse
+            schema = LogSchemaResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAuditLog")
+                print(e)
 
         
 
         return response
     
     async def getEntityTypes(self, ):
-        """Get a consolidated list of entity types from all the logs stored on the db, which further helps to filter the logs better
+        """Get entity types
         """
         payload = {}
         
@@ -165,13 +168,14 @@ class AuditTrail:
 
         
 
-        from .models import EntityTypesResponse
-        schema = EntityTypesResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getEntityTypes")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EntityTypesResponse
+            schema = EntityTypesResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getEntityTypes")
+                print(e)
 
         
 

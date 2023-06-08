@@ -21,13 +21,13 @@ class User:
         """
         payload = {}
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
 
@@ -51,13 +51,14 @@ class User:
 
         
 
-        from .models import CustomerListResponseSchema
-        schema = CustomerListResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCustomers")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CustomerListResponseSchema
+            schema = CustomerListResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCustomers")
+                print(e)
 
         
 
@@ -69,7 +70,7 @@ class User:
         """
         payload = {}
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
 
@@ -93,13 +94,14 @@ class User:
 
         
 
-        from .models import UserSearchResponseSchema
-        schema = UserSearchResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for searchUsers")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UserSearchResponseSchema
+            schema = UserSearchResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for searchUsers")
+                print(e)
 
         
 
@@ -136,13 +138,14 @@ class User:
 
         
 
-        from .models import CreateUserResponseSchema
-        schema = CreateUserResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createUser")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateUserResponseSchema
+            schema = CreateUserResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createUser")
+                print(e)
 
         
 
@@ -179,13 +182,14 @@ class User:
 
         
 
-        from .models import BlockUserSuccess
-        schema = BlockUserSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for blockOrUnblockUsers")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BlockUserSuccess
+            schema = BlockUserSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for blockOrUnblockUsers")
+                print(e)
 
         
 
@@ -222,13 +226,14 @@ class User:
 
         
 
-        from .models import ArchiveUserSuccess
-        schema = ArchiveUserSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for archiveUser")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ArchiveUserSuccess
+            schema = ArchiveUserSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for archiveUser")
+                print(e)
 
         
 
@@ -265,25 +270,26 @@ class User:
 
         
 
-        from .models import UnDeleteUserSuccess
-        schema = UnDeleteUserSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for unDeleteUser")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UnDeleteUserSuccess
+            schema = UnDeleteUserSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for unDeleteUser")
+                print(e)
 
         
 
         return response
     
     async def updateUser(self, user_id=None, body=""):
-        """Use this API to update user details, Note: Existing emails and phone numbers of user will be replaced directly if phone_numbers or emails field sent in request data.
+        """Update user
         :param user_id : User ID : type string
         """
         payload = {}
         
-        if user_id:
+        if user_id is not None:
             payload["user_id"] = user_id
         
 
@@ -312,13 +318,14 @@ class User:
 
         
 
-        from .models import CreateUserResponseSchema
-        schema = CreateUserResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateUser")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateUserResponseSchema
+            schema = CreateUserResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateUser")
+                print(e)
 
         
 
@@ -355,75 +362,26 @@ class User:
 
         
 
-        from .models import CreateUserSessionResponseSchema
-        schema = CreateUserSessionResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createUserSession")
-            print(e)
-
-        
-
-        return response
-    
-    async def deleteSession(self, id=None, session_id=None, reason=None):
-        """Use this API to Delete a session of customers who have registered in the application.
-        :param id : ID of a customer. : type string
-        :param session_id : Session ID of a customer. : type string
-        :param reason : Reason for deleting session. : type string
-        """
-        payload = {}
-        
-        if id:
-            payload["id"] = id
-        
-        if session_id:
-            payload["session_id"] = session_id
-        
-        if reason:
-            payload["reason"] = reason
-        
-
-        # Parameter validation
-        schema = UserValidator.deleteSession()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/session", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"id","in":"query","description":"ID of a customer.","required":true,"schema":{"type":"string"}},{"name":"session_id","in":"query","description":"Session ID of a customer.","required":true,"schema":{"type":"string"}},{"name":"reason","in":"query","description":"Reason for deleting session.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"name":"id","in":"query","description":"ID of a customer.","required":true,"schema":{"type":"string"}},{"name":"session_id","in":"query","description":"Session ID of a customer.","required":true,"schema":{"type":"string"}},{"name":"reason","in":"query","description":"Reason for deleting session.","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", id=id, session_id=session_id, reason=reason)
-        query_string = await create_query_string(id=id, session_id=session_id, reason=reason)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/session", id=id, session_id=session_id, reason=reason), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        from .models import SessionDeleteResponseSchema
-        schema = SessionDeleteResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteSession")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateUserSessionResponseSchema
+            schema = CreateUserSessionResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createUserSession")
+                print(e)
 
         
 
         return response
     
     async def getActiveSessions(self, id=None):
-        """Use this API to retrieve a list of session with info of customers who have registered in the application.
+        """Use this API to retrieve a list of session of customers who have registered in the application.
         :param id : ID of a customer. : type string
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -432,7 +390,7 @@ class User:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/sessions", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"id","in":"query","description":"ID of a customer.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"name":"id","in":"query","description":"ID of a customer.","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/sesions", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"id","in":"query","description":"ID of a customer.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"name":"id","in":"query","description":"ID of a customer.","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", id=id)
         query_string = await create_query_string(id=id)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -443,34 +401,31 @@ class User:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/sessions", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/sesions", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
 
-        from .models import SessionListResponseSchema
-        schema = SessionListResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getActiveSessions")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SessionListResponseSchema
+            schema = SessionListResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getActiveSessions")
+                print(e)
 
         
 
         return response
     
-    async def deleteActiveSessions(self, id=None, reason=None):
+    async def deleteActiveSessions(self, id=None):
         """Use this API to Delete a list of session of customers who have registered in the application.
         :param id : ID of a customer. : type string
-        :param reason : Reason to delete sessions. : type string
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
-        
-        if reason:
-            payload["reason"] = reason
         
 
         # Parameter validation
@@ -478,8 +433,8 @@ class User:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/sessions", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"id","in":"query","description":"ID of a customer.","required":true,"schema":{"type":"string"}},{"name":"reason","in":"query","description":"Reason to delete sessions.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"name":"id","in":"query","description":"ID of a customer.","required":true,"schema":{"type":"string"}},{"name":"reason","in":"query","description":"Reason to delete sessions.","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", id=id, reason=reason)
-        query_string = await create_query_string(id=id, reason=reason)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/sesions", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"id","in":"query","description":"ID of a customer.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"name":"id","in":"query","description":"ID of a customer.","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", id=id)
+        query_string = await create_query_string(id=id)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -489,17 +444,18 @@ class User:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/sessions", id=id, reason=reason), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/sesions", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
 
-        from .models import SessionDeleteResponseSchema
-        schema = SessionDeleteResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteActiveSessions")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SessionDeleteResponseSchema
+            schema = SessionDeleteResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteActiveSessions")
+                print(e)
 
         
 
@@ -531,13 +487,14 @@ class User:
 
         
 
-        from .models import PlatformSchema
-        schema = PlatformSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getPlatformConfig")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PlatformSchema
+            schema = PlatformSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPlatformConfig")
+                print(e)
 
         
 
@@ -574,203 +531,14 @@ class User:
 
         
 
-        from .models import PlatformSchema
-        schema = PlatformSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updatePlatformConfig")
-            print(e)
-
-        
-
-        return response
-    
-    async def createUserGroup(self, body=""):
-        """Use this API to create new user Group
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = UserValidator.createUserGroup()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import CreateUserGroupSchema
-        schema = CreateUserGroupSchema()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_group", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", )
-        query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_group", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        
-
-        from .models import UserGroupResponseSchema
-        schema = UserGroupResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createUserGroup")
-            print(e)
-
-        
-
-        return response
-    
-    async def getUserGroups(self, page_no=None, page_size=None, name=None, status=None, group_uid=None):
-        """Use this API to get User Groups mathing criteria passed in query
-        :param page_no : page number for pagination result : type string
-        :param page_size : page size for pagination result : type string
-        :param name : to seartch for User Groups which contains given string in their name : type string
-        :param status : to get User Groups with given status : type string
-        :param group_uid : to get User Groups with given uid : type integer
-        """
-        payload = {}
-        
-        if page_no:
-            payload["page_no"] = page_no
-        
-        if page_size:
-            payload["page_size"] = page_size
-        
-        if name:
-            payload["name"] = name
-        
-        if status:
-            payload["status"] = status
-        
-        if group_uid:
-            payload["group_uid"] = group_uid
-        
-
-        # Parameter validation
-        schema = UserValidator.getUserGroups()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_group", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"page_no","in":"query","description":"page number for pagination result","required":false,"schema":{"type":"string"}},{"name":"page_size","in":"query","description":"page size for pagination result","required":false,"schema":{"type":"string"}},{"name":"name","in":"query","description":"to seartch for User Groups which contains given string in their name","required":false,"schema":{"type":"string"}},{"name":"status","in":"query","description":"to get User Groups with given status","required":false,"schema":{"type":"string"}},{"name":"group_uid","in":"query","description":"to get User Groups with given uid","required":false,"schema":{"type":"integer"}}],"query":[{"name":"page_no","in":"query","description":"page number for pagination result","required":false,"schema":{"type":"string"}},{"name":"page_size","in":"query","description":"page size for pagination result","required":false,"schema":{"type":"string"}},{"name":"name","in":"query","description":"to seartch for User Groups which contains given string in their name","required":false,"schema":{"type":"string"}},{"name":"status","in":"query","description":"to get User Groups with given status","required":false,"schema":{"type":"string"}},{"name":"group_uid","in":"query","description":"to get User Groups with given uid","required":false,"schema":{"type":"integer"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", page_no=page_no, page_size=page_size, name=name, status=status, group_uid=group_uid)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, name=name, status=status, group_uid=group_uid)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_group", page_no=page_no, page_size=page_size, name=name, status=status, group_uid=group_uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        from .models import UserGroupListResponseSchema
-        schema = UserGroupListResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getUserGroups")
-            print(e)
-
-        
-
-        return response
-    
-    async def updateUserGroup(self, group_id=None, body=""):
-        """Use this API to update an existing user Group
-        :param group_id : Numeric ID allotted to a User Group : type string
-        """
-        payload = {}
-        
-        if group_id:
-            payload["group_id"] = group_id
-        
-
-        # Parameter validation
-        schema = UserValidator.updateUserGroup()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import UpdateUserGroupSchema
-        schema = UpdateUserGroupSchema()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_group/{group_id}", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"group_id","in":"path","description":"Numeric ID allotted to a User Group","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"group_id","in":"path","description":"Numeric ID allotted to a User Group","required":true,"schema":{"type":"string"}}]}""", group_id=group_id)
-        query_string = await create_query_string(group_id=group_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_group/{group_id}", group_id=group_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        
-
-        from .models import UserGroupResponseSchema
-        schema = UserGroupResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateUserGroup")
-            print(e)
-
-        
-
-        return response
-    
-    async def getUserGroupById(self, group_id=None):
-        """Use this API to get details of an existing user Group
-        :param group_id : Numeric ID allotted to a User Group : type string
-        """
-        payload = {}
-        
-        if group_id:
-            payload["group_id"] = group_id
-        
-
-        # Parameter validation
-        schema = UserValidator.getUserGroupById()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_group/{group_id}", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"group_id","in":"path","description":"Numeric ID allotted to a User Group","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"group_id","in":"path","description":"Numeric ID allotted to a User Group","required":true,"schema":{"type":"string"}}]}""", group_id=group_id)
-        query_string = await create_query_string(group_id=group_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_group/{group_id}", group_id=group_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        from .models import UserGroupResponseSchema
-        schema = UserGroupResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getUserGroupById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PlatformSchema
+            schema = PlatformSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updatePlatformConfig")
+                print(e)
 
         
 

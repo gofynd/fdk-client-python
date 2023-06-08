@@ -57,10 +57,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
-        
-        
 
 
 
@@ -109,15 +105,6 @@ class DiscountValidator:
         
     
     class updateDiscount(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        id = fields.Str(required=False)
-         
-        
-    
-    class upsertDiscountItems(BaseSchema):
         
         
         company_id = fields.Int(required=False)

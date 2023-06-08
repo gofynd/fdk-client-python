@@ -20,10 +20,10 @@ class Content:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -47,13 +47,14 @@ class Content:
 
         
 
-        from .models import GetAnnouncementListSchema
-        schema = GetAnnouncementListSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAnnouncementsList")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetAnnouncementListSchema
+            schema = GetAnnouncementListSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAnnouncementsList")
+                print(e)
 
         
 
@@ -90,13 +91,14 @@ class Content:
 
         
 
-        from .models import CreateAnnouncementSchema
-        schema = CreateAnnouncementSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createAnnouncement")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateAnnouncementSchema
+            schema = CreateAnnouncementSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createAnnouncement")
+                print(e)
 
         
 
@@ -108,7 +110,7 @@ class Content:
         """
         payload = {}
         
-        if announcement_id:
+        if announcement_id is not None:
             payload["announcement_id"] = announcement_id
         
 
@@ -132,13 +134,14 @@ class Content:
 
         
 
-        from .models import AdminAnnouncementSchema
-        schema = AdminAnnouncementSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAnnouncementById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AdminAnnouncementSchema
+            schema = AdminAnnouncementSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAnnouncementById")
+                print(e)
 
         
 
@@ -150,7 +153,7 @@ class Content:
         """
         payload = {}
         
-        if announcement_id:
+        if announcement_id is not None:
             payload["announcement_id"] = announcement_id
         
 
@@ -179,13 +182,14 @@ class Content:
 
         
 
-        from .models import CreateAnnouncementSchema
-        schema = CreateAnnouncementSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateAnnouncement")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateAnnouncementSchema
+            schema = CreateAnnouncementSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateAnnouncement")
+                print(e)
 
         
 
@@ -197,7 +201,7 @@ class Content:
         """
         payload = {}
         
-        if announcement_id:
+        if announcement_id is not None:
             payload["announcement_id"] = announcement_id
         
 
@@ -226,13 +230,14 @@ class Content:
 
         
 
-        from .models import CreateAnnouncementSchema
-        schema = CreateAnnouncementSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateAnnouncementSchedule")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateAnnouncementSchema
+            schema = CreateAnnouncementSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateAnnouncementSchedule")
+                print(e)
 
         
 
@@ -244,7 +249,7 @@ class Content:
         """
         payload = {}
         
-        if announcement_id:
+        if announcement_id is not None:
             payload["announcement_id"] = announcement_id
         
 
@@ -268,13 +273,14 @@ class Content:
 
         
 
-        from .models import CreateAnnouncementSchema
-        schema = CreateAnnouncementSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteAnnouncement")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateAnnouncementSchema
+            schema = CreateAnnouncementSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteAnnouncement")
+                print(e)
 
         
 
@@ -311,13 +317,14 @@ class Content:
 
         
 
-        from .models import BlogSchema
-        schema = BlogSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createBlog")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BlogSchema
+            schema = BlogSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createBlog")
+                print(e)
 
         
 
@@ -330,10 +337,10 @@ class Content:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -357,13 +364,14 @@ class Content:
 
         
 
-        from .models import BlogGetResponse
-        schema = BlogGetResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getBlogs")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BlogGetResponse
+            schema = BlogGetResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getBlogs")
+                print(e)
 
         
 
@@ -375,7 +383,7 @@ class Content:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -404,13 +412,14 @@ class Content:
 
         
 
-        from .models import BlogSchema
-        schema = BlogSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateBlog")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BlogSchema
+            schema = BlogSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateBlog")
+                print(e)
 
         
 
@@ -422,7 +431,7 @@ class Content:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -446,13 +455,14 @@ class Content:
 
         
 
-        from .models import BlogSchema
-        schema = BlogSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteBlog")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BlogSchema
+            schema = BlogSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteBlog")
+                print(e)
 
         
 
@@ -464,7 +474,7 @@ class Content:
         """
         payload = {}
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
 
@@ -488,13 +498,14 @@ class Content:
 
         
 
-        from .models import BlogSchema
-        schema = BlogSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getComponentById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BlogSchema
+            schema = BlogSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getComponentById")
+                print(e)
 
         
 
@@ -531,13 +542,14 @@ class Content:
 
         
 
-        from .models import DataLoaderResponseSchema
-        schema = DataLoaderResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for addDataLoader")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DataLoaderResponseSchema
+            schema = DataLoaderResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for addDataLoader")
+                print(e)
 
         
 
@@ -569,13 +581,14 @@ class Content:
 
         
 
-        from .models import DataLoadersSchema
-        schema = DataLoadersSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getDataLoaders")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DataLoadersSchema
+            schema = DataLoadersSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getDataLoaders")
+                print(e)
 
         
 
@@ -587,7 +600,7 @@ class Content:
         """
         payload = {}
         
-        if data_loader_id:
+        if data_loader_id is not None:
             payload["data_loader_id"] = data_loader_id
         
 
@@ -611,13 +624,14 @@ class Content:
 
         
 
-        from .models import DataLoaderResponseSchema
-        schema = DataLoaderResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteDataLoader")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DataLoaderResponseSchema
+            schema = DataLoaderResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteDataLoader")
+                print(e)
 
         
 
@@ -629,7 +643,7 @@ class Content:
         """
         payload = {}
         
-        if data_loader_id:
+        if data_loader_id is not None:
             payload["data_loader_id"] = data_loader_id
         
 
@@ -658,13 +672,14 @@ class Content:
 
         
 
-        from .models import DataLoaderResponseSchema
-        schema = DataLoaderResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for editDataLoader")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DataLoaderResponseSchema
+            schema = DataLoaderResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for editDataLoader")
+                print(e)
 
         
 
@@ -676,7 +691,7 @@ class Content:
         """
         payload = {}
         
-        if data_loader_id:
+        if data_loader_id is not None:
             payload["data_loader_id"] = data_loader_id
         
 
@@ -700,13 +715,14 @@ class Content:
 
         
 
-        from .models import DataLoaderResponseSchema
-        schema = DataLoaderResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for selectDataLoader")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DataLoaderResponseSchema
+            schema = DataLoaderResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for selectDataLoader")
+                print(e)
 
         
 
@@ -719,10 +735,10 @@ class Content:
         """
         payload = {}
         
-        if service:
+        if service is not None:
             payload["service"] = service
         
-        if operation_id:
+        if operation_id is not None:
             payload["operation_id"] = operation_id
         
 
@@ -746,13 +762,14 @@ class Content:
 
         
 
-        from .models import DataLoaderResetResponseSchema
-        schema = DataLoaderResetResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for resetDataLoader")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DataLoaderResetResponseSchema
+            schema = DataLoaderResetResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for resetDataLoader")
+                print(e)
 
         
 
@@ -784,13 +801,14 @@ class Content:
 
         
 
-        from .models import GetFaqCategoriesSchema
-        schema = GetFaqCategoriesSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getFaqCategories")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetFaqCategoriesSchema
+            schema = GetFaqCategoriesSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getFaqCategories")
+                print(e)
 
         
 
@@ -802,7 +820,7 @@ class Content:
         """
         payload = {}
         
-        if id_or_slug:
+        if id_or_slug is not None:
             payload["id_or_slug"] = id_or_slug
         
 
@@ -826,13 +844,14 @@ class Content:
 
         
 
-        from .models import GetFaqCategoryBySlugSchema
-        schema = GetFaqCategoryBySlugSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getFaqCategoryBySlugOrId")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetFaqCategoryBySlugSchema
+            schema = GetFaqCategoryBySlugSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getFaqCategoryBySlugOrId")
+                print(e)
 
         
 
@@ -869,13 +888,14 @@ class Content:
 
         
 
-        from .models import CreateFaqCategorySchema
-        schema = CreateFaqCategorySchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createFaqCategory")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateFaqCategorySchema
+            schema = CreateFaqCategorySchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createFaqCategory")
+                print(e)
 
         
 
@@ -887,7 +907,7 @@ class Content:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -916,13 +936,14 @@ class Content:
 
         
 
-        from .models import CreateFaqCategorySchema
-        schema = CreateFaqCategorySchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateFaqCategory")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateFaqCategorySchema
+            schema = CreateFaqCategorySchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateFaqCategory")
+                print(e)
 
         
 
@@ -934,7 +955,7 @@ class Content:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -958,13 +979,14 @@ class Content:
 
         
 
-        from .models import FaqSchema
-        schema = FaqSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteFaqCategory")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import FaqSchema
+            schema = FaqSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteFaqCategory")
+                print(e)
 
         
 
@@ -976,7 +998,7 @@ class Content:
         """
         payload = {}
         
-        if id_or_slug:
+        if id_or_slug is not None:
             payload["id_or_slug"] = id_or_slug
         
 
@@ -1000,13 +1022,14 @@ class Content:
 
         
 
-        from .models import GetFaqSchema
-        schema = GetFaqSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getFaqsByCategoryIdOrSlug")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetFaqSchema
+            schema = GetFaqSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getFaqsByCategoryIdOrSlug")
+                print(e)
 
         
 
@@ -1018,7 +1041,7 @@ class Content:
         """
         payload = {}
         
-        if category_id:
+        if category_id is not None:
             payload["category_id"] = category_id
         
 
@@ -1047,13 +1070,14 @@ class Content:
 
         
 
-        from .models import CreateFaqResponseSchema
-        schema = CreateFaqResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for addFaq")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateFaqResponseSchema
+            schema = CreateFaqResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for addFaq")
+                print(e)
 
         
 
@@ -1066,10 +1090,10 @@ class Content:
         """
         payload = {}
         
-        if category_id:
+        if category_id is not None:
             payload["category_id"] = category_id
         
-        if faq_id:
+        if faq_id is not None:
             payload["faq_id"] = faq_id
         
 
@@ -1098,13 +1122,14 @@ class Content:
 
         
 
-        from .models import CreateFaqResponseSchema
-        schema = CreateFaqResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateFaq")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateFaqResponseSchema
+            schema = CreateFaqResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateFaq")
+                print(e)
 
         
 
@@ -1117,10 +1142,10 @@ class Content:
         """
         payload = {}
         
-        if category_id:
+        if category_id is not None:
             payload["category_id"] = category_id
         
-        if faq_id:
+        if faq_id is not None:
             payload["faq_id"] = faq_id
         
 
@@ -1144,13 +1169,14 @@ class Content:
 
         
 
-        from .models import CreateFaqResponseSchema
-        schema = CreateFaqResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteFaq")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateFaqResponseSchema
+            schema = CreateFaqResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteFaq")
+                print(e)
 
         
 
@@ -1162,7 +1188,7 @@ class Content:
         """
         payload = {}
         
-        if id_or_slug:
+        if id_or_slug is not None:
             payload["id_or_slug"] = id_or_slug
         
 
@@ -1186,13 +1212,14 @@ class Content:
 
         
 
-        from .models import CreateFaqResponseSchema
-        schema = CreateFaqResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getFaqByIdOrSlug")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateFaqResponseSchema
+            schema = CreateFaqResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getFaqByIdOrSlug")
+                print(e)
 
         
 
@@ -1204,7 +1231,7 @@ class Content:
         """
         payload = {}
         
-        if type:
+        if type is not None:
             payload["type"] = type
         
 
@@ -1233,13 +1260,14 @@ class Content:
 
         
 
-        from .models import GeneratedSEOContent
-        schema = GeneratedSEOContent()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for generateSEOTitle")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GeneratedSEOContent
+            schema = GeneratedSEOContent()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for generateSEOTitle")
+                print(e)
 
         
 
@@ -1252,10 +1280,10 @@ class Content:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -1279,13 +1307,14 @@ class Content:
 
         
 
-        from .models import LandingPageGetResponse
-        schema = LandingPageGetResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getLandingPages")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import LandingPageGetResponse
+            schema = LandingPageGetResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getLandingPages")
+                print(e)
 
         
 
@@ -1322,13 +1351,14 @@ class Content:
 
         
 
-        from .models import LandingPageSchema
-        schema = LandingPageSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createLandingPage")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import LandingPageSchema
+            schema = LandingPageSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createLandingPage")
+                print(e)
 
         
 
@@ -1340,7 +1370,7 @@ class Content:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -1369,13 +1399,14 @@ class Content:
 
         
 
-        from .models import LandingPageSchema
-        schema = LandingPageSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateLandingPage")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import LandingPageSchema
+            schema = LandingPageSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateLandingPage")
+                print(e)
 
         
 
@@ -1387,7 +1418,7 @@ class Content:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -1411,13 +1442,14 @@ class Content:
 
         
 
-        from .models import LandingPageSchema
-        schema = LandingPageSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteLandingPage")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import LandingPageSchema
+            schema = LandingPageSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteLandingPage")
+                print(e)
 
         
 
@@ -1449,13 +1481,14 @@ class Content:
 
         
 
-        from .models import ApplicationLegal
-        schema = ApplicationLegal()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getLegalInformation")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ApplicationLegal
+            schema = ApplicationLegal()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getLegalInformation")
+                print(e)
 
         
 
@@ -1492,13 +1525,14 @@ class Content:
 
         
 
-        from .models import ApplicationLegal
-        schema = ApplicationLegal()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateLegalInformation")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ApplicationLegal
+            schema = ApplicationLegal()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateLegalInformation")
+                print(e)
 
         
 
@@ -1512,13 +1546,13 @@ class Content:
         """
         payload = {}
         
-        if device_platform:
+        if device_platform is not None:
             payload["device_platform"] = device_platform
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -1542,13 +1576,14 @@ class Content:
 
         
 
-        from .models import NavigationGetResponse
-        schema = NavigationGetResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getNavigations")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import NavigationGetResponse
+            schema = NavigationGetResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getNavigations")
+                print(e)
 
         
 
@@ -1585,13 +1620,14 @@ class Content:
 
         
 
-        from .models import NavigationSchema
-        schema = NavigationSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createNavigation")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import NavigationSchema
+            schema = NavigationSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createNavigation")
+                print(e)
 
         
 
@@ -1623,13 +1659,14 @@ class Content:
 
         
 
-        from .models import DefaultNavigationResponse
-        schema = DefaultNavigationResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getDefaultNavigations")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DefaultNavigationResponse
+            schema = DefaultNavigationResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getDefaultNavigations")
+                print(e)
 
         
 
@@ -1642,10 +1679,10 @@ class Content:
         """
         payload = {}
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
-        if device_platform:
+        if device_platform is not None:
             payload["device_platform"] = device_platform
         
 
@@ -1669,13 +1706,14 @@ class Content:
 
         
 
-        from .models import NavigationSchema
-        schema = NavigationSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getNavigationBySlug")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import NavigationSchema
+            schema = NavigationSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getNavigationBySlug")
+                print(e)
 
         
 
@@ -1687,7 +1725,7 @@ class Content:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -1716,13 +1754,14 @@ class Content:
 
         
 
-        from .models import NavigationSchema
-        schema = NavigationSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateNavigation")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import NavigationSchema
+            schema = NavigationSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateNavigation")
+                print(e)
 
         
 
@@ -1734,7 +1773,7 @@ class Content:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -1758,13 +1797,14 @@ class Content:
 
         
 
-        from .models import NavigationSchema
-        schema = NavigationSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteNavigation")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import NavigationSchema
+            schema = NavigationSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteNavigation")
+                print(e)
 
         
 
@@ -1796,13 +1836,14 @@ class Content:
 
         
 
-        from .models import PageMetaSchema
-        schema = PageMetaSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getPageMeta")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PageMetaSchema
+            schema = PageMetaSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPageMeta")
+                print(e)
 
         
 
@@ -1834,13 +1875,14 @@ class Content:
 
         
 
-        from .models import PageSpec
-        schema = PageSpec()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getPageSpec")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PageSpec
+            schema = PageSpec()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPageSpec")
+                print(e)
 
         
 
@@ -1877,13 +1919,14 @@ class Content:
 
         
 
-        from .models import PageSchema
-        schema = PageSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createPagePreview")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PageSchema
+            schema = PageSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createPagePreview")
+                print(e)
 
         
 
@@ -1895,7 +1938,7 @@ class Content:
         """
         payload = {}
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
 
@@ -1924,13 +1967,14 @@ class Content:
 
         
 
-        from .models import PageSchema
-        schema = PageSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updatePagePreview")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PageSchema
+            schema = PageSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updatePagePreview")
+                print(e)
 
         
 
@@ -1942,7 +1986,7 @@ class Content:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -1966,13 +2010,14 @@ class Content:
 
         
 
-        from .models import PageSchema
-        schema = PageSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deletePage")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PageSchema
+            schema = PageSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deletePage")
+                print(e)
 
         
 
@@ -2009,13 +2054,14 @@ class Content:
 
         
 
-        from .models import PathMappingSchema
-        schema = PathMappingSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for addPathRedirectionRules")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PathMappingSchema
+            schema = PathMappingSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for addPathRedirectionRules")
+                print(e)
 
         
 
@@ -2028,10 +2074,10 @@ class Content:
         """
         payload = {}
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
 
@@ -2055,13 +2101,14 @@ class Content:
 
         
 
-        from .models import PathMappingSchema
-        schema = PathMappingSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getPathRedirectionRules")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PathMappingSchema
+            schema = PathMappingSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPathRedirectionRules")
+                print(e)
 
         
 
@@ -2073,7 +2120,7 @@ class Content:
         """
         payload = {}
         
-        if path_id:
+        if path_id is not None:
             payload["path_id"] = path_id
         
 
@@ -2097,13 +2144,14 @@ class Content:
 
         
 
-        from .models import PathMappingSchema
-        schema = PathMappingSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getPathRedirectionRule")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PathMappingSchema
+            schema = PathMappingSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPathRedirectionRule")
+                print(e)
 
         
 
@@ -2115,7 +2163,7 @@ class Content:
         """
         payload = {}
         
-        if path_id:
+        if path_id is not None:
             payload["path_id"] = path_id
         
 
@@ -2144,13 +2192,14 @@ class Content:
 
         
 
-        from .models import PathMappingSchema
-        schema = PathMappingSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updatePathRedirectionRules")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PathMappingSchema
+            schema = PathMappingSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updatePathRedirectionRules")
+                print(e)
 
         
 
@@ -2162,7 +2211,7 @@ class Content:
         """
         payload = {}
         
-        if path_id:
+        if path_id is not None:
             payload["path_id"] = path_id
         
 
@@ -2214,13 +2263,14 @@ class Content:
 
         
 
-        from .models import SeoComponent
-        schema = SeoComponent()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getSEOConfiguration")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SeoComponent
+            schema = SeoComponent()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSEOConfiguration")
+                print(e)
 
         
 
@@ -2257,13 +2307,14 @@ class Content:
 
         
 
-        from .models import SeoSchema
-        schema = SeoSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateSEOConfiguration")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SeoSchema
+            schema = SeoSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateSEOConfiguration")
+                print(e)
 
         
 
@@ -2277,13 +2328,13 @@ class Content:
         """
         payload = {}
         
-        if device_platform:
+        if device_platform is not None:
             payload["device_platform"] = device_platform
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -2307,13 +2358,14 @@ class Content:
 
         
 
-        from .models import SlideshowGetResponse
-        schema = SlideshowGetResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getSlideshows")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SlideshowGetResponse
+            schema = SlideshowGetResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSlideshows")
+                print(e)
 
         
 
@@ -2350,13 +2402,14 @@ class Content:
 
         
 
-        from .models import SlideshowSchema
-        schema = SlideshowSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createSlideshow")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SlideshowSchema
+            schema = SlideshowSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createSlideshow")
+                print(e)
 
         
 
@@ -2369,10 +2422,10 @@ class Content:
         """
         payload = {}
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
-        if device_platform:
+        if device_platform is not None:
             payload["device_platform"] = device_platform
         
 
@@ -2396,13 +2449,14 @@ class Content:
 
         
 
-        from .models import SlideshowSchema
-        schema = SlideshowSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getSlideshowBySlug")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SlideshowSchema
+            schema = SlideshowSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSlideshowBySlug")
+                print(e)
 
         
 
@@ -2414,7 +2468,7 @@ class Content:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -2443,13 +2497,14 @@ class Content:
 
         
 
-        from .models import SlideshowSchema
-        schema = SlideshowSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateSlideshow")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SlideshowSchema
+            schema = SlideshowSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateSlideshow")
+                print(e)
 
         
 
@@ -2461,7 +2516,7 @@ class Content:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -2485,13 +2540,14 @@ class Content:
 
         
 
-        from .models import SlideshowSchema
-        schema = SlideshowSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteSlideshow")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SlideshowSchema
+            schema = SlideshowSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteSlideshow")
+                print(e)
 
         
 
@@ -2523,13 +2579,14 @@ class Content:
 
         
 
-        from .models import Support
-        schema = Support()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getSupportInformation")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Support
+            schema = Support()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSupportInformation")
+                print(e)
 
         
 
@@ -2566,13 +2623,14 @@ class Content:
 
         
 
-        from .models import Support
-        schema = Support()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateSupportInformation")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Support
+            schema = Support()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateSupportInformation")
+                print(e)
 
         
 
@@ -2609,13 +2667,14 @@ class Content:
 
         
 
-        from .models import TagsSchema
-        schema = TagsSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateInjectableTag")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TagsSchema
+            schema = TagsSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateInjectableTag")
+                print(e)
 
         
 
@@ -2647,13 +2706,14 @@ class Content:
 
         
 
-        from .models import TagsSchema
-        schema = TagsSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteAllInjectableTags")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TagsSchema
+            schema = TagsSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteAllInjectableTags")
+                print(e)
 
         
 
@@ -2685,13 +2745,14 @@ class Content:
 
         
 
-        from .models import TagsSchema
-        schema = TagsSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getInjectableTags")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TagsSchema
+            schema = TagsSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getInjectableTags")
+                print(e)
 
         
 
@@ -2728,13 +2789,14 @@ class Content:
 
         
 
-        from .models import TagsSchema
-        schema = TagsSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for addInjectableTag")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TagsSchema
+            schema = TagsSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for addInjectableTag")
+                print(e)
 
         
 
@@ -2771,13 +2833,14 @@ class Content:
 
         
 
-        from .models import TagDeleteSuccessResponse
-        schema = TagDeleteSuccessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for removeInjectableTag")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TagDeleteSuccessResponse
+            schema = TagDeleteSuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for removeInjectableTag")
+                print(e)
 
         
 
@@ -2789,7 +2852,7 @@ class Content:
         """
         payload = {}
         
-        if tag_id:
+        if tag_id is not None:
             payload["tag_id"] = tag_id
         
 
@@ -2818,13 +2881,14 @@ class Content:
 
         
 
-        from .models import TagsSchema
-        schema = TagsSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for editInjectableTag")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TagsSchema
+            schema = TagsSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for editInjectableTag")
+                print(e)
 
         
 
@@ -2861,13 +2925,14 @@ class Content:
 
         
 
-        from .models import PageSchema
-        schema = PageSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createPage")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PageSchema
+            schema = PageSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createPage")
+                print(e)
 
         
 
@@ -2880,10 +2945,10 @@ class Content:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -2907,13 +2972,14 @@ class Content:
 
         
 
-        from .models import PageGetResponse
-        schema = PageGetResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getPages")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PageGetResponse
+            schema = PageGetResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPages")
+                print(e)
 
         
 
@@ -2925,7 +2991,7 @@ class Content:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -2954,13 +3020,14 @@ class Content:
 
         
 
-        from .models import PageSchema
-        schema = PageSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updatePage")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PageSchema
+            schema = PageSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updatePage")
+                print(e)
 
         
 
@@ -2972,7 +3039,7 @@ class Content:
         """
         payload = {}
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
 
@@ -2996,13 +3063,14 @@ class Content:
 
         
 
-        from .models import PageSchema
-        schema = PageSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getPageBySlug")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PageSchema
+            schema = PageSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPageBySlug")
+                print(e)
 
         
 
