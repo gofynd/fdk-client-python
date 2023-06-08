@@ -364,14 +364,14 @@ class Finance:
 
         return response
     
-    async def getInvoiceList(self, body=""):
+    async def getInvoiceType(self, body=""):
         """
         """
         payload = {}
         
 
         # Parameter validation
-        schema = FinanceValidator.getInvoiceList()
+        schema = FinanceValidator.getInvoiceType()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -401,7 +401,7 @@ class Finance:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getInvoiceList")
+                print("Response Validation failed for getInvoiceType")
                 print(e)
 
         
