@@ -34,7 +34,7 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
         # Parameter validation
@@ -55,7 +55,21 @@ class Theme:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAllPages"]).netloc, "get", await create_url_without_domain("/service/application/theme/v1.0/{theme_id}/page", theme_id=theme_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAllPages"]).netloc, "get", await create_url_without_domain("/service/application/theme/v1.0/{theme_id}/page", theme_id=theme_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AllAvailablePageSchema
+            schema = AllAvailablePageSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAllPages")
+                print(e)
+
+        
+
+        return response
     
     async def getPage(self, theme_id=None, page_value=None, body=""):
         """Use this API to retrieve a page of a theme.
@@ -64,10 +78,10 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
-        if page_value:
+        if page_value is not None:
             payload["page_value"] = page_value
         
         # Parameter validation
@@ -88,7 +102,21 @@ class Theme:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPage"]).netloc, "get", await create_url_without_domain("/service/application/theme/v1.0/{theme_id}/{page_value}", theme_id=theme_id, page_value=page_value), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPage"]).netloc, "get", await create_url_without_domain("/service/application/theme/v1.0/{theme_id}/{page_value}", theme_id=theme_id, page_value=page_value), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AvailablePageSchema
+            schema = AvailablePageSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPage")
+                print(e)
+
+        
+
+        return response
     
     async def getAppliedTheme(self, body=""):
         """An application has multiple themes, but only one theme can be applied at a time. Use this API to retrieve the theme currently applied to the application.
@@ -113,7 +141,21 @@ class Theme:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAppliedTheme"]).netloc, "get", await create_url_without_domain("/service/application/theme/v1.0/applied-theme", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAppliedTheme"]).netloc, "get", await create_url_without_domain("/service/application/theme/v1.0/applied-theme", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ThemesSchema
+            schema = ThemesSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAppliedTheme")
+                print(e)
+
+        
+
+        return response
     
     async def getThemeForPreview(self, theme_id=None, body=""):
         """A theme can be previewed before applying it. Use this API to retrieve the preview of a theme by its ID.
@@ -121,7 +163,7 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
         # Parameter validation
@@ -142,6 +184,20 @@ class Theme:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getThemeForPreview"]).netloc, "get", await create_url_without_domain("/service/application/theme/v1.0/{theme_id}/preview", theme_id=theme_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getThemeForPreview"]).netloc, "get", await create_url_without_domain("/service/application/theme/v1.0/{theme_id}/preview", theme_id=theme_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ThemesSchema
+            schema = ThemesSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getThemeForPreview")
+                print(e)
+
+        
+
+        return response
     
 

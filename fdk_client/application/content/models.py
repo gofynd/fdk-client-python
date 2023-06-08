@@ -3,9 +3,7 @@
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
 
-
 from ..ApplicationModel import BaseSchema
-
 
 
 from .enums import *
@@ -507,6 +505,8 @@ class SeoSchema(BaseSchema):
     
     sitemap_enabled = fields.Boolean(required=False)
     
+    cannonical_enabled = fields.Boolean(required=False)
+    
     custom_meta_tags = fields.List(fields.Dict(required=False), required=False)
     
     details = fields.Nested(Detail, required=False)
@@ -536,6 +536,8 @@ class Detail(BaseSchema):
     title = fields.Str(required=False)
     
     description = fields.Str(required=False)
+    
+    image_url = fields.Str(required=False)
     
 
 

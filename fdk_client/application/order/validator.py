@@ -54,18 +54,6 @@ from ..ApplicationModel import BaseSchema
     
     
         
-    
-    
-        
-                
-from .models import invoiceParameter
-
-    
-    
-        
-                
-from .models import creditNoteParameter
-
 
 class OrderValidator:
     
@@ -169,24 +157,6 @@ class OrderValidator:
         
         
         shipment_id = fields.Str(required=False)
-         
-        
-    
-    class getInvoiceByShipmentId1(BaseSchema):
-        
-        
-        shipment_id = fields.Str(required=False)
-        
-        parameters = fields.Nested(invoiceParameter, required=False)
-         
-        
-    
-    class getCreditNoteByShipmentId(BaseSchema):
-        
-        
-        shipment_id = fields.Str(required=False)
-        
-        parameters = fields.Nested(creditNoteParameter, required=False)
          
         
     

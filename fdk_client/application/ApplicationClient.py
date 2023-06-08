@@ -58,15 +58,15 @@ class ApplicationClient:
         self.logistic = Logistic(config)
         
 
-    async def setCookie(self, cookie):
+    def setCookie(self, cookie):
         self.config.cookies = cookie
 
-    async def setLocationDetails(self, locationDetails):
+    def setLocationDetails(self, locationDetails):
         schema = LocationValidator.validateLocationObj()
         schema.dump(schema.load(locationDetails))
         self.config.locationDetails = locationDetails
 
-    async def setExtraHeaders(self, header):
+    def setExtraHeaders(self, header):
         if header and type(header) == dict:
             self.config.extraHeaders.append(header)
         else:

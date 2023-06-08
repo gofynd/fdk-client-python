@@ -3,13 +3,19 @@
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
 
-
 from ..PlatformModel import BaseSchema
-
 
 
 from .enums import *
 
+
+
+class GenerateSEOContent(BaseSchema):
+    pass
+
+
+class GeneratedSEOContent(BaseSchema):
+    pass
 
 
 class ApplicationLegal(BaseSchema):
@@ -423,6 +429,30 @@ class TagSourceSchema(BaseSchema):
 
 
 
+class GenerateSEOContent(BaseSchema):
+    # Content swagger.json
+
+    
+    text = fields.Str(required=False)
+    
+    existing_text = fields.Str(required=False)
+    
+    keywords = fields.List(fields.Str(required=False), required=False)
+    
+    type = fields.Str(required=False)
+    
+
+
+class GeneratedSEOContent(BaseSchema):
+    # Content swagger.json
+
+    
+    title = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+
+
 class ApplicationLegal(BaseSchema):
     # Content swagger.json
 
@@ -507,6 +537,8 @@ class SeoSchema(BaseSchema):
     
     sitemap_enabled = fields.Boolean(required=False)
     
+    cannonical_enabled = fields.Boolean(required=False)
+    
     custom_meta_tags = fields.List(fields.Dict(required=False), required=False)
     
     details = fields.Nested(Detail, required=False)
@@ -536,6 +568,8 @@ class Detail(BaseSchema):
     title = fields.Str(required=False)
     
     description = fields.Str(required=False)
+    
+    image_url = fields.Str(required=False)
     
 
 

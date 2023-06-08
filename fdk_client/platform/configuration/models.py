@@ -3,9 +3,7 @@
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
 
-
 from ..PlatformModel import BaseSchema
-
 
 
 
@@ -135,6 +133,14 @@ class CompanyBrandInfo(BaseSchema):
 
 
 class BrandsByCompanyResponse(BaseSchema):
+    pass
+
+
+class CommunicationConfig(BaseSchema):
+    pass
+
+
+class CommsConfig(BaseSchema):
     pass
 
 
@@ -765,6 +771,8 @@ class ApplicationInventory(BaseSchema):
     
     comms_enabled = fields.Boolean(required=False)
     
+    communication = fields.Nested(CommunicationConfig, required=False)
+    
     platforms = fields.List(fields.Str(required=False), required=False)
     
     _id = fields.Str(required=False)
@@ -1095,6 +1103,8 @@ class AppInventoryPartialUpdate(BaseSchema):
     
     comms_enabled = fields.Boolean(required=False)
     
+    communication = fields.Nested(CommunicationConfig, required=False)
+    
 
 
 class BrandCompanyInfo(BaseSchema):
@@ -1188,6 +1198,26 @@ class BrandsByCompanyResponse(BaseSchema):
 
     
     brands = fields.Nested(CompanyBrandInfo, required=False)
+    
+
+
+class CommunicationConfig(BaseSchema):
+    # Configuration swagger.json
+
+    
+    email = fields.Nested(CommsConfig, required=False)
+    
+    sms = fields.Nested(CommsConfig, required=False)
+    
+    voice = fields.Nested(CommsConfig, required=False)
+    
+
+
+class CommsConfig(BaseSchema):
+    # Configuration swagger.json
+
+    
+    enabled = fields.Boolean(required=False)
     
 
 

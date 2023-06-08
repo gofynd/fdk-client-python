@@ -1,6 +1,6 @@
 
 
-""" FileStorage Platform Client."""
+"""FileStorage Platform Client"""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -10,6 +10,7 @@ from .validator import FileStorageValidator
 class FileStorage:
     def __init__(self, config):
         self._conf = config
+
     
     async def startUpload(self, namespace=None, body=""):
         """Uploads an arbitrarily sized buffer or blob.
@@ -35,7 +36,7 @@ This operation will return the url for the uploaded file.
         """
         payload = {}
         
-        if namespace:
+        if namespace is not None:
             payload["namespace"] = namespace
         
 
@@ -60,7 +61,22 @@ This operation will return the url for the uploaded file.
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/namespaces/{namespace}/upload/start/", namespace=namespace, ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/namespaces/{namespace}/upload/start/", namespace=namespace, ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import StartResponse
+            schema = StartResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for startUpload")
+                print(e)
+
+        
+
+        return response
     
     async def completeUpload(self, namespace=None, body=""):
         """Uploads an arbitrarily sized buffer or blob.
@@ -86,7 +102,7 @@ This operation will return the url for the uploaded file.
         """
         payload = {}
         
-        if namespace:
+        if namespace is not None:
             payload["namespace"] = namespace
         
 
@@ -111,7 +127,22 @@ This operation will return the url for the uploaded file.
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/namespaces/{namespace}/upload/complete/", namespace=namespace, ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/namespaces/{namespace}/upload/complete/", namespace=namespace, ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CompleteResponse
+            schema = CompleteResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for completeUpload")
+                print(e)
+
+        
+
+        return response
     
     async def getSignUrls(self, body=""):
         """Describe here
@@ -140,7 +171,22 @@ This operation will return the url for the uploaded file.
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/sign-urls/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/sign-urls/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SignUrlResponse
+            schema = SignUrlResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSignUrls")
+                print(e)
+
+        
+
+        return response
     
     async def copyFiles(self, sync=None, body=""):
         """Copy Files
@@ -148,7 +194,7 @@ This operation will return the url for the uploaded file.
         """
         payload = {}
         
-        if sync:
+        if sync is not None:
             payload["sync"] = sync
         
 
@@ -173,7 +219,22 @@ This operation will return the url for the uploaded file.
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/uploads/copy/", sync=sync, ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/uploads/copy/", sync=sync, ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BulkUploadResponse
+            schema = BulkUploadResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for copyFiles")
+                print(e)
+
+        
+
+        return response
     
     async def browse(self, namespace=None, page_no=None):
         """Browse Files
@@ -182,10 +243,10 @@ This operation will return the url for the uploaded file.
         """
         payload = {}
         
-        if namespace:
+        if namespace is not None:
             payload["namespace"] = namespace
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
 
@@ -205,7 +266,22 @@ This operation will return the url for the uploaded file.
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/namespaces/{namespace}/browse/", namespace=namespace, page_no=page_no), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/namespaces/{namespace}/browse/", namespace=namespace, page_no=page_no), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BrowseResponse
+            schema = BrowseResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for browse")
+                print(e)
+
+        
+
+        return response
     
     async def proxy(self, url=None):
         """Proxy
@@ -213,7 +289,7 @@ This operation will return the url for the uploaded file.
         """
         payload = {}
         
-        if url:
+        if url is not None:
             payload["url"] = url
         
 
@@ -233,6 +309,10 @@ This operation will return the url for the uploaded file.
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/proxy/", url=url), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/proxy/", url=url), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        return response
     
 

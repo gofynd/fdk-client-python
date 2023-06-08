@@ -3,9 +3,7 @@
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
 
-
 from ..PlatformModel import BaseSchema
-
 
 
 from .enums import *
@@ -725,6 +723,8 @@ class SupportGeneralConfig(BaseSchema):
     
     integration = fields.Dict(required=False)
     
+    type = fields.Str(required=False)
+    
 
 
 class FeedbackForm(BaseSchema):
@@ -871,7 +871,7 @@ class Ticket(BaseSchema):
     
     content = fields.Nested(TicketContent, required=False)
     
-    category = fields.Str(required=False)
+    category = fields.Nested(TicketCategory, required=False)
     
     sub_category = fields.Str(required=False)
     
