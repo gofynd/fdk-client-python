@@ -6990,6 +6990,7 @@ Success
  | appType | String? |  yes  |  |
  | mobileLogo | [SecureUrl](#SecureUrl)? |  yes  |  |
  | domain | [Domain](#Domain)? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -7214,7 +7215,7 @@ Success
  | ---------- | ---- | -------- | ----------- |
  | loc | String? |  yes  |  |
  | addressLine | ArrayList<String>? |  yes  |  |
- | phone | [InformationPhone](#InformationPhone)? |  yes  |  |
+ | phone | ArrayList<[InformationPhone](#InformationPhone)>? |  yes  |  |
  | city | String? |  yes  |  |
  | country | String? |  yes  |  |
  | pincode | Int? |  yes  |  |
@@ -7415,15 +7416,16 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | name | String |  no  |  |
- | description | String |  no  |  |
- | logo | [SecureUrl](#SecureUrl) |  no  |  |
- | mobileLogo | [SecureUrl](#SecureUrl) |  no  |  |
- | favicon | [SecureUrl](#SecureUrl) |  no  |  |
- | banner | [SecureUrl](#SecureUrl) |  no  |  |
+ | name | String? |  yes  |  |
+ | description | String? |  yes  |  |
+ | logo | [SecureUrl](#SecureUrl)? |  yes  |  |
+ | mobileLogo | [SecureUrl](#SecureUrl)? |  yes  |  |
+ | favicon | [SecureUrl](#SecureUrl)? |  yes  |  |
+ | banner | [SecureUrl](#SecureUrl)? |  yes  |  |
  | domain | [Domain](#Domain)? |  yes  |  |
  | domains | ArrayList<[Domain](#Domain)>? |  yes  |  |
  | id | String? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
