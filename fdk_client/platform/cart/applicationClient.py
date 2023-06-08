@@ -26,28 +26,28 @@ class Cart:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if is_archived:
+        if is_archived is not None:
             payload["is_archived"] = is_archived
         
-        if title:
+        if title is not None:
             payload["title"] = title
         
-        if is_public:
+        if is_public is not None:
             payload["is_public"] = is_public
         
-        if is_display:
+        if is_display is not None:
             payload["is_display"] = is_display
         
-        if type_slug:
+        if type_slug is not None:
             payload["type_slug"] = type_slug
         
-        if code:
+        if code is not None:
             payload["code"] = code
         
 
@@ -71,13 +71,14 @@ class Cart:
 
         
 
-        from .models import CouponsResponse
-        schema = CouponsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCoupons")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CouponsResponse
+            schema = CouponsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCoupons")
+                print(e)
 
         
 
@@ -114,13 +115,14 @@ class Cart:
 
         
 
-        from .models import SuccessMessage
-        schema = SuccessMessage()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createCoupon")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessMessage
+            schema = SuccessMessage()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createCoupon")
+                print(e)
 
         
 
@@ -132,7 +134,7 @@ class Cart:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -156,13 +158,14 @@ class Cart:
 
         
 
-        from .models import CouponUpdate
-        schema = CouponUpdate()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCouponById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CouponUpdate
+            schema = CouponUpdate()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCouponById")
+                print(e)
 
         
 
@@ -174,7 +177,7 @@ class Cart:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -203,13 +206,14 @@ class Cart:
 
         
 
-        from .models import SuccessMessage
-        schema = SuccessMessage()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateCoupon")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessMessage
+            schema = SuccessMessage()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateCoupon")
+                print(e)
 
         
 
@@ -221,7 +225,7 @@ class Cart:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -250,13 +254,14 @@ class Cart:
 
         
 
-        from .models import SuccessMessage
-        schema = SuccessMessage()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateCouponPartially")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessMessage
+            schema = SuccessMessage()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateCouponPartially")
+                print(e)
 
         
 
@@ -275,28 +280,28 @@ class Cart:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
-        if is_active:
+        if is_active is not None:
             payload["is_active"] = is_active
         
-        if promo_group:
+        if promo_group is not None:
             payload["promo_group"] = promo_group
         
-        if promotion_type:
+        if promotion_type is not None:
             payload["promotion_type"] = promotion_type
         
-        if fp_panel:
+        if fp_panel is not None:
             payload["fp_panel"] = fp_panel
         
-        if promotion_id:
+        if promotion_id is not None:
             payload["promotion_id"] = promotion_id
         
 
@@ -320,13 +325,14 @@ class Cart:
 
         
 
-        from .models import PromotionsResponse
-        schema = PromotionsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getPromotions")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PromotionsResponse
+            schema = PromotionsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPromotions")
+                print(e)
 
         
 
@@ -363,13 +369,14 @@ class Cart:
 
         
 
-        from .models import PromotionAdd
-        schema = PromotionAdd()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createPromotion")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PromotionAdd
+            schema = PromotionAdd()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createPromotion")
+                print(e)
 
         
 
@@ -381,7 +388,7 @@ class Cart:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -405,13 +412,14 @@ class Cart:
 
         
 
-        from .models import PromotionUpdate
-        schema = PromotionUpdate()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getPromotionById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PromotionUpdate
+            schema = PromotionUpdate()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPromotionById")
+                print(e)
 
         
 
@@ -423,7 +431,7 @@ class Cart:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -452,13 +460,14 @@ class Cart:
 
         
 
-        from .models import PromotionUpdate
-        schema = PromotionUpdate()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updatePromotion")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PromotionUpdate
+            schema = PromotionUpdate()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updatePromotion")
+                print(e)
 
         
 
@@ -470,7 +479,7 @@ class Cart:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -499,13 +508,14 @@ class Cart:
 
         
 
-        from .models import SuccessMessage
-        schema = SuccessMessage()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updatePromotionPartially")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessMessage
+            schema = SuccessMessage()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updatePromotionPartially")
+                print(e)
 
         
 
@@ -517,7 +527,7 @@ class Cart:
         """
         payload = {}
         
-        if cart_meta_id:
+        if cart_meta_id is not None:
             payload["cart_meta_id"] = cart_meta_id
         
 
@@ -546,13 +556,14 @@ class Cart:
 
         
 
-        from .models import CartMetaConfigUpdate
-        schema = CartMetaConfigUpdate()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateCartMetaConfig")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CartMetaConfigUpdate
+            schema = CartMetaConfigUpdate()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateCartMetaConfig")
+                print(e)
 
         
 
@@ -584,13 +595,14 @@ class Cart:
 
         
 
-        from .models import CartMetaConfigAdd
-        schema = CartMetaConfigAdd()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for fetchCartMetaConfig")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CartMetaConfigAdd
+            schema = CartMetaConfigAdd()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for fetchCartMetaConfig")
+                print(e)
 
         
 
@@ -627,13 +639,14 @@ class Cart:
 
         
 
-        from .models import CartMetaConfigAdd
-        schema = CartMetaConfigAdd()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createCartMetaConfig")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CartMetaConfigAdd
+            schema = CartMetaConfigAdd()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createCartMetaConfig")
+                print(e)
 
         
 
@@ -670,13 +683,14 @@ class Cart:
 
         
 
-        from .models import OpenapiCartDetailsResponse
-        schema = OpenapiCartDetailsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for fetchAndvalidateCartItems")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OpenapiCartDetailsResponse
+            schema = OpenapiCartDetailsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for fetchAndvalidateCartItems")
+                print(e)
 
         
 
@@ -713,13 +727,14 @@ class Cart:
 
         
 
-        from .models import OpenApiCartServiceabilityResponse
-        schema = OpenApiCartServiceabilityResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for checkCartServiceability")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OpenApiCartServiceabilityResponse
+            schema = OpenApiCartServiceabilityResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for checkCartServiceability")
+                print(e)
 
         
 
@@ -756,13 +771,14 @@ class Cart:
 
         
 
-        from .models import OpenApiCheckoutResponse
-        schema = OpenApiCheckoutResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for checkoutCart")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OpenApiCheckoutResponse
+            schema = OpenApiCheckoutResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for checkoutCart")
+                print(e)
 
         
 
@@ -780,25 +796,25 @@ class Cart:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if from_date:
+        if from_date is not None:
             payload["from_date"] = from_date
         
-        if to_date:
+        if to_date is not None:
             payload["to_date"] = to_date
         
-        if anonymous_cart:
+        if anonymous_cart is not None:
             payload["anonymous_cart"] = anonymous_cart
         
-        if last_id:
+        if last_id is not None:
             payload["last_id"] = last_id
         
-        if sort_on:
+        if sort_on is not None:
             payload["sort_on"] = sort_on
         
 
@@ -822,13 +838,14 @@ class Cart:
 
         
 
-        from .models import AbandonedCartResponse
-        schema = AbandonedCartResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAbandonedCart")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AbandonedCartResponse
+            schema = AbandonedCartResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAbandonedCart")
+                print(e)
 
         
 
@@ -842,13 +859,13 @@ class Cart:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
-        if i:
+        if i is not None:
             payload["i"] = i
         
-        if b:
+        if b is not None:
             payload["b"] = b
         
 
@@ -872,13 +889,14 @@ class Cart:
 
         
 
-        from .models import CartDetailResponse
-        schema = CartDetailResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAbandonedCartDetails")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CartDetailResponse
+            schema = CartDetailResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAbandonedCartDetails")
+                print(e)
 
         
 
@@ -891,10 +909,10 @@ class Cart:
         """
         payload = {}
         
-        if cart_id:
+        if cart_id is not None:
             payload["cart_id"] = cart_id
         
-        if b:
+        if b is not None:
             payload["b"] = b
         
 
@@ -923,13 +941,14 @@ class Cart:
 
         
 
-        from .models import AddCartDetailResponse
-        schema = AddCartDetailResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for addItems")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AddCartDetailResponse
+            schema = AddCartDetailResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for addItems")
+                print(e)
 
         
 
@@ -942,10 +961,10 @@ class Cart:
         """
         payload = {}
         
-        if cart_id:
+        if cart_id is not None:
             payload["cart_id"] = cart_id
         
-        if b:
+        if b is not None:
             payload["b"] = b
         
 
@@ -974,13 +993,14 @@ class Cart:
 
         
 
-        from .models import UpdateCartDetailResponse
-        schema = UpdateCartDetailResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateCart")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UpdateCartDetailResponse
+            schema = UpdateCartDetailResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateCart")
+                print(e)
 
         
 
@@ -1020,7 +1040,7 @@ class Cart:
         """
         payload = {}
         
-        if code:
+        if code is not None:
             payload["code"] = code
         
 
@@ -1052,7 +1072,7 @@ class Cart:
         """
         payload = {}
         
-        if code:
+        if code is not None:
             payload["code"] = code
         
 

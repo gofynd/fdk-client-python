@@ -20,10 +20,10 @@ class Rewards:
         """
         payload = {}
         
-        if page_id:
+        if page_id is not None:
             payload["page_id"] = page_id
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -47,13 +47,14 @@ class Rewards:
 
         
 
-        from .models import GiveawayResponse
-        schema = GiveawayResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for showGiveaways")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GiveawayResponse
+            schema = GiveawayResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for showGiveaways")
+                print(e)
 
         
 
@@ -90,13 +91,14 @@ class Rewards:
 
         
 
-        from .models import Giveaway
-        schema = Giveaway()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for saveGiveAway")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Giveaway
+            schema = Giveaway()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for saveGiveAway")
+                print(e)
 
         
 
@@ -108,7 +110,7 @@ class Rewards:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -132,13 +134,14 @@ class Rewards:
 
         
 
-        from .models import Giveaway
-        schema = Giveaway()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getGiveawayById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Giveaway
+            schema = Giveaway()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getGiveawayById")
+                print(e)
 
         
 
@@ -150,7 +153,7 @@ class Rewards:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -179,13 +182,14 @@ class Rewards:
 
         
 
-        from .models import Giveaway
-        schema = Giveaway()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateGiveAway")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Giveaway
+            schema = Giveaway()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateGiveAway")
+                print(e)
 
         
 
@@ -198,10 +202,10 @@ class Rewards:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
-        if audience_id:
+        if audience_id is not None:
             payload["audience_id"] = audience_id
         
 
@@ -225,13 +229,14 @@ class Rewards:
 
         
 
-        from .models import GiveawayAudience
-        schema = GiveawayAudience()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getGiveawayAudienceStatus")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GiveawayAudience
+            schema = GiveawayAudience()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getGiveawayAudienceStatus")
+                print(e)
 
         
 
@@ -271,7 +276,7 @@ class Rewards:
         """
         payload = {}
         
-        if name:
+        if name is not None:
             payload["name"] = name
         
 
@@ -295,13 +300,14 @@ class Rewards:
 
         
 
-        from .models import Offer
-        schema = Offer()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getOfferByName")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Offer
+            schema = Offer()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getOfferByName")
+                print(e)
 
         
 
@@ -313,7 +319,7 @@ class Rewards:
         """
         payload = {}
         
-        if name:
+        if name is not None:
             payload["name"] = name
         
 
@@ -342,13 +348,14 @@ class Rewards:
 
         
 
-        from .models import Offer
-        schema = Offer()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateOfferByName")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Offer
+            schema = Offer()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateOfferByName")
+                print(e)
 
         
 
@@ -360,7 +367,7 @@ class Rewards:
         """
         payload = {}
         
-        if user_id:
+        if user_id is not None:
             payload["user_id"] = user_id
         
 
@@ -389,13 +396,14 @@ class Rewards:
 
         
 
-        from .models import AppUser
-        schema = AppUser()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateUserStatus")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AppUser
+            schema = AppUser()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateUserStatus")
+                print(e)
 
         
 
@@ -407,7 +415,7 @@ class Rewards:
         """
         payload = {}
         
-        if user_id:
+        if user_id is not None:
             payload["user_id"] = user_id
         
 
@@ -431,13 +439,14 @@ class Rewards:
 
         
 
-        from .models import UserRes
-        schema = UserRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getUserDetails")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UserRes
+            schema = UserRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getUserDetails")
+                print(e)
 
         
 
@@ -451,13 +460,13 @@ class Rewards:
         """
         payload = {}
         
-        if user_id:
+        if user_id is not None:
             payload["user_id"] = user_id
         
-        if page_id:
+        if page_id is not None:
             payload["page_id"] = page_id
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -481,13 +490,14 @@ class Rewards:
 
         
 
-        from .models import HistoryRes
-        schema = HistoryRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getUserPointsHistory")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import HistoryRes
+            schema = HistoryRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getUserPointsHistory")
+                print(e)
 
         
 
@@ -519,13 +529,14 @@ class Rewards:
 
         
 
-        from .models import ConfigurationRes
-        schema = ConfigurationRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getRewardsConfiguration")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ConfigurationRes
+            schema = ConfigurationRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getRewardsConfiguration")
+                print(e)
 
         
 
@@ -562,13 +573,14 @@ class Rewards:
 
         
 
-        from .models import SetConfigurationRes
-        schema = SetConfigurationRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for setRewardsConfiguration")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SetConfigurationRes
+            schema = SetConfigurationRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for setRewardsConfiguration")
+                print(e)
 
         
 

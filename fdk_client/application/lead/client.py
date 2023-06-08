@@ -37,7 +37,7 @@ class Lead:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
         # Parameter validation
@@ -61,14 +61,14 @@ class Lead:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getTicket"]).netloc, "get", await create_url_without_domain("/service/application/lead/v1.0/ticket/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import Ticket
-        schema = Ticket()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getTicket")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Ticket
+            schema = Ticket()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getTicket")
+                print(e)
 
         
 
@@ -80,7 +80,7 @@ class Lead:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
         # Parameter validation
@@ -109,14 +109,14 @@ class Lead:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["createHistory"]).netloc, "post", await create_url_without_domain("/service/application/lead/v1.0/ticket/{id}/history", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import TicketHistory
-        schema = TicketHistory()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createHistory")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TicketHistory
+            schema = TicketHistory()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createHistory")
+                print(e)
 
         
 
@@ -153,14 +153,14 @@ class Lead:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["createTicket"]).netloc, "post", await create_url_without_domain("/service/application/lead/v1.0/ticket/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import Ticket
-        schema = Ticket()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createTicket")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Ticket
+            schema = Ticket()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createTicket")
+                print(e)
 
         
 
@@ -172,7 +172,7 @@ class Lead:
         """
         payload = {}
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
         # Parameter validation
@@ -196,14 +196,14 @@ class Lead:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCustomForm"]).netloc, "get", await create_url_without_domain("/service/application/lead/v1.0/form/{slug}", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import CustomForm
-        schema = CustomForm()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCustomForm")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CustomForm
+            schema = CustomForm()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCustomForm")
+                print(e)
 
         
 
@@ -215,7 +215,7 @@ class Lead:
         """
         payload = {}
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
         # Parameter validation
@@ -244,14 +244,14 @@ class Lead:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["submitCustomForm"]).netloc, "post", await create_url_without_domain("/service/application/lead/v1.0/form/{slug}/submit", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import SubmitCustomFormResponse
-        schema = SubmitCustomFormResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for submitCustomForm")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SubmitCustomFormResponse
+            schema = SubmitCustomFormResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for submitCustomForm")
+                print(e)
 
         
 
@@ -263,7 +263,7 @@ class Lead:
         """
         payload = {}
         
-        if unique_name:
+        if unique_name is not None:
             payload["unique_name"] = unique_name
         
         # Parameter validation
@@ -287,14 +287,14 @@ class Lead:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getParticipantsInsideVideoRoom"]).netloc, "get", await create_url_without_domain("/service/application/lead/v1.0/video/room/{unique_name}/participants", unique_name=unique_name), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import GetParticipantsInsideVideoRoomResponse
-        schema = GetParticipantsInsideVideoRoomResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getParticipantsInsideVideoRoom")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetParticipantsInsideVideoRoomResponse
+            schema = GetParticipantsInsideVideoRoomResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getParticipantsInsideVideoRoom")
+                print(e)
 
         
 
@@ -306,7 +306,7 @@ class Lead:
         """
         payload = {}
         
-        if unique_name:
+        if unique_name is not None:
             payload["unique_name"] = unique_name
         
         # Parameter validation
@@ -330,14 +330,14 @@ class Lead:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getTokenForVideoRoom"]).netloc, "get", await create_url_without_domain("/service/application/lead/v1.0/video/room/{unique_name}/token", unique_name=unique_name), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import GetTokenForVideoRoomResponse
-        schema = GetTokenForVideoRoomResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getTokenForVideoRoom")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetTokenForVideoRoomResponse
+            schema = GetTokenForVideoRoomResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getTokenForVideoRoom")
+                print(e)
 
         
 

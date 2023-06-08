@@ -21,13 +21,13 @@ class Communication:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if sort:
+        if sort is not None:
             payload["sort"] = sort
         
 
@@ -51,13 +51,14 @@ class Communication:
 
         
 
-        from .models import Campaigns
-        schema = Campaigns()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCampaigns")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Campaigns
+            schema = Campaigns()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCampaigns")
+                print(e)
 
         
 
@@ -94,13 +95,14 @@ class Communication:
 
         
 
-        from .models import Campaign
-        schema = Campaign()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createCampaign")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Campaign
+            schema = Campaign()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createCampaign")
+                print(e)
 
         
 
@@ -112,7 +114,7 @@ class Communication:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -136,13 +138,14 @@ class Communication:
 
         
 
-        from .models import Campaign
-        schema = Campaign()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCampaignById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Campaign
+            schema = Campaign()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCampaignById")
+                print(e)
 
         
 
@@ -154,7 +157,7 @@ class Communication:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -183,13 +186,14 @@ class Communication:
 
         
 
-        from .models import Campaign
-        schema = Campaign()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateCampaignById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Campaign
+            schema = Campaign()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateCampaignById")
+                print(e)
 
         
 
@@ -201,7 +205,7 @@ class Communication:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -225,13 +229,14 @@ class Communication:
 
         
 
-        from .models import GetStats
-        schema = GetStats()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getStatsOfCampaignById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetStats
+            schema = GetStats()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getStatsOfCampaignById")
+                print(e)
 
         
 
@@ -245,13 +250,13 @@ class Communication:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if sort:
+        if sort is not None:
             payload["sort"] = sort
         
 
@@ -275,13 +280,14 @@ class Communication:
 
         
 
-        from .models import Audiences
-        schema = Audiences()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAudiences")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Audiences
+            schema = Audiences()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAudiences")
+                print(e)
 
         
 
@@ -318,13 +324,14 @@ class Communication:
 
         
 
-        from .models import Audience
-        schema = Audience()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createAudience")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Audience
+            schema = Audience()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createAudience")
+                print(e)
 
         
 
@@ -361,13 +368,14 @@ class Communication:
 
         
 
-        from .models import BigqueryHeadersRes
-        schema = BigqueryHeadersRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getBigqueryHeaders")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BigqueryHeadersRes
+            schema = BigqueryHeadersRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getBigqueryHeaders")
+                print(e)
 
         
 
@@ -379,7 +387,7 @@ class Communication:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -403,13 +411,14 @@ class Communication:
 
         
 
-        from .models import Audience
-        schema = Audience()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAudienceById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Audience
+            schema = Audience()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAudienceById")
+                print(e)
 
         
 
@@ -421,7 +430,7 @@ class Communication:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -450,13 +459,14 @@ class Communication:
 
         
 
-        from .models import Audience
-        schema = Audience()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateAudienceById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Audience
+            schema = Audience()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateAudienceById")
+                print(e)
 
         
 
@@ -493,13 +503,14 @@ class Communication:
 
         
 
-        from .models import GetNRecordsCsvRes
-        schema = GetNRecordsCsvRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getNSampleRecordsFromCsv")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetNRecordsCsvRes
+            schema = GetNRecordsCsvRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getNSampleRecordsFromCsv")
+                print(e)
 
         
 
@@ -513,13 +524,13 @@ class Communication:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if sort:
+        if sort is not None:
             payload["sort"] = sort
         
 
@@ -543,13 +554,14 @@ class Communication:
 
         
 
-        from .models import EmailProviders
-        schema = EmailProviders()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getEmailProviders")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EmailProviders
+            schema = EmailProviders()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getEmailProviders")
+                print(e)
 
         
 
@@ -586,13 +598,14 @@ class Communication:
 
         
 
-        from .models import EmailProvider
-        schema = EmailProvider()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createEmailProvider")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EmailProvider
+            schema = EmailProvider()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createEmailProvider")
+                print(e)
 
         
 
@@ -604,7 +617,7 @@ class Communication:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -628,13 +641,14 @@ class Communication:
 
         
 
-        from .models import EmailProvider
-        schema = EmailProvider()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getEmailProviderById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EmailProvider
+            schema = EmailProvider()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getEmailProviderById")
+                print(e)
 
         
 
@@ -646,7 +660,7 @@ class Communication:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -675,13 +689,14 @@ class Communication:
 
         
 
-        from .models import EmailProvider
-        schema = EmailProvider()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateEmailProviderById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EmailProvider
+            schema = EmailProvider()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateEmailProviderById")
+                print(e)
 
         
 
@@ -695,13 +710,13 @@ class Communication:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if sort:
+        if sort is not None:
             payload["sort"] = sort
         
 
@@ -725,13 +740,14 @@ class Communication:
 
         
 
-        from .models import EmailTemplates
-        schema = EmailTemplates()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getEmailTemplates")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EmailTemplates
+            schema = EmailTemplates()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getEmailTemplates")
+                print(e)
 
         
 
@@ -768,13 +784,14 @@ class Communication:
 
         
 
-        from .models import EmailTemplateRes
-        schema = EmailTemplateRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createEmailTemplate")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EmailTemplateRes
+            schema = EmailTemplateRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createEmailTemplate")
+                print(e)
 
         
 
@@ -788,13 +805,13 @@ class Communication:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if sort:
+        if sort is not None:
             payload["sort"] = sort
         
 
@@ -818,13 +835,14 @@ class Communication:
 
         
 
-        from .models import SystemEmailTemplates
-        schema = SystemEmailTemplates()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getSystemEmailTemplates")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SystemEmailTemplates
+            schema = SystemEmailTemplates()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSystemEmailTemplates")
+                print(e)
 
         
 
@@ -836,7 +854,7 @@ class Communication:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -860,13 +878,14 @@ class Communication:
 
         
 
-        from .models import EmailTemplate
-        schema = EmailTemplate()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getEmailTemplateById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EmailTemplate
+            schema = EmailTemplate()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getEmailTemplateById")
+                print(e)
 
         
 
@@ -878,7 +897,7 @@ class Communication:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -907,13 +926,14 @@ class Communication:
 
         
 
-        from .models import EmailTemplateRes
-        schema = EmailTemplateRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateEmailTemplateById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EmailTemplateRes
+            schema = EmailTemplateRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateEmailTemplateById")
+                print(e)
 
         
 
@@ -925,7 +945,7 @@ class Communication:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -949,13 +969,14 @@ class Communication:
 
         
 
-        from .models import EmailTemplateDeleteSuccessRes
-        schema = EmailTemplateDeleteSuccessRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteEmailTemplateById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EmailTemplateDeleteSuccessRes
+            schema = EmailTemplateDeleteSuccessRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteEmailTemplateById")
+                print(e)
 
         
 
@@ -992,13 +1013,14 @@ class Communication:
 
         
 
-        from .models import EngineResponse
-        schema = EngineResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for sendCommunicationSynchronously")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EngineResponse
+            schema = EngineResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for sendCommunicationSynchronously")
+                print(e)
 
         
 
@@ -1035,13 +1057,14 @@ class Communication:
 
         
 
-        from .models import EngineResponse
-        schema = EngineResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for sendCommunicationAsynchronously")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EngineResponse
+            schema = EngineResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for sendCommunicationAsynchronously")
+                print(e)
 
         
 
@@ -1055,13 +1078,13 @@ class Communication:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if populate:
+        if populate is not None:
             payload["populate"] = populate
         
 
@@ -1085,13 +1108,14 @@ class Communication:
 
         
 
-        from .models import EventSubscriptions
-        schema = EventSubscriptions()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getEventSubscriptions")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EventSubscriptions
+            schema = EventSubscriptions()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getEventSubscriptions")
+                print(e)
 
         
 
@@ -1105,13 +1129,13 @@ class Communication:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if sort:
+        if sort is not None:
             payload["sort"] = sort
         
 
@@ -1135,13 +1159,14 @@ class Communication:
 
         
 
-        from .models import Jobs
-        schema = Jobs()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getJobs")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Jobs
+            schema = Jobs()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getJobs")
+                print(e)
 
         
 
@@ -1178,13 +1203,14 @@ class Communication:
 
         
 
-        from .models import TriggerJobResponse
-        schema = TriggerJobResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for triggerCampaignJob")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TriggerJobResponse
+            schema = TriggerJobResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for triggerCampaignJob")
+                print(e)
 
         
 
@@ -1198,13 +1224,13 @@ class Communication:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if sort:
+        if sort is not None:
             payload["sort"] = sort
         
 
@@ -1228,13 +1254,14 @@ class Communication:
 
         
 
-        from .models import JobLogs
-        schema = JobLogs()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getJobLogs")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import JobLogs
+            schema = JobLogs()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getJobLogs")
+                print(e)
 
         
 
@@ -1249,16 +1276,16 @@ class Communication:
         """
         payload = {}
         
-        if page_id:
+        if page_id is not None:
             payload["page_id"] = page_id
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if sort:
+        if sort is not None:
             payload["sort"] = sort
         
-        if query:
+        if query is not None:
             payload["query"] = query
         
 
@@ -1282,13 +1309,14 @@ class Communication:
 
         
 
-        from .models import Logs
-        schema = Logs()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCommunicationLogs")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Logs
+            schema = Logs()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCommunicationLogs")
+                print(e)
 
         
 
@@ -1325,13 +1353,14 @@ class Communication:
 
         
 
-        from .models import SendOtpCommsRes
-        schema = SendOtpCommsRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for sendOtp")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SendOtpCommsRes
+            schema = SendOtpCommsRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for sendOtp")
+                print(e)
 
         
 
@@ -1368,13 +1397,14 @@ class Communication:
 
         
 
-        from .models import VerifyOtpCommsSuccessRes
-        schema = VerifyOtpCommsSuccessRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for verfiyOtp")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import VerifyOtpCommsSuccessRes
+            schema = VerifyOtpCommsSuccessRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for verfiyOtp")
+                print(e)
 
         
 
@@ -1388,13 +1418,13 @@ class Communication:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if sort:
+        if sort is not None:
             payload["sort"] = sort
         
 
@@ -1418,13 +1448,14 @@ class Communication:
 
         
 
-        from .models import SmsProviders
-        schema = SmsProviders()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getSmsProviders")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SmsProviders
+            schema = SmsProviders()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSmsProviders")
+                print(e)
 
         
 
@@ -1461,13 +1492,14 @@ class Communication:
 
         
 
-        from .models import SmsProvider
-        schema = SmsProvider()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createSmsProvider")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SmsProvider
+            schema = SmsProvider()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createSmsProvider")
+                print(e)
 
         
 
@@ -1479,7 +1511,7 @@ class Communication:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -1503,13 +1535,14 @@ class Communication:
 
         
 
-        from .models import SmsProvider
-        schema = SmsProvider()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getSmsProviderById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SmsProvider
+            schema = SmsProvider()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSmsProviderById")
+                print(e)
 
         
 
@@ -1521,7 +1554,7 @@ class Communication:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -1550,13 +1583,14 @@ class Communication:
 
         
 
-        from .models import SmsProvider
-        schema = SmsProvider()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateSmsProviderById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SmsProvider
+            schema = SmsProvider()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateSmsProviderById")
+                print(e)
 
         
 
@@ -1570,13 +1604,13 @@ class Communication:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if sort:
+        if sort is not None:
             payload["sort"] = sort
         
 
@@ -1600,13 +1634,14 @@ class Communication:
 
         
 
-        from .models import SmsTemplates
-        schema = SmsTemplates()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getSmsTemplates")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SmsTemplates
+            schema = SmsTemplates()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSmsTemplates")
+                print(e)
 
         
 
@@ -1643,13 +1678,14 @@ class Communication:
 
         
 
-        from .models import SmsTemplateRes
-        schema = SmsTemplateRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createSmsTemplate")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SmsTemplateRes
+            schema = SmsTemplateRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createSmsTemplate")
+                print(e)
 
         
 
@@ -1661,7 +1697,7 @@ class Communication:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -1685,13 +1721,14 @@ class Communication:
 
         
 
-        from .models import SmsTemplate
-        schema = SmsTemplate()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getSmsTemplateById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SmsTemplate
+            schema = SmsTemplate()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSmsTemplateById")
+                print(e)
 
         
 
@@ -1703,7 +1740,7 @@ class Communication:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -1732,13 +1769,14 @@ class Communication:
 
         
 
-        from .models import SmsTemplateRes
-        schema = SmsTemplateRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateSmsTemplateById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SmsTemplateRes
+            schema = SmsTemplateRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateSmsTemplateById")
+                print(e)
 
         
 
@@ -1750,7 +1788,7 @@ class Communication:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -1774,13 +1812,14 @@ class Communication:
 
         
 
-        from .models import SmsTemplateDeleteSuccessRes
-        schema = SmsTemplateDeleteSuccessRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteSmsTemplateById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SmsTemplateDeleteSuccessRes
+            schema = SmsTemplateDeleteSuccessRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteSmsTemplateById")
+                print(e)
 
         
 
@@ -1794,13 +1833,13 @@ class Communication:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if sort:
+        if sort is not None:
             payload["sort"] = sort
         
 
@@ -1824,13 +1863,14 @@ class Communication:
 
         
 
-        from .models import SystemSmsTemplates
-        schema = SystemSmsTemplates()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getSystemSystemTemplates")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SystemSmsTemplates
+            schema = SystemSmsTemplates()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSystemSystemTemplates")
+                print(e)
 
         
 

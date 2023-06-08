@@ -19,7 +19,7 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
 
@@ -43,13 +43,14 @@ class Theme:
 
         
 
-        from .models import AllAvailablePageSchema
-        schema = AllAvailablePageSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAllPages")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AllAvailablePageSchema
+            schema = AllAvailablePageSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAllPages")
+                print(e)
 
         
 
@@ -61,7 +62,7 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
 
@@ -90,13 +91,14 @@ class Theme:
 
         
 
-        from .models import AvailablePageSchema
-        schema = AvailablePageSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createPage")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AvailablePageSchema
+            schema = AvailablePageSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createPage")
+                print(e)
 
         
 
@@ -108,7 +110,7 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
 
@@ -137,13 +139,14 @@ class Theme:
 
         
 
-        from .models import AllAvailablePageSchema
-        schema = AllAvailablePageSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateMultiplePages")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AllAvailablePageSchema
+            schema = AllAvailablePageSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateMultiplePages")
+                print(e)
 
         
 
@@ -156,10 +159,10 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
-        if page_value:
+        if page_value is not None:
             payload["page_value"] = page_value
         
 
@@ -183,13 +186,14 @@ class Theme:
 
         
 
-        from .models import AvailablePageSchema
-        schema = AvailablePageSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getPage")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AvailablePageSchema
+            schema = AvailablePageSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPage")
+                print(e)
 
         
 
@@ -202,10 +206,10 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
-        if page_value:
+        if page_value is not None:
             payload["page_value"] = page_value
         
 
@@ -234,13 +238,14 @@ class Theme:
 
         
 
-        from .models import AvailablePageSchema
-        schema = AvailablePageSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updatePage")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AvailablePageSchema
+            schema = AvailablePageSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updatePage")
+                print(e)
 
         
 
@@ -253,10 +258,10 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
-        if page_value:
+        if page_value is not None:
             payload["page_value"] = page_value
         
 
@@ -280,13 +285,14 @@ class Theme:
 
         
 
-        from .models import AvailablePageSchema
-        schema = AvailablePageSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deletePage")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AvailablePageSchema
+            schema = AvailablePageSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deletePage")
+                print(e)
 
         
 
@@ -299,10 +305,10 @@ class Theme:
         """
         payload = {}
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
 
@@ -326,13 +332,14 @@ class Theme:
 
         
 
-        from .models import ThemesListingResponseSchema
-        schema = ThemesListingResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getThemeLibrary")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ThemesListingResponseSchema
+            schema = ThemesListingResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getThemeLibrary")
+                print(e)
 
         
 
@@ -369,13 +376,14 @@ class Theme:
 
         
 
-        from .models import ThemesSchema
-        schema = ThemesSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for addToThemeLibrary")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ThemesSchema
+            schema = ThemesSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for addToThemeLibrary")
+                print(e)
 
         
 
@@ -412,13 +420,14 @@ class Theme:
 
         
 
-        from .models import ThemesSchema
-        schema = ThemesSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for applyTheme")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ThemesSchema
+            schema = ThemesSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for applyTheme")
+                print(e)
 
         
 
@@ -430,7 +439,7 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
 
@@ -454,13 +463,14 @@ class Theme:
 
         
 
-        from .models import UpgradableThemeSchema
-        schema = UpgradableThemeSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for isUpgradable")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UpgradableThemeSchema
+            schema = UpgradableThemeSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for isUpgradable")
+                print(e)
 
         
 
@@ -472,7 +482,7 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
 
@@ -496,13 +506,14 @@ class Theme:
 
         
 
-        from .models import ThemesSchema
-        schema = ThemesSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for upgradeTheme")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ThemesSchema
+            schema = ThemesSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for upgradeTheme")
+                print(e)
 
         
 
@@ -515,10 +526,10 @@ class Theme:
         """
         payload = {}
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
 
@@ -542,13 +553,14 @@ class Theme:
 
         
 
-        from .models import ThemesListingResponseSchema
-        schema = ThemesListingResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getPublicThemes")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ThemesListingResponseSchema
+            schema = ThemesListingResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPublicThemes")
+                print(e)
 
         
 
@@ -585,13 +597,14 @@ class Theme:
 
         
 
-        from .models import ThemesSchema
-        schema = ThemesSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createTheme")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ThemesSchema
+            schema = ThemesSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createTheme")
+                print(e)
 
         
 
@@ -623,13 +636,14 @@ class Theme:
 
         
 
-        from .models import ThemesSchema
-        schema = ThemesSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAppliedTheme")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ThemesSchema
+            schema = ThemesSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAppliedTheme")
+                print(e)
 
         
 
@@ -661,13 +675,14 @@ class Theme:
 
         
 
-        from .models import FontsSchema
-        schema = FontsSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getFonts")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import FontsSchema
+            schema = FontsSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getFonts")
+                print(e)
 
         
 
@@ -679,7 +694,7 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
 
@@ -703,13 +718,14 @@ class Theme:
 
         
 
-        from .models import ThemesSchema
-        schema = ThemesSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getThemeById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ThemesSchema
+            schema = ThemesSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getThemeById")
+                print(e)
 
         
 
@@ -721,7 +737,7 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
 
@@ -750,13 +766,14 @@ class Theme:
 
         
 
-        from .models import ThemesSchema
-        schema = ThemesSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateTheme")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ThemesSchema
+            schema = ThemesSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateTheme")
+                print(e)
 
         
 
@@ -768,7 +785,7 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
 
@@ -792,13 +809,14 @@ class Theme:
 
         
 
-        from .models import ThemesSchema
-        schema = ThemesSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteTheme")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ThemesSchema
+            schema = ThemesSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteTheme")
+                print(e)
 
         
 
@@ -810,7 +828,7 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
 
@@ -834,13 +852,14 @@ class Theme:
 
         
 
-        from .models import ThemesSchema
-        schema = ThemesSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getThemeForPreview")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ThemesSchema
+            schema = ThemesSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getThemeForPreview")
+                print(e)
 
         
 
@@ -852,7 +871,7 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
 
@@ -876,13 +895,14 @@ class Theme:
 
         
 
-        from .models import ThemesSchema
-        schema = ThemesSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for publishTheme")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ThemesSchema
+            schema = ThemesSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for publishTheme")
+                print(e)
 
         
 
@@ -894,7 +914,7 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
 
@@ -918,13 +938,14 @@ class Theme:
 
         
 
-        from .models import ThemesSchema
-        schema = ThemesSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for unpublishTheme")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ThemesSchema
+            schema = ThemesSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for unpublishTheme")
+                print(e)
 
         
 
@@ -936,7 +957,7 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
 
@@ -960,13 +981,14 @@ class Theme:
 
         
 
-        from .models import ThemesSchema
-        schema = ThemesSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for archiveTheme")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ThemesSchema
+            schema = ThemesSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for archiveTheme")
+                print(e)
 
         
 
@@ -978,7 +1000,7 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
 
@@ -1002,13 +1024,14 @@ class Theme:
 
         
 
-        from .models import ThemesSchema
-        schema = ThemesSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for unarchiveTheme")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ThemesSchema
+            schema = ThemesSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for unarchiveTheme")
+                print(e)
 
         
 
@@ -1020,7 +1043,7 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
 
