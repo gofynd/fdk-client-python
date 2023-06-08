@@ -25,6 +25,10 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+        
+        
+        
     
     
         
@@ -41,6 +45,8 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
+        
         
         
         
@@ -102,6 +108,14 @@ class PartnerValidator:
         filter_by = fields.Str(required=False)
         
         query = fields.Str(required=False)
+        
+        q = fields.Str(required=False)
+        
+        is_application_level = fields.Str(required=False)
+        
+        is_saleschannel = fields.Str(required=False)
+        
+        extention_type = fields.Str(required=False)
          
         
     
@@ -146,6 +160,10 @@ class PartnerValidator:
         page_no = fields.Float(required=False)
         
         query = fields.Str(required=False)
+        
+        q = fields.Str(required=False)
+        
+        installed = fields.Str(required=False)
          
         
     

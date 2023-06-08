@@ -68,7 +68,7 @@ class Partner:
 
         return response
     
-    async def getExtensionsForCompany(self, page_size=None, tag=None, current_page=None, page_no=None, filter_by=None, query=None):
+    async def getExtensionsForCompany(self, page_size=None, tag=None, current_page=None, page_no=None, filter_by=None, query=None, q=None, is_application_level=None, is_saleschannel=None, extention_type=None):
         """Use this API to get the the extensions for the company
         :param page_size : Number of records you want to get in single page : type number
         :param tag : tag : type string
@@ -76,6 +76,10 @@ class Partner:
         :param page_no : Current page number : type number
         :param filter_by : Filter by : type string
         :param query : query : type string
+        :param q : Search value : type string
+        :param is_application_level : Flag to mark application level : type string
+        :param is_saleschannel : Flag to mark sales channel level : type string
+        :param extention_type : Extension type : type string
         """
         payload = {}
         
@@ -97,14 +101,26 @@ class Partner:
         if query is not None:
             payload["query"] = query
         
+        if q is not None:
+            payload["q"] = q
+        
+        if is_application_level is not None:
+            payload["is_application_level"] = is_application_level
+        
+        if is_saleschannel is not None:
+            payload["is_saleschannel"] = is_saleschannel
+        
+        if extention_type is not None:
+            payload["extention_type"] = extention_type
+        
 
         # Parameter validation
         schema = PartnerValidator.getExtensionsForCompany()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/partners/v1.0/company/{self._conf.companyId}/extensions", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"}],"optional":[{"name":"page_size","in":"query","description":"Number of records you want to get in single page","schema":{"type":"number"},"example":10},{"name":"tag","in":"query","description":"tag","schema":{"type":"string"}},{"name":"current_page","in":"query","description":"tag","schema":{"type":"string"}},{"name":"page_no","in":"query","description":"Current page number","schema":{"type":"number"},"example":1},{"name":"filter_by","in":"query","description":"Filter by","schema":{"type":"string"},"example":"user_specific"},{"name":"query","in":"query","description":"query","schema":{"type":"string"}}],"query":[{"name":"page_size","in":"query","description":"Number of records you want to get in single page","schema":{"type":"number"},"example":10},{"name":"tag","in":"query","description":"tag","schema":{"type":"string"}},{"name":"current_page","in":"query","description":"tag","schema":{"type":"string"}},{"name":"page_no","in":"query","description":"Current page number","schema":{"type":"number"},"example":1},{"name":"filter_by","in":"query","description":"Filter by","schema":{"type":"string"},"example":"user_specific"},{"name":"query","in":"query","description":"query","schema":{"type":"string"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"}]}""", page_size=page_size, tag=tag, current_page=current_page, page_no=page_no, filter_by=filter_by, query=query)
-        query_string = await create_query_string(page_size=page_size, tag=tag, current_page=current_page, page_no=page_no, filter_by=filter_by, query=query)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/partners/v1.0/company/{self._conf.companyId}/extensions", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"}],"optional":[{"name":"page_size","in":"query","description":"Number of records you want to get in single page","schema":{"type":"number"},"example":10},{"name":"tag","in":"query","description":"tag","schema":{"type":"string"}},{"name":"current_page","in":"query","description":"tag","schema":{"type":"string"}},{"name":"page_no","in":"query","description":"Current page number","schema":{"type":"number"},"example":1},{"name":"filter_by","in":"query","description":"Filter by","schema":{"type":"string"},"example":"user_specific"},{"name":"query","in":"query","description":"query","schema":{"type":"string"}},{"name":"q","in":"query","description":"Search value","schema":{"type":"string"},"example":"newsletter"},{"name":"is_application_level","in":"query","description":"Flag to mark application level","schema":{"type":"string"},"example":true},{"name":"is_saleschannel","in":"query","description":"Flag to mark sales channel level","schema":{"type":"string"},"example":true},{"name":"extention_type","in":"query","description":"Extension type","schema":{"type":"string"},"example":"private"}],"query":[{"name":"page_size","in":"query","description":"Number of records you want to get in single page","schema":{"type":"number"},"example":10},{"name":"tag","in":"query","description":"tag","schema":{"type":"string"}},{"name":"current_page","in":"query","description":"tag","schema":{"type":"string"}},{"name":"page_no","in":"query","description":"Current page number","schema":{"type":"number"},"example":1},{"name":"filter_by","in":"query","description":"Filter by","schema":{"type":"string"},"example":"user_specific"},{"name":"query","in":"query","description":"query","schema":{"type":"string"}},{"name":"q","in":"query","description":"Search value","schema":{"type":"string"},"example":"newsletter"},{"name":"is_application_level","in":"query","description":"Flag to mark application level","schema":{"type":"string"},"example":true},{"name":"is_saleschannel","in":"query","description":"Flag to mark sales channel level","schema":{"type":"string"},"example":true},{"name":"extention_type","in":"query","description":"Extension type","schema":{"type":"string"},"example":"private"}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"}]}""", page_size=page_size, tag=tag, current_page=current_page, page_no=page_no, filter_by=filter_by, query=query, q=q, is_application_level=is_application_level, is_saleschannel=is_saleschannel, extention_type=extention_type)
+        query_string = await create_query_string(page_size=page_size, tag=tag, current_page=current_page, page_no=page_no, filter_by=filter_by, query=query, q=q, is_application_level=is_application_level, is_saleschannel=is_saleschannel, extention_type=extention_type)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -114,7 +130,7 @@ class Partner:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/partners/v1.0/company/{self._conf.companyId}/extensions", page_size=page_size, tag=tag, current_page=current_page, page_no=page_no, filter_by=filter_by, query=query), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/partners/v1.0/company/{self._conf.companyId}/extensions", page_size=page_size, tag=tag, current_page=current_page, page_no=page_no, filter_by=filter_by, query=query, q=q, is_application_level=is_application_level, is_saleschannel=is_saleschannel, extention_type=extention_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
 
@@ -268,11 +284,13 @@ class Partner:
 
         return response
     
-    async def getPrivateExtensions(self, page_size=None, page_no=None, query=None):
+    async def getPrivateExtensions(self, page_size=None, page_no=None, query=None, q=None, installed=None):
         """Use this API to get the list of private extensions
         :param page_size : Number of records you want to get in single page : type number
         :param page_no : Number of page : type number
         :param query : Filter query which we want to pass : type string
+        :param q : Search value : type string
+        :param installed : Filter flag for installed extension : type string
         """
         payload = {}
         
@@ -285,14 +303,20 @@ class Partner:
         if query is not None:
             payload["query"] = query
         
+        if q is not None:
+            payload["q"] = q
+        
+        if installed is not None:
+            payload["installed"] = installed
+        
 
         # Parameter validation
         schema = PartnerValidator.getPrivateExtensions()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/partners/v1.0/company/{self._conf.companyId}/private-extensions", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"}],"optional":[{"name":"page_size","in":"query","description":"Number of records you want to get in single page","schema":{"type":"number"},"example":10},{"name":"page_no","in":"query","description":"Number of page","schema":{"type":"number"},"example":1},{"name":"query","in":"query","description":"Filter query which we want to pass","schema":{"type":"string"},"example":{"installed":"false"}}],"query":[{"name":"page_size","in":"query","description":"Number of records you want to get in single page","schema":{"type":"number"},"example":10},{"name":"page_no","in":"query","description":"Number of page","schema":{"type":"number"},"example":1},{"name":"query","in":"query","description":"Filter query which we want to pass","schema":{"type":"string"},"example":{"installed":"false"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"}]}""", page_size=page_size, page_no=page_no, query=query)
-        query_string = await create_query_string(page_size=page_size, page_no=page_no, query=query)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/partners/v1.0/company/{self._conf.companyId}/private-extensions", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"}],"optional":[{"name":"page_size","in":"query","description":"Number of records you want to get in single page","schema":{"type":"number"},"example":10},{"name":"page_no","in":"query","description":"Number of page","schema":{"type":"number"},"example":1},{"name":"query","in":"query","description":"Filter query which we want to pass","schema":{"type":"string"},"example":{"installed":"false"}},{"name":"q","in":"query","description":"Search value","schema":{"type":"string"},"example":"newsletter"},{"name":"installed","in":"query","description":"Filter flag for installed extension","schema":{"type":"string"},"example":true}],"query":[{"name":"page_size","in":"query","description":"Number of records you want to get in single page","schema":{"type":"number"},"example":10},{"name":"page_no","in":"query","description":"Number of page","schema":{"type":"number"},"example":1},{"name":"query","in":"query","description":"Filter query which we want to pass","schema":{"type":"string"},"example":{"installed":"false"}},{"name":"q","in":"query","description":"Search value","schema":{"type":"string"},"example":"newsletter"},{"name":"installed","in":"query","description":"Filter flag for installed extension","schema":{"type":"string"},"example":true}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"}]}""", page_size=page_size, page_no=page_no, query=query, q=q, installed=installed)
+        query_string = await create_query_string(page_size=page_size, page_no=page_no, query=query, q=q, installed=installed)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -302,7 +326,7 @@ class Partner:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/partners/v1.0/company/{self._conf.companyId}/private-extensions", page_size=page_size, page_no=page_no, query=query), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/partners/v1.0/company/{self._conf.companyId}/private-extensions", page_size=page_size, page_no=page_no, query=query, q=q, installed=installed), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
 

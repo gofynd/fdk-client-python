@@ -96,7 +96,7 @@ Get the list of all the extensions
 
 ```python
 try:
-    result = await platformClient.partner.getExtensionsForCompany(pageSize=pageSize, tag=tag, currentPage=currentPage, pageNo=pageNo, filterBy=filterBy, query=query)
+    result = await platformClient.partner.getExtensionsForCompany(pageSize=pageSize, tag=tag, currentPage=currentPage, pageNo=pageNo, filterBy=filterBy, query=query, q=q, isApplicationLevel=isApplicationLevel, isSaleschannel=isSaleschannel, extentionType=extentionType)
     # use result
 except Exception as e:
     print(e)
@@ -113,7 +113,11 @@ except Exception as e:
 | currentPage | String? | no | tag |   
 | pageNo | Double? | no | Current page number |   
 | filterBy | String? | no | Filter by |   
-| query | String? | no | query |  
+| query | String? | no | query |   
+| q | String? | no | Search value |   
+| isApplicationLevel | String? | no | Flag to mark application level |   
+| isSaleschannel | String? | no | Flag to mark sales channel level |   
+| extentionType | String? | no | Extension type |  
 
 
 
@@ -490,7 +494,7 @@ Get the list of private extensions
 
 ```python
 try:
-    result = await platformClient.partner.getPrivateExtensions(pageSize=pageSize, pageNo=pageNo, query=query)
+    result = await platformClient.partner.getPrivateExtensions(pageSize=pageSize, pageNo=pageNo, query=query, q=q, installed=installed)
     # use result
 except Exception as e:
     print(e)
@@ -504,7 +508,9 @@ except Exception as e:
 | --------- | -----  | -------- | ----------- | 
 | pageSize | Double? | no | Number of records you want to get in single page |   
 | pageNo | Double? | no | Number of page |   
-| query | String? | no | Filter query which we want to pass |  
+| query | String? | no | Filter query which we want to pass |   
+| q | String? | no | Search value |   
+| installed | String? | no | Filter flag for installed extension |  
 
 
 

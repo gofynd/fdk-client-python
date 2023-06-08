@@ -153,7 +153,7 @@ class ServiceabilityValidator:
          
         
     
-    class upsertDpApplicationRulesView(BaseSchema):
+    class getDpApplicationRules(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -162,7 +162,7 @@ class ServiceabilityValidator:
          
         
     
-    class getDpApplicationRulesView(BaseSchema):
+    class upsertDpApplicationRules(BaseSchema):
         
         
         company_id = fields.Int(required=False)

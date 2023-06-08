@@ -108,21 +108,21 @@ class ServiceabilityValidator:
          
         
     
-    class updateZoneControllerView(BaseSchema):
-        
-        
-        zone_id = fields.Str(required=False)
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
     class getZoneDataView(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         zone_id = fields.Str(required=False)
+         
+        
+    
+    class updateZoneControllerView(BaseSchema):
+        
+        
+        zone_id = fields.Str(required=False)
+        
+        company_id = fields.Int(required=False)
          
         
     
@@ -156,23 +156,14 @@ class ServiceabilityValidator:
          
         
     
-    class upsertDpAccountView(BaseSchema):
+    class upsertDpAccount(BaseSchema):
         
         
         company_id = fields.Int(required=False)
          
         
     
-    class updateDpRuleView(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        rule_uid = fields.Str(required=False)
-         
-        
-    
-    class getDpRulesView(BaseSchema):
+    class getDpRules(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -181,28 +172,37 @@ class ServiceabilityValidator:
          
         
     
-    class getDpRuleInsertView(BaseSchema):
+    class updateDpRule(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        rule_uid = fields.Str(required=False)
+         
+        
+    
+    class getDpRuleInsert(BaseSchema):
         
         
         company_id = fields.Int(required=False)
          
         
     
-    class upsertDpRulesView(BaseSchema):
+    class upsertDpRules(BaseSchema):
         
         
         company_id = fields.Int(required=False)
          
         
     
-    class upsertDpCompanyRulesView(BaseSchema):
+    class getDpCompanyRules(BaseSchema):
         
         
         company_id = fields.Int(required=False)
          
         
     
-    class getDpCompanyRulesView(BaseSchema):
+    class upsertDpCompanyRules(BaseSchema):
         
         
         company_id = fields.Int(required=False)
