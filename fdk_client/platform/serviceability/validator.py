@@ -181,14 +181,14 @@ class ServiceabilityValidator:
          
         
     
-    class upsertDpRules(BaseSchema):
+    class getDpRuleInsert(BaseSchema):
         
         
         company_id = fields.Int(required=False)
          
         
     
-    class getDpRuleInsert(BaseSchema):
+    class upsertDpRules(BaseSchema):
         
         
         company_id = fields.Int(required=False)
