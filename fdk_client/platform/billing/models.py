@@ -421,6 +421,8 @@ class DetailedPlanComponents(BaseSchema):
     
     display_text = fields.Str(required=False)
     
+    config = fields.Dict(required=False)
+    
 
 
 class DetailedPlan(BaseSchema):
@@ -1217,7 +1219,7 @@ class Subscription(BaseSchema):
     
     product_suite_id = fields.Str(required=False)
     
-    plan_data = fields.Nested(Plan, required=False)
+    plan_data = fields.Dict(required=False)
     
     current_status = fields.Str(required=False)
     
