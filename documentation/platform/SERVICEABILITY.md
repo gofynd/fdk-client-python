@@ -35,7 +35,7 @@ Zone configuration of application.
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").serviceability.getApplicationServiceability()
+    result = await platformClient.application("<APPLICATION_ID>").serviceability.getApplicationServiceability()
     # use result
 except Exception as e:
     print(e)
@@ -99,7 +99,7 @@ Get country and state list
 
 ```python
 try:
-    result = await client.serviceability.getEntityRegionView(body=body)
+    result = await platformClient.serviceability.getEntityRegionView(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -155,7 +155,7 @@ Zone List of application.
 
 ```python
 try:
-    result = await client.serviceability.getListView(pageNumber=pageNumber, pageSize=pageSize, name=name, isActive=isActive, channelIds=channelIds, q=q)
+    result = await platformClient.serviceability.getListView(pageNumber=pageNumber, pageSize=pageSize, name=name, isActive=isActive, channelIds=channelIds, q=q)
     # use result
 except Exception as e:
     print(e)
@@ -217,7 +217,7 @@ Company Store View of application.
 
 ```python
 try:
-    result = await client.serviceability.getCompanyStoreView()
+    result = await platformClient.serviceability.getCompanyStoreView()
     # use result
 except Exception as e:
     print(e)
@@ -269,7 +269,7 @@ Zone Data View of application.
 
 ```python
 try:
-    result = await client.serviceability.getZoneDataView(zoneId=zoneId)
+    result = await platformClient.serviceability.getZoneDataView(zoneId=zoneId)
     # use result
 except Exception as e:
     print(e)
@@ -326,7 +326,7 @@ Updation of zone collections in database.
 
 ```python
 try:
-    result = await client.serviceability.updateZoneControllerView(zoneId=zoneId, body=body)
+    result = await platformClient.serviceability.updateZoneControllerView(zoneId=zoneId, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -383,7 +383,7 @@ Insertion of zone in database.
 
 ```python
 try:
-    result = await client.serviceability.createZone(body=body)
+    result = await platformClient.serviceability.createZone(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -439,7 +439,7 @@ GET zones from the application_id.
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").serviceability.getZonesFromApplicationIdView(pageNo=pageNo, pageSize=pageSize, zoneId=zoneId, q=q)
+    result = await platformClient.application("<APPLICATION_ID>").serviceability.getZonesFromApplicationIdView(pageNo=pageNo, pageSize=pageSize, zoneId=zoneId, q=q)
     # use result
 except Exception as e:
     print(e)
@@ -499,7 +499,7 @@ GET zone from the Pincode.
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").serviceability.getZoneFromPincodeView(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").serviceability.getZoneFromPincodeView(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -555,7 +555,7 @@ GET stores data
 
 ```python
 try:
-    result = await client.serviceability.getStore(storeUid=storeUid)
+    result = await platformClient.serviceability.getStore(storeUid=storeUid)
     # use result
 except Exception as e:
     print(e)
@@ -821,7 +821,7 @@ GET stores data
 
 ```python
 try:
-    result = await client.serviceability.getAllStores()
+    result = await platformClient.serviceability.getAllStores()
     # use result
 except Exception as e:
     print(e)
@@ -873,7 +873,7 @@ PincodeView update of MOP.
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").serviceability.updatePincodeMopView(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").serviceability.updatePincodeMopView(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -929,7 +929,7 @@ Bulk Update of pincode in the application.
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").serviceability.updatePincodeBulkView(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").serviceability.updatePincodeBulkView(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -988,7 +988,7 @@ Pincode count view of application.
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").serviceability.updatePincodeCoDListing(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").serviceability.updatePincodeCoDListing(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1044,7 +1044,7 @@ Auditlog configuration of application.
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").serviceability.updatePincodeAuditHistory(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").serviceability.updatePincodeAuditHistory(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1101,9 +1101,9 @@ Response Data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | type | String |  no  |  |
- | message | String |  no  |  |
  | value | String |  no  |  |
+ | message | String |  no  |  |
+ | type | String |  no  |  |
 
 ---
 
@@ -1114,9 +1114,9 @@ Response Data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | channelId | String |  no  |  |
  | channelType | String |  no  |  |
  | serviceabilityType | String |  no  |  |
- | channelId | String |  no  |  |
 
 ---
 
@@ -1152,9 +1152,9 @@ Response Data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | type | String? |  yes  |  |
- | message | String? |  yes  |  |
  | value | String? |  yes  |  |
+ | message | String? |  yes  |  |
+ | type | String? |  yes  |  |
 
 ---
 
@@ -1165,11 +1165,11 @@ Response Data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | itemTotal | Int |  no  |  |
  | size | Int |  no  |  |
  | current | Int |  no  |  |
- | itemTotal | Int |  no  |  |
- | hasNext | Boolean |  no  |  |
  | type | String |  no  |  |
+ | hasNext | Boolean |  no  |  |
 
 ---
 
@@ -1193,22 +1193,10 @@ Response Data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | error | [EntityRegionView_Error](#EntityRegionView_Error) |  no  |  |
  | success | Boolean |  no  |  |
+ | error | [EntityRegionView_Error](#EntityRegionView_Error) |  no  |  |
  | page | [EntityRegionView_page](#EntityRegionView_page) |  no  |  |
  | data | ArrayList<[EntityRegionView_Items](#EntityRegionView_Items)> |  no  |  |
-
----
-
-
- 
- 
- #### [ListViewProduct](#ListViewProduct)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | type | String |  no  |  |
- | count | Int |  no  |  |
 
 ---
 
@@ -1219,8 +1207,20 @@ Response Data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | channelType | String |  no  |  |
  | channelId | String |  no  |  |
+ | channelType | String |  no  |  |
+
+---
+
+
+ 
+ 
+ #### [ListViewProduct](#ListViewProduct)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | count | Int |  no  |  |
+ | type | String |  no  |  |
 
 ---
 
@@ -1231,15 +1231,15 @@ Response Data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | product | [ListViewProduct](#ListViewProduct) |  no  |  |
- | name | String |  no  |  |
- | slug | String |  no  |  |
  | zoneId | String |  no  |  |
- | pincodesCount | Int |  no  |  |
- | isActive | Boolean |  no  |  |
  | channels | [ListViewChannels](#ListViewChannels) |  no  |  |
- | storesCount | Int |  no  |  |
  | companyId | Int |  no  |  |
+ | pincodesCount | Int |  no  |  |
+ | name | String |  no  |  |
+ | product | [ListViewProduct](#ListViewProduct) |  no  |  |
+ | slug | String |  no  |  |
+ | storesCount | Int |  no  |  |
+ | isActive | Boolean |  no  |  |
 
 ---
 
@@ -1251,8 +1251,8 @@ Response Data
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | totalPincodesServed | Int |  no  |  |
- | totalZones | Int |  no  |  |
  | totalActiveZones | Int |  no  |  |
+ | totalZones | Int |  no  |  |
 
 ---
 
@@ -1263,11 +1263,11 @@ Response Data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | itemTotal | Int |  no  |  |
+ | type | String |  no  |  |
  | size | Int |  no  |  |
  | current | Int |  no  |  |
- | itemTotal | Int |  no  |  |
  | hasNext | Boolean |  no  |  |
- | type | String |  no  |  |
 
 ---
 
@@ -1291,11 +1291,11 @@ Response Data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | itemTotal | Int |  no  |  |
  | size | Int |  no  |  |
  | current | Int |  no  |  |
- | itemTotal | Int |  no  |  |
- | hasNext | Boolean |  no  |  |
  | type | String |  no  |  |
+ | hasNext | Boolean |  no  |  |
 
 ---
 
@@ -1318,8 +1318,8 @@ Response Data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | channelType | String |  no  |  |
  | channelId | String |  no  |  |
+ | channelType | String |  no  |  |
 
 ---
 
@@ -1330,8 +1330,8 @@ Response Data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | type | String |  no  |  |
  | tags | ArrayList<String> |  no  |  |
+ | type | String |  no  |  |
 
 ---
 
@@ -1422,8 +1422,8 @@ Response Data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | statusCode | Int |  no  |  |
  | success | Boolean |  no  |  |
+ | statusCode | Int |  no  |  |
 
 ---
 
@@ -1466,9 +1466,9 @@ Response Data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | statusCode | Int |  no  |  |
  | success | Boolean |  no  |  |
  | zoneId | String |  no  |  |
+ | statusCode | Int |  no  |  |
 
 ---
 
@@ -1491,9 +1491,9 @@ Response Data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | type | String |  no  |  |
- | message | String |  no  |  |
  | value | String |  no  |  |
+ | message | String |  no  |  |
+ | type | String |  no  |  |
 
 ---
 
@@ -1512,34 +1512,87 @@ Response Data
 
  
  
+ #### [Zone](#Zone)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | zoneId | String |  no  |  |
+ | assignmentPreference | String |  no  |  |
+ | tags | ArrayList<String> |  no  |  |
+ | name | String |  no  |  |
+ | storeIds | ArrayList<Int> |  no  |  |
+ | type | String |  no  |  |
+ | slug | String |  no  |  |
+
+---
+
+
+ 
+ 
  #### [GetZoneFromPincodeViewResponse](#GetZoneFromPincodeViewResponse)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | serviceabilityType | String |  no  |  |
- | zones | ArrayList<String> |  no  |  |
+ | zones | ArrayList<[Zone](#Zone)> |  no  |  |
 
 ---
 
 
  
  
- #### [ProductReturnConfigResponse](#ProductReturnConfigResponse)
+ #### [CreatedByResponse](#CreatedByResponse)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | onSameStore | Boolean? |  yes  |  |
+ | username | String? |  yes  |  |
+ | userId | String? |  yes  |  |
 
 ---
 
 
  
  
- #### [WarningsResponse](#WarningsResponse)
+ #### [Dp](#Dp)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | storeAddress | String? |  yes  |  |
+ | operations | ArrayList<String>? |  yes  |  |
+ | externalAccountId | String? |  yes  |  |
+ | assignDpFromSb | Boolean? |  yes  |  |
+ | internalAccountId | String? |  yes  |  |
+ | fmPriority | Int? |  yes  |  |
+ | lmPriority | Int? |  yes  |  |
+ | paymentMode | String? |  yes  |  |
+ | transportMode | String? |  yes  |  |
+ | rvpPriority | Int? |  yes  |  |
+ | areaCode | Int? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [LogisticsResponse](#LogisticsResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | override | Boolean? |  yes  |  |
+ | dp | [Dp](#Dp)? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [DocumentsResponse](#DocumentsResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | value | String? |  yes  |  |
+ | verified | Boolean? |  yes  |  |
+ | legalName | String? |  yes  |  |
+ | type | String? |  yes  |  |
 
 ---
 
@@ -1574,9 +1627,20 @@ Response Data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | email | String? |  yes  |  |
  | name | String? |  yes  |  |
+ | email | String? |  yes  |  |
  | mobileNo | [MobileNo](#MobileNo)? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [WarningsResponse](#WarningsResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | storeAddress | String? |  yes  |  |
 
 ---
 
@@ -1617,12 +1681,24 @@ Response Data
 
  
  
+ #### [ModifiedByResponse](#ModifiedByResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | username | String? |  yes  |  |
+ | userId | String? |  yes  |  |
+
+---
+
+
+ 
+ 
  #### [OpeningClosing](#OpeningClosing)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | hour | Int? |  yes  |  |
  | minute | Int? |  yes  |  |
+ | hour | Int? |  yes  |  |
 
 ---
 
@@ -1633,99 +1709,21 @@ Response Data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | weekday | String? |  yes  |  |
- | opening | [OpeningClosing](#OpeningClosing)? |  yes  |  |
  | open | Boolean? |  yes  |  |
+ | weekday | String? |  yes  |  |
  | closing | [OpeningClosing](#OpeningClosing)? |  yes  |  |
+ | opening | [OpeningClosing](#OpeningClosing)? |  yes  |  |
 
 ---
 
 
  
  
- #### [ModifiedByResponse](#ModifiedByResponse)
+ #### [ProductReturnConfigResponse](#ProductReturnConfigResponse)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | userId | String? |  yes  |  |
- | username | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [DocumentsResponse](#DocumentsResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | value | String? |  yes  |  |
- | type | String? |  yes  |  |
- | verified | Boolean? |  yes  |  |
- | legalName | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [Dp](#Dp)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | internalAccountId | String? |  yes  |  |
- | externalAccountId | String? |  yes  |  |
- | assignDpFromSb | Boolean? |  yes  |  |
- | paymentMode | String? |  yes  |  |
- | areaCode | Int? |  yes  |  |
- | transportMode | String? |  yes  |  |
- | operations | ArrayList<String>? |  yes  |  |
- | rvpPriority | Int? |  yes  |  |
- | fmPriority | Int? |  yes  |  |
- | lmPriority | Int? |  yes  |  |
-
----
-
-
- 
- 
- #### [LogisticsResponse](#LogisticsResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | override | Boolean? |  yes  |  |
- | dp | [Dp](#Dp)? |  yes  |  |
-
----
-
-
- 
- 
- #### [CreatedByResponse](#CreatedByResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | userId | String? |  yes  |  |
- | username | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [AddressResponse](#AddressResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | city | String? |  yes  |  |
- | address1 | String? |  yes  |  |
- | pincode | Int? |  yes  |  |
- | country | String? |  yes  |  |
- | address2 | String? |  yes  |  |
- | landmark | String? |  yes  |  |
- | latitude | Double? |  yes  |  |
- | longitude | Double? |  yes  |  |
- | state | String? |  yes  |  |
+ | onSameStore | Boolean? |  yes  |  |
 
 ---
 
@@ -1744,38 +1742,57 @@ Response Data
 
  
  
+ #### [AddressResponse](#AddressResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | address2 | String? |  yes  |  |
+ | landmark | String? |  yes  |  |
+ | latitude | Double? |  yes  |  |
+ | state | String? |  yes  |  |
+ | longitude | Double? |  yes  |  |
+ | country | String? |  yes  |  |
+ | address1 | String? |  yes  |  |
+ | city | String? |  yes  |  |
+ | pincode | Int? |  yes  |  |
+
+---
+
+
+ 
+ 
  #### [ItemResponse](#ItemResponse)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | name | String? |  yes  |  |
- | createdOn | String? |  yes  |  |
- | productReturnConfig | [ProductReturnConfigResponse](#ProductReturnConfigResponse)? |  yes  |  |
- | stage | String? |  yes  |  |
- | storeType | String? |  yes  |  |
- | companyId | Int? |  yes  |  |
- | warnings | [WarningsResponse](#WarningsResponse)? |  yes  |  |
- | contactNumbers | ArrayList<[ContactNumberResponse](#ContactNumberResponse)>? |  yes  |  |
- | customJson | HashMap<String,Any>? |  yes  |  |
- | manager | [ManagerResponse](#ManagerResponse)? |  yes  |  |
- | gstCredentials | [GstCredentialsResponse](#GstCredentialsResponse)? |  yes  |  |
- | uid | Int? |  yes  |  |
- | notificationEmails | ArrayList<String>? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
  | displayName | String? |  yes  |  |
- | code | String? |  yes  |  |
- | subType | String? |  yes  |  |
- | timing | ArrayList<[TimmingResponse](#TimmingResponse)>? |  yes  |  |
- | cls | String? |  yes  |  |
- | verifiedBy | [ModifiedByResponse](#ModifiedByResponse)? |  yes  |  |
- | documents | ArrayList<[DocumentsResponse](#DocumentsResponse)>? |  yes  |  |
- | verifiedOn | String? |  yes  |  |
- | logistics | [LogisticsResponse](#LogisticsResponse)? |  yes  |  |
- | company | Int? |  yes  |  |
  | createdBy | [CreatedByResponse](#CreatedByResponse)? |  yes  |  |
+ | companyId | Int? |  yes  |  |
+ | logistics | [LogisticsResponse](#LogisticsResponse)? |  yes  |  |
+ | documents | ArrayList<[DocumentsResponse](#DocumentsResponse)>? |  yes  |  |
+ | contactNumbers | ArrayList<[ContactNumberResponse](#ContactNumberResponse)>? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | cls | String? |  yes  |  |
+ | manager | [ManagerResponse](#ManagerResponse)? |  yes  |  |
+ | warnings | [WarningsResponse](#WarningsResponse)? |  yes  |  |
+ | createdOn | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | gstCredentials | [GstCredentialsResponse](#GstCredentialsResponse)? |  yes  |  |
  | modifiedBy | [ModifiedByResponse](#ModifiedByResponse)? |  yes  |  |
- | address | [AddressResponse](#AddressResponse)? |  yes  |  |
+ | timing | ArrayList<[TimmingResponse](#TimmingResponse)>? |  yes  |  |
+ | verifiedOn | String? |  yes  |  |
+ | subType | String? |  yes  |  |
+ | code | String? |  yes  |  |
+ | productReturnConfig | [ProductReturnConfigResponse](#ProductReturnConfigResponse)? |  yes  |  |
+ | company | Int? |  yes  |  |
+ | verifiedBy | [ModifiedByResponse](#ModifiedByResponse)? |  yes  |  |
  | integrationType | [IntegrationTypeResponse](#IntegrationTypeResponse)? |  yes  |  |
+ | customJson | HashMap<String,Any>? |  yes  |  |
+ | address | [AddressResponse](#AddressResponse)? |  yes  |  |
+ | name | String? |  yes  |  |
+ | storeType | String? |  yes  |  |
+ | stage | String? |  yes  |  |
+ | notificationEmails | ArrayList<String>? |  yes  |  |
 
 ---
 
@@ -1786,11 +1803,11 @@ Response Data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | itemTotal | Int? |  yes  |  |
  | size | Int? |  yes  |  |
  | current | Int? |  yes  |  |
- | itemTotal | Int? |  yes  |  |
- | hasNext | Boolean? |  yes  |  |
  | type | String? |  yes  |  |
+ | hasNext | Boolean? |  yes  |  |
 
 ---
 
@@ -1925,11 +1942,11 @@ Response Data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | size | Int |  no  |  |
  | itemTotal | Int |  no  |  |
- | hasNext | Boolean |  no  |  |
- | type | String |  no  |  |
  | currentPageNumber | Int |  no  |  |
+ | size | Int |  no  |  |
+ | type | String |  no  |  |
+ | hasNext | Boolean |  no  |  |
 
 ---
 

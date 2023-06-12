@@ -89,7 +89,7 @@ Get a list of announcements
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.getAnnouncementsList(pageNo=pageNo, pageSize=pageSize)
+    result = await platformClient.application("<APPLICATION_ID>").content.getAnnouncementsList(pageNo=pageNo, pageSize=pageSize)
     # use result
 except Exception as e:
     print(e)
@@ -208,7 +208,7 @@ Create an announcement
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.createAnnouncement(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").content.createAnnouncement(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -318,7 +318,7 @@ Get announcement by ID
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.getAnnouncementById(announcementId=announcementId)
+    result = await platformClient.application("<APPLICATION_ID>").content.getAnnouncementById(announcementId=announcementId)
     # use result
 except Exception as e:
     print(e)
@@ -424,7 +424,7 @@ Update an announcement
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.updateAnnouncement(announcementId=announcementId, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").content.updateAnnouncement(announcementId=announcementId, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -535,7 +535,7 @@ Update the schedule and the publish status of an announcement
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.updateAnnouncementSchedule(announcementId=announcementId, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").content.updateAnnouncementSchedule(announcementId=announcementId, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -646,7 +646,7 @@ Delete announcement by id
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.deleteAnnouncement(announcementId=announcementId)
+    result = await platformClient.application("<APPLICATION_ID>").content.deleteAnnouncement(announcementId=announcementId)
     # use result
 except Exception as e:
     print(e)
@@ -757,7 +757,7 @@ Create a blog
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.createBlog(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").content.createBlog(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -858,7 +858,7 @@ Get blogs
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.getBlogs(pageNo=pageNo, pageSize=pageSize)
+    result = await platformClient.application("<APPLICATION_ID>").content.getBlogs(pageNo=pageNo, pageSize=pageSize)
     # use result
 except Exception as e:
     print(e)
@@ -965,7 +965,7 @@ Update a blog
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.updateBlog(id=id, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").content.updateBlog(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1067,7 +1067,7 @@ Delete blogs
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.deleteBlog(id=id)
+    result = await platformClient.application("<APPLICATION_ID>").content.deleteBlog(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -1169,7 +1169,7 @@ Get components of a blog
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.getComponentById(slug=slug)
+    result = await platformClient.application("<APPLICATION_ID>").content.getComponentById(slug=slug)
     # use result
 except Exception as e:
     print(e)
@@ -1271,7 +1271,7 @@ Adds a data loader
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.addDataLoader(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").content.addDataLoader(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1335,7 +1335,7 @@ Get all the data loaders in an application
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.getDataLoaders()
+    result = await platformClient.application("<APPLICATION_ID>").content.getDataLoaders()
     # use result
 except Exception as e:
     print(e)
@@ -1420,7 +1420,7 @@ Delete data loader in application
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.deleteDataLoader(dataLoaderId=dataLoaderId)
+    result = await platformClient.application("<APPLICATION_ID>").content.deleteDataLoader(dataLoaderId=dataLoaderId)
     # use result
 except Exception as e:
     print(e)
@@ -1485,7 +1485,7 @@ Edit a data loader by id
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.editDataLoader(dataLoaderId=dataLoaderId, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").content.editDataLoader(dataLoaderId=dataLoaderId, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1550,7 +1550,7 @@ Select a data loader by id
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.selectDataLoader(dataLoaderId=dataLoaderId)
+    result = await platformClient.application("<APPLICATION_ID>").content.selectDataLoader(dataLoaderId=dataLoaderId)
     # use result
 except Exception as e:
     print(e)
@@ -1615,7 +1615,7 @@ Reset a data loader by serive name and operation Id
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.resetDataLoader(service=service, operationId=operationId)
+    result = await platformClient.application("<APPLICATION_ID>").content.resetDataLoader(service=service, operationId=operationId)
     # use result
 except Exception as e:
     print(e)
@@ -1675,7 +1675,7 @@ Get a list of FAQ categories
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.getFaqCategories()
+    result = await platformClient.application("<APPLICATION_ID>").content.getFaqCategories()
     # use result
 except Exception as e:
     print(e)
@@ -1740,7 +1740,7 @@ Get an FAQ category by slug or id
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.getFaqCategoryBySlugOrId(idOrSlug=idOrSlug)
+    result = await platformClient.application("<APPLICATION_ID>").content.getFaqCategoryBySlugOrId(idOrSlug=idOrSlug)
     # use result
 except Exception as e:
     print(e)
@@ -1814,7 +1814,7 @@ Create an FAQ category
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.createFaqCategory(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").content.createFaqCategory(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1879,7 +1879,7 @@ Update an FAQ category
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.updateFaqCategory(id=id, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").content.updateFaqCategory(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1945,7 +1945,7 @@ Delete an FAQ category
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.deleteFaqCategory(id=id)
+    result = await platformClient.application("<APPLICATION_ID>").content.deleteFaqCategory(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -2012,7 +2012,7 @@ Get question and answers within an FAQ category
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.getFaqsByCategoryIdOrSlug(idOrSlug=idOrSlug)
+    result = await platformClient.application("<APPLICATION_ID>").content.getFaqsByCategoryIdOrSlug(idOrSlug=idOrSlug)
     # use result
 except Exception as e:
     print(e)
@@ -2079,7 +2079,7 @@ Create an FAQ
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.addFaq(categoryId=categoryId, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").content.addFaq(categoryId=categoryId, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2144,7 +2144,7 @@ Update an FAQ
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.updateFaq(categoryId=categoryId, faqId=faqId, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").content.updateFaq(categoryId=categoryId, faqId=faqId, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2210,7 +2210,7 @@ Delete an FAQ
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.deleteFaq(categoryId=categoryId, faqId=faqId)
+    result = await platformClient.application("<APPLICATION_ID>").content.deleteFaq(categoryId=categoryId, faqId=faqId)
     # use result
 except Exception as e:
     print(e)
@@ -2276,7 +2276,7 @@ Get an FAQ
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.getFaqByIdOrSlug(idOrSlug=idOrSlug)
+    result = await platformClient.application("<APPLICATION_ID>").content.getFaqByIdOrSlug(idOrSlug=idOrSlug)
     # use result
 except Exception as e:
     print(e)
@@ -2341,7 +2341,7 @@ Get SEO meta tag title for content
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.generateSEOTitle(type=type, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").content.generateSEOTitle(type=type, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2409,7 +2409,7 @@ Get landing pages
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.getLandingPages(pageNo=pageNo, pageSize=pageSize)
+    result = await platformClient.application("<APPLICATION_ID>").content.getLandingPages(pageNo=pageNo, pageSize=pageSize)
     # use result
 except Exception as e:
     print(e)
@@ -2507,7 +2507,7 @@ Create a landing page
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.createLandingPage(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").content.createLandingPage(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2594,7 +2594,7 @@ Update a landing page
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.updateLandingPage(id=id, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").content.updateLandingPage(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2682,7 +2682,7 @@ Delete a landing page
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.deleteLandingPage(id=id)
+    result = await platformClient.application("<APPLICATION_ID>").content.deleteLandingPage(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -2770,7 +2770,7 @@ Get legal information
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.getLegalInformation()
+    result = await platformClient.application("<APPLICATION_ID>").content.getLegalInformation()
     # use result
 except Exception as e:
     print(e)
@@ -2862,7 +2862,7 @@ Save legal information
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.updateLegalInformation(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").content.updateLegalInformation(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2927,7 +2927,7 @@ Get navigations
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.getNavigations(devicePlatform=devicePlatform, pageNo=pageNo, pageSize=pageSize)
+    result = await platformClient.application("<APPLICATION_ID>").content.getNavigations(devicePlatform=devicePlatform, pageNo=pageNo, pageSize=pageSize)
     # use result
 except Exception as e:
     print(e)
@@ -3181,7 +3181,7 @@ Create a navigation
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.createNavigation(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").content.createNavigation(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -3428,7 +3428,7 @@ Get default navigations
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.getDefaultNavigations()
+    result = await platformClient.application("<APPLICATION_ID>").content.getDefaultNavigations()
     # use result
 except Exception as e:
     print(e)
@@ -4150,7 +4150,7 @@ Get a navigation by slug
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.getNavigationBySlug(slug=slug, devicePlatform=devicePlatform)
+    result = await platformClient.application("<APPLICATION_ID>").content.getNavigationBySlug(slug=slug, devicePlatform=devicePlatform)
     # use result
 except Exception as e:
     print(e)
@@ -4399,7 +4399,7 @@ Update a navigation
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.updateNavigation(id=id, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").content.updateNavigation(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -4647,7 +4647,7 @@ Delete a navigation
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.deleteNavigation(id=id)
+    result = await platformClient.application("<APPLICATION_ID>").content.deleteNavigation(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -4892,7 +4892,7 @@ Get page meta
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.getPageMeta()
+    result = await platformClient.application("<APPLICATION_ID>").content.getPageMeta()
     # use result
 except Exception as e:
     print(e)
@@ -5006,7 +5006,7 @@ Get page spec
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.getPageSpec()
+    result = await platformClient.application("<APPLICATION_ID>").content.getPageSpec()
     # use result
 except Exception as e:
     print(e)
@@ -5092,7 +5092,7 @@ Create a page preview
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.createPagePreview(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").content.createPagePreview(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -5210,7 +5210,7 @@ Change the publish status of a page
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.updatePagePreview(slug=slug, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").content.updatePagePreview(slug=slug, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -5329,7 +5329,7 @@ Delete a page
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.deletePage(id=id)
+    result = await platformClient.application("<APPLICATION_ID>").content.deletePage(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -5448,7 +5448,7 @@ Save path based redirection rules
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.addPathRedirectionRules(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").content.addPathRedirectionRules(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -5519,7 +5519,7 @@ Get path based redirection rules
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.getPathRedirectionRules(pageSize=pageSize, pageNo=pageNo)
+    result = await platformClient.application("<APPLICATION_ID>").content.getPathRedirectionRules(pageSize=pageSize, pageNo=pageNo)
     # use result
 except Exception as e:
     print(e)
@@ -5592,7 +5592,7 @@ Get path based redirection rule
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.getPathRedirectionRule(pathId=pathId)
+    result = await platformClient.application("<APPLICATION_ID>").content.getPathRedirectionRule(pathId=pathId)
     # use result
 except Exception as e:
     print(e)
@@ -5664,7 +5664,7 @@ Update path based redirection rules
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.updatePathRedirectionRules(pathId=pathId, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").content.updatePathRedirectionRules(pathId=pathId, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -5736,7 +5736,7 @@ Delete path based redirection rules
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.deletePathRedirectionRules(pathId=pathId)
+    result = await platformClient.application("<APPLICATION_ID>").content.deletePathRedirectionRules(pathId=pathId)
     # use result
 except Exception as e:
     print(e)
@@ -5795,7 +5795,7 @@ Get SEO configuration of an application
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.getSEOConfiguration()
+    result = await platformClient.application("<APPLICATION_ID>").content.getSEOConfiguration()
     # use result
 except Exception as e:
     print(e)
@@ -5881,7 +5881,7 @@ Update SEO of application
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.updateSEOConfiguration(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").content.updateSEOConfiguration(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -5968,7 +5968,7 @@ Get slideshows
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.getSlideshows(devicePlatform=devicePlatform, pageNo=pageNo, pageSize=pageSize)
+    result = await platformClient.application("<APPLICATION_ID>").content.getSlideshows(devicePlatform=devicePlatform, pageNo=pageNo, pageSize=pageSize)
     # use result
 except Exception as e:
     print(e)
@@ -6086,7 +6086,7 @@ Create a slideshow
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.createSlideshow(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").content.createSlideshow(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -6189,7 +6189,7 @@ Get slideshow by slug
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.getSlideshowBySlug(slug=slug, devicePlatform=devicePlatform)
+    result = await platformClient.application("<APPLICATION_ID>").content.getSlideshowBySlug(slug=slug, devicePlatform=devicePlatform)
     # use result
 except Exception as e:
     print(e)
@@ -6294,7 +6294,7 @@ Update a slideshow
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.updateSlideshow(id=id, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").content.updateSlideshow(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -6398,7 +6398,7 @@ Delete a slideshow
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.deleteSlideshow(id=id)
+    result = await platformClient.application("<APPLICATION_ID>").content.deleteSlideshow(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -6502,7 +6502,7 @@ Get support information
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.getSupportInformation()
+    result = await platformClient.application("<APPLICATION_ID>").content.getSupportInformation()
     # use result
 except Exception as e:
     print(e)
@@ -6585,7 +6585,7 @@ Update the support data of an application
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.updateSupportInformation(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").content.updateSupportInformation(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -6672,7 +6672,7 @@ Update a tag
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.updateInjectableTag(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").content.updateInjectableTag(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -6750,7 +6750,7 @@ Delete tags in application
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.deleteAllInjectableTags()
+    result = await platformClient.application("<APPLICATION_ID>").content.deleteAllInjectableTags()
     # use result
 except Exception as e:
     print(e)
@@ -6824,7 +6824,7 @@ Get all the tags in an application
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.getInjectableTags()
+    result = await platformClient.application("<APPLICATION_ID>").content.getInjectableTags()
     # use result
 except Exception as e:
     print(e)
@@ -6898,7 +6898,7 @@ Add a tag
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.addInjectableTag(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").content.addInjectableTag(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -6968,7 +6968,7 @@ Remove a tag
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.removeInjectableTag(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").content.removeInjectableTag(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -7026,7 +7026,7 @@ Edit a tag by id
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.editInjectableTag(tagId=tagId, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").content.editInjectableTag(tagId=tagId, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -7097,7 +7097,7 @@ Create a page
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.createPage(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").content.createPage(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -7215,7 +7215,7 @@ Get a list of pages
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.getPages(pageNo=pageNo, pageSize=pageSize)
+    result = await platformClient.application("<APPLICATION_ID>").content.getPages(pageNo=pageNo, pageSize=pageSize)
     # use result
 except Exception as e:
     print(e)
@@ -7326,7 +7326,7 @@ Update a page
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.updatePage(id=id, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").content.updatePage(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -7445,7 +7445,7 @@ Get pages by component Id
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").content.getPageBySlug(slug=slug)
+    result = await platformClient.application("<APPLICATION_ID>").content.getPageBySlug(slug=slug)
     # use result
 except Exception as e:
     print(e)
@@ -9069,8 +9069,6 @@ Success. Returns a JSON object of components. Refer `PageSchema` for more detail
  | page | page | Symbolic link for Page: /page/:slug |
  | policy | policy | Symbolic link for Privacy Policy: /privacy-policy |
  | product | product | Symbolic link for Product: /product/:slug |
- | productReviews | product-reviews | Symbolic link for Product Reviews: /product/:slug/reviews |
- | addProductReview | add-product-review | Symbolic link for Add Product review: /product/:slug/add-review |
  | productRequest | product-request | Symbolic link for Product Request: /product-request/ |
  | products | products | Symbolic link for Products: /products/ |
  | profile | profile | Symbolic link for Profile: /profile |

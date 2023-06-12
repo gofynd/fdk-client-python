@@ -36,7 +36,7 @@ Get a list of customers
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").user.getCustomers(q=q, pageSize=pageSize, pageNo=pageNo)
+    result = await platformClient.application("<APPLICATION_ID>").user.getCustomers(q=q, pageSize=pageSize, pageNo=pageNo)
     # use result
 except Exception as e:
     print(e)
@@ -150,7 +150,7 @@ Search an existing user.
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").user.searchUsers(q=q)
+    result = await platformClient.application("<APPLICATION_ID>").user.searchUsers(q=q)
     # use result
 except Exception as e:
     print(e)
@@ -249,7 +249,7 @@ Create user
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").user.createUser(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").user.createUser(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -347,7 +347,7 @@ Block/Unblock user
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").user.blockOrUnblockUsers(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").user.blockOrUnblockUsers(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -405,7 +405,7 @@ archive user
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").user.archiveUser(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").user.archiveUser(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -463,7 +463,7 @@ undelete user who deleted from application and have not elapsed the platform con
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").user.unDeleteUser(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").user.unDeleteUser(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -521,7 +521,7 @@ Update user
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").user.updateUser(userId=userId, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").user.updateUser(userId=userId, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -620,7 +620,7 @@ Create user session
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").user.createUserSession(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").user.createUserSession(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -684,7 +684,7 @@ Get a list of all session for a user
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").user.getActiveSessions(id=id)
+    result = await platformClient.application("<APPLICATION_ID>").user.getActiveSessions(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -754,7 +754,7 @@ Delete a list of all session for a user
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").user.deleteActiveSessions(id=id)
+    result = await platformClient.application("<APPLICATION_ID>").user.deleteActiveSessions(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -824,7 +824,7 @@ Get platform configurations
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").user.getPlatformConfig()
+    result = await platformClient.application("<APPLICATION_ID>").user.getPlatformConfig()
     # use result
 except Exception as e:
     print(e)
@@ -957,7 +957,7 @@ Update platform configurations
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").user.updatePlatformConfig(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").user.updatePlatformConfig(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1094,7 +1094,7 @@ Create an User Group
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").user.createUserGroup(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").user.createUserGroup(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1162,7 +1162,7 @@ Get User Groups mathcing criteria
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").user.getUserGroups(pageNo=pageNo, pageSize=pageSize, name=name, status=status, groupUid=groupUid)
+    result = await platformClient.application("<APPLICATION_ID>").user.getUserGroups(pageNo=pageNo, pageSize=pageSize, name=name, status=status, groupUid=groupUid)
     # use result
 except Exception as e:
     print(e)
@@ -1259,7 +1259,7 @@ Update an User Group
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").user.updateUserGroup(groupId=groupId, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").user.updateUserGroup(groupId=groupId, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1328,7 +1328,7 @@ Get an User Group by Id
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").user.getUserGroupById(groupId=groupId)
+    result = await platformClient.application("<APPLICATION_ID>").user.getUserGroupById(groupId=groupId)
     # use result
 except Exception as e:
     print(e)
