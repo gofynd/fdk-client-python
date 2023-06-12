@@ -94,49 +94,6 @@ class Payment:
 
         return response
     
-    async def updateBrandPaymentGatewayConfig(self, body=""):
-        """Save Config Secret For Brand Payment Gateway
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = PaymentValidator.updateBrandPaymentGatewayConfig()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import PaymentGatewayConfigRequest
-        schema = PaymentGatewayConfigRequest()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/aggregator/request", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", )
-        query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/aggregator/request", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        
-
-        from .models import PaymentGatewayToBeReviewed
-        schema = PaymentGatewayToBeReviewed()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateBrandPaymentGatewayConfig")
-            print(e)
-
-        
-
-        return response
-    
     async def getPaymentModeRoutes(self, refresh=None, request_type=None):
         """Use this API to get Get All Valid Payment Options for making payment
         :param refresh :  : type boolean
@@ -482,6 +439,98 @@ class Payment:
             schema.dump(schema.load(response))
         except Exception as e:
             print("Response Validation failed for setUserCODlimitRoutes")
+            print(e)
+
+        
+
+        return response
+    
+    async def oauthGetUrl(self, aggregator=None, success_redirect_url=None, failure_redirect_url=None):
+        """Use this API to Get the url to call for oauth.
+        :param aggregator : aggregator : type string
+        :param success_redirect_url :  : type string
+        :param failure_redirect_url :  : type string
+        """
+        payload = {}
+        
+        if aggregator:
+            payload["aggregator"] = aggregator
+        
+        if success_redirect_url:
+            payload["success_redirect_url"] = success_redirect_url
+        
+        if failure_redirect_url:
+            payload["failure_redirect_url"] = failure_redirect_url
+        
+
+        # Parameter validation
+        schema = PaymentValidator.oauthGetUrl()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/onboard/{aggregator}/", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"aggregator","in":"path","description":"aggregator","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"success_redirect_url","schema":{"type":"string","description":"This is the url which will come back to after success authorization complete"}},{"in":"query","name":"failure_redirect_url","schema":{"type":"string","description":"This is the url which will come back to after failure authorization"}}],"query":[{"in":"query","name":"success_redirect_url","schema":{"type":"string","description":"This is the url which will come back to after success authorization complete"}},{"in":"query","name":"failure_redirect_url","schema":{"type":"string","description":"This is the url which will come back to after failure authorization"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"aggregator","in":"path","description":"aggregator","schema":{"type":"string"},"required":true}]}""", aggregator=aggregator, success_redirect_url=success_redirect_url, failure_redirect_url=failure_redirect_url)
+        query_string = await create_query_string(aggregator=aggregator, success_redirect_url=success_redirect_url, failure_redirect_url=failure_redirect_url)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/onboard/{aggregator}/", aggregator=aggregator, success_redirect_url=success_redirect_url, failure_redirect_url=failure_redirect_url), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        from .models import GetOauthUrlResponse
+        schema = GetOauthUrlResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for oauthGetUrl")
+            print(e)
+
+        
+
+        return response
+    
+    async def revokeOauthToken(self, aggregator=None):
+        """Use this API to Revoke oauth for razorpay partnership
+        :param aggregator : aggregator_slug : type string
+        """
+        payload = {}
+        
+        if aggregator:
+            payload["aggregator"] = aggregator
+        
+
+        # Parameter validation
+        schema = PaymentValidator.revokeOauthToken()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/revoke/{aggregator}/", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"aggregator","in":"path","description":"aggregator_slug","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"aggregator","in":"path","description":"aggregator_slug","schema":{"type":"string"},"required":true}]}""", aggregator=aggregator)
+        query_string = await create_query_string(aggregator=aggregator)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/revoke/{aggregator}/", aggregator=aggregator), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        from .models import RevokeOAuthToken
+        schema = RevokeOAuthToken()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for revokeOauthToken")
             print(e)
 
         
