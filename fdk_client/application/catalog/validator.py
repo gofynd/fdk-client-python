@@ -89,6 +89,7 @@ from ..ApplicationModel import BaseSchema
         
         
         
+        
     
     
         
@@ -321,6 +322,8 @@ class CatalogValidator:
         slug = fields.Str(required=False)
         
         f = fields.Str(required=False)
+        
+        q = fields.Str(required=False)
         
         filters = fields.Boolean(required=False)
         
