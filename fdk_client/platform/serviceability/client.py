@@ -554,6 +554,45 @@ class Serviceability:
 
         return response
     
+    async def getDpRuleInsert(self, ):
+        """This API returns response of DpRules from mongo database.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ServiceabilityValidator.getDpRuleInsert()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier/rules", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier/rules", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DpMultipleRuleSuccessResponse
+            schema = DpMultipleRuleSuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getDpRuleInsert")
+                print(e)
+
+        
+
+        return response
+    
     async def upsertDpRules(self, body=""):
         """This API returns response of upsert of DpRules in mongo database.
         """
@@ -592,45 +631,6 @@ class Serviceability:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for upsertDpRules")
-                print(e)
-
-        
-
-        return response
-    
-    async def getDpRuleInsert(self, ):
-        """This API returns response of DpRules from mongo database.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = ServiceabilityValidator.getDpRuleInsert()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier/rules", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}]}""", )
-        query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier/rules", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import DpMultipleRuleSuccessResponse
-            schema = DpMultipleRuleSuccessResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getDpRuleInsert")
                 print(e)
 
         
