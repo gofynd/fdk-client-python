@@ -110,6 +110,44 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+        
 
 class CartValidator:
     
@@ -330,6 +368,87 @@ class CartValidator:
         cart_id = fields.Str(required=False)
         
         b = fields.Boolean(required=False)
+         
+        
+    
+    class getAddresses(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        cart_id = fields.Str(required=False)
+        
+        buy_now = fields.Boolean(required=False)
+        
+        mobile_no = fields.Str(required=False)
+        
+        checkout_mode = fields.Str(required=False)
+        
+        tags = fields.Str(required=False)
+        
+        is_default = fields.Boolean(required=False)
+        
+        user_id = fields.Str(required=False)
+         
+        
+    
+    class addAddress(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getAddressById(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+        
+        cart_id = fields.Str(required=False)
+        
+        buy_now = fields.Boolean(required=False)
+        
+        mobile_no = fields.Str(required=False)
+        
+        checkout_mode = fields.Str(required=False)
+        
+        tags = fields.Str(required=False)
+        
+        is_default = fields.Boolean(required=False)
+        
+        user_id = fields.Str(required=False)
+         
+        
+    
+    class updateAddress(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
+    class removeAddress(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+        
+        user_id = fields.Str(required=False)
          
         
     
