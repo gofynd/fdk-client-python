@@ -28,8 +28,6 @@ from .configuration.client import Configuration
 
 from .discount.client import Discount
 
-from .partner.client import Partner
-
 from .webhook.client import Webhook
 
 from .audittrail.client import AuditTrail
@@ -66,8 +64,6 @@ class PlatformClient:
         self.configuration = Configuration(config)
         
         self.discount = Discount(config)
-        
-        self.partner = Partner(config)
         
         self.webhook = Webhook(config)
         

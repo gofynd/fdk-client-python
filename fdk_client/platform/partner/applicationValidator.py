@@ -19,32 +19,10 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-        
         
 
 class PartnerValidator:
     
-    
-    class getProxyPath(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        extension_id = fields.Str(required=False)
-         
-        
     
     class addProxyPath(BaseSchema):
         
@@ -54,19 +32,6 @@ class PartnerValidator:
         application_id = fields.Str(required=False)
         
         extension_id = fields.Str(required=False)
-         
-        
-    
-    class getProxyPathAttachedPath(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        extension_id = fields.Str(required=False)
-        
-        attached_path = fields.Str(required=False)
          
         
     

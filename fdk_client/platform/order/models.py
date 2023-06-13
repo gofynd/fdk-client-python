@@ -776,6 +776,14 @@ class GetActionsResponse(BaseSchema):
     pass
 
 
+class HistoryDict(BaseSchema):
+    pass
+
+
+class ShipmentHistoryResponse(BaseSchema):
+    pass
+
+
 class PostHistoryData(BaseSchema):
     pass
 
@@ -793,14 +801,6 @@ class PostHistoryDict(BaseSchema):
 
 
 class PostShipmentHistory(BaseSchema):
-    pass
-
-
-class HistoryDict(BaseSchema):
-    pass
-
-
-class ShipmentHistoryResponse(BaseSchema):
     pass
 
 
@@ -912,11 +912,11 @@ class CreateChannelConfigData(BaseSchema):
     pass
 
 
-class CreateChannelConfigResponse(BaseSchema):
+class CreateChannelConifgErrorResponse(BaseSchema):
     pass
 
 
-class CreateChannelConifgErrorResponse(BaseSchema):
+class CreateChannelConfigResponse(BaseSchema):
     pass
 
 
@@ -4711,6 +4711,48 @@ class GetActionsResponse(BaseSchema):
     
 
 
+class HistoryDict(BaseSchema):
+    # Order swagger.json
+
+    
+    l2_detail = fields.Str(required=False)
+    
+    user = fields.Str(required=False)
+    
+    l3_detail = fields.Str(required=False)
+    
+    ticket_id = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    createdat = fields.Str(required=False)
+    
+    bag_id = fields.Int(required=False)
+    
+    message = fields.Str(required=False)
+    
+    meta = fields.Dict(required=False)
+    
+    l1_detail = fields.Str(required=False)
+    
+    assigned_agent = fields.Str(required=False)
+    
+    ticket_url = fields.Str(required=False)
+    
+    display_message = fields.Str(required=False)
+    
+
+
+class ShipmentHistoryResponse(BaseSchema):
+    # Order swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+    activity_history = fields.List(fields.Nested(HistoryDict, required=False), required=False)
+    
+
+
 class PostHistoryData(BaseSchema):
     # Order swagger.json
 
@@ -4756,48 +4798,6 @@ class PostShipmentHistory(BaseSchema):
 
     
     activity_history = fields.List(fields.Nested(PostHistoryDict, required=False), required=False)
-    
-
-
-class HistoryDict(BaseSchema):
-    # Order swagger.json
-
-    
-    l2_detail = fields.Str(required=False)
-    
-    user = fields.Str(required=False)
-    
-    l3_detail = fields.Str(required=False)
-    
-    ticket_id = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
-    
-    createdat = fields.Str(required=False)
-    
-    bag_id = fields.Int(required=False)
-    
-    message = fields.Str(required=False)
-    
-    meta = fields.Dict(required=False)
-    
-    l1_detail = fields.Str(required=False)
-    
-    assigned_agent = fields.Str(required=False)
-    
-    ticket_url = fields.Str(required=False)
-    
-    display_message = fields.Str(required=False)
-    
-
-
-class ShipmentHistoryResponse(BaseSchema):
-    # Order swagger.json
-
-    
-    success = fields.Boolean(required=False)
-    
-    activity_history = fields.List(fields.Nested(HistoryDict, required=False), required=False)
     
 
 
@@ -5271,6 +5271,14 @@ class CreateChannelConfigData(BaseSchema):
     
 
 
+class CreateChannelConifgErrorResponse(BaseSchema):
+    # Order swagger.json
+
+    
+    error = fields.Str(required=False)
+    
+
+
 class CreateChannelConfigResponse(BaseSchema):
     # Order swagger.json
 
@@ -5280,14 +5288,6 @@ class CreateChannelConfigResponse(BaseSchema):
     is_upserted = fields.Boolean(required=False)
     
     is_inserted = fields.Boolean(required=False)
-    
-
-
-class CreateChannelConifgErrorResponse(BaseSchema):
-    # Order swagger.json
-
-    
-    error = fields.Str(required=False)
     
 
 
