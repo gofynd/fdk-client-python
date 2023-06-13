@@ -521,6 +521,53 @@ class Cart:
 
         return response
     
+    async def getPromosCouponConfig(self, entity_type=None, is_hidden=None):
+        """Use this API to get list of all the active promos/coupons.
+        :param entity_type : entity_type as coupon or promotion : type string
+        :param is_hidden : show Promo Coupon Config or not : type boolean
+        """
+        payload = {}
+        
+        if entity_type is not None:
+            payload["entity_type"] = entity_type
+        
+        if is_hidden is not None:
+            payload["is_hidden"] = is_hidden
+        
+
+        # Parameter validation
+        schema = CartValidator.getPromosCouponConfig()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promo-coupons", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"entity_type","in":"query","description":"entity_type as coupon or promotion","schema":{"type":"string"}},{"name":"is_hidden","in":"query","description":"show Promo Coupon Config or not","schema":{"type":"boolean"}}],"query":[{"name":"entity_type","in":"query","description":"entity_type as coupon or promotion","schema":{"type":"string"}},{"name":"is_hidden","in":"query","description":"show Promo Coupon Config or not","schema":{"type":"boolean"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", entity_type=entity_type, is_hidden=is_hidden)
+        query_string = await create_query_string(entity_type=entity_type, is_hidden=is_hidden)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promo-coupons", entity_type=entity_type, is_hidden=is_hidden), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ActivePromosResponse
+            schema = ActivePromosResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPromosCouponConfig")
+                print(e)
+
+        
+
+        return response
+    
     async def updateCartMetaConfig(self, cart_meta_id=None, body=""):
         """Update cart meta configuration
         :param cart_meta_id :  : type string
@@ -1093,6 +1140,50 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion_code_exists", code=code), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        return response
+    
+    async def overrideCart(self, body=""):
+        """Generate Fynd order while overriding cart details sent with provided `cart_items`
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = CartValidator.overrideCart()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import OverrideCheckoutReq
+        schema = OverrideCheckoutReq()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/checkout/over-ride", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/checkout/over-ride", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OverrideCheckoutResponse
+            schema = OverrideCheckoutResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for overrideCart")
+                print(e)
 
         
 
