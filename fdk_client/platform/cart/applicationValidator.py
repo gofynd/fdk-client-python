@@ -92,6 +92,20 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
     
     
         
@@ -524,6 +538,37 @@ class CartValidator:
         
     
     class createCartMetaConfig(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class updateCartDynamicInjection(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
+    class removeCartMetaConfig(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
+    class createCartDynamicInjection(BaseSchema):
         
         
         company_id = fields.Str(required=False)
