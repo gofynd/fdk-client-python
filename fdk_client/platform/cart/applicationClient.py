@@ -521,10 +521,18 @@ class Cart:
 
         return response
     
-    async def getPromosCouponConfig(self, ):
+    async def getPromosCouponConfig(self, entity_type=None, is_hidden=None):
         """Use this API to get list of all the active promos/coupons.
+        :param entity_type : entity_type as coupon or promotion : type string
+        :param is_hidden : show Promo Coupon Config or not : type boolean
         """
         payload = {}
+        
+        if entity_type is not None:
+            payload["entity_type"] = entity_type
+        
+        if is_hidden is not None:
+            payload["is_hidden"] = is_hidden
         
 
         # Parameter validation
@@ -532,8 +540,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promo-coupons", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", )
-        query_string = await create_query_string()
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promo-coupons", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"entity_type","in":"query","description":"entity_type as coupon or promotion","schema":{"type":"string"}},{"name":"is_hidden","in":"query","description":"show Promo Coupon Config or not","schema":{"type":"boolean"}}],"query":[{"name":"entity_type","in":"query","description":"entity_type as coupon or promotion","schema":{"type":"string"}},{"name":"is_hidden","in":"query","description":"show Promo Coupon Config or not","schema":{"type":"boolean"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", entity_type=entity_type, is_hidden=is_hidden)
+        query_string = await create_query_string(entity_type=entity_type, is_hidden=is_hidden)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -543,7 +551,7 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promo-coupons", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promo-coupons", entity_type=entity_type, is_hidden=is_hidden), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
 
