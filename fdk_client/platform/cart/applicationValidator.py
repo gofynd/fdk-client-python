@@ -376,18 +376,18 @@ class CartValidator:
         
         application_id = fields.Str(required=False)
         
-        extension_id = fields.Str(required=False)
+        id = fields.Str(required=False)
          
         
     
-    class removeCartMetaConfig(BaseSchema):
+    class removeCartDynamicInjection(BaseSchema):
         
         
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
         
-        extension_id = fields.Str(required=False)
+        id = fields.Str(required=False)
          
         
     

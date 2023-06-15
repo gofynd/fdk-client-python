@@ -142,6 +142,9 @@ from ..ApplicationModel import BaseSchema
         
         
         
+    
+    
+        
 
 class CartValidator:
     
@@ -439,6 +442,13 @@ class CartValidator:
         promotion_id = fields.Str(required=False)
         
         page_size = fields.Int(required=False)
+         
+        
+    
+    class checkoutCartV2(BaseSchema):
+        
+        
+        buy_now = fields.Boolean(required=False)
          
         
     

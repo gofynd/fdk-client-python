@@ -914,14 +914,14 @@ class Cart:
 
         return response
     
-    async def updateCartDynamicInjection(self, extension_id=None, body=""):
+    async def updateCartDynamicInjection(self, id=None, body=""):
         """Update cart injection configuration
-        :param extension_id :  : type string
+        :param id :  : type string
         """
         payload = {}
         
-        if extension_id is not None:
-            payload["extension_id"] = extension_id
+        if id is not None:
+            payload["id"] = id
         
 
         # Parameter validation
@@ -934,8 +934,8 @@ class Cart:
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/additional-charge-discount/{extension_id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"extension_id","in":"path","schema":{"type":"string","description":"CartMeta mongo extension id for fetching single cart injection data for editing"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"extension_id","in":"path","schema":{"type":"string","description":"CartMeta mongo extension id for fetching single cart injection data for editing"},"required":true}]}""", extension_id=extension_id)
-        query_string = await create_query_string(extension_id=extension_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/additional-charge-discount/{id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string","description":"CartMeta mongo extension id for fetching single cart injection data for editing"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string","description":"CartMeta mongo extension id for fetching single cart injection data for editing"},"required":true}]}""", id=id)
+        query_string = await create_query_string(id=id)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -945,13 +945,13 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/additional-charge-discount/{extension_id}", extension_id=extension_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/additional-charge-discount/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SuccessMessage
-            schema = SuccessMessage()
+            from .models import CartDynamicInjectionResponse
+            schema = CartDynamicInjectionResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -962,23 +962,23 @@ class Cart:
 
         return response
     
-    async def removeCartMetaConfig(self, extension_id=None):
-        """Remove cart meta configuration
-        :param extension_id :  : type string
+    async def removeCartDynamicInjection(self, id=None):
+        """Remove cart dynamic injection
+        :param id :  : type string
         """
         payload = {}
         
-        if extension_id is not None:
-            payload["extension_id"] = extension_id
+        if id is not None:
+            payload["id"] = id
         
 
         # Parameter validation
-        schema = CartValidator.removeCartMetaConfig()
+        schema = CartValidator.removeCartDynamicInjection()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/additional-charge-discount/{extension_id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"extension_id","in":"path","schema":{"type":"string","description":"CartMeta mongo extension id for fetching single cart injection data for editing"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"extension_id","in":"path","schema":{"type":"string","description":"CartMeta mongo extension id for fetching single cart injection data for editing"},"required":true}]}""", extension_id=extension_id)
-        query_string = await create_query_string(extension_id=extension_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/additional-charge-discount/{id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string","description":"Cart dynamic injection mongo extension id for fetching single cart injection data for editing"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string","description":"Cart dynamic injection mongo extension id for fetching single cart injection data for editing"},"required":true}]}""", id=id)
+        query_string = await create_query_string(id=id)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -988,7 +988,7 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/additional-charge-discount/{extension_id}", extension_id=extension_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/additional-charge-discount/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
 
@@ -998,7 +998,7 @@ class Cart:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for removeCartMetaConfig")
+                print("Response Validation failed for removeCartDynamicInjection")
                 print(e)
 
         
@@ -1037,8 +1037,8 @@ class Cart:
         
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SuccessMessage
-            schema = SuccessMessage()
+            from .models import CartDynamicInjectionResponse
+            schema = CartDynamicInjectionResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
