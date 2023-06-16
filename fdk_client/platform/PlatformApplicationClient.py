@@ -69,7 +69,7 @@ class PlatformApplicationClient:
         self.serviceability = Serviceability(config, applicationId)
         
 
-    async def setExtraHeaders(self, header):
+    def setExtraHeaders(self, header):
         if header and type(header) == dict:
             self.config.extraHeaders.append(header)
         else:
