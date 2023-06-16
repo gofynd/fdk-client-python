@@ -104,6 +104,14 @@ class Audiences(BaseSchema):
     pass
 
 
+class EmailProviderAdmin(BaseSchema):
+    pass
+
+
+class EmailProvidersAdmin(BaseSchema):
+    pass
+
+
 class EmailProviderReqFrom(BaseSchema):
     pass
 
@@ -117,6 +125,14 @@ class EmailProvider(BaseSchema):
 
 
 class EmailProviders(BaseSchema):
+    pass
+
+
+class DefaultEmailProviders(BaseSchema):
+    pass
+
+
+class DefaultEmailProvidersObjFrom(BaseSchema):
     pass
 
 
@@ -320,11 +336,63 @@ class VerifyOtpCommsErrorRes(BaseSchema):
     pass
 
 
+class AppProvider(BaseSchema):
+    pass
+
+
+class AppProviderRes(BaseSchema):
+    pass
+
+
+class AppProviderResVoice(BaseSchema):
+    pass
+
+
+class AppProviderResObj(BaseSchema):
+    pass
+
+
+class GlobalProviders(BaseSchema):
+    pass
+
+
+class GlobalProvidersResObj(BaseSchema):
+    pass
+
+
+class AppProviderAdmin(BaseSchema):
+    pass
+
+
+class AppProviderAdminObj(BaseSchema):
+    pass
+
+
+class UpdateGlobalProviders(BaseSchema):
+    pass
+
+
+class UpdateGlobalProvidersObj(BaseSchema):
+    pass
+
+
+class AppProviderReq(BaseSchema):
+    pass
+
+
 class PushtokenReq(BaseSchema):
     pass
 
 
 class PushtokenRes(BaseSchema):
+    pass
+
+
+class SmsProviderAdmin(BaseSchema):
+    pass
+
+
+class SmsProvidersAdmin(BaseSchema):
     pass
 
 
@@ -337,6 +405,10 @@ class SmsProvider(BaseSchema):
 
 
 class SmsProviders(BaseSchema):
+    pass
+
+
+class DefaultSmsProviders(BaseSchema):
     pass
 
 
@@ -449,6 +521,74 @@ class SystemVoiceTemplates(BaseSchema):
 
 
 class Page(BaseSchema):
+    pass
+
+
+class GenericSuccess(BaseSchema):
+    pass
+
+
+class InvalidRangeErrorReqPositive(BaseSchema):
+    pass
+
+
+class InvalidInputRequiredByteOrHexError(BaseSchema):
+    pass
+
+
+class NameValidatorError(BaseSchema):
+    pass
+
+
+class NameValidatorErrorMessage(BaseSchema):
+    pass
+
+
+class ApikeyValidatorError(BaseSchema):
+    pass
+
+
+class ApikeyValidatorErrorMessage(BaseSchema):
+    pass
+
+
+class FeedidValidatorError(BaseSchema):
+    pass
+
+
+class FeedidValidatorErrorMessage(BaseSchema):
+    pass
+
+
+class UsernameValidatorError(BaseSchema):
+    pass
+
+
+class UsernameValidatorErrorMessage(BaseSchema):
+    pass
+
+
+class PasswordValidatorError(BaseSchema):
+    pass
+
+
+class PasswordValidatorErrorMessage(BaseSchema):
+    pass
+
+
+class ValidatorErrorBody(BaseSchema):
+    pass
+
+
+class ValidatorErrorMessageProperties(BaseSchema):
+    pass
+
+
+class CastToStringFail(BaseSchema):
+    pass
+
+
+class InvalidID(BaseSchema):
     pass
 
 
@@ -775,6 +915,44 @@ class Audiences(BaseSchema):
     
 
 
+class EmailProviderAdmin(BaseSchema):
+    # Communication swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    provider = fields.Str(required=False)
+    
+    from_address = fields.List(fields.Nested(EmailProviderReqFrom, required=False), required=False)
+    
+    _id = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+    api_key = fields.Str(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    updated_at = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    __v = fields.Int(required=False)
+    
+
+
+class EmailProvidersAdmin(BaseSchema):
+    # Communication swagger.json
+
+    
+    items = fields.List(fields.Nested(EmailProvider, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
+    
+
+
 class EmailProviderReqFrom(BaseSchema):
     # Communication swagger.json
 
@@ -842,6 +1020,32 @@ class EmailProviders(BaseSchema):
     items = fields.List(fields.Nested(EmailProvider, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
+    
+
+
+class DefaultEmailProviders(BaseSchema):
+    # Communication swagger.json
+
+    
+    _id = fields.Str(required=False)
+    
+    from_address = fields.List(fields.Nested(DefaultEmailProvidersObjFrom, required=False), required=False)
+    
+    name = fields.Str(required=False)
+    
+    is_default = fields.Boolean(required=False)
+    
+
+
+class DefaultEmailProvidersObjFrom(BaseSchema):
+    # Communication swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    email = fields.Str(required=False)
+    
+    is_default = fields.Boolean(required=False)
     
 
 
@@ -1573,6 +1777,144 @@ class VerifyOtpCommsErrorRes(BaseSchema):
     
 
 
+class AppProvider(BaseSchema):
+    # Communication swagger.json
+
+    
+    email = fields.Nested(AppProviderRes, required=False)
+    
+    sms = fields.Nested(AppProviderRes, required=False)
+    
+    voice = fields.Nested(AppProviderResVoice, required=False)
+    
+    _id = fields.Str(required=False)
+    
+    application = fields.Str(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    updated_at = fields.Str(required=False)
+    
+    __v = fields.Int(required=False)
+    
+
+
+class AppProviderRes(BaseSchema):
+    # Communication swagger.json
+
+    
+    transaction = fields.Nested(AppProviderResObj, required=False)
+    
+    promotional = fields.Nested(AppProviderResObj, required=False)
+    
+    otp = fields.Nested(AppProviderResObj, required=False)
+    
+
+
+class AppProviderResVoice(BaseSchema):
+    # Communication swagger.json
+
+    
+    transaction = fields.Nested(AppProviderResObj, required=False)
+    
+    otp = fields.Nested(AppProviderResObj, required=False)
+    
+
+
+class AppProviderResObj(BaseSchema):
+    # Communication swagger.json
+
+    
+    provider = fields.Str(required=False)
+    
+
+
+class GlobalProviders(BaseSchema):
+    # Communication swagger.json
+
+    
+    email = fields.List(fields.Nested(GlobalProvidersResObj, required=False), required=False)
+    
+    sms = fields.List(fields.Nested(GlobalProvidersResObj, required=False), required=False)
+    
+    voice = fields.List(fields.Nested(GlobalProvidersResObj, required=False), required=False)
+    
+
+
+class GlobalProvidersResObj(BaseSchema):
+    # Communication swagger.json
+
+    
+    _id = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+
+
+class AppProviderAdmin(BaseSchema):
+    # Communication swagger.json
+
+    
+    email = fields.Nested(AppProviderAdminObj, required=False)
+    
+    sms = fields.Nested(AppProviderAdminObj, required=False)
+    
+    voice = fields.Nested(AppProviderAdminObj, required=False)
+    
+
+
+class AppProviderAdminObj(BaseSchema):
+    # Communication swagger.json
+
+    
+    transaction = fields.Nested(AppProviderResObj, required=False)
+    
+    otp = fields.Nested(AppProviderResObj, required=False)
+    
+
+
+class UpdateGlobalProviders(BaseSchema):
+    # Communication swagger.json
+
+    
+    email = fields.Nested(UpdateGlobalProvidersObj, required=False)
+    
+    sms = fields.Nested(UpdateGlobalProvidersObj, required=False)
+    
+    voice = fields.Nested(UpdateGlobalProvidersObj, required=False)
+    
+    _id = fields.Str(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    updated_at = fields.Str(required=False)
+    
+    __v = fields.Int(required=False)
+    
+
+
+class UpdateGlobalProvidersObj(BaseSchema):
+    # Communication swagger.json
+
+    
+    default_provider = fields.Str(required=False)
+    
+    otp_provider = fields.Str(required=False)
+    
+
+
+class AppProviderReq(BaseSchema):
+    # Communication swagger.json
+
+    
+    email = fields.Nested(AppProviderRes, required=False)
+    
+    sms = fields.Nested(AppProviderRes, required=False)
+    
+    voice = fields.Nested(AppProviderResVoice, required=False)
+    
+
+
 class PushtokenReq(BaseSchema):
     # Communication swagger.json
 
@@ -1615,6 +1957,50 @@ class PushtokenRes(BaseSchema):
     
 
 
+class SmsProviderAdmin(BaseSchema):
+    # Communication swagger.json
+
+    
+    rpt = fields.Int(required=False)
+    
+    type = fields.Str(required=False)
+    
+    provider = fields.Str(required=False)
+    
+    _id = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    entity_id = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+    sender = fields.Str(required=False)
+    
+    username = fields.Str(required=False)
+    
+    authkey = fields.Str(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    updated_at = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    __v = fields.Int(required=False)
+    
+
+
+class SmsProvidersAdmin(BaseSchema):
+    # Communication swagger.json
+
+    
+    items = fields.List(fields.Nested(SmsProviderAdmin, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
+    
+
+
 class SmsProviderReq(BaseSchema):
     # Communication swagger.json
 
@@ -1649,6 +2035,8 @@ class SmsProvider(BaseSchema):
     
     name = fields.Str(required=False)
     
+    entity_id = fields.Str(required=False)
+    
     description = fields.Str(required=False)
     
     sender = fields.Str(required=False)
@@ -1676,6 +2064,18 @@ class SmsProviders(BaseSchema):
     items = fields.List(fields.Nested(SmsProvider, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
+    
+
+
+class DefaultSmsProviders(BaseSchema):
+    # Communication swagger.json
+
+    
+    _id = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    is_default = fields.Boolean(required=False)
     
 
 
@@ -2190,6 +2590,174 @@ class Page(BaseSchema):
     type = fields.Str(required=False)
     
     size = fields.Int(required=False)
+    
+
+
+class GenericSuccess(BaseSchema):
+    # Communication swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+
+
+class InvalidRangeErrorReqPositive(BaseSchema):
+    # Communication swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+    code = fields.Int(required=False)
+    
+    sentry = fields.Str(required=False)
+    
+
+
+class InvalidInputRequiredByteOrHexError(BaseSchema):
+    # Communication swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+    sentry = fields.Str(required=False)
+    
+
+
+class NameValidatorError(BaseSchema):
+    # Communication swagger.json
+
+    
+    message = fields.Nested(NameValidatorErrorMessage, required=False)
+    
+    sentry = fields.Str(required=False)
+    
+
+
+class NameValidatorErrorMessage(BaseSchema):
+    # Communication swagger.json
+
+    
+    name = fields.Nested(ValidatorErrorBody, required=False)
+    
+
+
+class ApikeyValidatorError(BaseSchema):
+    # Communication swagger.json
+
+    
+    message = fields.Nested(ApikeyValidatorErrorMessage, required=False)
+    
+    sentry = fields.Str(required=False)
+    
+
+
+class ApikeyValidatorErrorMessage(BaseSchema):
+    # Communication swagger.json
+
+    
+    api_key = fields.Nested(ValidatorErrorBody, required=False)
+    
+
+
+class FeedidValidatorError(BaseSchema):
+    # Communication swagger.json
+
+    
+    message = fields.Nested(FeedidValidatorErrorMessage, required=False)
+    
+    sentry = fields.Str(required=False)
+    
+
+
+class FeedidValidatorErrorMessage(BaseSchema):
+    # Communication swagger.json
+
+    
+    feedid = fields.Nested(ValidatorErrorBody, required=False)
+    
+
+
+class UsernameValidatorError(BaseSchema):
+    # Communication swagger.json
+
+    
+    message = fields.Nested(UsernameValidatorErrorMessage, required=False)
+    
+    sentry = fields.Str(required=False)
+    
+
+
+class UsernameValidatorErrorMessage(BaseSchema):
+    # Communication swagger.json
+
+    
+    username = fields.Nested(ValidatorErrorBody, required=False)
+    
+
+
+class PasswordValidatorError(BaseSchema):
+    # Communication swagger.json
+
+    
+    message = fields.Nested(PasswordValidatorErrorMessage, required=False)
+    
+    sentry = fields.Str(required=False)
+    
+
+
+class PasswordValidatorErrorMessage(BaseSchema):
+    # Communication swagger.json
+
+    
+    password = fields.Nested(ValidatorErrorBody, required=False)
+    
+
+
+class ValidatorErrorBody(BaseSchema):
+    # Communication swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
+    
+    properties = fields.Nested(ValidatorErrorMessageProperties, required=False)
+    
+    kind = fields.Str(required=False)
+    
+    path = fields.Str(required=False)
+    
+
+
+class ValidatorErrorMessageProperties(BaseSchema):
+    # Communication swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    path = fields.Str(required=False)
+    
+
+
+class CastToStringFail(BaseSchema):
+    # Communication swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+    sentry = fields.Str(required=False)
+    
+
+
+class InvalidID(BaseSchema):
+    # Communication swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+    sentry = fields.Str(required=False)
     
 
 

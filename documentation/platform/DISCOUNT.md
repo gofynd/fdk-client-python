@@ -737,6 +737,18 @@ Success
 
  
  
+ #### [DiscountMeta](#DiscountMeta)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | timer | Boolean |  no  |  |
+ | numberOfMinutes | Double |  no  |  |
+
+---
+
+
+ 
+ 
  #### [DiscountItems](#DiscountItems)
 
  | Properties | Type | Nullable | Description |
@@ -746,6 +758,7 @@ Success
  | sellerIdentifier | String? |  yes  |  |
  | discountType | String |  no  |  |
  | value | Double |  no  |  |
+ | discountMeta | [DiscountMeta](#DiscountMeta)? |  yes  |  |
 
 ---
 

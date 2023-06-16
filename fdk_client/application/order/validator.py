@@ -29,7 +29,6 @@ from ..ApplicationModel import BaseSchema
     
     
         
-        
     
     
         
@@ -51,18 +50,6 @@ from ..ApplicationModel import BaseSchema
         
     
     
-        
-    
-    
-        
-    
-    
-        
-        
-        
-        
-        
-        
         
 
 class OrderValidator:
@@ -110,8 +97,6 @@ class OrderValidator:
         
         
         shipment_id = fields.Str(required=False)
-        
-        document_type = fields.Str(required=False)
          
         
     
@@ -162,32 +147,6 @@ class OrderValidator:
         
         
         shipment_id = fields.Str(required=False)
-         
-        
-    
-    class updateShipmentStatus(BaseSchema):
-        
-        
-        shipment_id = fields.Str(required=False)
-         
-        
-    
-    class getProducts(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        status = fields.Int(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        from_date = fields.Str(required=False)
-        
-        to_date = fields.Str(required=False)
-        
-        search_value = fields.Str(required=False)
          
         
     

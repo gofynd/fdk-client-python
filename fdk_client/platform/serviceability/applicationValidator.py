@@ -17,6 +17,10 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
+        
         
         
         
@@ -27,11 +31,6 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
-        
-    
-    
-        
         
         
     
@@ -71,6 +70,15 @@ class ServiceabilityValidator:
          
         
     
+    class getZoneFromPincodeView(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
     class getZonesFromApplicationIdView(BaseSchema):
         
         
@@ -85,35 +93,6 @@ class ServiceabilityValidator:
         zone_id = fields.List(fields.Str(required=False), required=False)
         
         q = fields.Str(required=False)
-         
-        
-    
-    class getZoneFromPincodeView(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class addAppDp(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class deleteAppDp(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        courier_partner_id = fields.Int(required=False)
          
         
     
@@ -153,7 +132,7 @@ class ServiceabilityValidator:
          
         
     
-    class getDpApplicationRules(BaseSchema):
+    class upsertDpApplicationRulePriority(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -162,10 +141,28 @@ class ServiceabilityValidator:
          
         
     
-    class upsertDpApplicationRules(BaseSchema):
+    class getDpApplicationRulePriority(BaseSchema):
         
         
         company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getApplicationServiceabilitySelfShipment(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class patchApplicationServiceabilitySelfShipment(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
          

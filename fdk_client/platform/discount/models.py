@@ -24,6 +24,10 @@ class ListOrCalender(BaseSchema):
     pass
 
 
+class DiscountMeta(BaseSchema):
+    pass
+
+
 class DiscountItems(BaseSchema):
     pass
 
@@ -157,6 +161,16 @@ class ListOrCalender(BaseSchema):
     
 
 
+class DiscountMeta(BaseSchema):
+    # Discount swagger.json
+
+    
+    timer = fields.Boolean(required=False)
+    
+    number_of_minutes = fields.Float(required=False)
+    
+
+
 class DiscountItems(BaseSchema):
     # Discount swagger.json
 
@@ -170,6 +184,8 @@ class DiscountItems(BaseSchema):
     discount_type = fields.Str(required=False)
     
     value = fields.Float(required=False)
+    
+    discount_meta = fields.Nested(DiscountMeta, required=False)
     
 
 

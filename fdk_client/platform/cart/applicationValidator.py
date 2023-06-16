@@ -557,7 +557,7 @@ class CartValidator:
          
         
     
-    class removeCartMetaConfig(BaseSchema):
+    class removeCartDynamicInjection(BaseSchema):
         
         
         company_id = fields.Str(required=False)

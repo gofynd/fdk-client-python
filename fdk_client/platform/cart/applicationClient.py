@@ -739,8 +739,8 @@ class Cart:
 
         return response
     
-    async def removeCartMetaConfig(self, id=None):
-        """Remove cart meta configuration
+    async def removeCartDynamicInjection(self, id=None):
+        """Remove cart dynamic injection
         :param id :  : type string
         """
         payload = {}
@@ -750,11 +750,11 @@ class Cart:
         
 
         # Parameter validation
-        schema = CartValidator.removeCartMetaConfig()
+        schema = CartValidator.removeCartDynamicInjection()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/additional-charge-discount/{id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string","description":"CartMeta mongo extension id for fetching single cart injection data for editing"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string","description":"CartMeta mongo extension id for fetching single cart injection data for editing"},"required":true}]}""", id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/additional-charge-discount/{id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string","description":"Cart dynamic injection mongo extension id for fetching single cart injection data for editing"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string","description":"Cart dynamic injection mongo extension id for fetching single cart injection data for editing"},"required":true}]}""", id=id)
         query_string = await create_query_string(id=id)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -775,7 +775,7 @@ class Cart:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for removeCartMetaConfig")
+                print("Response Validation failed for removeCartDynamicInjection")
                 print(e)
 
         
