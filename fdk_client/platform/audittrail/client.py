@@ -18,7 +18,7 @@ class AuditTrail:
         """
         payload = {}
         
-        if qs:
+        if qs is not None:
             payload["qs"] = qs
         
 
@@ -42,13 +42,14 @@ class AuditTrail:
 
         
 
-        from .models import LogSchemaResponse
-        schema = LogSchemaResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAuditLogs")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import LogSchemaResponse
+            schema = LogSchemaResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAuditLogs")
+                print(e)
 
         
 
@@ -85,13 +86,14 @@ class AuditTrail:
 
         
 
-        from .models import CreateLogResponse
-        schema = CreateLogResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createAuditLog")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateLogResponse
+            schema = CreateLogResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createAuditLog")
+                print(e)
 
         
 
@@ -103,7 +105,7 @@ class AuditTrail:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -127,13 +129,14 @@ class AuditTrail:
 
         
 
-        from .models import LogSchemaResponse
-        schema = LogSchemaResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAuditLog")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import LogSchemaResponse
+            schema = LogSchemaResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAuditLog")
+                print(e)
 
         
 
@@ -165,13 +168,14 @@ class AuditTrail:
 
         
 
-        from .models import EntityTypesResponse
-        schema = EntityTypesResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getEntityTypes")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EntityTypesResponse
+            schema = EntityTypesResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getEntityTypes")
+                print(e)
 
         
 

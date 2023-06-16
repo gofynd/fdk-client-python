@@ -29,8 +29,6 @@ from .cart.applicationClient import Cart
 
 from .rewards.applicationClient import Rewards
 
-from .analytics.applicationClient import Analytics
-
 from .partner.applicationClient import Partner
 
 from .serviceability.applicationClient import Serviceability
@@ -66,14 +64,12 @@ class PlatformApplicationClient:
         
         self.rewards = Rewards(config, applicationId)
         
-        self.analytics = Analytics(config, applicationId)
-        
         self.partner = Partner(config, applicationId)
         
         self.serviceability = Serviceability(config, applicationId)
         
 
-    async def setExtraHeaders(self, header):
+    def setExtraHeaders(self, header):
         if header and type(header) == dict:
             self.config.extraHeaders.append(header)
         else:

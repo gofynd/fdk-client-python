@@ -19,10 +19,10 @@ class Common:
         """
         payload = {}
         
-        if authorization:
+        if authorization is not None:
             payload["authorization"] = authorization
         
-        if query:
+        if query is not None:
             payload["query"] = query
         
 
@@ -46,13 +46,14 @@ class Common:
 
         
 
-        from .models import ApplicationResponse
-        schema = ApplicationResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for searchApplication")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ApplicationResponse
+            schema = ApplicationResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for searchApplication")
+                print(e)
 
         
 
@@ -65,10 +66,10 @@ class Common:
         """
         payload = {}
         
-        if location_type:
+        if location_type is not None:
             payload["location_type"] = location_type
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -92,13 +93,14 @@ class Common:
 
         
 
-        from .models import Locations
-        schema = Locations()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getLocations")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Locations
+            schema = Locations()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getLocations")
+                print(e)
 
         
 

@@ -19,10 +19,10 @@ class Billing:
         """
         payload = {}
         
-        if plan:
+        if plan is not None:
             payload["plan"] = plan
         
-        if coupon_code:
+        if coupon_code is not None:
             payload["coupon_code"] = coupon_code
         
 
@@ -46,13 +46,14 @@ class Billing:
 
         
 
-        from .models import CheckValidityResponse
-        schema = CheckValidityResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for checkCouponValidity")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CheckValidityResponse
+            schema = CheckValidityResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for checkCouponValidity")
+                print(e)
 
         
 
@@ -64,7 +65,7 @@ class Billing:
         """
         payload = {}
         
-        if extension_id:
+        if extension_id is not None:
             payload["extension_id"] = extension_id
         
 
@@ -93,13 +94,14 @@ class Billing:
 
         
 
-        from .models import CreateSubscriptionResponse
-        schema = CreateSubscriptionResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createSubscriptionCharge")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateSubscriptionResponse
+            schema = CreateSubscriptionResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createSubscriptionCharge")
+                print(e)
 
         
 
@@ -112,10 +114,10 @@ class Billing:
         """
         payload = {}
         
-        if extension_id:
+        if extension_id is not None:
             payload["extension_id"] = extension_id
         
-        if subscription_id:
+        if subscription_id is not None:
             payload["subscription_id"] = subscription_id
         
 
@@ -139,13 +141,14 @@ class Billing:
 
         
 
-        from .models import EntitySubscription
-        schema = EntitySubscription()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getSubscriptionCharge")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EntitySubscription
+            schema = EntitySubscription()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSubscriptionCharge")
+                print(e)
 
         
 
@@ -158,10 +161,10 @@ class Billing:
         """
         payload = {}
         
-        if extension_id:
+        if extension_id is not None:
             payload["extension_id"] = extension_id
         
-        if subscription_id:
+        if subscription_id is not None:
             payload["subscription_id"] = subscription_id
         
 
@@ -185,13 +188,14 @@ class Billing:
 
         
 
-        from .models import EntitySubscription
-        schema = EntitySubscription()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for cancelSubscriptionCharge")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EntitySubscription
+            schema = EntitySubscription()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for cancelSubscriptionCharge")
+                print(e)
 
         
 
@@ -203,7 +207,7 @@ class Billing:
         """
         payload = {}
         
-        if extension_id:
+        if extension_id is not None:
             payload["extension_id"] = extension_id
         
 
@@ -232,13 +236,14 @@ class Billing:
 
         
 
-        from .models import CreateOneTimeChargeResponse
-        schema = CreateOneTimeChargeResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createOneTimeCharge")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateOneTimeChargeResponse
+            schema = CreateOneTimeChargeResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createOneTimeCharge")
+                print(e)
 
         
 
@@ -251,10 +256,10 @@ class Billing:
         """
         payload = {}
         
-        if extension_id:
+        if extension_id is not None:
             payload["extension_id"] = extension_id
         
-        if charge_id:
+        if charge_id is not None:
             payload["charge_id"] = charge_id
         
 
@@ -278,13 +283,14 @@ class Billing:
 
         
 
-        from .models import OneTimeChargeEntity
-        schema = OneTimeChargeEntity()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getChargeDetails")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OneTimeChargeEntity
+            schema = OneTimeChargeEntity()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getChargeDetails")
+                print(e)
 
         
 
@@ -316,13 +322,14 @@ class Billing:
 
         
 
-        from .models import Invoices
-        schema = Invoices()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getInvoices")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Invoices
+            schema = Invoices()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getInvoices")
+                print(e)
 
         
 
@@ -334,7 +341,7 @@ class Billing:
         """
         payload = {}
         
-        if invoice_id:
+        if invoice_id is not None:
             payload["invoice_id"] = invoice_id
         
 
@@ -358,13 +365,14 @@ class Billing:
 
         
 
-        from .models import Invoice
-        schema = Invoice()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getInvoiceById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Invoice
+            schema = Invoice()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getInvoiceById")
+                print(e)
 
         
 
@@ -396,13 +404,14 @@ class Billing:
 
         
 
-        from .models import SubscriptionCustomer
-        schema = SubscriptionCustomer()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCustomerDetail")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SubscriptionCustomer
+            schema = SubscriptionCustomer()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCustomerDetail")
+                print(e)
 
         
 
@@ -439,13 +448,14 @@ class Billing:
 
         
 
-        from .models import SubscriptionCustomer
-        schema = SubscriptionCustomer()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for upsertCustomerDetail")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SubscriptionCustomer
+            schema = SubscriptionCustomer()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for upsertCustomerDetail")
+                print(e)
 
         
 
@@ -478,13 +488,14 @@ class Billing:
 
         
 
-        from .models import SubscriptionStatus
-        schema = SubscriptionStatus()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getSubscription")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SubscriptionStatus
+            schema = SubscriptionStatus()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSubscription")
+                print(e)
 
         
 
@@ -516,13 +527,14 @@ class Billing:
 
         
 
-        from .models import SubscriptionLimit
-        schema = SubscriptionLimit()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getFeatureLimitConfig")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SubscriptionLimit
+            schema = SubscriptionLimit()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getFeatureLimitConfig")
+                print(e)
 
         
 
@@ -559,13 +571,14 @@ class Billing:
 
         
 
-        from .models import SubscriptionActivateRes
-        schema = SubscriptionActivateRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for activateSubscriptionPlan")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SubscriptionActivateRes
+            schema = SubscriptionActivateRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for activateSubscriptionPlan")
+                print(e)
 
         
 
@@ -602,13 +615,14 @@ class Billing:
 
         
 
-        from .models import CancelSubscriptionRes
-        schema = CancelSubscriptionRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for cancelSubscriptionPlan")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CancelSubscriptionRes
+            schema = CancelSubscriptionRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for cancelSubscriptionPlan")
+                print(e)
 
         
 

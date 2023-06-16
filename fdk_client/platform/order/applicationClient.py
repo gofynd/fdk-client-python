@@ -19,7 +19,7 @@ class Order:
         """
         payload = {}
         
-        if shipment_id:
+        if shipment_id is not None:
             payload["shipment_id"] = shipment_id
         
 
@@ -43,13 +43,14 @@ class Order:
 
         
 
-        from .models import PlatformShipmentTrack
-        schema = PlatformShipmentTrack()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for trackShipmentPlatform")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PlatformShipmentTrack
+            schema = PlatformShipmentTrack()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for trackShipmentPlatform")
+                print(e)
 
         
 

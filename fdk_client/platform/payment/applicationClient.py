@@ -39,13 +39,14 @@ class Payment:
 
         
 
-        from .models import PaymentGatewayConfigResponse
-        schema = PaymentGatewayConfigResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getBrandPaymentGatewayConfig")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PaymentGatewayConfigResponse
+            schema = PaymentGatewayConfigResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getBrandPaymentGatewayConfig")
+                print(e)
 
         
 
@@ -82,13 +83,14 @@ class Payment:
 
         
 
-        from .models import PaymentGatewayToBeReviewed
-        schema = PaymentGatewayToBeReviewed()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for saveBrandPaymentGatewayConfig")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PaymentGatewayToBeReviewed
+            schema = PaymentGatewayToBeReviewed()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for saveBrandPaymentGatewayConfig")
+                print(e)
 
         
 
@@ -125,13 +127,14 @@ class Payment:
 
         
 
-        from .models import PaymentGatewayToBeReviewed
-        schema = PaymentGatewayToBeReviewed()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateBrandPaymentGatewayConfig")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PaymentGatewayToBeReviewed
+            schema = PaymentGatewayToBeReviewed()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateBrandPaymentGatewayConfig")
+                print(e)
 
         
 
@@ -144,10 +147,10 @@ class Payment:
         """
         payload = {}
         
-        if refresh:
+        if refresh is not None:
             payload["refresh"] = refresh
         
-        if request_type:
+        if request_type is not None:
             payload["request_type"] = request_type
         
 
@@ -171,13 +174,14 @@ class Payment:
 
         
 
-        from .models import PaymentOptionsResponse
-        schema = PaymentOptionsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getPaymentModeRoutes")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PaymentOptionsResponse
+            schema = PaymentOptionsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPaymentModeRoutes")
+                print(e)
 
         
 
@@ -190,10 +194,10 @@ class Payment:
         """
         payload = {}
         
-        if order_id:
+        if order_id is not None:
             payload["order_id"] = order_id
         
-        if request_hash:
+        if request_hash is not None:
             payload["request_hash"] = request_hash
         
 
@@ -217,13 +221,14 @@ class Payment:
 
         
 
-        from .models import RefundAccountResponse
-        schema = RefundAccountResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getBankAccountDetailsOpenAPI")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import RefundAccountResponse
+            schema = RefundAccountResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getBankAccountDetailsOpenAPI")
+                print(e)
 
         
 
@@ -260,13 +265,14 @@ class Payment:
 
         
 
-        from .models import RefundAccountResponse
-        schema = RefundAccountResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for addRefundBankAccountUsingOTP")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import RefundAccountResponse
+            schema = RefundAccountResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for addRefundBankAccountUsingOTP")
+                print(e)
 
         
 
@@ -278,7 +284,7 @@ class Payment:
         """
         payload = {}
         
-        if order_id:
+        if order_id is not None:
             payload["order_id"] = order_id
         
 
@@ -302,13 +308,14 @@ class Payment:
 
         
 
-        from .models import OrderBeneficiaryResponse
-        schema = OrderBeneficiaryResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getUserOrderBeneficiaries")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OrderBeneficiaryResponse
+            schema = OrderBeneficiaryResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getUserOrderBeneficiaries")
+                print(e)
 
         
 
@@ -320,7 +327,7 @@ class Payment:
         """
         payload = {}
         
-        if order_id:
+        if order_id is not None:
             payload["order_id"] = order_id
         
 
@@ -344,13 +351,14 @@ class Payment:
 
         
 
-        from .models import OrderBeneficiaryResponse
-        schema = OrderBeneficiaryResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getUserBeneficiaries")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OrderBeneficiaryResponse
+            schema = OrderBeneficiaryResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getUserBeneficiaries")
+                print(e)
 
         
 
@@ -387,13 +395,14 @@ class Payment:
 
         
 
-        from .models import PaymentConfirmationResponse
-        schema = PaymentConfirmationResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for confirmPayment")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PaymentConfirmationResponse
+            schema = PaymentConfirmationResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for confirmPayment")
+                print(e)
 
         
 
@@ -425,13 +434,14 @@ class Payment:
 
         
 
-        from .models import GetPaymentCodeResponse
-        schema = GetPaymentCodeResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getPaymentCodeOption")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetPaymentCodeResponse
+            schema = GetPaymentCodeResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPaymentCodeOption")
+                print(e)
 
         
 

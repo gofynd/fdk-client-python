@@ -60,7 +60,7 @@ class Catalog:
         """
         payload = {}
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
         # Parameter validation
@@ -84,14 +84,14 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductDetailBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/products/{slug}/", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import ProductDetail
-        schema = ProductDetail()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getProductDetailBySlug")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductDetail
+            schema = ProductDetail()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProductDetailBySlug")
+                print(e)
 
         
 
@@ -104,10 +104,10 @@ class Catalog:
         """
         payload = {}
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
-        if store_id:
+        if store_id is not None:
             payload["store_id"] = store_id
         
         # Parameter validation
@@ -131,14 +131,14 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductSizesBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/products/{slug}/sizes/", slug=slug, store_id=store_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import ProductSizes
-        schema = ProductSizes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getProductSizesBySlug")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductSizes
+            schema = ProductSizes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProductSizesBySlug")
+                print(e)
 
         
 
@@ -150,7 +150,7 @@ class Catalog:
         """
         payload = {}
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
         # Parameter validation
@@ -174,14 +174,14 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductComparisonBySlugs"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/products/compare/", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import ProductsComparisonResponse
-        schema = ProductsComparisonResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getProductComparisonBySlugs")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductsComparisonResponse
+            schema = ProductsComparisonResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProductComparisonBySlugs")
+                print(e)
 
         
 
@@ -193,7 +193,7 @@ class Catalog:
         """
         payload = {}
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
         # Parameter validation
@@ -217,14 +217,14 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getSimilarComparisonProductBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/products/{slug}/similar/compare/", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import ProductCompareResponse
-        schema = ProductCompareResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getSimilarComparisonProductBySlug")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductCompareResponse
+            schema = ProductCompareResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSimilarComparisonProductBySlug")
+                print(e)
 
         
 
@@ -236,7 +236,7 @@ class Catalog:
         """
         payload = {}
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
         # Parameter validation
@@ -260,14 +260,14 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getComparedFrequentlyProductBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/products/{slug}/similar/compared-frequently/", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import ProductFrequentlyComparedSimilarResponse
-        schema = ProductFrequentlyComparedSimilarResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getComparedFrequentlyProductBySlug")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductFrequentlyComparedSimilarResponse
+            schema = ProductFrequentlyComparedSimilarResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getComparedFrequentlyProductBySlug")
+                print(e)
 
         
 
@@ -279,7 +279,7 @@ class Catalog:
         """
         payload = {}
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
         # Parameter validation
@@ -303,14 +303,14 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductVariantsBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/products/{slug}/variants/", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import ProductVariantsResponse
-        schema = ProductVariantsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getProductVariantsBySlug")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductVariantsResponse
+            schema = ProductVariantsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProductVariantsBySlug")
+                print(e)
 
         
 
@@ -326,19 +326,19 @@ class Catalog:
         """
         payload = {}
         
-        if item_id:
+        if item_id is not None:
             payload["item_id"] = item_id
         
-        if alu:
+        if alu is not None:
             payload["alu"] = alu
         
-        if sku_code:
+        if sku_code is not None:
             payload["sku_code"] = sku_code
         
-        if ean:
+        if ean is not None:
             payload["ean"] = ean
         
-        if upc:
+        if upc is not None:
             payload["upc"] = upc
         
         # Parameter validation
@@ -362,14 +362,14 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductStockByIds"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/products/stock-status/", item_id=item_id, alu=alu, sku_code=sku_code, ean=ean, upc=upc), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import ProductStockStatusResponse
-        schema = ProductStockStatusResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getProductStockByIds")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductStockStatusResponse
+            schema = ProductStockStatusResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProductStockByIds")
+                print(e)
 
         
 
@@ -383,13 +383,13 @@ class Catalog:
         """
         payload = {}
         
-        if timestamp:
+        if timestamp is not None:
             payload["timestamp"] = timestamp
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if page_id:
+        if page_id is not None:
             payload["page_id"] = page_id
         
         # Parameter validation
@@ -413,14 +413,14 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductStockForTimeByIds"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/products/stock-status/poll/", timestamp=timestamp, page_size=page_size, page_id=page_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import ProductStockPolling
-        schema = ProductStockPolling()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getProductStockForTimeByIds")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductStockPolling
+            schema = ProductStockPolling()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProductStockForTimeByIds")
+                print(e)
 
         
 
@@ -439,28 +439,28 @@ class Catalog:
         """
         payload = {}
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
-        if f:
+        if f is not None:
             payload["f"] = f
         
-        if filters:
+        if filters is not None:
             payload["filters"] = filters
         
-        if sort_on:
+        if sort_on is not None:
             payload["sort_on"] = sort_on
         
-        if page_id:
+        if page_id is not None:
             payload["page_id"] = page_id
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_type:
+        if page_type is not None:
             payload["page_type"] = page_type
         
         # Parameter validation
@@ -484,14 +484,14 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProducts"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/products/", q=q, f=f, filters=filters, sort_on=sort_on, page_id=page_id, page_size=page_size, page_no=page_no, page_type=page_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import ProductListingResponse
-        schema = ProductListingResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getProducts")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductListingResponse
+            schema = ProductListingResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProducts")
+                print(e)
 
         
 
@@ -505,13 +505,13 @@ class Catalog:
         """
         payload = {}
         
-        if department:
+        if department is not None:
             payload["department"] = department
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
         # Parameter validation
@@ -535,14 +535,14 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getBrands"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/brands/", department=department, page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import BrandListingResponse
-        schema = BrandListingResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getBrands")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BrandListingResponse
+            schema = BrandListingResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getBrands")
+                print(e)
 
         
 
@@ -554,7 +554,7 @@ class Catalog:
         """
         payload = {}
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
         # Parameter validation
@@ -578,14 +578,14 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getBrandDetailBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/brands/{slug}/", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import BrandDetailResponse
-        schema = BrandDetailResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getBrandDetailBySlug")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BrandDetailResponse
+            schema = BrandDetailResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getBrandDetailBySlug")
+                print(e)
 
         
 
@@ -597,7 +597,7 @@ class Catalog:
         """
         payload = {}
         
-        if department:
+        if department is not None:
             payload["department"] = department
         
         # Parameter validation
@@ -621,14 +621,14 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCategories"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/categories/", department=department), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import CategoryListingResponse
-        schema = CategoryListingResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCategories")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CategoryListingResponse
+            schema = CategoryListingResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCategories")
+                print(e)
 
         
 
@@ -640,7 +640,7 @@ class Catalog:
         """
         payload = {}
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
         # Parameter validation
@@ -664,14 +664,14 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCategoryDetailBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/categories/{slug}/", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import CategoryMetaResponse
-        schema = CategoryMetaResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCategoryDetailBySlug")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CategoryMetaResponse
+            schema = CategoryMetaResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCategoryDetailBySlug")
+                print(e)
 
         
 
@@ -685,13 +685,13 @@ class Catalog:
         """
         payload = {}
         
-        if sort_on:
+        if sort_on is not None:
             payload["sort_on"] = sort_on
         
-        if page_id:
+        if page_id is not None:
             payload["page_id"] = page_id
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
         # Parameter validation
@@ -715,14 +715,14 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getHomeProducts"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/home/listing/", sort_on=sort_on, page_id=page_id, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import HomeListingResponse
-        schema = HomeListingResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getHomeProducts")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import HomeListingResponse
+            schema = HomeListingResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getHomeProducts")
+                print(e)
 
         
 
@@ -754,14 +754,14 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getDepartments"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/departments/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import DepartmentResponse
-        schema = DepartmentResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getDepartments")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DepartmentResponse
+            schema = DepartmentResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getDepartments")
+                print(e)
 
         
 
@@ -773,7 +773,7 @@ class Catalog:
         """
         payload = {}
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
         # Parameter validation
@@ -797,14 +797,14 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getSearchResults"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/auto-complete/", q=q), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import AutoCompleteResponse
-        schema = AutoCompleteResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getSearchResults")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AutoCompleteResponse
+            schema = AutoCompleteResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSearchResults")
+                print(e)
 
         
 
@@ -818,13 +818,13 @@ class Catalog:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if tag:
+        if tag is not None:
             payload["tag"] = tag
         
         # Parameter validation
@@ -848,14 +848,14 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCollections"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/collections/", page_no=page_no, page_size=page_size, tag=tag), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import GetCollectionListingResponse
-        schema = GetCollectionListingResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCollections")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetCollectionListingResponse
+            schema = GetCollectionListingResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCollections")
+                print(e)
 
         
 
@@ -872,22 +872,22 @@ class Catalog:
         """
         payload = {}
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
-        if f:
+        if f is not None:
             payload["f"] = f
         
-        if filters:
+        if filters is not None:
             payload["filters"] = filters
         
-        if sort_on:
+        if sort_on is not None:
             payload["sort_on"] = sort_on
         
-        if page_id:
+        if page_id is not None:
             payload["page_id"] = page_id
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
         # Parameter validation
@@ -911,14 +911,14 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCollectionItemsBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/collections/{slug}/items/", slug=slug, f=f, filters=filters, sort_on=sort_on, page_id=page_id, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import ProductListingResponse
-        schema = ProductListingResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCollectionItemsBySlug")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductListingResponse
+            schema = ProductListingResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCollectionItemsBySlug")
+                print(e)
 
         
 
@@ -930,7 +930,7 @@ class Catalog:
         """
         payload = {}
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
         # Parameter validation
@@ -954,14 +954,14 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCollectionDetailBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/collections/{slug}/", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import CollectionDetailResponse
-        schema = CollectionDetailResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCollectionDetailBySlug")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CollectionDetailResponse
+            schema = CollectionDetailResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCollectionDetailBySlug")
+                print(e)
 
         
 
@@ -975,13 +975,13 @@ class Catalog:
         """
         payload = {}
         
-        if collection_type:
+        if collection_type is not None:
             payload["collection_type"] = collection_type
         
-        if page_id:
+        if page_id is not None:
             payload["page_id"] = page_id
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
         # Parameter validation
@@ -1005,14 +1005,14 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getFollowedListing"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/follow/{collection_type}/", collection_type=collection_type, page_id=page_id, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import GetFollowListingResponse
-        schema = GetFollowListingResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getFollowedListing")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetFollowListingResponse
+            schema = GetFollowListingResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getFollowedListing")
+                print(e)
 
         
 
@@ -1025,10 +1025,10 @@ class Catalog:
         """
         payload = {}
         
-        if collection_type:
+        if collection_type is not None:
             payload["collection_type"] = collection_type
         
-        if collection_id:
+        if collection_id is not None:
             payload["collection_id"] = collection_id
         
         # Parameter validation
@@ -1052,14 +1052,14 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["unfollowById"]).netloc, "delete", await create_url_without_domain("/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/", collection_type=collection_type, collection_id=collection_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import FollowPostResponse
-        schema = FollowPostResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for unfollowById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import FollowPostResponse
+            schema = FollowPostResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for unfollowById")
+                print(e)
 
         
 
@@ -1072,10 +1072,10 @@ class Catalog:
         """
         payload = {}
         
-        if collection_type:
+        if collection_type is not None:
             payload["collection_type"] = collection_type
         
-        if collection_id:
+        if collection_id is not None:
             payload["collection_id"] = collection_id
         
         # Parameter validation
@@ -1099,14 +1099,14 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["followById"]).netloc, "post", await create_url_without_domain("/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/", collection_type=collection_type, collection_id=collection_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import FollowPostResponse
-        schema = FollowPostResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for followById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import FollowPostResponse
+            schema = FollowPostResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for followById")
+                print(e)
 
         
 
@@ -1119,10 +1119,10 @@ class Catalog:
         """
         payload = {}
         
-        if collection_type:
+        if collection_type is not None:
             payload["collection_type"] = collection_type
         
-        if collection_id:
+        if collection_id is not None:
             payload["collection_id"] = collection_id
         
         # Parameter validation
@@ -1146,14 +1146,14 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getFollowerCountById"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/count/", collection_type=collection_type, collection_id=collection_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import FollowerCountResponse
-        schema = FollowerCountResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getFollowerCountById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import FollowerCountResponse
+            schema = FollowerCountResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getFollowerCountById")
+                print(e)
 
         
 
@@ -1165,7 +1165,7 @@ class Catalog:
         """
         payload = {}
         
-        if collection_type:
+        if collection_type is not None:
             payload["collection_type"] = collection_type
         
         # Parameter validation
@@ -1189,14 +1189,14 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getFollowIds"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/follow/ids/", collection_type=collection_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import FollowIdsResponse
-        schema = FollowIdsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getFollowIds")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import FollowIdsResponse
+            schema = FollowIdsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getFollowIds")
+                print(e)
 
         
 
@@ -1214,25 +1214,25 @@ class Catalog:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
-        if city:
+        if city is not None:
             payload["city"] = city
         
-        if range:
+        if range is not None:
             payload["range"] = range
         
-        if latitude:
+        if latitude is not None:
             payload["latitude"] = latitude
         
-        if longitude:
+        if longitude is not None:
             payload["longitude"] = longitude
         
         # Parameter validation
@@ -1256,14 +1256,14 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getStores"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/locations/", page_no=page_no, page_size=page_size, q=q, city=city, range=range, latitude=latitude, longitude=longitude), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import StoreListingResponse
-        schema = StoreListingResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getStores")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import StoreListingResponse
+            schema = StoreListingResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getStores")
+                print(e)
 
         
 
@@ -1281,25 +1281,25 @@ class Catalog:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
-        if city:
+        if city is not None:
             payload["city"] = city
         
-        if range:
+        if range is not None:
             payload["range"] = range
         
-        if latitude:
+        if latitude is not None:
             payload["latitude"] = latitude
         
-        if longitude:
+        if longitude is not None:
             payload["longitude"] = longitude
         
         # Parameter validation
@@ -1323,14 +1323,14 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getInStockLocations"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/in-stock/locations/", page_no=page_no, page_size=page_size, q=q, city=city, range=range, latitude=latitude, longitude=longitude), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import ApplicationStoreListing
-        schema = ApplicationStoreListing()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getInStockLocations")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ApplicationStoreListing
+            schema = ApplicationStoreListing()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getInStockLocations")
+                print(e)
 
         
 
@@ -1342,7 +1342,7 @@ class Catalog:
         """
         payload = {}
         
-        if location_id:
+        if location_id is not None:
             payload["location_id"] = location_id
         
         # Parameter validation
@@ -1366,14 +1366,14 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getLocationDetailsById"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/locations/{location_id}/", location_id=location_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import StoreDetails
-        schema = StoreDetails()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getLocationDetailsById")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import StoreDetails
+            schema = StoreDetails()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getLocationDetailsById")
+                print(e)
 
         
 
@@ -1386,10 +1386,10 @@ class Catalog:
         """
         payload = {}
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
         # Parameter validation
@@ -1413,14 +1413,14 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductBundlesBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/product-grouping/", slug=slug, id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import ProductBundle
-        schema = ProductBundle()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getProductBundlesBySlug")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductBundle
+            schema = ProductBundle()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProductBundlesBySlug")
+                print(e)
 
         
 
@@ -1436,19 +1436,19 @@ class Catalog:
         """
         payload = {}
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
-        if size:
+        if size is not None:
             payload["size"] = size
         
-        if store_id:
+        if store_id is not None:
             payload["store_id"] = store_id
         
-        if pincode:
+        if pincode is not None:
             payload["pincode"] = pincode
         
-        if moq:
+        if moq is not None:
             payload["moq"] = moq
         
         # Parameter validation
@@ -1472,14 +1472,14 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductPriceBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v3.0/products/{slug}/sizes/{size}/price/", slug=slug, size=size, store_id=store_id, pincode=pincode, moq=moq), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import ProductSizePriceResponseV3
-        schema = ProductSizePriceResponseV3()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getProductPriceBySlug")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductSizePriceResponseV3
+            schema = ProductSizePriceResponseV3()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProductPriceBySlug")
+                print(e)
 
         
 
@@ -1496,22 +1496,22 @@ class Catalog:
         """
         payload = {}
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
-        if size:
+        if size is not None:
             payload["size"] = size
         
-        if pincode:
+        if pincode is not None:
             payload["pincode"] = pincode
         
-        if strategy:
+        if strategy is not None:
             payload["strategy"] = strategy
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
         # Parameter validation
@@ -1535,14 +1535,14 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductSellersBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v3.0/products/{slug}/sizes/{size}/sellers/", slug=slug, size=size, pincode=pincode, strategy=strategy, page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import ProductSizeSellersResponseV3
-        schema = ProductSizeSellersResponseV3()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getProductSellersBySlug")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductSizeSellersResponseV3
+            schema = ProductSizeSellersResponseV3()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProductSellersBySlug")
+                print(e)
 
         
 

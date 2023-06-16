@@ -65,7 +65,7 @@ class User:
         """
         payload = {}
         
-        if platform:
+        if platform is not None:
             payload["platform"] = platform
         
         # Parameter validation
@@ -94,14 +94,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["loginWithFacebook"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/login/facebook-token", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import AuthSuccess
-        schema = AuthSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for loginWithFacebook")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AuthSuccess
+            schema = AuthSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for loginWithFacebook")
+                print(e)
 
         
 
@@ -113,7 +113,7 @@ class User:
         """
         payload = {}
         
-        if platform:
+        if platform is not None:
             payload["platform"] = platform
         
         # Parameter validation
@@ -142,14 +142,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["loginWithGoogle"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/login/google-token", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import AuthSuccess
-        schema = AuthSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for loginWithGoogle")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AuthSuccess
+            schema = AuthSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for loginWithGoogle")
+                print(e)
 
         
 
@@ -161,7 +161,7 @@ class User:
         """
         payload = {}
         
-        if platform:
+        if platform is not None:
             payload["platform"] = platform
         
         # Parameter validation
@@ -190,14 +190,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["loginWithGoogleAndroid"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/login/google-android", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import AuthSuccess
-        schema = AuthSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for loginWithGoogleAndroid")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AuthSuccess
+            schema = AuthSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for loginWithGoogleAndroid")
+                print(e)
 
         
 
@@ -209,7 +209,7 @@ class User:
         """
         payload = {}
         
-        if platform:
+        if platform is not None:
             payload["platform"] = platform
         
         # Parameter validation
@@ -238,14 +238,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["loginWithGoogleIOS"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/login/google-ios", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import AuthSuccess
-        schema = AuthSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for loginWithGoogleIOS")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AuthSuccess
+            schema = AuthSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for loginWithGoogleIOS")
+                print(e)
 
         
 
@@ -257,7 +257,7 @@ class User:
         """
         payload = {}
         
-        if platform:
+        if platform is not None:
             payload["platform"] = platform
         
         # Parameter validation
@@ -286,14 +286,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["loginWithAppleIOS"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/login/apple-ios", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import AuthSuccess
-        schema = AuthSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for loginWithAppleIOS")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AuthSuccess
+            schema = AuthSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for loginWithAppleIOS")
+                print(e)
 
         
 
@@ -305,7 +305,7 @@ class User:
         """
         payload = {}
         
-        if platform:
+        if platform is not None:
             payload["platform"] = platform
         
         # Parameter validation
@@ -334,14 +334,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["loginWithOTP"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/login/otp", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import SendOtpResponse
-        schema = SendOtpResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for loginWithOTP")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SendOtpResponse
+            schema = SendOtpResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for loginWithOTP")
+                print(e)
 
         
 
@@ -378,14 +378,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["loginWithEmailAndPassword"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/login/password", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import LoginSuccess
-        schema = LoginSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for loginWithEmailAndPassword")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import LoginSuccess
+            schema = LoginSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for loginWithEmailAndPassword")
+                print(e)
 
         
 
@@ -397,7 +397,7 @@ class User:
         """
         payload = {}
         
-        if platform:
+        if platform is not None:
             payload["platform"] = platform
         
         # Parameter validation
@@ -426,14 +426,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["sendResetPasswordEmail"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/login/password/reset", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import ResetPasswordSuccess
-        schema = ResetPasswordSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for sendResetPasswordEmail")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResetPasswordSuccess
+            schema = ResetPasswordSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for sendResetPasswordEmail")
+                print(e)
 
         
 
@@ -445,7 +445,7 @@ class User:
         """
         payload = {}
         
-        if platform:
+        if platform is not None:
             payload["platform"] = platform
         
         # Parameter validation
@@ -474,14 +474,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["sendResetPasswordMobile"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/login/password/mobile/reset", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import ResetPasswordSuccess
-        schema = ResetPasswordSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for sendResetPasswordMobile")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResetPasswordSuccess
+            schema = ResetPasswordSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for sendResetPasswordMobile")
+                print(e)
 
         
 
@@ -518,14 +518,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["forgotPassword"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/login/password/reset/forgot", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import LoginSuccess
-        schema = LoginSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for forgotPassword")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import LoginSuccess
+            schema = LoginSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for forgotPassword")
+                print(e)
 
         
 
@@ -562,14 +562,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["sendResetToken"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/login/password/reset/token", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import ResetPasswordSuccess
-        schema = ResetPasswordSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for sendResetToken")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResetPasswordSuccess
+            schema = ResetPasswordSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for sendResetToken")
+                print(e)
 
         
 
@@ -606,14 +606,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["loginWithToken"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/login/token", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import LoginSuccess
-        schema = LoginSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for loginWithToken")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import LoginSuccess
+            schema = LoginSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for loginWithToken")
+                print(e)
 
         
 
@@ -625,7 +625,7 @@ class User:
         """
         payload = {}
         
-        if platform:
+        if platform is not None:
             payload["platform"] = platform
         
         # Parameter validation
@@ -654,14 +654,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["registerWithForm"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/register/form", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import RegisterFormSuccess
-        schema = RegisterFormSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for registerWithForm")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import RegisterFormSuccess
+            schema = RegisterFormSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for registerWithForm")
+                print(e)
 
         
 
@@ -698,14 +698,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["verifyEmail"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/verify/email", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import VerifyEmailSuccess
-        schema = VerifyEmailSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for verifyEmail")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import VerifyEmailSuccess
+            schema = VerifyEmailSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for verifyEmail")
+                print(e)
 
         
 
@@ -742,14 +742,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["verifyMobile"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/verify/mobile", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import VerifyEmailSuccess
-        schema = VerifyEmailSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for verifyMobile")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import VerifyEmailSuccess
+            schema = VerifyEmailSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for verifyMobile")
+                print(e)
 
         
 
@@ -781,14 +781,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["hasPassword"]).netloc, "get", await create_url_without_domain("/service/application/user/authentication/v1.0/has-password", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import HasPasswordSuccess
-        schema = HasPasswordSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for hasPassword")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import HasPasswordSuccess
+            schema = HasPasswordSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for hasPassword")
+                print(e)
 
         
 
@@ -825,14 +825,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["updatePassword"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/password", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import VerifyEmailSuccess
-        schema = VerifyEmailSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updatePassword")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import VerifyEmailSuccess
+            schema = VerifyEmailSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updatePassword")
+                print(e)
 
         
 
@@ -869,14 +869,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["deleteUser"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/delete", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import DeleteUserSuccess
-        schema = DeleteUserSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteUser")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DeleteUserSuccess
+            schema = DeleteUserSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteUser")
+                print(e)
 
         
 
@@ -908,14 +908,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["logout"]).netloc, "get", await create_url_without_domain("/service/application/user/authentication/v1.0/logout", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import LogoutSuccess
-        schema = LogoutSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for logout")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import LogoutSuccess
+            schema = LogoutSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for logout")
+                print(e)
 
         
 
@@ -927,7 +927,7 @@ class User:
         """
         payload = {}
         
-        if platform:
+        if platform is not None:
             payload["platform"] = platform
         
         # Parameter validation
@@ -956,14 +956,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["sendOTPOnMobile"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/otp/mobile/send", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import OtpSuccess
-        schema = OtpSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for sendOTPOnMobile")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OtpSuccess
+            schema = OtpSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for sendOTPOnMobile")
+                print(e)
 
         
 
@@ -975,7 +975,7 @@ class User:
         """
         payload = {}
         
-        if platform:
+        if platform is not None:
             payload["platform"] = platform
         
         # Parameter validation
@@ -1004,14 +1004,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["verifyMobileOTP"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/otp/mobile/verify", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import VerifyOtpSuccess
-        schema = VerifyOtpSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for verifyMobileOTP")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import VerifyOtpSuccess
+            schema = VerifyOtpSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for verifyMobileOTP")
+                print(e)
 
         
 
@@ -1023,7 +1023,7 @@ class User:
         """
         payload = {}
         
-        if platform:
+        if platform is not None:
             payload["platform"] = platform
         
         # Parameter validation
@@ -1052,14 +1052,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["sendOTPOnEmail"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/otp/email/send", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import EmailOtpSuccess
-        schema = EmailOtpSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for sendOTPOnEmail")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EmailOtpSuccess
+            schema = EmailOtpSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for sendOTPOnEmail")
+                print(e)
 
         
 
@@ -1071,7 +1071,7 @@ class User:
         """
         payload = {}
         
-        if platform:
+        if platform is not None:
             payload["platform"] = platform
         
         # Parameter validation
@@ -1100,14 +1100,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["verifyEmailOTP"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/otp/email/verify", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import VerifyOtpSuccess
-        schema = VerifyOtpSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for verifyEmailOTP")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import VerifyOtpSuccess
+            schema = VerifyOtpSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for verifyEmailOTP")
+                print(e)
 
         
 
@@ -1139,14 +1139,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getLoggedInUser"]).netloc, "get", await create_url_without_domain("/service/application/user/authentication/v1.0/session", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import UserObjectSchema
-        schema = UserObjectSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getLoggedInUser")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UserObjectSchema
+            schema = UserObjectSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getLoggedInUser")
+                print(e)
 
         
 
@@ -1178,14 +1178,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getListOfActiveSessions"]).netloc, "get", await create_url_without_domain("/service/application/user/authentication/v1.0/sessions", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import SessionListSuccess
-        schema = SessionListSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getListOfActiveSessions")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SessionListSuccess
+            schema = SessionListSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getListOfActiveSessions")
+                print(e)
 
         
 
@@ -1197,7 +1197,7 @@ class User:
         """
         payload = {}
         
-        if name:
+        if name is not None:
             payload["name"] = name
         
         # Parameter validation
@@ -1221,14 +1221,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPlatformConfig"]).netloc, "get", await create_url_without_domain("/service/application/user/platform/v1.0/config", name=name), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import PlatformSchema
-        schema = PlatformSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getPlatformConfig")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PlatformSchema
+            schema = PlatformSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPlatformConfig")
+                print(e)
 
         
 
@@ -1240,7 +1240,7 @@ class User:
         """
         payload = {}
         
-        if platform:
+        if platform is not None:
             payload["platform"] = platform
         
         # Parameter validation
@@ -1269,14 +1269,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["updateProfile"]).netloc, "post", await create_url_without_domain("/service/application/user/profile/v1.0/detail", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import ProfileEditSuccess
-        schema = ProfileEditSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateProfile")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProfileEditSuccess
+            schema = ProfileEditSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateProfile")
+                print(e)
 
         
 
@@ -1288,7 +1288,7 @@ class User:
         """
         payload = {}
         
-        if platform:
+        if platform is not None:
             payload["platform"] = platform
         
         # Parameter validation
@@ -1317,14 +1317,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["addMobileNumber"]).netloc, "put", await create_url_without_domain("/service/application/user/profile/v1.0/mobile", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import VerifyMobileOTPSuccess
-        schema = VerifyMobileOTPSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for addMobileNumber")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import VerifyMobileOTPSuccess
+            schema = VerifyMobileOTPSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for addMobileNumber")
+                print(e)
 
         
 
@@ -1341,22 +1341,22 @@ class User:
         """
         payload = {}
         
-        if platform:
+        if platform is not None:
             payload["platform"] = platform
         
-        if active:
+        if active is not None:
             payload["active"] = active
         
-        if primary:
+        if primary is not None:
             payload["primary"] = primary
         
-        if verified:
+        if verified is not None:
             payload["verified"] = verified
         
-        if country_code:
+        if country_code is not None:
             payload["country_code"] = country_code
         
-        if phone:
+        if phone is not None:
             payload["phone"] = phone
         
         # Parameter validation
@@ -1380,14 +1380,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["deleteMobileNumber"]).netloc, "delete", await create_url_without_domain("/service/application/user/profile/v1.0/mobile", platform=platform, active=active, primary=primary, verified=verified, country_code=country_code, phone=phone), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import LoginSuccess
-        schema = LoginSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteMobileNumber")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import LoginSuccess
+            schema = LoginSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteMobileNumber")
+                print(e)
 
         
 
@@ -1424,14 +1424,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["setMobileNumberAsPrimary"]).netloc, "post", await create_url_without_domain("/service/application/user/profile/v1.0/mobile/primary", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import LoginSuccess
-        schema = LoginSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for setMobileNumberAsPrimary")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import LoginSuccess
+            schema = LoginSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for setMobileNumberAsPrimary")
+                print(e)
 
         
 
@@ -1443,7 +1443,7 @@ class User:
         """
         payload = {}
         
-        if platform:
+        if platform is not None:
             payload["platform"] = platform
         
         # Parameter validation
@@ -1472,14 +1472,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["sendVerificationLinkToMobile"]).netloc, "post", await create_url_without_domain("/service/application/user/profile/v1.0/mobile/link/send", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import SendMobileVerifyLinkSuccess
-        schema = SendMobileVerifyLinkSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for sendVerificationLinkToMobile")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SendMobileVerifyLinkSuccess
+            schema = SendMobileVerifyLinkSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for sendVerificationLinkToMobile")
+                print(e)
 
         
 
@@ -1491,7 +1491,7 @@ class User:
         """
         payload = {}
         
-        if platform:
+        if platform is not None:
             payload["platform"] = platform
         
         # Parameter validation
@@ -1520,14 +1520,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["addEmail"]).netloc, "put", await create_url_without_domain("/service/application/user/profile/v1.0/email", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import VerifyEmailOTPSuccess
-        schema = VerifyEmailOTPSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for addEmail")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import VerifyEmailOTPSuccess
+            schema = VerifyEmailOTPSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for addEmail")
+                print(e)
 
         
 
@@ -1543,19 +1543,19 @@ class User:
         """
         payload = {}
         
-        if platform:
+        if platform is not None:
             payload["platform"] = platform
         
-        if active:
+        if active is not None:
             payload["active"] = active
         
-        if primary:
+        if primary is not None:
             payload["primary"] = primary
         
-        if verified:
+        if verified is not None:
             payload["verified"] = verified
         
-        if email:
+        if email is not None:
             payload["email"] = email
         
         # Parameter validation
@@ -1579,14 +1579,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["deleteEmail"]).netloc, "delete", await create_url_without_domain("/service/application/user/profile/v1.0/email", platform=platform, active=active, primary=primary, verified=verified, email=email), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import LoginSuccess
-        schema = LoginSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteEmail")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import LoginSuccess
+            schema = LoginSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteEmail")
+                print(e)
 
         
 
@@ -1623,14 +1623,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["setEmailAsPrimary"]).netloc, "post", await create_url_without_domain("/service/application/user/profile/v1.0/email/primary", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import LoginSuccess
-        schema = LoginSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for setEmailAsPrimary")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import LoginSuccess
+            schema = LoginSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for setEmailAsPrimary")
+                print(e)
 
         
 
@@ -1642,7 +1642,7 @@ class User:
         """
         payload = {}
         
-        if platform:
+        if platform is not None:
             payload["platform"] = platform
         
         # Parameter validation
@@ -1671,14 +1671,14 @@ class User:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["sendVerificationLinkToEmail"]).netloc, "post", await create_url_without_domain("/service/application/user/profile/v1.0/email/link/send", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import SendEmailVerifyLinkSuccess
-        schema = SendEmailVerifyLinkSuccess()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for sendVerificationLinkToEmail")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SendEmailVerifyLinkSuccess
+            schema = SendEmailVerifyLinkSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for sendVerificationLinkToEmail")
+                print(e)
 
         
 
