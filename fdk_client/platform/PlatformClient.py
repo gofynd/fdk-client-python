@@ -37,7 +37,7 @@ from .serviceability.client import Serviceability
 
 class PlatformClient:
     def __init__(self, config):
-        self.config = config
+        self._conf = config
         
         self.common = Common(config)
         
@@ -71,10 +71,10 @@ class PlatformClient:
         
 
     def application(self, applicationId):
-        return PlatformApplicationClient(applicationId, self.config)
+        return PlatformApplicationClient(applicationId, self._conf)
 
-    def setExtraHeaders(self, header):
+    async def setExtraHeaders(self, header):
         if header and type(header) == dict:
-            self.config.extraHeaders.append(header)
+            self._conf.extraHeaders.append(header)
         else:
             raise FDKClientValidationError("Context value should be an dict")
