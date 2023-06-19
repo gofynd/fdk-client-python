@@ -151,6 +151,21 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
     
     
         
@@ -464,7 +479,18 @@ class ThemeValidator:
          
         
     
-    class applyThemeV2(BaseSchema):
+    class deleteThemeV2(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        theme_id = fields.Str(required=False)
+         
+        
+    
+    class addThemeToApplicationV2(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -474,6 +500,28 @@ class ThemeValidator:
         
     
     class updateThemeNameV2(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        theme_id = fields.Str(required=False)
+         
+        
+    
+    class applyThemeV2(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        theme_id = fields.Str(required=False)
+         
+        
+    
+    class duplicateThemeV2(BaseSchema):
         
         
         company_id = fields.Int(required=False)

@@ -49,14 +49,6 @@ from ..ApplicationModel import BaseSchema
     
     
     
-    
-    
-        
-        
-    
-    
-    
-    
         
     
     
@@ -69,38 +61,6 @@ from ..ApplicationModel import BaseSchema
     
     
     
-    
-    
-        
-    
-    
-    
-    
-    
-        
-    
-    
-        
-    
-    
-    
-    
-    
-        
-    
-    
-        
-        
-    
-    
-        
-    
-    
-    
-        
-    
-    
-        
 
 class PaymentValidator:
     
@@ -203,35 +163,6 @@ class PaymentValidator:
         pass 
         
     
-    class getEpaylaterBannerDetails(BaseSchema):
-        
-        pass 
-        
-    
-    class resendOrCancelPayment(BaseSchema):
-        
-        pass 
-        
-    
-    class renderHTML(BaseSchema):
-        
-        pass 
-        
-    
-    class validateVPA(BaseSchema):
-        
-        pass 
-        
-    
-    class cardDetails(BaseSchema):
-        
-        
-        card_info = fields.Str(required=False)
-        
-        aggregator = fields.Str(required=False)
-         
-        
-    
     class getActiveRefundTransferModes(BaseSchema):
         
         pass 
@@ -286,99 +217,6 @@ class PaymentValidator:
     class updateDefaultBeneficiary(BaseSchema):
         
         pass 
-        
-    
-    class getPaymentLink(BaseSchema):
-        
-        
-        payment_link_id = fields.Str(required=False)
-         
-        
-    
-    class createPaymentLink(BaseSchema):
-        
-        pass 
-        
-    
-    class resendPaymentLink(BaseSchema):
-        
-        pass 
-        
-    
-    class cancelPaymentLink(BaseSchema):
-        
-        pass 
-        
-    
-    class getPaymentModeRoutesPaymentLink(BaseSchema):
-        
-        
-        payment_link_id = fields.Str(required=False)
-         
-        
-    
-    class pollingPaymentLink(BaseSchema):
-        
-        
-        payment_link_id = fields.Str(required=False)
-         
-        
-    
-    class createOrderHandlerPaymentLink(BaseSchema):
-        
-        pass 
-        
-    
-    class initialisePaymentPaymentLink(BaseSchema):
-        
-        pass 
-        
-    
-    class checkAndUpdatePaymentStatusPaymentLink(BaseSchema):
-        
-        pass 
-        
-    
-    class customerCreditSummary(BaseSchema):
-        
-        
-        aggregator = fields.Str(required=False)
-         
-        
-    
-    class redirectToAggregator(BaseSchema):
-        
-        
-        source = fields.Str(required=False)
-        
-        aggregator = fields.Str(required=False)
-         
-        
-    
-    class checkCredit(BaseSchema):
-        
-        
-        aggregator = fields.Str(required=False)
-         
-        
-    
-    class customerOnboard(BaseSchema):
-        
-        pass 
-        
-    
-    class outstandingOrderDetails(BaseSchema):
-        
-        
-        aggregator = fields.Str(required=False)
-         
-        
-    
-    class paidOrderDetails(BaseSchema):
-        
-        
-        aggregator = fields.Str(required=False)
-         
         
     
     

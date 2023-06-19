@@ -128,6 +128,34 @@ class Release(BaseSchema):
     pass
 
 
+class ThemeSlugResponse(BaseSchema):
+    pass
+
+
+class Organization(BaseSchema):
+    pass
+
+
+class OrganizationMeta(BaseSchema):
+    pass
+
+
+class ThemeCreator(BaseSchema):
+    pass
+
+
+class PhoneNumber(BaseSchema):
+    pass
+
+
+class Email(BaseSchema):
+    pass
+
+
+class ThemeAndUserDetailsResponse(BaseSchema):
+    pass
+
+
 class AllAvailablePageSchema(BaseSchema):
     pass
 
@@ -908,6 +936,100 @@ class Release(BaseSchema):
     version = fields.Str(required=False)
     
     notes = fields.Str(required=False)
+    
+
+
+class ThemeSlugResponse(BaseSchema):
+    # Theme swagger.json
+
+    
+    theme = fields.Nested(MarketplaceTheme, required=False)
+    
+    organization = fields.Nested(Organization, required=False)
+    
+    user = fields.List(fields.Nested(ThemeCreator, required=False), required=False)
+    
+
+
+class Organization(BaseSchema):
+    # Theme swagger.json
+
+    
+    meta = fields.Nested(OrganizationMeta, required=False)
+    
+    _id = fields.Str(required=False)
+    
+
+
+class OrganizationMeta(BaseSchema):
+    # Theme swagger.json
+
+    
+    ecomm_platform_used = fields.List(fields.Str(required=False), required=False)
+    
+    goals = fields.List(fields.Str(required=False), required=False)
+    
+
+
+class ThemeCreator(BaseSchema):
+    # Theme swagger.json
+
+    
+    _id = fields.Str(required=False)
+    
+    gender = fields.Str(required=False)
+    
+    account_type = fields.Str(required=False)
+    
+    active = fields.Boolean(required=False)
+    
+    first_name = fields.Str(required=False)
+    
+    last_name = fields.Str(required=False)
+    
+    phone_numbers = fields.List(fields.Nested(PhoneNumber, required=False), required=False)
+    
+    emails = fields.List(fields.Nested(Email, required=False), required=False)
+    
+
+
+class PhoneNumber(BaseSchema):
+    # Theme swagger.json
+
+    
+    active = fields.Boolean(required=False)
+    
+    primary = fields.Boolean(required=False)
+    
+    verified = fields.Boolean(required=False)
+    
+    phone = fields.Str(required=False)
+    
+    country_code = fields.Int(required=False)
+    
+
+
+class Email(BaseSchema):
+    # Theme swagger.json
+
+    
+    active = fields.Boolean(required=False)
+    
+    primary = fields.Boolean(required=False)
+    
+    verified = fields.Boolean(required=False)
+    
+    email = fields.Str(required=False)
+    
+
+
+class ThemeAndUserDetailsResponse(BaseSchema):
+    # Theme swagger.json
+
+    
+    themes = fields.List(fields.Nested(MarketplaceTheme, required=False), required=False)
+    
+    user = fields.List(fields.Nested(ThemeCreator, required=False), required=False)
     
 
 

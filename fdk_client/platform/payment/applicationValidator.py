@@ -21,8 +21,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
-        
     
     
         
@@ -41,40 +39,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-    
-    
         
         
     
@@ -103,6 +67,15 @@ class PaymentValidator:
          
         
     
+    class updateBrandPaymentGatewayConfig(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
     class getPaymentModeRoutes(BaseSchema):
         
         
@@ -116,20 +89,7 @@ class PaymentValidator:
          
         
     
-    class getBankAccountDetailsOpenAPI(BaseSchema):
-        
-        
-        order_id = fields.Str(required=False)
-        
-        request_hash = fields.Str(required=False)
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class addRefundBankAccountUsingOTP(BaseSchema):
+    class addBeneficiaryDetails(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -161,81 +121,6 @@ class PaymentValidator:
         
     
     class confirmPayment(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getUserCODlimitRoutes(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        merchant_user_id = fields.Str(required=False)
-        
-        mobile_no = fields.Str(required=False)
-         
-        
-    
-    class setUserCODlimitRoutes(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class oauthGetUrl(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        aggregator = fields.Str(required=False)
-        
-        success_redirect_url = fields.Str(required=False)
-        
-        failure_redirect_url = fields.Str(required=False)
-         
-        
-    
-    class revokeOauthToken(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        aggregator = fields.Str(required=False)
-         
-        
-    
-    class repaymentDetails(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class merchantOnBoarding(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getPaymentCodeOption(BaseSchema):
         
         
         company_id = fields.Int(required=False)

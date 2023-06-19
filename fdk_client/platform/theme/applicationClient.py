@@ -1216,14 +1216,57 @@ class Theme:
 
         return response
     
-    async def applyThemeV2(self, body=""):
+    async def deleteThemeV2(self, theme_id=None):
+        """This endpoint is used to delete a theme from the specified company and application.
+        :param theme_id : The ID of the theme to be deleted. : type string
+        """
+        payload = {}
+        
+        if theme_id is not None:
+            payload["theme_id"] = theme_id
+        
+
+        # Parameter validation
+        schema = ThemeValidator.deleteThemeV2()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","example":19243},"description":"The ID of the company."},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"},"description":"The ID of the application."},{"name":"theme_id","in":"path","required":true,"schema":{"type":"string","example":"64883324baad79e86a89839d"},"description":"The ID of the theme to be deleted."}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","example":19243},"description":"The ID of the company."},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"},"description":"The ID of the application."},{"name":"theme_id","in":"path","required":true,"schema":{"type":"string","example":"64883324baad79e86a89839d"},"description":"The ID of the theme to be deleted."}]}""", theme_id=theme_id)
+        query_string = await create_query_string(theme_id=theme_id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/theme/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}", theme_id=theme_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AllThemesApplicationResponseV2
+            schema = AllThemesApplicationResponseV2()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteThemeV2")
+                print(e)
+
+        
+
+        return response
+    
+    async def addThemeToApplicationV2(self, body=""):
         """Apply a theme to an application by providing the marketplace theme ID.
         """
         payload = {}
         
 
         # Parameter validation
-        schema = ThemeValidator.applyThemeV2()
+        schema = ThemeValidator.addThemeToApplicationV2()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -1253,7 +1296,7 @@ class Theme:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for applyThemeV2")
+                print("Response Validation failed for addThemeToApplicationV2")
                 print(e)
 
         
@@ -1302,6 +1345,92 @@ class Theme:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for updateThemeNameV2")
+                print(e)
+
+        
+
+        return response
+    
+    async def applyThemeV2(self, theme_id=None):
+        """Apply theme to a specific application by providing company_id, application_id, and theme_id.
+        :param theme_id : The ID of the apply : type string
+        """
+        payload = {}
+        
+        if theme_id is not None:
+            payload["theme_id"] = theme_id
+        
+
+        # Parameter validation
+        schema = ThemeValidator.applyThemeV2()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/apply", """{"required":[{"in":"path","name":"company_id","description":"The ID of the company","required":true,"schema":{"type":"integer","example":19243}},{"in":"path","name":"application_id","description":"The ID of the application","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"in":"path","name":"theme_id","description":"The ID of the apply","required":true,"schema":{"type":"string","example":"648832dcb99296ab200fbaaa"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"The ID of the company","required":true,"schema":{"type":"integer","example":19243}},{"in":"path","name":"application_id","description":"The ID of the application","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"in":"path","name":"theme_id","description":"The ID of the apply","required":true,"schema":{"type":"string","example":"648832dcb99296ab200fbaaa"}}]}""", theme_id=theme_id)
+        query_string = await create_query_string(theme_id=theme_id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/theme/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/apply", theme_id=theme_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AllThemesApplicationResponseV2
+            schema = AllThemesApplicationResponseV2()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for applyThemeV2")
+                print(e)
+
+        
+
+        return response
+    
+    async def duplicateThemeV2(self, theme_id=None):
+        """This endpoint duplicates a Theme in the specified application.
+        :param theme_id : The ID of the theme to be duplicated : type string
+        """
+        payload = {}
+        
+        if theme_id is not None:
+            payload["theme_id"] = theme_id
+        
+
+        # Parameter validation
+        schema = ThemeValidator.duplicateThemeV2()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/duplicate", """{"required":[{"name":"company_id","in":"path","description":"The ID of the company","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"The ID of the application","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","description":"The ID of the theme to be duplicated","required":true,"schema":{"type":"string","example":"6487ea3870cf5279a6e521d4"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The ID of the company","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"The ID of the application","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","description":"The ID of the theme to be duplicated","required":true,"schema":{"type":"string","example":"6487ea3870cf5279a6e521d4"}}]}""", theme_id=theme_id)
+        query_string = await create_query_string(theme_id=theme_id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/theme/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/duplicate", theme_id=theme_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AllThemesApplicationResponseV2
+            schema = AllThemesApplicationResponseV2()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for duplicateThemeV2")
                 print(e)
 
         
