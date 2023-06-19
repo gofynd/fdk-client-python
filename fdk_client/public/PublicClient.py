@@ -9,6 +9,8 @@ from .webhook.client import Webhook
 
 from .inventory.client import Inventory
 
+from .partner.client import Partner
+
 
 class PublicClient:
     def __init__(self, config):
@@ -19,6 +21,8 @@ class PublicClient:
         self.webhook = Webhook(config)
         
         self.inventory = Inventory(config)
+        
+        self.partner = Partner(config)
         
     
     def setExtraHeaders(self, header):

@@ -274,8 +274,8 @@ class Discount:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import FileJobRequest
-        schema = FileJobRequest()
+        from .models import DiscountJob
+        schema = DiscountJob()
         schema.dump(schema.load(body))
         
 

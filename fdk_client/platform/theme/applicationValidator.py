@@ -129,6 +129,28 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
 
 class ThemeValidator:
     
@@ -394,6 +416,55 @@ class ThemeValidator:
         application_id = fields.Str(required=False)
         
         theme_id = fields.Str(required=False)
+         
+        
+    
+    class getApplicationThemesV2(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getApplicationThemesCountV2(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getApplicationThemeByIdV2(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        theme_id = fields.Str(required=False)
+         
+        
+    
+    class updateThemeV2(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        theme_id = fields.Str(required=False)
+         
+        
+    
+    class applyThemeV2(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
          
         
     

@@ -8,6 +8,8 @@ from .common.client import Common
 
 from .lead.client import Lead
 
+from .theme.client import Theme
+
 from .billing.client import Billing
 
 from .communication.client import Communication
@@ -44,6 +46,8 @@ class PlatformClient:
         self.common = Common(config)
         
         self.lead = Lead(config)
+        
+        self.theme = Theme(config)
         
         self.billing = Billing(config)
         

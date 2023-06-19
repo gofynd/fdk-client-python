@@ -114,6 +114,10 @@ from ..ApplicationModel import BaseSchema
         
         
         
+        
+        
+        
+        
     
     
         
@@ -383,6 +387,14 @@ class CartValidator:
         aggregator_name = fields.Str(required=False)
         
         merchant_code = fields.Str(required=False)
+        
+        iin = fields.Str(required=False)
+        
+        network = fields.Str(required=False)
+        
+        type = fields.Str(required=False)
+        
+        card_id = fields.Str(required=False)
          
         
     
