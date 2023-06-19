@@ -288,6 +288,10 @@ class AllThemesApplicationResponseV2(BaseSchema):
     pass
 
 
+class UpdateThemeNameRequestBodyV2(BaseSchema):
+    pass
+
+
 class UpdateThemeRequestBodyV2(BaseSchema):
     pass
 
@@ -1434,6 +1438,14 @@ class AllThemesApplicationResponseV2(BaseSchema):
     assets = fields.Nested(AssetsV2, required=False)
     
     available_sections = fields.List(fields.Nested(SectionItem, required=False), required=False)
+    
+
+
+class UpdateThemeNameRequestBodyV2(BaseSchema):
+    # Theme swagger.json
+
+    
+    name = fields.Str(required=False)
     
 
 

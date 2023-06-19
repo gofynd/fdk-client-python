@@ -24,6 +24,10 @@ class ListOrCalender(BaseSchema):
     pass
 
 
+class DiscountMeta(BaseSchema):
+    pass
+
+
 class DiscountItems(BaseSchema):
     pass
 
@@ -33,6 +37,10 @@ class BulkDiscount(BaseSchema):
 
 
 class FileJobResponse(BaseSchema):
+    pass
+
+
+class FileJobRequest(BaseSchema):
     pass
 
 
@@ -153,6 +161,16 @@ class ListOrCalender(BaseSchema):
     
 
 
+class DiscountMeta(BaseSchema):
+    # Discount swagger.json
+
+    
+    timer = fields.Boolean(required=False)
+    
+    number_of_minutes = fields.Float(required=False)
+    
+
+
 class DiscountItems(BaseSchema):
     # Discount swagger.json
 
@@ -166,6 +184,8 @@ class DiscountItems(BaseSchema):
     discount_type = fields.Str(required=False)
     
     value = fields.Float(required=False)
+    
+    discount_meta = fields.Nested(DiscountMeta, required=False)
     
 
 
@@ -196,6 +216,34 @@ class FileJobResponse(BaseSchema):
     type = fields.Str(required=False)
     
     file_type = fields.Str(required=False)
+    
+
+
+class FileJobRequest(BaseSchema):
+    # Discount swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    is_active = fields.Boolean(required=False)
+    
+    app_ids = fields.List(fields.Str(required=False), required=False)
+    
+    job_type = fields.Str(required=False)
+    
+    discount_type = fields.Str(required=False)
+    
+    discount_level = fields.Str(required=False)
+    
+    file_path = fields.Str(required=False)
+    
+    brand_ids = fields.List(fields.Int(required=False), required=False)
+    
+    store_ids = fields.List(fields.Int(required=False), required=False)
+    
+    validity = fields.Nested(ValidityObject, required=False)
+    
+    meta = fields.Dict(required=False)
     
 
 

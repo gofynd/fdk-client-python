@@ -56,6 +56,42 @@ from ..PlatformModel import BaseSchema
     
     
         
+    
+    
+        
+    
+    
+        
+    
+    
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+    
+    
+        
+        
+        
+    
+    
+        
+    
+    
+        
 
 
 
@@ -99,21 +135,21 @@ class ServiceabilityValidator:
          
         
     
-    class getZoneDataView(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        zone_id = fields.Str(required=False)
-         
-        
-    
     class updateZoneControllerView(BaseSchema):
         
         
         zone_id = fields.Str(required=False)
         
         company_id = fields.Int(required=False)
+         
+        
+    
+    class getZoneDataView(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        zone_id = fields.Str(required=False)
          
         
     
@@ -157,6 +193,87 @@ class ServiceabilityValidator:
         
     
     class getAllStores(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class getOptimalLocations(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class upsertDpAccount(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class getDpAccount(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        page_number = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        stage = fields.Str(required=False)
+        
+        payment_mode = fields.Str(required=False)
+        
+        transport_type = fields.Str(required=False)
+         
+        
+    
+    class updateDpRule(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        rule_uid = fields.Str(required=False)
+         
+        
+    
+    class getDpRules(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        rule_uid = fields.Str(required=False)
+         
+        
+    
+    class upsertDpRules(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class getDpRuleInsert(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        page_number = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+         
+        
+    
+    class upsertDpCompanyRules(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class getDpCompanyRules(BaseSchema):
         
         
         company_id = fields.Int(required=False)

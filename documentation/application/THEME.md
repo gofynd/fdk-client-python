@@ -10469,6 +10469,17 @@ Success. Returns a JSON object of the theme. Check the example shown below or re
 
  
  
+ #### [UpdateThemeNameRequestBodyV2](#UpdateThemeNameRequestBodyV2)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | name | String? |  yes  | The new name of the theme. |
+
+---
+
+
+ 
+ 
  #### [UpdateThemeRequestBodyV2](#UpdateThemeRequestBodyV2)
 
  | Properties | Type | Nullable | Description |

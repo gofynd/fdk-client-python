@@ -1260,4 +1260,52 @@ class Theme:
 
         return response
     
+    async def updateThemeNameV2(self, theme_id=None, body=""):
+        """Update the name of a theme for a specific company and application.
+        :param theme_id : The ID of the theme to be updated. : type string
+        """
+        payload = {}
+        
+        if theme_id is not None:
+            payload["theme_id"] = theme_id
+        
+
+        # Parameter validation
+        schema = ThemeValidator.updateThemeNameV2()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import UpdateThemeNameRequestBodyV2
+        schema = UpdateThemeNameRequestBodyV2()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/name", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company."},{"in":"path","name":"application_id","required":true,"schema":{"type":"string"},"description":"The ID of the application."},{"in":"path","name":"theme_id","required":true,"schema":{"type":"string"},"description":"The ID of the theme to be updated."}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company."},{"in":"path","name":"application_id","required":true,"schema":{"type":"string"},"description":"The ID of the application."},{"in":"path","name":"theme_id","required":true,"schema":{"type":"string"},"description":"The ID of the theme to be updated."}]}""", theme_id=theme_id)
+        query_string = await create_query_string(theme_id=theme_id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/theme/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/name", theme_id=theme_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AllThemesApplicationResponseV2
+            schema = AllThemesApplicationResponseV2()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateThemeNameV2")
+                print(e)
+
+        
+
+        return response
+    
 

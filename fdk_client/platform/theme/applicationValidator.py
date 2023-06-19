@@ -151,6 +151,11 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
+        
+        
 
 class ThemeValidator:
     
@@ -465,6 +470,17 @@ class ThemeValidator:
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
+         
+        
+    
+    class updateThemeNameV2(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        theme_id = fields.Str(required=False)
          
         
     
