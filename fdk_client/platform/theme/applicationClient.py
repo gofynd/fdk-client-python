@@ -1097,6 +1097,45 @@ class Theme:
 
         return response
     
+    async def getFontsV2(self, ):
+        """Font is a collection of characters with a similar design. Use this API to retrieve a list of website fonts.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ThemeValidator.getFontsV2()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/fonts", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/theme/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/fonts", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import FontsSchema
+            schema = FontsSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getFontsV2")
+                print(e)
+
+        
+
+        return response
+    
     async def getApplicationThemesCountV2(self, ):
         """
         """
@@ -1303,6 +1342,45 @@ class Theme:
 
         return response
     
+    async def getAppliedThemeV2(self, ):
+        """Get Applied Theme of an Application by Application Id
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ThemeValidator.getAppliedThemeV2()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}/application/{self.applicationId}", """{"required":[{"name":"company_id","in":"path","description":"The ID of the company","required":true,"schema":{"type":"integer","example":17461}},{"name":"application_id","in":"path","description":"The ID of the application","required":true,"schema":{"type":"string","example":"644268ee520b9544cc95e204"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The ID of the company","required":true,"schema":{"type":"integer","example":17461}},{"name":"application_id","in":"path","description":"The ID of the application","required":true,"schema":{"type":"string","example":"644268ee520b9544cc95e204"}}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/theme/v2.0/company/{self._conf.companyId}/application/{self.applicationId}", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ApplyThemeResponseV2
+            schema = ApplyThemeResponseV2()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAppliedThemeV2")
+                print(e)
+
+        
+
+        return response
+    
     async def updateThemeNameV2(self, theme_id=None, body=""):
         """Update the name of a theme for a specific company and application.
         :param theme_id : The ID of the theme to be updated. : type string
@@ -1431,6 +1509,124 @@ class Theme:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for duplicateThemeV2")
+                print(e)
+
+        
+
+        return response
+    
+    async def getThemePreviewByIdV2(self, theme_id=None):
+        """
+        :param theme_id : The ID of the theme : type string
+        """
+        payload = {}
+        
+        if theme_id is not None:
+            payload["theme_id"] = theme_id
+        
+
+        # Parameter validation
+        schema = ThemeValidator.getThemePreviewByIdV2()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/preview", """{"required":[{"in":"path","name":"company_id","required":true,"description":"The ID of the company","schema":{"type":"integer","example":19243}},{"in":"path","name":"application_id","required":true,"description":"The ID of the application","schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"in":"path","name":"theme_id","required":true,"description":"The ID of the theme","schema":{"type":"string","example":"6487ea376e1442284917c44e"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"description":"The ID of the company","schema":{"type":"integer","example":19243}},{"in":"path","name":"application_id","required":true,"description":"The ID of the application","schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"in":"path","name":"theme_id","required":true,"description":"The ID of the theme","schema":{"type":"string","example":"6487ea376e1442284917c44e"}}]}""", theme_id=theme_id)
+        query_string = await create_query_string(theme_id=theme_id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/theme/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/preview", theme_id=theme_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AllThemesApplicationResponseV2
+            schema = AllThemesApplicationResponseV2()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getThemePreviewByIdV2")
+                print(e)
+
+        
+
+        return response
+    
+    async def getThemeLastModifiedV2(self, theme_id=None):
+        """Use this API to fetch Last-Modified timestamp in header metadata.
+        :param theme_id : ID allotted to the theme. : type string
+        """
+        payload = {}
+        
+        if theme_id is not None:
+            payload["theme_id"] = theme_id
+        
+
+        # Parameter validation
+        schema = ThemeValidator.getThemeLastModifiedV2()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/polling", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"theme_id","in":"path","description":"ID allotted to the theme.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"theme_id","in":"path","description":"ID allotted to the theme.","required":true,"schema":{"type":"string"}}]}""", theme_id=theme_id)
+        query_string = await create_query_string(theme_id=theme_id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("HEAD", url_with_params, headers=get_headers_with_signature(self._conf.domain, "head", await create_url_without_domain(f"/service/platform/theme/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/polling", theme_id=theme_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        return response
+    
+    async def checkThemeUpgradableV2(self, theme_id=None):
+        """This API endpoint checks if the theme is upgradable for a specific company and application.
+        :param theme_id : The ID of the theme : type string
+        """
+        payload = {}
+        
+        if theme_id is not None:
+            payload["theme_id"] = theme_id
+        
+
+        # Parameter validation
+        schema = ThemeValidator.checkThemeUpgradableV2()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/upgradable", """{"required":[{"name":"company_id","in":"path","required":true,"description":"The ID of the company","schema":{"type":"string","example":"19243"}},{"name":"application_id","in":"path","required":true,"description":"The ID of the application","schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","required":true,"description":"The ID of the theme","schema":{"type":"string","example":"648832dcb99296ab200fbaaa"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"description":"The ID of the company","schema":{"type":"string","example":"19243"}},{"name":"application_id","in":"path","required":true,"description":"The ID of the application","schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","required":true,"description":"The ID of the theme","schema":{"type":"string","example":"648832dcb99296ab200fbaaa"}}]}""", theme_id=theme_id)
+        query_string = await create_query_string(theme_id=theme_id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/theme/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/upgradable", theme_id=theme_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ThemeUpgradableResponseV2
+            schema = ThemeUpgradableResponseV2()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for checkThemeUpgradableV2")
                 print(e)
 
         

@@ -17,12 +17,12 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
+        
+        
+        
     
     
-        
-        
-        
-        
         
         
     
@@ -79,15 +79,6 @@ class ServiceabilityValidator:
          
         
     
-    class getZoneFromPincodeView(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
     class getZonesFromApplicationIdView(BaseSchema):
         
         
@@ -102,6 +93,15 @@ class ServiceabilityValidator:
         zone_id = fields.List(fields.Str(required=False), required=False)
         
         q = fields.Str(required=False)
+         
+        
+    
+    class getZoneFromPincodeView(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
          
         
     
@@ -161,7 +161,7 @@ class ServiceabilityValidator:
          
         
     
-    class upsertDpApplicationRules(BaseSchema):
+    class getDpApplicationRules(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -170,7 +170,7 @@ class ServiceabilityValidator:
          
         
     
-    class getDpApplicationRules(BaseSchema):
+    class upsertDpApplicationRules(BaseSchema):
         
         
         company_id = fields.Int(required=False)

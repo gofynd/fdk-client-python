@@ -141,6 +141,28 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
         
     
     
@@ -154,6 +176,7 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
         
         
     
@@ -448,6 +471,15 @@ class ThemeValidator:
          
         
     
+    class getFontsV2(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
     class getApplicationThemesCountV2(BaseSchema):
         
         
@@ -499,6 +531,15 @@ class ThemeValidator:
          
         
     
+    class getAppliedThemeV2(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
     class updateThemeNameV2(BaseSchema):
         
         
@@ -525,6 +566,39 @@ class ThemeValidator:
         
         
         company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        theme_id = fields.Str(required=False)
+         
+        
+    
+    class getThemePreviewByIdV2(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        theme_id = fields.Str(required=False)
+         
+        
+    
+    class getThemeLastModifiedV2(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        theme_id = fields.Str(required=False)
+         
+        
+    
+    class checkThemeUpgradableV2(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
         

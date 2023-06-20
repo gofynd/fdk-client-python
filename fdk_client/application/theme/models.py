@@ -316,6 +316,10 @@ class AllThemesApplicationResponseV2(BaseSchema):
     pass
 
 
+class ThemeUpgradableResponseV2(BaseSchema):
+    pass
+
+
 class UpdateThemeNameRequestBodyV2(BaseSchema):
     pass
 
@@ -525,6 +529,10 @@ class ImagePickerPropV2(BaseSchema):
 
 
 class UrlPropV2(BaseSchema):
+    pass
+
+
+class ThemeVersionsV2(BaseSchema):
     pass
 
 
@@ -1563,6 +1571,18 @@ class AllThemesApplicationResponseV2(BaseSchema):
     
 
 
+class ThemeUpgradableResponseV2(BaseSchema):
+    # Theme swagger.json
+
+    
+    upgrade = fields.Boolean(required=False)
+    
+    versions = fields.Nested(ThemeVersionsV2, required=False)
+    
+    message = fields.Str(required=False)
+    
+
+
 class UpdateThemeNameRequestBodyV2(BaseSchema):
     # Theme swagger.json
 
@@ -2226,6 +2246,16 @@ class UrlPropV2(BaseSchema):
     type = fields.Str(required=False)
     
     value = fields.Str(required=False)
+    
+
+
+class ThemeVersionsV2(BaseSchema):
+    # Theme swagger.json
+
+    
+    parent_theme = fields.Str(required=False)
+    
+    applied_theme = fields.Str(required=False)
     
 
 
