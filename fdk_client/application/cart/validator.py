@@ -143,6 +143,9 @@ from ..ApplicationModel import BaseSchema
         
         
         
+    
+    
+        
 
 class CartValidator:
     
@@ -202,7 +205,7 @@ class CartValidator:
     class deleteCart(BaseSchema):
         
         
-        id = fields.Int(required=False)
+        id = fields.Str(required=False)
          
         
     
@@ -443,6 +446,13 @@ class CartValidator:
         promotion_id = fields.Str(required=False)
         
         page_size = fields.Int(required=False)
+         
+        
+    
+    class checkoutCartV2(BaseSchema):
+        
+        
+        buy_now = fields.Boolean(required=False)
          
         
     
