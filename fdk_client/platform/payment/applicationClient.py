@@ -364,89 +364,6 @@ class Payment:
 
         return response
     
-    async def getPlatformPaymentConfig(self, ):
-        """Use this API to fetch the payment options.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = PaymentValidator.getPlatformPaymentConfig()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/configuration", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", )
-        query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/configuration", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import PlatfromPaymentConfig
-            schema = PlatfromPaymentConfig()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getPlatformPaymentConfig")
-                print(e)
-
-        
-
-        return response
-    
-    async def updatePlatformPaymentConfig(self, body=""):
-        """Use this API to update the payment options.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = PaymentValidator.updatePlatformPaymentConfig()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import UpdatePlatformPaymentConfig
-        schema = UpdatePlatformPaymentConfig()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/configuration", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", )
-        query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/configuration", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import PlatfromPaymentConfig
-            schema = PlatfromPaymentConfig()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updatePlatformPaymentConfig")
-                print(e)
-
-        
-
-        return response
-    
     async def getUserCODlimitRoutes(self, merchant_user_id=None, mobile_no=None):
         """Use this API to get user cod limit and reamining limit for the payment
         :param merchant_user_id :  : type string
@@ -1151,6 +1068,94 @@ class Payment:
 
         return response
     
+    async def repaymentDetails(self, body=""):
+        """Use this API to register any repayment record in the db and notify the aggrgator
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = PaymentValidator.repaymentDetails()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import RepaymentDetailsSerialiserPayAll
+        schema = RepaymentDetailsSerialiserPayAll()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/repayment-details", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/repayment-details", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import RepaymentResponse
+            schema = RepaymentResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for repaymentDetails")
+                print(e)
+
+        
+
+        return response
+    
+    async def merchantOnBoarding(self, body=""):
+        """Use this API to push Ajiodhan merchant data to Gringotts system
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = PaymentValidator.merchantOnBoarding()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import MerchantOnBoardingRequest
+        schema = MerchantOnBoardingRequest()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/merchant-onboarding", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/merchant-onboarding", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import MerchantOnBoardingResponse
+            schema = MerchantOnBoardingResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for merchantOnBoarding")
+                print(e)
+
+        
+
+        return response
+    
     async def verifyCustomerForPayment(self, body=""):
         """Use this API to check if the customer is eligible to use credit-line facilities such as Simpl Pay Later and Rupifi.
         """
@@ -1407,6 +1412,45 @@ class Payment:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for cancelPaymentLink")
+                print(e)
+
+        
+
+        return response
+    
+    async def getPaymentCodeOption(self, ):
+        """Get all active List Payment Options Method Codes
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = PaymentValidator.getPaymentCodeOption()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/codes", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/codes", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetPaymentCodeResponse
+            schema = GetPaymentCodeResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPaymentCodeOption")
                 print(e)
 
         

@@ -62,16 +62,12 @@ from ..PlatformModel import BaseSchema
     
     
         
-        
-        
-        
-        
-        
     
     
         
-    
-    
+        
+        
+        
         
         
     
@@ -82,9 +78,13 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
         
     
     
+        
+        
         
     
     
@@ -135,21 +135,21 @@ class ServiceabilityValidator:
          
         
     
-    class getZoneDataView(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        zone_id = fields.Str(required=False)
-         
-        
-    
     class updateZoneControllerView(BaseSchema):
         
         
         zone_id = fields.Str(required=False)
         
         company_id = fields.Int(required=False)
+         
+        
+    
+    class getZoneDataView(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        zone_id = fields.Str(required=False)
          
         
     
@@ -206,6 +206,13 @@ class ServiceabilityValidator:
          
         
     
+    class upsertDpAccount(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
     class getDpAccount(BaseSchema):
         
         
@@ -223,10 +230,12 @@ class ServiceabilityValidator:
          
         
     
-    class upsertDpAccount(BaseSchema):
+    class updateDpRule(BaseSchema):
         
         
         company_id = fields.Int(required=False)
+        
+        rule_uid = fields.Str(required=False)
          
         
     
@@ -239,12 +248,10 @@ class ServiceabilityValidator:
          
         
     
-    class updateDpRule(BaseSchema):
+    class upsertDpRules(BaseSchema):
         
         
         company_id = fields.Int(required=False)
-        
-        rule_uid = fields.Str(required=False)
          
         
     
@@ -259,7 +266,7 @@ class ServiceabilityValidator:
          
         
     
-    class upsertDpRules(BaseSchema):
+    class upsertDpCompanyRules(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -267,13 +274,6 @@ class ServiceabilityValidator:
         
     
     class getDpCompanyRules(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class upsertDpCompanyRules(BaseSchema):
         
         
         company_id = fields.Int(required=False)

@@ -51,14 +51,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
-        
-        
-    
-    
-        
-        
         
         
     
@@ -144,6 +136,14 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
+        
+    
+    
+        
+        
         
     
     
@@ -152,6 +152,10 @@ from ..PlatformModel import BaseSchema
     
     
         
+        
+        
+    
+    
         
         
     
@@ -242,24 +246,6 @@ class PaymentValidator:
         
     
     class confirmPayment(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getPlatformPaymentConfig(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class updatePlatformPaymentConfig(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -445,6 +431,24 @@ class PaymentValidator:
          
         
     
+    class repaymentDetails(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class merchantOnBoarding(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
     class verifyCustomerForPayment(BaseSchema):
         
         
@@ -495,6 +499,15 @@ class PaymentValidator:
         
     
     class cancelPaymentLink(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getPaymentCodeOption(BaseSchema):
         
         
         company_id = fields.Int(required=False)
