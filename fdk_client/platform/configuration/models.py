@@ -140,6 +140,14 @@ class PanCardConfig(BaseSchema):
     pass
 
 
+class ValidationFailedResponse(BaseSchema):
+    pass
+
+
+class NotFound(BaseSchema):
+    pass
+
+
 class CommunicationConfig(BaseSchema):
     pass
 
@@ -204,6 +212,10 @@ class DomainAddRequest(BaseSchema):
     pass
 
 
+class Domain(BaseSchema):
+    pass
+
+
 class DomainsResponse(BaseSchema):
     pass
 
@@ -237,6 +249,10 @@ class DomainSuggestion(BaseSchema):
 
 
 class DomainSuggestionsResponse(BaseSchema):
+    pass
+
+
+class SuccessMessageResponse(BaseSchema):
     pass
 
 
@@ -560,10 +576,6 @@ class Currency(BaseSchema):
     pass
 
 
-class Domain(BaseSchema):
-    pass
-
-
 class ApplicationWebsite(BaseSchema):
     pass
 
@@ -592,19 +604,11 @@ class Application(BaseSchema):
     pass
 
 
-class NotFound(BaseSchema):
-    pass
-
-
 class UnhandledError(BaseSchema):
     pass
 
 
 class InvalidPayloadRequest(BaseSchema):
-    pass
-
-
-class SuccessMessageResponse(BaseSchema):
     pass
 
 
@@ -983,6 +987,8 @@ class AppPaymentConfig(BaseSchema):
     
     cod_charges = fields.Float(required=False)
     
+    anonymous_cod = fields.Boolean(required=False)
+    
 
 
 class CallbackUrl(BaseSchema):
@@ -1219,6 +1225,22 @@ class PanCardConfig(BaseSchema):
     
 
 
+class ValidationFailedResponse(BaseSchema):
+    # Configuration swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+
+
+class NotFound(BaseSchema):
+    # Configuration swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+
+
 class CommunicationConfig(BaseSchema):
     # Configuration swagger.json
 
@@ -1423,6 +1445,18 @@ class DomainAdd(BaseSchema):
     
     name = fields.Str(required=False)
     
+    _id = fields.Str(required=False)
+    
+    verified = fields.Boolean(required=False)
+    
+    is_primary = fields.Boolean(required=False)
+    
+    is_shortlink = fields.Boolean(required=False)
+    
+    message = fields.Str(required=False)
+    
+    txt_records = fields.List(fields.Str(required=False), required=False)
+    
 
 
 class DomainAddRequest(BaseSchema):
@@ -1430,6 +1464,24 @@ class DomainAddRequest(BaseSchema):
 
     
     domain = fields.Nested(DomainAdd, required=False)
+    
+
+
+class Domain(BaseSchema):
+    # Configuration swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    _id = fields.Str(required=False)
+    
+    verified = fields.Boolean(required=False)
+    
+    is_primary = fields.Boolean(required=False)
+    
+    is_shortlink = fields.Boolean(required=False)
+    
+    is_predefined = fields.Boolean(required=False)
     
 
 
@@ -1445,7 +1497,15 @@ class UpdateDomain(BaseSchema):
     # Configuration swagger.json
 
     
+    name = fields.Str(required=False)
+    
     _id = fields.Str(required=False)
+    
+    verified = fields.Boolean(required=False)
+    
+    is_primary = fields.Boolean(required=False)
+    
+    is_shortlink = fields.Boolean(required=False)
     
 
 
@@ -1518,6 +1578,16 @@ class DomainSuggestionsResponse(BaseSchema):
 
     
     domains = fields.List(fields.Nested(DomainSuggestion, required=False), required=False)
+    
+
+
+class SuccessMessageResponse(BaseSchema):
+    # Configuration swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+    message = fields.Str(required=False)
     
 
 
@@ -2445,6 +2515,8 @@ class ListingPriceFeature(BaseSchema):
     
     value = fields.Str(required=False)
     
+    sort = fields.Str(required=False)
+    
 
 
 class CurrencyFeature(BaseSchema):
@@ -2565,24 +2637,6 @@ class Currency(BaseSchema):
     
 
 
-class Domain(BaseSchema):
-    # Configuration swagger.json
-
-    
-    verified = fields.Boolean(required=False)
-    
-    is_primary = fields.Boolean(required=False)
-    
-    is_shortlink = fields.Boolean(required=False)
-    
-    _id = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    is_predefined = fields.Boolean(required=False)
-    
-
-
 class ApplicationWebsite(BaseSchema):
     # Configuration swagger.json
 
@@ -2697,14 +2751,6 @@ class Application(BaseSchema):
     
 
 
-class NotFound(BaseSchema):
-    # Configuration swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-
-
 class UnhandledError(BaseSchema):
     # Configuration swagger.json
 
@@ -2714,14 +2760,6 @@ class UnhandledError(BaseSchema):
 
 
 class InvalidPayloadRequest(BaseSchema):
-    # Configuration swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-
-
-class SuccessMessageResponse(BaseSchema):
     # Configuration swagger.json
 
     

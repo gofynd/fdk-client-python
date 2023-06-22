@@ -207,13 +207,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
-        
-    
-    
-        
-        
         
     
     
@@ -226,6 +219,8 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
+        
         
     
     
@@ -244,6 +239,50 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
     
     
@@ -680,6 +719,15 @@ class OrderValidator:
          
         
     
+    class getManifestfilters(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        view = fields.Str(required=False)
+         
+        
+    
     class dispatchManifest(BaseSchema):
         
         
@@ -694,6 +742,13 @@ class OrderValidator:
          
         
     
+    class postShipmentHistory(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
     class getShipmentHistory(BaseSchema):
         
         
@@ -702,13 +757,6 @@ class OrderValidator:
         shipment_id = fields.Str(required=False)
         
         bag_id = fields.Int(required=False)
-         
-        
-    
-    class postShipmentHistory(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
          
         
     
@@ -733,14 +781,14 @@ class OrderValidator:
          
         
     
-    class getChannelConfig(BaseSchema):
+    class createChannelConfig(BaseSchema):
         
         
         company_id = fields.Int(required=False)
          
         
     
-    class createChannelConfig(BaseSchema):
+    class getChannelConfig(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -772,6 +820,79 @@ class OrderValidator:
         
         
         company_id = fields.Int(required=False)
+         
+        
+    
+    class getManifestShipments(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        dp_ids = fields.Int(required=False)
+        
+        stores = fields.Str(required=False)
+        
+        to_date = fields.Str(required=False)
+        
+        from_date = fields.Str(required=False)
+        
+        dp_name = fields.Str(required=False)
+        
+        sales_channels = fields.Str(required=False)
+        
+        search_type = fields.Str(required=False)
+        
+        search_value = fields.Str(required=False)
+        
+        page_no = fields.Str(required=False)
+        
+        page_size = fields.Str(required=False)
+         
+        
+    
+    class getManifests(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        status = fields.Str(required=False)
+        
+        to_date = fields.Str(required=False)
+        
+        from_date = fields.Str(required=False)
+        
+        search_value = fields.Str(required=False)
+        
+        dp_ids = fields.Str(required=False)
+        
+        page_no = fields.Str(required=False)
+        
+        page_size = fields.Str(required=False)
+         
+        
+    
+    class getManifestDetails(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        manifest_id = fields.Str(required=False)
+        
+        status = fields.Str(required=False)
+        
+        to_date = fields.Str(required=False)
+        
+        from_date = fields.Str(required=False)
+        
+        search_type = fields.Str(required=False)
+        
+        search_value = fields.Str(required=False)
+        
+        dp_ids = fields.Str(required=False)
+        
+        page_no = fields.Str(required=False)
+        
+        page_size = fields.Str(required=False)
          
         
     

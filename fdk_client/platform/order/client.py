@@ -1487,8 +1487,8 @@ class Order:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CreateOrderPayload
-        schema = CreateOrderPayload()
+        from .models import ProcessManifest
+        schema = ProcessManifest()
         schema.dump(schema.load(body))
         
 
@@ -1508,12 +1508,55 @@ class Order:
         
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CreateOrderResponse
-            schema = CreateOrderResponse()
+            from .models import ProcessManifestItemResponse
+            schema = ProcessManifestItemResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for processManifest")
+                print(e)
+
+        
+
+        return response
+    
+    async def getManifestfilters(self, view=None):
+        """
+        :param view : Name of View : type string
+        """
+        payload = {}
+        
+        if view is not None:
+            payload["view"] = view
+        
+
+        # Parameter validation
+        schema = OrderValidator.getManifestfilters()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/filter/listing", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}},{"in":"query","name":"view","description":"Name of View","required":true,"schema":{"type":"string","default":"manifest","enum":["my_orders","bulk_action","manifest","bulk_invoice"]}}],"optional":[],"query":[{"in":"query","name":"view","description":"Name of View","required":true,"schema":{"type":"string","default":"manifest","enum":["my_orders","bulk_action","manifest","bulk_invoice"]}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}]}""", view=view)
+        query_string = await create_query_string(view=view)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/filter/listing", view=view), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ManifestFiltersResponse
+            schema = ManifestFiltersResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getManifestfilters")
                 print(e)
 
         
@@ -1603,6 +1646,50 @@ class Order:
 
         return response
     
+    async def postShipmentHistory(self, body=""):
+        """
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = OrderValidator.postShipmentHistory()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import PostShipmentHistory
+        schema = PostShipmentHistory()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/history", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/history", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ShipmentHistoryResponse
+            schema = ShipmentHistoryResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for postShipmentHistory")
+                print(e)
+
+        
+
+        return response
+    
     async def getShipmentHistory(self, shipment_id=None, bag_id=None):
         """
         :param shipment_id : Shipment Id : type string
@@ -1644,50 +1731,6 @@ class Order:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getShipmentHistory")
-                print(e)
-
-        
-
-        return response
-    
-    async def postShipmentHistory(self, body=""):
-        """
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = OrderValidator.postShipmentHistory()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import PostShipmentHistory
-        schema = PostShipmentHistory()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/history", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
-        query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/history", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ShipmentHistoryResponse
-            schema = ShipmentHistoryResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for postShipmentHistory")
                 print(e)
 
         
@@ -1826,45 +1869,6 @@ class Order:
 
         return response
     
-    async def getChannelConfig(self, ):
-        """getChannelConfig
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = OrderValidator.getChannelConfig()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/order-config", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
-        query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/order-config", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import CreateChannelConfigData
-            schema = CreateChannelConfigData()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getChannelConfig")
-                print(e)
-
-        
-
-        return response
-    
     async def createChannelConfig(self, body=""):
         """createChannelConfig
         """
@@ -1903,6 +1907,45 @@ class Order:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for createChannelConfig")
+                print(e)
+
+        
+
+        return response
+    
+    async def getChannelConfig(self, ):
+        """getChannelConfig
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = OrderValidator.getChannelConfig()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/order-config", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/order-config", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateChannelConfigData
+            schema = CreateChannelConfigData()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getChannelConfig")
                 print(e)
 
         
@@ -2074,6 +2117,227 @@ class Order:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getStateTransitionMap")
+                print(e)
+
+        
+
+        return response
+    
+    async def getManifestShipments(self, dp_ids=None, stores=None, to_date=None, from_date=None, dp_name=None, sales_channels=None, search_type=None, search_value=None, page_no=None, page_size=None):
+        """
+        :param dp_ids :  : type integer
+        :param stores :  : type string
+        :param to_date :  : type string
+        :param from_date :  : type string
+        :param dp_name :  : type string
+        :param sales_channels :  : type string
+        :param search_type :  : type string
+        :param search_value :  : type string
+        :param page_no :  : type string
+        :param page_size :  : type string
+        """
+        payload = {}
+        
+        if dp_ids is not None:
+            payload["dp_ids"] = dp_ids
+        
+        if stores is not None:
+            payload["stores"] = stores
+        
+        if to_date is not None:
+            payload["to_date"] = to_date
+        
+        if from_date is not None:
+            payload["from_date"] = from_date
+        
+        if dp_name is not None:
+            payload["dp_name"] = dp_name
+        
+        if sales_channels is not None:
+            payload["sales_channels"] = sales_channels
+        
+        if search_type is not None:
+            payload["search_type"] = search_type
+        
+        if search_value is not None:
+            payload["search_value"] = search_value
+        
+        if page_no is not None:
+            payload["page_no"] = page_no
+        
+        if page_size is not None:
+            payload["page_size"] = page_size
+        
+
+        # Parameter validation
+        schema = OrderValidator.getManifestShipments()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifest/shipments-listing", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"query","name":"dp_ids","required":true,"schema":{"type":"integer"}},{"in":"query","name":"stores","required":true,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":true,"schema":{"type":"string"}},{"in":"query","name":"from_date","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"dp_name","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channels","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_value","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","name":"dp_ids","required":true,"schema":{"type":"integer"}},{"in":"query","name":"stores","required":true,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":true,"schema":{"type":"string"}},{"in":"query","name":"from_date","required":true,"schema":{"type":"string"}},{"in":"query","name":"dp_name","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channels","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_value","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", dp_ids=dp_ids, stores=stores, to_date=to_date, from_date=from_date, dp_name=dp_name, sales_channels=sales_channels, search_type=search_type, search_value=search_value, page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(dp_ids=dp_ids, stores=stores, to_date=to_date, from_date=from_date, dp_name=dp_name, sales_channels=sales_channels, search_type=search_type, search_value=search_value, page_no=page_no, page_size=page_size)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifest/shipments-listing", dp_ids=dp_ids, stores=stores, to_date=to_date, from_date=from_date, dp_name=dp_name, sales_channels=sales_channels, search_type=search_type, search_value=search_value, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ManifestShipmentListing
+            schema = ManifestShipmentListing()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getManifestShipments")
+                print(e)
+
+        
+
+        return response
+    
+    async def getManifests(self, status=None, to_date=None, from_date=None, search_value=None, dp_ids=None, page_no=None, page_size=None):
+        """
+        :param status : Possible Status [ active, closed ] : type string
+        :param to_date :  : type string
+        :param from_date :  : type string
+        :param search_value : Search values options [ fynd_order_id, shipment_id, manifest_id, dp_name, awb_no ] : type string
+        :param dp_ids : DP Ids separated by ',' (comma) : type string
+        :param page_no :  : type string
+        :param page_size :  : type string
+        """
+        payload = {}
+        
+        if status is not None:
+            payload["status"] = status
+        
+        if to_date is not None:
+            payload["to_date"] = to_date
+        
+        if from_date is not None:
+            payload["from_date"] = from_date
+        
+        if search_value is not None:
+            payload["search_value"] = search_value
+        
+        if dp_ids is not None:
+            payload["dp_ids"] = dp_ids
+        
+        if page_no is not None:
+            payload["page_no"] = page_no
+        
+        if page_size is not None:
+            payload["page_size"] = page_size
+        
+
+        # Parameter validation
+        schema = OrderValidator.getManifests()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifest/listing", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"status","required":false,"description":"Possible Status [ active, closed ]","schema":{"type":"string","default":"active"}},{"in":"query","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_value","required":false,"description":"Search values options [ fynd_order_id, shipment_id, manifest_id, dp_name, awb_no ]","schema":{"type":"string"}},{"in":"query","name":"dp_ids","required":false,"description":"DP Ids separated by ',' (comma)","schema":{"type":"string","example":"1,2,3,4"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","name":"status","required":false,"description":"Possible Status [ active, closed ]","schema":{"type":"string","default":"active"}},{"in":"query","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_value","required":false,"description":"Search values options [ fynd_order_id, shipment_id, manifest_id, dp_name, awb_no ]","schema":{"type":"string"}},{"in":"query","name":"dp_ids","required":false,"description":"DP Ids separated by ',' (comma)","schema":{"type":"string","example":"1,2,3,4"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", status=status, to_date=to_date, from_date=from_date, search_value=search_value, dp_ids=dp_ids, page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(status=status, to_date=to_date, from_date=from_date, search_value=search_value, dp_ids=dp_ids, page_no=page_no, page_size=page_size)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifest/listing", status=status, to_date=to_date, from_date=from_date, search_value=search_value, dp_ids=dp_ids, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ManifestList
+            schema = ManifestList()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getManifests")
+                print(e)
+
+        
+
+        return response
+    
+    async def getManifestDetails(self, manifest_id=None, status=None, to_date=None, from_date=None, search_type=None, search_value=None, dp_ids=None, page_no=None, page_size=None):
+        """
+        :param manifest_id :  : type string
+        :param status :  : type string
+        :param to_date :  : type string
+        :param from_date :  : type string
+        :param search_type :  : type string
+        :param search_value :  : type string
+        :param dp_ids : DP Ids separated by ',' (comma) : type string
+        :param page_no :  : type string
+        :param page_size :  : type string
+        """
+        payload = {}
+        
+        if manifest_id is not None:
+            payload["manifest_id"] = manifest_id
+        
+        if status is not None:
+            payload["status"] = status
+        
+        if to_date is not None:
+            payload["to_date"] = to_date
+        
+        if from_date is not None:
+            payload["from_date"] = from_date
+        
+        if search_type is not None:
+            payload["search_type"] = search_type
+        
+        if search_value is not None:
+            payload["search_value"] = search_value
+        
+        if dp_ids is not None:
+            payload["dp_ids"] = dp_ids
+        
+        if page_no is not None:
+            payload["page_no"] = page_no
+        
+        if page_size is not None:
+            payload["page_size"] = page_size
+        
+
+        # Parameter validation
+        schema = OrderValidator.getManifestDetails()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifest/details", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"query","name":"manifest_id","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"status","required":false,"schema":{"type":"string","default":"active"}},{"in":"query","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_value","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","required":false,"description":"DP Ids separated by ',' (comma)","schema":{"type":"string","example":"1,2,3,4"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","name":"manifest_id","required":true,"schema":{"type":"string"}},{"in":"query","name":"status","required":false,"schema":{"type":"string","default":"active"}},{"in":"query","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_value","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","required":false,"description":"DP Ids separated by ',' (comma)","schema":{"type":"string","example":"1,2,3,4"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", manifest_id=manifest_id, status=status, to_date=to_date, from_date=from_date, search_type=search_type, search_value=search_value, dp_ids=dp_ids, page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(manifest_id=manifest_id, status=status, to_date=to_date, from_date=from_date, search_type=search_type, search_value=search_value, dp_ids=dp_ids, page_no=page_no, page_size=page_size)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifest/details", manifest_id=manifest_id, status=status, to_date=to_date, from_date=from_date, search_type=search_type, search_value=search_value, dp_ids=dp_ids, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ManifestDetails
+            schema = ManifestDetails()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getManifestDetails")
                 print(e)
 
         
