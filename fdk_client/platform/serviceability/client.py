@@ -166,49 +166,6 @@ class Serviceability:
 
         return response
     
-    async def getZoneDataView(self, zone_id=None):
-        """This API returns Zone Data View of the application.
-        :param zone_id : A `zone_id` is a unique identifier for a particular zone. : type string
-        """
-        payload = {}
-        
-        if zone_id is not None:
-            payload["zone_id"] = zone_id
-        
-
-        # Parameter validation
-        schema = ServiceabilityValidator.getZoneDataView()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/zone/{zone_id}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"zone_id","description":"A `zone_id` is a unique identifier for a particular zone.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"zone_id","description":"A `zone_id` is a unique identifier for a particular zone.","schema":{"type":"string"},"required":true}]}""", zone_id=zone_id)
-        query_string = await create_query_string(zone_id=zone_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/zone/{zone_id}", zone_id=zone_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import GetSingleZoneDataViewResponse
-            schema = GetSingleZoneDataViewResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getZoneDataView")
-                print(e)
-
-        
-
-        return response
-    
     async def updateZoneControllerView(self, zone_id=None, body=""):
         """This API returns response of updation of zone in mongo database.
         :param zone_id : A `zone_id` is a unique identifier for a particular zone. : type string
@@ -251,6 +208,49 @@ class Serviceability:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for updateZoneControllerView")
+                print(e)
+
+        
+
+        return response
+    
+    async def getZoneDataView(self, zone_id=None):
+        """This API returns Zone Data View of the application.
+        :param zone_id : A `zone_id` is a unique identifier for a particular zone. : type string
+        """
+        payload = {}
+        
+        if zone_id is not None:
+            payload["zone_id"] = zone_id
+        
+
+        # Parameter validation
+        schema = ServiceabilityValidator.getZoneDataView()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/zone/{zone_id}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"zone_id","description":"A `zone_id` is a unique identifier for a particular zone.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"zone_id","description":"A `zone_id` is a unique identifier for a particular zone.","schema":{"type":"string"},"required":true}]}""", zone_id=zone_id)
+        query_string = await create_query_string(zone_id=zone_id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/zone/{zone_id}", zone_id=zone_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetSingleZoneDataViewResponse
+            schema = GetSingleZoneDataViewResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getZoneDataView")
                 print(e)
 
         
@@ -498,6 +498,184 @@ class Serviceability:
 
         return response
     
+    async def postRegionJobBulk(self, body=""):
+        """This API takes request body, validates it and sends it to kafka topic
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ServiceabilityValidator.postRegionJobBulk()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import BulkRegionJobSerializer
+        schema = BulkRegionJobSerializer()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/tat/bulk", """{"required":[{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular sale channel.","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular sale channel.","required":true,"schema":{"type":"integer"}}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/tat/bulk", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PostBulkRegionJobResponse
+            schema = PostBulkRegionJobResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for postRegionJobBulk")
+                print(e)
+
+        
+
+        return response
+    
+    async def getRegionJobBulk(self, current_page_number=None, page_size=None):
+        """This API takes gives all the records of bulk_export_job collection
+        :param current_page_number : The current page number : type integer
+        :param page_size : The page size : type integer
+        """
+        payload = {}
+        
+        if current_page_number is not None:
+            payload["current_page_number"] = current_page_number
+        
+        if page_size is not None:
+            payload["page_size"] = page_size
+        
+
+        # Parameter validation
+        schema = ServiceabilityValidator.getRegionJobBulk()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/tat/bulk", """{"required":[{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular sale channel.","required":true,"schema":{"type":"integer"}}],"optional":[{"name":"current_page_number","in":"query","description":"The current page number","required":false,"schema":{"type":"integer"}},{"name":"page_size","in":"query","description":"The page size","required":false,"schema":{"type":"integer"}}],"query":[{"name":"current_page_number","in":"query","description":"The current page number","required":false,"schema":{"type":"integer"}},{"name":"page_size","in":"query","description":"The page size","required":false,"schema":{"type":"integer"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular sale channel.","required":true,"schema":{"type":"integer"}}]}""", current_page_number=current_page_number, page_size=page_size)
+        query_string = await create_query_string(current_page_number=current_page_number, page_size=page_size)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/tat/bulk", current_page_number=current_page_number, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetBulkRegionJobResponse
+            schema = GetBulkRegionJobResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getRegionJobBulk")
+                print(e)
+
+        
+
+        return response
+    
+    async def getRegionJobBulkBatchId(self, batch_id=None):
+        """This API takes batch_id and gives the detail of bulk_export_job collection for the batch_id
+        :param batch_id : The batch ID : type string
+        """
+        payload = {}
+        
+        if batch_id is not None:
+            payload["batch_id"] = batch_id
+        
+
+        # Parameter validation
+        schema = ServiceabilityValidator.getRegionJobBulkBatchId()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/tat/bulk/{batch_id}", """{"required":[{"name":"batch_id","in":"path","description":"The batch ID","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular sale channel.","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"batch_id","in":"path","description":"The batch ID","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular sale channel.","required":true,"schema":{"type":"integer"}}]}""", batch_id=batch_id, )
+        query_string = await create_query_string(batch_id=batch_id, )
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/tat/bulk/{batch_id}", batch_id=batch_id, ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetBulkRegionJobResponse
+            schema = GetBulkRegionJobResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getRegionJobBulkBatchId")
+                print(e)
+
+        
+
+        return response
+    
+    async def upsertDpAccount(self, body=""):
+        """This API returns response of upsertion of DpAccount in mongo database.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ServiceabilityValidator.upsertDpAccount()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import CompanyDpAccountRequest
+        schema = CompanyDpAccountRequest()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier/account", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier/account", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CompanyDpAccountResponse
+            schema = CompanyDpAccountResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for upsertDpAccount")
+                print(e)
+
+        
+
+        return response
+    
     async def getDpAccount(self, page_number=None, page_size=None, stage=None, payment_mode=None, transport_type=None):
         """This API returns response DpAccount of a company from mongo database.
         :param page_number : index of the item to start returning with : type integer
@@ -557,24 +735,28 @@ class Serviceability:
 
         return response
     
-    async def upsertDpAccount(self, body=""):
-        """This API returns response of upsertion of DpAccount in mongo database.
+    async def updateDpRule(self, rule_uid=None, body=""):
+        """This API updates and returns response of DpRules from mongo database.
+        :param rule_uid : A `rule_uid` is a unique identifier for a particular Dp. : type string
         """
         payload = {}
         
+        if rule_uid is not None:
+            payload["rule_uid"] = rule_uid
+        
 
         # Parameter validation
-        schema = ServiceabilityValidator.upsertDpAccount()
+        schema = ServiceabilityValidator.updateDpRule()
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CompanyDpAccountRequest
-        schema = CompanyDpAccountRequest()
+        from .models import DpRulesUpdateRequest
+        schema = DpRulesUpdateRequest()
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier/account", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}]}""", )
-        query_string = await create_query_string()
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier/rules/{rule_uid}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"rule_uid","description":"A `rule_uid` is a unique identifier for a particular Dp.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"rule_uid","description":"A `rule_uid` is a unique identifier for a particular Dp.","schema":{"type":"string"},"required":true}]}""", rule_uid=rule_uid)
+        query_string = await create_query_string(rule_uid=rule_uid)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -584,17 +766,17 @@ class Serviceability:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier/account", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier/rules/{rule_uid}", rule_uid=rule_uid), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CompanyDpAccountResponse
-            schema = CompanyDpAccountResponse()
+            from .models import DpRuleUpdateSuccessResponse
+            schema = DpRuleUpdateSuccessResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for upsertDpAccount")
+                print("Response Validation failed for updateDpRule")
                 print(e)
 
         
@@ -644,28 +826,24 @@ class Serviceability:
 
         return response
     
-    async def updateDpRule(self, rule_uid=None, body=""):
-        """This API updates and returns response of DpRules from mongo database.
-        :param rule_uid : A `rule_uid` is a unique identifier for a particular Dp. : type string
+    async def upsertDpRules(self, body=""):
+        """This API returns response of upsert of DpRules in mongo database.
         """
         payload = {}
         
-        if rule_uid is not None:
-            payload["rule_uid"] = rule_uid
-        
 
         # Parameter validation
-        schema = ServiceabilityValidator.updateDpRule()
+        schema = ServiceabilityValidator.upsertDpRules()
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import DpRulesUpdateRequest
-        schema = DpRulesUpdateRequest()
+        from .models import DpRuleRequest
+        schema = DpRuleRequest()
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier/rules/{rule_uid}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"rule_uid","description":"A `rule_uid` is a unique identifier for a particular Dp.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"rule_uid","description":"A `rule_uid` is a unique identifier for a particular Dp.","schema":{"type":"string"},"required":true}]}""", rule_uid=rule_uid)
-        query_string = await create_query_string(rule_uid=rule_uid)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier/rules", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}]}""", )
+        query_string = await create_query_string()
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -675,17 +853,17 @@ class Serviceability:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier/rules/{rule_uid}", rule_uid=rule_uid), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier/rules", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import DpRuleUpdateSuccessResponse
-            schema = DpRuleUpdateSuccessResponse()
+            from .models import DpRuleSuccessResponse
+            schema = DpRuleSuccessResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for updateDpRule")
+                print("Response Validation failed for upsertDpRules")
                 print(e)
 
         
@@ -739,23 +917,23 @@ class Serviceability:
 
         return response
     
-    async def upsertDpRules(self, body=""):
-        """This API returns response of upsert of DpRules in mongo database.
+    async def upsertDpCompanyRules(self, body=""):
+        """This API returns response of upsert of DpCompanyRules in mongo database.
         """
         payload = {}
         
 
         # Parameter validation
-        schema = ServiceabilityValidator.upsertDpRules()
+        schema = ServiceabilityValidator.upsertDpCompanyRules()
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import DpRuleRequest
-        schema = DpRuleRequest()
+        from .models import DPCompanyRuleRequest
+        schema = DPCompanyRuleRequest()
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier/rules", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier/priority", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}]}""", )
         query_string = await create_query_string()
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -766,17 +944,17 @@ class Serviceability:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier/rules", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier/priority", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import DpRuleSuccessResponse
-            schema = DpRuleSuccessResponse()
+            from .models import DPCompanyRuleResponse
+            schema = DPCompanyRuleResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for upsertDpRules")
+                print("Response Validation failed for upsertDpCompanyRules")
                 print(e)
 
         
@@ -816,50 +994,6 @@ class Serviceability:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getDpCompanyRules")
-                print(e)
-
-        
-
-        return response
-    
-    async def upsertDpCompanyRules(self, body=""):
-        """This API returns response of upsert of DpCompanyRules in mongo database.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = ServiceabilityValidator.upsertDpCompanyRules()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import DPCompanyRuleRequest
-        schema = DPCompanyRuleRequest()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier/priority", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}]}""", )
-        query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier/priority", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import DPCompanyRuleResponse
-            schema = DPCompanyRuleResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for upsertDpCompanyRules")
                 print(e)
 
         
