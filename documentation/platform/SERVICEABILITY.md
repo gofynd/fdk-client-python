@@ -10,11 +10,11 @@ Logistics Configuration API's allows you to configure zone, application logistic
 * [getEntityRegionView](#getentityregionview)
 * [getListView](#getlistview)
 * [getCompanyStoreView](#getcompanystoreview)
-* [updateZoneControllerView](#updatezonecontrollerview)
 * [getZoneDataView](#getzonedataview)
+* [updateZoneControllerView](#updatezonecontrollerview)
 * [createZone](#createzone)
-* [getZoneFromPincodeView](#getzonefrompincodeview)
 * [getZonesFromApplicationIdView](#getzonesfromapplicationidview)
+* [getZoneFromPincodeView](#getzonefrompincodeview)
 * [getZoneListView](#getzonelistview)
 * [getStore](#getstore)
 * [getAllStores](#getallstores)
@@ -268,63 +268,6 @@ Get Company Store View Data
 ---
 
 
-### updateZoneControllerView
-Updation of zone collections in database.
-
-
-
-
-```python
-try:
-    result = await platformClient.serviceability.updateZoneControllerView(zoneId=zoneId, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| zoneId | String | yes | A `zone_id` is a unique identifier for a particular zone. |  
-| body | [ZoneUpdateRequest](#ZoneUpdateRequest) | yes | Request body |
-
-
-This API returns response of updation of zone in mongo database.
-
-*Returned Response:*
-
-
-
-
-[ZoneSuccessResponse](#ZoneSuccessResponse)
-
-Response status_code
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
 ### getZoneDataView
 Zone Data View of application.
 
@@ -359,6 +302,63 @@ This API returns Zone Data View of the application.
 [GetSingleZoneDataViewResponse](#GetSingleZoneDataViewResponse)
 
 Get Application Zone Data
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### updateZoneControllerView
+Updation of zone collections in database.
+
+
+
+
+```python
+try:
+    result = await platformClient.serviceability.updateZoneControllerView(zoneId=zoneId, body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| zoneId | String | yes | A `zone_id` is a unique identifier for a particular zone. |  
+| body | [ZoneUpdateRequest](#ZoneUpdateRequest) | yes | Request body |
+
+
+This API returns response of updation of zone in mongo database.
+
+*Returned Response:*
+
+
+
+
+[ZoneSuccessResponse](#ZoneSuccessResponse)
+
+Response status_code
 
 
 
@@ -442,62 +442,6 @@ Response status_code
 ---
 
 
-### getZoneFromPincodeView
-GET zone from the Pincode.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").serviceability.getZoneFromPincodeView(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [GetZoneFromPincodeViewRequest](#GetZoneFromPincodeViewRequest) | yes | Request body |
-
-
-This API returns zone from the Pincode View.
-
-*Returned Response:*
-
-
-
-
-[GetZoneFromPincodeViewResponse](#GetZoneFromPincodeViewResponse)
-
-Response status_code
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
 ### getZonesFromApplicationIdView
 GET zones from the application_id.
 
@@ -535,6 +479,62 @@ This API returns zones from the application_id View.
 [GetZoneFromApplicationIdViewResponse](#GetZoneFromApplicationIdViewResponse)
 
 List of zones for the given application_id
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getZoneFromPincodeView
+GET zone from the Pincode.
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").serviceability.getZoneFromPincodeView(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [GetZoneFromPincodeViewRequest](#GetZoneFromPincodeViewRequest) | yes | Request body |
+
+
+This API returns zone from the Pincode View.
+
+*Returned Response:*
+
+
+
+
+[GetZoneFromPincodeViewResponse](#GetZoneFromPincodeViewResponse)
+
+Response status_code
 
 
 
@@ -1172,26 +1172,26 @@ Response Data
 
  
  
- #### [ApplicationServiceabilityConfig](#ApplicationServiceabilityConfig)
+ #### [ServiceabilityErrorResponse](#ServiceabilityErrorResponse)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | channelId | String |  no  |  |
- | channelType | String |  no  |  |
- | serviceabilityType | String |  no  |  |
+ | type | String |  no  |  |
+ | message | String |  no  |  |
+ | value | String |  no  |  |
 
 ---
 
 
  
  
- #### [ServiceabilityErrorResponse](#ServiceabilityErrorResponse)
+ #### [ApplicationServiceabilityConfig](#ApplicationServiceabilityConfig)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | message | String |  no  |  |
- | value | String |  no  |  |
- | type | String |  no  |  |
+ | serviceabilityType | String |  no  |  |
+ | channelId | String |  no  |  |
+ | channelType | String |  no  |  |
 
 ---
 
@@ -1202,8 +1202,8 @@ Response Data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | data | [ApplicationServiceabilityConfig](#ApplicationServiceabilityConfig)? |  yes  |  |
  | error | [ServiceabilityErrorResponse](#ServiceabilityErrorResponse)? |  yes  |  |
+ | data | [ApplicationServiceabilityConfig](#ApplicationServiceabilityConfig)? |  yes  |  |
  | success | Boolean |  no  |  |
 
 ---
@@ -1223,26 +1223,13 @@ Response Data
 
  
  
- #### [EntityRegionView_Items](#EntityRegionView_Items)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | subType | String |  no  |  |
- | name | String |  no  |  |
- | uid | String |  no  |  |
-
----
-
-
- 
- 
  #### [EntityRegionView_Error](#EntityRegionView_Error)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | type | String? |  yes  |  |
  | message | String? |  yes  |  |
  | value | String? |  yes  |  |
- | type | String? |  yes  |  |
 
 ---
 
@@ -1254,10 +1241,23 @@ Response Data
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | type | String |  no  |  |
- | current | Int |  no  |  |
- | hasNext | Boolean |  no  |  |
  | itemTotal | Int |  no  |  |
+ | hasNext | Boolean |  no  |  |
  | size | Int |  no  |  |
+ | current | Int |  no  |  |
+
+---
+
+
+ 
+ 
+ #### [EntityRegionView_Items](#EntityRegionView_Items)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | name | String |  no  |  |
+ | subType | String |  no  |  |
+ | uid | String |  no  |  |
 
 ---
 
@@ -1268,25 +1268,10 @@ Response Data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | data | ArrayList<[EntityRegionView_Items](#EntityRegionView_Items)> |  no  |  |
  | error | [EntityRegionView_Error](#EntityRegionView_Error) |  no  |  |
- | page | [EntityRegionView_page](#EntityRegionView_page) |  no  |  |
  | success | Boolean |  no  |  |
-
----
-
-
- 
- 
- #### [ZoneDataItem](#ZoneDataItem)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | current | Int |  no  |  |
- | type | String |  no  |  |
- | hasNext | Boolean |  no  |  |
- | itemTotal | Int |  no  |  |
- | size | Int |  no  |  |
+ | page | [EntityRegionView_page](#EntityRegionView_page) |  no  |  |
+ | data | ArrayList<[EntityRegionView_Items](#EntityRegionView_Items)> |  no  |  |
 
 ---
 
@@ -1297,21 +1282,24 @@ Response Data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | totalPincodesServed | Int |  no  |  |
- | totalActiveZones | Int |  no  |  |
  | totalZones | Int |  no  |  |
+ | totalActiveZones | Int |  no  |  |
+ | totalPincodesServed | Int |  no  |  |
 
 ---
 
 
  
  
- #### [ListViewProduct](#ListViewProduct)
+ #### [ZoneDataItem](#ZoneDataItem)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | count | Int |  no  |  |
+ | itemTotal | Int |  no  |  |
+ | hasNext | Boolean |  no  |  |
+ | size | Int |  no  |  |
  | type | String |  no  |  |
+ | current | Int |  no  |  |
 
 ---
 
@@ -1330,18 +1318,30 @@ Response Data
 
  
  
+ #### [ListViewProduct](#ListViewProduct)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | type | String |  no  |  |
+ | count | Int |  no  |  |
+
+---
+
+
+ 
+ 
  #### [ListViewItems](#ListViewItems)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | name | String |  no  |  |
+ | channels | [ListViewChannels](#ListViewChannels) |  no  |  |
  | zoneId | String |  no  |  |
  | pincodesCount | Int |  no  |  |
- | isActive | Boolean |  no  |  |
  | companyId | Int |  no  |  |
- | product | [ListViewProduct](#ListViewProduct) |  no  |  |
  | slug | String |  no  |  |
- | channels | [ListViewChannels](#ListViewChannels) |  no  |  |
- | name | String |  no  |  |
+ | isActive | Boolean |  no  |  |
+ | product | [ListViewProduct](#ListViewProduct) |  no  |  |
  | storesCount | Int |  no  |  |
 
 ---
@@ -1353,8 +1353,8 @@ Response Data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | page | ArrayList<[ZoneDataItem](#ZoneDataItem)> |  no  |  |
  | summary | ArrayList<[ListViewSummary](#ListViewSummary)> |  no  |  |
+ | page | ArrayList<[ZoneDataItem](#ZoneDataItem)> |  no  |  |
  | items | ArrayList<[ListViewItems](#ListViewItems)> |  no  |  |
 
 ---
@@ -1367,10 +1367,10 @@ Response Data
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | type | String |  no  |  |
- | current | Int |  no  |  |
- | hasNext | Boolean |  no  |  |
  | itemTotal | Int |  no  |  |
+ | hasNext | Boolean |  no  |  |
  | size | Int |  no  |  |
+ | current | Int |  no  |  |
 
 ---
 
@@ -1405,8 +1405,8 @@ Response Data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | tags | ArrayList<String> |  no  |  |
  | type | String |  no  |  |
+ | tags | ArrayList<String> |  no  |  |
 
 ---
 
@@ -1417,9 +1417,43 @@ Response Data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | pincode | ArrayList<String>? |  yes  |  |
  | country | String |  no  |  |
+ | pincode | ArrayList<String>? |  yes  |  |
  | state | ArrayList<String>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [GetZoneDataViewItems](#GetZoneDataViewItems)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | zoneId | String |  no  |  |
+ | name | String |  no  |  |
+ | slug | String |  no  |  |
+ | companyId | Int? |  yes  |  |
+ | isActive | Boolean |  no  |  |
+ | channels | ArrayList<[GetZoneDataViewChannels](#GetZoneDataViewChannels)> |  no  |  |
+ | product | [ZoneProductTypes](#ZoneProductTypes) |  no  |  |
+ | storeIds | ArrayList<Int> |  no  |  |
+ | regionType | String |  no  |  |
+ | mapping | ArrayList<[ZoneMappingType](#ZoneMappingType)> |  no  |  |
+ | assignmentPreference | String? |  yes  |  |
+ | storesCount | Int |  no  |  |
+ | pincodesCount | Int |  no  |  |
+
+---
+
+
+ 
+ 
+ #### [GetSingleZoneDataViewResponse](#GetSingleZoneDataViewResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | data | [GetZoneDataViewItems](#GetZoneDataViewItems) |  no  |  |
 
 ---
 
@@ -1471,40 +1505,6 @@ Response Data
 
  
  
- #### [GetZoneDataViewItems](#GetZoneDataViewItems)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | zoneId | String |  no  |  |
- | name | String |  no  |  |
- | slug | String |  no  |  |
- | companyId | Int? |  yes  |  |
- | isActive | Boolean |  no  |  |
- | channels | ArrayList<[GetZoneDataViewChannels](#GetZoneDataViewChannels)> |  no  |  |
- | product | [ZoneProductTypes](#ZoneProductTypes) |  no  |  |
- | storeIds | ArrayList<Int> |  no  |  |
- | regionType | String |  no  |  |
- | mapping | ArrayList<[ZoneMappingType](#ZoneMappingType)> |  no  |  |
- | assignmentPreference | String? |  yes  |  |
- | storesCount | Int |  no  |  |
- | pincodesCount | Int |  no  |  |
-
----
-
-
- 
- 
- #### [GetSingleZoneDataViewResponse](#GetSingleZoneDataViewResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | data | [GetZoneDataViewItems](#GetZoneDataViewItems) |  no  |  |
-
----
-
-
- 
- 
  #### [CreateZoneData](#CreateZoneData)
 
  | Properties | Type | Nullable | Description |
@@ -1541,33 +1541,9 @@ Response Data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | zoneId | String |  no  |  |
  | success | Boolean |  no  |  |
+ | zoneId | String |  no  |  |
  | statusCode | Int |  no  |  |
-
----
-
-
- 
- 
- #### [GetZoneFromPincodeViewRequest](#GetZoneFromPincodeViewRequest)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | pincode | String |  no  |  |
- | country | String |  no  |  |
-
----
-
-
- 
- 
- #### [GetZoneFromPincodeViewResponse](#GetZoneFromPincodeViewResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | zones | ArrayList<String> |  no  |  |
- | serviceabilityType | String |  no  |  |
 
 ---
 
@@ -1586,27 +1562,94 @@ Response Data
 
  
  
- #### [PageResponse](#PageResponse)
+ #### [GetZoneFromPincodeViewRequest](#GetZoneFromPincodeViewRequest)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | type | String? |  yes  |  |
- | current | Int? |  yes  |  |
- | hasNext | Boolean? |  yes  |  |
- | itemTotal | Int? |  yes  |  |
- | size | Int? |  yes  |  |
+ | country | String |  no  |  |
+ | pincode | String |  no  |  |
 
 ---
 
 
  
  
- #### [ContactNumberResponse](#ContactNumberResponse)
+ #### [Zone](#Zone)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | countryCode | Int? |  yes  |  |
- | number | String? |  yes  |  |
+ | type | String |  no  |  |
+ | name | String |  no  |  |
+ | zoneId | String |  no  |  |
+ | slug | String |  no  |  |
+ | storeIds | ArrayList<Int> |  no  |  |
+ | assignmentPreference | String |  no  |  |
+ | isActive | Boolean |  no  |  |
+ | tags | ArrayList<String> |  no  |  |
+
+---
+
+
+ 
+ 
+ #### [GetZoneFromPincodeViewResponse](#GetZoneFromPincodeViewResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | serviceabilityType | String |  no  |  |
+ | zones | ArrayList<[Zone](#Zone)> |  no  |  |
+
+---
+
+
+ 
+ 
+ #### [PageResponse](#PageResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | type | String? |  yes  |  |
+ | itemTotal | Int? |  yes  |  |
+ | hasNext | Boolean? |  yes  |  |
+ | size | Int? |  yes  |  |
+ | current | Int? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [OpeningClosing](#OpeningClosing)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | minute | Int? |  yes  |  |
+ | hour | Int? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [TimmingResponse](#TimmingResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | opening | [OpeningClosing](#OpeningClosing)? |  yes  |  |
+ | closing | [OpeningClosing](#OpeningClosing)? |  yes  |  |
+ | weekday | String? |  yes  |  |
+ | open | Boolean? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [ProductReturnConfigResponse](#ProductReturnConfigResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | onSameStore | Boolean? |  yes  |  |
 
 ---
 
@@ -1617,16 +1660,16 @@ Response Data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | fmPriority | Int? |  yes  |  |
- | operations | ArrayList<String>? |  yes  |  |
- | paymentMode | String? |  yes  |  |
  | internalAccountId | String? |  yes  |  |
- | rvpPriority | Int? |  yes  |  |
  | areaCode | Int? |  yes  |  |
- | lmPriority | Int? |  yes  |  |
- | externalAccountId | String? |  yes  |  |
  | assignDpFromSb | Boolean? |  yes  |  |
+ | paymentMode | String? |  yes  |  |
+ | operations | ArrayList<String>? |  yes  |  |
+ | lmPriority | Int? |  yes  |  |
  | transportMode | String? |  yes  |  |
+ | rvpPriority | Int? |  yes  |  |
+ | fmPriority | Int? |  yes  |  |
+ | externalAccountId | String? |  yes  |  |
 
 ---
 
@@ -1645,11 +1688,94 @@ Response Data
 
  
  
- #### [ProductReturnConfigResponse](#ProductReturnConfigResponse)
+ #### [IntegrationTypeResponse](#IntegrationTypeResponse)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | onSameStore | Boolean? |  yes  |  |
+ | inventory | String? |  yes  |  |
+ | order | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [CreatedByResponse](#CreatedByResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | userId | String? |  yes  |  |
+ | username | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [DocumentsResponse](#DocumentsResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | value | String? |  yes  |  |
+ | type | String? |  yes  |  |
+ | legalName | String? |  yes  |  |
+ | verified | Boolean? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [ContactNumberResponse](#ContactNumberResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | number | String? |  yes  |  |
+ | countryCode | Int? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [MobileNo](#MobileNo)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | number | String? |  yes  |  |
+ | countryCode | Int? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [ManagerResponse](#ManagerResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | name | String? |  yes  |  |
+ | email | String? |  yes  |  |
+ | mobileNo | [MobileNo](#MobileNo)? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [AddressResponse](#AddressResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | city | String? |  yes  |  |
+ | state | String? |  yes  |  |
+ | latitude | Double? |  yes  |  |
+ | country | String? |  yes  |  |
+ | longitude | Double? |  yes  |  |
+ | landmark | String? |  yes  |  |
+ | address2 | String? |  yes  |  |
+ | pincode | Int? |  yes  |  |
+ | address1 | String? |  yes  |  |
 
 ---
 
@@ -1668,52 +1794,11 @@ Response Data
 
  
  
- #### [IntegrationTypeResponse](#IntegrationTypeResponse)
+ #### [WarningsResponse](#WarningsResponse)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | order | String? |  yes  |  |
- | inventory | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [OpeningClosing](#OpeningClosing)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | hour | Int? |  yes  |  |
- | minute | Int? |  yes  |  |
-
----
-
-
- 
- 
- #### [TimmingResponse](#TimmingResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | closing | [OpeningClosing](#OpeningClosing)? |  yes  |  |
- | opening | [OpeningClosing](#OpeningClosing)? |  yes  |  |
- | weekday | String? |  yes  |  |
- | open | Boolean? |  yes  |  |
-
----
-
-
- 
- 
- #### [DocumentsResponse](#DocumentsResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | verified | Boolean? |  yes  |  |
- | legalName | String? |  yes  |  |
- | value | String? |  yes  |  |
- | type | String? |  yes  |  |
+ | storeAddress | String? |  yes  |  |
 
 ---
 
@@ -1754,105 +1839,38 @@ Response Data
 
  
  
- #### [WarningsResponse](#WarningsResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | storeAddress | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [MobileNo](#MobileNo)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | countryCode | Int? |  yes  |  |
- | number | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [ManagerResponse](#ManagerResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | mobileNo | [MobileNo](#MobileNo)? |  yes  |  |
- | email | String? |  yes  |  |
- | name | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [AddressResponse](#AddressResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | latitude | Double? |  yes  |  |
- | address1 | String? |  yes  |  |
- | city | String? |  yes  |  |
- | state | String? |  yes  |  |
- | landmark | String? |  yes  |  |
- | longitude | Double? |  yes  |  |
- | country | String? |  yes  |  |
- | address2 | String? |  yes  |  |
- | pincode | Int? |  yes  |  |
-
----
-
-
- 
- 
- #### [CreatedByResponse](#CreatedByResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | userId | String? |  yes  |  |
- | username | String? |  yes  |  |
-
----
-
-
- 
- 
  #### [ItemResponse](#ItemResponse)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | contactNumbers | ArrayList<[ContactNumberResponse](#ContactNumberResponse)>? |  yes  |  |
- | logistics | [LogisticsResponse](#LogisticsResponse)? |  yes  |  |
- | productReturnConfig | [ProductReturnConfigResponse](#ProductReturnConfigResponse)? |  yes  |  |
- | verifiedOn | String? |  yes  |  |
- | customJson | HashMap<String,Any>? |  yes  |  |
- | name | String? |  yes  |  |
- | verifiedBy | [ModifiedByResponse](#ModifiedByResponse)? |  yes  |  |
- | company | Int? |  yes  |  |
- | notificationEmails | ArrayList<String>? |  yes  |  |
- | modifiedBy | [ModifiedByResponse](#ModifiedByResponse)? |  yes  |  |
- | stage | String? |  yes  |  |
- | uid | Int? |  yes  |  |
- | integrationType | [IntegrationTypeResponse](#IntegrationTypeResponse)? |  yes  |  |
- | code | String? |  yes  |  |
- | displayName | String? |  yes  |  |
- | cls | String? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
- | storeType | String? |  yes  |  |
  | subType | String? |  yes  |  |
+ | cls | String? |  yes  |  |
  | timing | ArrayList<[TimmingResponse](#TimmingResponse)>? |  yes  |  |
- | createdOn | String? |  yes  |  |
- | documents | ArrayList<[DocumentsResponse](#DocumentsResponse)>? |  yes  |  |
+ | productReturnConfig | [ProductReturnConfigResponse](#ProductReturnConfigResponse)? |  yes  |  |
  | companyId | Int? |  yes  |  |
- | gstCredentials | [GstCredentialsResponse](#GstCredentialsResponse)? |  yes  |  |
- | warnings | [WarningsResponse](#WarningsResponse)? |  yes  |  |
+ | logistics | [LogisticsResponse](#LogisticsResponse)? |  yes  |  |
+ | integrationType | [IntegrationTypeResponse](#IntegrationTypeResponse)? |  yes  |  |
+ | customJson | HashMap<String,Any>? |  yes  |  |
+ | code | String? |  yes  |  |
+ | verifiedOn | String? |  yes  |  |
+ | company | Int? |  yes  |  |
+ | createdBy | [CreatedByResponse](#CreatedByResponse)? |  yes  |  |
+ | storeType | String? |  yes  |  |
+ | stage | String? |  yes  |  |
+ | documents | ArrayList<[DocumentsResponse](#DocumentsResponse)>? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | contactNumbers | ArrayList<[ContactNumberResponse](#ContactNumberResponse)>? |  yes  |  |
  | manager | [ManagerResponse](#ManagerResponse)? |  yes  |  |
  | address | [AddressResponse](#AddressResponse)? |  yes  |  |
- | createdBy | [CreatedByResponse](#CreatedByResponse)? |  yes  |  |
+ | modifiedBy | [ModifiedByResponse](#ModifiedByResponse)? |  yes  |  |
+ | displayName | String? |  yes  |  |
+ | name | String? |  yes  |  |
+ | notificationEmails | ArrayList<String>? |  yes  |  |
+ | verifiedBy | [ModifiedByResponse](#ModifiedByResponse)? |  yes  |  |
+ | createdOn | String? |  yes  |  |
+ | warnings | [WarningsResponse](#WarningsResponse)? |  yes  |  |
+ | gstCredentials | [GstCredentialsResponse](#GstCredentialsResponse)? |  yes  |  |
 
 ---
 
@@ -2001,10 +2019,10 @@ Response Data
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | type | String |  no  |  |
- | current | Int |  no  |  |
- | hasNext | Boolean |  no  |  |
  | itemTotal | Int |  no  |  |
+ | hasNext | Boolean |  no  |  |
  | size | Int |  no  |  |
+ | current | Int |  no  |  |
 
 ---
 
