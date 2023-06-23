@@ -34,7 +34,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
     
     
         
@@ -152,12 +151,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
-        
-        
-        
-    
-    
         
         
         
@@ -351,8 +344,6 @@ class OrderValidator:
         ordering_channel = fields.Str(required=False)
         
         company_affiliate_tag = fields.Str(required=False)
-        
-        platform_user_id = fields.Str(required=False)
          
         
     
@@ -461,7 +452,7 @@ class OrderValidator:
         
         custom_meta = fields.Str(required=False)
         
-        platform_user_id = fields.Str(required=False)
+        my_orders = fields.Boolean(required=False)
          
         
     
@@ -611,19 +602,6 @@ class OrderValidator:
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
-         
-        
-    
-    class generatePOSReceiptByOrderId(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        order_id = fields.Str(required=False)
-        
-        shipment_id = fields.Str(required=False)
-        
-        document_type = fields.Str(required=False)
          
         
     

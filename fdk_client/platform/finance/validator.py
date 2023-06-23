@@ -125,7 +125,7 @@ class FinanceValidator:
          
         
     
-    class getInvoiceType(BaseSchema):
+    class invoiceType(BaseSchema):
         
         
         company_id = fields.Str(required=False)

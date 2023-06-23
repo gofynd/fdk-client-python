@@ -72,6 +72,14 @@ class MarketplaceThemeResponseBody(BaseSchema):
     pass
 
 
+class ArrayOfMarketplaceTheme(BaseSchema):
+    pass
+
+
+class ThemeCreateRequest(BaseSchema):
+    pass
+
+
 class MarketplaceTheme(BaseSchema):
     pass
 
@@ -88,7 +96,7 @@ class CatalogSize(BaseSchema):
     pass
 
 
-class Images(BaseSchema):
+class MarketplaceThemeImages(BaseSchema):
     pass
 
 
@@ -156,6 +164,22 @@ class ThemeAndUserDetailsResponse(BaseSchema):
     pass
 
 
+class ThemeRejectionReasons(BaseSchema):
+    pass
+
+
+class RejectionReason(BaseSchema):
+    pass
+
+
+class ThemeReviewRequest(BaseSchema):
+    pass
+
+
+class UpdateReviewStatusRequest(BaseSchema):
+    pass
+
+
 class AllAvailablePageSchema(BaseSchema):
     pass
 
@@ -209,6 +233,10 @@ class availableSectionSchema(BaseSchema):
 
 
 class Information(BaseSchema):
+    pass
+
+
+class Images(BaseSchema):
     pass
 
 
@@ -737,9 +765,27 @@ class MarketplaceThemeResponseBody(BaseSchema):
     # Theme swagger.json
 
     
-    items = fields.List(fields.Nested(MarketplaceTheme, required=False), required=False)
+    themes = fields.List(fields.Nested(MarketplaceTheme, required=False), required=False)
     
     page = fields.Nested(PaginationSchema, required=False)
+    
+
+
+class ArrayOfMarketplaceTheme(BaseSchema):
+    # Theme swagger.json
+
+    
+    body = fields.List(fields.Nested(MarketplaceTheme, required=False), required=False)
+    
+
+
+class ThemeCreateRequest(BaseSchema):
+    # Theme swagger.json
+
+    
+    src = fields.Str(required=False)
+    
+    release = fields.Nested(Release, required=False)
     
 
 
@@ -767,7 +813,7 @@ class MarketplaceTheme(BaseSchema):
     
     catalog_size = fields.Nested(CatalogSize, required=False)
     
-    images = fields.Nested(Images, required=False)
+    images = fields.Nested(MarketplaceThemeImages, required=False)
     
     carousel = fields.List(fields.Nested(CarouselItem, required=False), required=False)
     
@@ -835,19 +881,13 @@ class CatalogSize(BaseSchema):
     
 
 
-class Images(BaseSchema):
+class MarketplaceThemeImages(BaseSchema):
     # Theme swagger.json
 
     
-    desktop = fields.List(fields.Str(required=False), required=False)
+    desktop = fields.Str(required=False)
     
     mobile = fields.Str(required=False)
-    
-    android = fields.List(fields.Str(required=False), required=False)
-    
-    ios = fields.List(fields.Str(required=False), required=False)
-    
-    thumbnail = fields.List(fields.Str(required=False), required=False)
     
 
 
@@ -913,7 +953,7 @@ class Variation(BaseSchema):
     
     demo_url = fields.Str(required=False)
     
-    images = fields.Nested(Images, required=False)
+    images = fields.Nested(MarketplaceThemeImages, required=False)
     
 
 
@@ -1038,6 +1078,56 @@ class ThemeAndUserDetailsResponse(BaseSchema):
     themes = fields.List(fields.Nested(MarketplaceTheme, required=False), required=False)
     
     user = fields.List(fields.Nested(ThemeCreator, required=False), required=False)
+    
+
+
+class ThemeRejectionReasons(BaseSchema):
+    # Theme swagger.json
+
+    
+    _id = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
+    
+    theme_id = fields.Str(required=False)
+    
+    organization_id = fields.Str(required=False)
+    
+    admin_id = fields.Str(required=False)
+    
+    user_id = fields.Str(required=False)
+    
+    status = fields.Str(required=False)
+    
+    rejection_reasons = fields.Dict(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    updated_at = fields.Str(required=False)
+    
+
+
+class RejectionReason(BaseSchema):
+    # Theme swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+
+
+class ThemeReviewRequest(BaseSchema):
+    # Theme swagger.json
+
+    
+    dynamic_properties = fields.Dict(required=False)
+    
+
+
+class UpdateReviewStatusRequest(BaseSchema):
+    # Theme swagger.json
+
+    
+    status = fields.Str(required=False)
     
 
 
@@ -1236,6 +1326,20 @@ class Information(BaseSchema):
     name = fields.Str(required=False)
     
     description = fields.Str(required=False)
+    
+
+
+class Images(BaseSchema):
+    # Theme swagger.json
+
+    
+    desktop = fields.List(fields.Str(required=False), required=False)
+    
+    android = fields.List(fields.Str(required=False), required=False)
+    
+    ios = fields.List(fields.Str(required=False), required=False)
+    
+    thumbnail = fields.List(fields.Str(required=False), required=False)
     
 
 
