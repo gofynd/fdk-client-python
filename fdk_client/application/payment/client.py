@@ -31,6 +31,7 @@ class Payment:
             "resendOrCancelPayment": "/service/application/payment/v1.0/payment/resend_or_cancel",
             "renderHTML": "/service/application/payment/v1.0/payment/html/render/",
             "validateVPA": "/service/application/payment/v1.0/validate-vpa",
+            "cardDetails": "/service/application/payment/v1.0/cards/info/{card_info}",
             "getActiveRefundTransferModes": "/service/application/payment/v1.0/refund/transfer-mode",
             "enableOrDisableRefundTransferMode": "/service/application/payment/v1.0/refund/transfer-mode",
             "getUserBeneficiariesDetail": "/service/application/payment/v1.0/refund/user/beneficiary",
@@ -804,6 +805,53 @@ class Payment:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for validateVPA")
+                print(e)
+
+        
+
+        return response
+    
+    async def cardDetails(self, card_info=None, aggregator=None, body=""):
+        """API to get Card info from PG
+        :param card_info : Card first 6 digit IIN(prefix) number. : type string
+        :param aggregator :  : type string
+        """
+        payload = {}
+        
+        if card_info is not None:
+            payload["card_info"] = card_info
+        
+        if aggregator is not None:
+            payload["aggregator"] = aggregator
+        
+        # Parameter validation
+        schema = PaymentValidator.cardDetails()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["cardDetails"], proccessed_params="""{"required":[{"name":"card_info","in":"path","description":"Card first 6 digit IIN(prefix) number.","schema":{"type":"string"},"required":true}],"optional":[{"name":"aggregator","in":"query","schema":{"type":"string","default":"juspay","description":"This is a string value decribing the aggregator name."}}],"query":[{"name":"aggregator","in":"query","schema":{"type":"string","default":"juspay","description":"This is a string value decribing the aggregator name."}}],"headers":[],"path":[{"name":"card_info","in":"path","description":"Card first 6 digit IIN(prefix) number.","schema":{"type":"string"},"required":true}]}""", card_info=card_info, aggregator=aggregator)
+        query_string = await create_query_string(card_info=card_info, aggregator=aggregator)
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["cardDetails"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/cards/info/{card_info}", card_info=card_info, aggregator=aggregator), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CardDetailsResponse
+            schema = CardDetailsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for cardDetails")
                 print(e)
 
         

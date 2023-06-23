@@ -51,6 +51,10 @@ from ..ApplicationModel import BaseSchema
     
     
     
+        
+        
+    
+    
     
     
         
@@ -217,6 +221,15 @@ class PaymentValidator:
     class validateVPA(BaseSchema):
         
         pass 
+        
+    
+    class cardDetails(BaseSchema):
+        
+        
+        card_info = fields.Str(required=False)
+        
+        aggregator = fields.Str(required=False)
+         
         
     
     class getActiveRefundTransferModes(BaseSchema):
