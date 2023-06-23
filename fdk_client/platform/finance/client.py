@@ -364,6 +364,94 @@ class Finance:
 
         return response
     
+    async def creditlineDataplatform(self, body=""):
+        """
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = FinanceValidator.creditlineDataplatform()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import CreditlineDataPlatformRequest
+        schema = CreditlineDataPlatformRequest()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/credit-line-data", """{"required":[{"in":"path","name":"company_id","description":"Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company_id is required.","schema":{"type":"string"},"required":true}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/credit-line-data", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreditlineDataPlatformResponse
+            schema = CreditlineDataPlatformResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for creditlineDataplatform")
+                print(e)
+
+        
+
+        return response
+    
+    async def isCreditlinePlatform(self, body=""):
+        """
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = FinanceValidator.isCreditlinePlatform()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import IsCreditlinePlatformRequest
+        schema = IsCreditlinePlatformRequest()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/creditline-opted", """{"required":[{"in":"path","name":"company_id","description":"Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company_id is required.","schema":{"type":"string"},"required":true}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/creditline-opted", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import IsCreditlinePlatformResponse
+            schema = IsCreditlinePlatformResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for isCreditlinePlatform")
+                print(e)
+
+        
+
+        return response
+    
     async def getInvoiceType(self, body=""):
         """
         """

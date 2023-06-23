@@ -1047,6 +1047,8 @@ class ListingPriceFeature(BaseSchema):
     
     value = fields.Str(required=False)
     
+    sort = fields.Str(required=False)
+    
 
 
 class CurrencyFeature(BaseSchema):

@@ -43,6 +43,12 @@ from ..PlatformModel import BaseSchema
     
     
         
+    
+    
+        
+    
+    
+        
 
 
 
@@ -99,6 +105,20 @@ class FinanceValidator:
         
     
     class paymentProcess(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class creditlineDataplatform(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class isCreditlinePlatform(BaseSchema):
         
         
         company_id = fields.Str(required=False)
