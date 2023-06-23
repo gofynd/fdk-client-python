@@ -26,6 +26,7 @@ from ..ApplicationModel import BaseSchema
         
         
         
+        
     
     
         
@@ -187,6 +188,8 @@ class PosCartValidator:
         area_code = fields.Str(required=False)
         
         buy_now = fields.Boolean(required=False)
+        
+        id = fields.Str(required=False)
          
         
     

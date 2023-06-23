@@ -75,6 +75,13 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
+        
+    
+    
+        
+        
+        
     
     
         
@@ -91,23 +98,8 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
-        
-        
-        
-        
-        
-        
     
     
-        
-        
-        
-        
-    
-    
-        
-        
         
         
     
@@ -125,15 +117,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
-        
-        
-        
-        
-        
-        
-        
         
         
         
@@ -142,10 +125,29 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
         
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
         
         
 
@@ -232,7 +234,7 @@ class CartValidator:
         
         q = fields.Str(required=False)
         
-        status = fields.Str(required=False)
+        is_active = fields.Boolean(required=False)
         
         promo_group = fields.Str(required=False)
         
@@ -292,6 +294,39 @@ class CartValidator:
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
+        
+        entity_type = fields.Str(required=False)
+        
+        is_hidden = fields.Boolean(required=False)
+         
+        
+    
+    class updateCartMetaConfig(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        cart_meta_id = fields.Str(required=False)
+         
+        
+    
+    class fetchCartMetaConfig(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class createCartMetaConfig(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
          
         
     
@@ -345,6 +380,21 @@ class CartValidator:
          
         
     
+    class getAbandonedCartDetails(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+        
+        i = fields.Boolean(required=False)
+        
+        b = fields.Boolean(required=False)
+         
+        
+    
     class addItems(BaseSchema):
         
         
@@ -371,30 +421,7 @@ class CartValidator:
          
         
     
-    class getAddresses(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        cart_id = fields.Str(required=False)
-        
-        buy_now = fields.Boolean(required=False)
-        
-        mobile_no = fields.Str(required=False)
-        
-        checkout_mode = fields.Str(required=False)
-        
-        tags = fields.Str(required=False)
-        
-        is_default = fields.Boolean(required=False)
-        
-        user_id = fields.Str(required=False)
-         
-        
-    
-    class addAddress(BaseSchema):
+    class getCouponOptionValues(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -403,52 +430,34 @@ class CartValidator:
          
         
     
-    class getAddressById(BaseSchema):
+    class getCouponCodeExists(BaseSchema):
         
         
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
         
-        id = fields.Str(required=False)
-        
-        cart_id = fields.Str(required=False)
-        
-        buy_now = fields.Boolean(required=False)
-        
-        mobile_no = fields.Str(required=False)
-        
-        checkout_mode = fields.Str(required=False)
-        
-        tags = fields.Str(required=False)
-        
-        is_default = fields.Boolean(required=False)
-        
-        user_id = fields.Str(required=False)
+        code = fields.Str(required=False)
          
         
     
-    class updateAddress(BaseSchema):
+    class getPromotionCodeExists(BaseSchema):
         
         
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
         
-        id = fields.Str(required=False)
+        code = fields.Str(required=False)
          
         
     
-    class removeAddress(BaseSchema):
+    class overrideCart(BaseSchema):
         
         
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-        
-        user_id = fields.Str(required=False)
          
         
     

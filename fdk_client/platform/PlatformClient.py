@@ -22,11 +22,11 @@ from .companyprofile.client import CompanyProfile
 
 from .filestorage.client import FileStorage
 
-from .inventory.client import Inventory
-
 from .configuration.client import Configuration
 
 from .discount.client import Discount
+
+from .partner.client import Partner
 
 from .webhook.client import Webhook
 
@@ -57,11 +57,11 @@ class PlatformClient:
         
         self.fileStorage = FileStorage(config)
         
-        self.inventory = Inventory(config)
-        
         self.configuration = Configuration(config)
         
         self.discount = Discount(config)
+        
+        self.partner = Partner(config)
         
         self.webhook = Webhook(config)
         

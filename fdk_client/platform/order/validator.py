@@ -181,13 +181,10 @@ from ..PlatformModel import BaseSchema
     
     
         
-        
-        
     
     
         
-    
-    
+        
         
     
     
@@ -353,7 +350,7 @@ class OrderValidator:
         
         stores = fields.Str(required=False)
         
-        sales_channel = fields.Str(required=False)
+        sales_channels = fields.Str(required=False)
         
         page_no = fields.Int(required=False)
         
@@ -544,9 +541,9 @@ class OrderValidator:
         
         bag_id = fields.Str(required=False)
         
-        calling_to = fields.Str(required=False)
-        
         caller_id = fields.Str(required=False)
+        
+        method = fields.Str(required=False)
         
         company_id = fields.Int(required=False)
          
@@ -580,17 +577,6 @@ class OrderValidator:
          
         
     
-    class getShipmentHistory(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        shipment_id = fields.Int(required=False)
-        
-        bag_id = fields.Int(required=False)
-         
-        
-    
     class postShipmentHistory(BaseSchema):
         
         
@@ -598,14 +584,18 @@ class OrderValidator:
          
         
     
-    class sendSmsNinja(BaseSchema):
+    class getShipmentHistory(BaseSchema):
         
         
         company_id = fields.Int(required=False)
+        
+        shipment_id = fields.Str(required=False)
+        
+        bag_id = fields.Int(required=False)
          
         
     
-    class platformManualAssignDPToShipment(BaseSchema):
+    class sendSmsNinja(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -626,14 +616,14 @@ class OrderValidator:
          
         
     
-    class getChannelConfig(BaseSchema):
+    class createChannelConfig(BaseSchema):
         
         
         company_id = fields.Int(required=False)
          
         
     
-    class createChannelConfig(BaseSchema):
+    class getChannelConfig(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -661,7 +651,7 @@ class OrderValidator:
          
         
     
-    class sendSmsNinjaPlatform(BaseSchema):
+    class getStateTransitionMap(BaseSchema):
         
         
         company_id = fields.Int(required=False)
