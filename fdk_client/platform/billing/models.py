@@ -421,6 +421,8 @@ class DetailedPlanComponents(BaseSchema):
     
     display_text = fields.Str(required=False)
     
+    config = fields.Dict(required=False)
+    
 
 
 class DetailedPlan(BaseSchema):
@@ -1229,17 +1231,25 @@ class Subscription(BaseSchema):
     
     latest_invoice = fields.Str(required=False)
     
+    channel_type = fields.Str(required=False)
+    
 
 
 class SubscriptionStatus(BaseSchema):
     # Billing swagger.json
 
     
-    mandate_amount = fields.Float(required=False)
-    
     is_enabled = fields.Boolean(required=False)
     
     subscription = fields.Nested(Subscription, required=False)
+    
+    latest_invoice = fields.Nested(InvoicesData, required=False)
+    
+    next_plan = fields.Nested(Plan, required=False)
+    
+    current_subscriptions = fields.List(fields.Nested(Subscription, required=False), required=False)
+    
+    mandate_amount = fields.Str(required=False)
     
 
 
