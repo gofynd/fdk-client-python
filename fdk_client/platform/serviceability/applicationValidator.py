@@ -41,6 +41,26 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
 
 class ServiceabilityValidator:
     
@@ -80,6 +100,15 @@ class ServiceabilityValidator:
          
         
     
+    class addAppDp(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
     class updatePincodeMopView(BaseSchema):
         
         
@@ -108,6 +137,42 @@ class ServiceabilityValidator:
         
     
     class updatePincodeAuditHistory(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class upsertDpApplicationRulePriority(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getDpApplicationRulePriority(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getApplicationServiceabilitySelfShipment(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class patchApplicationServiceabilitySelfShipment(BaseSchema):
         
         
         company_id = fields.Str(required=False)
