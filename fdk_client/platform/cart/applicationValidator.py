@@ -75,6 +75,17 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
     
     
         
@@ -87,6 +98,14 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
+        
+    
+    
+        
+        
         
         
         
@@ -125,6 +144,10 @@ from ..PlatformModel import BaseSchema
     
     
         
+        
+        
+    
+    
         
         
 
@@ -265,6 +288,48 @@ class CartValidator:
          
         
     
+    class getPromosCouponConfig(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        entity_type = fields.Str(required=False)
+        
+        is_hidden = fields.Boolean(required=False)
+         
+        
+    
+    class updateCartMetaConfig(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        cart_meta_id = fields.Str(required=False)
+         
+        
+    
+    class fetchCartMetaConfig(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class createCartMetaConfig(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
     class fetchAndvalidateCartItems(BaseSchema):
         
         
@@ -384,6 +449,15 @@ class CartValidator:
         application_id = fields.Str(required=False)
         
         code = fields.Str(required=False)
+         
+        
+    
+    class overrideCart(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
          
         
     

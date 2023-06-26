@@ -336,7 +336,7 @@ except Exception as e:
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
 | discount | String? | no | discount |  
-| body | [DiscountJob](#DiscountJob) | yes | Request body |
+| body | [FileJobRequest](#FileJobRequest) | yes | Request body |
 
 
 Validate File.
@@ -775,6 +775,27 @@ Success
  | body | HashMap<String,Any>? |  yes  |  |
  | type | String |  no  |  |
  | fileType | String |  no  |  |
+
+---
+
+
+ 
+ 
+ #### [FileJobRequest](#FileJobRequest)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | name | String |  no  |  |
+ | isActive | Boolean |  no  |  |
+ | appIds | ArrayList<String>? |  yes  |  |
+ | jobType | String? |  yes  |  |
+ | discountType | String? |  yes  |  |
+ | discountLevel | String? |  yes  |  |
+ | filePath | String? |  yes  |  |
+ | brandIds | ArrayList<Int>? |  yes  |  |
+ | storeIds | ArrayList<Int>? |  yes  |  |
+ | validity | [ValidityObject](#ValidityObject) |  no  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
 
 ---
 

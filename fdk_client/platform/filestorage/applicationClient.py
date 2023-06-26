@@ -33,11 +33,11 @@ Make a `PUT` request on storage link received from `appStartUpload` api with fil
 After successfully upload, call `appCompleteUpload` api to complete the upload process.
 This operation will return the url for the uploaded file.
 
-        :param namespace : bucket name : type string
+        :param namespace : Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. : type string
         """
         payload = {}
         
-        if namespace:
+        if namespace is not None:
             payload["namespace"] = namespace
         
 
@@ -51,7 +51,7 @@ This operation will return the url for the uploaded file.
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/assets/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/namespaces/{namespace}/upload/start/", """{"required":[{"name":"namespace","in":"path","description":"bucket name","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}},{"name":"application_id","in":"path","description":"application id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"namespace","in":"path","description":"bucket name","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}},{"name":"application_id","in":"path","description":"application id","required":true,"schema":{"type":"string"}}]}""", namespace=namespace, )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/assets/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/namespaces/{namespace}/upload/start/", """{"required":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}},{"name":"application_id","in":"path","description":"application id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}},{"name":"application_id","in":"path","description":"application id","required":true,"schema":{"type":"string"}}]}""", namespace=namespace, )
         query_string = await create_query_string(namespace=namespace, )
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -66,13 +66,14 @@ This operation will return the url for the uploaded file.
 
         
 
-        from .models import StartResponse
-        schema = StartResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for appStartUpload")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import StartResponse
+            schema = StartResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for appStartUpload")
+                print(e)
 
         
 
@@ -98,11 +99,11 @@ Make a `PUT` request on storage link received from `appStartUpload` api with fil
 After successfully upload, call `appCompleteUpload` api to complete the upload process.
 This operation will return the url for the uploaded file.
 
-        :param namespace : bucket name : type string
+        :param namespace : Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. : type string
         """
         payload = {}
         
-        if namespace:
+        if namespace is not None:
             payload["namespace"] = namespace
         
 
@@ -116,7 +117,7 @@ This operation will return the url for the uploaded file.
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/assets/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/namespaces/{namespace}/upload/complete/", """{"required":[{"name":"namespace","in":"path","description":"bucket name","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}},{"name":"application_id","in":"path","description":"application id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"namespace","in":"path","description":"bucket name","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}},{"name":"application_id","in":"path","description":"application id","required":true,"schema":{"type":"string"}}]}""", namespace=namespace, )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/assets/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/namespaces/{namespace}/upload/complete/", """{"required":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}},{"name":"application_id","in":"path","description":"application id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}},{"name":"application_id","in":"path","description":"application id","required":true,"schema":{"type":"string"}}]}""", namespace=namespace, )
         query_string = await create_query_string(namespace=namespace, )
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -131,13 +132,14 @@ This operation will return the url for the uploaded file.
 
         
 
-        from .models import CompleteResponse
-        schema = CompleteResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for appCompleteUpload")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CompleteResponse
+            schema = CompleteResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for appCompleteUpload")
+                print(e)
 
         
 
@@ -149,7 +151,7 @@ This operation will return the url for the uploaded file.
         """
         payload = {}
         
-        if sync:
+        if sync is not None:
             payload["sync"] = sync
         
 
@@ -178,34 +180,35 @@ This operation will return the url for the uploaded file.
 
         
 
-        from .models import BulkUploadResponse
-        schema = BulkUploadResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for appCopyFiles")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BulkUploadResponse
+            schema = BulkUploadResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for appCopyFiles")
+                print(e)
 
         
 
         return response
     
-    async def browse(self, namespace=None, page_no=None):
+    async def appbrowse(self, namespace=None, page_no=None):
         """Browse Files
         :param namespace : bucket name : type string
         :param page_no : page no : type integer
         """
         payload = {}
         
-        if namespace:
+        if namespace is not None:
             payload["namespace"] = namespace
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
 
         # Parameter validation
-        schema = FileStorageValidator.browse()
+        schema = FileStorageValidator.appbrowse()
         schema.dump(schema.load(payload))
         
 
@@ -224,13 +227,14 @@ This operation will return the url for the uploaded file.
 
         
 
-        from .models import BrowseResponse
-        schema = BrowseResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for browse")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BrowseResponse
+            schema = BrowseResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for appbrowse")
+                print(e)
 
         
 

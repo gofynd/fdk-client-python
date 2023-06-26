@@ -19,10 +19,10 @@ class Inventory:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -46,13 +46,14 @@ class Inventory:
 
         
 
-        from .models import ResponseEnvelopeListJobConfigRawDTO
-        schema = ResponseEnvelopeListJobConfigRawDTO()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getJobsByCompany")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResponseEnvelopeListJobConfigRawDTO
+            schema = ResponseEnvelopeListJobConfigRawDTO()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getJobsByCompany")
+                print(e)
 
         
 
@@ -89,13 +90,14 @@ class Inventory:
 
         
 
-        from .models import ResponseEnvelopeString
-        schema = ResponseEnvelopeString()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateJob")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResponseEnvelopeString
+            schema = ResponseEnvelopeString()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateJob")
+                print(e)
 
         
 
@@ -132,13 +134,14 @@ class Inventory:
 
         
 
-        from .models import ResponseEnvelopeString
-        schema = ResponseEnvelopeString()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createJob")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResponseEnvelopeString
+            schema = ResponseEnvelopeString()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createJob")
+                print(e)
 
         
 
@@ -175,13 +178,14 @@ class Inventory:
 
         
 
-        from .models import ResponseEnvelopeKafkaResponse
-        schema = ResponseEnvelopeKafkaResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for suppressStores")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResponseEnvelopeKafkaResponse
+            schema = ResponseEnvelopeKafkaResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for suppressStores")
+                print(e)
 
         
 
@@ -213,13 +217,14 @@ class Inventory:
 
         
 
-        from .models import ResponseEnvelopeListSlingshotConfigurationDetail
-        schema = ResponseEnvelopeListSlingshotConfigurationDetail()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getConfigByCompany")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResponseEnvelopeListSlingshotConfigurationDetail
+            schema = ResponseEnvelopeListSlingshotConfigurationDetail()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getConfigByCompany")
+                print(e)
 
         
 
@@ -231,7 +236,7 @@ class Inventory:
         """
         payload = {}
         
-        if job_id:
+        if job_id is not None:
             payload["job_id"] = job_id
         
 
@@ -255,13 +260,14 @@ class Inventory:
 
         
 
-        from .models import ResponseEnvelopeListJobStepsDTO
-        schema = ResponseEnvelopeListJobStepsDTO()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getJobSteps")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResponseEnvelopeListJobStepsDTO
+            schema = ResponseEnvelopeListJobStepsDTO()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getJobSteps")
+                print(e)
 
         
 
@@ -275,13 +281,13 @@ class Inventory:
         """
         payload = {}
         
-        if integration_id:
+        if integration_id is not None:
             payload["integration_id"] = integration_id
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -305,13 +311,14 @@ class Inventory:
 
         
 
-        from .models import ResponseEnvelopeListJobConfigDTO
-        schema = ResponseEnvelopeListJobConfigDTO()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getJobByCompanyAndIntegration")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResponseEnvelopeListJobConfigDTO
+            schema = ResponseEnvelopeListJobConfigDTO()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getJobByCompanyAndIntegration")
+                print(e)
 
         
 
@@ -323,7 +330,7 @@ class Inventory:
         """
         payload = {}
         
-        if integration_id:
+        if integration_id is not None:
             payload["integration_id"] = integration_id
         
 
@@ -347,13 +354,14 @@ class Inventory:
 
         
 
-        from .models import ResponseEnvelopeString
-        schema = ResponseEnvelopeString()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for disable")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResponseEnvelopeString
+            schema = ResponseEnvelopeString()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for disable")
+                print(e)
 
         
 
@@ -385,13 +393,14 @@ class Inventory:
 
         
 
-        from .models import ResponseEnvelopeJobConfigDTO
-        schema = ResponseEnvelopeJobConfigDTO()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getJobConfigDefaults")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResponseEnvelopeJobConfigDTO
+            schema = ResponseEnvelopeJobConfigDTO()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getJobConfigDefaults")
+                print(e)
 
         
 
@@ -403,7 +412,7 @@ class Inventory:
         """
         payload = {}
         
-        if code:
+        if code is not None:
             payload["code"] = code
         
 
@@ -427,13 +436,14 @@ class Inventory:
 
         
 
-        from .models import ResponseEnvelopeJobConfigDTO
-        schema = ResponseEnvelopeJobConfigDTO()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getJobByCode")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResponseEnvelopeJobConfigDTO
+            schema = ResponseEnvelopeJobConfigDTO()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getJobByCode")
+                print(e)
 
         
 
@@ -449,19 +459,19 @@ class Inventory:
         """
         payload = {}
         
-        if code:
+        if code is not None:
             payload["code"] = code
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if status:
+        if status is not None:
             payload["status"] = status
         
-        if date:
+        if date is not None:
             payload["date"] = date
         
 
@@ -485,13 +495,14 @@ class Inventory:
 
         
 
-        from .models import ResponseEnvelopeJobMetricsDto
-        schema = ResponseEnvelopeJobMetricsDto()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getJobCodeMetrics")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResponseEnvelopeJobMetricsDto
+            schema = ResponseEnvelopeJobMetricsDto()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getJobCodeMetrics")
+                print(e)
 
         
 
@@ -505,13 +516,13 @@ class Inventory:
         """
         payload = {}
         
-        if integration_id:
+        if integration_id is not None:
             payload["integration_id"] = integration_id
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -535,13 +546,14 @@ class Inventory:
 
         
 
-        from .models import ResponseEnvelopeListJobConfigListDTO
-        schema = ResponseEnvelopeListJobConfigListDTO()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getJobCodesByCompanyAndIntegration")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResponseEnvelopeListJobConfigListDTO
+            schema = ResponseEnvelopeListJobConfigListDTO()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getJobCodesByCompanyAndIntegration")
+                print(e)
 
         
 

@@ -18,7 +18,7 @@ class Payment:
         """
         payload = {}
         
-        if unique_external_id:
+        if unique_external_id is not None:
             payload["unique_external_id"] = unique_external_id
         
 
@@ -42,13 +42,14 @@ class Payment:
 
         
 
-        from .models import PayoutsResponse
-        schema = PayoutsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAllPayouts")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PayoutsResponse
+            schema = PayoutsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAllPayouts")
+                print(e)
 
         
 
@@ -85,13 +86,14 @@ class Payment:
 
         
 
-        from .models import PayoutResponse
-        schema = PayoutResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for savePayout")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PayoutResponse
+            schema = PayoutResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for savePayout")
+                print(e)
 
         
 
@@ -103,7 +105,7 @@ class Payment:
         """
         payload = {}
         
-        if unique_transfer_no:
+        if unique_transfer_no is not None:
             payload["unique_transfer_no"] = unique_transfer_no
         
 
@@ -132,13 +134,14 @@ class Payment:
 
         
 
-        from .models import UpdatePayoutResponse
-        schema = UpdatePayoutResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updatePayout")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UpdatePayoutResponse
+            schema = UpdatePayoutResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updatePayout")
+                print(e)
 
         
 
@@ -150,7 +153,7 @@ class Payment:
         """
         payload = {}
         
-        if unique_transfer_no:
+        if unique_transfer_no is not None:
             payload["unique_transfer_no"] = unique_transfer_no
         
 
@@ -179,13 +182,14 @@ class Payment:
 
         
 
-        from .models import UpdatePayoutResponse
-        schema = UpdatePayoutResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for activateAndDectivatePayout")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UpdatePayoutResponse
+            schema = UpdatePayoutResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for activateAndDectivatePayout")
+                print(e)
 
         
 
@@ -197,7 +201,7 @@ class Payment:
         """
         payload = {}
         
-        if unique_transfer_no:
+        if unique_transfer_no is not None:
             payload["unique_transfer_no"] = unique_transfer_no
         
 
@@ -221,13 +225,14 @@ class Payment:
 
         
 
-        from .models import DeletePayoutResponse
-        schema = DeletePayoutResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deletePayout")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DeletePayoutResponse
+            schema = DeletePayoutResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deletePayout")
+                print(e)
 
         
 
@@ -239,7 +244,7 @@ class Payment:
         """
         payload = {}
         
-        if unique_external_id:
+        if unique_external_id is not None:
             payload["unique_external_id"] = unique_external_id
         
 
@@ -263,13 +268,14 @@ class Payment:
 
         
 
-        from .models import SubscriptionPaymentMethodResponse
-        schema = SubscriptionPaymentMethodResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getSubscriptionPaymentMethod")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SubscriptionPaymentMethodResponse
+            schema = SubscriptionPaymentMethodResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSubscriptionPaymentMethod")
+                print(e)
 
         
 
@@ -282,10 +288,10 @@ class Payment:
         """
         payload = {}
         
-        if unique_external_id:
+        if unique_external_id is not None:
             payload["unique_external_id"] = unique_external_id
         
-        if payment_method_id:
+        if payment_method_id is not None:
             payload["payment_method_id"] = payment_method_id
         
 
@@ -309,13 +315,14 @@ class Payment:
 
         
 
-        from .models import DeleteSubscriptionPaymentMethodResponse
-        schema = DeleteSubscriptionPaymentMethodResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteSubscriptionPaymentMethod")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DeleteSubscriptionPaymentMethodResponse
+            schema = DeleteSubscriptionPaymentMethodResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteSubscriptionPaymentMethod")
+                print(e)
 
         
 
@@ -347,13 +354,14 @@ class Payment:
 
         
 
-        from .models import SubscriptionConfigResponse
-        schema = SubscriptionConfigResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getSubscriptionConfig")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SubscriptionConfigResponse
+            schema = SubscriptionConfigResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSubscriptionConfig")
+                print(e)
 
         
 
@@ -390,13 +398,14 @@ class Payment:
 
         
 
-        from .models import SaveSubscriptionSetupIntentResponse
-        schema = SaveSubscriptionSetupIntentResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for saveSubscriptionSetupIntent")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SaveSubscriptionSetupIntentResponse
+            schema = SaveSubscriptionSetupIntentResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for saveSubscriptionSetupIntent")
+                print(e)
 
         
 
@@ -408,7 +417,7 @@ class Payment:
         """
         payload = {}
         
-        if ifsc_code:
+        if ifsc_code is not None:
             payload["ifsc_code"] = ifsc_code
         
 
@@ -432,13 +441,14 @@ class Payment:
 
         
 
-        from .models import IfscCodeResponse
-        schema = IfscCodeResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for verifyIfscCode")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import IfscCodeResponse
+            schema = IfscCodeResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for verifyIfscCode")
+                print(e)
 
         
 

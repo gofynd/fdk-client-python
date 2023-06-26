@@ -262,6 +262,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -329,7 +330,7 @@ from ..PlatformModel import BaseSchema
 class CatalogValidator:
     
     
-    class updateSearchKeywords(BaseSchema):
+    class deleteSearchKeywords(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -351,7 +352,7 @@ class CatalogValidator:
          
         
     
-    class deleteSearchKeywords(BaseSchema):
+    class updateSearchKeywords(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -380,7 +381,7 @@ class CatalogValidator:
          
         
     
-    class updateAutocompleteKeyword(BaseSchema):
+    class deleteAutocompleteKeyword(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -402,7 +403,7 @@ class CatalogValidator:
          
         
     
-    class deleteAutocompleteKeyword(BaseSchema):
+    class updateAutocompleteKeyword(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -496,7 +497,7 @@ class CatalogValidator:
          
         
     
-    class updateGroupConfiguration(BaseSchema):
+    class deleteGroupConfiguration(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -509,7 +510,7 @@ class CatalogValidator:
          
         
     
-    class deleteGroupConfiguration(BaseSchema):
+    class updateGroupConfiguration(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -550,7 +551,7 @@ class CatalogValidator:
          
         
     
-    class updateListingConfiguration(BaseSchema):
+    class deleteListingConfiguration(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -563,7 +564,7 @@ class CatalogValidator:
          
         
     
-    class deleteListingConfiguration(BaseSchema):
+    class updateListingConfiguration(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -695,7 +696,7 @@ class CatalogValidator:
          
         
     
-    class updateCollection(BaseSchema):
+    class deleteCollection(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -706,7 +707,7 @@ class CatalogValidator:
          
         
     
-    class deleteCollection(BaseSchema):
+    class updateCollection(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -870,6 +871,8 @@ class CatalogValidator:
         department_ids = fields.List(fields.Int(required=False), required=False)
         
         tags = fields.List(fields.Str(required=False), required=False)
+        
+        item_ids = fields.List(fields.Int(required=False), required=False)
         
         page_no = fields.Int(required=False)
         

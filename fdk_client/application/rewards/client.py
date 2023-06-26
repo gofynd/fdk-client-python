@@ -32,12 +32,12 @@ class Rewards:
         self._urls.update(urls)
     
     async def getOfferByName(self, name=None, body=""):
-        """Use this API to get the offer details and configuration by entering the name of the offer.
+        """Use this API to get fetch the specific offer details and configuration by the name of the offer.
         :param name : The name given to the offer. : type string
         """
         payload = {}
         
-        if name:
+        if name is not None:
             payload["name"] = name
         
         # Parameter validation
@@ -61,14 +61,14 @@ class Rewards:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getOfferByName"]).netloc, "get", await create_url_without_domain("/service/application/rewards/v1.0/offers/{name}/", name=name), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import Offer
-        schema = Offer()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getOfferByName")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Offer
+            schema = Offer()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getOfferByName")
+                print(e)
 
         
 
@@ -105,30 +105,30 @@ class Rewards:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["catalogueOrder"]).netloc, "post", await create_url_without_domain("/service/application/rewards/v1.0/catalogue/offer/order/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import CatalogueOrderResponse
-        schema = CatalogueOrderResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for catalogueOrder")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CatalogueOrderResponse
+            schema = CatalogueOrderResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for catalogueOrder")
+                print(e)
 
         
 
         return response
     
     async def getUserPointsHistory(self, page_id=None, page_size=None, body=""):
-        """Use this API to get a list of points transactions.
+        """Use this API to fetch a list of points transactions like giveaway points, signup points, referral points, order earn points, redeem points and expired points.
         :param page_id : PageID is the ID of the requested page. For first request it should be kept empty. : type string
         :param page_size : The number of items to retrieve in each page. : type integer
         """
         payload = {}
         
-        if page_id:
+        if page_id is not None:
             payload["page_id"] = page_id
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
         # Parameter validation
@@ -152,21 +152,21 @@ class Rewards:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getUserPointsHistory"]).netloc, "get", await create_url_without_domain("/service/application/rewards/v1.0/user/points/history/", page_id=page_id, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import PointsHistoryResponse
-        schema = PointsHistoryResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getUserPointsHistory")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PointsHistoryResponse
+            schema = PointsHistoryResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getUserPointsHistory")
+                print(e)
 
         
 
         return response
     
     async def getUserPoints(self, body=""):
-        """Use this API to retrieve total available points of a user for current application
+        """Use this API to retrieve total available points of a user for current application.
         """
         payload = {}
         
@@ -191,21 +191,21 @@ class Rewards:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getUserPoints"]).netloc, "get", await create_url_without_domain("/service/application/rewards/v1.0/user/points/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import PointsResponse
-        schema = PointsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getUserPoints")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PointsResponse
+            schema = PointsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getUserPoints")
+                print(e)
 
         
 
         return response
     
     async def getUserReferralDetails(self, body=""):
-        """Use this API to retrieve the referral details a user has configured in the application.
+        """Use this API to retrieve the referral details like referral code of a user.
         """
         payload = {}
         
@@ -230,21 +230,21 @@ class Rewards:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getUserReferralDetails"]).netloc, "get", await create_url_without_domain("/service/application/rewards/v1.0/user/referral/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import ReferralDetailsResponse
-        schema = ReferralDetailsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getUserReferralDetails")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ReferralDetailsResponse
+            schema = ReferralDetailsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getUserReferralDetails")
+                print(e)
 
         
 
         return response
     
     async def getOrderDiscount(self, body=""):
-        """Use this API to calculate the discount on order-amount based on all the amount range configured in order_discount.
+        """Use this API to calculate the discount on the order amount, based on all the amount range configured in Order Discount offer.
         """
         payload = {}
         
@@ -274,14 +274,14 @@ class Rewards:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getOrderDiscount"]).netloc, "post", await create_url_without_domain("/service/application/rewards/v1.0/user/offer/order-discount/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import OrderDiscountResponse
-        schema = OrderDiscountResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getOrderDiscount")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OrderDiscountResponse
+            schema = OrderDiscountResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getOrderDiscount")
+                print(e)
 
         
 
@@ -318,14 +318,14 @@ class Rewards:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["redeemReferralCode"]).netloc, "post", await create_url_without_domain("/service/application/rewards/v1.0/user/referral/redeem/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
-
-        from .models import RedeemReferralCodeResponse
-        schema = RedeemReferralCodeResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for redeemReferralCode")
-            print(e)
+        if 200 <= int(response['status_code']) < 300:
+            from .models import RedeemReferralCodeResponse
+            schema = RedeemReferralCodeResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for redeemReferralCode")
+                print(e)
 
         
 
