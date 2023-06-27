@@ -723,6 +723,8 @@ class SupportGeneralConfig(BaseSchema):
     
     integration = fields.Dict(required=False)
     
+    type = fields.Str(required=False)
+    
 
 
 class FeedbackForm(BaseSchema):
