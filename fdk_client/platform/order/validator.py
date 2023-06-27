@@ -34,17 +34,12 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
-        
         
     
     
         
         
         
-        
     
     
         
@@ -68,10 +63,6 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
-        
-        
-        
         
         
         
@@ -83,21 +74,9 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
         
         
         
-    
-    
         
         
         
@@ -105,9 +84,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
-    
-    
         
     
     
@@ -170,11 +146,6 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
-        
-        
-        
-        
         
         
         
@@ -183,35 +154,16 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
-        
-        
         
         
-        
-    
-    
-        
-    
-    
         
-    
-    
         
         
     
     
         
-    
-    
         
-    
-    
         
-    
-    
         
         
         
@@ -233,49 +185,19 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
         
-    
-    
         
     
     
         
     
     
-        
-        
-        
-        
-        
-        
         
-        
-        
-        
-        
     
     
-        
-        
-        
-        
-        
-        
         
-        
     
     
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
     
     
@@ -344,6 +266,8 @@ class OrderValidator:
         ordering_channel = fields.Str(required=False)
         
         company_affiliate_tag = fields.Str(required=False)
+        
+        platform_user_id = fields.Str(required=False)
          
         
     
@@ -355,19 +279,6 @@ class OrderValidator:
         channel_shipment_id = fields.Str(required=False)
         
         shipment_id = fields.Str(required=False)
-         
-        
-    
-    class getAssetByShipmentIds(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        shipment_ids = fields.Str(required=False)
-        
-        invoice = fields.Boolean(required=False)
-        
-        expires_in = fields.Str(required=False)
          
         
     
@@ -451,19 +362,6 @@ class OrderValidator:
         is_priority_sort = fields.Boolean(required=False)
         
         custom_meta = fields.Str(required=False)
-        
-        my_orders = fields.Boolean(required=False)
-         
-        
-    
-    class getMetricCount(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        from_date = fields.Str(required=False)
-        
-        to_date = fields.Str(required=False)
          
         
     
@@ -475,35 +373,6 @@ class OrderValidator:
         view = fields.Str(required=False)
         
         group_entity = fields.Str(required=False)
-         
-        
-    
-    class createShipmentReport(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        from_date = fields.Str(required=False)
-        
-        to_date = fields.Str(required=False)
-         
-        
-    
-    class getReportsShipmentListing(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-         
-        
-    
-    class upsertJioCode(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
          
         
     
@@ -697,15 +566,6 @@ class OrderValidator:
          
         
     
-    class getManifestfilters(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        view = fields.Str(required=False)
-         
-        
-    
     class dispatchManifest(BaseSchema):
         
         
@@ -795,114 +655,6 @@ class OrderValidator:
         
     
     class getStateTransitionMap(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class getManifestShipments(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        dp_ids = fields.Int(required=False)
-        
-        stores = fields.Str(required=False)
-        
-        to_date = fields.Str(required=False)
-        
-        from_date = fields.Str(required=False)
-        
-        dp_name = fields.Str(required=False)
-        
-        sales_channels = fields.Str(required=False)
-        
-        search_type = fields.Str(required=False)
-        
-        search_value = fields.Str(required=False)
-        
-        page_no = fields.Str(required=False)
-        
-        page_size = fields.Str(required=False)
-         
-        
-    
-    class getManifests(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        status = fields.Str(required=False)
-        
-        to_date = fields.Str(required=False)
-        
-        from_date = fields.Str(required=False)
-        
-        search_value = fields.Str(required=False)
-        
-        dp_ids = fields.Str(required=False)
-        
-        page_no = fields.Str(required=False)
-        
-        page_size = fields.Str(required=False)
-         
-        
-    
-    class getManifestDetails(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        manifest_id = fields.Str(required=False)
-        
-        status = fields.Str(required=False)
-        
-        to_date = fields.Str(required=False)
-        
-        from_date = fields.Str(required=False)
-        
-        search_type = fields.Str(required=False)
-        
-        search_value = fields.Str(required=False)
-        
-        dp_ids = fields.Str(required=False)
-        
-        page_no = fields.Str(required=False)
-        
-        page_size = fields.Str(required=False)
-         
-        
-    
-    class fetchCreditBalanceDetail(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class fetchRefundModeConfig(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class attachOrderUser(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class sendUserMobileOTP(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class verifyMobileOTP(BaseSchema):
         
         
         company_id = fields.Int(required=False)

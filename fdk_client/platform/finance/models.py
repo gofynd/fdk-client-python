@@ -176,11 +176,11 @@ class InvoiceListingRequest(BaseSchema):
     pass
 
 
-class UnpaidInvoiceDataItems(BaseSchema):
+class InvoiceListingResponseItems(BaseSchema):
     pass
 
 
-class InvoiceListingResponseItems(BaseSchema):
+class UnpaidInvoiceDataItems(BaseSchema):
     pass
 
 
@@ -207,11 +207,11 @@ class GenerateReportFilters(BaseSchema):
     # Finance swagger.json
 
     
-    channel = fields.List(fields.Str(required=False), required=False)
+    brand = fields.List(fields.Str(required=False), required=False)
     
     company = fields.List(fields.Str(required=False), required=False)
     
-    brand = fields.List(fields.Str(required=False), required=False)
+    channel = fields.List(fields.Str(required=False), required=False)
     
 
 
@@ -219,11 +219,11 @@ class GenerateReportMeta(BaseSchema):
     # Finance swagger.json
 
     
-    channel = fields.Str(required=False)
+    brand = fields.Str(required=False)
     
     company = fields.Str(required=False)
     
-    brand = fields.Str(required=False)
+    channel = fields.Str(required=False)
     
 
 
@@ -233,13 +233,13 @@ class GenerateReportPlatform(BaseSchema):
     
     end_date = fields.Str(required=False)
     
-    filters = fields.Nested(GenerateReportFilters, required=False)
-    
     start_date = fields.Str(required=False)
     
-    report_id = fields.Str(required=False)
+    filters = fields.Nested(GenerateReportFilters, required=False)
     
     meta = fields.Nested(GenerateReportMeta, required=False)
+    
+    report_id = fields.Str(required=False)
     
 
 
@@ -275,17 +275,17 @@ class GenerateReportJson(BaseSchema):
     # Finance swagger.json
 
     
-    item_count = fields.Int(required=False)
-    
-    items = fields.List(fields.List(fields.Str(required=False), required=False), required=False)
+    page = fields.Nested(Page, required=False)
     
     end_date = fields.Str(required=False)
     
-    headers = fields.List(fields.Str(required=False), required=False)
-    
     start_date = fields.Str(required=False)
     
-    page = fields.Nested(Page, required=False)
+    headers = fields.List(fields.Str(required=False), required=False)
+    
+    items = fields.List(fields.List(fields.Str(required=False), required=False), required=False)
+    
+    item_count = fields.Int(required=False)
     
 
 
@@ -303,13 +303,13 @@ class DownloadReport(BaseSchema):
     # Finance swagger.json
 
     
-    end_date = fields.Str(required=False)
-    
     pagesize = fields.Int(required=False)
     
-    page = fields.Int(required=False)
+    end_date = fields.Str(required=False)
     
     start_date = fields.Str(required=False)
+    
+    page = fields.Int(required=False)
     
 
 
@@ -319,15 +319,15 @@ class DownloadReportItems(BaseSchema):
     
     end_date = fields.Str(required=False)
     
-    type_of_request = fields.Str(required=False)
+    start_date = fields.Str(required=False)
     
     filters = fields.Nested(GenerateReportFilters, required=False)
     
-    start_date = fields.Str(required=False)
+    meta = fields.Nested(GenerateReportMeta, required=False)
+    
+    type_of_request = fields.Str(required=False)
     
     report_id = fields.Str(required=False)
-    
-    meta = fields.Nested(GenerateReportMeta, required=False)
     
 
 
@@ -335,9 +335,9 @@ class DownloadReportList(BaseSchema):
     # Finance swagger.json
 
     
-    item_count = fields.Int(required=False)
-    
     items = fields.List(fields.Nested(DownloadReportItems, required=False), required=False)
+    
+    item_count = fields.Int(required=False)
     
     page = fields.Nested(Page, required=False)
     
@@ -355,11 +355,11 @@ class GetEngineData(BaseSchema):
     # Finance swagger.json
 
     
-    table_name = fields.Str(required=False)
-    
     filters = fields.Nested(GetEngineFilters, required=False)
     
     project = fields.List(fields.Str(required=False), required=False)
+    
+    table_name = fields.Str(required=False)
     
 
 
@@ -375,9 +375,9 @@ class GetEngineResponse(BaseSchema):
     # Finance swagger.json
 
     
-    item_count = fields.Int(required=False)
-    
     items = fields.List(fields.Dict(required=False), required=False)
+    
+    item_count = fields.Int(required=False)
     
     page = fields.Nested(Page, required=False)
     
@@ -405,9 +405,9 @@ class GetDocs(BaseSchema):
     # Finance swagger.json
 
     
-    docs = fields.List(fields.Dict(required=False), required=False)
-    
     items = fields.List(fields.Dict(required=False), required=False)
+    
+    docs = fields.List(fields.Dict(required=False), required=False)
     
 
 
@@ -415,9 +415,9 @@ class GetReasonResponse(BaseSchema):
     # Finance swagger.json
 
     
-    data = fields.Nested(GetDocs, required=False)
-    
     success = fields.Boolean(required=False)
+    
+    data = fields.Nested(GetDocs, required=False)
     
 
 
@@ -487,9 +487,9 @@ class DownloadCreditDebitNoteResponse(BaseSchema):
     # Finance swagger.json
 
     
-    data = fields.List(fields.Nested(DownloadCreditDebitNoteResponseData, required=False), required=False)
-    
     success = fields.Boolean(required=False)
+    
+    data = fields.List(fields.Nested(DownloadCreditDebitNoteResponseData, required=False), required=False)
     
 
 
@@ -497,25 +497,25 @@ class PaymentProcessPayload(BaseSchema):
     # Finance swagger.json
 
     
-    platform = fields.Str(required=False)
+    total_amount = fields.Str(required=False)
     
-    transaction_type = fields.Str(required=False)
+    platform = fields.Str(required=False)
     
     seller_id = fields.Str(required=False)
     
-    meta = fields.Dict(required=False)
+    mode_of_payment = fields.Str(required=False)
     
-    invoice_number = fields.Str(required=False)
-    
-    amount = fields.Str(required=False)
+    transaction_type = fields.Str(required=False)
     
     source_reference = fields.Str(required=False)
     
+    invoice_number = fields.Str(required=False)
+    
+    meta = fields.Dict(required=False)
+    
+    amount = fields.Str(required=False)
+    
     currency = fields.Str(required=False)
-    
-    total_amount = fields.Str(required=False)
-    
-    mode_of_payment = fields.Str(required=False)
     
 
 
@@ -531,15 +531,15 @@ class PaymentProcessResponse(BaseSchema):
     # Finance swagger.json
 
     
-    message = fields.Str(required=False)
-    
-    redirect_url = fields.Str(required=False)
+    code = fields.Int(required=False)
     
     transaction_id = fields.Str(required=False)
     
-    code = fields.Int(required=False)
+    message = fields.Str(required=False)
     
     meta = fields.Dict(required=False)
+    
+    redirect_url = fields.Str(required=False)
     
 
 
@@ -547,15 +547,15 @@ class CreditlineDataPlatformPayload(BaseSchema):
     # Finance swagger.json
 
     
+    page = fields.Int(required=False)
+    
+    end_end = fields.Str(required=False)
+    
     seller_id = fields.Str(required=False)
     
     start_end = fields.Str(required=False)
     
-    end_end = fields.Str(required=False)
-    
     pagesize = fields.Int(required=False)
-    
-    page = fields.Int(required=False)
     
 
 
@@ -571,19 +571,19 @@ class CreditlineDataPlatformResponse(BaseSchema):
     # Finance swagger.json
 
     
-    item_count = fields.Int(required=False)
-    
-    items = fields.List(fields.Dict(required=False), required=False)
-    
-    message = fields.Str(required=False)
-    
-    headers = fields.List(fields.Str(required=False), required=False)
-    
     code = fields.Int(required=False)
     
     page = fields.Dict(required=False)
     
     show_mr = fields.Boolean(required=False)
+    
+    headers = fields.List(fields.Str(required=False), required=False)
+    
+    message = fields.Str(required=False)
+    
+    items = fields.List(fields.Dict(required=False), required=False)
+    
+    item_count = fields.Int(required=False)
     
 
 
@@ -633,9 +633,9 @@ class InvoiceTypeResponseItems(BaseSchema):
     # Finance swagger.json
 
     
-    text = fields.Str(required=False)
-    
     value = fields.Str(required=False)
+    
+    text = fields.Str(required=False)
     
 
 
@@ -643,9 +643,9 @@ class InvoiceTypeResponse(BaseSchema):
     # Finance swagger.json
 
     
-    payment_status_list = fields.List(fields.Nested(InvoiceTypeResponseItems, required=False), required=False)
-    
     invoice_type_list = fields.List(fields.Nested(InvoiceTypeResponseItems, required=False), required=False)
+    
+    payment_status_list = fields.List(fields.Nested(InvoiceTypeResponseItems, required=False), required=False)
     
     success = fields.Boolean(required=False)
     
@@ -655,9 +655,9 @@ class InoviceListingPayloadDataFilters(BaseSchema):
     # Finance swagger.json
 
     
-    invoice_type = fields.List(fields.Str(required=False), required=False)
-    
     company_id = fields.List(fields.Str(required=False), required=False)
+    
+    invoice_type = fields.List(fields.Str(required=False), required=False)
     
     payment_status = fields.List(fields.Str(required=False), required=False)
     
@@ -667,15 +667,15 @@ class InvoiceListingPayloadData(BaseSchema):
     # Finance swagger.json
 
     
-    end_date = fields.Str(required=False)
-    
-    filters = fields.Nested(InoviceListingPayloadDataFilters, required=False)
+    page = fields.Int(required=False)
     
     search = fields.Str(required=False)
     
+    end_date = fields.Str(required=False)
+    
     start_date = fields.Str(required=False)
     
-    page = fields.Int(required=False)
+    filters = fields.Nested(InoviceListingPayloadDataFilters, required=False)
     
     page_size = fields.Int(required=False)
     
@@ -689,21 +689,15 @@ class InvoiceListingRequest(BaseSchema):
     
 
 
-class UnpaidInvoiceDataItems(BaseSchema):
-    # Finance swagger.json
-
-    
-    currency = fields.Str(required=False)
-    
-    total_unpaid_invoice_count = fields.Int(required=False)
-    
-    total_unpaid_amount = fields.Float(required=False)
-    
-
-
 class InvoiceListingResponseItems(BaseSchema):
     # Finance swagger.json
 
+    
+    status = fields.Str(required=False)
+    
+    invoice_number = fields.Str(required=False)
+    
+    invoice_id = fields.Str(required=False)
     
     invoice_type = fields.Str(required=False)
     
@@ -711,19 +705,25 @@ class InvoiceListingResponseItems(BaseSchema):
     
     period = fields.Str(required=False)
     
-    invoice_number = fields.Str(required=False)
-    
     amount = fields.Str(required=False)
-    
-    due_date = fields.Str(required=False)
-    
-    invoice_id = fields.Str(required=False)
-    
-    is_downloadable = fields.Boolean(required=False)
     
     invoice_date = fields.Str(required=False)
     
-    status = fields.Str(required=False)
+    due_date = fields.Str(required=False)
+    
+    is_downloadable = fields.Boolean(required=False)
+    
+
+
+class UnpaidInvoiceDataItems(BaseSchema):
+    # Finance swagger.json
+
+    
+    total_unpaid_invoice_count = fields.Int(required=False)
+    
+    currency = fields.Str(required=False)
+    
+    total_unpaid_amount = fields.Float(required=False)
     
 
 
@@ -731,13 +731,13 @@ class InvoiceListingResponse(BaseSchema):
     # Finance swagger.json
 
     
-    unpaid_invoice_data = fields.Nested(UnpaidInvoiceDataItems, required=False)
-    
     items = fields.List(fields.Nested(InvoiceListingResponseItems, required=False), required=False)
+    
+    item_count = fields.Int(required=False)
     
     page = fields.Nested(Page, required=False)
     
-    item_count = fields.Int(required=False)
+    unpaid_invoice_data = fields.Nested(UnpaidInvoiceDataItems, required=False)
     
 
 
@@ -761,11 +761,11 @@ class InvoicePdfResponse(BaseSchema):
     # Finance swagger.json
 
     
-    data = fields.List(fields.Str(required=False), required=False)
-    
     error = fields.List(fields.Str(required=False), required=False)
     
     success = fields.Boolean(required=False)
+    
+    data = fields.List(fields.Str(required=False), required=False)
     
 
 
