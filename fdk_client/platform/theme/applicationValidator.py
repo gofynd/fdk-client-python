@@ -47,6 +47,11 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+        
         
     
     
@@ -270,6 +275,17 @@ class ThemeValidator:
         application_id = fields.Str(required=False)
         
         theme_id = fields.Str(required=False)
+        
+        page_value = fields.Str(required=False)
+         
+        
+    
+    class getDefaultPageDetails(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
         
         page_value = fields.Str(required=False)
          

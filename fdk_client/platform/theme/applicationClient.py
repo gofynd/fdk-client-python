@@ -298,6 +298,49 @@ class Theme:
 
         return response
     
+    async def getDefaultPageDetails(self, page_value=None):
+        """Use this API to retrieve default page details of a page.
+        :param page_value : Value of the page to be retrieved : type string
+        """
+        payload = {}
+        
+        if page_value is not None:
+            payload["page_value"] = page_value
+        
+
+        # Parameter validation
+        schema = ThemeValidator.getDefaultPageDetails()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/page/{page_value}/default", """{"required":[{"name":"company_id","in":"path","description":"Company ID","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID","required":true,"schema":{"type":"string"}},{"name":"page_value","in":"path","description":"Value of the page to be retrieved","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company ID","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID","required":true,"schema":{"type":"string"}},{"name":"page_value","in":"path","description":"Value of the page to be retrieved","required":true,"schema":{"type":"string"}}]}""", page_value=page_value)
+        query_string = await create_query_string(page_value=page_value)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/page/{page_value}/default", page_value=page_value), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AvailablePageSchema
+            schema = AvailablePageSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getDefaultPageDetails")
+                print(e)
+
+        
+
+        return response
+    
     async def getThemeLibrary(self, page_size=None, page_no=None):
         """Theme library is a personalized collection of themes that are chosen and added from the available themes. Use this API to fetch a list of themes from the library along with their configuration details. 
         :param page_size : The number of items to retrieve in each page. Default value is 10.  : type integer
