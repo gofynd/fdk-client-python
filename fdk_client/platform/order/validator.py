@@ -44,64 +44,7 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
         
     
     
@@ -112,40 +55,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
-        
-    
-    
-        
-    
-    
-        
-    
-    
-        
-        
-    
-    
         
         
         
@@ -167,8 +76,92 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
     
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
         
     
     
@@ -183,9 +176,48 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
     
     
+        
+        
+        
+        
+        
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+        
         
     
     
@@ -267,7 +299,7 @@ class OrderValidator:
         
         company_affiliate_tag = fields.Str(required=False)
         
-        platform_user_id = fields.Str(required=False)
+        my_orders = fields.Boolean(required=False)
          
         
     
@@ -279,6 +311,19 @@ class OrderValidator:
         channel_shipment_id = fields.Str(required=False)
         
         shipment_id = fields.Str(required=False)
+         
+        
+    
+    class getAssetByShipmentIds(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        shipment_ids = fields.Str(required=False)
+        
+        invoice = fields.Boolean(required=False)
+        
+        expires_in = fields.Str(required=False)
          
         
     
@@ -323,6 +368,8 @@ class OrderValidator:
         time_to_dispatch = fields.Str(required=False)
         
         payment_methods = fields.Str(required=False)
+        
+        my_orders = fields.Boolean(required=False)
          
         
     
@@ -362,6 +409,19 @@ class OrderValidator:
         is_priority_sort = fields.Boolean(required=False)
         
         custom_meta = fields.Str(required=False)
+        
+        my_orders = fields.Boolean(required=False)
+         
+        
+    
+    class getMetricCount(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        from_date = fields.Str(required=False)
+        
+        to_date = fields.Str(required=False)
          
         
     
@@ -373,6 +433,35 @@ class OrderValidator:
         view = fields.Str(required=False)
         
         group_entity = fields.Str(required=False)
+         
+        
+    
+    class createShipmentReport(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        from_date = fields.Str(required=False)
+        
+        to_date = fields.Str(required=False)
+         
+        
+    
+    class getReportsShipmentListing(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+         
+        
+    
+    class upsertJioCode(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
          
         
     
@@ -471,6 +560,19 @@ class OrderValidator:
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
+         
+        
+    
+    class generatePOSReceiptByOrderId(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        order_id = fields.Str(required=False)
+        
+        shipment_id = fields.Str(required=False)
+        
+        document_type = fields.Str(required=False)
          
         
     
@@ -580,6 +682,13 @@ class OrderValidator:
          
         
     
+    class postShipmentHistory(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
     class getShipmentHistory(BaseSchema):
         
         
@@ -588,13 +697,6 @@ class OrderValidator:
         shipment_id = fields.Str(required=False)
         
         bag_id = fields.Int(required=False)
-         
-        
-    
-    class postShipmentHistory(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
          
         
     
@@ -619,14 +721,14 @@ class OrderValidator:
          
         
     
-    class getChannelConfig(BaseSchema):
+    class createChannelConfig(BaseSchema):
         
         
         company_id = fields.Int(required=False)
          
         
     
-    class createChannelConfig(BaseSchema):
+    class getChannelConfig(BaseSchema):
         
         
         company_id = fields.Int(required=False)

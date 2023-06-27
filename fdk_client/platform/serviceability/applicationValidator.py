@@ -145,15 +145,6 @@ class ServiceabilityValidator:
          
         
     
-    class upsertDpApplicationRulePriority(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
     class getDpApplicationRulePriority(BaseSchema):
         
         
@@ -163,7 +154,16 @@ class ServiceabilityValidator:
          
         
     
-    class getApplicationServiceabilitySelfShipment(BaseSchema):
+    class upsertDpApplicationRulePriority(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class patchApplicationServiceabilitySelfShipment(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -172,7 +172,7 @@ class ServiceabilityValidator:
          
         
     
-    class patchApplicationServiceabilitySelfShipment(BaseSchema):
+    class getApplicationServiceabilitySelfShipment(BaseSchema):
         
         
         company_id = fields.Str(required=False)

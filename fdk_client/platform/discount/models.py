@@ -211,6 +211,8 @@ class FileJobResponse(BaseSchema):
     
     company_id = fields.Int(required=False)
     
+    _id = fields.Str(required=False)
+    
     body = fields.Dict(required=False)
     
     type = fields.Str(required=False)
