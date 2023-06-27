@@ -247,12 +247,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
-        
-    
-    
-        
         
         
         
@@ -778,20 +772,6 @@ class OrderValidator:
         
     
     class createOrder(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class getChannelConfig(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class createChannelConfig(BaseSchema):
         
         
         company_id = fields.Int(required=False)
