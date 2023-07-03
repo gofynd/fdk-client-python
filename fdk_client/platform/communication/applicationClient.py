@@ -896,7 +896,7 @@ class Communication:
         return response
     
     async def getEmailTemplates(self, page_no=None, page_size=None, sort=None):
-        """Get email templates
+        """Email templates are predefined formats linked to various events for delivering messages to users. Use this API to get all email templates.
         :param page_no : Current page no : type integer
         :param page_size : Current request items count : type integer
         :param sort : To sort based on created_at : type object
@@ -918,7 +918,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/templates", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"Current page no"},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"Current request items count"},{"name":"sort","in":"query","schema":{"type":"object","properties":{"created_at":{"type":"integer"}}},"description":"To sort based on created_at"}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"Current page no"},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"Current request items count"},{"name":"sort","in":"query","schema":{"type":"object","properties":{"created_at":{"type":"integer"}}},"description":"To sort based on created_at"}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", page_no=page_no, page_size=page_size, sort=sort)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/templates", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}},{"in":"query","name":"sort","description":"To sort based on created_at","required":false,"schema":{"type":"object","example":{"created_at":-1}}}],"query":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}},{"in":"query","name":"sort","description":"To sort based on created_at","required":false,"schema":{"type":"object","example":{"created_at":-1}}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", page_no=page_no, page_size=page_size, sort=sort)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, sort=sort)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -947,7 +947,7 @@ class Communication:
         return response
     
     async def createEmailTemplate(self, body=""):
-        """Create email template
+        """Email templates are predefined formats linked to various events for delivering messages to users. Use this API to create an email template.
         """
         payload = {}
         
@@ -978,8 +978,8 @@ class Communication:
         
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import EmailTemplateRes
-            schema = EmailTemplateRes()
+            from .models import EmailTemplate
+            schema = EmailTemplate()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -990,22 +990,10 @@ class Communication:
 
         return response
     
-    async def getSystemEmailTemplates(self, page_no=None, page_size=None, sort=None):
-        """Get system email templates
-        :param page_no : Current page no : type integer
-        :param page_size : Current request items count : type integer
-        :param sort : To sort based on created_at : type object
+    async def getSystemEmailTemplates(self, ):
+        """Email templates are predefined formats linked to various events for delivering messages to users. Use this API to get all system email templates.
         """
         payload = {}
-        
-        if page_no is not None:
-            payload["page_no"] = page_no
-        
-        if page_size is not None:
-            payload["page_size"] = page_size
-        
-        if sort is not None:
-            payload["sort"] = sort
         
 
         # Parameter validation
@@ -1013,8 +1001,8 @@ class Communication:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/system-templates", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"Current page no"},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"Current request items count"},{"name":"sort","in":"query","schema":{"type":"object","properties":{"created_at":{"type":"integer"}}},"description":"To sort based on created_at"}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"Current page no"},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"Current request items count"},{"name":"sort","in":"query","schema":{"type":"object","properties":{"created_at":{"type":"integer"}}},"description":"To sort based on created_at"}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", page_no=page_no, page_size=page_size, sort=sort)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, sort=sort)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/system-templates", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", )
+        query_string = await create_query_string()
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -1024,7 +1012,7 @@ class Communication:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/system-templates", page_no=page_no, page_size=page_size, sort=sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/system-templates", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
 
@@ -1042,7 +1030,7 @@ class Communication:
         return response
     
     async def getEmailTemplateById(self, id=None):
-        """Get email template by id
+        """Email templates are predefined formats linked to various events for delivering messages to users. Use this API to get an email template by id.
         :param id : Email template id : type string
         """
         payload = {}
@@ -1085,7 +1073,7 @@ class Communication:
         return response
     
     async def updateEmailTemplateById(self, id=None, body=""):
-        """Update email template by id
+        """Email templates are predefined formats linked to various events for delivering messages to users. Use this API to update an email template by id.
         :param id : Email template id : type string
         """
         payload = {}
@@ -1120,8 +1108,8 @@ class Communication:
         
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import EmailTemplateRes
-            schema = EmailTemplateRes()
+            from .models import EmailTemplate
+            schema = EmailTemplate()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1133,7 +1121,7 @@ class Communication:
         return response
     
     async def deleteEmailTemplateById(self, id=None):
-        """Delete email template by id
+        """Email templates are predefined formats linked to various events for delivering messages to users. Use this API to delete an email template by id.
         :param id : Email template id : type string
         """
         payload = {}
@@ -1163,12 +1151,59 @@ class Communication:
         
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import EmailTemplateDeleteSuccessRes
-            schema = EmailTemplateDeleteSuccessRes()
+            from .models import GenericDelete
+            schema = GenericDelete()
             try:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for deleteEmailTemplateById")
+                print(e)
+
+        
+
+        return response
+    
+    async def getSubscribedEmailTemplates(self, page_no=None, page_size=None):
+        """Email templates are predefined formats linked to various events for delivering messages to users. Use this API to get all subscribed email templates.
+        :param page_no : Current page no : type integer
+        :param page_size : Current request items count : type integer
+        """
+        payload = {}
+        
+        if page_no is not None:
+            payload["page_no"] = page_no
+        
+        if page_size is not None:
+            payload["page_size"] = page_size
+        
+
+        # Parameter validation
+        schema = CommunicationValidator.getSubscribedEmailTemplates()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/subscribedTemplates", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}}],"query":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/subscribedTemplates", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EmailTemplates
+            schema = EmailTemplates()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSubscribedEmailTemplates")
                 print(e)
 
         
@@ -1861,7 +1896,7 @@ class Communication:
         return response
     
     async def getSmsTemplates(self, page_no=None, page_size=None, sort=None):
-        """Get sms templates
+        """SMS templates are predefined message formats linked to various events for delivering messages to users. Use this API to get all sms templates.
         :param page_no : Current page no : type integer
         :param page_size : Current request items count : type integer
         :param sort : To sort based on created_at : type object
@@ -1883,7 +1918,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/templates", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"Current page no"},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"Current request items count"},{"name":"sort","in":"query","schema":{"type":"object","properties":{"created_at":{"type":"integer"}}},"description":"To sort based on created_at"}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"Current page no"},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"Current request items count"},{"name":"sort","in":"query","schema":{"type":"object","properties":{"created_at":{"type":"integer"}}},"description":"To sort based on created_at"}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", page_no=page_no, page_size=page_size, sort=sort)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/templates", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}},{"in":"query","name":"sort","description":"To sort based on created_at","required":false,"schema":{"type":"object","example":{"created_at":-1}}}],"query":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}},{"in":"query","name":"sort","description":"To sort based on created_at","required":false,"schema":{"type":"object","example":{"created_at":-1}}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", page_no=page_no, page_size=page_size, sort=sort)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, sort=sort)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -1912,7 +1947,7 @@ class Communication:
         return response
     
     async def createSmsTemplate(self, body=""):
-        """Create sms template
+        """SMS templates are predefined message formats linked to various events for delivering messages to users. Use this API to create an sms template.
         """
         payload = {}
         
@@ -1943,8 +1978,8 @@ class Communication:
         
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SmsTemplateRes
-            schema = SmsTemplateRes()
+            from .models import SmsTemplate
+            schema = SmsTemplate()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1955,8 +1990,36 @@ class Communication:
 
         return response
     
+    async def getSystemSmsTemplates(self, ):
+        """SMS templates are predefined message formats linked to various events for delivering messages to users. Use this API to get all system sms templates.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = CommunicationValidator.getSystemSmsTemplates()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/system-templates", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/system-templates", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        return response
+    
     async def getSmsTemplateById(self, id=None):
-        """Get sms template by id
+        """SMS templates are predefined message formats linked to various events for delivering messages to users. Use this API to get an sms template by ID.
         :param id : Sms template id : type string
         """
         payload = {}
@@ -1999,7 +2062,7 @@ class Communication:
         return response
     
     async def updateSmsTemplateById(self, id=None, body=""):
-        """Update sms template by id
+        """SMS templates are predefined message formats linked to various events for delivering messages to users. Use this API to update an sms template by ID.
         :param id : Sms template id : type string
         """
         payload = {}
@@ -2034,8 +2097,8 @@ class Communication:
         
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SmsTemplateRes
-            schema = SmsTemplateRes()
+            from .models import SmsTemplate
+            schema = SmsTemplate()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2047,7 +2110,7 @@ class Communication:
         return response
     
     async def deleteSmsTemplateById(self, id=None):
-        """Delete sms template by id
+        """SMS templates are predefined message formats linked to various events for delivering messages to users. Use this API to delete an sms template by ID.
         :param id : Sms template id : type string
         """
         payload = {}
@@ -2077,8 +2140,8 @@ class Communication:
         
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SmsTemplateDeleteSuccessRes
-            schema = SmsTemplateDeleteSuccessRes()
+            from .models import GenericDelete
+            schema = GenericDelete()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2089,11 +2152,10 @@ class Communication:
 
         return response
     
-    async def getSystemSystemTemplates(self, page_no=None, page_size=None, sort=None):
-        """Get system sms templates
+    async def getSubscribedSmsTemplates(self, page_no=None, page_size=None):
+        """SMS templates are predefined message formats linked to various events for delivering messages to users. Use this API to get all subscribed sms templates.
         :param page_no : Current page no : type integer
         :param page_size : Current request items count : type integer
-        :param sort : To sort based on created_at : type object
         """
         payload = {}
         
@@ -2103,17 +2165,14 @@ class Communication:
         if page_size is not None:
             payload["page_size"] = page_size
         
-        if sort is not None:
-            payload["sort"] = sort
-        
 
         # Parameter validation
-        schema = CommunicationValidator.getSystemSystemTemplates()
+        schema = CommunicationValidator.getSubscribedSmsTemplates()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/system-templates", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"Current page no"},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"Current request items count"},{"name":"sort","in":"query","schema":{"type":"object","properties":{"created_at":{"type":"integer"}}},"description":"To sort based on created_at"}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"Current page no"},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"Current request items count"},{"name":"sort","in":"query","schema":{"type":"object","properties":{"created_at":{"type":"integer"}}},"description":"To sort based on created_at"}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", page_no=page_no, page_size=page_size, sort=sort)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, sort=sort)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/subscribedTemplates", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}}],"query":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -2123,17 +2182,17 @@ class Communication:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/system-templates", page_no=page_no, page_size=page_size, sort=sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/subscribedTemplates", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SystemSmsTemplates
-            schema = SystemSmsTemplates()
+            from .models import SmsTemplates
+            schema = SmsTemplates()
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getSystemSystemTemplates")
+                print("Response Validation failed for getSubscribedSmsTemplates")
                 print(e)
 
         

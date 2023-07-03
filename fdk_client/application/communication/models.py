@@ -56,7 +56,27 @@ class Page(BaseSchema):
     pass
 
 
+class GenericPage(BaseSchema):
+    pass
+
+
 class GenericSuccess(BaseSchema):
+    pass
+
+
+class GenericError(BaseSchema):
+    pass
+
+
+class GenericDelete(BaseSchema):
+    pass
+
+
+class Message(BaseSchema):
+    pass
+
+
+class EnabledObj(BaseSchema):
     pass
 
 
@@ -291,11 +311,73 @@ class Page(BaseSchema):
     
 
 
+class GenericPage(BaseSchema):
+    # Communication swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    size = fields.Int(required=False)
+    
+    current = fields.Int(required=False)
+    
+    has_next = fields.Boolean(required=False)
+    
+    item_total = fields.Int(required=False)
+    
+
+
 class GenericSuccess(BaseSchema):
     # Communication swagger.json
 
     
     success = fields.Boolean(required=False)
+    
+
+
+class GenericError(BaseSchema):
+    # Communication swagger.json
+
+    
+    message = fields.Nested(Message, required=False)
+    
+    sentry = fields.Str(required=False)
+    
+
+
+class GenericDelete(BaseSchema):
+    # Communication swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+    acknowledged = fields.Boolean(required=False)
+    
+    affected = fields.Int(required=False)
+    
+    operation = fields.Str(required=False)
+    
+
+
+class Message(BaseSchema):
+    # Communication swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+    success = fields.Boolean(required=False)
+    
+    info = fields.Str(required=False)
+    
+    operation = fields.Str(required=False)
+    
+
+
+class EnabledObj(BaseSchema):
+    # Communication swagger.json
+
+    
+    enabled = fields.Boolean(required=False)
     
 
 

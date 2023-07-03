@@ -121,9 +121,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
-        
-        
     
     
         
@@ -141,41 +138,6 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
-        
-        
-    
-    
-        
-        
         
         
         
@@ -199,12 +161,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
-        
-        
-    
-    
         
         
         
@@ -212,9 +168,10 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
         
-    
-    
+        
         
         
         
@@ -223,6 +180,26 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+        
+        
+    
+    
         
         
     
@@ -247,6 +224,35 @@ from ..PlatformModel import BaseSchema
     
     
         
+        
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
         
         
         
@@ -548,12 +554,6 @@ class CommunicationValidator:
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        sort = fields.Dict(required=False)
          
         
     
@@ -587,6 +587,19 @@ class CommunicationValidator:
         application_id = fields.Str(required=False)
         
         id = fields.Str(required=False)
+         
+        
+    
+    class getSubscribedEmailTemplates(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
          
         
     
@@ -787,6 +800,15 @@ class CommunicationValidator:
          
         
     
+    class getSystemSmsTemplates(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
     class getSmsTemplateById(BaseSchema):
         
         
@@ -820,7 +842,7 @@ class CommunicationValidator:
          
         
     
-    class getSystemSystemTemplates(BaseSchema):
+    class getSubscribedSmsTemplates(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -830,8 +852,6 @@ class CommunicationValidator:
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
-        
-        sort = fields.Dict(required=False)
          
         
     

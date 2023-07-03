@@ -350,24 +350,26 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
         
     
     
         
         
         
+        
+        
+        
+        
+        
+        
     
     
+        
+        
+        
+    
+    
+        
         
         
         
@@ -1109,6 +1111,8 @@ class CartValidator:
         id = fields.Str(required=False)
         
         buy_now = fields.Boolean(required=False)
+        
+        order_type = fields.Str(required=False)
          
         
     
@@ -1156,6 +1160,8 @@ class CartValidator:
         id = fields.Str(required=False)
         
         buy_now = fields.Boolean(required=False)
+        
+        order_type = fields.Str(required=False)
          
         
     

@@ -145,7 +145,7 @@ class ServiceabilityValidator:
          
         
     
-    class upsertDpApplicationRulePriority(BaseSchema):
+    class getDpApplicationRulePriority(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -154,7 +154,7 @@ class ServiceabilityValidator:
          
         
     
-    class getDpApplicationRulePriority(BaseSchema):
+    class upsertDpApplicationRulePriority(BaseSchema):
         
         
         company_id = fields.Int(required=False)
