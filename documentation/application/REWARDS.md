@@ -27,7 +27,7 @@ Get the eligibility of reward points on a product
 
 ```python
 try:
-    result = await client.rewards.getPointsOnProduct(body=body)
+    result = await applicationClient.rewards.getPointsOnProduct(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -83,7 +83,7 @@ Get offer by name
 
 ```python
 try:
-    result = await client.rewards.getOfferByName(name=name)
+    result = await applicationClient.rewards.getOfferByName(name=name)
     # use result
 except Exception as e:
     print(e)
@@ -140,7 +140,7 @@ Calculates the discount on order-amount
 
 ```python
 try:
-    result = await client.rewards.getOrderDiscount(body=body)
+    result = await applicationClient.rewards.getOrderDiscount(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -196,7 +196,7 @@ Get reward points available with a user
 
 ```python
 try:
-    result = await client.rewards.getUserPoints()
+    result = await applicationClient.rewards.getUserPoints()
     # use result
 except Exception as e:
     print(e)
@@ -248,7 +248,7 @@ Get all transactions of reward points
 
 ```python
 try:
-    result = await client.rewards.getUserPointsHistory(pageId=pageId, pageSize=pageSize)
+    result = await applicationClient.rewards.getUserPointsHistory(pageId=pageId, pageSize=pageSize)
     # use result
 except Exception as e:
     print(e)
@@ -306,7 +306,7 @@ Get referral details of a user
 
 ```python
 try:
-    result = await client.rewards.getUserReferralDetails()
+    result = await applicationClient.rewards.getUserReferralDetails()
     # use result
 except Exception as e:
     print(e)
@@ -358,7 +358,7 @@ Redeems a referral code and credits reward points to users
 
 ```python
 try:
-    result = await client.rewards.redeemReferralCode(body=body)
+    result = await applicationClient.rewards.redeemReferralCode(body=body)
     # use result
 except Exception as e:
     print(e)
