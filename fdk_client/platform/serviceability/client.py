@@ -498,140 +498,6 @@ class Serviceability:
 
         return response
     
-    async def postRegionJobBulk(self, body=""):
-        """This API takes request body, validates it and sends it to kafka topic
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = ServiceabilityValidator.postRegionJobBulk()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import BulkRegionJobSerializer
-        schema = BulkRegionJobSerializer()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/tat/bulk", """{"required":[{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular sale channel.","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular sale channel.","required":true,"schema":{"type":"integer"}}]}""", )
-        query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/tat/bulk", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import PostBulkRegionJobResponse
-            schema = PostBulkRegionJobResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for postRegionJobBulk")
-                print(e)
-
-        
-
-        return response
-    
-    async def getRegionJobBulk(self, current_page_number=None, page_size=None):
-        """This API takes gives all the records of bulk_export_job collection
-        :param current_page_number : The current page number : type integer
-        :param page_size : The page size : type integer
-        """
-        payload = {}
-        
-        if current_page_number is not None:
-            payload["current_page_number"] = current_page_number
-        
-        if page_size is not None:
-            payload["page_size"] = page_size
-        
-
-        # Parameter validation
-        schema = ServiceabilityValidator.getRegionJobBulk()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/tat/bulk", """{"required":[{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular sale channel.","required":true,"schema":{"type":"integer"}}],"optional":[{"name":"current_page_number","in":"query","description":"The current page number","required":false,"schema":{"type":"integer"}},{"name":"page_size","in":"query","description":"The page size","required":false,"schema":{"type":"integer"}}],"query":[{"name":"current_page_number","in":"query","description":"The current page number","required":false,"schema":{"type":"integer"}},{"name":"page_size","in":"query","description":"The page size","required":false,"schema":{"type":"integer"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular sale channel.","required":true,"schema":{"type":"integer"}}]}""", current_page_number=current_page_number, page_size=page_size)
-        query_string = await create_query_string(current_page_number=current_page_number, page_size=page_size)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/tat/bulk", current_page_number=current_page_number, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import GetBulkRegionJobResponse
-            schema = GetBulkRegionJobResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getRegionJobBulk")
-                print(e)
-
-        
-
-        return response
-    
-    async def getRegionJobBulkBatchId(self, batch_id=None):
-        """This API takes batch_id and gives the detail of bulk_export_job collection for the batch_id
-        :param batch_id : The batch ID : type string
-        """
-        payload = {}
-        
-        if batch_id is not None:
-            payload["batch_id"] = batch_id
-        
-
-        # Parameter validation
-        schema = ServiceabilityValidator.getRegionJobBulkBatchId()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/tat/bulk/{batch_id}", """{"required":[{"name":"batch_id","in":"path","description":"The batch ID","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular sale channel.","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"batch_id","in":"path","description":"The batch ID","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular sale channel.","required":true,"schema":{"type":"integer"}}]}""", batch_id=batch_id, )
-        query_string = await create_query_string(batch_id=batch_id, )
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/tat/bulk/{batch_id}", batch_id=batch_id, ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import GetBulkRegionJobResponse
-            schema = GetBulkRegionJobResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getRegionJobBulkBatchId")
-                print(e)
-
-        
-
-        return response
-    
     async def upsertDpAccount(self, body=""):
         """This API returns response of upsertion of DpAccount in mongo database.
         """
@@ -676,7 +542,7 @@ class Serviceability:
 
         return response
     
-    async def getDpAccountList(self, page_number=None, page_size=None, stage=None, payment_mode=None, transport_type=None):
+    async def getDpAccount(self, page_number=None, page_size=None, stage=None, payment_mode=None, transport_type=None):
         """This API returns response DpAccount of a company from mongo database.
         :param page_number : index of the item to start returning with : type integer
         :param page_size : determines the items to be displayed in a page : type integer
@@ -703,7 +569,7 @@ class Serviceability:
         
 
         # Parameter validation
-        schema = ServiceabilityValidator.getDpAccountList()
+        schema = ServiceabilityValidator.getDpAccount()
         schema.dump(schema.load(payload))
         
 
@@ -728,14 +594,14 @@ class Serviceability:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getDpAccountList")
+                print("Response Validation failed for getDpAccount")
                 print(e)
 
         
 
         return response
     
-    async def getDpRule(self, rule_uid=None):
+    async def getDpRules(self, rule_uid=None):
         """This API returns response of DpRules from mongo database.
         :param rule_uid : A `rule_uid` is a unique identifier for a particular Dp. : type string
         """
@@ -746,7 +612,7 @@ class Serviceability:
         
 
         # Parameter validation
-        schema = ServiceabilityValidator.getDpRule()
+        schema = ServiceabilityValidator.getDpRules()
         schema.dump(schema.load(payload))
         
 
@@ -771,7 +637,7 @@ class Serviceability:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getDpRule")
+                print("Response Validation failed for getDpRules")
                 print(e)
 
         
@@ -826,14 +692,14 @@ class Serviceability:
 
         return response
     
-    async def createDpRule(self, body=""):
+    async def upsertDpRules(self, body=""):
         """This API returns response of upsert of DpRules in mongo database.
         """
         payload = {}
         
 
         # Parameter validation
-        schema = ServiceabilityValidator.createDpRule()
+        schema = ServiceabilityValidator.upsertDpRules()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -863,14 +729,14 @@ class Serviceability:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for createDpRule")
+                print("Response Validation failed for upsertDpRules")
                 print(e)
 
         
 
         return response
     
-    async def getDpRuleList(self, page_number=None, page_size=None):
+    async def getDpRuleInsert(self, page_number=None, page_size=None):
         """This API returns response of DpRules from mongo database.
         :param page_number : index of the item to start returning with : type integer
         :param page_size : determines the items to be displayed in a page : type integer
@@ -885,7 +751,7 @@ class Serviceability:
         
 
         # Parameter validation
-        schema = ServiceabilityValidator.getDpRuleList()
+        schema = ServiceabilityValidator.getDpRuleInsert()
         schema.dump(schema.load(payload))
         
 
@@ -910,21 +776,21 @@ class Serviceability:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getDpRuleList")
+                print("Response Validation failed for getDpRuleInsert")
                 print(e)
 
         
 
         return response
     
-    async def getDpCompanyRulePriority(self, ):
+    async def getDpCompanyRules(self, ):
         """This API returns response of all DpCompanyRules from mongo database.
         """
         payload = {}
         
 
         # Parameter validation
-        schema = ServiceabilityValidator.getDpCompanyRulePriority()
+        schema = ServiceabilityValidator.getDpCompanyRules()
         schema.dump(schema.load(payload))
         
 
@@ -949,21 +815,21 @@ class Serviceability:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getDpCompanyRulePriority")
+                print("Response Validation failed for getDpCompanyRules")
                 print(e)
 
         
 
         return response
     
-    async def upsertDpCompanyRulePriority(self, body=""):
+    async def upsertDpCompanyRules(self, body=""):
         """This API returns response of upsert of DpCompanyRules in mongo database.
         """
         payload = {}
         
 
         # Parameter validation
-        schema = ServiceabilityValidator.upsertDpCompanyRulePriority()
+        schema = ServiceabilityValidator.upsertDpCompanyRules()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -993,7 +859,7 @@ class Serviceability:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for upsertDpCompanyRulePriority")
+                print("Response Validation failed for upsertDpCompanyRules")
                 print(e)
 
         

@@ -195,6 +195,49 @@ class Serviceability:
 
         return response
     
+    async def deleteAppDp(self, courier_partner_id=None):
+        """This API remove application dp data.
+        :param courier_partner_id : A `courier_partner_id` is a unique identifier of a particular delivery partner. : type integer
+        """
+        payload = {}
+        
+        if courier_partner_id is not None:
+            payload["courier_partner_id"] = courier_partner_id
+        
+
+        # Parameter validation
+        schema = ServiceabilityValidator.deleteAppDp()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/courier-partner/{courier_partner_id}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier of a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"courier_partner_id","description":"A `courier_partner_id` is a unique identifier of a particular delivery partner.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier of a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"courier_partner_id","description":"A `courier_partner_id` is a unique identifier of a particular delivery partner.","schema":{"type":"integer"},"required":true}]}""", courier_partner_id=courier_partner_id)
+        query_string = await create_query_string(courier_partner_id=courier_partner_id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/courier-partner/{courier_partner_id}", courier_partner_id=courier_partner_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ApplicationCompanyDpViewResponse
+            schema = ApplicationCompanyDpViewResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteAppDp")
+                print(e)
+
+        
+
+        return response
+    
     async def updatePincodeMopView(self, body=""):
         """This API updates Pincode method of payment.
         """
@@ -371,14 +414,14 @@ class Serviceability:
 
         return response
     
-    async def getDpApplicationRulePriority(self, ):
+    async def getDpApplicationRules(self, ):
         """This API returns response of all rules of DpApplicationRules from mongo database.
         """
         payload = {}
         
 
         # Parameter validation
-        schema = ServiceabilityValidator.getDpApplicationRulePriority()
+        schema = ServiceabilityValidator.getDpApplicationRules()
         schema.dump(schema.load(payload))
         
 
@@ -403,21 +446,21 @@ class Serviceability:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getDpApplicationRulePriority")
+                print("Response Validation failed for getDpApplicationRules")
                 print(e)
 
         
 
         return response
     
-    async def upsertDpApplicationRulePriority(self, body=""):
+    async def upsertDpApplicationRules(self, body=""):
         """This API returns response of upsert of DpApplicationRules in mongo database.
         """
         payload = {}
         
 
         # Parameter validation
-        schema = ServiceabilityValidator.upsertDpApplicationRulePriority()
+        schema = ServiceabilityValidator.upsertDpApplicationRules()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -447,7 +490,7 @@ class Serviceability:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for upsertDpApplicationRulePriority")
+                print("Response Validation failed for upsertDpApplicationRules")
                 print(e)
 
         

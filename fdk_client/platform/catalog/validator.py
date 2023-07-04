@@ -797,7 +797,7 @@ class CatalogValidator:
          
         
     
-    class editProduct(BaseSchema):
+    class deleteProduct(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -806,7 +806,7 @@ class CatalogValidator:
          
         
     
-    class deleteProduct(BaseSchema):
+    class editProduct(BaseSchema):
         
         
         company_id = fields.Str(required=False)

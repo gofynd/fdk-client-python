@@ -33,6 +33,11 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
+    
+    
+        
+        
     
     
         
@@ -109,6 +114,17 @@ class ServiceabilityValidator:
          
         
     
+    class deleteAppDp(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        courier_partner_id = fields.Int(required=False)
+         
+        
+    
     class updatePincodeMopView(BaseSchema):
         
         
@@ -145,7 +161,7 @@ class ServiceabilityValidator:
          
         
     
-    class getDpApplicationRulePriority(BaseSchema):
+    class getDpApplicationRules(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -154,7 +170,7 @@ class ServiceabilityValidator:
          
         
     
-    class upsertDpApplicationRulePriority(BaseSchema):
+    class upsertDpApplicationRules(BaseSchema):
         
         
         company_id = fields.Int(required=False)

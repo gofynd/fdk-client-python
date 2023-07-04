@@ -2756,7 +2756,7 @@ Get event subscriptions
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").communication.getEventSubscriptions(pageNo=pageNo, pageSize=pageSize, populate=populate)
+    result = await platformClient.application("<APPLICATION_ID>").communication.getEventSubscriptions(pageNo=pageNo, pageSize=pageSize, populate=populate, query=query)
     # use result
 except Exception as e:
     print(e)
@@ -2770,7 +2770,8 @@ except Exception as e:
 | --------- | -----  | -------- | ----------- | 
 | pageNo | Int? | no | Current page no |   
 | pageSize | Int? | no | Current request items count |   
-| populate | String? | no | populate fields |  
+| populate | ArrayList<String>? | no | populate fields |   
+| query | String? | no | Current request items count |  
 
 
 

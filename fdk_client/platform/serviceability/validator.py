@@ -67,18 +67,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
-        
-    
-    
-        
-    
-    
-        
-        
-        
         
         
         
@@ -218,33 +206,6 @@ class ServiceabilityValidator:
          
         
     
-    class postRegionJobBulk(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class getRegionJobBulk(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        current_page_number = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-         
-        
-    
-    class getRegionJobBulkBatchId(BaseSchema):
-        
-        
-        batch_id = fields.Str(required=False)
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
     class upsertDpAccount(BaseSchema):
         
         
@@ -252,7 +213,7 @@ class ServiceabilityValidator:
          
         
     
-    class getDpAccountList(BaseSchema):
+    class getDpAccount(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -269,7 +230,7 @@ class ServiceabilityValidator:
          
         
     
-    class getDpRule(BaseSchema):
+    class getDpRules(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -287,14 +248,14 @@ class ServiceabilityValidator:
          
         
     
-    class createDpRule(BaseSchema):
+    class upsertDpRules(BaseSchema):
         
         
         company_id = fields.Int(required=False)
          
         
     
-    class getDpRuleList(BaseSchema):
+    class getDpRuleInsert(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -305,14 +266,14 @@ class ServiceabilityValidator:
          
         
     
-    class getDpCompanyRulePriority(BaseSchema):
+    class getDpCompanyRules(BaseSchema):
         
         
         company_id = fields.Int(required=False)
          
         
     
-    class upsertDpCompanyRulePriority(BaseSchema):
+    class upsertDpCompanyRules(BaseSchema):
         
         
         company_id = fields.Int(required=False)

@@ -166,10 +166,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
-        
-        
 
 class PaymentValidator:
     
@@ -503,15 +499,6 @@ class PaymentValidator:
         
     
     class cancelPaymentLink(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class extensionPaymentUpdate(BaseSchema):
         
         
         company_id = fields.Int(required=False)
