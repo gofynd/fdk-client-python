@@ -1183,6 +1183,8 @@ class Domain(BaseSchema):
     
     name = fields.Str(required=False)
     
+    is_predefined = fields.Boolean(required=False)
+    
 
 
 class ApplicationWebsite(BaseSchema):

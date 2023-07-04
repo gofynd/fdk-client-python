@@ -10,6 +10,46 @@ from ..ApplicationModel import BaseSchema
 
 
 
+class PromiseFormatted(BaseSchema):
+    pass
+
+
+class PromiseTimestamp(BaseSchema):
+    pass
+
+
+class ShipmentPromise(BaseSchema):
+    pass
+
+
+class PaymentSelectionLock(BaseSchema):
+    pass
+
+
+class CouponBreakup(BaseSchema):
+    pass
+
+
+class LoyaltyPoints(BaseSchema):
+    pass
+
+
+class DisplayBreakup(BaseSchema):
+    pass
+
+
+class RawBreakup(BaseSchema):
+    pass
+
+
+class CartBreakup(BaseSchema):
+    pass
+
+
+class CartCurrency(BaseSchema):
+    pass
+
+
 class BasePrice(BaseSchema):
     pass
 
@@ -26,10 +66,6 @@ class ProductArticle(BaseSchema):
     pass
 
 
-class PromoMeta(BaseSchema):
-    pass
-
-
 class ProductPrice(BaseSchema):
     pass
 
@@ -38,7 +74,15 @@ class ProductPriceInfo(BaseSchema):
     pass
 
 
+class PromoMeta(BaseSchema):
+    pass
+
+
 class BuyRules(BaseSchema):
+    pass
+
+
+class DiscountRulesApp(BaseSchema):
     pass
 
 
@@ -47,10 +91,6 @@ class FreeGiftItem(BaseSchema):
 
 
 class AppliedFreeArticles(BaseSchema):
-    pass
-
-
-class DiscountRulesApp(BaseSchema):
     pass
 
 
@@ -66,6 +106,14 @@ class ProductAvailability(BaseSchema):
     pass
 
 
+class CategoryInfo(BaseSchema):
+    pass
+
+
+class ProductImage(BaseSchema):
+    pass
+
+
 class ActionQuery(BaseSchema):
     pass
 
@@ -74,59 +122,11 @@ class ProductAction(BaseSchema):
     pass
 
 
-class ProductImage(BaseSchema):
-    pass
-
-
-class CategoryInfo(BaseSchema):
-    pass
-
-
 class CartProduct(BaseSchema):
     pass
 
 
 class CartProductInfo(BaseSchema):
-    pass
-
-
-class CouponBreakup(BaseSchema):
-    pass
-
-
-class DisplayBreakup(BaseSchema):
-    pass
-
-
-class RawBreakup(BaseSchema):
-    pass
-
-
-class LoyaltyPoints(BaseSchema):
-    pass
-
-
-class CartBreakup(BaseSchema):
-    pass
-
-
-class PromiseTimestamp(BaseSchema):
-    pass
-
-
-class PromiseFormatted(BaseSchema):
-    pass
-
-
-class ShipmentPromise(BaseSchema):
-    pass
-
-
-class PaymentSelectionLock(BaseSchema):
-    pass
-
-
-class CartCurrency(BaseSchema):
     pass
 
 
@@ -250,11 +250,11 @@ class CartShipmentsResponse(BaseSchema):
     pass
 
 
-class CartCheckoutCustomMeta(BaseSchema):
+class StaffCheckout(BaseSchema):
     pass
 
 
-class StaffCheckout(BaseSchema):
+class CartCheckoutCustomMeta(BaseSchema):
     pass
 
 
@@ -341,6 +341,152 @@ class LadderPriceOffers(BaseSchema):
 
 
 
+class PromiseFormatted(BaseSchema):
+    # Cart swagger.json
+
+    
+    min = fields.Str(required=False)
+    
+    max = fields.Str(required=False)
+    
+
+
+class PromiseTimestamp(BaseSchema):
+    # Cart swagger.json
+
+    
+    min = fields.Float(required=False)
+    
+    max = fields.Float(required=False)
+    
+
+
+class ShipmentPromise(BaseSchema):
+    # Cart swagger.json
+
+    
+    formatted = fields.Nested(PromiseFormatted, required=False)
+    
+    timestamp = fields.Nested(PromiseTimestamp, required=False)
+    
+
+
+class PaymentSelectionLock(BaseSchema):
+    # Cart swagger.json
+
+    
+    payment_identifier = fields.Str(required=False)
+    
+    enabled = fields.Boolean(required=False)
+    
+    default_options = fields.Str(required=False)
+    
+
+
+class CouponBreakup(BaseSchema):
+    # Cart swagger.json
+
+    
+    code = fields.Str(required=False)
+    
+    uid = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
+    
+    is_applied = fields.Boolean(required=False)
+    
+    value = fields.Float(required=False)
+    
+    type = fields.Str(required=False)
+    
+
+
+class LoyaltyPoints(BaseSchema):
+    # Cart swagger.json
+
+    
+    total = fields.Float(required=False)
+    
+    description = fields.Str(required=False)
+    
+    is_applied = fields.Boolean(required=False)
+    
+    applicable = fields.Float(required=False)
+    
+
+
+class DisplayBreakup(BaseSchema):
+    # Cart swagger.json
+
+    
+    message = fields.List(fields.Str(required=False), required=False)
+    
+    currency_symbol = fields.Str(required=False)
+    
+    key = fields.Str(required=False)
+    
+    value = fields.Float(required=False)
+    
+    currency_code = fields.Str(required=False)
+    
+    display = fields.Str(required=False)
+    
+
+
+class RawBreakup(BaseSchema):
+    # Cart swagger.json
+
+    
+    discount = fields.Float(required=False)
+    
+    delivery_charge = fields.Float(required=False)
+    
+    coupon = fields.Float(required=False)
+    
+    convenience_fee = fields.Float(required=False)
+    
+    fynd_cash = fields.Float(required=False)
+    
+    gst_charges = fields.Float(required=False)
+    
+    vog = fields.Float(required=False)
+    
+    mrp_total = fields.Float(required=False)
+    
+    cod_charge = fields.Float(required=False)
+    
+    total = fields.Float(required=False)
+    
+    you_saved = fields.Float(required=False)
+    
+    subtotal = fields.Float(required=False)
+    
+
+
+class CartBreakup(BaseSchema):
+    # Cart swagger.json
+
+    
+    coupon = fields.Nested(CouponBreakup, required=False)
+    
+    loyalty_points = fields.Nested(LoyaltyPoints, required=False)
+    
+    display = fields.List(fields.Nested(DisplayBreakup, required=False), required=False)
+    
+    raw = fields.Nested(RawBreakup, required=False)
+    
+
+
+class CartCurrency(BaseSchema):
+    # Cart swagger.json
+
+    
+    code = fields.Str(required=False)
+    
+    symbol = fields.Str(required=False)
+    
+
+
 class BasePrice(BaseSchema):
     # Cart swagger.json
 
@@ -349,9 +495,9 @@ class BasePrice(BaseSchema):
     
     currency_code = fields.Str(required=False)
     
-    effective = fields.Float(required=False)
-    
     marked = fields.Float(required=False)
+    
+    effective = fields.Float(required=False)
     
 
 
@@ -359,9 +505,9 @@ class ArticlePriceInfo(BaseSchema):
     # Cart swagger.json
 
     
-    base = fields.Nested(BasePrice, required=False)
-    
     converted = fields.Nested(BasePrice, required=False)
+    
+    base = fields.Nested(BasePrice, required=False)
     
 
 
@@ -369,9 +515,9 @@ class BaseInfo(BaseSchema):
     # Cart swagger.json
 
     
-    uid = fields.Int(required=False)
-    
     name = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
     
 
 
@@ -379,25 +525,53 @@ class ProductArticle(BaseSchema):
     # Cart swagger.json
 
     
-    type = fields.Str(required=False)
-    
-    product_group_tags = fields.List(fields.Str(required=False), required=False)
-    
-    size = fields.Str(required=False)
-    
-    parent_item_identifiers = fields.Dict(required=False)
-    
-    price = fields.Nested(ArticlePriceInfo, required=False)
-    
-    extra_meta = fields.Dict(required=False)
-    
     quantity = fields.Int(required=False)
-    
-    store = fields.Nested(BaseInfo, required=False)
     
     uid = fields.Str(required=False)
     
+    price = fields.Nested(ArticlePriceInfo, required=False)
+    
+    product_group_tags = fields.List(fields.Str(required=False), required=False)
+    
     seller = fields.Nested(BaseInfo, required=False)
+    
+    extra_meta = fields.Dict(required=False)
+    
+    size = fields.Str(required=False)
+    
+    store = fields.Nested(BaseInfo, required=False)
+    
+    type = fields.Str(required=False)
+    
+    parent_item_identifiers = fields.Dict(required=False)
+    
+
+
+class ProductPrice(BaseSchema):
+    # Cart swagger.json
+
+    
+    currency_symbol = fields.Str(required=False)
+    
+    add_on = fields.Float(required=False)
+    
+    selling = fields.Float(required=False)
+    
+    marked = fields.Float(required=False)
+    
+    currency_code = fields.Str(required=False)
+    
+    effective = fields.Float(required=False)
+    
+
+
+class ProductPriceInfo(BaseSchema):
+    # Cart swagger.json
+
+    
+    converted = fields.Nested(ProductPrice, required=False)
+    
+    base = fields.Nested(ProductPrice, required=False)
     
 
 
@@ -409,73 +583,13 @@ class PromoMeta(BaseSchema):
     
 
 
-class ProductPrice(BaseSchema):
-    # Cart swagger.json
-
-    
-    effective = fields.Float(required=False)
-    
-    marked = fields.Float(required=False)
-    
-    currency_code = fields.Str(required=False)
-    
-    currency_symbol = fields.Str(required=False)
-    
-    add_on = fields.Float(required=False)
-    
-    selling = fields.Float(required=False)
-    
-
-
-class ProductPriceInfo(BaseSchema):
-    # Cart swagger.json
-
-    
-    base = fields.Nested(ProductPrice, required=False)
-    
-    converted = fields.Nested(ProductPrice, required=False)
-    
-
-
 class BuyRules(BaseSchema):
     # Cart swagger.json
 
     
-    item_criteria = fields.Dict(required=False)
-    
     cart_conditions = fields.Dict(required=False)
     
-
-
-class FreeGiftItem(BaseSchema):
-    # Cart swagger.json
-
-    
-    item_id = fields.Int(required=False)
-    
-    item_brand_name = fields.Str(required=False)
-    
-    item_price_details = fields.Dict(required=False)
-    
-    item_images_url = fields.List(fields.Str(required=False), required=False)
-    
-    item_slug = fields.Str(required=False)
-    
-    item_name = fields.Str(required=False)
-    
-
-
-class AppliedFreeArticles(BaseSchema):
-    # Cart swagger.json
-
-    
-    parent_item_identifier = fields.Str(required=False)
-    
-    quantity = fields.Int(required=False)
-    
-    article_id = fields.Str(required=False)
-    
-    free_gift_item_details = fields.Nested(FreeGiftItem, required=False)
+    item_criteria = fields.Dict(required=False)
     
 
 
@@ -483,13 +597,45 @@ class DiscountRulesApp(BaseSchema):
     # Cart swagger.json
 
     
-    item_criteria = fields.Dict(required=False)
+    offer = fields.Dict(required=False)
     
     matched_buy_rules = fields.List(fields.Str(required=False), required=False)
     
-    offer = fields.Dict(required=False)
-    
     raw_offer = fields.Dict(required=False)
+    
+    item_criteria = fields.Dict(required=False)
+    
+
+
+class FreeGiftItem(BaseSchema):
+    # Cart swagger.json
+
+    
+    item_price_details = fields.Dict(required=False)
+    
+    item_id = fields.Int(required=False)
+    
+    item_name = fields.Str(required=False)
+    
+    item_images_url = fields.List(fields.Str(required=False), required=False)
+    
+    item_slug = fields.Str(required=False)
+    
+    item_brand_name = fields.Str(required=False)
+    
+
+
+class AppliedFreeArticles(BaseSchema):
+    # Cart swagger.json
+
+    
+    free_gift_item_details = fields.Nested(FreeGiftItem, required=False)
+    
+    parent_item_identifier = fields.Str(required=False)
+    
+    quantity = fields.Int(required=False)
+    
+    article_id = fields.Str(required=False)
     
 
 
@@ -497,27 +643,27 @@ class AppliedPromotion(BaseSchema):
     # Cart swagger.json
 
     
-    buy_rules = fields.List(fields.Nested(BuyRules, required=False), required=False)
+    amount = fields.Float(required=False)
     
     promo_id = fields.Str(required=False)
     
-    promotion_name = fields.Str(required=False)
-    
-    article_quantity = fields.Int(required=False)
-    
     mrp_promotion = fields.Boolean(required=False)
     
-    offer_text = fields.Str(required=False)
-    
-    promotion_group = fields.Str(required=False)
+    promotion_name = fields.Str(required=False)
     
     promotion_type = fields.Str(required=False)
     
-    amount = fields.Float(required=False)
+    promotion_group = fields.Str(required=False)
+    
+    buy_rules = fields.List(fields.Nested(BuyRules, required=False), required=False)
+    
+    article_quantity = fields.Int(required=False)
+    
+    discount_rules = fields.List(fields.Nested(DiscountRulesApp, required=False), required=False)
     
     applied_free_articles = fields.List(fields.Nested(AppliedFreeArticles, required=False), required=False)
     
-    discount_rules = fields.List(fields.Nested(DiscountRulesApp, required=False), required=False)
+    offer_text = fields.Str(required=False)
     
 
 
@@ -537,31 +683,21 @@ class ProductAvailability(BaseSchema):
     
     is_valid = fields.Boolean(required=False)
     
-    deliverable = fields.Boolean(required=False)
-    
     out_of_stock = fields.Boolean(required=False)
+    
+    deliverable = fields.Boolean(required=False)
     
     sizes = fields.List(fields.Str(required=False), required=False)
     
 
 
-class ActionQuery(BaseSchema):
+class CategoryInfo(BaseSchema):
     # Cart swagger.json
 
     
-    product_slug = fields.List(fields.Str(required=False), required=False)
+    name = fields.Str(required=False)
     
-
-
-class ProductAction(BaseSchema):
-    # Cart swagger.json
-
-    
-    type = fields.Str(required=False)
-    
-    query = fields.Nested(ActionQuery, required=False)
-    
-    url = fields.Str(required=False)
+    uid = fields.Int(required=False)
     
 
 
@@ -577,13 +713,23 @@ class ProductImage(BaseSchema):
     
 
 
-class CategoryInfo(BaseSchema):
+class ActionQuery(BaseSchema):
     # Cart swagger.json
 
     
-    uid = fields.Int(required=False)
+    product_slug = fields.List(fields.Str(required=False), required=False)
     
-    name = fields.Str(required=False)
+
+
+class ProductAction(BaseSchema):
+    # Cart swagger.json
+
+    
+    query = fields.Nested(ActionQuery, required=False)
+    
+    type = fields.Str(required=False)
+    
+    url = fields.Str(required=False)
     
 
 
@@ -591,21 +737,21 @@ class CartProduct(BaseSchema):
     # Cart swagger.json
 
     
-    action = fields.Nested(ProductAction, required=False)
-    
-    type = fields.Str(required=False)
-    
-    brand = fields.Nested(BaseInfo, required=False)
-    
-    images = fields.List(fields.Nested(ProductImage, required=False), required=False)
+    uid = fields.Int(required=False)
     
     categories = fields.List(fields.Nested(CategoryInfo, required=False), required=False)
     
-    name = fields.Str(required=False)
+    images = fields.List(fields.Nested(ProductImage, required=False), required=False)
     
-    uid = fields.Int(required=False)
+    action = fields.Nested(ProductAction, required=False)
+    
+    brand = fields.Nested(BaseInfo, required=False)
     
     slug = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
     
 
 
@@ -613,183 +759,37 @@ class CartProductInfo(BaseSchema):
     # Cart swagger.json
 
     
+    quantity = fields.Int(required=False)
+    
     article = fields.Nested(ProductArticle, required=False)
-    
-    promo_meta = fields.Nested(PromoMeta, required=False)
-    
-    parent_item_identifiers = fields.Dict(required=False)
     
     price = fields.Nested(ProductPriceInfo, required=False)
     
     discount = fields.Str(required=False)
     
+    message = fields.Str(required=False)
+    
+    bulk_offer = fields.Dict(required=False)
+    
+    promo_meta = fields.Nested(PromoMeta, required=False)
+    
+    promotions_applied = fields.List(fields.Nested(AppliedPromotion, required=False), required=False)
+    
     key = fields.Str(required=False)
     
-    message = fields.Str(required=False)
+    identifiers = fields.Nested(CartProductIdentifer, required=False)
+    
+    availability = fields.Nested(ProductAvailability, required=False)
     
     coupon_message = fields.Str(required=False)
     
     price_per_unit = fields.Nested(ProductPriceInfo, required=False)
     
-    promotions_applied = fields.List(fields.Nested(AppliedPromotion, required=False), required=False)
-    
-    identifiers = fields.Nested(CartProductIdentifer, required=False)
-    
-    quantity = fields.Int(required=False)
-    
-    availability = fields.Nested(ProductAvailability, required=False)
-    
     is_set = fields.Boolean(required=False)
-    
-    bulk_offer = fields.Dict(required=False)
     
     product = fields.Nested(CartProduct, required=False)
     
-
-
-class CouponBreakup(BaseSchema):
-    # Cart swagger.json
-
-    
-    value = fields.Float(required=False)
-    
-    type = fields.Str(required=False)
-    
-    code = fields.Str(required=False)
-    
-    is_applied = fields.Boolean(required=False)
-    
-    message = fields.Str(required=False)
-    
-    uid = fields.Str(required=False)
-    
-
-
-class DisplayBreakup(BaseSchema):
-    # Cart swagger.json
-
-    
-    value = fields.Float(required=False)
-    
-    display = fields.Str(required=False)
-    
-    key = fields.Str(required=False)
-    
-    message = fields.List(fields.Str(required=False), required=False)
-    
-    currency_code = fields.Str(required=False)
-    
-    currency_symbol = fields.Str(required=False)
-    
-
-
-class RawBreakup(BaseSchema):
-    # Cart swagger.json
-
-    
-    vog = fields.Float(required=False)
-    
-    cod_charge = fields.Float(required=False)
-    
-    gst_charges = fields.Float(required=False)
-    
-    fynd_cash = fields.Float(required=False)
-    
-    delivery_charge = fields.Float(required=False)
-    
-    convenience_fee = fields.Float(required=False)
-    
-    discount = fields.Float(required=False)
-    
-    subtotal = fields.Float(required=False)
-    
-    total = fields.Float(required=False)
-    
-    mrp_total = fields.Float(required=False)
-    
-    you_saved = fields.Float(required=False)
-    
-    coupon = fields.Float(required=False)
-    
-
-
-class LoyaltyPoints(BaseSchema):
-    # Cart swagger.json
-
-    
-    applicable = fields.Float(required=False)
-    
-    description = fields.Str(required=False)
-    
-    is_applied = fields.Boolean(required=False)
-    
-    total = fields.Float(required=False)
-    
-
-
-class CartBreakup(BaseSchema):
-    # Cart swagger.json
-
-    
-    coupon = fields.Nested(CouponBreakup, required=False)
-    
-    display = fields.List(fields.Nested(DisplayBreakup, required=False), required=False)
-    
-    raw = fields.Nested(RawBreakup, required=False)
-    
-    loyalty_points = fields.Nested(LoyaltyPoints, required=False)
-    
-
-
-class PromiseTimestamp(BaseSchema):
-    # Cart swagger.json
-
-    
-    max = fields.Float(required=False)
-    
-    min = fields.Float(required=False)
-    
-
-
-class PromiseFormatted(BaseSchema):
-    # Cart swagger.json
-
-    
-    max = fields.Str(required=False)
-    
-    min = fields.Str(required=False)
-    
-
-
-class ShipmentPromise(BaseSchema):
-    # Cart swagger.json
-
-    
-    timestamp = fields.Nested(PromiseTimestamp, required=False)
-    
-    formatted = fields.Nested(PromiseFormatted, required=False)
-    
-
-
-class PaymentSelectionLock(BaseSchema):
-    # Cart swagger.json
-
-    
-    default_options = fields.Str(required=False)
-    
-    enabled = fields.Boolean(required=False)
-    
-    payment_identifier = fields.Str(required=False)
-    
-
-
-class CartCurrency(BaseSchema):
-    # Cart swagger.json
-
-    
-    code = fields.Str(required=False)
-    
-    symbol = fields.Str(required=False)
+    parent_item_identifiers = fields.Dict(required=False)
     
 
 
@@ -797,35 +797,35 @@ class CartDetailResponse(BaseSchema):
     # Cart swagger.json
 
     
-    coupon_text = fields.Str(required=False)
-    
-    items = fields.List(fields.Nested(CartProductInfo, required=False), required=False)
-    
     is_valid = fields.Boolean(required=False)
-    
-    checkout_mode = fields.Str(required=False)
-    
-    id = fields.Str(required=False)
-    
-    last_modified = fields.Str(required=False)
-    
-    breakup_values = fields.Nested(CartBreakup, required=False)
-    
-    message = fields.Str(required=False)
-    
-    restrict_checkout = fields.Boolean(required=False)
     
     delivery_promise = fields.Nested(ShipmentPromise, required=False)
     
+    message = fields.Str(required=False)
+    
     payment_selection_lock = fields.Nested(PaymentSelectionLock, required=False)
+    
+    id = fields.Str(required=False)
+    
+    restrict_checkout = fields.Boolean(required=False)
     
     delivery_charge_info = fields.Str(required=False)
     
-    gstin = fields.Str(required=False)
+    breakup_values = fields.Nested(CartBreakup, required=False)
     
-    comment = fields.Str(required=False)
+    last_modified = fields.Str(required=False)
     
     currency = fields.Nested(CartCurrency, required=False)
+    
+    items = fields.List(fields.Nested(CartProductInfo, required=False), required=False)
+    
+    checkout_mode = fields.Str(required=False)
+    
+    gstin = fields.Str(required=False)
+    
+    coupon_text = fields.Str(required=False)
+    
+    comment = fields.Str(required=False)
     
 
 
@@ -833,29 +833,29 @@ class AddProductCart(BaseSchema):
     # Cart swagger.json
 
     
-    item_id = fields.Int(required=False)
+    store_id = fields.Int(required=False)
     
     pos = fields.Boolean(required=False)
     
-    display = fields.Str(required=False)
+    item_size = fields.Str(required=False)
+    
+    item_id = fields.Int(required=False)
+    
+    quantity = fields.Int(required=False)
     
     product_group_tags = fields.List(fields.Str(required=False), required=False)
     
     seller_id = fields.Int(required=False)
     
-    article_id = fields.Str(required=False)
-    
-    parent_item_identifiers = fields.Dict(required=False)
+    article_assignment = fields.Dict(required=False)
     
     extra_meta = fields.Dict(required=False)
     
-    article_assignment = fields.Dict(required=False)
+    article_id = fields.Str(required=False)
     
-    quantity = fields.Int(required=False)
+    display = fields.Str(required=False)
     
-    store_id = fields.Int(required=False)
-    
-    item_size = fields.Str(required=False)
+    parent_item_identifiers = fields.Dict(required=False)
     
 
 
@@ -863,9 +863,9 @@ class AddCartRequest(BaseSchema):
     # Cart swagger.json
 
     
-    items = fields.List(fields.Nested(AddProductCart, required=False), required=False)
-    
     new_cart = fields.Boolean(required=False)
+    
+    items = fields.List(fields.Nested(AddProductCart, required=False), required=False)
     
 
 
@@ -875,11 +875,11 @@ class AddCartDetailResponse(BaseSchema):
     
     success = fields.Boolean(required=False)
     
-    cart = fields.Nested(CartDetailResponse, required=False)
-    
     partial = fields.Boolean(required=False)
     
     message = fields.Str(required=False)
+    
+    cart = fields.Nested(CartDetailResponse, required=False)
     
 
 
@@ -887,21 +887,21 @@ class UpdateProductCart(BaseSchema):
     # Cart swagger.json
 
     
+    quantity = fields.Int(required=False)
+    
+    item_size = fields.Str(required=False)
+    
     item_id = fields.Int(required=False)
+    
+    extra_meta = fields.Dict(required=False)
+    
+    identifiers = fields.Nested(CartProductIdentifer, required=False)
+    
+    item_index = fields.Int(required=False)
     
     article_id = fields.Str(required=False)
     
     parent_item_identifiers = fields.Dict(required=False)
-    
-    extra_meta = fields.Dict(required=False)
-    
-    item_index = fields.Int(required=False)
-    
-    quantity = fields.Int(required=False)
-    
-    identifiers = fields.Nested(CartProductIdentifer, required=False)
-    
-    item_size = fields.Str(required=False)
     
 
 
@@ -921,9 +921,9 @@ class UpdateCartDetailResponse(BaseSchema):
     
     success = fields.Boolean(required=False)
     
-    cart = fields.Nested(CartDetailResponse, required=False)
-    
     message = fields.Str(required=False)
+    
+    cart = fields.Nested(CartDetailResponse, required=False)
     
 
 
@@ -939,25 +939,25 @@ class Coupon(BaseSchema):
     # Cart swagger.json
 
     
-    minimum_cart_value = fields.Float(required=False)
+    coupon_code = fields.Str(required=False)
     
-    sub_title = fields.Str(required=False)
-    
-    is_applied = fields.Boolean(required=False)
+    title = fields.Str(required=False)
     
     message = fields.Str(required=False)
     
     expires_on = fields.Str(required=False)
     
-    is_applicable = fields.Boolean(required=False)
-    
     coupon_value = fields.Float(required=False)
     
-    coupon_code = fields.Str(required=False)
+    is_applicable = fields.Boolean(required=False)
     
-    title = fields.Str(required=False)
+    sub_title = fields.Str(required=False)
+    
+    minimum_cart_value = fields.Float(required=False)
     
     max_discount_value = fields.Float(required=False)
+    
+    is_applied = fields.Boolean(required=False)
     
 
 
@@ -965,15 +965,15 @@ class PageCoupon(BaseSchema):
     # Cart swagger.json
 
     
-    current = fields.Int(required=False)
-    
-    has_next = fields.Boolean(required=False)
-    
-    total = fields.Int(required=False)
-    
     total_item_count = fields.Int(required=False)
     
     has_previous = fields.Boolean(required=False)
+    
+    total = fields.Int(required=False)
+    
+    current = fields.Int(required=False)
+    
+    has_next = fields.Boolean(required=False)
     
 
 
@@ -999,15 +999,15 @@ class OfferPrice(BaseSchema):
     # Cart swagger.json
 
     
-    bulk_effective = fields.Float(required=False)
+    currency_symbol = fields.Str(required=False)
     
-    effective = fields.Int(required=False)
+    bulk_effective = fields.Float(required=False)
     
     marked = fields.Int(required=False)
     
     currency_code = fields.Str(required=False)
     
-    currency_symbol = fields.Str(required=False)
+    effective = fields.Int(required=False)
     
 
 
@@ -1015,19 +1015,19 @@ class OfferItem(BaseSchema):
     # Cart swagger.json
 
     
-    type = fields.Str(required=False)
+    quantity = fields.Int(required=False)
     
     price = fields.Nested(OfferPrice, required=False)
     
     best = fields.Boolean(required=False)
     
-    quantity = fields.Int(required=False)
-    
     auto_applied = fields.Boolean(required=False)
+    
+    margin = fields.Int(required=False)
     
     total = fields.Float(required=False)
     
-    margin = fields.Int(required=False)
+    type = fields.Str(required=False)
     
 
 
@@ -1035,9 +1035,9 @@ class OfferSeller(BaseSchema):
     # Cart swagger.json
 
     
-    uid = fields.Int(required=False)
-    
     name = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
     
 
 
@@ -1071,9 +1071,9 @@ class GeoLocation(BaseSchema):
     # Cart swagger.json
 
     
-    latitude = fields.Float(required=False)
-    
     longitude = fields.Float(required=False)
+    
+    latitude = fields.Float(required=False)
     
 
 
@@ -1081,51 +1081,51 @@ class Address(BaseSchema):
     # Cart swagger.json
 
     
-    state = fields.Str(required=False)
-    
-    is_active = fields.Boolean(required=False)
-    
-    checkout_mode = fields.Str(required=False)
-    
-    is_default_address = fields.Boolean(required=False)
-    
-    area = fields.Str(required=False)
-    
-    tags = fields.List(fields.Str(required=False), required=False)
-    
-    city = fields.Str(required=False)
-    
     user_id = fields.Str(required=False)
     
-    area_code_slug = fields.Str(required=False)
-    
-    google_map_point = fields.Dict(required=False)
-    
-    geo_location = fields.Nested(GeoLocation, required=False)
-    
-    email = fields.Str(required=False)
-    
-    country = fields.Str(required=False)
-    
-    area_code = fields.Str(required=False)
-    
-    id = fields.Str(required=False)
-    
-    landmark = fields.Str(required=False)
-    
-    address_type = fields.Str(required=False)
-    
-    meta = fields.Dict(required=False)
-    
-    country_code = fields.Str(required=False)
+    _custom_json = fields.Dict(required=False)
     
     phone = fields.Str(required=False)
     
-    name = fields.Str(required=False)
+    id = fields.Str(required=False)
     
     address = fields.Str(required=False)
     
-    _custom_json = fields.Dict(required=False)
+    is_active = fields.Boolean(required=False)
+    
+    country = fields.Str(required=False)
+    
+    checkout_mode = fields.Str(required=False)
+    
+    area_code = fields.Str(required=False)
+    
+    landmark = fields.Str(required=False)
+    
+    geo_location = fields.Nested(GeoLocation, required=False)
+    
+    meta = fields.Dict(required=False)
+    
+    area_code_slug = fields.Str(required=False)
+    
+    email = fields.Str(required=False)
+    
+    tags = fields.List(fields.Str(required=False), required=False)
+    
+    address_type = fields.Str(required=False)
+    
+    google_map_point = fields.Dict(required=False)
+    
+    city = fields.Str(required=False)
+    
+    state = fields.Str(required=False)
+    
+    is_default_address = fields.Boolean(required=False)
+    
+    country_code = fields.Str(required=False)
+    
+    area = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
     
 
 
@@ -1143,9 +1143,9 @@ class SaveAddressResponse(BaseSchema):
     
     success = fields.Boolean(required=False)
     
-    id = fields.Str(required=False)
-    
     is_default_address = fields.Boolean(required=False)
+    
+    id = fields.Str(required=False)
     
 
 
@@ -1155,11 +1155,11 @@ class UpdateAddressResponse(BaseSchema):
     
     success = fields.Boolean(required=False)
     
+    is_default_address = fields.Boolean(required=False)
+    
     is_updated = fields.Boolean(required=False)
     
     id = fields.Str(required=False)
-    
-    is_default_address = fields.Boolean(required=False)
     
 
 
@@ -1167,9 +1167,9 @@ class DeleteAddressResponse(BaseSchema):
     # Cart swagger.json
 
     
-    id = fields.Str(required=False)
-    
     is_deleted = fields.Boolean(required=False)
+    
+    id = fields.Str(required=False)
     
 
 
@@ -1177,9 +1177,9 @@ class SelectCartAddressRequest(BaseSchema):
     # Cart swagger.json
 
     
-    billing_address_id = fields.Str(required=False)
-    
     cart_id = fields.Str(required=False)
+    
+    billing_address_id = fields.Str(required=False)
     
     id = fields.Str(required=False)
     
@@ -1193,13 +1193,13 @@ class UpdateCartPaymentRequest(BaseSchema):
     
     payment_mode = fields.Str(required=False)
     
-    payment_identifier = fields.Str(required=False)
-    
     merchant_code = fields.Str(required=False)
     
-    address_id = fields.Str(required=False)
-    
     id = fields.Str(required=False)
+    
+    payment_identifier = fields.Str(required=False)
+    
+    address_id = fields.Str(required=False)
     
 
 
@@ -1207,15 +1207,15 @@ class CouponValidity(BaseSchema):
     # Cart swagger.json
 
     
-    display_message_en = fields.Str(required=False)
-    
     code = fields.Str(required=False)
     
     discount = fields.Float(required=False)
     
+    title = fields.Str(required=False)
+    
     valid = fields.Boolean(required=False)
     
-    title = fields.Str(required=False)
+    display_message_en = fields.Str(required=False)
     
 
 
@@ -1225,9 +1225,9 @@ class PaymentCouponValidate(BaseSchema):
     
     success = fields.Boolean(required=False)
     
-    coupon_validity = fields.Nested(CouponValidity, required=False)
-    
     message = fields.Str(required=False)
+    
+    coupon_validity = fields.Nested(CouponValidity, required=False)
     
 
 
@@ -1235,25 +1235,25 @@ class ShipmentResponse(BaseSchema):
     # Cart swagger.json
 
     
-    order_type = fields.Str(required=False)
-    
-    items = fields.List(fields.Nested(CartProductInfo, required=False), required=False)
-    
-    box_type = fields.Str(required=False)
-    
-    promise = fields.Nested(ShipmentPromise, required=False)
+    dp_id = fields.Str(required=False)
     
     fulfillment_id = fields.Int(required=False)
     
-    shipments = fields.Int(required=False)
+    box_type = fields.Str(required=False)
     
-    fulfillment_type = fields.Str(required=False)
+    shipment_type = fields.Str(required=False)
     
     dp_options = fields.Dict(required=False)
     
-    dp_id = fields.Str(required=False)
+    fulfillment_type = fields.Str(required=False)
     
-    shipment_type = fields.Str(required=False)
+    items = fields.List(fields.Nested(CartProductInfo, required=False), required=False)
+    
+    order_type = fields.Str(required=False)
+    
+    promise = fields.Nested(ShipmentPromise, required=False)
+    
+    shipments = fields.Int(required=False)
     
 
 
@@ -1261,51 +1261,41 @@ class CartShipmentsResponse(BaseSchema):
     # Cart swagger.json
 
     
-    coupon_text = fields.Str(required=False)
+    cart_id = fields.Int(required=False)
     
     is_valid = fields.Boolean(required=False)
     
+    delivery_promise = fields.Nested(ShipmentPromise, required=False)
+    
+    uid = fields.Str(required=False)
+    
+    id = fields.Str(required=False)
+    
     checkout_mode = fields.Str(required=False)
     
+    currency = fields.Nested(CartCurrency, required=False)
+    
+    shipments = fields.List(fields.Nested(ShipmentResponse, required=False), required=False)
+    
+    comment = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
+    
+    payment_selection_lock = fields.Nested(PaymentSelectionLock, required=False)
+    
     error = fields.Boolean(required=False)
+    
+    restrict_checkout = fields.Boolean(required=False)
+    
+    delivery_charge_info = fields.Str(required=False)
     
     last_modified = fields.Str(required=False)
     
     breakup_values = fields.Nested(CartBreakup, required=False)
     
-    message = fields.Str(required=False)
-    
-    restrict_checkout = fields.Boolean(required=False)
-    
-    shipments = fields.List(fields.Nested(ShipmentResponse, required=False), required=False)
-    
-    uid = fields.Str(required=False)
-    
-    delivery_promise = fields.Nested(ShipmentPromise, required=False)
-    
-    delivery_charge_info = fields.Str(required=False)
-    
-    id = fields.Str(required=False)
-    
-    currency = fields.Nested(CartCurrency, required=False)
-    
-    comment = fields.Str(required=False)
-    
-    cart_id = fields.Int(required=False)
-    
-    payment_selection_lock = fields.Nested(PaymentSelectionLock, required=False)
-    
     gstin = fields.Str(required=False)
     
-
-
-class CartCheckoutCustomMeta(BaseSchema):
-    # Cart swagger.json
-
-    
-    value = fields.Str(required=False)
-    
-    key = fields.Str(required=False)
+    coupon_text = fields.Str(required=False)
     
 
 
@@ -1313,13 +1303,23 @@ class StaffCheckout(BaseSchema):
     # Cart swagger.json
 
     
-    user = fields.Str(required=False)
-    
     first_name = fields.Str(required=False)
+    
+    last_name = fields.Str(required=False)
     
     _id = fields.Str(required=False)
     
-    last_name = fields.Str(required=False)
+    user = fields.Str(required=False)
+    
+
+
+class CartCheckoutCustomMeta(BaseSchema):
+    # Cart swagger.json
+
+    
+    key = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
     
 
 
@@ -1327,39 +1327,39 @@ class CartCheckoutDetailRequest(BaseSchema):
     # Cart swagger.json
 
     
-    custom_meta = fields.List(fields.Nested(CartCheckoutCustomMeta, required=False), required=False)
+    ordering_store = fields.Int(required=False)
+    
+    staff = fields.Nested(StaffCheckout, required=False)
+    
+    billing_address_id = fields.Str(required=False)
     
     payment_mode = fields.Str(required=False)
-    
-    meta = fields.Dict(required=False)
-    
-    extra_meta = fields.Dict(required=False)
-    
-    payment_identifier = fields.Str(required=False)
-    
-    callback_url = fields.Str(required=False)
     
     merchant_code = fields.Str(required=False)
     
     billing_address = fields.Dict(required=False)
     
-    ordering_store = fields.Int(required=False)
-    
-    staff = fields.Nested(StaffCheckout, required=False)
-    
-    delivery_address = fields.Dict(required=False)
-    
-    billing_address_id = fields.Str(required=False)
-    
-    address_id = fields.Str(required=False)
-    
-    aggregator = fields.Str(required=False)
-    
-    payment_auto_confirm = fields.Boolean(required=False)
+    extra_meta = fields.Dict(required=False)
     
     id = fields.Str(required=False)
     
+    custom_meta = fields.List(fields.Nested(CartCheckoutCustomMeta, required=False), required=False)
+    
+    payment_identifier = fields.Str(required=False)
+    
+    aggregator = fields.Str(required=False)
+    
+    address_id = fields.Str(required=False)
+    
     payment_params = fields.Dict(required=False)
+    
+    callback_url = fields.Str(required=False)
+    
+    meta = fields.Dict(required=False)
+    
+    delivery_address = fields.Dict(required=False)
+    
+    payment_auto_confirm = fields.Boolean(required=False)
     
 
 
@@ -1367,61 +1367,61 @@ class CheckCart(BaseSchema):
     # Cart swagger.json
 
     
+    is_valid = fields.Boolean(required=False)
+    
+    delivery_promise = fields.Nested(ShipmentPromise, required=False)
+    
+    uid = fields.Str(required=False)
+    
+    user_type = fields.Str(required=False)
+    
+    cod_available = fields.Boolean(required=False)
+    
+    order_id = fields.Str(required=False)
+    
+    delivery_charges = fields.Int(required=False)
+    
+    id = fields.Str(required=False)
+    
+    coupon_text = fields.Str(required=False)
+    
+    success = fields.Boolean(required=False)
+    
     checkout_mode = fields.Str(required=False)
     
     store_emps = fields.List(fields.Dict(required=False), required=False)
     
-    cod_charges = fields.Int(required=False)
-    
-    uid = fields.Str(required=False)
-    
-    success = fields.Boolean(required=False)
+    payment_selection_lock = fields.Nested(PaymentSelectionLock, required=False)
     
     delivery_charge_info = fields.Str(required=False)
     
+    last_modified = fields.Str(required=False)
+    
     cart_id = fields.Int(required=False)
-    
-    store_code = fields.Str(required=False)
-    
-    cod_available = fields.Boolean(required=False)
-    
-    gstin = fields.Str(required=False)
-    
-    order_id = fields.Str(required=False)
-    
-    coupon_text = fields.Str(required=False)
-    
-    is_valid = fields.Boolean(required=False)
     
     error_message = fields.Str(required=False)
     
-    delivery_charge_order_value = fields.Int(required=False)
-    
-    last_modified = fields.Str(required=False)
-    
-    breakup_values = fields.Nested(CartBreakup, required=False)
-    
-    message = fields.Str(required=False)
-    
-    restrict_checkout = fields.Boolean(required=False)
-    
-    delivery_promise = fields.Nested(ShipmentPromise, required=False)
-    
-    user_type = fields.Str(required=False)
-    
-    id = fields.Str(required=False)
+    items = fields.List(fields.Nested(CartProductInfo, required=False), required=False)
     
     currency = fields.Nested(CartCurrency, required=False)
     
+    cod_message = fields.Str(required=False)
+    
+    delivery_charge_order_value = fields.Int(required=False)
+    
     comment = fields.Str(required=False)
     
-    delivery_charges = fields.Int(required=False)
+    message = fields.Str(required=False)
     
-    items = fields.List(fields.Nested(CartProductInfo, required=False), required=False)
+    cod_charges = fields.Int(required=False)
     
-    payment_selection_lock = fields.Nested(PaymentSelectionLock, required=False)
+    store_code = fields.Str(required=False)
     
-    cod_message = fields.Str(required=False)
+    breakup_values = fields.Nested(CartBreakup, required=False)
+    
+    gstin = fields.Str(required=False)
+    
+    restrict_checkout = fields.Boolean(required=False)
     
 
 
@@ -1429,21 +1429,21 @@ class CartCheckoutResponse(BaseSchema):
     # Cart swagger.json
 
     
-    cart = fields.Nested(CheckCart, required=False)
-    
-    app_intercept_url = fields.Str(required=False)
-    
     message = fields.Str(required=False)
-    
-    callback_url = fields.Str(required=False)
-    
-    data = fields.Dict(required=False)
     
     payment_confirm_url = fields.Str(required=False)
     
+    order_id = fields.Str(required=False)
+    
+    cart = fields.Nested(CheckCart, required=False)
+    
     success = fields.Boolean(required=False)
     
-    order_id = fields.Str(required=False)
+    callback_url = fields.Str(required=False)
+    
+    app_intercept_url = fields.Str(required=False)
+    
+    data = fields.Dict(required=False)
     
 
 
@@ -1451,11 +1451,11 @@ class CartMetaRequest(BaseSchema):
     # Cart swagger.json
 
     
-    checkout_mode = fields.Str(required=False)
-    
     pick_up_customer_details = fields.Dict(required=False)
     
     delivery_slots = fields.Dict(required=False)
+    
+    checkout_mode = fields.Str(required=False)
     
     gstin = fields.Str(required=False)
     
@@ -1493,9 +1493,9 @@ class GetShareCartLinkResponse(BaseSchema):
     # Cart swagger.json
 
     
-    token = fields.Str(required=False)
-    
     share_url = fields.Str(required=False)
+    
+    token = fields.Str(required=False)
     
 
 
@@ -1503,15 +1503,15 @@ class SharedCartDetails(BaseSchema):
     # Cart swagger.json
 
     
-    meta = fields.Dict(required=False)
-    
     created_on = fields.Str(required=False)
     
     token = fields.Str(required=False)
     
-    user = fields.Dict(required=False)
+    meta = fields.Dict(required=False)
     
     source = fields.Dict(required=False)
+    
+    user = fields.Dict(required=False)
     
 
 
@@ -1519,41 +1519,41 @@ class SharedCart(BaseSchema):
     # Cart swagger.json
 
     
-    coupon_text = fields.Str(required=False)
-    
-    items = fields.List(fields.Nested(CartProductInfo, required=False), required=False)
+    cart_id = fields.Int(required=False)
     
     is_valid = fields.Boolean(required=False)
     
-    checkout_mode = fields.Str(required=False)
-    
-    cart_id = fields.Int(required=False)
-    
-    id = fields.Str(required=False)
-    
-    last_modified = fields.Str(required=False)
-    
-    breakup_values = fields.Nested(CartBreakup, required=False)
+    delivery_promise = fields.Nested(ShipmentPromise, required=False)
     
     message = fields.Str(required=False)
     
-    restrict_checkout = fields.Boolean(required=False)
-    
-    shared_cart_details = fields.Nested(SharedCartDetails, required=False)
-    
     uid = fields.Str(required=False)
-    
-    delivery_promise = fields.Nested(ShipmentPromise, required=False)
     
     payment_selection_lock = fields.Nested(PaymentSelectionLock, required=False)
     
+    shared_cart_details = fields.Nested(SharedCartDetails, required=False)
+    
+    id = fields.Str(required=False)
+    
+    restrict_checkout = fields.Boolean(required=False)
+    
     delivery_charge_info = fields.Str(required=False)
+    
+    breakup_values = fields.Nested(CartBreakup, required=False)
+    
+    last_modified = fields.Str(required=False)
+    
+    currency = fields.Nested(CartCurrency, required=False)
+    
+    items = fields.List(fields.Nested(CartProductInfo, required=False), required=False)
+    
+    checkout_mode = fields.Str(required=False)
     
     gstin = fields.Str(required=False)
     
-    comment = fields.Str(required=False)
+    coupon_text = fields.Str(required=False)
     
-    currency = fields.Nested(CartCurrency, required=False)
+    comment = fields.Str(required=False)
     
 
 
@@ -1561,9 +1561,9 @@ class SharedCartResponse(BaseSchema):
     # Cart swagger.json
 
     
-    cart = fields.Nested(SharedCart, required=False)
-    
     error = fields.Str(required=False)
+    
+    cart = fields.Nested(SharedCart, required=False)
     
 
 
@@ -1571,17 +1571,17 @@ class FreeGiftItems(BaseSchema):
     # Cart swagger.json
 
     
+    item_price_details = fields.Dict(required=False)
+    
     item_id = fields.Int(required=False)
     
-    item_brand_name = fields.Str(required=False)
-    
-    item_price_details = fields.Dict(required=False)
+    item_name = fields.Str(required=False)
     
     item_images_url = fields.List(fields.Str(required=False), required=False)
     
     item_slug = fields.Str(required=False)
     
-    item_name = fields.Str(required=False)
+    item_brand_name = fields.Str(required=False)
     
 
 
@@ -1589,21 +1589,21 @@ class PromotionOffer(BaseSchema):
     # Cart swagger.json
 
     
-    buy_rules = fields.Dict(required=False)
-    
     valid_till = fields.Str(required=False)
-    
-    offer_text = fields.Str(required=False)
-    
-    free_gift_items = fields.List(fields.Nested(FreeGiftItems, required=False), required=False)
     
     promotion_group = fields.Str(required=False)
     
-    description = fields.Str(required=False)
-    
     id = fields.Str(required=False)
     
+    buy_rules = fields.Dict(required=False)
+    
+    description = fields.Str(required=False)
+    
+    free_gift_items = fields.List(fields.Nested(FreeGiftItems, required=False), required=False)
+    
     discount_rules = fields.List(fields.Dict(required=False), required=False)
+    
+    offer_text = fields.Str(required=False)
     
 
 
@@ -1639,15 +1639,15 @@ class LadderPrice(BaseSchema):
     # Cart swagger.json
 
     
-    effective = fields.Int(required=False)
+    currency_symbol = fields.Str(required=False)
     
     marked = fields.Int(required=False)
     
-    offer_price = fields.Float(required=False)
-    
     currency_code = fields.Str(required=False)
     
-    currency_symbol = fields.Str(required=False)
+    offer_price = fields.Float(required=False)
+    
+    effective = fields.Int(required=False)
     
 
 
@@ -1655,15 +1655,15 @@ class LadderOfferItem(BaseSchema):
     # Cart swagger.json
 
     
-    min_quantity = fields.Int(required=False)
-    
-    type = fields.Str(required=False)
-    
     price = fields.Nested(LadderPrice, required=False)
+    
+    min_quantity = fields.Int(required=False)
     
     max_quantity = fields.Int(required=False)
     
     margin = fields.Int(required=False)
+    
+    type = fields.Str(required=False)
     
 
 
@@ -1671,25 +1671,25 @@ class LadderPriceOffer(BaseSchema):
     # Cart swagger.json
 
     
-    buy_rules = fields.Dict(required=False)
-    
     valid_till = fields.Str(required=False)
-    
-    offer_text = fields.Str(required=False)
     
     calculate_on = fields.Str(required=False)
     
-    free_gift_items = fields.List(fields.Nested(FreeGiftItems, required=False), required=False)
-    
     promotion_group = fields.Str(required=False)
-    
-    offer_prices = fields.List(fields.Nested(LadderOfferItem, required=False), required=False)
-    
-    description = fields.Str(required=False)
     
     id = fields.Str(required=False)
     
+    buy_rules = fields.Dict(required=False)
+    
+    description = fields.Str(required=False)
+    
+    free_gift_items = fields.List(fields.Nested(FreeGiftItems, required=False), required=False)
+    
     discount_rules = fields.List(fields.Dict(required=False), required=False)
+    
+    offer_text = fields.Str(required=False)
+    
+    offer_prices = fields.List(fields.Nested(LadderOfferItem, required=False), required=False)
     
 
 
