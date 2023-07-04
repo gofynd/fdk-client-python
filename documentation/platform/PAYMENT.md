@@ -42,7 +42,7 @@ Get All Brand Payment Gateway Config Secret
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").payment.getBrandPaymentGatewayConfig()
+    result = await client.application("<APPLICATION_ID>").payment.getBrandPaymentGatewayConfig()
     # use result
 except Exception as e:
     print(e)
@@ -211,7 +211,7 @@ Save Config Secret For Brand Payment Gateway
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").payment.saveBrandPaymentGatewayConfig(body=body)
+    result = await client.application("<APPLICATION_ID>").payment.saveBrandPaymentGatewayConfig(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -272,7 +272,7 @@ Get All Valid Payment Options
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").payment.getPaymentModeRoutes(refresh=refresh, requestType=requestType)
+    result = await client.application("<APPLICATION_ID>").payment.getPaymentModeRoutes(refresh=refresh, requestType=requestType)
     # use result
 except Exception as e:
     print(e)
@@ -1483,7 +1483,7 @@ Get All Payouts
 
 ```python
 try:
-    result = await platformClient.payment.getAllPayouts(uniqueExternalId=uniqueExternalId)
+    result = await client.payment.getAllPayouts(uniqueExternalId=uniqueExternalId)
     # use result
 except Exception as e:
     print(e)
@@ -1603,7 +1603,7 @@ Save Payout
 
 ```python
 try:
-    result = await platformClient.payment.savePayout(body=body)
+    result = await client.payment.savePayout(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1687,7 +1687,7 @@ Update Payout
 
 ```python
 try:
-    result = await platformClient.payment.updatePayout(uniqueTransferNo=uniqueTransferNo, body=body)
+    result = await client.payment.updatePayout(uniqueTransferNo=uniqueTransferNo, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1748,7 +1748,7 @@ Partial Update Payout
 
 ```python
 try:
-    result = await platformClient.payment.activateAndDectivatePayout(uniqueTransferNo=uniqueTransferNo, body=body)
+    result = await client.payment.activateAndDectivatePayout(uniqueTransferNo=uniqueTransferNo, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1809,7 +1809,7 @@ Delete Payout
 
 ```python
 try:
-    result = await platformClient.payment.deletePayout(uniqueTransferNo=uniqueTransferNo)
+    result = await client.payment.deletePayout(uniqueTransferNo=uniqueTransferNo)
     # use result
 except Exception as e:
     print(e)
@@ -1868,7 +1868,7 @@ List Subscription Payment Method
 
 ```python
 try:
-    result = await platformClient.payment.getSubscriptionPaymentMethod(uniqueExternalId=uniqueExternalId)
+    result = await client.payment.getSubscriptionPaymentMethod(uniqueExternalId=uniqueExternalId)
     # use result
 except Exception as e:
     print(e)
@@ -2053,7 +2053,7 @@ Delete Subscription Payment Method
 
 ```python
 try:
-    result = await platformClient.payment.deleteSubscriptionPaymentMethod(uniqueExternalId=uniqueExternalId, paymentMethodId=paymentMethodId)
+    result = await client.payment.deleteSubscriptionPaymentMethod(uniqueExternalId=uniqueExternalId, paymentMethodId=paymentMethodId)
     # use result
 except Exception as e:
     print(e)
@@ -2113,7 +2113,7 @@ List Subscription Config
 
 ```python
 try:
-    result = await platformClient.payment.getSubscriptionConfig()
+    result = await client.payment.getSubscriptionConfig()
     # use result
 except Exception as e:
     print(e)
@@ -2171,7 +2171,7 @@ Save Subscription Setup Intent
 
 ```python
 try:
-    result = await platformClient.payment.saveSubscriptionSetupIntent(body=body)
+    result = await client.payment.saveSubscriptionSetupIntent(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2236,7 +2236,7 @@ Get bank details
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").payment.getBankAccountDetailsOpenAPI(orderId=orderId, requestHash=requestHash)
+    result = await client.application("<APPLICATION_ID>").payment.getBankAccountDetailsOpenAPI(orderId=orderId, requestHash=requestHash)
     # use result
 except Exception as e:
     print(e)
@@ -2307,7 +2307,7 @@ Save bank details for cancelled/returned order
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").payment.addRefundBankAccountUsingOTP(body=body)
+    result = await client.application("<APPLICATION_ID>").payment.addRefundBankAccountUsingOTP(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2368,7 +2368,7 @@ Ifsc Code Verification
 
 ```python
 try:
-    result = await platformClient.payment.verifyIfscCode(ifscCode=ifscCode)
+    result = await client.payment.verifyIfscCode(ifscCode=ifscCode)
     # use result
 except Exception as e:
     print(e)
@@ -2445,7 +2445,7 @@ List Order Beneficiary
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").payment.getUserOrderBeneficiaries(orderId=orderId)
+    result = await client.application("<APPLICATION_ID>").payment.getUserOrderBeneficiaries(orderId=orderId)
     # use result
 except Exception as e:
     print(e)
@@ -2526,7 +2526,7 @@ List User Beneficiary
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").payment.getUserBeneficiaries(orderId=orderId)
+    result = await client.application("<APPLICATION_ID>").payment.getUserBeneficiaries(orderId=orderId)
     # use result
 except Exception as e:
     print(e)
@@ -2608,7 +2608,7 @@ Confirm payment after successful payment from payment gateway
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").payment.confirmPayment(body=body)
+    result = await client.application("<APPLICATION_ID>").payment.confirmPayment(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2668,7 +2668,7 @@ Get COD limit for user
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").payment.getUserCODlimitRoutes(merchantUserId=merchantUserId, mobileNo=mobileNo)
+    result = await client.application("<APPLICATION_ID>").payment.getUserCODlimitRoutes(merchantUserId=merchantUserId, mobileNo=mobileNo)
     # use result
 except Exception as e:
     print(e)
@@ -2736,7 +2736,7 @@ Set COD option for user for payment
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").payment.setUserCODlimitRoutes(body=body)
+    result = await client.application("<APPLICATION_ID>").payment.setUserCODlimitRoutes(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2795,7 +2795,7 @@ API to Get the url to call for oauth
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").payment.oauthGetUrl(aggregator=aggregator, successRedirectUrl=successRedirectUrl, failureRedirectUrl=failureRedirectUrl)
+    result = await client.application("<APPLICATION_ID>").payment.oauthGetUrl(aggregator=aggregator, successRedirectUrl=successRedirectUrl, failureRedirectUrl=failureRedirectUrl)
     # use result
 except Exception as e:
     print(e)
@@ -2857,7 +2857,7 @@ API to Revoke oauth for razorpay partnership
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").payment.revokeOauthToken(aggregator=aggregator)
+    result = await client.application("<APPLICATION_ID>").payment.revokeOauthToken(aggregator=aggregator)
     # use result
 except Exception as e:
     print(e)

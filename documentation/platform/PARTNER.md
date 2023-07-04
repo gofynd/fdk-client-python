@@ -22,7 +22,7 @@ Create proxy URL for the external URL
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").partner.addProxyPath(extensionId=extensionId, body=body)
+    result = await client.application("<APPLICATION_ID>").partner.addProxyPath(extensionId=extensionId, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -88,7 +88,7 @@ Remove proxy URL for the external URL
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").partner.removeProxyPath(extensionId=extensionId, attachedPath=attachedPath)
+    result = await client.application("<APPLICATION_ID>").partner.removeProxyPath(extensionId=extensionId, attachedPath=attachedPath)
     # use result
 except Exception as e:
     print(e)

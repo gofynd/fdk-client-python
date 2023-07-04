@@ -22,7 +22,7 @@ Search Application
 
 ```python
 try:
-    result = await publicClient.configuration.searchApplication(authorization=authorization, query=query)
+    result = await client.configuration.searchApplication(authorization=authorization, query=query)
     # use result
 except Exception as e:
     print(e)
@@ -141,7 +141,7 @@ Get countries, states, cities
 
 ```python
 try:
-    result = await publicClient.configuration.getLocations(locationType=locationType, id=id)
+    result = await client.configuration.getLocations(locationType=locationType, id=id)
     # use result
 except Exception as e:
     print(e)

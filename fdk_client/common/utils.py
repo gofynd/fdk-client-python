@@ -85,7 +85,7 @@ def get_headers_with_signature(domain: Text, method: Text, url: Text, query_stri
 
     body_hex = hashlib.sha256("".encode()).hexdigest()
     if body:
-        body_hex = hashlib.sha256(ujson.dumps(body).encode()).hexdigest()
+        body_hex = hashlib.sha256(ujson.dumps(body).replace(", ", ",").replace(": ", ":").encode()).hexdigest()
     request_list = [
         method.upper(),
         url,

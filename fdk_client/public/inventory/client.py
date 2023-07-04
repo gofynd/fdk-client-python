@@ -1,7 +1,9 @@
 
 
-"""Inventory Public Client"""
+"""  Public Client."""
 
+import base64
+import ujson
 from urllib.parse import urlparse
 
 from ...common.aiohttp_helper import AiohttpHelper
@@ -35,10 +37,10 @@ class Inventory:
         """
         payload = {}
         
-        if daily_job is not None:
+        if daily_job:
             payload["daily_job"] = daily_job
         
-        if job_code is not None:
+        if job_code:
             payload["job_code"] = job_code
         
         # Parameter validation
@@ -59,22 +61,7 @@ class Inventory:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getJobCodesMetrics"]).netloc, "get", await create_url_without_domain("/service/common/inventory/v1.0/company/email/jobCode", daily_job=daily_job, job_code=job_code), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ResponseEnvelopeObject
-            schema = ResponseEnvelopeObject()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getJobCodesMetrics")
-                print(e)
-
-        
-
-        return response
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getJobCodesMetrics"]).netloc, "get", await create_url_without_domain("/service/common/inventory/v1.0/company/email/jobCode", daily_job=daily_job, job_code=job_code), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
     async def saveJobCodesMetrics(self, body=""):
         """Endpoint to save JobCode Metrics
@@ -104,22 +91,7 @@ class Inventory:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["saveJobCodesMetrics"]).netloc, "post", await create_url_without_domain("/service/common/inventory/v1.0/company/email/jobCode", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ResponseEnvelopeEmailJobMetrics
-            schema = ResponseEnvelopeEmailJobMetrics()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for saveJobCodesMetrics")
-                print(e)
-
-        
-
-        return response
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["saveJobCodesMetrics"]).netloc, "post", await create_url_without_domain("/service/common/inventory/v1.0/company/email/jobCode", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
     async def getConfigByApiKey(self, apikey=None, body=""):
         """REST Endpoint that returns all configuration detail of a company
@@ -127,7 +99,7 @@ class Inventory:
         """
         payload = {}
         
-        if apikey is not None:
+        if apikey:
             payload["apikey"] = apikey
         
         # Parameter validation
@@ -148,22 +120,7 @@ class Inventory:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getConfigByApiKey"]).netloc, "get", await create_url_without_domain("/service/common/inventory/v1.0/company/slingshot", apikey=apikey), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ResponseEnvelopeSlingshotConfigurationDetail
-            schema = ResponseEnvelopeSlingshotConfigurationDetail()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getConfigByApiKey")
-                print(e)
-
-        
-
-        return response
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getConfigByApiKey"]).netloc, "get", await create_url_without_domain("/service/common/inventory/v1.0/company/slingshot", apikey=apikey), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
     async def getApiKey(self, user_name=None, password=None, body=""):
         """REST Endpoint that returns apikey by username by password
@@ -172,10 +129,10 @@ class Inventory:
         """
         payload = {}
         
-        if user_name is not None:
+        if user_name:
             payload["user_name"] = user_name
         
-        if password is not None:
+        if password:
             payload["password"] = password
         
         # Parameter validation
@@ -196,22 +153,7 @@ class Inventory:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getApiKey"]).netloc, "get", await create_url_without_domain("/service/common/inventory/v1.0/company/slingshot/apikey", user_name=user_name, password=password), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ResponseEnvelopeApikeyModel
-            schema = ResponseEnvelopeApikeyModel()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getApiKey")
-                print(e)
-
-        
-
-        return response
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getApiKey"]).netloc, "get", await create_url_without_domain("/service/common/inventory/v1.0/company/slingshot/apikey", user_name=user_name, password=password), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
     async def getJobByCode(self, code=None, body=""):
         """REST Endpoint that returns job config by code
@@ -219,7 +161,7 @@ class Inventory:
         """
         payload = {}
         
-        if code is not None:
+        if code:
             payload["code"] = code
         
         # Parameter validation
@@ -240,22 +182,7 @@ class Inventory:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getJobByCode"]).netloc, "get", await create_url_without_domain("/service/common/inventory/v1.0/company/jobs/code/{code}", code=code), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ResponseEnvelopeJobConfigDTO
-            schema = ResponseEnvelopeJobConfigDTO()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getJobByCode")
-                print(e)
-
-        
-
-        return response
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getJobByCode"]).netloc, "get", await create_url_without_domain("/service/common/inventory/v1.0/company/jobs/code/{code}", code=code), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
     async def getJobConfigByIntegrationType(self, integration_type=None, disable=None, body=""):
         """REST Endpoint that returns all job Configs by Integration Type
@@ -264,10 +191,10 @@ class Inventory:
         """
         payload = {}
         
-        if integration_type is not None:
+        if integration_type:
             payload["integration_type"] = integration_type
         
-        if disable is not None:
+        if disable:
             payload["disable"] = disable
         
         # Parameter validation
@@ -288,21 +215,6 @@ class Inventory:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getJobConfigByIntegrationType"]).netloc, "get", await create_url_without_domain("/service/common/inventory/v1.0/company/job/config", integration_type=integration_type, disable=disable), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ResponseEnvelopeListJobConfigDTO
-            schema = ResponseEnvelopeListJobConfigDTO()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getJobConfigByIntegrationType")
-                print(e)
-
-        
-
-        return response
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getJobConfigByIntegrationType"]).netloc, "get", await create_url_without_domain("/service/common/inventory/v1.0/company/job/config", integration_type=integration_type, disable=disable), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
 

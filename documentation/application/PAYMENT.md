@@ -59,7 +59,7 @@ Get payment gateway keys
 
 ```python
 try:
-    result = await applicationClient.payment.getAggregatorsConfig(xApiToken=xApiToken, refresh=refresh)
+    result = await client.payment.getAggregatorsConfig(xApiToken=xApiToken, refresh=refresh)
     # use result
 except Exception as e:
     print(e)
@@ -153,7 +153,7 @@ Attach a saved card to customer.
 
 ```python
 try:
-    result = await applicationClient.payment.attachCardToCustomer(body=body)
+    result = await client.payment.attachCardToCustomer(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -238,7 +238,7 @@ Fetch active payment gateway for card payments
 
 ```python
 try:
-    result = await applicationClient.payment.getActiveCardAggregator(refresh=refresh)
+    result = await client.payment.getActiveCardAggregator(refresh=refresh)
     # use result
 except Exception as e:
     print(e)
@@ -303,7 +303,7 @@ Fetch the list of cards saved by the user
 
 ```python
 try:
-    result = await applicationClient.payment.getActiveUserCards(forceRefresh=forceRefresh)
+    result = await client.payment.getActiveUserCards(forceRefresh=forceRefresh)
     # use result
 except Exception as e:
     print(e)
@@ -384,7 +384,7 @@ Delete a card
 
 ```python
 try:
-    result = await applicationClient.payment.deleteUserCard(body=body)
+    result = await client.payment.deleteUserCard(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -442,7 +442,7 @@ Validate customer for payment
 
 ```python
 try:
-    result = await applicationClient.payment.verifyCustomerForPayment(body=body)
+    result = await client.payment.verifyCustomerForPayment(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -541,7 +541,7 @@ Verify and charge payment
 
 ```python
 try:
-    result = await applicationClient.payment.verifyAndChargePayment(body=body)
+    result = await client.payment.verifyAndChargePayment(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -605,7 +605,7 @@ Initialize a payment (server-to-server) for UPI and BharatQR
 
 ```python
 try:
-    result = await applicationClient.payment.initialisePayment(body=body)
+    result = await client.payment.initialisePayment(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -673,7 +673,7 @@ Performs continuous polling to check status of payment on the server
 
 ```python
 try:
-    result = await applicationClient.payment.checkAndUpdatePaymentStatus(body=body)
+    result = await client.payment.checkAndUpdatePaymentStatus(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -733,7 +733,7 @@ Get applicable payment options
 
 ```python
 try:
-    result = await applicationClient.payment.getPaymentModeRoutes(amount=amount, cartId=cartId, pincode=pincode, checkoutMode=checkoutMode, refresh=refresh, cardReference=cardReference, userDetails=userDetails)
+    result = await client.payment.getPaymentModeRoutes(amount=amount, cartId=cartId, pincode=pincode, checkoutMode=checkoutMode, refresh=refresh, cardReference=cardReference, userDetails=userDetails)
     # use result
 except Exception as e:
     print(e)
@@ -1308,7 +1308,7 @@ Get applicable payment options for Point-of-Sale (POS)
 
 ```python
 try:
-    result = await applicationClient.payment.getPosPaymentModeRoutes(amount=amount, cartId=cartId, pincode=pincode, checkoutMode=checkoutMode, refresh=refresh, cardReference=cardReference, orderType=orderType, userDetails=userDetails)
+    result = await client.payment.getPosPaymentModeRoutes(amount=amount, cartId=cartId, pincode=pincode, checkoutMode=checkoutMode, refresh=refresh, cardReference=cardReference, orderType=orderType, userDetails=userDetails)
     # use result
 except Exception as e:
     print(e)
@@ -1552,7 +1552,7 @@ Get CreditLine Offer
 
 ```python
 try:
-    result = await applicationClient.payment.getRupifiBannerDetails()
+    result = await client.payment.getRupifiBannerDetails()
     # use result
 except Exception as e:
     print(e)
@@ -1610,7 +1610,7 @@ Get Epaylater Enabled
 
 ```python
 try:
-    result = await applicationClient.payment.getEpaylaterBannerDetails()
+    result = await client.payment.getEpaylaterBannerDetails()
     # use result
 except Exception as e:
     print(e)
@@ -1694,7 +1694,7 @@ API to resend and cancel a payment link which was already generated.
 
 ```python
 try:
-    result = await applicationClient.payment.resendOrCancelPayment(body=body)
+    result = await client.payment.resendOrCancelPayment(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1780,7 +1780,7 @@ Convert base64 string to HTML form
 
 ```python
 try:
-    result = await applicationClient.payment.renderHTML(body=body)
+    result = await client.payment.renderHTML(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1838,7 +1838,7 @@ API to Validate UPI ID
 
 ```python
 try:
-    result = await applicationClient.payment.validateVPA(body=body)
+    result = await client.payment.validateVPA(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1902,7 +1902,7 @@ Lists the mode of refund
 
 ```python
 try:
-    result = await applicationClient.payment.getActiveRefundTransferModes()
+    result = await client.payment.getActiveRefundTransferModes()
     # use result
 except Exception as e:
     print(e)
@@ -1969,7 +1969,7 @@ Enable/Disable a mode for transferring a refund
 
 ```python
 try:
-    result = await applicationClient.payment.enableOrDisableRefundTransferMode(body=body)
+    result = await client.payment.enableOrDisableRefundTransferMode(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2027,7 +2027,7 @@ Lists the beneficiary of a refund
 
 ```python
 try:
-    result = await applicationClient.payment.getUserBeneficiariesDetail(orderId=orderId)
+    result = await client.payment.getUserBeneficiariesDetail(orderId=orderId)
     # use result
 except Exception as e:
     print(e)
@@ -2109,7 +2109,7 @@ Verify IFSC Code
 
 ```python
 try:
-    result = await applicationClient.payment.verifyIfscCode(ifscCode=ifscCode)
+    result = await client.payment.verifyIfscCode(ifscCode=ifscCode)
     # use result
 except Exception as e:
     print(e)
@@ -2186,7 +2186,7 @@ Lists the beneficiary of a refund
 
 ```python
 try:
-    result = await applicationClient.payment.getOrderBeneficiariesDetail(orderId=orderId)
+    result = await client.payment.getOrderBeneficiariesDetail(orderId=orderId)
     # use result
 except Exception as e:
     print(e)
@@ -2267,7 +2267,7 @@ Verify the beneficiary details using OTP
 
 ```python
 try:
-    result = await applicationClient.payment.verifyOtpAndAddBeneficiaryForBank(body=body)
+    result = await client.payment.verifyOtpAndAddBeneficiaryForBank(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2326,7 +2326,7 @@ Save bank details for cancelled/returned order
 
 ```python
 try:
-    result = await applicationClient.payment.addBeneficiaryDetails(body=body)
+    result = await client.payment.addBeneficiaryDetails(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2387,7 +2387,7 @@ Save bank details for cancelled/returned order
 
 ```python
 try:
-    result = await applicationClient.payment.addRefundBankAccountUsingOTP(body=body)
+    result = await client.payment.addRefundBankAccountUsingOTP(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2448,7 +2448,7 @@ Send OTP on adding a wallet beneficiary
 
 ```python
 try:
-    result = await applicationClient.payment.verifyOtpAndAddBeneficiaryForWallet(body=body)
+    result = await client.payment.verifyOtpAndAddBeneficiaryForWallet(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2508,7 +2508,7 @@ Set a default beneficiary for a refund
 
 ```python
 try:
-    result = await applicationClient.payment.updateDefaultBeneficiary(body=body)
+    result = await client.payment.updateDefaultBeneficiary(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2567,7 +2567,7 @@ Get payment link
 
 ```python
 try:
-    result = await applicationClient.payment.getPaymentLink(paymentLinkId=paymentLinkId)
+    result = await client.payment.getPaymentLink(paymentLinkId=paymentLinkId)
     # use result
 except Exception as e:
     print(e)
@@ -2634,7 +2634,7 @@ Create payment link
 
 ```python
 try:
-    result = await applicationClient.payment.createPaymentLink(body=body)
+    result = await client.payment.createPaymentLink(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2697,7 +2697,7 @@ Resend payment link
 
 ```python
 try:
-    result = await applicationClient.payment.resendPaymentLink(body=body)
+    result = await client.payment.resendPaymentLink(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2758,7 +2758,7 @@ Cancel payment link
 
 ```python
 try:
-    result = await applicationClient.payment.cancelPaymentLink(body=body)
+    result = await client.payment.cancelPaymentLink(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2818,7 +2818,7 @@ Get applicable payment options for payment link
 
 ```python
 try:
-    result = await applicationClient.payment.getPaymentModeRoutesPaymentLink(paymentLinkId=paymentLinkId)
+    result = await client.payment.getPaymentModeRoutesPaymentLink(paymentLinkId=paymentLinkId)
     # use result
 except Exception as e:
     print(e)
@@ -3282,7 +3282,7 @@ Used for polling if payment successful or not
 
 ```python
 try:
-    result = await applicationClient.payment.pollingPaymentLink(paymentLinkId=paymentLinkId)
+    result = await client.payment.pollingPaymentLink(paymentLinkId=paymentLinkId)
     # use result
 except Exception as e:
     print(e)
@@ -3347,7 +3347,7 @@ Create Order user
 
 ```python
 try:
-    result = await applicationClient.payment.createOrderHandlerPaymentLink(body=body)
+    result = await client.payment.createOrderHandlerPaymentLink(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -3421,7 +3421,7 @@ Initialize a payment (server-to-server) for UPI and BharatQR
 
 ```python
 try:
-    result = await applicationClient.payment.initialisePaymentPaymentLink(body=body)
+    result = await client.payment.initialisePaymentPaymentLink(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -3489,7 +3489,7 @@ Performs continuous polling to check status of payment on the server
 
 ```python
 try:
-    result = await applicationClient.payment.checkAndUpdatePaymentStatusPaymentLink(body=body)
+    result = await client.payment.checkAndUpdatePaymentStatusPaymentLink(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -3549,7 +3549,7 @@ API to fetch the customer credit summary
 
 ```python
 try:
-    result = await applicationClient.payment.customerCreditSummary(aggregator=aggregator)
+    result = await client.payment.customerCreditSummary(aggregator=aggregator)
     # use result
 except Exception as e:
     print(e)
@@ -3635,7 +3635,7 @@ API to get the redirect url to redirect the user to aggregator's page
 
 ```python
 try:
-    result = await applicationClient.payment.redirectToAggregator(source=source, aggregator=aggregator)
+    result = await client.payment.redirectToAggregator(source=source, aggregator=aggregator)
     # use result
 except Exception as e:
     print(e)
@@ -3699,7 +3699,7 @@ API to fetch the customer credit summary
 
 ```python
 try:
-    result = await applicationClient.payment.checkCredit(aggregator=aggregator)
+    result = await client.payment.checkCredit(aggregator=aggregator)
     # use result
 except Exception as e:
     print(e)
@@ -3763,7 +3763,7 @@ API to fetch the customer credit summary
 
 ```python
 try:
-    result = await applicationClient.payment.customerOnboard(body=body)
+    result = await client.payment.customerOnboard(body=body)
     # use result
 except Exception as e:
     print(e)

@@ -1,6 +1,6 @@
 
 
-"""Inventory Platform Client"""
+""" Inventory Platform Client."""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -10,7 +10,6 @@ from .validator import InventoryValidator
 class Inventory:
     def __init__(self, config):
         self._conf = config
-
     
     async def getJobsByCompany(self, page_no=None, page_size=None):
         """REST Endpoint that returns all job configs for a company
@@ -19,10 +18,10 @@ class Inventory:
         """
         payload = {}
         
-        if page_no is not None:
+        if page_no:
             payload["page_no"] = page_no
         
-        if page_size is not None:
+        if page_size:
             payload["page_size"] = page_size
         
 
@@ -42,22 +41,7 @@ class Inventory:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ResponseEnvelopeListJobConfigRawDTO
-            schema = ResponseEnvelopeListJobConfigRawDTO()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getJobsByCompany")
-                print(e)
-
-        
-
-        return response
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def updateJob(self, body=""):
         """REST Endpoint that updates a job config
@@ -86,22 +70,7 @@ class Inventory:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ResponseEnvelopeString
-            schema = ResponseEnvelopeString()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updateJob")
-                print(e)
-
-        
-
-        return response
+        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
     async def createJob(self, body=""):
         """REST Endpoint that creates a new job config
@@ -130,22 +99,7 @@ class Inventory:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ResponseEnvelopeString
-            schema = ResponseEnvelopeString()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for createJob")
-                print(e)
-
-        
-
-        return response
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
     async def suppressStores(self, body=""):
         """REST Endpoint that returns all configuration detail of a company
@@ -174,22 +128,7 @@ class Inventory:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/kafka/suppressStore", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ResponseEnvelopeKafkaResponse
-            schema = ResponseEnvelopeKafkaResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for suppressStores")
-                print(e)
-
-        
-
-        return response
+        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/kafka/suppressStore", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
     
     async def getConfigByCompany(self, ):
         """REST Endpoint that returns all configuration detail of a company
@@ -213,22 +152,7 @@ class Inventory:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/slingshot", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ResponseEnvelopeListSlingshotConfigurationDetail
-            schema = ResponseEnvelopeListSlingshotConfigurationDetail()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getConfigByCompany")
-                print(e)
-
-        
-
-        return response
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/slingshot", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def getJobSteps(self, job_id=None):
         """REST Endpoint that returns Inventory Job Steps
@@ -236,7 +160,7 @@ class Inventory:
         """
         payload = {}
         
-        if job_id is not None:
+        if job_id:
             payload["job_id"] = job_id
         
 
@@ -256,22 +180,7 @@ class Inventory:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs/steps/{job_id}", job_id=job_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ResponseEnvelopeListJobStepsDTO
-            schema = ResponseEnvelopeListJobStepsDTO()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getJobSteps")
-                print(e)
-
-        
-
-        return response
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs/steps/{job_id}", job_id=job_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def getJobByCompanyAndIntegration(self, integration_id=None, page_no=None, page_size=None):
         """REST Endpoint that returns all job configs by company And integration
@@ -281,13 +190,13 @@ class Inventory:
         """
         payload = {}
         
-        if integration_id is not None:
+        if integration_id:
             payload["integration_id"] = integration_id
         
-        if page_no is not None:
+        if page_no:
             payload["page_no"] = page_no
         
-        if page_size is not None:
+        if page_size:
             payload["page_size"] = page_size
         
 
@@ -307,22 +216,7 @@ class Inventory:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs/integration/{integration_id}", integration_id=integration_id, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ResponseEnvelopeListJobConfigDTO
-            schema = ResponseEnvelopeListJobConfigDTO()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getJobByCompanyAndIntegration")
-                print(e)
-
-        
-
-        return response
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs/integration/{integration_id}", integration_id=integration_id, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def disable(self, integration_id=None):
         """REST Endpoint that disables Inventory Job Config
@@ -330,7 +224,7 @@ class Inventory:
         """
         payload = {}
         
-        if integration_id is not None:
+        if integration_id:
             payload["integration_id"] = integration_id
         
 
@@ -350,22 +244,7 @@ class Inventory:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs/disable/integration/{integration_id}", integration_id=integration_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ResponseEnvelopeString
-            schema = ResponseEnvelopeString()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for disable")
-                print(e)
-
-        
-
-        return response
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs/disable/integration/{integration_id}", integration_id=integration_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def getJobConfigDefaults(self, ):
         """REST Endpoint that returns default fields job configs by company And integration
@@ -389,22 +268,7 @@ class Inventory:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs/defaults", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ResponseEnvelopeJobConfigDTO
-            schema = ResponseEnvelopeJobConfigDTO()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getJobConfigDefaults")
-                print(e)
-
-        
-
-        return response
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs/defaults", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def getJobByCode(self, code=None):
         """REST Endpoint that returns job config by code
@@ -412,7 +276,7 @@ class Inventory:
         """
         payload = {}
         
-        if code is not None:
+        if code:
             payload["code"] = code
         
 
@@ -432,22 +296,7 @@ class Inventory:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs/code/{code}", code=code), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ResponseEnvelopeJobConfigDTO
-            schema = ResponseEnvelopeJobConfigDTO()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getJobByCode")
-                print(e)
-
-        
-
-        return response
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs/code/{code}", code=code), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def getJobCodeMetrics(self, code=None, page_no=None, page_size=None, status=None, date=None):
         """REST Endpoint that returns Inventory Run History For A Job Code
@@ -459,19 +308,19 @@ class Inventory:
         """
         payload = {}
         
-        if code is not None:
+        if code:
             payload["code"] = code
         
-        if page_no is not None:
+        if page_no:
             payload["page_no"] = page_no
         
-        if page_size is not None:
+        if page_size:
             payload["page_size"] = page_size
         
-        if status is not None:
+        if status:
             payload["status"] = status
         
-        if date is not None:
+        if date:
             payload["date"] = date
         
 
@@ -491,22 +340,7 @@ class Inventory:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs/code/{code}/metrics", code=code, page_no=page_no, page_size=page_size, status=status, date=date), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ResponseEnvelopeJobMetricsDto
-            schema = ResponseEnvelopeJobMetricsDto()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getJobCodeMetrics")
-                print(e)
-
-        
-
-        return response
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs/code/{code}/metrics", code=code, page_no=page_no, page_size=page_size, status=status, date=date), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
     async def getJobCodesByCompanyAndIntegration(self, integration_id=None, page_no=None, page_size=None):
         """REST Endpoint that returns all job codes by company And integration
@@ -516,13 +350,13 @@ class Inventory:
         """
         payload = {}
         
-        if integration_id is not None:
+        if integration_id:
             payload["integration_id"] = integration_id
         
-        if page_no is not None:
+        if page_no:
             payload["page_no"] = page_no
         
-        if page_size is not None:
+        if page_size:
             payload["page_size"] = page_size
         
 
@@ -542,21 +376,6 @@ class Inventory:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs/code/integration/{integration_id}", integration_id=integration_id, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ResponseEnvelopeListJobConfigListDTO
-            schema = ResponseEnvelopeListJobConfigListDTO()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getJobCodesByCompanyAndIntegration")
-                print(e)
-
-        
-
-        return response
+        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/inventory/v1.0/company/{self._conf.companyId}/jobs/code/integration/{integration_id}", integration_id=integration_id, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
     
 

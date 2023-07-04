@@ -3,7 +3,9 @@
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
 
+
 from ..ApplicationModel import BaseSchema
+
 
 
 from .enums import *
@@ -911,7 +913,7 @@ class ActionPage(BaseSchema):
     
     url = fields.Str(required=False)
     
-    type = fields.Str(required=False, validate=OneOf([val.value for val in PageType.__members__.values()]))
+    type = fields.Nested(PageType, required=False)
     
 
 

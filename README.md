@@ -134,10 +134,3 @@ try:
 except Exception as e:
     print(e)
 ```
-
-### Documentation
-
-- [Public Front](documentation/public/README.md)
-- [Application Front](documentation/application/README.md)
-- [Platform Front](documentation/platform/README.md)
-

@@ -1,4 +1,4 @@
-aiohttp>=3.7.4
+aiohttp>=3.8.0
 marshmallow>=3.12.2
-pytz>=2020.1
-ujson>=1.35
+pytz>=2021.3
+ujson>=5.4.0

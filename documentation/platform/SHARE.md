@@ -25,7 +25,7 @@ Create short link
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").share.createShortLink(body=body)
+    result = await client.application("<APPLICATION_ID>").share.createShortLink(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -119,7 +119,7 @@ Get short links
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").share.getShortLinks(pageNo=pageNo, pageSize=pageSize, createdBy=createdBy, active=active, q=q)
+    result = await client.application("<APPLICATION_ID>").share.getShortLinks(pageNo=pageNo, pageSize=pageSize, createdBy=createdBy, active=active, q=q)
     # use result
 except Exception as e:
     print(e)
@@ -229,7 +229,7 @@ Get short link by hash
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").share.getShortLinkByHash(hash=hash)
+    result = await client.application("<APPLICATION_ID>").share.getShortLinkByHash(hash=hash)
     # use result
 except Exception as e:
     print(e)
@@ -324,7 +324,7 @@ Update short link by id
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").share.updateShortLinkById(id=id, body=body)
+    result = await client.application("<APPLICATION_ID>").share.updateShortLinkById(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -419,7 +419,7 @@ Get click statistics for a short link
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").share.getShortLinkClickStats(surlId=surlId)
+    result = await client.application("<APPLICATION_ID>").share.getShortLinkClickStats(surlId=surlId)
     # use result
 except Exception as e:
     print(e)

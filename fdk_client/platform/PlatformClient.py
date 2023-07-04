@@ -14,8 +14,6 @@ from .communication.client import Communication
 
 from .payment.client import Payment
 
-from .order.client import Order
-
 from .catalog.client import Catalog
 
 from .companyprofile.client import CompanyProfile
@@ -32,10 +30,12 @@ from .webhook.client import Webhook
 
 from .audittrail.client import AuditTrail
 
+from .serviceability.client import Serviceability
+
 
 class PlatformClient:
     def __init__(self, config):
-        self.config = config
+        self._conf = config
         
         self.common = Common(config)
         
@@ -46,8 +46,6 @@ class PlatformClient:
         self.communication = Communication(config)
         
         self.payment = Payment(config)
-        
-        self.order = Order(config)
         
         self.catalog = Catalog(config)
         
@@ -65,11 +63,13 @@ class PlatformClient:
         
         self.auditTrail = AuditTrail(config)
         
+        self.serviceability = Serviceability(config)
+        
 
     def application(self, applicationId):
-        return PlatformApplicationClient(applicationId, self.config)
+        return PlatformApplicationClient(applicationId, self._conf)
 
-    def setExtraHeaders(self, header):
+    async def setExtraHeaders(self, header):
         if header and type(header) == dict:
             self.config.extraHeaders.append(header)
         else:
