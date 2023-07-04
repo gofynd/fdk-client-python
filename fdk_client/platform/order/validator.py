@@ -35,6 +35,13 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+        
+    
+    
         
         
     
@@ -44,12 +51,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
-        
-    
-    
         
         
         
@@ -230,11 +231,11 @@ class OrderValidator:
         
         status_override_lane = fields.Boolean(required=False)
         
+        time_to_dispatch = fields.Str(required=False)
+        
         search_type = fields.Str(required=False)
         
         search_value = fields.Str(required=False)
-        
-        search_id = fields.Str(required=False)
         
         from_date = fields.Str(required=False)
         
@@ -242,19 +243,13 @@ class OrderValidator:
         
         dp_ids = fields.Str(required=False)
         
-        ordering_company_id = fields.Str(required=False)
-        
         stores = fields.Str(required=False)
         
-        sales_channel = fields.Str(required=False)
-        
-        request_by_ext = fields.Str(required=False)
+        sales_channels = fields.Str(required=False)
         
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
-        
-        is_priority_sort = fields.Boolean(required=False)
         
         fetch_active_shipment = fields.Boolean(required=False)
         
@@ -271,6 +266,8 @@ class OrderValidator:
         ordering_channel = fields.Str(required=False)
         
         company_affiliate_tag = fields.Str(required=False)
+        
+        platform_user_id = fields.Str(required=False)
          
         
     
@@ -282,10 +279,6 @@ class OrderValidator:
         channel_shipment_id = fields.Str(required=False)
         
         shipment_id = fields.Str(required=False)
-        
-        ordering_company_id = fields.Str(required=False)
-        
-        request_by_ext = fields.Str(required=False)
          
         
     
@@ -315,11 +308,21 @@ class OrderValidator:
         
         stores = fields.Str(required=False)
         
-        sales_channel = fields.Str(required=False)
+        sales_channels = fields.Str(required=False)
         
         payment_mode = fields.Str(required=False)
         
         bag_status = fields.Str(required=False)
+        
+        search_type = fields.Str(required=False)
+        
+        search_value = fields.Str(required=False)
+        
+        tags = fields.Str(required=False)
+        
+        time_to_dispatch = fields.Str(required=False)
+        
+        payment_methods = fields.Str(required=False)
          
         
     
