@@ -44,7 +44,7 @@ class SecureUrl(BaseSchema):
     pass
 
 
-class ApplicationData(BaseSchema):
+class Application(BaseSchema):
     pass
 
 
@@ -68,7 +68,7 @@ class LocationDefaultCurrency(BaseSchema):
     pass
 
 
-class LocationDetails(BaseSchema):
+class LocationCountry(BaseSchema):
     pass
 
 
@@ -83,7 +83,7 @@ class ApplicationResponse(BaseSchema):
     # Configuration swagger.json
 
     
-    application = fields.Nested(ApplicationData, required=False)
+    application = fields.Nested(Application, required=False)
     
 
 
@@ -183,7 +183,7 @@ class SecureUrl(BaseSchema):
     
 
 
-class ApplicationData(BaseSchema):
+class Application(BaseSchema):
     # Configuration swagger.json
 
     
@@ -236,8 +236,6 @@ class ApplicationData(BaseSchema):
     mobile_logo = fields.Nested(SecureUrl, required=False)
     
     domain = fields.Nested(Domain, required=False)
-    
-    slug = fields.Str(required=False)
     
 
 
@@ -299,7 +297,7 @@ class LocationDefaultCurrency(BaseSchema):
     
 
 
-class LocationDetails(BaseSchema):
+class LocationCountry(BaseSchema):
     # Configuration swagger.json
 
     
@@ -329,21 +327,13 @@ class LocationDetails(BaseSchema):
     
     default_language = fields.Nested(LocationDefaultLanguage, required=False)
     
-    state_code = fields.Str(required=False)
-    
-    country_code = fields.Str(required=False)
-    
-    latitude = fields.Str(required=False)
-    
-    longitude = fields.Str(required=False)
-    
 
 
 class Locations(BaseSchema):
     # Configuration swagger.json
 
     
-    items = fields.List(fields.Nested(LocationDetails, required=False), required=False)
+    items = fields.List(fields.Dict(required=False), required=False)
     
 
 

@@ -1777,7 +1777,7 @@ class SlideshowRequest(BaseSchema):
     
     configuration = fields.Nested(ConfigurationSchema, required=False)
     
-    media = fields.List(fields.Nested(SlideshowMedia, required=False), required=False)
+    media = fields.Nested(SlideshowMedia, required=False)
     
     active = fields.Boolean(required=False)
     

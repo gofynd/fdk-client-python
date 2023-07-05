@@ -61,29 +61,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
-        
-        
         
     
     
@@ -100,32 +77,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-        
         
         
         
@@ -134,14 +85,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
-        
-    
-    
-        
-    
-    
         
         
     
@@ -162,6 +105,71 @@ from ..PlatformModel import BaseSchema
     
     
         
+    
+    
+        
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
         
         
         
@@ -182,10 +190,25 @@ from ..PlatformModel import BaseSchema
     
     
         
+        
+        
     
     
         
+    
+    
         
+    
+    
+        
+    
+    
+        
+    
+    
+        
+    
+    
         
     
     
@@ -267,7 +290,7 @@ class OrderValidator:
         
         company_affiliate_tag = fields.Str(required=False)
         
-        platform_user_id = fields.Str(required=False)
+        my_orders = fields.Boolean(required=False)
          
         
     
@@ -323,6 +346,8 @@ class OrderValidator:
         time_to_dispatch = fields.Str(required=False)
         
         payment_methods = fields.Str(required=False)
+        
+        my_orders = fields.Boolean(required=False)
          
         
     
@@ -362,6 +387,8 @@ class OrderValidator:
         is_priority_sort = fields.Boolean(required=False)
         
         custom_meta = fields.Str(required=False)
+        
+        my_orders = fields.Boolean(required=False)
          
         
     
@@ -474,6 +501,19 @@ class OrderValidator:
          
         
     
+    class generatePOSReceiptByOrderId(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        order_id = fields.Str(required=False)
+        
+        shipment_id = fields.Str(required=False)
+        
+        document_type = fields.Str(required=False)
+         
+        
+    
     class invalidateShipmentCache(BaseSchema):
         
         
@@ -580,13 +620,6 @@ class OrderValidator:
          
         
     
-    class postShipmentHistory(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
     class getShipmentHistory(BaseSchema):
         
         
@@ -595,6 +628,13 @@ class OrderValidator:
         shipment_id = fields.Str(required=False)
         
         bag_id = fields.Int(required=False)
+         
+        
+    
+    class postShipmentHistory(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
          
         
     
@@ -619,14 +659,14 @@ class OrderValidator:
          
         
     
-    class createChannelConfig(BaseSchema):
+    class getChannelConfig(BaseSchema):
         
         
         company_id = fields.Int(required=False)
          
         
     
-    class getChannelConfig(BaseSchema):
+    class createChannelConfig(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -655,6 +695,41 @@ class OrderValidator:
         
     
     class getStateTransitionMap(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class fetchCreditBalanceDetail(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class fetchRefundModeConfig(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class attachOrderUser(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class sendUserMobileOTP(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class verifyMobileOTP(BaseSchema):
         
         
         company_id = fields.Int(required=False)
