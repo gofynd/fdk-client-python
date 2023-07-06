@@ -41,7 +41,7 @@ class Configuration:
         self._urls.update(urls)
     
     async def getApplication(self, body=""):
-        """Use this API to get the current application details which includes configurations that indicate the status of the website, domain, ID, tokens, images, etc.
+        """Use this API to get the current sales channel details which includes configurations that indicate the status of the website, domain, ID, tokens, images, etc.
         """
         payload = {}
         
@@ -80,7 +80,7 @@ class Configuration:
         return response
     
     async def getOwnerInfo(self, body=""):
-        """Use this API to get the current application details which includes channel name, description, banner, logo, favicon, domain details, etc. This API also retrieves the seller and owner information such as address, email address, and phone number.
+        """Use this API to get the current sales channel details which includes channel name, description, banner, logo, favicon, domain details, etc. This API also retrieves the seller and owner information such as address, email address, and phone number.
         """
         payload = {}
         
@@ -490,7 +490,7 @@ class Configuration:
         return response
     
     async def getLanguages(self, body=""):
-        """Use this API to get a list of languages supported in the application.
+        """Use this API to get a list of languages supported in the application
         """
         payload = {}
         

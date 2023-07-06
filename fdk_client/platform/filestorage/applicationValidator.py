@@ -67,7 +67,7 @@ class FileStorageValidator:
          
         
     
-    class browse(BaseSchema):
+    class appbrowse(BaseSchema):
         
         
         namespace = fields.Str(required=False)
