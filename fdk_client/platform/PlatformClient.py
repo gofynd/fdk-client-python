@@ -24,8 +24,6 @@ from .companyprofile.client import CompanyProfile
 
 from .filestorage.client import FileStorage
 
-from .inventory.client import Inventory
-
 from .configuration.client import Configuration
 
 from .discount.client import Discount
@@ -62,8 +60,6 @@ class PlatformClient:
         self.companyProfile = CompanyProfile(config)
         
         self.fileStorage = FileStorage(config)
-        
-        self.inventory = Inventory(config)
         
         self.configuration = Configuration(config)
         

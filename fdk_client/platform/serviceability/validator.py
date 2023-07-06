@@ -135,21 +135,21 @@ class ServiceabilityValidator:
          
         
     
-    class getZoneDataView(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        zone_id = fields.Str(required=False)
-         
-        
-    
     class updateZoneControllerView(BaseSchema):
         
         
         zone_id = fields.Str(required=False)
         
         company_id = fields.Int(required=False)
+         
+        
+    
+    class getZoneDataView(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        zone_id = fields.Str(required=False)
          
         
     
@@ -230,7 +230,7 @@ class ServiceabilityValidator:
          
         
     
-    class getDpRules(BaseSchema):
+    class updateDpRule(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -239,7 +239,7 @@ class ServiceabilityValidator:
          
         
     
-    class updateDpRule(BaseSchema):
+    class getDpRules(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -266,14 +266,14 @@ class ServiceabilityValidator:
          
         
     
-    class getDpCompanyRules(BaseSchema):
+    class upsertDpCompanyRules(BaseSchema):
         
         
         company_id = fields.Int(required=False)
          
         
     
-    class upsertDpCompanyRules(BaseSchema):
+    class getDpCompanyRules(BaseSchema):
         
         
         company_id = fields.Int(required=False)

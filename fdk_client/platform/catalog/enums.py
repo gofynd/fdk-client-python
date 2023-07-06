@@ -95,6 +95,8 @@ class PageType(Enum):
     
     RETURN_POLICY = "return-policy"
     
+    ORDER_STATUS = "order-status"
+    
     @classmethod
     async def is_valid(cls, value):
         if value in cls._value2member_map_:
