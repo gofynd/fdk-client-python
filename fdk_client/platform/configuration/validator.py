@@ -71,7 +71,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
     
     
         
@@ -236,8 +235,6 @@ class ConfigurationValidator:
         level = fields.Str(required=False)
         
         uid = fields.Int(required=False)
-        
-        permission = fields.Str(required=False)
          
         
     

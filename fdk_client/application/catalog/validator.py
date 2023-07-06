@@ -78,8 +78,10 @@ from ..ApplicationModel import BaseSchema
         
         
         
+        
     
     
+        
         
         
         
@@ -309,6 +311,8 @@ class CatalogValidator:
         page_size = fields.Int(required=False)
         
         tag = fields.List(fields.Str(required=False), required=False)
+        
+        q = fields.Str(required=False)
          
         
     
@@ -318,6 +322,8 @@ class CatalogValidator:
         slug = fields.Str(required=False)
         
         f = fields.Str(required=False)
+        
+        q = fields.Str(required=False)
         
         filters = fields.Boolean(required=False)
         

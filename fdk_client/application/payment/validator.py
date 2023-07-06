@@ -95,6 +95,12 @@ from ..ApplicationModel import BaseSchema
     
         
     
+    
+    
+        
+    
+    
+        
 
 class PaymentValidator:
     
@@ -359,6 +365,20 @@ class PaymentValidator:
     class customerOnboard(BaseSchema):
         
         pass 
+        
+    
+    class outstandingOrderDetails(BaseSchema):
+        
+        
+        aggregator = fields.Str(required=False)
+         
+        
+    
+    class paidOrderDetails(BaseSchema):
+        
+        
+        aggregator = fields.Str(required=False)
+         
         
     
     

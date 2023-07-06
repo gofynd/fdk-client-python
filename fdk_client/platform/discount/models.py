@@ -36,6 +36,10 @@ class FileJobResponse(BaseSchema):
     pass
 
 
+class FileJobRequest(BaseSchema):
+    pass
+
+
 class DownloadFileJob(BaseSchema):
     pass
 
@@ -196,6 +200,34 @@ class FileJobResponse(BaseSchema):
     type = fields.Str(required=False)
     
     file_type = fields.Str(required=False)
+    
+
+
+class FileJobRequest(BaseSchema):
+    # Discount swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    is_active = fields.Boolean(required=False)
+    
+    app_ids = fields.List(fields.Str(required=False), required=False)
+    
+    job_type = fields.Str(required=False)
+    
+    discount_type = fields.Str(required=False)
+    
+    discount_level = fields.Str(required=False)
+    
+    file_path = fields.Str(required=False)
+    
+    brand_ids = fields.List(fields.Int(required=False), required=False)
+    
+    store_ids = fields.List(fields.Int(required=False), required=False)
+    
+    validity = fields.Nested(ValidityObject, required=False)
+    
+    meta = fields.Dict(required=False)
     
 
 
