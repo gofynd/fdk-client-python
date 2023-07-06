@@ -38,6 +38,10 @@ class EventPayload(BaseSchema):
     pass
 
 
+class SubscriberConfig(BaseSchema):
+    pass
+
+
 class SubscriberResponse(BaseSchema):
     pass
 
@@ -55,18 +59,6 @@ class Association(BaseSchema):
 
 
 class EventConfigBase(BaseSchema):
-    pass
-
-
-class EventConfigDetails(BaseSchema):
-    pass
-
-
-class SubscriberConfigDetails(BaseSchema):
-    pass
-
-
-class SubscriberConfig(BaseSchema):
     pass
 
 
@@ -185,6 +177,30 @@ class EventPayload(BaseSchema):
     
 
 
+class SubscriberConfig(BaseSchema):
+    # Webhook swagger.json
+
+    
+    id = fields.Int(required=False)
+    
+    name = fields.Str(required=False)
+    
+    webhook_url = fields.Str(required=False)
+    
+    association = fields.Nested(Association, required=False)
+    
+    custom_headers = fields.Dict(required=False)
+    
+    status = fields.Str(required=False, validate=OneOf([val.value for val in SubscriberStatus.__members__.values()]))
+    
+    email_id = fields.Str(required=False)
+    
+    auth_meta = fields.Nested(AuthMeta, required=False)
+    
+    event_id = fields.List(fields.Int(required=False), required=False)
+    
+
+
 class SubscriberResponse(BaseSchema):
     # Webhook swagger.json
 
@@ -262,72 +278,6 @@ class EventConfigBase(BaseSchema):
     event_category = fields.Str(required=False)
     
     version = fields.Str(required=False)
-    
-
-
-class EventConfigDetails(BaseSchema):
-    # Webhook swagger.json
-
-    
-    event_name = fields.Str(required=False)
-    
-    event_type = fields.Str(required=False)
-    
-    event_category = fields.Str(required=False)
-    
-    version = fields.Str(required=False)
-    
-    display_name = fields.Str(required=False)
-    
-    description = fields.Str(required=False)
-    
-    created_on = fields.Str(required=False)
-    
-
-
-class SubscriberConfigDetails(BaseSchema):
-    # Webhook swagger.json
-
-    
-    name = fields.Str(required=False)
-    
-    webhook_url = fields.Str(required=False)
-    
-    association = fields.Nested(Association, required=False)
-    
-    custom_headers = fields.Dict(required=False)
-    
-    status = fields.Str(required=False, validate=OneOf([val.value for val in SubscriberStatus.__members__.values()]))
-    
-    email_id = fields.Str(required=False)
-    
-    auth_meta = fields.Nested(AuthMeta, required=False)
-    
-    event_id = fields.List(fields.Int(required=False), required=False)
-    
-
-
-class SubscriberConfig(BaseSchema):
-    # Webhook swagger.json
-
-    
-    id = fields.Int(required=False)
-    
-    name = fields.Str(required=False)
-    
-    webhook_url = fields.Str(required=False)
-    
-    association = fields.Nested(Association, required=False)
-    
-    custom_headers = fields.Dict(required=False)
-    
-    status = fields.Str(required=False, validate=OneOf([val.value for val in SubscriberStatus.__members__.values()]))
-    
-    email_id = fields.Str(required=False)
-    
-    auth_meta = fields.Nested(AuthMeta, required=False)
-    
-    event_id = fields.List(fields.Int(required=False), required=False)
     
 
 
