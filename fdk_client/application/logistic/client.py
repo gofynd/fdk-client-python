@@ -19,7 +19,11 @@ class Logistic:
             "getTatProduct": "/service/application/logistics/v1.0/",
             "getAllCountries": "/service/application/logistics/v1.0/country-list",
             "getPincodeZones": "/service/application/logistics/v1.0/pincode/zones",
-            "getOptimalLocations": "/service/application/logistics/v1.0/reassign_stores"
+            "getOptimalLocations": "/service/application/logistics/v1.0/reassign_stores",
+            "getCountries": "/service/application/logistics/v1.0/country",
+            "getCountry": "/service/application/logistics/v1.0/country/{uid}",
+            "getLocalities": "/service/application/logistics/v1.0/locality/{region}",
+            "getLocality": "/service/application/logistics/v1.0/locality/{region}/{value}"
             
         }
         self._urls = {
@@ -237,6 +241,178 @@ class Logistic:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getOptimalLocations")
+                print(e)
+
+        
+
+        return response
+    
+    async def getCountries(self, body=""):
+        """Get countries data
+        """
+        payload = {}
+        
+        # Parameter validation
+        schema = LogisticValidator.getCountries()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getCountries"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCountries"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/country", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetCountries
+            schema = GetCountries()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCountries")
+                print(e)
+
+        
+
+        return response
+    
+    async def getCountry(self, uid=None, body=""):
+        """Get country data
+        :param uid : A `uid` contains a specific unique name of a region. : type string
+        """
+        payload = {}
+        
+        if uid is not None:
+            payload["uid"] = uid
+        
+        # Parameter validation
+        schema = LogisticValidator.getCountry()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getCountry"], proccessed_params="""{"required":[{"in":"path","name":"uid","description":"A `uid` contains a specific unique name of a region.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"uid","description":"A `uid` contains a specific unique name of a region.","schema":{"type":"string"},"required":true}]}""", uid=uid)
+        query_string = await create_query_string(uid=uid)
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCountry"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/country/{uid}", uid=uid), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetCountry
+            schema = GetCountry()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCountry")
+                print(e)
+
+        
+
+        return response
+    
+    async def getLocalities(self, region=None, body=""):
+        """Get Localities data
+        :param region : A `region` contains a specific unique name. : type string
+        """
+        payload = {}
+        
+        if region is not None:
+            payload["region"] = region
+        
+        # Parameter validation
+        schema = LogisticValidator.getLocalities()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getLocalities"], proccessed_params="""{"required":[{"in":"path","name":"region","description":"A `region` contains a specific unique name.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"region","description":"A `region` contains a specific unique name.","schema":{"type":"string"},"required":true}]}""", region=region)
+        query_string = await create_query_string(region=region)
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getLocalities"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/locality/{region}", region=region), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetLocalities
+            schema = GetLocalities()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getLocalities")
+                print(e)
+
+        
+
+        return response
+    
+    async def getLocality(self, region=None, value=None, body=""):
+        """Get Locality data
+        :param region : A `region` contains a specific unique name. : type string
+        :param value : A `value` contains a specific value of the region. : type string
+        """
+        payload = {}
+        
+        if region is not None:
+            payload["region"] = region
+        
+        if value is not None:
+            payload["value"] = value
+        
+        # Parameter validation
+        schema = LogisticValidator.getLocality()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getLocality"], proccessed_params="""{"required":[{"in":"path","name":"region","description":"A `region` contains a specific unique name.","schema":{"type":"string"},"required":true},{"in":"path","name":"value","description":"A `value` contains a specific value of the region.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"region","description":"A `region` contains a specific unique name.","schema":{"type":"string"},"required":true},{"in":"path","name":"value","description":"A `value` contains a specific value of the region.","schema":{"type":"string"},"required":true}]}""", region=region, value=value)
+        query_string = await create_query_string(region=region, value=value)
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getLocality"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/locality/{region}/{value}", region=region, value=value), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetLocality
+            schema = GetLocality()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getLocality")
                 print(e)
 
         
