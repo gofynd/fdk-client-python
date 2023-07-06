@@ -54,6 +54,9 @@ from ..ApplicationModel import BaseSchema
     
     
         
+    
+    
+        
 
 class OrderValidator:
     
@@ -154,6 +157,13 @@ class OrderValidator:
         
     
     class updateShipmentStatus(BaseSchema):
+        
+        
+        shipment_id = fields.Str(required=False)
+         
+        
+    
+    class updateShipmentStatus1(BaseSchema):
         
         
         shipment_id = fields.Str(required=False)
