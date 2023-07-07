@@ -44,6 +44,12 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
+        
+    
+    
+        
+        
     
     
         
@@ -92,6 +98,24 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+    
+    
+        
+        
+        
         
         
         
@@ -194,10 +218,10 @@ from ..PlatformModel import BaseSchema
     
     
         
-        
-        
     
     
+        
+        
         
     
     
@@ -338,6 +362,19 @@ class OrderValidator:
          
         
     
+    class getAssetByShipmentIds(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        shipment_ids = fields.Str(required=False)
+        
+        invoice = fields.Boolean(required=False)
+        
+        expires_in = fields.Str(required=False)
+         
+        
+    
     class getOrderById(BaseSchema):
         
         
@@ -425,6 +462,17 @@ class OrderValidator:
          
         
     
+    class getMetricCount(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        from_date = fields.Str(required=False)
+        
+        to_date = fields.Str(required=False)
+         
+        
+    
     class getfilters(BaseSchema):
         
         
@@ -433,6 +481,35 @@ class OrderValidator:
         view = fields.Str(required=False)
         
         group_entity = fields.Str(required=False)
+         
+        
+    
+    class createShipmentReport(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        from_date = fields.Str(required=False)
+        
+        to_date = fields.Str(required=False)
+         
+        
+    
+    class getReportsShipmentListing(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+         
+        
+    
+    class upsertJioCode(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
          
         
     
@@ -662,6 +739,13 @@ class OrderValidator:
          
         
     
+    class postShipmentHistory(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
     class getShipmentHistory(BaseSchema):
         
         
@@ -670,13 +754,6 @@ class OrderValidator:
         shipment_id = fields.Str(required=False)
         
         bag_id = fields.Int(required=False)
-         
-        
-    
-    class postShipmentHistory(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
          
         
     

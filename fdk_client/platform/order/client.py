@@ -186,6 +186,57 @@ class Order:
 
         return response
     
+    async def getAssetByShipmentIds(self, shipment_ids=None, invoice=None, expires_in=None):
+        """Use this API to retrieve shipments invoice, label and pos.
+        :param shipment_ids :  : type string
+        :param invoice :  : type boolean
+        :param expires_in :  : type string
+        """
+        payload = {}
+        
+        if shipment_ids is not None:
+            payload["shipment_ids"] = shipment_ids
+        
+        if invoice is not None:
+            payload["invoice"] = invoice
+        
+        if expires_in is not None:
+            payload["expires_in"] = expires_in
+        
+
+        # Parameter validation
+        schema = OrderValidator.getAssetByShipmentIds()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/shipments-invoice", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"query","name":"shipment_ids","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"invoice","required":false,"schema":{"type":"boolean","default":true}},{"in":"query","name":"expires_in","required":false,"schema":{"type":"string","default":300}}],"query":[{"in":"query","name":"shipment_ids","required":true,"schema":{"type":"string"}},{"in":"query","name":"invoice","required":false,"schema":{"type":"boolean","default":true}},{"in":"query","name":"expires_in","required":false,"schema":{"type":"string","default":300}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", shipment_ids=shipment_ids, invoice=invoice, expires_in=expires_in)
+        query_string = await create_query_string(shipment_ids=shipment_ids, invoice=invoice, expires_in=expires_in)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/shipments-invoice", shipment_ids=shipment_ids, invoice=invoice, expires_in=expires_in), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResponseGetAssetShipment
+            schema = ResponseGetAssetShipment()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAssetByShipmentIds")
+                print(e)
+
+        
+
+        return response
+    
     async def getOrderById(self, order_id=None):
         """
         :param order_id :  : type string
@@ -435,6 +486,53 @@ class Order:
 
         return response
     
+    async def getMetricCount(self, from_date=None, to_date=None):
+        """
+        :param from_date :  : type string
+        :param to_date :  : type string
+        """
+        payload = {}
+        
+        if from_date is not None:
+            payload["from_date"] = from_date
+        
+        if to_date is not None:
+            payload["to_date"] = to_date
+        
+
+        # Parameter validation
+        schema = OrderValidator.getMetricCount()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/shipment/metrics-count/", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", from_date=from_date, to_date=to_date)
+        query_string = await create_query_string(from_date=from_date, to_date=to_date)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/shipment/metrics-count/", from_date=from_date, to_date=to_date), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import MetricCountResponse
+            schema = MetricCountResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getMetricCount")
+                print(e)
+
+        
+
+        return response
+    
     async def getfilters(self, view=None, group_entity=None):
         """
         :param view : Name of view : type string
@@ -476,6 +574,144 @@ class Order:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getfilters")
+                print(e)
+
+        
+
+        return response
+    
+    async def createShipmentReport(self, from_date=None, to_date=None):
+        """
+        :param from_date :  : type string
+        :param to_date :  : type string
+        """
+        payload = {}
+        
+        if from_date is not None:
+            payload["from_date"] = from_date
+        
+        if to_date is not None:
+            payload["to_date"] = to_date
+        
+
+        # Parameter validation
+        schema = OrderValidator.createShipmentReport()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/reports/shipment", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", from_date=from_date, to_date=to_date)
+        query_string = await create_query_string(from_date=from_date, to_date=to_date)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/reports/shipment", from_date=from_date, to_date=to_date), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Success
+            schema = Success()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createShipmentReport")
+                print(e)
+
+        
+
+        return response
+    
+    async def getReportsShipmentListing(self, page_no=None, page_size=None):
+        """
+        :param page_no :  : type integer
+        :param page_size :  : type integer
+        """
+        payload = {}
+        
+        if page_no is not None:
+            payload["page_no"] = page_no
+        
+        if page_size is not None:
+            payload["page_size"] = page_size
+        
+
+        # Parameter validation
+        schema = OrderValidator.getReportsShipmentListing()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/reports/shipment-listing", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}}],"query":[{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/reports/shipment-listing", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OmsReports
+            schema = OmsReports()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getReportsShipmentListing")
+                print(e)
+
+        
+
+        return response
+    
+    async def upsertJioCode(self, body=""):
+        """
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = OrderValidator.upsertJioCode()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import JioCodeUpsertPayload
+        schema = JioCodeUpsertPayload()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/upsert/jiocode/article", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/upsert/jiocode/article", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import JioCodeUpsertResponse
+            schema = JioCodeUpsertResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for upsertJioCode")
                 print(e)
 
         
@@ -1414,6 +1650,50 @@ class Order:
 
         return response
     
+    async def postShipmentHistory(self, body=""):
+        """
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = OrderValidator.postShipmentHistory()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import PostShipmentHistory
+        schema = PostShipmentHistory()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/history", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/history", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ShipmentHistoryResponse
+            schema = ShipmentHistoryResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for postShipmentHistory")
+                print(e)
+
+        
+
+        return response
+    
     async def getShipmentHistory(self, shipment_id=None, bag_id=None):
         """
         :param shipment_id : Shipment Id : type string
@@ -1455,50 +1735,6 @@ class Order:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getShipmentHistory")
-                print(e)
-
-        
-
-        return response
-    
-    async def postShipmentHistory(self, body=""):
-        """
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = OrderValidator.postShipmentHistory()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import PostShipmentHistory
-        schema = PostShipmentHistory()
-        schema.dump(schema.load(body))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/history", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
-        query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/history", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ShipmentHistoryResponse
-            schema = ShipmentHistoryResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for postShipmentHistory")
                 print(e)
 
         
