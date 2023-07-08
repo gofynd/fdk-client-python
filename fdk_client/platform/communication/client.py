@@ -1,6 +1,6 @@
 
 
-"""Communication Platform Client"""
+""" Communication Platform Client."""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -10,7 +10,6 @@ from .validator import CommunicationValidator
 class Communication:
     def __init__(self, config):
         self._conf = config
-
     
     async def getSystemNotifications(self, page_no=None, page_size=None):
         """Get system notifications
@@ -45,7 +44,7 @@ class Communication:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/notification/system-notifications/", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
+        
         from .models import SystemNotifications
         schema = SystemNotifications()
         try:
@@ -53,7 +52,7 @@ class Communication:
         except Exception as e:
             print("Response Validation failed for getSystemNotifications")
             print(e)
-
+            
         
 
         return response

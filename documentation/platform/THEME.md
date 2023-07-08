@@ -44,7 +44,7 @@ Get all pages of a theme
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").theme.getAllPages(themeId=themeId)
+    result = await client.application("<APPLICATION_ID>").theme.getAllPages(themeId=themeId)
     # use result
 except Exception as e:
     print(e)
@@ -367,7 +367,7 @@ Create a page
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").theme.createPage(themeId=themeId, body=body)
+    result = await client.application("<APPLICATION_ID>").theme.createPage(themeId=themeId, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -792,7 +792,7 @@ Update multiple pages of a theme
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").theme.updateMultiplePages(themeId=themeId, body=body)
+    result = await client.application("<APPLICATION_ID>").theme.updateMultiplePages(themeId=themeId, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1115,7 +1115,7 @@ Get page of a theme
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").theme.getPage(themeId=themeId, pageValue=pageValue)
+    result = await client.application("<APPLICATION_ID>").theme.getPage(themeId=themeId, pageValue=pageValue)
     # use result
 except Exception as e:
     print(e)
@@ -1541,7 +1541,7 @@ Updates a page
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").theme.updatePage(themeId=themeId, pageValue=pageValue, body=body)
+    result = await client.application("<APPLICATION_ID>").theme.updatePage(themeId=themeId, pageValue=pageValue, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1967,7 +1967,7 @@ Deletes a page
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").theme.deletePage(themeId=themeId, pageValue=pageValue)
+    result = await client.application("<APPLICATION_ID>").theme.deletePage(themeId=themeId, pageValue=pageValue)
     # use result
 except Exception as e:
     print(e)
@@ -2393,7 +2393,7 @@ Get a list of themes from the theme library
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").theme.getThemeLibrary(pageSize=pageSize, pageNo=pageNo)
+    result = await client.application("<APPLICATION_ID>").theme.getThemeLibrary(pageSize=pageSize, pageNo=pageNo)
     # use result
 except Exception as e:
     print(e)
@@ -4358,7 +4358,7 @@ Add a theme to the theme library
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").theme.addToThemeLibrary(body=body)
+    result = await client.application("<APPLICATION_ID>").theme.addToThemeLibrary(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -6544,7 +6544,7 @@ Apply a theme
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").theme.applyTheme(body=body)
+    result = await client.application("<APPLICATION_ID>").theme.applyTheme(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -8730,7 +8730,7 @@ Checks if theme is upgradable
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").theme.isUpgradable(themeId=themeId)
+    result = await client.application("<APPLICATION_ID>").theme.isUpgradable(themeId=themeId)
     # use result
 except Exception as e:
     print(e)
@@ -8799,7 +8799,7 @@ Upgrade a theme
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").theme.upgradeTheme(themeId=themeId)
+    result = await client.application("<APPLICATION_ID>").theme.upgradeTheme(themeId=themeId)
     # use result
 except Exception as e:
     print(e)
@@ -10986,7 +10986,7 @@ Get all public themes
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").theme.getPublicThemes(pageSize=pageSize, pageNo=pageNo)
+    result = await client.application("<APPLICATION_ID>").theme.getPublicThemes(pageSize=pageSize, pageNo=pageNo)
     # use result
 except Exception as e:
     print(e)
@@ -12951,7 +12951,7 @@ Create a new theme
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").theme.createTheme(body=body)
+    result = await client.application("<APPLICATION_ID>").theme.createTheme(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -15137,7 +15137,7 @@ Get the applied theme
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").theme.getAppliedTheme()
+    result = await client.application("<APPLICATION_ID>").theme.getAppliedTheme()
     # use result
 except Exception as e:
     print(e)
@@ -17319,7 +17319,7 @@ Get all the supported fonts in a theme
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").theme.getFonts()
+    result = await client.application("<APPLICATION_ID>").theme.getFonts()
     # use result
 except Exception as e:
     print(e)
@@ -17401,7 +17401,7 @@ Gets theme by id
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").theme.getThemeById(themeId=themeId)
+    result = await client.application("<APPLICATION_ID>").theme.getThemeById(themeId=themeId)
     # use result
 except Exception as e:
     print(e)
@@ -19588,7 +19588,7 @@ Update a theme
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").theme.updateTheme(themeId=themeId, body=body)
+    result = await client.application("<APPLICATION_ID>").theme.updateTheme(themeId=themeId, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -21775,7 +21775,7 @@ Delete a theme
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").theme.deleteTheme(themeId=themeId)
+    result = await client.application("<APPLICATION_ID>").theme.deleteTheme(themeId=themeId)
     # use result
 except Exception as e:
     print(e)
@@ -23962,7 +23962,7 @@ Get a theme preview
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").theme.getThemeForPreview(themeId=themeId)
+    result = await client.application("<APPLICATION_ID>").theme.getThemeForPreview(themeId=themeId)
     # use result
 except Exception as e:
     print(e)
@@ -26149,7 +26149,7 @@ Publish a theme
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").theme.publishTheme(themeId=themeId)
+    result = await client.application("<APPLICATION_ID>").theme.publishTheme(themeId=themeId)
     # use result
 except Exception as e:
     print(e)
@@ -28336,7 +28336,7 @@ Unpublish a theme
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").theme.unpublishTheme(themeId=themeId)
+    result = await client.application("<APPLICATION_ID>").theme.unpublishTheme(themeId=themeId)
     # use result
 except Exception as e:
     print(e)
@@ -30523,7 +30523,7 @@ Archive a theme
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").theme.archiveTheme(themeId=themeId)
+    result = await client.application("<APPLICATION_ID>").theme.archiveTheme(themeId=themeId)
     # use result
 except Exception as e:
     print(e)
@@ -32710,7 +32710,7 @@ Unarchive a theme
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").theme.unarchiveTheme(themeId=themeId)
+    result = await client.application("<APPLICATION_ID>").theme.unarchiveTheme(themeId=themeId)
     # use result
 except Exception as e:
     print(e)
@@ -34897,7 +34897,7 @@ Fetch last modified timestamp
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").theme.getThemeLastModified(themeId=themeId)
+    result = await client.application("<APPLICATION_ID>").theme.getThemeLastModified(themeId=themeId)
     # use result
 except Exception as e:
     print(e)

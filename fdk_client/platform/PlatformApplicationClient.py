@@ -15,8 +15,6 @@ from .communication.applicationClient import Communication
 
 from .payment.applicationClient import Payment
 
-from .order.applicationClient import Order
-
 from .catalog.applicationClient import Catalog
 
 from .filestorage.applicationClient import FileStorage
@@ -26,8 +24,6 @@ from .share.applicationClient import Share
 from .configuration.applicationClient import Configuration
 
 from .cart.applicationClient import Cart
-
-from .rewards.applicationClient import Rewards
 
 from .analytics.applicationClient import Analytics
 
@@ -50,8 +46,6 @@ class PlatformApplicationClient:
         
         self.payment = Payment(config, applicationId)
         
-        self.order = Order(config, applicationId)
-        
         self.catalog = Catalog(config, applicationId)
         
         self.fileStorage = FileStorage(config, applicationId)
@@ -61,8 +55,6 @@ class PlatformApplicationClient:
         self.configuration = Configuration(config, applicationId)
         
         self.cart = Cart(config, applicationId)
-        
-        self.rewards = Rewards(config, applicationId)
         
         self.analytics = Analytics(config, applicationId)
         

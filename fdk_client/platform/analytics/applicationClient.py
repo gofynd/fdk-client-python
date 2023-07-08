@@ -1,6 +1,6 @@
 
 
-"""Analytics Platform Client"""
+"""Analytics Platform Client."""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -11,7 +11,6 @@ class Analytics:
     def __init__(self, config, applicationId):
         self._conf = config
         self.applicationId = applicationId
-
     
     async def getStatiscticsGroups(self, ):
         """Get statistics groups
@@ -36,7 +35,7 @@ class Analytics:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/stats/group", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import StatsGroups
@@ -46,7 +45,7 @@ class Analytics:
         except Exception as e:
             print("Response Validation failed for getStatiscticsGroups")
             print(e)
-
+            
         
 
         return response
@@ -78,7 +77,7 @@ class Analytics:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/stats/group/{group_name}", group_name=group_name), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import StatsGroupComponents
@@ -88,7 +87,7 @@ class Analytics:
         except Exception as e:
             print("Response Validation failed for getStatiscticsGroupComponents")
             print(e)
-
+            
         
 
         return response
@@ -120,7 +119,7 @@ class Analytics:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/stats/component/{component_name}.csv", component_name=component_name), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         return response
@@ -152,7 +151,7 @@ class Analytics:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/stats/component/{component_name}.pdf", component_name=component_name), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         return response
@@ -184,7 +183,7 @@ class Analytics:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/stats/component/{component_name}", component_name=component_name), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import StatsRes
@@ -194,7 +193,7 @@ class Analytics:
         except Exception as e:
             print("Response Validation failed for getComponentStats")
             print(e)
-
+            
         
 
         return response
@@ -238,7 +237,7 @@ class Analytics:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/from/{from_date}/to/{to_date}/abandon-cart/", from_date=from_date, to_date=to_date, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import AbandonCartsList
@@ -248,7 +247,7 @@ class Analytics:
         except Exception as e:
             print("Response Validation failed for getAbandonCartList")
             print(e)
-
+            
         
 
         return response
@@ -284,7 +283,7 @@ class Analytics:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/{from_date}/to/{to_date}/abandon-cart.csv", from_date=from_date, to_date=to_date), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         return response
@@ -316,7 +315,7 @@ class Analytics:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/abandon-cart/{cart_id}", cart_id=cart_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import AbandonCartDetail
@@ -326,7 +325,7 @@ class Analytics:
         except Exception as e:
             print("Response Validation failed for getAbandonCartDetail")
             print(e)
-
+            
         
 
         return response

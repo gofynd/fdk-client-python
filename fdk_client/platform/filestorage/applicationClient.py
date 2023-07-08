@@ -1,6 +1,6 @@
 
 
-"""FileStorage Platform Client"""
+"""FileStorage Platform Client."""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -11,7 +11,6 @@ class FileStorage:
     def __init__(self, config, applicationId):
         self._conf = config
         self.applicationId = applicationId
-
     
     async def appStartUpload(self, namespace=None, body=""):
         """Uploads an arbitrarily sized buffer or blob.
@@ -63,7 +62,7 @@ This operation will return the url for the uploaded file.
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/namespaces/{namespace}/upload/start/", namespace=namespace, ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
         from .models import StartResponse
@@ -73,7 +72,7 @@ This operation will return the url for the uploaded file.
         except Exception as e:
             print("Response Validation failed for appStartUpload")
             print(e)
-
+            
         
 
         return response
@@ -128,7 +127,7 @@ This operation will return the url for the uploaded file.
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/namespaces/{namespace}/upload/complete/", namespace=namespace, ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
         from .models import CompleteResponse
@@ -138,7 +137,7 @@ This operation will return the url for the uploaded file.
         except Exception as e:
             print("Response Validation failed for appCompleteUpload")
             print(e)
-
+            
         
 
         return response
@@ -175,7 +174,7 @@ This operation will return the url for the uploaded file.
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/uploads/copy/", sync=sync, ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
         from .models import BulkUploadResponse
@@ -185,7 +184,7 @@ This operation will return the url for the uploaded file.
         except Exception as e:
             print("Response Validation failed for appCopyFiles")
             print(e)
-
+            
         
 
         return response
@@ -221,7 +220,7 @@ This operation will return the url for the uploaded file.
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/namespaces/{namespace}/browse/", namespace=namespace, page_no=page_no), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import BrowseResponse
@@ -231,7 +230,7 @@ This operation will return the url for the uploaded file.
         except Exception as e:
             print("Response Validation failed for browse")
             print(e)
-
+            
         
 
         return response

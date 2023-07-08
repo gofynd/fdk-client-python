@@ -1,6 +1,6 @@
 
 
-"""FileStorage Platform Client"""
+""" FileStorage Platform Client."""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -10,7 +10,6 @@ from .validator import FileStorageValidator
 class FileStorage:
     def __init__(self, config):
         self._conf = config
-
     
     async def startUpload(self, namespace=None, body=""):
         """Uploads an arbitrarily sized buffer or blob.
@@ -64,7 +63,7 @@ This operation will return the url for the uploaded file.
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/namespaces/{namespace}/upload/start/", namespace=namespace, ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
+        
         from .models import StartResponse
         schema = StartResponse()
         try:
@@ -72,7 +71,7 @@ This operation will return the url for the uploaded file.
         except Exception as e:
             print("Response Validation failed for startUpload")
             print(e)
-
+            
         
 
         return response
@@ -129,7 +128,7 @@ This operation will return the url for the uploaded file.
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/namespaces/{namespace}/upload/complete/", namespace=namespace, ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
+        
         from .models import CompleteResponse
         schema = CompleteResponse()
         try:
@@ -137,7 +136,7 @@ This operation will return the url for the uploaded file.
         except Exception as e:
             print("Response Validation failed for completeUpload")
             print(e)
-
+            
         
 
         return response
@@ -172,7 +171,7 @@ This operation will return the url for the uploaded file.
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/sign-urls/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
+        
         from .models import SignUrlResponse
         schema = SignUrlResponse()
         try:
@@ -180,7 +179,7 @@ This operation will return the url for the uploaded file.
         except Exception as e:
             print("Response Validation failed for getSignUrls")
             print(e)
-
+            
         
 
         return response
@@ -219,7 +218,7 @@ This operation will return the url for the uploaded file.
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/uploads/copy/", sync=sync, ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
+        
         from .models import BulkUploadResponse
         schema = BulkUploadResponse()
         try:
@@ -227,7 +226,7 @@ This operation will return the url for the uploaded file.
         except Exception as e:
             print("Response Validation failed for copyFiles")
             print(e)
-
+            
         
 
         return response
@@ -265,7 +264,7 @@ This operation will return the url for the uploaded file.
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/namespaces/{namespace}/browse/", namespace=namespace, page_no=page_no), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
+        
         from .models import BrowseResponse
         schema = BrowseResponse()
         try:
@@ -273,7 +272,7 @@ This operation will return the url for the uploaded file.
         except Exception as e:
             print("Response Validation failed for browse")
             print(e)
-
+            
         
 
         return response

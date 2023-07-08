@@ -27,7 +27,7 @@ Create QR Code of an app
 
 ```python
 try:
-    result = await applicationClient.share.getApplicationQRCode()
+    result = await client.share.getApplicationQRCode()
     # use result
 except Exception as e:
     print(e)
@@ -82,7 +82,7 @@ Create QR Code of a product
 
 ```python
 try:
-    result = await applicationClient.share.getProductQRCodeBySlug(slug=slug)
+    result = await client.share.getProductQRCodeBySlug(slug=slug)
     # use result
 except Exception as e:
     print(e)
@@ -142,7 +142,7 @@ Create QR Code of a collection
 
 ```python
 try:
-    result = await applicationClient.share.getCollectionQRCodeBySlug(slug=slug)
+    result = await client.share.getCollectionQRCodeBySlug(slug=slug)
     # use result
 except Exception as e:
     print(e)
@@ -202,7 +202,7 @@ Create QR Code of a URL
 
 ```python
 try:
-    result = await applicationClient.share.getUrlQRCode(url=url)
+    result = await client.share.getUrlQRCode(url=url)
     # use result
 except Exception as e:
     print(e)
@@ -262,7 +262,7 @@ Create a short link
 
 ```python
 try:
-    result = await applicationClient.share.createShortLink(body=body)
+    result = await client.share.createShortLink(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -356,7 +356,7 @@ Get short link by hash
 
 ```python
 try:
-    result = await applicationClient.share.getShortLinkByHash(hash=hash)
+    result = await client.share.getShortLinkByHash(hash=hash)
     # use result
 except Exception as e:
     print(e)
@@ -451,7 +451,7 @@ Get original link by hash
 
 ```python
 try:
-    result = await applicationClient.share.getOriginalShortLinkByHash(hash=hash)
+    result = await client.share.getOriginalShortLinkByHash(hash=hash)
     # use result
 except Exception as e:
     print(e)

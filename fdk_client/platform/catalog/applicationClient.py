@@ -1,6 +1,6 @@
 
 
-"""Catalog Platform Client"""
+"""Catalog Platform Client."""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -11,7 +11,6 @@ class Catalog:
     def __init__(self, config, applicationId):
         self._conf = config
         self.applicationId = applicationId
-
     
     async def updateSearchKeywords(self, id=None, body=""):
         """Update Search Keyword by its id. On successful request, returns the updated collection
@@ -45,7 +44,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
         from .models import GetSearchWordsData
@@ -55,49 +54,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for updateSearchKeywords")
             print(e)
-
-        
-
-        return response
-    
-    async def getSearchKeywords(self, id=None):
-        """Get the details of a words by its `id`. If successful, returns a Collection resource in the response body specified in `GetSearchWordsDetailResponseSchema`
-        :param id : A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. : type string
-        """
-        payload = {}
-        
-        if id:
-            payload["id"] = id
-        
-
-        # Parameter validation
-        schema = CatalogValidator.getSearchKeywords()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/{id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve.","schema":{"type":"string"},"required":true}]}""", id=id)
-        query_string = await create_query_string(id=id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        from .models import GetSearchWordsDetailResponse
-        schema = GetSearchWordsDetailResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getSearchKeywords")
-            print(e)
-
+            
         
 
         return response
@@ -129,7 +86,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import DeleteResponse
@@ -139,7 +96,49 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for deleteSearchKeywords")
             print(e)
+            
+        
 
+        return response
+    
+    async def getSearchKeywords(self, id=None):
+        """Get the details of a words by its `id`. If successful, returns a Collection resource in the response body specified in `GetSearchWordsDetailResponseSchema`
+        :param id : A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. : type string
+        """
+        payload = {}
+        
+        if id:
+            payload["id"] = id
+        
+
+        # Parameter validation
+        schema = CatalogValidator.getSearchKeywords()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/{id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve.","schema":{"type":"string"},"required":true}]}""", id=id)
+        query_string = await create_query_string(id=id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        from .models import GetSearchWordsDetailResponse
+        schema = GetSearchWordsDetailResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getSearchKeywords")
+            print(e)
+            
         
 
         return response
@@ -172,7 +171,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
         from .models import GetSearchWordsData
@@ -182,7 +181,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for createCustomKeyword")
             print(e)
-
+            
         
 
         return response
@@ -210,7 +209,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import GetSearchWordsResponse
@@ -220,7 +219,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getAllSearchKeyword")
             print(e)
-
+            
         
 
         return response
@@ -257,7 +256,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
         from .models import GetAutocompleteWordsResponse
@@ -267,49 +266,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for updateAutocompleteKeyword")
             print(e)
-
-        
-
-        return response
-    
-    async def getAutocompleteKeywordDetail(self, id=None):
-        """Get the details of a words by its `id`. If successful, returns a keywords resource in the response body specified in `GetAutocompleteWordsResponseSchema`
-        :param id : A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. : type string
-        """
-        payload = {}
-        
-        if id:
-            payload["id"] = id
-        
-
-        # Parameter validation
-        schema = CatalogValidator.getAutocompleteKeywordDetail()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete/{id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve.","schema":{"type":"string"},"required":true}]}""", id=id)
-        query_string = await create_query_string(id=id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        from .models import GetAutocompleteWordsResponse
-        schema = GetAutocompleteWordsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAutocompleteKeywordDetail")
-            print(e)
-
+            
         
 
         return response
@@ -341,7 +298,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import DeleteResponse
@@ -351,7 +308,49 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for deleteAutocompleteKeyword")
             print(e)
+            
+        
 
+        return response
+    
+    async def getAutocompleteKeywordDetail(self, id=None):
+        """Get the details of a words by its `id`. If successful, returns a keywords resource in the response body specified in `GetAutocompleteWordsResponseSchema`
+        :param id : A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. : type string
+        """
+        payload = {}
+        
+        if id:
+            payload["id"] = id
+        
+
+        # Parameter validation
+        schema = CatalogValidator.getAutocompleteKeywordDetail()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete/{id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve.","schema":{"type":"string"},"required":true}]}""", id=id)
+        query_string = await create_query_string(id=id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        from .models import GetAutocompleteWordsResponse
+        schema = GetAutocompleteWordsResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getAutocompleteKeywordDetail")
+            print(e)
+            
         
 
         return response
@@ -384,7 +383,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
         from .models import CreateAutocompleteWordsResponse
@@ -394,7 +393,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for createCustomAutocompleteRule")
             print(e)
-
+            
         
 
         return response
@@ -422,7 +421,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import GetAutocompleteWordsResponse
@@ -432,7 +431,49 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getAutocompleteConfig")
             print(e)
+            
+        
 
+        return response
+    
+    async def getAppProduct(self, item_id=None):
+        """Products are the core resource of an application. If successful, returns a Company Application Product resource in the response body depending upon filter sent.
+        :param item_id : product id for a particular product. : type string
+        """
+        payload = {}
+        
+        if item_id:
+            payload["item_id"] = item_id
+        
+
+        # Parameter validation
+        schema = CatalogValidator.getAppProduct()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product/{item_id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"product id for a particular product.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"product id for a particular product.","schema":{"type":"string"},"required":true}]}""", item_id=item_id)
+        query_string = await create_query_string(item_id=item_id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product/{item_id}/", item_id=item_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        
+        
+
+        from .models import OwnerAppItemResponse
+        schema = OwnerAppItemResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getAppProduct")
+            print(e)
+            
         
 
         return response
@@ -469,7 +510,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product/{item_id}/", item_id=item_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
         from .models import SuccessResponse1
@@ -479,49 +520,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for updateAppProduct")
             print(e)
-
-        
-
-        return response
-    
-    async def getAppProduct(self, item_id=None):
-        """Products are the core resource of an application. If successful, returns a Company Application Product resource in the response body depending upon filter sent.
-        :param item_id : product id for a particular product. : type string
-        """
-        payload = {}
-        
-        if item_id:
-            payload["item_id"] = item_id
-        
-
-        # Parameter validation
-        schema = CatalogValidator.getAppProduct()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product/{item_id}/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"product id for a particular product.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"product id for a particular product.","schema":{"type":"string"},"required":true}]}""", item_id=item_id)
-        query_string = await create_query_string(item_id=item_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product/{item_id}/", item_id=item_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        
-
-        from .models import OwnerAppItemResponse
-        schema = OwnerAppItemResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAppProduct")
-            print(e)
-
+            
         
 
         return response
@@ -557,7 +556,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/metadata/", config_type=config_type, template_slug=template_slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import GetConfigMetadataResponse
@@ -567,7 +566,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getConfigurationMetadata")
             print(e)
-
+            
         
 
         return response
@@ -604,7 +603,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/groups", config_type=config_type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
         from .models import AppConfigurationDetail
@@ -614,7 +613,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for createGroupConfiguration")
             print(e)
-
+            
         
 
         return response
@@ -662,7 +661,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/groups", config_type=config_type, page_no=page_no, page_size=page_size, search=search, template_slug=template_slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import GetConfigResponse
@@ -672,7 +671,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getGroupConfigurations")
             print(e)
-
+            
         
 
         return response
@@ -713,7 +712,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/groups/{group_slug}", config_type=config_type, group_slug=group_slug), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
         from .models import AppConfigurationDetail
@@ -723,7 +722,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for updateGroupConfiguration")
             print(e)
-
+            
         
 
         return response
@@ -759,7 +758,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/groups/{group_slug}", config_type=config_type, group_slug=group_slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import ConfigSuccessResponse
@@ -769,7 +768,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for deleteGroupConfiguration")
             print(e)
-
+            
         
 
         return response
@@ -806,7 +805,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/", config_type=config_type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
         from .models import AppConfigurationsSort
@@ -816,7 +815,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for createListingConfiguration")
             print(e)
-
+            
         
 
         return response
@@ -860,7 +859,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/", config_type=config_type, page_no=page_no, page_size=page_size, search=search), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import GetConfigResponse
@@ -870,7 +869,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getListingConfigurations")
             print(e)
-
+            
         
 
         return response
@@ -911,7 +910,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/item/{config_id}/", config_type=config_type, config_id=config_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
         from .models import AppConfigurationsSort
@@ -921,7 +920,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for updateListingConfiguration")
             print(e)
-
+            
         
 
         return response
@@ -957,7 +956,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/item/{config_id}/", config_type=config_type, config_id=config_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import ConfigSuccessResponse
@@ -967,7 +966,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for deleteListingConfiguration")
             print(e)
-
+            
         
 
         return response
@@ -1000,7 +999,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/filter/allow_single", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
         from .models import ConfigSuccessResponse
@@ -1010,7 +1009,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for updateAllowSingle")
             print(e)
-
+            
         
 
         return response
@@ -1043,7 +1042,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/sort/default_key", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
         from .models import ConfigSuccessResponse
@@ -1053,7 +1052,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for updateDefaultSort")
             print(e)
-
+            
         
 
         return response
@@ -1081,7 +1080,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/metadata/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import GetCatalogConfigurationMetaData
@@ -1091,7 +1090,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getCatalogConfiguration")
             print(e)
-
+            
         
 
         return response
@@ -1124,7 +1123,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
         from .models import GetAppCatalogConfiguration
@@ -1134,7 +1133,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for createConfigurationProductListing")
             print(e)
-
+            
         
 
         return response
@@ -1162,7 +1161,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import GetAppCatalogConfiguration
@@ -1172,7 +1171,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getConfigurations")
             print(e)
-
+            
         
 
         return response
@@ -1209,7 +1208,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{type}/", type=type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
         from .models import GetAppCatalogConfiguration
@@ -1219,7 +1218,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for createConfigurationByType")
             print(e)
-
+            
         
 
         return response
@@ -1251,7 +1250,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{type}/", type=type), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import GetAppCatalogEntityConfiguration
@@ -1261,7 +1260,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getConfigurationByType")
             print(e)
-
+            
         
 
         return response
@@ -1289,7 +1288,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/query-options/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import GetCollectionQueryOptionResponse
@@ -1299,7 +1298,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getQueryFilters")
             print(e)
-
+            
         
 
         return response
@@ -1332,7 +1331,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
         from .models import CollectionCreateResponse
@@ -1342,7 +1341,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for createCollection")
             print(e)
-
+            
         
 
         return response
@@ -1398,7 +1397,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/", q=q, schedule_status=schedule_status, type=type, tags=tags, is_active=is_active, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import GetCollectionListingResponse
@@ -1408,7 +1407,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getAllCollections")
             print(e)
-
+            
         
 
         return response
@@ -1440,7 +1439,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/{slug}/", slug=slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import CollectionDetailResponse
@@ -1450,7 +1449,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getCollectionDetail")
             print(e)
-
+            
         
 
         return response
@@ -1487,7 +1486,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
         from .models import UpdateCollection
@@ -1497,7 +1496,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for updateCollection")
             print(e)
-
+            
         
 
         return response
@@ -1529,7 +1528,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import DeleteResponse
@@ -1539,7 +1538,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for deleteCollection")
             print(e)
-
+            
         
 
         return response
@@ -1576,7 +1575,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/{id}/items/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
         from .models import UpdatedResponse
@@ -1586,7 +1585,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for addCollectionItems")
             print(e)
-
+            
         
 
         return response
@@ -1630,7 +1629,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/{id}/items/", id=id, sort_on=sort_on, page_id=page_id, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import GetCollectionItemsResponse
@@ -1640,7 +1639,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getCollectionItems")
             print(e)
-
+            
         
 
         return response
@@ -1672,7 +1671,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/analytics/insights/", brand=brand), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import CatalogInsightResponse
@@ -1682,7 +1681,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getCatalogInsights")
             print(e)
-
+            
         
 
         return response
@@ -1734,7 +1733,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/products/{item_id}/inventory/{size_identifier}", item_id=item_id, size_identifier=size_identifier, page_no=page_no, page_size=page_size, q=q, location_ids=location_ids), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import InventorySellerIdentifierResponsePaginated
@@ -1744,7 +1743,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getDiscountedInventoryBySizeIdentifier")
             print(e)
-
+            
         
 
         return response
@@ -1792,7 +1791,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/brands", department=department, page_no=page_no, page_size=page_size, q=q, brand_id=brand_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import BrandListingResponse
@@ -1802,7 +1801,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getApplicationBrands")
             print(e)
-
+            
         
 
         return response
@@ -1830,7 +1829,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/departments", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import DepartmentResponse
@@ -1840,7 +1839,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getDepartments")
             print(e)
-
+            
         
 
         return response
@@ -1872,7 +1871,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/categories", department=department), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import CategoryListingResponse
@@ -1882,7 +1881,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getCategories")
             print(e)
-
+            
         
 
         return response
@@ -1950,7 +1949,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/products", q=q, f=f, c=c, filters=filters, sort_on=sort_on, page_id=page_id, page_size=page_size, page_no=page_no, page_type=page_type, item_ids=item_ids), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import ApplicationProductListingResponse
@@ -1960,7 +1959,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getAppicationProducts")
             print(e)
-
+            
         
 
         return response
@@ -1992,7 +1991,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/products/{slug}", slug=slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import ProductDetail
@@ -2002,7 +2001,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getProductDetailBySlug")
             print(e)
-
+            
         
 
         return response
@@ -2058,7 +2057,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/raw-products/", brand_ids=brand_ids, category_ids=category_ids, department_ids=department_ids, tags=tags, page_no=page_no, page_size=page_size, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import ProductListingResponse
@@ -2068,7 +2067,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getAppProducts")
             print(e)
-
+            
         
 
         return response
@@ -2124,7 +2123,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/inventory/", item_ids=item_ids, store_ids=store_ids, brand_ids=brand_ids, seller_identifiers=seller_identifiers, timestamp=timestamp, page_size=page_size, page_id=page_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import InventoryStockResponse
@@ -2134,7 +2133,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getAppInventory")
             print(e)
-
+            
         
 
         return response
@@ -2186,7 +2185,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/locations", store_type=store_type, uid=uid, q=q, stage=stage, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import LocationListSerializer
@@ -2196,7 +2195,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getAppLocations")
             print(e)
-
+            
         
 
         return response
@@ -2236,7 +2235,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/brand", page_no=page_no, page_size=page_size, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import BrandListingResponse
@@ -2246,7 +2245,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getApplicationBrandListing")
             print(e)
-
+            
         
 
         return response
@@ -2283,7 +2282,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/brand/{brand_uid}", brand_uid=brand_uid), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
         from .models import SuccessResponse1
@@ -2293,7 +2292,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for updateAppBrand")
             print(e)
-
+            
         
 
         return response
@@ -2337,7 +2336,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/category", department_id=department_id, page_no=page_no, page_size=page_size, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import BrandListingResponse
@@ -2347,7 +2346,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getApplicationCategoryListing")
             print(e)
-
+            
         
 
         return response
@@ -2384,7 +2383,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/category/{category_uid}", category_uid=category_uid), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
         from .models import SuccessResponse1
@@ -2394,7 +2393,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for updateAppCategory")
             print(e)
-
+            
         
 
         return response
@@ -2434,7 +2433,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/department", page_no=page_no, page_size=page_size, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
         from .models import ApplicationDepartmentListingResponse
@@ -2444,7 +2443,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for getApplicationDepartmentListing")
             print(e)
-
+            
         
 
         return response
@@ -2481,7 +2480,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/department/{department_uid}", department_uid=department_uid), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
         from .models import SuccessResponse1
@@ -2491,7 +2490,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for updateAppDepartment")
             print(e)
-
+            
         
 
         return response
@@ -2528,7 +2527,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/store/{store_uid}", store_uid=store_uid), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
         from .models import SuccessResponse1
@@ -2538,7 +2537,7 @@ class Catalog:
         except Exception as e:
             print("Response Validation failed for updateAppLocation")
             print(e)
-
+            
         
 
         return response

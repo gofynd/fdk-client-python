@@ -1,6 +1,6 @@
 
 
-"""AuditTrail Platform Client"""
+""" AuditTrail Platform Client."""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -10,7 +10,6 @@ from .validator import AuditTrailValidator
 class AuditTrail:
     def __init__(self, config):
         self._conf = config
-
     
     async def getAuditLogs(self, qs=None):
         """Get audit logs
@@ -41,7 +40,7 @@ class AuditTrail:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/audit-trail/v1.0/company/{self._conf.companyId}/logs/", qs=qs), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
+        
         from .models import LogSchemaResponse
         schema = LogSchemaResponse()
         try:
@@ -49,7 +48,7 @@ class AuditTrail:
         except Exception as e:
             print("Response Validation failed for getAuditLogs")
             print(e)
-
+            
         
 
         return response
@@ -84,7 +83,7 @@ class AuditTrail:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/audit-trail/v1.0/company/{self._conf.companyId}/logs/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
+        
         from .models import CreateLogResponse
         schema = CreateLogResponse()
         try:
@@ -92,7 +91,7 @@ class AuditTrail:
         except Exception as e:
             print("Response Validation failed for createAuditLog")
             print(e)
-
+            
         
 
         return response
@@ -126,7 +125,7 @@ class AuditTrail:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/audit-trail/v1.0/company/{self._conf.companyId}/logs/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
+        
         from .models import LogSchemaResponse
         schema = LogSchemaResponse()
         try:
@@ -134,7 +133,7 @@ class AuditTrail:
         except Exception as e:
             print("Response Validation failed for getAuditLog")
             print(e)
-
+            
         
 
         return response
@@ -164,7 +163,7 @@ class AuditTrail:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/audit-trail/v1.0/company/{self._conf.companyId}/entity-types", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
+        
         from .models import EntityTypesResponse
         schema = EntityTypesResponse()
         try:
@@ -172,7 +171,7 @@ class AuditTrail:
         except Exception as e:
             print("Response Validation failed for getEntityTypes")
             print(e)
-
+            
         
 
         return response

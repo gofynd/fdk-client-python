@@ -47,6 +47,10 @@ class PageType(Enum):
     
     PRODUCT = "product"
     
+    PRODUCT_REVIEWS = "product-reviews"
+    
+    ADD_PRODUCT_REVIEW = "add-product-review"
+    
     PRODUCT_REQUEST = "product-request"
     
     PRODUCTS = "products"

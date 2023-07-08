@@ -29,6 +29,8 @@ class Payment:
             "getRupifiBannerDetails": "/service/application/payment/v1.0/rupifi/banner",
             "getEpaylaterBannerDetails": "/service/application/payment/v1.0/epaylater/banner",
             "resendOrCancelPayment": "/service/application/payment/v1.0/payment/resend_or_cancel",
+            "renderHTML": "/service/application/payment/v1.0/payment/html/render/",
+            "validateVPA": "/service/application/payment/v1.0/validate-vpa",
             "getActiveRefundTransferModes": "/service/application/payment/v1.0/refund/transfer-mode",
             "enableOrDisableRefundTransferMode": "/service/application/payment/v1.0/refund/transfer-mode",
             "getUserBeneficiariesDetail": "/service/application/payment/v1.0/refund/user/beneficiary",
@@ -39,6 +41,15 @@ class Payment:
             "addRefundBankAccountUsingOTP": "/service/application/payment/v1.0/refund/account/otp",
             "verifyOtpAndAddBeneficiaryForWallet": "/service/application/payment/v1.0/refund/verification/wallet",
             "updateDefaultBeneficiary": "/service/application/payment/v1.0/refund/beneficiary/default",
+            "getPaymentLink": "/service/application/payment/v1.0/create-payment-link/",
+            "createPaymentLink": "/service/application/payment/v1.0/create-payment-link/",
+            "resendPaymentLink": "/service/application/payment/v1.0/resend-payment-link/",
+            "cancelPaymentLink": "/service/application/payment/v1.0/cancel-payment-link/",
+            "getPaymentModeRoutesPaymentLink": "/service/application/payment/v1.0/payment/options/link/",
+            "pollingPaymentLink": "/service/application/payment/v1.0/polling-payment-link/",
+            "createOrderHandlerPaymentLink": "/service/application/payment/v1.0/create-order/link/",
+            "initialisePaymentPaymentLink": "/service/application/payment/v1.0/payment/request/link/",
+            "checkAndUpdatePaymentStatusPaymentLink": "/service/application/payment/v1.0/payment/confirm/polling/link/",
             "customerCreditSummary": "/service/application/payment/v1.0/payment/credit-summary/",
             "redirectToAggregator": "/service/application/payment/v1.0/payment/redirect-to-aggregator/",
             "checkCredit": "/service/application/payment/v1.0/check-credits/",
@@ -84,7 +95,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAggregatorsConfig"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/config/aggregators/key", x_api_token=x_api_token, refresh=refresh), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import AggregatorsConfigDetailResponse
@@ -128,7 +139,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["attachCardToCustomer"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/card/attach", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import AttachCardsResponse
@@ -171,7 +182,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getActiveCardAggregator"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/card/aggregator", refresh=refresh), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import ActiveCardPaymentGatewayResponse
@@ -214,7 +225,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getActiveUserCards"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/cards", force_refresh=force_refresh), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import ListCardsResponse
@@ -258,7 +269,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["deleteUserCard"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/card/remove", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import DeleteCardsResponse
@@ -302,7 +313,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["verifyCustomerForPayment"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/customer/validation", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import ValidateCustomerResponse
@@ -346,7 +357,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["verifyAndChargePayment"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/confirm/charge", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import ChargeCustomerResponse
@@ -390,7 +401,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["initialisePayment"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/request", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import PaymentInitializationResponse
@@ -434,7 +445,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["checkAndUpdatePaymentStatus"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/confirm/polling", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import PaymentStatusUpdateResponse
@@ -501,7 +512,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPaymentModeRoutes"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/payment/options", amount=amount, cart_id=cart_id, pincode=pincode, checkout_mode=checkout_mode, refresh=refresh, card_reference=card_reference, user_details=user_details), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import PaymentModeRouteResponse
@@ -572,7 +583,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPosPaymentModeRoutes"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/payment/options/pos", amount=amount, cart_id=cart_id, pincode=pincode, checkout_mode=checkout_mode, refresh=refresh, card_reference=card_reference, order_type=order_type, user_details=user_details), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import PaymentModeRouteResponse
@@ -611,7 +622,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getRupifiBannerDetails"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/rupifi/banner", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import RupifiBannerResponse
@@ -650,7 +661,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getEpaylaterBannerDetails"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/epaylater/banner", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import EpaylaterBannerResponse
@@ -694,7 +705,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["resendOrCancelPayment"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/resend_or_cancel", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import ResendOrCancelPaymentResponse
@@ -703,6 +714,94 @@ class Payment:
             schema.dump(schema.load(response))
         except Exception as e:
             print("Response Validation failed for resendOrCancelPayment")
+            print(e)
+
+        
+
+        return response
+    
+    async def renderHTML(self, body=""):
+        """Use this API to decode base64 html form to plain HTML string.
+        """
+        payload = {}
+        
+        # Parameter validation
+        schema = PaymentValidator.renderHTML()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import renderHTMLRequest
+        schema = renderHTMLRequest()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["renderHTML"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["renderHTML"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/html/render/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+                
+        
+
+        from .models import renderHTMLResponse
+        schema = renderHTMLResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for renderHTML")
+            print(e)
+
+        
+
+        return response
+    
+    async def validateVPA(self, body=""):
+        """API to Validate UPI ID
+        """
+        payload = {}
+        
+        # Parameter validation
+        schema = PaymentValidator.validateVPA()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import ValidateVPARequest
+        schema = ValidateVPARequest()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["validateVPA"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["validateVPA"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/validate-vpa", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+                
+        
+
+        from .models import ValidateVPAResponse
+        schema = ValidateVPAResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for validateVPA")
             print(e)
 
         
@@ -733,7 +832,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getActiveRefundTransferModes"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/refund/transfer-mode", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import TransferModeResponse
@@ -777,7 +876,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["enableOrDisableRefundTransferMode"]).netloc, "put", await create_url_without_domain("/service/application/payment/v1.0/refund/transfer-mode", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import UpdateRefundTransferModeResponse
@@ -820,7 +919,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getUserBeneficiariesDetail"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/refund/user/beneficiary", order_id=order_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import OrderBeneficiaryResponse
@@ -863,7 +962,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["verifyIfscCode"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/ifsc-code/verify", ifsc_code=ifsc_code), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import IfscCodeResponse
@@ -906,7 +1005,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getOrderBeneficiariesDetail"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/refund/order/beneficiaries", order_id=order_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import OrderBeneficiaryResponse
@@ -950,7 +1049,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["verifyOtpAndAddBeneficiaryForBank"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/refund/verification/bank", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import AddBeneficiaryViaOtpVerificationResponse
@@ -994,7 +1093,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["addBeneficiaryDetails"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/refund/account", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import RefundAccountResponse
@@ -1038,7 +1137,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["addRefundBankAccountUsingOTP"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/refund/account/otp", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import RefundAccountResponse
@@ -1082,7 +1181,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["verifyOtpAndAddBeneficiaryForWallet"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/refund/verification/wallet", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import WalletOtpResponse
@@ -1126,7 +1225,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["updateDefaultBeneficiary"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/refund/beneficiary/default", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import SetDefaultBeneficiaryResponse
@@ -1135,6 +1234,399 @@ class Payment:
             schema.dump(schema.load(response))
         except Exception as e:
             print("Response Validation failed for updateDefaultBeneficiary")
+            print(e)
+
+        
+
+        return response
+    
+    async def getPaymentLink(self, payment_link_id=None, body=""):
+        """Use this API to get a payment link
+        :param payment_link_id :  : type string
+        """
+        payload = {}
+        
+        if payment_link_id:
+            payload["payment_link_id"] = payment_link_id
+        
+        # Parameter validation
+        schema = PaymentValidator.getPaymentLink()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getPaymentLink"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"payment_link_id","schema":{"type":"string","description":"Unique payment link id"}}],"query":[{"in":"query","name":"payment_link_id","schema":{"type":"string","description":"Unique payment link id"}}],"headers":[],"path":[]}""", payment_link_id=payment_link_id)
+        query_string = await create_query_string(payment_link_id=payment_link_id)
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPaymentLink"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/create-payment-link/", payment_link_id=payment_link_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+                
+        
+
+        from .models import GetPaymentLinkResponse
+        schema = GetPaymentLinkResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getPaymentLink")
+            print(e)
+
+        
+
+        return response
+    
+    async def createPaymentLink(self, body=""):
+        """Use this API to create a payment link for the customer
+        """
+        payload = {}
+        
+        # Parameter validation
+        schema = PaymentValidator.createPaymentLink()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import CreatePaymentLinkRequest
+        schema = CreatePaymentLinkRequest()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["createPaymentLink"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["createPaymentLink"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/create-payment-link/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+                
+        
+
+        from .models import CreatePaymentLinkResponse
+        schema = CreatePaymentLinkResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for createPaymentLink")
+            print(e)
+
+        
+
+        return response
+    
+    async def resendPaymentLink(self, body=""):
+        """Use this API to resend a payment link for the customer
+        """
+        payload = {}
+        
+        # Parameter validation
+        schema = PaymentValidator.resendPaymentLink()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import CancelOrResendPaymentLinkRequest
+        schema = CancelOrResendPaymentLinkRequest()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["resendPaymentLink"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["resendPaymentLink"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/resend-payment-link/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+                
+        
+
+        from .models import ResendPaymentLinkResponse
+        schema = ResendPaymentLinkResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for resendPaymentLink")
+            print(e)
+
+        
+
+        return response
+    
+    async def cancelPaymentLink(self, body=""):
+        """Use this API to cancel a payment link for the customer
+        """
+        payload = {}
+        
+        # Parameter validation
+        schema = PaymentValidator.cancelPaymentLink()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import CancelOrResendPaymentLinkRequest
+        schema = CancelOrResendPaymentLinkRequest()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["cancelPaymentLink"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["cancelPaymentLink"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/cancel-payment-link/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+                
+        
+
+        from .models import CancelPaymentLinkResponse
+        schema = CancelPaymentLinkResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for cancelPaymentLink")
+            print(e)
+
+        
+
+        return response
+    
+    async def getPaymentModeRoutesPaymentLink(self, payment_link_id=None, body=""):
+        """Use this API to get all valid payment options for doing a payment through payment link
+        :param payment_link_id : Payment link id : type string
+        """
+        payload = {}
+        
+        if payment_link_id:
+            payload["payment_link_id"] = payment_link_id
+        
+        # Parameter validation
+        schema = PaymentValidator.getPaymentModeRoutesPaymentLink()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getPaymentModeRoutesPaymentLink"], proccessed_params="""{"required":[{"name":"payment_link_id","in":"query","description":"Payment link id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"name":"payment_link_id","in":"query","description":"Payment link id","required":true,"schema":{"type":"string"}}],"headers":[],"path":[]}""", payment_link_id=payment_link_id)
+        query_string = await create_query_string(payment_link_id=payment_link_id)
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPaymentModeRoutesPaymentLink"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/payment/options/link/", payment_link_id=payment_link_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+                
+        
+
+        from .models import PaymentModeRouteResponse
+        schema = PaymentModeRouteResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getPaymentModeRoutesPaymentLink")
+            print(e)
+
+        
+
+        return response
+    
+    async def pollingPaymentLink(self, payment_link_id=None, body=""):
+        """Use this API to poll if payment through payment was successful or not
+        :param payment_link_id :  : type string
+        """
+        payload = {}
+        
+        if payment_link_id:
+            payload["payment_link_id"] = payment_link_id
+        
+        # Parameter validation
+        schema = PaymentValidator.pollingPaymentLink()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["pollingPaymentLink"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"payment_link_id","schema":{"type":"string","description":"Unique payment link id"}}],"query":[{"in":"query","name":"payment_link_id","schema":{"type":"string","description":"Unique payment link id"}}],"headers":[],"path":[]}""", payment_link_id=payment_link_id)
+        query_string = await create_query_string(payment_link_id=payment_link_id)
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["pollingPaymentLink"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/polling-payment-link/", payment_link_id=payment_link_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+                
+        
+
+        from .models import PollingPaymentLinkResponse
+        schema = PollingPaymentLinkResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for pollingPaymentLink")
+            print(e)
+
+        
+
+        return response
+    
+    async def createOrderHandlerPaymentLink(self, body=""):
+        """Use this API to create a order and payment on aggregator side
+        """
+        payload = {}
+        
+        # Parameter validation
+        schema = PaymentValidator.createOrderHandlerPaymentLink()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import CreateOrderUserRequest
+        schema = CreateOrderUserRequest()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["createOrderHandlerPaymentLink"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["createOrderHandlerPaymentLink"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/create-order/link/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+                
+        
+
+        from .models import CreateOrderUserResponse
+        schema = CreateOrderUserResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for createOrderHandlerPaymentLink")
+            print(e)
+
+        
+
+        return response
+    
+    async def initialisePaymentPaymentLink(self, body=""):
+        """Use this API to inititate payment using UPI, BharatQR, wherein the UPI requests are send to the app and QR code is displayed on the screen.
+        """
+        payload = {}
+        
+        # Parameter validation
+        schema = PaymentValidator.initialisePaymentPaymentLink()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import PaymentInitializationRequest
+        schema = PaymentInitializationRequest()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["initialisePaymentPaymentLink"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["initialisePaymentPaymentLink"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/request/link/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+                
+        
+
+        from .models import PaymentInitializationResponse
+        schema = PaymentInitializationResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for initialisePaymentPaymentLink")
+            print(e)
+
+        
+
+        return response
+    
+    async def checkAndUpdatePaymentStatusPaymentLink(self, body=""):
+        """Use this API to perform continuous polling at intervals to check the status of payment until timeout.
+        """
+        payload = {}
+        
+        # Parameter validation
+        schema = PaymentValidator.checkAndUpdatePaymentStatusPaymentLink()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import PaymentStatusUpdateRequest
+        schema = PaymentStatusUpdateRequest()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["checkAndUpdatePaymentStatusPaymentLink"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["checkAndUpdatePaymentStatusPaymentLink"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/confirm/polling/link/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+                
+        
+
+        from .models import PaymentStatusUpdateResponse
+        schema = PaymentStatusUpdateResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for checkAndUpdatePaymentStatusPaymentLink")
             print(e)
 
         
@@ -1169,7 +1661,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["customerCreditSummary"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/payment/credit-summary/", aggregator=aggregator), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import CustomerCreditSummaryResponse
@@ -1216,7 +1708,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["redirectToAggregator"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/payment/redirect-to-aggregator/", source=source, aggregator=aggregator), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import RedirectToAggregatorResponse
@@ -1259,7 +1751,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["checkCredit"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/check-credits/", aggregator=aggregator), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import CheckCreditResponse
@@ -1303,7 +1795,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["customerOnboard"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/credit-onboard/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import CustomerOnboardingResponse

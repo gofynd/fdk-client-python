@@ -1,6 +1,6 @@
 
 
-"""Common Platform Client"""
+""" Common Platform Client."""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -10,7 +10,6 @@ from .validator import CommonValidator
 class Common:
     def __init__(self, config):
         self._conf = config
-
     
     async def searchApplication(self, authorization=None, query=None):
         """Provide application name or domain url
@@ -45,7 +44,7 @@ class Common:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/common/configuration/v1.0/application/search-application", authorization=authorization, query=query), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
+        
         from .models import ApplicationResponse
         schema = ApplicationResponse()
         try:
@@ -53,7 +52,7 @@ class Common:
         except Exception as e:
             print("Response Validation failed for searchApplication")
             print(e)
-
+            
         
 
         return response
@@ -91,7 +90,7 @@ class Common:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/common/configuration/v1.0/location", location_type=location_type, id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
+        
         from .models import Locations
         schema = Locations()
         try:
@@ -99,7 +98,7 @@ class Common:
         except Exception as e:
             print("Response Validation failed for getLocations")
             print(e)
-
+            
         
 
         return response

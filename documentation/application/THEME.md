@@ -24,7 +24,7 @@ Get all pages of a theme
 
 ```python
 try:
-    result = await applicationClient.theme.getAllPages(themeId=themeId)
+    result = await client.theme.getAllPages(themeId=themeId)
     # use result
 except Exception as e:
     print(e)
@@ -347,7 +347,7 @@ Get page of a theme
 
 ```python
 try:
-    result = await applicationClient.theme.getPage(themeId=themeId, pageValue=pageValue)
+    result = await client.theme.getPage(themeId=themeId, pageValue=pageValue)
     # use result
 except Exception as e:
     print(e)
@@ -773,7 +773,7 @@ Get the theme currently applied to an application
 
 ```python
 try:
-    result = await applicationClient.theme.getAppliedTheme()
+    result = await client.theme.getAppliedTheme()
     # use result
 except Exception as e:
     print(e)
@@ -2955,7 +2955,7 @@ Get a theme for a preview
 
 ```python
 try:
-    result = await applicationClient.theme.getThemeForPreview(themeId=themeId)
+    result = await client.theme.getThemeForPreview(themeId=themeId)
     # use result
 except Exception as e:
     print(e)

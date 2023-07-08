@@ -59,7 +59,7 @@ class Lead:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getTicket"]).netloc, "get", await create_url_without_domain("/service/application/lead/v1.0/ticket/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import Ticket
@@ -107,7 +107,7 @@ class Lead:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["createHistory"]).netloc, "post", await create_url_without_domain("/service/application/lead/v1.0/ticket/{id}/history", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import TicketHistory
@@ -151,7 +151,7 @@ class Lead:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["createTicket"]).netloc, "post", await create_url_without_domain("/service/application/lead/v1.0/ticket/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import Ticket
@@ -194,7 +194,7 @@ class Lead:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCustomForm"]).netloc, "get", await create_url_without_domain("/service/application/lead/v1.0/form/{slug}", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import CustomForm
@@ -242,7 +242,7 @@ class Lead:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["submitCustomForm"]).netloc, "post", await create_url_without_domain("/service/application/lead/v1.0/form/{slug}/submit", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import SubmitCustomFormResponse
@@ -285,7 +285,7 @@ class Lead:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getParticipantsInsideVideoRoom"]).netloc, "get", await create_url_without_domain("/service/application/lead/v1.0/video/room/{unique_name}/participants", unique_name=unique_name), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import GetParticipantsInsideVideoRoomResponse
@@ -328,7 +328,7 @@ class Lead:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getTokenForVideoRoom"]).netloc, "get", await create_url_without_domain("/service/application/lead/v1.0/video/room/{unique_name}/token", unique_name=unique_name), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
 
         from .models import GetTokenForVideoRoomResponse

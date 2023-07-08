@@ -1,6 +1,6 @@
 
 
-"""Analytics Platform Client"""
+""" Analytics Platform Client."""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -10,7 +10,6 @@ from .validator import AnalyticsValidator
 class Analytics:
     def __init__(self, config):
         self._conf = config
-
     
     async def createExportJob(self, export_type=None, body=""):
         """Create data export job in required format
@@ -46,7 +45,7 @@ class Analytics:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/export/{export_type}", export_type=export_type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
+        
         from .models import ExportJobRes
         schema = ExportJobRes()
         try:
@@ -54,7 +53,7 @@ class Analytics:
         except Exception as e:
             print("Response Validation failed for createExportJob")
             print(e)
-
+            
         
 
         return response
@@ -92,7 +91,7 @@ class Analytics:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/export/{export_type}/job/{job_id}", export_type=export_type, job_id=job_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
+        
         from .models import ExportJobStatusRes
         schema = ExportJobStatusRes()
         try:
@@ -100,7 +99,7 @@ class Analytics:
         except Exception as e:
             print("Response Validation failed for getExportJobStatus")
             print(e)
-
+            
         
 
         return response
@@ -147,7 +146,7 @@ class Analytics:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/logs/{log_type}", log_type=log_type, page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
+        
         from .models import GetLogsListRes
         schema = GetLogsListRes()
         try:
@@ -155,7 +154,7 @@ class Analytics:
         except Exception as e:
             print("Response Validation failed for getLogsList")
             print(e)
-
+            
         
 
         return response
@@ -202,7 +201,7 @@ class Analytics:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/logs/{log_type}/search", page_no=page_no, page_size=page_size, log_type=log_type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
+        
         from .models import SearchLogRes
         schema = SearchLogRes()
         try:
@@ -210,7 +209,7 @@ class Analytics:
         except Exception as e:
             print("Response Validation failed for searchLogs")
             print(e)
-
+            
         
 
         return response

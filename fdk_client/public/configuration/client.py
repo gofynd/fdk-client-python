@@ -1,7 +1,9 @@
 
 
-"""Configuration Public Client"""
+"""  Public Client."""
 
+import base64
+import ujson
 from urllib.parse import urlparse
 
 from ...common.aiohttp_helper import AiohttpHelper
@@ -66,7 +68,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for searchApplication")
             print(e)
-
+            
         
 
         return response
@@ -113,7 +115,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for getLocations")
             print(e)
-
+            
         
 
         return response

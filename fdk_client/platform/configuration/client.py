@@ -1,6 +1,6 @@
 
 
-"""Configuration Platform Client"""
+""" Configuration Platform Client."""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -10,7 +10,6 @@ from .validator import ConfigurationValidator
 class Configuration:
     def __init__(self, config):
         self._conf = config
-
     
     async def createApplication(self, body=""):
         """Create new application
@@ -42,7 +41,7 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
+        
         from .models import CreateAppResponse
         schema = CreateAppResponse()
         try:
@@ -50,7 +49,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for createApplication")
             print(e)
-
+            
         
 
         return response
@@ -92,7 +91,7 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application", page_no=page_no, page_size=page_size, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
+        
         from .models import ApplicationsResponse
         schema = ApplicationsResponse()
         try:
@@ -100,7 +99,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for getApplications")
             print(e)
-
+            
         
 
         return response
@@ -130,7 +129,7 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/currencies", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
+        
         from .models import CurrenciesResponse
         schema = CurrenciesResponse()
         try:
@@ -138,7 +137,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for getCurrencies")
             print(e)
-
+            
         
 
         return response
@@ -173,7 +172,7 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/domain/suggestions", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
+        
         from .models import DomainSuggestionsResponse
         schema = DomainSuggestionsResponse()
         try:
@@ -181,7 +180,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for getDomainAvailibility")
             print(e)
-
+            
         
 
         return response
@@ -215,7 +214,7 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
+        
         from .models import Integration
         schema = Integration()
         try:
@@ -223,7 +222,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for getIntegrationById")
             print(e)
-
+            
         
 
         return response
@@ -261,7 +260,7 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/available", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
+        
         from .models import GetIntegrationsOptInsResponse
         schema = GetIntegrationsOptInsResponse()
         try:
@@ -269,7 +268,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for getAvailableOptIns")
             print(e)
-
+            
         
 
         return response
@@ -315,7 +314,7 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/selected/{level}/{uid}", level=level, uid=uid, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
+        
         from .models import GetIntegrationsOptInsResponse
         schema = GetIntegrationsOptInsResponse()
         try:
@@ -323,7 +322,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for getSelectedOptIns")
             print(e)
-
+            
         
 
         return response
@@ -369,7 +368,7 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/configuration/{id}/{level}", id=id, level=level, opted=opted, check_permission=check_permission), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
+        
         from .models import IntegrationConfigResponse
         schema = IntegrationConfigResponse()
         try:
@@ -377,7 +376,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for getIntegrationLevelConfig")
             print(e)
-
+            
         
 
         return response
@@ -420,7 +419,7 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/configuration/{id}/{level}", id=id, level=level), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
+        
         from .models import IntegrationLevel
         schema = IntegrationLevel()
         try:
@@ -428,7 +427,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for updateLevelIntegration")
             print(e)
-
+            
         
 
         return response
@@ -470,7 +469,7 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/configuration/{id}/{level}/{uid}", id=id, level=level, uid=uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
+        
         from .models import IntegrationLevel
         schema = IntegrationLevel()
         try:
@@ -478,7 +477,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for getIntegrationByLevelId")
             print(e)
-
+            
         
 
         return response
@@ -525,7 +524,7 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/configuration/{id}/{level}/{uid}", id=id, level=level, uid=uid), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
+        
         from .models import IntegrationLevel
         schema = IntegrationLevel()
         try:
@@ -533,7 +532,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for updateLevelUidIntegration")
             print(e)
-
+            
         
 
         return response
@@ -579,7 +578,7 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/check/configuration/{id}/{level}/{uid}", id=id, level=level, uid=uid, permission=permission), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
+        
         from .models import OptedStoreIntegration
         schema = OptedStoreIntegration()
         try:
@@ -587,7 +586,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for getLevelActiveIntegrations")
             print(e)
-
+            
         
 
         return response
@@ -621,7 +620,7 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/inventory/brands-by-companies", q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
+        
         from .models import BrandsByCompanyResponse
         schema = BrandsByCompanyResponse()
         try:
@@ -629,7 +628,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for getBrandsByCompany")
             print(e)
-
+            
         
 
         return response
@@ -672,7 +671,7 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/inventory/companies-by-brands", page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
+        
         from .models import CompanyByBrandsResponse
         schema = CompanyByBrandsResponse()
         try:
@@ -680,7 +679,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for getCompanyByBrands")
             print(e)
-
+            
         
 
         return response
@@ -723,7 +722,7 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/inventory/stores-by-brands", page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
+        
         from .models import StoreByBrandsResponse
         schema = StoreByBrandsResponse()
         try:
@@ -731,7 +730,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for getStoreByBrands")
             print(e)
-
+            
         
 
         return response
@@ -769,7 +768,7 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/other-seller-applications/", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
+        
         from .models import OtherSellerApplications
         schema = OtherSellerApplications()
         try:
@@ -777,7 +776,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for getOtherSellerApplications")
             print(e)
-
+            
         
 
         return response
@@ -811,7 +810,7 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/other-seller-applications/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
+        
         from .models import OptedApplicationResponse
         schema = OptedApplicationResponse()
         try:
@@ -819,7 +818,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for getOtherSellerApplicationById")
             print(e)
-
+            
         
 
         return response
@@ -858,7 +857,7 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/other-seller-applications/{id}/opt_out", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
+        
         from .models import SuccessMessageResponse
         schema = SuccessMessageResponse()
         try:
@@ -866,7 +865,7 @@ class Configuration:
         except Exception as e:
             print("Response Validation failed for optOutFromApplication")
             print(e)
-
+            
         
 
         return response
