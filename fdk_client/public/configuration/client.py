@@ -1,7 +1,9 @@
 
 
-"""Configuration Public Client"""
+"""  Public Client."""
 
+import base64
+import ujson
 from urllib.parse import urlparse
 
 from ...common.aiohttp_helper import AiohttpHelper
@@ -31,10 +33,10 @@ class Configuration:
         """
         payload = {}
         
-        if authorization is not None:
+        if authorization:
             payload["authorization"] = authorization
         
-        if query is not None:
+        if query:
             payload["query"] = query
         
         # Parameter validation
@@ -59,15 +61,14 @@ class Configuration:
 
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ApplicationResponse
-            schema = ApplicationResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for searchApplication")
-                print(e)
-
+        from .models import ApplicationResponse
+        schema = ApplicationResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for searchApplication")
+            print(e)
+            
         
 
         return response
@@ -79,10 +80,10 @@ class Configuration:
         """
         payload = {}
         
-        if location_type is not None:
+        if location_type:
             payload["location_type"] = location_type
         
-        if id is not None:
+        if id:
             payload["id"] = id
         
         # Parameter validation
@@ -107,15 +108,14 @@ class Configuration:
 
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import Locations
-            schema = Locations()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getLocations")
-                print(e)
-
+        from .models import Locations
+        schema = Locations()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getLocations")
+            print(e)
+            
         
 
         return response

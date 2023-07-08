@@ -1,6 +1,6 @@
 
 
-"""User Platform Client"""
+"""User Platform Client."""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -11,7 +11,6 @@ class User:
     def __init__(self, config, applicationId):
         self._conf = config
         self.applicationId = applicationId
-
     
     async def getCustomers(self, q=None, page_size=None, page_no=None):
         """Use this API to retrieve a list of customers who have registered in the application.
@@ -21,13 +20,13 @@ class User:
         """
         payload = {}
         
-        if q is not None:
+        if q:
             payload["q"] = q
         
-        if page_size is not None:
+        if page_size:
             payload["page_size"] = page_size
         
-        if page_no is not None:
+        if page_no:
             payload["page_no"] = page_no
         
 
@@ -48,18 +47,17 @@ class User:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/list", q=q, page_size=page_size, page_no=page_no), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import CustomerListResponseSchema
-            schema = CustomerListResponseSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getCustomers")
-                print(e)
-
+        from .models import CustomerListResponseSchema
+        schema = CustomerListResponseSchema()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getCustomers")
+            print(e)
+            
         
 
         return response
@@ -70,7 +68,7 @@ class User:
         """
         payload = {}
         
-        if q is not None:
+        if q:
             payload["q"] = q
         
 
@@ -91,18 +89,17 @@ class User:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/search", q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import UserSearchResponseSchema
-            schema = UserSearchResponseSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for searchUsers")
-                print(e)
-
+        from .models import UserSearchResponseSchema
+        schema = UserSearchResponseSchema()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for searchUsers")
+            print(e)
+            
         
 
         return response
@@ -135,18 +132,17 @@ class User:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import CreateUserResponseSchema
-            schema = CreateUserResponseSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for createUser")
-                print(e)
-
+        from .models import CreateUserResponseSchema
+        schema = CreateUserResponseSchema()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for createUser")
+            print(e)
+            
         
 
         return response
@@ -179,18 +175,17 @@ class User:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/activation", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import BlockUserSuccess
-            schema = BlockUserSuccess()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for blockOrUnblockUsers")
-                print(e)
-
+        from .models import BlockUserSuccess
+        schema = BlockUserSuccess()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for blockOrUnblockUsers")
+            print(e)
+            
         
 
         return response
@@ -223,18 +218,17 @@ class User:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/archive", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ArchiveUserSuccess
-            schema = ArchiveUserSuccess()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for archiveUser")
-                print(e)
-
+        from .models import ArchiveUserSuccess
+        schema = ArchiveUserSuccess()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for archiveUser")
+            print(e)
+            
         
 
         return response
@@ -267,18 +261,17 @@ class User:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/undelete", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import UnDeleteUserSuccess
-            schema = UnDeleteUserSuccess()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for unDeleteUser")
-                print(e)
-
+        from .models import UnDeleteUserSuccess
+        schema = UnDeleteUserSuccess()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for unDeleteUser")
+            print(e)
+            
         
 
         return response
@@ -289,7 +282,7 @@ class User:
         """
         payload = {}
         
-        if user_id is not None:
+        if user_id:
             payload["user_id"] = user_id
         
 
@@ -315,18 +308,17 @@ class User:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/{user_id}", user_id=user_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import CreateUserResponseSchema
-            schema = CreateUserResponseSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updateUser")
-                print(e)
-
+        from .models import CreateUserResponseSchema
+        schema = CreateUserResponseSchema()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for updateUser")
+            print(e)
+            
         
 
         return response
@@ -359,18 +351,17 @@ class User:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/session", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import CreateUserSessionResponseSchema
-            schema = CreateUserSessionResponseSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for createUserSession")
-                print(e)
-
+        from .models import CreateUserSessionResponseSchema
+        schema = CreateUserSessionResponseSchema()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for createUserSession")
+            print(e)
+            
         
 
         return response
@@ -381,7 +372,7 @@ class User:
         """
         payload = {}
         
-        if id is not None:
+        if id:
             payload["id"] = id
         
 
@@ -402,18 +393,17 @@ class User:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/sesions", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SessionListResponseSchema
-            schema = SessionListResponseSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getActiveSessions")
-                print(e)
-
+        from .models import SessionListResponseSchema
+        schema = SessionListResponseSchema()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getActiveSessions")
+            print(e)
+            
         
 
         return response
@@ -424,7 +414,7 @@ class User:
         """
         payload = {}
         
-        if id is not None:
+        if id:
             payload["id"] = id
         
 
@@ -445,18 +435,17 @@ class User:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/sesions", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SessionDeleteResponseSchema
-            schema = SessionDeleteResponseSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for deleteActiveSessions")
-                print(e)
-
+        from .models import SessionDeleteResponseSchema
+        schema = SessionDeleteResponseSchema()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for deleteActiveSessions")
+            print(e)
+            
         
 
         return response
@@ -484,18 +473,17 @@ class User:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/platform/config", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import PlatformSchema
-            schema = PlatformSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getPlatformConfig")
-                print(e)
-
+        from .models import PlatformSchema
+        schema = PlatformSchema()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getPlatformConfig")
+            print(e)
+            
         
 
         return response
@@ -528,18 +516,17 @@ class User:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/platform/config", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import PlatformSchema
-            schema = PlatformSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updatePlatformConfig")
-                print(e)
-
+        from .models import PlatformSchema
+        schema = PlatformSchema()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for updatePlatformConfig")
+            print(e)
+            
         
 
         return response

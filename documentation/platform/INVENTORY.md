@@ -32,7 +32,7 @@ Get Slingshot Configuration Of  A Company
 
 ```python
 try:
-    result = await platformClient.inventory.getConfigByCompany()
+    result = await client.inventory.getConfigByCompany()
     # use result
 except Exception as e:
     print(e)
@@ -84,7 +84,7 @@ Get Slingshot Configuration Of  A Company
 
 ```python
 try:
-    result = await platformClient.inventory.suppressStores(body=body)
+    result = await client.inventory.suppressStores(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -140,7 +140,7 @@ Get Job Configs For A Company
 
 ```python
 try:
-    result = await platformClient.inventory.getJobsByCompany(pageNo=pageNo, pageSize=pageSize)
+    result = await client.inventory.getJobsByCompany(pageNo=pageNo, pageSize=pageSize)
     # use result
 except Exception as e:
     print(e)
@@ -198,7 +198,7 @@ Updates An Existing Job Config
 
 ```python
 try:
-    result = await platformClient.inventory.updateJob(body=body)
+    result = await client.inventory.updateJob(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -254,7 +254,7 @@ Creates A New Job Config
 
 ```python
 try:
-    result = await platformClient.inventory.createJob(body=body)
+    result = await client.inventory.createJob(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -310,7 +310,7 @@ Get Job Code Steps
 
 ```python
 try:
-    result = await platformClient.inventory.getJobSteps(jobId=jobId)
+    result = await client.inventory.getJobSteps(jobId=jobId)
     # use result
 except Exception as e:
     print(e)
@@ -367,7 +367,7 @@ Get Job Configs By Company And Integration
 
 ```python
 try:
-    result = await platformClient.inventory.getJobByCompanyAndIntegration(integrationId=integrationId, pageNo=pageNo, pageSize=pageSize)
+    result = await client.inventory.getJobByCompanyAndIntegration(integrationId=integrationId, pageNo=pageNo, pageSize=pageSize)
     # use result
 except Exception as e:
     print(e)
@@ -426,7 +426,7 @@ Disable Job Config
 
 ```python
 try:
-    result = await platformClient.inventory.disable(integrationId=integrationId)
+    result = await client.inventory.disable(integrationId=integrationId)
     # use result
 except Exception as e:
     print(e)
@@ -483,7 +483,7 @@ Get Job Configs Defaults
 
 ```python
 try:
-    result = await platformClient.inventory.getJobConfigDefaults()
+    result = await client.inventory.getJobConfigDefaults()
     # use result
 except Exception as e:
     print(e)
@@ -535,7 +535,7 @@ Get Job Config By Code
 
 ```python
 try:
-    result = await platformClient.inventory.getJobByCode(code=code)
+    result = await client.inventory.getJobByCode(code=code)
     # use result
 except Exception as e:
     print(e)
@@ -592,7 +592,7 @@ Get Job Metrics
 
 ```python
 try:
-    result = await platformClient.inventory.getJobCodeMetrics(code=code, pageNo=pageNo, pageSize=pageSize, status=status, date=date)
+    result = await client.inventory.getJobCodeMetrics(code=code, pageNo=pageNo, pageSize=pageSize, status=status, date=date)
     # use result
 except Exception as e:
     print(e)
@@ -653,7 +653,7 @@ Get Job Codes By Company And Integration
 
 ```python
 try:
-    result = await platformClient.inventory.getJobCodesByCompanyAndIntegration(integrationId=integrationId, pageNo=pageNo, pageSize=pageSize)
+    result = await client.inventory.getJobCodesByCompanyAndIntegration(integrationId=integrationId, pageNo=pageNo, pageSize=pageSize)
     # use result
 except Exception as e:
     print(e)

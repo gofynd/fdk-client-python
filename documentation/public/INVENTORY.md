@@ -26,7 +26,7 @@ Get Slingshot Configuration Of  A Company using API key
 
 ```python
 try:
-    result = await publicClient.inventory.getConfigByApiKey(apikey=apikey)
+    result = await client.inventory.getConfigByApiKey(apikey=apikey)
     # use result
 except Exception as e:
     print(e)
@@ -83,7 +83,7 @@ Get apikey  for  Company  to call other Slingshot Configuration APIs
 
 ```python
 try:
-    result = await publicClient.inventory.getApiKey(userName=userName, password=password)
+    result = await client.inventory.getApiKey(userName=userName, password=password)
     # use result
 except Exception as e:
     print(e)
@@ -141,7 +141,7 @@ Get Job Config By Code
 
 ```python
 try:
-    result = await publicClient.inventory.getJobByCode(code=code)
+    result = await client.inventory.getJobByCode(code=code)
     # use result
 except Exception as e:
     print(e)
@@ -198,7 +198,7 @@ Get Job Configs By Integration Type
 
 ```python
 try:
-    result = await publicClient.inventory.getJobConfigByIntegrationType(integrationType=integrationType, disable=disable)
+    result = await client.inventory.getJobConfigByIntegrationType(integrationType=integrationType, disable=disable)
     # use result
 except Exception as e:
     print(e)
@@ -256,7 +256,7 @@ Find all the JobCodes from Metrics Collection based on the field Values
 
 ```python
 try:
-    result = await publicClient.inventory.getJobCodesMetrics(dailyJob=dailyJob, jobCode=jobCode)
+    result = await client.inventory.getJobCodesMetrics(dailyJob=dailyJob, jobCode=jobCode)
     # use result
 except Exception as e:
     print(e)
@@ -314,7 +314,7 @@ Save JobCode Metrics
 
 ```python
 try:
-    result = await publicClient.inventory.saveJobCodesMetrics(body=body)
+    result = await client.inventory.saveJobCodesMetrics(body=body)
     # use result
 except Exception as e:
     print(e)

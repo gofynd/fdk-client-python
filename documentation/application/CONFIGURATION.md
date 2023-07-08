@@ -36,7 +36,7 @@ Get current application details
 
 ```python
 try:
-    result = await applicationClient.configuration.getApplication()
+    result = await client.configuration.getApplication()
     # use result
 except Exception as e:
     print(e)
@@ -151,7 +151,7 @@ Get application, owner and seller information
 
 ```python
 try:
-    result = await applicationClient.configuration.getOwnerInfo()
+    result = await client.configuration.getOwnerInfo()
     # use result
 except Exception as e:
     print(e)
@@ -304,7 +304,7 @@ Get basic application details
 
 ```python
 try:
-    result = await applicationClient.configuration.getBasicDetails()
+    result = await client.configuration.getBasicDetails()
     # use result
 except Exception as e:
     print(e)
@@ -396,7 +396,7 @@ Get integration tokens
 
 ```python
 try:
-    result = await applicationClient.configuration.getIntegrationTokens()
+    result = await client.configuration.getIntegrationTokens()
     # use result
 except Exception as e:
     print(e)
@@ -517,7 +517,7 @@ Get deployment stores
 
 ```python
 try:
-    result = await applicationClient.configuration.getOrderingStores(pageNo=pageNo, pageSize=pageSize, q=q)
+    result = await client.configuration.getOrderingStores(pageNo=pageNo, pageSize=pageSize, q=q)
     # use result
 except Exception as e:
     print(e)
@@ -576,7 +576,7 @@ Get ordering store details
 
 ```python
 try:
-    result = await applicationClient.configuration.getStoreDetailById(storeId=storeId)
+    result = await client.configuration.getStoreDetailById(storeId=storeId)
     # use result
 except Exception as e:
     print(e)
@@ -641,7 +641,7 @@ Get features of application
 
 ```python
 try:
-    result = await applicationClient.configuration.getFeatures()
+    result = await client.configuration.getFeatures()
     # use result
 except Exception as e:
     print(e)
@@ -788,7 +788,7 @@ Get application information
 
 ```python
 try:
-    result = await applicationClient.configuration.getContactInfo()
+    result = await client.configuration.getContactInfo()
     # use result
 except Exception as e:
     print(e)
@@ -955,7 +955,7 @@ Get all currencies list
 
 ```python
 try:
-    result = await applicationClient.configuration.getCurrencies()
+    result = await client.configuration.getCurrencies()
     # use result
 except Exception as e:
     print(e)
@@ -1020,7 +1020,7 @@ Get currency by its ID
 
 ```python
 try:
-    result = await applicationClient.configuration.getCurrencyById(id=id)
+    result = await client.configuration.getCurrencyById(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -1086,7 +1086,7 @@ Get currencies enabled in the application
 
 ```python
 try:
-    result = await applicationClient.configuration.getAppCurrencies()
+    result = await client.configuration.getAppCurrencies()
     # use result
 except Exception as e:
     print(e)
@@ -1156,7 +1156,7 @@ Get list of languages
 
 ```python
 try:
-    result = await applicationClient.configuration.getLanguages()
+    result = await client.configuration.getLanguages()
     # use result
 except Exception as e:
     print(e)
@@ -1223,7 +1223,7 @@ Get an Ordering Store signed cookie on selection of ordering store.
 
 ```python
 try:
-    result = await applicationClient.configuration.getOrderingStoreCookie(body=body)
+    result = await client.configuration.getOrderingStoreCookie(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1279,7 +1279,7 @@ Unset the Ordering Store signed cookie.
 
 ```python
 try:
-    result = await applicationClient.configuration.removeOrderingStoreCookie()
+    result = await client.configuration.removeOrderingStoreCookie()
     # use result
 except Exception as e:
     print(e)
@@ -1331,7 +1331,7 @@ Get a list of staff.
 
 ```python
 try:
-    result = await applicationClient.configuration.getAppStaffList(pageNo=pageNo, pageSize=pageSize, orderIncent=orderIncent, orderingStore=orderingStore, user=user)
+    result = await client.configuration.getAppStaffList(pageNo=pageNo, pageSize=pageSize, orderIncent=orderIncent, orderingStore=orderingStore, user=user)
     # use result
 except Exception as e:
     print(e)
@@ -1392,7 +1392,7 @@ Get a list of staff.
 
 ```python
 try:
-    result = await applicationClient.configuration.getAppStaffs(orderIncent=orderIncent, orderingStore=orderingStore, user=user)
+    result = await client.configuration.getAppStaffs(orderIncent=orderIncent, orderingStore=orderingStore, user=user)
     # use result
 except Exception as e:
     print(e)

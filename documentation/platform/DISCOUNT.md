@@ -30,7 +30,7 @@ Fetch discount list.
 
 ```python
 try:
-    result = await platformClient.discount.getDiscounts(view=view, q=q, pageNo=pageNo, pageSize=pageSize, archived=archived, month=month, year=year, type=type, appIds=appIds)
+    result = await client.discount.getDiscounts(view=view, q=q, pageNo=pageNo, pageSize=pageSize, archived=archived, month=month, year=year, type=type, appIds=appIds)
     # use result
 except Exception as e:
     print(e)
@@ -95,7 +95,7 @@ Create Discount.
 
 ```python
 try:
-    result = await platformClient.discount.createDiscount(body=body)
+    result = await client.discount.createDiscount(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -151,7 +151,7 @@ Fetch discount.
 
 ```python
 try:
-    result = await platformClient.discount.getDiscount(id=id)
+    result = await client.discount.getDiscount(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -208,7 +208,7 @@ Create Discount.
 
 ```python
 try:
-    result = await platformClient.discount.updateDiscount(id=id, body=body)
+    result = await client.discount.updateDiscount(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -265,7 +265,7 @@ Validate File.
 
 ```python
 try:
-    result = await platformClient.discount.validateDiscountFile(discount=discount, body=body)
+    result = await client.discount.validateDiscountFile(discount=discount, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -322,7 +322,7 @@ Validate File.
 
 ```python
 try:
-    result = await platformClient.discount.downloadDiscountFile(type=type, body=body)
+    result = await client.discount.downloadDiscountFile(type=type, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -379,7 +379,7 @@ Validate File Job.
 
 ```python
 try:
-    result = await platformClient.discount.getValidationJob(id=id)
+    result = await client.discount.getValidationJob(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -436,7 +436,7 @@ Cancel Validation Job.
 
 ```python
 try:
-    result = await platformClient.discount.cancelValidationJob(id=id)
+    result = await client.discount.cancelValidationJob(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -493,7 +493,7 @@ Download File Job.
 
 ```python
 try:
-    result = await platformClient.discount.getDownloadJob(id=id)
+    result = await client.discount.getDownloadJob(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -550,7 +550,7 @@ Cancel Download Job.
 
 ```python
 try:
-    result = await platformClient.discount.cancelDownloadJob(id=id)
+    result = await client.discount.cancelDownloadJob(id=id)
     # use result
 except Exception as e:
     print(e)

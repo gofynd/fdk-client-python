@@ -1,6 +1,6 @@
 
 
-"""Payment Platform Client"""
+""" Payment Platform Client."""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -10,7 +10,6 @@ from .validator import PaymentValidator
 class Payment:
     def __init__(self, config):
         self._conf = config
-
     
     async def getAllPayouts(self, unique_external_id=None):
         """Get All Payouts
@@ -18,7 +17,7 @@ class Payment:
         """
         payload = {}
         
-        if unique_external_id is not None:
+        if unique_external_id:
             payload["unique_external_id"] = unique_external_id
         
 
@@ -41,16 +40,15 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/payouts", unique_external_id=unique_external_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import PayoutsResponse
-            schema = PayoutsResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getAllPayouts")
-                print(e)
-
+        
+        from .models import PayoutsResponse
+        schema = PayoutsResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getAllPayouts")
+            print(e)
+            
         
 
         return response
@@ -85,16 +83,15 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/payouts", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import PayoutResponse
-            schema = PayoutResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for savePayout")
-                print(e)
-
+        
+        from .models import PayoutResponse
+        schema = PayoutResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for savePayout")
+            print(e)
+            
         
 
         return response
@@ -105,7 +102,7 @@ class Payment:
         """
         payload = {}
         
-        if unique_transfer_no is not None:
+        if unique_transfer_no:
             payload["unique_transfer_no"] = unique_transfer_no
         
 
@@ -133,16 +130,15 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/payouts/{unique_transfer_no}", unique_transfer_no=unique_transfer_no), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import UpdatePayoutResponse
-            schema = UpdatePayoutResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updatePayout")
-                print(e)
-
+        
+        from .models import UpdatePayoutResponse
+        schema = UpdatePayoutResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for updatePayout")
+            print(e)
+            
         
 
         return response
@@ -153,7 +149,7 @@ class Payment:
         """
         payload = {}
         
-        if unique_transfer_no is not None:
+        if unique_transfer_no:
             payload["unique_transfer_no"] = unique_transfer_no
         
 
@@ -181,16 +177,15 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/payouts/{unique_transfer_no}", unique_transfer_no=unique_transfer_no), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import UpdatePayoutResponse
-            schema = UpdatePayoutResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for activateAndDectivatePayout")
-                print(e)
-
+        
+        from .models import UpdatePayoutResponse
+        schema = UpdatePayoutResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for activateAndDectivatePayout")
+            print(e)
+            
         
 
         return response
@@ -201,7 +196,7 @@ class Payment:
         """
         payload = {}
         
-        if unique_transfer_no is not None:
+        if unique_transfer_no:
             payload["unique_transfer_no"] = unique_transfer_no
         
 
@@ -224,16 +219,15 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/payouts/{unique_transfer_no}", unique_transfer_no=unique_transfer_no), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import DeletePayoutResponse
-            schema = DeletePayoutResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for deletePayout")
-                print(e)
-
+        
+        from .models import DeletePayoutResponse
+        schema = DeletePayoutResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for deletePayout")
+            print(e)
+            
         
 
         return response
@@ -244,7 +238,7 @@ class Payment:
         """
         payload = {}
         
-        if unique_external_id is not None:
+        if unique_external_id:
             payload["unique_external_id"] = unique_external_id
         
 
@@ -267,16 +261,15 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/subscription/methods", unique_external_id=unique_external_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SubscriptionPaymentMethodResponse
-            schema = SubscriptionPaymentMethodResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getSubscriptionPaymentMethod")
-                print(e)
-
+        
+        from .models import SubscriptionPaymentMethodResponse
+        schema = SubscriptionPaymentMethodResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getSubscriptionPaymentMethod")
+            print(e)
+            
         
 
         return response
@@ -288,10 +281,10 @@ class Payment:
         """
         payload = {}
         
-        if unique_external_id is not None:
+        if unique_external_id:
             payload["unique_external_id"] = unique_external_id
         
-        if payment_method_id is not None:
+        if payment_method_id:
             payload["payment_method_id"] = payment_method_id
         
 
@@ -314,16 +307,15 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/subscription/methods", unique_external_id=unique_external_id, payment_method_id=payment_method_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import DeleteSubscriptionPaymentMethodResponse
-            schema = DeleteSubscriptionPaymentMethodResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for deleteSubscriptionPaymentMethod")
-                print(e)
-
+        
+        from .models import DeleteSubscriptionPaymentMethodResponse
+        schema = DeleteSubscriptionPaymentMethodResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for deleteSubscriptionPaymentMethod")
+            print(e)
+            
         
 
         return response
@@ -353,16 +345,15 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/subscription/configs", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SubscriptionConfigResponse
-            schema = SubscriptionConfigResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getSubscriptionConfig")
-                print(e)
-
+        
+        from .models import SubscriptionConfigResponse
+        schema = SubscriptionConfigResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getSubscriptionConfig")
+            print(e)
+            
         
 
         return response
@@ -397,16 +388,15 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/subscription/setup/intent", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SaveSubscriptionSetupIntentResponse
-            schema = SaveSubscriptionSetupIntentResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for saveSubscriptionSetupIntent")
-                print(e)
-
+        
+        from .models import SaveSubscriptionSetupIntentResponse
+        schema = SaveSubscriptionSetupIntentResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for saveSubscriptionSetupIntent")
+            print(e)
+            
         
 
         return response
@@ -417,7 +407,7 @@ class Payment:
         """
         payload = {}
         
-        if ifsc_code is not None:
+        if ifsc_code:
             payload["ifsc_code"] = ifsc_code
         
 
@@ -440,16 +430,15 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/ifsc-code/verify", ifsc_code=ifsc_code), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import IfscCodeResponse
-            schema = IfscCodeResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for verifyIfscCode")
-                print(e)
-
+        
+        from .models import IfscCodeResponse
+        schema = IfscCodeResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for verifyIfscCode")
+            print(e)
+            
         
 
         return response

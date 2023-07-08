@@ -1,6 +1,6 @@
 
 
-"""Communication Platform Client"""
+"""Communication Platform Client."""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -11,7 +11,6 @@ class Communication:
     def __init__(self, config, applicationId):
         self._conf = config
         self.applicationId = applicationId
-
     
     async def getCampaigns(self, page_no=None, page_size=None, sort=None):
         """Get campaigns
@@ -21,13 +20,13 @@ class Communication:
         """
         payload = {}
         
-        if page_no is not None:
+        if page_no:
             payload["page_no"] = page_no
         
-        if page_size is not None:
+        if page_size:
             payload["page_size"] = page_size
         
-        if sort is not None:
+        if sort:
             payload["sort"] = sort
         
 
@@ -48,18 +47,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/campaigns/campaigns", page_no=page_no, page_size=page_size, sort=sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import Campaigns
-            schema = Campaigns()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getCampaigns")
-                print(e)
-
+        from .models import Campaigns
+        schema = Campaigns()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getCampaigns")
+            print(e)
+            
         
 
         return response
@@ -92,18 +90,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/campaigns/campaigns", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import Campaign
-            schema = Campaign()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for createCampaign")
-                print(e)
-
+        from .models import Campaign
+        schema = Campaign()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for createCampaign")
+            print(e)
+            
         
 
         return response
@@ -114,7 +111,7 @@ class Communication:
         """
         payload = {}
         
-        if id is not None:
+        if id:
             payload["id"] = id
         
 
@@ -135,18 +132,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/campaigns/campaigns/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import Campaign
-            schema = Campaign()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getCampaignById")
-                print(e)
-
+        from .models import Campaign
+        schema = Campaign()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getCampaignById")
+            print(e)
+            
         
 
         return response
@@ -157,7 +153,7 @@ class Communication:
         """
         payload = {}
         
-        if id is not None:
+        if id:
             payload["id"] = id
         
 
@@ -183,18 +179,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/campaigns/campaigns/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import Campaign
-            schema = Campaign()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updateCampaignById")
-                print(e)
-
+        from .models import Campaign
+        schema = Campaign()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for updateCampaignById")
+            print(e)
+            
         
 
         return response
@@ -205,7 +200,7 @@ class Communication:
         """
         payload = {}
         
-        if id is not None:
+        if id:
             payload["id"] = id
         
 
@@ -226,18 +221,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/campaigns/get-stats/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import GetStats
-            schema = GetStats()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getStatsOfCampaignById")
-                print(e)
-
+        from .models import GetStats
+        schema = GetStats()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getStatsOfCampaignById")
+            print(e)
+            
         
 
         return response
@@ -250,13 +244,13 @@ class Communication:
         """
         payload = {}
         
-        if page_no is not None:
+        if page_no:
             payload["page_no"] = page_no
         
-        if page_size is not None:
+        if page_size:
             payload["page_size"] = page_size
         
-        if sort is not None:
+        if sort:
             payload["sort"] = sort
         
 
@@ -277,18 +271,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sources/datasources", page_no=page_no, page_size=page_size, sort=sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import Audiences
-            schema = Audiences()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getAudiences")
-                print(e)
-
+        from .models import Audiences
+        schema = Audiences()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getAudiences")
+            print(e)
+            
         
 
         return response
@@ -321,18 +314,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sources/datasources", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import Audience
-            schema = Audience()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for createAudience")
-                print(e)
-
+        from .models import Audience
+        schema = Audience()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for createAudience")
+            print(e)
+            
         
 
         return response
@@ -365,18 +357,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sources/bigquery-headers", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import BigqueryHeadersRes
-            schema = BigqueryHeadersRes()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getBigqueryHeaders")
-                print(e)
-
+        from .models import BigqueryHeadersRes
+        schema = BigqueryHeadersRes()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getBigqueryHeaders")
+            print(e)
+            
         
 
         return response
@@ -387,7 +378,7 @@ class Communication:
         """
         payload = {}
         
-        if id is not None:
+        if id:
             payload["id"] = id
         
 
@@ -408,18 +399,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sources/datasources/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import Audience
-            schema = Audience()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getAudienceById")
-                print(e)
-
+        from .models import Audience
+        schema = Audience()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getAudienceById")
+            print(e)
+            
         
 
         return response
@@ -430,7 +420,7 @@ class Communication:
         """
         payload = {}
         
-        if id is not None:
+        if id:
             payload["id"] = id
         
 
@@ -456,18 +446,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sources/datasources/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import Audience
-            schema = Audience()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updateAudienceById")
-                print(e)
-
+        from .models import Audience
+        schema = Audience()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for updateAudienceById")
+            print(e)
+            
         
 
         return response
@@ -500,18 +489,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sources/get-n-records", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import GetNRecordsCsvRes
-            schema = GetNRecordsCsvRes()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getNSampleRecordsFromCsv")
-                print(e)
-
+        from .models import GetNRecordsCsvRes
+        schema = GetNRecordsCsvRes()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getNSampleRecordsFromCsv")
+            print(e)
+            
         
 
         return response
@@ -524,13 +512,13 @@ class Communication:
         """
         payload = {}
         
-        if page_no is not None:
+        if page_no:
             payload["page_no"] = page_no
         
-        if page_size is not None:
+        if page_size:
             payload["page_size"] = page_size
         
-        if sort is not None:
+        if sort:
             payload["sort"] = sort
         
 
@@ -551,18 +539,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/providers", page_no=page_no, page_size=page_size, sort=sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import EmailProviders
-            schema = EmailProviders()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getEmailProviders")
-                print(e)
-
+        from .models import EmailProviders
+        schema = EmailProviders()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getEmailProviders")
+            print(e)
+            
         
 
         return response
@@ -595,18 +582,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/providers", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import EmailProvider
-            schema = EmailProvider()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for createEmailProvider")
-                print(e)
-
+        from .models import EmailProvider
+        schema = EmailProvider()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for createEmailProvider")
+            print(e)
+            
         
 
         return response
@@ -617,7 +603,7 @@ class Communication:
         """
         payload = {}
         
-        if id is not None:
+        if id:
             payload["id"] = id
         
 
@@ -638,18 +624,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/providers/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import EmailProvider
-            schema = EmailProvider()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getEmailProviderById")
-                print(e)
-
+        from .models import EmailProvider
+        schema = EmailProvider()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getEmailProviderById")
+            print(e)
+            
         
 
         return response
@@ -660,7 +645,7 @@ class Communication:
         """
         payload = {}
         
-        if id is not None:
+        if id:
             payload["id"] = id
         
 
@@ -686,18 +671,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/providers/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import EmailProvider
-            schema = EmailProvider()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updateEmailProviderById")
-                print(e)
-
+        from .models import EmailProvider
+        schema = EmailProvider()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for updateEmailProviderById")
+            print(e)
+            
         
 
         return response
@@ -710,13 +694,13 @@ class Communication:
         """
         payload = {}
         
-        if page_no is not None:
+        if page_no:
             payload["page_no"] = page_no
         
-        if page_size is not None:
+        if page_size:
             payload["page_size"] = page_size
         
-        if sort is not None:
+        if sort:
             payload["sort"] = sort
         
 
@@ -737,18 +721,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/templates", page_no=page_no, page_size=page_size, sort=sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import EmailTemplates
-            schema = EmailTemplates()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getEmailTemplates")
-                print(e)
-
+        from .models import EmailTemplates
+        schema = EmailTemplates()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getEmailTemplates")
+            print(e)
+            
         
 
         return response
@@ -781,18 +764,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/templates", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import EmailTemplateRes
-            schema = EmailTemplateRes()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for createEmailTemplate")
-                print(e)
-
+        from .models import EmailTemplateRes
+        schema = EmailTemplateRes()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for createEmailTemplate")
+            print(e)
+            
         
 
         return response
@@ -805,13 +787,13 @@ class Communication:
         """
         payload = {}
         
-        if page_no is not None:
+        if page_no:
             payload["page_no"] = page_no
         
-        if page_size is not None:
+        if page_size:
             payload["page_size"] = page_size
         
-        if sort is not None:
+        if sort:
             payload["sort"] = sort
         
 
@@ -832,18 +814,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/system-templates", page_no=page_no, page_size=page_size, sort=sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SystemEmailTemplates
-            schema = SystemEmailTemplates()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getSystemEmailTemplates")
-                print(e)
-
+        from .models import SystemEmailTemplates
+        schema = SystemEmailTemplates()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getSystemEmailTemplates")
+            print(e)
+            
         
 
         return response
@@ -854,7 +835,7 @@ class Communication:
         """
         payload = {}
         
-        if id is not None:
+        if id:
             payload["id"] = id
         
 
@@ -875,18 +856,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/templates/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import EmailTemplate
-            schema = EmailTemplate()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getEmailTemplateById")
-                print(e)
-
+        from .models import EmailTemplate
+        schema = EmailTemplate()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getEmailTemplateById")
+            print(e)
+            
         
 
         return response
@@ -897,7 +877,7 @@ class Communication:
         """
         payload = {}
         
-        if id is not None:
+        if id:
             payload["id"] = id
         
 
@@ -923,18 +903,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/templates/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import EmailTemplateRes
-            schema = EmailTemplateRes()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updateEmailTemplateById")
-                print(e)
-
+        from .models import EmailTemplateRes
+        schema = EmailTemplateRes()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for updateEmailTemplateById")
+            print(e)
+            
         
 
         return response
@@ -945,7 +924,7 @@ class Communication:
         """
         payload = {}
         
-        if id is not None:
+        if id:
             payload["id"] = id
         
 
@@ -966,18 +945,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/templates/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import EmailTemplateDeleteSuccessRes
-            schema = EmailTemplateDeleteSuccessRes()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for deleteEmailTemplateById")
-                print(e)
-
+        from .models import EmailTemplateDeleteSuccessRes
+        schema = EmailTemplateDeleteSuccessRes()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for deleteEmailTemplateById")
+            print(e)
+            
         
 
         return response
@@ -1010,18 +988,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/engine/send-instant", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import EngineResponse
-            schema = EngineResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for sendCommunicationSynchronously")
-                print(e)
-
+        from .models import EngineResponse
+        schema = EngineResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for sendCommunicationSynchronously")
+            print(e)
+            
         
 
         return response
@@ -1054,18 +1031,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/engine/send-async", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import EngineResponse
-            schema = EngineResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for sendCommunicationAsynchronously")
-                print(e)
-
+        from .models import EngineResponse
+        schema = EngineResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for sendCommunicationAsynchronously")
+            print(e)
+            
         
 
         return response
@@ -1078,13 +1054,13 @@ class Communication:
         """
         payload = {}
         
-        if page_no is not None:
+        if page_no:
             payload["page_no"] = page_no
         
-        if page_size is not None:
+        if page_size:
             payload["page_size"] = page_size
         
-        if populate is not None:
+        if populate:
             payload["populate"] = populate
         
 
@@ -1105,18 +1081,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/event/event-subscriptions", page_no=page_no, page_size=page_size, populate=populate), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import EventSubscriptions
-            schema = EventSubscriptions()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getEventSubscriptions")
-                print(e)
-
+        from .models import EventSubscriptions
+        schema = EventSubscriptions()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getEventSubscriptions")
+            print(e)
+            
         
 
         return response
@@ -1129,13 +1104,13 @@ class Communication:
         """
         payload = {}
         
-        if page_no is not None:
+        if page_no:
             payload["page_no"] = page_no
         
-        if page_size is not None:
+        if page_size:
             payload["page_size"] = page_size
         
-        if sort is not None:
+        if sort:
             payload["sort"] = sort
         
 
@@ -1156,18 +1131,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/jobs/jobs", page_no=page_no, page_size=page_size, sort=sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import Jobs
-            schema = Jobs()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getJobs")
-                print(e)
-
+        from .models import Jobs
+        schema = Jobs()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getJobs")
+            print(e)
+            
         
 
         return response
@@ -1200,18 +1174,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/jobs/trigger-job", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import TriggerJobResponse
-            schema = TriggerJobResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for triggerCampaignJob")
-                print(e)
-
+        from .models import TriggerJobResponse
+        schema = TriggerJobResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for triggerCampaignJob")
+            print(e)
+            
         
 
         return response
@@ -1224,13 +1197,13 @@ class Communication:
         """
         payload = {}
         
-        if page_no is not None:
+        if page_no:
             payload["page_no"] = page_no
         
-        if page_size is not None:
+        if page_size:
             payload["page_size"] = page_size
         
-        if sort is not None:
+        if sort:
             payload["sort"] = sort
         
 
@@ -1251,18 +1224,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/jobs/logs", page_no=page_no, page_size=page_size, sort=sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import JobLogs
-            schema = JobLogs()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getJobLogs")
-                print(e)
-
+        from .models import JobLogs
+        schema = JobLogs()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getJobLogs")
+            print(e)
+            
         
 
         return response
@@ -1276,16 +1248,16 @@ class Communication:
         """
         payload = {}
         
-        if page_id is not None:
+        if page_id:
             payload["page_id"] = page_id
         
-        if page_size is not None:
+        if page_size:
             payload["page_size"] = page_size
         
-        if sort is not None:
+        if sort:
             payload["sort"] = sort
         
-        if query is not None:
+        if query:
             payload["query"] = query
         
 
@@ -1306,18 +1278,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/log", page_id=page_id, page_size=page_size, sort=sort, query=query), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import Logs
-            schema = Logs()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getCommunicationLogs")
-                print(e)
-
+        from .models import Logs
+        schema = Logs()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getCommunicationLogs")
+            print(e)
+            
         
 
         return response
@@ -1350,18 +1321,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/otp/send-otp-comms", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SendOtpCommsRes
-            schema = SendOtpCommsRes()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for sendOtp")
-                print(e)
-
+        from .models import SendOtpCommsRes
+        schema = SendOtpCommsRes()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for sendOtp")
+            print(e)
+            
         
 
         return response
@@ -1394,18 +1364,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/otp/verify-otp-comms", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import VerifyOtpCommsSuccessRes
-            schema = VerifyOtpCommsSuccessRes()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for verfiyOtp")
-                print(e)
-
+        from .models import VerifyOtpCommsSuccessRes
+        schema = VerifyOtpCommsSuccessRes()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for verfiyOtp")
+            print(e)
+            
         
 
         return response
@@ -1418,13 +1387,13 @@ class Communication:
         """
         payload = {}
         
-        if page_no is not None:
+        if page_no:
             payload["page_no"] = page_no
         
-        if page_size is not None:
+        if page_size:
             payload["page_size"] = page_size
         
-        if sort is not None:
+        if sort:
             payload["sort"] = sort
         
 
@@ -1445,18 +1414,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/providers", page_no=page_no, page_size=page_size, sort=sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SmsProviders
-            schema = SmsProviders()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getSmsProviders")
-                print(e)
-
+        from .models import SmsProviders
+        schema = SmsProviders()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getSmsProviders")
+            print(e)
+            
         
 
         return response
@@ -1489,18 +1457,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/providers", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SmsProvider
-            schema = SmsProvider()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for createSmsProvider")
-                print(e)
-
+        from .models import SmsProvider
+        schema = SmsProvider()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for createSmsProvider")
+            print(e)
+            
         
 
         return response
@@ -1511,7 +1478,7 @@ class Communication:
         """
         payload = {}
         
-        if id is not None:
+        if id:
             payload["id"] = id
         
 
@@ -1532,18 +1499,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/providers/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SmsProvider
-            schema = SmsProvider()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getSmsProviderById")
-                print(e)
-
+        from .models import SmsProvider
+        schema = SmsProvider()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getSmsProviderById")
+            print(e)
+            
         
 
         return response
@@ -1554,7 +1520,7 @@ class Communication:
         """
         payload = {}
         
-        if id is not None:
+        if id:
             payload["id"] = id
         
 
@@ -1580,18 +1546,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/providers/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SmsProvider
-            schema = SmsProvider()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updateSmsProviderById")
-                print(e)
-
+        from .models import SmsProvider
+        schema = SmsProvider()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for updateSmsProviderById")
+            print(e)
+            
         
 
         return response
@@ -1604,13 +1569,13 @@ class Communication:
         """
         payload = {}
         
-        if page_no is not None:
+        if page_no:
             payload["page_no"] = page_no
         
-        if page_size is not None:
+        if page_size:
             payload["page_size"] = page_size
         
-        if sort is not None:
+        if sort:
             payload["sort"] = sort
         
 
@@ -1631,18 +1596,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/templates", page_no=page_no, page_size=page_size, sort=sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SmsTemplates
-            schema = SmsTemplates()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getSmsTemplates")
-                print(e)
-
+        from .models import SmsTemplates
+        schema = SmsTemplates()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getSmsTemplates")
+            print(e)
+            
         
 
         return response
@@ -1675,18 +1639,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/templates", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SmsTemplateRes
-            schema = SmsTemplateRes()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for createSmsTemplate")
-                print(e)
-
+        from .models import SmsTemplateRes
+        schema = SmsTemplateRes()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for createSmsTemplate")
+            print(e)
+            
         
 
         return response
@@ -1697,7 +1660,7 @@ class Communication:
         """
         payload = {}
         
-        if id is not None:
+        if id:
             payload["id"] = id
         
 
@@ -1718,18 +1681,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/templates/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SmsTemplate
-            schema = SmsTemplate()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getSmsTemplateById")
-                print(e)
-
+        from .models import SmsTemplate
+        schema = SmsTemplate()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getSmsTemplateById")
+            print(e)
+            
         
 
         return response
@@ -1740,7 +1702,7 @@ class Communication:
         """
         payload = {}
         
-        if id is not None:
+        if id:
             payload["id"] = id
         
 
@@ -1766,18 +1728,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/templates/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SmsTemplateRes
-            schema = SmsTemplateRes()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updateSmsTemplateById")
-                print(e)
-
+        from .models import SmsTemplateRes
+        schema = SmsTemplateRes()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for updateSmsTemplateById")
+            print(e)
+            
         
 
         return response
@@ -1788,7 +1749,7 @@ class Communication:
         """
         payload = {}
         
-        if id is not None:
+        if id:
             payload["id"] = id
         
 
@@ -1809,18 +1770,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/templates/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SmsTemplateDeleteSuccessRes
-            schema = SmsTemplateDeleteSuccessRes()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for deleteSmsTemplateById")
-                print(e)
-
+        from .models import SmsTemplateDeleteSuccessRes
+        schema = SmsTemplateDeleteSuccessRes()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for deleteSmsTemplateById")
+            print(e)
+            
         
 
         return response
@@ -1833,13 +1793,13 @@ class Communication:
         """
         payload = {}
         
-        if page_no is not None:
+        if page_no:
             payload["page_no"] = page_no
         
-        if page_size is not None:
+        if page_size:
             payload["page_size"] = page_size
         
-        if sort is not None:
+        if sort:
             payload["sort"] = sort
         
 
@@ -1860,18 +1820,17 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/system-templates", page_no=page_no, page_size=page_size, sort=sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
+        
         
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SystemSmsTemplates
-            schema = SystemSmsTemplates()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getSystemSystemTemplates")
-                print(e)
-
+        from .models import SystemSmsTemplates
+        schema = SystemSmsTemplates()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getSystemSystemTemplates")
+            print(e)
+            
         
 
         return response

@@ -45,19 +45,19 @@ class Order:
         """
         payload = {}
         
-        if page_no is not None:
+        if page_no:
             payload["page_no"] = page_no
         
-        if page_size is not None:
+        if page_size:
             payload["page_size"] = page_size
         
-        if from_date is not None:
+        if from_date:
             payload["from_date"] = from_date
         
-        if to_date is not None:
+        if to_date:
             payload["to_date"] = to_date
         
-        if status is not None:
+        if status:
             payload["status"] = status
         
         # Parameter validation
@@ -79,16 +79,16 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getOrders"]).netloc, "get", await create_url_without_domain("/service/application/order/v1.0/orders", page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, status=status), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
-        if 200 <= int(response['status_code']) < 300:
-            from .models import OrderList
-            schema = OrderList()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getOrders")
-                print(e)
+
+        from .models import OrderList
+        schema = OrderList()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getOrders")
+            print(e)
 
         
 
@@ -100,7 +100,7 @@ class Order:
         """
         payload = {}
         
-        if order_id is not None:
+        if order_id:
             payload["order_id"] = order_id
         
         # Parameter validation
@@ -122,16 +122,16 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getOrderById"]).netloc, "get", await create_url_without_domain("/service/application/order/v1.0/orders/{order_id}", order_id=order_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
-        if 200 <= int(response['status_code']) < 300:
-            from .models import OrderById
-            schema = OrderById()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getOrderById")
-                print(e)
+
+        from .models import OrderById
+        schema = OrderById()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getOrderById")
+            print(e)
 
         
 
@@ -143,7 +143,7 @@ class Order:
         """
         payload = {}
         
-        if shipment_id is not None:
+        if shipment_id:
             payload["shipment_id"] = shipment_id
         
         # Parameter validation
@@ -165,16 +165,16 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getShipmentById"]).netloc, "get", await create_url_without_domain("/service/application/order/v1.0/orders/shipments/{shipment_id}", shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ShipmentById
-            schema = ShipmentById()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getShipmentById")
-                print(e)
+
+        from .models import ShipmentById
+        schema = ShipmentById()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getShipmentById")
+            print(e)
 
         
 
@@ -186,7 +186,7 @@ class Order:
         """
         payload = {}
         
-        if shipment_id is not None:
+        if shipment_id:
             payload["shipment_id"] = shipment_id
         
         # Parameter validation
@@ -208,16 +208,16 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getShipmentReasons"]).netloc, "get", await create_url_without_domain("/service/application/order/v1.0/orders/shipments/{shipment_id}/reasons", shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ShipmentReasons
-            schema = ShipmentReasons()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getShipmentReasons")
-                print(e)
+
+        from .models import ShipmentReasons
+        schema = ShipmentReasons()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getShipmentReasons")
+            print(e)
 
         
 
@@ -229,7 +229,7 @@ class Order:
         """
         payload = {}
         
-        if shipment_id is not None:
+        if shipment_id:
             payload["shipment_id"] = shipment_id
         
         # Parameter validation
@@ -256,16 +256,16 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["updateShipmentStatus"]).netloc, "put", await create_url_without_domain("/service/application/order/v1.0/orders/shipments/{shipment_id}/status", shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ShipmentStatusUpdate
-            schema = ShipmentStatusUpdate()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updateShipmentStatus")
-                print(e)
+
+        from .models import ShipmentStatusUpdate
+        schema = ShipmentStatusUpdate()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for updateShipmentStatus")
+            print(e)
 
         
 
@@ -277,7 +277,7 @@ class Order:
         """
         payload = {}
         
-        if shipment_id is not None:
+        if shipment_id:
             payload["shipment_id"] = shipment_id
         
         # Parameter validation
@@ -299,16 +299,16 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["trackShipment"]).netloc, "get", await create_url_without_domain("/service/application/order/v1.0/orders/shipments/{shipment_id}/track", shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ShipmentTrack
-            schema = ShipmentTrack()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for trackShipment")
-                print(e)
+
+        from .models import ShipmentTrack
+        schema = ShipmentTrack()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for trackShipment")
+            print(e)
 
         
 
@@ -320,7 +320,7 @@ class Order:
         """
         payload = {}
         
-        if order_id is not None:
+        if order_id:
             payload["order_id"] = order_id
         
         # Parameter validation
@@ -342,16 +342,16 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPosOrderById"]).netloc, "get", await create_url_without_domain("/service/application/order/v1.0/orders/pos-order/{order_id}", order_id=order_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
-        if 200 <= int(response['status_code']) < 300:
-            from .models import PosOrderById
-            schema = PosOrderById()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getPosOrderById")
-                print(e)
+
+        from .models import PosOrderById
+        schema = PosOrderById()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getPosOrderById")
+            print(e)
 
         
 
@@ -364,10 +364,10 @@ class Order:
         """
         payload = {}
         
-        if order_id is not None:
+        if order_id:
             payload["order_id"] = order_id
         
-        if shipment_id is not None:
+        if shipment_id:
             payload["shipment_id"] = shipment_id
         
         # Parameter validation
@@ -389,16 +389,16 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCustomerDetailsByShipmentId"]).netloc, "get", await create_url_without_domain("/service/application/order/v1.0/orders/{order_id}/shipments/{shipment_id}/customer-details", order_id=order_id, shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
-        if 200 <= int(response['status_code']) < 300:
-            from .models import CustomerDetailsByShipmentId
-            schema = CustomerDetailsByShipmentId()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getCustomerDetailsByShipmentId")
-                print(e)
+
+        from .models import CustomerDetailsByShipmentId
+        schema = CustomerDetailsByShipmentId()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getCustomerDetailsByShipmentId")
+            print(e)
 
         
 
@@ -411,10 +411,10 @@ class Order:
         """
         payload = {}
         
-        if order_id is not None:
+        if order_id:
             payload["order_id"] = order_id
         
-        if shipment_id is not None:
+        if shipment_id:
             payload["shipment_id"] = shipment_id
         
         # Parameter validation
@@ -436,16 +436,16 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["sendOtpToShipmentCustomer"]).netloc, "post", await create_url_without_domain("/service/application/order/v1.0/orders/{order_id}/shipments/{shipment_id}/otp/send/", order_id=order_id, shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
-        if 200 <= int(response['status_code']) < 300:
-            from .models import sendOTPApplicationResponse
-            schema = sendOTPApplicationResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for sendOtpToShipmentCustomer")
-                print(e)
+
+        from .models import sendOTPApplicationResponse
+        schema = sendOTPApplicationResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for sendOtpToShipmentCustomer")
+            print(e)
 
         
 
@@ -458,10 +458,10 @@ class Order:
         """
         payload = {}
         
-        if order_id is not None:
+        if order_id:
             payload["order_id"] = order_id
         
-        if shipment_id is not None:
+        if shipment_id:
             payload["shipment_id"] = shipment_id
         
         # Parameter validation
@@ -488,16 +488,16 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["verifyOtpShipmentCustomer"]).netloc, "post", await create_url_without_domain("/service/application/order/v1.0/orders/{order_id}/shipments/{shipment_id}/otp/verify", order_id=order_id, shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ResponseVerifyOTPShipment
-            schema = ResponseVerifyOTPShipment()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for verifyOtpShipmentCustomer")
-                print(e)
+
+        from .models import ResponseVerifyOTPShipment
+        schema = ResponseVerifyOTPShipment()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for verifyOtpShipmentCustomer")
+            print(e)
 
         
 
@@ -509,7 +509,7 @@ class Order:
         """
         payload = {}
         
-        if shipment_id is not None:
+        if shipment_id:
             payload["shipment_id"] = shipment_id
         
         # Parameter validation
@@ -531,16 +531,16 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getInvoiceByShipmentId"]).netloc, "get", await create_url_without_domain("/service/application/order/v1.0/orders/shipments/{shipment_id}/invoice", shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ResponseGetInvoiceShipment
-            schema = ResponseGetInvoiceShipment()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getInvoiceByShipmentId")
-                print(e)
+
+        from .models import ResponseGetInvoiceShipment
+        schema = ResponseGetInvoiceShipment()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getInvoiceByShipmentId")
+            print(e)
 
         
 

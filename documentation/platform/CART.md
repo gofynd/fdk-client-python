@@ -37,7 +37,7 @@ Get with single coupon details or coupon list
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.getCoupons(pageNo=pageNo, pageSize=pageSize, isArchived=isArchived, title=title, isPublic=isPublic, isDisplay=isDisplay, typeSlug=typeSlug, code=code)
+    result = await client.application("<APPLICATION_ID>").cart.getCoupons(pageNo=pageNo, pageSize=pageSize, isArchived=isArchived, title=title, isPublic=isPublic, isDisplay=isDisplay, typeSlug=typeSlug, code=code)
     # use result
 except Exception as e:
     print(e)
@@ -153,7 +153,7 @@ Create new coupon
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.createCoupon(body=body)
+    result = await client.application("<APPLICATION_ID>").cart.createCoupon(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -212,7 +212,7 @@ Get with single coupon details or coupon list
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.getCouponById(id=id)
+    result = await client.application("<APPLICATION_ID>").cart.getCouponById(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -409,7 +409,7 @@ Update existing coupon configuration
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.updateCoupon(id=id, body=body)
+    result = await client.application("<APPLICATION_ID>").cart.updateCoupon(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -469,7 +469,7 @@ Update coupon archive state and schedule
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.updateCouponPartially(id=id, body=body)
+    result = await client.application("<APPLICATION_ID>").cart.updateCouponPartially(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -550,7 +550,7 @@ Get promotion list
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.getPromotions(pageNo=pageNo, pageSize=pageSize, q=q, isActive=isActive, promoGroup=promoGroup, promotionType=promotionType, fpPanel=fpPanel, promotionId=promotionId)
+    result = await client.application("<APPLICATION_ID>").cart.getPromotions(pageNo=pageNo, pageSize=pageSize, q=q, isActive=isActive, promoGroup=promoGroup, promotionType=promotionType, fpPanel=fpPanel, promotionId=promotionId)
     # use result
 except Exception as e:
     print(e)
@@ -659,7 +659,7 @@ Create new promotion
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.createPromotion(body=body)
+    result = await client.application("<APPLICATION_ID>").cart.createPromotion(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -829,7 +829,7 @@ Get with single promotion details or promotion list
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.getPromotionById(id=id)
+    result = await client.application("<APPLICATION_ID>").cart.getPromotionById(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -1000,7 +1000,7 @@ Update existing promotion configuration
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.updatePromotion(id=id, body=body)
+    result = await client.application("<APPLICATION_ID>").cart.updatePromotion(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1171,7 +1171,7 @@ Update promotion publish state and schedule
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.updatePromotionPartially(id=id, body=body)
+    result = await client.application("<APPLICATION_ID>").cart.updatePromotionPartially(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1252,7 +1252,7 @@ Fetch Cart Details
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.fetchAndvalidateCartItems(body=body)
+    result = await client.application("<APPLICATION_ID>").cart.fetchAndvalidateCartItems(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1582,7 +1582,7 @@ Check Pincode Serviceability
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.checkCartServiceability(body=body)
+    result = await client.application("<APPLICATION_ID>").cart.checkCartServiceability(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2168,7 +2168,7 @@ Create Fynd order with cart details
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.checkoutCart(body=body)
+    result = await client.application("<APPLICATION_ID>").cart.checkoutCart(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2229,7 +2229,7 @@ Get with abandoned cart list
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.getAbandonedCart(pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, anonymousCart=anonymousCart, lastId=lastId, sortOn=sortOn)
+    result = await client.application("<APPLICATION_ID>").cart.getAbandonedCart(pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, anonymousCart=anonymousCart, lastId=lastId, sortOn=sortOn)
     # use result
 except Exception as e:
     print(e)
@@ -2453,7 +2453,7 @@ Fetch all items added to the cart
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.getAbandonedCartDetails(id=id, i=i, b=b)
+    result = await client.application("<APPLICATION_ID>").cart.getAbandonedCartDetails(id=id, i=i, b=b)
     # use result
 except Exception as e:
     print(e)
@@ -2679,7 +2679,7 @@ Add items to abandoned cart
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.addItems(cartId=cartId, b=b, body=body)
+    result = await client.application("<APPLICATION_ID>").cart.addItems(cartId=cartId, b=b, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -3382,7 +3382,7 @@ Update items in the abandoned cart
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.updateCart(cartId=cartId, b=b, body=body)
+    result = await client.application("<APPLICATION_ID>").cart.updateCart(cartId=cartId, b=b, body=body)
     # use result
 except Exception as e:
     print(e)

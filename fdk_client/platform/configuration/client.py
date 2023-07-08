@@ -1,6 +1,6 @@
 
 
-"""Configuration Platform Client"""
+""" Configuration Platform Client."""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -10,7 +10,6 @@ from .validator import ConfigurationValidator
 class Configuration:
     def __init__(self, config):
         self._conf = config
-
     
     async def createApplication(self, body=""):
         """Create new application
@@ -42,16 +41,15 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import CreateAppResponse
-            schema = CreateAppResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for createApplication")
-                print(e)
-
+        
+        from .models import CreateAppResponse
+        schema = CreateAppResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for createApplication")
+            print(e)
+            
         
 
         return response
@@ -64,13 +62,13 @@ class Configuration:
         """
         payload = {}
         
-        if page_no is not None:
+        if page_no:
             payload["page_no"] = page_no
         
-        if page_size is not None:
+        if page_size:
             payload["page_size"] = page_size
         
-        if q is not None:
+        if q:
             payload["q"] = q
         
 
@@ -93,16 +91,15 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application", page_no=page_no, page_size=page_size, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ApplicationsResponse
-            schema = ApplicationsResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getApplications")
-                print(e)
-
+        
+        from .models import ApplicationsResponse
+        schema = ApplicationsResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getApplications")
+            print(e)
+            
         
 
         return response
@@ -132,16 +129,15 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/currencies", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import CurrenciesResponse
-            schema = CurrenciesResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getCurrencies")
-                print(e)
-
+        
+        from .models import CurrenciesResponse
+        schema = CurrenciesResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getCurrencies")
+            print(e)
+            
         
 
         return response
@@ -176,16 +172,15 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/domain/suggestions", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import DomainSuggestionsResponse
-            schema = DomainSuggestionsResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getDomainAvailibility")
-                print(e)
-
+        
+        from .models import DomainSuggestionsResponse
+        schema = DomainSuggestionsResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getDomainAvailibility")
+            print(e)
+            
         
 
         return response
@@ -196,7 +191,7 @@ class Configuration:
         """
         payload = {}
         
-        if id is not None:
+        if id:
             payload["id"] = id
         
 
@@ -219,16 +214,15 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import Integration
-            schema = Integration()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getIntegrationById")
-                print(e)
-
+        
+        from .models import Integration
+        schema = Integration()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getIntegrationById")
+            print(e)
+            
         
 
         return response
@@ -240,10 +234,10 @@ class Configuration:
         """
         payload = {}
         
-        if page_no is not None:
+        if page_no:
             payload["page_no"] = page_no
         
-        if page_size is not None:
+        if page_size:
             payload["page_size"] = page_size
         
 
@@ -266,16 +260,15 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/available", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import GetIntegrationsOptInsResponse
-            schema = GetIntegrationsOptInsResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getAvailableOptIns")
-                print(e)
-
+        
+        from .models import GetIntegrationsOptInsResponse
+        schema = GetIntegrationsOptInsResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getAvailableOptIns")
+            print(e)
+            
         
 
         return response
@@ -289,16 +282,16 @@ class Configuration:
         """
         payload = {}
         
-        if level is not None:
+        if level:
             payload["level"] = level
         
-        if uid is not None:
+        if uid:
             payload["uid"] = uid
         
-        if page_no is not None:
+        if page_no:
             payload["page_no"] = page_no
         
-        if page_size is not None:
+        if page_size:
             payload["page_size"] = page_size
         
 
@@ -321,16 +314,15 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/selected/{level}/{uid}", level=level, uid=uid, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import GetIntegrationsOptInsResponse
-            schema = GetIntegrationsOptInsResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getSelectedOptIns")
-                print(e)
-
+        
+        from .models import GetIntegrationsOptInsResponse
+        schema = GetIntegrationsOptInsResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getSelectedOptIns")
+            print(e)
+            
         
 
         return response
@@ -344,16 +336,16 @@ class Configuration:
         """
         payload = {}
         
-        if id is not None:
+        if id:
             payload["id"] = id
         
-        if level is not None:
+        if level:
             payload["level"] = level
         
-        if opted is not None:
+        if opted:
             payload["opted"] = opted
         
-        if check_permission is not None:
+        if check_permission:
             payload["check_permission"] = check_permission
         
 
@@ -376,16 +368,15 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/configuration/{id}/{level}", id=id, level=level, opted=opted, check_permission=check_permission), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import IntegrationConfigResponse
-            schema = IntegrationConfigResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getIntegrationLevelConfig")
-                print(e)
-
+        
+        from .models import IntegrationConfigResponse
+        schema = IntegrationConfigResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getIntegrationLevelConfig")
+            print(e)
+            
         
 
         return response
@@ -397,10 +388,10 @@ class Configuration:
         """
         payload = {}
         
-        if id is not None:
+        if id:
             payload["id"] = id
         
-        if level is not None:
+        if level:
             payload["level"] = level
         
 
@@ -428,16 +419,15 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/configuration/{id}/{level}", id=id, level=level), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import IntegrationLevel
-            schema = IntegrationLevel()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updateLevelIntegration")
-                print(e)
-
+        
+        from .models import IntegrationLevel
+        schema = IntegrationLevel()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for updateLevelIntegration")
+            print(e)
+            
         
 
         return response
@@ -450,13 +440,13 @@ class Configuration:
         """
         payload = {}
         
-        if id is not None:
+        if id:
             payload["id"] = id
         
-        if level is not None:
+        if level:
             payload["level"] = level
         
-        if uid is not None:
+        if uid:
             payload["uid"] = uid
         
 
@@ -479,16 +469,15 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/configuration/{id}/{level}/{uid}", id=id, level=level, uid=uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import IntegrationLevel
-            schema = IntegrationLevel()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getIntegrationByLevelId")
-                print(e)
-
+        
+        from .models import IntegrationLevel
+        schema = IntegrationLevel()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getIntegrationByLevelId")
+            print(e)
+            
         
 
         return response
@@ -501,13 +490,13 @@ class Configuration:
         """
         payload = {}
         
-        if id is not None:
+        if id:
             payload["id"] = id
         
-        if level is not None:
+        if level:
             payload["level"] = level
         
-        if uid is not None:
+        if uid:
             payload["uid"] = uid
         
 
@@ -535,16 +524,15 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/configuration/{id}/{level}/{uid}", id=id, level=level, uid=uid), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import IntegrationLevel
-            schema = IntegrationLevel()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updateLevelUidIntegration")
-                print(e)
-
+        
+        from .models import IntegrationLevel
+        schema = IntegrationLevel()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for updateLevelUidIntegration")
+            print(e)
+            
         
 
         return response
@@ -557,13 +545,13 @@ class Configuration:
         """
         payload = {}
         
-        if id is not None:
+        if id:
             payload["id"] = id
         
-        if level is not None:
+        if level:
             payload["level"] = level
         
-        if uid is not None:
+        if uid:
             payload["uid"] = uid
         
 
@@ -586,16 +574,15 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/check/configuration/{id}/{level}/{uid}", id=id, level=level, uid=uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import OptedStoreIntegration
-            schema = OptedStoreIntegration()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getLevelActiveIntegrations")
-                print(e)
-
+        
+        from .models import OptedStoreIntegration
+        schema = OptedStoreIntegration()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getLevelActiveIntegrations")
+            print(e)
+            
         
 
         return response
@@ -606,7 +593,7 @@ class Configuration:
         """
         payload = {}
         
-        if q is not None:
+        if q:
             payload["q"] = q
         
 
@@ -629,16 +616,15 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/inventory/brands-by-companies", q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import BrandsByCompanyResponse
-            schema = BrandsByCompanyResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getBrandsByCompany")
-                print(e)
-
+        
+        from .models import BrandsByCompanyResponse
+        schema = BrandsByCompanyResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getBrandsByCompany")
+            print(e)
+            
         
 
         return response
@@ -650,10 +636,10 @@ class Configuration:
         """
         payload = {}
         
-        if page_no is not None:
+        if page_no:
             payload["page_no"] = page_no
         
-        if page_size is not None:
+        if page_size:
             payload["page_size"] = page_size
         
 
@@ -681,16 +667,15 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/inventory/companies-by-brands", page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import CompanyByBrandsResponse
-            schema = CompanyByBrandsResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getCompanyByBrands")
-                print(e)
-
+        
+        from .models import CompanyByBrandsResponse
+        schema = CompanyByBrandsResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getCompanyByBrands")
+            print(e)
+            
         
 
         return response
@@ -702,10 +687,10 @@ class Configuration:
         """
         payload = {}
         
-        if page_no is not None:
+        if page_no:
             payload["page_no"] = page_no
         
-        if page_size is not None:
+        if page_size:
             payload["page_size"] = page_size
         
 
@@ -733,16 +718,15 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/inventory/stores-by-brands", page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import StoreByBrandsResponse
-            schema = StoreByBrandsResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getStoreByBrands")
-                print(e)
-
+        
+        from .models import StoreByBrandsResponse
+        schema = StoreByBrandsResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getStoreByBrands")
+            print(e)
+            
         
 
         return response
@@ -754,10 +738,10 @@ class Configuration:
         """
         payload = {}
         
-        if page_no is not None:
+        if page_no:
             payload["page_no"] = page_no
         
-        if page_size is not None:
+        if page_size:
             payload["page_size"] = page_size
         
 
@@ -780,16 +764,15 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/other-seller-applications/", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import OtherSellerApplications
-            schema = OtherSellerApplications()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getOtherSellerApplications")
-                print(e)
-
+        
+        from .models import OtherSellerApplications
+        schema = OtherSellerApplications()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getOtherSellerApplications")
+            print(e)
+            
         
 
         return response
@@ -800,7 +783,7 @@ class Configuration:
         """
         payload = {}
         
-        if id is not None:
+        if id:
             payload["id"] = id
         
 
@@ -823,16 +806,15 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/other-seller-applications/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import OptedApplicationResponse
-            schema = OptedApplicationResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getOtherSellerApplicationById")
-                print(e)
-
+        
+        from .models import OptedApplicationResponse
+        schema = OptedApplicationResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getOtherSellerApplicationById")
+            print(e)
+            
         
 
         return response
@@ -843,7 +825,7 @@ class Configuration:
         """
         payload = {}
         
-        if id is not None:
+        if id:
             payload["id"] = id
         
 
@@ -871,16 +853,15 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/other-seller-applications/{id}/opt_out", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SuccessMessageResponse
-            schema = SuccessMessageResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for optOutFromApplication")
-                print(e)
-
+        
+        from .models import SuccessMessageResponse
+        schema = SuccessMessageResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for optOutFromApplication")
+            print(e)
+            
         
 
         return response

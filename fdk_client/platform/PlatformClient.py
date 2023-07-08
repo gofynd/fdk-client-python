@@ -14,6 +14,8 @@ from .communication.client import Communication
 
 from .payment.client import Payment
 
+from .order.client import Order
+
 from .catalog.client import Catalog
 
 from .companyprofile.client import CompanyProfile
@@ -44,6 +46,8 @@ class PlatformClient:
         self.communication = Communication(config)
         
         self.payment = Payment(config)
+        
+        self.order = Order(config)
         
         self.catalog = Catalog(config)
         

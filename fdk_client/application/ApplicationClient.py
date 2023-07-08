@@ -34,6 +34,8 @@ from .rewards.client import Rewards
 
 from .poscart.client import PosCart
 
+from .logistic.client import Logistic
+
 
 class ApplicationClient:
     def __init__(self, config):
@@ -53,6 +55,7 @@ class ApplicationClient:
         self.order = Order(config)
         self.rewards = Rewards(config)
         self.posCart = PosCart(config)
+        self.logistic = Logistic(config)
         
 
     def setCookie(self, cookie):

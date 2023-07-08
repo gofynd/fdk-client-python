@@ -1,6 +1,6 @@
 
 
-"""Webhook Platform Client"""
+""" Webhook Platform Client."""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -10,7 +10,6 @@ from .validator import WebhookValidator
 class Webhook:
     def __init__(self, config):
         self._conf = config
-
     
     async def getSubscribersByCompany(self, page_no=None, page_size=None, extension_id=None):
         """Get Subscribers By CompanyId
@@ -20,13 +19,13 @@ class Webhook:
         """
         payload = {}
         
-        if page_no is not None:
+        if page_no:
             payload["page_no"] = page_no
         
-        if page_size is not None:
+        if page_size:
             payload["page_size"] = page_size
         
-        if extension_id is not None:
+        if extension_id:
             payload["extension_id"] = extension_id
         
 
@@ -49,16 +48,15 @@ class Webhook:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber", page_no=page_no, page_size=page_size, extension_id=extension_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SubscriberResponse
-            schema = SubscriberResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getSubscribersByCompany")
-                print(e)
-
+        
+        from .models import SubscriberResponse
+        schema = SubscriberResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getSubscribersByCompany")
+            print(e)
+            
         
 
         return response
@@ -93,16 +91,15 @@ class Webhook:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SubscriberConfig
-            schema = SubscriberConfig()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for registerSubscriberToEvent")
-                print(e)
-
+        
+        from .models import SubscriberConfig
+        schema = SubscriberConfig()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for registerSubscriberToEvent")
+            print(e)
+            
         
 
         return response
@@ -137,16 +134,15 @@ class Webhook:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SubscriberConfig
-            schema = SubscriberConfig()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updateSubscriberConfig")
-                print(e)
-
+        
+        from .models import SubscriberConfig
+        schema = SubscriberConfig()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for updateSubscriberConfig")
+            print(e)
+            
         
 
         return response
@@ -159,13 +155,13 @@ class Webhook:
         """
         payload = {}
         
-        if page_no is not None:
+        if page_no:
             payload["page_no"] = page_no
         
-        if page_size is not None:
+        if page_size:
             payload["page_size"] = page_size
         
-        if extension_id is not None:
+        if extension_id:
             payload["extension_id"] = extension_id
         
 
@@ -188,16 +184,15 @@ class Webhook:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/extension/{extension_id}/subscriber", page_no=page_no, page_size=page_size, extension_id=extension_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SubscriberConfigList
-            schema = SubscriberConfigList()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getSubscribersByExtensionId")
-                print(e)
-
+        
+        from .models import SubscriberConfigList
+        schema = SubscriberConfigList()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getSubscribersByExtensionId")
+            print(e)
+            
         
 
         return response
@@ -208,7 +203,7 @@ class Webhook:
         """
         payload = {}
         
-        if subscriber_id is not None:
+        if subscriber_id:
             payload["subscriber_id"] = subscriber_id
         
 
@@ -231,16 +226,15 @@ class Webhook:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber/{subscriber_id}", subscriber_id=subscriber_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SubscriberResponse
-            schema = SubscriberResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getSubscriberById")
-                print(e)
-
+        
+        from .models import SubscriberResponse
+        schema = SubscriberResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getSubscriberById")
+            print(e)
+            
         
 
         return response
@@ -270,16 +264,15 @@ class Webhook:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/events", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import EventConfigResponse
-            schema = EventConfigResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for fetchAllEventConfigurations")
-                print(e)
-
+        
+        from .models import EventConfigResponse
+        schema = EventConfigResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for fetchAllEventConfigurations")
+            print(e)
+            
         
 
         return response

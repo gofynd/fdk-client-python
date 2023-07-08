@@ -1,6 +1,6 @@
 
 
-"""Billing Platform Client"""
+""" Billing Platform Client."""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -10,7 +10,6 @@ from .validator import BillingValidator
 class Billing:
     def __init__(self, config):
         self._conf = config
-
     
     async def checkCouponValidity(self, plan=None, coupon_code=None):
         """Check coupon validity.
@@ -19,10 +18,10 @@ class Billing:
         """
         payload = {}
         
-        if plan is not None:
+        if plan:
             payload["plan"] = plan
         
-        if coupon_code is not None:
+        if coupon_code:
             payload["coupon_code"] = coupon_code
         
 
@@ -45,16 +44,15 @@ class Billing:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/coupon/check-validity", plan=plan, coupon_code=coupon_code), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import CheckValidityResponse
-            schema = CheckValidityResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for checkCouponValidity")
-                print(e)
-
+        
+        from .models import CheckValidityResponse
+        schema = CheckValidityResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for checkCouponValidity")
+            print(e)
+            
         
 
         return response
@@ -65,7 +63,7 @@ class Billing:
         """
         payload = {}
         
-        if extension_id is not None:
+        if extension_id:
             payload["extension_id"] = extension_id
         
 
@@ -93,16 +91,15 @@ class Billing:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/extension/{extension_id}/subscription", extension_id=extension_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import CreateSubscriptionResponse
-            schema = CreateSubscriptionResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for createSubscriptionCharge")
-                print(e)
-
+        
+        from .models import CreateSubscriptionResponse
+        schema = CreateSubscriptionResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for createSubscriptionCharge")
+            print(e)
+            
         
 
         return response
@@ -114,10 +111,10 @@ class Billing:
         """
         payload = {}
         
-        if extension_id is not None:
+        if extension_id:
             payload["extension_id"] = extension_id
         
-        if subscription_id is not None:
+        if subscription_id:
             payload["subscription_id"] = subscription_id
         
 
@@ -140,16 +137,15 @@ class Billing:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/extension/{extension_id}/subscription/{subscription_id}", extension_id=extension_id, subscription_id=subscription_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import EntitySubscription
-            schema = EntitySubscription()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getSubscriptionCharge")
-                print(e)
-
+        
+        from .models import EntitySubscription
+        schema = EntitySubscription()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getSubscriptionCharge")
+            print(e)
+            
         
 
         return response
@@ -161,10 +157,10 @@ class Billing:
         """
         payload = {}
         
-        if extension_id is not None:
+        if extension_id:
             payload["extension_id"] = extension_id
         
-        if subscription_id is not None:
+        if subscription_id:
             payload["subscription_id"] = subscription_id
         
 
@@ -187,16 +183,15 @@ class Billing:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/extension/{extension_id}/subscription/{subscription_id}/cancel", extension_id=extension_id, subscription_id=subscription_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import EntitySubscription
-            schema = EntitySubscription()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for cancelSubscriptionCharge")
-                print(e)
-
+        
+        from .models import EntitySubscription
+        schema = EntitySubscription()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for cancelSubscriptionCharge")
+            print(e)
+            
         
 
         return response
@@ -226,16 +221,15 @@ class Billing:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/invoice/list", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import Invoices
-            schema = Invoices()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getInvoices")
-                print(e)
-
+        
+        from .models import Invoices
+        schema = Invoices()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getInvoices")
+            print(e)
+            
         
 
         return response
@@ -246,7 +240,7 @@ class Billing:
         """
         payload = {}
         
-        if invoice_id is not None:
+        if invoice_id:
             payload["invoice_id"] = invoice_id
         
 
@@ -269,16 +263,15 @@ class Billing:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/invoice/{invoice_id}", invoice_id=invoice_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import Invoice
-            schema = Invoice()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getInvoiceById")
-                print(e)
-
+        
+        from .models import Invoice
+        schema = Invoice()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getInvoiceById")
+            print(e)
+            
         
 
         return response
@@ -308,16 +301,15 @@ class Billing:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/customer-detail", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SubscriptionCustomer
-            schema = SubscriptionCustomer()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getCustomerDetail")
-                print(e)
-
+        
+        from .models import SubscriptionCustomer
+        schema = SubscriptionCustomer()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getCustomerDetail")
+            print(e)
+            
         
 
         return response
@@ -352,16 +344,15 @@ class Billing:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/customer-detail", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SubscriptionCustomer
-            schema = SubscriptionCustomer()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for upsertCustomerDetail")
-                print(e)
-
+        
+        from .models import SubscriptionCustomer
+        schema = SubscriptionCustomer()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for upsertCustomerDetail")
+            print(e)
+            
         
 
         return response
@@ -392,16 +383,15 @@ class Billing:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/current", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SubscriptionStatus
-            schema = SubscriptionStatus()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getSubscription")
-                print(e)
-
+        
+        from .models import SubscriptionStatus
+        schema = SubscriptionStatus()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getSubscription")
+            print(e)
+            
         
 
         return response
@@ -431,16 +421,15 @@ class Billing:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/current-limit", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SubscriptionLimit
-            schema = SubscriptionLimit()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getFeatureLimitConfig")
-                print(e)
-
+        
+        from .models import SubscriptionLimit
+        schema = SubscriptionLimit()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getFeatureLimitConfig")
+            print(e)
+            
         
 
         return response
@@ -475,16 +464,15 @@ class Billing:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/activate", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SubscriptionActivateRes
-            schema = SubscriptionActivateRes()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for activateSubscriptionPlan")
-                print(e)
-
+        
+        from .models import SubscriptionActivateRes
+        schema = SubscriptionActivateRes()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for activateSubscriptionPlan")
+            print(e)
+            
         
 
         return response
@@ -519,16 +507,15 @@ class Billing:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/cancel", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import CancelSubscriptionRes
-            schema = CancelSubscriptionRes()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for cancelSubscriptionPlan")
-                print(e)
-
+        
+        from .models import CancelSubscriptionRes
+        schema = CancelSubscriptionRes()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for cancelSubscriptionPlan")
+            print(e)
+            
         
 
         return response

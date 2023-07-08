@@ -1,6 +1,6 @@
 
 
-"""Discount Platform Client"""
+""" Discount Platform Client."""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -10,7 +10,6 @@ from .validator import DiscountValidator
 class Discount:
     def __init__(self, config):
         self._conf = config
-
     
     async def getDiscounts(self, view=None, q=None, page_no=None, page_size=None, archived=None, month=None, year=None, type=None, app_ids=None):
         """Fetch discount list.
@@ -26,31 +25,31 @@ class Discount:
         """
         payload = {}
         
-        if view is not None:
+        if view:
             payload["view"] = view
         
-        if q is not None:
+        if q:
             payload["q"] = q
         
-        if page_no is not None:
+        if page_no:
             payload["page_no"] = page_no
         
-        if page_size is not None:
+        if page_size:
             payload["page_size"] = page_size
         
-        if archived is not None:
+        if archived:
             payload["archived"] = archived
         
-        if month is not None:
+        if month:
             payload["month"] = month
         
-        if year is not None:
+        if year:
             payload["year"] = year
         
-        if type is not None:
+        if type:
             payload["type"] = type
         
-        if app_ids is not None:
+        if app_ids:
             payload["app_ids"] = app_ids
         
 
@@ -73,16 +72,15 @@ class Discount:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/discount/v1.0/company/{self._conf.companyId}/job/", view=view, q=q, page_no=page_no, page_size=page_size, archived=archived, month=month, year=year, type=type, app_ids=app_ids), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ListOrCalender
-            schema = ListOrCalender()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getDiscounts")
-                print(e)
-
+        
+        from .models import ListOrCalender
+        schema = ListOrCalender()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getDiscounts")
+            print(e)
+            
         
 
         return response
@@ -117,16 +115,15 @@ class Discount:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/discount/v1.0/company/{self._conf.companyId}/job/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import DiscountJob
-            schema = DiscountJob()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for createDiscount")
-                print(e)
-
+        
+        from .models import DiscountJob
+        schema = DiscountJob()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for createDiscount")
+            print(e)
+            
         
 
         return response
@@ -137,7 +134,7 @@ class Discount:
         """
         payload = {}
         
-        if id is not None:
+        if id:
             payload["id"] = id
         
 
@@ -160,16 +157,15 @@ class Discount:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/discount/v1.0/company/{self._conf.companyId}/job/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import DiscountJob
-            schema = DiscountJob()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getDiscount")
-                print(e)
-
+        
+        from .models import DiscountJob
+        schema = DiscountJob()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getDiscount")
+            print(e)
+            
         
 
         return response
@@ -180,7 +176,7 @@ class Discount:
         """
         payload = {}
         
-        if id is not None:
+        if id:
             payload["id"] = id
         
 
@@ -208,16 +204,15 @@ class Discount:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/discount/v1.0/company/{self._conf.companyId}/job/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import DiscountJob
-            schema = DiscountJob()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updateDiscount")
-                print(e)
-
+        
+        from .models import DiscountJob
+        schema = DiscountJob()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for updateDiscount")
+            print(e)
+            
         
 
         return response
@@ -228,7 +223,7 @@ class Discount:
         """
         payload = {}
         
-        if discount is not None:
+        if discount:
             payload["discount"] = discount
         
 
@@ -256,16 +251,15 @@ class Discount:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/discount/v1.0/company/{self._conf.companyId}/file/validation/", discount=discount), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import FileJobResponse
-            schema = FileJobResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for validateDiscountFile")
-                print(e)
-
+        
+        from .models import FileJobResponse
+        schema = FileJobResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for validateDiscountFile")
+            print(e)
+            
         
 
         return response
@@ -276,7 +270,7 @@ class Discount:
         """
         payload = {}
         
-        if type is not None:
+        if type:
             payload["type"] = type
         
 
@@ -304,16 +298,15 @@ class Discount:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/discount/v1.0/company/{self._conf.companyId}/file/{type}/download/", type=type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import FileJobResponse
-            schema = FileJobResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for downloadDiscountFile")
-                print(e)
-
+        
+        from .models import FileJobResponse
+        schema = FileJobResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for downloadDiscountFile")
+            print(e)
+            
         
 
         return response
@@ -324,7 +317,7 @@ class Discount:
         """
         payload = {}
         
-        if id is not None:
+        if id:
             payload["id"] = id
         
 
@@ -347,16 +340,15 @@ class Discount:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/discount/v1.0/company/{self._conf.companyId}/file/validation/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import FileJobResponse
-            schema = FileJobResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getValidationJob")
-                print(e)
-
+        
+        from .models import FileJobResponse
+        schema = FileJobResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getValidationJob")
+            print(e)
+            
         
 
         return response
@@ -367,7 +359,7 @@ class Discount:
         """
         payload = {}
         
-        if id is not None:
+        if id:
             payload["id"] = id
         
 
@@ -390,16 +382,15 @@ class Discount:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/discount/v1.0/company/{self._conf.companyId}/file/validation/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import CancelJobResponse
-            schema = CancelJobResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for cancelValidationJob")
-                print(e)
-
+        
+        from .models import CancelJobResponse
+        schema = CancelJobResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for cancelValidationJob")
+            print(e)
+            
         
 
         return response
@@ -410,7 +401,7 @@ class Discount:
         """
         payload = {}
         
-        if id is not None:
+        if id:
             payload["id"] = id
         
 
@@ -433,16 +424,15 @@ class Discount:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/discount/v1.0/company/{self._conf.companyId}/file/download/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import FileJobResponse
-            schema = FileJobResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getDownloadJob")
-                print(e)
-
+        
+        from .models import FileJobResponse
+        schema = FileJobResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getDownloadJob")
+            print(e)
+            
         
 
         return response
@@ -453,7 +443,7 @@ class Discount:
         """
         payload = {}
         
-        if id is not None:
+        if id:
             payload["id"] = id
         
 
@@ -476,16 +466,15 @@ class Discount:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/discount/v1.0/company/{self._conf.companyId}/file/download/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import CancelJobResponse
-            schema = CancelJobResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for cancelDownloadJob")
-                print(e)
-
+        
+        from .models import CancelJobResponse
+        schema = CancelJobResponse()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for cancelDownloadJob")
+            print(e)
+            
         
 
         return response

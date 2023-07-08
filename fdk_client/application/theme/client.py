@@ -34,7 +34,7 @@ class Theme:
         """
         payload = {}
         
-        if theme_id is not None:
+        if theme_id:
             payload["theme_id"] = theme_id
         
         # Parameter validation
@@ -56,16 +56,16 @@ class Theme:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAllPages"]).netloc, "get", await create_url_without_domain("/service/application/theme/v1.0/{theme_id}/page", theme_id=theme_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
-        if 200 <= int(response['status_code']) < 300:
-            from .models import AllAvailablePageSchema
-            schema = AllAvailablePageSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getAllPages")
-                print(e)
+
+        from .models import AllAvailablePageSchema
+        schema = AllAvailablePageSchema()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getAllPages")
+            print(e)
 
         
 
@@ -78,10 +78,10 @@ class Theme:
         """
         payload = {}
         
-        if theme_id is not None:
+        if theme_id:
             payload["theme_id"] = theme_id
         
-        if page_value is not None:
+        if page_value:
             payload["page_value"] = page_value
         
         # Parameter validation
@@ -103,16 +103,16 @@ class Theme:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPage"]).netloc, "get", await create_url_without_domain("/service/application/theme/v1.0/{theme_id}/{page_value}", theme_id=theme_id, page_value=page_value), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
-        if 200 <= int(response['status_code']) < 300:
-            from .models import AvailablePageSchema
-            schema = AvailablePageSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getPage")
-                print(e)
+
+        from .models import AvailablePageSchema
+        schema = AvailablePageSchema()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getPage")
+            print(e)
 
         
 
@@ -142,16 +142,16 @@ class Theme:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAppliedTheme"]).netloc, "get", await create_url_without_domain("/service/application/theme/v1.0/applied-theme", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ThemesSchema
-            schema = ThemesSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getAppliedTheme")
-                print(e)
+
+        from .models import ThemesSchema
+        schema = ThemesSchema()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getAppliedTheme")
+            print(e)
 
         
 
@@ -163,7 +163,7 @@ class Theme:
         """
         payload = {}
         
-        if theme_id is not None:
+        if theme_id:
             payload["theme_id"] = theme_id
         
         # Parameter validation
@@ -185,16 +185,16 @@ class Theme:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getThemeForPreview"]).netloc, "get", await create_url_without_domain("/service/application/theme/v1.0/{theme_id}/preview", theme_id=theme_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
+                
         
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ThemesSchema
-            schema = ThemesSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getThemeForPreview")
-                print(e)
+
+        from .models import ThemesSchema
+        schema = ThemesSchema()
+        try:
+            schema.dump(schema.load(response))
+        except Exception as e:
+            print("Response Validation failed for getThemeForPreview")
+            print(e)
 
         
 
