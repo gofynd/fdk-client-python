@@ -56,16 +56,16 @@ class Logistic:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getTatProduct"]).netloc, "post", await create_url_without_domain("/service/application/logistics/v1.0", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-                
-        
 
-        from .models import GetTatProductResponse
-        schema = GetTatProductResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getTatProduct")
-            print(e)
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetTatProductResponse
+            schema = GetTatProductResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getTatProduct")
+                print(e)
 
         
 
@@ -100,16 +100,16 @@ class Logistic:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPincodeZones"]).netloc, "post", await create_url_without_domain("/service/application/logistics/v1.0/pincode/zones", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-                
-        
 
-        from .models import GetPincodeZonesResponse
-        schema = GetPincodeZonesResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getPincodeZones")
-            print(e)
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetPincodeZonesResponse
+            schema = GetPincodeZonesResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPincodeZones")
+                print(e)
 
         
 
@@ -121,7 +121,7 @@ class Logistic:
         """
         payload = {}
         
-        if pincode:
+        if pincode is not None:
             payload["pincode"] = pincode
         
         # Parameter validation
@@ -143,16 +143,16 @@ class Logistic:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPincodeCity"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/pincode/{pincode}", pincode=pincode), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-                
-        
 
-        from .models import GetPincodeCityResponse
-        schema = GetPincodeCityResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getPincodeCity")
-            print(e)
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetPincodeCityResponse
+            schema = GetPincodeCityResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPincodeCity")
+                print(e)
 
         
 

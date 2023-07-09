@@ -48,7 +48,7 @@ Fetch all items added to the cart
 
 ```python
 try:
-    result = await client.cart.getCart(id=id, i=i, b=b, assignCardId=assignCardId, buyNow=buyNow)
+    result = await applicationClient.cart.getCart(id=id, i=i, b=b, assignCardId=assignCardId, buyNow=buyNow)
     # use result
 except Exception as e:
     print(e)
@@ -276,7 +276,7 @@ Fetch last-modified timestamp
 
 ```python
 try:
-    result = await client.cart.getCartLastModified(id=id)
+    result = await applicationClient.cart.getCartLastModified(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -314,7 +314,7 @@ Add items to cart
 
 ```python
 try:
-    result = await client.cart.addItems(i=i, b=b, buyNow=buyNow, body=body)
+    result = await applicationClient.cart.addItems(i=i, b=b, buyNow=buyNow, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1018,7 +1018,7 @@ Update items in the cart
 
 ```python
 try:
-    result = await client.cart.updateCart(id=id, i=i, b=b, buyNow=buyNow, body=body)
+    result = await applicationClient.cart.updateCart(id=id, i=i, b=b, buyNow=buyNow, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1452,7 +1452,7 @@ Delete cart once user made successful checkout
 
 ```python
 try:
-    result = await client.cart.deleteCart(id=id)
+    result = await applicationClient.cart.deleteCart(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -1512,7 +1512,7 @@ Count items in the cart
 
 ```python
 try:
-    result = await client.cart.getItemCount(id=id, buyNow=buyNow)
+    result = await applicationClient.cart.getItemCount(id=id, buyNow=buyNow)
     # use result
 except Exception as e:
     print(e)
@@ -1572,7 +1572,7 @@ Fetch Coupon
 
 ```python
 try:
-    result = await client.cart.getCoupons(id=id, buyNow=buyNow)
+    result = await applicationClient.cart.getCoupons(id=id, buyNow=buyNow)
     # use result
 except Exception as e:
     print(e)
@@ -1666,7 +1666,7 @@ Apply Coupon
 
 ```python
 try:
-    result = await client.cart.applyCoupon(i=i, b=b, p=p, id=id, buyNow=buyNow, body=body)
+    result = await applicationClient.cart.applyCoupon(i=i, b=b, p=p, id=id, buyNow=buyNow, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2264,7 +2264,7 @@ Remove Coupon Applied
 
 ```python
 try:
-    result = await client.cart.removeCoupon(id=id, buyNow=buyNow)
+    result = await applicationClient.cart.removeCoupon(id=id, buyNow=buyNow)
     # use result
 except Exception as e:
     print(e)
@@ -2480,7 +2480,7 @@ Get discount offers based on quantity
 
 ```python
 try:
-    result = await client.cart.getBulkDiscountOffers(itemId=itemId, articleId=articleId, uid=uid, slug=slug)
+    result = await applicationClient.cart.getBulkDiscountOffers(itemId=itemId, articleId=articleId, uid=uid, slug=slug)
     # use result
 except Exception as e:
     print(e)
@@ -2611,7 +2611,7 @@ Apply reward points at cart
 
 ```python
 try:
-    result = await client.cart.applyRewardPoints(id=id, i=i, b=b, buyNow=buyNow, body=body)
+    result = await applicationClient.cart.applyRewardPoints(id=id, i=i, b=b, buyNow=buyNow, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2838,7 +2838,7 @@ Fetch address
 
 ```python
 try:
-    result = await client.cart.getAddresses(cartId=cartId, buyNow=buyNow, mobileNo=mobileNo, checkoutMode=checkoutMode, tags=tags, isDefault=isDefault)
+    result = await applicationClient.cart.getAddresses(cartId=cartId, buyNow=buyNow, mobileNo=mobileNo, checkoutMode=checkoutMode, tags=tags, isDefault=isDefault)
     # use result
 except Exception as e:
     print(e)
@@ -2930,7 +2930,7 @@ Add address to an account
 
 ```python
 try:
-    result = await client.cart.addAddress(body=body)
+    result = await applicationClient.cart.addAddress(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2990,7 +2990,7 @@ Fetch a single address by its ID
 
 ```python
 try:
-    result = await client.cart.getAddressById(id=id, cartId=cartId, buyNow=buyNow, mobileNo=mobileNo, checkoutMode=checkoutMode, tags=tags, isDefault=isDefault)
+    result = await applicationClient.cart.getAddressById(id=id, cartId=cartId, buyNow=buyNow, mobileNo=mobileNo, checkoutMode=checkoutMode, tags=tags, isDefault=isDefault)
     # use result
 except Exception as e:
     print(e)
@@ -3080,7 +3080,7 @@ Update address added to an account
 
 ```python
 try:
-    result = await client.cart.updateAddress(id=id, body=body)
+    result = await applicationClient.cart.updateAddress(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -3142,7 +3142,7 @@ Remove address associated with an account
 
 ```python
 try:
-    result = await client.cart.removeAddress(id=id)
+    result = await applicationClient.cart.removeAddress(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -3202,7 +3202,7 @@ Select an address from available addresses
 
 ```python
 try:
-    result = await client.cart.selectAddress(cartId=cartId, buyNow=buyNow, i=i, b=b, body=body)
+    result = await applicationClient.cart.selectAddress(cartId=cartId, buyNow=buyNow, i=i, b=b, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -3518,7 +3518,7 @@ Update cart payment
 
 ```python
 try:
-    result = await client.cart.selectPaymentMode(id=id, buyNow=buyNow, body=body)
+    result = await applicationClient.cart.selectPaymentMode(id=id, buyNow=buyNow, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -3844,7 +3844,7 @@ Verify the coupon eligibility against the payment mode
 
 ```python
 try:
-    result = await client.cart.validateCouponForPayment(id=id, buyNow=buyNow, addressId=addressId, paymentMode=paymentMode, paymentIdentifier=paymentIdentifier, aggregatorName=aggregatorName, merchantCode=merchantCode)
+    result = await applicationClient.cart.validateCouponForPayment(id=id, buyNow=buyNow, addressId=addressId, paymentMode=paymentMode, paymentIdentifier=paymentIdentifier, aggregatorName=aggregatorName, merchantCode=merchantCode)
     # use result
 except Exception as e:
     print(e)
@@ -3917,7 +3917,7 @@ Get delivery date and options before checkout
 
 ```python
 try:
-    result = await client.cart.getShipments(p=p, id=id, buyNow=buyNow, addressId=addressId, areaCode=areaCode)
+    result = await applicationClient.cart.getShipments(p=p, id=id, buyNow=buyNow, addressId=addressId, areaCode=areaCode)
     # use result
 except Exception as e:
     print(e)
@@ -4620,7 +4620,7 @@ Checkout all items in the cart
 
 ```python
 try:
-    result = await client.cart.checkoutCart(buyNow=buyNow, body=body)
+    result = await applicationClient.cart.checkoutCart(buyNow=buyNow, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -5057,7 +5057,7 @@ Update the cart meta
 
 ```python
 try:
-    result = await client.cart.updateCartMeta(id=id, buyNow=buyNow, body=body)
+    result = await applicationClient.cart.updateCartMeta(id=id, buyNow=buyNow, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -5117,7 +5117,7 @@ Generate token for sharing the cart
 
 ```python
 try:
-    result = await client.cart.getCartShareLink(body=body)
+    result = await applicationClient.cart.getCartShareLink(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -5184,7 +5184,7 @@ Get details of a shared cart
 
 ```python
 try:
-    result = await client.cart.getCartSharedItems(token=token)
+    result = await applicationClient.cart.getCartSharedItems(token=token)
     # use result
 except Exception as e:
     print(e)
@@ -5517,7 +5517,7 @@ Merge or replace existing cart
 
 ```python
 try:
-    result = await client.cart.updateCartWithSharedItems(token=token, action=action)
+    result = await applicationClient.cart.updateCartWithSharedItems(token=token, action=action)
     # use result
 except Exception as e:
     print(e)
@@ -5858,7 +5858,7 @@ Fetch available promotions
 
 ```python
 try:
-    result = await client.cart.getPromotionOffers(slug=slug, pageSize=pageSize, promotionGroup=promotionGroup)
+    result = await applicationClient.cart.getPromotionOffers(slug=slug, pageSize=pageSize, promotionGroup=promotionGroup)
     # use result
 except Exception as e:
     print(e)
@@ -5948,7 +5948,7 @@ Fetch ladder price promotion
 
 ```python
 try:
-    result = await client.cart.getLadderOffers(slug=slug, storeId=storeId, promotionId=promotionId, pageSize=pageSize)
+    result = await applicationClient.cart.getLadderOffers(slug=slug, storeId=storeId, promotionId=promotionId, pageSize=pageSize)
     # use result
 except Exception as e:
     print(e)
@@ -6095,7 +6095,7 @@ Checkout all items in the cart
 
 ```python
 try:
-    result = await client.cart.checkoutCartV2(buyNow=buyNow, body=body)
+    result = await applicationClient.cart.checkoutCartV2(buyNow=buyNow, body=body)
     # use result
 except Exception as e:
     print(e)

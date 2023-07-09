@@ -60,16 +60,16 @@ class Rewards:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPointsOnProduct"]).netloc, "post", await create_url_without_domain("/service/application/rewards/v1.0/catalogue/offer/order/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-                
-        
 
-        from .models import CatalogueOrderResponse
-        schema = CatalogueOrderResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getPointsOnProduct")
-            print(e)
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CatalogueOrderResponse
+            schema = CatalogueOrderResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPointsOnProduct")
+                print(e)
 
         
 
@@ -81,7 +81,7 @@ class Rewards:
         """
         payload = {}
         
-        if name:
+        if name is not None:
             payload["name"] = name
         
         # Parameter validation
@@ -103,16 +103,16 @@ class Rewards:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getOfferByName"]).netloc, "get", await create_url_without_domain("/service/application/rewards/v1.0/offers/{name}/", name=name), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-                
-        
 
-        from .models import Offer
-        schema = Offer()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getOfferByName")
-            print(e)
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Offer
+            schema = Offer()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getOfferByName")
+                print(e)
 
         
 
@@ -147,16 +147,16 @@ class Rewards:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getOrderDiscount"]).netloc, "post", await create_url_without_domain("/service/application/rewards/v1.0/user/offers/order-discount/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-                
-        
 
-        from .models import OrderDiscountResponse
-        schema = OrderDiscountResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getOrderDiscount")
-            print(e)
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OrderDiscountResponse
+            schema = OrderDiscountResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getOrderDiscount")
+                print(e)
 
         
 
@@ -186,16 +186,16 @@ class Rewards:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getUserPoints"]).netloc, "get", await create_url_without_domain("/service/application/rewards/v1.0/user/points/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-                
-        
 
-        from .models import PointsResponse
-        schema = PointsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getUserPoints")
-            print(e)
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PointsResponse
+            schema = PointsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getUserPoints")
+                print(e)
 
         
 
@@ -208,10 +208,10 @@ class Rewards:
         """
         payload = {}
         
-        if page_id:
+        if page_id is not None:
             payload["page_id"] = page_id
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
         # Parameter validation
@@ -233,16 +233,16 @@ class Rewards:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getUserPointsHistory"]).netloc, "get", await create_url_without_domain("/service/application/rewards/v1.0/user/points/history/", page_id=page_id, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-                
-        
 
-        from .models import PointsHistoryResponse
-        schema = PointsHistoryResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getUserPointsHistory")
-            print(e)
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PointsHistoryResponse
+            schema = PointsHistoryResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getUserPointsHistory")
+                print(e)
 
         
 
@@ -272,16 +272,16 @@ class Rewards:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getUserReferralDetails"]).netloc, "get", await create_url_without_domain("/service/application/rewards/v1.0/user/referral/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-                
-        
 
-        from .models import ReferralDetailsResponse
-        schema = ReferralDetailsResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getUserReferralDetails")
-            print(e)
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ReferralDetailsResponse
+            schema = ReferralDetailsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getUserReferralDetails")
+                print(e)
 
         
 
@@ -316,16 +316,16 @@ class Rewards:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["redeemReferralCode"]).netloc, "post", await create_url_without_domain("/service/application/rewards/v1.0/user/referral/redeem/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-                
-        
 
-        from .models import RedeemReferralCodeResponse
-        schema = RedeemReferralCodeResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for redeemReferralCode")
-            print(e)
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import RedeemReferralCodeResponse
+            schema = RedeemReferralCodeResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for redeemReferralCode")
+                print(e)
 
         
 

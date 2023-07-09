@@ -51,7 +51,7 @@ This operation will return the URL of the uploaded file.
         """
         payload = {}
         
-        if namespace:
+        if namespace is not None:
             payload["namespace"] = namespace
         
         # Parameter validation
@@ -78,16 +78,16 @@ This operation will return the URL of the uploaded file.
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["startUpload"]).netloc, "post", await create_url_without_domain("/service/application/assets/v1.0/namespaces/{namespace}/upload/start/", namespace=namespace), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-                
-        
 
-        from .models import StartResponse
-        schema = StartResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for startUpload")
-            print(e)
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import StartResponse
+            schema = StartResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for startUpload")
+                print(e)
 
         
 
@@ -117,7 +117,7 @@ This operation will return the URL of the uploaded file.
         """
         payload = {}
         
-        if namespace:
+        if namespace is not None:
             payload["namespace"] = namespace
         
         # Parameter validation
@@ -144,16 +144,16 @@ This operation will return the URL of the uploaded file.
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["completeUpload"]).netloc, "post", await create_url_without_domain("/service/application/assets/v1.0/namespaces/{namespace}/upload/complete/", namespace=namespace), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-                
-        
 
-        from .models import CompleteResponse
-        schema = CompleteResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for completeUpload")
-            print(e)
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CompleteResponse
+            schema = CompleteResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for completeUpload")
+                print(e)
 
         
 
@@ -188,16 +188,16 @@ This operation will return the URL of the uploaded file.
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["signUrls"]).netloc, "post", await create_url_without_domain("/service/application/assets/v1.0/sign-urls/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-                
-        
 
-        from .models import SignUrlResponse
-        schema = SignUrlResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for signUrls")
-            print(e)
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SignUrlResponse
+            schema = SignUrlResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for signUrls")
+                print(e)
 
         
 

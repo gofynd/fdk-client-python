@@ -1,6 +1,6 @@
 
 
-""" Analytics Platform Client."""
+"""Analytics Platform Client"""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -10,6 +10,7 @@ from .validator import AnalyticsValidator
 class Analytics:
     def __init__(self, config):
         self._conf = config
+
     
     async def createExportJob(self, export_type=None, body=""):
         """Create data export job in required format
@@ -17,7 +18,7 @@ class Analytics:
         """
         payload = {}
         
-        if export_type:
+        if export_type is not None:
             payload["export_type"] = export_type
         
 
@@ -45,15 +46,16 @@ class Analytics:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/export/{export_type}", export_type=export_type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
-        from .models import ExportJobRes
-        schema = ExportJobRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createExportJob")
-            print(e)
-            
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ExportJobRes
+            schema = ExportJobRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createExportJob")
+                print(e)
+
         
 
         return response
@@ -65,10 +67,10 @@ class Analytics:
         """
         payload = {}
         
-        if export_type:
+        if export_type is not None:
             payload["export_type"] = export_type
         
-        if job_id:
+        if job_id is not None:
             payload["job_id"] = job_id
         
 
@@ -91,15 +93,16 @@ class Analytics:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/export/{export_type}/job/{job_id}", export_type=export_type, job_id=job_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
-        from .models import ExportJobStatusRes
-        schema = ExportJobStatusRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getExportJobStatus")
-            print(e)
-            
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ExportJobStatusRes
+            schema = ExportJobStatusRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getExportJobStatus")
+                print(e)
+
         
 
         return response
@@ -112,13 +115,13 @@ class Analytics:
         """
         payload = {}
         
-        if log_type:
+        if log_type is not None:
             payload["log_type"] = log_type
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -146,15 +149,16 @@ class Analytics:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/logs/{log_type}", log_type=log_type, page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
-        from .models import GetLogsListRes
-        schema = GetLogsListRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getLogsList")
-            print(e)
-            
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetLogsListRes
+            schema = GetLogsListRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getLogsList")
+                print(e)
+
         
 
         return response
@@ -167,13 +171,13 @@ class Analytics:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if log_type:
+        if log_type is not None:
             payload["log_type"] = log_type
         
 
@@ -201,15 +205,16 @@ class Analytics:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/analytics/v1.0/company/{self._conf.companyId}/logs/{log_type}/search", page_no=page_no, page_size=page_size, log_type=log_type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
-        from .models import SearchLogRes
-        schema = SearchLogRes()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for searchLogs")
-            print(e)
-            
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SearchLogRes
+            schema = SearchLogRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for searchLogs")
+                print(e)
+
         
 
         return response

@@ -40,7 +40,7 @@ Update status of Shipment
 
 ```python
 try:
-    result = await client.order.shipmentStatusUpdate(body=body)
+    result = await platformClient.order.shipmentStatusUpdate(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -96,7 +96,7 @@ Get Activity Status
 
 ```python
 try:
-    result = await client.order.activityStatus(bagId=bagId)
+    result = await platformClient.order.activityStatus(bagId=bagId)
     # use result
 except Exception as e:
     print(e)
@@ -153,7 +153,7 @@ Update Store Process-Shipment
 
 ```python
 try:
-    result = await client.order.storeProcessShipmentUpdate(body=body)
+    result = await platformClient.order.storeProcessShipmentUpdate(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -209,7 +209,7 @@ Check Refund is available or not
 
 ```python
 try:
-    result = await client.order.checkRefund(shipmentId=shipmentId)
+    result = await platformClient.order.checkRefund(shipmentId=shipmentId)
     # use result
 except Exception as e:
     print(e)
@@ -266,7 +266,7 @@ Decides if Shipment bags can break
 
 ```python
 try:
-    result = await client.order.shipmentBagsCanBreak(body=body)
+    result = await platformClient.order.shipmentBagsCanBreak(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -322,7 +322,7 @@ Get Orders for company based on Company Id
 
 ```python
 try:
-    result = await client.order.getOrdersByCompanyId(pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, isPrioritySort=isPrioritySort, lockStatus=lockStatus, q=q, stage=stage, salesChannels=salesChannels, orderId=orderId, stores=stores, deploymentStores=deploymentStores, status=status, dp=dp, shortenUrls=shortenUrls, filterType=filterType)
+    result = await platformClient.order.getOrdersByCompanyId(pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, isPrioritySort=isPrioritySort, lockStatus=lockStatus, q=q, stage=stage, salesChannels=salesChannels, orderId=orderId, stores=stores, deploymentStores=deploymentStores, status=status, dp=dp, shortenUrls=shortenUrls, filterType=filterType)
     # use result
 except Exception as e:
     print(e)
@@ -394,7 +394,7 @@ Get Order Lanes Count for company based on Company Id
 
 ```python
 try:
-    result = await client.order.getOrderLanesCountByCompanyId(pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, q=q, stage=stage, salesChannels=salesChannels, orderId=orderId, stores=stores, status=status, shortenUrls=shortenUrls, filterType=filterType)
+    result = await platformClient.order.getOrderLanesCountByCompanyId(pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, q=q, stage=stage, salesChannels=salesChannels, orderId=orderId, stores=stores, status=status, shortenUrls=shortenUrls, filterType=filterType)
     # use result
 except Exception as e:
     print(e)
@@ -462,7 +462,7 @@ Get Order Details for company based on Company Id and Order Id
 
 ```python
 try:
-    result = await client.order.getOrderDetails(orderId=orderId, next=next, previous=previous)
+    result = await platformClient.order.getOrderDetails(orderId=orderId, next=next, previous=previous)
     # use result
 except Exception as e:
     print(e)
@@ -521,7 +521,7 @@ Get Order Details for company based on Company Id and Order Id
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").order.getOrderDetails(orderId=orderId, next=next, previous=previous)
+    result = await platformClient.application("<APPLICATION_ID>").order.getOrderDetails(orderId=orderId, next=next, previous=previous)
     # use result
 except Exception as e:
     print(e)
@@ -580,7 +580,7 @@ Get Orders for company based on Company Id
 
 ```python
 try:
-    result = await client.order.getPicklistOrdersByCompanyId(pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, q=q, stage=stage, salesChannels=salesChannels, orderId=orderId, stores=stores, status=status, shortenUrls=shortenUrls, filterType=filterType)
+    result = await platformClient.order.getPicklistOrdersByCompanyId(pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, q=q, stage=stage, salesChannels=salesChannels, orderId=orderId, stores=stores, status=status, shortenUrls=shortenUrls, filterType=filterType)
     # use result
 except Exception as e:
     print(e)
@@ -648,7 +648,7 @@ Track Shipment by shipment id, for application based on application Id
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").order.trackShipmentPlatform(shipmentId=shipmentId)
+    result = await platformClient.application("<APPLICATION_ID>").order.trackShipmentPlatform(shipmentId=shipmentId)
     # use result
 except Exception as e:
     print(e)
@@ -705,7 +705,7 @@ Track Order by order id, for application based on application Id
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").order.trackOrder(orderId=orderId)
+    result = await platformClient.application("<APPLICATION_ID>").order.trackOrder(orderId=orderId)
     # use result
 except Exception as e:
     print(e)
@@ -762,7 +762,7 @@ Get all failed orders application wise
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").order.failedOrders()
+    result = await platformClient.application("<APPLICATION_ID>").order.failedOrders()
     # use result
 except Exception as e:
     print(e)
@@ -814,7 +814,7 @@ Reprocess order by order id
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").order.reprocessOrder(orderId=orderId)
+    result = await platformClient.application("<APPLICATION_ID>").order.reprocessOrder(orderId=orderId)
     # use result
 except Exception as e:
     print(e)
@@ -871,7 +871,7 @@ Use this API to update the shipment using its shipment ID.
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").order.updateShipment(shipmentId=shipmentId, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").order.updateShipment(shipmentId=shipmentId, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -928,7 +928,7 @@ Use this API to retrieve the issues that led to the cancellation of bags within 
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").order.getPlatformShipmentReasons(action=action)
+    result = await platformClient.application("<APPLICATION_ID>").order.getPlatformShipmentReasons(action=action)
     # use result
 except Exception as e:
     print(e)
@@ -985,7 +985,7 @@ Use this API to track a shipment using its shipment ID.
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").order.getShipmentTrackDetails(orderId=orderId, shipmentId=shipmentId)
+    result = await platformClient.application("<APPLICATION_ID>").order.getShipmentTrackDetails(orderId=orderId, shipmentId=shipmentId)
     # use result
 except Exception as e:
     print(e)
@@ -1043,7 +1043,7 @@ Use this API to get address of a shipment using its shipment ID and Address Cate
 
 ```python
 try:
-    result = await client.order.getShipmentAddress(shipmentId=shipmentId, addressCategory=addressCategory)
+    result = await platformClient.order.getShipmentAddress(shipmentId=shipmentId, addressCategory=addressCategory)
     # use result
 except Exception as e:
     print(e)
@@ -1101,7 +1101,7 @@ Use this API to update address of a shipment using its shipment ID and Address C
 
 ```python
 try:
-    result = await client.order.updateShipmentAddress(shipmentId=shipmentId, addressCategory=addressCategory, body=body)
+    result = await platformClient.order.updateShipmentAddress(shipmentId=shipmentId, addressCategory=addressCategory, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1159,7 +1159,7 @@ Get Orders for company based on Company Id
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").order.getOrdersByApplicationId(pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, q=q, stage=stage, salesChannels=salesChannels, orderId=orderId, stores=stores, status=status, dp=dp, shortenUrls=shortenUrls, filterType=filterType)
+    result = await platformClient.application("<APPLICATION_ID>").order.getOrdersByApplicationId(pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, q=q, stage=stage, salesChannels=salesChannels, orderId=orderId, stores=stores, status=status, dp=dp, shortenUrls=shortenUrls, filterType=filterType)
     # use result
 except Exception as e:
     print(e)

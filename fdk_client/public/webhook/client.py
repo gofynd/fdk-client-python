@@ -1,9 +1,7 @@
 
 
-"""  Public Client."""
+"""Webhook Public Client"""
 
-import base64
-import ujson
 from urllib.parse import urlparse
 
 from ...common.aiohttp_helper import AiohttpHelper
@@ -53,14 +51,15 @@ class Webhook:
 
         
 
-        from .models import EventConfigResponse
-        schema = EventConfigResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for fetchAllWebhookEvents")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EventConfigResponse
+            schema = EventConfigResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for fetchAllWebhookEvents")
+                print(e)
+
         
 
         return response
@@ -92,14 +91,15 @@ class Webhook:
 
         
 
-        from .models import EventConfigResponse
-        schema = EventConfigResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for queryWebhookEventDetails")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EventConfigResponse
+            schema = EventConfigResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for queryWebhookEventDetails")
+                print(e)
+
         
 
         return response

@@ -1,6 +1,6 @@
 
 
-"""Theme Platform Client."""
+"""Theme Platform Client"""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -11,6 +11,7 @@ class Theme:
     def __init__(self, config, applicationId):
         self._conf = config
         self.applicationId = applicationId
+
     
     async def getAllPages(self, theme_id=None):
         """Use this API to retrieve all the available pages of a theme by its ID.
@@ -18,7 +19,7 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
 
@@ -39,17 +40,18 @@ class Theme:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/page", theme_id=theme_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
-        from .models import AllAvailablePageSchema
-        schema = AllAvailablePageSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAllPages")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AllAvailablePageSchema
+            schema = AllAvailablePageSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAllPages")
+                print(e)
+
         
 
         return response
@@ -60,7 +62,7 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
 
@@ -86,17 +88,18 @@ class Theme:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/page", theme_id=theme_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
-        from .models import AvailablePageSchema
-        schema = AvailablePageSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createPage")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AvailablePageSchema
+            schema = AvailablePageSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createPage")
+                print(e)
+
         
 
         return response
@@ -107,7 +110,7 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
 
@@ -133,17 +136,18 @@ class Theme:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/page", theme_id=theme_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
-        from .models import AllAvailablePageSchema
-        schema = AllAvailablePageSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateMultiplePages")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AllAvailablePageSchema
+            schema = AllAvailablePageSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateMultiplePages")
+                print(e)
+
         
 
         return response
@@ -155,10 +159,10 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
-        if page_value:
+        if page_value is not None:
             payload["page_value"] = page_value
         
 
@@ -179,17 +183,18 @@ class Theme:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/{page_value}", theme_id=theme_id, page_value=page_value), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
-        from .models import AvailablePageSchema
-        schema = AvailablePageSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getPage")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AvailablePageSchema
+            schema = AvailablePageSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPage")
+                print(e)
+
         
 
         return response
@@ -201,10 +206,10 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
-        if page_value:
+        if page_value is not None:
             payload["page_value"] = page_value
         
 
@@ -230,17 +235,18 @@ class Theme:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/{page_value}", theme_id=theme_id, page_value=page_value), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
-        from .models import AvailablePageSchema
-        schema = AvailablePageSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updatePage")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AvailablePageSchema
+            schema = AvailablePageSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updatePage")
+                print(e)
+
         
 
         return response
@@ -252,10 +258,10 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
-        if page_value:
+        if page_value is not None:
             payload["page_value"] = page_value
         
 
@@ -276,17 +282,18 @@ class Theme:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/{page_value}", theme_id=theme_id, page_value=page_value), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
-        from .models import AvailablePageSchema
-        schema = AvailablePageSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deletePage")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AvailablePageSchema
+            schema = AvailablePageSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deletePage")
+                print(e)
+
         
 
         return response
@@ -298,10 +305,10 @@ class Theme:
         """
         payload = {}
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
 
@@ -322,17 +329,18 @@ class Theme:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/library", page_size=page_size, page_no=page_no), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
-        from .models import ThemesListingResponseSchema
-        schema = ThemesListingResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getThemeLibrary")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ThemesListingResponseSchema
+            schema = ThemesListingResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getThemeLibrary")
+                print(e)
+
         
 
         return response
@@ -365,17 +373,18 @@ class Theme:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/library", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
-        from .models import ThemesSchema
-        schema = ThemesSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for addToThemeLibrary")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ThemesSchema
+            schema = ThemesSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for addToThemeLibrary")
+                print(e)
+
         
 
         return response
@@ -408,17 +417,18 @@ class Theme:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/apply", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
-        from .models import ThemesSchema
-        schema = ThemesSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for applyTheme")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ThemesSchema
+            schema = ThemesSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for applyTheme")
+                print(e)
+
         
 
         return response
@@ -429,7 +439,7 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
 
@@ -450,17 +460,18 @@ class Theme:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/upgradable", theme_id=theme_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
-        from .models import UpgradableThemeSchema
-        schema = UpgradableThemeSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for isUpgradable")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UpgradableThemeSchema
+            schema = UpgradableThemeSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for isUpgradable")
+                print(e)
+
         
 
         return response
@@ -471,7 +482,7 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
 
@@ -492,17 +503,18 @@ class Theme:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/upgrade", theme_id=theme_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
-        from .models import ThemesSchema
-        schema = ThemesSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for upgradeTheme")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ThemesSchema
+            schema = ThemesSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for upgradeTheme")
+                print(e)
+
         
 
         return response
@@ -514,10 +526,10 @@ class Theme:
         """
         payload = {}
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
 
@@ -538,17 +550,18 @@ class Theme:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/list/public", page_size=page_size, page_no=page_no), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
-        from .models import ThemesListingResponseSchema
-        schema = ThemesListingResponseSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getPublicThemes")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ThemesListingResponseSchema
+            schema = ThemesListingResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPublicThemes")
+                print(e)
+
         
 
         return response
@@ -581,17 +594,18 @@ class Theme:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
-        from .models import ThemesSchema
-        schema = ThemesSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createTheme")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ThemesSchema
+            schema = ThemesSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createTheme")
+                print(e)
+
         
 
         return response
@@ -619,17 +633,18 @@ class Theme:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
-        from .models import ThemesSchema
-        schema = ThemesSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getAppliedTheme")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ThemesSchema
+            schema = ThemesSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAppliedTheme")
+                print(e)
+
         
 
         return response
@@ -657,17 +672,18 @@ class Theme:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/fonts", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
-        from .models import FontsSchema
-        schema = FontsSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getFonts")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import FontsSchema
+            schema = FontsSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getFonts")
+                print(e)
+
         
 
         return response
@@ -678,7 +694,7 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
 
@@ -699,17 +715,18 @@ class Theme:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}", theme_id=theme_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
-        from .models import ThemesSchema
-        schema = ThemesSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getThemeById")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ThemesSchema
+            schema = ThemesSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getThemeById")
+                print(e)
+
         
 
         return response
@@ -720,7 +737,7 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
 
@@ -746,17 +763,18 @@ class Theme:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}", theme_id=theme_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
-        from .models import ThemesSchema
-        schema = ThemesSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateTheme")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ThemesSchema
+            schema = ThemesSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateTheme")
+                print(e)
+
         
 
         return response
@@ -767,7 +785,7 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
 
@@ -788,17 +806,18 @@ class Theme:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}", theme_id=theme_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
-        from .models import ThemesSchema
-        schema = ThemesSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for deleteTheme")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ThemesSchema
+            schema = ThemesSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteTheme")
+                print(e)
+
         
 
         return response
@@ -809,7 +828,7 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
 
@@ -830,17 +849,18 @@ class Theme:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/preview", theme_id=theme_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
-        from .models import ThemesSchema
-        schema = ThemesSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getThemeForPreview")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ThemesSchema
+            schema = ThemesSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getThemeForPreview")
+                print(e)
+
         
 
         return response
@@ -851,7 +871,7 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
 
@@ -872,17 +892,18 @@ class Theme:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/publish", theme_id=theme_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
-        from .models import ThemesSchema
-        schema = ThemesSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for publishTheme")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ThemesSchema
+            schema = ThemesSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for publishTheme")
+                print(e)
+
         
 
         return response
@@ -893,7 +914,7 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
 
@@ -914,17 +935,18 @@ class Theme:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/unpublish", theme_id=theme_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
-        from .models import ThemesSchema
-        schema = ThemesSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for unpublishTheme")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ThemesSchema
+            schema = ThemesSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for unpublishTheme")
+                print(e)
+
         
 
         return response
@@ -935,7 +957,7 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
 
@@ -956,17 +978,18 @@ class Theme:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/archive", theme_id=theme_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
-        from .models import ThemesSchema
-        schema = ThemesSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for archiveTheme")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ThemesSchema
+            schema = ThemesSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for archiveTheme")
+                print(e)
+
         
 
         return response
@@ -977,7 +1000,7 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
 
@@ -998,17 +1021,18 @@ class Theme:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/unarchive", theme_id=theme_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
-        from .models import ThemesSchema
-        schema = ThemesSchema()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for unarchiveTheme")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ThemesSchema
+            schema = ThemesSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for unarchiveTheme")
+                print(e)
+
         
 
         return response
@@ -1019,7 +1043,7 @@ class Theme:
         """
         payload = {}
         
-        if theme_id:
+        if theme_id is not None:
             payload["theme_id"] = theme_id
         
 
@@ -1040,7 +1064,7 @@ class Theme:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("HEAD", url_with_params, headers=get_headers_with_signature(self._conf.domain, "head", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/polling", theme_id=theme_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
         return response

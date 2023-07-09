@@ -23,7 +23,7 @@ Get TAT of a product
 
 ```python
 try:
-    result = await client.logistic.getTatProduct(body=body)
+    result = await applicationClient.logistic.getTatProduct(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -79,7 +79,7 @@ Get Pincode Zones
 
 ```python
 try:
-    result = await client.logistic.getPincodeZones(body=body)
+    result = await applicationClient.logistic.getPincodeZones(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -135,7 +135,7 @@ Get city from PIN Code
 
 ```python
 try:
-    result = await client.logistic.getPincodeCity(pincode=pincode)
+    result = await applicationClient.logistic.getPincodeCity(pincode=pincode)
     # use result
 except Exception as e:
     print(e)

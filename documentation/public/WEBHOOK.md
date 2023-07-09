@@ -22,7 +22,7 @@ Get All Webhook Events
 
 ```python
 try:
-    result = await client.webhook.fetchAllWebhookEvents()
+    result = await publicClient.webhook.fetchAllWebhookEvents()
     # use result
 except Exception as e:
     print(e)
@@ -74,7 +74,7 @@ Send webhook event name, type, version, category in request body to get complete
 
 ```python
 try:
-    result = await client.webhook.queryWebhookEventDetails(body=body)
+    result = await publicClient.webhook.queryWebhookEventDetails(body=body)
     # use result
 except Exception as e:
     print(e)

@@ -1,6 +1,6 @@
 
 
-"""Lead Platform Client."""
+"""Lead Platform Client"""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -11,6 +11,7 @@ class Lead:
     def __init__(self, config, applicationId):
         self._conf = config
         self.applicationId = applicationId
+
     
     async def getTickets(self, items=None, filters=None, q=None, status=None, priority=None, category=None):
         """Gets the list of Application level Tickets and/or ticket filters
@@ -23,22 +24,22 @@ class Lead:
         """
         payload = {}
         
-        if items:
+        if items is not None:
             payload["items"] = items
         
-        if filters:
+        if filters is not None:
             payload["filters"] = filters
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
-        if status:
+        if status is not None:
             payload["status"] = status
         
-        if priority:
+        if priority is not None:
             payload["priority"] = priority
         
-        if category:
+        if category is not None:
             payload["category"] = category
         
 
@@ -59,17 +60,18 @@ class Lead:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ticket", items=items, filters=filters, q=q, status=status, priority=priority, category=category), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
-        from .models import TicketList
-        schema = TicketList()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getTickets")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TicketList
+            schema = TicketList()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getTickets")
+                print(e)
+
         
 
         return response
@@ -80,7 +82,7 @@ class Lead:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -101,17 +103,18 @@ class Lead:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ticket/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
-        from .models import Ticket
-        schema = Ticket()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getTicket")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Ticket
+            schema = Ticket()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getTicket")
+                print(e)
+
         
 
         return response
@@ -122,7 +125,7 @@ class Lead:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -148,17 +151,18 @@ class Lead:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ticket/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
-        from .models import Ticket
-        schema = Ticket()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for editTicket")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Ticket
+            schema = Ticket()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for editTicket")
+                print(e)
+
         
 
         return response
@@ -169,7 +173,7 @@ class Lead:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -195,17 +199,18 @@ class Lead:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ticket/{id}/history", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
-        from .models import TicketHistory
-        schema = TicketHistory()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createHistory")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TicketHistory
+            schema = TicketHistory()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createHistory")
+                print(e)
+
         
 
         return response
@@ -216,7 +221,7 @@ class Lead:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -237,17 +242,18 @@ class Lead:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ticket/{id}/history", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
-        from .models import TicketHistoryList
-        schema = TicketHistoryList()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getTicketHistory")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TicketHistoryList
+            schema = TicketHistoryList()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getTicketHistory")
+                print(e)
+
         
 
         return response
@@ -258,7 +264,7 @@ class Lead:
         """
         payload = {}
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
 
@@ -279,17 +285,18 @@ class Lead:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/form/{slug}", slug=slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
-        from .models import CustomForm
-        schema = CustomForm()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCustomForm")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CustomForm
+            schema = CustomForm()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCustomForm")
+                print(e)
+
         
 
         return response
@@ -300,7 +307,7 @@ class Lead:
         """
         payload = {}
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
 
@@ -326,17 +333,18 @@ class Lead:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/form/{slug}", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
-        from .models import CustomForm
-        schema = CustomForm()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for editCustomForm")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CustomForm
+            schema = CustomForm()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for editCustomForm")
+                print(e)
+
         
 
         return response
@@ -364,17 +372,18 @@ class Lead:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/form", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
-        from .models import CustomFormList
-        schema = CustomFormList()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCustomForms")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CustomFormList
+            schema = CustomFormList()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCustomForms")
+                print(e)
+
         
 
         return response
@@ -407,17 +416,18 @@ class Lead:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/form", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
-        from .models import CustomForm
-        schema = CustomForm()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createCustomForm")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CustomForm
+            schema = CustomForm()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createCustomForm")
+                print(e)
+
         
 
         return response
@@ -428,7 +438,7 @@ class Lead:
         """
         payload = {}
         
-        if unique_name:
+        if unique_name is not None:
             payload["unique_name"] = unique_name
         
 
@@ -449,17 +459,18 @@ class Lead:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/video/room/{unique_name}/token", unique_name=unique_name), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
-        from .models import GetTokenForVideoRoomResponse
-        schema = GetTokenForVideoRoomResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getTokenForVideoRoom")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetTokenForVideoRoomResponse
+            schema = GetTokenForVideoRoomResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getTokenForVideoRoom")
+                print(e)
+
         
 
         return response
@@ -470,7 +481,7 @@ class Lead:
         """
         payload = {}
         
-        if unique_name:
+        if unique_name is not None:
             payload["unique_name"] = unique_name
         
 
@@ -491,17 +502,18 @@ class Lead:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/video/room/{unique_name}/participants", unique_name=unique_name), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
-        from .models import GetParticipantsInsideVideoRoomResponse
-        schema = GetParticipantsInsideVideoRoomResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getVideoParticipants")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetParticipantsInsideVideoRoomResponse
+            schema = GetParticipantsInsideVideoRoomResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getVideoParticipants")
+                print(e)
+
         
 
         return response
@@ -534,17 +546,18 @@ class Lead:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/video/room", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-        
+
         
 
-        from .models import CreateVideoRoomResponse
-        schema = CreateVideoRoomResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for openVideoRoom")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateVideoRoomResponse
+            schema = CreateVideoRoomResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for openVideoRoom")
+                print(e)
+
         
 
         return response
@@ -555,7 +568,7 @@ class Lead:
         """
         payload = {}
         
-        if unique_name:
+        if unique_name is not None:
             payload["unique_name"] = unique_name
         
 
@@ -576,17 +589,18 @@ class Lead:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/video/room/{unique_name}", unique_name=unique_name), query_string, headers, "", exclude_headers=exclude_headers), data="")
-        
+
         
 
-        from .models import CloseVideoRoomResponse
-        schema = CloseVideoRoomResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for closeVideoRoom")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CloseVideoRoomResponse
+            schema = CloseVideoRoomResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for closeVideoRoom")
+                print(e)
+
         
 
         return response

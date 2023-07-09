@@ -47,7 +47,7 @@ Fetch all items added to the cart
 
 ```python
 try:
-    result = await client.poscart.getCart(id=id, i=i, b=b, assignCardId=assignCardId, buyNow=buyNow)
+    result = await applicationClient.poscart.getCart(id=id, i=i, b=b, assignCardId=assignCardId, buyNow=buyNow)
     # use result
 except Exception as e:
     print(e)
@@ -275,7 +275,7 @@ Fetch last-modified timestamp
 
 ```python
 try:
-    result = await client.poscart.getCartLastModified(id=id)
+    result = await applicationClient.poscart.getCartLastModified(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -313,7 +313,7 @@ Add items to cart
 
 ```python
 try:
-    result = await client.poscart.addItems(i=i, b=b, buyNow=buyNow, body=body)
+    result = await applicationClient.poscart.addItems(i=i, b=b, buyNow=buyNow, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1017,7 +1017,7 @@ Update items in the cart
 
 ```python
 try:
-    result = await client.poscart.updateCart(id=id, i=i, b=b, buyNow=buyNow, body=body)
+    result = await applicationClient.poscart.updateCart(id=id, i=i, b=b, buyNow=buyNow, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1451,7 +1451,7 @@ Count items in the cart
 
 ```python
 try:
-    result = await client.poscart.getItemCount(id=id, buyNow=buyNow)
+    result = await applicationClient.poscart.getItemCount(id=id, buyNow=buyNow)
     # use result
 except Exception as e:
     print(e)
@@ -1511,7 +1511,7 @@ Fetch Coupon
 
 ```python
 try:
-    result = await client.poscart.getCoupons(id=id, buyNow=buyNow)
+    result = await applicationClient.poscart.getCoupons(id=id, buyNow=buyNow)
     # use result
 except Exception as e:
     print(e)
@@ -1605,7 +1605,7 @@ Apply Coupon
 
 ```python
 try:
-    result = await client.poscart.applyCoupon(i=i, b=b, p=p, id=id, buyNow=buyNow, body=body)
+    result = await applicationClient.poscart.applyCoupon(i=i, b=b, p=p, id=id, buyNow=buyNow, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2203,7 +2203,7 @@ Remove Coupon Applied
 
 ```python
 try:
-    result = await client.poscart.removeCoupon(id=id, buyNow=buyNow)
+    result = await applicationClient.poscart.removeCoupon(id=id, buyNow=buyNow)
     # use result
 except Exception as e:
     print(e)
@@ -2419,7 +2419,7 @@ Get discount offers based on quantity
 
 ```python
 try:
-    result = await client.poscart.getBulkDiscountOffers(itemId=itemId, articleId=articleId, uid=uid, slug=slug)
+    result = await applicationClient.poscart.getBulkDiscountOffers(itemId=itemId, articleId=articleId, uid=uid, slug=slug)
     # use result
 except Exception as e:
     print(e)
@@ -2550,7 +2550,7 @@ Apply reward points at cart
 
 ```python
 try:
-    result = await client.poscart.applyRewardPoints(id=id, i=i, b=b, buyNow=buyNow, body=body)
+    result = await applicationClient.poscart.applyRewardPoints(id=id, i=i, b=b, buyNow=buyNow, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2777,7 +2777,7 @@ Fetch address
 
 ```python
 try:
-    result = await client.poscart.getAddresses(cartId=cartId, buyNow=buyNow, mobileNo=mobileNo, checkoutMode=checkoutMode, tags=tags, isDefault=isDefault)
+    result = await applicationClient.poscart.getAddresses(cartId=cartId, buyNow=buyNow, mobileNo=mobileNo, checkoutMode=checkoutMode, tags=tags, isDefault=isDefault)
     # use result
 except Exception as e:
     print(e)
@@ -2869,7 +2869,7 @@ Add address to an account
 
 ```python
 try:
-    result = await client.poscart.addAddress(body=body)
+    result = await applicationClient.poscart.addAddress(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2929,7 +2929,7 @@ Fetch a single address by its ID
 
 ```python
 try:
-    result = await client.poscart.getAddressById(id=id, cartId=cartId, buyNow=buyNow, mobileNo=mobileNo, checkoutMode=checkoutMode, tags=tags, isDefault=isDefault)
+    result = await applicationClient.poscart.getAddressById(id=id, cartId=cartId, buyNow=buyNow, mobileNo=mobileNo, checkoutMode=checkoutMode, tags=tags, isDefault=isDefault)
     # use result
 except Exception as e:
     print(e)
@@ -3019,7 +3019,7 @@ Update address added to an account
 
 ```python
 try:
-    result = await client.poscart.updateAddress(id=id, body=body)
+    result = await applicationClient.poscart.updateAddress(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -3081,7 +3081,7 @@ Remove address associated with an account
 
 ```python
 try:
-    result = await client.poscart.removeAddress(id=id)
+    result = await applicationClient.poscart.removeAddress(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -3141,7 +3141,7 @@ Select an address from available addresses
 
 ```python
 try:
-    result = await client.poscart.selectAddress(cartId=cartId, buyNow=buyNow, i=i, b=b, body=body)
+    result = await applicationClient.poscart.selectAddress(cartId=cartId, buyNow=buyNow, i=i, b=b, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -3457,7 +3457,7 @@ Update cart payment
 
 ```python
 try:
-    result = await client.poscart.selectPaymentMode(id=id, buyNow=buyNow, body=body)
+    result = await applicationClient.poscart.selectPaymentMode(id=id, buyNow=buyNow, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -3783,7 +3783,7 @@ Verify the coupon eligibility against the payment mode
 
 ```python
 try:
-    result = await client.poscart.validateCouponForPayment(id=id, buyNow=buyNow, addressId=addressId, paymentMode=paymentMode, paymentIdentifier=paymentIdentifier, aggregatorName=aggregatorName, merchantCode=merchantCode)
+    result = await applicationClient.poscart.validateCouponForPayment(id=id, buyNow=buyNow, addressId=addressId, paymentMode=paymentMode, paymentIdentifier=paymentIdentifier, aggregatorName=aggregatorName, merchantCode=merchantCode)
     # use result
 except Exception as e:
     print(e)
@@ -3856,7 +3856,7 @@ Get delivery date and options before checkout
 
 ```python
 try:
-    result = await client.poscart.getShipments(pickAtStoreUid=pickAtStoreUid, orderingStoreId=orderingStoreId, p=p, id=id, addressId=addressId, areaCode=areaCode, orderType=orderType)
+    result = await applicationClient.poscart.getShipments(pickAtStoreUid=pickAtStoreUid, orderingStoreId=orderingStoreId, p=p, id=id, addressId=addressId, areaCode=areaCode, orderType=orderType)
     # use result
 except Exception as e:
     print(e)
@@ -4559,7 +4559,7 @@ Update shipment delivery type and quantity before checkout
 
 ```python
 try:
-    result = await client.poscart.updateShipments(i=i, p=p, id=id, addressId=addressId, orderType=orderType, body=body)
+    result = await applicationClient.poscart.updateShipments(i=i, p=p, id=id, addressId=addressId, orderType=orderType, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -5261,7 +5261,7 @@ Checkout all items in the cart
 
 ```python
 try:
-    result = await client.poscart.checkoutCart(id=id, body=body)
+    result = await applicationClient.poscart.checkoutCart(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -5698,7 +5698,7 @@ Update the cart meta
 
 ```python
 try:
-    result = await client.poscart.updateCartMeta(id=id, buyNow=buyNow, body=body)
+    result = await applicationClient.poscart.updateCartMeta(id=id, buyNow=buyNow, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -5758,7 +5758,7 @@ Get available delivery modes for cart
 
 ```python
 try:
-    result = await client.poscart.getAvailableDeliveryModes(areaCode=areaCode, id=id)
+    result = await applicationClient.poscart.getAvailableDeliveryModes(areaCode=areaCode, id=id)
     # use result
 except Exception as e:
     print(e)
@@ -5824,7 +5824,7 @@ Get list of stores for give uids
 
 ```python
 try:
-    result = await client.poscart.getStoreAddressByUid(storeUid=storeUid)
+    result = await applicationClient.poscart.getStoreAddressByUid(storeUid=storeUid)
     # use result
 except Exception as e:
     print(e)
@@ -5905,7 +5905,7 @@ Generate token for sharing the cart
 
 ```python
 try:
-    result = await client.poscart.getCartShareLink(body=body)
+    result = await applicationClient.poscart.getCartShareLink(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -5972,7 +5972,7 @@ Get details of a shared cart
 
 ```python
 try:
-    result = await client.poscart.getCartSharedItems(token=token)
+    result = await applicationClient.poscart.getCartSharedItems(token=token)
     # use result
 except Exception as e:
     print(e)
@@ -6305,7 +6305,7 @@ Merge or replace existing cart
 
 ```python
 try:
-    result = await client.poscart.updateCartWithSharedItems(token=token, action=action)
+    result = await applicationClient.poscart.updateCartWithSharedItems(token=token, action=action)
     # use result
 except Exception as e:
     print(e)

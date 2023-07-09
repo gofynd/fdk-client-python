@@ -34,7 +34,7 @@ Get company profile
 
 ```python
 try:
-    result = await client.companyprofile.cbsOnboardGet()
+    result = await platformClient.companyprofile.cbsOnboardGet()
     # use result
 except Exception as e:
     print(e)
@@ -147,7 +147,7 @@ Edit company profile
 
 ```python
 try:
-    result = await client.companyprofile.updateCompany(body=body)
+    result = await platformClient.companyprofile.updateCompany(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -206,7 +206,7 @@ Get company metrics
 
 ```python
 try:
-    result = await client.companyprofile.getCompanyMetrics()
+    result = await platformClient.companyprofile.getCompanyMetrics()
     # use result
 except Exception as e:
     print(e)
@@ -281,7 +281,7 @@ Get a single brand.
 
 ```python
 try:
-    result = await client.companyprofile.getBrand(brandId=brandId)
+    result = await platformClient.companyprofile.getBrand(brandId=brandId)
     # use result
 except Exception as e:
     print(e)
@@ -366,7 +366,7 @@ Edit a brand.
 
 ```python
 try:
-    result = await client.companyprofile.editBrand(brandId=brandId, body=body)
+    result = await platformClient.companyprofile.editBrand(brandId=brandId, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -426,7 +426,7 @@ Create a Brand.
 
 ```python
 try:
-    result = await client.companyprofile.createBrand(body=body)
+    result = await platformClient.companyprofile.createBrand(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -485,7 +485,7 @@ Get brands associated to a company
 
 ```python
 try:
-    result = await client.companyprofile.getBrands(pageNo=pageNo, pageSize=pageSize, q=q)
+    result = await platformClient.companyprofile.getBrands(pageNo=pageNo, pageSize=pageSize, q=q)
     # use result
 except Exception as e:
     print(e)
@@ -631,7 +631,7 @@ Create a company brand mapping.
 
 ```python
 try:
-    result = await client.companyprofile.createCompanyBrandMapping(body=body)
+    result = await platformClient.companyprofile.createCompanyBrandMapping(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -689,7 +689,7 @@ Get list of locations
 
 ```python
 try:
-    result = await client.companyprofile.getLocations(storeType=storeType, q=q, stage=stage, pageNo=pageNo, pageSize=pageSize, locationIds=locationIds)
+    result = await platformClient.companyprofile.getLocations(storeType=storeType, q=q, stage=stage, pageNo=pageNo, pageSize=pageSize, locationIds=locationIds)
     # use result
 except Exception as e:
     print(e)
@@ -934,7 +934,7 @@ Create a location associated to a company.
 
 ```python
 try:
-    result = await client.companyprofile.createLocation(body=body)
+    result = await platformClient.companyprofile.createLocation(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -993,7 +993,7 @@ Get details of a specific location.
 
 ```python
 try:
-    result = await client.companyprofile.getLocationDetail(locationId=locationId)
+    result = await platformClient.companyprofile.getLocationDetail(locationId=locationId)
     # use result
 except Exception as e:
     print(e)
@@ -1231,7 +1231,7 @@ Edit a location asscoiated to a company.
 
 ```python
 try:
-    result = await client.companyprofile.updateLocation(locationId=locationId, body=body)
+    result = await platformClient.companyprofile.updateLocation(locationId=locationId, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1291,7 +1291,7 @@ Create a location asscoiated to a company in bulk.
 
 ```python
 try:
-    result = await client.companyprofile.createLocationBulk(body=body)
+    result = await platformClient.companyprofile.createLocationBulk(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1350,7 +1350,7 @@ Location Reassignment
 
 ```python
 try:
-    result = await client.companyprofile.getOptimalLocations(body=body)
+    result = await platformClient.companyprofile.getOptimalLocations(body=body)
     # use result
 except Exception as e:
     print(e)

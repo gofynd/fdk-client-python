@@ -1,6 +1,6 @@
 
 
-""" CompanyProfile Platform Client."""
+"""CompanyProfile Platform Client"""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -10,6 +10,7 @@ from .validator import CompanyProfileValidator
 class CompanyProfile:
     def __init__(self, config):
         self._conf = config
+
     
     async def cbsOnboardGet(self, ):
         """This API allows to view the company profile of the seller account.
@@ -36,15 +37,16 @@ class CompanyProfile:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
-        from .models import GetCompanyProfileSerializerResponse
-        schema = GetCompanyProfileSerializerResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for cbsOnboardGet")
-            print(e)
-            
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetCompanyProfileSerializerResponse
+            schema = GetCompanyProfileSerializerResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for cbsOnboardGet")
+                print(e)
+
         
 
         return response
@@ -79,15 +81,16 @@ class CompanyProfile:
         response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
-        from .models import ProfileSuccessResponse
-        schema = ProfileSuccessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateCompany")
-            print(e)
-            
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProfileSuccessResponse
+            schema = ProfileSuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateCompany")
+                print(e)
+
         
 
         return response
@@ -117,15 +120,16 @@ class CompanyProfile:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/metrics", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
-        from .models import MetricsSerializer
-        schema = MetricsSerializer()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getCompanyMetrics")
-            print(e)
-            
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import MetricsSerializer
+            schema = MetricsSerializer()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCompanyMetrics")
+                print(e)
+
         
 
         return response
@@ -136,7 +140,7 @@ class CompanyProfile:
         """
         payload = {}
         
-        if brand_id:
+        if brand_id is not None:
             payload["brand_id"] = brand_id
         
 
@@ -159,15 +163,16 @@ class CompanyProfile:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/brand/{brand_id}", brand_id=brand_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
-        from .models import GetBrandResponseSerializer
-        schema = GetBrandResponseSerializer()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getBrand")
-            print(e)
-            
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetBrandResponseSerializer
+            schema = GetBrandResponseSerializer()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getBrand")
+                print(e)
+
         
 
         return response
@@ -178,7 +183,7 @@ class CompanyProfile:
         """
         payload = {}
         
-        if brand_id:
+        if brand_id is not None:
             payload["brand_id"] = brand_id
         
 
@@ -206,15 +211,16 @@ class CompanyProfile:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/brand/{brand_id}", brand_id=brand_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
-        from .models import ProfileSuccessResponse
-        schema = ProfileSuccessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for editBrand")
-            print(e)
-            
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProfileSuccessResponse
+            schema = ProfileSuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for editBrand")
+                print(e)
+
         
 
         return response
@@ -249,15 +255,16 @@ class CompanyProfile:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/brand/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
-        from .models import ProfileSuccessResponse
-        schema = ProfileSuccessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createBrand")
-            print(e)
-            
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProfileSuccessResponse
+            schema = ProfileSuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createBrand")
+                print(e)
+
         
 
         return response
@@ -270,13 +277,13 @@ class CompanyProfile:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
 
@@ -299,15 +306,16 @@ class CompanyProfile:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/company-brand", page_no=page_no, page_size=page_size, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
-        from .models import CompanyBrandListSerializer
-        schema = CompanyBrandListSerializer()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getBrands")
-            print(e)
-            
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CompanyBrandListSerializer
+            schema = CompanyBrandListSerializer()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getBrands")
+                print(e)
+
         
 
         return response
@@ -342,15 +350,16 @@ class CompanyProfile:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/company-brand", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
-        from .models import ProfileSuccessResponse
-        schema = ProfileSuccessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createCompanyBrandMapping")
-            print(e)
-            
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProfileSuccessResponse
+            schema = ProfileSuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createCompanyBrandMapping")
+                print(e)
+
         
 
         return response
@@ -366,22 +375,22 @@ class CompanyProfile:
         """
         payload = {}
         
-        if store_type:
+        if store_type is not None:
             payload["store_type"] = store_type
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
-        if stage:
+        if stage is not None:
             payload["stage"] = stage
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if location_ids:
+        if location_ids is not None:
             payload["location_ids"] = location_ids
         
 
@@ -404,15 +413,16 @@ class CompanyProfile:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/location", store_type=store_type, q=q, stage=stage, page_no=page_no, page_size=page_size, location_ids=location_ids), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
-        from .models import LocationListSerializer
-        schema = LocationListSerializer()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getLocations")
-            print(e)
-            
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import LocationListSerializer
+            schema = LocationListSerializer()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getLocations")
+                print(e)
+
         
 
         return response
@@ -447,15 +457,16 @@ class CompanyProfile:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/location", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
-        from .models import ProfileSuccessResponse
-        schema = ProfileSuccessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createLocation")
-            print(e)
-            
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProfileSuccessResponse
+            schema = ProfileSuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createLocation")
+                print(e)
+
         
 
         return response
@@ -466,7 +477,7 @@ class CompanyProfile:
         """
         payload = {}
         
-        if location_id:
+        if location_id is not None:
             payload["location_id"] = location_id
         
 
@@ -489,15 +500,16 @@ class CompanyProfile:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/location/{location_id}", location_id=location_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
-        from .models import GetLocationSerializer
-        schema = GetLocationSerializer()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getLocationDetail")
-            print(e)
-            
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetLocationSerializer
+            schema = GetLocationSerializer()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getLocationDetail")
+                print(e)
+
         
 
         return response
@@ -508,7 +520,7 @@ class CompanyProfile:
         """
         payload = {}
         
-        if location_id:
+        if location_id is not None:
             payload["location_id"] = location_id
         
 
@@ -536,15 +548,16 @@ class CompanyProfile:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/location/{location_id}", location_id=location_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
-        from .models import ProfileSuccessResponse
-        schema = ProfileSuccessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateLocation")
-            print(e)
-            
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProfileSuccessResponse
+            schema = ProfileSuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateLocation")
+                print(e)
+
         
 
         return response
@@ -579,15 +592,16 @@ class CompanyProfile:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/location/bulk", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
-        from .models import ProfileSuccessResponse
-        schema = ProfileSuccessResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for createLocationBulk")
-            print(e)
-            
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProfileSuccessResponse
+            schema = ProfileSuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createLocationBulk")
+                print(e)
+
         
 
         return response
@@ -622,15 +636,16 @@ class CompanyProfile:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/location/reassign", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
-        from .models import AssignStoreResponseSerializer
-        schema = AssignStoreResponseSerializer()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getOptimalLocations")
-            print(e)
-            
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AssignStoreResponseSerializer
+            schema = AssignStoreResponseSerializer()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getOptimalLocations")
+                print(e)
+
         
 
         return response

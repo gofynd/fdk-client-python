@@ -1,6 +1,6 @@
 
 
-""" Order Platform Client."""
+"""Order Platform Client"""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -10,6 +10,7 @@ from .validator import OrderValidator
 class Order:
     def __init__(self, config):
         self._conf = config
+
     
     async def shipmentStatusUpdate(self, body=""):
         """Update Shipment Status
@@ -41,15 +42,16 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/actions/status", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
-        from .models import UpdateShipmentStatusResponse
-        schema = UpdateShipmentStatusResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for shipmentStatusUpdate")
-            print(e)
-            
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UpdateShipmentStatusResponse
+            schema = UpdateShipmentStatusResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for shipmentStatusUpdate")
+                print(e)
+
         
 
         return response
@@ -60,7 +62,7 @@ class Order:
         """
         payload = {}
         
-        if bag_id:
+        if bag_id is not None:
             payload["bag_id"] = bag_id
         
 
@@ -83,15 +85,16 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/actions/activity/status", bag_id=bag_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
-        from .models import GetActivityStatus
-        schema = GetActivityStatus()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for activityStatus")
-            print(e)
-            
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetActivityStatus
+            schema = GetActivityStatus()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for activityStatus")
+                print(e)
+
         
 
         return response
@@ -126,15 +129,16 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/actions/store/process-shipments", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
-        from .models import UpdateProcessShipmenstRequestResponse
-        schema = UpdateProcessShipmenstRequestResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for storeProcessShipmentUpdate")
-            print(e)
-            
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UpdateProcessShipmenstRequestResponse
+            schema = UpdateProcessShipmenstRequestResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for storeProcessShipmentUpdate")
+                print(e)
+
         
 
         return response
@@ -145,7 +149,7 @@ class Order:
         """
         payload = {}
         
-        if shipment_id:
+        if shipment_id is not None:
             payload["shipment_id"] = shipment_id
         
 
@@ -201,15 +205,16 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/actions/can-break", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
-        from .models import CanBreakResponse
-        schema = CanBreakResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for shipmentBagsCanBreak")
-            print(e)
-            
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CanBreakResponse
+            schema = CanBreakResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for shipmentBagsCanBreak")
+                print(e)
+
         
 
         return response
@@ -235,52 +240,52 @@ class Order:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if from_date:
+        if from_date is not None:
             payload["from_date"] = from_date
         
-        if to_date:
+        if to_date is not None:
             payload["to_date"] = to_date
         
-        if is_priority_sort:
+        if is_priority_sort is not None:
             payload["is_priority_sort"] = is_priority_sort
         
-        if lock_status:
+        if lock_status is not None:
             payload["lock_status"] = lock_status
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
-        if stage:
+        if stage is not None:
             payload["stage"] = stage
         
-        if sales_channels:
+        if sales_channels is not None:
             payload["sales_channels"] = sales_channels
         
-        if order_id:
+        if order_id is not None:
             payload["order_id"] = order_id
         
-        if stores:
+        if stores is not None:
             payload["stores"] = stores
         
-        if deployment_stores:
+        if deployment_stores is not None:
             payload["deployment_stores"] = deployment_stores
         
-        if status:
+        if status is not None:
             payload["status"] = status
         
-        if dp:
+        if dp is not None:
             payload["dp"] = dp
         
-        if shorten_urls:
+        if shorten_urls is not None:
             payload["shorten_urls"] = shorten_urls
         
-        if filter_type:
+        if filter_type is not None:
             payload["filter_type"] = filter_type
         
 
@@ -303,15 +308,16 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/orders", page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, is_priority_sort=is_priority_sort, lock_status=lock_status, q=q, stage=stage, sales_channels=sales_channels, order_id=order_id, stores=stores, deployment_stores=deployment_stores, status=status, dp=dp, shorten_urls=shorten_urls, filter_type=filter_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
-        from .models import OrderListing
-        schema = OrderListing()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getOrdersByCompanyId")
-            print(e)
-            
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OrderListing
+            schema = OrderListing()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getOrdersByCompanyId")
+                print(e)
+
         
 
         return response
@@ -333,40 +339,40 @@ class Order:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if from_date:
+        if from_date is not None:
             payload["from_date"] = from_date
         
-        if to_date:
+        if to_date is not None:
             payload["to_date"] = to_date
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
-        if stage:
+        if stage is not None:
             payload["stage"] = stage
         
-        if sales_channels:
+        if sales_channels is not None:
             payload["sales_channels"] = sales_channels
         
-        if order_id:
+        if order_id is not None:
             payload["order_id"] = order_id
         
-        if stores:
+        if stores is not None:
             payload["stores"] = stores
         
-        if status:
+        if status is not None:
             payload["status"] = status
         
-        if shorten_urls:
+        if shorten_urls is not None:
             payload["shorten_urls"] = shorten_urls
         
-        if filter_type:
+        if filter_type is not None:
             payload["filter_type"] = filter_type
         
 
@@ -389,15 +395,16 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/orders/lane-count", page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, q=q, stage=stage, sales_channels=sales_channels, order_id=order_id, stores=stores, status=status, shorten_urls=shorten_urls, filter_type=filter_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
-        from .models import OrderLanesCount
-        schema = OrderLanesCount()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getOrderLanesCountByCompanyId")
-            print(e)
-            
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OrderLanesCount
+            schema = OrderLanesCount()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getOrderLanesCountByCompanyId")
+                print(e)
+
         
 
         return response
@@ -410,13 +417,13 @@ class Order:
         """
         payload = {}
         
-        if order_id:
+        if order_id is not None:
             payload["order_id"] = order_id
         
-        if next:
+        if next is not None:
             payload["next"] = next
         
-        if previous:
+        if previous is not None:
             payload["previous"] = previous
         
 
@@ -439,15 +446,16 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/orders/details", order_id=order_id, next=next, previous=previous), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
-        from .models import OrderDetails
-        schema = OrderDetails()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getOrderDetails")
-            print(e)
-            
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OrderDetails
+            schema = OrderDetails()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getOrderDetails")
+                print(e)
+
         
 
         return response
@@ -469,40 +477,40 @@ class Order:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if from_date:
+        if from_date is not None:
             payload["from_date"] = from_date
         
-        if to_date:
+        if to_date is not None:
             payload["to_date"] = to_date
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
-        if stage:
+        if stage is not None:
             payload["stage"] = stage
         
-        if sales_channels:
+        if sales_channels is not None:
             payload["sales_channels"] = sales_channels
         
-        if order_id:
+        if order_id is not None:
             payload["order_id"] = order_id
         
-        if stores:
+        if stores is not None:
             payload["stores"] = stores
         
-        if status:
+        if status is not None:
             payload["status"] = status
         
-        if shorten_urls:
+        if shorten_urls is not None:
             payload["shorten_urls"] = shorten_urls
         
-        if filter_type:
+        if filter_type is not None:
             payload["filter_type"] = filter_type
         
 
@@ -525,15 +533,16 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/orders/picklist", page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, q=q, stage=stage, sales_channels=sales_channels, order_id=order_id, stores=stores, status=status, shorten_urls=shorten_urls, filter_type=filter_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
-        from .models import OrderPicklistListing
-        schema = OrderPicklistListing()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getPicklistOrdersByCompanyId")
-            print(e)
-            
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OrderPicklistListing
+            schema = OrderPicklistListing()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPicklistOrdersByCompanyId")
+                print(e)
+
         
 
         return response
@@ -545,10 +554,10 @@ class Order:
         """
         payload = {}
         
-        if shipment_id:
+        if shipment_id is not None:
             payload["shipment_id"] = shipment_id
         
-        if address_category:
+        if address_category is not None:
             payload["address_category"] = address_category
         
 
@@ -571,15 +580,16 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/orders/shipments/{shipment_id}/address/{address_category}", shipment_id=shipment_id, address_category=address_category), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
-        
-        from .models import GetShipmentAddressResponse
-        schema = GetShipmentAddressResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getShipmentAddress")
-            print(e)
-            
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetShipmentAddressResponse
+            schema = GetShipmentAddressResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getShipmentAddress")
+                print(e)
+
         
 
         return response
@@ -591,10 +601,10 @@ class Order:
         """
         payload = {}
         
-        if shipment_id:
+        if shipment_id is not None:
             payload["shipment_id"] = shipment_id
         
-        if address_category:
+        if address_category is not None:
             payload["address_category"] = address_category
         
 
@@ -622,15 +632,16 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/orders/shipments/{shipment_id}/address/{address_category}", shipment_id=shipment_id, address_category=address_category), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         
-        
-        from .models import UpdateShipmentAddressResponse
-        schema = UpdateShipmentAddressResponse()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for updateShipmentAddress")
-            print(e)
-            
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UpdateShipmentAddressResponse
+            schema = UpdateShipmentAddressResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateShipmentAddress")
+                print(e)
+
         
 
         return response

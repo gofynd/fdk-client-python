@@ -1,9 +1,7 @@
 
 
-"""  Public Client."""
+"""Inventory Public Client"""
 
-import base64
-import ujson
 from urllib.parse import urlparse
 
 from ...common.aiohttp_helper import AiohttpHelper
@@ -36,7 +34,7 @@ class Inventory:
         """
         payload = {}
         
-        if apikey:
+        if apikey is not None:
             payload["apikey"] = apikey
         
         # Parameter validation
@@ -61,14 +59,15 @@ class Inventory:
 
         
 
-        from .models import ResponseEnvelopeSlingshotConfigurationDetail
-        schema = ResponseEnvelopeSlingshotConfigurationDetail()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getConfigByApiKey")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResponseEnvelopeSlingshotConfigurationDetail
+            schema = ResponseEnvelopeSlingshotConfigurationDetail()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getConfigByApiKey")
+                print(e)
+
         
 
         return response
@@ -80,10 +79,10 @@ class Inventory:
         """
         payload = {}
         
-        if user_name:
+        if user_name is not None:
             payload["user_name"] = user_name
         
-        if password:
+        if password is not None:
             payload["password"] = password
         
         # Parameter validation
@@ -108,14 +107,15 @@ class Inventory:
 
         
 
-        from .models import ResponseEnvelopeApikeyModel
-        schema = ResponseEnvelopeApikeyModel()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getApiKey")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResponseEnvelopeApikeyModel
+            schema = ResponseEnvelopeApikeyModel()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getApiKey")
+                print(e)
+
         
 
         return response
@@ -126,7 +126,7 @@ class Inventory:
         """
         payload = {}
         
-        if code:
+        if code is not None:
             payload["code"] = code
         
         # Parameter validation
@@ -151,14 +151,15 @@ class Inventory:
 
         
 
-        from .models import ResponseEnvelopeJobConfigDTO
-        schema = ResponseEnvelopeJobConfigDTO()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getJobByCode")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResponseEnvelopeJobConfigDTO
+            schema = ResponseEnvelopeJobConfigDTO()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getJobByCode")
+                print(e)
+
         
 
         return response
@@ -170,10 +171,10 @@ class Inventory:
         """
         payload = {}
         
-        if integration_type:
+        if integration_type is not None:
             payload["integration_type"] = integration_type
         
-        if disable:
+        if disable is not None:
             payload["disable"] = disable
         
         # Parameter validation
@@ -198,14 +199,15 @@ class Inventory:
 
         
 
-        from .models import ResponseEnvelopeListJobConfigDTO
-        schema = ResponseEnvelopeListJobConfigDTO()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getJobConfigByIntegrationType")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResponseEnvelopeListJobConfigDTO
+            schema = ResponseEnvelopeListJobConfigDTO()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getJobConfigByIntegrationType")
+                print(e)
+
         
 
         return response
@@ -217,10 +219,10 @@ class Inventory:
         """
         payload = {}
         
-        if daily_job:
+        if daily_job is not None:
             payload["daily_job"] = daily_job
         
-        if job_code:
+        if job_code is not None:
             payload["job_code"] = job_code
         
         # Parameter validation
@@ -245,14 +247,15 @@ class Inventory:
 
         
 
-        from .models import ResponseEnvelopeObject
-        schema = ResponseEnvelopeObject()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for getJobCodesMetrics")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResponseEnvelopeObject
+            schema = ResponseEnvelopeObject()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getJobCodesMetrics")
+                print(e)
+
         
 
         return response
@@ -289,14 +292,15 @@ class Inventory:
 
         
 
-        from .models import ResponseEnvelopeEmailJobMetrics
-        schema = ResponseEnvelopeEmailJobMetrics()
-        try:
-            schema.dump(schema.load(response))
-        except Exception as e:
-            print("Response Validation failed for saveJobCodesMetrics")
-            print(e)
-            
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResponseEnvelopeEmailJobMetrics
+            schema = ResponseEnvelopeEmailJobMetrics()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for saveJobCodesMetrics")
+                print(e)
+
         
 
         return response
