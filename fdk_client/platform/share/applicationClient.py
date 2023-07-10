@@ -207,4 +207,47 @@ class Share:
 
         return response
     
+    async def getShortLinkClickStats(self, surl_id=None):
+        """Retrieve click statistics for a given short link ID.
+        :param surl_id : Short link ID for which click statistics are to be retrieved. : type string
+        """
+        payload = {}
+        
+        if surl_id is not None:
+            payload["surl_id"] = surl_id
+        
+
+        # Parameter validation
+        schema = ShareValidator.getShortLinkClickStats()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/share/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/links/short-link/click-stats", """{"required":[{"in":"query","name":"surl_id","schema":{"type":"string","example":"52Bfbf"},"required":true,"description":"Short link ID for which click statistics are to be retrieved."},{"in":"path","name":"company_id","description":"Company Id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application Id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"in":"query","name":"surl_id","schema":{"type":"string","example":"52Bfbf"},"required":true,"description":"Short link ID for which click statistics are to be retrieved."}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application Id","required":true,"schema":{"type":"string"}}]}""", surl_id=surl_id, )
+        query_string = await create_query_string(surl_id=surl_id, )
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/share/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/links/short-link/click-stats", surl_id=surl_id, ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ClickStatsResponse
+            schema = ClickStatsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getShortLinkClickStats")
+                print(e)
+
+        
+
+        return response
+    
 

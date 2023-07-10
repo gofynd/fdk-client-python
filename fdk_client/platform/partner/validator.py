@@ -1,6 +1,6 @@
 
 
-"""Billing Platform Validators."""
+"""Partner Platform Validators."""
 
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
@@ -15,17 +15,13 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
         
     
     
         
         
         
-    
-    
+        
         
         
         
@@ -37,50 +33,79 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
     
     
         
-    
-    
+        
         
         
     
     
         
-    
-    
+        
+        
         
     
     
         
-    
-    
         
     
     
         
+        
+        
+        
     
     
+        
+        
+    
+    
+        
+        
+    
+    
+        
         
 
 
 
-class BillingValidator:
+class PartnerValidator:
     
     
-    class checkCouponValidity(BaseSchema):
+    class subscribeExtension(BaseSchema):
         
         
         company_id = fields.Str(required=False)
         
-        plan = fields.Str(required=False)
+        entity = fields.Str(required=False)
         
-        coupon_code = fields.Str(required=False)
+        extension_id = fields.Str(required=False)
+        
+        entity_id = fields.Str(required=False)
          
         
     
-    class createSubscriptionCharge(BaseSchema):
+    class getExtensionsForCompany(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        page_size = fields.Float(required=False)
+        
+        tag = fields.Str(required=False)
+        
+        current_page = fields.Str(required=False)
+        
+        page_no = fields.Float(required=False)
+        
+        filter_by = fields.Str(required=False)
+        
+        query = fields.Str(required=False)
+         
+        
+    
+    class getPublicExtension(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -89,29 +114,7 @@ class BillingValidator:
          
         
     
-    class getSubscriptionCharge(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        extension_id = fields.Str(required=False)
-        
-        subscription_id = fields.Str(required=False)
-         
-        
-    
-    class cancelSubscriptionCharge(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        extension_id = fields.Str(required=False)
-        
-        subscription_id = fields.Str(required=False)
-         
-        
-    
-    class createOneTimeCharge(BaseSchema):
+    class getExtensionById(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -120,72 +123,78 @@ class BillingValidator:
          
         
     
-    class getChargeDetails(BaseSchema):
+    class deleteExtensionById(BaseSchema):
         
         
         company_id = fields.Str(required=False)
         
         extension_id = fields.Str(required=False)
         
-        charge_id = fields.Str(required=False)
+        message = fields.Str(required=False)
+        
+        uninstall_reason_type = fields.Str(required=False)
          
         
     
-    class getInvoices(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-         
-        
-    
-    class getInvoiceById(BaseSchema):
+    class getPrivateExtensions(BaseSchema):
         
         
         company_id = fields.Str(required=False)
         
-        invoice_id = fields.Str(required=False)
+        page_size = fields.Float(required=False)
+        
+        page_no = fields.Float(required=False)
+        
+        query = fields.Str(required=False)
          
         
     
-    class getCustomerDetail(BaseSchema):
+    class getExtensionsSuggestions(BaseSchema):
         
         
         company_id = fields.Str(required=False)
+        
+        page_size = fields.Float(required=False)
          
         
     
-    class upsertCustomerDetail(BaseSchema):
+    class getPartnerInvites(BaseSchema):
         
         
         company_id = fields.Str(required=False)
+        
+        request_status = fields.Str(required=False)
+        
+        page_size = fields.Str(required=False)
+        
+        page_no = fields.Str(required=False)
          
         
     
-    class getSubscription(BaseSchema):
+    class getPartnerRequestDetails(BaseSchema):
         
         
         company_id = fields.Str(required=False)
+        
+        invite_id = fields.Str(required=False)
          
         
     
-    class getFeatureLimitConfig(BaseSchema):
+    class modifyPartnerRequest(BaseSchema):
         
         
         company_id = fields.Str(required=False)
+        
+        invite_id = fields.Str(required=False)
          
         
     
-    class activateSubscriptionPlan(BaseSchema):
+    class setupProducts(BaseSchema):
         
         
         company_id = fields.Str(required=False)
-         
         
-    
-    class cancelSubscriptionPlan(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
+        request_id = fields.Str(required=False)
          
         
     

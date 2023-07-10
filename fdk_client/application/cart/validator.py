@@ -37,16 +37,8 @@ from ..ApplicationModel import BaseSchema
     
     
         
-        
     
     
-        
-        
-    
-    
-        
-        
-        
         
         
     
@@ -59,6 +51,17 @@ from ..ApplicationModel import BaseSchema
         
         
         
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+        
     
     
         
@@ -101,6 +104,10 @@ from ..ApplicationModel import BaseSchema
         
     
     
+        
+        
+        
+        
         
         
         
@@ -182,9 +189,9 @@ class CartValidator:
         
         area_code = fields.Str(required=False)
         
-        id = fields.Str(required=False)
-        
         buy_now = fields.Boolean(required=False)
+        
+        id = fields.Str(required=False)
          
         
     
@@ -200,6 +207,13 @@ class CartValidator:
         area_code = fields.Str(required=False)
         
         buy_now = fields.Boolean(required=False)
+         
+        
+    
+    class deleteCart(BaseSchema):
+        
+        
+        id = fields.Str(required=False)
          
         
     
@@ -364,6 +378,14 @@ class CartValidator:
         aggregator_name = fields.Str(required=False)
         
         merchant_code = fields.Str(required=False)
+        
+        iin = fields.Str(required=False)
+        
+        network = fields.Str(required=False)
+        
+        type = fields.Str(required=False)
+        
+        card_id = fields.Str(required=False)
          
         
     

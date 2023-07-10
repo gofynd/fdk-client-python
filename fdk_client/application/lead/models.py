@@ -130,14 +130,6 @@ class Status(BaseSchema):
     pass
 
 
-class TicketCategory(BaseSchema):
-    pass
-
-
-class TicketSubCategory(BaseSchema):
-    pass
-
-
 class TicketFeedbackForm(BaseSchema):
     pass
 
@@ -167,6 +159,26 @@ class CommunicationDetails(BaseSchema):
 
 
 class SupportGeneralConfig(BaseSchema):
+    pass
+
+
+class FeedbackForm(BaseSchema):
+    pass
+
+
+class TicketSubCategory(BaseSchema):
+    pass
+
+
+class TicketCategory(BaseSchema):
+    pass
+
+
+class CategoryData(BaseSchema):
+    pass
+
+
+class IntegrationConfig(BaseSchema):
     pass
 
 
@@ -447,10 +459,6 @@ class UserSchema(BaseSchema):
     
     account_type = fields.Str(required=False)
     
-    debug = fields.Nested(Debug, required=False)
-    
-    has_old_password_hash = fields.Boolean(required=False)
-    
     _id = fields.Str(required=False)
     
     created_at = fields.Str(required=False)
@@ -593,32 +601,6 @@ class Status(BaseSchema):
     
 
 
-class TicketCategory(BaseSchema):
-    # Lead swagger.json
-
-    
-    key = fields.Str(required=False)
-    
-    display = fields.Str(required=False)
-    
-    form = fields.Nested(CustomForm, required=False)
-    
-    sub_categories = fields.List(fields.Nested(TicketSubCategory, required=False), required=False)
-    
-    feedback_form = fields.Nested(TicketFeedbackForm, required=False)
-    
-
-
-class TicketSubCategory(BaseSchema):
-    # Lead swagger.json
-
-    
-    key = fields.Str(required=False)
-    
-    display = fields.Str(required=False)
-    
-
-
 class TicketFeedbackForm(BaseSchema):
     # Lead swagger.json
 
@@ -709,6 +691,10 @@ class CommunicationDetails(BaseSchema):
     # Lead swagger.json
 
     
+    type = fields.Str(required=False)
+    
+    title = fields.Str(required=False)
+    
     value = fields.Str(required=False)
     
     description = fields.Str(required=False)
@@ -731,9 +717,89 @@ class SupportGeneralConfig(BaseSchema):
     
     show_communication_info = fields.Boolean(required=False)
     
+    support_communication = fields.Nested(CommunicationDetails, required=False)
+    
     show_support_dris = fields.Boolean(required=False)
     
     integration = fields.Dict(required=False)
+    
+    type = fields.Str(required=False)
+    
+
+
+class FeedbackForm(BaseSchema):
+    # Lead swagger.json
+
+    
+    inputs = fields.Dict(required=False)
+    
+    title = fields.Str(required=False)
+    
+    timestamps = fields.Dict(required=False)
+    
+
+
+class TicketSubCategory(BaseSchema):
+    # Lead swagger.json
+
+    
+    key = fields.Str(required=False)
+    
+    display = fields.Str(required=False)
+    
+    sub_categories = fields.Nested(lambda: TicketSubCategory(exclude=('sub_categories')), required=False)
+    
+
+
+class TicketCategory(BaseSchema):
+    # Lead swagger.json
+
+    
+    display = fields.Str(required=False)
+    
+    key = fields.Str(required=False)
+    
+    sub_categories = fields.Nested(lambda: TicketCategory(exclude=('sub_categories')), required=False)
+    
+    group_id = fields.Float(required=False)
+    
+    feedback_form = fields.Nested(FeedbackForm, required=False)
+    
+
+
+class CategoryData(BaseSchema):
+    # Lead swagger.json
+
+    
+    list = fields.Nested(TicketCategory, required=False)
+    
+
+
+class IntegrationConfig(BaseSchema):
+    # Lead swagger.json
+
+    
+    _id = fields.Str(required=False)
+    
+    integration_type = fields.Str(required=False)
+    
+    base_url = fields.Str(required=False)
+    
+    create_ticket_apikey = fields.Str(required=False)
+    
+    update_ticket_apikey = fields.Str(required=False)
+    
+    category_sync_apikey = fields.Str(required=False)
+    
+    category_data = fields.Nested(CategoryData, required=False)
+    
+    webhook_apikey = fields.Str(required=False)
+    
+    config_completed = fields.Boolean(required=False)
+    
+    allow_ticket_creation = fields.Boolean(required=False)
+    
+    show_listing = fields.Boolean(required=False)
     
 
 
@@ -805,11 +871,9 @@ class Ticket(BaseSchema):
     
     content = fields.Nested(TicketContent, required=False)
     
-    ticket_id = fields.Str(required=False)
-    
     category = fields.Nested(TicketCategory, required=False)
     
-    sub_category = fields.Nested(TicketSubCategory, required=False)
+    sub_category = fields.Str(required=False)
     
     source = fields.Nested(TicketSourceEnum, required=False)
     
@@ -826,6 +890,8 @@ class Ticket(BaseSchema):
     _custom_json = fields.Dict(required=False)
     
     is_feedback_pending = fields.Boolean(required=False)
+    
+    integration = fields.Dict(required=False)
     
     _id = fields.Str(required=False)
     

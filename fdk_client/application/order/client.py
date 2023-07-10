@@ -173,8 +173,8 @@ class Order:
 
         
         if 200 <= int(response['status_code']) < 300:
-            from .models import OrderList
-            schema = OrderList()
+            from .models import OrderById
+            schema = OrderById()
             try:
                 schema.load(response["json"])
             except Exception as e:

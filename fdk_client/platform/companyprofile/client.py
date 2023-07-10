@@ -135,7 +135,7 @@ class CompanyProfile:
         return response
     
     async def getBrand(self, brand_id=None):
-        """This API helps to get data associated to a particular brand.
+        """This API helps to get data associated to a particular company brand.
         :param brand_id : Id of the brand to be viewed. : type string
         """
         payload = {}
