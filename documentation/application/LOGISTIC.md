@@ -729,14 +729,27 @@ Get Locality data
 
  
  
+ #### [PincodeErrorSchemaResponse](#PincodeErrorSchemaResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | type | String? |  yes  |  |
+ | value | String? |  yes  |  |
+ | message | String? |  yes  |  |
+
+---
+
+
+ 
+ 
  #### [PincodeParentsResponse](#PincodeParentsResponse)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | name | String? |  yes  |  |
- | subType | String? |  yes  |  |
  | uid | String? |  yes  |  |
+ | subType | String? |  yes  |  |
  | displayName | String? |  yes  |  |
+ | name | String? |  yes  |  |
 
 ---
 
@@ -747,21 +760,8 @@ Get Locality data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | type | String? |  yes  |  |
  | coordinates | ArrayList<String>? |  yes  |  |
-
----
-
-
- 
- 
- #### [PincodeErrorSchemaResponse](#PincodeErrorSchemaResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
  | type | String? |  yes  |  |
- | message | String? |  yes  |  |
- | value | String? |  yes  |  |
 
 ---
 
@@ -796,15 +796,15 @@ Get Locality data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | subType | String? |  yes  |  |
- | displayName | String? |  yes  |  |
- | parents | ArrayList<[PincodeParentsResponse](#PincodeParentsResponse)>? |  yes  |  |
+ | uid | String? |  yes  |  |
  | name | String? |  yes  |  |
+ | parents | ArrayList<[PincodeParentsResponse](#PincodeParentsResponse)>? |  yes  |  |
  | latLong | [PincodeLatLongData](#PincodeLatLongData)? |  yes  |  |
  | error | [PincodeErrorSchemaResponse](#PincodeErrorSchemaResponse) |  no  |  |
+ | subType | String? |  yes  |  |
  | meta | [PincodeMetaResponse](#PincodeMetaResponse)? |  yes  |  |
- | uid | String? |  yes  |  |
  | metaCode | [CountryMetaResponse](#CountryMetaResponse)? |  yes  |  |
+ | displayName | String? |  yes  |  |
 
 ---
 
@@ -816,8 +816,8 @@ Get Locality data
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | success | Boolean |  no  |  |
- | data | ArrayList<[PincodeDataResponse](#PincodeDataResponse)>? |  yes  |  |
  | error | [PincodeErrorSchemaResponse](#PincodeErrorSchemaResponse) |  no  |  |
+ | data | ArrayList<[PincodeDataResponse](#PincodeDataResponse)>? |  yes  |  |
 
 ---
 
@@ -828,8 +828,8 @@ Get Locality data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | id | Int? |  yes  |  |
  | level | String? |  yes  |  |
+ | id | Int? |  yes  |  |
 
 ---
 
@@ -866,24 +866,25 @@ Get Locality data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | action | String? |  yes  |  |
- | locationDetails | ArrayList<[TATLocationDetailsRequest](#TATLocationDetailsRequest)>? |  yes  |  |
+ | identifier | String? |  yes  |  |
  | toPincode | String? |  yes  |  |
  | source | String? |  yes  |  |
  | journey | String? |  yes  |  |
- | identifier | String? |  yes  |  |
+ | locationDetails | ArrayList<[TATLocationDetailsRequest](#TATLocationDetailsRequest)>? |  yes  |  |
+ | action | String? |  yes  |  |
 
 ---
 
 
  
  
- #### [TATFormattedResponse](#TATFormattedResponse)
+ #### [TATErrorSchemaResponse](#TATErrorSchemaResponse)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | max | String? |  yes  |  |
- | min | String? |  yes  |  |
+ | type | String? |  yes  |  |
+ | value | String? |  yes  |  |
+ | message | String? |  yes  |  |
 
 ---
 
@@ -902,25 +903,24 @@ Get Locality data
 
  
  
- #### [TATPromiseResponse](#TATPromiseResponse)
+ #### [TATFormattedResponse](#TATFormattedResponse)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | formatted | [TATFormattedResponse](#TATFormattedResponse)? |  yes  |  |
- | timestamp | [TATTimestampResponse](#TATTimestampResponse)? |  yes  |  |
+ | max | String? |  yes  |  |
+ | min | String? |  yes  |  |
 
 ---
 
 
  
  
- #### [TATErrorSchemaResponse](#TATErrorSchemaResponse)
+ #### [TATPromiseResponse](#TATPromiseResponse)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | type | String? |  yes  |  |
- | message | String? |  yes  |  |
- | value | String? |  yes  |  |
+ | timestamp | [TATTimestampResponse](#TATTimestampResponse)? |  yes  |  |
+ | formatted | [TATFormattedResponse](#TATFormattedResponse)? |  yes  |  |
 
 ---
 
@@ -931,13 +931,13 @@ Get Locality data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | category | [TATCategoryRequest](#TATCategoryRequest)? |  yes  |  |
- | manufacturingTimeSeconds | Int? |  yes  |  |
- | promise | [TATPromiseResponse](#TATPromiseResponse)? |  yes  |  |
  | manufacturingTimeUnit | String? |  yes  |  |
- | isCodAvailable | Boolean? |  yes  |  |
- | error | [TATErrorSchemaResponse](#TATErrorSchemaResponse)? |  yes  |  |
+ | manufacturingTimeSeconds | Int? |  yes  |  |
  | manufacturingTime | Int? |  yes  |  |
+ | promise | [TATPromiseResponse](#TATPromiseResponse)? |  yes  |  |
+ | error | [TATErrorSchemaResponse](#TATErrorSchemaResponse)? |  yes  |  |
+ | category | [TATCategoryRequest](#TATCategoryRequest)? |  yes  |  |
+ | isCodAvailable | Boolean? |  yes  |  |
 
 ---
 
@@ -961,19 +961,19 @@ Get Locality data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | action | String? |  yes  |  |
- | paymentMode | String? |  yes  |  |
  | requestUuid | String? |  yes  |  |
+ | paymentMode | String? |  yes  |  |
+ | identifier | String? |  yes  |  |
  | success | Boolean? |  yes  |  |
- | stormbreakerUuid | String? |  yes  |  |
- | locationDetails | ArrayList<[TATLocationDetailsResponse](#TATLocationDetailsResponse)>? |  yes  |  |
- | toCity | String? |  yes  |  |
  | toPincode | String? |  yes  |  |
  | source | String? |  yes  |  |
- | isCodAvailable | Boolean? |  yes  |  |
- | error | [TATErrorSchemaResponse](#TATErrorSchemaResponse)? |  yes  |  |
  | journey | String? |  yes  |  |
- | identifier | String? |  yes  |  |
+ | error | [TATErrorSchemaResponse](#TATErrorSchemaResponse)? |  yes  |  |
+ | locationDetails | ArrayList<[TATLocationDetailsResponse](#TATLocationDetailsResponse)>? |  yes  |  |
+ | stormbreakerUuid | String? |  yes  |  |
+ | isCodAvailable | Boolean? |  yes  |  |
+ | action | String? |  yes  |  |
+ | toCity | String? |  yes  |  |
 
 ---
 
@@ -1015,15 +1015,15 @@ Get Locality data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | subType | String? |  yes  |  |
- | displayName | String? |  yes  |  |
- | name | String? |  yes  |  |
- | type | String? |  yes  |  |
- | parentId | String? |  yes  |  |
- | logistics | [LogisticsResponse](#LogisticsResponse)? |  yes  |  |
- | meta | [CountryMetaResponse](#CountryMetaResponse)? |  yes  |  |
  | uid | String? |  yes  |  |
+ | type | String? |  yes  |  |
+ | name | String? |  yes  |  |
+ | parentId | String? |  yes  |  |
  | isActive | Boolean? |  yes  |  |
+ | logistics | [LogisticsResponse](#LogisticsResponse)? |  yes  |  |
+ | subType | String? |  yes  |  |
+ | meta | [CountryMetaResponse](#CountryMetaResponse)? |  yes  |  |
+ | displayName | String? |  yes  |  |
 
 ---
 
@@ -1069,11 +1069,11 @@ Get Locality data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | articles | ArrayList<HashMap<String,Any>> |  no  |  |
- | ignoredLocations | ArrayList<Int> |  no  |  |
- | toPincode | String |  no  |  |
  | identifier | String |  no  |  |
+ | toPincode | String |  no  |  |
+ | ignoredLocations | ArrayList<Int> |  no  |  |
  | configuration | HashMap<String,Any> |  no  |  |
+ | articles | ArrayList<HashMap<String,Any>> |  no  |  |
 
 ---
 
@@ -1084,8 +1084,8 @@ Get Locality data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | success | Boolean |  no  |  |
  | pystormbreakerUuid | String |  no  |  |
+ | success | Boolean |  no  |  |
  | toPincode | String |  no  |  |
  | error | HashMap<String,Any> |  no  |  |
  | assignedStores | ArrayList<HashMap<String,Any>>? |  yes  |  |
@@ -1111,14 +1111,14 @@ Get Locality data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | subType | String? |  yes  |  |
+ | uid | String? |  yes  |  |
  | actions | HashMap<String,Any>? |  yes  |  |
- | name | String? |  yes  |  |
- | phoneCode | String? |  yes  |  |
  | ios2 | String? |  yes  |  |
  | hierarchy | HashMap<String,Any>? |  yes  |  |
+ | name | String? |  yes  |  |
  | ios3 | String? |  yes  |  |
- | uid | String? |  yes  |  |
+ | subType | String? |  yes  |  |
+ | phoneCode | String? |  yes  |  |
  | currency | String? |  yes  |  |
  | timezones | ArrayList<String>? |  yes  |  |
 
@@ -1131,11 +1131,11 @@ Get Locality data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | current | Int? |  yes  |  |
  | type | String? |  yes  |  |
- | itemTotal | Int? |  yes  |  |
- | size | Int? |  yes  |  |
  | hasNext | Boolean? |  yes  |  |
+ | current | Int? |  yes  |  |
+ | size | Int? |  yes  |  |
+ | itemTotal | Int? |  yes  |  |
  | hasPrevious | Boolean? |  yes  |  |
 
 ---
@@ -1158,15 +1158,15 @@ Get Locality data
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | subType | String? |  yes  |  |
- | displayName | String? |  yes  |  |
- | name | String? |  yes  |  |
- | type | String? |  yes  |  |
- | parentId | ArrayList<String>? |  yes  |  |
- | logistics | [Logistics](#Logistics)? |  yes  |  |
- | meta | HashMap<String,Any>? |  yes  |  |
  | uid | String? |  yes  |  |
+ | type | String? |  yes  |  |
+ | name | String? |  yes  |  |
+ | parentId | ArrayList<String>? |  yes  |  |
  | isActive | Boolean? |  yes  |  |
+ | logistics | [Logistics](#Logistics)? |  yes  |  |
+ | subType | String? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
+ | displayName | String? |  yes  |  |
 
 ---
 
