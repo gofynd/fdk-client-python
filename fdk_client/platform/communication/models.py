@@ -236,6 +236,22 @@ class EventSubscriptions(BaseSchema):
     pass
 
 
+class GlobalVariablesGetResponse(BaseSchema):
+    pass
+
+
+class GlobalVariablesPostResponse(BaseSchema):
+    pass
+
+
+class GlobalVariablesPostResponseAdmin(BaseSchema):
+    pass
+
+
+class GlobalVariablesReq(BaseSchema):
+    pass
+
+
 class Job(BaseSchema):
     pass
 
@@ -1506,6 +1522,54 @@ class EventSubscriptions(BaseSchema):
     items = fields.List(fields.Nested(EventSubscription, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
+    
+
+
+class GlobalVariablesGetResponse(BaseSchema):
+    # Communication swagger.json
+
+    
+    read_only = fields.Dict(required=False)
+    
+    editable = fields.Dict(required=False)
+    
+
+
+class GlobalVariablesPostResponse(BaseSchema):
+    # Communication swagger.json
+
+    
+    _id = fields.Str(required=False)
+    
+    category = fields.Str(required=False)
+    
+    application = fields.Dict(required=False)
+    
+    global_variables = fields.Dict(required=False)
+    
+    created_at = fields.Dict(required=False)
+    
+
+
+class GlobalVariablesPostResponseAdmin(BaseSchema):
+    # Communication swagger.json
+
+    
+    _id = fields.Str(required=False)
+    
+    category = fields.Str(required=False)
+    
+    global_variables = fields.Dict(required=False)
+    
+    created_at = fields.Dict(required=False)
+    
+
+
+class GlobalVariablesReq(BaseSchema):
+    # Communication swagger.json
+
+    
+    global_variables = fields.Dict(required=False)
     
 
 

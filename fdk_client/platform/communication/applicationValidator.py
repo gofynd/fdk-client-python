@@ -162,6 +162,14 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
+        
+    
+    
+        
+        
         
         
         
@@ -636,6 +644,24 @@ class CommunicationValidator:
         populate = fields.List(fields.Str(required=False), required=False)
         
         query = fields.Str(required=False)
+         
+        
+    
+    class getGlobalVariables(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class postGlobalVariables(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
          
         
     
