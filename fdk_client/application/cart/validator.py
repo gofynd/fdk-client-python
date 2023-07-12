@@ -125,6 +125,7 @@ from ..ApplicationModel import BaseSchema
         
         
         
+        
     
     
         
@@ -410,6 +411,8 @@ class CartValidator:
         address_id = fields.Str(required=False)
         
         area_code = fields.Str(required=False)
+        
+        order_type = fields.Str(required=False)
          
         
     

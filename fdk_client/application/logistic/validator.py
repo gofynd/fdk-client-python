@@ -16,17 +16,6 @@ from ..ApplicationModel import BaseSchema
     
     
     
-    
-    
-    
-        
-    
-    
-        
-    
-    
-        
-        
 
 class LogisticValidator:
     
@@ -56,34 +45,6 @@ class LogisticValidator:
     class getOptimalLocations(BaseSchema):
         
         pass 
-        
-    
-    class getCountries(BaseSchema):
-        
-        pass 
-        
-    
-    class getCountry(BaseSchema):
-        
-        
-        uid = fields.Str(required=False)
-         
-        
-    
-    class getLocalities(BaseSchema):
-        
-        
-        region = fields.Str(required=False)
-         
-        
-    
-    class getLocality(BaseSchema):
-        
-        
-        region = fields.Str(required=False)
-        
-        value = fields.Str(required=False)
-         
         
     
     

@@ -1111,13 +1111,14 @@ class Cart:
 
         return response
     
-    async def getShipments(self, p=None, id=None, buy_now=None, address_id=None, area_code=None, body=""):
+    async def getShipments(self, p=None, id=None, buy_now=None, address_id=None, area_code=None, order_type=None, body=""):
         """Use this API to get shipment details, expected delivery date, items and price breakup of the shipment.
         :param p : This is a boolean value. Select `true` for getting a payment option in response. : type boolean
         :param id : The unique identifier of the cart : type string
         :param buy_now :  : type boolean
         :param address_id : ID allotted to the selected address : type string
         :param area_code : The PIN Code of the destination address, e.g. 400059 : type string
+        :param order_type : The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself. Digital - If the customer wants to buy digital voucher ( for jiogames ) : type string
         """
         payload = {}
         
@@ -1136,13 +1137,16 @@ class Cart:
         if area_code is not None:
             payload["area_code"] = area_code
         
+        if order_type is not None:
+            payload["order_type"] = order_type
+        
         # Parameter validation
         schema = CartValidator.getShipments()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getShipments"], proccessed_params="""{"required":[],"optional":[{"name":"p","description":"This is a boolean value. Select `true` for getting a payment option in response.","in":"query","schema":{"type":"boolean"}},{"name":"id","description":"The unique identifier of the cart","in":"query","schema":{"type":"string"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"name":"address_id","description":"ID allotted to the selected address","in":"query","schema":{"type":"string"}},{"name":"area_code","description":"The PIN Code of the destination address, e.g. 400059","in":"query","schema":{"type":"string"}}],"query":[{"name":"p","description":"This is a boolean value. Select `true` for getting a payment option in response.","in":"query","schema":{"type":"boolean"}},{"name":"id","description":"The unique identifier of the cart","in":"query","schema":{"type":"string"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"name":"address_id","description":"ID allotted to the selected address","in":"query","schema":{"type":"string"}},{"name":"area_code","description":"The PIN Code of the destination address, e.g. 400059","in":"query","schema":{"type":"string"}}],"headers":[],"path":[]}""", p=p, id=id, buy_now=buy_now, address_id=address_id, area_code=area_code)
-        query_string = await create_query_string(p=p, id=id, buy_now=buy_now, address_id=address_id, area_code=area_code)
+        url_with_params = await create_url_with_params(api_url=self._urls["getShipments"], proccessed_params="""{"required":[],"optional":[{"name":"p","description":"This is a boolean value. Select `true` for getting a payment option in response.","in":"query","schema":{"type":"boolean"}},{"name":"id","description":"The unique identifier of the cart","in":"query","schema":{"type":"string"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"name":"address_id","description":"ID allotted to the selected address","in":"query","schema":{"type":"string"}},{"name":"area_code","description":"The PIN Code of the destination address, e.g. 400059","in":"query","schema":{"type":"string"}},{"name":"order_type","description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself. Digital - If the customer wants to buy digital voucher ( for jiogames )","in":"query","schema":{"type":"string"}}],"query":[{"name":"p","description":"This is a boolean value. Select `true` for getting a payment option in response.","in":"query","schema":{"type":"boolean"}},{"name":"id","description":"The unique identifier of the cart","in":"query","schema":{"type":"string"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"name":"address_id","description":"ID allotted to the selected address","in":"query","schema":{"type":"string"}},{"name":"area_code","description":"The PIN Code of the destination address, e.g. 400059","in":"query","schema":{"type":"string"}},{"name":"order_type","description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself. Digital - If the customer wants to buy digital voucher ( for jiogames )","in":"query","schema":{"type":"string"}}],"headers":[],"path":[]}""", p=p, id=id, buy_now=buy_now, address_id=address_id, area_code=area_code, order_type=order_type)
+        query_string = await create_query_string(p=p, id=id, buy_now=buy_now, address_id=address_id, area_code=area_code, order_type=order_type)
         headers = {
             "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
         }
@@ -1154,7 +1158,7 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getShipments"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/shipment", p=p, id=id, buy_now=buy_now, address_id=address_id, area_code=area_code), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getShipments"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/shipment", p=p, id=id, buy_now=buy_now, address_id=address_id, area_code=area_code, order_type=order_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
         if 200 <= int(response['status_code']) < 300:
