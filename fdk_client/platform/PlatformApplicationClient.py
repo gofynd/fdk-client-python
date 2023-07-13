@@ -3,65 +3,66 @@
 from ..common.exceptions import FDKClientValidationError
 
 
+from .cart.applicationClient import Cart
+
+from .catalog.applicationClient import Catalog
+
+from .communication.applicationClient import Communication
+
+from .configuration.applicationClient import Configuration
+
+from .content.applicationClient import Content
+
+from .filestorage.applicationClient import FileStorage
+
 from .lead.applicationClient import Lead
+
+from .order.applicationClient import Order
+
+from .partner.applicationClient import Partner
+
+from .payment.applicationClient import Payment
+
+from .rewards.applicationClient import Rewards
+
+from .share.applicationClient import Share
 
 from .theme.applicationClient import Theme
 
 from .user.applicationClient import User
 
-from .content.applicationClient import Content
-
-from .communication.applicationClient import Communication
-
-from .payment.applicationClient import Payment
-
-from .catalog.applicationClient import Catalog
-
-from .filestorage.applicationClient import FileStorage
-
-from .share.applicationClient import Share
-
-from .configuration.applicationClient import Configuration
-
-from .cart.applicationClient import Cart
-
-from .rewards.applicationClient import Rewards
-
-from .partner.applicationClient import Partner
-
-from .serviceability.applicationClient import Serviceability
-
 
 class PlatformApplicationClient:
     def __init__(self, applicationId, config):
+        self._conf = config
+        
+        self.cart = Cart(config, applicationId)
+        
+        self.catalog = Catalog(config, applicationId)
+        
+        self.communication = Communication(config, applicationId)
+        
+        self.configuration = Configuration(config, applicationId)
+        
+        self.content = Content(config, applicationId)
+        
+        self.fileStorage = FileStorage(config, applicationId)
         
         self.lead = Lead(config, applicationId)
+        
+        self.order = Order(config, applicationId)
+        
+        self.partner = Partner(config, applicationId)
+        
+        self.payment = Payment(config, applicationId)
+        
+        self.rewards = Rewards(config, applicationId)
+        
+        self.share = Share(config, applicationId)
         
         self.theme = Theme(config, applicationId)
         
         self.user = User(config, applicationId)
-        
-        self.content = Content(config, applicationId)
-        
-        self.communication = Communication(config, applicationId)
-        
-        self.payment = Payment(config, applicationId)
-        
-        self.catalog = Catalog(config, applicationId)
-        
-        self.fileStorage = FileStorage(config, applicationId)
-        
-        self.share = Share(config, applicationId)
-        
-        self.configuration = Configuration(config, applicationId)
-        
-        self.cart = Cart(config, applicationId)
-        
-        self.rewards = Rewards(config, applicationId)
-        
-        self.partner = Partner(config, applicationId)
-        
-        self.serviceability = Serviceability(config, applicationId)
         
 
     async def setExtraHeaders(self, header):

@@ -4,72 +4,80 @@ from .PlatformApplicationClient import PlatformApplicationClient
 from ..common.exceptions import FDKClientValidationError
 
 
-from .common.client import Common
-
-from .lead.client import Lead
+from .audittrail.client import AuditTrail
 
 from .billing.client import Billing
 
-from .communication.client import Communication
-
-from .payment.client import Payment
-
 from .catalog.client import Catalog
 
+from .common.client import Common
+
+from .communication.client import Communication
+
 from .companyprofile.client import CompanyProfile
-
-from .filestorage.client import FileStorage
-
-from .inventory.client import Inventory
 
 from .configuration.client import Configuration
 
 from .discount.client import Discount
 
+from .filestorage.client import FileStorage
+
+from .finance.client import Finance
+
+from .inventory.client import Inventory
+
+from .lead.client import Lead
+
+from .order.client import Order
+
+from .partner.client import Partner
+
+from .payment.client import Payment
+
 from .webhook.client import Webhook
-
-from .audittrail.client import AuditTrail
-
-from .serviceability.client import Serviceability
 
 
 class PlatformClient:
     def __init__(self, config):
-        self._conf = config
+        self.config = config
         
-        self.common = Common(config)
-        
-        self.lead = Lead(config)
+        self.auditTrail = AuditTrail(config)
         
         self.billing = Billing(config)
         
-        self.communication = Communication(config)
-        
-        self.payment = Payment(config)
-        
         self.catalog = Catalog(config)
         
+        self.common = Common(config)
+        
+        self.communication = Communication(config)
+        
         self.companyProfile = CompanyProfile(config)
-        
-        self.fileStorage = FileStorage(config)
-        
-        self.inventory = Inventory(config)
         
         self.configuration = Configuration(config)
         
         self.discount = Discount(config)
         
+        self.fileStorage = FileStorage(config)
+        
+        self.finance = Finance(config)
+        
+        self.inventory = Inventory(config)
+        
+        self.lead = Lead(config)
+        
+        self.order = Order(config)
+        
+        self.partner = Partner(config)
+        
+        self.payment = Payment(config)
+        
         self.webhook = Webhook(config)
-        
-        self.auditTrail = AuditTrail(config)
-        
-        self.serviceability = Serviceability(config)
         
 
     def application(self, applicationId):
-        return PlatformApplicationClient(applicationId, self._conf)
+        return PlatformApplicationClient(applicationId, self.config)
 
-    async def setExtraHeaders(self, header):
+    def setExtraHeaders(self, header):
         if header and type(header) == dict:
             self.config.extraHeaders.append(header)
         else:

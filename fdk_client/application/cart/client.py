@@ -41,7 +41,8 @@ class Cart:
             "getCartSharedItems": "/service/application/cart/v1.0/share-cart/{token}",
             "updateCartWithSharedItems": "/service/application/cart/v1.0/share-cart/{token}/{action}",
             "getPromotionOffers": "/service/application/cart/v1.0/available-promotions",
-            "getLadderOffers": "/service/application/cart/v1.0/available-ladder-prices"
+            "getLadderOffers": "/service/application/cart/v1.0/available-ladder-prices",
+            "checkoutCartV2": "/service/application/cart/v2.0/checkout"
             
         }
         self._urls = {
@@ -62,22 +63,22 @@ class Cart:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
-        if i:
+        if i is not None:
             payload["i"] = i
         
-        if b:
+        if b is not None:
             payload["b"] = b
         
-        if assign_card_id:
+        if assign_card_id is not None:
             payload["assign_card_id"] = assign_card_id
         
-        if area_code:
+        if area_code is not None:
             payload["area_code"] = area_code
         
-        if buy_now:
+        if buy_now is not None:
             payload["buy_now"] = buy_now
         
         # Parameter validation
@@ -98,7 +99,21 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCart"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/detail", id=id, i=i, b=b, assign_card_id=assign_card_id, area_code=area_code, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCart"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/detail", id=id, i=i, b=b, assign_card_id=assign_card_id, area_code=area_code, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CartDetailResponse
+            schema = CartDetailResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCart")
+                print(e)
+
+        
+
+        return response
     
     async def getCartLastModified(self, id=None, body=""):
         """Use this API to fetch Last-Modified timestamp in header metadata.
@@ -106,7 +121,7 @@ class Cart:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
         # Parameter validation
@@ -127,28 +142,36 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("HEAD", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCartLastModified"]).netloc, "head", await create_url_without_domain("/service/application/cart/v1.0/detail", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("HEAD", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCartLastModified"]).netloc, "head", await create_url_without_domain("/service/application/cart/v1.0/detail", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+
+        return response
     
-    async def addItems(self, i=None, b=None, area_code=None, buy_now=None, body=""):
+    async def addItems(self, i=None, b=None, area_code=None, buy_now=None, id=None, body=""):
         """Use this API to add items to the cart.
         :param i :  : type boolean
         :param b :  : type boolean
         :param area_code :  : type string
         :param buy_now :  : type boolean
+        :param id :  : type string
         """
         payload = {}
         
-        if i:
+        if i is not None:
             payload["i"] = i
         
-        if b:
+        if b is not None:
             payload["b"] = b
         
-        if area_code:
+        if area_code is not None:
             payload["area_code"] = area_code
         
-        if buy_now:
+        if buy_now is not None:
             payload["buy_now"] = buy_now
+        
+        if id is not None:
+            payload["id"] = id
         
         # Parameter validation
         schema = CartValidator.addItems()
@@ -160,8 +183,8 @@ class Cart:
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["addItems"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"i","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."}},{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}},{"in":"query","name":"area_code","schema":{"type":"string","description":"Customer servicable area_code"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is a boolen value. Select `true` to set/initialize buy now cart"}}],"query":[{"in":"query","name":"i","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."}},{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}},{"in":"query","name":"area_code","schema":{"type":"string","description":"Customer servicable area_code"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is a boolen value. Select `true` to set/initialize buy now cart"}}],"headers":[],"path":[]}""", i=i, b=b, area_code=area_code, buy_now=buy_now)
-        query_string = await create_query_string(i=i, b=b, area_code=area_code, buy_now=buy_now)
+        url_with_params = await create_url_with_params(api_url=self._urls["addItems"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"i","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."}},{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}},{"in":"query","name":"area_code","schema":{"type":"string","description":"Customer servicable area_code"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is a boolen value. Select `true` to set/initialize buy now cart"}},{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}}],"query":[{"in":"query","name":"i","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."}},{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}},{"in":"query","name":"area_code","schema":{"type":"string","description":"Customer servicable area_code"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is a boolen value. Select `true` to set/initialize buy now cart"}},{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}}],"headers":[],"path":[]}""", i=i, b=b, area_code=area_code, buy_now=buy_now, id=id)
+        query_string = await create_query_string(i=i, b=b, area_code=area_code, buy_now=buy_now, id=id)
         headers = {
             "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
         }
@@ -173,7 +196,21 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["addItems"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/detail", i=i, b=b, area_code=area_code, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["addItems"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/detail", i=i, b=b, area_code=area_code, buy_now=buy_now, id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AddCartDetailResponse
+            schema = AddCartDetailResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for addItems")
+                print(e)
+
+        
+
+        return response
     
     async def updateCart(self, id=None, i=None, b=None, area_code=None, buy_now=None, body=""):
         """<p>Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size. These attributes will be fetched from the following APIs</p> <ul> <li><font color="monochrome">operation</font> Operation for current api call. <b>update_item</b> for update items. <b>remove_item</b> for removing items.</li> <li> <font color="monochrome">item_id</font>  "/platform/content/v1/products/"</li> <li> <font color="monochrome">item_size</font>   "/platform/content/v1/products/:slug/sizes/"</li> <li> <font color="monochrome">quantity</font>  item quantity (must be greater than or equal to 1)</li> <li> <font color="monochrome">article_id</font>   "/content​/v1​/products​/:identifier​/sizes​/price​/"</li> <li> <font color="monochrome">item_index</font>  item position in the cart (must be greater than or equal to 0)</li> </ul>
@@ -185,19 +222,19 @@ class Cart:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
-        if i:
+        if i is not None:
             payload["i"] = i
         
-        if b:
+        if b is not None:
             payload["b"] = b
         
-        if area_code:
+        if area_code is not None:
             payload["area_code"] = area_code
         
-        if buy_now:
+        if buy_now is not None:
             payload["buy_now"] = buy_now
         
         # Parameter validation
@@ -223,15 +260,29 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["updateCart"]).netloc, "put", await create_url_without_domain("/service/application/cart/v1.0/detail", id=id, i=i, b=b, area_code=area_code, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["updateCart"]).netloc, "put", await create_url_without_domain("/service/application/cart/v1.0/detail", id=id, i=i, b=b, area_code=area_code, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UpdateCartDetailResponse
+            schema = UpdateCartDetailResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateCart")
+                print(e)
+
+        
+
+        return response
     
     async def deleteCart(self, id=None, body=""):
         """Use this API to delete the cart.
-        :param id : The unique identifier of the cart. : type integer
+        :param id : The unique identifier of the cart. : type string
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
         # Parameter validation
@@ -239,7 +290,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["deleteCart"], proccessed_params="""{"required":[],"optional":[{"name":"id","in":"query","description":"The unique identifier of the cart.","schema":{"type":"integer"}}],"query":[{"name":"id","in":"query","description":"The unique identifier of the cart.","schema":{"type":"integer"}}],"headers":[],"path":[]}""", id=id)
+        url_with_params = await create_url_with_params(api_url=self._urls["deleteCart"], proccessed_params="""{"required":[],"optional":[{"name":"id","in":"query","description":"The unique identifier of the cart.","schema":{"type":"string"}}],"query":[{"name":"id","in":"query","description":"The unique identifier of the cart.","schema":{"type":"string"}}],"headers":[],"path":[]}""", id=id)
         query_string = await create_query_string(id=id)
         headers = {
             "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
@@ -252,7 +303,21 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["deleteCart"]).netloc, "put", await create_url_without_domain("/service/application/cart/v1.0/cart_archive", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["deleteCart"]).netloc, "put", await create_url_without_domain("/service/application/cart/v1.0/cart_archive", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DeleteCartDetailResponse
+            schema = DeleteCartDetailResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteCart")
+                print(e)
+
+        
+
+        return response
     
     async def getItemCount(self, id=None, buy_now=None, body=""):
         """Use this API to get the total number of items present in cart.
@@ -261,10 +326,10 @@ class Cart:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
-        if buy_now:
+        if buy_now is not None:
             payload["buy_now"] = buy_now
         
         # Parameter validation
@@ -285,7 +350,21 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getItemCount"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/basic", id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getItemCount"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/basic", id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CartItemCountResponse
+            schema = CartItemCountResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getItemCount")
+                print(e)
+
+        
+
+        return response
     
     async def getCoupons(self, id=None, buy_now=None, body=""):
         """Use this API to get a list of available coupons along with their details.
@@ -294,10 +373,10 @@ class Cart:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
-        if buy_now:
+        if buy_now is not None:
             payload["buy_now"] = buy_now
         
         # Parameter validation
@@ -318,7 +397,21 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCoupons"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/coupon", id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCoupons"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/coupon", id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetCouponResponse
+            schema = GetCouponResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCoupons")
+                print(e)
+
+        
+
+        return response
     
     async def applyCoupon(self, i=None, b=None, p=None, id=None, buy_now=None, body=""):
         """Use this API to apply coupons on items in the cart.
@@ -330,19 +423,19 @@ class Cart:
         """
         payload = {}
         
-        if i:
+        if i is not None:
             payload["i"] = i
         
-        if b:
+        if b is not None:
             payload["b"] = b
         
-        if p:
+        if p is not None:
             payload["p"] = p
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
-        if buy_now:
+        if buy_now is not None:
             payload["buy_now"] = buy_now
         
         # Parameter validation
@@ -368,7 +461,21 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["applyCoupon"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/coupon", i=i, b=b, p=p, id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["applyCoupon"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/coupon", i=i, b=b, p=p, id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CartDetailResponse
+            schema = CartDetailResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for applyCoupon")
+                print(e)
+
+        
+
+        return response
     
     async def removeCoupon(self, id=None, buy_now=None, body=""):
         """Remove Coupon applied on the cart by passing uid in request body.
@@ -377,10 +484,10 @@ class Cart:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
-        if buy_now:
+        if buy_now is not None:
             payload["buy_now"] = buy_now
         
         # Parameter validation
@@ -401,7 +508,21 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["removeCoupon"]).netloc, "delete", await create_url_without_domain("/service/application/cart/v1.0/coupon", id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["removeCoupon"]).netloc, "delete", await create_url_without_domain("/service/application/cart/v1.0/coupon", id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CartDetailResponse
+            schema = CartDetailResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for removeCoupon")
+                print(e)
+
+        
+
+        return response
     
     async def getBulkDiscountOffers(self, item_id=None, article_id=None, uid=None, slug=None, body=""):
         """Use this API to get a list of applicable offers along with current, next and best offer for given product. Either one of uid, item_id, slug should be present.
@@ -412,16 +533,16 @@ class Cart:
         """
         payload = {}
         
-        if item_id:
+        if item_id is not None:
             payload["item_id"] = item_id
         
-        if article_id:
+        if article_id is not None:
             payload["article_id"] = article_id
         
-        if uid:
+        if uid is not None:
             payload["uid"] = uid
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
         # Parameter validation
@@ -442,7 +563,21 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getBulkDiscountOffers"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/bulk-price", item_id=item_id, article_id=article_id, uid=uid, slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getBulkDiscountOffers"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/bulk-price", item_id=item_id, article_id=article_id, uid=uid, slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BulkPriceResponse
+            schema = BulkPriceResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getBulkDiscountOffers")
+                print(e)
+
+        
+
+        return response
     
     async def applyRewardPoints(self, id=None, i=None, b=None, buy_now=None, body=""):
         """Use this API to redeem a fixed no. of reward points by applying it to the cart.
@@ -453,16 +588,16 @@ class Cart:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
-        if i:
+        if i is not None:
             payload["i"] = i
         
-        if b:
+        if b is not None:
             payload["b"] = b
         
-        if buy_now:
+        if buy_now is not None:
             payload["buy_now"] = buy_now
         
         # Parameter validation
@@ -488,7 +623,21 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["applyRewardPoints"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/redeem/points/", id=id, i=i, b=b, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["applyRewardPoints"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/redeem/points/", id=id, i=i, b=b, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CartDetailResponse
+            schema = CartDetailResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for applyRewardPoints")
+                print(e)
+
+        
+
+        return response
     
     async def getAddresses(self, cart_id=None, buy_now=None, mobile_no=None, checkout_mode=None, tags=None, is_default=None, body=""):
         """Use this API to get all the addresses associated with an account. If successful, returns a Address resource in the response body specified in GetAddressesResponse.attibutes listed below are optional <ul> <li> <font color="monochrome">uid</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">mobile_no</font></li> <li> <font color="monochrome">checkout_mode</font></li> <li> <font color="monochrome">tags</font></li> <li> <font color="monochrome">default</font></li> </ul>
@@ -501,22 +650,22 @@ class Cart:
         """
         payload = {}
         
-        if cart_id:
+        if cart_id is not None:
             payload["cart_id"] = cart_id
         
-        if buy_now:
+        if buy_now is not None:
             payload["buy_now"] = buy_now
         
-        if mobile_no:
+        if mobile_no is not None:
             payload["mobile_no"] = mobile_no
         
-        if checkout_mode:
+        if checkout_mode is not None:
             payload["checkout_mode"] = checkout_mode
         
-        if tags:
+        if tags is not None:
             payload["tags"] = tags
         
-        if is_default:
+        if is_default is not None:
             payload["is_default"] = is_default
         
         # Parameter validation
@@ -537,7 +686,21 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAddresses"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/address", cart_id=cart_id, buy_now=buy_now, mobile_no=mobile_no, checkout_mode=checkout_mode, tags=tags, is_default=is_default), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAddresses"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/address", cart_id=cart_id, buy_now=buy_now, mobile_no=mobile_no, checkout_mode=checkout_mode, tags=tags, is_default=is_default), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetAddressesResponse
+            schema = GetAddressesResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAddresses")
+                print(e)
+
+        
+
+        return response
     
     async def addAddress(self, body=""):
         """Use this API to add an address to an account.
@@ -567,7 +730,21 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["addAddress"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/address", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["addAddress"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/address", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SaveAddressResponse
+            schema = SaveAddressResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for addAddress")
+                print(e)
+
+        
+
+        return response
     
     async def getAddressById(self, id=None, cart_id=None, buy_now=None, mobile_no=None, checkout_mode=None, tags=None, is_default=None, body=""):
         """Use this API to get an addresses using its ID. If successful, returns a Address resource in the response body specified in `Address`. Attibutes listed below are optional <ul> <li> <font color="monochrome">mobile_no</font></li> <li> <font color="monochrome">checkout_mode</font></li> <li> <font color="monochrome">tags</font></li> <li> <font color="monochrome">default</font></li> </ul>
@@ -581,25 +758,25 @@ class Cart:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
-        if cart_id:
+        if cart_id is not None:
             payload["cart_id"] = cart_id
         
-        if buy_now:
+        if buy_now is not None:
             payload["buy_now"] = buy_now
         
-        if mobile_no:
+        if mobile_no is not None:
             payload["mobile_no"] = mobile_no
         
-        if checkout_mode:
+        if checkout_mode is not None:
             payload["checkout_mode"] = checkout_mode
         
-        if tags:
+        if tags is not None:
             payload["tags"] = tags
         
-        if is_default:
+        if is_default is not None:
             payload["is_default"] = is_default
         
         # Parameter validation
@@ -620,7 +797,21 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAddressById"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/address/{id}", id=id, cart_id=cart_id, buy_now=buy_now, mobile_no=mobile_no, checkout_mode=checkout_mode, tags=tags, is_default=is_default), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAddressById"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/address/{id}", id=id, cart_id=cart_id, buy_now=buy_now, mobile_no=mobile_no, checkout_mode=checkout_mode, tags=tags, is_default=is_default), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Address
+            schema = Address()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAddressById")
+                print(e)
+
+        
+
+        return response
     
     async def updateAddress(self, id=None, body=""):
         """<p>Use this API to update an existing address in the account. Request object should contain attributes mentioned in  <font color="blue">Address </font> can be updated. These attributes are:</p> <ul> <li> <font color="monochrome">is_default_address</font></li> <li> <font color="monochrome">landmark</font></li> <li> <font color="monochrome">area</font></li> <li> <font color="monochrome">pincode</font></li> <li> <font color="monochrome">email</font></li> <li> <font color="monochrome">address_type</font></li> <li> <font color="monochrome">name</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">address</font></li> </ul>
@@ -628,7 +819,7 @@ class Cart:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
         # Parameter validation
@@ -654,7 +845,21 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["updateAddress"]).netloc, "put", await create_url_without_domain("/service/application/cart/v1.0/address/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["updateAddress"]).netloc, "put", await create_url_without_domain("/service/application/cart/v1.0/address/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UpdateAddressResponse
+            schema = UpdateAddressResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateAddress")
+                print(e)
+
+        
+
+        return response
     
     async def removeAddress(self, id=None, body=""):
         """Use this API to delete an address by its ID. This will returns an object that will indicate whether the address was deleted successfully or not.
@@ -662,7 +867,7 @@ class Cart:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
         # Parameter validation
@@ -683,7 +888,21 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["removeAddress"]).netloc, "delete", await create_url_without_domain("/service/application/cart/v1.0/address/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["removeAddress"]).netloc, "delete", await create_url_without_domain("/service/application/cart/v1.0/address/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DeleteAddressResponse
+            schema = DeleteAddressResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for removeAddress")
+                print(e)
+
+        
+
+        return response
     
     async def selectAddress(self, cart_id=None, buy_now=None, i=None, b=None, body=""):
         """<p>Select Address from all addresses associated with the account in order to ship the cart items to that address, otherwise default address will be selected implicitly. See `SelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, this API returns a Cart object. Below address attributes are required. <ul> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">billing_address_id</font></li> <li> <font color="monochrome">uid</font></li> </ul></p>
@@ -694,16 +913,16 @@ class Cart:
         """
         payload = {}
         
-        if cart_id:
+        if cart_id is not None:
             payload["cart_id"] = cart_id
         
-        if buy_now:
+        if buy_now is not None:
             payload["buy_now"] = buy_now
         
-        if i:
+        if i is not None:
             payload["i"] = i
         
-        if b:
+        if b is not None:
             payload["b"] = b
         
         # Parameter validation
@@ -729,7 +948,21 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["selectAddress"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/select-address", cart_id=cart_id, buy_now=buy_now, i=i, b=b), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["selectAddress"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/select-address", cart_id=cart_id, buy_now=buy_now, i=i, b=b), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CartDetailResponse
+            schema = CartDetailResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for selectAddress")
+                print(e)
+
+        
+
+        return response
     
     async def selectPaymentMode(self, id=None, buy_now=None, body=""):
         """Use this API to update cart payment.
@@ -738,10 +971,10 @@ class Cart:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
-        if buy_now:
+        if buy_now is not None:
             payload["buy_now"] = buy_now
         
         # Parameter validation
@@ -767,9 +1000,23 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["selectPaymentMode"]).netloc, "put", await create_url_without_domain("/service/application/cart/v1.0/payment", id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["selectPaymentMode"]).netloc, "put", await create_url_without_domain("/service/application/cart/v1.0/payment", id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CartDetailResponse
+            schema = CartDetailResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for selectPaymentMode")
+                print(e)
+
+        
+
+        return response
     
-    async def validateCouponForPayment(self, id=None, buy_now=None, address_id=None, payment_mode=None, payment_identifier=None, aggregator_name=None, merchant_code=None, body=""):
+    async def validateCouponForPayment(self, id=None, buy_now=None, address_id=None, payment_mode=None, payment_identifier=None, aggregator_name=None, merchant_code=None, iin=None, network=None, type=None, card_id=None, body=""):
         """Use this API to validate a coupon against the payment mode such as NetBanking, Wallet, UPI etc.
         :param id :  : type string
         :param buy_now :  : type boolean
@@ -778,37 +1025,53 @@ class Cart:
         :param payment_identifier :  : type string
         :param aggregator_name :  : type string
         :param merchant_code :  : type string
+        :param iin :  : type string
+        :param network :  : type string
+        :param type :  : type string
+        :param card_id :  : type string
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
-        if buy_now:
+        if buy_now is not None:
             payload["buy_now"] = buy_now
         
-        if address_id:
+        if address_id is not None:
             payload["address_id"] = address_id
         
-        if payment_mode:
+        if payment_mode is not None:
             payload["payment_mode"] = payment_mode
         
-        if payment_identifier:
+        if payment_identifier is not None:
             payload["payment_identifier"] = payment_identifier
         
-        if aggregator_name:
+        if aggregator_name is not None:
             payload["aggregator_name"] = aggregator_name
         
-        if merchant_code:
+        if merchant_code is not None:
             payload["merchant_code"] = merchant_code
+        
+        if iin is not None:
+            payload["iin"] = iin
+        
+        if network is not None:
+            payload["network"] = network
+        
+        if type is not None:
+            payload["type"] = type
+        
+        if card_id is not None:
+            payload["card_id"] = card_id
         
         # Parameter validation
         schema = CartValidator.validateCouponForPayment()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["validateCouponForPayment"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"address_id","schema":{"type":"string","description":"ID allotted to an address"}},{"in":"query","name":"payment_mode","schema":{"type":"string","description":"Payment mode selected by the customer"}},{"in":"query","name":"payment_identifier","schema":{"type":"string","description":"Identifier of payment like ICIC, PAYTM"}},{"in":"query","name":"aggregator_name","schema":{"type":"string","description":"Payment gateway identifier"}},{"in":"query","name":"merchant_code","schema":{"type":"string","description":"Identifier used by payment gateway for a given payment mode, e.g. NB_ICIC, PAYTM"}}],"query":[{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"address_id","schema":{"type":"string","description":"ID allotted to an address"}},{"in":"query","name":"payment_mode","schema":{"type":"string","description":"Payment mode selected by the customer"}},{"in":"query","name":"payment_identifier","schema":{"type":"string","description":"Identifier of payment like ICIC, PAYTM"}},{"in":"query","name":"aggregator_name","schema":{"type":"string","description":"Payment gateway identifier"}},{"in":"query","name":"merchant_code","schema":{"type":"string","description":"Identifier used by payment gateway for a given payment mode, e.g. NB_ICIC, PAYTM"}}],"headers":[],"path":[]}""", id=id, buy_now=buy_now, address_id=address_id, payment_mode=payment_mode, payment_identifier=payment_identifier, aggregator_name=aggregator_name, merchant_code=merchant_code)
-        query_string = await create_query_string(id=id, buy_now=buy_now, address_id=address_id, payment_mode=payment_mode, payment_identifier=payment_identifier, aggregator_name=aggregator_name, merchant_code=merchant_code)
+        url_with_params = await create_url_with_params(api_url=self._urls["validateCouponForPayment"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"address_id","schema":{"type":"string","description":"ID allotted to an address"}},{"in":"query","name":"payment_mode","schema":{"type":"string","description":"Payment mode selected by the customer"}},{"in":"query","name":"payment_identifier","schema":{"type":"string","description":"Identifier of payment like ICIC, PAYTM"}},{"in":"query","name":"aggregator_name","schema":{"type":"string","description":"Payment gateway identifier"}},{"in":"query","name":"merchant_code","schema":{"type":"string","description":"Identifier used by payment gateway for a given payment mode, e.g. NB_ICIC, PAYTM"}},{"in":"query","name":"iin","schema":{"type":"string","description":"Debit/Credit card prefix (first 6 digit)"}},{"in":"query","name":"network","schema":{"type":"string","description":"Credit/Debit card issuer, e.g. VISA, MASTERCARD, RUPAY"}},{"in":"query","name":"type","schema":{"type":"string","description":"card type, e.g. Credit, Debit"}},{"in":"query","name":"card_id","schema":{"type":"string","description":"saved card token reference id"}}],"query":[{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"address_id","schema":{"type":"string","description":"ID allotted to an address"}},{"in":"query","name":"payment_mode","schema":{"type":"string","description":"Payment mode selected by the customer"}},{"in":"query","name":"payment_identifier","schema":{"type":"string","description":"Identifier of payment like ICIC, PAYTM"}},{"in":"query","name":"aggregator_name","schema":{"type":"string","description":"Payment gateway identifier"}},{"in":"query","name":"merchant_code","schema":{"type":"string","description":"Identifier used by payment gateway for a given payment mode, e.g. NB_ICIC, PAYTM"}},{"in":"query","name":"iin","schema":{"type":"string","description":"Debit/Credit card prefix (first 6 digit)"}},{"in":"query","name":"network","schema":{"type":"string","description":"Credit/Debit card issuer, e.g. VISA, MASTERCARD, RUPAY"}},{"in":"query","name":"type","schema":{"type":"string","description":"card type, e.g. Credit, Debit"}},{"in":"query","name":"card_id","schema":{"type":"string","description":"saved card token reference id"}}],"headers":[],"path":[]}""", id=id, buy_now=buy_now, address_id=address_id, payment_mode=payment_mode, payment_identifier=payment_identifier, aggregator_name=aggregator_name, merchant_code=merchant_code, iin=iin, network=network, type=type, card_id=card_id)
+        query_string = await create_query_string(id=id, buy_now=buy_now, address_id=address_id, payment_mode=payment_mode, payment_identifier=payment_identifier, aggregator_name=aggregator_name, merchant_code=merchant_code, iin=iin, network=network, type=type, card_id=card_id)
         headers = {
             "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
         }
@@ -820,40 +1083,58 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["validateCouponForPayment"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/payment/validate/", id=id, buy_now=buy_now, address_id=address_id, payment_mode=payment_mode, payment_identifier=payment_identifier, aggregator_name=aggregator_name, merchant_code=merchant_code), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["validateCouponForPayment"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/payment/validate/", id=id, buy_now=buy_now, address_id=address_id, payment_mode=payment_mode, payment_identifier=payment_identifier, aggregator_name=aggregator_name, merchant_code=merchant_code, iin=iin, network=network, type=type, card_id=card_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PaymentCouponValidate
+            schema = PaymentCouponValidate()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for validateCouponForPayment")
+                print(e)
+
+        
+
+        return response
     
-    async def getShipments(self, p=None, id=None, buy_now=None, address_id=None, area_code=None, body=""):
+    async def getShipments(self, p=None, id=None, buy_now=None, address_id=None, area_code=None, order_type=None, body=""):
         """Use this API to get shipment details, expected delivery date, items and price breakup of the shipment.
         :param p : This is a boolean value. Select `true` for getting a payment option in response. : type boolean
         :param id : The unique identifier of the cart : type string
         :param buy_now :  : type boolean
         :param address_id : ID allotted to the selected address : type string
         :param area_code : The PIN Code of the destination address, e.g. 400059 : type string
+        :param order_type : The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself. Digital - If the customer wants to buy digital voucher ( for jiogames ) : type string
         """
         payload = {}
         
-        if p:
+        if p is not None:
             payload["p"] = p
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
-        if buy_now:
+        if buy_now is not None:
             payload["buy_now"] = buy_now
         
-        if address_id:
+        if address_id is not None:
             payload["address_id"] = address_id
         
-        if area_code:
+        if area_code is not None:
             payload["area_code"] = area_code
+        
+        if order_type is not None:
+            payload["order_type"] = order_type
         
         # Parameter validation
         schema = CartValidator.getShipments()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getShipments"], proccessed_params="""{"required":[],"optional":[{"name":"p","description":"This is a boolean value. Select `true` for getting a payment option in response.","in":"query","schema":{"type":"boolean"}},{"name":"id","description":"The unique identifier of the cart","in":"query","schema":{"type":"string"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"name":"address_id","description":"ID allotted to the selected address","in":"query","schema":{"type":"string"}},{"name":"area_code","description":"The PIN Code of the destination address, e.g. 400059","in":"query","schema":{"type":"string"}}],"query":[{"name":"p","description":"This is a boolean value. Select `true` for getting a payment option in response.","in":"query","schema":{"type":"boolean"}},{"name":"id","description":"The unique identifier of the cart","in":"query","schema":{"type":"string"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"name":"address_id","description":"ID allotted to the selected address","in":"query","schema":{"type":"string"}},{"name":"area_code","description":"The PIN Code of the destination address, e.g. 400059","in":"query","schema":{"type":"string"}}],"headers":[],"path":[]}""", p=p, id=id, buy_now=buy_now, address_id=address_id, area_code=area_code)
-        query_string = await create_query_string(p=p, id=id, buy_now=buy_now, address_id=address_id, area_code=area_code)
+        url_with_params = await create_url_with_params(api_url=self._urls["getShipments"], proccessed_params="""{"required":[],"optional":[{"name":"p","description":"This is a boolean value. Select `true` for getting a payment option in response.","in":"query","schema":{"type":"boolean"}},{"name":"id","description":"The unique identifier of the cart","in":"query","schema":{"type":"string"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"name":"address_id","description":"ID allotted to the selected address","in":"query","schema":{"type":"string"}},{"name":"area_code","description":"The PIN Code of the destination address, e.g. 400059","in":"query","schema":{"type":"string"}},{"name":"order_type","description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself. Digital - If the customer wants to buy digital voucher ( for jiogames )","in":"query","schema":{"type":"string"}}],"query":[{"name":"p","description":"This is a boolean value. Select `true` for getting a payment option in response.","in":"query","schema":{"type":"boolean"}},{"name":"id","description":"The unique identifier of the cart","in":"query","schema":{"type":"string"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"name":"address_id","description":"ID allotted to the selected address","in":"query","schema":{"type":"string"}},{"name":"area_code","description":"The PIN Code of the destination address, e.g. 400059","in":"query","schema":{"type":"string"}},{"name":"order_type","description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself. Digital - If the customer wants to buy digital voucher ( for jiogames )","in":"query","schema":{"type":"string"}}],"headers":[],"path":[]}""", p=p, id=id, buy_now=buy_now, address_id=address_id, area_code=area_code, order_type=order_type)
+        query_string = await create_query_string(p=p, id=id, buy_now=buy_now, address_id=address_id, area_code=area_code, order_type=order_type)
         headers = {
             "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
         }
@@ -865,7 +1146,21 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getShipments"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/shipment", p=p, id=id, buy_now=buy_now, address_id=address_id, area_code=area_code), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getShipments"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/shipment", p=p, id=id, buy_now=buy_now, address_id=address_id, area_code=area_code, order_type=order_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CartShipmentsResponse
+            schema = CartShipmentsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getShipments")
+                print(e)
+
+        
+
+        return response
     
     async def checkoutCart(self, buy_now=None, body=""):
         """Use this API to checkout all items in the cart for payment and order generation. For COD, order will be directly generated, whereas for other checkout modes, user will be redirected to a payment gateway.
@@ -873,7 +1168,7 @@ class Cart:
         """
         payload = {}
         
-        if buy_now:
+        if buy_now is not None:
             payload["buy_now"] = buy_now
         
         # Parameter validation
@@ -899,7 +1194,21 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["checkoutCart"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/checkout", buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["checkoutCart"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/checkout", buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CartCheckoutResponse
+            schema = CartCheckoutResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for checkoutCart")
+                print(e)
+
+        
+
+        return response
     
     async def updateCartMeta(self, id=None, buy_now=None, body=""):
         """Use this API to update cart meta like checkout_mode and gstin.
@@ -908,10 +1217,10 @@ class Cart:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
-        if buy_now:
+        if buy_now is not None:
             payload["buy_now"] = buy_now
         
         # Parameter validation
@@ -937,7 +1246,21 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["updateCartMeta"]).netloc, "put", await create_url_without_domain("/service/application/cart/v1.0/meta", id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["updateCartMeta"]).netloc, "put", await create_url_without_domain("/service/application/cart/v1.0/meta", id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CartMetaResponse
+            schema = CartMetaResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateCartMeta")
+                print(e)
+
+        
+
+        return response
     
     async def getCartShareLink(self, body=""):
         """Use this API to generate a shared cart snapshot and return a shortlink token. The link can be shared with other users for getting the same items in their cart.
@@ -967,7 +1290,21 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCartShareLink"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/share-cart", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCartShareLink"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/share-cart", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetShareCartLinkResponse
+            schema = GetShareCartLinkResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCartShareLink")
+                print(e)
+
+        
+
+        return response
     
     async def getCartSharedItems(self, token=None, body=""):
         """Use this API to get the shared cart details as per the token generated using the share-cart API.
@@ -975,7 +1312,7 @@ class Cart:
         """
         payload = {}
         
-        if token:
+        if token is not None:
             payload["token"] = token
         
         # Parameter validation
@@ -996,7 +1333,21 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCartSharedItems"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/share-cart/{token}", token=token), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCartSharedItems"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/share-cart/{token}", token=token), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SharedCartResponse
+            schema = SharedCartResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCartSharedItems")
+                print(e)
+
+        
+
+        return response
     
     async def updateCartWithSharedItems(self, token=None, action=None, body=""):
         """Use this API to merge the shared cart with existing cart, or replace the existing cart with the shared cart. The `action` parameter is used to indicate the operation Merge or Replace.
@@ -1005,10 +1356,10 @@ class Cart:
         """
         payload = {}
         
-        if token:
+        if token is not None:
             payload["token"] = token
         
-        if action:
+        if action is not None:
             payload["action"] = action
         
         # Parameter validation
@@ -1029,32 +1380,50 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["updateCartWithSharedItems"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/share-cart/{token}/{action}", token=token, action=action), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["updateCartWithSharedItems"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/share-cart/{token}/{action}", token=token, action=action), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SharedCartResponse
+            schema = SharedCartResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateCartWithSharedItems")
+                print(e)
+
+        
+
+        return response
     
-    async def getPromotionOffers(self, slug=None, page_size=None, promotion_group=None, body=""):
+    async def getPromotionOffers(self, slug=None, page_size=None, promotion_group=None, store_id=None, body=""):
         """Use this API to get top 5 offers available for current product
         :param slug : A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ : type string
         :param page_size : Number of offers to be fetched to show : type integer
         :param promotion_group : Type of promotion groups : type string
+        :param store_id : Store id : type integer
         """
         payload = {}
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if promotion_group:
+        if promotion_group is not None:
             payload["promotion_group"] = promotion_group
+        
+        if store_id is not None:
+            payload["store_id"] = store_id
         
         # Parameter validation
         schema = CartValidator.getPromotionOffers()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getPromotionOffers"], proccessed_params="""{"required":[],"optional":[{"name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/","in":"query","schema":{"type":"string"}},{"name":"page_size","description":"Number of offers to be fetched to show","in":"query","schema":{"type":"integer"}},{"name":"promotion_group","description":"Type of promotion groups","in":"query","schema":{"type":"string"}}],"query":[{"name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/","in":"query","schema":{"type":"string"}},{"name":"page_size","description":"Number of offers to be fetched to show","in":"query","schema":{"type":"integer"}},{"name":"promotion_group","description":"Type of promotion groups","in":"query","schema":{"type":"string"}}],"headers":[],"path":[]}""", slug=slug, page_size=page_size, promotion_group=promotion_group)
-        query_string = await create_query_string(slug=slug, page_size=page_size, promotion_group=promotion_group)
+        url_with_params = await create_url_with_params(api_url=self._urls["getPromotionOffers"], proccessed_params="""{"required":[],"optional":[{"name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/","in":"query","schema":{"type":"string"}},{"name":"page_size","description":"Number of offers to be fetched to show","in":"query","schema":{"type":"integer"}},{"name":"promotion_group","description":"Type of promotion groups","in":"query","schema":{"type":"string"}},{"name":"store_id","description":"Store id","in":"query","schema":{"type":"integer"}}],"query":[{"name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/","in":"query","schema":{"type":"string"}},{"name":"page_size","description":"Number of offers to be fetched to show","in":"query","schema":{"type":"integer"}},{"name":"promotion_group","description":"Type of promotion groups","in":"query","schema":{"type":"string"}},{"name":"store_id","description":"Store id","in":"query","schema":{"type":"integer"}}],"headers":[],"path":[]}""", slug=slug, page_size=page_size, promotion_group=promotion_group, store_id=store_id)
+        query_string = await create_query_string(slug=slug, page_size=page_size, promotion_group=promotion_group, store_id=store_id)
         headers = {
             "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
         }
@@ -1066,7 +1435,21 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPromotionOffers"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/available-promotions", slug=slug, page_size=page_size, promotion_group=promotion_group), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPromotionOffers"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/available-promotions", slug=slug, page_size=page_size, promotion_group=promotion_group, store_id=store_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PromotionOffersResponse
+            schema = PromotionOffersResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPromotionOffers")
+                print(e)
+
+        
+
+        return response
     
     async def getLadderOffers(self, slug=None, store_id=None, promotion_id=None, page_size=None, body=""):
         """Use this API to get applicable ladder price promotion for current product
@@ -1077,16 +1460,16 @@ class Cart:
         """
         payload = {}
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
-        if store_id:
+        if store_id is not None:
             payload["store_id"] = store_id
         
-        if promotion_id:
+        if promotion_id is not None:
             payload["promotion_id"] = promotion_id
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
         # Parameter validation
@@ -1107,6 +1490,68 @@ class Cart:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getLadderOffers"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/available-ladder-prices", slug=slug, store_id=store_id, promotion_id=promotion_id, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getLadderOffers"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/available-ladder-prices", slug=slug, store_id=store_id, promotion_id=promotion_id, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import LadderPriceOffers
+            schema = LadderPriceOffers()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getLadderOffers")
+                print(e)
+
+        
+
+        return response
+    
+    async def checkoutCartV2(self, buy_now=None, body=""):
+        """Use this API to checkout all items in the cart for payment and order generation. For COD, order will be directly generated, whereas for other checkout modes, user will be redirected to a payment gateway.
+        :param buy_now : This indicates the type of cart to checkout : type boolean
+        """
+        payload = {}
+        
+        if buy_now is not None:
+            payload["buy_now"] = buy_now
+        
+        # Parameter validation
+        schema = CartValidator.checkoutCartV2()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import CartCheckoutDetailV2Request
+        schema = CartCheckoutDetailV2Request()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["checkoutCartV2"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"buy_now","description":"This indicates the type of cart to checkout","schema":{"type":"boolean"}}],"query":[{"in":"query","name":"buy_now","description":"This indicates the type of cart to checkout","schema":{"type":"boolean"}}],"headers":[],"path":[]}""", buy_now=buy_now)
+        query_string = await create_query_string(buy_now=buy_now)
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["checkoutCartV2"]).netloc, "post", await create_url_without_domain("/service/application/cart/v2.0/checkout", buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CartCheckoutResponse
+            schema = CartCheckoutResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for checkoutCartV2")
+                print(e)
+
+        
+
+        return response
     
 

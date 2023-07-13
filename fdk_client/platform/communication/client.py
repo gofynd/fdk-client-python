@@ -1,6 +1,6 @@
 
 
-""" Communication Platform Client."""
+"""Communication Platform Client"""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -10,6 +10,7 @@ from .validator import CommunicationValidator
 class Communication:
     def __init__(self, config):
         self._conf = config
+
     
     async def getSystemNotifications(self, page_no=None, page_size=None):
         """Get system notifications
@@ -18,10 +19,10 @@ class Communication:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -41,6 +42,21 @@ class Communication:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/notification/system-notifications/", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/notification/system-notifications/", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SystemNotifications
+            schema = SystemNotifications()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSystemNotifications")
+                print(e)
+
+        
+
+        return response
     
 

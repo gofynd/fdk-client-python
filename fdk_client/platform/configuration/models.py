@@ -3,9 +3,7 @@
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
 
-
 from ..PlatformModel import BaseSchema
-
 
 
 
@@ -151,6 +149,10 @@ class CommunicationConfig(BaseSchema):
 
 
 class CommsConfig(BaseSchema):
+    pass
+
+
+class PanCardConfig(BaseSchema):
     pass
 
 
@@ -939,6 +941,8 @@ class AppCartConfig(BaseSchema):
     
     revenue_engine_coupon = fields.Boolean(required=False)
     
+    pan_card = fields.Nested(PanCardConfig, required=False)
+    
 
 
 class DeliveryCharges(BaseSchema):
@@ -1240,6 +1244,18 @@ class CommsConfig(BaseSchema):
 
     
     enabled = fields.Boolean(required=False)
+    
+
+
+class PanCardConfig(BaseSchema):
+    # Configuration swagger.json
+
+    
+    enabled = fields.Boolean(required=False)
+    
+    cod_threshold_amount = fields.Float(required=False)
+    
+    online_threshold_amount = fields.Float(required=False)
     
 
 
