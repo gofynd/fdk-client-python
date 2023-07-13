@@ -35,6 +35,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -291,6 +292,8 @@ class OrderValidator:
         company_affiliate_tag = fields.Str(required=False)
         
         my_orders = fields.Boolean(required=False)
+        
+        platform_user_id = fields.Str(required=False)
          
         
     
