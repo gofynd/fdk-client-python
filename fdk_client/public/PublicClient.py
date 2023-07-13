@@ -5,9 +5,9 @@ from ..common.exceptions import FDKClientValidationError
 
 from .configuration.client import Configuration
 
-from .webhook.client import Webhook
-
 from .inventory.client import Inventory
+
+from .webhook.client import Webhook
 
 
 class PublicClient:
@@ -16,12 +16,12 @@ class PublicClient:
         
         self.configuration = Configuration(config)
         
-        self.webhook = Webhook(config)
-        
         self.inventory = Inventory(config)
         
+        self.webhook = Webhook(config)
+        
     
-    async def setExtraHeaders(self, header):
+    def setExtraHeaders(self, header):
         if header and type(header) == dict:
             self.config.extraHeaders.append(header)
         else:

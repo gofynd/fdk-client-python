@@ -3,9 +3,7 @@
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
 
-
 from ..PublicModel import BaseSchema
-
 
 
 from .enums import *
@@ -193,7 +191,7 @@ class SubscriberConfig(BaseSchema):
     
     custom_headers = fields.Dict(required=False)
     
-    status = fields.Nested(SubscriberStatus, required=False)
+    status = fields.Str(required=False, validate=OneOf([val.value for val in SubscriberStatus.__members__.values()]))
     
     email_id = fields.Str(required=False)
     
@@ -219,7 +217,7 @@ class SubscriberResponse(BaseSchema):
     
     email_id = fields.Str(required=False)
     
-    status = fields.Nested(SubscriberStatus, required=False)
+    status = fields.Str(required=False, validate=OneOf([val.value for val in SubscriberStatus.__members__.values()]))
     
     auth_meta = fields.Nested(AuthMeta, required=False)
     

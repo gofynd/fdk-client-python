@@ -26,20 +26,6 @@ from ..ApplicationModel import BaseSchema
         
         
         
-    
-    
-        
-        
-        
-        
-        
-    
-    
-        
-        
-    
-    
-        
         
     
     
@@ -56,6 +42,21 @@ from ..ApplicationModel import BaseSchema
     
         
         
+    
+    
+        
+        
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
         
         
     
@@ -107,17 +108,22 @@ from ..ApplicationModel import BaseSchema
         
         
         
-    
-    
-        
-        
-        
         
         
         
         
     
     
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
         
         
         
@@ -183,6 +189,8 @@ class PosCartValidator:
         area_code = fields.Str(required=False)
         
         buy_now = fields.Boolean(required=False)
+        
+        id = fields.Str(required=False)
          
         
     
@@ -362,6 +370,14 @@ class PosCartValidator:
         aggregator_name = fields.Str(required=False)
         
         merchant_code = fields.Str(required=False)
+        
+        iin = fields.Str(required=False)
+        
+        network = fields.Str(required=False)
+        
+        type = fields.Str(required=False)
+        
+        card_id = fields.Str(required=False)
          
         
     
@@ -394,6 +410,8 @@ class PosCartValidator:
         id = fields.Str(required=False)
         
         address_id = fields.Str(required=False)
+        
+        area_code = fields.Str(required=False)
         
         order_type = fields.Str(required=False)
          
