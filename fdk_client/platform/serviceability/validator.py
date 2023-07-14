@@ -62,20 +62,9 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
         
         
         
-        
-        
-        
-    
-    
-        
-        
-    
-    
         
         
     
@@ -85,6 +74,17 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
+        
+    
+    
+        
+        
+        
+    
+    
         
     
     
@@ -206,13 +206,6 @@ class ServiceabilityValidator:
          
         
     
-    class upsertDpAccount(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
     class getDpAccount(BaseSchema):
         
         
@@ -227,6 +220,13 @@ class ServiceabilityValidator:
         payment_mode = fields.Str(required=False)
         
         transport_type = fields.Str(required=False)
+         
+        
+    
+    class upsertDpAccount(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
          
         
     
@@ -248,13 +248,6 @@ class ServiceabilityValidator:
          
         
     
-    class upsertDpRules(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
     class getDpRuleInsert(BaseSchema):
         
         
@@ -263,6 +256,13 @@ class ServiceabilityValidator:
         page_number = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
+         
+        
+    
+    class upsertDpRules(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
          
         
     
