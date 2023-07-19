@@ -61,7 +61,7 @@ Get campaigns
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.getCampaigns(pageNo=pageNo, pageSize=pageSize, sort=sort)
+    result = await platformClient.application("<APPLICATION_ID>").communication.getCampaigns(pageNo=pageNo, pageSize=pageSize, sort=sort)
     # use result
 except Exception as e:
     print(e)
@@ -192,7 +192,7 @@ Create campaign
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.createCampaign(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").communication.createCampaign(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -283,7 +283,7 @@ Get campaign by id
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.getCampaignById(id=id)
+    result = await platformClient.application("<APPLICATION_ID>").communication.getCampaignById(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -375,7 +375,7 @@ Update campaign by id
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.updateCampaignById(id=id, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").communication.updateCampaignById(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -467,7 +467,7 @@ Get stats of campaign by id
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.getStatsOfCampaignById(id=id)
+    result = await platformClient.application("<APPLICATION_ID>").communication.getStatsOfCampaignById(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -551,7 +551,7 @@ Get audiences
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.getAudiences(pageNo=pageNo, pageSize=pageSize, sort=sort)
+    result = await platformClient.application("<APPLICATION_ID>").communication.getAudiences(pageNo=pageNo, pageSize=pageSize, sort=sort)
     # use result
 except Exception as e:
     print(e)
@@ -652,7 +652,7 @@ Create audience
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.createAudience(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").communication.createAudience(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -739,7 +739,7 @@ Get bigquery headers
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.getBigqueryHeaders(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").communication.getBigqueryHeaders(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -830,7 +830,7 @@ Get audience by id
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.getAudienceById(id=id)
+    result = await platformClient.application("<APPLICATION_ID>").communication.getAudienceById(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -918,7 +918,7 @@ Update audience by id
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.updateAudienceById(id=id, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").communication.updateAudienceById(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1006,7 +1006,7 @@ Get n sample records from csv
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.getNSampleRecordsFromCsv(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").communication.getNSampleRecordsFromCsv(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1078,7 +1078,7 @@ Get email providers
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.getEmailProviders(pageNo=pageNo, pageSize=pageSize, sort=sort)
+    result = await platformClient.application("<APPLICATION_ID>").communication.getEmailProviders(pageNo=pageNo, pageSize=pageSize, sort=sort)
     # use result
 except Exception as e:
     print(e)
@@ -1175,7 +1175,7 @@ Create email provider
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.createEmailProvider(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").communication.createEmailProvider(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1258,7 +1258,7 @@ Get email provider by id
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.getEmailProviderById(id=id)
+    result = await platformClient.application("<APPLICATION_ID>").communication.getEmailProviderById(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -1342,7 +1342,7 @@ Update email provider by id
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.updateEmailProviderById(id=id, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").communication.updateEmailProviderById(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1426,7 +1426,7 @@ Get email templates
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.getEmailTemplates(pageNo=pageNo, pageSize=pageSize, sort=sort)
+    result = await platformClient.application("<APPLICATION_ID>").communication.getEmailTemplates(pageNo=pageNo, pageSize=pageSize, sort=sort)
     # use result
 except Exception as e:
     print(e)
@@ -1535,7 +1535,7 @@ Create email template
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.createEmailTemplate(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").communication.createEmailTemplate(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1644,7 +1644,7 @@ Get system email templates
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.getSystemEmailTemplates(pageNo=pageNo, pageSize=pageSize, sort=sort)
+    result = await platformClient.application("<APPLICATION_ID>").communication.getSystemEmailTemplates(pageNo=pageNo, pageSize=pageSize, sort=sort)
     # use result
 except Exception as e:
     print(e)
@@ -1753,7 +1753,7 @@ Get email template by id
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.getEmailTemplateById(id=id)
+    result = await platformClient.application("<APPLICATION_ID>").communication.getEmailTemplateById(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -1849,7 +1849,7 @@ Update email template by id
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.updateEmailTemplateById(id=id, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").communication.updateEmailTemplateById(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1959,7 +1959,7 @@ Delete email template by id
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.deleteEmailTemplateById(id=id)
+    result = await platformClient.application("<APPLICATION_ID>").communication.deleteEmailTemplateById(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -2027,7 +2027,7 @@ Send email or sms synchronously
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.sendCommunicationSynchronously(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").communication.sendCommunicationSynchronously(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2093,7 +2093,7 @@ Send email or sms asynchronously
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.sendCommunicationAsynchronously(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").communication.sendCommunicationAsynchronously(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2159,7 +2159,7 @@ Get event subscriptions
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.getEventSubscriptions(pageNo=pageNo, pageSize=pageSize, populate=populate)
+    result = await platformClient.application("<APPLICATION_ID>").communication.getEventSubscriptions(pageNo=pageNo, pageSize=pageSize, populate=populate)
     # use result
 except Exception as e:
     print(e)
@@ -2796,7 +2796,7 @@ Get jobs
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.getJobs(pageNo=pageNo, pageSize=pageSize, sort=sort)
+    result = await platformClient.application("<APPLICATION_ID>").communication.getJobs(pageNo=pageNo, pageSize=pageSize, sort=sort)
     # use result
 except Exception as e:
     print(e)
@@ -2883,7 +2883,7 @@ Trigger campaign job
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.triggerCampaignJob(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").communication.triggerCampaignJob(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2949,7 +2949,7 @@ Get job logs
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.getJobLogs(pageNo=pageNo, pageSize=pageSize, sort=sort)
+    result = await platformClient.application("<APPLICATION_ID>").communication.getJobLogs(pageNo=pageNo, pageSize=pageSize, sort=sort)
     # use result
 except Exception as e:
     print(e)
@@ -3049,7 +3049,7 @@ Get communication logs
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.getCommunicationLogs(pageId=pageId, pageSize=pageSize, sort=sort, query=query)
+    result = await platformClient.application("<APPLICATION_ID>").communication.getCommunicationLogs(pageId=pageId, pageSize=pageSize, sort=sort, query=query)
     # use result
 except Exception as e:
     print(e)
@@ -3151,7 +3151,7 @@ Get system notifications
 
 ```python
 try:
-    result = await client.communication.getSystemNotifications(pageNo=pageNo, pageSize=pageSize)
+    result = await platformClient.communication.getSystemNotifications(pageNo=pageNo, pageSize=pageSize)
     # use result
 except Exception as e:
     print(e)
@@ -3250,7 +3250,7 @@ Send OTP using email and sms
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.sendOtp(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").communication.sendOtp(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -3330,7 +3330,7 @@ Verify OTP sent via email and sms
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.verfiyOtp(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").communication.verfiyOtp(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -3399,7 +3399,7 @@ Get sms providers
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.getSmsProviders(pageNo=pageNo, pageSize=pageSize, sort=sort)
+    result = await platformClient.application("<APPLICATION_ID>").communication.getSmsProviders(pageNo=pageNo, pageSize=pageSize, sort=sort)
     # use result
 except Exception as e:
     print(e)
@@ -3492,7 +3492,7 @@ Create sms provider
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.createSmsProvider(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").communication.createSmsProvider(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -3571,7 +3571,7 @@ Get sms provider by id
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.getSmsProviderById(id=id)
+    result = await platformClient.application("<APPLICATION_ID>").communication.getSmsProviderById(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -3651,7 +3651,7 @@ Update sms provider by id
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.updateSmsProviderById(id=id, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").communication.updateSmsProviderById(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -3731,7 +3731,7 @@ Get sms templates
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.getSmsTemplates(pageNo=pageNo, pageSize=pageSize, sort=sort)
+    result = await platformClient.application("<APPLICATION_ID>").communication.getSmsTemplates(pageNo=pageNo, pageSize=pageSize, sort=sort)
     # use result
 except Exception as e:
     print(e)
@@ -3829,7 +3829,7 @@ Create sms template
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.createSmsTemplate(body=body)
+    result = await platformClient.application("<APPLICATION_ID>").communication.createSmsTemplate(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -3913,7 +3913,7 @@ Get sms template by id
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.getSmsTemplateById(id=id)
+    result = await platformClient.application("<APPLICATION_ID>").communication.getSmsTemplateById(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -3998,7 +3998,7 @@ Update sms template by id
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.updateSmsTemplateById(id=id, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").communication.updateSmsTemplateById(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -4083,7 +4083,7 @@ Delete sms template by id
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.deleteSmsTemplateById(id=id)
+    result = await platformClient.application("<APPLICATION_ID>").communication.deleteSmsTemplateById(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -4151,7 +4151,7 @@ Get system sms templates
 
 ```python
 try:
-    result = await client.application("<APPLICATION_ID>").communication.getSystemSystemTemplates(pageNo=pageNo, pageSize=pageSize, sort=sort)
+    result = await platformClient.application("<APPLICATION_ID>").communication.getSystemSystemTemplates(pageNo=pageNo, pageSize=pageSize, sort=sort)
     # use result
 except Exception as e:
     print(e)
@@ -5027,28 +5027,6 @@ Success
 
  
  
- #### [TriggerJobResponse](#TriggerJobResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | status | Int? |  yes  |  |
-
----
-
-
- 
- 
- #### [TriggerJobRequest](#TriggerJobRequest)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | jobId | String? |  yes  |  |
-
----
-
-
- 
- 
  #### [Job](#Job)
 
  | Properties | Type | Nullable | Description |
@@ -5109,6 +5087,28 @@ Success
 
  
  
+ #### [TriggerJobResponse](#TriggerJobResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | status | Int? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [TriggerJobRequest](#TriggerJobRequest)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | jobId | String? |  yes  |  |
+
+---
+
+
+ 
+ 
  #### [LogEmail](#LogEmail)
 
  | Properties | Type | Nullable | Description |
@@ -5158,6 +5158,8 @@ Success
  | application | String? |  yes  |  |
  | service | String? |  yes  |  |
  | step | String? |  yes  |  |
+ | source | String? |  yes  |  |
+ | channelType | String? |  yes  |  |
  | status | String? |  yes  |  |
  | data | Any? |  yes  |  |
  | expireAt | String? |  yes  |  |
@@ -5216,6 +5218,18 @@ Success
 
  
  
+ #### [SendOtpEmailCommsProvider](#SendOtpEmailCommsProvider)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | slug | String? |  yes  |  |
+ | id | String? |  yes  |  |
+
+---
+
+
+ 
+ 
  #### [SendOtpCommsReqData](#SendOtpCommsReqData)
 
  | Properties | Type | Nullable | Description |
@@ -5251,6 +5265,7 @@ Success
  | otpLength | Int? |  yes  |  |
  | expiry | Int? |  yes  |  |
  | template | [SendOtpEmailCommsTemplate](#SendOtpEmailCommsTemplate)? |  yes  |  |
+ | provider | [SendOtpEmailCommsProvider](#SendOtpEmailCommsProvider)? |  yes  |  |
 
 ---
 

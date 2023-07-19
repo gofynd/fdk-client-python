@@ -1,6 +1,6 @@
 
 
-""" Catalog Platform Client."""
+"""Catalog Platform Client"""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -10,6 +10,7 @@ from .validator import CatalogValidator
 class Catalog:
     def __init__(self, config):
         self._conf = config
+
     
     async def createProductBundle(self, body=""):
         """Create Product Bundle. See `ProductBundleRequest` for the request body parameter need to create a product bundle. On successful request, returns in `ProductBundleRequest` with id
@@ -38,7 +39,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetProductBundleCreateResponse
+            schema = GetProductBundleCreateResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createProductBundle")
+                print(e)
+
+        
+
+        return response
     
     async def getProductBundle(self, q=None, slug=None):
         """Get all product bundles for a particular company
@@ -47,10 +63,10 @@ class Catalog:
         """
         payload = {}
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
 
@@ -70,7 +86,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/", q=q, slug=slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/", q=q, slug=slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetProductBundleListingResponse
+            schema = GetProductBundleListingResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProductBundle")
+                print(e)
+
+        
+
+        return response
     
     async def updateProductBundle(self, id=None, body=""):
         """Update a Product Bundle by its id. On successful request, returns the updated product bundle
@@ -78,7 +109,7 @@ class Catalog:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -103,7 +134,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetProductBundleCreateResponse
+            schema = GetProductBundleCreateResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateProductBundle")
+                print(e)
+
+        
+
+        return response
     
     async def getProductBundleDetail(self, id=None):
         """Get a particular Bundle details by its `id`. If successful, returns a Product bundle resource in the response body specified in `GetProductBundleResponse`
@@ -111,7 +157,7 @@ class Catalog:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -131,7 +177,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetProductBundleResponse
+            schema = GetProductBundleResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProductBundleDetail")
+                print(e)
+
+        
+
+        return response
     
     async def createSizeGuide(self, body=""):
         """This API allows to create a size guide associated to a brand.
@@ -160,7 +221,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse
+            schema = SuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createSizeGuide")
+                print(e)
+
+        
+
+        return response
     
     async def getSizeGuides(self, active=None, q=None, tag=None, page_no=None, page_size=None):
         """This API allows to view all the size guides associated to the seller.
@@ -172,19 +248,19 @@ class Catalog:
         """
         payload = {}
         
-        if active:
+        if active is not None:
             payload["active"] = active
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
-        if tag:
+        if tag is not None:
             payload["tag"] = tag
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -204,7 +280,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide", active=active, q=q, tag=tag, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide", active=active, q=q, tag=tag, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ListSizeGuide
+            schema = ListSizeGuide()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSizeGuides")
+                print(e)
+
+        
+
+        return response
     
     async def updateSizeGuide(self, id=None, body=""):
         """This API allows to edit a size guide.
@@ -212,7 +303,7 @@ class Catalog:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -237,7 +328,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse
+            schema = SuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateSizeGuide")
+                print(e)
+
+        
+
+        return response
     
     async def getSizeGuide(self, id=None):
         """This API helps to get data associated to a size guide.
@@ -245,7 +351,7 @@ class Catalog:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -265,7 +371,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SizeGuideResponse
+            schema = SizeGuideResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSizeGuide")
+                print(e)
+
+        
+
+        return response
     
     async def getSellerInsights(self, seller_app_id=None):
         """Analytics data of catalog and inventory that are being cross-selled.
@@ -273,7 +394,7 @@ class Catalog:
         """
         payload = {}
         
-        if seller_app_id:
+        if seller_app_id is not None:
             payload["seller_app_id"] = seller_app_id
         
 
@@ -293,7 +414,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/cross-selling/{seller_app_id}/analytics/insights/", seller_app_id=seller_app_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/cross-selling/{seller_app_id}/analytics/insights/", seller_app_id=seller_app_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CrossSellingResponse
+            schema = CrossSellingResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSellerInsights")
+                print(e)
+
+        
+
+        return response
     
     async def createMarketplaceOptin(self, marketplace=None, body=""):
         """Use this API to create/update opt-in information for given platform. If successful, returns data in the response body as specified in `OptInPostResponseSchema`
@@ -301,7 +437,7 @@ class Catalog:
         """
         payload = {}
         
-        if marketplace:
+        if marketplace is not None:
             payload["marketplace"] = marketplace
         
 
@@ -326,7 +462,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/{marketplace}/optin/", marketplace=marketplace), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/{marketplace}/optin/", marketplace=marketplace), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UpdatedResponse
+            schema = UpdatedResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createMarketplaceOptin")
+                print(e)
+
+        
+
+        return response
     
     async def getMarketplaceOptinDetail(self, ):
         """Use this API to fetch opt-in information for all the platforms. If successful, returns a logs in the response body as specified in `GetOptInPlatformSchema`
@@ -350,7 +501,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetOptInPlatform
+            schema = GetOptInPlatform()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getMarketplaceOptinDetail")
+                print(e)
+
+        
+
+        return response
     
     async def getCompanyDetail(self, ):
         """Get the details of the company associated with the given company_id passed.
@@ -374,7 +540,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/company-details/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/company-details/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OptinCompanyDetail
+            schema = OptinCompanyDetail()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCompanyDetail")
+                print(e)
+
+        
+
+        return response
     
     async def getCompanyBrandDetail(self, is_active=None, q=None, page_no=None, page_size=None, marketplace=None):
         """Get the details of the Brands associated with the given company_id passed.
@@ -386,19 +567,19 @@ class Catalog:
         """
         payload = {}
         
-        if is_active:
+        if is_active is not None:
             payload["is_active"] = is_active
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if marketplace:
+        if marketplace is not None:
             payload["marketplace"] = marketplace
         
 
@@ -418,7 +599,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/company-brand-details/", is_active=is_active, q=q, page_no=page_no, page_size=page_size, marketplace=marketplace), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/company-brand-details/", is_active=is_active, q=q, page_no=page_no, page_size=page_size, marketplace=marketplace), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OptinCompanyBrandDetailsView
+            schema = OptinCompanyBrandDetailsView()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCompanyBrandDetail")
+                print(e)
+
+        
+
+        return response
     
     async def getCompanyMetrics(self, ):
         """Get the Company metrics associated with the company ID passed.
@@ -442,7 +638,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/company-metrics/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/company-metrics/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OptinCompanyMetrics
+            schema = OptinCompanyMetrics()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCompanyMetrics")
+                print(e)
+
+        
+
+        return response
     
     async def getStoreDetail(self, q=None, page_no=None, page_size=None):
         """Get the details of the store associated with the company ID passed.
@@ -452,13 +663,13 @@ class Catalog:
         """
         payload = {}
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -478,7 +689,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/location-details/", q=q, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/location-details/", q=q, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OptinStoreDetails
+            schema = OptinStoreDetails()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getStoreDetail")
+                print(e)
+
+        
+
+        return response
     
     async def getGenderAttribute(self, attribute_slug=None):
         """This API allows to view the gender attribute details.
@@ -486,7 +712,7 @@ class Catalog:
         """
         payload = {}
         
-        if attribute_slug:
+        if attribute_slug is not None:
             payload["attribute_slug"] = attribute_slug
         
 
@@ -506,7 +732,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-attributes/{attribute_slug}", attribute_slug=attribute_slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-attributes/{attribute_slug}", attribute_slug=attribute_slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GenderDetail
+            schema = GenderDetail()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getGenderAttribute")
+                print(e)
+
+        
+
+        return response
     
     async def listProductTemplateCategories(self, departments=None, item_type=None):
         """Allows you to list all product categories values for the departments specified
@@ -515,10 +756,10 @@ class Catalog:
         """
         payload = {}
         
-        if departments:
+        if departments is not None:
             payload["departments"] = departments
         
-        if item_type:
+        if item_type is not None:
             payload["item_type"] = item_type
         
 
@@ -538,7 +779,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/categories/", departments=departments, item_type=item_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/categories/", departments=departments, item_type=item_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProdcutTemplateCategoriesResponse
+            schema = ProdcutTemplateCategoriesResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for listProductTemplateCategories")
+                print(e)
+
+        
+
+        return response
     
     async def createDepartments(self, body=""):
         """Create departments using the API.
@@ -567,7 +823,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DepartmentCreateResponse
+            schema = DepartmentCreateResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createDepartments")
+                print(e)
+
+        
+
+        return response
     
     async def listDepartmentsData(self, page_no=None, item_type=None, page_size=None, name=None, search=None, is_active=None):
         """Allows you to list all departments, also can search using name and filter active and incative departments, and item type.
@@ -580,22 +851,22 @@ class Catalog:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if item_type:
+        if item_type is not None:
             payload["item_type"] = item_type
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if name:
+        if name is not None:
             payload["name"] = name
         
-        if search:
+        if search is not None:
             payload["search"] = search
         
-        if is_active:
+        if is_active is not None:
             payload["is_active"] = is_active
         
 
@@ -615,7 +886,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/", page_no=page_no, item_type=item_type, page_size=page_size, name=name, search=search, is_active=is_active), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/", page_no=page_no, item_type=item_type, page_size=page_size, name=name, search=search, is_active=is_active), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DepartmentsResponse
+            schema = DepartmentsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for listDepartmentsData")
+                print(e)
+
+        
+
+        return response
     
     async def updateDepartment(self, uid=None, body=""):
         """Update the department by their uid using this API.
@@ -623,7 +909,7 @@ class Catalog:
         """
         payload = {}
         
-        if uid:
+        if uid is not None:
             payload["uid"] = uid
         
 
@@ -648,7 +934,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/{uid}/", uid=uid), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/{uid}/", uid=uid), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DepartmentModel
+            schema = DepartmentModel()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateDepartment")
+                print(e)
+
+        
+
+        return response
     
     async def getDepartmentData(self, uid=None):
         """Allows you to get department data, by uid.
@@ -656,7 +957,7 @@ class Catalog:
         """
         payload = {}
         
-        if uid:
+        if uid is not None:
             payload["uid"] = uid
         
 
@@ -676,7 +977,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/{uid}/", uid=uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/{uid}/", uid=uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DepartmentsResponse
+            schema = DepartmentsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getDepartmentData")
+                print(e)
+
+        
+
+        return response
     
     async def listProductTemplate(self, department=None):
         """Allows you to list all product templates, also can filter by department
@@ -684,7 +1000,7 @@ class Catalog:
         """
         payload = {}
         
-        if department:
+        if department is not None:
             payload["department"] = department
         
 
@@ -704,7 +1020,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/", department=department), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/", department=department), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TemplatesResponse
+            schema = TemplatesResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for listProductTemplate")
+                print(e)
+
+        
+
+        return response
     
     async def validateProductTemplate(self, slug=None):
         """Allows you to list all product templates validation values for all the fields present in the database
@@ -712,7 +1043,7 @@ class Catalog:
         """
         payload = {}
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
 
@@ -732,7 +1063,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/{slug}/validation/schema/", slug=slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/{slug}/validation/schema/", slug=slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TemplatesValidationResponse
+            schema = TemplatesValidationResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for validateProductTemplate")
+                print(e)
+
+        
+
+        return response
     
     async def downloadProductTemplateViews(self, slug=None):
         """Allows you to download product template data
@@ -740,7 +1086,7 @@ class Catalog:
         """
         payload = {}
         
-        if slug:
+        if slug is not None:
             payload["slug"] = slug
         
 
@@ -760,7 +1106,11 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/{slug}/download/", slug=slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/{slug}/download/", slug=slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        return response
     
     async def downloadInventoryTemplateView(self, item_type=None):
         """Allows you to download product template data
@@ -768,7 +1118,7 @@ class Catalog:
         """
         payload = {}
         
-        if item_type:
+        if item_type is not None:
             payload["item_type"] = item_type
         
 
@@ -788,7 +1138,11 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/templates/download/", item_type=item_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/templates/download/", item_type=item_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        return response
     
     async def validateProductTemplateSchema(self, item_type=None):
         """Allows you to list all product templates validation values for all the fields present in the database
@@ -796,7 +1150,7 @@ class Catalog:
         """
         payload = {}
         
-        if item_type:
+        if item_type is not None:
             payload["item_type"] = item_type
         
 
@@ -816,7 +1170,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/templates/validation/schema/", item_type=item_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/templates/validation/schema/", item_type=item_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import InventoryValidationResponse
+            schema = InventoryValidationResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for validateProductTemplateSchema")
+                print(e)
+
+        
+
+        return response
     
     async def listHSNCodes(self, ):
         """Allows you to list all hsn Codes
@@ -840,7 +1209,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/hsn/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/hsn/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import HSNCodesResponse
+            schema = HSNCodesResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for listHSNCodes")
+                print(e)
+
+        
+
+        return response
     
     async def listProductTemplateExportDetails(self, ):
         """Can view details including trigger data, task id , etc.
@@ -864,7 +1248,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/downloads/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/downloads/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductDownloadsResponse
+            schema = ProductDownloadsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for listProductTemplateExportDetails")
+                print(e)
+
+        
+
+        return response
     
     async def createProductExportJob(self, body=""):
         """This API helps to create a Inventory export job.
@@ -893,7 +1292,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/downloads/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/downloads/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductDownloadsResponse
+            schema = ProductDownloadsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createProductExportJob")
+                print(e)
+
+        
+
+        return response
     
     async def getProductExportJobs(self, status=None, from_date=None, to_date=None, q=None):
         """Can view details including trigger data, task id , etc.
@@ -904,16 +1318,16 @@ class Catalog:
         """
         payload = {}
         
-        if status:
+        if status is not None:
             payload["status"] = status
         
-        if from_date:
+        if from_date is not None:
             payload["from_date"] = from_date
         
-        if to_date:
+        if to_date is not None:
             payload["to_date"] = to_date
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
 
@@ -933,7 +1347,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/downloads/", status=status, from_date=from_date, to_date=to_date, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/downloads/", status=status, from_date=from_date, to_date=to_date, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductDownloadsResponse
+            schema = ProductDownloadsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProductExportJobs")
+                print(e)
+
+        
+
+        return response
     
     async def listTemplateBrandTypeValues(self, filter=None, template_tag=None, item_type=None):
         """The filter type query parameter defines what type of data to return. The type of query returns the valid values for the same
@@ -943,13 +1372,13 @@ class Catalog:
         """
         payload = {}
         
-        if filter:
+        if filter is not None:
             payload["filter"] = filter
         
-        if template_tag:
+        if template_tag is not None:
             payload["template_tag"] = template_tag
         
-        if item_type:
+        if item_type is not None:
             payload["item_type"] = item_type
         
 
@@ -969,7 +1398,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/downloads/configuration/", filter=filter, template_tag=template_tag, item_type=item_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/downloads/configuration/", filter=filter, template_tag=template_tag, item_type=item_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductConfigurationDownloads
+            schema = ProductConfigurationDownloads()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for listTemplateBrandTypeValues")
+                print(e)
+
+        
+
+        return response
     
     async def createCategories(self, body=""):
         """This API lets user create product categories
@@ -998,7 +1442,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CategoryCreateResponse
+            schema = CategoryCreateResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createCategories")
+                print(e)
+
+        
+
+        return response
     
     async def listCategories(self, level=None, departments=None, q=None, page_no=None, page_size=None):
         """This API gets meta associated to product categories.
@@ -1010,19 +1469,19 @@ class Catalog:
         """
         payload = {}
         
-        if level:
+        if level is not None:
             payload["level"] = level
         
-        if departments:
+        if departments is not None:
             payload["departments"] = departments
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -1042,7 +1501,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/", level=level, departments=departments, q=q, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/", level=level, departments=departments, q=q, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CategoryResponse
+            schema = CategoryResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for listCategories")
+                print(e)
+
+        
+
+        return response
     
     async def updateCategory(self, uid=None, body=""):
         """Update a product category using this api
@@ -1050,7 +1524,7 @@ class Catalog:
         """
         payload = {}
         
-        if uid:
+        if uid is not None:
             payload["uid"] = uid
         
 
@@ -1075,7 +1549,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/{uid}/", uid=uid), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/{uid}/", uid=uid), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CategoryUpdateResponse
+            schema = CategoryUpdateResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateCategory")
+                print(e)
+
+        
+
+        return response
     
     async def getCategoryData(self, uid=None):
         """This API gets meta associated to product categories.
@@ -1083,7 +1572,7 @@ class Catalog:
         """
         payload = {}
         
-        if uid:
+        if uid is not None:
             payload["uid"] = uid
         
 
@@ -1103,7 +1592,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/{uid}/", uid=uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/{uid}/", uid=uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SingleCategoryResponse
+            schema = SingleCategoryResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCategoryData")
+                print(e)
+
+        
+
+        return response
     
     async def createProduct(self, body=""):
         """This API allows to create product.
@@ -1132,7 +1636,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse
+            schema = SuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createProduct")
+                print(e)
+
+        
+
+        return response
     
     async def getProducts(self, brand_ids=None, category_ids=None, item_ids=None, department_ids=None, item_code=None, q=None, tags=None, page_no=None, page_size=None):
         """This API gets meta associated to products.
@@ -1148,31 +1667,31 @@ class Catalog:
         """
         payload = {}
         
-        if brand_ids:
+        if brand_ids is not None:
             payload["brand_ids"] = brand_ids
         
-        if category_ids:
+        if category_ids is not None:
             payload["category_ids"] = category_ids
         
-        if item_ids:
+        if item_ids is not None:
             payload["item_ids"] = item_ids
         
-        if department_ids:
+        if department_ids is not None:
             payload["department_ids"] = department_ids
         
-        if item_code:
+        if item_code is not None:
             payload["item_code"] = item_code
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
-        if tags:
+        if tags is not None:
             payload["tags"] = tags
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -1192,7 +1711,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/", brand_ids=brand_ids, category_ids=category_ids, item_ids=item_ids, department_ids=department_ids, item_code=item_code, q=q, tags=tags, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/", brand_ids=brand_ids, category_ids=category_ids, item_ids=item_ids, department_ids=department_ids, item_code=item_code, q=q, tags=tags, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductListingResponseV2
+            schema = ProductListingResponseV2()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProducts")
+                print(e)
+
+        
+
+        return response
     
     async def getVariantsOfProducts(self, item_id=None, variant_type=None, page_no=None, page_size=None):
         """This API gets meta associated to products.
@@ -1203,16 +1737,16 @@ class Catalog:
         """
         payload = {}
         
-        if item_id:
+        if item_id is not None:
             payload["item_id"] = item_id
         
-        if variant_type:
+        if variant_type is not None:
             payload["variant_type"] = variant_type
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -1232,7 +1766,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/variants/{variant_type}", item_id=item_id, variant_type=variant_type, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/variants/{variant_type}", item_id=item_id, variant_type=variant_type, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductVariantsResponse
+            schema = ProductVariantsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getVariantsOfProducts")
+                print(e)
+
+        
+
+        return response
     
     async def getProductAttributes(self, category=None, filter=None):
         """This API allows to list all the attributes by their l3_categories.
@@ -1241,10 +1790,10 @@ class Catalog:
         """
         payload = {}
         
-        if category:
+        if category is not None:
             payload["category"] = category
         
-        if filter:
+        if filter is not None:
             payload["filter"] = filter
         
 
@@ -1264,7 +1813,65 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-attributes/", category=category, filter=filter), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-attributes/", category=category, filter=filter), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductAttributesResponse
+            schema = ProductAttributesResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProductAttributes")
+                print(e)
+
+        
+
+        return response
+    
+    async def deleteProduct(self, item_id=None):
+        """This API allows to delete product.
+        :param item_id : Id of the product to be updated. : type integer
+        """
+        payload = {}
+        
+        if item_id is not None:
+            payload["item_id"] = item_id
+        
+
+        # Parameter validation
+        schema = CatalogValidator.deleteProduct()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", """{"required":[{"in":"path","name":"company_id","description":"Company Id of the company associated to product that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Id of the product to be updated.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of the company associated to product that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Id of the product to be updated.","schema":{"type":"integer"},"required":true}]}""", item_id=item_id)
+        query_string = await create_query_string(item_id=item_id)
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse
+            schema = SuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteProduct")
+                print(e)
+
+        
+
+        return response
     
     async def editProduct(self, item_id=None, body=""):
         """This API allows to edit product.
@@ -1272,7 +1879,7 @@ class Catalog:
         """
         payload = {}
         
-        if item_id:
+        if item_id is not None:
             payload["item_id"] = item_id
         
 
@@ -1297,35 +1904,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-    
-    async def deleteProduct(self, item_id=None):
-        """This API allows to delete product.
-        :param item_id : Id of the product to be updated. : type integer
-        """
-        payload = {}
-        
-        if item_id:
-            payload["item_id"] = item_id
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
         
 
-        # Parameter validation
-        schema = CatalogValidator.deleteProduct()
-        schema.dump(schema.load(payload))
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse
+            schema = SuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for editProduct")
+                print(e)
+
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", """{"required":[{"in":"path","name":"company_id","description":"Company Id of the company associated to product that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Id of the product to be updated.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id of the company associated to product that is to be deleted.","schema":{"type":"string"},"required":true},{"in":"path","name":"item_id","description":"Id of the product to be updated.","schema":{"type":"integer"},"required":true}]}""", item_id=item_id)
-        query_string = await create_query_string(item_id=item_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        return response
     
     async def getProduct(self, item_id=None, brand_uid=None, item_code=None):
         """This API helps to get data associated to a particular product.
@@ -1335,13 +1929,13 @@ class Catalog:
         """
         payload = {}
         
-        if item_id:
+        if item_id is not None:
             payload["item_id"] = item_id
         
-        if brand_uid:
+        if brand_uid is not None:
             payload["brand_uid"] = brand_uid
         
-        if item_code:
+        if item_code is not None:
             payload["item_code"] = item_code
         
 
@@ -1361,7 +1955,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id, brand_uid=brand_uid, item_code=item_code), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id, brand_uid=brand_uid, item_code=item_code), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SingleProductResponse
+            schema = SingleProductResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProduct")
+                print(e)
+
+        
+
+        return response
     
     async def allSizes(self, item_id=None):
         """This API allows to get  All Sizes for a given Product.
@@ -1369,7 +1978,7 @@ class Catalog:
         """
         payload = {}
         
-        if item_id:
+        if item_id is not None:
             payload["item_id"] = item_id
         
 
@@ -1389,7 +1998,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/all_sizes", item_id=item_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/all_sizes", item_id=item_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetAllSizes
+            schema = GetAllSizes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for allSizes")
+                print(e)
+
+        
+
+        return response
     
     async def getProductValidation(self, ):
         """This API validates product data.
@@ -1413,7 +2037,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/validation/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/validation/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ValidateProduct
+            schema = ValidateProduct()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProductValidation")
+                print(e)
+
+        
+
+        return response
     
     async def getProductSize(self, item_code=None, item_id=None, brand_uid=None, uid=None):
         """This API helps to get data associated to a particular product size.
@@ -1424,16 +2063,16 @@ class Catalog:
         """
         payload = {}
         
-        if item_code:
+        if item_code is not None:
             payload["item_code"] = item_code
         
-        if item_id:
+        if item_id is not None:
             payload["item_id"] = item_id
         
-        if brand_uid:
+        if brand_uid is not None:
             payload["brand_uid"] = brand_uid
         
-        if uid:
+        if uid is not None:
             payload["uid"] = uid
         
 
@@ -1453,7 +2092,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/", item_code=item_code, item_id=item_id, brand_uid=brand_uid, uid=uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/", item_code=item_code, item_id=item_id, brand_uid=brand_uid, uid=uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductListingResponse
+            schema = ProductListingResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProductSize")
+                print(e)
+
+        
+
+        return response
     
     async def createBulkProductUploadJob(self, body=""):
         """This API helps to create a bulk products upload job.
@@ -1482,7 +2136,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BulkResponse
+            schema = BulkResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createBulkProductUploadJob")
+                print(e)
+
+        
+
+        return response
     
     async def getProductBulkUploadHistory(self, search=None, page_no=None, page_size=None):
         """This API helps to get bulk product upload jobs data.
@@ -1492,13 +2161,13 @@ class Catalog:
         """
         payload = {}
         
-        if search:
+        if search is not None:
             payload["search"] = search
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -1518,7 +2187,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk", search=search, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk", search=search, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductBulkRequestList
+            schema = ProductBulkRequestList()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProductBulkUploadHistory")
+                print(e)
+
+        
+
+        return response
     
     async def uploadBulkProducts(self, department=None, product_type=None, body=""):
         """This API helps to create a bulk products upload job.
@@ -1527,10 +2211,10 @@ class Catalog:
         """
         payload = {}
         
-        if department:
+        if department is not None:
             payload["department"] = department
         
-        if product_type:
+        if product_type is not None:
             payload["product_type"] = product_type
         
 
@@ -1555,7 +2239,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/bulk", department=department, product_type=product_type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/bulk", department=department, product_type=product_type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BulkResponse
+            schema = BulkResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for uploadBulkProducts")
+                print(e)
+
+        
+
+        return response
     
     async def deleteProductBulkJob(self, batch_id=None):
         """This API allows to delete bulk product job associated with company.
@@ -1563,7 +2262,7 @@ class Catalog:
         """
         payload = {}
         
-        if batch_id:
+        if batch_id is not None:
             payload["batch_id"] = batch_id
         
 
@@ -1583,7 +2282,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk/{batch_id}", batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk/{batch_id}", batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse
+            schema = SuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteProductBulkJob")
+                print(e)
+
+        
+
+        return response
     
     async def createProductsInBulk(self, batch_id=None, body=""):
         """This API helps to create products in bulk push to kafka for approval/creation.
@@ -1591,7 +2305,7 @@ class Catalog:
         """
         payload = {}
         
-        if batch_id:
+        if batch_id is not None:
             payload["batch_id"] = batch_id
         
 
@@ -1616,7 +2330,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk/{batch_id}", batch_id=batch_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk/{batch_id}", batch_id=batch_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse
+            schema = SuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createProductsInBulk")
+                print(e)
+
+        
+
+        return response
     
     async def getProductTags(self, ):
         """This API helps to get tags data associated to a particular company.
@@ -1640,7 +2369,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/tags", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/tags", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductTagsViewResponse
+            schema = ProductTagsViewResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProductTags")
+                print(e)
+
+        
+
+        return response
     
     async def createProductAssetsInBulk(self, body=""):
         """This API helps to create a bulk asset upload job.
@@ -1669,7 +2413,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/assets/bulk/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/assets/bulk/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse
+            schema = SuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createProductAssetsInBulk")
+                print(e)
+
+        
+
+        return response
     
     async def getProductAssetsInBulk(self, page_no=None, page_size=None):
         """This API helps to get bulk asset jobs data associated to a particular company.
@@ -1678,10 +2437,10 @@ class Catalog:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -1701,7 +2460,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/assets/bulk/", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/assets/bulk/", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BulkAssetResponse
+            schema = BulkAssetResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProductAssetsInBulk")
+                print(e)
+
+        
+
+        return response
     
     async def deleteSize(self, item_id=None, size=None):
         """This API allows to delete size associated with product.
@@ -1710,10 +2484,10 @@ class Catalog:
         """
         payload = {}
         
-        if item_id:
+        if item_id is not None:
             payload["item_id"] = item_id
         
-        if size:
+        if size is not None:
             payload["size"] = size
         
 
@@ -1733,7 +2507,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/{size}", item_id=item_id, size=size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/{size}", item_id=item_id, size=size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductSizeDeleteResponse
+            schema = ProductSizeDeleteResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteSize")
+                print(e)
+
+        
+
+        return response
     
     async def addInventory(self, item_id=None, size=None, body=""):
         """This API allows add Inventory for particular size and store.
@@ -1742,10 +2531,10 @@ class Catalog:
         """
         payload = {}
         
-        if item_id:
+        if item_id is not None:
             payload["item_id"] = item_id
         
-        if size:
+        if size is not None:
             payload["size"] = size
         
 
@@ -1770,7 +2559,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/{size}", item_id=item_id, size=size), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/{size}", item_id=item_id, size=size), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse
+            schema = SuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for addInventory")
+                print(e)
+
+        
+
+        return response
     
     async def getInventoryBySize(self, item_id=None, size=None, page_no=None, page_size=None, q=None, sellable=None):
         """This API allows get Inventory data for particular company grouped by size and store.
@@ -1783,22 +2587,22 @@ class Catalog:
         """
         payload = {}
         
-        if item_id:
+        if item_id is not None:
             payload["item_id"] = item_id
         
-        if size:
+        if size is not None:
             payload["size"] = size
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
-        if sellable:
+        if sellable is not None:
             payload["sellable"] = sellable
         
 
@@ -1818,7 +2622,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/{size}", item_id=item_id, size=size, page_no=page_no, page_size=page_size, q=q, sellable=sellable), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/{size}", item_id=item_id, size=size, page_no=page_no, page_size=page_size, q=q, sellable=sellable), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import InventoryResponsePaginated
+            schema = InventoryResponsePaginated()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getInventoryBySize")
+                print(e)
+
+        
+
+        return response
     
     async def getInventoryBySizeIdentifier(self, item_id=None, size_identifier=None, page_no=None, page_size=None, q=None, location_ids=None):
         """This API allows get Inventory data for particular company grouped by size and store.
@@ -1831,22 +2650,22 @@ class Catalog:
         """
         payload = {}
         
-        if item_id:
+        if item_id is not None:
             payload["item_id"] = item_id
         
-        if size_identifier:
+        if size_identifier is not None:
             payload["size_identifier"] = size_identifier
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
-        if location_ids:
+        if location_ids is not None:
             payload["location_ids"] = location_ids
         
 
@@ -1866,7 +2685,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/inventory/{size_identifier}", item_id=item_id, size_identifier=size_identifier, page_no=page_no, page_size=page_size, q=q, location_ids=location_ids), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/inventory/{size_identifier}", item_id=item_id, size_identifier=size_identifier, page_no=page_no, page_size=page_size, q=q, location_ids=location_ids), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import InventorySellerIdentifierResponsePaginated
+            schema = InventorySellerIdentifierResponsePaginated()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getInventoryBySizeIdentifier")
+                print(e)
+
+        
+
+        return response
     
     async def getInventories(self, item_id=None, size=None, page_no=None, page_size=None, q=None, sellable=None, store_ids=None, size_identifier=None):
         """This API allows get Inventories data for particular company.
@@ -1881,28 +2715,28 @@ class Catalog:
         """
         payload = {}
         
-        if item_id:
+        if item_id is not None:
             payload["item_id"] = item_id
         
-        if size:
+        if size is not None:
             payload["size"] = size
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
-        if sellable:
+        if sellable is not None:
             payload["sellable"] = sellable
         
-        if store_ids:
+        if store_ids is not None:
             payload["store_ids"] = store_ids
         
-        if size_identifier:
+        if size_identifier is not None:
             payload["size_identifier"] = size_identifier
         
 
@@ -1922,7 +2756,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventories", item_id=item_id, size=size, page_no=page_no, page_size=page_size, q=q, sellable=sellable, store_ids=store_ids, size_identifier=size_identifier), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventories", item_id=item_id, size=size, page_no=page_no, page_size=page_size, q=q, sellable=sellable, store_ids=store_ids, size_identifier=size_identifier), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetInventoriesResponse
+            schema = GetInventoriesResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getInventories")
+                print(e)
+
+        
+
+        return response
     
     async def deleteInventory(self, size=None, item_id=None, location_id=None):
         """This API allows to delete inventory of a particular product for particular company.
@@ -1932,13 +2781,13 @@ class Catalog:
         """
         payload = {}
         
-        if size:
+        if size is not None:
             payload["size"] = size
         
-        if item_id:
+        if item_id is not None:
             payload["item_id"] = item_id
         
-        if location_id:
+        if location_id is not None:
             payload["location_id"] = location_id
         
 
@@ -1958,7 +2807,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/{size}/location/{location_id}/", size=size, item_id=item_id, location_id=location_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/{size}/location/{location_id}/", size=size, item_id=item_id, location_id=location_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse
+            schema = SuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteInventory")
+                print(e)
+
+        
+
+        return response
     
     async def createBulkInventoryJob(self, body=""):
         """This API helps to create a bulk Inventory upload job.
@@ -1987,7 +2851,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BulkResponse
+            schema = BulkResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createBulkInventoryJob")
+                print(e)
+
+        
+
+        return response
     
     async def getInventoryBulkUploadHistory(self, page_no=None, page_size=None):
         """This API helps to get bulk Inventory upload jobs data.
@@ -1996,10 +2875,10 @@ class Catalog:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
 
@@ -2019,7 +2898,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BulkInventoryGet
+            schema = BulkInventoryGet()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getInventoryBulkUploadHistory")
+                print(e)
+
+        
+
+        return response
     
     async def deleteBulkInventoryJob(self, batch_id=None):
         """This API allows to delete bulk Inventory job associated with company.
@@ -2027,7 +2921,7 @@ class Catalog:
         """
         payload = {}
         
-        if batch_id:
+        if batch_id is not None:
             payload["batch_id"] = batch_id
         
 
@@ -2047,7 +2941,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/{batch_id}/", batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/{batch_id}/", batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse
+            schema = SuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteBulkInventoryJob")
+                print(e)
+
+        
+
+        return response
     
     async def createBulkInventory(self, batch_id=None, body=""):
         """This API helps to create products in bulk push to kafka for approval/creation.
@@ -2055,7 +2964,7 @@ class Catalog:
         """
         payload = {}
         
-        if batch_id:
+        if batch_id is not None:
             payload["batch_id"] = batch_id
         
 
@@ -2080,7 +2989,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/{batch_id}/", batch_id=batch_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/{batch_id}/", batch_id=batch_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse
+            schema = SuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createBulkInventory")
+                print(e)
+
+        
+
+        return response
     
     async def createInventoryExportJob(self, body=""):
         """This API helps to create a Inventory export job.
@@ -2109,7 +3033,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/download/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/download/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import InventoryExportResponse
+            schema = InventoryExportResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createInventoryExportJob")
+                print(e)
+
+        
+
+        return response
     
     async def getInventoryExport(self, ):
         """This API helps to get Inventory export history.
@@ -2133,7 +3072,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/download/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/download/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import InventoryExportJob
+            schema = InventoryExportJob()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getInventoryExport")
+                print(e)
+
+        
+
+        return response
     
     async def createInventoryExport(self, body=""):
         """This API helps to create a Inventory export job.
@@ -2162,7 +3116,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/inventory/download/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/inventory/download/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import InventoryExportResponse
+            schema = InventoryExportResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createInventoryExport")
+                print(e)
+
+        
+
+        return response
     
     async def listInventoryExport(self, status=None, from_date=None, to_date=None, q=None):
         """This API helps you the get the history of inventory jobs depending on the filtered criteria.
@@ -2173,16 +3142,16 @@ class Catalog:
         """
         payload = {}
         
-        if status:
+        if status is not None:
             payload["status"] = status
         
-        if from_date:
+        if from_date is not None:
             payload["from_date"] = from_date
         
-        if to_date:
+        if to_date is not None:
             payload["to_date"] = to_date
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
 
@@ -2202,7 +3171,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/inventory/download/", status=status, from_date=from_date, to_date=to_date, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/inventory/download/", status=status, from_date=from_date, to_date=to_date, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import InventoryExportJobListResponse
+            schema = InventoryExportJobListResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for listInventoryExport")
+                print(e)
+
+        
+
+        return response
     
     async def exportInventoryConfig(self, filter_type=None):
         """This API allows get List of different filters like brand, store, and type for inventory export.
@@ -2210,7 +3194,7 @@ class Catalog:
         """
         payload = {}
         
-        if filter_type:
+        if filter_type is not None:
             payload["filter_type"] = filter_type
         
 
@@ -2230,7 +3214,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/download/configuration/", filter_type=filter_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/download/configuration/", filter_type=filter_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import InventoryConfig
+            schema = InventoryConfig()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for exportInventoryConfig")
+                print(e)
+
+        
+
+        return response
     
     async def deleteRealtimeInventory(self, item_id=None, seller_identifier=None, body=""):
         """This API allows add Inventory for particular size and store.
@@ -2239,10 +3238,10 @@ class Catalog:
         """
         payload = {}
         
-        if item_id:
+        if item_id is not None:
             payload["item_id"] = item_id
         
-        if seller_identifier:
+        if seller_identifier is not None:
             payload["seller_identifier"] = seller_identifier
         
 
@@ -2256,7 +3255,7 @@ class Catalog:
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/inventory/{seller_identifier}/", """{"required":[{"in":"path","name":"company_id","description":"Id of the company associated to product that is to be viewed.","schema":{"type":"integer"},"required":true},{"in":"path","name":"item_id","description":"Item code of the product of which size is to be get.","schema":{"type":"integer"},"required":true},{"in":"path","name":"seller_identifier","description":"Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company associated to product that is to be viewed.","schema":{"type":"integer"},"required":true},{"in":"path","name":"item_id","description":"Item code of the product of which size is to be get.","schema":{"type":"integer"},"required":true},{"in":"path","name":"seller_identifier","description":"Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get.","schema":{"type":"string"},"required":true}]}""", item_id=item_id, seller_identifier=seller_identifier)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/inventory/{seller_identifier}", """{"required":[{"in":"path","name":"company_id","description":"Id of the company associated to product that is to be viewed.","schema":{"type":"integer"},"required":true},{"in":"path","name":"item_id","description":"Item code of the product of which size is to be get.","schema":{"type":"integer"},"required":true},{"in":"path","name":"seller_identifier","description":"Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company associated to product that is to be viewed.","schema":{"type":"integer"},"required":true},{"in":"path","name":"item_id","description":"Item code of the product of which size is to be get.","schema":{"type":"integer"},"required":true},{"in":"path","name":"seller_identifier","description":"Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get.","schema":{"type":"string"},"required":true}]}""", item_id=item_id, seller_identifier=seller_identifier)
         query_string = await create_query_string(item_id=item_id, seller_identifier=seller_identifier)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -2267,7 +3266,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/inventory/{seller_identifier}/", item_id=item_id, seller_identifier=seller_identifier), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/inventory/{seller_identifier}", item_id=item_id, seller_identifier=seller_identifier), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import InventoryUpdateResponse
+            schema = InventoryUpdateResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteRealtimeInventory")
+                print(e)
+
+        
+
+        return response
     
     async def updateRealtimeInventory(self, item_id=None, seller_identifier=None, body=""):
         """This API allows add Inventory for particular size and store.
@@ -2276,10 +3290,10 @@ class Catalog:
         """
         payload = {}
         
-        if item_id:
+        if item_id is not None:
             payload["item_id"] = item_id
         
-        if seller_identifier:
+        if seller_identifier is not None:
             payload["seller_identifier"] = seller_identifier
         
 
@@ -2293,7 +3307,7 @@ class Catalog:
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/inventory/{seller_identifier}/", """{"required":[{"in":"path","name":"company_id","description":"Id of the company associated to product that is to be viewed.","schema":{"type":"integer"},"required":true},{"in":"path","name":"item_id","description":"Item code of the product of which size is to be get.","schema":{"type":"integer"},"required":true},{"in":"path","name":"seller_identifier","description":"Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company associated to product that is to be viewed.","schema":{"type":"integer"},"required":true},{"in":"path","name":"item_id","description":"Item code of the product of which size is to be get.","schema":{"type":"integer"},"required":true},{"in":"path","name":"seller_identifier","description":"Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get.","schema":{"type":"string"},"required":true}]}""", item_id=item_id, seller_identifier=seller_identifier)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/inventory/{seller_identifier}", """{"required":[{"in":"path","name":"company_id","description":"Id of the company associated to product that is to be viewed.","schema":{"type":"integer"},"required":true},{"in":"path","name":"item_id","description":"Item code of the product of which size is to be get.","schema":{"type":"integer"},"required":true},{"in":"path","name":"seller_identifier","description":"Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company associated to product that is to be viewed.","schema":{"type":"integer"},"required":true},{"in":"path","name":"item_id","description":"Item code of the product of which size is to be get.","schema":{"type":"integer"},"required":true},{"in":"path","name":"seller_identifier","description":"Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get.","schema":{"type":"string"},"required":true}]}""", item_id=item_id, seller_identifier=seller_identifier)
         query_string = await create_query_string(item_id=item_id, seller_identifier=seller_identifier)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -2304,7 +3318,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/inventory/{seller_identifier}/", item_id=item_id, seller_identifier=seller_identifier), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/inventory/{seller_identifier}", item_id=item_id, seller_identifier=seller_identifier), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import InventoryUpdateResponse
+            schema = InventoryUpdateResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateRealtimeInventory")
+                print(e)
+
+        
+
+        return response
     
     async def updateInventories(self, body=""):
         """This API allows add Inventory for particular size and store.
@@ -2333,7 +3362,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/inventory/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/inventory/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import InventoryUpdateResponse
+            schema = InventoryUpdateResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateInventories")
+                print(e)
+
+        
+
+        return response
     
     async def updateHsnCode(self, id=None, body=""):
         """Update Hsn Code.
@@ -2341,7 +3385,7 @@ class Catalog:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -2366,7 +3410,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/hsn/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/hsn/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import HsnCode
+            schema = HsnCode()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateHsnCode")
+                print(e)
+
+        
+
+        return response
     
     async def getHsnCode(self, id=None):
         """Fetch Hsn Code.
@@ -2374,7 +3433,7 @@ class Catalog:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -2394,7 +3453,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/hsn/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/hsn/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import HsnCode
+            schema = HsnCode()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getHsnCode")
+                print(e)
+
+        
+
+        return response
     
     async def bulkHsnCode(self, body=""):
         """Bulk Create or Update Hsn Code.
@@ -2423,7 +3497,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/hsn/bulk/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/hsn/bulk/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BulkHsnResponse
+            schema = BulkHsnResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for bulkHsnCode")
+                print(e)
+
+        
+
+        return response
     
     async def getAllProductHsnCodes(self, page_no=None, page_size=None, q=None, type=None):
         """Hsn Code List.
@@ -2434,16 +3523,16 @@ class Catalog:
         """
         payload = {}
         
-        if page_no:
+        if page_no is not None:
             payload["page_no"] = page_no
         
-        if page_size:
+        if page_size is not None:
             payload["page_size"] = page_size
         
-        if q:
+        if q is not None:
             payload["q"] = q
         
-        if type:
+        if type is not None:
             payload["type"] = type
         
 
@@ -2463,7 +3552,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/hsn/", page_no=page_no, page_size=page_size, q=q, type=type, ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/hsn/", page_no=page_no, page_size=page_size, q=q, type=type, ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import HsnCodesListingResponseSchemaV2
+            schema = HsnCodesListingResponseSchemaV2()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAllProductHsnCodes")
+                print(e)
+
+        
+
+        return response
     
     async def getSingleProductHSNCode(self, reporting_hsn=None):
         """Hsn Code List.
@@ -2471,7 +3575,7 @@ class Catalog:
         """
         payload = {}
         
-        if reporting_hsn:
+        if reporting_hsn is not None:
             payload["reporting_hsn"] = reporting_hsn
         
 
@@ -2491,7 +3595,22 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/hsn/{reporting_hsn}", reporting_hsn=reporting_hsn, ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/hsn/{reporting_hsn}", reporting_hsn=reporting_hsn, ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import HSNDataInsertV2
+            schema = HSNDataInsertV2()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSingleProductHSNCode")
+                print(e)
+
+        
+
+        return response
     
     async def getOptimalLocations(self, body=""):
         """
@@ -2520,6 +3639,21 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/location/reassign/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/location/reassign/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import StoreAssignResponse
+            schema = StoreAssignResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getOptimalLocations")
+                print(e)
+
+        
+
+        return response
     
 

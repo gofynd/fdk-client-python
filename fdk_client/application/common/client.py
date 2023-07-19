@@ -33,10 +33,10 @@ class Common:
         """
         payload = {}
         
-        if authorization:
+        if authorization is not None:
             payload["authorization"] = authorization
         
-        if query:
+        if query is not None:
             payload["query"] = query
         
         # Parameter validation
@@ -57,7 +57,21 @@ class Common:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["searchApplication"]).netloc, "get", await create_url_without_domain("/service/common/configuration/v1.0/application/search-application", authorization=authorization, query=query), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["searchApplication"]).netloc, "get", await create_url_without_domain("/service/common/configuration/v1.0/application/search-application", authorization=authorization, query=query), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ApplicationResponse
+            schema = ApplicationResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for searchApplication")
+                print(e)
+
+        
+
+        return response
     
     async def getLocations(self, location_type=None, id=None, body=""):
         """
@@ -66,10 +80,10 @@ class Common:
         """
         payload = {}
         
-        if location_type:
+        if location_type is not None:
             payload["location_type"] = location_type
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
         # Parameter validation
@@ -90,6 +104,20 @@ class Common:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getLocations"]).netloc, "get", await create_url_without_domain("/service/common/configuration/v1.0/location", location_type=location_type, id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getLocations"]).netloc, "get", await create_url_without_domain("/service/common/configuration/v1.0/location", location_type=location_type, id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Locations
+            schema = Locations()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getLocations")
+                print(e)
+
+        
+
+        return response
     
 

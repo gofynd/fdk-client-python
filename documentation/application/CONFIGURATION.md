@@ -36,7 +36,7 @@ Get current sales channel details
 
 ```python
 try:
-    result = await client.configuration.getApplication()
+    result = await applicationClient.configuration.getApplication()
     # use result
 except Exception as e:
     print(e)
@@ -151,7 +151,7 @@ Get sales channel, owner and seller information
 
 ```python
 try:
-    result = await client.configuration.getOwnerInfo()
+    result = await applicationClient.configuration.getOwnerInfo()
     # use result
 except Exception as e:
     print(e)
@@ -304,7 +304,7 @@ Get basic details of the application
 
 ```python
 try:
-    result = await client.configuration.getBasicDetails()
+    result = await applicationClient.configuration.getBasicDetails()
     # use result
 except Exception as e:
     print(e)
@@ -396,7 +396,7 @@ Get integration tokens
 
 ```python
 try:
-    result = await client.configuration.getIntegrationTokens()
+    result = await applicationClient.configuration.getIntegrationTokens()
     # use result
 except Exception as e:
     print(e)
@@ -517,7 +517,7 @@ Get all deployment stores
 
 ```python
 try:
-    result = await client.configuration.getOrderingStores(pageNo=pageNo, pageSize=pageSize, q=q)
+    result = await applicationClient.configuration.getOrderingStores(pageNo=pageNo, pageSize=pageSize, q=q)
     # use result
 except Exception as e:
     print(e)
@@ -576,7 +576,7 @@ Get ordering store details
 
 ```python
 try:
-    result = await client.configuration.getStoreDetailById(storeId=storeId)
+    result = await applicationClient.configuration.getStoreDetailById(storeId=storeId)
     # use result
 except Exception as e:
     print(e)
@@ -641,7 +641,7 @@ Get features of application
 
 ```python
 try:
-    result = await client.configuration.getFeatures()
+    result = await applicationClient.configuration.getFeatures()
     # use result
 except Exception as e:
     print(e)
@@ -788,7 +788,7 @@ Get application information
 
 ```python
 try:
-    result = await client.configuration.getContactInfo()
+    result = await applicationClient.configuration.getContactInfo()
     # use result
 except Exception as e:
     print(e)
@@ -955,7 +955,7 @@ Get all currencies list
 
 ```python
 try:
-    result = await client.configuration.getCurrencies()
+    result = await applicationClient.configuration.getCurrencies()
     # use result
 except Exception as e:
     print(e)
@@ -1020,7 +1020,7 @@ Get currency by its ID
 
 ```python
 try:
-    result = await client.configuration.getCurrencyById(id=id)
+    result = await applicationClient.configuration.getCurrencyById(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -1086,7 +1086,7 @@ Get currencies enabled in the application
 
 ```python
 try:
-    result = await client.configuration.getAppCurrencies()
+    result = await applicationClient.configuration.getAppCurrencies()
     # use result
 except Exception as e:
     print(e)
@@ -1156,7 +1156,7 @@ Get list of languages
 
 ```python
 try:
-    result = await client.configuration.getLanguages()
+    result = await applicationClient.configuration.getLanguages()
     # use result
 except Exception as e:
     print(e)
@@ -1223,7 +1223,7 @@ Get an Ordering Store signed cookie on selection of ordering store.
 
 ```python
 try:
-    result = await client.configuration.getOrderingStoreCookie(body=body)
+    result = await applicationClient.configuration.getOrderingStoreCookie(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1281,7 +1281,7 @@ Unset the Ordering Store signed cookie.
 
 ```python
 try:
-    result = await client.configuration.removeOrderingStoreCookie()
+    result = await applicationClient.configuration.removeOrderingStoreCookie()
     # use result
 except Exception as e:
     print(e)
@@ -1335,7 +1335,7 @@ Get a list of staff.
 
 ```python
 try:
-    result = await client.configuration.getAppStaffList(pageNo=pageNo, pageSize=pageSize, orderIncent=orderIncent, orderingStore=orderingStore, user=user)
+    result = await applicationClient.configuration.getAppStaffList(pageNo=pageNo, pageSize=pageSize, orderIncent=orderIncent, orderingStore=orderingStore, user=user, userName=userName)
     # use result
 except Exception as e:
     print(e)
@@ -1351,7 +1351,8 @@ except Exception as e:
 | pageSize | Int? | no |  |   
 | orderIncent | Boolean? | no | This is a boolean value. Select `true` to retrieve the staff members eligible for getting incentives on orders. |   
 | orderingStore | Int? | no | ID of the ordering store. Helps in retrieving staff members working at a particular ordering store. |   
-| user | String? | no | Mongo ID of the staff. Helps in retrieving the details of a particular staff member. |  
+| user | String? | no | Mongo ID of the staff. Helps in retrieving the details of a particular staff member. |   
+| userName | String? | no | user name of the member |  
 
 
 
@@ -1396,7 +1397,7 @@ Get a list of staff.
 
 ```python
 try:
-    result = await client.configuration.getAppStaffs(orderIncent=orderIncent, orderingStore=orderingStore, user=user)
+    result = await applicationClient.configuration.getAppStaffs(orderIncent=orderIncent, orderingStore=orderingStore, user=user)
     # use result
 except Exception as e:
     print(e)

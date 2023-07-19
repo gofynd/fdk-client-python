@@ -1,6 +1,6 @@
 
 
-""" AuditTrail Platform Client."""
+"""AuditTrail Platform Client"""
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
@@ -10,6 +10,7 @@ from .validator import AuditTrailValidator
 class AuditTrail:
     def __init__(self, config):
         self._conf = config
+
     
     async def getAuditLogs(self, qs=None):
         """Get a paginated set of logs that can be filtered using the available set of parameters and get the relevant group of logs
@@ -17,7 +18,7 @@ class AuditTrail:
         """
         payload = {}
         
-        if qs:
+        if qs is not None:
             payload["qs"] = qs
         
 
@@ -37,7 +38,22 @@ class AuditTrail:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/audit-trail/v1.0/company/{self._conf.companyId}/logs/", qs=qs), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/audit-trail/v1.0/company/{self._conf.companyId}/logs/", qs=qs), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import LogSchemaResponse
+            schema = LogSchemaResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAuditLogs")
+                print(e)
+
+        
+
+        return response
     
     async def createAuditLog(self, body=""):
         """Create a log instance that stores all the relevant info to be logged
@@ -66,7 +82,22 @@ class AuditTrail:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/audit-trail/v1.0/company/{self._conf.companyId}/logs/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/audit-trail/v1.0/company/{self._conf.companyId}/logs/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateLogResponse
+            schema = CreateLogResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createAuditLog")
+                print(e)
+
+        
+
+        return response
     
     async def getAuditLog(self, id=None):
         """Get detailed log information by their id
@@ -74,7 +105,7 @@ class AuditTrail:
         """
         payload = {}
         
-        if id:
+        if id is not None:
             payload["id"] = id
         
 
@@ -94,7 +125,22 @@ class AuditTrail:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/audit-trail/v1.0/company/{self._conf.companyId}/logs/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/audit-trail/v1.0/company/{self._conf.companyId}/logs/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import LogSchemaResponse
+            schema = LogSchemaResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAuditLog")
+                print(e)
+
+        
+
+        return response
     
     async def getEntityTypes(self, ):
         """Get a consolidated list of entity types from all the logs stored on the db, which further helps to filter the logs better
@@ -118,6 +164,21 @@ class AuditTrail:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        return await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/audit-trail/v1.0/company/{self._conf.companyId}/entity-types", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/audit-trail/v1.0/company/{self._conf.companyId}/entity-types", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EntityTypesResponse
+            schema = EntityTypesResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getEntityTypes")
+                print(e)
+
+        
+
+        return response
     
 

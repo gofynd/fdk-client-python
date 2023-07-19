@@ -3,9 +3,7 @@
 from marshmallow import fields, Schema
 from marshmallow.validate import OneOf
 
-
 from ..PlatformModel import BaseSchema
-
 
 
 from .enums import *
@@ -269,7 +267,7 @@ class CreateCustomFormPayload(BaseSchema):
     
     header_image = fields.Str(required=False)
     
-    priority = fields.Nested(PriorityEnum, required=False)
+    priority = fields.Str(required=False, validate=OneOf([val.value for val in PriorityEnum.__members__.values()]))
     
     should_notify = fields.Boolean(required=False)
     
@@ -289,7 +287,7 @@ class EditCustomFormPayload(BaseSchema):
     
     description = fields.Str(required=False)
     
-    priority = fields.Nested(PriorityEnum, required=False)
+    priority = fields.Str(required=False, validate=OneOf([val.value for val in PriorityEnum.__members__.values()]))
     
     header_image = fields.Str(required=False)
     
@@ -317,7 +315,7 @@ class EditTicketPayload(BaseSchema):
     
     status = fields.Str(required=False)
     
-    priority = fields.Nested(PriorityEnum, required=False)
+    priority = fields.Str(required=False, validate=OneOf([val.value for val in PriorityEnum.__members__.values()]))
     
     assigned_to = fields.Nested(AgentChangePayload, required=False)
     
@@ -389,7 +387,7 @@ class TicketHistoryPayload(BaseSchema):
     
     value = fields.Dict(required=False)
     
-    type = fields.Nested(HistoryTypeEnum, required=False)
+    type = fields.Str(required=False, validate=OneOf([val.value for val in HistoryTypeEnum.__members__.values()]))
     
 
 
@@ -545,7 +543,7 @@ class TicketAsset(BaseSchema):
     
     value = fields.Str(required=False)
     
-    type = fields.Nested(TicketAssetTypeEnum, required=False)
+    type = fields.Str(required=False, validate=OneOf([val.value for val in TicketAssetTypeEnum.__members__.values()]))
     
 
 
@@ -569,7 +567,7 @@ class AddTicketPayload(BaseSchema):
     
     status = fields.Str(required=False)
     
-    priority = fields.Nested(PriorityEnum, required=False)
+    priority = fields.Str(required=False, validate=OneOf([val.value for val in PriorityEnum.__members__.values()]))
     
     category = fields.Str(required=False)
     
@@ -583,7 +581,7 @@ class Priority(BaseSchema):
     # Lead swagger.json
 
     
-    key = fields.Nested(PriorityEnum, required=False)
+    key = fields.Str(required=False, validate=OneOf([val.value for val in PriorityEnum.__members__.values()]))
     
     display = fields.Str(required=False)
     
@@ -877,7 +875,7 @@ class Ticket(BaseSchema):
     
     sub_category = fields.Str(required=False)
     
-    source = fields.Nested(TicketSourceEnum, required=False)
+    source = fields.Str(required=False, validate=OneOf([val.value for val in TicketSourceEnum.__members__.values()]))
     
     status = fields.Nested(Status, required=False)
     

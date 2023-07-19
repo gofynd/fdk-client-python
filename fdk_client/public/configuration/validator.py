@@ -18,7 +18,6 @@ from ..PublicModel import BaseSchema
         
         
 
-
 class ConfigurationValidator:
     
     

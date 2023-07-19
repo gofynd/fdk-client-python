@@ -47,10 +47,6 @@ class PageType(Enum):
     
     PRODUCT = "product"
     
-    PRODUCT_REVIEWS = "product-reviews"
-    
-    ADD_PRODUCT_REVIEW = "add-product-review"
-    
     PRODUCT_REQUEST = "product-request"
     
     PRODUCTS = "products"
@@ -98,6 +94,8 @@ class PageType(Enum):
     SHIPPING_POLICY = "shipping-policy"
     
     RETURN_POLICY = "return-policy"
+    
+    ORDER_STATUS = "order-status"
     
     @classmethod
     async def is_valid(cls, value):
