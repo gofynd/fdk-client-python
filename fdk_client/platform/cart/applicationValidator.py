@@ -94,6 +94,20 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
     
     
         
@@ -528,6 +542,37 @@ class CartValidator:
         
     
     class createCartMetaConfig(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class updatePriceAdjustment(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
+    class removePriceAdjustment(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
+    class addPriceAdjustment(BaseSchema):
         
         
         company_id = fields.Str(required=False)
