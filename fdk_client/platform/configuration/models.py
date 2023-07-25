@@ -2913,7 +2913,7 @@ class ApplicationInformation(BaseSchema):
     
     social_links = fields.Nested(SocialLinks, required=False)
     
-    links = fields.Nested(Links, required=False)
+    links = fields.List(fields.Nested(Links, required=False), required=False)
     
     copyright_text = fields.Str(required=False)
     
@@ -2939,7 +2939,7 @@ class InformationAddress(BaseSchema):
     
     address_line = fields.List(fields.Str(required=False), required=False)
     
-    phone = fields.Nested(InformationPhone, required=False)
+    phone = fields.List(fields.Nested(InformationPhone, required=False), required=False)
     
     city = fields.Str(required=False)
     
