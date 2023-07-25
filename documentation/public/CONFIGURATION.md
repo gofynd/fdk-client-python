@@ -340,6 +340,7 @@ Success
  | appType | String? |  yes  | It shows whether application is live or in development mode |
  | mobileLogo | [SecureUrl](#SecureUrl)? |  yes  |  |
  | domain | [Domain](#Domain)? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -427,6 +428,10 @@ Success
  | id | String? |  yes  |  |
  | defaultCurrency | [LocationDefaultCurrency](#LocationDefaultCurrency)? |  yes  |  |
  | defaultLanguage | [LocationDefaultLanguage](#LocationDefaultLanguage)? |  yes  |  |
+ | stateCode | String? |  yes  |  |
+ | countryCode | String? |  yes  |  |
+ | latitude | String? |  yes  |  |
+ | longitude | String? |  yes  |  |
 
 ---
 

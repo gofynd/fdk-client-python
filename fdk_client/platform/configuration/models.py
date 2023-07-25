@@ -2743,6 +2743,8 @@ class Application(BaseSchema):
     
     domain = fields.Nested(Domain, required=False)
     
+    slug = fields.Str(required=False)
+    
 
 
 class UnhandledError(BaseSchema):

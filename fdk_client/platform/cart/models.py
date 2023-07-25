@@ -1457,7 +1457,7 @@ class PromotionsResponse(BaseSchema):
     # Cart swagger.json
 
     
-    items = fields.Nested(PromotionListItem, required=False)
+    items = fields.List(fields.Nested(PromotionListItem, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
     
