@@ -64,6 +64,22 @@ class PaymentOptionsResponse(BaseSchema):
     pass
 
 
+class PayoutCustomer(BaseSchema):
+    pass
+
+
+class PayoutMoreAttributes(BaseSchema):
+    pass
+
+
+class PayoutAggregator(BaseSchema):
+    pass
+
+
+class Payout(BaseSchema):
+    pass
+
+
 class PayoutsResponse(BaseSchema):
     pass
 
@@ -595,23 +611,85 @@ class PaymentOptionsResponse(BaseSchema):
     
 
 
-class PayoutsResponse(BaseSchema):
+class PayoutCustomer(BaseSchema):
     # Payment swagger.json
 
     
-    more_attributes = fields.Dict(required=False)
+    unique_external_id = fields.Str(required=False)
     
-    customers = fields.Dict(required=False)
+    mobile = fields.Str(required=False)
     
-    unique_transfer_no = fields.Dict(required=False)
+    name = fields.Str(required=False)
+    
+    email = fields.Str(required=False)
+    
+    id = fields.Int(required=False)
+    
+
+
+class PayoutMoreAttributes(BaseSchema):
+    # Payment swagger.json
+
+    
+    branch_name = fields.Str(required=False)
+    
+    city = fields.Str(required=False)
+    
+    account_no = fields.Str(required=False)
+    
+    country = fields.Str(required=False)
+    
+    state = fields.Str(required=False)
+    
+    account_holder = fields.Str(required=False)
+    
+    ifsc_code = fields.Str(required=False)
+    
+    account_type = fields.Str(required=False)
+    
+    bank_name = fields.Str(required=False)
+    
+
+
+class PayoutAggregator(BaseSchema):
+    # Payment swagger.json
+
+    
+    aggregator_id = fields.Int(required=False)
+    
+    aggregator_fund_id = fields.Int(required=False)
+    
+    payout_details_id = fields.Int(required=False)
+    
+
+
+class Payout(BaseSchema):
+    # Payment swagger.json
+
+    
+    customers = fields.Nested(PayoutCustomer, required=False)
+    
+    more_attributes = fields.Nested(PayoutMoreAttributes, required=False)
     
     is_default = fields.Boolean(required=False)
+    
+    payouts_aggregators = fields.List(fields.Nested(PayoutAggregator, required=False), required=False)
+    
+    unique_transfer_no = fields.Str(required=False)
     
     is_active = fields.Boolean(required=False)
     
     transfer_type = fields.Str(required=False)
     
-    payouts_aggregators = fields.List(fields.Dict(required=False), required=False)
+
+
+class PayoutsResponse(BaseSchema):
+    # Payment swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+    items = fields.List(fields.Nested(Payout, required=False), required=False)
     
 
 

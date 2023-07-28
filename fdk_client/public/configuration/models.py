@@ -237,6 +237,8 @@ class Application(BaseSchema):
     
     domain = fields.Nested(Domain, required=False)
     
+    slug = fields.Str(required=False)
+    
 
 
 class NotFound(BaseSchema):
@@ -326,6 +328,14 @@ class LocationCountry(BaseSchema):
     default_currency = fields.Nested(LocationDefaultCurrency, required=False)
     
     default_language = fields.Nested(LocationDefaultLanguage, required=False)
+    
+    state_code = fields.Str(required=False)
+    
+    country_code = fields.Str(required=False)
+    
+    latitude = fields.Str(required=False)
+    
+    longitude = fields.Str(required=False)
     
 
 
