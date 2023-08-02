@@ -6035,7 +6035,7 @@ Get delivery date and options before checkout
 
 ```python
 try:
-    result = await applicationClient.cart.getShipments(p=p, id=id, buyNow=buyNow, addressId=addressId, areaCode=areaCode)
+    result = await applicationClient.cart.getShipments(p=p, id=id, buyNow=buyNow, addressId=addressId, areaCode=areaCode, orderType=orderType)
     # use result
 except Exception as e:
     print(e)
@@ -6051,7 +6051,8 @@ except Exception as e:
 | id | String? | no | The unique identifier of the cart |   
 | buyNow | Boolean? | no |  |   
 | addressId | String? | no | ID allotted to the selected address |   
-| areaCode | String? | no | The PIN Code of the destination address, e.g. 400059 |  
+| areaCode | String? | no | The PIN Code of the destination address, e.g. 400059 |   
+| orderType | String? | no | The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself. Digital - If the customer wants to buy digital voucher ( for jiogames ) |  
 
 
 
