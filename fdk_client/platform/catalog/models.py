@@ -4173,11 +4173,11 @@ class Trader(BaseSchema):
     # Catalog swagger.json
 
     
-    name = fields.Raw(required=False)
+    address = fields.List(fields.Str(required=False), required=False)
+    
+    name = fields.Str(required=False)
     
     type = fields.Str(required=False)
-    
-    address = fields.List(fields.Str(required=False), required=False)
     
 
 
@@ -4185,9 +4185,9 @@ class NetQuantity(BaseSchema):
     # Catalog swagger.json
 
     
-    unit = fields.Raw(required=False)
-    
     value = fields.Float(required=False)
+    
+    unit = fields.Str(required=False)
     
 
 

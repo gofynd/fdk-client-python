@@ -25,6 +25,8 @@ from .payment.applicationClient import Payment
 
 from .rewards.applicationClient import Rewards
 
+from .serviceability.applicationClient import Serviceability
+
 from .share.applicationClient import Share
 
 from .theme.applicationClient import Theme
@@ -57,6 +59,8 @@ class PlatformApplicationClient:
         self.payment = Payment(config, applicationId)
         
         self.rewards = Rewards(config, applicationId)
+        
+        self.serviceability = Serviceability(config, applicationId)
         
         self.share = Share(config, applicationId)
         
