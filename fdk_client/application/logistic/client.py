@@ -19,7 +19,11 @@ class Logistic:
             "getTatProduct": "/service/application/logistics/v1.0/",
             "getAllCountries": "/service/application/logistics/v1.0/country-list",
             "getPincodeZones": "/service/application/logistics/v1.0/pincode/zones",
-            "getOptimalLocations": "/service/application/logistics/v1.0/reassign_stores"
+            "getOptimalLocations": "/service/application/logistics/v1.0/reassign_stores",
+            "getCountries": "/service/application/logistics/v1.0/countries",
+            "getCountry": "/service/application/logistics/v1.0/countries/{country_iso_code}",
+            "getLocalities": "/service/application/logistics/v1.0/localities/{locality_type}",
+            "getLocality": "/service/application/logistics/v1.0/localities/{locality_type}/{locality_value}"
             
         }
         self._urls = {
@@ -237,6 +241,206 @@ class Logistic:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getOptimalLocations")
+                print(e)
+
+        
+
+        return response
+    
+    async def getCountries(self, onboarding=None, body=""):
+        """Retrieve of all countries.
+        :param onboarding : Only fetch countries which allowed for onboard on Platform. : type boolean
+        """
+        payload = {}
+        
+        if onboarding is not None:
+            payload["onboarding"] = onboarding
+        
+        # Parameter validation
+        schema = LogisticValidator.getCountries()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getCountries"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"onboarding","description":"Only fetch countries which allowed for onboard on Platform.","schema":{"type":"boolean"},"required":false,"example":true}],"query":[{"in":"query","name":"onboarding","description":"Only fetch countries which allowed for onboard on Platform.","schema":{"type":"boolean"},"required":false,"example":true}],"headers":[],"path":[]}""", onboarding=onboarding)
+        query_string = await create_query_string(onboarding=onboarding)
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCountries"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/countries", onboarding=onboarding), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetCountries
+            schema = GetCountries()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCountries")
+                print(e)
+
+        
+
+        return response
+    
+    async def getCountry(self, country_iso_code=None, body=""):
+        """Retrieve data for a single country and address format.
+        :param country_iso_code : The `country_iso_code` is ISO-2 (alpha-2) code for the country. : type string
+        """
+        payload = {}
+        
+        if country_iso_code is not None:
+            payload["country_iso_code"] = country_iso_code
+        
+        # Parameter validation
+        schema = LogisticValidator.getCountry()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getCountry"], proccessed_params="""{"required":[{"in":"path","name":"country_iso_code","description":"The `country_iso_code` is ISO-2 (alpha-2) code for the country.","schema":{"type":"string"},"required":true,"example":"IN"}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"country_iso_code","description":"The `country_iso_code` is ISO-2 (alpha-2) code for the country.","schema":{"type":"string"},"required":true,"example":"IN"}]}""", country_iso_code=country_iso_code)
+        query_string = await create_query_string(country_iso_code=country_iso_code)
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCountry"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/countries/{country_iso_code}", country_iso_code=country_iso_code), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetCountry
+            schema = GetCountry()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCountry")
+                print(e)
+
+        
+
+        return response
+    
+    async def getLocalities(self, locality_type=None, country=None, state=None, city=None, body=""):
+        """Get Localities data.
+        :param locality_type : A `locality_type` contains unique geographical division. : type string
+        :param country : A `country` contains a specific value of the country iso2 code. : type string
+        :param state : A `state` contains a specific value of the state, province. : type string
+        :param city : A `city` contains a specific value of the city. : type string
+        """
+        payload = {}
+        
+        if locality_type is not None:
+            payload["locality_type"] = locality_type
+        
+        if country is not None:
+            payload["country"] = country
+        
+        if state is not None:
+            payload["state"] = state
+        
+        if city is not None:
+            payload["city"] = city
+        
+        # Parameter validation
+        schema = LogisticValidator.getLocalities()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getLocalities"], proccessed_params="""{"required":[{"in":"path","name":"locality_type","description":"A `locality_type` contains unique geographical division.","schema":{"type":"string","enum":["state","city","pincode","sector"]},"required":true,"example":"sector"}],"optional":[{"in":"query","name":"country","description":"A `country` contains a specific value of the country iso2 code.","schema":{"type":"string"},"required":false,"example":"IN"},{"in":"query","name":"state","description":"A `state` contains a specific value of the state, province.","schema":{"type":"string"},"required":false,"example":"MAHARASHTRA"},{"in":"query","name":"city","description":"A `city` contains a specific value of the city.","schema":{"type":"string"},"required":false,"example":"THANE"}],"query":[{"in":"query","name":"country","description":"A `country` contains a specific value of the country iso2 code.","schema":{"type":"string"},"required":false,"example":"IN"},{"in":"query","name":"state","description":"A `state` contains a specific value of the state, province.","schema":{"type":"string"},"required":false,"example":"MAHARASHTRA"},{"in":"query","name":"city","description":"A `city` contains a specific value of the city.","schema":{"type":"string"},"required":false,"example":"THANE"}],"headers":[],"path":[{"in":"path","name":"locality_type","description":"A `locality_type` contains unique geographical division.","schema":{"type":"string","enum":["state","city","pincode","sector"]},"required":true,"example":"sector"}]}""", locality_type=locality_type, country=country, state=state, city=city)
+        query_string = await create_query_string(locality_type=locality_type, country=country, state=state, city=city)
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getLocalities"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/localities/{locality_type}", locality_type=locality_type, country=country, state=state, city=city), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetLocalities
+            schema = GetLocalities()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getLocalities")
+                print(e)
+
+        
+
+        return response
+    
+    async def getLocality(self, locality_type=None, locality_value=None, country=None, state=None, city=None, body=""):
+        """Get Locality data
+        :param locality_type : A `locality_type` contains value geographical division. : type string
+        :param locality_value : A `locality_value` contains a specific value of the locality. : type string
+        :param country : A `country` contains a specific value of the country iso2 code. : type string
+        :param state : A `state` contains a specific value of the state, province. : type string
+        :param city : A `city` contains a specific value of the city. : type string
+        """
+        payload = {}
+        
+        if locality_type is not None:
+            payload["locality_type"] = locality_type
+        
+        if locality_value is not None:
+            payload["locality_value"] = locality_value
+        
+        if country is not None:
+            payload["country"] = country
+        
+        if state is not None:
+            payload["state"] = state
+        
+        if city is not None:
+            payload["city"] = city
+        
+        # Parameter validation
+        schema = LogisticValidator.getLocality()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getLocality"], proccessed_params="""{"required":[{"in":"path","name":"locality_type","description":"A `locality_type` contains value geographical division.","schema":{"type":"string","enum":["state","city","pincode","sector"]},"required":true,"examples":{"Pincode":{"value":"pincode"},"Sector":{"value":"sector"}}},{"in":"path","name":"locality_value","description":"A `locality_value` contains a specific value of the locality.","schema":{"type":"string"},"required":true,"examples":{"Pincode":{"value":"400603"},"Sector":{"value":"Abu Dhabi"}}}],"optional":[{"in":"query","name":"country","description":"A `country` contains a specific value of the country iso2 code.","schema":{"type":"string"},"required":false,"examples":{"India":{"value":"IN"},"UAE":{"value":"AE"}}},{"in":"query","name":"state","description":"A `state` contains a specific value of the state, province.","schema":{"type":"string"},"required":false,"examples":{"Maharashtra":{"value":"MAHARASHTRA"}}},{"in":"query","name":"city","description":"A `city` contains a specific value of the city.","schema":{"type":"string"},"required":false,"examples":{"Dubai":{"value":"DUBAI"},"Thane":{"value":"THANE"}}}],"query":[{"in":"query","name":"country","description":"A `country` contains a specific value of the country iso2 code.","schema":{"type":"string"},"required":false,"examples":{"India":{"value":"IN"},"UAE":{"value":"AE"}}},{"in":"query","name":"state","description":"A `state` contains a specific value of the state, province.","schema":{"type":"string"},"required":false,"examples":{"Maharashtra":{"value":"MAHARASHTRA"}}},{"in":"query","name":"city","description":"A `city` contains a specific value of the city.","schema":{"type":"string"},"required":false,"examples":{"Dubai":{"value":"DUBAI"},"Thane":{"value":"THANE"}}}],"headers":[],"path":[{"in":"path","name":"locality_type","description":"A `locality_type` contains value geographical division.","schema":{"type":"string","enum":["state","city","pincode","sector"]},"required":true,"examples":{"Pincode":{"value":"pincode"},"Sector":{"value":"sector"}}},{"in":"path","name":"locality_value","description":"A `locality_value` contains a specific value of the locality.","schema":{"type":"string"},"required":true,"examples":{"Pincode":{"value":"400603"},"Sector":{"value":"Abu Dhabi"}}}]}""", locality_type=locality_type, locality_value=locality_value, country=country, state=state, city=city)
+        query_string = await create_query_string(locality_type=locality_type, locality_value=locality_value, country=country, state=state, city=city)
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getLocality"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/localities/{locality_type}/{locality_value}", locality_type=locality_type, locality_value=locality_value, country=country, state=state, city=city), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetLocality
+            schema = GetLocality()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getLocality")
                 print(e)
 
         

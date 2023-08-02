@@ -112,6 +112,38 @@ class ReAssignStoreResponse(BaseSchema):
     pass
 
 
+class GetCountries(BaseSchema):
+    pass
+
+
+class GetCountry(BaseSchema):
+    pass
+
+
+class Page(BaseSchema):
+    pass
+
+
+class Logistics(BaseSchema):
+    pass
+
+
+class Locality(BaseSchema):
+    pass
+
+
+class GetLocalities(BaseSchema):
+    pass
+
+
+class GetLocality(BaseSchema):
+    pass
+
+
+class ErrorResponse(BaseSchema):
+    pass
+
+
 
 
 
@@ -480,6 +512,120 @@ class ReAssignStoreResponse(BaseSchema):
     error = fields.Dict(required=False)
     
     assigned_stores = fields.List(fields.Dict(required=False), required=False)
+    
+
+
+class GetCountries(BaseSchema):
+    # Logistic swagger.json
+
+    
+    page = fields.Dict(required=False)
+    
+    items = fields.List(fields.Dict(required=False), required=False)
+    
+
+
+class GetCountry(BaseSchema):
+    # Logistic swagger.json
+
+    
+    actions = fields.Dict(required=False)
+    
+    ios2 = fields.Str(required=False)
+    
+    timezones = fields.List(fields.Str(required=False), required=False)
+    
+    hierarchy = fields.Dict(required=False)
+    
+    ios3 = fields.Str(required=False)
+    
+    phone_code = fields.Str(required=False)
+    
+    currency = fields.Str(required=False)
+    
+    sub_type = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    uid = fields.Str(required=False)
+    
+
+
+class Page(BaseSchema):
+    # Logistic swagger.json
+
+    
+    item_total = fields.Int(required=False)
+    
+    next_id = fields.Str(required=False)
+    
+    has_previous = fields.Boolean(required=False)
+    
+    has_next = fields.Boolean(required=False)
+    
+    current = fields.Int(required=False)
+    
+    type = fields.Str(required=False)
+    
+    size = fields.Int(required=False)
+    
+
+
+class Logistics(BaseSchema):
+    # Logistic swagger.json
+
+    
+    dp = fields.Dict(required=False)
+    
+
+
+class Locality(BaseSchema):
+    # Logistic swagger.json
+
+    
+    is_active = fields.Boolean(required=False)
+    
+    parent_id = fields.List(fields.Str(required=False), required=False)
+    
+    meta = fields.Dict(required=False)
+    
+    logistics = fields.Nested(Logistics, required=False)
+    
+    uid = fields.Str(required=False)
+    
+    sub_type = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    display_name = fields.Str(required=False)
+    
+
+
+class GetLocalities(BaseSchema):
+    # Logistic swagger.json
+
+    
+    page = fields.Nested(Page, required=False)
+    
+    regions = fields.List(fields.Nested(Locality, required=False), required=False)
+    
+
+
+class GetLocality(BaseSchema):
+    # Logistic swagger.json
+
+    
+    regions = fields.Nested(Locality, required=False)
+    
+
+
+class ErrorResponse(BaseSchema):
+    # Logistic swagger.json
+
+    
+    error = fields.Str(required=False)
     
 
 
