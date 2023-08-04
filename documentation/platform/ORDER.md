@@ -27,11 +27,13 @@ Handles all platform order and shipment api(s)
 * [orderUpdate](#orderupdate)
 * [checkOrderStatus](#checkorderstatus)
 * [getStateTransitionMap](#getstatetransitionmap)
+* [getRoleBaseStateTransition](#getrolebasestatetransition)
 * [fetchCreditBalanceDetail](#fetchcreditbalancedetail)
 * [fetchRefundModeConfig](#fetchrefundmodeconfig)
 * [attachOrderUser](#attachorderuser)
 * [sendUserMobileOTP](#sendusermobileotp)
 * [verifyMobileOTP](#verifymobileotp)
+* [downloadLanesReport](#downloadlanesreport)
 * [getShipments](#getshipments)
 * [getShipmentById](#getshipmentbyid)
 * [getOrderById](#getorderbyid)
@@ -1627,6 +1629,81 @@ State Transition Mapping, for next possible state
 ---
 
 
+### getRoleBaseStateTransition
+To fetch next state transitions.
+
+
+
+
+```python
+try:
+    result = await platformClient.order.getRoleBaseStateTransition(orderingChannel=orderingChannel, status=status)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| orderingChannel | String | yes | Ordering channel |   
+| status | String | yes | current status of a shipment |  
+
+
+
+This endpoint will fetch next possible states based on logged in user
+
+
+*Returned Response:*
+
+
+
+
+[RoleBaseStateTransitionMapping](#RoleBaseStateTransitionMapping)
+
+Role wise state transition mapping, for next possible state
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; send state transition success</i></summary>
+
+```json
+{
+  "value": {
+    "success": true,
+    "next_statuses": [
+      "bag_picked",
+      "delivery_done",
+      "rto_bag_delivered",
+      "rto_in_transit"
+    ]
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
 ### fetchCreditBalanceDetail
 
 
@@ -1916,6 +1993,76 @@ Verify OTP
 ---
 
 
+### downloadLanesReport
+
+
+
+
+
+```python
+try:
+    result = await platformClient.order.downloadLanesReport(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [BulkReportsDownloadRequest](#BulkReportsDownloadRequest) | yes | Request body |
+
+
+
+
+*Returned Response:*
+
+
+
+
+[BulkReportsDownloadResponse](#BulkReportsDownloadResponse)
+
+Bulk Report creation initiated.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; success</i></summary>
+
+```json
+true
+```
+</details>
+
+<details>
+<summary><i>&nbsp; batch_id</i></summary>
+
+```json
+"0000-1111-2222-3333"
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
 ### getShipments
 
 
@@ -1924,7 +2071,7 @@ Verify OTP
 
 ```python
 try:
-    result = await platformClient.order.getShipments(lane=lane, bagStatus=bagStatus, statusOverrideLane=statusOverrideLane, timeToDispatch=timeToDispatch, searchType=searchType, searchValue=searchValue, fromDate=fromDate, toDate=toDate, dpIds=dpIds, stores=stores, salesChannels=salesChannels, pageNo=pageNo, pageSize=pageSize, fetchActiveShipment=fetchActiveShipment, excludeLockedShipments=excludeLockedShipments, paymentMethods=paymentMethods, channelShipmentId=channelShipmentId, channelOrderId=channelOrderId, customMeta=customMeta, orderingChannel=orderingChannel, companyAffiliateTag=companyAffiliateTag, myOrders=myOrders, platformUserId=platformUserId)
+    result = await platformClient.order.getShipments(lane=lane, bagStatus=bagStatus, statusOverrideLane=statusOverrideLane, timeToDispatch=timeToDispatch, searchType=searchType, searchValue=searchValue, fromDate=fromDate, toDate=toDate, dpIds=dpIds, stores=stores, salesChannels=salesChannels, pageNo=pageNo, pageSize=pageSize, fetchActiveShipment=fetchActiveShipment, excludeLockedShipments=excludeLockedShipments, paymentMethods=paymentMethods, channelShipmentId=channelShipmentId, channelOrderId=channelOrderId, customMeta=customMeta, orderingChannel=orderingChannel, companyAffiliateTag=companyAffiliateTag, myOrders=myOrders, platformUserId=platformUserId, tags=tags)
     # use result
 except Exception as e:
     print(e)
@@ -1958,7 +2105,8 @@ except Exception as e:
 | orderingChannel | String? | no |  |   
 | companyAffiliateTag | String? | no |  |   
 | myOrders | Boolean? | no |  |   
-| platformUserId | String? | no |  |  
+| platformUserId | String? | no |  |   
+| tags | String? | no | Comma separated values of tags |  
 
 
 
@@ -4459,8 +4607,9 @@ We are processing the request!
  | ---------- | ---- | -------- | ----------- |
  | status | Int? |  yes  |  |
  | success | Boolean? |  yes  |  |
- | message | String? |  yes  |  |
+ | message | String |  no  |  |
  | errorTrace | String? |  yes  |  |
+ | error | String |  no  |  |
 
 ---
 
@@ -4930,6 +5079,7 @@ We are processing the request!
  | weight | HashMap<String,Any> |  no  |  |
  | attributes | HashMap<String,Any> |  no  |  |
  | quantity | Int |  no  |  |
+ | status | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -4960,6 +5110,9 @@ We are processing the request!
  | dpId | Int? |  yes  |  |
  | meta | HashMap<String,Any>? |  yes  |  |
  | affiliateShipmentId | String |  no  |  |
+ | lockStatus | Boolean? |  yes  |  |
+ | lockMessage | String? |  yes  |  |
+ | actionToStatus | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -5618,7 +5771,7 @@ We are processing the request!
  | ---------- | ---- | -------- | ----------- |
  | charges | ArrayList<[Charge](#Charge)>? |  yes  |  |
  | meta | HashMap<String,Any>? |  yes  |  |
- | customMessasge | String? |  yes  |  |
+ | customMessage | String? |  yes  |  |
  | quantity | Int? |  yes  |  |
  | sellerIdentifier | String |  no  |  |
  | externalLineId | String? |  yes  |  |
@@ -5733,6 +5886,7 @@ We are processing the request!
  | ---------- | ---- | -------- | ----------- |
  | b2BGstinNumber | String? |  yes  |  |
  | gstin | String? |  yes  |  |
+ | panNo | String? |  yes  |  |
 
 ---
 
@@ -5967,6 +6121,18 @@ We are processing the request!
 
  
  
+ #### [RoleBaseStateTransitionMapping](#RoleBaseStateTransitionMapping)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | success | Boolean? |  yes  |  |
+ | nextStatuses | ArrayList<String>? |  yes  |  |
+
+---
+
+
+ 
+ 
  #### [FetchCreditBalanceRequestPayload](#FetchCreditBalanceRequestPayload)
 
  | Properties | Type | Nullable | Description |
@@ -6195,6 +6361,50 @@ We are processing the request!
  | success | Boolean? |  yes  |  |
  | message | String? |  yes  |  |
  | data | [VerifyOtpResponseData](#VerifyOtpResponseData)? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [BulkReportsDownloadRequest](#BulkReportsDownloadRequest)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | storeIds | ArrayList<String>? |  yes  | Download for specific store ids. |
+ | laneType | String? |  yes  |  |
+ | customHeaders | String? |  yes  | Download report with specific headers |
+ | reportType | String? |  yes  | Type of report |
+ | fromDate | String? |  yes  |  |
+ | toDate | String? |  yes  |  |
+ | entities | ArrayList<String>? |  yes  | Download for specific enitites, entities can be bag, shipment or order_id, etc. |
+ | filterType | String? |  yes  |  |
+ | isCrossCompanyEnabled | Boolean? |  yes  | Download lanes for cross company. |
+ | customFiltersForLane | HashMap<String,Any>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [BulkReportsDownloadResponse](#BulkReportsDownloadResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | success | Boolean? |  yes  |  |
+ | batchId | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [BulkReportsDownloadFailedResponse](#BulkReportsDownloadFailedResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | status | Boolean? |  yes  |  |
+ | error | String? |  yes  |  |
 
 ---
 
@@ -6931,19 +7141,6 @@ We are processing the request!
 
  
  
- #### [ShipmentDetails1](#ShipmentDetails1)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | lockStatus | Boolean? |  yes  |  |
- | lockMessage | String? |  yes  |  |
- | actionToStatus | HashMap<String,Any>? |  yes  |  |
-
----
-
-
- 
- 
  #### [PhoneDetails](#PhoneDetails)
 
  | Properties | Type | Nullable | Description |
@@ -7498,7 +7695,7 @@ We are processing the request!
  | billingDetails | [UserDetailsData](#UserDetailsData)? |  yes  |  |
  | forwardShipmentId | String? |  yes  |  |
  | fulfilmentPriority | Int? |  yes  |  |
- | shipmentDetails | [ShipmentDetails1](#ShipmentDetails1)? |  yes  |  |
+ | shipmentDetails | [ShipmentDetails](#ShipmentDetails)? |  yes  |  |
  | customMeta | ArrayList<HashMap<String,Any>>? |  yes  |  |
  | shipmentQuantity | Int? |  yes  |  |
  | companyDetails | [CompanyDetails](#CompanyDetails)? |  yes  |  |
@@ -7996,17 +8193,6 @@ We are processing the request!
 
  
  
- #### [ArticleDetails1](#ArticleDetails1)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | status | HashMap<String,Any>? |  yes  |  |
-
----
-
-
- 
- 
  #### [StoreAddress](#StoreAddress)
 
  | Properties | Type | Nullable | Description |
@@ -8282,7 +8468,7 @@ We are processing the request!
  | bagStatus | ArrayList<[BagStatusHistory](#BagStatusHistory)>? |  yes  |  |
  | sellerIdentifier | String? |  yes  |  |
  | originalBagList | ArrayList<Int>? |  yes  |  |
- | articleDetails | [ArticleDetails1](#ArticleDetails1)? |  yes  |  |
+ | articleDetails | [ArticleDetails](#ArticleDetails)? |  yes  |  |
  | currentOperationalStatus | [BagStatusHistory](#BagStatusHistory)? |  yes  |  |
  | orderingStore | [Store](#Store)? |  yes  |  |
  | article | [Article](#Article)? |  yes  |  |
@@ -8312,18 +8498,6 @@ We are processing the request!
  | operationalStatus | String? |  yes  |  |
  | entityType | String? |  yes  |  |
  | status | [BagReturnableCancelableStatus1](#BagReturnableCancelableStatus1)? |  yes  |  |
-
----
-
-
- 
- 
- #### [ErrorResponse1](#ErrorResponse1)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | message | String |  no  |  |
- | error | String |  no  |  |
 
 ---
 

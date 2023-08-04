@@ -96,8 +96,7 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
+        
         
     
     
@@ -110,6 +109,16 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
         
         
         
@@ -431,6 +440,17 @@ class OrderValidator:
          
         
     
+    class getRoleBaseStateTransition(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        ordering_channel = fields.Str(required=False)
+        
+        status = fields.Str(required=False)
+         
+        
+    
     class fetchCreditBalanceDetail(BaseSchema):
         
         
@@ -460,6 +480,13 @@ class OrderValidator:
         
     
     class verifyMobileOTP(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class downloadLanesReport(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -516,6 +543,8 @@ class OrderValidator:
         my_orders = fields.Boolean(required=False)
         
         platform_user_id = fields.Str(required=False)
+        
+        tags = fields.Str(required=False)
          
         
     

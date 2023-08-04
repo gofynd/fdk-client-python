@@ -12,6 +12,10 @@ class ValidityObject(BaseSchema):
     pass
 
 
+class DiscountMeta(BaseSchema):
+    pass
+
+
 class CreateUpdateDiscount(BaseSchema):
     pass
 
@@ -73,6 +77,18 @@ class ValidityObject(BaseSchema):
     
 
 
+class DiscountMeta(BaseSchema):
+    # Discount swagger.json
+
+    
+    timer = fields.Boolean(required=False)
+    
+    hours = fields.Float(required=False)
+    
+    minutes = fields.Float(required=False)
+    
+
+
 class CreateUpdateDiscount(BaseSchema):
     # Discount swagger.json
 
@@ -103,6 +119,8 @@ class CreateUpdateDiscount(BaseSchema):
     
     validity = fields.Nested(ValidityObject, required=False)
     
+    discount_meta = fields.Nested(DiscountMeta, required=False)
+    
 
 
 class DiscountJob(BaseSchema):
@@ -132,6 +150,8 @@ class DiscountJob(BaseSchema):
     brand_ids = fields.List(fields.Int(required=False), required=False)
     
     store_ids = fields.List(fields.Int(required=False), required=False)
+    
+    discount_meta = fields.Nested(DiscountMeta, required=False)
     
     validity = fields.Nested(ValidityObject, required=False)
     
@@ -171,6 +191,8 @@ class DiscountItems(BaseSchema):
     
     value = fields.Float(required=False)
     
+    discount_meta = fields.Nested(DiscountMeta, required=False)
+    
 
 
 class BulkDiscount(BaseSchema):
@@ -200,6 +222,8 @@ class FileJobResponse(BaseSchema):
     type = fields.Str(required=False)
     
     file_type = fields.Str(required=False)
+    
+    _id = fields.Str(required=False)
     
 
 

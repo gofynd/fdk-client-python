@@ -8654,7 +8654,7 @@ Validate Product Template Schema
 
 ```python
 try:
-    result = await platformClient.catalog.validateProductTemplate(slug=slug)
+    result = await platformClient.catalog.validateProductTemplate(slug=slug, itemType=itemType, bulk=bulk)
     # use result
 except Exception as e:
     print(e)
@@ -8666,7 +8666,9 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| slug | String | yes | A `slug` is a unique identifier for a particular template. |  
+| slug | String | yes | A `slug` is a unique identifier for a particular template. |   
+| itemType | String? | no | An `item_type` defines the type of item. The default value is standard. |   
+| bulk | Boolean? | no | This specification determines the schema type to be retrieved. When set to true, it will return the schema for bulk data; when set to false, it will provide the schema for a single product. The default value is false. |  
 
 
 
@@ -8711,7 +8713,7 @@ Download Product Template View
 
 ```python
 try:
-    result = await platformClient.catalog.downloadProductTemplateViews(slug=slug)
+    result = await platformClient.catalog.downloadProductTemplateViews(slug=slug, itemType=itemType, type=type)
     # use result
 except Exception as e:
     print(e)
@@ -8723,7 +8725,9 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| slug | String | yes | A `slug` is a unique identifier for a particular template. |  
+| slug | String | yes | A `slug` is a unique identifier for a particular template. |   
+| itemType | String? | no | An `item_type` defines the type of item. The default value is standard. |   
+| type | String? | no | Format type of the sample file. The default value is excel. |  
 
 
 

@@ -62,6 +62,9 @@ from ..PlatformModel import BaseSchema
     
     
         
+    
+    
+        
 
 
 
@@ -182,6 +185,13 @@ class CompanyProfileValidator:
         
         
         company_id = fields.Str(required=False)
+         
+        
+    
+    class getLocationTags(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
          
         
     

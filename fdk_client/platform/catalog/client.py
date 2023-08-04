@@ -1037,14 +1037,22 @@ class Catalog:
 
         return response
     
-    async def validateProductTemplate(self, slug=None):
+    async def validateProductTemplate(self, slug=None, item_type=None, bulk=None):
         """Allows you to list all product templates validation values for all the fields present in the database
         :param slug : A `slug` is a unique identifier for a particular template. : type string
+        :param item_type : An `item_type` defines the type of item. The default value is standard. : type string
+        :param bulk : This specification determines the schema type to be retrieved. When set to true, it will return the schema for bulk data; when set to false, it will provide the schema for a single product. The default value is false. : type boolean
         """
         payload = {}
         
         if slug is not None:
             payload["slug"] = slug
+        
+        if item_type is not None:
+            payload["item_type"] = item_type
+        
+        if bulk is not None:
+            payload["bulk"] = bulk
         
 
         # Parameter validation
@@ -1052,8 +1060,8 @@ class Catalog:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/{slug}/validation/schema/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"slug","description":"A `slug` is a unique identifier for a particular template.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"slug","description":"A `slug` is a unique identifier for a particular template.","schema":{"type":"string"},"required":true}]}""", slug=slug)
-        query_string = await create_query_string(slug=slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/{slug}/validation/schema/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"slug","description":"A `slug` is a unique identifier for a particular template.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"item_type","description":"An `item_type` defines the type of item. The default value is standard.","schema":{"type":"string"}},{"in":"query","name":"bulk","description":"This specification determines the schema type to be retrieved. When set to true, it will return the schema for bulk data; when set to false, it will provide the schema for a single product. The default value is false.","schema":{"type":"boolean"}}],"query":[{"in":"query","name":"item_type","description":"An `item_type` defines the type of item. The default value is standard.","schema":{"type":"string"}},{"in":"query","name":"bulk","description":"This specification determines the schema type to be retrieved. When set to true, it will return the schema for bulk data; when set to false, it will provide the schema for a single product. The default value is false.","schema":{"type":"boolean"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"slug","description":"A `slug` is a unique identifier for a particular template.","schema":{"type":"string"},"required":true}]}""", slug=slug, item_type=item_type, bulk=bulk)
+        query_string = await create_query_string(slug=slug, item_type=item_type, bulk=bulk)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -1063,7 +1071,7 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/{slug}/validation/schema/", slug=slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/{slug}/validation/schema/", slug=slug, item_type=item_type, bulk=bulk), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
 
@@ -1080,14 +1088,22 @@ class Catalog:
 
         return response
     
-    async def downloadProductTemplateViews(self, slug=None):
+    async def downloadProductTemplateViews(self, slug=None, item_type=None, type=None):
         """Allows you to download product template data
         :param slug : A `slug` is a unique identifier for a particular template. : type string
+        :param item_type : An `item_type` defines the type of item. The default value is standard. : type string
+        :param type : Format type of the sample file. The default value is excel. : type string
         """
         payload = {}
         
         if slug is not None:
             payload["slug"] = slug
+        
+        if item_type is not None:
+            payload["item_type"] = item_type
+        
+        if type is not None:
+            payload["type"] = type
         
 
         # Parameter validation
@@ -1095,8 +1111,8 @@ class Catalog:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/{slug}/download/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"slug","description":"A `slug` is a unique identifier for a particular template.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"slug","description":"A `slug` is a unique identifier for a particular template.","schema":{"type":"string"},"required":true}]}""", slug=slug)
-        query_string = await create_query_string(slug=slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/{slug}/download/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"slug","description":"A `slug` is a unique identifier for a particular template.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"item_type","description":"An `item_type` defines the type of item. The default value is standard.","schema":{"type":"string"}},{"in":"query","name":"type","description":"Format type of the sample file. The default value is excel.","schema":{"type":"string"}}],"query":[{"in":"query","name":"item_type","description":"An `item_type` defines the type of item. The default value is standard.","schema":{"type":"string"}},{"in":"query","name":"type","description":"Format type of the sample file. The default value is excel.","schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"slug","description":"A `slug` is a unique identifier for a particular template.","schema":{"type":"string"},"required":true}]}""", slug=slug, item_type=item_type, type=type)
+        query_string = await create_query_string(slug=slug, item_type=item_type, type=type)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -1106,7 +1122,7 @@ class Catalog:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/{slug}/download/", slug=slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/{slug}/download/", slug=slug, item_type=item_type, type=type), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
 

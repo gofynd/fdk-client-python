@@ -166,6 +166,41 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
 
 class PaymentValidator:
     
@@ -508,6 +543,83 @@ class PaymentValidator:
         
     
     class getPaymentCodeOption(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class updatePaymentSession(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        gid = fields.Str(required=False)
+         
+        
+    
+    class updateRefundSession(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        gid = fields.Str(required=False)
+        
+        request_id = fields.Str(required=False)
+         
+        
+    
+    class getMerchantPaymentOption(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class patchMerchantPaymentOption(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getMerchantAggregatorPaymentModeDetails(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        aggregator_id = fields.Int(required=False)
+        
+        business_unit = fields.Str(required=False)
+        
+        device = fields.Str(required=False)
+         
+        
+    
+    class patchMerchantAggregatorPaymentModeDetails(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        aggregator_id = fields.Int(required=False)
+         
+        
+    
+    class getPGConfigAggregators(BaseSchema):
         
         
         company_id = fields.Int(required=False)

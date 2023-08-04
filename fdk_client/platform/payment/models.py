@@ -372,6 +372,42 @@ class GetPaymentCodeResponse(BaseSchema):
     pass
 
 
+class MerchnatPaymentModeResponse(BaseSchema):
+    pass
+
+
+class AddressDetail(BaseSchema):
+    pass
+
+
+class PaymentSessionDetail(BaseSchema):
+    pass
+
+
+class OrderDetail(BaseSchema):
+    pass
+
+
+class PaymentSessionRequestSerializer(BaseSchema):
+    pass
+
+
+class PaymentSessionResponseSerializer(BaseSchema):
+    pass
+
+
+class RefundSessionDetail(BaseSchema):
+    pass
+
+
+class RefundSessionRequestSerializer(BaseSchema):
+    pass
+
+
+class RefundSessionResponseSerializer(BaseSchema):
+    pass
+
+
 
 
 
@@ -1802,6 +1838,226 @@ class GetPaymentCodeResponse(BaseSchema):
     data = fields.Nested(GetPaymentCode, required=False)
     
     success = fields.Boolean(required=False)
+    
+
+
+class MerchnatPaymentModeResponse(BaseSchema):
+    # Payment swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+    items = fields.List(fields.Dict(required=False), required=False)
+    
+    success = fields.Boolean(required=False)
+    
+
+
+class AddressDetail(BaseSchema):
+    # Payment swagger.json
+
+    
+    country_iso_code = fields.Str(required=False)
+    
+    google_map_point = fields.Dict(required=False)
+    
+    country = fields.Str(required=False)
+    
+    email = fields.Str(required=False)
+    
+    area_code = fields.Str(required=False)
+    
+    city = fields.Str(required=False)
+    
+    phone = fields.Str(required=False)
+    
+    expire_at = fields.Str(required=False)
+    
+    address = fields.Str(required=False)
+    
+    g_address_id = fields.Str(required=False)
+    
+    tags = fields.List(fields.Dict(required=False), required=False)
+    
+    name = fields.Str(required=False)
+    
+    state = fields.Str(required=False)
+    
+    landmark = fields.Str(required=False)
+    
+    area = fields.Str(required=False)
+    
+    area_code_slug = fields.Str(required=False)
+    
+    address_type = fields.Str(required=False)
+    
+    country_phone_code = fields.Str(required=False)
+    
+    geo_location = fields.Dict(required=False)
+    
+
+
+class PaymentSessionDetail(BaseSchema):
+    # Payment swagger.json
+
+    
+    aggregator_order_id = fields.Str(required=False)
+    
+    shipping_address = fields.Nested(AddressDetail, required=False)
+    
+    amount_captured = fields.Int(required=False)
+    
+    amount_refunded = fields.Int(required=False)
+    
+    aggregator_customer_id = fields.Str(required=False)
+    
+    cancel_url = fields.Str(required=False)
+    
+    payment_id = fields.Str(required=False)
+    
+    payment_methods = fields.List(fields.Dict(required=False), required=False)
+    
+    created = fields.Str(required=False)
+    
+    g_user_id = fields.Str(required=False)
+    
+    currency = fields.Str(required=False)
+    
+    locale = fields.Str(required=False)
+    
+    gid = fields.Str(required=False)
+    
+    amount = fields.Int(required=False)
+    
+    billing_address = fields.Nested(AddressDetail, required=False)
+    
+    success_url = fields.Str(required=False)
+    
+    kind = fields.Str(required=False)
+    
+    mode = fields.Str(required=False)
+    
+    status = fields.Str(required=False)
+    
+    merchant_locale = fields.Str(required=False)
+    
+    captured = fields.Boolean(required=False)
+    
+
+
+class OrderDetail(BaseSchema):
+    # Payment swagger.json
+
+    
+    gid = fields.Str(required=False)
+    
+    aggregator = fields.Str(required=False)
+    
+    amount = fields.Int(required=False)
+    
+    aggregator_order_details = fields.Dict(required=False)
+    
+    status = fields.Str(required=False)
+    
+    currency = fields.Str(required=False)
+    
+
+
+class PaymentSessionRequestSerializer(BaseSchema):
+    # Payment swagger.json
+
+    
+    gid = fields.Str(required=False)
+    
+    payment_details = fields.List(fields.Nested(PaymentSessionDetail, required=False), required=False)
+    
+    total_amount = fields.Int(required=False)
+    
+    status = fields.Str(required=False)
+    
+    order_details = fields.Nested(OrderDetail, required=False)
+    
+    currency = fields.Str(required=False)
+    
+
+
+class PaymentSessionResponseSerializer(BaseSchema):
+    # Payment swagger.json
+
+    
+    gid = fields.Str(required=False)
+    
+    platform_transaction_details = fields.List(fields.Dict(required=False), required=False)
+    
+    total_amount = fields.Int(required=False)
+    
+    status = fields.Str(required=False)
+    
+    currency = fields.Str(required=False)
+    
+
+
+class RefundSessionDetail(BaseSchema):
+    # Payment swagger.json
+
+    
+    refund_utr = fields.Str(required=False)
+    
+    receipt_number = fields.Str(required=False)
+    
+    balance_transaction = fields.Str(required=False)
+    
+    payment_id = fields.Str(required=False)
+    
+    created = fields.Str(required=False)
+    
+    request_id = fields.Str(required=False)
+    
+    transfer_reversal = fields.Str(required=False)
+    
+    amount = fields.Int(required=False)
+    
+    status = fields.Str(required=False)
+    
+    source_transfer_reversal = fields.Str(required=False)
+    
+    currency = fields.Str(required=False)
+    
+    reason = fields.Str(required=False)
+    
+
+
+class RefundSessionRequestSerializer(BaseSchema):
+    # Payment swagger.json
+
+    
+    gid = fields.Str(required=False)
+    
+    payment_details = fields.Nested(PaymentSessionDetail, required=False)
+    
+    total_amount = fields.Int(required=False)
+    
+    refund_details = fields.List(fields.Nested(RefundSessionDetail, required=False), required=False)
+    
+    status = fields.Str(required=False)
+    
+    currency = fields.Str(required=False)
+    
+
+
+class RefundSessionResponseSerializer(BaseSchema):
+    # Payment swagger.json
+
+    
+    total_refund_amount = fields.Int(required=False)
+    
+    gid = fields.Str(required=False)
+    
+    platform_refund_details = fields.List(fields.Dict(required=False), required=False)
+    
+    status = fields.Str(required=False)
+    
+    currency = fields.Str(required=False)
     
 
 

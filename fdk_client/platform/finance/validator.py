@@ -49,6 +49,42 @@ from ..PlatformModel import BaseSchema
     
     
         
+    
+    
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+        
+        
 
 
 
@@ -143,6 +179,89 @@ class FinanceValidator:
         
         
         company_id = fields.Str(required=False)
+         
+        
+    
+    class isCnRefundMethod(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class createSellerCreditNoteConfig(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class deleteConfig(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class channelDisplayName(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        filter_key = fields.Str(required=False)
+         
+        
+    
+    class getPdfUrlView(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class creditNoteDetails(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class getCustomerCreditBalance(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class getCnConfig(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class generateReportCustomerCn(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class downloadReportCustomerCn(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class getReportingFilters(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        filter_key = fields.Str(required=False)
+        
+        affiliate_id = fields.Str(required=False)
          
         
     
