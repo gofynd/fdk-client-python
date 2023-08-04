@@ -48,14 +48,6 @@ class ShortLinkRes(BaseSchema):
     pass
 
 
-class Page(BaseSchema):
-    pass
-
-
-class ShortLinkList(BaseSchema):
-    pass
-
-
 class ErrorRes(BaseSchema):
     pass
 
@@ -222,36 +214,6 @@ class ShortLinkRes(BaseSchema):
     social_media_tags = fields.Nested(SocialMediaTags, required=False)
     
     count = fields.Int(required=False)
-    
-
-
-class Page(BaseSchema):
-    # Share swagger.json
-
-    
-    item_total = fields.Int(required=False)
-    
-    next_id = fields.Str(required=False)
-    
-    has_previous = fields.Boolean(required=False)
-    
-    has_next = fields.Boolean(required=False)
-    
-    current = fields.Int(required=False)
-    
-    type = fields.Str(required=False)
-    
-    size = fields.Int(required=False)
-    
-
-
-class ShortLinkList(BaseSchema):
-    # Share swagger.json
-
-    
-    items = fields.List(fields.Nested(ShortLinkRes, required=False), required=False)
-    
-    page = fields.Nested(Page, required=False)
     
 
 

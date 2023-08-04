@@ -82,7 +82,7 @@ from .models import PriorityEnum
 class LeadValidator:
     
     
-    class getTickets(BaseSchema):
+    class getNewTickets(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -103,7 +103,7 @@ class LeadValidator:
          
         
     
-    class getTicket(BaseSchema):
+    class getNewTicket(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -114,7 +114,7 @@ class LeadValidator:
          
         
     
-    class editTicket(BaseSchema):
+    class editNewTicket(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -125,7 +125,7 @@ class LeadValidator:
          
         
     
-    class createHistory(BaseSchema):
+    class createNewHistory(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -136,7 +136,7 @@ class LeadValidator:
          
         
     
-    class getTicketHistory(BaseSchema):
+    class getNewTicketHistory(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -187,7 +187,7 @@ class LeadValidator:
          
         
     
-    class getTokenForVideoRoom(BaseSchema):
+    class getNewTokenForVideoRoom(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -198,7 +198,7 @@ class LeadValidator:
          
         
     
-    class getVideoParticipants(BaseSchema):
+    class getNewVideoParticipants(BaseSchema):
         
         
         company_id = fields.Str(required=False)

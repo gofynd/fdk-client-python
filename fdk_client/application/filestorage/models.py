@@ -32,30 +32,6 @@ class CompleteResponse(BaseSchema):
     pass
 
 
-class Opts(BaseSchema):
-    pass
-
-
-class CopyFileTask(BaseSchema):
-    pass
-
-
-class BulkUploadResponse(BaseSchema):
-    pass
-
-
-class ReqConfiguration(BaseSchema):
-    pass
-
-
-class Destination(BaseSchema):
-    pass
-
-
-class BulkRequest(BaseSchema):
-    pass
-
-
 class Urls(BaseSchema):
     pass
 
@@ -65,18 +41,6 @@ class SignUrlResponse(BaseSchema):
 
 
 class SignUrlRequest(BaseSchema):
-    pass
-
-
-class Page(BaseSchema):
-    pass
-
-
-class DbRecord(BaseSchema):
-    pass
-
-
-class BrowseResponse(BaseSchema):
     pass
 
 
@@ -187,88 +151,6 @@ class CompleteResponse(BaseSchema):
     
 
 
-class Opts(BaseSchema):
-    # FileStorage swagger.json
-
-    
-    attempts = fields.Int(required=False)
-    
-    timestamp = fields.Int(required=False)
-    
-    delay = fields.Int(required=False)
-    
-
-
-class CopyFileTask(BaseSchema):
-    # FileStorage swagger.json
-
-    
-    id = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    data = fields.Nested(BulkRequest, required=False)
-    
-    opts = fields.Nested(Opts, required=False)
-    
-    progress = fields.Int(required=False)
-    
-    delay = fields.Int(required=False)
-    
-    timestamp = fields.Int(required=False)
-    
-    attempts_made = fields.Int(required=False)
-    
-    stacktrace = fields.List(fields.Str(required=False), required=False)
-    
-    finished_on = fields.Int(required=False)
-    
-    processed_on = fields.Int(required=False)
-    
-
-
-class BulkUploadResponse(BaseSchema):
-    # FileStorage swagger.json
-
-    
-    tracking_url = fields.Str(required=False)
-    
-    task = fields.Nested(CopyFileTask, required=False)
-    
-
-
-class ReqConfiguration(BaseSchema):
-    # FileStorage swagger.json
-
-    
-    concurrency = fields.Int(required=False)
-    
-
-
-class Destination(BaseSchema):
-    # FileStorage swagger.json
-
-    
-    namespace = fields.Str(required=False)
-    
-    rewrite = fields.Str(required=False)
-    
-    basepath = fields.Str(required=False)
-    
-
-
-class BulkRequest(BaseSchema):
-    # FileStorage swagger.json
-
-    
-    urls = fields.List(fields.Str(required=False), required=False)
-    
-    destination = fields.Nested(Destination, required=False)
-    
-    configuration = fields.Nested(ReqConfiguration, required=False)
-    
-
-
 class Urls(BaseSchema):
     # FileStorage swagger.json
 
@@ -296,66 +178,6 @@ class SignUrlRequest(BaseSchema):
     expiry = fields.Int(required=False)
     
     urls = fields.List(fields.Str(required=False), required=False)
-    
-
-
-class Page(BaseSchema):
-    # FileStorage swagger.json
-
-    
-    item_total = fields.Int(required=False)
-    
-    next_id = fields.Str(required=False)
-    
-    has_previous = fields.Boolean(required=False)
-    
-    has_next = fields.Boolean(required=False)
-    
-    current = fields.Int(required=False)
-    
-    type = fields.Str(required=False)
-    
-    size = fields.Int(required=False)
-    
-
-
-class DbRecord(BaseSchema):
-    # FileStorage swagger.json
-
-    
-    success = fields.Boolean(required=False)
-    
-    tags = fields.List(fields.Str(required=False), required=False)
-    
-    _id = fields.Str(required=False)
-    
-    file_name = fields.Str(required=False)
-    
-    operation = fields.Str(required=False)
-    
-    namespace = fields.Str(required=False)
-    
-    content_type = fields.Str(required=False)
-    
-    file_path = fields.Str(required=False)
-    
-    upload = fields.Nested(Upload, required=False)
-    
-    cdn = fields.Nested(CDN, required=False)
-    
-    created_on = fields.Str(required=False)
-    
-    modified_on = fields.Str(required=False)
-    
-
-
-class BrowseResponse(BaseSchema):
-    # FileStorage swagger.json
-
-    
-    items = fields.List(fields.Nested(DbRecord, required=False), required=False)
-    
-    page = fields.Nested(Page, required=False)
     
 
 

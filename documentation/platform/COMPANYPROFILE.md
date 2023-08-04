@@ -5,7 +5,7 @@
 ##### [Back to Platform docs](./README.md)
 
 ## CompanyProfile Methods
-
+Catalog CBS - platform Front API's
 * [cbsOnboardGet](#cbsonboardget)
 * [updateCompany](#updatecompany)
 * [getCompanyMetrics](#getcompanymetrics)
@@ -19,6 +19,7 @@
 * [getLocationDetail](#getlocationdetail)
 * [updateLocation](#updatelocation)
 * [createLocationBulk](#createlocationbulk)
+* [getLocationTags](#getlocationtags)
 
 
 
@@ -601,6 +602,7 @@ Brand object. See example below or refer `CompanyBrandListSerializer` for detail
     }
   ],
   "page": {
+    "type": "",
     "current": 1,
     "size": 1,
     "has_previous": false,
@@ -904,6 +906,7 @@ Company profile object. See example below or refer `LocationListSerializer` for 
     }
   ],
   "page": {
+    "type": "",
     "current": 1,
     "size": 1,
     "has_previous": false,
@@ -1328,6 +1331,85 @@ Returns a success response
   "success": true
 }
 ```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getLocationTags
+Get tags associated with locations for a company.
+
+
+
+
+```python
+try:
+    result = await platformClient.companyprofile.getLocationTags()
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+
+This API fetches all the tags associated to a company.
+
+*Returned Response:*
+
+
+
+
+[StoreTagsResponseSchema](#StoreTagsResponseSchema)
+
+Tags list. See example below or refer `StoreTagsResponseSchema` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; TagsFound</i></summary>
+
+```json
+{
+  "value": {
+    "tags": [
+      "hyperlocale",
+      "instant"
+    ],
+    "success": true
+  }
+}
+```
+</details>
+
+<details>
+<summary><i>&nbsp; NoTagsFound</i></summary>
+
+```json
+{
+  "value": {
+    "tags": [],
+    "success": true
+  }
+}
+```
+</details>
+
 </details>
 
 
@@ -2008,6 +2090,11 @@ Returns a success response
  | productReturnConfig | [ProductReturnConfigSerializer](#ProductReturnConfigSerializer)? |  yes  |  |
  | displayName | String |  no  |  |
  | notificationEmails | ArrayList<String>? |  yes  |  |
+ | tags | ArrayList<String>? |  yes  |  |
+ | defaultOrderAcceptanceTiming | Boolean? |  yes  |  |
+ | orderAcceptanceTiming | ArrayList<[LocationDayWiseSerializer](#LocationDayWiseSerializer)>? |  yes  |  |
+ | avgOrderProcessingTime | [AverageOrderProcessingTime](#AverageOrderProcessingTime)? |  yes  |  |
+ | bulkShipment | Boolean? |  yes  |  |
 
 ---
 
@@ -2019,6 +2106,30 @@ Returns a success response
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | data | ArrayList<[LocationSerializer](#LocationSerializer)>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [AverageOrderProcessingTime](#AverageOrderProcessingTime)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | duration | Int? |  yes  |  |
+ | durationType | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [StoreTagsResponseSchema](#StoreTagsResponseSchema)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | tags | ArrayList<String>? |  yes  |  |
+ | success | Boolean? |  yes  |  |
 
 ---
 

@@ -200,10 +200,6 @@ class DefaultCurrency(BaseSchema):
     pass
 
 
-class CurrencyConfig(BaseSchema):
-    pass
-
-
 class DomainAdd(BaseSchema):
     pass
 
@@ -604,10 +600,6 @@ class Application(BaseSchema):
     pass
 
 
-class UnhandledError(BaseSchema):
-    pass
-
-
 class InvalidPayloadRequest(BaseSchema):
     pass
 
@@ -637,18 +629,6 @@ class ArticleAssignmentRule(BaseSchema):
 
 
 class InventoryArticleAssignment(BaseSchema):
-    pass
-
-
-class CompanyAboutAddress(BaseSchema):
-    pass
-
-
-class UserEmail(BaseSchema):
-    pass
-
-
-class UserPhoneNumber(BaseSchema):
     pass
 
 
@@ -1412,28 +1392,6 @@ class DefaultCurrency(BaseSchema):
     ref = fields.Str(required=False)
     
     code = fields.Str(required=False)
-    
-
-
-class CurrencyConfig(BaseSchema):
-    # Configuration swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    is_active = fields.Boolean(required=False)
-    
-    name = fields.Str(required=False)
-    
-    code = fields.Str(required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    updated_at = fields.Str(required=False)
-    
-    decimal_digits = fields.Int(required=False)
-    
-    symbol = fields.Str(required=False)
     
 
 
@@ -2743,13 +2701,7 @@ class Application(BaseSchema):
     
     domain = fields.Nested(Domain, required=False)
     
-
-
-class UnhandledError(BaseSchema):
-    # Configuration swagger.json
-
-    
-    message = fields.Str(required=False)
+    slug = fields.Str(required=False)
     
 
 
@@ -2831,56 +2783,6 @@ class InventoryArticleAssignment(BaseSchema):
     
 
 
-class CompanyAboutAddress(BaseSchema):
-    # Configuration swagger.json
-
-    
-    pincode = fields.Int(required=False)
-    
-    address1 = fields.Str(required=False)
-    
-    address2 = fields.Str(required=False)
-    
-    city = fields.Str(required=False)
-    
-    state = fields.Str(required=False)
-    
-    country = fields.Str(required=False)
-    
-    address_type = fields.Str(required=False)
-    
-
-
-class UserEmail(BaseSchema):
-    # Configuration swagger.json
-
-    
-    active = fields.Boolean(required=False)
-    
-    primary = fields.Boolean(required=False)
-    
-    verified = fields.Boolean(required=False)
-    
-    email = fields.Str(required=False)
-    
-
-
-class UserPhoneNumber(BaseSchema):
-    # Configuration swagger.json
-
-    
-    active = fields.Boolean(required=False)
-    
-    primary = fields.Boolean(required=False)
-    
-    verified = fields.Boolean(required=False)
-    
-    country_code = fields.Int(required=False)
-    
-    phone = fields.Str(required=False)
-    
-
-
 class Page(BaseSchema):
     # Configuration swagger.json
 
@@ -2911,7 +2813,7 @@ class ApplicationInformation(BaseSchema):
     
     social_links = fields.Nested(SocialLinks, required=False)
     
-    links = fields.Nested(Links, required=False)
+    links = fields.List(fields.Nested(Links, required=False), required=False)
     
     copyright_text = fields.Str(required=False)
     
@@ -2937,7 +2839,7 @@ class InformationAddress(BaseSchema):
     
     address_line = fields.List(fields.Str(required=False), required=False)
     
-    phone = fields.Nested(InformationPhone, required=False)
+    phone = fields.List(fields.Nested(InformationPhone, required=False), required=False)
     
     city = fields.Str(required=False)
     

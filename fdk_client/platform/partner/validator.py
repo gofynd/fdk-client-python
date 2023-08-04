@@ -145,7 +145,7 @@ class PartnerValidator:
         
         page_no = fields.Float(required=False)
         
-        query = fields.Str(required=False)
+        query = fields.Dict(required=False)
          
         
     

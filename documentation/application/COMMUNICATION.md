@@ -400,17 +400,6 @@ Success. Check the example shown below or refer `PushtokenRes` for more details.
 
  
  
- #### [NotFound](#NotFound)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | message | String? |  yes  | Failure message. |
-
----
-
-
- 
- 
  #### [PushtokenReq](#PushtokenReq)
 
  | Properties | Type | Nullable | Description |
@@ -441,23 +430,6 @@ Success. Check the example shown below or refer `PushtokenRes` for more details.
  | createdAt | String? |  yes  |  |
  | updatedAt | String? |  yes  |  |
  | expiredAt | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [Page](#Page)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | type | String |  no  |  |
- | size | Int? |  yes  |  |
- | current | Int? |  yes  |  |
- | hasNext | Boolean? |  yes  |  |
- | itemTotal | Int? |  yes  |  |
- | nextId | String? |  yes  |  |
- | hasPrevious | Boolean? |  yes  |  |
 
 ---
 

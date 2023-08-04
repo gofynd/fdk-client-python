@@ -74,14 +74,6 @@ class NextSchedule(BaseSchema):
     pass
 
 
-class AnnouncementSchema(BaseSchema):
-    pass
-
-
-class ScheduleStartSchema(BaseSchema):
-    pass
-
-
 class BlogGetResponse(BaseSchema):
     pass
 
@@ -134,10 +126,6 @@ class DataLoaderResetResponseSchema(BaseSchema):
     pass
 
 
-class Navigation(BaseSchema):
-    pass
-
-
 class LocaleLanguage(BaseSchema):
     pass
 
@@ -158,27 +146,11 @@ class NavigationReference(BaseSchema):
     pass
 
 
-class LandingPage(BaseSchema):
-    pass
-
-
 class ConfigurationSchema(BaseSchema):
     pass
 
 
 class SlideshowMedia(BaseSchema):
-    pass
-
-
-class Slideshow(BaseSchema):
-    pass
-
-
-class AnnouncementsResponseSchema(BaseSchema):
-    pass
-
-
-class FaqResponseSchema(BaseSchema):
     pass
 
 
@@ -314,22 +286,6 @@ class NavigationRequest(BaseSchema):
     pass
 
 
-class CustomPageSchema(BaseSchema):
-    pass
-
-
-class ContentSchema(BaseSchema):
-    pass
-
-
-class CustomPage(BaseSchema):
-    pass
-
-
-class FeatureImage(BaseSchema):
-    pass
-
-
 class PageGetResponse(BaseSchema):
     pass
 
@@ -351,14 +307,6 @@ class PageSchema(BaseSchema):
 
 
 class CreatedBySchema(BaseSchema):
-    pass
-
-
-class PageContent(BaseSchema):
-    pass
-
-
-class PageMeta(BaseSchema):
     pass
 
 
@@ -539,7 +487,7 @@ class SeoSchema(BaseSchema):
     
     cannonical_enabled = fields.Boolean(required=False)
     
-    custom_meta_tags = fields.List(fields.Dict(required=False), required=False)
+    custom_meta_tags = fields.List(fields.Nested(CustomMetaTag, required=False), required=False)
     
     details = fields.Nested(Detail, required=False)
     
@@ -647,31 +595,11 @@ class ScheduleSchema(BaseSchema):
     
     duration = fields.Float(required=False)
     
-    next_schedule = fields.List(fields.Dict(required=False), required=False)
+    next_schedule = fields.List(fields.Nested(NextSchedule, required=False), required=False)
     
 
 
 class NextSchedule(BaseSchema):
-    # Content swagger.json
-
-    
-    start = fields.Str(required=False)
-    
-    end = fields.Str(required=False)
-    
-
-
-class AnnouncementSchema(BaseSchema):
-    # Content swagger.json
-
-    
-    announcement = fields.Str(required=False)
-    
-    schedule = fields.Nested(ScheduleStartSchema, required=False)
-    
-
-
-class ScheduleStartSchema(BaseSchema):
     # Content swagger.json
 
     
@@ -871,33 +799,7 @@ class DataLoaderResetResponseSchema(BaseSchema):
     # Content swagger.json
 
     
-    reset = fields.Str(required=False)
-    
-
-
-class Navigation(BaseSchema):
-    # Content swagger.json
-
-    
-    name = fields.Str(required=False)
-    
-    slug = fields.Str(required=False)
-    
-    orientation = fields.Str(required=False)
-    
-    created_by = fields.Nested(CreatedBySchema, required=False)
-    
-    date_meta = fields.Nested(DateMeta, required=False)
-    
-    _id = fields.Str(required=False)
-    
-    position = fields.Str(required=False)
-    
-    application = fields.Str(required=False)
-    
-    platform = fields.Str(required=False)
-    
-    navigation = fields.Nested(NavigationReference, required=False)
+    reset = fields.Boolean(required=False)
     
 
 
@@ -973,16 +875,6 @@ class NavigationReference(BaseSchema):
     
 
 
-class LandingPage(BaseSchema):
-    # Content swagger.json
-
-    
-    data = fields.Nested(LandingPageSchema, required=False)
-    
-    success = fields.Boolean(required=False)
-    
-
-
 class ConfigurationSchema(BaseSchema):
     # Content swagger.json
 
@@ -1012,36 +904,6 @@ class SlideshowMedia(BaseSchema):
     auto_decide_duration = fields.Boolean(required=False)
     
     action = fields.Nested(Action, required=False)
-    
-
-
-class Slideshow(BaseSchema):
-    # Content swagger.json
-
-    
-    data = fields.Nested(SlideshowSchema, required=False)
-    
-    success = fields.Boolean(required=False)
-    
-
-
-class AnnouncementsResponseSchema(BaseSchema):
-    # Content swagger.json
-
-    
-    announcements = fields.Dict(required=False)
-    
-    refresh_rate = fields.Int(required=False)
-    
-    refresh_pages = fields.List(fields.Str(required=False), required=False)
-    
-
-
-class FaqResponseSchema(BaseSchema):
-    # Content swagger.json
-
-    
-    faqs = fields.List(fields.Nested(FaqSchema, required=False), required=False)
     
 
 
@@ -1485,66 +1347,6 @@ class NavigationRequest(BaseSchema):
     
 
 
-class CustomPageSchema(BaseSchema):
-    # Content swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    platform = fields.Str(required=False)
-    
-    title = fields.Str(required=False)
-    
-    slug = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
-    
-    orientation = fields.Str(required=False)
-    
-    application = fields.Str(required=False)
-    
-    description = fields.Str(required=False)
-    
-    published = fields.Boolean(required=False)
-    
-    tags = fields.List(fields.Str(required=False), required=False)
-    
-    content = fields.List(fields.Dict(required=False), required=False)
-    
-    created_by = fields.Nested(CreatedBySchema, required=False)
-    
-    date_meta = fields.Nested(DateMeta, required=False)
-    
-    _schedule = fields.Nested(ScheduleSchema, required=False)
-    
-
-
-class ContentSchema(BaseSchema):
-    # Content swagger.json
-
-    
-    type = fields.Str(required=False)
-    
-    value = fields.Dict(required=False)
-    
-
-
-class CustomPage(BaseSchema):
-    # Content swagger.json
-
-    
-    data = fields.Nested(CustomPageSchema, required=False)
-    
-
-
-class FeatureImage(BaseSchema):
-    # Content swagger.json
-
-    
-    secure_url = fields.Str(required=False)
-    
-
-
 class PageGetResponse(BaseSchema):
     # Content swagger.json
 
@@ -1559,7 +1361,7 @@ class PageSpec(BaseSchema):
     # Content swagger.json
 
     
-    specifications = fields.List(fields.Dict(required=False), required=False)
+    specifications = fields.List(fields.Nested(PageSpecItem, required=False), required=False)
     
 
 
@@ -1642,26 +1444,6 @@ class CreatedBySchema(BaseSchema):
 
     
     id = fields.Str(required=False)
-    
-
-
-class PageContent(BaseSchema):
-    # Content swagger.json
-
-    
-    type = fields.Str(required=False)
-    
-    value = fields.Dict(required=False)
-    
-
-
-class PageMeta(BaseSchema):
-    # Content swagger.json
-
-    
-    key = fields.Str(required=False)
-    
-    value = fields.Dict(required=False)
     
 
 

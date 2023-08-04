@@ -691,6 +691,20 @@ Success
  | brandIds | ArrayList<Int>? |  yes  |  |
  | storeIds | ArrayList<Int>? |  yes  |  |
  | validity | [ValidityObject](#ValidityObject) |  no  |  |
+ | discountMeta | [DiscountMeta](#DiscountMeta)? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [DiscountMeta](#DiscountMeta)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | timer | Boolean |  no  | Determines whether the discount countdown is visible or not. |
+ | hours | Double? |  yes  | The time in hours before the discount ends when the countdown timer should start. |
+ | minutes | Double? |  yes  | The time in minutes before the discount ends when the countdown timer should start. |
 
 ---
 
@@ -713,6 +727,7 @@ Success
  | filePath | String? |  yes  |  |
  | brandIds | ArrayList<Int>? |  yes  |  |
  | storeIds | ArrayList<Int>? |  yes  |  |
+ | discountMeta | [DiscountMeta](#DiscountMeta)? |  yes  |  |
  | validity | [ValidityObject](#ValidityObject) |  no  |  |
  | createdOn | String |  no  |  |
  | modifiedOn | String |  no  |  |
@@ -746,6 +761,7 @@ Success
  | sellerIdentifier | String? |  yes  |  |
  | discountType | String |  no  |  |
  | value | Double |  no  |  |
+ | discountMeta | [DiscountMeta](#DiscountMeta)? |  yes  |  |
 
 ---
 
@@ -775,6 +791,7 @@ Success
  | body | HashMap<String,Any>? |  yes  |  |
  | type | String |  no  |  |
  | fileType | String |  no  |  |
+ | id | String |  no  | A unique identifier to distinguish and identify a job. |
 
 ---
 

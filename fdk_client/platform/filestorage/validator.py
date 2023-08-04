@@ -30,6 +30,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -81,7 +82,9 @@ class FileStorageValidator:
         
         company_id = fields.Int(required=False)
         
-        page_no = fields.Int(required=False)
+        page = fields.Int(required=False)
+        
+        limit = fields.Int(required=False)
          
         
     

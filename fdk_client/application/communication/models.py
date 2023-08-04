@@ -40,19 +40,11 @@ class BadRequestSchema(BaseSchema):
     pass
 
 
-class NotFound(BaseSchema):
-    pass
-
-
 class PushtokenReq(BaseSchema):
     pass
 
 
 class PushtokenRes(BaseSchema):
-    pass
-
-
-class Page(BaseSchema):
     pass
 
 
@@ -151,14 +143,6 @@ class BadRequestSchema(BaseSchema):
     
 
 
-class NotFound(BaseSchema):
-    # Communication swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-
-
 class PushtokenReq(BaseSchema):
     # Communication swagger.json
 
@@ -200,26 +184,6 @@ class PushtokenRes(BaseSchema):
     updated_at = fields.Str(required=False)
     
     expired_at = fields.Str(required=False)
-    
-
-
-class Page(BaseSchema):
-    # Communication swagger.json
-
-    
-    item_total = fields.Int(required=False)
-    
-    next_id = fields.Str(required=False)
-    
-    has_previous = fields.Boolean(required=False)
-    
-    has_next = fields.Boolean(required=False)
-    
-    current = fields.Int(required=False)
-    
-    type = fields.Str(required=False)
-    
-    size = fields.Int(required=False)
     
 
 

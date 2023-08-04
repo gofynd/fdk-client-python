@@ -12,10 +12,6 @@ class ApplicationResponse(BaseSchema):
     pass
 
 
-class Currency(BaseSchema):
-    pass
-
-
 class Domain(BaseSchema):
     pass
 
@@ -56,10 +52,6 @@ class BadRequest(BaseSchema):
     pass
 
 
-class Page(BaseSchema):
-    pass
-
-
 class LocationDefaultLanguage(BaseSchema):
     pass
 
@@ -84,28 +76,6 @@ class ApplicationResponse(BaseSchema):
 
     
     application = fields.Nested(Application, required=False)
-    
-
-
-class Currency(BaseSchema):
-    # Configuration swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    is_active = fields.Boolean(required=False)
-    
-    name = fields.Str(required=False)
-    
-    code = fields.Str(required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    updated_at = fields.Str(required=False)
-    
-    decimal_digits = fields.Int(required=False)
-    
-    symbol = fields.Str(required=False)
     
 
 
@@ -237,6 +207,8 @@ class Application(BaseSchema):
     
     domain = fields.Nested(Domain, required=False)
     
+    slug = fields.Str(required=False)
+    
 
 
 class NotFound(BaseSchema):
@@ -252,26 +224,6 @@ class BadRequest(BaseSchema):
 
     
     message = fields.Str(required=False)
-    
-
-
-class Page(BaseSchema):
-    # Configuration swagger.json
-
-    
-    type = fields.Str(required=False)
-    
-    size = fields.Int(required=False)
-    
-    current = fields.Int(required=False)
-    
-    has_next = fields.Boolean(required=False)
-    
-    item_total = fields.Int(required=False)
-    
-    next_id = fields.Str(required=False)
-    
-    has_previous = fields.Boolean(required=False)
     
 
 
@@ -327,13 +279,21 @@ class LocationCountry(BaseSchema):
     
     default_language = fields.Nested(LocationDefaultLanguage, required=False)
     
+    state_code = fields.Str(required=False)
+    
+    country_code = fields.Str(required=False)
+    
+    latitude = fields.Str(required=False)
+    
+    longitude = fields.Str(required=False)
+    
 
 
 class Locations(BaseSchema):
     # Configuration swagger.json
 
     
-    items = fields.List(fields.Dict(required=False), required=False)
+    items = fields.List(fields.Nested(LocationCountry, required=False), required=False)
     
 
 

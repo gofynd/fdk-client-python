@@ -96,8 +96,7 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
+        
         
     
     
@@ -110,6 +109,16 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
         
         
         
@@ -431,6 +440,17 @@ class OrderValidator:
          
         
     
+    class getAllowedStateTransition(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        ordering_channel = fields.Str(required=False)
+        
+        status = fields.Str(required=False)
+         
+        
+    
     class fetchCreditBalanceDetail(BaseSchema):
         
         
@@ -466,6 +486,13 @@ class OrderValidator:
          
         
     
+    class downloadLanesReport(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
     class getShipments(BaseSchema):
         
         
@@ -477,7 +504,7 @@ class OrderValidator:
         
         status_override_lane = fields.Boolean(required=False)
         
-        time_to_dispatch = fields.Str(required=False)
+        time_to_dispatch = fields.Float(required=False)
         
         search_type = fields.Str(required=False)
         
@@ -516,6 +543,8 @@ class OrderValidator:
         my_orders = fields.Boolean(required=False)
         
         platform_user_id = fields.Str(required=False)
+        
+        tags = fields.Str(required=False)
          
         
     
