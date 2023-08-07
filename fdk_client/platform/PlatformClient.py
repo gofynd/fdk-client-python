@@ -34,6 +34,8 @@ from .partner.client import Partner
 
 from .payment.client import Payment
 
+from .serviceability.client import Serviceability
+
 from .webhook.client import Webhook
 
 
@@ -70,6 +72,8 @@ class PlatformClient:
         self.partner = Partner(config)
         
         self.payment = Payment(config)
+        
+        self.serviceability = Serviceability(config)
         
         self.webhook = Webhook(config)
         

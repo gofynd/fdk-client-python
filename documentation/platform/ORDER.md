@@ -1924,7 +1924,7 @@ Verify OTP
 
 ```python
 try:
-    result = await platformClient.order.getShipments(lane=lane, bagStatus=bagStatus, statusOverrideLane=statusOverrideLane, timeToDispatch=timeToDispatch, searchType=searchType, searchValue=searchValue, fromDate=fromDate, toDate=toDate, dpIds=dpIds, stores=stores, salesChannels=salesChannels, pageNo=pageNo, pageSize=pageSize, fetchActiveShipment=fetchActiveShipment, excludeLockedShipments=excludeLockedShipments, paymentMethods=paymentMethods, channelShipmentId=channelShipmentId, channelOrderId=channelOrderId, customMeta=customMeta, orderingChannel=orderingChannel, companyAffiliateTag=companyAffiliateTag, myOrders=myOrders, platformUserId=platformUserId)
+    result = await platformClient.order.getShipments(lane=lane, bagStatus=bagStatus, statusOverrideLane=statusOverrideLane, timeToDispatch=timeToDispatch, searchType=searchType, searchValue=searchValue, fromDate=fromDate, toDate=toDate, dpIds=dpIds, stores=stores, salesChannels=salesChannels, pageNo=pageNo, pageSize=pageSize, fetchActiveShipment=fetchActiveShipment, excludeLockedShipments=excludeLockedShipments, paymentMethods=paymentMethods, channelShipmentId=channelShipmentId, channelOrderId=channelOrderId, customMeta=customMeta, orderingChannel=orderingChannel, companyAffiliateTag=companyAffiliateTag, myOrders=myOrders, platformUserId=platformUserId, tags=tags)
     # use result
 except Exception as e:
     print(e)
@@ -1958,7 +1958,8 @@ except Exception as e:
 | orderingChannel | String? | no |  |   
 | companyAffiliateTag | String? | no |  |   
 | myOrders | Boolean? | no |  |   
-| platformUserId | String? | no |  |  
+| platformUserId | String? | no |  |   
+| tags | String? | no | Comma separated values of tags |  
 
 
 
@@ -6286,7 +6287,7 @@ We are processing the request!
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | cgstTaxPercentage | Double? |  yes  |  |
- | gstinCode | String |  no  |  |
+ | gstinCode | String? |  yes  |  |
  | valueOfGood | Double |  no  |  |
  | gstFee | Double |  no  |  |
  | igstTaxPercentage | Double? |  yes  |  |
@@ -6326,30 +6327,30 @@ We are processing the request!
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | refundCredit | Int |  no  |  |
+ | refundCredit | Double |  no  |  |
  | amountPaidRoundoff | Int? |  yes  |  |
- | priceEffective | Int |  no  |  |
+ | priceEffective | Double |  no  |  |
  | promotionEffectiveDiscount | Double |  no  |  |
- | transferPrice | Int |  no  |  |
+ | transferPrice | Double |  no  |  |
  | couponEffectiveDiscount | Double |  no  |  |
  | gstFee | Double |  no  |  |
- | taxCollectedAtSource | Int? |  yes  |  |
+ | taxCollectedAtSource | Double? |  yes  |  |
  | brandCalculatedAmount | Double |  no  |  |
  | deliveryCharge | Double |  no  |  |
  | gstTag | String |  no  |  |
  | hsnCode | String |  no  |  |
- | cashback | Int |  no  |  |
+ | cashback | Double |  no  |  |
  | itemName | String |  no  |  |
  | valueOfGood | Double |  no  |  |
- | cashbackApplied | Int |  no  |  |
- | codCharges | Int |  no  |  |
- | priceMarked | Int |  no  |  |
+ | cashbackApplied | Double |  no  |  |
+ | codCharges | Double |  no  |  |
+ | priceMarked | Double |  no  |  |
  | size | String |  no  |  |
  | amountPaid | Double |  no  |  |
  | couponValue | Double |  no  |  |
- | discount | Int |  no  |  |
- | fyndCredits | Int |  no  |  |
- | gstTaxPercentage | Int |  no  |  |
+ | discount | Double |  no  |  |
+ | fyndCredits | Double |  no  |  |
+ | gstTaxPercentage | Double |  no  |  |
  | identifiers | [Identifier](#Identifier) |  no  |  |
  | totalUnits | Int |  no  |  |
  | addedToFyndCash | Boolean |  no  |  |

@@ -2961,21 +2961,21 @@ class FinancialBreakup(BaseSchema):
     # Order swagger.json
 
     
-    refund_credit = fields.Int(required=False)
+    refund_credit = fields.Float(required=False)
     
     amount_paid_roundoff = fields.Int(required=False)
     
-    price_effective = fields.Int(required=False)
+    price_effective = fields.Float(required=False)
     
     promotion_effective_discount = fields.Float(required=False)
     
-    transfer_price = fields.Int(required=False)
+    transfer_price = fields.Float(required=False)
     
     coupon_effective_discount = fields.Float(required=False)
     
     gst_fee = fields.Float(required=False)
     
-    tax_collected_at_source = fields.Int(required=False)
+    tax_collected_at_source = fields.Float(required=False)
     
     brand_calculated_amount = fields.Float(required=False)
     
@@ -2985,17 +2985,17 @@ class FinancialBreakup(BaseSchema):
     
     hsn_code = fields.Str(required=False)
     
-    cashback = fields.Int(required=False)
+    cashback = fields.Float(required=False)
     
     item_name = fields.Str(required=False)
     
     value_of_good = fields.Float(required=False)
     
-    cashback_applied = fields.Int(required=False)
+    cashback_applied = fields.Float(required=False)
     
-    cod_charges = fields.Int(required=False)
+    cod_charges = fields.Float(required=False)
     
-    price_marked = fields.Int(required=False)
+    price_marked = fields.Float(required=False)
     
     size = fields.Str(required=False)
     
@@ -3003,11 +3003,11 @@ class FinancialBreakup(BaseSchema):
     
     coupon_value = fields.Float(required=False)
     
-    discount = fields.Int(required=False)
+    discount = fields.Float(required=False)
     
-    fynd_credits = fields.Int(required=False)
+    fynd_credits = fields.Float(required=False)
     
-    gst_tax_percentage = fields.Int(required=False)
+    gst_tax_percentage = fields.Float(required=False)
     
     identifiers = fields.Nested(Identifier, required=False)
     
