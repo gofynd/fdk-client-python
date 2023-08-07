@@ -303,6 +303,8 @@ class AddTicketPayload(BaseSchema):
     
     _custom_json = fields.Dict(required=False)
     
+    subscribers = fields.List(fields.Str(required=False), required=False)
+    
 
 
 class Priority(BaseSchema):

@@ -12,14 +12,22 @@ class AuditTrail:
         self._conf = config
 
     
-    async def getAuditLogs(self, qs=None):
+    async def getAuditLogs(self, qs=None, limit=None, sort=None):
         """Get a paginated set of logs that can be filtered using the available set of parameters and get the relevant group of logs
         :param qs : Logs Query : type string
+        :param limit : Current request items count : type integer
+        :param sort : To sort based on _id : type object
         """
         payload = {}
         
         if qs is not None:
             payload["qs"] = qs
+        
+        if limit is not None:
+            payload["limit"] = limit
+        
+        if sort is not None:
+            payload["sort"] = sort
         
 
         # Parameter validation
@@ -27,8 +35,8 @@ class AuditTrail:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/audit-trail/v1.0/company/{self._conf.companyId}/logs/", """{"required":[{"in":"path","name":"company_id","description":"Compnay Id","required":true,"schema":{"type":"string","example":"1"}},{"in":"query","name":"qs","description":"Logs Query","required":true,"schema":{"type":"string","example":"%7B%7D&limit=10&company=61&sort=%7B%22_id%22%3A-1%7D"}}],"optional":[],"query":[{"in":"query","name":"qs","description":"Logs Query","required":true,"schema":{"type":"string","example":"%7B%7D&limit=10&company=61&sort=%7B%22_id%22%3A-1%7D"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Compnay Id","required":true,"schema":{"type":"string","example":"1"}}]}""", qs=qs)
-        query_string = await create_query_string(qs=qs)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/audit-trail/v1.0/company/{self._conf.companyId}/logs/", """{"required":[{"in":"path","name":"company_id","description":"Compnay Id","required":true,"schema":{"type":"string","example":"1"}},{"in":"query","name":"qs","description":"Logs Query","required":true,"schema":{"type":"string","example":"%7B%7D&limit=10&company=61&sort=%7B%22_id%22%3A-1%7D"}}],"optional":[{"name":"limit","in":"query","schema":{"type":"integer"},"description":"Current request items count"},{"name":"sort","in":"query","schema":{"type":"object","properties":{"_id":{"type":"integer","enum":[-1,1]}}},"description":"To sort based on _id"}],"query":[{"in":"query","name":"qs","description":"Logs Query","required":true,"schema":{"type":"string","example":"%7B%7D&limit=10&company=61&sort=%7B%22_id%22%3A-1%7D"}},{"name":"limit","in":"query","schema":{"type":"integer"},"description":"Current request items count"},{"name":"sort","in":"query","schema":{"type":"object","properties":{"_id":{"type":"integer","enum":[-1,1]}}},"description":"To sort based on _id"}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Compnay Id","required":true,"schema":{"type":"string","example":"1"}}]}""", qs=qs, limit=limit, sort=sort)
+        query_string = await create_query_string(qs=qs, limit=limit, sort=sort)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -38,7 +46,7 @@ class AuditTrail:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/audit-trail/v1.0/company/{self._conf.companyId}/logs/", qs=qs), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/audit-trail/v1.0/company/{self._conf.companyId}/logs/", qs=qs, limit=limit, sort=sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
 

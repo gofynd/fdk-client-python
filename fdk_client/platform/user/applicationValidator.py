@@ -21,6 +21,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -122,6 +123,8 @@ class UserValidator:
         application_id = fields.Str(required=False)
         
         q = fields.Str(required=False)
+        
+        query = fields.List(fields.Raw(required=False), required=False)
          
         
     

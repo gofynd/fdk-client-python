@@ -24,7 +24,7 @@ Get paginated audit logs
 
 ```python
 try:
-    result = await platformClient.audittrail.getAuditLogs(qs=qs)
+    result = await platformClient.audittrail.getAuditLogs(qs=qs, limit=limit, sort=sort)
     # use result
 except Exception as e:
     print(e)
@@ -36,7 +36,9 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| qs | String | yes | Logs Query |  
+| qs | String | yes | Logs Query |   
+| limit | Int? | no | Current request items count |   
+| sort | HashMap<String,Any>? | no | To sort based on _id |  
 
 
 

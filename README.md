@@ -138,6 +138,8 @@ except Exception as e:
 ### Documentation
 
 - [Application Front](documentation/application/README.md)
+- [Panel Front](documentation/panel/README.md)
 - [Platform Front](documentation/platform/README.md)
 - [Public Front](documentation/public/README.md)
+- [Webhook Front](documentation/webhook/README.md)
 

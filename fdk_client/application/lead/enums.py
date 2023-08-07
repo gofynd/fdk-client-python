@@ -28,6 +28,8 @@ class HistoryTypeEnum(Enum):
     
     COMMENT = "comment"
     
+    THREAD = "thread"
+    
     @classmethod
     async def is_valid(cls, value):
         if value in cls._value2member_map_:
