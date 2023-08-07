@@ -124,7 +124,7 @@ class Page(BaseSchema):
     pass
 
 
-class Logistics(BaseSchema):
+class LogisticsDPSchema(BaseSchema):
     pass
 
 
@@ -571,7 +571,7 @@ class Page(BaseSchema):
     
 
 
-class Logistics(BaseSchema):
+class LogisticsDPSchema(BaseSchema):
     # Logistic swagger.json
 
     
@@ -589,7 +589,7 @@ class Locality(BaseSchema):
     
     meta = fields.Dict(required=False)
     
-    logistics = fields.Nested(Logistics, required=False)
+    logistics = fields.Nested(LogisticsDPSchema, required=False)
     
     uid = fields.Str(required=False)
     

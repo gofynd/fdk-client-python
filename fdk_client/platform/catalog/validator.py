@@ -113,8 +113,12 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
+        
     
     
+        
+        
         
         
     
@@ -605,6 +609,10 @@ class CatalogValidator:
         company_id = fields.Str(required=False)
         
         slug = fields.Str(required=False)
+        
+        item_type = fields.Str(required=False)
+        
+        bulk = fields.Boolean(required=False)
          
         
     
@@ -614,6 +622,10 @@ class CatalogValidator:
         company_id = fields.Str(required=False)
         
         slug = fields.Str(required=False)
+        
+        item_type = fields.Str(required=False)
+        
+        type = fields.Str(required=False)
          
         
     

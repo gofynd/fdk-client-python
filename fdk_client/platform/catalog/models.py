@@ -2937,7 +2937,7 @@ class UpdateCollection(BaseSchema):
     
     visible_facets_keys = fields.List(fields.Str(required=False), required=False)
     
-    modified_by = fields.Nested(UserInfo, required=False)
+    modified_by = fields.Str(required=False)
     
     name = fields.Str(required=False)
     
@@ -4173,11 +4173,11 @@ class Trader(BaseSchema):
     # Catalog swagger.json
 
     
-    name = fields.Raw(required=False)
+    address = fields.List(fields.Str(required=False), required=False)
+    
+    name = fields.Str(required=False)
     
     type = fields.Str(required=False)
-    
-    address = fields.List(fields.Str(required=False), required=False)
     
 
 
@@ -4185,9 +4185,9 @@ class NetQuantity(BaseSchema):
     # Catalog swagger.json
 
     
-    unit = fields.Raw(required=False)
-    
     value = fields.Float(required=False)
+    
+    unit = fields.Str(required=False)
     
 
 
@@ -4235,7 +4235,7 @@ class ProductCreateUpdateSchemaV2(BaseSchema):
     
     action = fields.Str(required=False)
     
-    change_request_id = fields.Raw(required=False)
+    change_request_id = fields.Str(required=False)
     
     return_config = fields.Nested(ReturnConfig, required=False)
     
@@ -4571,8 +4571,6 @@ class AttributeMasterSerializer(BaseSchema):
     
     enabled_for_end_consumer = fields.Boolean(required=False)
     
-    example = fields.Str(required=False)
-    
     schema = fields.Nested(AttributeMaster, required=False)
     
     created_by = fields.Dict(required=False)
@@ -4843,7 +4841,7 @@ class BulkResponse(BaseSchema):
     
     is_active = fields.Boolean(required=False)
     
-    modified_by = fields.Nested(UserInfo1, required=False)
+    modified_by = fields.Str(required=False)
     
     created_on = fields.Str(required=False)
     
@@ -5341,7 +5339,7 @@ class InventorySellerResponse(BaseSchema):
     
     track_inventory = fields.Boolean(required=False)
     
-    modified_by = fields.Nested(UserSerializer, required=False)
+    modified_by = fields.Str(required=False)
     
     brand = fields.Nested(BrandMeta, required=False)
     
@@ -5383,7 +5381,7 @@ class InventorySellerResponse(BaseSchema):
     
     meta = fields.Dict(required=False)
     
-    created_by = fields.Nested(UserSerializer, required=False)
+    created_by = fields.Str(required=False)
     
     fynd_item_code = fields.Str(required=False)
     

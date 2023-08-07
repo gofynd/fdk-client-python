@@ -14,6 +14,8 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
+        
     
     
         
@@ -36,6 +38,10 @@ class AuditTrailValidator:
         company_id = fields.Str(required=False)
         
         qs = fields.Str(required=False)
+        
+        limit = fields.Int(required=False)
+        
+        sort = fields.Dict(required=False)
          
         
     

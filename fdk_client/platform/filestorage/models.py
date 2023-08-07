@@ -44,10 +44,6 @@ class BulkUploadResponse(BaseSchema):
     pass
 
 
-class ReqConfiguration(BaseSchema):
-    pass
-
-
 class Destination(BaseSchema):
     pass
 
@@ -77,6 +73,26 @@ class DbRecord(BaseSchema):
 
 
 class BrowseResponse(BaseSchema):
+    pass
+
+
+class Status(BaseSchema):
+    pass
+
+
+class FileSrc(BaseSchema):
+    pass
+
+
+class File(BaseSchema):
+    pass
+
+
+class BulkUploadFailFileResponseItems(BaseSchema):
+    pass
+
+
+class BulkUploadFailResponse(BaseSchema):
     pass
 
 
@@ -237,14 +253,6 @@ class BulkUploadResponse(BaseSchema):
     
 
 
-class ReqConfiguration(BaseSchema):
-    # FileStorage swagger.json
-
-    
-    concurrency = fields.Int(required=False)
-    
-
-
 class Destination(BaseSchema):
     # FileStorage swagger.json
 
@@ -264,8 +272,6 @@ class BulkRequest(BaseSchema):
     urls = fields.List(fields.Str(required=False), required=False)
     
     destination = fields.Nested(Destination, required=False)
-    
-    configuration = fields.Nested(ReqConfiguration, required=False)
     
 
 
@@ -356,6 +362,64 @@ class BrowseResponse(BaseSchema):
     items = fields.List(fields.Nested(DbRecord, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
+    
+
+
+class Status(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    total = fields.Float(required=False)
+    
+    failed = fields.Float(required=False)
+    
+    succeeded = fields.Float(required=False)
+    
+    result = fields.Str(required=False)
+    
+
+
+class FileSrc(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    method = fields.Str(required=False)
+    
+    url = fields.Str(required=False)
+    
+    namespace = fields.Str(required=False)
+    
+
+
+class File(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    src = fields.Nested(FileSrc, required=False)
+    
+
+
+class BulkUploadFailFileResponseItems(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+    error = fields.Str(required=False)
+    
+    file = fields.Nested(File, required=False)
+    
+    stage = fields.Str(required=False)
+    
+
+
+class BulkUploadFailResponse(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    status = fields.Nested(Status, required=False)
+    
+    files = fields.List(fields.Nested(BulkUploadFailFileResponseItems, required=False), required=False)
     
 
 

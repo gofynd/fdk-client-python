@@ -809,7 +809,7 @@ class IntentApp(BaseSchema):
     
     package_name = fields.Str(required=False)
     
-    logos = fields.Nested(PaymentModeLogo, required=False)
+    logos = fields.Dict(required=False)
     
     display_name = fields.Str(required=False)
     
@@ -865,7 +865,7 @@ class PaymentModeList(BaseSchema):
     
     cod_limit_per_order = fields.Float(required=False)
     
-    logo_url = fields.Nested(PaymentModeLogo, required=False)
+    logo_url = fields.Dict(required=False)
     
     nickname = fields.Str(required=False)
     
@@ -929,33 +929,33 @@ class PaymentFlow(BaseSchema):
     # Payment swagger.json
 
     
-    bqr_razorpay = fields.Nested(AggregatorRoute, required=False)
+    bqr_razorpay = fields.Dict(required=False)
     
-    fynd = fields.Nested(AggregatorRoute, required=False)
+    fynd = fields.Dict(required=False)
     
-    epaylater = fields.Nested(AggregatorRoute, required=False)
+    epaylater = fields.Dict(required=False)
     
-    razorpay = fields.Nested(AggregatorRoute, required=False)
+    razorpay = fields.Dict(required=False)
     
-    juspay = fields.Nested(AggregatorRoute, required=False)
+    juspay = fields.Dict(required=False)
     
-    ajiodhan = fields.Nested(AggregatorRoute, required=False)
+    ajiodhan = fields.Dict(required=False)
     
-    simpl = fields.Nested(AggregatorRoute, required=False)
+    simpl = fields.Dict(required=False)
     
-    rupifi = fields.Nested(AggregatorRoute, required=False)
+    rupifi = fields.Dict(required=False)
     
-    mswipe = fields.Nested(AggregatorRoute, required=False)
+    mswipe = fields.Dict(required=False)
     
-    stripe = fields.Nested(AggregatorRoute, required=False)
+    stripe = fields.Dict(required=False)
     
-    ccavenue = fields.Nested(AggregatorRoute, required=False)
+    ccavenue = fields.Dict(required=False)
     
-    payubiz = fields.Nested(AggregatorRoute, required=False)
+    payubiz = fields.Dict(required=False)
     
-    jiopay = fields.Nested(AggregatorRoute, required=False)
+    jiopay = fields.Dict(required=False)
     
-    upi_razorpay = fields.Nested(AggregatorRoute, required=False)
+    upi_razorpay = fields.Dict(required=False)
     
 
 
@@ -1509,7 +1509,7 @@ class ErrorResponse(BaseSchema):
     
     status_code = fields.Int(required=False)
     
-    error = fields.Nested(ErrorDescription, required=False)
+    error = fields.Dict(required=False)
     
     message = fields.Str(required=False)
     
@@ -1733,19 +1733,31 @@ class CreditSummary(BaseSchema):
     # Payment swagger.json
 
     
+    total_due_amount = fields.Nested(BalanceDetails, required=False)
+    
     status = fields.Str(required=False)
+    
+    limit = fields.Nested(BalanceDetails, required=False)
     
     credit_line_id = fields.Str(required=False)
     
     amount_available = fields.Nested(BalanceDetails, required=False)
     
+    due_amount = fields.Nested(BalanceDetails, required=False)
+    
     balance = fields.Nested(BalanceDetails, required=False)
     
     status_message = fields.Str(required=False)
     
+    repayment_url = fields.Str(required=False)
+    
+    is_eligible_for_txn = fields.Boolean(required=False)
+    
     merchant_customer_ref_id = fields.Str(required=False)
     
     buyer_status = fields.Str(required=False)
+    
+    activation_url = fields.Str(required=False)
     
 
 
@@ -1943,11 +1955,19 @@ class OnboardSummary(BaseSchema):
     # Payment swagger.json
 
     
-    status = fields.Boolean(required=False)
-    
     redirect_url = fields.Str(required=False)
     
     session = fields.Dict(required=False)
+    
+    status = fields.Boolean(required=False)
+    
+    status_remark = fields.Str(required=False)
+    
+    is_eligible_for_txn = fields.Boolean(required=False)
+    
+    merchant_customer_ref_id = fields.Str(required=False)
+    
+    activation_url = fields.Str(required=False)
     
 
 

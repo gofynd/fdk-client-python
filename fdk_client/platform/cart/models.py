@@ -1325,7 +1325,7 @@ class Restrictions1(BaseSchema):
     
     payments = fields.List(fields.Nested(PromotionPaymentModes, required=False), required=False)
     
-    user_registered = fields.Nested(UserRegistered, required=False)
+    user_registered = fields.Str(required=False)
     
     platforms = fields.List(fields.Str(required=False), required=False)
     
@@ -1450,6 +1450,8 @@ class PromotionListItem(BaseSchema):
     _custom_json = fields.Dict(required=False)
     
     date_meta = fields.Nested(PromotionDateMeta, required=False)
+    
+    _id = fields.Str(required=False)
     
 
 

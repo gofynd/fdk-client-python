@@ -14,10 +14,6 @@ class EventConfig(BaseSchema):
     pass
 
 
-class EventConfigList(BaseSchema):
-    pass
-
-
 class EventConfigResponse(BaseSchema):
     pass
 
@@ -30,14 +26,6 @@ class Page(BaseSchema):
     pass
 
 
-class EventProcessedStatus(BaseSchema):
-    pass
-
-
-class EventPayload(BaseSchema):
-    pass
-
-
 class SubscriberConfig(BaseSchema):
     pass
 
@@ -46,19 +34,11 @@ class SubscriberResponse(BaseSchema):
     pass
 
 
-class SubscriberEvent(BaseSchema):
-    pass
-
-
 class AuthMeta(BaseSchema):
     pass
 
 
 class Association(BaseSchema):
-    pass
-
-
-class EventConfigBase(BaseSchema):
     pass
 
 
@@ -84,16 +64,6 @@ class EventConfig(BaseSchema):
     description = fields.Str(required=False)
     
     created_on = fields.Str(required=False)
-    
-
-
-class EventConfigList(BaseSchema):
-    # Webhook swagger.json
-
-    
-    items = fields.List(fields.Nested(EventConfig, required=False), required=False)
-    
-    page = fields.Nested(Page, required=False)
     
 
 
@@ -132,48 +102,6 @@ class Page(BaseSchema):
     type = fields.Str(required=False)
     
     size = fields.Int(required=False)
-    
-
-
-class EventProcessedStatus(BaseSchema):
-    # Webhook swagger.json
-
-    
-    id = fields.Int(required=False)
-    
-    subscriber_id = fields.Str(required=False)
-    
-    attempt = fields.Int(required=False)
-    
-    response_code = fields.Str(required=False)
-    
-    response_message = fields.Str(required=False)
-    
-    created_on = fields.Str(required=False)
-    
-    processed_on = fields.Str(required=False)
-    
-    status = fields.Boolean(required=False)
-    
-
-
-class EventPayload(BaseSchema):
-    # Webhook swagger.json
-
-    
-    id = fields.Int(required=False)
-    
-    event_trace_id = fields.Str(required=False)
-    
-    message_id = fields.Str(required=False)
-    
-    event_name = fields.Str(required=False)
-    
-    event_type = fields.Str(required=False)
-    
-    version = fields.Str(required=False)
-    
-    status = fields.Boolean(required=False)
     
 
 
@@ -229,20 +157,6 @@ class SubscriberResponse(BaseSchema):
     
 
 
-class SubscriberEvent(BaseSchema):
-    # Webhook swagger.json
-
-    
-    id = fields.Int(required=False)
-    
-    subscriber_id = fields.Int(required=False)
-    
-    event_id = fields.Int(required=False)
-    
-    created_date = fields.Str(required=False)
-    
-
-
 class AuthMeta(BaseSchema):
     # Webhook swagger.json
 
@@ -264,20 +178,6 @@ class Association(BaseSchema):
     extension_id = fields.Str(required=False)
     
     criteria = fields.Str(required=False)
-    
-
-
-class EventConfigBase(BaseSchema):
-    # Webhook swagger.json
-
-    
-    event_name = fields.Str(required=False)
-    
-    event_type = fields.Str(required=False)
-    
-    event_category = fields.Str(required=False)
-    
-    version = fields.Str(required=False)
     
 
 

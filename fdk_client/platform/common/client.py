@@ -60,9 +60,9 @@ class Common:
         return response
     
     async def getLocations(self, location_type=None, id=None):
-        """
-        :param location_type : Provide location type to query on. Possible values : country, state, city : type string
-        :param id : Field is optional when location_type is country. If querying for state, provide id of country. If querying for city, provide id of state. : type string
+        """Retrieve a list of countries, states, or cities based on the provided location_type and id parameters.
+        :param location_type :  : type string
+        :param id : Field is optional when location_type is country. If querying for state, provide id of the country. If querying for city, provide id of the state. : type string
         """
         payload = {}
         
@@ -78,7 +78,7 @@ class Common:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/common/configuration/v1.0/location", """{"required":[],"optional":[{"in":"query","name":"location_type","schema":{"type":"string","enum":["country","state","city"]},"description":"Provide location type to query on. Possible values : country, state, city"},{"in":"query","name":"id","schema":{"type":"string"},"description":"Field is optional when location_type is country. If querying for state, provide id of country. If querying for city, provide id of state."}],"query":[{"in":"query","name":"location_type","schema":{"type":"string","enum":["country","state","city"]},"description":"Provide location type to query on. Possible values : country, state, city"},{"in":"query","name":"id","schema":{"type":"string"},"description":"Field is optional when location_type is country. If querying for state, provide id of country. If querying for city, provide id of state."}],"headers":[],"path":[]}""", location_type=location_type, id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/common/configuration/v1.0/location", """{"required":[],"optional":[{"in":"query","name":"location_type","schema":{"type":"string","enum":["country","state","city"]}},{"in":"query","name":"id","schema":{"type":"string"},"description":"Field is optional when location_type is country. If querying for state, provide id of the country. If querying for city, provide id of the state."}],"query":[{"in":"query","name":"location_type","schema":{"type":"string","enum":["country","state","city"]}},{"in":"query","name":"id","schema":{"type":"string"},"description":"Field is optional when location_type is country. If querying for state, provide id of the country. If querying for city, provide id of the state."}],"headers":[],"path":[]}""", location_type=location_type, id=id)
         query_string = await create_query_string(location_type=location_type, id=id)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()

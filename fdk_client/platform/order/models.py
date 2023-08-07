@@ -440,6 +440,10 @@ class BagStateTransitionMap(BaseSchema):
     pass
 
 
+class RoleBaseStateTransitionMapping(BaseSchema):
+    pass
+
+
 class FetchCreditBalanceRequestPayload(BaseSchema):
     pass
 
@@ -509,6 +513,18 @@ class VerifyOtpResponseData(BaseSchema):
 
 
 class VerifyOtpResponse(BaseSchema):
+    pass
+
+
+class BulkReportsDownloadRequest(BaseSchema):
+    pass
+
+
+class BulkReportsDownloadResponse(BaseSchema):
+    pass
+
+
+class BulkReportsDownloadFailedResponse(BaseSchema):
     pass
 
 
@@ -2203,7 +2219,7 @@ class LineItem(BaseSchema):
     
     meta = fields.Dict(required=False)
     
-    custom_messasge = fields.Str(required=False)
+    custom_message = fields.Str(required=False)
     
     quantity = fields.Int(required=False)
     
@@ -2362,6 +2378,8 @@ class TaxInfo(BaseSchema):
     b2b_gstin_number = fields.Str(required=False)
     
     gstin = fields.Str(required=False)
+    
+    pan_no = fields.Str(required=False)
     
 
 
@@ -2583,6 +2601,16 @@ class BagStateTransitionMap(BaseSchema):
     
 
 
+class RoleBaseStateTransitionMapping(BaseSchema):
+    # Order swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+    next_statuses = fields.List(fields.Str(required=False), required=False)
+    
+
+
 class FetchCreditBalanceRequestPayload(BaseSchema):
     # Order swagger.json
 
@@ -2799,6 +2827,52 @@ class VerifyOtpResponse(BaseSchema):
     
 
 
+class BulkReportsDownloadRequest(BaseSchema):
+    # Order swagger.json
+
+    
+    store_ids = fields.List(fields.Str(required=False), required=False)
+    
+    lane_type = fields.Str(required=False)
+    
+    custom_headers = fields.Str(required=False)
+    
+    report_type = fields.Str(required=False)
+    
+    from_date = fields.Str(required=False)
+    
+    to_date = fields.Str(required=False)
+    
+    entities = fields.List(fields.Str(required=False), required=False)
+    
+    filter_type = fields.Str(required=False)
+    
+    is_cross_company_enabled = fields.Boolean(required=False)
+    
+    custom_filters_for_lane = fields.Dict(required=False)
+    
+
+
+class BulkReportsDownloadResponse(BaseSchema):
+    # Order swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+    batch_id = fields.Str(required=False)
+    
+
+
+class BulkReportsDownloadFailedResponse(BaseSchema):
+    # Order swagger.json
+
+    
+    status = fields.Boolean(required=False)
+    
+    error = fields.Str(required=False)
+    
+
+
 class ShipmentStatus(BaseSchema):
     # Order swagger.json
 
@@ -2961,21 +3035,21 @@ class FinancialBreakup(BaseSchema):
     # Order swagger.json
 
     
-    refund_credit = fields.Int(required=False)
+    refund_credit = fields.Float(required=False)
     
     amount_paid_roundoff = fields.Int(required=False)
     
-    price_effective = fields.Int(required=False)
+    price_effective = fields.Float(required=False)
     
     promotion_effective_discount = fields.Float(required=False)
     
-    transfer_price = fields.Int(required=False)
+    transfer_price = fields.Float(required=False)
     
     coupon_effective_discount = fields.Float(required=False)
     
     gst_fee = fields.Float(required=False)
     
-    tax_collected_at_source = fields.Int(required=False)
+    tax_collected_at_source = fields.Float(required=False)
     
     brand_calculated_amount = fields.Float(required=False)
     
@@ -2985,17 +3059,17 @@ class FinancialBreakup(BaseSchema):
     
     hsn_code = fields.Str(required=False)
     
-    cashback = fields.Int(required=False)
+    cashback = fields.Float(required=False)
     
     item_name = fields.Str(required=False)
     
     value_of_good = fields.Float(required=False)
     
-    cashback_applied = fields.Int(required=False)
+    cashback_applied = fields.Float(required=False)
     
-    cod_charges = fields.Int(required=False)
+    cod_charges = fields.Float(required=False)
     
-    price_marked = fields.Int(required=False)
+    price_marked = fields.Float(required=False)
     
     size = fields.Str(required=False)
     
@@ -3003,11 +3077,11 @@ class FinancialBreakup(BaseSchema):
     
     coupon_value = fields.Float(required=False)
     
-    discount = fields.Int(required=False)
+    discount = fields.Float(required=False)
     
-    fynd_credits = fields.Int(required=False)
+    fynd_credits = fields.Float(required=False)
     
-    gst_tax_percentage = fields.Int(required=False)
+    gst_tax_percentage = fields.Float(required=False)
     
     identifiers = fields.Nested(Identifier, required=False)
     

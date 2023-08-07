@@ -68,6 +68,10 @@ class ProductListingPrice(BaseSchema):
     pass
 
 
+class ProductSizesPrice(BaseSchema):
+    pass
+
+
 class ProductDetail(BaseSchema):
     pass
 
@@ -81,6 +85,10 @@ class Dimension(BaseSchema):
 
 
 class Weight(BaseSchema):
+    pass
+
+
+class DiscountMeta(BaseSchema):
     pass
 
 
@@ -456,6 +464,10 @@ class SellerV3(BaseSchema):
     pass
 
 
+class PromiseSchema(BaseSchema):
+    pass
+
+
 class ProductSizePriceResponseV3(BaseSchema):
     pass
 
@@ -643,6 +655,18 @@ class ProductListingPrice(BaseSchema):
     
 
 
+class ProductSizesPrice(BaseSchema):
+    # Catalog swagger.json
+
+    
+    effective = fields.Nested(Price, required=False)
+    
+    marked = fields.Nested(Price, required=False)
+    
+    selling = fields.Nested(Price, required=False)
+    
+
+
 class ProductDetail(BaseSchema):
     # Catalog swagger.json
 
@@ -757,6 +781,20 @@ class Weight(BaseSchema):
     
 
 
+class DiscountMeta(BaseSchema):
+    # Catalog swagger.json
+
+    
+    timer = fields.Boolean(required=False)
+    
+    start_timer_in_minutes = fields.Float(required=False)
+    
+    start = fields.Str(required=False)
+    
+    end = fields.Str(required=False)
+    
+
+
 class ProductSize(BaseSchema):
     # Catalog swagger.json
 
@@ -857,7 +895,7 @@ class ProductSizes(BaseSchema):
     
     sizes = fields.List(fields.Nested(ProductSize, required=False), required=False)
     
-    price = fields.Nested(ProductListingPrice, required=False)
+    price = fields.Nested(ProductSizesPrice, required=False)
     
     size_chart = fields.Nested(SizeChart, required=False)
     
@@ -868,6 +906,8 @@ class ProductSizes(BaseSchema):
     discount = fields.Str(required=False)
     
     stores = fields.Nested(ProductSizeStores, required=False)
+    
+    discount_meta = fields.Nested(DiscountMeta, required=False)
     
 
 
@@ -2055,7 +2095,7 @@ class ProductGroupingModel(BaseSchema):
     # Catalog swagger.json
 
     
-    logo = fields.Raw(required=False)
+    logo = fields.Str(required=False)
     
     is_active = fields.Boolean(required=False)
     
@@ -2203,9 +2243,13 @@ class ProductStockPriceV3(BaseSchema):
     
     effective = fields.Float(required=False)
     
-    currency = fields.Str(required=False)
+    currency_code = fields.Str(required=False)
+    
+    currency_symbol = fields.Str(required=False)
     
     marked = fields.Float(required=False)
+    
+    selling = fields.Float(required=False)
     
 
 
@@ -2245,6 +2289,16 @@ class SellerV3(BaseSchema):
     
 
 
+class PromiseSchema(BaseSchema):
+    # Catalog swagger.json
+
+    
+    min = fields.Str(required=False)
+    
+    max = fields.Str(required=False)
+    
+
+
 class ProductSizePriceResponseV3(BaseSchema):
     # Catalog swagger.json
 
@@ -2275,6 +2329,8 @@ class ProductSizePriceResponseV3(BaseSchema):
     
     price_per_piece = fields.Nested(ProductStockPriceV3, required=False)
     
+    discount_meta = fields.Nested(DiscountMeta, required=False)
+    
     discount = fields.Str(required=False)
     
     long_lat = fields.List(fields.Float(required=False), required=False)
@@ -2290,6 +2346,8 @@ class ProductSizePriceResponseV3(BaseSchema):
     marketplace_attributes = fields.List(fields.Nested(MarketPlaceSttributesSchemaV3, required=False), required=False)
     
     seller = fields.Nested(SellerV3, required=False)
+    
+    delivery_promise = fields.Nested(PromiseSchema, required=False)
     
 
 

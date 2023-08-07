@@ -24,22 +24,6 @@ class OwnerInfo(BaseSchema):
     pass
 
 
-class AppVersionRequest(BaseSchema):
-    pass
-
-
-class ApplicationVersionRequest(BaseSchema):
-    pass
-
-
-class Device(BaseSchema):
-    pass
-
-
-class OS(BaseSchema):
-    pass
-
-
 class SupportedLanguage(BaseSchema):
     pass
 
@@ -53,10 +37,6 @@ class AppStaffResponse(BaseSchema):
 
 
 class AppStaffListResponse(BaseSchema):
-    pass
-
-
-class UpdateDialog(BaseSchema):
     pass
 
 
@@ -236,10 +216,6 @@ class OrderFeature(BaseSchema):
     pass
 
 
-class AppFeatureRequest(BaseSchema):
-    pass
-
-
 class AppFeatureResponse(BaseSchema):
     pass
 
@@ -288,39 +264,7 @@ class UnhandledError(BaseSchema):
     pass
 
 
-class InvalidPayloadRequest(BaseSchema):
-    pass
-
-
 class SuccessMessageResponse(BaseSchema):
-    pass
-
-
-class InventoryBrandRule(BaseSchema):
-    pass
-
-
-class StoreCriteriaRule(BaseSchema):
-    pass
-
-
-class InventoryStoreRule(BaseSchema):
-    pass
-
-
-class InventoryPaymentConfig(BaseSchema):
-    pass
-
-
-class StorePriorityRule(BaseSchema):
-    pass
-
-
-class ArticleAssignmentRule(BaseSchema):
-    pass
-
-
-class InventoryArticleAssignment(BaseSchema):
     pass
 
 
@@ -436,10 +380,6 @@ class OrderingStores(BaseSchema):
     pass
 
 
-class OrderingStoresResponse(BaseSchema):
-    pass
-
-
 
 
 
@@ -525,58 +465,6 @@ class OwnerInfo(BaseSchema):
     
 
 
-class AppVersionRequest(BaseSchema):
-    # Configuration swagger.json
-
-    
-    application = fields.Nested(ApplicationVersionRequest, required=False)
-    
-    device = fields.Nested(Device, required=False)
-    
-    locale = fields.Str(required=False)
-    
-    timezone = fields.Str(required=False)
-    
-
-
-class ApplicationVersionRequest(BaseSchema):
-    # Configuration swagger.json
-
-    
-    id = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    namespace = fields.Str(required=False)
-    
-    token = fields.Str(required=False)
-    
-    version = fields.Str(required=False)
-    
-
-
-class Device(BaseSchema):
-    # Configuration swagger.json
-
-    
-    build = fields.Int(required=False)
-    
-    model = fields.Str(required=False)
-    
-    os = fields.Nested(OS, required=False)
-    
-
-
-class OS(BaseSchema):
-    # Configuration swagger.json
-
-    
-    name = fields.Str(required=False)
-    
-    version = fields.Str(required=False)
-    
-
-
 class SupportedLanguage(BaseSchema):
     # Configuration swagger.json
 
@@ -610,16 +498,6 @@ class AppStaffListResponse(BaseSchema):
     page = fields.Nested(Page, required=False)
     
     items = fields.List(fields.Nested(AppStaff, required=False), required=False)
-    
-
-
-class UpdateDialog(BaseSchema):
-    # Configuration swagger.json
-
-    
-    type = fields.Str(required=False)
-    
-    interval = fields.Int(required=False)
     
 
 
@@ -1131,14 +1009,6 @@ class OrderFeature(BaseSchema):
     
 
 
-class AppFeatureRequest(BaseSchema):
-    # Configuration swagger.json
-
-    
-    feature = fields.Nested(AppFeature, required=False)
-    
-
-
 class AppFeatureResponse(BaseSchema):
     # Configuration swagger.json
 
@@ -1315,89 +1185,11 @@ class UnhandledError(BaseSchema):
     
 
 
-class InvalidPayloadRequest(BaseSchema):
-    # Configuration swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-
-
 class SuccessMessageResponse(BaseSchema):
     # Configuration swagger.json
 
     
     message = fields.Str(required=False)
-    
-
-
-class InventoryBrandRule(BaseSchema):
-    # Configuration swagger.json
-
-    
-    criteria = fields.Str(required=False)
-    
-    brands = fields.List(fields.Int(required=False), required=False)
-    
-
-
-class StoreCriteriaRule(BaseSchema):
-    # Configuration swagger.json
-
-    
-    companies = fields.List(fields.Int(required=False), required=False)
-    
-    brands = fields.List(fields.Int(required=False), required=False)
-    
-
-
-class InventoryStoreRule(BaseSchema):
-    # Configuration swagger.json
-
-    
-    criteria = fields.Str(required=False)
-    
-    rules = fields.List(fields.Nested(StoreCriteriaRule, required=False), required=False)
-    
-    stores = fields.List(fields.Int(required=False), required=False)
-    
-
-
-class InventoryPaymentConfig(BaseSchema):
-    # Configuration swagger.json
-
-    
-    mode_of_payment = fields.Str(required=False)
-    
-    source = fields.Str(required=False)
-    
-
-
-class StorePriorityRule(BaseSchema):
-    # Configuration swagger.json
-
-    
-    enabled = fields.Boolean(required=False)
-    
-    storetype_order = fields.List(fields.Str(required=False), required=False)
-    
-
-
-class ArticleAssignmentRule(BaseSchema):
-    # Configuration swagger.json
-
-    
-    store_priority = fields.Nested(StorePriorityRule, required=False)
-    
-
-
-class InventoryArticleAssignment(BaseSchema):
-    # Configuration swagger.json
-
-    
-    post_order_reassignment = fields.Boolean(required=False)
-    
-    rules = fields.Nested(ArticleAssignmentRule, required=False)
     
 
 
@@ -1824,16 +1616,6 @@ class OrderingStores(BaseSchema):
     app = fields.Str(required=False)
     
     __v = fields.Int(required=False)
-    
-
-
-class OrderingStoresResponse(BaseSchema):
-    # Configuration swagger.json
-
-    
-    page = fields.Nested(Page, required=False)
-    
-    items = fields.List(fields.Nested(OrderingStore, required=False), required=False)
     
 
 

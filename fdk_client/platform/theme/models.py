@@ -68,10 +68,6 @@ class BlitzkriegApiErrorSchema(BaseSchema):
     pass
 
 
-class BlitzkriegNotFoundSchema(BaseSchema):
-    pass
-
-
 class BlitzkriegInternalServerErrorSchema(BaseSchema):
     pass
 
@@ -120,10 +116,6 @@ class Css(BaseSchema):
     pass
 
 
-class Sections(BaseSchema):
-    pass
-
-
 class Config(BaseSchema):
     pass
 
@@ -141,10 +133,6 @@ class ListSchemaItem(BaseSchema):
 
 
 class Colors(BaseSchema):
-    pass
-
-
-class Custom(BaseSchema):
     pass
 
 
@@ -377,14 +365,6 @@ class BlitzkriegApiErrorSchema(BaseSchema):
     
 
 
-class BlitzkriegNotFoundSchema(BaseSchema):
-    # Theme swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-
-
 class BlitzkriegInternalServerErrorSchema(BaseSchema):
     # Theme swagger.json
 
@@ -565,14 +545,6 @@ class Css(BaseSchema):
     
 
 
-class Sections(BaseSchema):
-    # Theme swagger.json
-
-    
-    attributes = fields.Str(required=False)
-    
-
-
 class Config(BaseSchema):
     # Theme swagger.json
 
@@ -630,14 +602,6 @@ class Colors(BaseSchema):
     link_color = fields.Str(required=False)
     
     button_secondary_color = fields.Str(required=False)
-    
-
-
-class Custom(BaseSchema):
-    # Theme swagger.json
-
-    
-    props = fields.Dict(required=False)
     
 
 
