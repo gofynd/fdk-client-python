@@ -12,11 +12,11 @@ class ValidityObject(BaseSchema):
     pass
 
 
-class DiscountMeta(BaseSchema):
+class CreateUpdateDiscount(BaseSchema):
     pass
 
 
-class CreateUpdateDiscount(BaseSchema):
+class DiscountMeta(BaseSchema):
     pass
 
 
@@ -77,18 +77,6 @@ class ValidityObject(BaseSchema):
     
 
 
-class DiscountMeta(BaseSchema):
-    # Discount swagger.json
-
-    
-    timer = fields.Boolean(required=False)
-    
-    hours = fields.Float(required=False)
-    
-    minutes = fields.Float(required=False)
-    
-
-
 class CreateUpdateDiscount(BaseSchema):
     # Discount swagger.json
 
@@ -120,6 +108,18 @@ class CreateUpdateDiscount(BaseSchema):
     validity = fields.Nested(ValidityObject, required=False)
     
     discount_meta = fields.Nested(DiscountMeta, required=False)
+    
+
+
+class DiscountMeta(BaseSchema):
+    # Discount swagger.json
+
+    
+    timer = fields.Boolean(required=False)
+    
+    hours = fields.Float(required=False)
+    
+    minutes = fields.Float(required=False)
     
 
 

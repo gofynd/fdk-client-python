@@ -44,43 +44,11 @@ class AllAvailablePageSchema(BaseSchema):
     pass
 
 
-class PaginationSchema(BaseSchema):
-    pass
-
-
-class ThemesListingResponseSchema(BaseSchema):
-    pass
-
-
-class AddThemeRequestSchema(BaseSchema):
-    pass
-
-
-class UpgradableThemeSchema(BaseSchema):
-    pass
-
-
-class FontsSchema(BaseSchema):
-    pass
-
-
 class BlitzkriegApiErrorSchema(BaseSchema):
     pass
 
 
-class BlitzkriegNotFoundSchema(BaseSchema):
-    pass
-
-
 class BlitzkriegInternalServerErrorSchema(BaseSchema):
-    pass
-
-
-class FontsSchemaItems(BaseSchema):
-    pass
-
-
-class FontsSchemaItemsFiles(BaseSchema):
     pass
 
 
@@ -120,10 +88,6 @@ class Css(BaseSchema):
     pass
 
 
-class Sections(BaseSchema):
-    pass
-
-
 class Config(BaseSchema):
     pass
 
@@ -141,10 +105,6 @@ class ListSchemaItem(BaseSchema):
 
 
 class Colors(BaseSchema):
-    pass
-
-
-class Custom(BaseSchema):
     pass
 
 
@@ -313,71 +273,7 @@ class AllAvailablePageSchema(BaseSchema):
     
 
 
-class PaginationSchema(BaseSchema):
-    # Theme swagger.json
-
-    
-    size = fields.Int(required=False)
-    
-    item_total = fields.Int(required=False)
-    
-    has_next = fields.Boolean(required=False)
-    
-    type = fields.Str(required=False)
-    
-    current = fields.Int(required=False)
-    
-
-
-class ThemesListingResponseSchema(BaseSchema):
-    # Theme swagger.json
-
-    
-    items = fields.List(fields.Nested(ThemesSchema, required=False), required=False)
-    
-    page = fields.Nested(PaginationSchema, required=False)
-    
-
-
-class AddThemeRequestSchema(BaseSchema):
-    # Theme swagger.json
-
-    
-    theme_id = fields.Str(required=False)
-    
-
-
-class UpgradableThemeSchema(BaseSchema):
-    # Theme swagger.json
-
-    
-    parent_theme = fields.Str(required=False)
-    
-    applied_theme = fields.Str(required=False)
-    
-    upgrade = fields.Boolean(required=False)
-    
-
-
-class FontsSchema(BaseSchema):
-    # Theme swagger.json
-
-    
-    items = fields.Nested(FontsSchemaItems, required=False)
-    
-    kind = fields.Str(required=False)
-    
-
-
 class BlitzkriegApiErrorSchema(BaseSchema):
-    # Theme swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-
-
-class BlitzkriegNotFoundSchema(BaseSchema):
     # Theme swagger.json
 
     
@@ -390,40 +286,6 @@ class BlitzkriegInternalServerErrorSchema(BaseSchema):
 
     
     message = fields.Str(required=False)
-    
-
-
-class FontsSchemaItems(BaseSchema):
-    # Theme swagger.json
-
-    
-    family = fields.Str(required=False)
-    
-    variants = fields.List(fields.Str(required=False), required=False)
-    
-    subsets = fields.List(fields.Str(required=False), required=False)
-    
-    version = fields.Str(required=False)
-    
-    last_modified = fields.Str(required=False)
-    
-    files = fields.Nested(FontsSchemaItemsFiles, required=False)
-    
-    category = fields.Str(required=False)
-    
-    kind = fields.Str(required=False)
-    
-
-
-class FontsSchemaItemsFiles(BaseSchema):
-    # Theme swagger.json
-
-    
-    regular = fields.Str(required=False)
-    
-    italic = fields.Str(required=False)
-    
-    bold = fields.Str(required=False)
     
 
 
@@ -565,14 +427,6 @@ class Css(BaseSchema):
     
 
 
-class Sections(BaseSchema):
-    # Theme swagger.json
-
-    
-    attributes = fields.Str(required=False)
-    
-
-
 class Config(BaseSchema):
     # Theme swagger.json
 
@@ -630,14 +484,6 @@ class Colors(BaseSchema):
     link_color = fields.Str(required=False)
     
     button_secondary_color = fields.Str(required=False)
-    
-
-
-class Custom(BaseSchema):
-    # Theme swagger.json
-
-    
-    props = fields.Dict(required=False)
     
 
 

@@ -3629,7 +3629,7 @@ class Catalog:
         return response
     
     async def getOptimalLocations(self, body=""):
-        """
+        """Location Reassignment
         """
         payload = {}
         

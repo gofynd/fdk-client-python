@@ -8,19 +8,7 @@ from ..ApplicationModel import BaseSchema
 
 
 
-class BlockUserRequestSchema(BaseSchema):
-    pass
-
-
-class ArchiveUserRequestSchema(BaseSchema):
-    pass
-
-
 class DeleteApplicationUserRequestSchema(BaseSchema):
-    pass
-
-
-class UnDeleteUserRequestSchema(BaseSchema):
     pass
 
 
@@ -148,19 +136,7 @@ class LogoutSuccess(BaseSchema):
     pass
 
 
-class BlockUserSuccess(BaseSchema):
-    pass
-
-
-class ArchiveUserSuccess(BaseSchema):
-    pass
-
-
 class DeleteUserSuccess(BaseSchema):
-    pass
-
-
-class UnDeleteUserSuccess(BaseSchema):
     pass
 
 
@@ -192,47 +168,11 @@ class SendEmailVerifyLinkSuccess(BaseSchema):
     pass
 
 
-class UserSearchResponseSchema(BaseSchema):
-    pass
-
-
-class CustomerListResponseSchema(BaseSchema):
-    pass
-
-
-class PaginationSchema(BaseSchema):
-    pass
-
-
-class SessionListResponseSchema(BaseSchema):
-    pass
-
-
-class SessionDeleteResponseSchema(BaseSchema):
-    pass
-
-
-class UnauthorizedSchema(BaseSchema):
-    pass
-
-
-class UnauthenticatedSchema(BaseSchema):
-    pass
-
-
-class NotFoundSchema(BaseSchema):
-    pass
-
-
 class AuthenticationInternalServerErrorSchema(BaseSchema):
     pass
 
 
 class AuthenticationApiErrorSchema(BaseSchema):
-    pass
-
-
-class ProfileEditSuccessSchema(BaseSchema):
     pass
 
 
@@ -253,50 +193,6 @@ class OAuthRequestAppleSchemaOauth(BaseSchema):
 
 
 class OAuthRequestAppleSchemaProfile(BaseSchema):
-    pass
-
-
-class AuthSuccessUser(BaseSchema):
-    pass
-
-
-class SessionListResponseInfo(BaseSchema):
-    pass
-
-
-class AuthSuccessUserDebug(BaseSchema):
-    pass
-
-
-class AuthSuccessUserEmails(BaseSchema):
-    pass
-
-
-class UserGroupResponseSchema(BaseSchema):
-    pass
-
-
-class UserGroupListResponseSchema(BaseSchema):
-    pass
-
-
-class CreateUserGroupSchema(BaseSchema):
-    pass
-
-
-class CreateUserRequestSchema(BaseSchema):
-    pass
-
-
-class CreateUserResponseSchema(BaseSchema):
-    pass
-
-
-class CreateUserSessionRequestSchema(BaseSchema):
-    pass
-
-
-class CreateUserSessionResponseSchema(BaseSchema):
     pass
 
 
@@ -376,22 +272,6 @@ class SessionExpiry(BaseSchema):
     pass
 
 
-class UpdateUserGroupSchema(BaseSchema):
-    pass
-
-
-class UpdateUserRequestSchema(BaseSchema):
-    pass
-
-
-class UserEmails(BaseSchema):
-    pass
-
-
-class UserPhoneNumbers(BaseSchema):
-    pass
-
-
 class UserSchema(BaseSchema):
     pass
 
@@ -407,26 +287,6 @@ class Email(BaseSchema):
 
 
 
-class BlockUserRequestSchema(BaseSchema):
-    # User swagger.json
-
-    
-    status = fields.Boolean(required=False)
-    
-    user_id = fields.List(fields.Str(required=False), required=False)
-    
-    reason = fields.Str(required=False)
-    
-
-
-class ArchiveUserRequestSchema(BaseSchema):
-    # User swagger.json
-
-    
-    user_id = fields.Str(required=False)
-    
-
-
 class DeleteApplicationUserRequestSchema(BaseSchema):
     # User swagger.json
 
@@ -440,18 +300,6 @@ class DeleteApplicationUserRequestSchema(BaseSchema):
     request_id = fields.Str(required=False)
     
     otp = fields.Str(required=False)
-    
-
-
-class UnDeleteUserRequestSchema(BaseSchema):
-    # User swagger.json
-
-    
-    user_id = fields.Str(required=False)
-    
-    reason = fields.Str(required=False)
-    
-    reason_id = fields.Str(required=False)
     
 
 
@@ -893,31 +741,7 @@ class LogoutSuccess(BaseSchema):
     
 
 
-class BlockUserSuccess(BaseSchema):
-    # User swagger.json
-
-    
-    success = fields.Boolean(required=False)
-    
-
-
-class ArchiveUserSuccess(BaseSchema):
-    # User swagger.json
-
-    
-    success = fields.Boolean(required=False)
-    
-
-
 class DeleteUserSuccess(BaseSchema):
-    # User swagger.json
-
-    
-    success = fields.Boolean(required=False)
-    
-
-
-class UnDeleteUserSuccess(BaseSchema):
     # User swagger.json
 
     
@@ -999,80 +823,6 @@ class SendEmailVerifyLinkSuccess(BaseSchema):
     
 
 
-class UserSearchResponseSchema(BaseSchema):
-    # User swagger.json
-
-    
-    users = fields.List(fields.Nested(UserSchema, required=False), required=False)
-    
-
-
-class CustomerListResponseSchema(BaseSchema):
-    # User swagger.json
-
-    
-    items = fields.List(fields.Nested(UserSchema, required=False), required=False)
-    
-    page = fields.Nested(PaginationSchema, required=False)
-    
-
-
-class PaginationSchema(BaseSchema):
-    # User swagger.json
-
-    
-    size = fields.Int(required=False)
-    
-    item_total = fields.Int(required=False)
-    
-    has_next = fields.Boolean(required=False)
-    
-    type = fields.Str(required=False)
-    
-    current = fields.Int(required=False)
-    
-
-
-class SessionListResponseSchema(BaseSchema):
-    # User swagger.json
-
-    
-    items = fields.List(fields.Nested(SessionListResponseInfo, required=False), required=False)
-    
-
-
-class SessionDeleteResponseSchema(BaseSchema):
-    # User swagger.json
-
-    
-    items = fields.List(fields.Str(required=False), required=False)
-    
-
-
-class UnauthorizedSchema(BaseSchema):
-    # User swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-
-
-class UnauthenticatedSchema(BaseSchema):
-    # User swagger.json
-
-    
-    authenticated = fields.Boolean(required=False)
-    
-
-
-class NotFoundSchema(BaseSchema):
-    # User swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-
-
 class AuthenticationInternalServerErrorSchema(BaseSchema):
     # User swagger.json
 
@@ -1086,26 +836,6 @@ class AuthenticationApiErrorSchema(BaseSchema):
 
     
     message = fields.Str(required=False)
-    
-
-
-class ProfileEditSuccessSchema(BaseSchema):
-    # User swagger.json
-
-    
-    email = fields.Str(required=False)
-    
-    verify_email_otp = fields.Boolean(required=False)
-    
-    verify_email_link = fields.Boolean(required=False)
-    
-    verify_mobile_otp = fields.Boolean(required=False)
-    
-    user = fields.Str(required=False)
-    
-    register_token = fields.Str(required=False)
-    
-    user_exists = fields.Boolean(required=False)
     
 
 
@@ -1166,164 +896,6 @@ class OAuthRequestAppleSchemaProfile(BaseSchema):
     full_name = fields.Str(required=False)
     
     first_name = fields.Str(required=False)
-    
-
-
-class AuthSuccessUser(BaseSchema):
-    # User swagger.json
-
-    
-    first_name = fields.Str(required=False)
-    
-    last_name = fields.Str(required=False)
-    
-    debug = fields.Nested(AuthSuccessUserDebug, required=False)
-    
-    active = fields.Boolean(required=False)
-    
-    emails = fields.Nested(AuthSuccessUserEmails, required=False)
-    
-
-
-class SessionListResponseInfo(BaseSchema):
-    # User swagger.json
-
-    
-    session_id = fields.Str(required=False)
-    
-    user_agent = fields.Str(required=False)
-    
-    ip = fields.Str(required=False)
-    
-    domain = fields.Str(required=False)
-    
-    expire_in = fields.Str(required=False)
-    
-
-
-class AuthSuccessUserDebug(BaseSchema):
-    # User swagger.json
-
-    
-    platform = fields.Str(required=False)
-    
-
-
-class AuthSuccessUserEmails(BaseSchema):
-    # User swagger.json
-
-    
-    email = fields.Str(required=False)
-    
-    verified = fields.Boolean(required=False)
-    
-    primary = fields.Boolean(required=False)
-    
-    active = fields.Boolean(required=False)
-    
-
-
-class UserGroupResponseSchema(BaseSchema):
-    # User swagger.json
-
-    
-    name = fields.Str(required=False)
-    
-    description = fields.Str(required=False)
-    
-    file_url = fields.Str(required=False)
-    
-    _id = fields.Str(required=False)
-    
-    status = fields.Str(required=False)
-    
-    uid = fields.Int(required=False)
-    
-    application_id = fields.Str(required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    modified_at = fields.Str(required=False)
-    
-    __v = fields.Int(required=False)
-    
-
-
-class UserGroupListResponseSchema(BaseSchema):
-    # User swagger.json
-
-    
-    items = fields.List(fields.Nested(UserGroupResponseSchema, required=False), required=False)
-    
-    page = fields.Nested(PaginationSchema, required=False)
-    
-
-
-class CreateUserGroupSchema(BaseSchema):
-    # User swagger.json
-
-    
-    name = fields.Str(required=False)
-    
-    description = fields.Str(required=False)
-    
-    file_url = fields.Str(required=False)
-    
-
-
-class CreateUserRequestSchema(BaseSchema):
-    # User swagger.json
-
-    
-    phone_number = fields.Str(required=False)
-    
-    email = fields.Str(required=False)
-    
-    first_name = fields.Str(required=False)
-    
-    last_name = fields.Str(required=False)
-    
-    gender = fields.Str(required=False)
-    
-    username = fields.Str(required=False)
-    
-    meta = fields.Dict(required=False)
-    
-
-
-class CreateUserResponseSchema(BaseSchema):
-    # User swagger.json
-
-    
-    user = fields.Nested(UserSchema, required=False)
-    
-
-
-class CreateUserSessionRequestSchema(BaseSchema):
-    # User swagger.json
-
-    
-    domain = fields.Str(required=False)
-    
-    max_age = fields.Float(required=False)
-    
-    user_id = fields.Str(required=False)
-    
-
-
-class CreateUserSessionResponseSchema(BaseSchema):
-    # User swagger.json
-
-    
-    domain = fields.Str(required=False)
-    
-    max_age = fields.Float(required=False)
-    
-    secure = fields.Boolean(required=False)
-    
-    http_only = fields.Boolean(required=False)
-    
-    cookie = fields.Dict(required=False)
     
 
 
@@ -1562,68 +1134,6 @@ class SessionExpiry(BaseSchema):
     type = fields.Str(required=False)
     
     is_rolling = fields.Boolean(required=False)
-    
-
-
-class UpdateUserGroupSchema(BaseSchema):
-    # User swagger.json
-
-    
-    name = fields.Str(required=False)
-    
-    description = fields.Str(required=False)
-    
-    file_url = fields.Str(required=False)
-    
-
-
-class UpdateUserRequestSchema(BaseSchema):
-    # User swagger.json
-
-    
-    first_name = fields.Str(required=False)
-    
-    last_name = fields.Str(required=False)
-    
-    gender = fields.Str(required=False)
-    
-    external_id = fields.Str(required=False)
-    
-    meta = fields.Dict(required=False)
-    
-    phone_numbers = fields.List(fields.Nested(UserPhoneNumbers, required=False), required=False)
-    
-    emails = fields.List(fields.Nested(UserEmails, required=False), required=False)
-    
-
-
-class UserEmails(BaseSchema):
-    # User swagger.json
-
-    
-    active = fields.Boolean(required=False)
-    
-    primary = fields.Boolean(required=False)
-    
-    verified = fields.Boolean(required=False)
-    
-    email = fields.Str(required=False)
-    
-
-
-class UserPhoneNumbers(BaseSchema):
-    # User swagger.json
-
-    
-    active = fields.Boolean(required=False)
-    
-    primary = fields.Boolean(required=False)
-    
-    verified = fields.Boolean(required=False)
-    
-    phone = fields.Str(required=False)
-    
-    country_code = fields.Str(required=False)
     
 
 

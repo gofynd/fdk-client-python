@@ -440,7 +440,7 @@ class OrderValidator:
          
         
     
-    class getRoleBaseStateTransition(BaseSchema):
+    class getAllowedStateTransition(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -504,7 +504,7 @@ class OrderValidator:
         
         status_override_lane = fields.Boolean(required=False)
         
-        time_to_dispatch = fields.Str(required=False)
+        time_to_dispatch = fields.Float(required=False)
         
         search_type = fields.Str(required=False)
         

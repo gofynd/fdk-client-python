@@ -324,14 +324,6 @@ class VerifyOtpCommsErrorRes(BaseSchema):
     pass
 
 
-class PushtokenReq(BaseSchema):
-    pass
-
-
-class PushtokenRes(BaseSchema):
-    pass
-
-
 class SmsProviderReq(BaseSchema):
     pass
 
@@ -388,15 +380,7 @@ class SystemNotificationUser(BaseSchema):
     pass
 
 
-class SystemNotificationSettings(BaseSchema):
-    pass
-
-
 class SystemNotification(BaseSchema):
-    pass
-
-
-class SystemNotificationsPage(BaseSchema):
     pass
 
 
@@ -1545,48 +1529,6 @@ class VerifyOtpCommsErrorRes(BaseSchema):
     
 
 
-class PushtokenReq(BaseSchema):
-    # Communication swagger.json
-
-    
-    action = fields.Str(required=False)
-    
-    bundle_identifier = fields.Str(required=False)
-    
-    push_token = fields.Str(required=False)
-    
-    unique_device_id = fields.Str(required=False)
-    
-
-
-class PushtokenRes(BaseSchema):
-    # Communication swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    bundle_identifier = fields.Str(required=False)
-    
-    push_token = fields.Str(required=False)
-    
-    unique_device_id = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
-    
-    platform = fields.Str(required=False)
-    
-    application_id = fields.Str(required=False)
-    
-    user_id = fields.Str(required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    updated_at = fields.Str(required=False)
-    
-    expired_at = fields.Str(required=False)
-    
-
-
 class SmsProviderReq(BaseSchema):
     # Communication swagger.json
 
@@ -1849,18 +1791,6 @@ class SystemNotificationUser(BaseSchema):
     
 
 
-class SystemNotificationSettings(BaseSchema):
-    # Communication swagger.json
-
-    
-    sound = fields.Boolean(required=False)
-    
-    priority = fields.Str(required=False)
-    
-    time_to_live = fields.Str(required=False)
-    
-
-
 class SystemNotification(BaseSchema):
     # Communication swagger.json
 
@@ -1876,22 +1806,6 @@ class SystemNotification(BaseSchema):
     group = fields.Str(required=False)
     
     created_at = fields.Str(required=False)
-    
-
-
-class SystemNotificationsPage(BaseSchema):
-    # Communication swagger.json
-
-    
-    type = fields.Str(required=False)
-    
-    current = fields.Int(required=False)
-    
-    size = fields.Int(required=False)
-    
-    item_total = fields.Int(required=False)
-    
-    has_next = fields.Boolean(required=False)
     
 
 

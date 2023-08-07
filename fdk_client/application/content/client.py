@@ -501,7 +501,7 @@ class Content:
         return response
     
     async def getNavigations(self, page_no=None, page_size=None, body=""):
-        """Use this API to fetch the navigations details which includes the items of the navigation pane. It also shows the links and sub-navigations.
+        """Use this API to fetch the navigations details which includes the items of the navigation panel. It also shows the links and sub-navigations.
         :param page_no : The page number to navigate through the given set of results. Default value is 1.  : type integer
         :param page_size : The number of items to retrieve in each page. : type integer
         """

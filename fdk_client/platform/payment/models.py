@@ -529,7 +529,7 @@ class IntentApp(BaseSchema):
     
     code = fields.Str(required=False)
     
-    logos = fields.Nested(PaymentModeLogo, required=False)
+    logos = fields.Dict(required=False)
     
 
 
@@ -583,7 +583,7 @@ class PaymentModeList(BaseSchema):
     
     expired = fields.Boolean(required=False)
     
-    logo_url = fields.Nested(PaymentModeLogo, required=False)
+    logo_url = fields.Dict(required=False)
     
     card_token = fields.Str(required=False)
     
@@ -1677,7 +1677,7 @@ class ErrorResponse(BaseSchema):
     
     status_code = fields.Int(required=False)
     
-    error = fields.Nested(ErrorDescription, required=False)
+    error = fields.Dict(required=False)
     
     message = fields.Str(required=False)
     

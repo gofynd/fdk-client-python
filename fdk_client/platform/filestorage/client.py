@@ -203,8 +203,8 @@ This operation will return the url for the uploaded file.
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CopyFiles
-        schema = CopyFiles()
+        from .models import BulkRequest
+        schema = BulkRequest()
         schema.dump(schema.load(body))
         
 
@@ -224,8 +224,8 @@ This operation will return the url for the uploaded file.
         
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import BulkUploadSyncMode
-            schema = BulkUploadSyncMode()
+            from .models import BulkUploadResponse
+            schema = BulkUploadResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:

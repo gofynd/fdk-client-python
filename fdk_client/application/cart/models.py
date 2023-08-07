@@ -1537,7 +1537,7 @@ class CartCheckoutDetailRequest(BaseSchema):
     
     custom_meta = fields.List(fields.Nested(CartCheckoutCustomMeta, required=False), required=False)
     
-    customer_details = fields.Nested(CustomerDetails, required=False)
+    customer_details = fields.Dict(required=False)
     
     merchant_code = fields.Str(required=False)
     
@@ -1977,7 +1977,7 @@ class CartCheckoutDetailV2Request(BaseSchema):
     
     custom_meta = fields.Dict(required=False)
     
-    customer_details = fields.Nested(CustomerDetails, required=False)
+    customer_details = fields.Dict(required=False)
     
     merchant_code = fields.Str(required=False)
     

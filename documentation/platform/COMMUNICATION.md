@@ -506,26 +506,24 @@ Success
 
 ```json
 {
-  "value": [
-    {
-      "_id": "6009a1ea1f6a61d88e80a867",
-      "imported": {
-        "count": 2
+  "value": {
+    "_id": "6009a1ea1f6a61d88e80a867",
+    "imported": {
+      "count": 2
+    },
+    "processed": {
+      "email": {
+        "success": 2,
+        "failed": 0,
+        "suppressed": 0
       },
-      "processed": {
-        "email": {
-          "success": 2,
-          "failed": 0,
-          "suppressed": 0
-        },
-        "sms": {
-          "success": 0,
-          "failed": 0,
-          "suppressed": 0
-        }
+      "sms": {
+        "success": 0,
+        "failed": 0,
+        "suppressed": 0
       }
     }
-  ]
+  }
 }
 ```
 </details>
@@ -1044,15 +1042,13 @@ Success
 
 ```json
 {
-  "value": [
-    {
-      "phone_number": "1234567890",
-      "email": "abcxyz@gofynd.com",
-      "firstname": "Abc",
-      "lastname": "Xyz",
-      "orderid": "1"
-    }
-  ]
+  "value": {
+    "phone_number": "1234567890",
+    "email": "abcxyz@gofynd.com",
+    "firstname": "Abc",
+    "lastname": "Xyz",
+    "orderid": "1"
+  }
 }
 ```
 </details>
@@ -2206,7 +2202,7 @@ Success
         "template": {
           "sms": {
             "subscribed": true,
-            "template": null
+            "template": ""
           },
           "email": {
             "subscribed": true,
@@ -2226,7 +2222,7 @@ Success
         "template": {
           "sms": {
             "subscribed": true,
-            "template": null
+            "template": ""
           },
           "email": {
             "subscribed": true,
@@ -2246,7 +2242,7 @@ Success
         "template": {
           "sms": {
             "subscribed": true,
-            "template": null
+            "template": ""
           },
           "email": {
             "subscribed": true,
@@ -2266,7 +2262,7 @@ Success
         "template": {
           "sms": {
             "subscribed": true,
-            "template": null
+            "template": ""
           },
           "email": {
             "subscribed": true,
@@ -2570,7 +2566,7 @@ Success
           },
           "email": {
             "subscribed": true,
-            "template": null
+            "template": ""
           }
         },
         "is_default": true,
@@ -2590,7 +2586,7 @@ Success
           },
           "email": {
             "subscribed": true,
-            "template": null
+            "template": ""
           }
         },
         "is_default": true,
@@ -2610,7 +2606,7 @@ Success
           },
           "email": {
             "subscribed": true,
-            "template": null
+            "template": ""
           }
         },
         "is_default": true,
@@ -2626,7 +2622,7 @@ Success
         "template": {
           "sms": {
             "subscribed": true,
-            "template": null
+            "template": ""
           },
           "email": {
             "subscribed": true,
@@ -2650,7 +2646,7 @@ Success
           },
           "email": {
             "subscribed": true,
-            "template": null
+            "template": ""
           }
         },
         "is_default": true,
@@ -2670,7 +2666,7 @@ Success
           },
           "email": {
             "subscribed": true,
-            "template": null
+            "template": ""
           }
         },
         "is_default": true,
@@ -2690,7 +2686,7 @@ Success
           },
           "email": {
             "subscribed": true,
-            "template": null
+            "template": ""
           }
         },
         "is_default": true,
@@ -2750,7 +2746,7 @@ Success
           },
           "email": {
             "subscribed": true,
-            "template": null
+            "template": ""
           }
         },
         "is_default": true,
@@ -3121,7 +3117,7 @@ Success
     ],
     "page": {
       "type": "cursor",
-      "next_id": null,
+      "next_id": "",
       "has_previous": false,
       "has_next": false
     }
@@ -5366,41 +5362,6 @@ Success
 
  
  
- #### [PushtokenReq](#PushtokenReq)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | action | String? |  yes  |  |
- | bundleIdentifier | String? |  yes  |  |
- | pushToken | String? |  yes  |  |
- | uniqueDeviceId | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [PushtokenRes](#PushtokenRes)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | id | String? |  yes  |  |
- | bundleIdentifier | String? |  yes  |  |
- | pushToken | String? |  yes  |  |
- | uniqueDeviceId | String? |  yes  |  |
- | type | String? |  yes  |  |
- | platform | String? |  yes  |  |
- | applicationId | String? |  yes  |  |
- | userId | String? |  yes  |  |
- | createdAt | String? |  yes  |  |
- | updatedAt | String? |  yes  |  |
- | expiredAt | String? |  yes  |  |
-
----
-
-
- 
- 
  #### [SmsProviderReq](#SmsProviderReq)
 
  | Properties | Type | Nullable | Description |
@@ -5630,19 +5591,6 @@ Success
 
  
  
- #### [SystemNotificationSettings](#SystemNotificationSettings)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | sound | Boolean? |  yes  |  |
- | priority | String? |  yes  |  |
- | timeToLive | String? |  yes  |  |
-
----
-
-
- 
- 
  #### [SystemNotification](#SystemNotification)
 
  | Properties | Type | Nullable | Description |
@@ -5653,21 +5601,6 @@ Success
  | id | String? |  yes  |  |
  | group | String? |  yes  |  |
  | createdAt | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [SystemNotificationsPage](#SystemNotificationsPage)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | type | String? |  yes  |  |
- | current | Int? |  yes  |  |
- | size | Int? |  yes  |  |
- | itemTotal | Int? |  yes  |  |
- | hasNext | Boolean? |  yes  |  |
 
 ---
 

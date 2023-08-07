@@ -8,18 +8,6 @@ from ..PlatformModel import BaseSchema
 
 
 
-class Page(BaseSchema):
-    pass
-
-
-class UnauthenticatedUser(BaseSchema):
-    pass
-
-
-class UnauthenticatedApplication(BaseSchema):
-    pass
-
-
 class BadRequest(BaseSchema):
     pass
 
@@ -41,14 +29,6 @@ class PlanRecurring(BaseSchema):
 
 
 class Plan(BaseSchema):
-    pass
-
-
-class DetailedPlanComponents(BaseSchema):
-    pass
-
-
-class DetailedPlan(BaseSchema):
     pass
 
 
@@ -113,26 +93,6 @@ class InvoiceDetailsClient(BaseSchema):
 
 
 class InvoiceDetailsStatusTrail(BaseSchema):
-    pass
-
-
-class InvoiceDetailsPaymentMethodsDataChecks(BaseSchema):
-    pass
-
-
-class InvoiceDetailsPaymentMethodsDataNetworks(BaseSchema):
-    pass
-
-
-class InvoiceDetailsPaymentMethodsDataThreeDSecureUsage(BaseSchema):
-    pass
-
-
-class InvoiceDetailsPaymentMethodsData(BaseSchema):
-    pass
-
-
-class InvoiceDetailsPaymentMethods(BaseSchema):
     pass
 
 
@@ -275,42 +235,6 @@ class CancelSubscriptionRes(BaseSchema):
 
 
 
-class Page(BaseSchema):
-    # Billing swagger.json
-
-    
-    item_total = fields.Int(required=False)
-    
-    next_id = fields.Str(required=False)
-    
-    has_previous = fields.Boolean(required=False)
-    
-    has_next = fields.Boolean(required=False)
-    
-    current = fields.Int(required=False)
-    
-    type = fields.Str(required=False)
-    
-    size = fields.Int(required=False)
-    
-
-
-class UnauthenticatedUser(BaseSchema):
-    # Billing swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-
-
-class UnauthenticatedApplication(BaseSchema):
-    # Billing swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-
-
 class BadRequest(BaseSchema):
     # Billing swagger.json
 
@@ -398,76 +322,6 @@ class Plan(BaseSchema):
     created_at = fields.Str(required=False)
     
     modified_at = fields.Str(required=False)
-    
-
-
-class DetailedPlanComponents(BaseSchema):
-    # Billing swagger.json
-
-    
-    name = fields.Str(required=False)
-    
-    slug = fields.Str(required=False)
-    
-    description = fields.Str(required=False)
-    
-    group = fields.Str(required=False)
-    
-    icon = fields.Str(required=False)
-    
-    links = fields.Dict(required=False)
-    
-    enabled = fields.Boolean(required=False)
-    
-    display_text = fields.Str(required=False)
-    
-    config = fields.Dict(required=False)
-    
-
-
-class DetailedPlan(BaseSchema):
-    # Billing swagger.json
-
-    
-    recurring = fields.Nested(PlanRecurring, required=False)
-    
-    is_trial_plan = fields.Boolean(required=False)
-    
-    plan_group = fields.Str(required=False)
-    
-    tag_lines = fields.List(fields.Str(required=False), required=False)
-    
-    currency = fields.Str(required=False)
-    
-    is_active = fields.Boolean(required=False)
-    
-    is_visible = fields.Boolean(required=False)
-    
-    trial_period = fields.Float(required=False)
-    
-    addons = fields.List(fields.Str(required=False), required=False)
-    
-    tags = fields.List(fields.Str(required=False), required=False)
-    
-    type = fields.Str(required=False)
-    
-    country = fields.Str(required=False)
-    
-    _id = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    description = fields.Str(required=False)
-    
-    amount = fields.Float(required=False)
-    
-    product_suite_id = fields.Str(required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    modified_at = fields.Str(required=False)
-    
-    components = fields.List(fields.Nested(DetailedPlanComponents, required=False), required=False)
     
 
 
@@ -730,82 +584,6 @@ class InvoiceDetailsStatusTrail(BaseSchema):
     value = fields.Str(required=False)
     
     timestamp = fields.Str(required=False)
-    
-
-
-class InvoiceDetailsPaymentMethodsDataChecks(BaseSchema):
-    # Billing swagger.json
-
-    
-    cvc_check = fields.Str(required=False)
-    
-    address_line1_check = fields.Str(required=False)
-    
-    address_postal_code_check = fields.Str(required=False)
-    
-
-
-class InvoiceDetailsPaymentMethodsDataNetworks(BaseSchema):
-    # Billing swagger.json
-
-    
-    available = fields.List(fields.Str(required=False), required=False)
-    
-    preferred = fields.Str(required=False)
-    
-
-
-class InvoiceDetailsPaymentMethodsDataThreeDSecureUsage(BaseSchema):
-    # Billing swagger.json
-
-    
-    supported = fields.Boolean(required=False)
-    
-
-
-class InvoiceDetailsPaymentMethodsData(BaseSchema):
-    # Billing swagger.json
-
-    
-    brand = fields.Str(required=False)
-    
-    last4 = fields.Str(required=False)
-    
-    checks = fields.Nested(InvoiceDetailsPaymentMethodsDataChecks, required=False)
-    
-    wallet = fields.Str(required=False)
-    
-    country = fields.Str(required=False)
-    
-    funding = fields.Str(required=False)
-    
-    exp_year = fields.Int(required=False)
-    
-    networks = fields.Nested(InvoiceDetailsPaymentMethodsDataNetworks, required=False)
-    
-    exp_month = fields.Int(required=False)
-    
-    fingerprint = fields.Str(required=False)
-    
-    generated_from = fields.Str(required=False)
-    
-    three_d_secure_usage = fields.Nested(InvoiceDetailsPaymentMethodsDataThreeDSecureUsage, required=False)
-    
-
-
-class InvoiceDetailsPaymentMethods(BaseSchema):
-    # Billing swagger.json
-
-    
-    id = fields.Int(required=False)
-    
-    type = fields.Str(required=False)
-    
-    pg_payment_method_id = fields.Str(required=False)
-    
-    data = fields.Nested(InvoiceDetailsPaymentMethodsData, required=False)
-    
-    is_default = fields.Boolean(required=False)
     
 
 

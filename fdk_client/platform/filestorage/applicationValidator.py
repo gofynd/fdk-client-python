@@ -31,36 +31,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
-        
 
 class FileStorageValidator:
     
@@ -72,7 +42,7 @@ class FileStorageValidator:
         
         company_id = fields.Int(required=False)
         
-        application_id = fields.Int(required=False)
+        application_id = fields.Str(required=False)
          
         
     
@@ -83,7 +53,7 @@ class FileStorageValidator:
         
         company_id = fields.Int(required=False)
         
-        application_id = fields.Int(required=False)
+        application_id = fields.Str(required=False)
          
         
     
@@ -94,7 +64,7 @@ class FileStorageValidator:
         
         company_id = fields.Int(required=False)
         
-        application_id = fields.Int(required=False)
+        application_id = fields.Str(required=False)
          
         
     
@@ -105,77 +75,11 @@ class FileStorageValidator:
         
         company_id = fields.Int(required=False)
         
-        application_id = fields.Int(required=False)
+        application_id = fields.Str(required=False)
         
         page = fields.Int(required=False)
         
         limit = fields.Int(required=False)
-         
-        
-    
-    class getPdfTypes(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Int(required=False)
-         
-        
-    
-    class getDefaultPdfData(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Int(required=False)
-        
-        pdf_type_id = fields.Int(required=False)
-         
-        
-    
-    class getDefaultHtmlTemplate(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Int(required=False)
-        
-        pdf_type_id = fields.Int(required=False)
-        
-        format = fields.Str(required=False)
-         
-        
-    
-    class saveHtmlTemplate(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Int(required=False)
-        
-        id = fields.Int(required=False)
-         
-        
-    
-    class previewTemplate(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Int(required=False)
-         
-        
-    
-    class getDefaultPdfTemplate(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Int(required=False)
-        
-        pdf_type_id = fields.Int(required=False)
-        
-        format = fields.Str(required=False)
          
         
     
