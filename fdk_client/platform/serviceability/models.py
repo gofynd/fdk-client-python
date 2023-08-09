@@ -563,9 +563,9 @@ class ListViewResponse(BaseSchema):
     # Serviceability swagger.json
 
     
-    summary = fields.List(fields.Nested(ListViewSummary, required=False), required=False)
+    summary = fields.Nested(ListViewSummary, required=False)
     
-    page = fields.List(fields.Nested(ZoneDataItem, required=False), required=False)
+    page = fields.Nested(ZoneDataItem, required=False)
     
     items = fields.List(fields.Nested(ListViewItems, required=False), required=False)
     
