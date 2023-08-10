@@ -823,7 +823,7 @@ class InventoryStore(BaseSchema):
     
     stores = fields.List(fields.Raw(required=False), required=False)
     
-    rules = fields.Nested(AppStoreRules, required=False)
+    rules = fields.List(fields.Nested(AppStoreRules, required=False), required=False)
     
 
 
