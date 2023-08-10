@@ -471,6 +471,8 @@ class EntityRegionView_Items(BaseSchema):
     
     name = fields.Str(required=False)
     
+    display_name = fields.Str(required=False)
+    
 
 
 class EntityRegionView_Response(BaseSchema):
