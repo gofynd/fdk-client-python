@@ -30,8 +30,6 @@ from .lead.client import Lead
 
 from .order.client import Order
 
-from .partner.client import Partner
-
 from .payment.client import Payment
 
 from .serviceability.client import Serviceability
@@ -70,8 +68,6 @@ class PlatformClient:
         self.lead = Lead(config)
         
         self.order = Order(config)
-        
-        self.partner = Partner(config)
         
         self.payment = Payment(config)
         

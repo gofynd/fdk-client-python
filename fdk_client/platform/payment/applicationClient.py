@@ -1607,8 +1607,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import MerchnatPaymentModeResponse
-        schema = MerchnatPaymentModeResponse()
+        from .models import MerchnatPaymentModeRequest
+        schema = MerchnatPaymentModeRequest()
         schema.dump(schema.load(body))
         
 

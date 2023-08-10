@@ -376,6 +376,10 @@ class MerchnatPaymentModeResponse(BaseSchema):
     pass
 
 
+class MerchnatPaymentModeRequest(BaseSchema):
+    pass
+
+
 class AddressDetail(BaseSchema):
     pass
 
@@ -1850,6 +1854,16 @@ class MerchnatPaymentModeResponse(BaseSchema):
     items = fields.List(fields.Dict(required=False), required=False)
     
     success = fields.Boolean(required=False)
+    
+
+
+class MerchnatPaymentModeRequest(BaseSchema):
+    # Payment swagger.json
+
+    
+    offline = fields.Dict(required=False)
+    
+    online = fields.Dict(required=False)
     
 
 

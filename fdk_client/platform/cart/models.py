@@ -1325,7 +1325,7 @@ class Restrictions1(BaseSchema):
     
     payments = fields.List(fields.Nested(PromotionPaymentModes, required=False), required=False)
     
-    user_registered = fields.Str(required=False)
+    user_registered = fields.Dict(required=False)
     
     platforms = fields.List(fields.Str(required=False), required=False)
     
