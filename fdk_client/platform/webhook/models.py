@@ -6,8 +6,6 @@ from marshmallow.validate import OneOf
 from ..PlatformModel import BaseSchema
 
 
-from .enums import *
-
 
 
 class CancelResponse(BaseSchema):
@@ -517,7 +515,7 @@ class SubscriberResponse(BaseSchema):
     
     email_id = fields.Str(required=False)
     
-    status = fields.Str(required=False, validate=OneOf([val.value for val in SubscriberStatus.__members__.values()]))
+    status = fields.Str(required=False)
     
     auth_meta = fields.Nested(AuthMeta, required=False)
     
@@ -567,7 +565,7 @@ class SubscriberConfig(BaseSchema):
     
     custom_headers = fields.Dict(required=False)
     
-    status = fields.Str(required=False, validate=OneOf([val.value for val in SubscriberStatus.__members__.values()]))
+    status = fields.Str(required=False)
     
     email_id = fields.Str(required=False)
     
