@@ -644,6 +644,10 @@ class StaffCheckout(BaseSchema):
     pass
 
 
+class CustomerDetails(BaseSchema):
+    pass
+
+
 class Files(BaseSchema):
     pass
 
@@ -3537,6 +3541,18 @@ class StaffCheckout(BaseSchema):
     
 
 
+class CustomerDetails(BaseSchema):
+    # Cart swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    email = fields.Str(required=False)
+    
+    mobile = fields.Str(required=False)
+    
+
+
 class Files(BaseSchema):
     # Cart swagger.json
 
@@ -3578,6 +3594,8 @@ class PlatformCartCheckoutDetailRequest(BaseSchema):
     payment_mode = fields.Str(required=False)
     
     checkout_mode = fields.Str(required=False)
+    
+    customer_details = fields.Dict(required=False)
     
     meta = fields.Dict(required=False)
     
@@ -3854,6 +3872,8 @@ class PlatformCartCheckoutDetailV2Request(BaseSchema):
     payment_mode = fields.Str(required=False)
     
     checkout_mode = fields.Str(required=False)
+    
+    customer_details = fields.Dict(required=False)
     
     meta = fields.Dict(required=False)
     
