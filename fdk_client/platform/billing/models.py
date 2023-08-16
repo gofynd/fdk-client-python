@@ -232,6 +232,10 @@ class CancelSubscriptionRes(BaseSchema):
     pass
 
 
+class PlanStatusUpdateReq(BaseSchema):
+    pass
+
+
 
 
 
@@ -1166,6 +1170,18 @@ class CancelSubscriptionRes(BaseSchema):
     success = fields.Boolean(required=False)
     
     data = fields.Nested(Subscription, required=False)
+    
+
+
+class PlanStatusUpdateReq(BaseSchema):
+    # Billing swagger.json
+
+    
+    plan_id = fields.Str(required=False)
+    
+    reason = fields.Str(required=False)
+    
+    seller_status = fields.Str(required=False)
     
 
 
