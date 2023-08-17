@@ -13,7 +13,7 @@ class Lead:
         self.applicationId = applicationId
 
     
-    async def getNewTickets(self, items=None, filters=None, q=None, status=None, priority=None, category=None):
+    async def getTickets(self, items=None, filters=None, q=None, status=None, priority=None, category=None):
         """Gets the list of Application level Tickets and/or ticket filters
         :param items : Decides that the reponse will contain the list of tickets : type boolean
         :param filters : Decides that the reponse will contain the ticket filters : type boolean
@@ -44,7 +44,7 @@ class Lead:
         
 
         # Parameter validation
-        schema = LeadValidator.getNewTickets()
+        schema = LeadValidator.getTickets()
         schema.dump(schema.load(payload))
         
 
@@ -69,14 +69,14 @@ class Lead:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getNewTickets")
+                print("Response Validation failed for getTickets")
                 print(e)
 
         
 
         return response
     
-    async def getNewTicket(self, id=None):
+    async def getTicket(self, id=None):
         """Retreives ticket details of a application level ticket with ticket ID
         :param id : Tiket ID of the ticket to be fetched : type string
         """
@@ -87,7 +87,7 @@ class Lead:
         
 
         # Parameter validation
-        schema = LeadValidator.getNewTicket()
+        schema = LeadValidator.getTicket()
         schema.dump(schema.load(payload))
         
 
@@ -112,14 +112,14 @@ class Lead:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getNewTicket")
+                print("Response Validation failed for getTicket")
                 print(e)
 
         
 
         return response
     
-    async def editNewTicket(self, id=None, body=""):
+    async def editTicket(self, id=None, body=""):
         """Edits ticket details of a application level ticket such as status, priority, category, tags, attachments, assigne & ticket content changes
         :param id : Ticket ID of ticket to be edited : type string
         """
@@ -130,7 +130,7 @@ class Lead:
         
 
         # Parameter validation
-        schema = LeadValidator.editNewTicket()
+        schema = LeadValidator.editTicket()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -160,14 +160,14 @@ class Lead:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for editNewTicket")
+                print("Response Validation failed for editTicket")
                 print(e)
 
         
 
         return response
     
-    async def createNewHistory(self, id=None, body=""):
+    async def createHistory(self, id=None, body=""):
         """Create history for specific application level ticket, this history is seen on ticket detail page, this can be comment, log or rating.
         :param id : Ticket ID for which history is created : type string
         """
@@ -178,7 +178,7 @@ class Lead:
         
 
         # Parameter validation
-        schema = LeadValidator.createNewHistory()
+        schema = LeadValidator.createHistory()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -208,14 +208,14 @@ class Lead:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for createNewHistory")
+                print("Response Validation failed for createHistory")
                 print(e)
 
         
 
         return response
     
-    async def getNewTicketHistory(self, id=None):
+    async def getTicketHistory(self, id=None):
         """Gets history list for specific application level ticket, this history is seen on ticket detail page, this can be comment, log or rating.
         :param id : Ticket ID for which history is to be fetched : type string
         """
@@ -226,7 +226,7 @@ class Lead:
         
 
         # Parameter validation
-        schema = LeadValidator.getNewTicketHistory()
+        schema = LeadValidator.getTicketHistory()
         schema.dump(schema.load(payload))
         
 
@@ -251,7 +251,7 @@ class Lead:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getNewTicketHistory")
+                print("Response Validation failed for getTicketHistory")
                 print(e)
 
         
@@ -432,7 +432,7 @@ class Lead:
 
         return response
     
-    async def getNewTokenForVideoRoom(self, unique_name=None):
+    async def getTokenForVideoRoom(self, unique_name=None):
         """Get Token to join a specific Video Room using it's unqiue name, this Token is your ticket to Room and also creates your identity there.
         :param unique_name : Unique name of video room : type string
         """
@@ -443,7 +443,7 @@ class Lead:
         
 
         # Parameter validation
-        schema = LeadValidator.getNewTokenForVideoRoom()
+        schema = LeadValidator.getTokenForVideoRoom()
         schema.dump(schema.load(payload))
         
 
@@ -468,14 +468,14 @@ class Lead:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getNewTokenForVideoRoom")
+                print("Response Validation failed for getTokenForVideoRoom")
                 print(e)
 
         
 
         return response
     
-    async def getNewVideoParticipants(self, unique_name=None):
+    async def getVideoParticipants(self, unique_name=None):
         """Get participants of a specific Video Room using it's unique name, this can be used to check if people are already there in the room and also to show their names.
         :param unique_name : Unique name of Video Room : type string
         """
@@ -486,7 +486,7 @@ class Lead:
         
 
         # Parameter validation
-        schema = LeadValidator.getNewVideoParticipants()
+        schema = LeadValidator.getVideoParticipants()
         schema.dump(schema.load(payload))
         
 
@@ -511,7 +511,7 @@ class Lead:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getNewVideoParticipants")
+                print("Response Validation failed for getVideoParticipants")
                 print(e)
 
         

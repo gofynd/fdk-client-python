@@ -111,6 +111,10 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
+        
         
         
         
@@ -353,6 +357,15 @@ class ConfigurationValidator:
         
     
     class updateOrderingStoreConfig(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getOrderingStoreConfig(BaseSchema):
         
         
         company_id = fields.Str(required=False)

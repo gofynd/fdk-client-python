@@ -307,7 +307,7 @@ class Locations(BaseSchema):
     # Common swagger.json
 
     
-    items = fields.Nested(LocationCountry, required=False)
+    items = fields.List(fields.Nested(LocationCountry, required=False), required=False)
     
 
 

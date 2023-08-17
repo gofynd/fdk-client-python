@@ -6,27 +6,27 @@
 
 ## Lead Methods
 Handles communication between Administrator
-* [getTickets](#gettickets)
+* [getPlatformTickets](#getplatformtickets)
 * [createTicket](#createticket)
-* [getNewTickets](#getnewtickets)
+* [getTickets](#gettickets)
+* [getPlatformTicket](#getplatformticket)
+* [editPlatformTicket](#editplatformticket)
 * [getTicket](#getticket)
 * [editTicket](#editticket)
-* [getNewTicket](#getnewticket)
-* [editNewTicket](#editnewticket)
-* [createHistory](#createhistory)
-* [getTicketHistory](#gettickethistory)
+* [createPlatformTicketHistory](#createplatformtickethistory)
+* [getPlatformTicketHistory](#getplatformtickethistory)
 * [getFeedbacks](#getfeedbacks)
 * [submitFeedback](#submitfeedback)
-* [createNewHistory](#createnewhistory)
-* [getNewTicketHistory](#getnewtickethistory)
+* [createHistory](#createhistory)
+* [getTicketHistory](#gettickethistory)
 * [getCustomForm](#getcustomform)
 * [editCustomForm](#editcustomform)
 * [getCustomForms](#getcustomforms)
 * [createCustomForm](#createcustomform)
+* [getTokenForPlatformVideoRoom](#gettokenforplatformvideoroom)
 * [getTokenForVideoRoom](#gettokenforvideoroom)
-* [getNewTokenForVideoRoom](#getnewtokenforvideoroom)
+* [getPlatformVideoParticipants](#getplatformvideoparticipants)
 * [getVideoParticipants](#getvideoparticipants)
-* [getNewVideoParticipants](#getnewvideoparticipants)
 * [openVideoRoom](#openvideoroom)
 * [closeVideoRoom](#closevideoroom)
 * [getGeneralConfig](#getgeneralconfig)
@@ -36,7 +36,7 @@ Handles communication between Administrator
 ## Methods with example and description
 
 
-### getTickets
+### getPlatformTickets
 Gets the list of company level tickets and/or ticket filters depending on query params
 
 
@@ -44,7 +44,7 @@ Gets the list of company level tickets and/or ticket filters depending on query 
 
 ```python
 try:
-    result = await platformClient.lead.getTickets(items=items, filters=filters, q=q, status=status, priority=priority, category=category, pageNo=pageNo, pageSize=pageSize)
+    result = await platformClient.lead.getPlatformTickets(items=items, filters=filters, q=q, status=status, priority=priority, category=category, pageNo=pageNo, pageSize=pageSize)
     # use result
 except Exception as e:
     print(e)
@@ -728,7 +728,7 @@ Success
 ---
 
 
-### getNewTickets
+### getTickets
 Gets the list of Application level Tickets and/or ticket filters depending on query params
 
 
@@ -736,7 +736,7 @@ Gets the list of Application level Tickets and/or ticket filters depending on qu
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").lead.getNewTickets(items=items, filters=filters, q=q, status=status, priority=priority, category=category)
+    result = await platformClient.application("<APPLICATION_ID>").lead.getTickets(items=items, filters=filters, q=q, status=status, priority=priority, category=category)
     # use result
 except Exception as e:
     print(e)
@@ -1164,7 +1164,7 @@ Success
 ---
 
 
-### getTicket
+### getPlatformTicket
 Retreives ticket details of a company level ticket with ticket ID
 
 
@@ -1172,7 +1172,7 @@ Retreives ticket details of a company level ticket with ticket ID
 
 ```python
 try:
-    result = await platformClient.lead.getTicket(id=id)
+    result = await platformClient.lead.getPlatformTicket(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -1419,7 +1419,7 @@ Success
 ---
 
 
-### editTicket
+### editPlatformTicket
 Edits ticket details of a company level ticket
 
 
@@ -1427,7 +1427,7 @@ Edits ticket details of a company level ticket
 
 ```python
 try:
-    result = await platformClient.lead.editTicket(id=id, body=body)
+    result = await platformClient.lead.editPlatformTicket(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1674,7 +1674,7 @@ Success
 ---
 
 
-### getNewTicket
+### getTicket
 Retreives ticket details of a application level ticket
 
 
@@ -1682,7 +1682,7 @@ Retreives ticket details of a application level ticket
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").lead.getNewTicket(id=id)
+    result = await platformClient.application("<APPLICATION_ID>").lead.getTicket(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -1930,7 +1930,7 @@ Success
 ---
 
 
-### editNewTicket
+### editTicket
 Edits ticket details of a application level ticket
 
 
@@ -1938,7 +1938,7 @@ Edits ticket details of a application level ticket
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").lead.editNewTicket(id=id, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").lead.editTicket(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2186,7 +2186,7 @@ Success
 ---
 
 
-### createHistory
+### createPlatformTicketHistory
 Create history for specific company level ticket
 
 
@@ -2194,7 +2194,7 @@ Create history for specific company level ticket
 
 ```python
 try:
-    result = await platformClient.lead.createHistory(id=id, body=body)
+    result = await platformClient.lead.createPlatformTicketHistory(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2287,7 +2287,7 @@ Success
 ---
 
 
-### getTicketHistory
+### getPlatformTicketHistory
 Gets history list for specific company level ticket
 
 
@@ -2295,7 +2295,7 @@ Gets history list for specific company level ticket
 
 ```python
 try:
-    result = await platformClient.lead.getTicketHistory(id=id)
+    result = await platformClient.lead.getPlatformTicketHistory(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -2670,7 +2670,7 @@ Success
 ---
 
 
-### createNewHistory
+### createHistory
 Create history for specific application level ticket
 
 
@@ -2678,7 +2678,7 @@ Create history for specific application level ticket
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").lead.createNewHistory(id=id, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").lead.createHistory(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2771,7 +2771,7 @@ Success
 ---
 
 
-### getNewTicketHistory
+### getTicketHistory
 Gets history list for specific application level ticket
 
 
@@ -2779,7 +2779,7 @@ Gets history list for specific application level ticket
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").lead.getNewTicketHistory(id=id)
+    result = await platformClient.application("<APPLICATION_ID>").lead.getTicketHistory(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -3526,6 +3526,73 @@ Success
 ---
 
 
+### getTokenForPlatformVideoRoom
+Get Token to join a specific Video Room using it's unqiue name
+
+
+
+
+```python
+try:
+    result = await platformClient.lead.getTokenForPlatformVideoRoom(uniqueName=uniqueName)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| uniqueName | String | yes | Unique name of video room |  
+
+
+
+Get Token to join a specific Video Room using it's unqiue name, this Token is your ticket to Room and also creates your identity there.
+
+*Returned Response:*
+
+
+
+
+[GetTokenForVideoRoomResponse](#GetTokenForVideoRoomResponse)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; Default</i></summary>
+
+```json
+{
+  "value": {
+    "access_token": "your_token_to_the_room"
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
 ### getTokenForVideoRoom
 Get Token to join a specific Video Room using it's unqiue name
 
@@ -3534,7 +3601,7 @@ Get Token to join a specific Video Room using it's unqiue name
 
 ```python
 try:
-    result = await platformClient.lead.getTokenForVideoRoom(uniqueName=uniqueName)
+    result = await platformClient.application("<APPLICATION_ID>").lead.getTokenForVideoRoom(uniqueName=uniqueName)
     # use result
 except Exception as e:
     print(e)
@@ -3593,74 +3660,7 @@ Success
 ---
 
 
-### getNewTokenForVideoRoom
-Get Token to join a specific Video Room using it's unqiue name
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").lead.getNewTokenForVideoRoom(uniqueName=uniqueName)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| uniqueName | String | yes | Unique name of video room |  
-
-
-
-Get Token to join a specific Video Room using it's unqiue name, this Token is your ticket to Room and also creates your identity there.
-
-*Returned Response:*
-
-
-
-
-[GetTokenForVideoRoomResponse](#GetTokenForVideoRoomResponse)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Default</i></summary>
-
-```json
-{
-  "value": {
-    "access_token": "your_token_to_the_room"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getVideoParticipants
+### getPlatformVideoParticipants
 Get participants of a specific Video Room using it's unique name
 
 
@@ -3668,7 +3668,7 @@ Get participants of a specific Video Room using it's unique name
 
 ```python
 try:
-    result = await platformClient.lead.getVideoParticipants(uniqueName=uniqueName)
+    result = await platformClient.lead.getPlatformVideoParticipants(uniqueName=uniqueName)
     # use result
 except Exception as e:
     print(e)
@@ -3727,7 +3727,7 @@ Success
 ---
 
 
-### getNewVideoParticipants
+### getVideoParticipants
 Get participants of a specific Video Room using it's unique name
 
 
@@ -3735,7 +3735,7 @@ Get participants of a specific Video Room using it's unique name
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").lead.getNewVideoParticipants(uniqueName=uniqueName)
+    result = await platformClient.application("<APPLICATION_ID>").lead.getVideoParticipants(uniqueName=uniqueName)
     # use result
 except Exception as e:
     print(e)

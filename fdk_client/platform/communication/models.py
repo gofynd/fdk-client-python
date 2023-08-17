@@ -8,6 +8,34 @@ from ..PlatformModel import BaseSchema
 
 
 
+class AppProvider(BaseSchema):
+    pass
+
+
+class AppProviderRes(BaseSchema):
+    pass
+
+
+class AppProviderResVoice(BaseSchema):
+    pass
+
+
+class AppProviderResObj(BaseSchema):
+    pass
+
+
+class GlobalProviders(BaseSchema):
+    pass
+
+
+class GlobalProvidersResObj(BaseSchema):
+    pass
+
+
+class AppProviderReq(BaseSchema):
+    pass
+
+
 class StatsImported(BaseSchema):
     pass
 
@@ -68,15 +96,15 @@ class NotFound(BaseSchema):
     pass
 
 
-class BigqueryHeadersReq(BaseSchema):
+class AudienceReq(BaseSchema):
     pass
 
 
-class BigqueryHeadersResHeaders(BaseSchema):
+class Audience(BaseSchema):
     pass
 
 
-class BigqueryHeadersRes(BaseSchema):
+class Audiences(BaseSchema):
     pass
 
 
@@ -92,15 +120,15 @@ class GetNRecordsCsvRes(BaseSchema):
     pass
 
 
-class AudienceReq(BaseSchema):
+class DummyDatasources(BaseSchema):
     pass
 
 
-class Audience(BaseSchema):
+class DummyDatasourcesMeta(BaseSchema):
     pass
 
 
-class Audiences(BaseSchema):
+class DummyDatasourcesMetaObj(BaseSchema):
     pass
 
 
@@ -120,14 +148,6 @@ class EmailProviders(BaseSchema):
     pass
 
 
-class EmailTemplateDeleteSuccessRes(BaseSchema):
-    pass
-
-
-class EmailTemplateDeleteFailureRes(BaseSchema):
-    pass
-
-
 class EmailTemplateKeys(BaseSchema):
     pass
 
@@ -141,10 +161,6 @@ class EmailTemplateReq(BaseSchema):
 
 
 class TemplateAndType(BaseSchema):
-    pass
-
-
-class EmailTemplateRes(BaseSchema):
     pass
 
 
@@ -224,6 +240,26 @@ class EventSubscriptions(BaseSchema):
     pass
 
 
+class TriggerJobResponse(BaseSchema):
+    pass
+
+
+class TriggerJobRequest(BaseSchema):
+    pass
+
+
+class GlobalVariablesGetResponse(BaseSchema):
+    pass
+
+
+class GlobalVariablesPostResponse(BaseSchema):
+    pass
+
+
+class GlobalVariablesReq(BaseSchema):
+    pass
+
+
 class Job(BaseSchema):
     pass
 
@@ -237,14 +273,6 @@ class JobLog(BaseSchema):
 
 
 class JobLogs(BaseSchema):
-    pass
-
-
-class TriggerJobResponse(BaseSchema):
-    pass
-
-
-class TriggerJobRequest(BaseSchema):
     pass
 
 
@@ -277,10 +305,6 @@ class SendOtpSmsCommsProvider(BaseSchema):
 
 
 class SendOtpEmailCommsTemplate(BaseSchema):
-    pass
-
-
-class SendOtpEmailCommsProvider(BaseSchema):
     pass
 
 
@@ -336,11 +360,7 @@ class SmsProviders(BaseSchema):
     pass
 
 
-class SmsTemplateDeleteSuccessRes(BaseSchema):
-    pass
-
-
-class SmsTemplateDeleteFailureRes(BaseSchema):
+class DefaultSmsProviders(BaseSchema):
     pass
 
 
@@ -348,11 +368,7 @@ class SmsTemplateMessage(BaseSchema):
     pass
 
 
-class SmsTemplateReq(BaseSchema):
-    pass
-
-
-class SmsTemplateRes(BaseSchema):
+class SmsTemplates(BaseSchema):
     pass
 
 
@@ -360,15 +376,15 @@ class SmsTemplate(BaseSchema):
     pass
 
 
-class SystemSmsTemplate(BaseSchema):
-    pass
-
-
-class SmsTemplates(BaseSchema):
-    pass
-
-
 class SystemSmsTemplates(BaseSchema):
+    pass
+
+
+class metaObj(BaseSchema):
+    pass
+
+
+class SmsTemplateReq(BaseSchema):
     pass
 
 
@@ -392,7 +408,109 @@ class Page(BaseSchema):
     pass
 
 
+class GenericError(BaseSchema):
+    pass
 
+
+class GenericDelete(BaseSchema):
+    pass
+
+
+class Message(BaseSchema):
+    pass
+
+
+class EnabledObj(BaseSchema):
+    pass
+
+
+
+
+
+class AppProvider(BaseSchema):
+    # Communication swagger.json
+
+    
+    email = fields.Nested(AppProviderRes, required=False)
+    
+    sms = fields.Nested(AppProviderRes, required=False)
+    
+    voice = fields.Nested(AppProviderResVoice, required=False)
+    
+    _id = fields.Str(required=False)
+    
+    application = fields.Str(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    updated_at = fields.Str(required=False)
+    
+    __v = fields.Int(required=False)
+    
+
+
+class AppProviderRes(BaseSchema):
+    # Communication swagger.json
+
+    
+    transaction = fields.Nested(AppProviderResObj, required=False)
+    
+    promotional = fields.Nested(AppProviderResObj, required=False)
+    
+    otp = fields.Nested(AppProviderResObj, required=False)
+    
+
+
+class AppProviderResVoice(BaseSchema):
+    # Communication swagger.json
+
+    
+    transaction = fields.Nested(AppProviderResObj, required=False)
+    
+    otp = fields.Nested(AppProviderResObj, required=False)
+    
+
+
+class AppProviderResObj(BaseSchema):
+    # Communication swagger.json
+
+    
+    provider = fields.Str(required=False)
+    
+
+
+class GlobalProviders(BaseSchema):
+    # Communication swagger.json
+
+    
+    email = fields.List(fields.Nested(GlobalProvidersResObj, required=False), required=False)
+    
+    sms = fields.List(fields.Nested(GlobalProvidersResObj, required=False), required=False)
+    
+    voice = fields.List(fields.Nested(GlobalProvidersResObj, required=False), required=False)
+    
+
+
+class GlobalProvidersResObj(BaseSchema):
+    # Communication swagger.json
+
+    
+    _id = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+
+
+class AppProviderReq(BaseSchema):
+    # Communication swagger.json
+
+    
+    email = fields.Nested(AppProviderRes, required=False)
+    
+    sms = fields.Nested(AppProviderRes, required=False)
+    
+    voice = fields.Nested(AppProviderResVoice, required=False)
+    
 
 
 class StatsImported(BaseSchema):
@@ -583,31 +701,67 @@ class NotFound(BaseSchema):
     
 
 
-class BigqueryHeadersReq(BaseSchema):
-    # Communication swagger.json
-
-    
-    query = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
-    
-
-
-class BigqueryHeadersResHeaders(BaseSchema):
+class AudienceReq(BaseSchema):
     # Communication swagger.json
 
     
     name = fields.Str(required=False)
     
+    description = fields.Str(required=False)
+    
+    tags = fields.List(fields.Str(required=False), required=False)
+    
+    file_url = fields.Str(required=False)
+    
     type = fields.Str(required=False)
+    
+    records_count = fields.Int(required=False)
+    
+    headers = fields.List(fields.Str(required=False), required=False)
     
 
 
-class BigqueryHeadersRes(BaseSchema):
+class Audience(BaseSchema):
     # Communication swagger.json
 
     
-    headers = fields.List(fields.Nested(BigqueryHeadersResHeaders, required=False), required=False)
+    _id = fields.Str(required=False)
+    
+    application = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+    records_count = fields.Int(required=False)
+    
+    type = fields.Str(required=False)
+    
+    tags = fields.List(fields.Str(required=False), required=False)
+    
+    headers = fields.List(fields.Str(required=False), required=False)
+    
+    file_url = fields.Str(required=False)
+    
+    is_active = fields.Boolean(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    updated_at = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    __v = fields.Int(required=False)
+    
+
+
+class Audiences(BaseSchema):
+    # Communication swagger.json
+
+    
+    items = fields.List(fields.Nested(Audience, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
     
 
 
@@ -647,71 +801,31 @@ class GetNRecordsCsvRes(BaseSchema):
     
 
 
-class AudienceReq(BaseSchema):
+class DummyDatasources(BaseSchema):
     # Communication swagger.json
 
     
-    description = fields.Str(required=False)
-    
-    tags = fields.List(fields.Str(required=False), required=False)
-    
-    headers = fields.List(fields.Str(required=False), required=False)
-    
-    is_active = fields.Boolean(required=False)
+    id = fields.Int(required=False)
     
     name = fields.Str(required=False)
     
-    file_url = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
-    
-    records_count = fields.Int(required=False)
-    
-    application = fields.Str(required=False)
-    
 
 
-class Audience(BaseSchema):
+class DummyDatasourcesMeta(BaseSchema):
     # Communication swagger.json
 
     
-    description = fields.Str(required=False)
+    id = fields.Int(required=False)
     
-    tags = fields.List(fields.Str(required=False), required=False)
-    
-    headers = fields.List(fields.Str(required=False), required=False)
-    
-    is_active = fields.Boolean(required=False)
-    
-    _id = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    file_url = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
-    
-    records_count = fields.Int(required=False)
-    
-    application = fields.Str(required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    updated_at = fields.Str(required=False)
-    
-    slug = fields.Str(required=False)
-    
-    __v = fields.Int(required=False)
+    data = fields.Nested(DummyDatasourcesMetaObj, required=False)
     
 
 
-class Audiences(BaseSchema):
+class DummyDatasourcesMetaObj(BaseSchema):
     # Communication swagger.json
 
     
-    items = fields.List(fields.Nested(Audience, required=False), required=False)
-    
-    page = fields.Nested(Page, required=False)
+    b = fields.Int(required=False)
     
 
 
@@ -785,26 +899,6 @@ class EmailProviders(BaseSchema):
     
 
 
-class EmailTemplateDeleteSuccessRes(BaseSchema):
-    # Communication swagger.json
-
-    
-    success = fields.Boolean(required=False)
-    
-    message = fields.Str(required=False)
-    
-
-
-class EmailTemplateDeleteFailureRes(BaseSchema):
-    # Communication swagger.json
-
-    
-    success = fields.Boolean(required=False)
-    
-    message = fields.Str(required=False)
-    
-
-
 class EmailTemplateKeys(BaseSchema):
     # Communication swagger.json
 
@@ -835,7 +929,7 @@ class EmailTemplateReq(BaseSchema):
     
     description = fields.Str(required=False)
     
-    keys = fields.Nested(EmailTemplateKeys, required=False)
+    from_name = fields.Str(required=False)
     
     static_to = fields.List(fields.Str(required=False), required=False)
     
@@ -845,17 +939,29 @@ class EmailTemplateReq(BaseSchema):
     
     reply_to = fields.Str(required=False)
     
-    headers = fields.List(fields.Nested(EmailTemplateHeaders, required=False), required=False)
+    priority = fields.Str(required=False)
+    
+    tags = fields.List(fields.Str(required=False), required=False)
+    
+    template_variables = fields.Dict(required=False)
+    
+    published = fields.Boolean(required=False)
     
     subject = fields.Nested(TemplateAndType, required=False)
     
     html = fields.Nested(TemplateAndType, required=False)
     
+    editor_type = fields.Str(required=False)
+    
+    editor_meta = fields.Str(required=False)
+    
+    attachments = fields.List(fields.Int(required=False), required=False)
+    
+    headers = fields.List(fields.Nested(EmailTemplateHeaders, required=False), required=False)
+    
+    keys = fields.Nested(EmailTemplateKeys, required=False)
+    
     text = fields.Nested(TemplateAndType, required=False)
-    
-    attachments = fields.List(fields.Raw(required=False), required=False)
-    
-    priority = fields.Str(required=False)
     
 
 
@@ -869,15 +975,23 @@ class TemplateAndType(BaseSchema):
     
 
 
-class EmailTemplateRes(BaseSchema):
+class EmailTemplate(BaseSchema):
     # Communication swagger.json
 
+    
+    application = fields.Str(required=False)
     
     is_system = fields.Boolean(required=False)
     
     is_internal = fields.Boolean(required=False)
     
+    name = fields.Str(required=False)
+    
     description = fields.Str(required=False)
+    
+    editor_type = fields.Str(required=False)
+    
+    editor_meta = fields.Str(required=False)
     
     static_to = fields.List(fields.Str(required=False), required=False)
     
@@ -885,29 +999,29 @@ class EmailTemplateRes(BaseSchema):
     
     static_bcc = fields.List(fields.Str(required=False), required=False)
     
-    tags = fields.List(fields.Raw(required=False), required=False)
+    reply_to = fields.Str(required=False)
+    
+    tags = fields.List(fields.Str(required=False), required=False)
+    
+    subject = fields.Nested(TemplateAndType, required=False)
+    
+    html = fields.Nested(TemplateAndType, required=False)
+    
+    url_shorten = fields.Nested(EnabledObj, required=False)
     
     priority = fields.Str(required=False)
     
+    template_variables = fields.Dict(required=False)
+    
     published = fields.Boolean(required=False)
     
+    category = fields.Str(required=False)
+    
     _id = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    keys = fields.Nested(EmailTemplateKeys, required=False)
-    
-    reply_to = fields.Str(required=False)
     
     headers = fields.List(fields.Nested(EmailTemplateHeaders, required=False), required=False)
     
-    subject = fields.Nested(TemplateAndType, required=False)
-    
-    html = fields.Nested(TemplateAndType, required=False)
-    
-    text = fields.Nested(TemplateAndType, required=False)
-    
-    attachments = fields.List(fields.Raw(required=False), required=False)
+    attachments = fields.List(fields.Int(required=False), required=False)
     
     created_at = fields.Str(required=False)
     
@@ -916,54 +1030,10 @@ class EmailTemplateRes(BaseSchema):
     slug = fields.Str(required=False)
     
     __v = fields.Int(required=False)
-    
-
-
-class EmailTemplate(BaseSchema):
-    # Communication swagger.json
-
-    
-    is_system = fields.Boolean(required=False)
-    
-    is_internal = fields.Boolean(required=False)
-    
-    description = fields.Str(required=False)
-    
-    static_to = fields.List(fields.Raw(required=False), required=False)
-    
-    static_cc = fields.List(fields.Raw(required=False), required=False)
-    
-    static_bcc = fields.List(fields.Raw(required=False), required=False)
-    
-    tags = fields.List(fields.Raw(required=False), required=False)
-    
-    priority = fields.Str(required=False)
-    
-    published = fields.Boolean(required=False)
-    
-    _id = fields.Str(required=False)
-    
-    slug = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
     
     from_name = fields.Str(required=False)
     
-    subject = fields.Nested(TemplateAndType, required=False)
-    
-    html = fields.Nested(TemplateAndType, required=False)
-    
     text = fields.Nested(TemplateAndType, required=False)
-    
-    headers = fields.List(fields.Raw(required=False), required=False)
-    
-    attachments = fields.List(fields.Raw(required=False), required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    updated_at = fields.Str(required=False)
-    
-    __v = fields.Int(required=False)
     
 
 
@@ -975,43 +1045,47 @@ class SystemEmailTemplate(BaseSchema):
     
     is_internal = fields.Boolean(required=False)
     
-    description = fields.Str(required=False)
-    
-    static_to = fields.List(fields.Raw(required=False), required=False)
-    
-    static_cc = fields.List(fields.Raw(required=False), required=False)
-    
-    static_bcc = fields.List(fields.Raw(required=False), required=False)
-    
-    tags = fields.List(fields.Raw(required=False), required=False)
-    
-    priority = fields.Str(required=False)
-    
-    published = fields.Boolean(required=False)
-    
-    _id = fields.Str(required=False)
-    
-    slug = fields.Str(required=False)
-    
     name = fields.Str(required=False)
     
-    from_name = fields.Str(required=False)
+    description = fields.Str(required=False)
+    
+    static_to = fields.List(fields.Str(required=False), required=False)
+    
+    static_cc = fields.List(fields.Str(required=False), required=False)
+    
+    static_bcc = fields.List(fields.Str(required=False), required=False)
+    
+    tags = fields.List(fields.Str(required=False), required=False)
     
     subject = fields.Nested(TemplateAndType, required=False)
     
     html = fields.Nested(TemplateAndType, required=False)
     
-    text = fields.Nested(TemplateAndType, required=False)
+    url_shorten = fields.Nested(EnabledObj, required=False)
     
-    headers = fields.List(fields.Raw(required=False), required=False)
+    priority = fields.Str(required=False)
     
-    attachments = fields.List(fields.Raw(required=False), required=False)
+    template_variables = fields.Dict(required=False)
+    
+    published = fields.Boolean(required=False)
+    
+    category = fields.Str(required=False)
+    
+    _id = fields.Str(required=False)
+    
+    headers = fields.List(fields.Nested(EmailTemplateHeaders, required=False), required=False)
+    
+    attachments = fields.List(fields.Int(required=False), required=False)
     
     created_at = fields.Str(required=False)
     
     updated_at = fields.Str(required=False)
     
+    slug = fields.Str(required=False)
+    
     __v = fields.Int(required=False)
+    
+    text = fields.Nested(TemplateAndType, required=False)
     
 
 
@@ -1030,8 +1104,6 @@ class SystemEmailTemplates(BaseSchema):
 
     
     items = fields.List(fields.Nested(SystemEmailTemplate, required=False), required=False)
-    
-    page = fields.Nested(Page, required=False)
     
 
 
@@ -1201,6 +1273,56 @@ class EventSubscriptions(BaseSchema):
     
 
 
+class TriggerJobResponse(BaseSchema):
+    # Communication swagger.json
+
+    
+    status = fields.Int(required=False)
+    
+
+
+class TriggerJobRequest(BaseSchema):
+    # Communication swagger.json
+
+    
+    job_id = fields.Str(required=False)
+    
+
+
+class GlobalVariablesGetResponse(BaseSchema):
+    # Communication swagger.json
+
+    
+    read_only = fields.Dict(required=False)
+    
+    editable = fields.Dict(required=False)
+    
+
+
+class GlobalVariablesPostResponse(BaseSchema):
+    # Communication swagger.json
+
+    
+    _id = fields.Str(required=False)
+    
+    category = fields.Str(required=False)
+    
+    application = fields.Str(required=False)
+    
+    global_variables = fields.Dict(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+
+
+class GlobalVariablesReq(BaseSchema):
+    # Communication swagger.json
+
+    
+    global_variables = fields.Dict(required=False)
+    
+
+
 class Job(BaseSchema):
     # Communication swagger.json
 
@@ -1265,22 +1387,6 @@ class JobLogs(BaseSchema):
     
 
 
-class TriggerJobResponse(BaseSchema):
-    # Communication swagger.json
-
-    
-    status = fields.Int(required=False)
-    
-
-
-class TriggerJobRequest(BaseSchema):
-    # Communication swagger.json
-
-    
-    job_id = fields.Str(required=False)
-    
-
-
 class LogEmail(BaseSchema):
     # Communication swagger.json
 
@@ -1333,10 +1439,6 @@ class Log(BaseSchema):
     
     step = fields.Str(required=False)
     
-    source = fields.Str(required=False)
-    
-    channel_type = fields.Str(required=False)
-    
     status = fields.Str(required=False)
     
     data = fields.Raw(required=False)
@@ -1387,16 +1489,6 @@ class SendOtpEmailCommsTemplate(BaseSchema):
     
 
 
-class SendOtpEmailCommsProvider(BaseSchema):
-    # Communication swagger.json
-
-    
-    slug = fields.Str(required=False)
-    
-    _id = fields.Str(required=False)
-    
-
-
 class SendOtpCommsReqData(BaseSchema):
     # Communication swagger.json
 
@@ -1434,8 +1526,6 @@ class SendOtpCommsReqEmail(BaseSchema):
     expiry = fields.Int(required=False)
     
     template = fields.Nested(SendOtpEmailCommsTemplate, required=False)
-    
-    provider = fields.Nested(SendOtpEmailCommsProvider, required=False)
     
 
 
@@ -1593,23 +1683,15 @@ class SmsProviders(BaseSchema):
     
 
 
-class SmsTemplateDeleteSuccessRes(BaseSchema):
+class DefaultSmsProviders(BaseSchema):
     # Communication swagger.json
 
     
-    success = fields.Boolean(required=False)
+    _id = fields.Str(required=False)
     
-    message = fields.Str(required=False)
+    name = fields.Str(required=False)
     
-
-
-class SmsTemplateDeleteFailureRes(BaseSchema):
-    # Communication swagger.json
-
-    
-    success = fields.Boolean(required=False)
-    
-    message = fields.Str(required=False)
+    is_default = fields.Boolean(required=False)
     
 
 
@@ -1623,126 +1705,6 @@ class SmsTemplateMessage(BaseSchema):
     
 
 
-class SmsTemplateReq(BaseSchema):
-    # Communication swagger.json
-
-    
-    name = fields.Str(required=False)
-    
-    description = fields.Str(required=False)
-    
-    message = fields.Nested(SmsTemplateMessage, required=False)
-    
-    template_variables = fields.Raw(required=False)
-    
-    attachments = fields.List(fields.Raw(required=False), required=False)
-    
-    priority = fields.Str(required=False)
-    
-
-
-class SmsTemplateRes(BaseSchema):
-    # Communication swagger.json
-
-    
-    is_system = fields.Boolean(required=False)
-    
-    is_internal = fields.Boolean(required=False)
-    
-    description = fields.Str(required=False)
-    
-    tags = fields.List(fields.Raw(required=False), required=False)
-    
-    priority = fields.Str(required=False)
-    
-    published = fields.Boolean(required=False)
-    
-    _id = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    message = fields.Nested(SmsTemplateMessage, required=False)
-    
-    template_variables = fields.Raw(required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    updated_at = fields.Str(required=False)
-    
-    slug = fields.Str(required=False)
-    
-    __v = fields.Int(required=False)
-    
-
-
-class SmsTemplate(BaseSchema):
-    # Communication swagger.json
-
-    
-    is_system = fields.Boolean(required=False)
-    
-    is_internal = fields.Boolean(required=False)
-    
-    description = fields.Str(required=False)
-    
-    priority = fields.Str(required=False)
-    
-    tags = fields.List(fields.Raw(required=False), required=False)
-    
-    published = fields.Boolean(required=False)
-    
-    _id = fields.Str(required=False)
-    
-    slug = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    message = fields.Nested(SmsTemplateMessage, required=False)
-    
-    template_variables = fields.Raw(required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    updated_at = fields.Str(required=False)
-    
-    __v = fields.Int(required=False)
-    
-
-
-class SystemSmsTemplate(BaseSchema):
-    # Communication swagger.json
-
-    
-    is_system = fields.Boolean(required=False)
-    
-    is_internal = fields.Boolean(required=False)
-    
-    description = fields.Str(required=False)
-    
-    tags = fields.List(fields.Raw(required=False), required=False)
-    
-    priority = fields.Str(required=False)
-    
-    published = fields.Boolean(required=False)
-    
-    _id = fields.Str(required=False)
-    
-    slug = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    message = fields.Nested(SmsTemplateMessage, required=False)
-    
-    template_variables = fields.Raw(required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    updated_at = fields.Str(required=False)
-    
-    __v = fields.Int(required=False)
-    
-
-
 class SmsTemplates(BaseSchema):
     # Communication swagger.json
 
@@ -1753,13 +1715,121 @@ class SmsTemplates(BaseSchema):
     
 
 
+class SmsTemplate(BaseSchema):
+    # Communication swagger.json
+
+    
+    url_shorten = fields.Nested(EnabledObj, required=False)
+    
+    _id = fields.Str(required=False)
+    
+    application = fields.Str(required=False)
+    
+    is_system = fields.Boolean(required=False)
+    
+    is_internal = fields.Boolean(required=False)
+    
+    meta = fields.Nested(metaObj, required=False)
+    
+    name = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+    message = fields.Nested(SmsTemplateMessage, required=False)
+    
+    priority = fields.Str(required=False)
+    
+    tags = fields.List(fields.Str(required=False), required=False)
+    
+    template_variables = fields.Dict(required=False)
+    
+    template_id = fields.Str(required=False)
+    
+    published = fields.Boolean(required=False)
+    
+    category = fields.Str(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    updated_at = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    __v = fields.Int(required=False)
+    
+
+
 class SystemSmsTemplates(BaseSchema):
     # Communication swagger.json
 
     
-    items = fields.List(fields.Nested(SystemSmsTemplate, required=False), required=False)
+    url_shorten = fields.Nested(EnabledObj, required=False)
     
-    page = fields.Nested(Page, required=False)
+    _id = fields.Str(required=False)
+    
+    is_system = fields.Boolean(required=False)
+    
+    is_internal = fields.Boolean(required=False)
+    
+    name = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+    message = fields.Nested(SmsTemplateMessage, required=False)
+    
+    priority = fields.Str(required=False)
+    
+    tags = fields.List(fields.Str(required=False), required=False)
+    
+    template_variables = fields.Dict(required=False)
+    
+    template_id = fields.Str(required=False)
+    
+    published = fields.Boolean(required=False)
+    
+    category = fields.Str(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    updated_at = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    __v = fields.Int(required=False)
+    
+
+
+class metaObj(BaseSchema):
+    # Communication swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    is_system = fields.Boolean(required=False)
+    
+    template = fields.Str(required=False)
+    
+
+
+class SmsTemplateReq(BaseSchema):
+    # Communication swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+    priority = fields.Str(required=False)
+    
+    template_id = fields.Str(required=False)
+    
+    meta = fields.Nested(metaObj, required=False)
+    
+    template_variables = fields.Dict(required=False)
+    
+    published = fields.Boolean(required=False)
+    
+    message = fields.Nested(SmsTemplateMessage, required=False)
     
 
 
@@ -1838,6 +1908,52 @@ class Page(BaseSchema):
     type = fields.Str(required=False)
     
     size = fields.Int(required=False)
+    
+
+
+class GenericError(BaseSchema):
+    # Communication swagger.json
+
+    
+    message = fields.Nested(Message, required=False)
+    
+    sentry = fields.Str(required=False)
+    
+
+
+class GenericDelete(BaseSchema):
+    # Communication swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+    acknowledged = fields.Boolean(required=False)
+    
+    affected = fields.Int(required=False)
+    
+    operation = fields.Str(required=False)
+    
+
+
+class Message(BaseSchema):
+    # Communication swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+    success = fields.Boolean(required=False)
+    
+    info = fields.Str(required=False)
+    
+    operation = fields.Str(required=False)
+    
+
+
+class EnabledObj(BaseSchema):
+    # Communication swagger.json
+
+    
+    enabled = fields.Boolean(required=False)
     
 
 

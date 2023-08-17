@@ -28,6 +28,7 @@ Application configuration apis
 * [getAppSupportedCurrency](#getappsupportedcurrency)
 * [getOrderingStoresByFilter](#getorderingstoresbyfilter)
 * [updateOrderingStoreConfig](#updateorderingstoreconfig)
+* [getOrderingStoreConfig](#getorderingstoreconfig)
 * [getStaffOrderingStores](#getstafforderingstores)
 * [getDomains](#getdomains)
 * [addDomain](#adddomain)
@@ -1741,18 +1742,18 @@ Success
   },
   "cart": {
     "delivery_charges": {
-      "enabled": true
+      "enabled": true,
+      "charges": [
+        {
+          "threshold": 1000,
+          "charges": 49
+        },
+        {
+          "threshold": 200000,
+          "charges": 79
+        }
+      ]
     },
-    "charges": [
-      {
-        "threshold": 1000,
-        "charges": 49
-      },
-      {
-        "threshold": 200000,
-        "charges": 79
-      }
-    ],
     "enabled": true,
     "max_cart_items": 0,
     "min_cart_value": 120,
@@ -1993,18 +1994,18 @@ Success
   },
   "cart": {
     "delivery_charges": {
-      "enabled": true
+      "enabled": true,
+      "charges": [
+        {
+          "threshold": 1000,
+          "charges": 49
+        },
+        {
+          "threshold": 200000,
+          "charges": 79
+        }
+      ]
     },
-    "charges": [
-      {
-        "threshold": 1000,
-        "charges": 49
-      },
-      {
-        "threshold": 200000,
-        "charges": 79
-      }
-    ],
     "enabled": true,
     "max_cart_items": 0,
     "min_cart_value": 120,
@@ -2245,18 +2246,18 @@ Success
   },
   "cart": {
     "delivery_charges": {
-      "enabled": true
+      "enabled": true,
+      "charges": [
+        {
+          "threshold": 1000,
+          "charges": 49
+        },
+        {
+          "threshold": 200000,
+          "charges": 79
+        }
+      ]
     },
-    "charges": [
-      {
-        "threshold": 1000,
-        "charges": 49
-      },
-      {
-        "threshold": 200000,
-        "charges": 79
-      }
-    ],
     "enabled": true,
     "max_cart_items": 0,
     "min_cart_value": 120,
@@ -2805,6 +2806,71 @@ Success
   "_id": "5e7e5e4d6b5f3b4b54c95f9c",
   "app": "000000000000000000000004",
   "__v": 6
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getOrderingStoreConfig
+Get ordering store config
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").configuration.getOrderingStoreConfig()
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+
+Fetch the details of the deployment stores (the selling locations where the application will be utilised for placing orders).
+
+*Returned Response:*
+
+
+
+
+[OrderingStoreConfig](#OrderingStoreConfig)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "deployment_meta": {
+    "deployed_stores": [
+      1,
+      10
+    ],
+    "all_stores": false,
+    "enabled": true,
+    "type": "hard",
+    "_id": "5e7e5e4d6b5f3b4b54c95f9c",
+    "app": "000000000000000000000004",
+    "__v": 6
+  }
 }
 ```
 </details>
@@ -5155,7 +5221,7 @@ Success
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | enabled | Boolean? |  yes  | Allow delivery charges |
- | charges | [Charges](#Charges)? |  yes  |  |
+ | charges | ArrayList<[Charges](#Charges)>? |  yes  | Holds values for delivery charges. |
 
 ---
 

@@ -931,7 +931,7 @@ class DeliveryCharges(BaseSchema):
     
     enabled = fields.Boolean(required=False)
     
-    charges = fields.Nested(Charges, required=False)
+    charges = fields.List(fields.Nested(Charges, required=False), required=False)
     
 
 
