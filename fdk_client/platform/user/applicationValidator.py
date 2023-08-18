@@ -124,7 +124,7 @@ class UserValidator:
         
         q = fields.Str(required=False)
         
-        query = fields.List(fields.Raw(required=False), required=False)
+        query = fields.List(fields.Str(required=False), required=False)
          
         
     

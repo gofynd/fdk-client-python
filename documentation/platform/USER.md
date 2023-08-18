@@ -164,7 +164,7 @@ except Exception as e:
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
 | q | String? | no | The search query. Mobile number or email ID of a customer. |   
-| query | ArrayList<Any>? | no | The search queries. Mobile numbers or email IDs of customers. |  
+| query | ArrayList<String>? | no | The search queries. Mobile numbers or email IDs of customers. |  
 
 
 
