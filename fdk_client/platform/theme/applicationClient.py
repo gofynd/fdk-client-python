@@ -848,8 +848,8 @@ class Theme:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CompanyThemeSchema
-        schema = CompanyThemeSchema()
+        from .models import ThemeReq
+        schema = ThemeReq()
         schema.dump(schema.load(body))
         
 

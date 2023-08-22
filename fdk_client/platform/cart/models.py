@@ -652,6 +652,10 @@ class Files(BaseSchema):
     pass
 
 
+class CartCheckoutCustomMeta(BaseSchema):
+    pass
+
+
 class PlatformCartCheckoutDetailRequest(BaseSchema):
     pass
 
@@ -3563,9 +3567,21 @@ class Files(BaseSchema):
     
 
 
+class CartCheckoutCustomMeta(BaseSchema):
+    # Cart swagger.json
+
+    
+    key = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
+    
+
+
 class PlatformCartCheckoutDetailRequest(BaseSchema):
     # Cart swagger.json
 
+    
+    custom_meta = fields.List(fields.Nested(CartCheckoutCustomMeta, required=False), required=False)
     
     address_id = fields.Str(required=False)
     
