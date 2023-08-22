@@ -676,10 +676,6 @@ class UserDetailsData(BaseSchema):
     pass
 
 
-class ShipmentDetails1(BaseSchema):
-    pass
-
-
 class PhoneDetails(BaseSchema):
     pass
 
@@ -928,10 +924,6 @@ class BagGSTDetails(BaseSchema):
     pass
 
 
-class ArticleDetails1(BaseSchema):
-    pass
-
-
 class StoreAddress(BaseSchema):
     pass
 
@@ -985,10 +977,6 @@ class BagReturnableCancelableStatus1(BaseSchema):
 
 
 class BagDetailsPlatformResponse(BaseSchema):
-    pass
-
-
-class ErrorResponse1(BaseSchema):
     pass
 
 
@@ -1052,6 +1040,8 @@ class ErrorResponse(BaseSchema):
     message = fields.Str(required=False)
     
     error_trace = fields.Str(required=False)
+    
+    error = fields.Str(required=False)
     
 
 
@@ -1515,6 +1505,8 @@ class ArticleDetails(BaseSchema):
     
     quantity = fields.Int(required=False)
     
+    status = fields.Dict(required=False)
+    
 
 
 class LocationDetails(BaseSchema):
@@ -1546,6 +1538,12 @@ class ShipmentDetails(BaseSchema):
     meta = fields.Dict(required=False)
     
     affiliate_shipment_id = fields.Str(required=False)
+    
+    lock_status = fields.Boolean(required=False)
+    
+    lock_message = fields.Str(required=False)
+    
+    action_to_status = fields.Dict(required=False)
     
 
 
@@ -3817,18 +3815,6 @@ class UserDetailsData(BaseSchema):
     
 
 
-class ShipmentDetails1(BaseSchema):
-    # Order swagger.json
-
-    
-    lock_status = fields.Boolean(required=False)
-    
-    lock_message = fields.Str(required=False)
-    
-    action_to_status = fields.Dict(required=False)
-    
-
-
 class PhoneDetails(BaseSchema):
     # Order swagger.json
 
@@ -4513,7 +4499,7 @@ class PlatformShipment(BaseSchema):
     
     fulfilment_priority = fields.Int(required=False)
     
-    shipment_details = fields.Nested(ShipmentDetails1, required=False)
+    shipment_details = fields.Nested(ShipmentDetails, required=False)
     
     custom_meta = fields.List(fields.Dict(required=False), required=False)
     
@@ -5065,14 +5051,6 @@ class BagGSTDetails(BaseSchema):
     
 
 
-class ArticleDetails1(BaseSchema):
-    # Order swagger.json
-
-    
-    status = fields.Dict(required=False)
-    
-
-
 class StoreAddress(BaseSchema):
     # Order swagger.json
 
@@ -5437,7 +5415,7 @@ class BagDetailsPlatformResponse(BaseSchema):
     
     original_bag_list = fields.List(fields.Int(required=False), required=False)
     
-    article_details = fields.Nested(ArticleDetails1, required=False)
+    article_details = fields.Nested(ArticleDetails, required=False)
     
     current_operational_status = fields.Nested(BagStatusHistory, required=False)
     
@@ -5496,16 +5474,6 @@ class BagDetailsPlatformResponse(BaseSchema):
     entity_type = fields.Str(required=False)
     
     status = fields.Nested(BagReturnableCancelableStatus1, required=False)
-    
-
-
-class ErrorResponse1(BaseSchema):
-    # Order swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-    error = fields.Str(required=False)
     
 
 

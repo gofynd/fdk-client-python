@@ -247,22 +247,34 @@ class Logistic:
 
         return response
     
-    async def getCountries(self, onboarding=None, body=""):
+    async def getCountries(self, onboarding=None, page_no=None, page_size=None, q=None, body=""):
         """Retrieve of all countries.
         :param onboarding : Only fetch countries which allowed for onboard on Platform. : type boolean
+        :param page_no : page number. : type integer
+        :param page_size : page size. : type integer
+        :param q : search. : type string
         """
         payload = {}
         
         if onboarding is not None:
             payload["onboarding"] = onboarding
         
+        if page_no is not None:
+            payload["page_no"] = page_no
+        
+        if page_size is not None:
+            payload["page_size"] = page_size
+        
+        if q is not None:
+            payload["q"] = q
+        
         # Parameter validation
         schema = LogisticValidator.getCountries()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getCountries"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"onboarding","description":"Only fetch countries which allowed for onboard on Platform.","schema":{"type":"boolean"},"required":false,"example":true}],"query":[{"in":"query","name":"onboarding","description":"Only fetch countries which allowed for onboard on Platform.","schema":{"type":"boolean"},"required":false,"example":true}],"headers":[],"path":[]}""", onboarding=onboarding)
-        query_string = await create_query_string(onboarding=onboarding)
+        url_with_params = await create_url_with_params(api_url=self._urls["getCountries"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"onboarding","description":"Only fetch countries which allowed for onboard on Platform.","schema":{"type":"boolean"},"required":false,"examples":{"Yes":{"value":true},"No":{"value":false}}},{"in":"query","name":"page_no","description":"page number.","schema":{"type":"integer","default":1},"required":false,"examples":{"One":{"value":1},"Ten":{"value":10}}},{"in":"query","name":"page_size","description":"page size.","schema":{"type":"integer","default":12,"maximum":250},"required":false,"examples":{"Six":{"value":6},"Five":{"value":5}}},{"in":"query","name":"q","description":"search.","schema":{"type":"string"},"required":false,"examples":{"400603":{"value":"400603"},"Mumbai":{"value":"Mumbai"}}}],"query":[{"in":"query","name":"onboarding","description":"Only fetch countries which allowed for onboard on Platform.","schema":{"type":"boolean"},"required":false,"examples":{"Yes":{"value":true},"No":{"value":false}}},{"in":"query","name":"page_no","description":"page number.","schema":{"type":"integer","default":1},"required":false,"examples":{"One":{"value":1},"Ten":{"value":10}}},{"in":"query","name":"page_size","description":"page size.","schema":{"type":"integer","default":12,"maximum":250},"required":false,"examples":{"Six":{"value":6},"Five":{"value":5}}},{"in":"query","name":"q","description":"search.","schema":{"type":"string"},"required":false,"examples":{"400603":{"value":"400603"},"Mumbai":{"value":"Mumbai"}}}],"headers":[],"path":[]}""", onboarding=onboarding, page_no=page_no, page_size=page_size, q=q)
+        query_string = await create_query_string(onboarding=onboarding, page_no=page_no, page_size=page_size, q=q)
         headers = {
             "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
         }
@@ -274,7 +286,7 @@ class Logistic:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCountries"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/countries", onboarding=onboarding), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCountries"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/countries", onboarding=onboarding, page_no=page_no, page_size=page_size, q=q), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
         if 200 <= int(response['status_code']) < 300:
@@ -304,7 +316,7 @@ class Logistic:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getCountry"], proccessed_params="""{"required":[{"in":"path","name":"country_iso_code","description":"The `country_iso_code` is ISO-2 (alpha-2) code for the country.","schema":{"type":"string"},"required":true,"example":"IN"}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"country_iso_code","description":"The `country_iso_code` is ISO-2 (alpha-2) code for the country.","schema":{"type":"string"},"required":true,"example":"IN"}]}""", country_iso_code=country_iso_code)
+        url_with_params = await create_url_with_params(api_url=self._urls["getCountry"], proccessed_params="""{"required":[{"in":"path","name":"country_iso_code","description":"The `country_iso_code` is ISO-2 (alpha-2) code for the country.","schema":{"type":"string"},"required":true,"examples":{"India":{"value":"IN"},"UAE":{"value":"AE"}}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"country_iso_code","description":"The `country_iso_code` is ISO-2 (alpha-2) code for the country.","schema":{"type":"string"},"required":true,"examples":{"India":{"value":"IN"},"UAE":{"value":"AE"}}}]}""", country_iso_code=country_iso_code)
         query_string = await create_query_string(country_iso_code=country_iso_code)
         headers = {
             "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
@@ -333,12 +345,15 @@ class Logistic:
 
         return response
     
-    async def getLocalities(self, locality_type=None, country=None, state=None, city=None, body=""):
+    async def getLocalities(self, locality_type=None, country=None, state=None, city=None, page_no=None, page_size=None, q=None, body=""):
         """Get Localities data.
         :param locality_type : A `locality_type` contains unique geographical division. : type string
         :param country : A `country` contains a specific value of the country iso2 code. : type string
         :param state : A `state` contains a specific value of the state, province. : type string
         :param city : A `city` contains a specific value of the city. : type string
+        :param page_no : page number. : type integer
+        :param page_size : page size. : type integer
+        :param q : search. : type string
         """
         payload = {}
         
@@ -354,13 +369,22 @@ class Logistic:
         if city is not None:
             payload["city"] = city
         
+        if page_no is not None:
+            payload["page_no"] = page_no
+        
+        if page_size is not None:
+            payload["page_size"] = page_size
+        
+        if q is not None:
+            payload["q"] = q
+        
         # Parameter validation
         schema = LogisticValidator.getLocalities()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getLocalities"], proccessed_params="""{"required":[{"in":"path","name":"locality_type","description":"A `locality_type` contains unique geographical division.","schema":{"type":"string","enum":["state","city","pincode","sector"]},"required":true,"example":"sector"}],"optional":[{"in":"query","name":"country","description":"A `country` contains a specific value of the country iso2 code.","schema":{"type":"string"},"required":false,"example":"IN"},{"in":"query","name":"state","description":"A `state` contains a specific value of the state, province.","schema":{"type":"string"},"required":false,"example":"MAHARASHTRA"},{"in":"query","name":"city","description":"A `city` contains a specific value of the city.","schema":{"type":"string"},"required":false,"example":"THANE"}],"query":[{"in":"query","name":"country","description":"A `country` contains a specific value of the country iso2 code.","schema":{"type":"string"},"required":false,"example":"IN"},{"in":"query","name":"state","description":"A `state` contains a specific value of the state, province.","schema":{"type":"string"},"required":false,"example":"MAHARASHTRA"},{"in":"query","name":"city","description":"A `city` contains a specific value of the city.","schema":{"type":"string"},"required":false,"example":"THANE"}],"headers":[],"path":[{"in":"path","name":"locality_type","description":"A `locality_type` contains unique geographical division.","schema":{"type":"string","enum":["state","city","pincode","sector"]},"required":true,"example":"sector"}]}""", locality_type=locality_type, country=country, state=state, city=city)
-        query_string = await create_query_string(locality_type=locality_type, country=country, state=state, city=city)
+        url_with_params = await create_url_with_params(api_url=self._urls["getLocalities"], proccessed_params="""{"required":[{"in":"path","name":"locality_type","description":"A `locality_type` contains unique geographical division.","schema":{"type":"string","enum":["state","city","pincode","sector"]},"required":true,"examples":{"Sector":{"value":"sector"},"City":{"value":"city"}}}],"optional":[{"in":"query","name":"country","description":"A `country` contains a specific value of the country iso2 code.","schema":{"type":"string"},"required":false,"examples":{"India":{"value":"IN"},"UAE":{"value":"AE"}}},{"in":"query","name":"state","description":"A `state` contains a specific value of the state, province.","schema":{"type":"string"},"required":false,"examples":{"Maharashtra":{"value":"MAHARASHTRA"},"Gujurat":{"value":"GUJURAT"}}},{"in":"query","name":"city","description":"A `city` contains a specific value of the city.","schema":{"type":"string"},"required":false,"examples":{"Thane":{"value":"THANE"},"Mumbai":{"value":"MUMBAI"}}},{"in":"query","name":"page_no","description":"page number.","schema":{"type":"integer","default":1},"required":false,"examples":{"One":{"value":1},"Ten":{"value":10}}},{"in":"query","name":"page_size","description":"page size.","schema":{"type":"integer","default":12,"maximum":250},"required":false,"examples":{"Six":{"value":6},"Five":{"value":5}}},{"in":"query","name":"q","description":"search.","schema":{"type":"string"},"required":false,"examples":{"India":{"value":"India"},"UAE":{"value":"UAE"}}}],"query":[{"in":"query","name":"country","description":"A `country` contains a specific value of the country iso2 code.","schema":{"type":"string"},"required":false,"examples":{"India":{"value":"IN"},"UAE":{"value":"AE"}}},{"in":"query","name":"state","description":"A `state` contains a specific value of the state, province.","schema":{"type":"string"},"required":false,"examples":{"Maharashtra":{"value":"MAHARASHTRA"},"Gujurat":{"value":"GUJURAT"}}},{"in":"query","name":"city","description":"A `city` contains a specific value of the city.","schema":{"type":"string"},"required":false,"examples":{"Thane":{"value":"THANE"},"Mumbai":{"value":"MUMBAI"}}},{"in":"query","name":"page_no","description":"page number.","schema":{"type":"integer","default":1},"required":false,"examples":{"One":{"value":1},"Ten":{"value":10}}},{"in":"query","name":"page_size","description":"page size.","schema":{"type":"integer","default":12,"maximum":250},"required":false,"examples":{"Six":{"value":6},"Five":{"value":5}}},{"in":"query","name":"q","description":"search.","schema":{"type":"string"},"required":false,"examples":{"India":{"value":"India"},"UAE":{"value":"UAE"}}}],"headers":[],"path":[{"in":"path","name":"locality_type","description":"A `locality_type` contains unique geographical division.","schema":{"type":"string","enum":["state","city","pincode","sector"]},"required":true,"examples":{"Sector":{"value":"sector"},"City":{"value":"city"}}}]}""", locality_type=locality_type, country=country, state=state, city=city, page_no=page_no, page_size=page_size, q=q)
+        query_string = await create_query_string(locality_type=locality_type, country=country, state=state, city=city, page_no=page_no, page_size=page_size, q=q)
         headers = {
             "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
         }
@@ -372,7 +396,7 @@ class Logistic:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getLocalities"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/localities/{locality_type}", locality_type=locality_type, country=country, state=state, city=city), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getLocalities"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/localities/{locality_type}", locality_type=locality_type, country=country, state=state, city=city, page_no=page_no, page_size=page_size, q=q), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         
         if 200 <= int(response['status_code']) < 300:
@@ -391,7 +415,7 @@ class Logistic:
     async def getLocality(self, locality_type=None, locality_value=None, country=None, state=None, city=None, body=""):
         """Get Locality data
         :param locality_type : A `locality_type` contains value geographical division. : type string
-        :param locality_value : A `locality_value` contains a specific value of the locality. : type string
+        :param locality_value : A `locality_value` contains a specific name of the locality. : type string
         :param country : A `country` contains a specific value of the country iso2 code. : type string
         :param state : A `state` contains a specific value of the state, province. : type string
         :param city : A `city` contains a specific value of the city. : type string
@@ -418,7 +442,7 @@ class Logistic:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getLocality"], proccessed_params="""{"required":[{"in":"path","name":"locality_type","description":"A `locality_type` contains value geographical division.","schema":{"type":"string","enum":["state","city","pincode","sector"]},"required":true,"examples":{"Pincode":{"value":"pincode"},"Sector":{"value":"sector"}}},{"in":"path","name":"locality_value","description":"A `locality_value` contains a specific value of the locality.","schema":{"type":"string"},"required":true,"examples":{"Pincode":{"value":"400603"},"Sector":{"value":"Abu Dhabi"}}}],"optional":[{"in":"query","name":"country","description":"A `country` contains a specific value of the country iso2 code.","schema":{"type":"string"},"required":false,"examples":{"India":{"value":"IN"},"UAE":{"value":"AE"}}},{"in":"query","name":"state","description":"A `state` contains a specific value of the state, province.","schema":{"type":"string"},"required":false,"examples":{"Maharashtra":{"value":"MAHARASHTRA"}}},{"in":"query","name":"city","description":"A `city` contains a specific value of the city.","schema":{"type":"string"},"required":false,"examples":{"Dubai":{"value":"DUBAI"},"Thane":{"value":"THANE"}}}],"query":[{"in":"query","name":"country","description":"A `country` contains a specific value of the country iso2 code.","schema":{"type":"string"},"required":false,"examples":{"India":{"value":"IN"},"UAE":{"value":"AE"}}},{"in":"query","name":"state","description":"A `state` contains a specific value of the state, province.","schema":{"type":"string"},"required":false,"examples":{"Maharashtra":{"value":"MAHARASHTRA"}}},{"in":"query","name":"city","description":"A `city` contains a specific value of the city.","schema":{"type":"string"},"required":false,"examples":{"Dubai":{"value":"DUBAI"},"Thane":{"value":"THANE"}}}],"headers":[],"path":[{"in":"path","name":"locality_type","description":"A `locality_type` contains value geographical division.","schema":{"type":"string","enum":["state","city","pincode","sector"]},"required":true,"examples":{"Pincode":{"value":"pincode"},"Sector":{"value":"sector"}}},{"in":"path","name":"locality_value","description":"A `locality_value` contains a specific value of the locality.","schema":{"type":"string"},"required":true,"examples":{"Pincode":{"value":"400603"},"Sector":{"value":"Abu Dhabi"}}}]}""", locality_type=locality_type, locality_value=locality_value, country=country, state=state, city=city)
+        url_with_params = await create_url_with_params(api_url=self._urls["getLocality"], proccessed_params="""{"required":[{"in":"path","name":"locality_type","description":"A `locality_type` contains value geographical division.","schema":{"type":"string","enum":["pincode","sector"]},"required":true,"examples":{"Pincode":{"value":"pincode"},"Sector":{"value":"sector"}}},{"in":"path","name":"locality_value","description":"A `locality_value` contains a specific name of the locality.","schema":{"type":"string"},"required":true,"examples":{"Pincode":{"value":"400603"},"Sector":{"value":"Abu Dhabi"}}}],"optional":[{"in":"query","name":"country","description":"A `country` contains a specific value of the country iso2 code.","schema":{"type":"string"},"required":false,"examples":{"India":{"value":"IN"},"UAE":{"value":"AE"}}},{"in":"query","name":"state","description":"A `state` contains a specific value of the state, province.","schema":{"type":"string"},"required":false,"examples":{"Maharashtra":{"value":"MAHARASHTRA"}}},{"in":"query","name":"city","description":"A `city` contains a specific value of the city.","schema":{"type":"string"},"required":false,"examples":{"Dubai":{"value":"DUBAI"},"Thane":{"value":"THANE"}}}],"query":[{"in":"query","name":"country","description":"A `country` contains a specific value of the country iso2 code.","schema":{"type":"string"},"required":false,"examples":{"India":{"value":"IN"},"UAE":{"value":"AE"}}},{"in":"query","name":"state","description":"A `state` contains a specific value of the state, province.","schema":{"type":"string"},"required":false,"examples":{"Maharashtra":{"value":"MAHARASHTRA"}}},{"in":"query","name":"city","description":"A `city` contains a specific value of the city.","schema":{"type":"string"},"required":false,"examples":{"Dubai":{"value":"DUBAI"},"Thane":{"value":"THANE"}}}],"headers":[],"path":[{"in":"path","name":"locality_type","description":"A `locality_type` contains value geographical division.","schema":{"type":"string","enum":["pincode","sector"]},"required":true,"examples":{"Pincode":{"value":"pincode"},"Sector":{"value":"sector"}}},{"in":"path","name":"locality_value","description":"A `locality_value` contains a specific name of the locality.","schema":{"type":"string"},"required":true,"examples":{"Pincode":{"value":"400603"},"Sector":{"value":"Abu Dhabi"}}}]}""", locality_type=locality_type, locality_value=locality_value, country=country, state=state, city=city)
         query_string = await create_query_string(locality_type=locality_type, locality_value=locality_value, country=country, state=state, city=city)
         headers = {
             "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()

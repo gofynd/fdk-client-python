@@ -112,7 +112,59 @@ class ReAssignStoreResponse(BaseSchema):
     pass
 
 
+class CountryHierarchy(BaseSchema):
+    pass
+
+
+class CountryObject(BaseSchema):
+    pass
+
+
 class GetCountries(BaseSchema):
+    pass
+
+
+class GetOneOrAllPath(BaseSchema):
+    pass
+
+
+class GetOneOrAllQuery(BaseSchema):
+    pass
+
+
+class GetOneOrAllParams(BaseSchema):
+    pass
+
+
+class GetOneOrAll(BaseSchema):
+    pass
+
+
+class LengthValidation(BaseSchema):
+    pass
+
+
+class FieldValidationRegex(BaseSchema):
+    pass
+
+
+class FieldValidation(BaseSchema):
+    pass
+
+
+class GetCountryFieldsAddressValues(BaseSchema):
+    pass
+
+
+class GetCountryFieldsAddress(BaseSchema):
+    pass
+
+
+class GetCountryFieldsAddressTemplate(BaseSchema):
+    pass
+
+
+class GetCountryFields(BaseSchema):
     pass
 
 
@@ -124,11 +176,7 @@ class Page(BaseSchema):
     pass
 
 
-class LogisticsDPSchema(BaseSchema):
-    pass
-
-
-class Locality(BaseSchema):
+class Localities(BaseSchema):
     pass
 
 
@@ -515,13 +563,177 @@ class ReAssignStoreResponse(BaseSchema):
     
 
 
+class CountryHierarchy(BaseSchema):
+    # Logistic swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+
+
+class CountryObject(BaseSchema):
+    # Logistic swagger.json
+
+    
+    id = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    display_name = fields.Str(required=False)
+    
+    iso2 = fields.Str(required=False)
+    
+    iso3 = fields.Str(required=False)
+    
+    timezones = fields.List(fields.Str(required=False), required=False)
+    
+    hierarchy = fields.List(fields.Nested(CountryHierarchy, required=False), required=False)
+    
+    phone_code = fields.Str(required=False)
+    
+    currency = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+
+
 class GetCountries(BaseSchema):
     # Logistic swagger.json
 
     
-    page = fields.Dict(required=False)
+    items = fields.List(fields.Nested(CountryObject, required=False), required=False)
     
-    items = fields.List(fields.Dict(required=False), required=False)
+    page = fields.Nested(Page, required=False)
+    
+
+
+class GetOneOrAllPath(BaseSchema):
+    # Logistic swagger.json
+
+    
+    locality_type = fields.Str(required=False)
+    
+    locality_value = fields.Str(required=False)
+    
+
+
+class GetOneOrAllQuery(BaseSchema):
+    # Logistic swagger.json
+
+    
+    country = fields.Str(required=False)
+    
+    state = fields.Str(required=False)
+    
+    city = fields.Str(required=False)
+    
+    sector = fields.Str(required=False)
+    
+
+
+class GetOneOrAllParams(BaseSchema):
+    # Logistic swagger.json
+
+    
+    path = fields.Nested(GetOneOrAllPath, required=False)
+    
+    query = fields.Nested(GetOneOrAllQuery, required=False)
+    
+
+
+class GetOneOrAll(BaseSchema):
+    # Logistic swagger.json
+
+    
+    operation_id = fields.Str(required=False)
+    
+    params = fields.Nested(GetOneOrAllParams, required=False)
+    
+
+
+class LengthValidation(BaseSchema):
+    # Logistic swagger.json
+
+    
+    min = fields.Int(required=False)
+    
+    max = fields.Int(required=False)
+    
+
+
+class FieldValidationRegex(BaseSchema):
+    # Logistic swagger.json
+
+    
+    value = fields.Str(required=False)
+    
+    length = fields.Nested(LengthValidation, required=False)
+    
+
+
+class FieldValidation(BaseSchema):
+    # Logistic swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    regex = fields.Nested(FieldValidationRegex, required=False)
+    
+
+
+class GetCountryFieldsAddressValues(BaseSchema):
+    # Logistic swagger.json
+
+    
+    get_one = fields.Nested(GetOneOrAll, required=False)
+    
+    get_all = fields.Nested(GetOneOrAll, required=False)
+    
+
+
+class GetCountryFieldsAddress(BaseSchema):
+    # Logistic swagger.json
+
+    
+    display_name = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    required = fields.Boolean(required=False)
+    
+    edit = fields.Boolean(required=False)
+    
+    input = fields.Str(required=False)
+    
+    validation = fields.Nested(FieldValidation, required=False)
+    
+    values = fields.Nested(GetCountryFieldsAddressValues, required=False)
+    
+    error_text = fields.Str(required=False)
+    
+
+
+class GetCountryFieldsAddressTemplate(BaseSchema):
+    # Logistic swagger.json
+
+    
+    checkout_form = fields.Str(required=False)
+    
+    invoice_display = fields.Str(required=False)
+    
+
+
+class GetCountryFields(BaseSchema):
+    # Logistic swagger.json
+
+    
+    address = fields.List(fields.Nested(GetCountryFieldsAddress, required=False), required=False)
+    
+    serviceability_fields = fields.List(fields.Str(required=False), required=False)
+    
+    address_template = fields.Nested(GetCountryFieldsAddressTemplate, required=False)
     
 
 
@@ -529,25 +741,27 @@ class GetCountry(BaseSchema):
     # Logistic swagger.json
 
     
-    actions = fields.Dict(required=False)
+    id = fields.Str(required=False)
     
-    ios2 = fields.Str(required=False)
+    name = fields.Str(required=False)
+    
+    display_name = fields.Str(required=False)
+    
+    iso2 = fields.Str(required=False)
+    
+    iso3 = fields.Str(required=False)
     
     timezones = fields.List(fields.Str(required=False), required=False)
     
-    hierarchy = fields.Dict(required=False)
-    
-    ios3 = fields.Str(required=False)
+    hierarchy = fields.List(fields.Nested(CountryHierarchy, required=False), required=False)
     
     phone_code = fields.Str(required=False)
     
     currency = fields.Str(required=False)
     
-    sub_type = fields.Str(required=False)
+    type = fields.Str(required=False)
     
-    name = fields.Str(required=False)
-    
-    uid = fields.Str(required=False)
+    fields = fields.Nested(GetCountryFields, required=False)
     
 
 
@@ -571,35 +785,19 @@ class Page(BaseSchema):
     
 
 
-class LogisticsDPSchema(BaseSchema):
+class Localities(BaseSchema):
     # Logistic swagger.json
 
     
-    dp = fields.Dict(required=False)
-    
-
-
-class Locality(BaseSchema):
-    # Logistic swagger.json
-
-    
-    is_active = fields.Boolean(required=False)
-    
-    parent_id = fields.List(fields.Str(required=False), required=False)
-    
-    meta = fields.Dict(required=False)
-    
-    logistics = fields.Nested(LogisticsDPSchema, required=False)
-    
-    uid = fields.Str(required=False)
-    
-    sub_type = fields.Str(required=False)
+    id = fields.Str(required=False)
     
     name = fields.Str(required=False)
     
-    type = fields.Str(required=False)
-    
     display_name = fields.Str(required=False)
+    
+    parent_ids = fields.List(fields.Str(required=False), required=False)
+    
+    type = fields.Str(required=False)
     
 
 
@@ -607,9 +805,9 @@ class GetLocalities(BaseSchema):
     # Logistic swagger.json
 
     
-    page = fields.Nested(Page, required=False)
+    items = fields.List(fields.Nested(Localities, required=False), required=False)
     
-    regions = fields.List(fields.Nested(Locality, required=False), required=False)
+    page = fields.Nested(Page, required=False)
     
 
 
@@ -617,7 +815,17 @@ class GetLocality(BaseSchema):
     # Logistic swagger.json
 
     
-    regions = fields.Nested(Locality, required=False)
+    id = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    display_name = fields.Str(required=False)
+    
+    parent_ids = fields.List(fields.Str(required=False), required=False)
+    
+    type = fields.Str(required=False)
+    
+    localities = fields.List(fields.Nested(Localities, required=False), required=False)
     
 
 
@@ -625,7 +833,7 @@ class ErrorResponse(BaseSchema):
     # Logistic swagger.json
 
     
-    error = fields.Str(required=False)
+    message = fields.Str(required=False)
     
 
 

@@ -19,11 +19,17 @@ from ..ApplicationModel import BaseSchema
     
     
         
+        
+        
+        
     
     
         
     
     
+        
+        
+        
         
         
         
@@ -70,6 +76,12 @@ class LogisticValidator:
         
         
         onboarding = fields.Boolean(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        q = fields.Str(required=False)
          
         
     
@@ -90,6 +102,12 @@ class LogisticValidator:
         state = fields.Str(required=False)
         
         city = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        q = fields.Str(required=False)
          
         
     

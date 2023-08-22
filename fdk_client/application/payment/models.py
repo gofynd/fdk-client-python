@@ -1745,11 +1745,15 @@ class CreditSummary(BaseSchema):
     
     due_amount = fields.Nested(BalanceDetails, required=False)
     
+    due_date = fields.Str(required=False)
+    
     balance = fields.Nested(BalanceDetails, required=False)
     
     status_message = fields.Str(required=False)
     
     repayment_url = fields.Str(required=False)
+    
+    soa_url = fields.Str(required=False)
     
     is_eligible_for_txn = fields.Boolean(required=False)
     
