@@ -516,6 +516,18 @@ class VerifyOtpResponse(BaseSchema):
     pass
 
 
+class CourierPartnerTrackingDetails(BaseSchema):
+    pass
+
+
+class PageDetails(BaseSchema):
+    pass
+
+
+class CourierPartnerTrackingResponse(BaseSchema):
+    pass
+
+
 class BulkReportsDownloadRequest(BaseSchema):
     pass
 
@@ -2822,6 +2834,64 @@ class VerifyOtpResponse(BaseSchema):
     message = fields.Str(required=False)
     
     data = fields.Nested(VerifyOtpResponseData, required=False)
+    
+
+
+class CourierPartnerTrackingDetails(BaseSchema):
+    # Order swagger.json
+
+    
+    operational_status = fields.Str(required=False)
+    
+    dp_status = fields.Str(required=False)
+    
+    shipment_id = fields.Str(required=False)
+    
+    awb = fields.Str(required=False)
+    
+    dp_status_updated_at = fields.Str(required=False)
+    
+    remark = fields.Str(required=False)
+    
+    id = fields.Int(required=False)
+    
+    dp_location = fields.Str(required=False)
+    
+    estimated_delivery_date = fields.Str(required=False)
+    
+    journey = fields.Str(required=False)
+    
+    meta = fields.Dict(required=False)
+    
+    dp_name = fields.Str(required=False)
+    
+    promised_delivery_date = fields.Str(required=False)
+    
+
+
+class PageDetails(BaseSchema):
+    # Order swagger.json
+
+    
+    item_total = fields.Int(required=False)
+    
+    current = fields.Int(required=False)
+    
+    size = fields.Int(required=False)
+    
+    type = fields.Str(required=False)
+    
+    has_next = fields.Boolean(required=False)
+    
+
+
+class CourierPartnerTrackingResponse(BaseSchema):
+    # Order swagger.json
+
+    
+    items = fields.List(fields.Nested(CourierPartnerTrackingDetails, required=False), required=False)
+    
+    page = fields.Nested(PageDetails, required=False)
     
 
 
