@@ -136,14 +136,6 @@ class StaticConfig(BaseSchema):
     pass
 
 
-class AuthConfig(BaseSchema):
-    pass
-
-
-class PaletteConfig(BaseSchema):
-    pass
-
-
 class CustomConfig(BaseSchema):
     pass
 
@@ -165,6 +157,14 @@ class StaticProps(BaseSchema):
 
 
 class Colors(BaseSchema):
+    pass
+
+
+class AuthConfig(BaseSchema):
+    pass
+
+
+class PaletteConfig(BaseSchema):
     pass
 
 
@@ -705,7 +705,7 @@ class ThemeConfiguration(BaseSchema):
     
     name = fields.Str(required=False)
     
-    global_config = fields.Nested(GlobalConfig, required=False)
+    global_config = fields.Dict(required=False)
     
     custom = fields.Nested(CustomConfig, required=False)
     
@@ -719,9 +719,7 @@ class GlobalConfig(BaseSchema):
     
     statics = fields.Nested(StaticConfig, required=False)
     
-    auth = fields.Nested(AuthConfig, required=False)
-    
-    palette = fields.Nested(PaletteConfig, required=False)
+    custom = fields.Nested(CustomConfig, required=False)
     
 
 
@@ -730,26 +728,6 @@ class StaticConfig(BaseSchema):
 
     
     props = fields.Nested(StaticProps, required=False)
-    
-
-
-class AuthConfig(BaseSchema):
-    # Theme swagger.json
-
-    
-    show_header_auth = fields.Boolean(required=False)
-    
-    show_footer_auth = fields.Boolean(required=False)
-    
-
-
-class PaletteConfig(BaseSchema):
-    # Theme swagger.json
-
-    
-    general_setting = fields.Nested(GeneralSetting, required=False)
-    
-    advance_setting = fields.Nested(AdvanceSetting, required=False)
     
 
 
@@ -809,6 +787,8 @@ class StaticProps(BaseSchema):
     
     auth = fields.Nested(AuthConfig, required=False)
     
+    palette = fields.Nested(PaletteConfig, required=False)
+    
 
 
 class Colors(BaseSchema):
@@ -826,6 +806,26 @@ class Colors(BaseSchema):
     button_secondary_color = fields.Str(required=False)
     
     bg_color = fields.Str(required=False)
+    
+
+
+class AuthConfig(BaseSchema):
+    # Theme swagger.json
+
+    
+    show_header_auth = fields.Boolean(required=False)
+    
+    show_footer_auth = fields.Boolean(required=False)
+    
+
+
+class PaletteConfig(BaseSchema):
+    # Theme swagger.json
+
+    
+    general_setting = fields.Nested(GeneralSetting, required=False)
+    
+    advance_setting = fields.Nested(AdvanceSetting, required=False)
     
 
 
