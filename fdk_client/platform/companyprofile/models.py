@@ -873,6 +873,16 @@ class GetLocationSerializer(BaseSchema):
     
     modified_by = fields.Nested(UserSerializer, required=False)
     
+    tags = fields.List(fields.Str(required=False), required=False)
+    
+    default_order_acceptance_timing = fields.Boolean(required=False)
+    
+    order_acceptance_timing = fields.List(fields.Nested(LocationDayWiseSerializer, required=False), required=False)
+    
+    avg_order_processing_time = fields.Nested(AverageOrderProcessingTime, required=False)
+    
+    bulk_shipment = fields.Boolean(required=False)
+    
 
 
 class LocationListSerializer(BaseSchema):
