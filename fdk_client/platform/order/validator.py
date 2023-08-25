@@ -119,6 +119,9 @@ from ..PlatformModel import BaseSchema
     
     
         
+    
+    
+        
         
         
         
@@ -503,6 +506,13 @@ class OrderValidator:
         
     
     class downloadLanesReport(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class eInvoiceRetry(BaseSchema):
         
         
         company_id = fields.Int(required=False)

@@ -540,6 +540,22 @@ class BulkReportsDownloadFailedResponse(BaseSchema):
     pass
 
 
+class EInvoiceRetryShipmentData(BaseSchema):
+    pass
+
+
+class EInvoiceRetry(BaseSchema):
+    pass
+
+
+class EInvoiceResponseData(BaseSchema):
+    pass
+
+
+class EInvoiceRetryResponse(BaseSchema):
+    pass
+
+
 class ShipmentStatus(BaseSchema):
     pass
 
@@ -2938,6 +2954,58 @@ class BulkReportsDownloadFailedResponse(BaseSchema):
     status = fields.Boolean(required=False)
     
     error = fields.Str(required=False)
+    
+
+
+class EInvoiceRetryShipmentData(BaseSchema):
+    # Order swagger.json
+
+    
+    shipment_id = fields.Str(required=False)
+    
+
+
+class EInvoiceRetry(BaseSchema):
+    # Order swagger.json
+
+    
+    shipments_data = fields.List(fields.Nested(EInvoiceRetryShipmentData, required=False), required=False)
+    
+
+
+class EInvoiceResponseData(BaseSchema):
+    # Order swagger.json
+
+    
+    shipment_id = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
+    
+    success = fields.Boolean(required=False)
+    
+    ack_no = fields.Str(required=False)
+    
+    irn = fields.Str(required=False)
+    
+    ack_dt = fields.Str(required=False)
+    
+    timeout = fields.Int(required=False)
+    
+    timeout_unit = fields.Str(required=False)
+    
+
+
+class EInvoiceRetryResponse(BaseSchema):
+    # Order swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+    success_count = fields.Int(required=False)
+    
+    message = fields.Str(required=False)
+    
+    response_data = fields.List(fields.Nested(EInvoiceResponseData, required=False), required=False)
     
 
 

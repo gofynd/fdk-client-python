@@ -1637,6 +1637,30 @@ class SmsProviderReq(BaseSchema):
     
     provider = fields.Str(required=False)
     
+    password = fields.Str(required=False)
+    
+    senderid = fields.Str(required=False)
+    
+    feedid = fields.Str(required=False)
+    
+    entityid = fields.Str(required=False)
+    
+    override_dnd = fields.Boolean(required=False)
+    
+    host = fields.Str(required=False)
+    
+    port = fields.Int(required=False)
+    
+    entity_id = fields.Str(required=False)
+    
+    apikey = fields.Str(required=False)
+    
+    version_id = fields.Int(required=False)
+    
+    sender_id = fields.Str(required=False)
+    
+    api_key = fields.Str(required=False)
+    
 
 
 class SmsProvider(BaseSchema):
