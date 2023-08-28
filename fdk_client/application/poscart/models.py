@@ -451,6 +451,8 @@ class AppliedPromotion(BaseSchema):
     
     ownership = fields.Nested(Ownership, required=False)
     
+    currency = fields.Nested(CartCurrency, required=False)
+    
     promotion_group = fields.Str(required=False)
     
 

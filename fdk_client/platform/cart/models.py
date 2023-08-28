@@ -2167,6 +2167,8 @@ class AppliedPromotion(BaseSchema):
     
     ownership = fields.Nested(Ownership2, required=False)
     
+    currency = fields.Nested(CartCurrency, required=False)
+    
     discount_rules = fields.List(fields.Nested(DiscountRulesApp, required=False), required=False)
     
     applied_free_articles = fields.List(fields.Nested(AppliedFreeArticles, required=False), required=False)
@@ -3042,6 +3044,8 @@ class CartList(BaseSchema):
     created_on = fields.Str(required=False)
     
     user_id = fields.Str(required=False)
+    
+    currency_code = fields.Str(required=False)
     
     item_counts = fields.Int(required=False)
     

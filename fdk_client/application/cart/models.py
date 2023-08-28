@@ -475,6 +475,8 @@ class AppliedPromotion(BaseSchema):
     
     ownership = fields.Nested(Ownership, required=False)
     
+    currency = fields.Nested(CartCurrency, required=False)
+    
     article_quantity = fields.Int(required=False)
     
     applied_free_articles = fields.List(fields.Nested(AppliedFreeArticles, required=False), required=False)
