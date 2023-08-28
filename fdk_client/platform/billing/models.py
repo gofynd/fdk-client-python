@@ -236,6 +236,18 @@ class PlanStatusUpdateReq(BaseSchema):
     pass
 
 
+class SunscribePlan(BaseSchema):
+    pass
+
+
+class Meta(BaseSchema):
+    pass
+
+
+class SubscribePlanRes(BaseSchema):
+    pass
+
+
 
 
 
@@ -1182,6 +1194,48 @@ class PlanStatusUpdateReq(BaseSchema):
     reason = fields.Str(required=False)
     
     seller_status = fields.Str(required=False)
+    
+
+
+class SunscribePlan(BaseSchema):
+    # Billing swagger.json
+
+    
+    entity_type = fields.Str(required=False)
+    
+    collection_type = fields.Str(required=False)
+    
+    plan_id = fields.Str(required=False)
+    
+    callback_url = fields.Str(required=False)
+    
+    meta = fields.Nested(Meta, required=False)
+    
+
+
+class Meta(BaseSchema):
+    # Billing swagger.json
+
+    
+    subscribe = fields.Boolean(required=False)
+    
+    is_custom_plan = fields.Boolean(required=False)
+    
+    is_plan_upgrade = fields.Boolean(required=False)
+    
+
+
+class SubscribePlanRes(BaseSchema):
+    # Billing swagger.json
+
+    
+    redirect_url = fields.Str(required=False)
+    
+    transaction_id = fields.Str(required=False)
+    
+    current_status = fields.Str(required=False)
+    
+    meta = fields.Nested(Meta, required=False)
     
 
 

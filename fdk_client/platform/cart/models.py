@@ -1677,15 +1677,17 @@ class Article(BaseSchema):
     # Cart swagger.json
 
     
-    meta = fields.Dict(required=False)
-    
-    article_id = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
-    
     value = fields.Float(required=False)
     
     code = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    article_id = fields.Str(required=False)
+    
+    quantity = fields.Int(required=False)
+    
+    meta = fields.Dict(required=False)
     
 
 
@@ -1703,31 +1705,29 @@ class PriceAdjustmentUpdate(BaseSchema):
     # Cart swagger.json
 
     
-    apply_expiry = fields.Str(required=False)
-    
-    cart_id = fields.Str(required=False)
-    
-    cart_value = fields.Float(required=False)
-    
-    meta = fields.Dict(required=False)
-    
-    type = fields.Str(required=False)
+    modified_by = fields.Str(required=False)
     
     value = fields.Float(required=False)
     
+    message = fields.Str(required=False)
+    
+    apply_expiry = fields.Str(required=False)
+    
     article_level_distribution = fields.Boolean(required=False)
     
-    article_ids = fields.List(fields.Nested(Article, required=False), required=False)
+    collection = fields.Nested(Collection, required=False)
     
-    modified_by = fields.Str(required=False)
-    
-    is_authenticated = fields.Boolean(required=False)
+    type = fields.Str(required=False)
     
     allowed_refund = fields.Boolean(required=False)
     
-    message = fields.Str(required=False)
+    is_authenticated = fields.Boolean(required=False)
     
-    collection = fields.Nested(Collection, required=False)
+    article_ids = fields.List(fields.Nested(Article, required=False), required=False)
+    
+    meta = fields.Dict(required=False)
+    
+    cart_id = fields.Str(required=False)
     
 
 
@@ -1735,31 +1735,29 @@ class PriceAdjustment(BaseSchema):
     # Cart swagger.json
 
     
-    apply_expiry = fields.Str(required=False)
-    
-    cart_id = fields.Str(required=False)
-    
-    cart_value = fields.Float(required=False)
-    
-    meta = fields.Dict(required=False)
-    
-    type = fields.Str(required=False)
-    
     value = fields.Float(required=False)
-    
-    article_level_distribution = fields.Boolean(required=False)
-    
-    article_ids = fields.List(fields.Nested(Article, required=False), required=False)
-    
-    id = fields.Str(required=False)
-    
-    is_authenticated = fields.Boolean(required=False)
-    
-    allowed_refund = fields.Boolean(required=False)
     
     message = fields.Str(required=False)
     
+    apply_expiry = fields.Str(required=False)
+    
+    article_level_distribution = fields.Boolean(required=False)
+    
+    id = fields.Str(required=False)
+    
     collection = fields.Nested(Collection, required=False)
+    
+    type = fields.Str(required=False)
+    
+    allowed_refund = fields.Boolean(required=False)
+    
+    is_authenticated = fields.Boolean(required=False)
+    
+    article_ids = fields.List(fields.Nested(Article, required=False), required=False)
+    
+    meta = fields.Dict(required=False)
+    
+    cart_id = fields.Str(required=False)
     
 
 
@@ -1775,31 +1773,29 @@ class PriceAdjustmentAdd(BaseSchema):
     # Cart swagger.json
 
     
-    apply_expiry = fields.Str(required=False)
-    
-    cart_id = fields.Str(required=False)
-    
-    cart_value = fields.Float(required=False)
-    
-    meta = fields.Dict(required=False)
-    
-    type = fields.Str(required=False)
-    
-    created_by = fields.Str(required=False)
-    
     value = fields.Float(required=False)
-    
-    article_level_distribution = fields.Boolean(required=False)
-    
-    article_ids = fields.List(fields.Nested(Article, required=False), required=False)
-    
-    is_authenticated = fields.Boolean(required=False)
-    
-    allowed_refund = fields.Boolean(required=False)
     
     message = fields.Str(required=False)
     
+    apply_expiry = fields.Str(required=False)
+    
+    created_by = fields.Str(required=False)
+    
+    article_level_distribution = fields.Boolean(required=False)
+    
     collection = fields.Nested(Collection, required=False)
+    
+    type = fields.Str(required=False)
+    
+    allowed_refund = fields.Boolean(required=False)
+    
+    is_authenticated = fields.Boolean(required=False)
+    
+    article_ids = fields.List(fields.Nested(Article, required=False), required=False)
+    
+    meta = fields.Dict(required=False)
+    
+    cart_id = fields.Str(required=False)
     
 
 

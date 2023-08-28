@@ -701,4 +701,48 @@ class Billing:
 
         return response
     
+    async def subscripePlan(self, body=""):
+        """It will subscribe a plan.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = BillingValidator.subscripePlan()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import SunscribePlan
+        schema = SunscribePlan()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/payment/initiate", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/payment/initiate", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SubscribePlanRes
+            schema = SubscribePlanRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for subscripePlan")
+                print(e)
+
+        
+
+        return response
+    
 
