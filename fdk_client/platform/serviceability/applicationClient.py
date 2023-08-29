@@ -52,6 +52,50 @@ class Serviceability:
 
         return response
     
+    async def updateApplicationServiceability(self, body=""):
+        """This API updates serviceability config of the application.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ServiceabilityValidator.updateApplicationServiceability()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import ServiceabilityPayloadSchema
+        schema = ServiceabilityPayloadSchema()
+        schema.dump(schema.load(body))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/serviceability", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}]}""", )
+        query_string = await create_query_string()
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/serviceability", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ApplicationServiceabilityConfigResponse
+            schema = ApplicationServiceabilityConfigResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateApplicationServiceability")
+                print(e)
+
+        
+
+        return response
+    
     async def getZoneFromPincodeView(self, body=""):
         """This API returns zone from the Pincode View.
         """
@@ -497,14 +541,14 @@ class Serviceability:
 
         return response
     
-    async def patchApplicationServiceabilitySelfShipment(self, body=""):
+    async def updateSelfShip(self, body=""):
         """This API updates Self-ship configuration of the application.
         """
         payload = {}
         
 
         # Parameter validation
-        schema = ServiceabilityValidator.patchApplicationServiceabilitySelfShipment()
+        schema = ServiceabilityValidator.updateSelfShip()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -534,21 +578,21 @@ class Serviceability:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for patchApplicationServiceabilitySelfShipment")
+                print("Response Validation failed for updateSelfShip")
                 print(e)
 
         
 
         return response
     
-    async def getApplicationServiceabilitySelfShipment(self, ):
+    async def getSelfShip(self, ):
         """This API returns Self-ship configuration of the application.
         """
         payload = {}
         
 
         # Parameter validation
-        schema = ServiceabilityValidator.getApplicationServiceabilitySelfShipment()
+        schema = ServiceabilityValidator.getSelfShip()
         schema.dump(schema.load(payload))
         
 
@@ -573,7 +617,7 @@ class Serviceability:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getApplicationServiceabilitySelfShipment")
+                print("Response Validation failed for getSelfShip")
                 print(e)
 
         

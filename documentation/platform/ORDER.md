@@ -27,11 +27,16 @@ Handles all platform order and shipment api(s)
 * [orderUpdate](#orderupdate)
 * [checkOrderStatus](#checkorderstatus)
 * [getStateTransitionMap](#getstatetransitionmap)
+* [getAllowedStateTransition](#getallowedstatetransition)
 * [fetchCreditBalanceDetail](#fetchcreditbalancedetail)
 * [fetchRefundModeConfig](#fetchrefundmodeconfig)
 * [attachOrderUser](#attachorderuser)
 * [sendUserMobileOTP](#sendusermobileotp)
 * [verifyMobileOTP](#verifymobileotp)
+* [downloadLanesReport](#downloadlanesreport)
+* [eInvoiceRetry](#einvoiceretry)
+* [trackShipment](#trackshipment)
+* [updateShipmentTracking](#updateshipmenttracking)
 * [getShipments](#getshipments)
 * [getShipmentById](#getshipmentbyid)
 * [getOrderById](#getorderbyid)
@@ -291,7 +296,7 @@ except Exception as e:
 
 
 
-
+Get Announcements
 
 *Returned Response:*
 
@@ -359,7 +364,7 @@ except Exception as e:
 
 
 
-
+Update Address for the order
 
 *Returned Response:*
 
@@ -420,7 +425,7 @@ except Exception as e:
 
 
 
-
+Click to Call
 
 *Returned Response:*
 
@@ -516,10 +521,10 @@ NOTE success response can contains success and failed result as well
         {
           "status": 400,
           "message": "Invalid State Transition bag_confirmed detected for given entity",
-          "code": null,
+          "code": "",
           "exception": "ValidationError",
-          "stack_trace": null,
-          "meta": null,
+          "stack_trace": "",
+          "meta": {},
           "identifier": "16836279770211860494"
         }
       ]
@@ -563,7 +568,7 @@ except Exception as e:
 | body | [CreateOrderPayload](#CreateOrderPayload) | yes | Request body |
 
 
-
+Process Manifest
 
 *Returned Response:*
 
@@ -619,7 +624,7 @@ except Exception as e:
 | body | [DispatchManifest](#DispatchManifest) | yes | Request body |
 
 
-
+Dispatch Manifest
 
 *Returned Response:*
 
@@ -671,7 +676,7 @@ except Exception as e:
 
 
 
-
+Get Role Based Actions
 
 *Returned Response:*
 
@@ -744,7 +749,7 @@ except Exception as e:
 
 
 
-
+Get Shipment History
 
 *Returned Response:*
 
@@ -765,40 +770,34 @@ It shows the journey of the shipment!
 {
   "activity_history": [
     {
-      "message": {
-        "message": "Bag status changed to pending",
-        "store_id": 10,
-        "store_code": "SF94",
-        "store_name": "shub",
-        "reason": {},
-        "type": "activity_status"
-      },
+      "message": "Bag status changed to pending",
+      "store_id": 10,
+      "store_code": "SF94",
+      "store_name": "shub",
+      "reason": {},
       "createdat": "01 Apr 2022, 17:57:PM",
       "user": "system",
       "type": "activity_status",
-      "l1_detail": null,
-      "l2_detail": null,
-      "l3_detail": null,
-      "ticket_id": null,
-      "ticket_url": null
+      "l1_detail": "",
+      "l2_detail": "",
+      "l3_detail": "",
+      "ticket_id": "",
+      "ticket_url": ""
     },
     {
-      "message": {
-        "message": "Bag status changed to placed",
-        "store_id": 10,
-        "store_code": "SF94",
-        "store_name": "shub",
-        "reason": {},
-        "type": "activity_status"
-      },
+      "message": "Bag status changed to placed",
+      "store_id": 10,
+      "store_code": "SF94",
+      "store_name": "shub",
+      "reason": {},
       "createdat": "01 Apr 2022, 17:57:PM",
       "user": "system",
       "type": "activity_status",
-      "l1_detail": null,
-      "l2_detail": null,
-      "l3_detail": null,
-      "ticket_id": null,
-      "ticket_url": null
+      "l1_detail": "",
+      "l2_detail": "",
+      "l3_detail": "",
+      "ticket_id": "",
+      "ticket_url": ""
     }
   ]
 }
@@ -839,7 +838,7 @@ except Exception as e:
 | body | [PostShipmentHistory](#PostShipmentHistory) | yes | Request body |
 
 
-
+Post shipment history
 
 *Returned Response:*
 
@@ -860,40 +859,34 @@ It shows the journey of the shipment!
 {
   "activity_history": [
     {
-      "message": {
-        "message": "Bag status changed to pending",
-        "store_id": 10,
-        "store_code": "SF94",
-        "store_name": "shub",
-        "reason": {},
-        "type": "activity_status"
-      },
+      "message": "Bag status changed to pending",
+      "store_id": 10,
+      "store_code": "SF94",
+      "store_name": "shub",
+      "reason": {},
       "createdat": "01 Apr 2022, 17:57:PM",
       "user": "system",
       "type": "activity_status",
-      "l1_detail": null,
-      "l2_detail": null,
-      "l3_detail": null,
-      "ticket_id": null,
-      "ticket_url": null
+      "l1_detail": "",
+      "l2_detail": "",
+      "l3_detail": "",
+      "ticket_id": "",
+      "ticket_url": ""
     },
     {
-      "message": {
-        "message": "Bag status changed to placed",
-        "store_id": 10,
-        "store_code": "SF94",
-        "store_name": "shub",
-        "reason": {},
-        "type": "activity_status"
-      },
+      "message": "Bag status changed to placed",
+      "store_id": 10,
+      "store_code": "SF94",
+      "store_name": "shub",
+      "reason": {},
+      "type": "activity_status",
       "createdat": "01 Apr 2022, 17:57:PM",
       "user": "system",
-      "type": "activity_status",
-      "l1_detail": null,
-      "l2_detail": null,
-      "l3_detail": null,
-      "ticket_id": null,
-      "ticket_url": null
+      "l1_detail": "",
+      "l2_detail": "",
+      "l3_detail": "",
+      "ticket_id": "",
+      "ticket_url": ""
     }
   ],
   "success": true
@@ -935,7 +928,7 @@ except Exception as e:
 | body | [SendSmsPayload](#SendSmsPayload) | yes | Request body |
 
 
-
+Send SMS Ninja Panel
 
 *Returned Response:*
 
@@ -954,7 +947,7 @@ Sms Sent successfully
 
 ```json
 {
-  "success": true,
+  "success": "true",
   "message": "Successfully emitted aldaviz-delayed-shipment-event"
 }
 ```
@@ -994,7 +987,7 @@ except Exception as e:
 | body | [UpdatePackagingDimensionsPayload](#UpdatePackagingDimensionsPayload) | yes | Request body |
 
 
-
+Update Packaging Dimensions
 
 *Returned Response:*
 
@@ -1050,7 +1043,7 @@ except Exception as e:
 | body | [CreateOrderAPI](#CreateOrderAPI) | yes | Request body |
 
 
-
+Create Order
 
 *Returned Response:*
 
@@ -1243,7 +1236,7 @@ except Exception as e:
 | body | [UploadConsent](#UploadConsent) | yes | Request body |
 
 
-
+Upload Consent
 
 *Returned Response:*
 
@@ -1299,7 +1292,7 @@ except Exception as e:
 | body | [PlatformOrderUpdate](#PlatformOrderUpdate) | yes | Request body |
 
 
-
+Update Order
 
 *Returned Response:*
 
@@ -1355,7 +1348,7 @@ except Exception as e:
 | body | [OrderStatus](#OrderStatus) | yes | Request body |
 
 
-
+Check order status
 
 *Returned Response:*
 
@@ -1407,7 +1400,7 @@ except Exception as e:
 
 
 
-
+Get State Transition Map
 
 *Returned Response:*
 
@@ -1627,6 +1620,81 @@ State Transition Mapping, for next possible state
 ---
 
 
+### getAllowedStateTransition
+To fetch next state transitions.
+
+
+
+
+```python
+try:
+    result = await platformClient.order.getAllowedStateTransition(orderingChannel=orderingChannel, status=status)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| orderingChannel | String | yes | Ordering channel |   
+| status | String | yes | current status of a shipment |  
+
+
+
+This endpoint will fetch next possible states based on logged in user
+
+
+*Returned Response:*
+
+
+
+
+[RoleBaseStateTransitionMapping](#RoleBaseStateTransitionMapping)
+
+Role wise state transition mapping, for next possible state
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; send state transition success</i></summary>
+
+```json
+{
+  "value": {
+    "success": true,
+    "next_statuses": [
+      "bag_picked",
+      "delivery_done",
+      "rto_bag_delivered",
+      "rto_in_transit"
+    ]
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
 ### fetchCreditBalanceDetail
 
 
@@ -1650,7 +1718,7 @@ except Exception as e:
 | body | [FetchCreditBalanceRequestPayload](#FetchCreditBalanceRequestPayload) | yes | Request body |
 
 
-
+Fetch Credit Balance Detail
 
 *Returned Response:*
 
@@ -1706,7 +1774,7 @@ except Exception as e:
 | body | [RefundModeConfigRequestPayload](#RefundModeConfigRequestPayload) | yes | Request body |
 
 
-
+Fetch Refund Mode Config
 
 *Returned Response:*
 
@@ -1762,7 +1830,7 @@ except Exception as e:
 | body | [AttachOrderUser](#AttachOrderUser) | yes | Request body |
 
 
-
+Attach Order User
 
 *Returned Response:*
 
@@ -1818,7 +1886,7 @@ except Exception as e:
 | body | [SendUserMobileOTP](#SendUserMobileOTP) | yes | Request body |
 
 
-
+Send User Mobile OTP
 
 *Returned Response:*
 
@@ -1841,7 +1909,7 @@ Send OTP to user mobile
   "data": {
     "request_id": "112312312",
     "message": "Text",
-    "resend_timer": "600",
+    "resend_timer": 600,
     "mobile": 99990000
   },
   "message": "Text"
@@ -1883,7 +1951,7 @@ except Exception as e:
 | body | [VerifyMobileOTP](#VerifyMobileOTP) | yes | Request body |
 
 
-
+Verify Mobile OTP
 
 *Returned Response:*
 
@@ -1916,6 +1984,317 @@ Verify OTP
 ---
 
 
+### downloadLanesReport
+
+
+
+
+
+```python
+try:
+    result = await platformClient.order.downloadLanesReport(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [BulkReportsDownloadRequest](#BulkReportsDownloadRequest) | yes | Request body |
+
+
+downloads lanes shipment/orders.
+
+*Returned Response:*
+
+
+
+
+[BulkReportsDownloadResponse](#BulkReportsDownloadResponse)
+
+Bulk Report creation initiated.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; BulkReportsSucessfulEventSample</i></summary>
+
+```json
+{
+  "value": {
+    "success": true,
+    "batch_id": "0000-1111-2222-3333"
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### eInvoiceRetry
+
+
+
+
+
+```python
+try:
+    result = await platformClient.order.eInvoiceRetry(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [EInvoiceRetry](#EInvoiceRetry) | yes | Request body |
+
+
+Retry e-invoice after failure
+
+*Returned Response:*
+
+
+
+
+[EInvoiceRetryResponse](#EInvoiceRetryResponse)
+
+E-invoice Retry Successfully!!
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; sample1</i></summary>
+
+```json
+{
+  "value": {
+    "response_data": [
+      {
+        "shipment_id": "16342342342343423",
+        "success": true,
+        "message": "IRN already generated, for e-invoice type: invoice"
+      }
+    ],
+    "success_count": 1,
+    "message": "Success Count: 1 out of 1",
+    "success": true
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### trackShipment
+Get courier partner tracking details
+
+
+
+
+```python
+try:
+    result = await platformClient.order.trackShipment(shipmentId=shipmentId, awb=awb, pageNo=pageNo, pageSize=pageSize)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| shipmentId | String? | no | Shipment ID |   
+| awb | String? | no | AWB number |   
+| pageNo | Int? | no | Page number |   
+| pageSize | Int? | no | Page size |  
+
+
+
+This endpoint allows users to get courier partner tracking details for a given shipment id or awb no. The service will fetch courier partner statuses that are pushed to oms.
+
+*Returned Response:*
+
+
+
+
+[CourierPartnerTrackingResponse](#CourierPartnerTrackingResponse)
+
+Shipment Tracking fetched successfully
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; success</i></summary>
+
+```json
+{
+  "value": {
+    "items": [
+      {
+        "awb": "713191641",
+        "dp_location": "Mumbai",
+        "dp_name": "Ecom b2b",
+        "dp_status": "dp_assigned",
+        "dp_status_updated_at": "2023-07-12T20:17:46.384Z",
+        "estimated_delivery_date": "2023-07-12T20:17:46.384Z",
+        "id": 370,
+        "journey": "forward",
+        "operational_status": "dp_assigned",
+        "promised_delivery_date": "2023-07-12T20:17:46.384Z",
+        "remark": "UD -Manifested",
+        "shipment_id": "16908065964581066182"
+      }
+    ],
+    "page": {
+      "type": "number",
+      "size": 200,
+      "current": 1,
+      "has_next": true,
+      "item_total": 3
+    }
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### updateShipmentTracking
+Post courier partner tracking details
+
+
+
+
+```python
+try:
+    result = await platformClient.order.updateShipmentTracking(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [CourierPartnerTrackingDetails](#CourierPartnerTrackingDetails) | yes | Request body |
+
+
+This endpoint allows users to post courier partner tracking details for a given shipment id or awb no. The service will add entry for courier partner statuses and will be saved to oms.
+
+*Returned Response:*
+
+
+
+
+[CourierPartnerTrackingDetails](#CourierPartnerTrackingDetails)
+
+Shipment Tracking updated successfully
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; success</i></summary>
+
+```json
+{
+  "value": {
+    "awb": "713191641",
+    "dp_location": "Mumbai",
+    "dp_name": "Ecom b2b",
+    "dp_status": "dp_assigned",
+    "dp_status_updated_at": "2023-07-12T20:17:46.384Z",
+    "estimated_delivery_date": "2023-07-12T20:17:46.384Z",
+    "id": 370,
+    "journey": "forward",
+    "operational_status": "dp_assigned",
+    "promised_delivery_date": "2023-07-12T20:17:46.384Z",
+    "remark": "UD -Manifested",
+    "shipment_id": "16908065964581066182"
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
 ### getShipments
 
 
@@ -1924,7 +2303,7 @@ Verify OTP
 
 ```python
 try:
-    result = await platformClient.order.getShipments(lane=lane, bagStatus=bagStatus, statusOverrideLane=statusOverrideLane, timeToDispatch=timeToDispatch, searchType=searchType, searchValue=searchValue, fromDate=fromDate, toDate=toDate, dpIds=dpIds, stores=stores, salesChannels=salesChannels, pageNo=pageNo, pageSize=pageSize, fetchActiveShipment=fetchActiveShipment, excludeLockedShipments=excludeLockedShipments, paymentMethods=paymentMethods, channelShipmentId=channelShipmentId, channelOrderId=channelOrderId, customMeta=customMeta, orderingChannel=orderingChannel, companyAffiliateTag=companyAffiliateTag, myOrders=myOrders, platformUserId=platformUserId, tags=tags)
+    result = await platformClient.order.getShipments(lane=lane, bagStatus=bagStatus, statusOverrideLane=statusOverrideLane, timeToDispatch=timeToDispatch, searchType=searchType, searchValue=searchValue, fromDate=fromDate, toDate=toDate, dpIds=dpIds, stores=stores, salesChannels=salesChannels, pageNo=pageNo, pageSize=pageSize, fetchActiveShipment=fetchActiveShipment, excludeLockedShipments=excludeLockedShipments, paymentMethods=paymentMethods, channelShipmentId=channelShipmentId, channelOrderId=channelOrderId, customMeta=customMeta, orderingChannel=orderingChannel, companyAffiliateTag=companyAffiliateTag, myOrders=myOrders, platformUserId=platformUserId, sortType=sortType, showCrossCompanyData=showCrossCompanyData, tags=tags, customerId=customerId)
     # use result
 except Exception as e:
     print(e)
@@ -1939,7 +2318,7 @@ except Exception as e:
 | lane | String? | no | Name of lane for which data is to be fetched |   
 | bagStatus | String? | no | Comma separated values of bag statuses |   
 | statusOverrideLane | Boolean? | no | Use this flag to fetch by bag_status and override lane |   
-| timeToDispatch | String? | no |  |   
+| timeToDispatch | Double? | no |  |   
 | searchType | String? | no | Search type key |   
 | searchValue | String? | no | Search type value |   
 | fromDate | String? | no | Start Date in DD-MM-YYYY format |   
@@ -1959,11 +2338,14 @@ except Exception as e:
 | companyAffiliateTag | String? | no |  |   
 | myOrders | Boolean? | no |  |   
 | platformUserId | String? | no |  |   
-| tags | String? | no | Comma separated values of tags |  
+| sortType | String? | no | Sort the result data on basis of input |   
+| showCrossCompanyData | Boolean? | no | Flag to view cross & non-cross company order |   
+| tags | String? | no | Comma separated values of tags |   
+| customerId | String? | no |  |  
 
 
 
-
+Get Shipments Listing for the company id
 
 *Returned Response:*
 
@@ -2021,7 +2403,7 @@ except Exception as e:
 
 
 
-
+Get shipment details for the given shipment.
 
 *Returned Response:*
 
@@ -2051,6 +2433,7 @@ We are processing the report!
       "shipment_id": "16557829457641286433",
       "payment_mode": "COD",
       "fulfilling_store": {
+        "meta": {},
         "id": 1,
         "code": "HS-468a5",
         "fulfillment_channel": "pulse",
@@ -2061,7 +2444,7 @@ We are processing the report!
         "city": "MUMBAI",
         "state": "MAHARASHTRA",
         "country": "INDIA",
-        "pincode": 400093
+        "pincode": "400093"
       },
       "delivery_details": {
         "name": "Manish Prakash",
@@ -2098,7 +2481,7 @@ We are processing the report!
         "fynd_order_id": "FY62B13E2101810C19E4",
         "affiliate_id": "000000000000000000000001",
         "ordering_channel": "FYND",
-        "source": null,
+        "source": "null",
         "tax_details": {
           "gstin": null
         },
@@ -2183,42 +2566,42 @@ We are processing the report!
             "allow_force_return": false,
             "is_active": false
           },
-          "financial_breakup": [
-            {
-              "price_effective": 499,
-              "discount": 0,
-              "amount_paid": 549,
-              "coupon_effective_discount": 0,
-              "delivery_charge": 50,
-              "fynd_credits": 0,
-              "cod_charges": 0,
-              "refund_credit": 0,
-              "cashback": 0,
-              "refund_amount": 549,
-              "added_to_fynd_cash": false,
-              "cashback_applied": 0,
-              "gst_tax_percentage": 5,
-              "value_of_good": 475.24,
-              "price_marked": 499,
-              "transfer_price": 0,
-              "brand_calculated_amount": 499,
-              "promotion_effective_discount": 0,
-              "coupon_value": 0,
-              "pm_price_split": {
-                "COD": 549
-              },
-              "size": "5",
-              "total_units": 1,
-              "hsn_code": "62050000",
-              "identifiers": {
-                "sku_code": "CL-001L-L-PRPL-PINK-5"
-              },
-              "item_name": "Purple Flip Flops",
-              "gst_fee": "23.76",
-              "gst_tag": "IGST"
-            }
-          ],
-          "current_status": "delivery_done",
+          "financial_breakup": {
+            "price_effective": 499,
+            "discount": 0,
+            "amount_paid": 549,
+            "coupon_effective_discount": 0,
+            "delivery_charge": 50,
+            "fynd_credits": 0,
+            "cod_charges": 0,
+            "refund_credit": 0,
+            "cashback": 0,
+            "refund_amount": 549,
+            "added_to_fynd_cash": false,
+            "cashback_applied": 0,
+            "gst_tax_percentage": 5,
+            "value_of_good": 475.24,
+            "price_marked": 499,
+            "transfer_price": 0,
+            "brand_calculated_amount": 499,
+            "promotion_effective_discount": 0,
+            "coupon_value": 0,
+            "pm_price_split": {
+              "COD": 549
+            },
+            "size": "5",
+            "total_units": 1,
+            "hsn_code": "62050000",
+            "identifiers": {
+              "sku_code": "CL-001L-L-PRPL-PINK-5"
+            },
+            "item_name": "Purple Flip Flops",
+            "gst_fee": 23.76,
+            "gst_tag": "IGST"
+          },
+          "current_status": {
+            "id": 1
+          },
           "item": {
             "name": "Purple Flip Flops",
             "brand": "Nike",
@@ -2227,26 +2610,26 @@ We are processing the report!
               "https://hdn-1.fynd.com/products/pictures/item/free/270x0/CL-001L-L-PRPL-PINK-6/Rvk5WbGg9Hx-1.jpg"
             ],
             "size": "5",
-            "l1_category": "",
-            "l3_category": "27"
+            "l1_category": [],
+            "l3_category": 27
           },
           "brand": {
-            "modified_on": 1655707988,
+            "modified_on": "1655707988",
             "logo": "https://hdn-1.jiomarketx0.de/x0/brands/pictures/square-logo/original/DbhIvd_tB-Logo.jpeg",
             "brand_name": "Nike",
             "company": null,
-            "created_on": 1647793418,
+            "created_on": "1647793418",
             "id": 4
           },
           "gst_details": {
-            "gstin_code": null,
+            "gstin_code": "null",
             "gst_tag": "IGST",
             "hsn_code": "62050000",
             "value_of_good": 475.24,
             "gst_tax_percentage": 5,
             "is_default_hsn_code": true,
             "brand_calculated_amount": 499,
-            "gst_fee": "23.76"
+            "gst_fee": 23.76
           },
           "article": {
             "uid": "6237fdfec0903e7ae543c201",
@@ -2270,20 +2653,18 @@ We are processing the report!
         "type": "order_window"
       },
       "total_items": 1,
-      "payment_methods": [
-        {
-          "slug": "COD",
-          "payment_id": "COD",
-          "payment_amt": 549,
-          "payment_cart": null,
-          "payment_desc": "COD",
-          "bdcustomer_id": null,
-          "order_inv_num": null,
-          "mode_of_payment": "COD",
-          "payment_gateway_logo": null,
-          "transaction_ref_number": ""
-        }
-      ],
+      "payment_methods": {
+        "slug": "COD",
+        "payment_id": "COD",
+        "payment_amt": 549,
+        "payment_cart": null,
+        "payment_desc": "COD",
+        "bdcustomer_id": null,
+        "order_inv_num": null,
+        "mode_of_payment": "COD",
+        "payment_gateway_logo": null,
+        "transaction_ref_number": ""
+      },
       "vertical": "GROCERIES",
       "payments": {
         "mode": "COD",
@@ -2292,7 +2673,7 @@ We are processing the report!
       },
       "priority_text": null,
       "status": {
-        "created_at": 1655804437,
+        "created_at": "1655804437",
         "shipment_id": "16557829457641286433",
         "status": "delivery_done",
         "bag_list": [
@@ -2313,9 +2694,8 @@ We are processing the report!
         "price_effective": 499,
         "refund_credit": 0,
         "value_of_good": 475.24,
-        "pm_price_split": {
-          "COD": 549
-        },
+        "pm_price_split": 500,
+        "COD": 549,
         "brand_calculated_amount": 499,
         "coupon_effective_discount": 0,
         "tax_collected_at_source": 0,
@@ -2327,49 +2707,57 @@ We are processing the report!
           "status": "Order Placed",
           "time": "2022-06-21T09:12:32+00:00",
           "is_passed": true,
-          "is_current": false
+          "is_current": false,
+          "text": ""
         },
         {
           "status": "Order Confirmed",
           "time": "2022-06-21T09:39:13+00:00",
           "is_passed": true,
-          "is_current": false
+          "is_current": false,
+          "text": ""
         },
         {
           "status": "Invoiced",
           "time": "2022-06-21T09:40:12+00:00",
           "is_passed": true,
-          "is_current": false
+          "is_current": false,
+          "text": ""
         },
         {
           "status": "Delivery Partner Assigned",
           "time": "2022-06-21T09:40:12+00:00",
           "is_passed": true,
-          "is_current": false
+          "is_current": false,
+          "text": ""
         },
         {
           "status": "Packed",
           "time": "2022-06-21T09:40:12+00:00",
           "is_passed": true,
-          "is_current": false
+          "is_current": false,
+          "text": ""
         },
         {
           "status": "In Transit",
           "time": "2022-06-21T09:40:12+00:00",
           "is_passed": true,
-          "is_current": false
+          "is_current": false,
+          "text": ""
         },
         {
           "status": "Out For Delivery",
           "time": "2022-06-21T09:40:29+00:00",
           "is_passed": true,
-          "is_current": false
+          "is_current": false,
+          "text": ""
         },
         {
           "status": "Delivered",
           "time": "2022-06-21T09:40:37+00:00",
           "is_passed": true,
-          "is_current": true
+          "is_current": true,
+          "text": ""
         }
       ],
       "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36",
@@ -2416,7 +2804,7 @@ except Exception as e:
 
 
 
-
+Get Order Details by ID
 
 *Returned Response:*
 
@@ -2450,7 +2838,7 @@ We are processing the report!
       "payment_type": "self",
       "mongo_cart_id": 1835,
       "order_platform": "platform-site",
-      "ordering_store": null,
+      "ordering_store": 1,
       "order_child_entities": [
         "bag",
         "shipment"
@@ -2740,45 +3128,46 @@ We are processing the report!
             "can_be_cancelled": true,
             "enable_tracking": true,
             "is_customer_return_allowed": false,
-            "is_active": true
+            "is_active": true,
+            "allow_force_return": true
           },
-          "financial_breakup": [
-            {
-              "price_effective": 524.25,
-              "discount": 174.75,
-              "amount_paid": 474.25,
-              "coupon_effective_discount": 0,
-              "delivery_charge": 0,
-              "fynd_credits": 0,
-              "cod_charges": 0,
-              "refund_credit": 0,
-              "cashback": 0,
-              "refund_amount": 474.25,
-              "added_to_fynd_cash": false,
-              "cashback_applied": 0,
-              "gst_tax_percentage": 18,
-              "value_of_good": 401.91,
-              "price_marked": 699,
-              "transfer_price": 0,
-              "brand_calculated_amount": 474.25,
-              "tax_collected_at_source": 0,
-              "tcs_percentage": 0,
-              "promotion_effective_discount": 50,
-              "coupon_value": 0,
-              "amount_paid_roundoff": 474,
-              "size": "OS",
-              "total_units": 1,
-              "hsn_code": "20472574",
-              "identifiers": {
-                "ean": "6902395784364",
-                "sku_code": "1020820"
-              },
-              "item_name": "L'Oreal Paris Rouge Signature Matte Liquid Lipstick, 146 I Enlight",
-              "gst_fee": 72.34,
-              "gst_tag": "SGST"
-            }
-          ],
-          "current_status": "bag_confirmed",
+          "financial_breakup": {
+            "price_effective": 524,
+            "discount": 174,
+            "amount_paid": 474.25,
+            "coupon_effective_discount": 0,
+            "delivery_charge": 0,
+            "fynd_credits": 0,
+            "cod_charges": 0,
+            "refund_credit": 0,
+            "cashback": 0,
+            "refund_amount": 474.25,
+            "added_to_fynd_cash": false,
+            "cashback_applied": 0,
+            "gst_tax_percentage": 18,
+            "value_of_good": 401.91,
+            "price_marked": 699,
+            "transfer_price": 0,
+            "brand_calculated_amount": 474.25,
+            "tax_collected_at_source": 0,
+            "tcs_percentage": 0,
+            "promotion_effective_discount": 50,
+            "coupon_value": 0,
+            "amount_paid_roundoff": 474,
+            "size": "OS",
+            "total_units": 1,
+            "hsn_code": "20472574",
+            "identifiers": {
+              "ean": "6902395784364",
+              "sku_code": "1020820"
+            },
+            "item_name": "L'Oreal Paris Rouge Signature Matte Liquid Lipstick, 146 I Enlight",
+            "gst_fee": 72.34,
+            "gst_tag": "SGST"
+          },
+          "current_status": {
+            "id": 1
+          },
           "item": {
             "name": "L'Oreal Paris Rouge Signature Matte Liquid Lipstick, 146 I Enlight",
             "brand": "L'Oreal Paris",
@@ -2848,7 +3237,7 @@ We are processing the report!
             "coupon_code": null
           },
           "quantity": 1,
-          "identifier": null,
+          "identifier": "",
           "applied_promos": [
             {
               "amount": 50,
@@ -2996,7 +3385,7 @@ We are processing the report!
         "external_invoice_id": ""
       },
       "can_process": true,
-      "estimated_sla_time": null,
+      "estimated_sla_time": "null",
       "tracking_url": "",
       "meta": {
         "dp_id": "9",
@@ -3154,7 +3543,7 @@ We are processing the report!
         },
         "fulfilment_type": null
       },
-      "custom_meta": {}
+      "custom_meta": []
     }
   ]
 }
@@ -3180,7 +3569,7 @@ We are processing the report!
 
 ```python
 try:
-    result = await platformClient.order.getLaneConfig(superLane=superLane, groupEntity=groupEntity, fromDate=fromDate, toDate=toDate, dpIds=dpIds, stores=stores, salesChannels=salesChannels, paymentMode=paymentMode, bagStatus=bagStatus, searchType=searchType, searchValue=searchValue, tags=tags, timeToDispatch=timeToDispatch, paymentMethods=paymentMethods, myOrders=myOrders)
+    result = await platformClient.order.getLaneConfig(superLane=superLane, groupEntity=groupEntity, fromDate=fromDate, toDate=toDate, dpIds=dpIds, stores=stores, salesChannels=salesChannels, paymentMode=paymentMode, bagStatus=bagStatus, searchType=searchType, searchValue=searchValue, tags=tags, timeToDispatch=timeToDispatch, paymentMethods=paymentMethods, myOrders=myOrders, showCrossCompanyData=showCrossCompanyData)
     # use result
 except Exception as e:
     print(e)
@@ -3206,11 +3595,12 @@ except Exception as e:
 | tags | String? | no |  |   
 | timeToDispatch | String? | no |  |   
 | paymentMethods | String? | no |  |   
-| myOrders | Boolean? | no |  |  
+| myOrders | Boolean? | no |  |   
+| showCrossCompanyData | Boolean? | no | Flag to view cross & non-cross company order |  
 
 
 
-
+Get lane config for the order
 
 *Returned Response:*
 
@@ -3324,7 +3714,7 @@ Response containing count of shipments of the given status
 
 ```python
 try:
-    result = await platformClient.order.getOrders(lane=lane, searchType=searchType, bagStatus=bagStatus, timeToDispatch=timeToDispatch, paymentMethods=paymentMethods, tags=tags, searchValue=searchValue, fromDate=fromDate, toDate=toDate, dpIds=dpIds, stores=stores, salesChannels=salesChannels, pageNo=pageNo, pageSize=pageSize, isPrioritySort=isPrioritySort, customMeta=customMeta, myOrders=myOrders)
+    result = await platformClient.order.getOrders(lane=lane, searchType=searchType, bagStatus=bagStatus, timeToDispatch=timeToDispatch, paymentMethods=paymentMethods, tags=tags, searchValue=searchValue, fromDate=fromDate, toDate=toDate, dpIds=dpIds, stores=stores, salesChannels=salesChannels, pageNo=pageNo, pageSize=pageSize, isPrioritySort=isPrioritySort, customMeta=customMeta, myOrders=myOrders, showCrossCompanyData=showCrossCompanyData, customerId=customerId)
     # use result
 except Exception as e:
     print(e)
@@ -3352,11 +3742,13 @@ except Exception as e:
 | pageSize | Int? | no |  |   
 | isPrioritySort | Boolean? | no |  |   
 | customMeta | String? | no |  |   
-| myOrders | Boolean? | no |  |  
+| myOrders | Boolean? | no |  |   
+| showCrossCompanyData | Boolean? | no | Flag to view cross & non-cross company order |   
+| customerId | String? | no |  |  
 
 
 
-
+Get Orders Listing
 
 *Returned Response:*
 
@@ -3444,7 +3836,7 @@ Success. Check the example shown below or refer `PlatformShipmentTrack` for more
       "account_name": "fyndr",
       "awb": "2125658183710",
       "raw_status": "dp_assigned",
-      "meta": null
+      "meta": {}
     }
   ]
 }
@@ -3487,7 +3879,7 @@ except Exception as e:
 
 
 
-
+Get Listing Filters
 
 *Returned Response:*
 
@@ -3903,7 +4295,7 @@ except Exception as e:
 
 
 
-
+Generate Bulk Shipment Excel Report.
 
 *Returned Response:*
 
@@ -3971,7 +4363,7 @@ except Exception as e:
 
 
 
-
+Get Bulk Action seller templates.
 
 *Returned Response:*
 
@@ -4035,7 +4427,7 @@ except Exception as e:
 
 
 
-
+Download bulk actions seller templates.
 
 *Returned Response:*
 
@@ -4254,7 +4646,7 @@ except Exception as e:
 
 
 
-
+Get Order Bag Details.
 
 *Returned Response:*
 
@@ -4319,7 +4711,7 @@ except Exception as e:
 
 
 
-
+Get Bags for the order
 
 *Returned Response:*
 
@@ -4378,7 +4770,7 @@ except Exception as e:
 
 
 
-
+Generate POS recipt by order id.
 
 *Returned Response:*
 
@@ -5624,7 +6016,7 @@ We are processing the request!
  | ---------- | ---- | -------- | ----------- |
  | charges | ArrayList<[Charge](#Charge)>? |  yes  |  |
  | meta | HashMap<String,Any>? |  yes  |  |
- | customMessasge | String? |  yes  |  |
+ | customMessage | String? |  yes  |  |
  | quantity | Int? |  yes  |  |
  | sellerIdentifier | String |  no  |  |
  | externalLineId | String? |  yes  |  |
@@ -5739,6 +6131,7 @@ We are processing the request!
  | ---------- | ---- | -------- | ----------- |
  | b2BGstinNumber | String? |  yes  |  |
  | gstin | String? |  yes  |  |
+ | panNo | String? |  yes  |  |
 
 ---
 
@@ -5973,6 +6366,18 @@ We are processing the request!
 
  
  
+ #### [RoleBaseStateTransitionMapping](#RoleBaseStateTransitionMapping)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | success | Boolean? |  yes  |  |
+ | nextStatuses | ArrayList<String>? |  yes  |  |
+
+---
+
+
+ 
+ 
  #### [FetchCreditBalanceRequestPayload](#FetchCreditBalanceRequestPayload)
 
  | Properties | Type | Nullable | Description |
@@ -6201,6 +6606,154 @@ We are processing the request!
  | success | Boolean? |  yes  |  |
  | message | String? |  yes  |  |
  | data | [VerifyOtpResponseData](#VerifyOtpResponseData)? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [CourierPartnerTrackingDetails](#CourierPartnerTrackingDetails)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | operationalStatus | String |  no  | Operational status of OMS |
+ | dpStatus | String |  no  | Status at Courier partner end |
+ | shipmentId | String |  no  | Shipment ID |
+ | awb | String |  no  | AWB Number |
+ | dpStatusUpdatedAt | String |  no  | Date Time at which status was updated at Courier partner |
+ | remark | String? |  yes  | Remark from courier partner |
+ | id | Int? |  yes  | Id of Tracking history |
+ | dpLocation | String? |  yes  | Current location of Courier partner |
+ | estimatedDeliveryDate | String? |  yes  | Estimated delivery date received from Courier partner |
+ | journey | String |  no  | Journey type of the shipment |
+ | meta | HashMap<String,Any>? |  yes  | Meta field to store Courier partner's meta data |
+ | dpName | String |  no  | Courier Partner name |
+ | promisedDeliveryDate | String? |  yes  | Promised delivery date received from Courier partner |
+
+---
+
+
+ 
+ 
+ #### [PageDetails](#PageDetails)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | itemTotal | Int |  no  | Total count of the results present in the requested filter |
+ | current | Int? |  yes  | Current page number |
+ | size | Int? |  yes  | Page size |
+ | type | String? |  yes  | Type of the page |
+ | hasNext | Boolean? |  yes  | if next page contains any result |
+
+---
+
+
+ 
+ 
+ #### [CourierPartnerTrackingResponse](#CourierPartnerTrackingResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | items | ArrayList<[CourierPartnerTrackingDetails](#CourierPartnerTrackingDetails)>? |  yes  |  |
+ | page | [PageDetails](#PageDetails)? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [BulkReportsDownloadRequest](#BulkReportsDownloadRequest)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | storeIds | ArrayList<String>? |  yes  | Download for specific store ids. |
+ | laneType | String? |  yes  |  |
+ | customHeaders | String? |  yes  | Download report with specific headers |
+ | reportType | String? |  yes  | Type of report |
+ | fromDate | String? |  yes  |  |
+ | toDate | String? |  yes  |  |
+ | entities | ArrayList<String>? |  yes  | Download for specific enitites, entities can be bag, shipment or order_id, etc. |
+ | filterType | String? |  yes  |  |
+ | isCrossCompanyEnabled | Boolean? |  yes  | Download lanes for cross company. |
+ | customFiltersForLane | HashMap<String,Any>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [BulkReportsDownloadResponse](#BulkReportsDownloadResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | success | Boolean? |  yes  |  |
+ | batchId | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [BulkReportsDownloadFailedResponse](#BulkReportsDownloadFailedResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | status | Boolean? |  yes  |  |
+ | error | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [EInvoiceRetryShipmentData](#EInvoiceRetryShipmentData)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | shipmentId | String |  no  |  |
+
+---
+
+
+ 
+ 
+ #### [EInvoiceRetry](#EInvoiceRetry)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | shipmentsData | ArrayList<[EInvoiceRetryShipmentData](#EInvoiceRetryShipmentData)>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [EInvoiceResponseData](#EInvoiceResponseData)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | shipmentId | String |  no  |  |
+ | message | String |  no  |  |
+ | success | Boolean |  no  |  |
+ | ackNo | String? |  yes  |  |
+ | irn | String? |  yes  |  |
+ | ackDt | String? |  yes  |  |
+ | timeout | Int? |  yes  |  |
+ | timeoutUnit | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [EInvoiceRetryResponse](#EInvoiceRetryResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | success | Boolean? |  yes  |  |
+ | successCount | Int |  no  |  |
+ | message | String? |  yes  |  |
+ | responseData | ArrayList<[EInvoiceResponseData](#EInvoiceResponseData)> |  no  |  |
 
 ---
 

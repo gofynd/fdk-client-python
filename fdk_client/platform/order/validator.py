@@ -96,6 +96,11 @@ from ..PlatformModel import BaseSchema
     
     
         
+        
+        
+    
+    
+        
     
     
         
@@ -111,6 +116,25 @@ from ..PlatformModel import BaseSchema
     
     
         
+    
+    
+        
+    
+    
+        
+        
+        
+        
+        
+    
+    
+        
+    
+    
+        
+        
+        
+        
         
         
         
@@ -162,8 +186,11 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
+        
+        
         
         
         
@@ -432,6 +459,17 @@ class OrderValidator:
          
         
     
+    class getAllowedStateTransition(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        ordering_channel = fields.Str(required=False)
+        
+        status = fields.Str(required=False)
+         
+        
+    
     class fetchCreditBalanceDetail(BaseSchema):
         
         
@@ -467,6 +505,42 @@ class OrderValidator:
          
         
     
+    class downloadLanesReport(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class eInvoiceRetry(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class trackShipment(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        shipment_id = fields.Str(required=False)
+        
+        awb = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+         
+        
+    
+    class updateShipmentTracking(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
     class getShipments(BaseSchema):
         
         
@@ -478,7 +552,7 @@ class OrderValidator:
         
         status_override_lane = fields.Boolean(required=False)
         
-        time_to_dispatch = fields.Str(required=False)
+        time_to_dispatch = fields.Float(required=False)
         
         search_type = fields.Str(required=False)
         
@@ -518,7 +592,13 @@ class OrderValidator:
         
         platform_user_id = fields.Str(required=False)
         
+        sort_type = fields.Str(required=False)
+        
+        show_cross_company_data = fields.Boolean(required=False)
+        
         tags = fields.Str(required=False)
+        
+        customer_id = fields.Str(required=False)
          
         
     
@@ -576,6 +656,8 @@ class OrderValidator:
         payment_methods = fields.Str(required=False)
         
         my_orders = fields.Boolean(required=False)
+        
+        show_cross_company_data = fields.Boolean(required=False)
          
         
     
@@ -617,6 +699,10 @@ class OrderValidator:
         custom_meta = fields.Str(required=False)
         
         my_orders = fields.Boolean(required=False)
+        
+        show_cross_company_data = fields.Boolean(required=False)
+        
+        customer_id = fields.Str(required=False)
          
         
     

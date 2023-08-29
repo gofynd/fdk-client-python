@@ -172,6 +172,14 @@ class BulkLocationSerializer(BaseSchema):
     pass
 
 
+class AverageOrderProcessingTime(BaseSchema):
+    pass
+
+
+class StoreTagsResponseSchema(BaseSchema):
+    pass
+
+
 
 
 
@@ -865,6 +873,16 @@ class GetLocationSerializer(BaseSchema):
     
     modified_by = fields.Nested(UserSerializer, required=False)
     
+    tags = fields.List(fields.Str(required=False), required=False)
+    
+    default_order_acceptance_timing = fields.Boolean(required=False)
+    
+    order_acceptance_timing = fields.List(fields.Nested(LocationDayWiseSerializer, required=False), required=False)
+    
+    avg_order_processing_time = fields.Nested(AverageOrderProcessingTime, required=False)
+    
+    bulk_shipment = fields.Boolean(required=False)
+    
 
 
 class LocationListSerializer(BaseSchema):
@@ -949,6 +967,16 @@ class LocationSerializer(BaseSchema):
     
     notification_emails = fields.List(fields.Str(required=False), required=False)
     
+    tags = fields.List(fields.Str(required=False), required=False)
+    
+    default_order_acceptance_timing = fields.Boolean(required=False)
+    
+    order_acceptance_timing = fields.List(fields.Nested(LocationDayWiseSerializer, required=False), required=False)
+    
+    avg_order_processing_time = fields.Nested(AverageOrderProcessingTime, required=False)
+    
+    bulk_shipment = fields.Boolean(required=False)
+    
 
 
 class BulkLocationSerializer(BaseSchema):
@@ -956,6 +984,26 @@ class BulkLocationSerializer(BaseSchema):
 
     
     data = fields.List(fields.Nested(LocationSerializer, required=False), required=False)
+    
+
+
+class AverageOrderProcessingTime(BaseSchema):
+    # CompanyProfile swagger.json
+
+    
+    duration = fields.Int(required=False)
+    
+    duration_type = fields.Str(required=False)
+    
+
+
+class StoreTagsResponseSchema(BaseSchema):
+    # CompanyProfile swagger.json
+
+    
+    tags = fields.List(fields.Str(required=False), required=False)
+    
+    success = fields.Boolean(required=False)
     
 
 

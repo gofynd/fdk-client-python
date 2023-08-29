@@ -200,10 +200,6 @@ class DefaultCurrency(BaseSchema):
     pass
 
 
-class CurrencyConfig(BaseSchema):
-    pass
-
-
 class DomainAdd(BaseSchema):
     pass
 
@@ -604,10 +600,6 @@ class Application(BaseSchema):
     pass
 
 
-class UnhandledError(BaseSchema):
-    pass
-
-
 class InvalidPayloadRequest(BaseSchema):
     pass
 
@@ -637,18 +629,6 @@ class ArticleAssignmentRule(BaseSchema):
 
 
 class InventoryArticleAssignment(BaseSchema):
-    pass
-
-
-class CompanyAboutAddress(BaseSchema):
-    pass
-
-
-class UserEmail(BaseSchema):
-    pass
-
-
-class UserPhoneNumber(BaseSchema):
     pass
 
 
@@ -843,7 +823,7 @@ class InventoryStore(BaseSchema):
     
     stores = fields.List(fields.Raw(required=False), required=False)
     
-    rules = fields.Nested(AppStoreRules, required=False)
+    rules = fields.List(fields.Nested(AppStoreRules, required=False), required=False)
     
 
 
@@ -951,7 +931,7 @@ class DeliveryCharges(BaseSchema):
     
     enabled = fields.Boolean(required=False)
     
-    charges = fields.Nested(Charges, required=False)
+    charges = fields.List(fields.Nested(Charges, required=False), required=False)
     
 
 
@@ -1412,28 +1392,6 @@ class DefaultCurrency(BaseSchema):
     ref = fields.Str(required=False)
     
     code = fields.Str(required=False)
-    
-
-
-class CurrencyConfig(BaseSchema):
-    # Configuration swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    is_active = fields.Boolean(required=False)
-    
-    name = fields.Str(required=False)
-    
-    code = fields.Str(required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    updated_at = fields.Str(required=False)
-    
-    decimal_digits = fields.Int(required=False)
-    
-    symbol = fields.Str(required=False)
     
 
 
@@ -2747,14 +2705,6 @@ class Application(BaseSchema):
     
 
 
-class UnhandledError(BaseSchema):
-    # Configuration swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-
-
 class InvalidPayloadRequest(BaseSchema):
     # Configuration swagger.json
 
@@ -2830,56 +2780,6 @@ class InventoryArticleAssignment(BaseSchema):
     post_order_reassignment = fields.Boolean(required=False)
     
     rules = fields.Nested(ArticleAssignmentRule, required=False)
-    
-
-
-class CompanyAboutAddress(BaseSchema):
-    # Configuration swagger.json
-
-    
-    pincode = fields.Int(required=False)
-    
-    address1 = fields.Str(required=False)
-    
-    address2 = fields.Str(required=False)
-    
-    city = fields.Str(required=False)
-    
-    state = fields.Str(required=False)
-    
-    country = fields.Str(required=False)
-    
-    address_type = fields.Str(required=False)
-    
-
-
-class UserEmail(BaseSchema):
-    # Configuration swagger.json
-
-    
-    active = fields.Boolean(required=False)
-    
-    primary = fields.Boolean(required=False)
-    
-    verified = fields.Boolean(required=False)
-    
-    email = fields.Str(required=False)
-    
-
-
-class UserPhoneNumber(BaseSchema):
-    # Configuration swagger.json
-
-    
-    active = fields.Boolean(required=False)
-    
-    primary = fields.Boolean(required=False)
-    
-    verified = fields.Boolean(required=False)
-    
-    country_code = fields.Int(required=False)
-    
-    phone = fields.Str(required=False)
     
 
 

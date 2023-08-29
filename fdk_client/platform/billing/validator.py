@@ -63,6 +63,15 @@ from ..PlatformModel import BaseSchema
     
     
         
+    
+    
+        
+    
+    
+        
+    
+    
+        
 
 
 
@@ -183,6 +192,27 @@ class BillingValidator:
         
     
     class cancelSubscriptionPlan(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class getEnterprisePlans(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class planStatusUpdate(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class subscripePlan(BaseSchema):
         
         
         company_id = fields.Str(required=False)

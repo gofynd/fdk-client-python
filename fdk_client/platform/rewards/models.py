@@ -68,10 +68,6 @@ class AppUser(BaseSchema):
     pass
 
 
-class GiveawayAudience(BaseSchema):
-    pass
-
-
 class HistoryRes(BaseSchema):
     pass
 
@@ -336,16 +332,6 @@ class AppUser(BaseSchema):
     updated_by = fields.Str(required=False)
     
     user_id = fields.Str(required=False)
-    
-
-
-class GiveawayAudience(BaseSchema):
-    # Rewards swagger.json
-
-    
-    audience_id = fields.Str(required=False)
-    
-    current_count = fields.Float(required=False)
     
 
 

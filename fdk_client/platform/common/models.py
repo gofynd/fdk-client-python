@@ -12,10 +12,6 @@ class ApplicationResponse(BaseSchema):
     pass
 
 
-class Currency(BaseSchema):
-    pass
-
-
 class Domain(BaseSchema):
     pass
 
@@ -56,10 +52,6 @@ class BadRequest(BaseSchema):
     pass
 
 
-class Page(BaseSchema):
-    pass
-
-
 class LocationDefaultLanguage(BaseSchema):
     pass
 
@@ -84,12 +76,6 @@ class ApplicationResponse(BaseSchema):
 
     
     application = fields.Nested(Application, required=False)
-    
-
-
-class Currency(BaseSchema):
-    # Common swagger.json
-
     
     _id = fields.Str(required=False)
     
@@ -255,26 +241,6 @@ class BadRequest(BaseSchema):
     
 
 
-class Page(BaseSchema):
-    # Common swagger.json
-
-    
-    item_total = fields.Int(required=False)
-    
-    next_id = fields.Str(required=False)
-    
-    has_previous = fields.Boolean(required=False)
-    
-    has_next = fields.Boolean(required=False)
-    
-    current = fields.Int(required=False)
-    
-    type = fields.Str(required=False)
-    
-    size = fields.Int(required=False)
-    
-
-
 class LocationDefaultLanguage(BaseSchema):
     # Common swagger.json
 
@@ -341,7 +307,7 @@ class Locations(BaseSchema):
     # Common swagger.json
 
     
-    items = fields.List(fields.Dict(required=False), required=False)
+    items = fields.List(fields.Nested(LocationCountry, required=False), required=False)
     
 
 

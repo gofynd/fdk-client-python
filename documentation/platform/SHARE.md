@@ -77,6 +77,8 @@ Success
       "type": "web",
       "link": "https://0icof6vvsf.hostx0.de/products/?brand=ruosh"
     },
+    "expiry": "",
+    "url": "",
     "force_web": false
   },
   "created_by": "team",
@@ -91,7 +93,7 @@ Success
   "meta": {
     "type": "brand"
   },
-  "expire_at": null,
+  "expire_at": "",
   "application": "5eda528b97457fe43a733ace",
   "user_id": "5e4d01e2c39837ab66144f6d",
   "created_at": "2021-02-03T07:43:01.342Z",
@@ -178,6 +180,8 @@ Success
           "type": "web",
           "link": "https://0icof6vvsf.hostx0.de/products/?brand=ruosh"
         },
+        "expiry": "",
+        "url": "",
         "force_web": false
       },
       "created_by": "team",
@@ -192,7 +196,7 @@ Success
       "meta": {
         "type": "brand"
       },
-      "expire_at": null,
+      "expire_at": "",
       "application": "5eda528b97457fe43a733ace",
       "user_id": "5e4d01e2c39837ab66144f6d",
       "created_at": "2021-02-03T07:43:01.342Z",
@@ -282,6 +286,8 @@ Success
       "type": "web",
       "link": "https://0icof6vvsf.hostx0.de/products/?brand=ruosh"
     },
+    "expiry": "",
+    "url": "",
     "force_web": false
   },
   "created_by": "team",
@@ -296,7 +302,7 @@ Success
   "meta": {
     "type": "brand"
   },
-  "expire_at": null,
+  "expire_at": "",
   "application": "5eda528b97457fe43a733ace",
   "user_id": "5e4d01e2c39837ab66144f6d",
   "created_at": "2021-02-03T07:43:01.342Z",
@@ -377,6 +383,8 @@ Success
       "type": "web",
       "link": "https://0icof6vvsf.hostx0.de/products/?brand=ruosh"
     },
+    "expiry": "",
+    "url": "",
     "force_web": false
   },
   "created_by": "team",
@@ -391,7 +399,7 @@ Success
   "meta": {
     "type": "brand"
   },
-  "expire_at": null,
+  "expire_at": "",
   "application": "5eda528b97457fe43a733ace",
   "user_id": "5e4d01e2c39837ab66144f6d",
   "created_at": "2021-02-03T07:43:01.342Z",
@@ -488,8 +496,8 @@ Successful retrieval of click statistics.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | display | String? |  yes  | The display name of the click statistic. |
- | total | Int? |  yes  | The total number of clicks for the statistic. |
+ | display | String |  no  | The display name of the click statistic. |
+ | total | Int |  no  | The total number of clicks for the statistic. |
 
 ---
 

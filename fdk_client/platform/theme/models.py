@@ -8,6 +8,30 @@ from ..PlatformModel import BaseSchema
 
 
 
+class ThemeReq(BaseSchema):
+    pass
+
+
+class CompanyThemeSchema(BaseSchema):
+    pass
+
+
+class MarketplaceThemeId(BaseSchema):
+    pass
+
+
+class ThemeMeta(BaseSchema):
+    pass
+
+
+class ThemePayment(BaseSchema):
+    pass
+
+
+class ThemeImages(BaseSchema):
+    pass
+
+
 class AvailablePageSchema(BaseSchema):
     pass
 
@@ -44,19 +68,7 @@ class AllAvailablePageSchema(BaseSchema):
     pass
 
 
-class PaginationSchema(BaseSchema):
-    pass
-
-
-class ThemesListingResponseSchema(BaseSchema):
-    pass
-
-
 class AddThemeRequestSchema(BaseSchema):
-    pass
-
-
-class UpgradableThemeSchema(BaseSchema):
     pass
 
 
@@ -65,10 +77,6 @@ class FontsSchema(BaseSchema):
 
 
 class BlitzkriegApiErrorSchema(BaseSchema):
-    pass
-
-
-class BlitzkriegNotFoundSchema(BaseSchema):
     pass
 
 
@@ -88,67 +96,15 @@ class ThemesSchema(BaseSchema):
     pass
 
 
-class availableSectionSchema(BaseSchema):
+class ThemeUpgradableResponse(BaseSchema):
     pass
 
 
-class Information(BaseSchema):
+class UpdateThemeNameRequestBody(BaseSchema):
     pass
 
 
-class Images(BaseSchema):
-    pass
-
-
-class Src(BaseSchema):
-    pass
-
-
-class AssetsSchema(BaseSchema):
-    pass
-
-
-class UmdJs(BaseSchema):
-    pass
-
-
-class CommonJs(BaseSchema):
-    pass
-
-
-class Css(BaseSchema):
-    pass
-
-
-class Sections(BaseSchema):
-    pass
-
-
-class Config(BaseSchema):
-    pass
-
-
-class Preset(BaseSchema):
-    pass
-
-
-class GlobalSchema(BaseSchema):
-    pass
-
-
-class ListSchemaItem(BaseSchema):
-    pass
-
-
-class Colors(BaseSchema):
-    pass
-
-
-class Custom(BaseSchema):
-    pass
-
-
-class ConfigPage(BaseSchema):
+class UpdateThemeRequestBody(BaseSchema):
     pass
 
 
@@ -156,43 +112,285 @@ class Font(BaseSchema):
     pass
 
 
-class Variants(BaseSchema):
+class FontVariants(BaseSchema):
     pass
 
 
-class Medium(BaseSchema):
+class FontVariant(BaseSchema):
     pass
 
 
-class SemiBold(BaseSchema):
+class Config(BaseSchema):
     pass
 
 
-class Bold(BaseSchema):
+class ThemeConfiguration(BaseSchema):
     pass
 
 
-class Light(BaseSchema):
+class GlobalConfig(BaseSchema):
     pass
 
 
-class Regular(BaseSchema):
+class StaticConfig(BaseSchema):
     pass
 
 
-class Blocks(BaseSchema):
+class CustomConfig(BaseSchema):
     pass
 
 
-class GlobalSchemaProps(BaseSchema):
+class Meta(BaseSchema):
     pass
 
 
-class BlocksProps(BaseSchema):
+class Release(BaseSchema):
+    pass
+
+
+class Images(BaseSchema):
+    pass
+
+
+class StaticProps(BaseSchema):
+    pass
+
+
+class Colors(BaseSchema):
+    pass
+
+
+class AuthConfig(BaseSchema):
+    pass
+
+
+class PaletteConfig(BaseSchema):
+    pass
+
+
+class GeneralSetting(BaseSchema):
+    pass
+
+
+class AdvanceSetting(BaseSchema):
+    pass
+
+
+class ThemeSetting(BaseSchema):
+    pass
+
+
+class TextSetting(BaseSchema):
+    pass
+
+
+class ButtonSetting(BaseSchema):
+    pass
+
+
+class SaleDiscountSetting(BaseSchema):
+    pass
+
+
+class HeaderSetting(BaseSchema):
+    pass
+
+
+class FooterSetting(BaseSchema):
+    pass
+
+
+class OverlayPopupSetting(BaseSchema):
+    pass
+
+
+class DividerStrokeHighlightSetting(BaseSchema):
+    pass
+
+
+class UserAlertsSetting(BaseSchema):
+    pass
+
+
+class CustomProps(BaseSchema):
+    pass
+
+
+class GlobalSchema(BaseSchema):
+    pass
+
+
+class Prop(BaseSchema):
+    pass
+
+
+class Assets(BaseSchema):
+    pass
+
+
+class UMDJs(BaseSchema):
+    pass
+
+
+class CommonJS(BaseSchema):
+    pass
+
+
+class CSS(BaseSchema):
+    pass
+
+
+class SectionItem(BaseSchema):
+    pass
+
+
+class Preset(BaseSchema):
+    pass
+
+
+class Page(BaseSchema):
+    pass
+
+
+class Section(BaseSchema):
+    pass
+
+
+class Block(BaseSchema):
+    pass
+
+
+class Predicate(BaseSchema):
+    pass
+
+
+class Screen(BaseSchema):
+    pass
+
+
+class ThemeUserSchema(BaseSchema):
+    pass
+
+
+class Route(BaseSchema):
+    pass
+
+
+class SectionProps(BaseSchema):
+    pass
+
+
+class SectionPreset(BaseSchema):
+    pass
+
+
+class BlockProps(BaseSchema):
+    pass
+
+
+class TextProp(BaseSchema):
+    pass
+
+
+class CheckboxProp(BaseSchema):
+    pass
+
+
+class RangeProp(BaseSchema):
+    pass
+
+
+class ImagePickerProp(BaseSchema):
+    pass
+
+
+class UrlProp(BaseSchema):
+    pass
+
+
+class ThemeVersions(BaseSchema):
+    pass
+
+
+class DummyResponse(BaseSchema):
     pass
 
 
 
+
+
+class ThemeReq(BaseSchema):
+    # Theme swagger.json
+
+    
+    marketplace_theme_id = fields.Str(required=False)
+    
+
+
+class CompanyThemeSchema(BaseSchema):
+    # Theme swagger.json
+
+    
+    _id = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    marketplace_theme_id = fields.Nested(MarketplaceThemeId, required=False)
+    
+    company_id = fields.Int(required=False)
+    
+    meta = fields.Nested(ThemeMeta, required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    updated_at = fields.Str(required=False)
+    
+
+
+class MarketplaceThemeId(BaseSchema):
+    # Theme swagger.json
+
+    
+    _id = fields.Str(required=False)
+    
+    is_default = fields.Boolean(required=False)
+    
+
+
+class ThemeMeta(BaseSchema):
+    # Theme swagger.json
+
+    
+    payment = fields.Nested(ThemePayment, required=False)
+    
+    industry = fields.List(fields.Str(required=False), required=False)
+    
+    description = fields.Str(required=False)
+    
+    images = fields.Nested(ThemeImages, required=False)
+    
+    slug = fields.Str(required=False)
+    
+
+
+class ThemePayment(BaseSchema):
+    # Theme swagger.json
+
+    
+    is_paid = fields.Boolean(required=False)
+    
+    amount = fields.Float(required=False)
+    
+
+
+class ThemeImages(BaseSchema):
+    # Theme swagger.json
+
+    
+    desktop = fields.Str(required=False)
+    
+    mobile = fields.Str(required=False)
+    
 
 
 class AvailablePageSchema(BaseSchema):
@@ -313,49 +511,11 @@ class AllAvailablePageSchema(BaseSchema):
     
 
 
-class PaginationSchema(BaseSchema):
-    # Theme swagger.json
-
-    
-    size = fields.Int(required=False)
-    
-    item_total = fields.Int(required=False)
-    
-    has_next = fields.Boolean(required=False)
-    
-    type = fields.Str(required=False)
-    
-    current = fields.Int(required=False)
-    
-
-
-class ThemesListingResponseSchema(BaseSchema):
-    # Theme swagger.json
-
-    
-    items = fields.List(fields.Nested(ThemesSchema, required=False), required=False)
-    
-    page = fields.Nested(PaginationSchema, required=False)
-    
-
-
 class AddThemeRequestSchema(BaseSchema):
     # Theme swagger.json
 
     
     theme_id = fields.Str(required=False)
-    
-
-
-class UpgradableThemeSchema(BaseSchema):
-    # Theme swagger.json
-
-    
-    parent_theme = fields.Str(required=False)
-    
-    applied_theme = fields.Str(required=False)
-    
-    upgrade = fields.Boolean(required=False)
     
 
 
@@ -370,14 +530,6 @@ class FontsSchema(BaseSchema):
 
 
 class BlitzkriegApiErrorSchema(BaseSchema):
-    # Theme swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-
-
-class BlitzkriegNotFoundSchema(BaseSchema):
     # Theme swagger.json
 
     
@@ -431,145 +583,105 @@ class ThemesSchema(BaseSchema):
     # Theme swagger.json
 
     
-    application = fields.Str(required=False)
+    font = fields.Nested(Font, required=False)
+    
+    config = fields.Nested(Config, required=False)
     
     applied = fields.Boolean(required=False)
     
-    customized = fields.Boolean(required=False)
+    is_private = fields.Boolean(required=False)
     
-    published = fields.Boolean(required=False)
+    tags = fields.List(fields.Str(required=False), required=False)
     
-    archived = fields.Boolean(required=False)
+    _id = fields.Str(required=False)
+    
+    application_id = fields.Str(required=False)
+    
+    marketplace_theme_id = fields.Str(required=False)
+    
+    meta = fields.Nested(Meta, required=False)
+    
+    name = fields.Str(required=False)
+    
+    template_theme_id = fields.Str(required=False)
+    
+    version = fields.Str(required=False)
+    
+    styles = fields.Dict(required=False)
     
     created_at = fields.Str(required=False)
     
     updated_at = fields.Str(required=False)
     
-    version = fields.Str(required=False)
+    assets = fields.Nested(Assets, required=False)
     
-    parent_theme_version = fields.Str(required=False)
+    available_sections = fields.List(fields.Nested(SectionItem, required=False), required=False)
     
-    parent_theme = fields.Str(required=False)
+
+
+class ThemeUpgradableResponse(BaseSchema):
+    # Theme swagger.json
+
     
-    information = fields.Nested(Information, required=False)
+    upgrade = fields.Boolean(required=False)
     
-    tags = fields.List(fields.Str(required=False), required=False)
+    versions = fields.Nested(ThemeVersions, required=False)
     
-    src = fields.Nested(Src, required=False)
+    message = fields.Str(required=False)
     
-    assets = fields.Nested(AssetsSchema, required=False)
+
+
+class UpdateThemeNameRequestBody(BaseSchema):
+    # Theme swagger.json
+
     
-    available_sections = fields.List(fields.Nested(availableSectionSchema, required=False), required=False)
+    name = fields.Str(required=False)
     
-    styles = fields.Dict(required=False)
+
+
+class UpdateThemeRequestBody(BaseSchema):
+    # Theme swagger.json
+
     
     config = fields.Nested(Config, required=False)
     
     font = fields.Nested(Font, required=False)
     
-    _id = fields.Str(required=False)
-    
-    __v = fields.Int(required=False)
-    
-    colors = fields.Nested(Colors, required=False)
-    
 
 
-class availableSectionSchema(BaseSchema):
+class Font(BaseSchema):
     # Theme swagger.json
 
     
-    blocks = fields.List(fields.Nested(Blocks, required=False), required=False)
+    variants = fields.Nested(FontVariants, required=False)
+    
+    family = fields.Str(required=False)
+    
+
+
+class FontVariants(BaseSchema):
+    # Theme swagger.json
+
+    
+    light = fields.Nested(FontVariant, required=False)
+    
+    regular = fields.Nested(FontVariant, required=False)
+    
+    medium = fields.Nested(FontVariant, required=False)
+    
+    semi_bold = fields.Nested(FontVariant, required=False)
+    
+    bold = fields.Nested(FontVariant, required=False)
+    
+
+
+class FontVariant(BaseSchema):
+    # Theme swagger.json
+
     
     name = fields.Str(required=False)
     
-    label = fields.Str(required=False)
-    
-    props = fields.List(fields.Nested(BlocksProps, required=False), required=False)
-    
-
-
-class Information(BaseSchema):
-    # Theme swagger.json
-
-    
-    images = fields.Nested(Images, required=False)
-    
-    features = fields.List(fields.Str(required=False), required=False)
-    
-    name = fields.Str(required=False)
-    
-    description = fields.Str(required=False)
-    
-
-
-class Images(BaseSchema):
-    # Theme swagger.json
-
-    
-    desktop = fields.List(fields.Str(required=False), required=False)
-    
-    android = fields.List(fields.Str(required=False), required=False)
-    
-    ios = fields.List(fields.Str(required=False), required=False)
-    
-    thumbnail = fields.List(fields.Str(required=False), required=False)
-    
-
-
-class Src(BaseSchema):
-    # Theme swagger.json
-
-    
-    link = fields.Str(required=False)
-    
-
-
-class AssetsSchema(BaseSchema):
-    # Theme swagger.json
-
-    
-    umd_js = fields.Nested(UmdJs, required=False)
-    
-    common_js = fields.Nested(CommonJs, required=False)
-    
-    css = fields.Nested(Css, required=False)
-    
-
-
-class UmdJs(BaseSchema):
-    # Theme swagger.json
-
-    
-    link = fields.Str(required=False)
-    
-    links = fields.List(fields.Str(required=False), required=False)
-    
-
-
-class CommonJs(BaseSchema):
-    # Theme swagger.json
-
-    
-    link = fields.Str(required=False)
-    
-
-
-class Css(BaseSchema):
-    # Theme swagger.json
-
-    
-    link = fields.Str(required=False)
-    
-    links = fields.List(fields.Str(required=False), required=False)
-    
-
-
-class Sections(BaseSchema):
-    # Theme swagger.json
-
-    
-    attributes = fields.Str(required=False)
+    file = fields.Str(required=False)
     
 
 
@@ -577,49 +689,111 @@ class Config(BaseSchema):
     # Theme swagger.json
 
     
-    preset = fields.Nested(Preset, required=False)
+    current = fields.Str(required=False)
+    
+    list = fields.List(fields.Nested(ThemeConfiguration, required=False), required=False)
     
     global_schema = fields.Nested(GlobalSchema, required=False)
     
-    current = fields.Str(required=False)
-    
-    list = fields.List(fields.Nested(ListSchemaItem, required=False), required=False)
+    preset = fields.Nested(Preset, required=False)
     
 
 
-class Preset(BaseSchema):
+class ThemeConfiguration(BaseSchema):
     # Theme swagger.json
 
     
-    pages = fields.List(fields.Nested(AvailablePageSchema, required=False), required=False)
-    
-
-
-class GlobalSchema(BaseSchema):
-    # Theme swagger.json
-
-    
-    props = fields.List(fields.Nested(GlobalSchemaProps, required=False), required=False)
-    
-
-
-class ListSchemaItem(BaseSchema):
-    # Theme swagger.json
-
+    name = fields.Str(required=False)
     
     global_config = fields.Dict(required=False)
     
-    page = fields.List(fields.Nested(ConfigPage, required=False), required=False)
+    custom = fields.Nested(CustomConfig, required=False)
+    
+    page = fields.List(fields.Str(required=False), required=False)
+    
+
+
+class GlobalConfig(BaseSchema):
+    # Theme swagger.json
+
+    
+    statics = fields.Nested(StaticConfig, required=False)
+    
+    custom = fields.Nested(CustomConfig, required=False)
+    
+
+
+class StaticConfig(BaseSchema):
+    # Theme swagger.json
+
+    
+    props = fields.Nested(StaticProps, required=False)
+    
+
+
+class CustomConfig(BaseSchema):
+    # Theme swagger.json
+
+    
+    props = fields.Nested(CustomProps, required=False)
+    
+
+
+class Meta(BaseSchema):
+    # Theme swagger.json
+
+    
+    payment = fields.Nested(ThemePayment, required=False)
+    
+    description = fields.Str(required=False)
+    
+    industry = fields.List(fields.Str(required=False), required=False)
+    
+    release = fields.Nested(Release, required=False)
+    
+    images = fields.Nested(Images, required=False)
+    
+    slug = fields.Str(required=False)
     
     name = fields.Str(required=False)
+    
+
+
+class Release(BaseSchema):
+    # Theme swagger.json
+
+    
+    notes = fields.Str(required=False)
+    
+    version = fields.Str(required=False)
+    
+
+
+class Images(BaseSchema):
+    # Theme swagger.json
+
+    
+    desktop = fields.Str(required=False)
+    
+    mobile = fields.Str(required=False)
+    
+
+
+class StaticProps(BaseSchema):
+    # Theme swagger.json
+
+    
+    colors = fields.Nested(Colors, required=False)
+    
+    auth = fields.Nested(AuthConfig, required=False)
+    
+    palette = fields.Nested(PaletteConfig, required=False)
     
 
 
 class Colors(BaseSchema):
     # Theme swagger.json
 
-    
-    bg_color = fields.Str(required=False)
     
     primary_color = fields.Str(required=False)
     
@@ -631,137 +805,513 @@ class Colors(BaseSchema):
     
     button_secondary_color = fields.Str(required=False)
     
+    bg_color = fields.Str(required=False)
+    
 
 
-class Custom(BaseSchema):
+class AuthConfig(BaseSchema):
     # Theme swagger.json
 
     
-    props = fields.Dict(required=False)
+    show_header_auth = fields.Boolean(required=False)
+    
+    show_footer_auth = fields.Boolean(required=False)
     
 
 
-class ConfigPage(BaseSchema):
+class PaletteConfig(BaseSchema):
     # Theme swagger.json
 
     
-    settings = fields.Dict(required=False)
+    general_setting = fields.Nested(GeneralSetting, required=False)
     
-    page = fields.Str(required=False)
+    advance_setting = fields.Nested(AdvanceSetting, required=False)
     
 
 
-class Font(BaseSchema):
+class GeneralSetting(BaseSchema):
     # Theme swagger.json
 
     
-    family = fields.Str(required=False)
+    theme = fields.Nested(ThemeSetting, required=False)
     
-    variants = fields.Nested(Variants, required=False)
+    text = fields.Nested(TextSetting, required=False)
+    
+    button = fields.Nested(ButtonSetting, required=False)
+    
+    sale_discount = fields.Nested(SaleDiscountSetting, required=False)
+    
+    header = fields.Nested(HeaderSetting, required=False)
+    
+    footer = fields.Nested(FooterSetting, required=False)
     
 
 
-class Variants(BaseSchema):
+class AdvanceSetting(BaseSchema):
     # Theme swagger.json
 
     
-    medium = fields.Nested(Medium, required=False)
+    overlay_popup = fields.Nested(OverlayPopupSetting, required=False)
     
-    semi_bold = fields.Nested(SemiBold, required=False)
+    divider_stroke_highlight = fields.Nested(DividerStrokeHighlightSetting, required=False)
     
-    bold = fields.Nested(Bold, required=False)
-    
-    light = fields.Nested(Light, required=False)
-    
-    regular = fields.Nested(Regular, required=False)
+    user_alerts = fields.Nested(UserAlertsSetting, required=False)
     
 
 
-class Medium(BaseSchema):
+class ThemeSetting(BaseSchema):
     # Theme swagger.json
 
     
-    name = fields.Str(required=False)
+    page_background = fields.Str(required=False)
     
-    file = fields.Str(required=False)
+    theme_accent = fields.Str(required=False)
     
 
 
-class SemiBold(BaseSchema):
+class TextSetting(BaseSchema):
     # Theme swagger.json
 
     
-    name = fields.Str(required=False)
+    text_heading = fields.Str(required=False)
     
-    file = fields.Str(required=False)
+    text_body = fields.Str(required=False)
+    
+    text_label = fields.Str(required=False)
+    
+    text_secondary = fields.Str(required=False)
     
 
 
-class Bold(BaseSchema):
+class ButtonSetting(BaseSchema):
     # Theme swagger.json
 
     
-    name = fields.Str(required=False)
+    button_primary = fields.Str(required=False)
     
-    file = fields.Str(required=False)
+    button_secondary = fields.Str(required=False)
+    
+    button_link = fields.Str(required=False)
     
 
 
-class Light(BaseSchema):
+class SaleDiscountSetting(BaseSchema):
     # Theme swagger.json
 
     
-    name = fields.Str(required=False)
+    sale_badge_background = fields.Str(required=False)
     
-    file = fields.Str(required=False)
+    sale_badge_text = fields.Str(required=False)
+    
+    sale_discount_text = fields.Str(required=False)
+    
+    sale_timer = fields.Str(required=False)
     
 
 
-class Regular(BaseSchema):
+class HeaderSetting(BaseSchema):
     # Theme swagger.json
 
     
-    name = fields.Str(required=False)
+    header_background = fields.Str(required=False)
     
-    file = fields.Str(required=False)
+    header_nav = fields.Str(required=False)
+    
+    header_icon = fields.Str(required=False)
     
 
 
-class Blocks(BaseSchema):
+class FooterSetting(BaseSchema):
     # Theme swagger.json
 
     
-    type = fields.Str(required=False)
+    footer_background = fields.Str(required=False)
     
-    name = fields.Str(required=False)
+    footer_bottom_background = fields.Str(required=False)
     
-    props = fields.List(fields.Nested(BlocksProps, required=False), required=False)
+    footer_heading_text = fields.Str(required=False)
+    
+    footer_body_text = fields.Str(required=False)
+    
+    footer_icon = fields.Str(required=False)
     
 
 
-class GlobalSchemaProps(BaseSchema):
+class OverlayPopupSetting(BaseSchema):
     # Theme swagger.json
 
     
-    id = fields.Str(required=False)
+    dialog_backgroung = fields.Str(required=False)
     
-    label = fields.Str(required=False)
+    overlay = fields.Str(required=False)
+    
+
+
+class DividerStrokeHighlightSetting(BaseSchema):
+    # Theme swagger.json
+
+    
+    divider_strokes = fields.Str(required=False)
+    
+    highlight = fields.Str(required=False)
+    
+
+
+class UserAlertsSetting(BaseSchema):
+    # Theme swagger.json
+
+    
+    success_background = fields.Str(required=False)
+    
+    success_text = fields.Str(required=False)
+    
+    error_background = fields.Str(required=False)
+    
+    error_text = fields.Str(required=False)
+    
+    info_background = fields.Str(required=False)
+    
+    info_text = fields.Str(required=False)
+    
+
+
+class CustomProps(BaseSchema):
+    # Theme swagger.json
+
+    
+    header_bg_color = fields.Str(required=False)
+    
+    header_text_color = fields.Str(required=False)
+    
+    header_border_color = fields.Str(required=False)
+    
+    header_icon_color = fields.Str(required=False)
+    
+    header_cart_notification_bg_color = fields.Str(required=False)
+    
+    header_cart_notification_text_color = fields.Str(required=False)
+    
+    header_nav_hover_color = fields.Str(required=False)
+    
+    button_primary_color = fields.Str(required=False)
+    
+    button_primary_label_color = fields.Str(required=False)
+    
+    button_add_to_cart_color = fields.Str(required=False)
+    
+    button_add_to_cart_label_color = fields.Str(required=False)
+    
+    button_secondary_color = fields.Str(required=False)
+    
+    button_secondary_label_color = fields.Str(required=False)
+    
+    button_tertiary_color = fields.Str(required=False)
+    
+    button_tertiary_label_color = fields.Str(required=False)
+    
+    button_tertiary_hover_color = fields.Str(required=False)
+    
+    button_tertiary_hover_text_color = fields.Str(required=False)
+    
+    text_heading_link_color = fields.Str(required=False)
+    
+    text_body_color = fields.Str(required=False)
+    
+    text_price_color = fields.Str(required=False)
+    
+    text_sale_price_color = fields.Str(required=False)
+    
+    text_strikethrough_price_color = fields.Str(required=False)
+    
+    text_discount_color = fields.Str(required=False)
+    
+    footer_bg_color = fields.Str(required=False)
+    
+    footer_text_color = fields.Str(required=False)
+    
+    footer_border_color = fields.Str(required=False)
+    
+    footer_nav_hover_color = fields.Str(required=False)
+    
+    disable_cart = fields.Boolean(required=False)
+    
+    is_menu_below_logo = fields.Boolean(required=False)
+    
+    menu_position = fields.Str(required=False)
+    
+
+
+class GlobalSchema(BaseSchema):
+    # Theme swagger.json
+
+    
+    props = fields.List(fields.Nested(Prop, required=False), required=False)
+    
+
+
+class Prop(BaseSchema):
+    # Theme swagger.json
+
     
     type = fields.Str(required=False)
     
     category = fields.Str(required=False)
     
-
-
-class BlocksProps(BaseSchema):
-    # Theme swagger.json
-
-    
     id = fields.Str(required=False)
     
     label = fields.Str(required=False)
     
+    info = fields.Str(required=False)
+    
+
+
+class Assets(BaseSchema):
+    # Theme swagger.json
+
+    
+    umd_js = fields.Nested(UMDJs, required=False)
+    
+    common_js = fields.Nested(CommonJS, required=False)
+    
+    css = fields.Nested(CSS, required=False)
+    
+
+
+class UMDJs(BaseSchema):
+    # Theme swagger.json
+
+    
+    links = fields.List(fields.Str(required=False), required=False)
+    
+
+
+class CommonJS(BaseSchema):
+    # Theme swagger.json
+
+    
+    link = fields.Str(required=False)
+    
+
+
+class CSS(BaseSchema):
+    # Theme swagger.json
+
+    
+    links = fields.List(fields.Str(required=False), required=False)
+    
+
+
+class SectionItem(BaseSchema):
+    # Theme swagger.json
+
+    
+    props = fields.List(fields.Raw(required=False), required=False)
+    
+    blocks = fields.List(fields.Raw(required=False), required=False)
+    
+    name = fields.Str(required=False)
+    
+    label = fields.Str(required=False)
+    
+
+
+class Preset(BaseSchema):
+    # Theme swagger.json
+
+    
+    pages = fields.List(fields.Nested(Page, required=False), required=False)
+    
+
+
+class Page(BaseSchema):
+    # Theme swagger.json
+
+    
+    item_total = fields.Int(required=False)
+    
+    next_id = fields.Str(required=False)
+    
+    has_previous = fields.Boolean(required=False)
+    
+    has_next = fields.Boolean(required=False)
+    
+    current = fields.Int(required=False)
+    
     type = fields.Str(required=False)
+    
+    size = fields.Int(required=False)
+    
+
+
+class Section(BaseSchema):
+    # Theme swagger.json
+
+    
+    blocks = fields.List(fields.Nested(Block, required=False), required=False)
+    
+    predicate = fields.Nested(Predicate, required=False)
+    
+    name = fields.Str(required=False)
+    
+    props = fields.Nested(SectionProps, required=False)
+    
+    preset = fields.Nested(SectionPreset, required=False)
+    
+
+
+class Block(BaseSchema):
+    # Theme swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    props = fields.Nested(BlockProps, required=False)
+    
+
+
+class Predicate(BaseSchema):
+    # Theme swagger.json
+
+    
+    screen = fields.Nested(Screen, required=False)
+    
+    user = fields.Nested(ThemeUserSchema, required=False)
+    
+    route = fields.Nested(Route, required=False)
+    
+
+
+class Screen(BaseSchema):
+    # Theme swagger.json
+
+    
+    mobile = fields.Boolean(required=False)
+    
+    desktop = fields.Boolean(required=False)
+    
+    tablet = fields.Boolean(required=False)
+    
+
+
+class ThemeUserSchema(BaseSchema):
+    # Theme swagger.json
+
+    
+    authenticated = fields.Boolean(required=False)
+    
+    anonymous = fields.Boolean(required=False)
+    
+
+
+class Route(BaseSchema):
+    # Theme swagger.json
+
+    
+    selected = fields.Str(required=False)
+    
+    exact_url = fields.Str(required=False)
+    
+
+
+class SectionProps(BaseSchema):
+    # Theme swagger.json
+
+    
+    title = fields.Nested(TextProp, required=False)
+    
+    item_margin = fields.Nested(TextProp, required=False)
+    
+    autoplay = fields.Nested(CheckboxProp, required=False)
+    
+    slide_interval = fields.Nested(RangeProp, required=False)
+    
+
+
+class SectionPreset(BaseSchema):
+    # Theme swagger.json
+
+    
+    blocks = fields.List(fields.Nested(Block, required=False), required=False)
+    
+
+
+class BlockProps(BaseSchema):
+    # Theme swagger.json
+
+    
+    image = fields.Nested(ImagePickerProp, required=False)
+    
+    slide_link = fields.Nested(UrlProp, required=False)
+    
+
+
+class TextProp(BaseSchema):
+    # Theme swagger.json
+
+    
+    value = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+
+
+class CheckboxProp(BaseSchema):
+    # Theme swagger.json
+
+    
+    value = fields.Boolean(required=False)
+    
+    type = fields.Str(required=False)
+    
+
+
+class RangeProp(BaseSchema):
+    # Theme swagger.json
+
+    
+    value = fields.Int(required=False)
+    
+    type = fields.Str(required=False)
+    
+
+
+class ImagePickerProp(BaseSchema):
+    # Theme swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
+    
+
+
+class UrlProp(BaseSchema):
+    # Theme swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
+    
+
+
+class ThemeVersions(BaseSchema):
+    # Theme swagger.json
+
+    
+    parent_theme = fields.Str(required=False)
+    
+    applied_theme = fields.Str(required=False)
+    
+
+
+class DummyResponse(BaseSchema):
+    # Theme swagger.json
+
+    
+    message = fields.Str(required=False)
     
 
 

@@ -12,7 +12,7 @@ class Lead:
         self._conf = config
 
     
-    async def getTickets(self, items=None, filters=None, q=None, status=None, priority=None, category=None, page_no=None, page_size=None):
+    async def getPlatformTickets(self, items=None, filters=None, q=None, status=None, priority=None, category=None, page_no=None, page_size=None):
         """Gets the list of company level tickets and/or ticket filters
         :param items : Decides that the reponse will contain the list of tickets : type boolean
         :param filters : Decides that the reponse will contain the ticket filters : type boolean
@@ -51,7 +51,7 @@ class Lead:
         
 
         # Parameter validation
-        schema = LeadValidator.getTickets()
+        schema = LeadValidator.getPlatformTickets()
         schema.dump(schema.load(payload))
         
 
@@ -76,7 +76,7 @@ class Lead:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getTickets")
+                print("Response Validation failed for getPlatformTickets")
                 print(e)
 
         
@@ -127,7 +127,7 @@ class Lead:
 
         return response
     
-    async def getTicket(self, id=None):
+    async def getPlatformTicket(self, id=None):
         """Retreives ticket details of a company level ticket
         :param id : Tiket ID of the ticket to be fetched : type string
         """
@@ -138,7 +138,7 @@ class Lead:
         
 
         # Parameter validation
-        schema = LeadValidator.getTicket()
+        schema = LeadValidator.getPlatformTicket()
         schema.dump(schema.load(payload))
         
 
@@ -163,14 +163,14 @@ class Lead:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getTicket")
+                print("Response Validation failed for getPlatformTicket")
                 print(e)
 
         
 
         return response
     
-    async def editTicket(self, id=None, body=""):
+    async def editPlatformTicket(self, id=None, body=""):
         """Edits ticket details of a company level ticket such as status, priority, category, tags, attachments, assigne & ticket content changes
         :param id : Ticket ID of ticket to be edited : type string
         """
@@ -181,7 +181,7 @@ class Lead:
         
 
         # Parameter validation
-        schema = LeadValidator.editTicket()
+        schema = LeadValidator.editPlatformTicket()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -211,14 +211,14 @@ class Lead:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for editTicket")
+                print("Response Validation failed for editPlatformTicket")
                 print(e)
 
         
 
         return response
     
-    async def createHistory(self, id=None, body=""):
+    async def createPlatformTicketHistory(self, id=None, body=""):
         """Create history for specific company level ticket, this history is seen on ticket detail page, this can be comment, log or rating.
         :param id : Ticket ID for which history is created : type string
         """
@@ -229,7 +229,7 @@ class Lead:
         
 
         # Parameter validation
-        schema = LeadValidator.createHistory()
+        schema = LeadValidator.createPlatformTicketHistory()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -259,14 +259,14 @@ class Lead:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for createHistory")
+                print("Response Validation failed for createPlatformTicketHistory")
                 print(e)
 
         
 
         return response
     
-    async def getTicketHistory(self, id=None):
+    async def getPlatformTicketHistory(self, id=None):
         """Gets history list for specific company level ticket, this history is seen on ticket detail page, this can be comment, log or rating.
         :param id : Ticket ID for which history is to be fetched : type string
         """
@@ -277,7 +277,7 @@ class Lead:
         
 
         # Parameter validation
-        schema = LeadValidator.getTicketHistory()
+        schema = LeadValidator.getPlatformTicketHistory()
         schema.dump(schema.load(payload))
         
 
@@ -302,7 +302,7 @@ class Lead:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getTicketHistory")
+                print("Response Validation failed for getPlatformTicketHistory")
                 print(e)
 
         
@@ -400,7 +400,7 @@ class Lead:
 
         return response
     
-    async def getTokenForVideoRoom(self, unique_name=None):
+    async def getTokenForPlatformVideoRoom(self, unique_name=None):
         """Get Token to join a specific Video Room using it's unqiue name, this Token is your ticket to Room and also creates your identity there.
         :param unique_name : Unique name of video room : type string
         """
@@ -411,7 +411,7 @@ class Lead:
         
 
         # Parameter validation
-        schema = LeadValidator.getTokenForVideoRoom()
+        schema = LeadValidator.getTokenForPlatformVideoRoom()
         schema.dump(schema.load(payload))
         
 
@@ -436,14 +436,14 @@ class Lead:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getTokenForVideoRoom")
+                print("Response Validation failed for getTokenForPlatformVideoRoom")
                 print(e)
 
         
 
         return response
     
-    async def getVideoParticipants(self, unique_name=None):
+    async def getPlatformVideoParticipants(self, unique_name=None):
         """Get participants of a specific Video Room using it's unique name, this can be used to check if people are already there in the room and also to show their names.
         :param unique_name : Unique name of Video Room : type string
         """
@@ -454,7 +454,7 @@ class Lead:
         
 
         # Parameter validation
-        schema = LeadValidator.getVideoParticipants()
+        schema = LeadValidator.getPlatformVideoParticipants()
         schema.dump(schema.load(payload))
         
 
@@ -479,7 +479,7 @@ class Lead:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getVideoParticipants")
+                print("Response Validation failed for getPlatformVideoParticipants")
                 print(e)
 
         

@@ -52,10 +52,6 @@ class BadRequest(BaseSchema):
     pass
 
 
-class ResourceNotFound(BaseSchema):
-    pass
-
-
 class InternalServerError(BaseSchema):
     pass
 
@@ -198,14 +194,6 @@ class Location(BaseSchema):
 
 
 class BadRequest(BaseSchema):
-    # AuditTrail swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-
-
-class ResourceNotFound(BaseSchema):
     # AuditTrail swagger.json
 
     

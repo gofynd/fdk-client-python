@@ -7,6 +7,8 @@ from .configuration.client import Configuration
 
 from .inventory.client import Inventory
 
+from .partner.client import Partner
+
 from .webhook.client import Webhook
 
 
@@ -17,6 +19,8 @@ class PublicClient:
         self.configuration = Configuration(config)
         
         self.inventory = Inventory(config)
+        
+        self.partner = Partner(config)
         
         self.webhook = Webhook(config)
         

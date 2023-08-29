@@ -21,6 +21,10 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
+        
         
         
         
@@ -71,6 +75,15 @@ class ServiceabilityValidator:
     
     
     class getApplicationServiceability(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class updateApplicationServiceability(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -179,7 +192,7 @@ class ServiceabilityValidator:
          
         
     
-    class patchApplicationServiceabilitySelfShipment(BaseSchema):
+    class updateSelfShip(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -188,7 +201,7 @@ class ServiceabilityValidator:
          
         
     
-    class getApplicationServiceabilitySelfShipment(BaseSchema):
+    class getSelfShip(BaseSchema):
         
         
         company_id = fields.Str(required=False)

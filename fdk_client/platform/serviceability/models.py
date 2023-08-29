@@ -8,6 +8,10 @@ from ..PlatformModel import BaseSchema
 
 
 
+class ServiceabilityPayloadSchema(BaseSchema):
+    pass
+
+
 class ServiceabilityErrorResponse(BaseSchema):
     pass
 
@@ -385,6 +389,14 @@ class ApplicationSelfShipConfigResponse(BaseSchema):
 
 
 
+
+
+class ServiceabilityPayloadSchema(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    serviceability_type = fields.Str(required=False)
+    
 
 
 class ServiceabilityErrorResponse(BaseSchema):
@@ -1671,7 +1683,7 @@ class ApplicationSelfShipConfig(BaseSchema):
     # Serviceability swagger.json
 
     
-    self_ship = fields.Nested(SelfShipResponse, required=False)
+    self_ship = fields.Dict(required=False)
     
 
 

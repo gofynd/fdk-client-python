@@ -5,16 +5,16 @@
 ##### [Back to Platform docs](./README.md)
 
 ## Lead Methods
-Handles communication between Administrator <-> Staff and Staff <-> Users
-* [getTickets](#gettickets)
+Handles communication between Administrator
+* [getPlatformTickets](#getplatformtickets)
 * [createTicket](#createticket)
 * [getTickets](#gettickets)
+* [getPlatformTicket](#getplatformticket)
+* [editPlatformTicket](#editplatformticket)
 * [getTicket](#getticket)
 * [editTicket](#editticket)
-* [getTicket](#getticket)
-* [editTicket](#editticket)
-* [createHistory](#createhistory)
-* [getTicketHistory](#gettickethistory)
+* [createPlatformTicketHistory](#createplatformtickethistory)
+* [getPlatformTicketHistory](#getplatformtickethistory)
 * [getFeedbacks](#getfeedbacks)
 * [submitFeedback](#submitfeedback)
 * [createHistory](#createhistory)
@@ -23,9 +23,9 @@ Handles communication between Administrator <-> Staff and Staff <-> Users
 * [editCustomForm](#editcustomform)
 * [getCustomForms](#getcustomforms)
 * [createCustomForm](#createcustomform)
+* [getTokenForPlatformVideoRoom](#gettokenforplatformvideoroom)
 * [getTokenForVideoRoom](#gettokenforvideoroom)
-* [getTokenForVideoRoom](#gettokenforvideoroom)
-* [getVideoParticipants](#getvideoparticipants)
+* [getPlatformVideoParticipants](#getplatformvideoparticipants)
 * [getVideoParticipants](#getvideoparticipants)
 * [openVideoRoom](#openvideoroom)
 * [closeVideoRoom](#closevideoroom)
@@ -36,7 +36,7 @@ Handles communication between Administrator <-> Staff and Staff <-> Users
 ## Methods with example and description
 
 
-### getTickets
+### getPlatformTickets
 Gets the list of company level tickets and/or ticket filters depending on query params
 
 
@@ -44,7 +44,7 @@ Gets the list of company level tickets and/or ticket filters depending on query 
 
 ```python
 try:
-    result = await platformClient.lead.getTickets(items=items, filters=filters, q=q, status=status, priority=priority, category=category, pageNo=pageNo, pageSize=pageSize)
+    result = await platformClient.lead.getPlatformTickets(items=items, filters=filters, q=q, status=status, priority=priority, category=category, pageNo=pageNo, pageSize=pageSize)
     # use result
 except Exception as e:
     print(e)
@@ -526,7 +526,7 @@ Success
     },
     "content": {
       "title": "SOme title Response",
-      "description": "<b>Single lineeee</b>: asdf<br><b>Email</b>: asdf@asdf.com<br><b>dfsdf</b>: asdf<br>",
+      "description": "Handles communication between Administrator",
       "attachments": []
     },
     "status": {
@@ -1164,7 +1164,7 @@ Success
 ---
 
 
-### getTicket
+### getPlatformTicket
 Retreives ticket details of a company level ticket with ticket ID
 
 
@@ -1172,7 +1172,7 @@ Retreives ticket details of a company level ticket with ticket ID
 
 ```python
 try:
-    result = await platformClient.lead.getTicket(id=id)
+    result = await platformClient.lead.getPlatformTicket(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -1217,7 +1217,7 @@ Success
     },
     "content": {
       "title": "SOme title Response",
-      "description": "<b>Single lineeee</b>: asdf<br><b>Email</b>: asdf@asdf.com<br><b>dfsdf</b>: asdf<br>",
+      "description": "Handles communication between Administrator",
       "attachments": []
     },
     "status": {
@@ -1419,7 +1419,7 @@ Success
 ---
 
 
-### editTicket
+### editPlatformTicket
 Edits ticket details of a company level ticket
 
 
@@ -1427,7 +1427,7 @@ Edits ticket details of a company level ticket
 
 ```python
 try:
-    result = await platformClient.lead.editTicket(id=id, body=body)
+    result = await platformClient.lead.editPlatformTicket(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1472,7 +1472,7 @@ Success
     },
     "content": {
       "title": "SOme title Response",
-      "description": "<b>Single lineeee</b>: asdf<br><b>Email</b>: asdf@asdf.com<br><b>dfsdf</b>: asdf<br>",
+      "description": "Handles communication between Administrator",
       "attachments": []
     },
     "status": {
@@ -1728,7 +1728,7 @@ Success
     },
     "content": {
       "title": "SOme title Response",
-      "description": "<b>Single lineeee</b>: asdf<br><b>Email</b>: asdf@asdf.com<br><b>dfsdf</b>: asdf<br>",
+      "description": "Handles communication between Administrator",
       "attachments": []
     },
     "status": {
@@ -1984,7 +1984,7 @@ Success
     },
     "content": {
       "title": "SOme title Response",
-      "description": "<b>Single lineeee</b>: asdf<br><b>Email</b>: asdf@asdf.com<br><b>dfsdf</b>: asdf<br>",
+      "description": "Handles communication between Administrator",
       "attachments": []
     },
     "status": {
@@ -2186,7 +2186,7 @@ Success
 ---
 
 
-### createHistory
+### createPlatformTicketHistory
 Create history for specific company level ticket
 
 
@@ -2194,7 +2194,7 @@ Create history for specific company level ticket
 
 ```python
 try:
-    result = await platformClient.lead.createHistory(id=id, body=body)
+    result = await platformClient.lead.createPlatformTicketHistory(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2263,7 +2263,9 @@ Success
         }
       }
     },
-    "created_by": "5d1363adf599d850df93175e",
+    "created_by": {
+      "5d1363adf599d850df93175e": null
+    },
     "createdAt": "2021-02-03T12:55:46.808Z",
     "updatedAt": "2021-02-03T12:55:46.808Z",
     "__v": 0
@@ -2285,7 +2287,7 @@ Success
 ---
 
 
-### getTicketHistory
+### getPlatformTicketHistory
 Gets history list for specific company level ticket
 
 
@@ -2293,7 +2295,7 @@ Gets history list for specific company level ticket
 
 ```python
 try:
-    result = await platformClient.lead.getTicketHistory(id=id)
+    result = await platformClient.lead.getPlatformTicketHistory(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -2468,7 +2470,9 @@ Success
     ],
     "total": 2,
     "limit": 100,
-    "page": 1,
+    "page": {
+      "type": ""
+    },
     "pages": 1
   }
 }
@@ -2547,10 +2551,15 @@ Success
           "user_id": "5f8147abbd1a0a870f61f1a6"
         },
         "category": "customers",
-        "response": {
-          "audio": 2,
-          "video": 6
-        },
+        "response": [
+          {
+            "audio": 2,
+            "video": 6,
+            "display": "",
+            "key": "",
+            "value": ""
+          }
+        ],
         "createdAt": "2021-06-10T18:11:11.349Z",
         "updatedAt": "2021-06-10T18:11:11.349Z",
         "__v": 0
@@ -2631,10 +2640,15 @@ Success
       "user_id": "5f8147abbd1a0a870f61f1a6"
     },
     "category": "customers",
-    "response": {
-      "audio": 2,
-      "video": 6
-    },
+    "response": [
+      {
+        "audio": 2,
+        "video": 6,
+        "display": "",
+        "key": "",
+        "value": ""
+      }
+    ],
     "createdAt": "2021-06-10T18:11:11.349Z",
     "updatedAt": "2021-06-10T18:11:11.349Z",
     "__v": 0
@@ -2733,7 +2747,9 @@ Success
         }
       }
     },
-    "created_by": "5d1363adf599d850df93175e",
+    "created_by": {
+      "5d1363adf599d850df93175e": null
+    },
     "createdAt": "2021-02-03T12:55:46.808Z",
     "updatedAt": "2021-02-03T12:55:46.808Z",
     "__v": 0
@@ -2938,7 +2954,9 @@ Success
     ],
     "total": 2,
     "limit": 100,
-    "page": 1,
+    "page": {
+      "type": ""
+    },
     "pages": 1
   }
 }
@@ -3005,51 +3023,54 @@ Success
 
 ```json
 {
-  "value": {
-    "login_required": false,
-    "should_notify": false,
-    "inputs": [
-      {
-        "required": false,
-        "type": "text",
-        "display": "Name",
-        "placeholder": "Please enter your name",
-        "key": "name"
-      }
-    ],
-    "available_assignees": [],
-    "_id": "5fd258a9088f957f34c288fc",
-    "title": "trail form",
-    "description": "Trail form description",
-    "slug": "trail-form",
-    "application_id": "000000000000000000000003",
-    "created_on": {
-      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
-      "platform": "web",
-      "meta": {
-        "browser": {
-          "name": "Chrome",
-          "version": "87.0.4280.88"
-        },
-        "os": {
-          "name": "macOS",
-          "version": "10.15.6",
-          "versionName": "Catalina"
-        },
-        "platform": {
-          "type": "desktop",
-          "vendor": "Apple"
-        },
-        "engine": {
-          "name": "Blink"
+  "value": [
+    {
+      "required": false,
+      "login_required": false,
+      "should_notify": false,
+      "inputs": [
+        {
+          "required": false,
+          "type": "text",
+          "display": "Name",
+          "placeholder": "Please enter your name",
+          "key": "name"
         }
-      }
-    },
-    "created_by": "5d1363adf599d850df93175e",
-    "createdAt": "2020-12-10T17:19:37.515Z",
-    "updatedAt": "2020-12-10T17:19:43.214Z",
-    "__v": 0
-  }
+      ],
+      "available_assignees": [],
+      "_id": "5fd258a9088f957f34c288fc",
+      "title": "trail form",
+      "description": "Trail form description",
+      "slug": "trail-form",
+      "application_id": "000000000000000000000003",
+      "created_on": {
+        "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
+        "platform": "web",
+        "meta": {
+          "browser": {
+            "name": "Chrome",
+            "version": "87.0.4280.88"
+          },
+          "os": {
+            "name": "macOS",
+            "version": "10.15.6",
+            "versionName": "Catalina"
+          },
+          "platform": {
+            "type": "desktop",
+            "vendor": "Apple"
+          },
+          "engine": {
+            "name": "Blink"
+          }
+        }
+      },
+      "created_by": "5d1363adf599d850df93175e",
+      "createdAt": "2020-12-10T17:19:37.515Z",
+      "updatedAt": "2020-12-10T17:19:43.214Z",
+      "__v": 0
+    }
+  ]
 }
 ```
 </details>
@@ -3114,61 +3135,64 @@ Success
 
 ```json
 {
-  "value": {
-    "login_required": false,
-    "should_notify": false,
-    "inputs": [
-      {
-        "type": "email",
-        "showRegexInput": true,
-        "enum": [],
-        "regex": "\\S+@\\S+\\.\\S+",
-        "display": "email",
-        "required": true,
-        "key": "email"
-      },
-      {
-        "type": "number",
-        "showRegexInput": false,
-        "enum": [],
-        "display": "Enter your fav number",
-        "placeholder": "123",
-        "key": "enter-your-fav-number"
-      }
-    ],
-    "available_assignees": [],
-    "_id": "602e900a2042255c03cadaf0",
-    "title": "service-test-satyen",
-    "description": "testing form from service",
-    "slug": "service-test-satyen",
-    "header_image": "https://hdn-1.addsale.com/x0/support-ticket/files/free/original/KZL86aN5l-service-test-satyen.jpeg",
-    "application_id": "000000000000000000000001",
-    "created_on": {
-      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
-      "platform": "web",
-      "meta": {
-        "browser": {
-          "name": "Chrome",
-          "version": "88.0.4324.150"
+  "value": [
+    {
+      "required": false,
+      "login_required": false,
+      "should_notify": false,
+      "inputs": [
+        {
+          "type": "email",
+          "showRegexInput": true,
+          "enum": [],
+          "regex": "\\S+@\\S+\\.\\S+",
+          "display": "email",
+          "required": true,
+          "key": "email"
         },
-        "os": {
-          "name": "macOS",
-          "version": "11.2.0"
-        },
-        "platform": {
-          "type": "desktop",
-          "vendor": "Apple"
-        },
-        "engine": {
-          "name": "Blink"
+        {
+          "type": "number",
+          "showRegexInput": false,
+          "enum": [],
+          "display": "Enter your fav number",
+          "placeholder": "123",
+          "key": "enter-your-fav-number"
         }
-      }
-    },
-    "created_by": "5f8147abbd1a0a870f61f1a6",
-    "createdAt": "2021-02-18T16:04:26.495Z",
-    "updatedAt": "2021-02-26T10:16:49.272Z",
-    "__v": 0
-  }
+      ],
+      "available_assignees": [],
+      "_id": "602e900a2042255c03cadaf0",
+      "title": "service-test-satyen",
+      "description": "testing form from service",
+      "slug": "service-test-satyen",
+      "header_image": "https://hdn-1.addsale.com/x0/support-ticket/files/free/original/KZL86aN5l-service-test-satyen.jpeg",
+      "application_id": "000000000000000000000001",
+      "created_on": {
+        "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
+        "platform": "web",
+        "meta": {
+          "browser": {
+            "name": "Chrome",
+            "version": "88.0.4324.150"
+          },
+          "os": {
+            "name": "macOS",
+            "version": "11.2.0"
+          },
+          "platform": {
+            "type": "desktop",
+            "vendor": "Apple"
+          },
+          "engine": {
+            "name": "Blink"
+          }
+        }
+      },
+      "created_by": "5f8147abbd1a0a870f61f1a6",
+      "createdAt": "2021-02-18T16:04:26.495Z",
+      "updatedAt": "2021-02-26T10:16:49.272Z",
+      "__v": 0
+    }
+  ]
 }
 ```
 </details>
@@ -3359,7 +3383,9 @@ Success
     ],
     "total": 2,
     "limit": 10,
-    "page": 1,
+    "page": {
+      "type": ""
+    },
     "pages": 1
   }
 }
@@ -3425,61 +3451,64 @@ Success
 
 ```json
 {
-  "value": {
-    "login_required": false,
-    "should_notify": false,
-    "inputs": [
-      {
-        "type": "email",
-        "showRegexInput": true,
-        "enum": [],
-        "regex": "\\S+@\\S+\\.\\S+",
-        "display": "email",
-        "required": true,
-        "key": "email"
-      },
-      {
-        "type": "number",
-        "showRegexInput": false,
-        "enum": [],
-        "display": "Enter your fav number",
-        "placeholder": "123",
-        "key": "enter-your-fav-number"
-      }
-    ],
-    "available_assignees": [],
-    "_id": "602e900a2042255c03cadaf0",
-    "title": "service-test-satyen",
-    "description": "testing form from service",
-    "slug": "service-test-satyen",
-    "header_image": "https://hdn-1.addsale.com/x0/support-ticket/files/free/original/KZL86aN5l-service-test-satyen.jpeg",
-    "application_id": "000000000000000000000001",
-    "created_on": {
-      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
-      "platform": "web",
-      "meta": {
-        "browser": {
-          "name": "Chrome",
-          "version": "88.0.4324.150"
+  "value": [
+    {
+      "required": false,
+      "login_required": false,
+      "should_notify": false,
+      "inputs": [
+        {
+          "type": "email",
+          "showRegexInput": true,
+          "enum": [],
+          "regex": "\\S+@\\S+\\.\\S+",
+          "display": "email",
+          "required": true,
+          "key": "email"
         },
-        "os": {
-          "name": "macOS",
-          "version": "11.2.0"
-        },
-        "platform": {
-          "type": "desktop",
-          "vendor": "Apple"
-        },
-        "engine": {
-          "name": "Blink"
+        {
+          "type": "number",
+          "showRegexInput": false,
+          "enum": [],
+          "display": "Enter your fav number",
+          "placeholder": "123",
+          "key": "enter-your-fav-number"
         }
-      }
-    },
-    "created_by": "5f8147abbd1a0a870f61f1a6",
-    "createdAt": "2021-02-18T16:04:26.495Z",
-    "updatedAt": "2021-02-26T10:16:49.272Z",
-    "__v": 0
-  }
+      ],
+      "available_assignees": [],
+      "_id": "602e900a2042255c03cadaf0",
+      "title": "service-test-satyen",
+      "description": "testing form from service",
+      "slug": "service-test-satyen",
+      "header_image": "https://hdn-1.addsale.com/x0/support-ticket/files/free/original/KZL86aN5l-service-test-satyen.jpeg",
+      "application_id": "000000000000000000000001",
+      "created_on": {
+        "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
+        "platform": "web",
+        "meta": {
+          "browser": {
+            "name": "Chrome",
+            "version": "88.0.4324.150"
+          },
+          "os": {
+            "name": "macOS",
+            "version": "11.2.0"
+          },
+          "platform": {
+            "type": "desktop",
+            "vendor": "Apple"
+          },
+          "engine": {
+            "name": "Blink"
+          }
+        }
+      },
+      "created_by": "5f8147abbd1a0a870f61f1a6",
+      "createdAt": "2021-02-18T16:04:26.495Z",
+      "updatedAt": "2021-02-26T10:16:49.272Z",
+      "__v": 0
+    }
+  ]
 }
 ```
 </details>
@@ -3497,7 +3526,7 @@ Success
 ---
 
 
-### getTokenForVideoRoom
+### getTokenForPlatformVideoRoom
 Get Token to join a specific Video Room using it's unqiue name
 
 
@@ -3505,7 +3534,7 @@ Get Token to join a specific Video Room using it's unqiue name
 
 ```python
 try:
-    result = await platformClient.lead.getTokenForVideoRoom(uniqueName=uniqueName)
+    result = await platformClient.lead.getTokenForPlatformVideoRoom(uniqueName=uniqueName)
     # use result
 except Exception as e:
     print(e)
@@ -3631,7 +3660,7 @@ Success
 ---
 
 
-### getVideoParticipants
+### getPlatformVideoParticipants
 Get participants of a specific Video Room using it's unique name
 
 
@@ -3639,7 +3668,7 @@ Get participants of a specific Video Room using it's unique name
 
 ```python
 try:
-    result = await platformClient.lead.getVideoParticipants(uniqueName=uniqueName)
+    result = await platformClient.lead.getPlatformVideoParticipants(uniqueName=uniqueName)
     # use result
 except Exception as e:
     print(e)
@@ -3970,8 +3999,8 @@ Success
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | items | ArrayList<[Ticket](#Ticket)>? |  yes  | List of tickets |
- | filters | [Filter](#Filter)? |  yes  | All the filters available for tickets |
- | page | [Page](#Page)? |  yes  | Describes the pagination state |
+ | filters | [Filter](#Filter)? |  yes  |  |
+ | page | [Page](#Page)? |  yes  |  |
 
 ---
 
@@ -4000,7 +4029,7 @@ Success
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | items | ArrayList<[TicketHistory](#TicketHistory)>? |  yes  | List of ticket history |
- | page | [Page](#Page)? |  yes  | Describes the pagination state |
+ | page | [Page](#Page)? |  yes  |  |
 
 ---
 
@@ -4012,7 +4041,7 @@ Success
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | items | ArrayList<[CustomForm](#CustomForm)>? |  yes  | List of forms |
- | page | [Page](#Page)? |  yes  | Describes the pagination state |
+ | page | [Page](#Page)? |  yes  |  |
 
 ---
 
@@ -4028,10 +4057,10 @@ Success
  | inputs | ArrayList<HashMap<String,Any>> |  no  | List of all the form components |
  | description | String? |  yes  | Description of the form |
  | headerImage | String? |  yes  | Header image that is to be shown for the form |
- | priority | [PriorityEnum](#PriorityEnum) |  no  | Describes the priority of the tickets created by the form |
+ | priority | [PriorityEnum](#PriorityEnum) |  no  |  |
  | shouldNotify | Boolean? |  yes  | Indicates if staff should be notified when a response is received |
  | successMessage | String? |  yes  | Success message that will be shown on submission |
- | pollForAssignment | [PollForAssignment](#PollForAssignment)? |  yes  | Describes how polling will be done for the tickets createds |
+ | pollForAssignment | [PollForAssignment](#PollForAssignment)? |  yes  |  |
 
 ---
 
@@ -4045,12 +4074,12 @@ Success
  | title | String |  no  | Title for the form |
  | inputs | ArrayList<HashMap<String,Any>> |  no  | List of all the form components |
  | description | String? |  yes  | Description of the form |
- | priority | [PriorityEnum](#PriorityEnum) |  no  | Describes the priority of the tickets created by the form |
+ | priority | [PriorityEnum](#PriorityEnum) |  no  |  |
  | headerImage | String? |  yes  | Header image that is to be shown for the form |
  | shouldNotify | Boolean? |  yes  | Indicates if staff should be notified when a response is received |
  | loginRequired | Boolean? |  yes  | Denotes if login is required to make a form response submission |
  | successMessage | String? |  yes  | Success message that will be shown on submission |
- | pollForAssignment | [PollForAssignment](#PollForAssignment)? |  yes  | Describes how polling will be done for the tickets createds |
+ | pollForAssignment | [PollForAssignment](#PollForAssignment)? |  yes  |  |
 
 ---
 
@@ -4061,13 +4090,13 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | content | [TicketContent](#TicketContent)? |  yes  | Ticket conetent details |
+ | content | [TicketContent](#TicketContent)? |  yes  |  |
  | category | String? |  yes  | Category assigned to the ticket |
  | subCategory | String? |  yes  | Sub-category assigned to the ticket |
  | source | String? |  yes  | Denotes if the ticket was created at company or application level |
  | status | String? |  yes  | Denotes in what state is the ticket |
- | priority | [PriorityEnum](#PriorityEnum)? |  yes  | Denotes the priority of ticket |
- | assignedTo | [AgentChangePayload](#AgentChangePayload)? |  yes  | Details of support staff to whom ticket is assigned |
+ | priority | [PriorityEnum](#PriorityEnum)? |  yes  |  |
+ | assignedTo | [AgentChangePayload](#AgentChangePayload)? |  yes  |  |
  | tags | ArrayList<String>? |  yes  | Tags relevant to ticket |
 
 ---
@@ -4151,19 +4180,7 @@ Success
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | value | HashMap<String,Any> |  no  | Details of history event |
- | type | [HistoryTypeEnum](#HistoryTypeEnum) |  no  | Type of history event |
-
----
-
-
- 
- 
- #### [CustomFormSubmissionPayload](#CustomFormSubmissionPayload)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | response | ArrayList<HashMap<String,Any>> |  no  | Form response |
- | attachments | ArrayList<[TicketAsset](#TicketAsset)>? |  yes  | List of all attachments related to the form |
+ | type | [HistoryTypeEnum](#HistoryTypeEnum) |  no  |  |
 
 ---
 
@@ -4196,7 +4213,7 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | user | [UserSchema](#UserSchema)? |  yes  | Details of participant |
+ | user | [UserSchema](#UserSchema)? |  yes  |  |
  | identity | String? |  yes  | Unique identifier of participant |
  | status | String? |  yes  | Status of participant |
 
@@ -4219,7 +4236,7 @@ Success
  | username | String? |  yes  | username of user |
  | accountType | String? |  yes  | Type of account |
  | uid | String? |  yes  | Unique identifier of user |
- | debug | [Debug](#Debug)? |  yes  | Used for debugging |
+ | debug | [Debug](#Debug)? |  yes  |  |
  | hasOldPasswordHash | Boolean? |  yes  | Denotes if user has old password hash |
  | id | String? |  yes  | Unique identifier of user |
  | createdAt | String? |  yes  | Time of user creation |
@@ -4271,18 +4288,6 @@ Success
 
  
  
- #### [SubmitCustomFormResponse](#SubmitCustomFormResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | message | String |  no  | Success message for form submission |
- | ticket | [Ticket](#Ticket)? |  yes  | Ticket created on form submission |
-
----
-
-
- 
- 
  #### [TicketContext](#TicketContext)
 
  | Properties | Type | Nullable | Description |
@@ -4312,7 +4317,7 @@ Success
  | ---------- | ---- | -------- | ----------- |
  | display | String? |  yes  | Display text for asset |
  | value | String |  no  | To be used for details |
- | type | [TicketAssetTypeEnum](#TicketAssetTypeEnum) |  no  | Type of asset |
+ | type | [TicketAssetTypeEnum](#TicketAssetTypeEnum) |  no  |  |
 
 ---
 
@@ -4338,9 +4343,9 @@ Success
  | ---------- | ---- | -------- | ----------- |
  | createdBy | HashMap<String,Any>? |  yes  | Creator of the ticket |
  | status | String? |  yes  | Status of the ticket |
- | priority | [PriorityEnum](#PriorityEnum)? |  yes  | Priority of the ticket |
+ | priority | [PriorityEnum](#PriorityEnum)? |  yes  |  |
  | category | String |  no  | Category of the ticket |
- | content | [TicketContent](#TicketContent) |  no  | Content for the ticket |
+ | content | [TicketContent](#TicketContent) |  no  |  |
  | customJson | HashMap<String,Any>? |  yes  | optional custom data that needs to be sent |
 
 ---
@@ -4352,7 +4357,7 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | key | [PriorityEnum](#PriorityEnum) |  no  | Key for priority |
+ | key | [PriorityEnum](#PriorityEnum) |  no  |  |
  | display | String |  no  | Display text for priority |
  | color | String |  no  | Color for priority |
 
@@ -4368,18 +4373,6 @@ Success
  | key | String |  no  | Key for status |
  | display | String |  no  | Display text for status |
  | color | String |  no  | Color for status |
-
----
-
-
- 
- 
- #### [TicketFeedbackForm](#TicketFeedbackForm)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | title | String |  no  | Feedback form title that will be shown to the user |
- | display | ArrayList<HashMap<String,Any>>? |  yes  | List of all the form fields |
 
 ---
 
@@ -4444,49 +4437,15 @@ Success
  | headerImage | String? |  yes  | Form header image that will be shown to the user |
  | title | String |  no  | Form title that will be shown to the user |
  | description | String? |  yes  | Form description that will be shown to the user |
- | priority | [Priority](#Priority) |  no  | Sets priority of tickets created by form response |
+ | priority | [Priority](#Priority) |  no  |  |
  | loginRequired | Boolean |  no  | Denotes if login is required to make a form response submission |
  | shouldNotify | Boolean |  no  | Denotes if new response submission for the form should be notified to the assignees |
  | successMessage | String? |  yes  | Message that is to be shown on succesfull form response submission |
- | submitButton | [SubmitButton](#SubmitButton)? |  yes  | Details for submit button |
+ | submitButton | [SubmitButton](#SubmitButton)? |  yes  |  |
  | inputs | ArrayList<HashMap<String,Any>> |  no  | List of all the form fields |
- | createdOn | [CreatedOn](#CreatedOn)? |  yes  | Gives details of when the form was created |
- | pollForAssignment | [PollForAssignment](#PollForAssignment)? |  yes  | Details of how polling should be done for support |
+ | createdOn | [CreatedOn](#CreatedOn)? |  yes  |  |
+ | pollForAssignment | [PollForAssignment](#PollForAssignment)? |  yes  |  |
  | id | String |  no  | Unique identifier for the form |
-
----
-
-
- 
- 
- #### [CommunicationDetails](#CommunicationDetails)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | type | String? |  yes  | Enum type for the communication method |
- | title | String? |  yes  | Title for the communication method |
- | value | String? |  yes  | Value for the communication method |
- | description | String? |  yes  | Short description for the communication method |
- | enabled | Boolean? |  yes  | Denotes if this communication method has to be shown |
-
----
-
-
- 
- 
- #### [SupportGeneralConfig](#SupportGeneralConfig)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | id | String? |  yes  | Unique id |
- | supportEmail | [CommunicationDetails](#CommunicationDetails)? |  yes  | Support e-mail details |
- | supportPhone | [CommunicationDetails](#CommunicationDetails)? |  yes  | Support Phone number details |
- | supportFaq | [CommunicationDetails](#CommunicationDetails)? |  yes  | Support FAQ details |
- | showCommunicationInfo | Boolean? |  yes  | Denotes if support communication info should be shown |
- | supportCommunication | [CommunicationDetails](#CommunicationDetails)? |  yes  | Support communication array list details |
- | showSupportDris | Boolean? |  yes  | Denotes if support DRIS info should be shown |
- | integration | HashMap<String,Any>? |  yes  | Contains integrations basic information |
- | type | String? |  yes  | The enity/platform for which the config is stored |
 
 ---
 
@@ -4506,60 +4465,15 @@ Success
 
  
  
- #### [TicketSubCategory](#TicketSubCategory)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | key | String |  no  | Key for sub-category |
- | display | String |  no  | Display text for sub-category |
- | subCategories | [TicketSubCategory](#TicketSubCategory)? |  yes  |  |
-
----
-
-
- 
- 
  #### [TicketCategory](#TicketCategory)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | display | String |  no  | Category display value identifier |
  | key | String |  no  | Category key value identifier |
- | subCategories | [TicketCategory](#TicketCategory)? |  yes  | Support category array list details |
+ | subCategories | [TicketCategory](#TicketCategory)? |  yes  |  |
  | groupId | Double? |  yes  | Group id of category releted data |
- | feedbackForm | [FeedbackForm](#FeedbackForm)? |  yes  | Support category array list details |
-
----
-
-
- 
- 
- #### [CategoryData](#CategoryData)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | list | [TicketCategory](#TicketCategory)? |  yes  |  |
-
----
-
-
- 
- 
- #### [IntegrationConfig](#IntegrationConfig)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | id | String? |  yes  | Unique id |
- | integrationType | String |  no  | Enum string values for integration |
- | baseUrl | String? |  yes  | Integration base url for validate and create ticket |
- | createTicketApikey | String? |  yes  | Integration apikey to validate and create ticket |
- | updateTicketApikey | String? |  yes  | Integration apikey to update ticket |
- | categorySyncApikey | String? |  yes  | Integration apikey to sync category of selected type |
- | categoryData | [CategoryData](#CategoryData)? |  yes  | Support category array list details |
- | webhookApikey | String? |  yes  | Integration webhook apikey to got callbacks from integration type dashboard like freshdesk, etc |
- | configCompleted | Boolean? |  yes  | Denotes the current intergration is completed or partially done |
- | allowTicketCreation | Boolean |  no  | Denotes ticket creation enable or disable on platform |
- | showListing | Boolean |  no  | Denotes ticket listing enable or disable on platform |
+ | feedbackForm | [FeedbackForm](#FeedbackForm)? |  yes  |  |
 
 ---
 
@@ -4604,7 +4518,7 @@ Success
  | type | String |  no  | Type of the history event |
  | value | HashMap<String,Any> |  no  | Data of the history event |
  | ticketId | String |  no  | Readable ticket number |
- | createdOn | [CreatedOn](#CreatedOn)? |  yes  | Time of creation of the history event |
+ | createdOn | [CreatedOn](#CreatedOn)? |  yes  |  |
  | createdBy | HashMap<String,Any>? |  yes  | User who created the history event |
  | id | String |  no  | Unique identifier of the history event |
  | updatedAt | String? |  yes  | Time of last update of the history event |
@@ -4619,15 +4533,15 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | context | [TicketContext](#TicketContext)? |  yes  | Details of company and application realated to the ticket |
- | createdOn | [CreatedOn](#CreatedOn)? |  yes  | Details of company and application realated to the ticket |
+ | context | [TicketContext](#TicketContext)? |  yes  |  |
+ | createdOn | [CreatedOn](#CreatedOn)? |  yes  |  |
  | responseId | String? |  yes  | Details of company and application realated to the ticket |
- | content | [TicketContent](#TicketContent)? |  yes  | Ticket conetent details |
- | category | [TicketCategory](#TicketCategory) |  no  | Category assigned to the ticket |
+ | content | [TicketContent](#TicketContent)? |  yes  |  |
+ | category | [TicketCategory](#TicketCategory) |  no  |  |
  | subCategory | String? |  yes  | Sub-category assigned to the ticket |
- | source | [TicketSourceEnum](#TicketSourceEnum) |  no  | Denotes if the ticket was created at company or application level |
- | status | [Status](#Status) |  no  | Denotes in what state is the ticket |
- | priority | [Priority](#Priority) |  no  | Denotes the priority of ticket |
+ | source | [TicketSourceEnum](#TicketSourceEnum) |  no  |  |
+ | status | [Status](#Status) |  no  |  |
+ | priority | [Priority](#Priority) |  no  |  |
  | createdBy | HashMap<String,Any>? |  yes  | User details of ticket creator |
  | assignedTo | HashMap<String,Any>? |  yes  | Details of support staff to whom ticket is assigned |
  | tags | ArrayList<String>? |  yes  | Tags relevant to ticket |
@@ -4702,19 +4616,6 @@ Success
  | ---- | ----- | ----------- |
  | platformPanel | platform_panel | This means it is company level ticket |
  | salesChannel | sales_channel | This means it is a application/sales channel level ticket |
-
----
-
-
-
- #### [TicketIntegrationDetails](#TicketIntegrationDetails)
- Type : string
-
- | Name | Value | Description |
- | ---- | ----- | ----------- |
- | defaultCase | default | This means it is default level ticket integration |
- | freshdesk | freshdesk | This means it is default level freshdesk integration |
- | kapture | kapture | This means it is default level kapture integration |
 
 ---
 

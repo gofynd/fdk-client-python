@@ -1547,7 +1547,7 @@ class CartPosCheckoutDetailRequest(BaseSchema):
     
     staff = fields.Nested(StaffCheckout, required=False)
     
-    customer_details = fields.Nested(CustomerDetails, required=False)
+    customer_details = fields.Dict(required=False)
     
     address_id = fields.Str(required=False)
     

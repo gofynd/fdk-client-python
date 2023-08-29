@@ -440,6 +440,10 @@ class BagStateTransitionMap(BaseSchema):
     pass
 
 
+class RoleBaseStateTransitionMapping(BaseSchema):
+    pass
+
+
 class FetchCreditBalanceRequestPayload(BaseSchema):
     pass
 
@@ -509,6 +513,46 @@ class VerifyOtpResponseData(BaseSchema):
 
 
 class VerifyOtpResponse(BaseSchema):
+    pass
+
+
+class CourierPartnerTrackingDetails(BaseSchema):
+    pass
+
+
+class PageDetails(BaseSchema):
+    pass
+
+
+class CourierPartnerTrackingResponse(BaseSchema):
+    pass
+
+
+class BulkReportsDownloadRequest(BaseSchema):
+    pass
+
+
+class BulkReportsDownloadResponse(BaseSchema):
+    pass
+
+
+class BulkReportsDownloadFailedResponse(BaseSchema):
+    pass
+
+
+class EInvoiceRetryShipmentData(BaseSchema):
+    pass
+
+
+class EInvoiceRetry(BaseSchema):
+    pass
+
+
+class EInvoiceResponseData(BaseSchema):
+    pass
+
+
+class EInvoiceRetryResponse(BaseSchema):
     pass
 
 
@@ -2201,7 +2245,7 @@ class LineItem(BaseSchema):
     
     meta = fields.Dict(required=False)
     
-    custom_messasge = fields.Str(required=False)
+    custom_message = fields.Str(required=False)
     
     quantity = fields.Int(required=False)
     
@@ -2360,6 +2404,8 @@ class TaxInfo(BaseSchema):
     b2b_gstin_number = fields.Str(required=False)
     
     gstin = fields.Str(required=False)
+    
+    pan_no = fields.Str(required=False)
     
 
 
@@ -2581,6 +2627,16 @@ class BagStateTransitionMap(BaseSchema):
     
 
 
+class RoleBaseStateTransitionMapping(BaseSchema):
+    # Order swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+    next_statuses = fields.List(fields.Str(required=False), required=False)
+    
+
+
 class FetchCreditBalanceRequestPayload(BaseSchema):
     # Order swagger.json
 
@@ -2794,6 +2850,162 @@ class VerifyOtpResponse(BaseSchema):
     message = fields.Str(required=False)
     
     data = fields.Nested(VerifyOtpResponseData, required=False)
+    
+
+
+class CourierPartnerTrackingDetails(BaseSchema):
+    # Order swagger.json
+
+    
+    operational_status = fields.Str(required=False)
+    
+    dp_status = fields.Str(required=False)
+    
+    shipment_id = fields.Str(required=False)
+    
+    awb = fields.Str(required=False)
+    
+    dp_status_updated_at = fields.Str(required=False)
+    
+    remark = fields.Str(required=False)
+    
+    id = fields.Int(required=False)
+    
+    dp_location = fields.Str(required=False)
+    
+    estimated_delivery_date = fields.Str(required=False)
+    
+    journey = fields.Str(required=False)
+    
+    meta = fields.Dict(required=False)
+    
+    dp_name = fields.Str(required=False)
+    
+    promised_delivery_date = fields.Str(required=False)
+    
+
+
+class PageDetails(BaseSchema):
+    # Order swagger.json
+
+    
+    item_total = fields.Int(required=False)
+    
+    current = fields.Int(required=False)
+    
+    size = fields.Int(required=False)
+    
+    type = fields.Str(required=False)
+    
+    has_next = fields.Boolean(required=False)
+    
+
+
+class CourierPartnerTrackingResponse(BaseSchema):
+    # Order swagger.json
+
+    
+    items = fields.List(fields.Nested(CourierPartnerTrackingDetails, required=False), required=False)
+    
+    page = fields.Nested(PageDetails, required=False)
+    
+
+
+class BulkReportsDownloadRequest(BaseSchema):
+    # Order swagger.json
+
+    
+    store_ids = fields.List(fields.Str(required=False), required=False)
+    
+    lane_type = fields.Str(required=False)
+    
+    custom_headers = fields.Str(required=False)
+    
+    report_type = fields.Str(required=False)
+    
+    from_date = fields.Str(required=False)
+    
+    to_date = fields.Str(required=False)
+    
+    entities = fields.List(fields.Str(required=False), required=False)
+    
+    filter_type = fields.Str(required=False)
+    
+    is_cross_company_enabled = fields.Boolean(required=False)
+    
+    custom_filters_for_lane = fields.Dict(required=False)
+    
+
+
+class BulkReportsDownloadResponse(BaseSchema):
+    # Order swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+    batch_id = fields.Str(required=False)
+    
+
+
+class BulkReportsDownloadFailedResponse(BaseSchema):
+    # Order swagger.json
+
+    
+    status = fields.Boolean(required=False)
+    
+    error = fields.Str(required=False)
+    
+
+
+class EInvoiceRetryShipmentData(BaseSchema):
+    # Order swagger.json
+
+    
+    shipment_id = fields.Str(required=False)
+    
+
+
+class EInvoiceRetry(BaseSchema):
+    # Order swagger.json
+
+    
+    shipments_data = fields.List(fields.Nested(EInvoiceRetryShipmentData, required=False), required=False)
+    
+
+
+class EInvoiceResponseData(BaseSchema):
+    # Order swagger.json
+
+    
+    shipment_id = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
+    
+    success = fields.Boolean(required=False)
+    
+    ack_no = fields.Str(required=False)
+    
+    irn = fields.Str(required=False)
+    
+    ack_dt = fields.Str(required=False)
+    
+    timeout = fields.Int(required=False)
+    
+    timeout_unit = fields.Str(required=False)
+    
+
+
+class EInvoiceRetryResponse(BaseSchema):
+    # Order swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+    success_count = fields.Int(required=False)
+    
+    message = fields.Str(required=False)
+    
+    response_data = fields.List(fields.Nested(EInvoiceResponseData, required=False), required=False)
     
 
 
