@@ -158,7 +158,7 @@ class WebhookValidator:
         
         page_size = fields.Int(required=False)
         
-        extension_id = fields.Int(required=False)
+        extension_id = fields.Str(required=False)
         
         company_id = fields.Int(required=False)
          
@@ -196,7 +196,7 @@ class WebhookValidator:
         
         company_id = fields.Int(required=False)
         
-        extension_id = fields.Int(required=False)
+        extension_id = fields.Str(required=False)
          
         
     

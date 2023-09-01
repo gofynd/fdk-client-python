@@ -29,7 +29,7 @@ class Webhook:
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/retry", """{"required":[{"name":"company_id","in":"path","description":"The ID of the company for which manual retry is to be initiated.","required":true,"schema":{"type":"integer"},"example":1}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The ID of the company for which manual retry is to be initiated.","required":true,"schema":{"type":"integer"},"example":1}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/retry", """{"required":[{"name":"company_id","in":"path","description":"The company id of the application","required":true,"schema":{"type":"integer"},"example":1}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The company id of the application","required":true,"schema":{"type":"integer"},"example":1}]}""", )
         query_string = await create_query_string()
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -74,7 +74,7 @@ class Webhook:
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/retry/events/counts", """{"required":[{"name":"company_id","in":"path","description":"The ID of the company for which manual retry is to be initiated.","required":true,"schema":{"type":"integer"},"example":1}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The ID of the company for which manual retry is to be initiated.","required":true,"schema":{"type":"integer"},"example":1}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/retry/events/counts", """{"required":[{"name":"company_id","in":"path","description":"The company id of the application","required":true,"schema":{"type":"integer"},"example":1}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The company id of the application","required":true,"schema":{"type":"integer"},"example":1}]}""", )
         query_string = await create_query_string()
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -114,7 +114,7 @@ class Webhook:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/retry/status", """{"required":[{"name":"company_id","in":"path","description":"The ID of the company for which manual retry is to be initiated.","required":true,"schema":{"type":"integer"},"example":1}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The ID of the company for which manual retry is to be initiated.","required":true,"schema":{"type":"integer"},"example":1}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/retry/status", """{"required":[{"name":"company_id","in":"path","description":"The company id of the application","required":true,"schema":{"type":"integer"},"example":1}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The company id of the application","required":true,"schema":{"type":"integer"},"example":1}]}""", )
         query_string = await create_query_string()
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -154,7 +154,7 @@ class Webhook:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/retry/cancel", """{"required":[{"name":"company_id","in":"path","description":"The ID of the company for which manual retry is to be initiated.","required":true,"schema":{"type":"integer"},"example":1}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The ID of the company for which manual retry is to be initiated.","required":true,"schema":{"type":"integer"},"example":1}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/retry/cancel", """{"required":[{"name":"company_id","in":"path","description":"The company id of the application","required":true,"schema":{"type":"integer"},"example":1}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The company id of the application","required":true,"schema":{"type":"integer"},"example":1}]}""", )
         query_string = await create_query_string()
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -198,7 +198,7 @@ class Webhook:
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/reports/event_processed", """{"required":[{"name":"company_id","in":"path","description":"The ID of the company for which manual retry is to be initiated.","required":true,"schema":{"type":"integer"},"example":1}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The ID of the company for which manual retry is to be initiated.","required":true,"schema":{"type":"integer"},"example":1}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/reports/event_processed", """{"required":[{"name":"company_id","in":"path","description":"The company id of the application","required":true,"schema":{"type":"integer"},"example":1}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The company id of the application","required":true,"schema":{"type":"integer"},"example":1}]}""", )
         query_string = await create_query_string()
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -242,7 +242,7 @@ class Webhook:
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/reports/download", """{"required":[{"name":"company_id","in":"path","description":"The ID of the company for which manual retry is to be initiated.","required":true,"schema":{"type":"integer"},"example":1}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The ID of the company for which manual retry is to be initiated.","required":true,"schema":{"type":"integer"},"example":1}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/reports/download", """{"required":[{"name":"company_id","in":"path","description":"The company id of the application","required":true,"schema":{"type":"integer"},"example":1}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The company id of the application","required":true,"schema":{"type":"integer"},"example":1}]}""", )
         query_string = await create_query_string()
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -275,7 +275,7 @@ class Webhook:
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber/ping", """{"required":[{"name":"company_id","in":"path","description":"The ID of the company for which manual retry is to be initiated.","required":true,"schema":{"type":"integer"},"example":1}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The ID of the company for which manual retry is to be initiated.","required":true,"schema":{"type":"integer"},"example":1}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber/ping", """{"required":[{"name":"company_id","in":"path","description":"The company id of the application","required":true,"schema":{"type":"integer"},"example":1}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The company id of the application","required":true,"schema":{"type":"integer"},"example":1}]}""", )
         query_string = await create_query_string()
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -314,7 +314,7 @@ class Webhook:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/events", """{"required":[{"name":"company_id","in":"path","description":"The ID of the company for which manual retry is to be initiated.","required":true,"schema":{"type":"integer"},"example":1}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The ID of the company for which manual retry is to be initiated.","required":true,"schema":{"type":"integer"},"example":1}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/events", """{"required":[{"name":"company_id","in":"path","description":"The company id of the application","required":true,"schema":{"type":"integer"},"example":1}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The company id of the application","required":true,"schema":{"type":"integer"},"example":1}]}""", )
         query_string = await create_query_string()
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -358,7 +358,7 @@ class Webhook:
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/filters", """{"required":[{"name":"company_id","in":"path","description":"The ID of the company for which manual retry is to be initiated.","required":true,"schema":{"type":"integer"},"example":1}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The ID of the company for which manual retry is to be initiated.","required":true,"schema":{"type":"integer"},"example":1}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/filters", """{"required":[{"name":"company_id","in":"path","description":"The company id of the application","required":true,"schema":{"type":"integer"},"example":1}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The company id of the application","required":true,"schema":{"type":"integer"},"example":1}]}""", )
         query_string = await create_query_string()
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -402,7 +402,7 @@ class Webhook:
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/reports/history", """{"required":[{"name":"company_id","in":"path","description":"The ID of the company for which manual retry is to be initiated.","required":true,"schema":{"type":"integer"},"example":1}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The ID of the company for which manual retry is to be initiated.","required":true,"schema":{"type":"integer"},"example":1}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/reports/history", """{"required":[{"name":"company_id","in":"path","description":"The company id of the application","required":true,"schema":{"type":"integer"},"example":1}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The company id of the application","required":true,"schema":{"type":"integer"},"example":1}]}""", )
         query_string = await create_query_string()
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -445,7 +445,7 @@ class Webhook:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/reports/cancel/file/{filename}", """{"required":[{"name":"company_id","in":"path","description":"The ID of the company for which manual retry is to be initiated.","required":true,"schema":{"type":"integer"},"example":1},{"name":"filename","in":"path","description":"Filename of the specific report export to cancel.","required":true,"schema":{"type":"string"},"example":"exportiuUkj_1689758910271"}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The ID of the company for which manual retry is to be initiated.","required":true,"schema":{"type":"integer"},"example":1},{"name":"filename","in":"path","description":"Filename of the specific report export to cancel.","required":true,"schema":{"type":"string"},"example":"exportiuUkj_1689758910271"}]}""", filename=filename)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/reports/cancel/file/{filename}", """{"required":[{"name":"company_id","in":"path","description":"The company id of the application","required":true,"schema":{"type":"integer"},"example":1},{"name":"filename","in":"path","description":"Filename of the specific report export to cancel.","required":true,"schema":{"type":"string"},"example":"exportiuUkj_1689758910271"}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The company id of the application","required":true,"schema":{"type":"integer"},"example":1},{"name":"filename","in":"path","description":"Filename of the specific report export to cancel.","required":true,"schema":{"type":"string"},"example":"exportiuUkj_1689758910271"}]}""", filename=filename)
         query_string = await create_query_string(filename=filename)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -477,7 +477,7 @@ class Webhook:
         """Get Subscribers By CompanyId
         :param page_no : Page Number : type integer
         :param page_size : Page Size : type integer
-        :param extension_id : extension_id : type integer
+        :param extension_id : extension_id : type string
         """
         payload = {}
         
@@ -496,7 +496,7 @@ class Webhook:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber", """{"required":[{"name":"company_id","in":"path","description":"The ID of the company for which manual retry is to be initiated.","required":true,"schema":{"type":"integer"},"example":1}],"optional":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer","format":"int32"},"example":1},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32"},"example":10},{"name":"extension_id","in":"query","description":"extension_id","required":false,"schema":{"type":"integer","format":"int32"},"example":102}],"query":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer","format":"int32"},"example":1},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32"},"example":10},{"name":"extension_id","in":"query","description":"extension_id","required":false,"schema":{"type":"integer","format":"int32"},"example":102}],"headers":[],"path":[{"name":"company_id","in":"path","description":"The ID of the company for which manual retry is to be initiated.","required":true,"schema":{"type":"integer"},"example":1}]}""", page_no=page_no, page_size=page_size, extension_id=extension_id, )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber", """{"required":[{"name":"company_id","in":"path","description":"The company id of the application","required":true,"schema":{"type":"integer"},"example":1}],"optional":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer","format":"int32"},"example":1},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32"},"example":10},{"name":"extension_id","in":"query","description":"extension_id","required":false,"schema":{"type":"string"},"example":"64affd97cbddb85348ca8f93"}],"query":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer","format":"int32"},"example":1},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32"},"example":10},{"name":"extension_id","in":"query","description":"extension_id","required":false,"schema":{"type":"string"},"example":"64affd97cbddb85348ca8f93"}],"headers":[],"path":[{"name":"company_id","in":"path","description":"The company id of the application","required":true,"schema":{"type":"integer"},"example":1}]}""", page_no=page_no, page_size=page_size, extension_id=extension_id, )
         query_string = await create_query_string(page_no=page_no, page_size=page_size, extension_id=extension_id, )
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -540,7 +540,7 @@ class Webhook:
         schema.dump(schema.load(body))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber", """{"required":[{"name":"company_id","in":"path","description":"The ID of the company for which manual retry is to be initiated.","required":true,"schema":{"type":"integer"},"example":1}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The ID of the company for which manual retry is to be initiated.","required":true,"schema":{"type":"integer"},"example":1}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber", """{"required":[{"name":"company_id","in":"path","description":"The company id of the application","required":true,"schema":{"type":"integer"},"example":1}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The company id of the application","required":true,"schema":{"type":"integer"},"example":1}]}""", )
         query_string = await create_query_string()
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -614,7 +614,7 @@ class Webhook:
     
     async def getSubscriberById(self, subscriber_id=None):
         """Get Subscriber By Subscriber ID
-        :param subscriber_id : The ID of the company for which manual retry is to be initiated. : type integer
+        :param subscriber_id : subscriber id : type integer
         """
         payload = {}
         
@@ -627,7 +627,7 @@ class Webhook:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber/{subscriber_id}", """{"required":[{"name":"company_id","in":"path","description":"The ID of the company for which manual retry is to be initiated.","required":true,"schema":{"type":"integer"},"example":1},{"name":"subscriber_id","in":"path","description":"The ID of the company for which manual retry is to be initiated.","required":true,"schema":{"type":"integer"},"example":123}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The ID of the company for which manual retry is to be initiated.","required":true,"schema":{"type":"integer"},"example":1},{"name":"subscriber_id","in":"path","description":"The ID of the company for which manual retry is to be initiated.","required":true,"schema":{"type":"integer"},"example":123}]}""", subscriber_id=subscriber_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber/{subscriber_id}", """{"required":[{"name":"company_id","in":"path","description":"The company id of the application","required":true,"schema":{"type":"integer"},"example":1},{"name":"subscriber_id","in":"path","description":"subscriber id","required":true,"schema":{"type":"integer"},"example":123}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The company id of the application","required":true,"schema":{"type":"integer"},"example":1},{"name":"subscriber_id","in":"path","description":"subscriber id","required":true,"schema":{"type":"integer"},"example":123}]}""", subscriber_id=subscriber_id)
         query_string = await create_query_string(subscriber_id=subscriber_id)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
@@ -659,7 +659,7 @@ class Webhook:
         """Get Subscribers By ExtensionID
         :param page_no : Page Number : type integer
         :param page_size : Page Size : type integer
-        :param extension_id : The ID of the company for which manual retry is to be initiated. : type integer
+        :param extension_id : extension id : type string
         """
         payload = {}
         
@@ -678,7 +678,7 @@ class Webhook:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/extension/{extension_id}/subscriber", """{"required":[{"name":"company_id","in":"path","description":"The ID of the company for which manual retry is to be initiated.","required":true,"schema":{"type":"integer"},"example":1},{"name":"extension_id","in":"path","description":"The ID of the company for which manual retry is to be initiated.","required":true,"schema":{"type":"integer"},"example":1}],"optional":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer","format":"int32"},"example":1},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32"},"example":10}],"query":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer","format":"int32"},"example":1},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32"},"example":10}],"headers":[],"path":[{"name":"company_id","in":"path","description":"The ID of the company for which manual retry is to be initiated.","required":true,"schema":{"type":"integer"},"example":1},{"name":"extension_id","in":"path","description":"The ID of the company for which manual retry is to be initiated.","required":true,"schema":{"type":"integer"},"example":1}]}""", page_no=page_no, page_size=page_size, extension_id=extension_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/extension/{extension_id}/subscriber", """{"required":[{"name":"company_id","in":"path","description":"The company id of the application","required":true,"schema":{"type":"integer"},"example":1},{"name":"extension_id","in":"path","description":"extension id","required":true,"schema":{"type":"string"},"example":"64affd97cbddb85348ca8f93"}],"optional":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer","format":"int32"},"example":1},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32"},"example":10}],"query":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer","format":"int32"},"example":1},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32"},"example":10}],"headers":[],"path":[{"name":"company_id","in":"path","description":"The company id of the application","required":true,"schema":{"type":"integer"},"example":1},{"name":"extension_id","in":"path","description":"extension id","required":true,"schema":{"type":"string"},"example":"64affd97cbddb85348ca8f93"}]}""", page_no=page_no, page_size=page_size, extension_id=extension_id)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, extension_id=extension_id)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()

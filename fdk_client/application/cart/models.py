@@ -863,6 +863,8 @@ class RawBreakup(BaseSchema):
     
     mrp_total = fields.Float(required=False)
     
+    mop_total = fields.Float(required=False)
+    
     coupon = fields.Float(required=False)
     
     total = fields.Float(required=False)
