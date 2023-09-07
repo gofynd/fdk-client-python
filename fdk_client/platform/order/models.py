@@ -3131,17 +3131,17 @@ class GSTDetailsData(BaseSchema):
     
     hsn_code_id = fields.Str(required=False)
     
-    igst_gst_fee = fields.Str(required=False)
+    igst_gst_fee = fields.Float(required=False)
     
     is_default_hsn_code = fields.Boolean(required=False)
     
-    sgst_gst_fee = fields.Str(required=False)
+    sgst_gst_fee = fields.Float(required=False)
     
     tax_collected_at_source = fields.Float(required=False)
     
     brand_calculated_amount = fields.Float(required=False)
     
-    cgst_gst_fee = fields.Str(required=False)
+    cgst_gst_fee = fields.Float(required=False)
     
     gst_tag = fields.Str(required=False)
     
@@ -4811,7 +4811,7 @@ class OrderMeta(BaseSchema):
     
     order_platform = fields.Str(required=False)
     
-    employee_id = fields.Int(required=False)
+    employee_id = fields.Str(required=False)
     
     order_tags = fields.List(fields.Dict(required=False), required=False)
     

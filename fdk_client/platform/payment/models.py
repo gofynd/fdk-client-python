@@ -40,6 +40,14 @@ class IntentAppErrorList(BaseSchema):
     pass
 
 
+class ProductCODData(BaseSchema):
+    pass
+
+
+class CODChargesLimitsResponse(BaseSchema):
+    pass
+
+
 class PaymentModeLogo(BaseSchema):
     pass
 
@@ -513,6 +521,28 @@ class IntentAppErrorList(BaseSchema):
     
 
 
+class ProductCODData(BaseSchema):
+    # Payment swagger.json
+
+    
+    items = fields.Dict(required=False)
+    
+    cod_charges = fields.Dict(required=False)
+    
+
+
+class CODChargesLimitsResponse(BaseSchema):
+    # Payment swagger.json
+
+    
+    max_cart_value = fields.Float(required=False)
+    
+    min_cart_value = fields.Float(required=False)
+    
+    cod_charge = fields.Float(required=False)
+    
+
+
 class PaymentModeLogo(BaseSchema):
     # Payment swagger.json
 
@@ -592,6 +622,10 @@ class PaymentModeList(BaseSchema):
     card_token = fields.Str(required=False)
     
     aggregator_name = fields.Str(required=False)
+    
+    cod_charges = fields.Float(required=False)
+    
+    product_cod_data = fields.Dict(required=False)
     
     cod_limit = fields.Float(required=False)
     

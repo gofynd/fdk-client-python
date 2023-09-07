@@ -13,10 +13,18 @@ class Payment:
         self.applicationId = applicationId
 
     
-    async def getBrandPaymentGatewayConfig(self, ):
+    async def getBrandPaymentGatewayConfig(self, aggregator=None, config_type=None):
         """Get All Brand Payment Gateway Config Secret
+        :param aggregator : aggregator slug : type string
+        :param config_type :  : type string
         """
         payload = {}
+        
+        if aggregator is not None:
+            payload["aggregator"] = aggregator
+        
+        if config_type is not None:
+            payload["config_type"] = config_type
         
 
         # Parameter validation
@@ -24,8 +32,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/aggregator/request", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", )
-        query_string = await create_query_string()
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/aggregator/request", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[{"name":"aggregator","in":"query","description":"aggregator slug","schema":{"type":"string"},"required":false},{"name":"config_type","in":"query","required":false,"schema":{"type":"string","enum":["self","partner","fynd"]}}],"query":[{"name":"aggregator","in":"query","description":"aggregator slug","schema":{"type":"string"},"required":false},{"name":"config_type","in":"query","required":false,"schema":{"type":"string","enum":["self","partner","fynd"]}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", aggregator=aggregator, config_type=config_type)
+        query_string = await create_query_string(aggregator=aggregator, config_type=config_type)
         headers = {
             "Authorization": "Bearer " + await self._conf.getAccessToken()
         }
@@ -35,7 +43,7 @@ class Payment:
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/aggregator/request", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/aggregator/request", aggregator=aggregator, config_type=config_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         
 
