@@ -2113,8 +2113,8 @@ class Catalog:
         
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ProductListingResponse
-            schema = ProductListingResponse()
+            from .models import RawProductListingResponse
+            schema = RawProductListingResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
