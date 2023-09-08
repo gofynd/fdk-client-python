@@ -1813,6 +1813,8 @@ class AffiliateConfig(BaseSchema):
     
     inventory = fields.Nested(AffiliateInventoryConfig, required=False)
     
+    app_company_id = fields.Int(required=False)
+    
 
 
 class Affiliate(BaseSchema):
@@ -3921,6 +3923,8 @@ class OrderDetailsData(BaseSchema):
     
     ordering_channel = fields.Str(required=False)
     
+    meta = fields.Nested(OrderMeta, required=False)
+    
 
 
 class UserDetailsData(BaseSchema):
@@ -4216,6 +4220,8 @@ class AffiliateDetails(BaseSchema):
     affiliate_order_id = fields.Str(required=False)
     
     pdf_links = fields.Nested(PDFLinks, required=False)
+    
+    config = fields.Nested(AffiliateConfig, required=False)
     
     affiliate_id = fields.Str(required=False)
     
@@ -4702,6 +4708,14 @@ class PlatformShipment(BaseSchema):
     total_bags = fields.Int(required=False)
     
     shipment_created_at = fields.Str(required=False)
+    
+    previous_shipment_id = fields.Str(required=False)
+    
+    shipment_update_time = fields.Float(required=False)
+    
+    rto_address = fields.Nested(PlatformDeliveryAddress, required=False)
+    
+    credit_note_id = fields.Str(required=False)
     
 
 
