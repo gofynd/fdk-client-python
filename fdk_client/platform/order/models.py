@@ -4473,7 +4473,7 @@ class CurrentStatus(BaseSchema):
     
     shipment_id = fields.Str(required=False)
     
-    updated_at = fields.Int(required=False)
+    updated_at = fields.Str(required=False)
     
     bag_state_mapper = fields.Nested(BagStateMapper, required=False)
     
