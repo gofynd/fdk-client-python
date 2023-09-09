@@ -651,7 +651,7 @@ class ReportItem(BaseSchema):
     
     report_type = fields.Str(required=False)
     
-    display_date = fields.Str(required=False)
+    display_date = fields.Str(required=False, allow_none=True)
     
 
 

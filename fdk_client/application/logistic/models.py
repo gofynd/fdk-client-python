@@ -143,11 +143,11 @@ class PincodeErrorSchemaResponse(BaseSchema):
     # Logistic swagger.json
 
     
-    message = fields.Str(required=False)
+    message = fields.Str(required=False, allow_none=True)
     
-    value = fields.Str(required=False)
+    value = fields.Str(required=False, allow_none=True)
     
-    type = fields.Str(required=False)
+    type = fields.Str(required=False, allow_none=True)
     
 
 
@@ -263,11 +263,11 @@ class TATErrorSchemaResponse(BaseSchema):
     # Logistic swagger.json
 
     
-    message = fields.Str(required=False)
+    message = fields.Str(required=False, allow_none=True)
     
-    value = fields.Str(required=False)
+    value = fields.Str(required=False, allow_none=True)
     
-    type = fields.Str(required=False)
+    type = fields.Str(required=False, allow_none=True)
     
 
 
@@ -379,13 +379,13 @@ class DP(BaseSchema):
     
     operations = fields.List(fields.Str(required=False), required=False)
     
-    area_code = fields.Str(required=False)
+    area_code = fields.Str(required=False, allow_none=True)
     
     assign_dp_from_sb = fields.Boolean(required=False)
     
     internal_account_id = fields.Str(required=False)
     
-    external_account_id = fields.Str(required=False)
+    external_account_id = fields.Str(required=False, allow_none=True)
     
     transport_mode = fields.Str(required=False)
     

@@ -1025,13 +1025,13 @@ class Dp(BaseSchema):
     
     internal_account_id = fields.Str(required=False)
     
-    area_code = fields.Int(required=False)
+    area_code = fields.Int(required=False, allow_none=True)
     
     payment_mode = fields.Str(required=False)
     
     operations = fields.List(fields.Str(required=False), required=False)
     
-    external_account_id = fields.Str(required=False)
+    external_account_id = fields.Str(required=False, allow_none=True)
     
     transport_mode = fields.Str(required=False)
     
@@ -1259,7 +1259,7 @@ class PincodeCodStatusListingRequest(BaseSchema):
     
     is_active = fields.Boolean(required=False)
     
-    pincode = fields.Int(required=False)
+    pincode = fields.Int(required=False, allow_none=True)
     
     current = fields.Int(required=False)
     
@@ -1289,11 +1289,11 @@ class Error(BaseSchema):
     # Serviceability swagger.json
 
     
-    type = fields.Str(required=False)
+    type = fields.Str(required=False, allow_none=True)
     
-    value = fields.Str(required=False)
+    value = fields.Str(required=False, allow_none=True)
     
-    message = fields.Str(required=False)
+    message = fields.Str(required=False, allow_none=True)
     
 
 
@@ -1683,7 +1683,7 @@ class ApplicationSelfShipConfig(BaseSchema):
     # Serviceability swagger.json
 
     
-    self_ship = fields.Dict(required=False)
+    self_ship = fields.Dict(required=False, allow_none=True)
     
 
 

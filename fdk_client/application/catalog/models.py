@@ -2095,7 +2095,7 @@ class ProductGroupingModel(BaseSchema):
     # Catalog swagger.json
 
     
-    logo = fields.Str(required=False)
+    logo = fields.Str(required=False, allow_none=True)
     
     is_active = fields.Boolean(required=False)
     

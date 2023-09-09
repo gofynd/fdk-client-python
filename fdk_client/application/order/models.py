@@ -373,7 +373,7 @@ class ShipmentStatus(BaseSchema):
     # Order swagger.json
 
     
-    value = fields.Str(required=False)
+    value = fields.Str(required=False, allow_none=True)
     
     title = fields.Str(required=False)
     
@@ -411,7 +411,7 @@ class TrackingDetails(BaseSchema):
     # Order swagger.json
 
     
-    value = fields.Str(required=False)
+    value = fields.Str(required=False, allow_none=True)
     
     is_current = fields.Boolean(required=False)
     
@@ -659,7 +659,7 @@ class CurrentStatus(BaseSchema):
     
     status = fields.Str(required=False)
     
-    journey_type = fields.Str(required=False)
+    journey_type = fields.Str(required=False, allow_none=True)
     
 
 
@@ -667,7 +667,7 @@ class Bags(BaseSchema):
     # Order swagger.json
 
     
-    delivery_date = fields.Str(required=False)
+    delivery_date = fields.Str(required=False, allow_none=True)
     
     line_number = fields.Int(required=False)
     
@@ -687,7 +687,7 @@ class Bags(BaseSchema):
     
     id = fields.Int(required=False)
     
-    returnable_date = fields.Str(required=False)
+    returnable_date = fields.Str(required=False, allow_none=True)
     
     financial_breakup = fields.List(fields.Nested(FinancialBreakup, required=False), required=False)
     
@@ -721,7 +721,7 @@ class DeliveryAddress(BaseSchema):
     
     phone = fields.Str(required=False)
     
-    latitude = fields.Float(required=False)
+    latitude = fields.Float(required=False, allow_none=True)
     
     address2 = fields.Str(required=False)
     
@@ -735,7 +735,7 @@ class DeliveryAddress(BaseSchema):
     
     address_type = fields.Str(required=False)
     
-    longitude = fields.Float(required=False)
+    longitude = fields.Float(required=False, allow_none=True)
     
     country_iso_code = fields.Str(required=False)
     
@@ -769,7 +769,7 @@ class Shipments(BaseSchema):
     
     payment = fields.Nested(ShipmentPayment, required=False)
     
-    order_type = fields.Str(required=False)
+    order_type = fields.Str(required=False, allow_none=True)
     
     show_download_invoice = fields.Boolean(required=False)
     
@@ -809,7 +809,7 @@ class Shipments(BaseSchema):
     
     prices = fields.Nested(Prices, required=False)
     
-    returnable_date = fields.Str(required=False)
+    returnable_date = fields.Str(required=False, allow_none=True)
     
     shipment_created_at = fields.Str(required=False)
     
@@ -837,7 +837,7 @@ class Shipments(BaseSchema):
     
     return_meta = fields.Dict(required=False)
     
-    delivery_date = fields.Str(required=False)
+    delivery_date = fields.Str(required=False, allow_none=True)
     
 
 
@@ -1287,15 +1287,15 @@ class ErrorResponse(BaseSchema):
     # Order swagger.json
 
     
-    code = fields.Str(required=False)
+    code = fields.Str(required=False, allow_none=True)
     
-    message = fields.Str(required=False)
+    message = fields.Str(required=False, allow_none=True)
     
     status = fields.Int(required=False)
     
-    exception = fields.Str(required=False)
+    exception = fields.Str(required=False, allow_none=True)
     
-    stack_trace = fields.Str(required=False)
+    stack_trace = fields.Str(required=False, allow_none=True)
     
 
 

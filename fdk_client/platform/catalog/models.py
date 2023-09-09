@@ -1561,7 +1561,7 @@ class ProductBundleRequest(BaseSchema):
     
     products = fields.List(fields.Nested(ProductBundleItem, required=False), required=False)
     
-    logo = fields.Str(required=False)
+    logo = fields.Str(required=False, allow_none=True)
     
     is_active = fields.Boolean(required=False)
     
@@ -1597,7 +1597,7 @@ class GetProductBundleCreateResponse(BaseSchema):
     
     products = fields.List(fields.Nested(ProductBundleItem, required=False), required=False)
     
-    logo = fields.Str(required=False)
+    logo = fields.Str(required=False, allow_none=True)
     
     is_active = fields.Boolean(required=False)
     
@@ -1641,7 +1641,7 @@ class ProductBundleUpdateRequest(BaseSchema):
     
     products = fields.List(fields.Nested(ProductBundleItem, required=False), required=False)
     
-    logo = fields.Str(required=False)
+    logo = fields.Str(required=False, allow_none=True)
     
     is_active = fields.Boolean(required=False)
     
@@ -2591,7 +2591,7 @@ class NextSchedule(BaseSchema):
     
     start = fields.Str(required=False)
     
-    end = fields.Str(required=False)
+    end = fields.Str(required=False, allow_none=True)
     
 
 
@@ -2599,13 +2599,13 @@ class CollectionSchedule(BaseSchema):
     # Catalog swagger.json
 
     
-    duration = fields.Int(required=False)
+    duration = fields.Int(required=False, allow_none=True)
     
-    end = fields.Str(required=False)
+    end = fields.Str(required=False, allow_none=True)
     
     start = fields.Str(required=False)
     
-    cron = fields.Str(required=False)
+    cron = fields.Str(required=False, allow_none=True)
     
     next_schedule = fields.List(fields.Nested(NextSchedule, required=False), required=False)
     
@@ -2945,7 +2945,7 @@ class UpdateCollection(BaseSchema):
     
     visible_facets_keys = fields.List(fields.Str(required=False), required=False)
     
-    modified_by = fields.Str(required=False)
+    modified_by = fields.Str(required=False, allow_none=True)
     
     name = fields.Str(required=False)
     
@@ -3955,7 +3955,7 @@ class ProductTemplateDownloadsExport(BaseSchema):
     
     filters = fields.Nested(ProductTemplateExportFilterRequest, required=False)
     
-    type = fields.Str(required=False)
+    type = fields.Str(required=False, allow_none=True)
     
 
 
@@ -4137,9 +4137,9 @@ class TeaserTag(BaseSchema):
     # Catalog swagger.json
 
     
-    url = fields.Str(required=False)
+    url = fields.Str(required=False, allow_none=True)
     
-    tag = fields.Str(required=False)
+    tag = fields.Str(required=False, allow_none=True)
     
 
 
@@ -4353,7 +4353,7 @@ class ProductCreateUpdateSchemaV2(BaseSchema):
     
     tax_identifier = fields.Nested(TaxIdentifier, required=False)
     
-    uid = fields.Int(required=False)
+    uid = fields.Int(required=False, allow_none=True)
     
     variant_media = fields.Dict(required=False)
     
@@ -4383,7 +4383,7 @@ class ProductCreateUpdateSchemaV2(BaseSchema):
     
     action = fields.Str(required=False)
     
-    change_request_id = fields.Str(required=False)
+    change_request_id = fields.Str(required=False, allow_none=True)
     
     return_config = fields.Nested(ReturnConfig, required=False)
     
@@ -4413,7 +4413,7 @@ class ProductCreateUpdateSchemaV2(BaseSchema):
     
     is_dependent = fields.Boolean(required=False)
     
-    highlights = fields.List(fields.Str(required=False), required=False)
+    highlights = fields.List(fields.Str(required=False, allow_none=True), required=False)
     
     sizes = fields.List(fields.Dict(required=False), required=False)
     
@@ -4989,7 +4989,7 @@ class BulkResponse(BaseSchema):
     
     is_active = fields.Boolean(required=False)
     
-    modified_by = fields.Str(required=False)
+    modified_by = fields.Str(required=False, allow_none=True)
     
     created_on = fields.Str(required=False)
     
@@ -5225,31 +5225,31 @@ class InvSize(BaseSchema):
     # Catalog swagger.json
 
     
-    item_width = fields.Float(required=False)
+    item_width = fields.Float(required=False, allow_none=True)
     
     size = fields.Raw(required=False)
     
     is_set = fields.Boolean(required=False)
     
-    item_weight = fields.Float(required=False)
+    item_weight = fields.Float(required=False, allow_none=True)
     
-    price_transfer = fields.Float(required=False)
+    price_transfer = fields.Float(required=False, allow_none=True)
     
-    item_weight_unit_of_measure = fields.Str(required=False)
+    item_weight_unit_of_measure = fields.Str(required=False, allow_none=True)
     
     identifiers = fields.List(fields.Nested(GTIN, required=False), required=False)
     
     expiration_date = fields.Str(required=False)
     
-    item_length = fields.Float(required=False)
+    item_length = fields.Float(required=False, allow_none=True)
     
     store_code = fields.Str(required=False)
     
-    item_height = fields.Float(required=False)
+    item_height = fields.Float(required=False, allow_none=True)
     
     quantity = fields.Int(required=False)
     
-    item_dimensions_unit_of_measure = fields.Str(required=False)
+    item_dimensions_unit_of_measure = fields.Str(required=False, allow_none=True)
     
     price = fields.Float(required=False)
     
@@ -5487,7 +5487,7 @@ class InventorySellerResponse(BaseSchema):
     
     track_inventory = fields.Boolean(required=False)
     
-    modified_by = fields.Str(required=False)
+    modified_by = fields.Str(required=False, allow_none=True)
     
     brand = fields.Nested(BrandMeta, required=False)
     
@@ -5527,9 +5527,9 @@ class InventorySellerResponse(BaseSchema):
     
     set = fields.Nested(InventorySet, required=False)
     
-    meta = fields.Dict(required=False)
+    meta = fields.Dict(required=False, allow_none=True)
     
-    created_by = fields.Str(required=False)
+    created_by = fields.Str(required=False, allow_none=True)
     
     fynd_item_code = fields.Str(required=False)
     
@@ -5817,7 +5817,7 @@ class InventoryJobPayload(BaseSchema):
     # Catalog swagger.json
 
     
-    trace_id = fields.Str(required=False)
+    trace_id = fields.Str(required=False, allow_none=True)
     
     item_dimensions_unit_of_measure = fields.Str(required=False)
     
@@ -5865,7 +5865,7 @@ class InventoryExportRequest(BaseSchema):
     
     store = fields.List(fields.Int(required=False), required=False)
     
-    type = fields.Str(required=False)
+    type = fields.Str(required=False, allow_none=True)
     
     brand = fields.List(fields.Int(required=False), required=False)
     
@@ -5911,9 +5911,9 @@ class InventoryExportAdvanceOption(BaseSchema):
     # Catalog swagger.json
 
     
-    from_date = fields.Str(required=False)
+    from_date = fields.Str(required=False, allow_none=True)
     
-    to_date = fields.Str(required=False)
+    to_date = fields.Str(required=False, allow_none=True)
     
     brand_ids = fields.List(fields.Int(required=False), required=False)
     
@@ -5969,7 +5969,7 @@ class InventoryCreateRequest(BaseSchema):
     
     filters = fields.Nested(InventoryExportFilter, required=False)
     
-    type = fields.Str(required=False)
+    type = fields.Str(required=False, allow_none=True)
     
     data = fields.List(fields.Str(required=False), required=False)
     
@@ -5999,7 +5999,7 @@ class InventoryJobDetailResponse(BaseSchema):
     
     filters = fields.Nested(InventoryJobFilters, required=False)
     
-    type = fields.Str(required=False)
+    type = fields.Str(required=False, allow_none=True)
     
     task_id = fields.Str(required=False)
     
@@ -6065,7 +6065,7 @@ class InventoryPayload(BaseSchema):
     
     price_marked = fields.Float(required=False)
     
-    total_quantity = fields.Int(required=False)
+    total_quantity = fields.Int(required=False, allow_none=True)
     
     expiration_date = fields.Str(required=False)
     
@@ -6125,7 +6125,7 @@ class HsnUpsert(BaseSchema):
     
     company_id = fields.Int(required=False)
     
-    hs2_code = fields.Str(required=False)
+    hs2_code = fields.Str(required=False, allow_none=True)
     
     tax_on_esp = fields.Boolean(required=False)
     
@@ -6517,7 +6517,7 @@ class InventoryPage(BaseSchema):
     
     item_total = fields.Int(required=False)
     
-    next_id = fields.Str(required=False)
+    next_id = fields.Str(required=False, allow_none=True)
     
     has_previous = fields.Boolean(required=False)
     

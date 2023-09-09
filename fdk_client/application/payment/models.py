@@ -403,25 +403,25 @@ class AggregatorConfigDetail(BaseSchema):
     # Payment swagger.json
 
     
-    sdk = fields.Boolean(required=False)
+    sdk = fields.Boolean(required=False, allow_none=True)
     
     secret = fields.Str(required=False)
     
-    api = fields.Str(required=False)
+    api = fields.Str(required=False, allow_none=True)
     
-    pin = fields.Str(required=False)
+    pin = fields.Str(required=False, allow_none=True)
     
     config_type = fields.Str(required=False)
     
-    merchant_key = fields.Str(required=False)
+    merchant_key = fields.Str(required=False, allow_none=True)
     
-    verify_api = fields.Str(required=False)
+    verify_api = fields.Str(required=False, allow_none=True)
     
     key = fields.Str(required=False)
     
-    user_id = fields.Str(required=False)
+    user_id = fields.Str(required=False, allow_none=True)
     
-    merchant_id = fields.Str(required=False)
+    merchant_id = fields.Str(required=False, allow_none=True)
     
 
 
@@ -477,9 +477,9 @@ class AttachCardRequest(BaseSchema):
     
     nickname = fields.Str(required=False)
     
-    refresh = fields.Boolean(required=False)
+    refresh = fields.Boolean(required=False, allow_none=True)
     
-    card_id = fields.Str(required=False)
+    card_id = fields.Str(required=False, allow_none=True)
     
     name_on_card = fields.Str(required=False)
     
@@ -501,11 +501,11 @@ class CardPaymentGateway(BaseSchema):
     # Payment swagger.json
 
     
-    api = fields.Str(required=False)
+    api = fields.Str(required=False, allow_none=True)
     
     aggregator = fields.Str(required=False)
     
-    customer_id = fields.Str(required=False)
+    customer_id = fields.Str(required=False, allow_none=True)
     
 
 
@@ -525,39 +525,39 @@ class Card(BaseSchema):
     # Payment swagger.json
 
     
-    card_number = fields.Str(required=False)
+    card_number = fields.Str(required=False, allow_none=True)
     
-    card_name = fields.Str(required=False)
+    card_name = fields.Str(required=False, allow_none=True)
     
-    card_type = fields.Str(required=False)
+    card_type = fields.Str(required=False, allow_none=True)
     
-    card_brand_image = fields.Str(required=False)
+    card_brand_image = fields.Str(required=False, allow_none=True)
     
-    card_reference = fields.Str(required=False)
+    card_reference = fields.Str(required=False, allow_none=True)
     
-    card_issuer = fields.Str(required=False)
+    card_issuer = fields.Str(required=False, allow_none=True)
     
-    card_brand = fields.Str(required=False)
+    card_brand = fields.Str(required=False, allow_none=True)
     
-    expired = fields.Boolean(required=False)
+    expired = fields.Boolean(required=False, allow_none=True)
     
-    compliant_with_tokenisation_guidelines = fields.Boolean(required=False)
+    compliant_with_tokenisation_guidelines = fields.Boolean(required=False, allow_none=True)
     
-    card_isin = fields.Str(required=False)
+    card_isin = fields.Str(required=False, allow_none=True)
     
-    exp_year = fields.Int(required=False)
+    exp_year = fields.Int(required=False, allow_none=True)
     
-    nickname = fields.Str(required=False)
+    nickname = fields.Str(required=False, allow_none=True)
     
     aggregator_name = fields.Str(required=False)
     
-    card_fingerprint = fields.Str(required=False)
+    card_fingerprint = fields.Str(required=False, allow_none=True)
     
-    card_token = fields.Str(required=False)
+    card_token = fields.Str(required=False, allow_none=True)
     
-    exp_month = fields.Int(required=False)
+    exp_month = fields.Int(required=False, allow_none=True)
     
-    card_id = fields.Str(required=False)
+    card_id = fields.Str(required=False, allow_none=True)
     
 
 
@@ -577,7 +577,7 @@ class DeletehCardRequest(BaseSchema):
     # Payment swagger.json
 
     
-    card_id = fields.Str(required=False)
+    card_id = fields.Str(required=False, allow_none=True)
     
 
 
@@ -587,7 +587,7 @@ class DeleteCardsResponse(BaseSchema):
     
     success = fields.Boolean(required=False)
     
-    message = fields.Str(required=False)
+    message = fields.Str(required=False, allow_none=True)
     
 
 
@@ -605,7 +605,7 @@ class ValidateCustomerRequest(BaseSchema):
     
     order_items = fields.List(fields.Dict(required=False), required=False)
     
-    payload = fields.Str(required=False)
+    payload = fields.Str(required=False, allow_none=True)
     
     merchant_params = fields.Dict(required=False)
     
@@ -629,15 +629,15 @@ class ChargeCustomerRequest(BaseSchema):
     # Payment swagger.json
 
     
-    verified = fields.Boolean(required=False)
+    verified = fields.Boolean(required=False, allow_none=True)
     
     aggregator = fields.Str(required=False)
     
     order_id = fields.Str(required=False)
     
-    transaction_token = fields.Str(required=False)
+    transaction_token = fields.Str(required=False, allow_none=True)
     
-    amount = fields.Int(required=False)
+    amount = fields.Int(required=False, allow_none=True)
     
 
 
@@ -647,7 +647,7 @@ class ChargeCustomerResponse(BaseSchema):
     
     status = fields.Str(required=False)
     
-    cart_id = fields.Str(required=False)
+    cart_id = fields.Str(required=False, allow_none=True)
     
     success = fields.Boolean(required=False)
     
@@ -657,7 +657,7 @@ class ChargeCustomerResponse(BaseSchema):
     
     order_id = fields.Str(required=False)
     
-    delivery_address_id = fields.Str(required=False)
+    delivery_address_id = fields.Str(required=False, allow_none=True)
     
 
 
@@ -665,11 +665,11 @@ class PaymentInitializationRequest(BaseSchema):
     # Payment swagger.json
 
     
-    razorpay_payment_id = fields.Str(required=False)
+    razorpay_payment_id = fields.Str(required=False, allow_none=True)
     
     method = fields.Str(required=False)
     
-    device_id = fields.Str(required=False)
+    device_id = fields.Str(required=False, allow_none=True)
     
     aggregator = fields.Str(required=False)
     
@@ -679,15 +679,15 @@ class PaymentInitializationRequest(BaseSchema):
     
     merchant_order_id = fields.Str(required=False)
     
-    vpa = fields.Str(required=False)
+    vpa = fields.Str(required=False, allow_none=True)
     
     order_id = fields.Str(required=False)
     
     currency = fields.Str(required=False)
     
-    timeout = fields.Int(required=False)
+    timeout = fields.Int(required=False, allow_none=True)
     
-    amount = fields.Int(required=False)
+    amount = fields.Int(required=False, allow_none=True)
     
     email = fields.Str(required=False)
     
@@ -699,7 +699,7 @@ class PaymentInitializationResponse(BaseSchema):
     
     status = fields.Str(required=False)
     
-    razorpay_payment_id = fields.Str(required=False)
+    razorpay_payment_id = fields.Str(required=False, allow_none=True)
     
     aggregator_order_id = fields.Str(required=False)
     
@@ -707,11 +707,11 @@ class PaymentInitializationResponse(BaseSchema):
     
     success = fields.Boolean(required=False)
     
-    upi_poll_url = fields.Str(required=False)
+    upi_poll_url = fields.Str(required=False, allow_none=True)
     
-    virtual_id = fields.Str(required=False)
+    virtual_id = fields.Str(required=False, allow_none=True)
     
-    device_id = fields.Str(required=False)
+    device_id = fields.Str(required=False, allow_none=True)
     
     polling_url = fields.Str(required=False)
     
@@ -719,17 +719,17 @@ class PaymentInitializationResponse(BaseSchema):
     
     merchant_order_id = fields.Str(required=False)
     
-    customer_id = fields.Str(required=False)
+    customer_id = fields.Str(required=False, allow_none=True)
     
-    vpa = fields.Str(required=False)
+    vpa = fields.Str(required=False, allow_none=True)
     
-    currency = fields.Str(required=False)
+    currency = fields.Str(required=False, allow_none=True)
     
-    timeout = fields.Int(required=False)
+    timeout = fields.Int(required=False, allow_none=True)
     
-    amount = fields.Int(required=False)
+    amount = fields.Int(required=False, allow_none=True)
     
-    bqr_image = fields.Str(required=False)
+    bqr_image = fields.Str(required=False, allow_none=True)
     
 
 
@@ -743,7 +743,7 @@ class PaymentStatusUpdateRequest(BaseSchema):
     
     method = fields.Str(required=False)
     
-    device_id = fields.Str(required=False)
+    device_id = fields.Str(required=False, allow_none=True)
     
     aggregator = fields.Str(required=False)
     
@@ -759,7 +759,7 @@ class PaymentStatusUpdateRequest(BaseSchema):
     
     currency = fields.Str(required=False)
     
-    amount = fields.Int(required=False)
+    amount = fields.Int(required=False, allow_none=True)
     
     email = fields.Str(required=False)
     
@@ -771,11 +771,11 @@ class PaymentStatusUpdateResponse(BaseSchema):
     
     status = fields.Str(required=False)
     
-    success = fields.Boolean(required=False)
+    success = fields.Boolean(required=False, allow_none=True)
     
     retry = fields.Boolean(required=False)
     
-    redirect_url = fields.Str(required=False)
+    redirect_url = fields.Str(required=False, allow_none=True)
     
     aggregator_name = fields.Str(required=False)
     
@@ -785,9 +785,9 @@ class IntentAppErrorList(BaseSchema):
     # Payment swagger.json
 
     
-    code = fields.Str(required=False)
+    code = fields.Str(required=False, allow_none=True)
     
-    package_name = fields.Str(required=False)
+    package_name = fields.Str(required=False, allow_none=True)
     
 
 
@@ -805,13 +805,13 @@ class IntentApp(BaseSchema):
     # Payment swagger.json
 
     
-    code = fields.Str(required=False)
+    code = fields.Str(required=False, allow_none=True)
     
-    package_name = fields.Str(required=False)
+    package_name = fields.Str(required=False, allow_none=True)
     
-    logos = fields.Dict(required=False)
+    logos = fields.Dict(required=False, allow_none=True)
     
-    display_name = fields.Str(required=False)
+    display_name = fields.Str(required=False, allow_none=True)
     
 
 
@@ -819,71 +819,71 @@ class PaymentModeList(BaseSchema):
     # Payment swagger.json
 
     
-    card_number = fields.Str(required=False)
+    card_number = fields.Str(required=False, allow_none=True)
     
-    merchant_code = fields.Str(required=False)
+    merchant_code = fields.Str(required=False, allow_none=True)
     
-    card_reference = fields.Str(required=False)
+    card_reference = fields.Str(required=False, allow_none=True)
     
-    card_issuer = fields.Str(required=False)
+    card_issuer = fields.Str(required=False, allow_none=True)
     
-    compliant_with_tokenisation_guidelines = fields.Boolean(required=False)
+    compliant_with_tokenisation_guidelines = fields.Boolean(required=False, allow_none=True)
     
-    code = fields.Str(required=False)
+    code = fields.Str(required=False, allow_none=True)
     
-    cod_limit = fields.Float(required=False)
+    cod_limit = fields.Float(required=False, allow_none=True)
     
-    intent_flow = fields.Boolean(required=False)
+    intent_flow = fields.Boolean(required=False, allow_none=True)
     
-    fynd_vpa = fields.Str(required=False)
+    fynd_vpa = fields.Str(required=False, allow_none=True)
     
     intent_app_error_dict_list = fields.List(fields.Nested(IntentAppErrorList, required=False), required=False)
     
     aggregator_name = fields.Str(required=False)
     
-    card_fingerprint = fields.Str(required=False)
+    card_fingerprint = fields.Str(required=False, allow_none=True)
     
     intent_app_error_list = fields.List(fields.Str(required=False), required=False)
     
     intent_app = fields.List(fields.Nested(IntentApp, required=False), required=False)
     
-    expired = fields.Boolean(required=False)
+    expired = fields.Boolean(required=False, allow_none=True)
     
-    retry_count = fields.Int(required=False)
+    retry_count = fields.Int(required=False, allow_none=True)
     
-    exp_year = fields.Int(required=False)
+    exp_year = fields.Int(required=False, allow_none=True)
     
-    exp_month = fields.Int(required=False)
+    exp_month = fields.Int(required=False, allow_none=True)
     
-    card_id = fields.Str(required=False)
+    card_id = fields.Str(required=False, allow_none=True)
     
-    remaining_limit = fields.Float(required=False)
+    remaining_limit = fields.Float(required=False, allow_none=True)
     
-    display_priority = fields.Int(required=False)
+    display_priority = fields.Int(required=False, allow_none=True)
     
-    card_brand = fields.Str(required=False)
+    card_brand = fields.Str(required=False, allow_none=True)
     
-    cod_limit_per_order = fields.Float(required=False)
+    cod_limit_per_order = fields.Float(required=False, allow_none=True)
     
-    logo_url = fields.Dict(required=False)
+    logo_url = fields.Dict(required=False, allow_none=True)
     
-    nickname = fields.Str(required=False)
+    nickname = fields.Str(required=False, allow_none=True)
     
-    card_name = fields.Str(required=False)
+    card_name = fields.Str(required=False, allow_none=True)
     
-    card_type = fields.Str(required=False)
+    card_type = fields.Str(required=False, allow_none=True)
     
-    card_brand_image = fields.Str(required=False)
+    card_brand_image = fields.Str(required=False, allow_none=True)
     
-    display_name = fields.Str(required=False)
+    display_name = fields.Str(required=False, allow_none=True)
     
-    card_isin = fields.Str(required=False)
+    card_isin = fields.Str(required=False, allow_none=True)
     
-    timeout = fields.Int(required=False)
+    timeout = fields.Int(required=False, allow_none=True)
     
-    card_token = fields.Str(required=False)
+    card_token = fields.Str(required=False, allow_none=True)
     
-    name = fields.Str(required=False)
+    name = fields.Str(required=False, allow_none=True)
     
 
 
@@ -891,9 +891,9 @@ class RootPaymentMode(BaseSchema):
     # Payment swagger.json
 
     
-    is_pay_by_card_pl = fields.Boolean(required=False)
+    is_pay_by_card_pl = fields.Boolean(required=False, allow_none=True)
     
-    add_card_enabled = fields.Boolean(required=False)
+    add_card_enabled = fields.Boolean(required=False, allow_none=True)
     
     display_priority = fields.Int(required=False)
     
@@ -901,13 +901,13 @@ class RootPaymentMode(BaseSchema):
     
     list = fields.List(fields.Nested(PaymentModeList, required=False), required=False)
     
-    save_card = fields.Boolean(required=False)
+    save_card = fields.Boolean(required=False, allow_none=True)
     
-    aggregator_name = fields.Str(required=False)
+    aggregator_name = fields.Str(required=False, allow_none=True)
     
     name = fields.Str(required=False)
     
-    anonymous_enable = fields.Boolean(required=False)
+    anonymous_enable = fields.Boolean(required=False, allow_none=True)
     
 
 
@@ -915,13 +915,13 @@ class AggregatorRoute(BaseSchema):
     # Payment swagger.json
 
     
-    data = fields.Dict(required=False)
+    data = fields.Dict(required=False, allow_none=True)
     
-    payment_flow_data = fields.Str(required=False)
+    payment_flow_data = fields.Str(required=False, allow_none=True)
     
-    payment_flow = fields.Str(required=False)
+    payment_flow = fields.Str(required=False, allow_none=True)
     
-    api_link = fields.Str(required=False)
+    api_link = fields.Str(required=False, allow_none=True)
     
 
 
@@ -929,33 +929,33 @@ class PaymentFlow(BaseSchema):
     # Payment swagger.json
 
     
-    bqr_razorpay = fields.Dict(required=False)
+    bqr_razorpay = fields.Dict(required=False, allow_none=True)
     
-    fynd = fields.Dict(required=False)
+    fynd = fields.Dict(required=False, allow_none=True)
     
-    epaylater = fields.Dict(required=False)
+    epaylater = fields.Dict(required=False, allow_none=True)
     
-    razorpay = fields.Dict(required=False)
+    razorpay = fields.Dict(required=False, allow_none=True)
     
-    juspay = fields.Dict(required=False)
+    juspay = fields.Dict(required=False, allow_none=True)
     
-    ajiodhan = fields.Dict(required=False)
+    ajiodhan = fields.Dict(required=False, allow_none=True)
     
-    simpl = fields.Dict(required=False)
+    simpl = fields.Dict(required=False, allow_none=True)
     
-    rupifi = fields.Dict(required=False)
+    rupifi = fields.Dict(required=False, allow_none=True)
     
-    mswipe = fields.Dict(required=False)
+    mswipe = fields.Dict(required=False, allow_none=True)
     
-    stripe = fields.Dict(required=False)
+    stripe = fields.Dict(required=False, allow_none=True)
     
-    ccavenue = fields.Dict(required=False)
+    ccavenue = fields.Dict(required=False, allow_none=True)
     
-    payubiz = fields.Dict(required=False)
+    payubiz = fields.Dict(required=False, allow_none=True)
     
-    jiopay = fields.Dict(required=False)
+    jiopay = fields.Dict(required=False, allow_none=True)
     
-    upi_razorpay = fields.Dict(required=False)
+    upi_razorpay = fields.Dict(required=False, allow_none=True)
     
 
 
@@ -1027,7 +1027,7 @@ class ResendOrCancelPaymentRequest(BaseSchema):
     
     order_id = fields.Str(required=False)
     
-    device_id = fields.Str(required=False)
+    device_id = fields.Str(required=False, allow_none=True)
     
     request_type = fields.Str(required=False)
     
@@ -1057,7 +1057,7 @@ class renderHTMLRequest(BaseSchema):
     # Payment swagger.json
 
     
-    returntype = fields.Str(required=False)
+    returntype = fields.Str(required=False, allow_none=True)
     
     base64_html = fields.Str(required=False)
     
@@ -1111,7 +1111,7 @@ class CardDetails(BaseSchema):
     
     country = fields.Str(required=False)
     
-    bank_code = fields.Str(required=False)
+    bank_code = fields.Str(required=False, allow_none=True)
     
     id = fields.Str(required=False)
     
@@ -1121,7 +1121,7 @@ class CardDetails(BaseSchema):
     
     type = fields.Str(required=False)
     
-    card_sub_type = fields.Str(required=False)
+    card_sub_type = fields.Str(required=False, allow_none=True)
     
     is_domestic_card = fields.Boolean(required=False)
     
@@ -1225,7 +1225,7 @@ class OrderBeneficiaryDetails(BaseSchema):
     
     email = fields.Str(required=False)
     
-    delights_user_name = fields.Str(required=False)
+    delights_user_name = fields.Str(required=False, allow_none=True)
     
     id = fields.Int(required=False)
     
@@ -1343,13 +1343,13 @@ class BeneficiaryModeDetails(BaseSchema):
     
     ifsc_code = fields.Str(required=False)
     
-    vpa = fields.Str(required=False)
+    vpa = fields.Str(required=False, allow_none=True)
     
     branch_name = fields.Str(required=False)
     
     account_holder = fields.Str(required=False)
     
-    wallet = fields.Str(required=False)
+    wallet = fields.Str(required=False, allow_none=True)
     
     email = fields.Str(required=False)
     
@@ -1463,21 +1463,21 @@ class GetPaymentLinkResponse(BaseSchema):
     
     status_code = fields.Int(required=False)
     
-    payment_link_current_status = fields.Str(required=False)
+    payment_link_current_status = fields.Str(required=False, allow_none=True)
     
     success = fields.Boolean(required=False)
     
-    polling_timeout = fields.Int(required=False)
+    polling_timeout = fields.Int(required=False, allow_none=True)
     
-    payment_link_url = fields.Str(required=False)
+    payment_link_url = fields.Str(required=False, allow_none=True)
     
-    external_order_id = fields.Str(required=False)
+    external_order_id = fields.Str(required=False, allow_none=True)
     
     message = fields.Str(required=False)
     
-    merchant_name = fields.Str(required=False)
+    merchant_name = fields.Str(required=False, allow_none=True)
     
-    amount = fields.Float(required=False)
+    amount = fields.Float(required=False, allow_none=True)
     
 
 
@@ -1485,21 +1485,21 @@ class ErrorDescription(BaseSchema):
     # Payment swagger.json
 
     
-    payment_transaction_id = fields.Str(required=False)
+    payment_transaction_id = fields.Str(required=False, allow_none=True)
     
-    expired = fields.Boolean(required=False)
+    expired = fields.Boolean(required=False, allow_none=True)
     
-    merchant_order_id = fields.Str(required=False)
+    merchant_order_id = fields.Str(required=False, allow_none=True)
     
-    merchant_name = fields.Str(required=False)
+    merchant_name = fields.Str(required=False, allow_none=True)
     
-    msg = fields.Str(required=False)
+    msg = fields.Str(required=False, allow_none=True)
     
-    cancelled = fields.Boolean(required=False)
+    cancelled = fields.Boolean(required=False, allow_none=True)
     
-    amount = fields.Float(required=False)
+    amount = fields.Float(required=False, allow_none=True)
     
-    invalid_id = fields.Boolean(required=False)
+    invalid_id = fields.Boolean(required=False, allow_none=True)
     
 
 
@@ -1509,7 +1509,7 @@ class ErrorResponse(BaseSchema):
     
     status_code = fields.Int(required=False)
     
-    error = fields.Dict(required=False)
+    error = fields.Dict(required=False, allow_none=True)
     
     message = fields.Str(required=False)
     
@@ -1527,7 +1527,7 @@ class CreatePaymentLinkMeta(BaseSchema):
     
     pincode = fields.Str(required=False)
     
-    assign_card_id = fields.Str(required=False)
+    assign_card_id = fields.Str(required=False, allow_none=True)
     
     amount = fields.Str(required=False)
     
@@ -1537,7 +1537,7 @@ class CreatePaymentLinkRequest(BaseSchema):
     # Payment swagger.json
 
     
-    description = fields.Str(required=False)
+    description = fields.Str(required=False, allow_none=True)
     
     external_order_id = fields.Str(required=False)
     
@@ -1559,13 +1559,13 @@ class CreatePaymentLinkResponse(BaseSchema):
     
     success = fields.Boolean(required=False)
     
-    polling_timeout = fields.Int(required=False)
+    polling_timeout = fields.Int(required=False, allow_none=True)
     
-    payment_link_url = fields.Str(required=False)
+    payment_link_url = fields.Str(required=False, allow_none=True)
     
     message = fields.Str(required=False)
     
-    payment_link_id = fields.Str(required=False)
+    payment_link_id = fields.Str(required=False, allow_none=True)
     
 
 
@@ -1583,7 +1583,7 @@ class ResendPaymentLinkResponse(BaseSchema):
     
     status_code = fields.Int(required=False)
     
-    polling_timeout = fields.Int(required=False)
+    polling_timeout = fields.Int(required=False, allow_none=True)
     
     success = fields.Boolean(required=False)
     
@@ -1607,25 +1607,25 @@ class PollingPaymentLinkResponse(BaseSchema):
     # Payment swagger.json
 
     
-    status = fields.Str(required=False)
+    status = fields.Str(required=False, allow_none=True)
     
-    status_code = fields.Int(required=False)
+    status_code = fields.Int(required=False, allow_none=True)
     
-    success = fields.Boolean(required=False)
+    success = fields.Boolean(required=False, allow_none=True)
     
-    http_status = fields.Int(required=False)
+    http_status = fields.Int(required=False, allow_none=True)
     
-    message = fields.Str(required=False)
+    message = fields.Str(required=False, allow_none=True)
     
-    order_id = fields.Str(required=False)
+    order_id = fields.Str(required=False, allow_none=True)
     
-    redirect_url = fields.Str(required=False)
+    redirect_url = fields.Str(required=False, allow_none=True)
     
-    payment_link_id = fields.Str(required=False)
+    payment_link_id = fields.Str(required=False, allow_none=True)
     
-    aggregator_name = fields.Str(required=False)
+    aggregator_name = fields.Str(required=False, allow_none=True)
     
-    amount = fields.Float(required=False)
+    amount = fields.Float(required=False, allow_none=True)
     
 
 
@@ -1667,7 +1667,7 @@ class CreateOrderUserRequest(BaseSchema):
     
     success_callback_url = fields.Str(required=False)
     
-    meta = fields.Dict(required=False)
+    meta = fields.Dict(required=False, allow_none=True)
     
 
 
@@ -1675,25 +1675,25 @@ class CreateOrderUserData(BaseSchema):
     # Payment swagger.json
 
     
-    method = fields.Str(required=False)
+    method = fields.Str(required=False, allow_none=True)
     
-    aggregator = fields.Str(required=False)
+    aggregator = fields.Str(required=False, allow_none=True)
     
-    customer_id = fields.Str(required=False)
+    customer_id = fields.Str(required=False, allow_none=True)
     
-    contact = fields.Str(required=False)
+    contact = fields.Str(required=False, allow_none=True)
     
-    merchant_order_id = fields.Str(required=False)
+    merchant_order_id = fields.Str(required=False, allow_none=True)
     
-    order_id = fields.Str(required=False)
+    order_id = fields.Str(required=False, allow_none=True)
     
-    currency = fields.Str(required=False)
+    currency = fields.Str(required=False, allow_none=True)
     
-    callback_url = fields.Str(required=False)
+    callback_url = fields.Str(required=False, allow_none=True)
     
-    amount = fields.Float(required=False)
+    amount = fields.Float(required=False, allow_none=True)
     
-    email = fields.Str(required=False)
+    email = fields.Str(required=False, allow_none=True)
     
 
 
@@ -1709,11 +1709,11 @@ class CreateOrderUserResponse(BaseSchema):
     
     message = fields.Str(required=False)
     
-    order_id = fields.Str(required=False)
+    order_id = fields.Str(required=False, allow_none=True)
     
-    callback_url = fields.Str(required=False)
+    callback_url = fields.Str(required=False, allow_none=True)
     
-    payment_confirm_url = fields.Str(required=False)
+    payment_confirm_url = fields.Str(required=False, allow_none=True)
     
 
 
@@ -1721,11 +1721,11 @@ class BalanceDetails(BaseSchema):
     # Payment swagger.json
 
     
-    formatted_value = fields.Str(required=False)
+    formatted_value = fields.Str(required=False, allow_none=True)
     
-    currency = fields.Str(required=False)
+    currency = fields.Str(required=False, allow_none=True)
     
-    value = fields.Float(required=False)
+    value = fields.Float(required=False, allow_none=True)
     
 
 
@@ -1733,19 +1733,19 @@ class CreditSummary(BaseSchema):
     # Payment swagger.json
 
     
-    status = fields.Str(required=False)
+    status = fields.Str(required=False, allow_none=True)
     
-    credit_line_id = fields.Str(required=False)
+    credit_line_id = fields.Str(required=False, allow_none=True)
     
     amount_available = fields.Nested(BalanceDetails, required=False)
     
     balance = fields.Nested(BalanceDetails, required=False)
     
-    status_message = fields.Str(required=False)
+    status_message = fields.Str(required=False, allow_none=True)
     
-    merchant_customer_ref_id = fields.Str(required=False)
+    merchant_customer_ref_id = fields.Str(required=False, allow_none=True)
     
-    buyer_status = fields.Str(required=False)
+    buyer_status = fields.Str(required=False, allow_none=True)
     
 
 
@@ -1807,15 +1807,15 @@ class KYCAddress(BaseSchema):
     
     city = fields.Str(required=False)
     
-    addressline2 = fields.Str(required=False)
+    addressline2 = fields.Str(required=False, allow_none=True)
     
     state = fields.Str(required=False)
     
-    ownership_type = fields.Str(required=False)
+    ownership_type = fields.Str(required=False, allow_none=True)
     
     pincode = fields.Str(required=False)
     
-    land_mark = fields.Str(required=False)
+    land_mark = fields.Str(required=False, allow_none=True)
     
     addressline1 = fields.Str(required=False)
     
@@ -1827,25 +1827,25 @@ class UserPersonalInfoInDetails(BaseSchema):
     
     first_name = fields.Str(required=False)
     
-    voter_id = fields.Str(required=False)
+    voter_id = fields.Str(required=False, allow_none=True)
     
-    gender = fields.Str(required=False)
+    gender = fields.Str(required=False, allow_none=True)
     
-    dob = fields.Str(required=False)
+    dob = fields.Str(required=False, allow_none=True)
     
-    passport = fields.Str(required=False)
+    passport = fields.Str(required=False, allow_none=True)
     
-    fathers_name = fields.Str(required=False)
+    fathers_name = fields.Str(required=False, allow_none=True)
     
-    mothers_name = fields.Str(required=False)
+    mothers_name = fields.Str(required=False, allow_none=True)
     
-    middle_name = fields.Str(required=False)
+    middle_name = fields.Str(required=False, allow_none=True)
     
-    last_name = fields.Str(required=False)
+    last_name = fields.Str(required=False, allow_none=True)
     
-    pan = fields.Str(required=False)
+    pan = fields.Str(required=False, allow_none=True)
     
-    driving_license = fields.Str(required=False)
+    driving_license = fields.Str(required=False, allow_none=True)
     
     email_verified = fields.Boolean(required=False)
     
@@ -1855,7 +1855,7 @@ class UserPersonalInfoInDetails(BaseSchema):
     
     phone = fields.Str(required=False)
     
-    email = fields.Str(required=False)
+    email = fields.Str(required=False, allow_none=True)
     
 
 
@@ -1863,7 +1863,7 @@ class MarketplaceInfo(BaseSchema):
     # Payment swagger.json
 
     
-    date_of_joining = fields.Str(required=False)
+    date_of_joining = fields.Str(required=False, allow_none=True)
     
     name = fields.Str(required=False)
     
@@ -1875,25 +1875,25 @@ class BusinessDetails(BaseSchema):
     # Payment swagger.json
 
     
-    business_ownership_type = fields.Str(required=False)
+    business_ownership_type = fields.Str(required=False, allow_none=True)
     
-    vintage = fields.Str(required=False)
+    vintage = fields.Str(required=False, allow_none=True)
     
-    gstin = fields.Str(required=False)
+    gstin = fields.Str(required=False, allow_none=True)
     
-    pan = fields.Str(required=False)
+    pan = fields.Str(required=False, allow_none=True)
     
-    entity_type = fields.Str(required=False)
+    entity_type = fields.Str(required=False, allow_none=True)
     
     shop_and_establishment = fields.Dict(required=False)
     
-    fssai = fields.Str(required=False)
+    fssai = fields.Str(required=False, allow_none=True)
     
-    fda = fields.Str(required=False)
+    fda = fields.Str(required=False, allow_none=True)
     
-    business_type = fields.Str(required=False)
+    business_type = fields.Str(required=False, allow_none=True)
     
-    name = fields.Str(required=False)
+    name = fields.Str(required=False, allow_none=True)
     
     address = fields.Nested(KYCAddress, required=False)
     
@@ -1903,19 +1903,19 @@ class DeviceDetails(BaseSchema):
     # Payment swagger.json
 
     
-    identification_number = fields.Str(required=False)
+    identification_number = fields.Str(required=False, allow_none=True)
     
-    identifier_type = fields.Str(required=False)
+    identifier_type = fields.Str(required=False, allow_none=True)
     
-    device_model = fields.Str(required=False)
+    device_model = fields.Str(required=False, allow_none=True)
     
-    device_make = fields.Str(required=False)
+    device_make = fields.Str(required=False, allow_none=True)
     
-    device_type = fields.Str(required=False)
+    device_type = fields.Str(required=False, allow_none=True)
     
-    os = fields.Str(required=False)
+    os = fields.Str(required=False, allow_none=True)
     
-    os_version = fields.Str(required=False)
+    os_version = fields.Str(required=False, allow_none=True)
     
 
 
@@ -1925,7 +1925,7 @@ class CustomerOnboardingRequest(BaseSchema):
     
     personal_info = fields.Nested(UserPersonalInfoInDetails, required=False)
     
-    mcc = fields.Str(required=False)
+    mcc = fields.Str(required=False, allow_none=True)
     
     aggregator = fields.Str(required=False)
     
@@ -1971,7 +1971,7 @@ class OutstandingOrderDetailsResponse(BaseSchema):
     
     success = fields.Boolean(required=False)
     
-    message = fields.Str(required=False)
+    message = fields.Str(required=False, allow_none=True)
     
 
 
@@ -1985,7 +1985,7 @@ class PaidOrderDetailsResponse(BaseSchema):
     
     success = fields.Boolean(required=False)
     
-    message = fields.Str(required=False)
+    message = fields.Str(required=False, allow_none=True)
     
 
 

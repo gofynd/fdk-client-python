@@ -533,13 +533,13 @@ class CouponBreakup(BaseSchema):
     
     type = fields.Str(required=False)
     
-    coupon_type = fields.Str(required=False)
+    coupon_type = fields.Str(required=False, allow_none=True)
     
-    sub_title = fields.Str(required=False)
+    sub_title = fields.Str(required=False, allow_none=True)
     
     coupon_value = fields.Float(required=False)
     
-    description = fields.Str(required=False)
+    description = fields.Str(required=False, allow_none=True)
     
     code = fields.Str(required=False)
     
@@ -547,7 +547,7 @@ class CouponBreakup(BaseSchema):
     
     value = fields.Float(required=False)
     
-    title = fields.Str(required=False)
+    title = fields.Str(required=False, allow_none=True)
     
 
 
@@ -755,7 +755,7 @@ class CartProduct(BaseSchema):
     
     categories = fields.List(fields.Nested(CategoryInfo, required=False), required=False)
     
-    item_code = fields.Str(required=False)
+    item_code = fields.Str(required=False, allow_none=True)
     
     tags = fields.List(fields.Str(required=False), required=False)
     
@@ -987,7 +987,7 @@ class AddProductCart(BaseSchema):
     
     extra_meta = fields.Dict(required=False)
     
-    product_group_tags = fields.List(fields.Str(required=False), required=False)
+    product_group_tags = fields.List(fields.Str(required=False, allow_none=True), required=False)
     
     article_assignment = fields.Dict(required=False)
     
@@ -1103,7 +1103,7 @@ class Coupon(BaseSchema):
     
     is_applied = fields.Boolean(required=False)
     
-    coupon_type = fields.Str(required=False)
+    coupon_type = fields.Str(required=False, allow_none=True)
     
     sub_title = fields.Str(required=False)
     
@@ -1111,7 +1111,7 @@ class Coupon(BaseSchema):
     
     is_applicable = fields.Boolean(required=False)
     
-    description = fields.Str(required=False)
+    description = fields.Str(required=False, allow_none=True)
     
     minimum_cart_value = fields.Float(required=False)
     
@@ -1341,7 +1341,7 @@ class UpdateCartPaymentRequest(BaseSchema):
     # PosCart swagger.json
 
     
-    payment_identifier = fields.Str(required=False)
+    payment_identifier = fields.Str(required=False, allow_none=True)
     
     aggregator_name = fields.Str(required=False)
     
@@ -1363,11 +1363,11 @@ class CouponValidity(BaseSchema):
     
     valid = fields.Boolean(required=False)
     
-    next_validation_required = fields.Boolean(required=False)
+    next_validation_required = fields.Boolean(required=False, allow_none=True)
     
-    display_message_en = fields.Str(required=False)
+    display_message_en = fields.Str(required=False, allow_none=True)
     
-    code = fields.Str(required=False)
+    code = fields.Str(required=False, allow_none=True)
     
     title = fields.Str(required=False)
     
@@ -1395,11 +1395,11 @@ class ShipmentResponse(BaseSchema):
     
     promise = fields.Nested(ShipmentPromise, required=False)
     
-    dp_id = fields.Str(required=False)
+    dp_id = fields.Str(required=False, allow_none=True)
     
-    box_type = fields.Str(required=False)
+    box_type = fields.Str(required=False, allow_none=True)
     
-    dp_options = fields.Dict(required=False)
+    dp_options = fields.Dict(required=False, allow_none=True)
     
     items = fields.List(fields.Nested(CartProductInfo, required=False), required=False)
     
@@ -1499,7 +1499,7 @@ class CustomerDetails(BaseSchema):
     
     name = fields.Str(required=False)
     
-    email = fields.Str(required=False)
+    email = fields.Str(required=False, allow_none=True)
     
 
 
@@ -1529,13 +1529,13 @@ class CartPosCheckoutDetailRequest(BaseSchema):
     
     meta = fields.Dict(required=False)
     
-    pick_at_store_uid = fields.Int(required=False)
+    pick_at_store_uid = fields.Int(required=False, allow_none=True)
     
     billing_address = fields.Dict(required=False)
     
     payment_auto_confirm = fields.Boolean(required=False)
     
-    callback_url = fields.Str(required=False)
+    callback_url = fields.Str(required=False, allow_none=True)
     
     delivery_address = fields.Dict(required=False)
     
@@ -1543,17 +1543,17 @@ class CartPosCheckoutDetailRequest(BaseSchema):
     
     order_type = fields.Str(required=False)
     
-    id = fields.Str(required=False)
+    id = fields.Str(required=False, allow_none=True)
     
     staff = fields.Nested(StaffCheckout, required=False)
     
-    customer_details = fields.Dict(required=False)
+    customer_details = fields.Dict(required=False, allow_none=True)
     
     address_id = fields.Str(required=False)
     
     aggregator = fields.Str(required=False)
     
-    payment_params = fields.Dict(required=False)
+    payment_params = fields.Dict(required=False, allow_none=True)
     
     billing_address_id = fields.Str(required=False)
     
@@ -1565,9 +1565,9 @@ class CartPosCheckoutDetailRequest(BaseSchema):
     
     custom_meta = fields.List(fields.Nested(CartCheckoutCustomMeta, required=False), required=False)
     
-    payment_identifier = fields.Str(required=False)
+    payment_identifier = fields.Str(required=False, allow_none=True)
     
-    ordering_store = fields.Int(required=False)
+    ordering_store = fields.Int(required=False, allow_none=True)
     
     files = fields.List(fields.Nested(Files, required=False), required=False)
     
