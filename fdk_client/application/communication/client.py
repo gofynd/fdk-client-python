@@ -1,18 +1,18 @@
-
-
 """Communication Application Client"""
 
 import base64
 import ujson
 from urllib.parse import urlparse
+from typing import Dict
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
+from ..ApplicationConfig import ApplicationConfig
 
 from .validator import CommunicationValidator
 
 class Communication:
-    def __init__(self, config):
+    def __init__(self, config: ApplicationConfig):
         self._conf = config
         self._relativeUrls = {
             "getCommunicationConsent": "/service/application/communication/v1.0/consent",
@@ -27,11 +27,12 @@ class Communication:
     async def updateUrls(self, urls):
         self._urls.update(urls)
     
-    async def getCommunicationConsent(self, body=""):
+    async def getCommunicationConsent(self, body="", request_headers:Dict={}):
         """Use this API to retrieve the consent provided by the user for receiving communication messages over Email/SMS/WhatsApp.
         """
         payload = {}
         
+
         # Parameter validation
         schema = CommunicationValidator.getCommunicationConsent()
         schema.dump(schema.load(payload))
@@ -39,20 +40,23 @@ class Communication:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getCommunicationConsent"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
         query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
-        }
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
         if self._conf.locationDetails:
             headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
+
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCommunicationConsent"]).netloc, "get", await create_url_without_domain("/service/application/communication/v1.0/consent", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
-        
         if 200 <= int(response['status_code']) < 300:
             from .models import CommunicationConsent
             schema = CommunicationConsent()
@@ -62,15 +66,14 @@ class Communication:
                 print("Response Validation failed for getCommunicationConsent")
                 print(e)
 
-        
-
         return response
     
-    async def upsertCommunicationConsent(self, body=""):
+    async def upsertCommunicationConsent(self, body="", request_headers:Dict={}):
         """Use this API to update and insert the consent provided by the user for receiving communication messages over Email/SMS/WhatsApp.
         """
         payload = {}
         
+
         # Parameter validation
         schema = CommunicationValidator.upsertCommunicationConsent()
         schema.dump(schema.load(payload))
@@ -79,24 +82,26 @@ class Communication:
         from .models import CommunicationConsentReq
         schema = CommunicationConsentReq()
         schema.dump(schema.load(body))
-        
 
         url_with_params = await create_url_with_params(api_url=self._urls["upsertCommunicationConsent"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
         query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
-        }
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
         if self._conf.locationDetails:
             headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
+
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["upsertCommunicationConsent"]).netloc, "post", await create_url_without_domain("/service/application/communication/v1.0/consent", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
-        
         if 200 <= int(response['status_code']) < 300:
             from .models import CommunicationConsentRes
             schema = CommunicationConsentRes()
@@ -106,15 +111,14 @@ class Communication:
                 print("Response Validation failed for upsertCommunicationConsent")
                 print(e)
 
-        
-
         return response
     
-    async def upsertAppPushtoken(self, body=""):
+    async def upsertAppPushtoken(self, body="", request_headers:Dict={}):
         """Use this API to update and insert the push token of the user.
         """
         payload = {}
         
+
         # Parameter validation
         schema = CommunicationValidator.upsertAppPushtoken()
         schema.dump(schema.load(payload))
@@ -123,24 +127,26 @@ class Communication:
         from .models import PushtokenReq
         schema = PushtokenReq()
         schema.dump(schema.load(body))
-        
 
         url_with_params = await create_url_with_params(api_url=self._urls["upsertAppPushtoken"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
         query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
-        }
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
         if self._conf.locationDetails:
             headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
+
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["upsertAppPushtoken"]).netloc, "post", await create_url_without_domain("/service/application/communication/v1.0/pn-token", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
-        
         if 200 <= int(response['status_code']) < 300:
             from .models import PushtokenRes
             schema = PushtokenRes()
@@ -150,8 +156,5 @@ class Communication:
                 print("Response Validation failed for upsertAppPushtoken")
                 print(e)
 
-        
-
         return response
     
-

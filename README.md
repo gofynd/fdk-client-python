@@ -13,7 +13,7 @@ Get started with the python Development SDK for Fynd Platform
 
 ### Usage
 
-```
+```bash
 pip install fdk-client-python
 ```
 
@@ -23,6 +23,8 @@ Using this method, you can `import` fdk-client-python like so:
 from fdk_client.application.ApplicationClient import ApplicationClient
 from fdk_client.application.ApplicationConfig import ApplicationConfig
 ```
+
+---
 
 ### Sample Usage - ApplicationClient
 
@@ -56,9 +58,14 @@ async def getProductDetails():
 
 getProductDetails()
 ```
+
+---
+
 #### Persisting cookies across requests
+
 Some APIs require a login to proceed ahead. For this, we have several login options mentioned in these [User methods](/documentation/application/USER.md).
 Using any of these methods, you can get a cookie. All you need to do is store the cookie in application config. Consider an example with mobile OTP:
+
 ```python
 send_otp_response = applicationClient.user.loginWithOTP(
     platform=YOUR_APPLICATION_ID,
@@ -79,11 +86,12 @@ login_response = applicationClient.user.verifyMobileOTP(
 
 applicationClient.config.cookies = login_response["cookies"]
 ```
+
 This will make sure the cookies are passed in all subsequent API calls.
 
+---
 
 ### Sample Usage - PlatformClient
-
 
 ```python
 from fdk_client.common.aiohttp_helper import AiohttpHelper
@@ -134,6 +142,25 @@ try:
 except Exception as e:
     print(e)
 ```
+
+---
+
+### Headers
+
+When calling method, custom request headers can be included by passing a dictionary of headers as the `request_headers` argument in the method signature
+
+```python
+request_headers = {
+    "x-api-version": "1.0"
+}
+
+response = await platform_client.application("<APPLICATION_ID>").theme.getAllPages(
+    theme_id="<THEME_ID>",
+    request_headers=request_headers
+)
+```
+
+---
 
 ### Documentation
 
