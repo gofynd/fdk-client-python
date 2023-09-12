@@ -1,19 +1,19 @@
+
+
 """Lead Platform Client"""
-from typing import Dict
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
-from ..PlatformConfig import PlatformConfig
 
 from .applicationValidator import LeadValidator
 
 class Lead:
-    def __init__(self, config: PlatformConfig, applicationId: str):
+    def __init__(self, config, applicationId):
         self._conf = config
         self.applicationId = applicationId
 
     
-    async def getTickets(self, items=None, filters=None, q=None, status=None, priority=None, category=None, request_headers:Dict={}):
+    async def getTickets(self, items=None, filters=None, q=None, status=None, priority=None, category=None):
         """Gets the list of Application level Tickets and/or ticket filters
         :param items : Decides that the reponse will contain the list of tickets : type boolean
         :param filters : Decides that the reponse will contain the ticket filters : type boolean
@@ -26,16 +26,22 @@ class Lead:
         
         if items is not None:
             payload["items"] = items
+        
         if filters is not None:
             payload["filters"] = filters
+        
         if q is not None:
             payload["q"] = q
+        
         if status is not None:
             payload["status"] = status
+        
         if priority is not None:
             payload["priority"] = priority
+        
         if category is not None:
             payload["category"] = category
+        
 
         # Parameter validation
         schema = LeadValidator.getTickets()
@@ -44,20 +50,18 @@ class Lead:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ticket", """{"required":[{"name":"company_id","in":"path","description":"Company ID of the application","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID for which the data will be returned","required":true,"schema":{"type":"string"}}],"optional":[{"name":"items","in":"query","description":"Decides that the reponse will contain the list of tickets","schema":{"type":"boolean"}},{"name":"filters","in":"query","description":"Decides that the reponse will contain the ticket filters","schema":{"type":"boolean"}},{"name":"q","in":"query","description":"Search through ticket titles and description","schema":{"type":"string"}},{"name":"status","in":"query","description":"Filter tickets on status","schema":{"type":"string"}},{"name":"priority","in":"query","description":"Filter tickets on priority","schema":{"$ref":"#/components/schemas/PriorityEnum"}},{"name":"category","in":"query","description":"Filter tickets on category","schema":{"type":"string"}}],"query":[{"name":"items","in":"query","description":"Decides that the reponse will contain the list of tickets","schema":{"type":"boolean"}},{"name":"filters","in":"query","description":"Decides that the reponse will contain the ticket filters","schema":{"type":"boolean"}},{"name":"q","in":"query","description":"Search through ticket titles and description","schema":{"type":"string"}},{"name":"status","in":"query","description":"Filter tickets on status","schema":{"type":"string"}},{"name":"priority","in":"query","description":"Filter tickets on priority","schema":{"$ref":"#/components/schemas/PriorityEnum"}},{"name":"category","in":"query","description":"Filter tickets on category","schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company ID of the application","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID for which the data will be returned","required":true,"schema":{"type":"string"}}]}""", items=items, filters=filters, q=q, status=status, priority=priority, category=category)
         query_string = await create_query_string(items=items, filters=filters, q=q, status=status, priority=priority, category=category)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ticket", items=items, filters=filters, q=q, status=status, priority=priority, category=category), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
 
         if 200 <= int(response['status_code']) < 300:
             from .models import TicketList
@@ -68,9 +72,11 @@ class Lead:
                 print("Response Validation failed for getTickets")
                 print(e)
 
+        
+
         return response
     
-    async def getTicket(self, id=None, request_headers:Dict={}):
+    async def getTicket(self, id=None):
         """Retreives ticket details of a application level ticket with ticket ID
         :param id : Tiket ID of the ticket to be fetched : type string
         """
@@ -78,6 +84,7 @@ class Lead:
         
         if id is not None:
             payload["id"] = id
+        
 
         # Parameter validation
         schema = LeadValidator.getTicket()
@@ -86,20 +93,18 @@ class Lead:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ticket/{id}", """{"required":[{"name":"company_id","in":"path","description":"Company ID of the application","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID for which the data will be returned","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Tiket ID of the ticket to be fetched","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company ID of the application","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID for which the data will be returned","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Tiket ID of the ticket to be fetched","required":true,"schema":{"type":"string"}}]}""", id=id)
         query_string = await create_query_string(id=id)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ticket/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
 
         if 200 <= int(response['status_code']) < 300:
             from .models import Ticket
@@ -110,9 +115,11 @@ class Lead:
                 print("Response Validation failed for getTicket")
                 print(e)
 
+        
+
         return response
     
-    async def editTicket(self, id=None, body="", request_headers:Dict={}):
+    async def editTicket(self, id=None, body=""):
         """Edits ticket details of a application level ticket such as status, priority, category, tags, attachments, assigne & ticket content changes
         :param id : Ticket ID of ticket to be edited : type string
         """
@@ -120,6 +127,7 @@ class Lead:
         
         if id is not None:
             payload["id"] = id
+        
 
         # Parameter validation
         schema = LeadValidator.editTicket()
@@ -129,23 +137,22 @@ class Lead:
         from .models import EditTicketPayload
         schema = EditTicketPayload()
         schema.dump(schema.load(body))
+        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ticket/{id}", """{"required":[{"name":"company_id","in":"path","description":"Company ID of the application","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID for ticket","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Ticket ID of ticket to be edited","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company ID of the application","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID for ticket","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Ticket ID of ticket to be edited","required":true,"schema":{"type":"string"}}]}""", id=id)
         query_string = await create_query_string(id=id)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ticket/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
 
         if 200 <= int(response['status_code']) < 300:
             from .models import Ticket
@@ -156,9 +163,11 @@ class Lead:
                 print("Response Validation failed for editTicket")
                 print(e)
 
+        
+
         return response
     
-    async def createHistory(self, id=None, body="", request_headers:Dict={}):
+    async def createHistory(self, id=None, body=""):
         """Create history for specific application level ticket, this history is seen on ticket detail page, this can be comment, log or rating.
         :param id : Ticket ID for which history is created : type string
         """
@@ -166,6 +175,7 @@ class Lead:
         
         if id is not None:
             payload["id"] = id
+        
 
         # Parameter validation
         schema = LeadValidator.createHistory()
@@ -175,23 +185,22 @@ class Lead:
         from .models import TicketHistoryPayload
         schema = TicketHistoryPayload()
         schema.dump(schema.load(body))
+        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ticket/{id}/history", """{"required":[{"name":"company_id","in":"path","description":"Company ID of the application","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID for ticket","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Ticket ID for which history is created","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company ID of the application","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID for ticket","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Ticket ID for which history is created","required":true,"schema":{"type":"string"}}]}""", id=id)
         query_string = await create_query_string(id=id)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ticket/{id}/history", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
 
         if 200 <= int(response['status_code']) < 300:
             from .models import TicketHistory
@@ -202,9 +211,11 @@ class Lead:
                 print("Response Validation failed for createHistory")
                 print(e)
 
+        
+
         return response
     
-    async def getTicketHistory(self, id=None, request_headers:Dict={}):
+    async def getTicketHistory(self, id=None):
         """Gets history list for specific application level ticket, this history is seen on ticket detail page, this can be comment, log or rating.
         :param id : Ticket ID for which history is to be fetched : type string
         """
@@ -212,6 +223,7 @@ class Lead:
         
         if id is not None:
             payload["id"] = id
+        
 
         # Parameter validation
         schema = LeadValidator.getTicketHistory()
@@ -220,20 +232,18 @@ class Lead:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ticket/{id}/history", """{"required":[{"name":"company_id","in":"path","description":"Company ID of application","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID for ticket","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Ticket ID for which history is to be fetched","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company ID of application","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID for ticket","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Ticket ID for which history is to be fetched","required":true,"schema":{"type":"string"}}]}""", id=id)
         query_string = await create_query_string(id=id)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ticket/{id}/history", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
 
         if 200 <= int(response['status_code']) < 300:
             from .models import TicketHistoryList
@@ -244,9 +254,11 @@ class Lead:
                 print("Response Validation failed for getTicketHistory")
                 print(e)
 
+        
+
         return response
     
-    async def getCustomForm(self, slug=None, request_headers:Dict={}):
+    async def getCustomForm(self, slug=None):
         """Get specific custom form using it's slug, this is used to view the form.
         :param slug : Slug of form whose response is getting submitted : type string
         """
@@ -254,6 +266,7 @@ class Lead:
         
         if slug is not None:
             payload["slug"] = slug
+        
 
         # Parameter validation
         schema = LeadValidator.getCustomForm()
@@ -262,20 +275,18 @@ class Lead:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/form/{slug}", """{"required":[{"name":"company_id","in":"path","description":"Company ID of the application","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID for the form","required":true,"schema":{"type":"string"}},{"name":"slug","in":"path","description":"Slug of form whose response is getting submitted","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company ID of the application","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID for the form","required":true,"schema":{"type":"string"}},{"name":"slug","in":"path","description":"Slug of form whose response is getting submitted","required":true,"schema":{"type":"string"}}]}""", slug=slug)
         query_string = await create_query_string(slug=slug)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/form/{slug}", slug=slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CustomForm
@@ -286,9 +297,11 @@ class Lead:
                 print("Response Validation failed for getCustomForm")
                 print(e)
 
+        
+
         return response
     
-    async def editCustomForm(self, slug=None, body="", request_headers:Dict={}):
+    async def editCustomForm(self, slug=None, body=""):
         """Edit the given custom form field such as adding or deleting input, assignee, title, decription, notification and polling information.
         :param slug : Slug of form whose response is getting submitted : type string
         """
@@ -296,6 +309,7 @@ class Lead:
         
         if slug is not None:
             payload["slug"] = slug
+        
 
         # Parameter validation
         schema = LeadValidator.editCustomForm()
@@ -305,23 +319,22 @@ class Lead:
         from .models import EditCustomFormPayload
         schema = EditCustomFormPayload()
         schema.dump(schema.load(body))
+        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/form/{slug}", """{"required":[{"name":"company_id","in":"path","description":"Company ID of the application","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID for the form","required":true,"schema":{"type":"string"}},{"name":"slug","in":"path","description":"Slug of form whose response is getting submitted","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company ID of the application","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID for the form","required":true,"schema":{"type":"string"}},{"name":"slug","in":"path","description":"Slug of form whose response is getting submitted","required":true,"schema":{"type":"string"}}]}""", slug=slug)
         query_string = await create_query_string(slug=slug)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/form/{slug}", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CustomForm
@@ -332,9 +345,11 @@ class Lead:
                 print("Response Validation failed for editCustomForm")
                 print(e)
 
+        
+
         return response
     
-    async def getCustomForms(self, request_headers:Dict={}):
+    async def getCustomForms(self, ):
         """Get list of custom form for given application
         """
         payload = {}
@@ -347,20 +362,18 @@ class Lead:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/form", """{"required":[{"name":"company_id","in":"path","description":"Company ID of the application","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID for the form","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company ID of the application","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID for the form","required":true,"schema":{"type":"string"}}]}""", )
         query_string = await create_query_string()
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/form", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CustomFormList
@@ -371,9 +384,11 @@ class Lead:
                 print("Response Validation failed for getCustomForms")
                 print(e)
 
+        
+
         return response
     
-    async def createCustomForm(self, body="", request_headers:Dict={}):
+    async def createCustomForm(self, body=""):
         """Creates a new custom form for given application
         """
         payload = {}
@@ -387,23 +402,22 @@ class Lead:
         from .models import CreateCustomFormPayload
         schema = CreateCustomFormPayload()
         schema.dump(schema.load(body))
+        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/form", """{"required":[{"name":"company_id","in":"path","description":"Company ID of the application","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID for the form","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company ID of the application","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID for the form","required":true,"schema":{"type":"string"}}]}""", )
         query_string = await create_query_string()
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/form", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CustomForm
@@ -414,9 +428,11 @@ class Lead:
                 print("Response Validation failed for createCustomForm")
                 print(e)
 
+        
+
         return response
     
-    async def getTokenForVideoRoom(self, unique_name=None, request_headers:Dict={}):
+    async def getTokenForVideoRoom(self, unique_name=None):
         """Get Token to join a specific Video Room using it's unqiue name, this Token is your ticket to Room and also creates your identity there.
         :param unique_name : Unique name of video room : type string
         """
@@ -424,6 +440,7 @@ class Lead:
         
         if unique_name is not None:
             payload["unique_name"] = unique_name
+        
 
         # Parameter validation
         schema = LeadValidator.getTokenForVideoRoom()
@@ -432,20 +449,18 @@ class Lead:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/video/room/{unique_name}/token", """{"required":[{"name":"company_id","in":"path","description":"Company ID of the application","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID for video room","required":true,"schema":{"type":"string"}},{"name":"unique_name","in":"path","description":"Unique name of video room","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company ID of the application","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID for video room","required":true,"schema":{"type":"string"}},{"name":"unique_name","in":"path","description":"Unique name of video room","required":true,"schema":{"type":"string"}}]}""", unique_name=unique_name)
         query_string = await create_query_string(unique_name=unique_name)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/video/room/{unique_name}/token", unique_name=unique_name), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
 
         if 200 <= int(response['status_code']) < 300:
             from .models import GetTokenForVideoRoomResponse
@@ -456,9 +471,11 @@ class Lead:
                 print("Response Validation failed for getTokenForVideoRoom")
                 print(e)
 
+        
+
         return response
     
-    async def getVideoParticipants(self, unique_name=None, request_headers:Dict={}):
+    async def getVideoParticipants(self, unique_name=None):
         """Get participants of a specific Video Room using it's unique name, this can be used to check if people are already there in the room and also to show their names.
         :param unique_name : Unique name of Video Room : type string
         """
@@ -466,6 +483,7 @@ class Lead:
         
         if unique_name is not None:
             payload["unique_name"] = unique_name
+        
 
         # Parameter validation
         schema = LeadValidator.getVideoParticipants()
@@ -474,20 +492,18 @@ class Lead:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/video/room/{unique_name}/participants", """{"required":[{"name":"company_id","in":"path","description":"Company ID of the application","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID for video room","required":true,"schema":{"type":"string"}},{"name":"unique_name","in":"path","description":"Unique name of Video Room","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company ID of the application","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID for video room","required":true,"schema":{"type":"string"}},{"name":"unique_name","in":"path","description":"Unique name of Video Room","required":true,"schema":{"type":"string"}}]}""", unique_name=unique_name)
         query_string = await create_query_string(unique_name=unique_name)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/video/room/{unique_name}/participants", unique_name=unique_name), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
 
         if 200 <= int(response['status_code']) < 300:
             from .models import GetParticipantsInsideVideoRoomResponse
@@ -498,9 +514,11 @@ class Lead:
                 print("Response Validation failed for getVideoParticipants")
                 print(e)
 
+        
+
         return response
     
-    async def openVideoRoom(self, body="", request_headers:Dict={}):
+    async def openVideoRoom(self, body=""):
         """Open a video room.
         """
         payload = {}
@@ -514,23 +532,22 @@ class Lead:
         from .models import CreateVideoRoomPayload
         schema = CreateVideoRoomPayload()
         schema.dump(schema.load(body))
+        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/video/room", """{"required":[{"name":"company_id","in":"path","description":"Company ID of the application","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID for video room","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company ID of the application","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID for video room","required":true,"schema":{"type":"string"}}]}""", )
         query_string = await create_query_string()
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/video/room", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CreateVideoRoomResponse
@@ -541,9 +558,11 @@ class Lead:
                 print("Response Validation failed for openVideoRoom")
                 print(e)
 
+        
+
         return response
     
-    async def closeVideoRoom(self, unique_name=None, request_headers:Dict={}):
+    async def closeVideoRoom(self, unique_name=None):
         """Close the video room and force all participants to leave.
         :param unique_name : Unique name of Video Room : type string
         """
@@ -551,6 +570,7 @@ class Lead:
         
         if unique_name is not None:
             payload["unique_name"] = unique_name
+        
 
         # Parameter validation
         schema = LeadValidator.closeVideoRoom()
@@ -559,20 +579,18 @@ class Lead:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/video/room/{unique_name}", """{"required":[{"name":"company_id","in":"path","description":"Company ID of the application","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID for video room","required":true,"schema":{"type":"string"}},{"name":"unique_name","in":"path","description":"Unique name of Video Room","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company ID of the application","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID for video room","required":true,"schema":{"type":"string"}},{"name":"unique_name","in":"path","description":"Unique name of Video Room","required":true,"schema":{"type":"string"}}]}""", unique_name=unique_name)
         query_string = await create_query_string(unique_name=unique_name)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/video/room/{unique_name}", unique_name=unique_name), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CloseVideoRoomResponse
@@ -583,5 +601,8 @@ class Lead:
                 print("Response Validation failed for closeVideoRoom")
                 print(e)
 
+        
+
         return response
     
+

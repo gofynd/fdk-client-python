@@ -1,16 +1,16 @@
+
+
 """Partner Public Client"""
 
 from urllib.parse import urlparse
-from typing import Dict
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
-from ..PublicConfig import PublicConfig
 
 from .validator import PartnerValidator
 
 class Partner:
-    def __init__(self, config: PublicConfig):
+    def __init__(self, config):
         self._conf = config
         self._relativeUrls = {
             "getPanelExtensionDetails": "/service/panel/partners/v1.0/extensions/{slug}"
@@ -23,7 +23,7 @@ class Partner:
     async def updateUrls(self, urls):
         self._urls.update(urls)
     
-    async def getPanelExtensionDetails(self, slug=None, body="", request_headers:Dict={}):
+    async def getPanelExtensionDetails(self, slug=None, body=""):
         """Use this API to get extension details
         :param slug : pass the slug of the extension : type string
         """
@@ -31,7 +31,7 @@ class Partner:
         
         if slug is not None:
             payload["slug"] = slug
-
+        
         # Parameter validation
         schema = PartnerValidator.getPanelExtensionDetails()
         schema.dump(schema.load(payload))
@@ -39,7 +39,6 @@ class Partner:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getPanelExtensionDetails"], proccessed_params="""{"required":[{"name":"slug","in":"path","description":"pass the slug of the extension","required":true,"schema":{"type":"string"},"example":"example-extension-1"}],"optional":[],"query":[],"headers":[],"path":[{"name":"slug","in":"path","description":"pass the slug of the extension","required":true,"schema":{"type":"string"},"example":"example-extension-1"}]}""", slug=slug)
         query_string = await create_query_string(slug=slug)
-
         headers = {
             "User-Agent": self._conf.userAgent,
             "Accept-Language": self._conf.language,
@@ -47,15 +46,13 @@ class Partner:
         }
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPanelExtensionDetails"]).netloc, "get", await create_url_without_domain("/service/panel/partners/v1.0/extensions/{slug}", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ExtensionUsingSlug
@@ -66,5 +63,8 @@ class Partner:
                 print("Response Validation failed for getPanelExtensionDetails")
                 print(e)
 
+        
+
         return response
     
+

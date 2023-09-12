@@ -1,18 +1,18 @@
+
+
 """Billing Platform Client"""
-from typing import Dict
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
-from ..PlatformConfig import PlatformConfig
 
 from .validator import BillingValidator
 
 class Billing:
-    def __init__(self, config: PlatformConfig):
+    def __init__(self, config):
         self._conf = config
 
     
-    async def checkCouponValidity(self, plan=None, coupon_code=None, request_headers:Dict={}):
+    async def checkCouponValidity(self, plan=None, coupon_code=None):
         """Check coupon validity.
         :param plan : ID of the plan. : type string
         :param coupon_code : Coupon code. : type string
@@ -21,8 +21,10 @@ class Billing:
         
         if plan is not None:
             payload["plan"] = plan
+        
         if coupon_code is not None:
             payload["coupon_code"] = coupon_code
+        
 
         # Parameter validation
         schema = BillingValidator.checkCouponValidity()
@@ -31,20 +33,18 @@ class Billing:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/coupon/check-validity", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}},{"in":"query","name":"plan","description":"ID of the plan.","required":true,"schema":{"type":"string","example":"61a5d6ea3e8c230f3aa2c507"}},{"in":"query","name":"coupon_code","description":"Coupon code.","required":true,"schema":{"type":"string","example":"FYND1"}}],"optional":[],"query":[{"in":"query","name":"plan","description":"ID of the plan.","required":true,"schema":{"type":"string","example":"61a5d6ea3e8c230f3aa2c507"}},{"in":"query","name":"coupon_code","description":"Coupon code.","required":true,"schema":{"type":"string","example":"FYND1"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}]}""", plan=plan, coupon_code=coupon_code)
         query_string = await create_query_string(plan=plan, coupon_code=coupon_code)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/coupon/check-validity", plan=plan, coupon_code=coupon_code), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CheckValidityResponse
@@ -55,9 +55,11 @@ class Billing:
                 print("Response Validation failed for checkCouponValidity")
                 print(e)
 
+        
+
         return response
     
-    async def createSubscriptionCharge(self, extension_id=None, body="", request_headers:Dict={}):
+    async def createSubscriptionCharge(self, extension_id=None, body=""):
         """Register subscription charge for a seller of your extension.
         :param extension_id : Extension _id : type string
         """
@@ -65,6 +67,7 @@ class Billing:
         
         if extension_id is not None:
             payload["extension_id"] = extension_id
+        
 
         # Parameter validation
         schema = BillingValidator.createSubscriptionCharge()
@@ -74,23 +77,22 @@ class Billing:
         from .models import CreateSubscriptionCharge
         schema = CreateSubscriptionCharge()
         schema.dump(schema.load(body))
+        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/extension/{extension_id}/subscription", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}},{"in":"path","name":"extension_id","description":"Extension _id","required":true,"schema":{"type":"string","example":"5f7acb709e76da30e3b92cdb"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}},{"in":"path","name":"extension_id","description":"Extension _id","required":true,"schema":{"type":"string","example":"5f7acb709e76da30e3b92cdb"}}]}""", extension_id=extension_id)
         query_string = await create_query_string(extension_id=extension_id)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/extension/{extension_id}/subscription", extension_id=extension_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CreateSubscriptionResponse
@@ -101,9 +103,11 @@ class Billing:
                 print("Response Validation failed for createSubscriptionCharge")
                 print(e)
 
+        
+
         return response
     
-    async def getSubscriptionCharge(self, extension_id=None, subscription_id=None, request_headers:Dict={}):
+    async def getSubscriptionCharge(self, extension_id=None, subscription_id=None):
         """Get created subscription charge details
         :param extension_id : Extension _id : type string
         :param subscription_id : Subscription charge _id : type string
@@ -112,8 +116,10 @@ class Billing:
         
         if extension_id is not None:
             payload["extension_id"] = extension_id
+        
         if subscription_id is not None:
             payload["subscription_id"] = subscription_id
+        
 
         # Parameter validation
         schema = BillingValidator.getSubscriptionCharge()
@@ -122,20 +128,18 @@ class Billing:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/extension/{extension_id}/subscription/{subscription_id}", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}},{"in":"path","name":"extension_id","description":"Extension _id","required":true,"schema":{"type":"string","example":"5f7acb709e76da30e3b92cdb"}},{"in":"path","name":"subscription_id","description":"Subscription charge _id","required":true,"schema":{"type":"string","example":"5f7acb709e76da30e3b92cdb"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}},{"in":"path","name":"extension_id","description":"Extension _id","required":true,"schema":{"type":"string","example":"5f7acb709e76da30e3b92cdb"}},{"in":"path","name":"subscription_id","description":"Subscription charge _id","required":true,"schema":{"type":"string","example":"5f7acb709e76da30e3b92cdb"}}]}""", extension_id=extension_id, subscription_id=subscription_id)
         query_string = await create_query_string(extension_id=extension_id, subscription_id=subscription_id)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/extension/{extension_id}/subscription/{subscription_id}", extension_id=extension_id, subscription_id=subscription_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
 
         if 200 <= int(response['status_code']) < 300:
             from .models import EntitySubscription
@@ -146,9 +150,11 @@ class Billing:
                 print("Response Validation failed for getSubscriptionCharge")
                 print(e)
 
+        
+
         return response
     
-    async def cancelSubscriptionCharge(self, extension_id=None, subscription_id=None, request_headers:Dict={}):
+    async def cancelSubscriptionCharge(self, extension_id=None, subscription_id=None):
         """Cancel subscription and attached charges.
         :param extension_id : Extension _id : type string
         :param subscription_id : Subscription charge _id : type string
@@ -157,8 +163,10 @@ class Billing:
         
         if extension_id is not None:
             payload["extension_id"] = extension_id
+        
         if subscription_id is not None:
             payload["subscription_id"] = subscription_id
+        
 
         # Parameter validation
         schema = BillingValidator.cancelSubscriptionCharge()
@@ -167,20 +175,18 @@ class Billing:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/extension/{extension_id}/subscription/{subscription_id}/cancel", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}},{"in":"path","name":"extension_id","description":"Extension _id","required":true,"schema":{"type":"string","example":"5f7acb709e76da30e3b92cdb"}},{"in":"path","name":"subscription_id","description":"Subscription charge _id","required":true,"schema":{"type":"string","example":"5f7acb709e76da30e3b92cdb"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}},{"in":"path","name":"extension_id","description":"Extension _id","required":true,"schema":{"type":"string","example":"5f7acb709e76da30e3b92cdb"}},{"in":"path","name":"subscription_id","description":"Subscription charge _id","required":true,"schema":{"type":"string","example":"5f7acb709e76da30e3b92cdb"}}]}""", extension_id=extension_id, subscription_id=subscription_id)
         query_string = await create_query_string(extension_id=extension_id, subscription_id=subscription_id)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/extension/{extension_id}/subscription/{subscription_id}/cancel", extension_id=extension_id, subscription_id=subscription_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
 
         if 200 <= int(response['status_code']) < 300:
             from .models import EntitySubscription
@@ -191,9 +197,11 @@ class Billing:
                 print("Response Validation failed for cancelSubscriptionCharge")
                 print(e)
 
+        
+
         return response
     
-    async def createOneTimeCharge(self, extension_id=None, body="", request_headers:Dict={}):
+    async def createOneTimeCharge(self, extension_id=None, body=""):
         """Register one time subscription charge for a seller of your extension.
         :param extension_id : Extension _id : type string
         """
@@ -201,6 +209,7 @@ class Billing:
         
         if extension_id is not None:
             payload["extension_id"] = extension_id
+        
 
         # Parameter validation
         schema = BillingValidator.createOneTimeCharge()
@@ -210,23 +219,22 @@ class Billing:
         from .models import CreateOneTimeCharge
         schema = CreateOneTimeCharge()
         schema.dump(schema.load(body))
+        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/extension/{extension_id}/one_time_charge", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}},{"in":"path","name":"extension_id","description":"Extension _id","required":true,"schema":{"type":"string","example":"5f7acb709e76da30e3b92cdb"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}},{"in":"path","name":"extension_id","description":"Extension _id","required":true,"schema":{"type":"string","example":"5f7acb709e76da30e3b92cdb"}}]}""", extension_id=extension_id)
         query_string = await create_query_string(extension_id=extension_id)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/extension/{extension_id}/one_time_charge", extension_id=extension_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CreateOneTimeChargeResponse
@@ -237,9 +245,11 @@ class Billing:
                 print("Response Validation failed for createOneTimeCharge")
                 print(e)
 
+        
+
         return response
     
-    async def getChargeDetails(self, extension_id=None, charge_id=None, request_headers:Dict={}):
+    async def getChargeDetails(self, extension_id=None, charge_id=None):
         """Get created subscription charge details
         :param extension_id : Extension _id : type string
         :param charge_id : Standalone charge _id : type string
@@ -248,8 +258,10 @@ class Billing:
         
         if extension_id is not None:
             payload["extension_id"] = extension_id
+        
         if charge_id is not None:
             payload["charge_id"] = charge_id
+        
 
         # Parameter validation
         schema = BillingValidator.getChargeDetails()
@@ -258,20 +270,18 @@ class Billing:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/extension/{extension_id}/charge/{charge_id}", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}},{"in":"path","name":"extension_id","description":"Extension _id","required":true,"schema":{"type":"string","example":"5f7acb709e76da30e3b92cdb"}},{"in":"path","name":"charge_id","description":"Standalone charge _id","required":true,"schema":{"type":"string","example":"5f7acb709e76da30e3b92cdb"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}},{"in":"path","name":"extension_id","description":"Extension _id","required":true,"schema":{"type":"string","example":"5f7acb709e76da30e3b92cdb"}},{"in":"path","name":"charge_id","description":"Standalone charge _id","required":true,"schema":{"type":"string","example":"5f7acb709e76da30e3b92cdb"}}]}""", extension_id=extension_id, charge_id=charge_id)
         query_string = await create_query_string(extension_id=extension_id, charge_id=charge_id)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/extension/{extension_id}/charge/{charge_id}", extension_id=extension_id, charge_id=charge_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
 
         if 200 <= int(response['status_code']) < 300:
             from .models import OneTimeChargeEntity
@@ -282,9 +292,11 @@ class Billing:
                 print("Response Validation failed for getChargeDetails")
                 print(e)
 
+        
+
         return response
     
-    async def getInvoices(self, request_headers:Dict={}):
+    async def getInvoices(self, ):
         """Get invoices.
         """
         payload = {}
@@ -297,20 +309,18 @@ class Billing:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/invoice/list", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}]}""", )
         query_string = await create_query_string()
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/invoice/list", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
 
         if 200 <= int(response['status_code']) < 300:
             from .models import Invoices
@@ -321,9 +331,11 @@ class Billing:
                 print("Response Validation failed for getInvoices")
                 print(e)
 
+        
+
         return response
     
-    async def getInvoiceById(self, invoice_id=None, request_headers:Dict={}):
+    async def getInvoiceById(self, invoice_id=None):
         """Get invoice by id.
         :param invoice_id : Invoice id : type string
         """
@@ -331,6 +343,7 @@ class Billing:
         
         if invoice_id is not None:
             payload["invoice_id"] = invoice_id
+        
 
         # Parameter validation
         schema = BillingValidator.getInvoiceById()
@@ -339,20 +352,18 @@ class Billing:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/invoice/{invoice_id}", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}},{"in":"path","name":"invoice_id","description":"Invoice id","required":true,"schema":{"type":"string","example":"5f7acb709e76da30e3b92cdb"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}},{"in":"path","name":"invoice_id","description":"Invoice id","required":true,"schema":{"type":"string","example":"5f7acb709e76da30e3b92cdb"}}]}""", invoice_id=invoice_id)
         query_string = await create_query_string(invoice_id=invoice_id)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/invoice/{invoice_id}", invoice_id=invoice_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
 
         if 200 <= int(response['status_code']) < 300:
             from .models import Invoice
@@ -363,9 +374,11 @@ class Billing:
                 print("Response Validation failed for getInvoiceById")
                 print(e)
 
+        
+
         return response
     
-    async def getCustomerDetail(self, request_headers:Dict={}):
+    async def getCustomerDetail(self, ):
         """Get subscription customer detail.
         """
         payload = {}
@@ -378,20 +391,18 @@ class Billing:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/customer-detail", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}]}""", )
         query_string = await create_query_string()
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/customer-detail", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SubscriptionCustomer
@@ -402,9 +413,11 @@ class Billing:
                 print("Response Validation failed for getCustomerDetail")
                 print(e)
 
+        
+
         return response
     
-    async def upsertCustomerDetail(self, body="", request_headers:Dict={}):
+    async def upsertCustomerDetail(self, body=""):
         """Upsert subscription customer detail.
         """
         payload = {}
@@ -418,23 +431,22 @@ class Billing:
         from .models import SubscriptionCustomerCreate
         schema = SubscriptionCustomerCreate()
         schema.dump(schema.load(body))
+        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/customer-detail", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}]}""", )
         query_string = await create_query_string()
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/customer-detail", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SubscriptionCustomer
@@ -445,9 +457,11 @@ class Billing:
                 print("Response Validation failed for upsertCustomerDetail")
                 print(e)
 
+        
+
         return response
     
-    async def getSubscription(self, request_headers:Dict={}):
+    async def getSubscription(self, ):
         """If subscription is active then it will return is_enabled true and return subscription object. If subscription is not active then is_enabled false and message.
 
         """
@@ -461,20 +475,18 @@ class Billing:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/current", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}]}""", )
         query_string = await create_query_string()
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/current", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SubscriptionStatus
@@ -485,9 +497,11 @@ class Billing:
                 print("Response Validation failed for getSubscription")
                 print(e)
 
+        
+
         return response
     
-    async def getFeatureLimitConfig(self, request_headers:Dict={}):
+    async def getFeatureLimitConfig(self, ):
         """Get subscription subscription limits.
         """
         payload = {}
@@ -500,20 +514,18 @@ class Billing:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/current-limit", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}]}""", )
         query_string = await create_query_string()
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/current-limit", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SubscriptionLimit
@@ -524,9 +536,11 @@ class Billing:
                 print("Response Validation failed for getFeatureLimitConfig")
                 print(e)
 
+        
+
         return response
     
-    async def activateSubscriptionPlan(self, body="", request_headers:Dict={}):
+    async def activateSubscriptionPlan(self, body=""):
         """It will activate subscription plan for customer
         """
         payload = {}
@@ -540,23 +554,22 @@ class Billing:
         from .models import SubscriptionActivateReq
         schema = SubscriptionActivateReq()
         schema.dump(schema.load(body))
+        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/activate", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}]}""", )
         query_string = await create_query_string()
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/activate", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SubscriptionActivateRes
@@ -567,9 +580,11 @@ class Billing:
                 print("Response Validation failed for activateSubscriptionPlan")
                 print(e)
 
+        
+
         return response
     
-    async def cancelSubscriptionPlan(self, body="", request_headers:Dict={}):
+    async def cancelSubscriptionPlan(self, body=""):
         """It will cancel current active subscription.
         """
         payload = {}
@@ -583,23 +598,22 @@ class Billing:
         from .models import CancelSubscriptionReq
         schema = CancelSubscriptionReq()
         schema.dump(schema.load(body))
+        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/cancel", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}]}""", )
         query_string = await create_query_string()
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/cancel", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CancelSubscriptionRes
@@ -610,9 +624,11 @@ class Billing:
                 print("Response Validation failed for cancelSubscriptionPlan")
                 print(e)
 
+        
+
         return response
     
-    async def getEnterprisePlans(self, request_headers:Dict={}):
+    async def getEnterprisePlans(self, ):
         """Get Enterprise Plans.
 
         """
@@ -626,24 +642,22 @@ class Billing:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/plans", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}]}""", )
         query_string = await create_query_string()
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/plans", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        
 
         return response
     
-    async def planStatusUpdate(self, body="", request_headers:Dict={}):
+    async def planStatusUpdate(self, body=""):
         """It will update the status of the plan
         """
         payload = {}
@@ -657,23 +671,22 @@ class Billing:
         from .models import PlanStatusUpdateReq
         schema = PlanStatusUpdateReq()
         schema.dump(schema.load(body))
+        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/plan/status", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}]}""", )
         query_string = await create_query_string()
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/plan/status", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
 
         if 200 <= int(response['status_code']) < 300:
             from .models import Plan
@@ -684,9 +697,11 @@ class Billing:
                 print("Response Validation failed for planStatusUpdate")
                 print(e)
 
+        
+
         return response
     
-    async def subscripePlan(self, body="", request_headers:Dict={}):
+    async def subscripePlan(self, body=""):
         """It will subscribe a plan.
         """
         payload = {}
@@ -700,23 +715,22 @@ class Billing:
         from .models import SunscribePlan
         schema = SunscribePlan()
         schema.dump(schema.load(body))
+        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/payment/initiate", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}]}""", )
         query_string = await create_query_string()
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        headers = {
+            "Authorization": "Bearer " + await self._conf.getAccessToken()
+        }
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/payment/initiate", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SubscribePlanRes
@@ -727,5 +741,8 @@ class Billing:
                 print("Response Validation failed for subscripePlan")
                 print(e)
 
+        
+
         return response
     
+

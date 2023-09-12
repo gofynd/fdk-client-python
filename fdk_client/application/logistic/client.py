@@ -1,18 +1,18 @@
+
+
 """Logistic Application Client"""
 
 import base64
 import ujson
 from urllib.parse import urlparse
-from typing import Dict
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
-from ..ApplicationConfig import ApplicationConfig
 
 from .validator import LogisticValidator
 
 class Logistic:
-    def __init__(self, config: ApplicationConfig):
+    def __init__(self, config):
         self._conf = config
         self._relativeUrls = {
             "getPincodeCity": "/service/application/logistics/v1.0/pincode/{pincode}",
@@ -29,7 +29,7 @@ class Logistic:
     async def updateUrls(self, urls):
         self._urls.update(urls)
     
-    async def getPincodeCity(self, pincode=None, body="", request_headers:Dict={}):
+    async def getPincodeCity(self, pincode=None, body=""):
         """Get pincode data
         :param pincode : A `pincode` contains a specific address of a location. : type string
         """
@@ -37,7 +37,7 @@ class Logistic:
         
         if pincode is not None:
             payload["pincode"] = pincode
-
+        
         # Parameter validation
         schema = LogisticValidator.getPincodeCity()
         schema.dump(schema.load(payload))
@@ -45,23 +45,20 @@ class Logistic:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getPincodeCity"], proccessed_params="""{"required":[{"in":"path","name":"pincode","description":"A `pincode` contains a specific address of a location.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"pincode","description":"A `pincode` contains a specific address of a location.","schema":{"type":"string"},"required":true}]}""", pincode=pincode)
         query_string = await create_query_string(pincode=pincode)
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
         if self._conf.locationDetails:
             headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPincodeCity"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/pincode/{pincode}", pincode=pincode), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
+        
         if 200 <= int(response['status_code']) < 300:
             from .models import PincodeApiResponse
             schema = PincodeApiResponse()
@@ -71,14 +68,15 @@ class Logistic:
                 print("Response Validation failed for getPincodeCity")
                 print(e)
 
+        
+
         return response
     
-    async def getTatProduct(self, body="", request_headers:Dict={}):
+    async def getTatProduct(self, body=""):
         """Get TAT data
         """
         payload = {}
         
-
         # Parameter validation
         schema = LogisticValidator.getTatProduct()
         schema.dump(schema.load(payload))
@@ -87,26 +85,24 @@ class Logistic:
         from .models import TATViewRequest
         schema = TATViewRequest()
         schema.dump(schema.load(body))
+        
 
         url_with_params = await create_url_with_params(api_url=self._urls["getTatProduct"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
         query_string = await create_query_string()
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
         if self._conf.locationDetails:
             headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getTatProduct"]).netloc, "post", await create_url_without_domain("/service/application/logistics/v1.0/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
+        
         if 200 <= int(response['status_code']) < 300:
             from .models import TATViewResponse
             schema = TATViewResponse()
@@ -116,14 +112,15 @@ class Logistic:
                 print("Response Validation failed for getTatProduct")
                 print(e)
 
+        
+
         return response
     
-    async def getAllCountries(self, body="", request_headers:Dict={}):
+    async def getAllCountries(self, body=""):
         """Get all countries
         """
         payload = {}
         
-
         # Parameter validation
         schema = LogisticValidator.getAllCountries()
         schema.dump(schema.load(payload))
@@ -131,23 +128,20 @@ class Logistic:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getAllCountries"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
         query_string = await create_query_string()
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
         if self._conf.locationDetails:
             headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAllCountries"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/country-list", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
+        
         if 200 <= int(response['status_code']) < 300:
             from .models import CountryListResponse
             schema = CountryListResponse()
@@ -157,14 +151,15 @@ class Logistic:
                 print("Response Validation failed for getAllCountries")
                 print(e)
 
+        
+
         return response
     
-    async def getPincodeZones(self, body="", request_headers:Dict={}):
+    async def getPincodeZones(self, body=""):
         """This API returns zone from the Pincode View.
         """
         payload = {}
         
-
         # Parameter validation
         schema = LogisticValidator.getPincodeZones()
         schema.dump(schema.load(payload))
@@ -173,26 +168,24 @@ class Logistic:
         from .models import GetZoneFromPincodeViewRequest
         schema = GetZoneFromPincodeViewRequest()
         schema.dump(schema.load(body))
+        
 
         url_with_params = await create_url_with_params(api_url=self._urls["getPincodeZones"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
         query_string = await create_query_string()
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
         if self._conf.locationDetails:
             headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPincodeZones"]).netloc, "post", await create_url_without_domain("/service/application/logistics/v1.0/pincode/zones", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
+        
         if 200 <= int(response['status_code']) < 300:
             from .models import GetZoneFromPincodeViewResponse
             schema = GetZoneFromPincodeViewResponse()
@@ -202,14 +195,15 @@ class Logistic:
                 print("Response Validation failed for getPincodeZones")
                 print(e)
 
+        
+
         return response
     
-    async def getOptimalLocations(self, body="", request_headers:Dict={}):
+    async def getOptimalLocations(self, body=""):
         """This API returns zone from the Pincode View.
         """
         payload = {}
         
-
         # Parameter validation
         schema = LogisticValidator.getOptimalLocations()
         schema.dump(schema.load(payload))
@@ -218,26 +212,24 @@ class Logistic:
         from .models import ReAssignStoreRequest
         schema = ReAssignStoreRequest()
         schema.dump(schema.load(body))
+        
 
         url_with_params = await create_url_with_params(api_url=self._urls["getOptimalLocations"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
         query_string = await create_query_string()
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        headers = {
+            "Authorization": "Bearer " + base64.b64encode("{}:{}".format(self._conf.applicationID, self._conf.applicationToken).encode()).decode()
+        }
         if self._conf.locationDetails:
             headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
         for h in self._conf.extraHeaders:
             headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getOptimalLocations"]).netloc, "post", await create_url_without_domain("/service/application/logistics/v1.0/reassign_stores", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
+        
         if 200 <= int(response['status_code']) < 300:
             from .models import ReAssignStoreResponse
             schema = ReAssignStoreResponse()
@@ -247,5 +239,8 @@ class Logistic:
                 print("Response Validation failed for getOptimalLocations")
                 print(e)
 
+        
+
         return response
     
+
