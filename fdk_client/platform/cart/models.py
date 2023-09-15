@@ -1027,6 +1027,8 @@ class CouponAdd(BaseSchema):
     
     rule_definition = fields.Nested(RuleDefinition, required=False)
     
+    _id = fields.Str(required=False)
+    
 
 
 class Page(BaseSchema):
@@ -1053,7 +1055,7 @@ class CouponsResponse(BaseSchema):
     # Cart swagger.json
 
     
-    items = fields.Nested(CouponAdd, required=False)
+    items = fields.List(fields.Nested(CouponAdd, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
     

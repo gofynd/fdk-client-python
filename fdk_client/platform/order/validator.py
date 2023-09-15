@@ -159,20 +159,22 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
-        
-        
-    
-    
-        
         
     
     
         
         
         
+    
+    
+        
+        
+    
+    
+        
+        
+        
+        
         
         
         
@@ -189,6 +191,7 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
         
         
         
@@ -599,6 +602,8 @@ class OrderValidator:
         tags = fields.Str(required=False)
         
         customer_id = fields.Str(required=False)
+        
+        order_type = fields.Str(required=False)
          
         
     
@@ -658,6 +663,8 @@ class OrderValidator:
         my_orders = fields.Boolean(required=False)
         
         show_cross_company_data = fields.Boolean(required=False)
+        
+        order_type = fields.Str(required=False)
          
         
     
@@ -703,6 +710,8 @@ class OrderValidator:
         show_cross_company_data = fields.Boolean(required=False)
         
         customer_id = fields.Str(required=False)
+        
+        order_type = fields.Str(required=False)
          
         
     
