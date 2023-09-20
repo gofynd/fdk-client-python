@@ -2303,7 +2303,7 @@ Shipment Tracking updated successfully
 
 ```python
 try:
-    result = await platformClient.order.getShipments(lane=lane, bagStatus=bagStatus, statusOverrideLane=statusOverrideLane, timeToDispatch=timeToDispatch, searchType=searchType, searchValue=searchValue, fromDate=fromDate, toDate=toDate, dpIds=dpIds, stores=stores, salesChannels=salesChannels, pageNo=pageNo, pageSize=pageSize, fetchActiveShipment=fetchActiveShipment, excludeLockedShipments=excludeLockedShipments, paymentMethods=paymentMethods, channelShipmentId=channelShipmentId, channelOrderId=channelOrderId, customMeta=customMeta, orderingChannel=orderingChannel, companyAffiliateTag=companyAffiliateTag, myOrders=myOrders, platformUserId=platformUserId, sortType=sortType, showCrossCompanyData=showCrossCompanyData, tags=tags, customerId=customerId)
+    result = await platformClient.order.getShipments(lane=lane, bagStatus=bagStatus, statusOverrideLane=statusOverrideLane, timeToDispatch=timeToDispatch, searchType=searchType, searchValue=searchValue, fromDate=fromDate, toDate=toDate, dpIds=dpIds, stores=stores, salesChannels=salesChannels, pageNo=pageNo, pageSize=pageSize, fetchActiveShipment=fetchActiveShipment, excludeLockedShipments=excludeLockedShipments, paymentMethods=paymentMethods, channelShipmentId=channelShipmentId, channelOrderId=channelOrderId, customMeta=customMeta, orderingChannel=orderingChannel, companyAffiliateTag=companyAffiliateTag, myOrders=myOrders, platformUserId=platformUserId, sortType=sortType, showCrossCompanyData=showCrossCompanyData, tags=tags, customerId=customerId, orderType=orderType)
     # use result
 except Exception as e:
     print(e)
@@ -2341,7 +2341,8 @@ except Exception as e:
 | sortType | String? | no | Sort the result data on basis of input |   
 | showCrossCompanyData | Boolean? | no | Flag to view cross & non-cross company order |   
 | tags | String? | no | Comma separated values of tags |   
-| customerId | String? | no |  |  
+| customerId | String? | no |  |   
+| orderType | String? | no |  |  
 
 
 
@@ -2629,7 +2630,8 @@ We are processing the report!
             "gst_tax_percentage": 5,
             "is_default_hsn_code": true,
             "brand_calculated_amount": 499,
-            "gst_fee": 23.76
+            "gst_fee": 23.76,
+            "tax_collected_at_source": 0
           },
           "article": {
             "uid": "6237fdfec0903e7ae543c201",
@@ -3217,9 +3219,9 @@ We are processing the report!
             "igst_tax_percentage": 0,
             "sgst_tax_percentage": 9,
             "cgst_tax_percentage": 9,
-            "igst_gst_fee": "0",
-            "cgst_gst_fee": "36.17",
-            "sgst_gst_fee": "36.17"
+            "igst_gst_fee": 0,
+            "cgst_gst_fee": 36.17,
+            "sgst_gst_fee": 36.17
           },
           "article": {
             "uid": "62f495f2a604499934540c69",
@@ -3569,7 +3571,7 @@ We are processing the report!
 
 ```python
 try:
-    result = await platformClient.order.getLaneConfig(superLane=superLane, groupEntity=groupEntity, fromDate=fromDate, toDate=toDate, dpIds=dpIds, stores=stores, salesChannels=salesChannels, paymentMode=paymentMode, bagStatus=bagStatus, searchType=searchType, searchValue=searchValue, tags=tags, timeToDispatch=timeToDispatch, paymentMethods=paymentMethods, myOrders=myOrders, showCrossCompanyData=showCrossCompanyData)
+    result = await platformClient.order.getLaneConfig(superLane=superLane, groupEntity=groupEntity, fromDate=fromDate, toDate=toDate, dpIds=dpIds, stores=stores, salesChannels=salesChannels, paymentMode=paymentMode, bagStatus=bagStatus, searchType=searchType, searchValue=searchValue, tags=tags, timeToDispatch=timeToDispatch, paymentMethods=paymentMethods, myOrders=myOrders, showCrossCompanyData=showCrossCompanyData, orderType=orderType)
     # use result
 except Exception as e:
     print(e)
@@ -3596,7 +3598,8 @@ except Exception as e:
 | timeToDispatch | String? | no |  |   
 | paymentMethods | String? | no |  |   
 | myOrders | Boolean? | no |  |   
-| showCrossCompanyData | Boolean? | no | Flag to view cross & non-cross company order |  
+| showCrossCompanyData | Boolean? | no | Flag to view cross & non-cross company order |   
+| orderType | String? | no |  |  
 
 
 
@@ -3714,7 +3717,7 @@ Response containing count of shipments of the given status
 
 ```python
 try:
-    result = await platformClient.order.getOrders(lane=lane, searchType=searchType, bagStatus=bagStatus, timeToDispatch=timeToDispatch, paymentMethods=paymentMethods, tags=tags, searchValue=searchValue, fromDate=fromDate, toDate=toDate, dpIds=dpIds, stores=stores, salesChannels=salesChannels, pageNo=pageNo, pageSize=pageSize, isPrioritySort=isPrioritySort, customMeta=customMeta, myOrders=myOrders, showCrossCompanyData=showCrossCompanyData, customerId=customerId)
+    result = await platformClient.order.getOrders(lane=lane, searchType=searchType, bagStatus=bagStatus, timeToDispatch=timeToDispatch, paymentMethods=paymentMethods, tags=tags, searchValue=searchValue, fromDate=fromDate, toDate=toDate, dpIds=dpIds, stores=stores, salesChannels=salesChannels, pageNo=pageNo, pageSize=pageSize, isPrioritySort=isPrioritySort, customMeta=customMeta, myOrders=myOrders, showCrossCompanyData=showCrossCompanyData, customerId=customerId, orderType=orderType)
     # use result
 except Exception as e:
     print(e)
@@ -3744,7 +3747,8 @@ except Exception as e:
 | customMeta | String? | no |  |   
 | myOrders | Boolean? | no |  |   
 | showCrossCompanyData | Boolean? | no | Flag to view cross & non-cross company order |   
-| customerId | String? | no |  |  
+| customerId | String? | no |  |   
+| orderType | String? | no |  |  
 
 
 
@@ -7369,6 +7373,7 @@ We are processing the request!
  | customerNote | String? |  yes  |  |
  | totalBags | Int |  no  |  |
  | shipmentCreatedAt | String |  no  |  |
+ | modeOfPayment | String? |  yes  |  |
 
 ---
 
@@ -7654,6 +7659,7 @@ We are processing the request!
  | forwardAffiliateOrderId | String? |  yes  |  |
  | returnAffiliateOrderId | String? |  yes  |  |
  | bagWeight | HashMap<String,Any>? |  yes  |  |
+ | refundTo | String? |  yes  |  |
 
 ---
 
@@ -7944,7 +7950,7 @@ We are processing the request!
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | gstDetails | [BagGST](#BagGST)? |  yes  |  |
+ | gstDetails | [GSTDetailsData](#GSTDetailsData)? |  yes  |  |
  | parentPromoBags | HashMap<String,Any>? |  yes  |  |
  | financialBreakup | [FinancialBreakup](#FinancialBreakup)? |  yes  |  |
  | bagConfigs | [BagConfigs](#BagConfigs)? |  yes  |  |
@@ -7968,6 +7974,7 @@ We are processing the request!
  | currentStatus | [CurrentStatus](#CurrentStatus)? |  yes  |  |
  | bagId | Int |  no  |  |
  | entityType | String? |  yes  |  |
+ | isParent | Boolean? |  yes  |  |
 
 ---
 
@@ -8084,6 +8091,8 @@ We are processing the request!
  | shipmentUpdateTime | Double? |  yes  |  |
  | rtoAddress | [PlatformDeliveryAddress](#PlatformDeliveryAddress)? |  yes  |  |
  | creditNoteId | String? |  yes  |  |
+ | isSelfShip | Boolean? |  yes  |  |
+ | modeOfPayment | String? |  yes  |  |
 
 ---
 
@@ -8185,6 +8194,7 @@ We are processing the request!
  | customerNote | String? |  yes  |  |
  | staff | HashMap<String,Any>? |  yes  |  |
  | cartId | Int? |  yes  |  |
+ | cartObjectId | String? |  yes  |  |
 
 ---
 
@@ -8817,7 +8827,7 @@ We are processing the request!
  | ---------- | ---- | -------- | ----------- |
  | bagUpdateTime | Double? |  yes  |  |
  | id | Int? |  yes  |  |
- | gstDetails | [BagGSTDetails](#BagGSTDetails)? |  yes  |  |
+ | gstDetails | [GSTDetailsData](#GSTDetailsData)? |  yes  |  |
  | parentPromoBags | HashMap<String,Any>? |  yes  |  |
  | tags | ArrayList<String>? |  yes  |  |
  | financialBreakup | ArrayList<[FinancialBreakup](#FinancialBreakup)>? |  yes  |  |

@@ -360,6 +360,14 @@ class OrderingStoreConfig(BaseSchema):
     pass
 
 
+class OrderingStoreSelectRequest(BaseSchema):
+    pass
+
+
+class OrderingStoreSelect(BaseSchema):
+    pass
+
+
 class OtherSellerCompany(BaseSchema):
     pass
 
@@ -1962,6 +1970,22 @@ class OrderingStoreConfig(BaseSchema):
 
     
     deployment_meta = fields.Nested(DeploymentMeta, required=False)
+    
+
+
+class OrderingStoreSelectRequest(BaseSchema):
+    # Configuration swagger.json
+
+    
+    ordering_store = fields.Nested(OrderingStoreSelect, required=False)
+    
+
+
+class OrderingStoreSelect(BaseSchema):
+    # Configuration swagger.json
+
+    
+    uid = fields.Int(required=False)
     
 
 

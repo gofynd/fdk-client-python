@@ -1575,6 +1575,8 @@ class CartCheckoutDetailRequest(BaseSchema):
     
     meta = fields.Dict(required=False)
     
+    payment_extra_identifiers = fields.Dict(required=False)
+    
 
 
 class CheckCart(BaseSchema):
@@ -1970,6 +1972,8 @@ class PaymentMethod(BaseSchema):
     amount = fields.Float(required=False, allow_none=True)
     
     name = fields.Str(required=False)
+    
+    payment_extra_identifiers = fields.Dict(required=False)
     
 
 
