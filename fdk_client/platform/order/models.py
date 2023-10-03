@@ -4497,7 +4497,7 @@ class OrderBags(BaseSchema):
     # Order swagger.json
 
     
-    gst_details = fields.Nested(BagGST, required=False)
+    gst_details = fields.Nested(GSTDetailsData, required=False)
     
     parent_promo_bags = fields.Dict(required=False, allow_none=True)
     
@@ -5565,7 +5565,7 @@ class BagDetailsPlatformResponse(BaseSchema):
     
     id = fields.Int(required=False, allow_none=True)
     
-    gst_details = fields.Nested(BagGSTDetails, required=False)
+    gst_details = fields.Nested(GSTDetailsData, required=False)
     
     parent_promo_bags = fields.Dict(required=False, allow_none=True)
     

@@ -15401,6 +15401,7 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | orderType | String |  no  |  |
  | files | ArrayList<[Files](#Files)>? |  yes  | List of file url |
  | orderingStore | Int? |  yes  |  |
+ | paymentExtraIdentifiers | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -15581,6 +15582,7 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | paymentMeta | [PaymentMeta](#PaymentMeta) |  no  |  |
  | amount | Double? |  yes  |  |
  | name | String? |  yes  |  |
+ | paymentExtraIdentifiers | HashMap<String,Any>? |  yes  |  |
 
 ---
 

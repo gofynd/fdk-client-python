@@ -96,6 +96,11 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+        
 
 class UserValidator:
     
@@ -281,6 +286,17 @@ class UserValidator:
         
     
     class getUserGroupById(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        group_id = fields.Str(required=False)
+         
+        
+    
+    class updateUserGroupPartially(BaseSchema):
         
         
         company_id = fields.Str(required=False)

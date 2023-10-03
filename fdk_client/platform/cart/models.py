@@ -3631,6 +3631,8 @@ class PlatformCartCheckoutDetailRequest(BaseSchema):
     
     ordering_store = fields.Int(required=False, allow_none=True)
     
+    payment_extra_identifiers = fields.Dict(required=False)
+    
 
 
 class CheckCart(BaseSchema):
@@ -3850,6 +3852,8 @@ class PaymentMethod(BaseSchema):
     amount = fields.Float(required=False, allow_none=True)
     
     name = fields.Str(required=False)
+    
+    payment_extra_identifiers = fields.Dict(required=False)
     
 
 
