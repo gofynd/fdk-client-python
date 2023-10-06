@@ -1,18 +1,18 @@
-
-
 """Catalog Platform Client"""
+from typing import Dict
 
 from ...common.aiohttp_helper import AiohttpHelper
 from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
+from ..PlatformConfig import PlatformConfig
 
 from .validator import CatalogValidator
 
 class Catalog:
-    def __init__(self, config):
+    def __init__(self, config: PlatformConfig):
         self._conf = config
 
     
-    async def listCategories(self, level=None, departments=None, q=None, page_no=None, page_size=None):
+    async def listCategories(self, level=None, departments=None, q=None, page_no=None, page_size=None, request_headers:Dict={}):
         """This API gets meta associated to product categories.
         :param level : Get category for multiple levels : type string
         :param departments : Get category for multiple departments filtered : type string
@@ -24,19 +24,14 @@ class Catalog:
         
         if level is not None:
             payload["level"] = level
-        
         if departments is not None:
             payload["departments"] = departments
-        
         if q is not None:
             payload["q"] = q
-        
         if page_no is not None:
             payload["page_no"] = page_no
-        
         if page_size is not None:
             payload["page_size"] = page_size
-        
 
         # Parameter validation
         schema = CatalogValidator.listCategories()
@@ -45,18 +40,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"Get category for multiple levels","in":"query","name":"level","required":false,"schema":{"type":"string"}},{"description":"Get category for multiple departments filtered","in":"query","name":"departments","required":false,"schema":{"type":"string"}},{"description":"Get multiple categories filtered by search string","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 10.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}}],"query":[{"description":"Get category for multiple levels","in":"query","name":"level","required":false,"schema":{"type":"string"}},{"description":"Get category for multiple departments filtered","in":"query","name":"departments","required":false,"schema":{"type":"string"}},{"description":"Get multiple categories filtered by search string","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 10.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", level=level, departments=departments, q=q, page_no=page_no, page_size=page_size)
         query_string = await create_query_string(level=level, departments=departments, q=q, page_no=page_no, page_size=page_size)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/", level=level, departments=departments, q=q, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/", level=level, departments=departments, q=q, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CategoryResponse
@@ -67,11 +64,9 @@ class Catalog:
                 print("Response Validation failed for listCategories")
                 print(e)
 
-        
-
         return response
     
-    async def createCategories(self, body=""):
+    async def createCategories(self, body="", request_headers:Dict={}):
         """This API lets user create product categories
         """
         payload = {}
@@ -85,22 +80,23 @@ class Catalog:
         from .models import CategoryRequestBody
         schema = CategoryRequestBody()
         schema.dump(schema.load(body))
-        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", )
         query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
-        
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CategoryCreateResponse
@@ -111,11 +107,9 @@ class Catalog:
                 print("Response Validation failed for createCategories")
                 print(e)
 
-        
-
         return response
     
-    async def getCategoryData(self, uid=None):
+    async def getCategoryData(self, uid=None, request_headers:Dict={}):
         """This API gets meta associated to product categories.
         :param uid : Category unique id : type string
         """
@@ -123,7 +117,6 @@ class Catalog:
         
         if uid is not None:
             payload["uid"] = uid
-        
 
         # Parameter validation
         schema = CatalogValidator.getCategoryData()
@@ -132,18 +125,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/{uid}/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Category unique id","in":"path","name":"uid","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Category unique id","in":"path","name":"uid","required":true,"schema":{"type":"string"}}]}""", uid=uid)
         query_string = await create_query_string(uid=uid)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/{uid}/", uid=uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/{uid}/", uid=uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SingleCategoryResponse
@@ -154,11 +149,9 @@ class Catalog:
                 print("Response Validation failed for getCategoryData")
                 print(e)
 
-        
-
         return response
     
-    async def updateCategory(self, uid=None, body=""):
+    async def updateCategory(self, uid=None, body="", request_headers:Dict={}):
         """Update a product category using this api
         :param uid : Category unique id : type string
         """
@@ -166,7 +159,6 @@ class Catalog:
         
         if uid is not None:
             payload["uid"] = uid
-        
 
         # Parameter validation
         schema = CatalogValidator.updateCategory()
@@ -176,22 +168,23 @@ class Catalog:
         from .models import CategoryRequestBody
         schema = CategoryRequestBody()
         schema.dump(schema.load(body))
-        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/{uid}/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Category unique id","in":"path","name":"uid","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Category unique id","in":"path","name":"uid","required":true,"schema":{"type":"string"}}]}""", uid=uid)
         query_string = await create_query_string(uid=uid)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/{uid}/", uid=uid), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
-        
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/{uid}/", uid=uid), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CategoryUpdateResponse
@@ -202,11 +195,9 @@ class Catalog:
                 print("Response Validation failed for updateCategory")
                 print(e)
 
-        
-
         return response
     
-    async def getSellerInsights(self, seller_app_id=None):
+    async def getSellerInsights(self, seller_app_id=None, request_headers:Dict={}):
         """Analytics data of catalog and inventory that are being cross-selled.
         :param seller_app_id : Id of the seller application which is serving the invetory/catalog of the company : type string
         """
@@ -214,7 +205,6 @@ class Catalog:
         
         if seller_app_id is not None:
             payload["seller_app_id"] = seller_app_id
-        
 
         # Parameter validation
         schema = CatalogValidator.getSellerInsights()
@@ -223,18 +213,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/cross-selling/{seller_app_id}/analytics/insights/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Id of the seller application which is serving the invetory/catalog of the company","in":"path","name":"seller_app_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Id of the seller application which is serving the invetory/catalog of the company","in":"path","name":"seller_app_id","required":true,"schema":{"type":"string"}}]}""", seller_app_id=seller_app_id)
         query_string = await create_query_string(seller_app_id=seller_app_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/cross-selling/{seller_app_id}/analytics/insights/", seller_app_id=seller_app_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/cross-selling/{seller_app_id}/analytics/insights/", seller_app_id=seller_app_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CrossSellingResponse
@@ -245,11 +237,9 @@ class Catalog:
                 print("Response Validation failed for getSellerInsights")
                 print(e)
 
-        
-
         return response
     
-    async def listDepartmentsData(self, page_no=None, item_type=None, page_size=None, name=None, search=None, is_active=None):
+    async def listDepartmentsData(self, page_no=None, item_type=None, page_size=None, name=None, search=None, is_active=None, request_headers:Dict={}):
         """Allows you to list all departments, also can search using name and filter active and incative departments, and item type.
         :param page_no : The page number to navigate through the given set of results : type integer
         :param item_type : A `item_type` is a type of product eg. set, standard, digital : type string
@@ -262,22 +252,16 @@ class Catalog:
         
         if page_no is not None:
             payload["page_no"] = page_no
-        
         if item_type is not None:
             payload["item_type"] = item_type
-        
         if page_size is not None:
             payload["page_size"] = page_size
-        
         if name is not None:
             payload["name"] = name
-        
         if search is not None:
             payload["search"] = search
-        
         if is_active is not None:
             payload["is_active"] = is_active
-        
 
         # Parameter validation
         schema = CatalogValidator.listDepartmentsData()
@@ -286,18 +270,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"A `item_type` is a type of product eg. set, standard, digital","in":"query","name":"item_type","required":false,"schema":{"type":"string"}},{"description":"Number of items to retrieve in each page. Default is 10.","in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"description":"Can search departments by passing name.","in":"query","name":"name","required":false,"schema":{"type":"string"}},{"description":"Can search departments by passing name of the department in search parameter.","in":"query","name":"search","required":false,"schema":{"type":"string"}},{"description":"Can query for departments based on whether they are active or inactive.","in":"query","name":"is_active","required":false,"schema":{"type":"boolean"}}],"query":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"A `item_type` is a type of product eg. set, standard, digital","in":"query","name":"item_type","required":false,"schema":{"type":"string"}},{"description":"Number of items to retrieve in each page. Default is 10.","in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"description":"Can search departments by passing name.","in":"query","name":"name","required":false,"schema":{"type":"string"}},{"description":"Can search departments by passing name of the department in search parameter.","in":"query","name":"search","required":false,"schema":{"type":"string"}},{"description":"Can query for departments based on whether they are active or inactive.","in":"query","name":"is_active","required":false,"schema":{"type":"boolean"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", page_no=page_no, item_type=item_type, page_size=page_size, name=name, search=search, is_active=is_active)
         query_string = await create_query_string(page_no=page_no, item_type=item_type, page_size=page_size, name=name, search=search, is_active=is_active)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/", page_no=page_no, item_type=item_type, page_size=page_size, name=name, search=search, is_active=is_active), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/", page_no=page_no, item_type=item_type, page_size=page_size, name=name, search=search, is_active=is_active), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import DepartmentsResponse
@@ -308,11 +294,9 @@ class Catalog:
                 print("Response Validation failed for listDepartmentsData")
                 print(e)
 
-        
-
         return response
     
-    async def createDepartments(self, body=""):
+    async def createDepartments(self, body="", request_headers:Dict={}):
         """Create departments using the API.
         """
         payload = {}
@@ -326,22 +310,23 @@ class Catalog:
         from .models import DepartmentCreateUpdate
         schema = DepartmentCreateUpdate()
         schema.dump(schema.load(body))
-        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", )
         query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
-        
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import DepartmentCreateResponse
@@ -352,11 +337,9 @@ class Catalog:
                 print("Response Validation failed for createDepartments")
                 print(e)
 
-        
-
         return response
     
-    async def getDepartmentData(self, uid=None):
+    async def getDepartmentData(self, uid=None, request_headers:Dict={}):
         """Allows you to get department data, by uid.
         :param uid : A `uid` is a unique identifier of a department. : type string
         """
@@ -364,7 +347,6 @@ class Catalog:
         
         if uid is not None:
             payload["uid"] = uid
-        
 
         # Parameter validation
         schema = CatalogValidator.getDepartmentData()
@@ -373,18 +355,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/{uid}/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `uid` is a unique identifier of a department.","in":"path","name":"uid","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `uid` is a unique identifier of a department.","in":"path","name":"uid","required":true,"schema":{"type":"string"}}]}""", uid=uid)
         query_string = await create_query_string(uid=uid)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/{uid}/", uid=uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/{uid}/", uid=uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import DepartmentsResponse
@@ -395,11 +379,9 @@ class Catalog:
                 print("Response Validation failed for getDepartmentData")
                 print(e)
 
-        
-
         return response
     
-    async def updateDepartment(self, uid=None, body=""):
+    async def updateDepartment(self, uid=None, body="", request_headers:Dict={}):
         """Update the department by their uid using this API.
         :param uid : A `uid` is a unique identifier of a department. : type string
         """
@@ -407,7 +389,6 @@ class Catalog:
         
         if uid is not None:
             payload["uid"] = uid
-        
 
         # Parameter validation
         schema = CatalogValidator.updateDepartment()
@@ -417,22 +398,23 @@ class Catalog:
         from .models import DepartmentCreateUpdate
         schema = DepartmentCreateUpdate()
         schema.dump(schema.load(body))
-        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/{uid}/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `uid` is a unique identifier of a department.","in":"path","name":"uid","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `uid` is a unique identifier of a department.","in":"path","name":"uid","required":true,"schema":{"type":"string"}}]}""", uid=uid)
         query_string = await create_query_string(uid=uid)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/{uid}/", uid=uid), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
-        
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/{uid}/", uid=uid), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import DepartmentModel
@@ -443,11 +425,9 @@ class Catalog:
                 print("Response Validation failed for updateDepartment")
                 print(e)
 
-        
-
         return response
     
-    async def listTemplateBrandTypeValues(self, filter=None, template_tag=None, item_type=None):
+    async def listTemplateBrandTypeValues(self, filter=None, template_tag=None, item_type=None, request_headers:Dict={}):
         """The filter type query parameter defines what type of data to return. The type of query returns the valid values for the same
         :param filter : A `filter` is the unique identifier of the type of value required. : type string
         :param template_tag : A `template_tag` is the identifier of the type of template required. : type string
@@ -457,13 +437,10 @@ class Catalog:
         
         if filter is not None:
             payload["filter"] = filter
-        
         if template_tag is not None:
             payload["template_tag"] = template_tag
-        
         if item_type is not None:
             payload["item_type"] = item_type
-        
 
         # Parameter validation
         schema = CatalogValidator.listTemplateBrandTypeValues()
@@ -472,18 +449,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/downloads/configuration/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `filter` is the unique identifier of the type of value required.","in":"query","name":"filter","required":true,"schema":{"type":"string"}}],"optional":[{"description":"A `template_tag` is the identifier of the type of template required.","in":"query","name":"template_tag","required":false,"schema":{"type":"string"}},{"description":"A `item_type` is the identifier of the type of template required.","in":"query","name":"item_type","required":false,"schema":{"type":"string"}}],"query":[{"description":"A `filter` is the unique identifier of the type of value required.","in":"query","name":"filter","required":true,"schema":{"type":"string"}},{"description":"A `template_tag` is the identifier of the type of template required.","in":"query","name":"template_tag","required":false,"schema":{"type":"string"}},{"description":"A `item_type` is the identifier of the type of template required.","in":"query","name":"item_type","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", filter=filter, template_tag=template_tag, item_type=item_type)
         query_string = await create_query_string(filter=filter, template_tag=template_tag, item_type=item_type)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/downloads/configuration/", filter=filter, template_tag=template_tag, item_type=item_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/downloads/configuration/", filter=filter, template_tag=template_tag, item_type=item_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ProductConfigurationDownloads
@@ -494,11 +473,9 @@ class Catalog:
                 print("Response Validation failed for listTemplateBrandTypeValues")
                 print(e)
 
-        
-
         return response
     
-    async def bulkHsnCode(self, body=""):
+    async def bulkHsnCode(self, body="", request_headers:Dict={}):
         """Bulk Create or Update Hsn Code.
         """
         payload = {}
@@ -512,22 +489,23 @@ class Catalog:
         from .models import BulkHsnUpsert
         schema = BulkHsnUpsert()
         schema.dump(schema.load(body))
-        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/hsn/bulk/", """{"required":[{"description":"company id","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"company id","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", )
         query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/hsn/bulk/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
-        
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/hsn/bulk/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import BulkHsnResponse
@@ -538,11 +516,9 @@ class Catalog:
                 print("Response Validation failed for bulkHsnCode")
                 print(e)
 
-        
-
         return response
     
-    async def getHsnCode(self, id=None):
+    async def getHsnCode(self, id=None, request_headers:Dict={}):
         """Fetch Hsn Code.
         :param id : Unique id : type string
         """
@@ -550,7 +526,6 @@ class Catalog:
         
         if id is not None:
             payload["id"] = id
-        
 
         # Parameter validation
         schema = CatalogValidator.getHsnCode()
@@ -559,18 +534,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/hsn/{id}/", """{"required":[{"description":"company id","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Unique id","in":"path","name":"id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"company id","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Unique id","in":"path","name":"id","required":true,"schema":{"type":"string"}}]}""", id=id)
         query_string = await create_query_string(id=id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/hsn/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/hsn/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import HsnCode
@@ -581,11 +558,9 @@ class Catalog:
                 print("Response Validation failed for getHsnCode")
                 print(e)
 
-        
-
         return response
     
-    async def updateHsnCode(self, id=None, body=""):
+    async def updateHsnCode(self, id=None, body="", request_headers:Dict={}):
         """Update Hsn Code.
         :param id : Unique id : type string
         """
@@ -593,7 +568,6 @@ class Catalog:
         
         if id is not None:
             payload["id"] = id
-        
 
         # Parameter validation
         schema = CatalogValidator.updateHsnCode()
@@ -603,22 +577,23 @@ class Catalog:
         from .models import HsnUpsert
         schema = HsnUpsert()
         schema.dump(schema.load(body))
-        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/hsn/{id}/", """{"required":[{"description":"company id","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Unique id","in":"path","name":"id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"company id","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Unique id","in":"path","name":"id","required":true,"schema":{"type":"string"}}]}""", id=id)
         query_string = await create_query_string(id=id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/hsn/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
-        
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/hsn/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import HsnCode
@@ -629,11 +604,9 @@ class Catalog:
                 print("Response Validation failed for updateHsnCode")
                 print(e)
 
-        
-
         return response
     
-    async def getInventories(self, item_id=None, size=None, page_no=None, page_size=None, q=None, sellable=None, store_ids=None, size_identifier=None):
+    async def getInventories(self, item_id=None, size=None, page_no=None, page_size=None, q=None, sellable=None, store_ids=None, size_identifier=None, request_headers:Dict={}):
         """This API allows get Inventories data for particular company.
         :param item_id : Item code of the product of which size is to be get. : type string
         :param size : Size of which inventory is to get. : type string
@@ -648,28 +621,20 @@ class Catalog:
         
         if item_id is not None:
             payload["item_id"] = item_id
-        
         if size is not None:
             payload["size"] = size
-        
         if page_no is not None:
             payload["page_no"] = page_no
-        
         if page_size is not None:
             payload["page_size"] = page_size
-        
         if q is not None:
             payload["q"] = q
-        
         if sellable is not None:
             payload["sellable"] = sellable
-        
         if store_ids is not None:
             payload["store_ids"] = store_ids
-        
         if size_identifier is not None:
             payload["size_identifier"] = size_identifier
-        
 
         # Parameter validation
         schema = CatalogValidator.getInventories()
@@ -678,18 +643,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventories", """{"required":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"Item code of the product of which size is to be get.","in":"query","name":"item_id","required":false,"schema":{"type":"string"}},{"description":"Size of which inventory is to get.","in":"query","name":"size","required":false,"schema":{"type":"string"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"Search with help of store code.","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"Filter on whether product is in stock or not.","in":"query","name":"sellable","required":false,"schema":{"default":false,"type":"boolean"}},{"description":"The Store Id of products to fetch inventory.","in":"query","name":"store_ids","required":false,"schema":{"items":{"type":"integer"},"type":"array"}},{"description":"Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get.","in":"query","name":"size_identifier","required":false,"schema":{"type":"string"}}],"query":[{"description":"Item code of the product of which size is to be get.","in":"query","name":"item_id","required":false,"schema":{"type":"string"}},{"description":"Size of which inventory is to get.","in":"query","name":"size","required":false,"schema":{"type":"string"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"Search with help of store code.","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"Filter on whether product is in stock or not.","in":"query","name":"sellable","required":false,"schema":{"default":false,"type":"boolean"}},{"description":"The Store Id of products to fetch inventory.","in":"query","name":"store_ids","required":false,"schema":{"items":{"type":"integer"},"type":"array"}},{"description":"Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get.","in":"query","name":"size_identifier","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", item_id=item_id, size=size, page_no=page_no, page_size=page_size, q=q, sellable=sellable, store_ids=store_ids, size_identifier=size_identifier)
         query_string = await create_query_string(item_id=item_id, size=size, page_no=page_no, page_size=page_size, q=q, sellable=sellable, store_ids=store_ids, size_identifier=size_identifier)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventories", item_id=item_id, size=size, page_no=page_no, page_size=page_size, q=q, sellable=sellable, store_ids=store_ids, size_identifier=size_identifier), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventories", item_id=item_id, size=size, page_no=page_no, page_size=page_size, q=q, sellable=sellable, store_ids=store_ids, size_identifier=size_identifier), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import GetInventoriesResponse
@@ -700,11 +667,9 @@ class Catalog:
                 print("Response Validation failed for getInventories")
                 print(e)
 
-        
-
         return response
     
-    async def getInventoryBulkUploadHistory(self, page_no=None, page_size=None):
+    async def getInventoryBulkUploadHistory(self, page_no=None, page_size=None, request_headers:Dict={}):
         """This API helps to get bulk Inventory upload jobs data.
         :param page_no : The page number to navigate through the given set of results : type integer
         :param page_size : Number of items to retrieve in each page. Default is 12. : type integer
@@ -713,10 +678,8 @@ class Catalog:
         
         if page_no is not None:
             payload["page_no"] = page_no
-        
         if page_size is not None:
             payload["page_size"] = page_size
-        
 
         # Parameter validation
         schema = CatalogValidator.getInventoryBulkUploadHistory()
@@ -725,18 +688,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/", """{"required":[{"description":"Company Id of of which Inventory Bulk Upload History to be obtained.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}}],"query":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}}],"headers":[],"path":[{"description":"Company Id of of which Inventory Bulk Upload History to be obtained.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", page_no=page_no, page_size=page_size)
         query_string = await create_query_string(page_no=page_no, page_size=page_size)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import BulkInventoryGet
@@ -747,11 +712,9 @@ class Catalog:
                 print("Response Validation failed for getInventoryBulkUploadHistory")
                 print(e)
 
-        
-
         return response
     
-    async def createBulkInventoryJob(self, body=""):
+    async def createBulkInventoryJob(self, body="", request_headers:Dict={}):
         """This API helps to create a bulk Inventory upload job.
         """
         payload = {}
@@ -765,22 +728,23 @@ class Catalog:
         from .models import BulkJob
         schema = BulkJob()
         schema.dump(schema.load(body))
-        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/", """{"required":[{"description":"Company Id in which Inventory to be uploaded.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Company Id in which Inventory to be uploaded.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
         query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
-        
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import BulkResponse
@@ -791,11 +755,9 @@ class Catalog:
                 print("Response Validation failed for createBulkInventoryJob")
                 print(e)
 
-        
-
         return response
     
-    async def deleteBulkInventoryJob(self, batch_id=None):
+    async def deleteBulkInventoryJob(self, batch_id=None, request_headers:Dict={}):
         """This API allows to delete bulk Inventory job associated with company.
         :param batch_id : Batch Id of the bulk delete job. : type string
         """
@@ -803,7 +765,6 @@ class Catalog:
         
         if batch_id is not None:
             payload["batch_id"] = batch_id
-        
 
         # Parameter validation
         schema = CatalogValidator.deleteBulkInventoryJob()
@@ -812,18 +773,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/{batch_id}/", """{"required":[{"description":"Company Id of the company of which bulk Inventory job is to be deleted.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Batch Id of the bulk delete job.","in":"path","name":"batch_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Company Id of the company of which bulk Inventory job is to be deleted.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Batch Id of the bulk delete job.","in":"path","name":"batch_id","required":true,"schema":{"type":"string"}}]}""", batch_id=batch_id)
         query_string = await create_query_string(batch_id=batch_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/{batch_id}/", batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/{batch_id}/", batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SuccessResponse
@@ -834,11 +797,9 @@ class Catalog:
                 print("Response Validation failed for deleteBulkInventoryJob")
                 print(e)
 
-        
-
         return response
     
-    async def createBulkInventory(self, batch_id=None, body=""):
+    async def createBulkInventory(self, batch_id=None, body="", request_headers:Dict={}):
         """This API helps to create products in bulk push to kafka for approval/creation.
         :param batch_id : Batch Id of the bulk create job. : type string
         """
@@ -846,7 +807,6 @@ class Catalog:
         
         if batch_id is not None:
             payload["batch_id"] = batch_id
-        
 
         # Parameter validation
         schema = CatalogValidator.createBulkInventory()
@@ -856,22 +816,23 @@ class Catalog:
         from .models import InventoryBulkRequest
         schema = InventoryBulkRequest()
         schema.dump(schema.load(body))
-        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/{batch_id}/", """{"required":[{"description":"Company Id in which Inventory is to be uploaded.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Batch Id of the bulk create job.","in":"path","name":"batch_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Company Id in which Inventory is to be uploaded.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Batch Id of the bulk create job.","in":"path","name":"batch_id","required":true,"schema":{"type":"string"}}]}""", batch_id=batch_id)
         query_string = await create_query_string(batch_id=batch_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/{batch_id}/", batch_id=batch_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
-        
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/{batch_id}/", batch_id=batch_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SuccessResponse
@@ -882,11 +843,9 @@ class Catalog:
                 print("Response Validation failed for createBulkInventory")
                 print(e)
 
-        
-
         return response
     
-    async def getInventoryExport(self, ):
+    async def getInventoryExport(self, request_headers:Dict={}):
         """This API helps to get Inventory export history.
         """
         payload = {}
@@ -899,18 +858,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/download/", """{"required":[{"description":"Company Id in which assets to be uploaded.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Company Id in which assets to be uploaded.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
         query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/download/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/download/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import InventoryExportJob
@@ -921,11 +882,9 @@ class Catalog:
                 print("Response Validation failed for getInventoryExport")
                 print(e)
 
-        
-
         return response
     
-    async def createInventoryExportJob(self, body=""):
+    async def createInventoryExportJob(self, body="", request_headers:Dict={}):
         """This API helps to create a Inventory export job.
         """
         payload = {}
@@ -939,22 +898,23 @@ class Catalog:
         from .models import InventoryExportRequest
         schema = InventoryExportRequest()
         schema.dump(schema.load(body))
-        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/download/", """{"required":[{"description":"Company Id in which assets to be uploaded.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Company Id in which assets to be uploaded.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
         query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/download/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
-        
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/download/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import InventoryExportResponse
@@ -965,11 +925,9 @@ class Catalog:
                 print("Response Validation failed for createInventoryExportJob")
                 print(e)
 
-        
-
         return response
     
-    async def exportInventoryConfig(self, filter_type=None):
+    async def exportInventoryConfig(self, filter_type=None, request_headers:Dict={}):
         """This API allows get List of different filters like brand, store, and type for inventory export.
         :param filter_type : filter type from any one of ['brand', 'store', 'type'] : type string
         """
@@ -977,7 +935,6 @@ class Catalog:
         
         if filter_type is not None:
             payload["filter_type"] = filter_type
-        
 
         # Parameter validation
         schema = CatalogValidator.exportInventoryConfig()
@@ -986,18 +943,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/download/configuration/", """{"required":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"filter type from any one of ['brand', 'store', 'type']","in":"query","name":"filter_type","required":false,"schema":{"type":"string"}}],"query":[{"description":"filter type from any one of ['brand', 'store', 'type']","in":"query","name":"filter_type","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", filter_type=filter_type)
         query_string = await create_query_string(filter_type=filter_type)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/download/configuration/", filter_type=filter_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/download/configuration/", filter_type=filter_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import InventoryConfig
@@ -1008,11 +967,9 @@ class Catalog:
                 print("Response Validation failed for exportInventoryConfig")
                 print(e)
 
-        
-
         return response
     
-    async def downloadInventoryTemplateView(self, item_type=None):
+    async def downloadInventoryTemplateView(self, item_type=None, request_headers:Dict={}):
         """Allows you to download product template data
         :param item_type : An `item_type` defines the type of item. : type string
         """
@@ -1020,7 +977,6 @@ class Catalog:
         
         if item_type is not None:
             payload["item_type"] = item_type
-        
 
         # Parameter validation
         schema = CatalogValidator.downloadInventoryTemplateView()
@@ -1029,22 +985,24 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/templates/download/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"An `item_type` defines the type of item.","in":"query","name":"item_type","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"description":"An `item_type` defines the type of item.","in":"query","name":"item_type","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", item_type=item_type)
         query_string = await create_query_string(item_type=item_type)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/templates/download/", item_type=item_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/templates/download/", item_type=item_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         return response
     
-    async def validateProductTemplateSchema(self, item_type=None):
+    async def validateProductTemplateSchema(self, item_type=None, request_headers:Dict={}):
         """Allows you to list all product templates validation values for all the fields present in the database
         :param item_type : An `item_type` defines the type of item. The default value is standard. : type string
         """
@@ -1052,7 +1010,6 @@ class Catalog:
         
         if item_type is not None:
             payload["item_type"] = item_type
-        
 
         # Parameter validation
         schema = CatalogValidator.validateProductTemplateSchema()
@@ -1061,18 +1018,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/templates/validation/schema/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"An `item_type` defines the type of item. The default value is standard.","in":"query","name":"item_type","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"description":"An `item_type` defines the type of item. The default value is standard.","in":"query","name":"item_type","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", item_type=item_type)
         query_string = await create_query_string(item_type=item_type)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/templates/validation/schema/", item_type=item_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/templates/validation/schema/", item_type=item_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import InventoryValidationResponse
@@ -1083,11 +1042,9 @@ class Catalog:
                 print("Response Validation failed for validateProductTemplateSchema")
                 print(e)
 
-        
-
         return response
     
-    async def getOptimalLocations(self, body=""):
+    async def getOptimalLocations(self, body="", request_headers:Dict={}):
         """
         """
         payload = {}
@@ -1101,22 +1058,23 @@ class Catalog:
         from .models import AssignStore
         schema = AssignStore()
         schema.dump(schema.load(body))
-        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/location/reassign/", """{"required":[{"description":"Id of the company inside which the location is to be created.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Id of the company inside which the location is to be created.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", )
         query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/location/reassign/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
-        
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/location/reassign/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import StoreAssignResponse
@@ -1127,11 +1085,9 @@ class Catalog:
                 print("Response Validation failed for getOptimalLocations")
                 print(e)
 
-        
-
         return response
     
-    async def getMarketplaceOptinDetail(self, ):
+    async def getMarketplaceOptinDetail(self, request_headers:Dict={}):
         """Use this API to fetch opt-in information for all the platforms. If successful, returns a logs in the response body as specified in `GetOptInPlatformSchema`
         """
         payload = {}
@@ -1144,18 +1100,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
         query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import GetOptInPlatform
@@ -1166,11 +1124,9 @@ class Catalog:
                 print("Response Validation failed for getMarketplaceOptinDetail")
                 print(e)
 
-        
-
         return response
     
-    async def getCompanyBrandDetail(self, is_active=None, q=None, page_no=None, page_size=None, marketplace=None):
+    async def getCompanyBrandDetail(self, is_active=None, q=None, page_no=None, page_size=None, marketplace=None, request_headers:Dict={}):
         """Get the details of the Brands associated with the given company_id passed.
         :param is_active : The is_active status for the optin id. : type boolean
         :param q : The search value to filter the list. : type string
@@ -1182,19 +1138,14 @@ class Catalog:
         
         if is_active is not None:
             payload["is_active"] = is_active
-        
         if q is not None:
             payload["q"] = q
-        
         if page_no is not None:
             payload["page_no"] = page_no
-        
         if page_size is not None:
             payload["page_size"] = page_size
-        
         if marketplace is not None:
             payload["marketplace"] = marketplace
-        
 
         # Parameter validation
         schema = CatalogValidator.getCompanyBrandDetail()
@@ -1203,18 +1154,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/company-brand-details/", """{"required":[{"description":"The company id for which the detail needs to be retrieved.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"description":"The is_active status for the optin id.","in":"query","name":"is_active","required":false,"schema":{"type":"boolean"}},{"description":"The search value to filter the list.","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"The number of page for the company id.","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of records that can be seen on the page for the company id.","in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"description":"The marketplace platform associated with the company id.","in":"query","name":"marketplace","required":false,"schema":{"type":"string"}}],"query":[{"description":"The is_active status for the optin id.","in":"query","name":"is_active","required":false,"schema":{"type":"boolean"}},{"description":"The search value to filter the list.","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"The number of page for the company id.","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of records that can be seen on the page for the company id.","in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"description":"The marketplace platform associated with the company id.","in":"query","name":"marketplace","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"description":"The company id for which the detail needs to be retrieved.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", is_active=is_active, q=q, page_no=page_no, page_size=page_size, marketplace=marketplace)
         query_string = await create_query_string(is_active=is_active, q=q, page_no=page_no, page_size=page_size, marketplace=marketplace)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/company-brand-details/", is_active=is_active, q=q, page_no=page_no, page_size=page_size, marketplace=marketplace), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/company-brand-details/", is_active=is_active, q=q, page_no=page_no, page_size=page_size, marketplace=marketplace), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import OptinCompanyBrandDetailsView
@@ -1225,11 +1178,9 @@ class Catalog:
                 print("Response Validation failed for getCompanyBrandDetail")
                 print(e)
 
-        
-
         return response
     
-    async def getCompanyDetail(self, ):
+    async def getCompanyDetail(self, request_headers:Dict={}):
         """Get the details of the company associated with the given company_id passed.
         """
         payload = {}
@@ -1242,18 +1193,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/company-details/", """{"required":[{"description":"The company id for which the detail needs to be retrieved.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"The company id for which the detail needs to be retrieved.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
         query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/company-details/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/company-details/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import OptinCompanyDetail
@@ -1264,11 +1217,9 @@ class Catalog:
                 print("Response Validation failed for getCompanyDetail")
                 print(e)
 
-        
-
         return response
     
-    async def getCompanyMetrics(self, ):
+    async def getCompanyMetrics(self, request_headers:Dict={}):
         """Get the Company metrics associated with the company ID passed.
         """
         payload = {}
@@ -1281,18 +1232,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/company-metrics/", """{"required":[{"description":"The company id for which the detail needs to be retrieved.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"The company id for which the detail needs to be retrieved.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
         query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/company-metrics/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/company-metrics/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import OptinCompanyMetrics
@@ -1303,11 +1256,9 @@ class Catalog:
                 print("Response Validation failed for getCompanyMetrics")
                 print(e)
 
-        
-
         return response
     
-    async def getStoreDetail(self, q=None, page_no=None, page_size=None):
+    async def getStoreDetail(self, q=None, page_no=None, page_size=None, request_headers:Dict={}):
         """Get the details of the store associated with the company ID passed.
         :param q : The search related the store for the company id. : type string
         :param page_no : The number of page for the company id. : type integer
@@ -1317,13 +1268,10 @@ class Catalog:
         
         if q is not None:
             payload["q"] = q
-        
         if page_no is not None:
             payload["page_no"] = page_no
-        
         if page_size is not None:
             payload["page_size"] = page_size
-        
 
         # Parameter validation
         schema = CatalogValidator.getStoreDetail()
@@ -1332,18 +1280,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/location-details/", """{"required":[{"description":"The company id for which the detail needs to be retrieved.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"description":"The search related the store for the company id.","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"The number of page for the company id.","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of records that can be seen on the page for the company id.","in":"query","name":"page_size","required":false,"schema":{"type":"integer"}}],"query":[{"description":"The search related the store for the company id.","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"The number of page for the company id.","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of records that can be seen on the page for the company id.","in":"query","name":"page_size","required":false,"schema":{"type":"integer"}}],"headers":[],"path":[{"description":"The company id for which the detail needs to be retrieved.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", q=q, page_no=page_no, page_size=page_size)
         query_string = await create_query_string(q=q, page_no=page_no, page_size=page_size)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/location-details/", q=q, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/location-details/", q=q, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import OptinStoreDetails
@@ -1354,11 +1304,9 @@ class Catalog:
                 print("Response Validation failed for getStoreDetail")
                 print(e)
 
-        
-
         return response
     
-    async def createMarketplaceOptin(self, marketplace=None, body=""):
+    async def createMarketplaceOptin(self, marketplace=None, body="", request_headers:Dict={}):
         """Use this API to create/update opt-in information for given platform. If successful, returns data in the response body as specified in `OptInPostResponseSchema`
         :param marketplace : The marketplace for which the detail needs to be retrieved. : type string
         """
@@ -1366,7 +1314,6 @@ class Catalog:
         
         if marketplace is not None:
             payload["marketplace"] = marketplace
-        
 
         # Parameter validation
         schema = CatalogValidator.createMarketplaceOptin()
@@ -1376,22 +1323,23 @@ class Catalog:
         from .models import OptInPostRequest
         schema = OptInPostRequest()
         schema.dump(schema.load(body))
-        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/{marketplace}/optin/", """{"required":[{"description":"The company id for which the detail needs to be retrieved.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"The marketplace for which the detail needs to be retrieved.","in":"path","name":"marketplace","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"The company id for which the detail needs to be retrieved.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"The marketplace for which the detail needs to be retrieved.","in":"path","name":"marketplace","required":true,"schema":{"type":"string"}}]}""", marketplace=marketplace)
         query_string = await create_query_string(marketplace=marketplace)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/{marketplace}/optin/", marketplace=marketplace), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
-        
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/{marketplace}/optin/", marketplace=marketplace), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import UpdatedResponse
@@ -1402,11 +1350,9 @@ class Catalog:
                 print("Response Validation failed for createMarketplaceOptin")
                 print(e)
 
-        
-
         return response
     
-    async def getProductAttributes(self, category=None, filter=None):
+    async def getProductAttributes(self, category=None, filter=None, request_headers:Dict={}):
         """This API allows to list all the attributes by their l3_categories.
         :param category : It is the name of the l3 cateogry : type string
         :param filter : If true, returns filtered values, else returns all the attributes : type boolean
@@ -1415,10 +1361,8 @@ class Catalog:
         
         if category is not None:
             payload["category"] = category
-        
         if filter is not None:
             payload["filter"] = filter
-        
 
         # Parameter validation
         schema = CatalogValidator.getProductAttributes()
@@ -1427,18 +1371,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-attributes/", """{"required":[{"description":"company for which you want to view the genders","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"It is the name of the l3 cateogry","in":"query","name":"category","required":true,"schema":{"type":"string"}}],"optional":[{"description":"If true, returns filtered values, else returns all the attributes","in":"query","name":"filter","required":false,"schema":{"type":"boolean"}}],"query":[{"description":"It is the name of the l3 cateogry","in":"query","name":"category","required":true,"schema":{"type":"string"}},{"description":"If true, returns filtered values, else returns all the attributes","in":"query","name":"filter","required":false,"schema":{"type":"boolean"}}],"headers":[],"path":[{"description":"company for which you want to view the genders","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", category=category, filter=filter)
         query_string = await create_query_string(category=category, filter=filter)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-attributes/", category=category, filter=filter), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-attributes/", category=category, filter=filter), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ProductAttributesResponse
@@ -1449,11 +1395,9 @@ class Catalog:
                 print("Response Validation failed for getProductAttributes")
                 print(e)
 
-        
-
         return response
     
-    async def getGenderAttribute(self, attribute_slug=None):
+    async def getGenderAttribute(self, attribute_slug=None, request_headers:Dict={}):
         """This API allows to view the gender attribute details.
         :param attribute_slug : slug of the attribute for which you want to view the genders : type string
         """
@@ -1461,7 +1405,6 @@ class Catalog:
         
         if attribute_slug is not None:
             payload["attribute_slug"] = attribute_slug
-        
 
         # Parameter validation
         schema = CatalogValidator.getGenderAttribute()
@@ -1470,18 +1413,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-attributes/{attribute_slug}", """{"required":[{"description":"company for which you want to view the genders","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"slug of the attribute for which you want to view the genders","in":"path","name":"attribute_slug","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"company for which you want to view the genders","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"slug of the attribute for which you want to view the genders","in":"path","name":"attribute_slug","required":true,"schema":{"type":"string"}}]}""", attribute_slug=attribute_slug)
         query_string = await create_query_string(attribute_slug=attribute_slug)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-attributes/{attribute_slug}", attribute_slug=attribute_slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-attributes/{attribute_slug}", attribute_slug=attribute_slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import GenderDetail
@@ -1492,11 +1437,9 @@ class Catalog:
                 print("Response Validation failed for getGenderAttribute")
                 print(e)
 
-        
-
         return response
     
-    async def getProductBundle(self, q=None, slug=None):
+    async def getProductBundle(self, q=None, slug=None, request_headers:Dict={}):
         """Get all product bundles for a particular company
         :param q : A search string that is searched with product bundle name. : type string
         :param slug : slugs of bundles to be retrieved. : type array
@@ -1505,10 +1448,8 @@ class Catalog:
         
         if q is not None:
             payload["q"] = q
-        
         if slug is not None:
             payload["slug"] = slug
-        
 
         # Parameter validation
         schema = CatalogValidator.getProductBundle()
@@ -1517,18 +1458,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"A search string that is searched with product bundle name.","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"slugs of bundles to be retrieved.","in":"query","name":"slug","required":false,"schema":{"items":{"type":"string"},"type":"array"}}],"query":[{"description":"A search string that is searched with product bundle name.","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"slugs of bundles to be retrieved.","in":"query","name":"slug","required":false,"schema":{"items":{"type":"string"},"type":"array"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", q=q, slug=slug)
         query_string = await create_query_string(q=q, slug=slug)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/", q=q, slug=slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/", q=q, slug=slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import GetProductBundleListingResponse
@@ -1539,11 +1482,9 @@ class Catalog:
                 print("Response Validation failed for getProductBundle")
                 print(e)
 
-        
-
         return response
     
-    async def createProductBundle(self, body=""):
+    async def createProductBundle(self, body="", request_headers:Dict={}):
         """Create Product Bundle. See `ProductBundleRequest` for the request body parameter need to create a product bundle. On successful request, returns in `ProductBundleRequest` with id
         """
         payload = {}
@@ -1557,22 +1498,23 @@ class Catalog:
         from .models import ProductBundleRequest
         schema = ProductBundleRequest()
         schema.dump(schema.load(body))
-        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", )
         query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
-        
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import GetProductBundleCreateResponse
@@ -1583,11 +1525,9 @@ class Catalog:
                 print("Response Validation failed for createProductBundle")
                 print(e)
 
-        
-
         return response
     
-    async def getProductBundleDetail(self, id=None):
+    async def getProductBundleDetail(self, id=None, request_headers:Dict={}):
         """Get a particular Bundle details by its `id`. If successful, returns a Product bundle resource in the response body specified in `GetProductBundleResponse`
         :param id : A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. : type string
         """
@@ -1595,7 +1535,6 @@ class Catalog:
         
         if id is not None:
             payload["id"] = id
-        
 
         # Parameter validation
         schema = CatalogValidator.getProductBundleDetail()
@@ -1604,18 +1543,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/{id}/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve.","in":"path","name":"id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve.","in":"path","name":"id","required":true,"schema":{"type":"string"}}]}""", id=id)
         query_string = await create_query_string(id=id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import GetProductBundleResponse
@@ -1626,11 +1567,9 @@ class Catalog:
                 print("Response Validation failed for getProductBundleDetail")
                 print(e)
 
-        
-
         return response
     
-    async def updateProductBundle(self, id=None, body=""):
+    async def updateProductBundle(self, id=None, body="", request_headers:Dict={}):
         """Update a Product Bundle by its id. On successful request, returns the updated product bundle
         :param id : A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. : type string
         """
@@ -1638,7 +1577,6 @@ class Catalog:
         
         if id is not None:
             payload["id"] = id
-        
 
         # Parameter validation
         schema = CatalogValidator.updateProductBundle()
@@ -1648,22 +1586,23 @@ class Catalog:
         from .models import ProductBundleUpdateRequest
         schema = ProductBundleUpdateRequest()
         schema.dump(schema.load(body))
-        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/{id}/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete.","in":"path","name":"id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete.","in":"path","name":"id","required":true,"schema":{"type":"string"}}]}""", id=id)
         query_string = await create_query_string(id=id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
-        
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import GetProductBundleCreateResponse
@@ -1674,11 +1613,9 @@ class Catalog:
                 print("Response Validation failed for updateProductBundle")
                 print(e)
 
-        
-
         return response
     
-    async def getProductAssetsInBulk(self, page_no=None, page_size=None):
+    async def getProductAssetsInBulk(self, page_no=None, page_size=None, request_headers:Dict={}):
         """This API helps to get bulk asset jobs data associated to a particular company.
         :param page_no : The page number to navigate through the given set of results : type integer
         :param page_size : Number of items to retrieve in each page. Default is 12. : type integer
@@ -1687,10 +1624,8 @@ class Catalog:
         
         if page_no is not None:
             payload["page_no"] = page_no
-        
         if page_size is not None:
             payload["page_size"] = page_size
-        
 
         # Parameter validation
         schema = CatalogValidator.getProductAssetsInBulk()
@@ -1699,18 +1634,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/assets/bulk/", """{"required":[{"description":"Company Id of the product size.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}}],"query":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}}],"headers":[],"path":[{"description":"Company Id of the product size.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", page_no=page_no, page_size=page_size)
         query_string = await create_query_string(page_no=page_no, page_size=page_size)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/assets/bulk/", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/assets/bulk/", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import BulkAssetResponse
@@ -1721,11 +1658,9 @@ class Catalog:
                 print("Response Validation failed for getProductAssetsInBulk")
                 print(e)
 
-        
-
         return response
     
-    async def createProductAssetsInBulk(self, body=""):
+    async def createProductAssetsInBulk(self, body="", request_headers:Dict={}):
         """This API helps to create a bulk asset upload job.
         """
         payload = {}
@@ -1739,22 +1674,23 @@ class Catalog:
         from .models import ProductBulkAssets
         schema = ProductBulkAssets()
         schema.dump(schema.load(body))
-        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/assets/bulk/", """{"required":[{"description":"Company Id in which assets to be uploaded.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Company Id in which assets to be uploaded.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
         query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/assets/bulk/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
-        
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/assets/bulk/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SuccessResponse
@@ -1765,11 +1701,9 @@ class Catalog:
                 print("Response Validation failed for createProductAssetsInBulk")
                 print(e)
 
-        
-
         return response
     
-    async def getProductBulkUploadHistory(self, search=None, page_no=None, page_size=None):
+    async def getProductBulkUploadHistory(self, search=None, page_no=None, page_size=None, request_headers:Dict={}):
         """This API helps to get bulk product upload jobs data.
         :param search : Search string to filter the results by batch id : type string
         :param page_no : The page number to navigate through the given set of results : type integer
@@ -1779,13 +1713,10 @@ class Catalog:
         
         if search is not None:
             payload["search"] = search
-        
         if page_no is not None:
             payload["page_no"] = page_no
-        
         if page_size is not None:
             payload["page_size"] = page_size
-        
 
         # Parameter validation
         schema = CatalogValidator.getProductBulkUploadHistory()
@@ -1794,18 +1725,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk", """{"required":[{"description":"Company Id of of which Product Bulk Upload History to be obtained.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"description":"Search string to filter the results by batch id","in":"query","name":"search","required":false,"schema":{"type":"string"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}}],"query":[{"description":"Search string to filter the results by batch id","in":"query","name":"search","required":false,"schema":{"type":"string"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}}],"headers":[],"path":[{"description":"Company Id of of which Product Bulk Upload History to be obtained.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", search=search, page_no=page_no, page_size=page_size)
         query_string = await create_query_string(search=search, page_no=page_no, page_size=page_size)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk", search=search, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk", search=search, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ProductBulkRequestList
@@ -1816,11 +1749,9 @@ class Catalog:
                 print("Response Validation failed for getProductBulkUploadHistory")
                 print(e)
 
-        
-
         return response
     
-    async def createBulkProductUploadJob(self, body=""):
+    async def createBulkProductUploadJob(self, body="", request_headers:Dict={}):
         """This API helps to create a bulk products upload job.
         """
         payload = {}
@@ -1834,22 +1765,23 @@ class Catalog:
         from .models import BulkJob
         schema = BulkJob()
         schema.dump(schema.load(body))
-        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk", """{"required":[{"description":"Company Id in which assets to be uploaded.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Company Id in which assets to be uploaded.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
         query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
-        
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import BulkResponse
@@ -1860,11 +1792,9 @@ class Catalog:
                 print("Response Validation failed for createBulkProductUploadJob")
                 print(e)
 
-        
-
         return response
     
-    async def deleteProductBulkJob(self, batch_id=None):
+    async def deleteProductBulkJob(self, batch_id=None, request_headers:Dict={}):
         """This API allows to delete bulk product job associated with company.
         :param batch_id : Batch Id of the bulk product job to be deleted. : type integer
         """
@@ -1872,7 +1802,6 @@ class Catalog:
         
         if batch_id is not None:
             payload["batch_id"] = batch_id
-        
 
         # Parameter validation
         schema = CatalogValidator.deleteProductBulkJob()
@@ -1881,18 +1810,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk/{batch_id}", """{"required":[{"description":"Company Id of the company associated to size that is to be deleted.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Batch Id of the bulk product job to be deleted.","in":"path","name":"batch_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Company Id of the company associated to size that is to be deleted.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Batch Id of the bulk product job to be deleted.","in":"path","name":"batch_id","required":true,"schema":{"type":"integer"}}]}""", batch_id=batch_id)
         query_string = await create_query_string(batch_id=batch_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk/{batch_id}", batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk/{batch_id}", batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SuccessResponse
@@ -1903,11 +1834,9 @@ class Catalog:
                 print("Response Validation failed for deleteProductBulkJob")
                 print(e)
 
-        
-
         return response
     
-    async def createProductsInBulk(self, batch_id=None, body=""):
+    async def createProductsInBulk(self, batch_id=None, body="", request_headers:Dict={}):
         """This API helps to create products in bulk push to kafka for approval/creation.
         :param batch_id : Batch Id in which assets to be uploaded. : type string
         """
@@ -1915,7 +1844,6 @@ class Catalog:
         
         if batch_id is not None:
             payload["batch_id"] = batch_id
-        
 
         # Parameter validation
         schema = CatalogValidator.createProductsInBulk()
@@ -1925,22 +1853,23 @@ class Catalog:
         from .models import BulkProductRequest
         schema = BulkProductRequest()
         schema.dump(schema.load(body))
-        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk/{batch_id}", """{"required":[{"description":"Company Id in which assets to be uploaded.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Batch Id in which assets to be uploaded.","in":"path","name":"batch_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Company Id in which assets to be uploaded.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Batch Id in which assets to be uploaded.","in":"path","name":"batch_id","required":true,"schema":{"type":"string"}}]}""", batch_id=batch_id)
         query_string = await create_query_string(batch_id=batch_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk/{batch_id}", batch_id=batch_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
-        
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/bulk/{batch_id}", batch_id=batch_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SuccessResponse
@@ -1951,11 +1880,9 @@ class Catalog:
                 print("Response Validation failed for createProductsInBulk")
                 print(e)
 
-        
-
         return response
     
-    async def listProductTemplateExportDetails(self, ):
+    async def listProductTemplateExportDetails(self, request_headers:Dict={}):
         """Can view details including trigger data, task id , etc.
         """
         payload = {}
@@ -1968,18 +1895,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/downloads/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", )
         query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/downloads/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/downloads/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ProductDownloadsResponse
@@ -1990,11 +1919,9 @@ class Catalog:
                 print("Response Validation failed for listProductTemplateExportDetails")
                 print(e)
 
-        
-
         return response
     
-    async def listHSNCodes(self, ):
+    async def listHSNCodes(self, request_headers:Dict={}):
         """Allows you to list all hsn Codes
         """
         payload = {}
@@ -2007,18 +1934,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/hsn/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", )
         query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/hsn/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/hsn/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import HSNCodesResponse
@@ -2029,11 +1958,9 @@ class Catalog:
                 print("Response Validation failed for listHSNCodes")
                 print(e)
 
-        
-
         return response
     
-    async def getProductTags(self, ):
+    async def getProductTags(self, request_headers:Dict={}):
         """This API helps to get tags data associated to a particular company.
         """
         payload = {}
@@ -2046,18 +1973,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/tags", """{"required":[{"description":"Company Id for which tags to be fetched.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Company Id for which tags to be fetched.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
         query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/tags", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/tags", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ProductTagsViewResponse
@@ -2068,11 +1997,9 @@ class Catalog:
                 print("Response Validation failed for getProductTags")
                 print(e)
 
-        
-
         return response
     
-    async def listProductTemplate(self, department=None):
+    async def listProductTemplate(self, department=None, request_headers:Dict={}):
         """Allows you to list all product templates, also can filter by department
         :param department : A `department` is the name of a particular department. : type string
         """
@@ -2080,7 +2007,6 @@ class Catalog:
         
         if department is not None:
             payload["department"] = department
-        
 
         # Parameter validation
         schema = CatalogValidator.listProductTemplate()
@@ -2089,18 +2015,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `department` is the name of a particular department.","in":"query","name":"department","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"description":"A `department` is the name of a particular department.","in":"query","name":"department","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", department=department)
         query_string = await create_query_string(department=department)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/", department=department), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/", department=department), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import TemplatesResponse
@@ -2111,11 +2039,9 @@ class Catalog:
                 print("Response Validation failed for listProductTemplate")
                 print(e)
 
-        
-
         return response
     
-    async def listProductTemplateCategories(self, departments=None, item_type=None):
+    async def listProductTemplateCategories(self, departments=None, item_type=None, request_headers:Dict={}):
         """Allows you to list all product categories values for the departments specified
         :param departments : A `department` is name of a departments whose category needs to be listed. Can specify multiple departments. : type string
         :param item_type : An `item_type` is the type of item, it can be `set`, `standard`, `digital`, etc. : type string
@@ -2124,10 +2050,8 @@ class Catalog:
         
         if departments is not None:
             payload["departments"] = departments
-        
         if item_type is not None:
             payload["item_type"] = item_type
-        
 
         # Parameter validation
         schema = CatalogValidator.listProductTemplateCategories()
@@ -2136,18 +2060,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/categories/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `department` is name of a departments whose category needs to be listed. Can specify multiple departments.","in":"query","name":"departments","required":true,"schema":{"type":"string"}},{"description":"An `item_type` is the type of item, it can be `set`, `standard`, `digital`, etc.","in":"query","name":"item_type","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"description":"A `department` is name of a departments whose category needs to be listed. Can specify multiple departments.","in":"query","name":"departments","required":true,"schema":{"type":"string"}},{"description":"An `item_type` is the type of item, it can be `set`, `standard`, `digital`, etc.","in":"query","name":"item_type","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", departments=departments, item_type=item_type)
         query_string = await create_query_string(departments=departments, item_type=item_type)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/categories/", departments=departments, item_type=item_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/categories/", departments=departments, item_type=item_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ProdcutTemplateCategoriesResponse
@@ -2158,11 +2084,9 @@ class Catalog:
                 print("Response Validation failed for listProductTemplateCategories")
                 print(e)
 
-        
-
         return response
     
-    async def downloadProductTemplateViews(self, slug=None, item_type=None, type=None):
+    async def downloadProductTemplateViews(self, slug=None, item_type=None, type=None, request_headers:Dict={}):
         """Allows you to download product template data
         :param slug : A `slug` is a unique identifier for a particular template. : type string
         :param item_type : An `item_type` defines the type of item. The default value is standard. : type string
@@ -2172,13 +2096,10 @@ class Catalog:
         
         if slug is not None:
             payload["slug"] = slug
-        
         if item_type is not None:
             payload["item_type"] = item_type
-        
         if type is not None:
             payload["type"] = type
-        
 
         # Parameter validation
         schema = CatalogValidator.downloadProductTemplateViews()
@@ -2187,22 +2108,24 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/{slug}/download/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `slug` is a unique identifier for a particular template.","in":"path","name":"slug","required":true,"schema":{"type":"string"}}],"optional":[{"description":"An `item_type` defines the type of item. The default value is standard.","in":"query","name":"item_type","schema":{"type":"string"}},{"description":"Format type of the sample file. The default value is excel.","in":"query","name":"type","schema":{"type":"string"}}],"query":[{"description":"An `item_type` defines the type of item. The default value is standard.","in":"query","name":"item_type","schema":{"type":"string"}},{"description":"Format type of the sample file. The default value is excel.","in":"query","name":"type","schema":{"type":"string"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `slug` is a unique identifier for a particular template.","in":"path","name":"slug","required":true,"schema":{"type":"string"}}]}""", slug=slug, item_type=item_type, type=type)
         query_string = await create_query_string(slug=slug, item_type=item_type, type=type)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/{slug}/download/", slug=slug, item_type=item_type, type=type), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/{slug}/download/", slug=slug, item_type=item_type, type=type), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         return response
     
-    async def validateProductTemplate(self, slug=None, item_type=None, bulk=None):
+    async def validateProductTemplate(self, slug=None, item_type=None, bulk=None, request_headers:Dict={}):
         """Allows you to list all product templates validation values for all the fields present in the database
         :param slug : A `slug` is a unique identifier for a particular template. : type string
         :param item_type : An `item_type` defines the type of item. The default value is standard. : type string
@@ -2212,13 +2135,10 @@ class Catalog:
         
         if slug is not None:
             payload["slug"] = slug
-        
         if item_type is not None:
             payload["item_type"] = item_type
-        
         if bulk is not None:
             payload["bulk"] = bulk
-        
 
         # Parameter validation
         schema = CatalogValidator.validateProductTemplate()
@@ -2227,18 +2147,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/{slug}/validation/schema/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `slug` is a unique identifier for a particular template.","in":"path","name":"slug","required":true,"schema":{"type":"string"}}],"optional":[{"description":"An `item_type` defines the type of item. The default value is standard.","in":"query","name":"item_type","schema":{"type":"string"}},{"description":"This specification determines the schema type to be retrieved. When set to true, it will return the schema for bulk data; when set to false, it will provide the schema for a single product. The default value is false.","in":"query","name":"bulk","schema":{"type":"boolean"}}],"query":[{"description":"An `item_type` defines the type of item. The default value is standard.","in":"query","name":"item_type","schema":{"type":"string"}},{"description":"This specification determines the schema type to be retrieved. When set to true, it will return the schema for bulk data; when set to false, it will provide the schema for a single product. The default value is false.","in":"query","name":"bulk","schema":{"type":"boolean"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `slug` is a unique identifier for a particular template.","in":"path","name":"slug","required":true,"schema":{"type":"string"}}]}""", slug=slug, item_type=item_type, bulk=bulk)
         query_string = await create_query_string(slug=slug, item_type=item_type, bulk=bulk)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/{slug}/validation/schema/", slug=slug, item_type=item_type, bulk=bulk), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/{slug}/validation/schema/", slug=slug, item_type=item_type, bulk=bulk), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import TemplatesValidationResponse
@@ -2249,11 +2171,9 @@ class Catalog:
                 print("Response Validation failed for validateProductTemplate")
                 print(e)
 
-        
-
         return response
     
-    async def getProductValidation(self, ):
+    async def getProductValidation(self, request_headers:Dict={}):
         """This API validates product data.
         """
         payload = {}
@@ -2266,18 +2186,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/validation/", """{"required":[{"description":"Validates data against given company","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Validates data against given company","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
         query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/validation/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/validation/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ValidateProduct
@@ -2288,11 +2210,9 @@ class Catalog:
                 print("Response Validation failed for getProductValidation")
                 print(e)
 
-        
-
         return response
     
-    async def getInventoryBySizeIdentifier(self, item_id=None, size_identifier=None, page_no=None, page_size=None, q=None, location_ids=None):
+    async def getInventoryBySizeIdentifier(self, item_id=None, size_identifier=None, page_no=None, page_size=None, q=None, location_ids=None, request_headers:Dict={}):
         """This API allows get Inventory data for particular company grouped by size and store.
         :param item_id : Item code of the product of which size is to be get. : type integer
         :param size_identifier : Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get. : type string
@@ -2305,22 +2225,16 @@ class Catalog:
         
         if item_id is not None:
             payload["item_id"] = item_id
-        
         if size_identifier is not None:
             payload["size_identifier"] = size_identifier
-        
         if page_no is not None:
             payload["page_no"] = page_no
-        
         if page_size is not None:
             payload["page_size"] = page_size
-        
         if q is not None:
             payload["q"] = q
-        
         if location_ids is not None:
             payload["location_ids"] = location_ids
-        
 
         # Parameter validation
         schema = CatalogValidator.getInventoryBySizeIdentifier()
@@ -2329,18 +2243,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/inventory/{size_identifier}", """{"required":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Item code of the product of which size is to be get.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}},{"description":"Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get.","in":"path","name":"size_identifier","required":true,"schema":{"type":"string"}}],"optional":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"Search with help of store code.","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"Search by store ids.","in":"query","name":"location_ids","required":false,"schema":{"items":{"type":"integer"},"type":"array"}}],"query":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"Search with help of store code.","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"Search by store ids.","in":"query","name":"location_ids","required":false,"schema":{"items":{"type":"integer"},"type":"array"}}],"headers":[],"path":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Item code of the product of which size is to be get.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}},{"description":"Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get.","in":"path","name":"size_identifier","required":true,"schema":{"type":"string"}}]}""", item_id=item_id, size_identifier=size_identifier, page_no=page_no, page_size=page_size, q=q, location_ids=location_ids)
         query_string = await create_query_string(item_id=item_id, size_identifier=size_identifier, page_no=page_no, page_size=page_size, q=q, location_ids=location_ids)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/inventory/{size_identifier}", item_id=item_id, size_identifier=size_identifier, page_no=page_no, page_size=page_size, q=q, location_ids=location_ids), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/inventory/{size_identifier}", item_id=item_id, size_identifier=size_identifier, page_no=page_no, page_size=page_size, q=q, location_ids=location_ids), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import InventorySellerIdentifierResponsePaginated
@@ -2351,11 +2267,9 @@ class Catalog:
                 print("Response Validation failed for getInventoryBySizeIdentifier")
                 print(e)
 
-        
-
         return response
     
-    async def getProductSize(self, item_code=None, item_id=None, brand_uid=None, uid=None):
+    async def getProductSize(self, item_code=None, item_id=None, brand_uid=None, uid=None, request_headers:Dict={}):
         """This API helps to get data associated to a particular product size.
         :param item_code : Item code of the product size. : type string
         :param item_id : Item Id of the product size. : type integer
@@ -2366,16 +2280,12 @@ class Catalog:
         
         if item_code is not None:
             payload["item_code"] = item_code
-        
         if item_id is not None:
             payload["item_id"] = item_id
-        
         if brand_uid is not None:
             payload["brand_uid"] = brand_uid
-        
         if uid is not None:
             payload["uid"] = uid
-        
 
         # Parameter validation
         schema = CatalogValidator.getProductSize()
@@ -2384,18 +2294,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/", """{"required":[{"description":"Company Id of the product size.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Item Id of the product size.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}}],"optional":[{"description":"Item code of the product size.","in":"query","name":"item_code","required":false,"schema":{"type":"string"}},{"description":"Brand Id of the product size.","in":"query","name":"brand_uid","required":false,"schema":{"type":"integer"}},{"description":"Id of the product size.","in":"query","name":"uid","required":false,"schema":{"type":"integer"}}],"query":[{"description":"Item code of the product size.","in":"query","name":"item_code","required":false,"schema":{"type":"string"}},{"description":"Brand Id of the product size.","in":"query","name":"brand_uid","required":false,"schema":{"type":"integer"}},{"description":"Id of the product size.","in":"query","name":"uid","required":false,"schema":{"type":"integer"}}],"headers":[],"path":[{"description":"Company Id of the product size.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Item Id of the product size.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}}]}""", item_code=item_code, item_id=item_id, brand_uid=brand_uid, uid=uid)
         query_string = await create_query_string(item_code=item_code, item_id=item_id, brand_uid=brand_uid, uid=uid)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/", item_code=item_code, item_id=item_id, brand_uid=brand_uid, uid=uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/", item_code=item_code, item_id=item_id, brand_uid=brand_uid, uid=uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ProductListingResponse
@@ -2406,11 +2318,9 @@ class Catalog:
                 print("Response Validation failed for getProductSize")
                 print(e)
 
-        
-
         return response
     
-    async def deleteSize(self, item_id=None, size=None):
+    async def deleteSize(self, item_id=None, size=None, request_headers:Dict={}):
         """This API allows to delete size associated with product.
         :param item_id : Item Id of the product associated with size to be deleted. : type integer
         :param size : size to be deleted. : type string
@@ -2419,10 +2329,8 @@ class Catalog:
         
         if item_id is not None:
             payload["item_id"] = item_id
-        
         if size is not None:
             payload["size"] = size
-        
 
         # Parameter validation
         schema = CatalogValidator.deleteSize()
@@ -2431,18 +2339,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/{size}", """{"required":[{"description":"Company Id of the company associated to size that is to be deleted.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Item Id of the product associated with size to be deleted.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}},{"description":"size to be deleted.","in":"path","name":"size","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Company Id of the company associated to size that is to be deleted.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Item Id of the product associated with size to be deleted.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}},{"description":"size to be deleted.","in":"path","name":"size","required":true,"schema":{"type":"string"}}]}""", item_id=item_id, size=size)
         query_string = await create_query_string(item_id=item_id, size=size)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/{size}", item_id=item_id, size=size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/{size}", item_id=item_id, size=size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ProductSizeDeleteResponse
@@ -2453,11 +2363,9 @@ class Catalog:
                 print("Response Validation failed for deleteSize")
                 print(e)
 
-        
-
         return response
     
-    async def getInventoryBySize(self, item_id=None, size=None, page_no=None, page_size=None, q=None, sellable=None):
+    async def getInventoryBySize(self, item_id=None, size=None, page_no=None, page_size=None, q=None, sellable=None, request_headers:Dict={}):
         """This API allows get Inventory data for particular company grouped by size and store.
         :param item_id : Item code of the product of which size is to be get. : type integer
         :param size : Size of which inventory is to get. : type string
@@ -2470,22 +2378,16 @@ class Catalog:
         
         if item_id is not None:
             payload["item_id"] = item_id
-        
         if size is not None:
             payload["size"] = size
-        
         if page_no is not None:
             payload["page_no"] = page_no
-        
         if page_size is not None:
             payload["page_size"] = page_size
-        
         if q is not None:
             payload["q"] = q
-        
         if sellable is not None:
             payload["sellable"] = sellable
-        
 
         # Parameter validation
         schema = CatalogValidator.getInventoryBySize()
@@ -2494,18 +2396,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/{size}", """{"required":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Item code of the product of which size is to be get.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}},{"description":"Size of which inventory is to get.","in":"path","name":"size","required":true,"schema":{"type":"string"}}],"optional":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"Search with help of store code.","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"Filter on whether product is in stock or not.","in":"query","name":"sellable","required":false,"schema":{"default":false,"type":"boolean"}}],"query":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"Search with help of store code.","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"Filter on whether product is in stock or not.","in":"query","name":"sellable","required":false,"schema":{"default":false,"type":"boolean"}}],"headers":[],"path":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Item code of the product of which size is to be get.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}},{"description":"Size of which inventory is to get.","in":"path","name":"size","required":true,"schema":{"type":"string"}}]}""", item_id=item_id, size=size, page_no=page_no, page_size=page_size, q=q, sellable=sellable)
         query_string = await create_query_string(item_id=item_id, size=size, page_no=page_no, page_size=page_size, q=q, sellable=sellable)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/{size}", item_id=item_id, size=size, page_no=page_no, page_size=page_size, q=q, sellable=sellable), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/{size}", item_id=item_id, size=size, page_no=page_no, page_size=page_size, q=q, sellable=sellable), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import InventoryResponsePaginated
@@ -2516,11 +2420,9 @@ class Catalog:
                 print("Response Validation failed for getInventoryBySize")
                 print(e)
 
-        
-
         return response
     
-    async def addInventory(self, item_id=None, size=None, body=""):
+    async def addInventory(self, item_id=None, size=None, body="", request_headers:Dict={}):
         """This API allows add Inventory for particular size and store.
         :param item_id : Item code of the product of which size is to be get. : type integer
         :param size : Size in which inventory is to be added. : type string
@@ -2529,10 +2431,8 @@ class Catalog:
         
         if item_id is not None:
             payload["item_id"] = item_id
-        
         if size is not None:
             payload["size"] = size
-        
 
         # Parameter validation
         schema = CatalogValidator.addInventory()
@@ -2542,22 +2442,23 @@ class Catalog:
         from .models import InventoryRequest
         schema = InventoryRequest()
         schema.dump(schema.load(body))
-        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/{size}", """{"required":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Item code of the product of which size is to be get.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}},{"description":"Size in which inventory is to be added.","in":"path","name":"size","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Item code of the product of which size is to be get.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}},{"description":"Size in which inventory is to be added.","in":"path","name":"size","required":true,"schema":{"type":"string"}}]}""", item_id=item_id, size=size)
         query_string = await create_query_string(item_id=item_id, size=size)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/{size}", item_id=item_id, size=size), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
-        
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/{size}", item_id=item_id, size=size), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SuccessResponse
@@ -2568,11 +2469,9 @@ class Catalog:
                 print("Response Validation failed for addInventory")
                 print(e)
 
-        
-
         return response
     
-    async def deleteInventory(self, size=None, item_id=None, location_id=None):
+    async def deleteInventory(self, size=None, item_id=None, location_id=None, request_headers:Dict={}):
         """This API allows to delete inventory of a particular product for particular company.
         :param size : size that is to be deleted. : type string
         :param item_id : Id of the product associated with Inventory to be deleted. : type integer
@@ -2582,13 +2481,10 @@ class Catalog:
         
         if size is not None:
             payload["size"] = size
-        
         if item_id is not None:
             payload["item_id"] = item_id
-        
         if location_id is not None:
             payload["location_id"] = location_id
-        
 
         # Parameter validation
         schema = CatalogValidator.deleteInventory()
@@ -2597,18 +2493,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/{size}/location/{location_id}/", """{"required":[{"description":"Company Id of the company associated with Inventory that is to be deleted.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"size that is to be deleted.","in":"path","name":"size","required":true,"schema":{"type":"string"}},{"description":"Id of the product associated with Inventory to be deleted.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}},{"description":"Location ID of store of which inventory is to be deleted.","in":"path","name":"location_id","required":true,"schema":{"type":"number"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Company Id of the company associated with Inventory that is to be deleted.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"size that is to be deleted.","in":"path","name":"size","required":true,"schema":{"type":"string"}},{"description":"Id of the product associated with Inventory to be deleted.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}},{"description":"Location ID of store of which inventory is to be deleted.","in":"path","name":"location_id","required":true,"schema":{"type":"number"}}]}""", size=size, item_id=item_id, location_id=location_id)
         query_string = await create_query_string(size=size, item_id=item_id, location_id=location_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/{size}/location/{location_id}/", size=size, item_id=item_id, location_id=location_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/{size}/location/{location_id}/", size=size, item_id=item_id, location_id=location_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SuccessResponse
@@ -2619,11 +2517,9 @@ class Catalog:
                 print("Response Validation failed for deleteInventory")
                 print(e)
 
-        
-
         return response
     
-    async def getVariantsOfProducts(self, item_id=None, variant_type=None, page_no=None, page_size=None):
+    async def getVariantsOfProducts(self, item_id=None, variant_type=None, page_no=None, page_size=None, request_headers:Dict={}):
         """This API gets meta associated to products.
         :param item_id : Get list of variants of item Id : type integer
         :param variant_type : Get multiple products filtered by variant type : type string
@@ -2634,16 +2530,12 @@ class Catalog:
         
         if item_id is not None:
             payload["item_id"] = item_id
-        
         if variant_type is not None:
             payload["variant_type"] = variant_type
-        
         if page_no is not None:
             payload["page_no"] = page_no
-        
         if page_size is not None:
             payload["page_size"] = page_size
-        
 
         # Parameter validation
         schema = CatalogValidator.getVariantsOfProducts()
@@ -2652,18 +2544,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/variants/{variant_type}", """{"required":[{"description":"Get list of products filtered by company Id","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Get list of variants of item Id","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}},{"description":"Get multiple products filtered by variant type","in":"path","name":"variant_type","required":true,"schema":{"type":"string"}}],"optional":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 10.","in":"query","name":"page_size","required":false,"schema":{"default":10,"type":"integer"}}],"query":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 10.","in":"query","name":"page_size","required":false,"schema":{"default":10,"type":"integer"}}],"headers":[],"path":[{"description":"Get list of products filtered by company Id","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Get list of variants of item Id","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}},{"description":"Get multiple products filtered by variant type","in":"path","name":"variant_type","required":true,"schema":{"type":"string"}}]}""", item_id=item_id, variant_type=variant_type, page_no=page_no, page_size=page_size)
         query_string = await create_query_string(item_id=item_id, variant_type=variant_type, page_no=page_no, page_size=page_size)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/variants/{variant_type}", item_id=item_id, variant_type=variant_type, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/variants/{variant_type}", item_id=item_id, variant_type=variant_type, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ProductVariantsResponse
@@ -2674,11 +2568,9 @@ class Catalog:
                 print("Response Validation failed for getVariantsOfProducts")
                 print(e)
 
-        
-
         return response
     
-    async def getSizeGuides(self, active=None, q=None, tag=None, page_no=None, page_size=None):
+    async def getSizeGuides(self, active=None, q=None, tag=None, page_no=None, page_size=None, request_headers:Dict={}):
         """This API allows to view all the size guides associated to the seller.
         :param active : filter size guide on basis of active, in-active : type boolean
         :param q : Query that is to be searched. : type string
@@ -2690,19 +2582,14 @@ class Catalog:
         
         if active is not None:
             payload["active"] = active
-        
         if q is not None:
             payload["q"] = q
-        
         if tag is not None:
             payload["tag"] = tag
-        
         if page_no is not None:
             payload["page_no"] = page_no
-        
         if page_size is not None:
             payload["page_size"] = page_size
-        
 
         # Parameter validation
         schema = CatalogValidator.getSizeGuides()
@@ -2711,18 +2598,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide", """{"required":[{"description":"Id of the company for which the size guides are to be fetched.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"filter size guide on basis of active, in-active","in":"query","name":"active","required":false,"schema":{"type":"boolean"}},{"description":"Query that is to be searched.","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"to filter size guide on basis of tag.","in":"query","name":"tag","required":false,"schema":{"type":"string"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 10.","in":"query","name":"page_size","required":false,"schema":{"default":10,"type":"integer"}}],"query":[{"description":"filter size guide on basis of active, in-active","in":"query","name":"active","required":false,"schema":{"type":"boolean"}},{"description":"Query that is to be searched.","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"to filter size guide on basis of tag.","in":"query","name":"tag","required":false,"schema":{"type":"string"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 10.","in":"query","name":"page_size","required":false,"schema":{"default":10,"type":"integer"}}],"headers":[],"path":[{"description":"Id of the company for which the size guides are to be fetched.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", active=active, q=q, tag=tag, page_no=page_no, page_size=page_size)
         query_string = await create_query_string(active=active, q=q, tag=tag, page_no=page_no, page_size=page_size)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide", active=active, q=q, tag=tag, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide", active=active, q=q, tag=tag, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ListSizeGuide
@@ -2733,11 +2622,9 @@ class Catalog:
                 print("Response Validation failed for getSizeGuides")
                 print(e)
 
-        
-
         return response
     
-    async def createSizeGuide(self, body=""):
+    async def createSizeGuide(self, body="", request_headers:Dict={}):
         """This API allows to create a size guide associated to a brand.
         """
         payload = {}
@@ -2751,22 +2638,23 @@ class Catalog:
         from .models import ValidateSizeGuide
         schema = ValidateSizeGuide()
         schema.dump(schema.load(body))
-        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide", """{"required":[{"description":"Id of the company inside which the size guide is to be created.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Id of the company inside which the size guide is to be created.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", )
         query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
-        
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SuccessResponse
@@ -2777,11 +2665,9 @@ class Catalog:
                 print("Response Validation failed for createSizeGuide")
                 print(e)
 
-        
-
         return response
     
-    async def getSizeGuide(self, id=None):
+    async def getSizeGuide(self, id=None, request_headers:Dict={}):
         """This API helps to get data associated to a size guide.
         :param id : Id of the size guide to be viewed. : type string
         """
@@ -2789,7 +2675,6 @@ class Catalog:
         
         if id is not None:
             payload["id"] = id
-        
 
         # Parameter validation
         schema = CatalogValidator.getSizeGuide()
@@ -2798,18 +2683,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide/{id}/", """{"required":[{"description":"Id of the company associated to size guide.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Id of the size guide to be viewed.","in":"path","name":"id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Id of the company associated to size guide.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Id of the size guide to be viewed.","in":"path","name":"id","required":true,"schema":{"type":"string"}}]}""", id=id)
         query_string = await create_query_string(id=id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SizeGuideResponse
@@ -2820,11 +2707,9 @@ class Catalog:
                 print("Response Validation failed for getSizeGuide")
                 print(e)
 
-        
-
         return response
     
-    async def updateSizeGuide(self, id=None, body=""):
+    async def updateSizeGuide(self, id=None, body="", request_headers:Dict={}):
         """This API allows to edit a size guide.
         :param id : Mongo id of the size guide to be edited : type string
         """
@@ -2832,7 +2717,6 @@ class Catalog:
         
         if id is not None:
             payload["id"] = id
-        
 
         # Parameter validation
         schema = CatalogValidator.updateSizeGuide()
@@ -2842,22 +2726,23 @@ class Catalog:
         from .models import ValidateSizeGuide
         schema = ValidateSizeGuide()
         schema.dump(schema.load(body))
-        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide/{id}/", """{"required":[{"description":"Id of the company.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Mongo id of the size guide to be edited","in":"path","name":"id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Id of the company.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Mongo id of the size guide to be edited","in":"path","name":"id","required":true,"schema":{"type":"string"}}]}""", id=id)
         query_string = await create_query_string(id=id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
-        
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SuccessResponse
@@ -2868,11 +2753,9 @@ class Catalog:
                 print("Response Validation failed for updateSizeGuide")
                 print(e)
 
-        
-
         return response
     
-    async def getAllProductHsnCodes(self, page_no=None, page_size=None, q=None, type=None):
+    async def getAllProductHsnCodes(self, page_no=None, page_size=None, q=None, type=None, request_headers:Dict={}):
         """Hsn Code List.
         :param page_no : page no : type integer
         :param page_size : page size : type integer
@@ -2883,16 +2766,12 @@ class Catalog:
         
         if page_no is not None:
             payload["page_no"] = page_no
-        
         if page_size is not None:
             payload["page_size"] = page_size
-        
         if q is not None:
             payload["q"] = q
-        
         if type is not None:
             payload["type"] = type
-        
 
         # Parameter validation
         schema = CatalogValidator.getAllProductHsnCodes()
@@ -2901,18 +2780,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/hsn/", """{"required":[{"description":"Company Id for which HSN codes needs to be fetched","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"description":"page no","in":"query","name":"page_no","required":false,"schema":{"default":1,"type":"integer"}},{"description":"page size","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"search using hsn code, description, reporting_hsn","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"search using type","in":"query","name":"type","required":false,"schema":{"type":"string"}}],"query":[{"description":"page no","in":"query","name":"page_no","required":false,"schema":{"default":1,"type":"integer"}},{"description":"page size","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"search using hsn code, description, reporting_hsn","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"search using type","in":"query","name":"type","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"description":"Company Id for which HSN codes needs to be fetched","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", page_no=page_no, page_size=page_size, q=q, type=type, )
         query_string = await create_query_string(page_no=page_no, page_size=page_size, q=q, type=type, )
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/hsn/", page_no=page_no, page_size=page_size, q=q, type=type, ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/hsn/", page_no=page_no, page_size=page_size, q=q, type=type), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import HsnCodesListingResponseSchemaV2
@@ -2923,11 +2804,9 @@ class Catalog:
                 print("Response Validation failed for getAllProductHsnCodes")
                 print(e)
 
-        
-
         return response
     
-    async def getSingleProductHSNCode(self, reporting_hsn=None):
+    async def getSingleProductHSNCode(self, reporting_hsn=None, request_headers:Dict={}):
         """Hsn Code List.
         :param reporting_hsn : reporting_hsn : type string
         """
@@ -2935,7 +2814,6 @@ class Catalog:
         
         if reporting_hsn is not None:
             payload["reporting_hsn"] = reporting_hsn
-        
 
         # Parameter validation
         schema = CatalogValidator.getSingleProductHSNCode()
@@ -2944,18 +2822,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/hsn/{reporting_hsn}", """{"required":[{"description":"reporting_hsn","in":"path","name":"reporting_hsn","required":true,"schema":{"type":"string"}},{"description":"Company Id for which HSN codes needs to be fetched","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"reporting_hsn","in":"path","name":"reporting_hsn","required":true,"schema":{"type":"string"}},{"description":"Company Id for which HSN codes needs to be fetched","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", reporting_hsn=reporting_hsn, )
         query_string = await create_query_string(reporting_hsn=reporting_hsn, )
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/hsn/{reporting_hsn}", reporting_hsn=reporting_hsn, ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/hsn/{reporting_hsn}", reporting_hsn=reporting_hsn), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import HSNDataInsertV2
@@ -2966,11 +2846,9 @@ class Catalog:
                 print("Response Validation failed for getSingleProductHSNCode")
                 print(e)
 
-        
-
         return response
     
-    async def updateInventories(self, body=""):
+    async def updateInventories(self, body="", request_headers:Dict={}):
         """This API allows add Inventory for particular size and store.
         """
         payload = {}
@@ -2984,22 +2862,23 @@ class Catalog:
         from .models import InventoryRequestSchemaV2
         schema = InventoryRequestSchemaV2()
         schema.dump(schema.load(body))
-        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/inventory/", """{"required":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
         query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/inventory/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
-        
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/inventory/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import InventoryUpdateResponse
@@ -3010,11 +2889,9 @@ class Catalog:
                 print("Response Validation failed for updateInventories")
                 print(e)
 
-        
-
         return response
     
-    async def listInventoryExport(self, status=None, from_date=None, to_date=None, q=None):
+    async def listInventoryExport(self, status=None, from_date=None, to_date=None, q=None, request_headers:Dict={}):
         """This API helps you the get the history of inventory jobs depending on the filtered criteria.
         :param status : Status of the export job. : type string
         :param from_date : Inventory export history filtered according to from_date. : type string
@@ -3025,16 +2902,12 @@ class Catalog:
         
         if status is not None:
             payload["status"] = status
-        
         if from_date is not None:
             payload["from_date"] = from_date
-        
         if to_date is not None:
             payload["to_date"] = to_date
-        
         if q is not None:
             payload["q"] = q
-        
 
         # Parameter validation
         schema = CatalogValidator.listInventoryExport()
@@ -3043,18 +2916,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/inventory/download/", """{"required":[{"description":"It is the unique identifier of the company.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"description":"Status of the export job.","in":"query","name":"status","required":false,"schema":{"type":"string"}},{"description":"Inventory export history filtered according to from_date.","in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"description":"Inventory export history filtered according to from_date.","in":"query","name":"to_date","required":false,"schema":{"type":"string"}},{"description":"Inventory export history filtered according to task ID.","in":"query","name":"q","required":false,"schema":{"type":"string"}}],"query":[{"description":"Status of the export job.","in":"query","name":"status","required":false,"schema":{"type":"string"}},{"description":"Inventory export history filtered according to from_date.","in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"description":"Inventory export history filtered according to from_date.","in":"query","name":"to_date","required":false,"schema":{"type":"string"}},{"description":"Inventory export history filtered according to task ID.","in":"query","name":"q","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"description":"It is the unique identifier of the company.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", status=status, from_date=from_date, to_date=to_date, q=q)
         query_string = await create_query_string(status=status, from_date=from_date, to_date=to_date, q=q)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/inventory/download/", status=status, from_date=from_date, to_date=to_date, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/inventory/download/", status=status, from_date=from_date, to_date=to_date, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import InventoryExportJobListResponse
@@ -3065,11 +2940,9 @@ class Catalog:
                 print("Response Validation failed for listInventoryExport")
                 print(e)
 
-        
-
         return response
     
-    async def createInventoryExport(self, body=""):
+    async def createInventoryExport(self, body="", request_headers:Dict={}):
         """This API helps to create a Inventory export job.
         """
         payload = {}
@@ -3083,22 +2956,23 @@ class Catalog:
         from .models import InventoryCreateRequest
         schema = InventoryCreateRequest()
         schema.dump(schema.load(body))
-        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/inventory/download/", """{"required":[{"description":"Company Id in which assets to be uploaded.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Company Id in which assets to be uploaded.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
         query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/inventory/download/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
-        
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/inventory/download/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import InventoryExportResponse
@@ -3109,11 +2983,9 @@ class Catalog:
                 print("Response Validation failed for createInventoryExport")
                 print(e)
 
-        
-
         return response
     
-    async def getProducts(self, brand_ids=None, category_ids=None, item_ids=None, department_ids=None, item_code=None, q=None, tags=None, page_no=None, page_size=None):
+    async def getProducts(self, brand_ids=None, category_ids=None, item_ids=None, department_ids=None, item_code=None, q=None, tags=None, page_no=None, page_size=None, request_headers:Dict={}):
         """This API gets meta associated to products.
         :param brand_ids : Get multiple products filtered by Brand Ids : type array
         :param category_ids : Get multiple products filtered by Category Ids : type array
@@ -3129,31 +3001,22 @@ class Catalog:
         
         if brand_ids is not None:
             payload["brand_ids"] = brand_ids
-        
         if category_ids is not None:
             payload["category_ids"] = category_ids
-        
         if item_ids is not None:
             payload["item_ids"] = item_ids
-        
         if department_ids is not None:
             payload["department_ids"] = department_ids
-        
         if item_code is not None:
             payload["item_code"] = item_code
-        
         if q is not None:
             payload["q"] = q
-        
         if tags is not None:
             payload["tags"] = tags
-        
         if page_no is not None:
             payload["page_no"] = page_no
-        
         if page_size is not None:
             payload["page_size"] = page_size
-        
 
         # Parameter validation
         schema = CatalogValidator.getProducts()
@@ -3162,18 +3025,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/", """{"required":[{"description":"Get list of products filtered by company Id","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"description":"Get multiple products filtered by Brand Ids","in":"query","name":"brand_ids","required":false,"schema":{"items":{"type":"integer"},"type":"array"}},{"description":"Get multiple products filtered by Category Ids","in":"query","name":"category_ids","required":false,"schema":{"items":{"type":"integer"},"type":"array"}},{"description":"Get multiple products filtered by Item Ids","in":"query","name":"item_ids","required":false,"schema":{"items":{"type":"integer"},"type":"array"}},{"description":"Get multiple products filtered by Department Ids","in":"query","name":"department_ids","required":false,"schema":{"items":{"type":"integer"},"type":"array"}},{"description":"Get multiple products filtered by Item Code","in":"query","name":"item_code","required":false,"schema":{"items":{"type":"string"},"type":"array"}},{"description":"Get multiple products filtered by q string","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"Get multiple products filtered by tags","in":"query","name":"tags","required":false,"schema":{"items":{"type":"string"},"type":"array"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 10.","in":"query","name":"page_size","required":false,"schema":{"default":10,"type":"integer"}}],"query":[{"description":"Get multiple products filtered by Brand Ids","in":"query","name":"brand_ids","required":false,"schema":{"items":{"type":"integer"},"type":"array"}},{"description":"Get multiple products filtered by Category Ids","in":"query","name":"category_ids","required":false,"schema":{"items":{"type":"integer"},"type":"array"}},{"description":"Get multiple products filtered by Item Ids","in":"query","name":"item_ids","required":false,"schema":{"items":{"type":"integer"},"type":"array"}},{"description":"Get multiple products filtered by Department Ids","in":"query","name":"department_ids","required":false,"schema":{"items":{"type":"integer"},"type":"array"}},{"description":"Get multiple products filtered by Item Code","in":"query","name":"item_code","required":false,"schema":{"items":{"type":"string"},"type":"array"}},{"description":"Get multiple products filtered by q string","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"Get multiple products filtered by tags","in":"query","name":"tags","required":false,"schema":{"items":{"type":"string"},"type":"array"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 10.","in":"query","name":"page_size","required":false,"schema":{"default":10,"type":"integer"}}],"headers":[],"path":[{"description":"Get list of products filtered by company Id","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", brand_ids=brand_ids, category_ids=category_ids, item_ids=item_ids, department_ids=department_ids, item_code=item_code, q=q, tags=tags, page_no=page_no, page_size=page_size)
         query_string = await create_query_string(brand_ids=brand_ids, category_ids=category_ids, item_ids=item_ids, department_ids=department_ids, item_code=item_code, q=q, tags=tags, page_no=page_no, page_size=page_size)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/", brand_ids=brand_ids, category_ids=category_ids, item_ids=item_ids, department_ids=department_ids, item_code=item_code, q=q, tags=tags, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/", brand_ids=brand_ids, category_ids=category_ids, item_ids=item_ids, department_ids=department_ids, item_code=item_code, q=q, tags=tags, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ProductListingResponseV2
@@ -3184,11 +3049,9 @@ class Catalog:
                 print("Response Validation failed for getProducts")
                 print(e)
 
-        
-
         return response
     
-    async def createProduct(self, body=""):
+    async def createProduct(self, body="", request_headers:Dict={}):
         """This API allows to create product.
         """
         payload = {}
@@ -3202,22 +3065,23 @@ class Catalog:
         from .models import ProductCreateUpdateSchemaV2
         schema = ProductCreateUpdateSchemaV2()
         schema.dump(schema.load(body))
-        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/", """{"required":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", )
         query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
-        
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SuccessResponse
@@ -3228,11 +3092,9 @@ class Catalog:
                 print("Response Validation failed for createProduct")
                 print(e)
 
-        
-
         return response
     
-    async def uploadBulkProducts(self, department=None, product_type=None, body=""):
+    async def uploadBulkProducts(self, department=None, product_type=None, body="", request_headers:Dict={}):
         """This API helps to create a bulk products upload job.
         :param department : Department of the product to be uploaded. : type string
         :param product_type : Product type of the product to be uploaded i.e. set, standard , digital. : type string
@@ -3241,10 +3103,8 @@ class Catalog:
         
         if department is not None:
             payload["department"] = department
-        
         if product_type is not None:
             payload["product_type"] = product_type
-        
 
         # Parameter validation
         schema = CatalogValidator.uploadBulkProducts()
@@ -3254,22 +3114,23 @@ class Catalog:
         from .models import BulkJob
         schema = BulkJob()
         schema.dump(schema.load(body))
-        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/bulk", """{"required":[{"description":"Company Id in which assets to be uploaded.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Department of the product to be uploaded.","in":"query","name":"department","required":true,"schema":{"type":"string"}},{"description":"Product type of the product to be uploaded i.e. set, standard , digital.","in":"query","name":"product_type","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"description":"Department of the product to be uploaded.","in":"query","name":"department","required":true,"schema":{"type":"string"}},{"description":"Product type of the product to be uploaded i.e. set, standard , digital.","in":"query","name":"product_type","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"description":"Company Id in which assets to be uploaded.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", department=department, product_type=product_type)
         query_string = await create_query_string(department=department, product_type=product_type)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/bulk", department=department, product_type=product_type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
-        
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/bulk", department=department, product_type=product_type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import BulkResponse
@@ -3280,11 +3141,9 @@ class Catalog:
                 print("Response Validation failed for uploadBulkProducts")
                 print(e)
 
-        
-
         return response
     
-    async def getProductExportJobs(self, status=None, from_date=None, to_date=None, q=None):
+    async def getProductExportJobs(self, status=None, from_date=None, to_date=None, q=None, request_headers:Dict={}):
         """Can view details including trigger data, task id , etc.
         :param status : This is a parameter used to find all the jobs with the specified status. : type string
         :param from_date : This is a parameter used to find the job from the date specified to the current date. : type string
@@ -3295,16 +3154,12 @@ class Catalog:
         
         if status is not None:
             payload["status"] = status
-        
         if from_date is not None:
             payload["from_date"] = from_date
-        
         if to_date is not None:
             payload["to_date"] = to_date
-        
         if q is not None:
             payload["q"] = q
-        
 
         # Parameter validation
         schema = CatalogValidator.getProductExportJobs()
@@ -3313,18 +3168,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/downloads/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"This is a parameter used to find all the jobs with the specified status.","in":"query","name":"status","required":false,"schema":{"type":"string"}},{"description":"This is a parameter used to find the job from the date specified to the current date.","in":"query","name":"from_date","required":false,"schema":{"format":"date","type":"string"}},{"description":"This is a parameter used to find the job from the from_date specified to the to_date.","in":"query","name":"to_date","required":false,"schema":{"format":"date","type":"string"}},{"description":"It is a query parameter to search the export job with the task ID.","in":"query","name":"q","required":false,"schema":{"type":"string"}}],"query":[{"description":"This is a parameter used to find all the jobs with the specified status.","in":"query","name":"status","required":false,"schema":{"type":"string"}},{"description":"This is a parameter used to find the job from the date specified to the current date.","in":"query","name":"from_date","required":false,"schema":{"format":"date","type":"string"}},{"description":"This is a parameter used to find the job from the from_date specified to the to_date.","in":"query","name":"to_date","required":false,"schema":{"format":"date","type":"string"}},{"description":"It is a query parameter to search the export job with the task ID.","in":"query","name":"q","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", status=status, from_date=from_date, to_date=to_date, q=q)
         query_string = await create_query_string(status=status, from_date=from_date, to_date=to_date, q=q)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/downloads/", status=status, from_date=from_date, to_date=to_date, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/downloads/", status=status, from_date=from_date, to_date=to_date, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ProductDownloadsResponse
@@ -3335,11 +3192,9 @@ class Catalog:
                 print("Response Validation failed for getProductExportJobs")
                 print(e)
 
-        
-
         return response
     
-    async def createProductExportJob(self, body=""):
+    async def createProductExportJob(self, body="", request_headers:Dict={}):
         """This API helps to create a Inventory export job.
         """
         payload = {}
@@ -3353,22 +3208,23 @@ class Catalog:
         from .models import ProductTemplateDownloadsExport
         schema = ProductTemplateDownloadsExport()
         schema.dump(schema.load(body))
-        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/downloads/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
         query_string = await create_query_string()
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/downloads/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
-        
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/downloads/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ProductDownloadsResponse
@@ -3379,11 +3235,9 @@ class Catalog:
                 print("Response Validation failed for createProductExportJob")
                 print(e)
 
-        
-
         return response
     
-    async def deleteProduct(self, item_id=None):
+    async def deleteProduct(self, item_id=None, request_headers:Dict={}):
         """This API allows to delete product.
         :param item_id : Id of the product to be updated. : type integer
         """
@@ -3391,7 +3245,6 @@ class Catalog:
         
         if item_id is not None:
             payload["item_id"] = item_id
-        
 
         # Parameter validation
         schema = CatalogValidator.deleteProduct()
@@ -3400,18 +3253,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", """{"required":[{"description":"Company Id of the company associated to product that is to be deleted.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Id of the product to be updated.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Company Id of the company associated to product that is to be deleted.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Id of the product to be updated.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}}]}""", item_id=item_id)
         query_string = await create_query_string(item_id=item_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SuccessResponse
@@ -3422,11 +3277,9 @@ class Catalog:
                 print("Response Validation failed for deleteProduct")
                 print(e)
 
-        
-
         return response
     
-    async def getProduct(self, item_id=None, brand_uid=None, item_code=None):
+    async def getProduct(self, item_id=None, brand_uid=None, item_code=None, request_headers:Dict={}):
         """This API helps to get data associated to a particular product.
         :param item_id : Item Id of the product. : type integer
         :param brand_uid : Brand Id of the product. : type integer
@@ -3436,13 +3289,10 @@ class Catalog:
         
         if item_id is not None:
             payload["item_id"] = item_id
-        
         if brand_uid is not None:
             payload["brand_uid"] = brand_uid
-        
         if item_code is not None:
             payload["item_code"] = item_code
-        
 
         # Parameter validation
         schema = CatalogValidator.getProduct()
@@ -3451,18 +3301,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", """{"required":[{"description":"Company Id of the product.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Item Id of the product.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}}],"optional":[{"description":"Brand Id of the product.","in":"query","name":"brand_uid","required":false,"schema":{"type":"integer"}},{"description":"Item code of the product.","in":"query","name":"item_code","required":false,"schema":{"type":"string"}}],"query":[{"description":"Brand Id of the product.","in":"query","name":"brand_uid","required":false,"schema":{"type":"integer"}},{"description":"Item code of the product.","in":"query","name":"item_code","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"description":"Company Id of the product.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Item Id of the product.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}}]}""", item_id=item_id, brand_uid=brand_uid, item_code=item_code)
         query_string = await create_query_string(item_id=item_id, brand_uid=brand_uid, item_code=item_code)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id, brand_uid=brand_uid, item_code=item_code), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id, brand_uid=brand_uid, item_code=item_code), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SingleProductResponse
@@ -3473,11 +3325,9 @@ class Catalog:
                 print("Response Validation failed for getProduct")
                 print(e)
 
-        
-
         return response
     
-    async def editProduct(self, item_id=None, body=""):
+    async def editProduct(self, item_id=None, body="", request_headers:Dict={}):
         """This API allows to edit product.
         :param item_id : Id of the product to be updated. : type integer
         """
@@ -3485,7 +3335,6 @@ class Catalog:
         
         if item_id is not None:
             payload["item_id"] = item_id
-        
 
         # Parameter validation
         schema = CatalogValidator.editProduct()
@@ -3495,22 +3344,23 @@ class Catalog:
         from .models import ProductCreateUpdateSchemaV2
         schema = ProductCreateUpdateSchemaV2()
         schema.dump(schema.load(body))
-        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", """{"required":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Id of the product to be updated.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Id of the product to be updated.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}}]}""", item_id=item_id)
         query_string = await create_query_string(item_id=item_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
-        
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SuccessResponse
@@ -3521,11 +3371,9 @@ class Catalog:
                 print("Response Validation failed for editProduct")
                 print(e)
 
-        
-
         return response
     
-    async def allSizes(self, item_id=None):
+    async def allSizes(self, item_id=None, request_headers:Dict={}):
         """This API allows to get  All Sizes for a given Product.
         :param item_id : Id of the product to be updated. : type integer
         """
@@ -3533,7 +3381,6 @@ class Catalog:
         
         if item_id is not None:
             payload["item_id"] = item_id
-        
 
         # Parameter validation
         schema = CatalogValidator.allSizes()
@@ -3542,18 +3389,20 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/all_sizes", """{"required":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Id of the product to be updated.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Id of the product to be updated.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}}]}""", item_id=item_id)
         query_string = await create_query_string(item_id=item_id)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/all_sizes", item_id=item_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
-        
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/all_sizes", item_id=item_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import GetAllSizes
@@ -3564,11 +3413,9 @@ class Catalog:
                 print("Response Validation failed for allSizes")
                 print(e)
 
-        
-
         return response
     
-    async def deleteRealtimeInventory(self, item_id=None, seller_identifier=None, body=""):
+    async def deleteRealtimeInventory(self, item_id=None, seller_identifier=None, body="", request_headers:Dict={}):
         """This API allows add Inventory for particular size and store.
         :param item_id : Item code of the product of which size is to be get. : type integer
         :param seller_identifier : Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get. : type string
@@ -3577,10 +3424,8 @@ class Catalog:
         
         if item_id is not None:
             payload["item_id"] = item_id
-        
         if seller_identifier is not None:
             payload["seller_identifier"] = seller_identifier
-        
 
         # Parameter validation
         schema = CatalogValidator.deleteRealtimeInventory()
@@ -3590,22 +3435,23 @@ class Catalog:
         from .models import InventoryRequestSchemaV2
         schema = InventoryRequestSchemaV2()
         schema.dump(schema.load(body))
-        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/inventory/{seller_identifier}", """{"required":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Item code of the product of which size is to be get.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}},{"description":"Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get.","in":"path","name":"seller_identifier","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Item code of the product of which size is to be get.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}},{"description":"Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get.","in":"path","name":"seller_identifier","required":true,"schema":{"type":"string"}}]}""", item_id=item_id, seller_identifier=seller_identifier)
         query_string = await create_query_string(item_id=item_id, seller_identifier=seller_identifier)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/inventory/{seller_identifier}", item_id=item_id, seller_identifier=seller_identifier), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
-        
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/inventory/{seller_identifier}", item_id=item_id, seller_identifier=seller_identifier), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import InventoryUpdateResponse
@@ -3616,11 +3462,9 @@ class Catalog:
                 print("Response Validation failed for deleteRealtimeInventory")
                 print(e)
 
-        
-
         return response
     
-    async def updateRealtimeInventory(self, item_id=None, seller_identifier=None, body=""):
+    async def updateRealtimeInventory(self, item_id=None, seller_identifier=None, body="", request_headers:Dict={}):
         """This API allows add Inventory for particular size and store.
         :param item_id : Item code of the product of which size is to be get. : type integer
         :param seller_identifier : Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get. : type string
@@ -3629,10 +3473,8 @@ class Catalog:
         
         if item_id is not None:
             payload["item_id"] = item_id
-        
         if seller_identifier is not None:
             payload["seller_identifier"] = seller_identifier
-        
 
         # Parameter validation
         schema = CatalogValidator.updateRealtimeInventory()
@@ -3642,22 +3484,23 @@ class Catalog:
         from .models import InventoryRequestSchemaV2
         schema = InventoryRequestSchemaV2()
         schema.dump(schema.load(body))
-        
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/inventory/{seller_identifier}", """{"required":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Item code of the product of which size is to be get.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}},{"description":"Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get.","in":"path","name":"seller_identifier","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Item code of the product of which size is to be get.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}},{"description":"Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get.","in":"path","name":"seller_identifier","required":true,"schema":{"type":"string"}}]}""", item_id=item_id, seller_identifier=seller_identifier)
         query_string = await create_query_string(item_id=item_id, seller_identifier=seller_identifier)
-        headers = {
-            "Authorization": "Bearer " + await self._conf.getAccessToken()
-        }
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
         for h in self._conf.extraHeaders:
             headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
         exclude_headers = []
         for key, val in headers.items():
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/inventory/{seller_identifier}", item_id=item_id, seller_identifier=seller_identifier), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
-        
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/inventory/{seller_identifier}", item_id=item_id, seller_identifier=seller_identifier), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import InventoryUpdateResponse
@@ -3668,8 +3511,5 @@ class Catalog:
                 print("Response Validation failed for updateRealtimeInventory")
                 print(e)
 
-        
-
         return response
     
-
