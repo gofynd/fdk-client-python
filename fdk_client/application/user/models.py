@@ -36,7 +36,15 @@ class SendEmailOtpRequestSchema(BaseSchema):
     pass
 
 
+class SendEmailForgotOtpRequestSchema(BaseSchema):
+    pass
+
+
 class VerifyEmailOtpRequestSchema(BaseSchema):
+    pass
+
+
+class VerifyEmailForgotOtpRequestSchema(BaseSchema):
     pass
 
 
@@ -44,7 +52,15 @@ class VerifyOtpRequestSchema(BaseSchema):
     pass
 
 
+class VerifyMobileForgotOtpRequestSchema(BaseSchema):
+    pass
+
+
 class SendMobileOtpRequestSchema(BaseSchema):
+    pass
+
+
+class SendMobileForgotOtpRequestSchema(BaseSchema):
     pass
 
 
@@ -112,7 +128,15 @@ class LoginSuccess(BaseSchema):
     pass
 
 
+class ResetForgotPasswordSuccess(BaseSchema):
+    pass
+
+
 class VerifyOtpSuccess(BaseSchema):
+    pass
+
+
+class VerifyForgotOtpSuccess(BaseSchema):
     pass
 
 
@@ -173,6 +197,10 @@ class AuthenticationInternalServerErrorSchema(BaseSchema):
 
 
 class AuthenticationApiErrorSchema(BaseSchema):
+    pass
+
+
+class APIError(BaseSchema):
     pass
 
 
@@ -391,6 +419,18 @@ class SendEmailOtpRequestSchema(BaseSchema):
     
 
 
+class SendEmailForgotOtpRequestSchema(BaseSchema):
+    # User swagger.json
+
+    
+    email = fields.Str(required=False)
+    
+    action = fields.Str(required=False)
+    
+    token = fields.Str(required=False)
+    
+
+
 class VerifyEmailOtpRequestSchema(BaseSchema):
     # User swagger.json
 
@@ -405,6 +445,16 @@ class VerifyEmailOtpRequestSchema(BaseSchema):
     
 
 
+class VerifyEmailForgotOtpRequestSchema(BaseSchema):
+    # User swagger.json
+
+    
+    email = fields.Str(required=False)
+    
+    otp = fields.Str(required=False)
+    
+
+
 class VerifyOtpRequestSchema(BaseSchema):
     # User swagger.json
 
@@ -412,6 +462,16 @@ class VerifyOtpRequestSchema(BaseSchema):
     request_id = fields.Str(required=False)
     
     register_token = fields.Str(required=False)
+    
+    otp = fields.Str(required=False)
+    
+
+
+class VerifyMobileForgotOtpRequestSchema(BaseSchema):
+    # User swagger.json
+
+    
+    request_id = fields.Str(required=False)
     
     otp = fields.Str(required=False)
     
@@ -434,6 +494,22 @@ class SendMobileOtpRequestSchema(BaseSchema):
     force = fields.Str(required=False)
     
     captcha_code = fields.Str(required=False)
+    
+
+
+class SendMobileForgotOtpRequestSchema(BaseSchema):
+    # User swagger.json
+
+    
+    mobile = fields.Str(required=False)
+    
+    country_code = fields.Str(required=False)
+    
+    action = fields.Str(required=False)
+    
+    token = fields.Str(required=False)
+    
+    android_hash = fields.Str(required=False)
     
 
 
@@ -665,6 +741,14 @@ class LoginSuccess(BaseSchema):
     
 
 
+class ResetForgotPasswordSuccess(BaseSchema):
+    # User swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+
+
 class VerifyOtpSuccess(BaseSchema):
     # User swagger.json
 
@@ -674,6 +758,16 @@ class VerifyOtpSuccess(BaseSchema):
     user_exists = fields.Boolean(required=False)
     
     register_token = fields.Str(required=False)
+    
+
+
+class VerifyForgotOtpSuccess(BaseSchema):
+    # User swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+    forgot_token = fields.Str(required=False)
     
 
 
@@ -836,6 +930,22 @@ class AuthenticationApiErrorSchema(BaseSchema):
 
     
     message = fields.Str(required=False)
+    
+
+
+class APIError(BaseSchema):
+    # User swagger.json
+
+    
+    code = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
+    
+    info = fields.Str(required=False)
+    
+    request_id = fields.Str(required=False)
+    
+    meta = fields.Dict(required=False)
     
 
 

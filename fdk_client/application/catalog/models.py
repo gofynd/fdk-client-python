@@ -32,6 +32,10 @@ class ProductBrand(BaseSchema):
     pass
 
 
+class ProductDepartment(BaseSchema):
+    pass
+
+
 class ProductCategoryMap(BaseSchema):
     pass
 
@@ -555,6 +559,20 @@ class ProductBrand(BaseSchema):
     
 
 
+class ProductDepartment(BaseSchema):
+    # Catalog swagger.json
+
+    
+    uid = fields.Int(required=False)
+    
+    logo = fields.Nested(Media, required=False)
+    
+    slug = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+
+
 class ProductCategoryMap(BaseSchema):
     # Catalog swagger.json
 
@@ -740,6 +758,8 @@ class ProductDetail(BaseSchema):
     price = fields.Nested(ProductListingPrice, required=False)
     
     brand = fields.Nested(ProductBrand, required=False)
+    
+    department = fields.Nested(ProductDepartment, required=False)
     
     teaser_tag = fields.Str(required=False)
     

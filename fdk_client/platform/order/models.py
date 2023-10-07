@@ -3707,6 +3707,8 @@ class ShipmentItemMeta(BaseSchema):
     
     same_store_available = fields.Boolean(required=False, allow_none=True)
     
+    is_self_ship = fields.Boolean(required=False, allow_none=True)
+    
     is_international = fields.Boolean(required=False, allow_none=True)
     
     formatted = fields.Nested(Formatted, required=False)
@@ -4089,6 +4091,10 @@ class ShipmentMeta(BaseSchema):
     # Order swagger.json
 
     
+    tracking_url = fields.Str(required=False, allow_none=True)
+    
+    estimated_delivery_date = fields.Str(required=False, allow_none=True)
+    
     same_store_available = fields.Boolean(required=False)
     
     b2b_buyer_details = fields.Nested(BuyerDetails, required=False)
@@ -4098,6 +4104,8 @@ class ShipmentMeta(BaseSchema):
     debug_info = fields.Nested(DebugInfo, required=False)
     
     return_awb_number = fields.Str(required=False, allow_none=True)
+    
+    is_self_ship = fields.Boolean(required=False, allow_none=True)
     
     box_type = fields.Str(required=False, allow_none=True)
     

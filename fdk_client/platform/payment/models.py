@@ -420,6 +420,18 @@ class RefundSessionResponseSerializer(BaseSchema):
     pass
 
 
+class RefundSourcesPriority(BaseSchema):
+    pass
+
+
+class RefundPriorityResponseSerializer(BaseSchema):
+    pass
+
+
+class RefundPriorityRequestSerializer(BaseSchema):
+    pass
+
+
 
 
 
@@ -2106,6 +2118,44 @@ class RefundSessionResponseSerializer(BaseSchema):
     status = fields.Str(required=False)
     
     currency = fields.Str(required=False)
+    
+
+
+class RefundSourcesPriority(BaseSchema):
+    # Payment swagger.json
+
+    
+    description = fields.Str(required=False)
+    
+    priority = fields.Int(required=False)
+    
+    source = fields.Str(required=False)
+    
+
+
+class RefundPriorityResponseSerializer(BaseSchema):
+    # Payment swagger.json
+
+    
+    configuration = fields.Str(required=False)
+    
+    success = fields.Boolean(required=False)
+    
+    apportion = fields.Boolean(required=False)
+    
+    refund_sources_priority = fields.List(fields.Nested(RefundSourcesPriority, required=False), required=False)
+    
+    message = fields.Str(required=False)
+    
+
+
+class RefundPriorityRequestSerializer(BaseSchema):
+    # Payment swagger.json
+
+    
+    apportion = fields.Boolean(required=False)
+    
+    refund_sources_priority = fields.List(fields.Nested(RefundSourcesPriority, required=False), required=False)
     
 
 

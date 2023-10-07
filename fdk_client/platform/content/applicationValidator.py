@@ -307,9 +307,6 @@ from .models import GenerationEntityType
     
         
         
-    
-    
-        
         
     
     
@@ -997,21 +994,14 @@ class ContentValidator:
          
         
     
-    class deleteAllInjectableTags(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
     class getInjectableTags(BaseSchema):
         
         
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
+        
+        all = fields.Boolean(required=False)
          
         
     
