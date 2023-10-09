@@ -1728,3 +1728,137 @@ class Payment:
 
         return response
     
+    async def getMerchantRefundPriority(self, config_type=None, request_headers:Dict={}):
+        """API to get merchant refund priority
+        :param config_type : configuration for merchant or customer : type string
+        """
+        payload = {}
+        
+        if config_type is not None:
+            payload["config_type"] = config_type
+
+        # Parameter validation
+        schema = PaymentValidator.getMerchantRefundPriority()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund_priority/config/{config_type}", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"examples":{"success":{"summary":"valid company id","value":1},"failed":{"summary":"invalid company id","value":0}},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"examples":{"success":{"summary":"valid app id","value":"64bf81dcc07acacc135733ea"},"failed":{"summary":"invalid app id","value":"123"}},"required":true},{"name":"config_type","in":"path","description":"configuration for merchant or customer","schema":{"type":"string","enum":["merchant","customer","default"]},"examples":{"success":{"summary":"config source valid","value":"merchant"}},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"examples":{"success":{"summary":"valid company id","value":1},"failed":{"summary":"invalid company id","value":0}},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"examples":{"success":{"summary":"valid app id","value":"64bf81dcc07acacc135733ea"},"failed":{"summary":"invalid app id","value":"123"}},"required":true},{"name":"config_type","in":"path","description":"configuration for merchant or customer","schema":{"type":"string","enum":["merchant","customer","default"]},"examples":{"success":{"summary":"config source valid","value":"merchant"}},"required":true}]}""", config_type=config_type)
+        query_string = await create_query_string(config_type=config_type)
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund_priority/config/{config_type}", config_type=config_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import RefundPriorityResponseSerializer
+            schema = RefundPriorityResponseSerializer()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getMerchantRefundPriority")
+                print(e)
+
+        return response
+    
+    async def createMerchantRefundPriority(self, config_type=None, body="", request_headers:Dict={}):
+        """API to update merchant refund priority
+        :param config_type : configuration for merchant or customer : type string
+        """
+        payload = {}
+        
+        if config_type is not None:
+            payload["config_type"] = config_type
+
+        # Parameter validation
+        schema = PaymentValidator.createMerchantRefundPriority()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import RefundPriorityRequestSerializer
+        schema = RefundPriorityRequestSerializer()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund_priority/config/{config_type}", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"examples":{"success":{"summary":"valid company id","value":1},"failed":{"summary":"invalid company id","value":0}},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"examples":{"success":{"summary":"valid app id","value":"64bf81dcc07acacc135733ea"},"failed":{"summary":"invalid app id","value":"123"}},"required":true},{"name":"config_type","in":"path","description":"configuration for merchant or customer","schema":{"type":"string","enum":["merchant","customer","default"]},"examples":{"success":{"summary":"config source valid","value":"merchant"}},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"examples":{"success":{"summary":"valid company id","value":1},"failed":{"summary":"invalid company id","value":0}},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"examples":{"success":{"summary":"valid app id","value":"64bf81dcc07acacc135733ea"},"failed":{"summary":"invalid app id","value":"123"}},"required":true},{"name":"config_type","in":"path","description":"configuration for merchant or customer","schema":{"type":"string","enum":["merchant","customer","default"]},"examples":{"success":{"summary":"config source valid","value":"merchant"}},"required":true}]}""", config_type=config_type)
+        query_string = await create_query_string(config_type=config_type)
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund_priority/config/{config_type}", config_type=config_type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import RefundPriorityResponseSerializer
+            schema = RefundPriorityResponseSerializer()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createMerchantRefundPriority")
+                print(e)
+
+        return response
+    
+    async def updateMerchantRefundPriority(self, config_type=None, body="", request_headers:Dict={}):
+        """API to update merchant refund priority
+        :param config_type : configuration for merchant or customer : type string
+        """
+        payload = {}
+        
+        if config_type is not None:
+            payload["config_type"] = config_type
+
+        # Parameter validation
+        schema = PaymentValidator.updateMerchantRefundPriority()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import RefundPriorityRequestSerializer
+        schema = RefundPriorityRequestSerializer()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund_priority/config/{config_type}", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"examples":{"success":{"summary":"valid company id","value":1},"failed":{"summary":"invalid company id","value":0}},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"examples":{"success":{"summary":"valid app id","value":"64bf81dcc07acacc135733ea"},"failed":{"summary":"invalid app id","value":"123"}},"required":true},{"name":"config_type","in":"path","description":"configuration for merchant or customer","schema":{"type":"string","enum":["merchant","customer","default"]},"examples":{"success":{"summary":"config source valid","value":"merchant"}},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"examples":{"success":{"summary":"valid company id","value":1},"failed":{"summary":"invalid company id","value":0}},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"examples":{"success":{"summary":"valid app id","value":"64bf81dcc07acacc135733ea"},"failed":{"summary":"invalid app id","value":"123"}},"required":true},{"name":"config_type","in":"path","description":"configuration for merchant or customer","schema":{"type":"string","enum":["merchant","customer","default"]},"examples":{"success":{"summary":"config source valid","value":"merchant"}},"required":true}]}""", config_type=config_type)
+        query_string = await create_query_string(config_type=config_type)
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund_priority/config/{config_type}", config_type=config_type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import RefundPriorityResponseSerializer
+            schema = RefundPriorityResponseSerializer()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateMerchantRefundPriority")
+                print(e)
+
+        return response
+    

@@ -45,6 +45,11 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+        
         
     
     
@@ -54,10 +59,10 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
         
         
+    
+    
         
         
 
@@ -132,6 +137,17 @@ class FileStorageValidator:
          
         
     
+    class updateHtmlTemplate(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
     class getDefaultHtmlTemplate(BaseSchema):
         
         
@@ -154,15 +170,6 @@ class FileStorageValidator:
          
         
     
-    class previewTemplate(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
     class getDefaultPdfTemplate(BaseSchema):
         
         
@@ -173,6 +180,15 @@ class FileStorageValidator:
         pdf_type_id = fields.Int(required=False)
         
         format = fields.Str(required=False)
+         
+        
+    
+    class generatePaymentReceipt(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
          
         
     

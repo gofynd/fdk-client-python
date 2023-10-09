@@ -25,6 +25,7 @@ class User:
             "sendResetPasswordEmail": "/service/application/user/authentication/v1.0/login/password/reset",
             "sendResetPasswordMobile": "/service/application/user/authentication/v1.0/login/password/mobile/reset",
             "forgotPassword": "/service/application/user/authentication/v1.0/login/password/reset/forgot",
+            "resetForgotPassword": "/service/application/user/authentication/v1.0/login/password/forgot",
             "sendResetToken": "/service/application/user/authentication/v1.0/login/password/reset/token",
             "loginWithToken": "/service/application/user/authentication/v1.0/login/token",
             "registerWithForm": "/service/application/user/authentication/v1.0/register/form",
@@ -35,9 +36,13 @@ class User:
             "deleteUser": "/service/application/user/authentication/v1.0/delete",
             "logout": "/service/application/user/authentication/v1.0/logout",
             "sendOTPOnMobile": "/service/application/user/authentication/v1.0/otp/mobile/send",
+            "sendForgotOTPOnMobile": "/service/application/user/authentication/v1.0/otp/forgot/mobile/send",
             "verifyMobileOTP": "/service/application/user/authentication/v1.0/otp/mobile/verify",
+            "verifyMobileForgotOTP": "/service/application/user/authentication/v1.0/otp/forgot/mobile/verify",
             "sendOTPOnEmail": "/service/application/user/authentication/v1.0/otp/email/send",
+            "sendForgotOTPOnEmail": "/service/application/user/authentication/v1.0/otp/forgot/email/send",
             "verifyEmailOTP": "/service/application/user/authentication/v1.0/otp/email/verify",
+            "verifyEmailForgotOTP": "/service/application/user/authentication/v1.0/otp/forgot/email/verify",
             "getLoggedInUser": "/service/application/user/authentication/v1.0/session",
             "getListOfActiveSessions": "/service/application/user/authentication/v1.0/sessions",
             "getPlatformConfig": "/service/application/user/platform/v1.0/config",
@@ -533,6 +538,51 @@ class User:
 
         return response
     
+    async def resetForgotPassword(self, body="", request_headers:Dict={}):
+        """Use this API to reset a password using the code sent on email or SMS.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = UserValidator.resetForgotPassword()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import ForgotPasswordRequestSchema
+        schema = ForgotPasswordRequestSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(api_url=self._urls["resetForgotPassword"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        query_string = await create_query_string()
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["resetForgotPassword"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/login/password/forgot", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResetForgotPasswordSuccess
+            schema = ResetForgotPasswordSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for resetForgotPassword")
+                print(e)
+
+        return response
+    
     async def sendResetToken(self, body="", request_headers:Dict={}):
         """Use this API to send code to reset password.
         """
@@ -981,6 +1031,54 @@ class User:
 
         return response
     
+    async def sendForgotOTPOnMobile(self, platform=None, body="", request_headers:Dict={}):
+        """Use this API to send an Forgot OTP to a mobile number.
+        :param platform : ID of the application : type string
+        """
+        payload = {}
+        
+        if platform is not None:
+            payload["platform"] = platform
+
+        # Parameter validation
+        schema = UserValidator.sendForgotOTPOnMobile()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import SendMobileForgotOtpRequestSchema
+        schema = SendMobileForgotOtpRequestSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(api_url=self._urls["sendForgotOTPOnMobile"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", platform=platform)
+        query_string = await create_query_string(platform=platform)
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["sendForgotOTPOnMobile"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/otp/forgot/mobile/send", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OtpSuccess
+            schema = OtpSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for sendForgotOTPOnMobile")
+                print(e)
+
+        return response
+    
     async def verifyMobileOTP(self, platform=None, body="", request_headers:Dict={}):
         """Use this API to verify the OTP received on a mobile number.
         :param platform : ID of the application : type string
@@ -1025,6 +1123,54 @@ class User:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for verifyMobileOTP")
+                print(e)
+
+        return response
+    
+    async def verifyMobileForgotOTP(self, platform=None, body="", request_headers:Dict={}):
+        """Use this API to verify the Forgot OTP received on a mobile number.
+        :param platform : ID of the application : type string
+        """
+        payload = {}
+        
+        if platform is not None:
+            payload["platform"] = platform
+
+        # Parameter validation
+        schema = UserValidator.verifyMobileForgotOTP()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import VerifyMobileForgotOtpRequestSchema
+        schema = VerifyMobileForgotOtpRequestSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(api_url=self._urls["verifyMobileForgotOTP"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", platform=platform)
+        query_string = await create_query_string(platform=platform)
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["verifyMobileForgotOTP"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/otp/forgot/mobile/verify", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import VerifyForgotOtpSuccess
+            schema = VerifyForgotOtpSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for verifyMobileForgotOTP")
                 print(e)
 
         return response
@@ -1077,6 +1223,54 @@ class User:
 
         return response
     
+    async def sendForgotOTPOnEmail(self, platform=None, body="", request_headers:Dict={}):
+        """Use this API to send an Forgot OTP to an email ID.
+        :param platform : ID of the application : type string
+        """
+        payload = {}
+        
+        if platform is not None:
+            payload["platform"] = platform
+
+        # Parameter validation
+        schema = UserValidator.sendForgotOTPOnEmail()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import SendEmailForgotOtpRequestSchema
+        schema = SendEmailForgotOtpRequestSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(api_url=self._urls["sendForgotOTPOnEmail"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", platform=platform)
+        query_string = await create_query_string(platform=platform)
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["sendForgotOTPOnEmail"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/otp/forgot/email/send", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EmailOtpSuccess
+            schema = EmailOtpSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for sendForgotOTPOnEmail")
+                print(e)
+
+        return response
+    
     async def verifyEmailOTP(self, platform=None, body="", request_headers:Dict={}):
         """Use this API to verify the OTP received on an email ID.
         :param platform : ID of the application : type string
@@ -1121,6 +1315,54 @@ class User:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for verifyEmailOTP")
+                print(e)
+
+        return response
+    
+    async def verifyEmailForgotOTP(self, platform=None, body="", request_headers:Dict={}):
+        """Use this API to verify the Forgot OTP received on an email ID.
+        :param platform : ID of the application : type string
+        """
+        payload = {}
+        
+        if platform is not None:
+            payload["platform"] = platform
+
+        # Parameter validation
+        schema = UserValidator.verifyEmailForgotOTP()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import VerifyEmailForgotOtpRequestSchema
+        schema = VerifyEmailForgotOtpRequestSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(api_url=self._urls["verifyEmailForgotOTP"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", platform=platform)
+        query_string = await create_query_string(platform=platform)
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["verifyEmailForgotOTP"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/otp/forgot/email/verify", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import VerifyForgotOtpSuccess
+            schema = VerifyForgotOtpSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for verifyEmailForgotOTP")
                 print(e)
 
         return response

@@ -555,7 +555,7 @@ class OrderValidator:
         
         status_override_lane = fields.Boolean(required=False)
         
-        time_to_dispatch = fields.Float(required=False)
+        time_to_dispatch = fields.Int(required=False)
         
         search_type = fields.Str(required=False)
         
@@ -656,7 +656,7 @@ class OrderValidator:
         
         tags = fields.Str(required=False)
         
-        time_to_dispatch = fields.Str(required=False)
+        time_to_dispatch = fields.Int(required=False)
         
         payment_methods = fields.Str(required=False)
         
@@ -679,7 +679,7 @@ class OrderValidator:
         
         bag_status = fields.Str(required=False)
         
-        time_to_dispatch = fields.Str(required=False)
+        time_to_dispatch = fields.Int(required=False)
         
         payment_methods = fields.Str(required=False)
         

@@ -39,6 +39,7 @@ from ..ApplicationModel import BaseSchema
     
     
     
+    
         
     
     
@@ -46,6 +47,18 @@ from ..ApplicationModel import BaseSchema
     
     
     
+    
+    
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
     
     
         
@@ -165,6 +178,11 @@ class UserValidator:
         pass 
         
     
+    class resetForgotPassword(BaseSchema):
+        
+        pass 
+        
+    
     class sendResetToken(BaseSchema):
         
         pass 
@@ -219,7 +237,21 @@ class UserValidator:
          
         
     
+    class sendForgotOTPOnMobile(BaseSchema):
+        
+        
+        platform = fields.Str(required=False)
+         
+        
+    
     class verifyMobileOTP(BaseSchema):
+        
+        
+        platform = fields.Str(required=False)
+         
+        
+    
+    class verifyMobileForgotOTP(BaseSchema):
         
         
         platform = fields.Str(required=False)
@@ -233,7 +265,21 @@ class UserValidator:
          
         
     
+    class sendForgotOTPOnEmail(BaseSchema):
+        
+        
+        platform = fields.Str(required=False)
+         
+        
+    
     class verifyEmailOTP(BaseSchema):
+        
+        
+        platform = fields.Str(required=False)
+         
+        
+    
+    class verifyEmailForgotOTP(BaseSchema):
         
         
         platform = fields.Str(required=False)

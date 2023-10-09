@@ -8,10 +8,6 @@ from ..ApplicationModel import BaseSchema
 
 
 
-class FailedResponse(BaseSchema):
-    pass
-
-
 class CDN(BaseSchema):
     pass
 
@@ -24,7 +20,15 @@ class StartResponse(BaseSchema):
     pass
 
 
+class Params(BaseSchema):
+    pass
+
+
 class StartRequest(BaseSchema):
+    pass
+
+
+class CreatedBy(BaseSchema):
     pass
 
 
@@ -45,14 +49,6 @@ class SignUrlRequest(BaseSchema):
 
 
 
-
-
-class FailedResponse(BaseSchema):
-    # FileStorage swagger.json
-
-    
-    message = fields.Str(required=False)
-    
 
 
 class CDN(BaseSchema):
@@ -103,6 +99,14 @@ class StartResponse(BaseSchema):
     
 
 
+class Params(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    subpath = fields.Str(required=False)
+    
+
+
 class StartRequest(BaseSchema):
     # FileStorage swagger.json
 
@@ -115,7 +119,15 @@ class StartRequest(BaseSchema):
     
     tags = fields.List(fields.Str(required=False), required=False)
     
-    params = fields.Dict(required=False)
+    params = fields.Nested(Params, required=False)
+    
+
+
+class CreatedBy(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    username = fields.Str(required=False)
     
 
 
@@ -148,6 +160,8 @@ class CompleteResponse(BaseSchema):
     created_on = fields.Str(required=False)
     
     modified_on = fields.Str(required=False)
+    
+    created_by = fields.Nested(CreatedBy, required=False)
     
 
 

@@ -168,6 +168,14 @@ class UpdateUserGroupSchema(BaseSchema):
     pass
 
 
+class PartialUserGroupUpdateSchema(BaseSchema):
+    pass
+
+
+class UserGroupUpdateData(BaseSchema):
+    pass
+
+
 class UpdateUserRequestSchema(BaseSchema):
     pass
 
@@ -676,6 +684,36 @@ class UpdateUserGroupSchema(BaseSchema):
     description = fields.Str(required=False)
     
     file_url = fields.Str(required=False)
+    
+
+
+class PartialUserGroupUpdateSchema(BaseSchema):
+    # User swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+    file_url = fields.Str(required=False)
+    
+    user_data = fields.List(fields.Nested(UserGroupUpdateData, required=False), required=False)
+    
+
+
+class UserGroupUpdateData(BaseSchema):
+    # User swagger.json
+
+    
+    user_id = fields.Str(required=False)
+    
+    phone_number = fields.Str(required=False)
+    
+    email = fields.Str(required=False)
+    
+    action = fields.Str(required=False)
     
 
 

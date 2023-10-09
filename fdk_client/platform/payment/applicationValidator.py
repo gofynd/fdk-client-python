@@ -203,6 +203,21 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
 
 class PaymentValidator:
     
@@ -631,6 +646,39 @@ class PaymentValidator:
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
+         
+        
+    
+    class getMerchantRefundPriority(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        config_type = fields.Str(required=False)
+         
+        
+    
+    class createMerchantRefundPriority(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        config_type = fields.Str(required=False)
+         
+        
+    
+    class updateMerchantRefundPriority(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        config_type = fields.Str(required=False)
          
         
     
