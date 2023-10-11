@@ -5491,7 +5491,7 @@ class ProductBulkRequestList(BaseSchema):
     # Catalog swagger.json
 
     
-    items = fields.Nested(ProductBulkRequest, required=False)
+    items = fields.List(fields.Nested(ProductBulkRequest, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
     
