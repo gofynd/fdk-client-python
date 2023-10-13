@@ -5455,7 +5455,7 @@ class ProductBulkRequest(BaseSchema):
     
     cancelled = fields.Int(required=False)
     
-    cancelled_records = fields.List(fields.Str(required=False), required=False)
+    cancelled_records = fields.List(fields.Dict(required=False), required=False)
     
     company_id = fields.Int(required=False)
     
@@ -5465,7 +5465,7 @@ class ProductBulkRequest(BaseSchema):
     
     failed = fields.Int(required=False)
     
-    failed_records = fields.List(fields.Str(required=False), required=False)
+    failed_records = fields.List(fields.Dict(required=False), required=False)
     
     file_path = fields.Str(required=False)
     

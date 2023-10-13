@@ -6057,6 +6057,7 @@ We are processing the request!
  | meta | HashMap<String,Any>? |  yes  |  |
  | priority | Int? |  yes  |  |
  | locationId | Int |  no  |  |
+ | orderType | String? |  yes  |  |
 
 ---
 
@@ -8031,6 +8032,7 @@ We are processing the request!
  | shipmentId | String? |  yes  |  |
  | status | String? |  yes  |  |
  | displayName | String? |  yes  |  |
+ | currentShipmentStatus | String? |  yes  |  |
 
 ---
 
