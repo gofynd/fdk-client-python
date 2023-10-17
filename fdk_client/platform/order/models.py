@@ -2291,8 +2291,6 @@ class Shipment(BaseSchema):
     
     location_id = fields.Int(required=False)
     
-    order_type = fields.Str(required=False)
-    
 
 
 class ShippingInfo(BaseSchema):
@@ -4618,8 +4616,6 @@ class ShipmentStatusData(BaseSchema):
     status = fields.Str(required=False, allow_none=True)
     
     display_name = fields.Str(required=False, allow_none=True)
-    
-    current_shipment_status = fields.Str(required=False, allow_none=True)
     
 
 

@@ -423,6 +423,8 @@ class UserSchema(BaseSchema):
     
     updated_at = fields.Str(required=False)
     
+    external_id = fields.Str(required=False)
+    
 
 
 class PhoneNumber(BaseSchema):

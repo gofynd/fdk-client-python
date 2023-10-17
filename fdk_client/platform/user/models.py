@@ -399,6 +399,8 @@ class CreateUserRequestSchema(BaseSchema):
     
     meta = fields.Dict(required=False)
     
+    external_id = fields.Str(required=False)
+    
 
 
 class CreateUserResponseSchema(BaseSchema):
@@ -802,6 +804,8 @@ class UserSchema(BaseSchema):
     created_at = fields.Str(required=False)
     
     updated_at = fields.Str(required=False)
+    
+    external_id = fields.Str(required=False)
     
 
 

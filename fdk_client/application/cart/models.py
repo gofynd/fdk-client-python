@@ -1509,7 +1509,7 @@ class CustomerDetails(BaseSchema):
     # Cart swagger.json
 
     
-    email = fields.Str(required=False)
+    email = fields.Str(required=False, allow_none=True)
     
     mobile = fields.Str(required=False)
     
@@ -1539,11 +1539,11 @@ class CartCheckoutDetailRequest(BaseSchema):
     
     custom_meta = fields.List(fields.Nested(CartCheckoutCustomMeta, required=False), required=False)
     
-    customer_details = fields.Dict(required=False)
+    customer_details = fields.Dict(required=False, allow_none=True)
     
     merchant_code = fields.Str(required=False)
     
-    id = fields.Str(required=False)
+    id = fields.Str(required=False, allow_none=True)
     
     payment_auto_confirm = fields.Boolean(required=False)
     
@@ -1553,7 +1553,7 @@ class CartCheckoutDetailRequest(BaseSchema):
     
     address_id = fields.Str(required=False)
     
-    callback_url = fields.Str(required=False)
+    callback_url = fields.Str(required=False, allow_none=True)
     
     delivery_address = fields.Dict(required=False)
     
@@ -1561,15 +1561,15 @@ class CartCheckoutDetailRequest(BaseSchema):
     
     order_type = fields.Str(required=False)
     
-    ordering_store = fields.Int(required=False)
+    ordering_store = fields.Int(required=False, allow_none=True)
     
     extra_meta = fields.Dict(required=False)
     
-    payment_identifier = fields.Str(required=False)
+    payment_identifier = fields.Str(required=False, allow_none=True)
     
     billing_address = fields.Dict(required=False)
     
-    payment_params = fields.Dict(required=False)
+    payment_params = fields.Dict(required=False, allow_none=True)
     
     billing_address_id = fields.Str(required=False)
     
