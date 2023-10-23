@@ -368,6 +368,10 @@ class BillingInfo(BaseSchema):
     pass
 
 
+class UserInfo(BaseSchema):
+    pass
+
+
 class TaxInfo(BaseSchema):
     pass
 
@@ -2291,6 +2295,8 @@ class Shipment(BaseSchema):
     
     location_id = fields.Int(required=False)
     
+    order_type = fields.Str(required=False)
+    
 
 
 class ShippingInfo(BaseSchema):
@@ -2399,6 +2405,26 @@ class BillingInfo(BaseSchema):
     
 
 
+class UserInfo(BaseSchema):
+    # Order swagger.json
+
+    
+    user_id = fields.Str(required=False)
+    
+    user_type = fields.Str(required=False)
+    
+    email = fields.Str(required=False)
+    
+    gender = fields.Str(required=False)
+    
+    first_name = fields.Str(required=False)
+    
+    last_name = fields.Str(required=False)
+    
+    mobile = fields.Str(required=False)
+    
+
+
 class TaxInfo(BaseSchema):
     # Order swagger.json
 
@@ -2466,6 +2492,8 @@ class CreateOrderAPI(BaseSchema):
     config = fields.Dict(required=False)
     
     payment_info = fields.Nested(PaymentInfo, required=False)
+    
+    user_info = fields.Nested(UserInfo, required=False)
     
 
 
@@ -4616,6 +4644,8 @@ class ShipmentStatusData(BaseSchema):
     status = fields.Str(required=False, allow_none=True)
     
     display_name = fields.Str(required=False, allow_none=True)
+    
+    current_shipment_status = fields.Str(required=False, allow_none=True)
     
 
 

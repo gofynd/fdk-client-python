@@ -225,6 +225,8 @@ class FileJobResponse(BaseSchema):
     
     _id = fields.Str(required=False)
     
+    file_path = fields.Str(required=False)
+    
 
 
 class FileJobRequest(BaseSchema):

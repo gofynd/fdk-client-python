@@ -1154,6 +1154,34 @@ class ReturnConfigResponse(BaseSchema):
     pass
 
 
+class Sitemap(BaseSchema):
+    pass
+
+
+class ApplicationItemSeoAction(BaseSchema):
+    pass
+
+
+class ApplicationItemSeoBreadcrumbs(BaseSchema):
+    pass
+
+
+class ApplicationItemSeoMetaTagItem(BaseSchema):
+    pass
+
+
+class ApplicationItemSeoMetaTags(BaseSchema):
+    pass
+
+
+class Metatags(BaseSchema):
+    pass
+
+
+class SizePromotionThreshold(BaseSchema):
+    pass
+
+
 class SEOData(BaseSchema):
     pass
 
@@ -1582,6 +1610,8 @@ class ApplicationItemMeta(BaseSchema):
     moq = fields.Nested(ApplicationItemMOQ, required=False)
     
     seo = fields.Nested(ApplicationItemSEO, required=False)
+    
+    size_promotion_threshold = fields.Nested(SizePromotionThreshold, required=False)
     
 
 
@@ -6405,6 +6435,76 @@ class ReturnConfigResponse(BaseSchema):
     
 
 
+class Sitemap(BaseSchema):
+    # Catalog swagger.json
+
+    
+    priority = fields.Float(required=False)
+    
+    frequency = fields.Str(required=False)
+    
+
+
+class ApplicationItemSeoAction(BaseSchema):
+    # Catalog swagger.json
+
+    
+    page = fields.Dict(required=False)
+    
+    type = fields.Str(required=False)
+    
+
+
+class ApplicationItemSeoBreadcrumbs(BaseSchema):
+    # Catalog swagger.json
+
+    
+    url = fields.Str(required=False)
+    
+    action = fields.List(fields.Nested(ApplicationItemSeoAction, required=False), required=False)
+    
+
+
+class ApplicationItemSeoMetaTagItem(BaseSchema):
+    # Catalog swagger.json
+
+    
+    key = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
+    
+
+
+class ApplicationItemSeoMetaTags(BaseSchema):
+    # Catalog swagger.json
+
+    
+    title = fields.Str(required=False)
+    
+    items = fields.List(fields.Nested(ApplicationItemSeoMetaTagItem, required=False), required=False)
+    
+
+
+class Metatags(BaseSchema):
+    # Catalog swagger.json
+
+    
+    title = fields.Str(required=False)
+    
+    items = fields.List(fields.Nested(ApplicationItemSeoMetaTags, required=False), required=False)
+    
+
+
+class SizePromotionThreshold(BaseSchema):
+    # Catalog swagger.json
+
+    
+    threshold_type = fields.Str(required=False)
+    
+    threshold_value = fields.Int(required=False)
+    
+
+
 class SEOData(BaseSchema):
     # Catalog swagger.json
 
@@ -6412,6 +6512,12 @@ class SEOData(BaseSchema):
     description = fields.Str(required=False)
     
     title = fields.Str(required=False)
+    
+    sitemap = fields.Nested(Sitemap, required=False)
+    
+    breadcrumbs = fields.List(fields.Nested(ApplicationItemSeoBreadcrumbs, required=False), required=False)
+    
+    meta_tags = fields.List(fields.Nested(Metatags, required=False), required=False)
     
 
 
@@ -6474,6 +6580,12 @@ class SeoDetail(BaseSchema):
     description = fields.Str(required=False)
     
     title = fields.Str(required=False)
+    
+    sitemap = fields.Dict(required=False)
+    
+    breadcrumbs = fields.List(fields.Nested(ApplicationItemSeoBreadcrumbs, required=False), required=False)
+    
+    meta_tags = fields.List(fields.Nested(Metatags, required=False), required=False)
     
 
 

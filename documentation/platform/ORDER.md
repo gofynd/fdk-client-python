@@ -2790,7 +2790,7 @@ We are processing the report!
 
 ```python
 try:
-    result = await platformClient.order.getOrderById(orderId=orderId)
+    result = await platformClient.order.getOrderById(orderId=orderId, myOrders=myOrders)
     # use result
 except Exception as e:
     print(e)
@@ -2802,7 +2802,8 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| orderId | String | yes |  |  
+| orderId | String | yes |  |   
+| myOrders | Boolean? | no |  |  
 
 
 
@@ -6057,6 +6058,7 @@ We are processing the request!
  | meta | HashMap<String,Any>? |  yes  |  |
  | priority | Int? |  yes  |  |
  | locationId | Int |  no  |  |
+ | orderType | String? |  yes  |  |
 
 ---
 
@@ -6130,6 +6132,23 @@ We are processing the request!
 
  
  
+ #### [UserInfo](#UserInfo)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | userId | String? |  yes  |  |
+ | userType | String? |  yes  |  |
+ | email | String |  no  |  |
+ | gender | String? |  yes  |  |
+ | firstName | String |  no  |  |
+ | lastName | String? |  yes  |  |
+ | mobile | String |  no  |  |
+
+---
+
+
+ 
+ 
  #### [TaxInfo](#TaxInfo)
 
  | Properties | Type | Nullable | Description |
@@ -6187,6 +6206,7 @@ We are processing the request!
  | taxInfo | [TaxInfo](#TaxInfo)? |  yes  |  |
  | config | HashMap<String,Any>? |  yes  |  |
  | paymentInfo | [PaymentInfo](#PaymentInfo) |  no  |  |
+ | userInfo | [UserInfo](#UserInfo) |  no  |  |
 
 ---
 
@@ -8031,6 +8051,7 @@ We are processing the request!
  | shipmentId | String? |  yes  |  |
  | status | String? |  yes  |  |
  | displayName | String? |  yes  |  |
+ | currentShipmentStatus | String? |  yes  |  |
 
 ---
 
