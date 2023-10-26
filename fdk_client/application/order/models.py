@@ -543,6 +543,8 @@ class Item(BaseSchema):
     
     size = fields.Str(required=False)
     
+    attributes = fields.Dict(required=False)
+    
 
 
 class AppliedFreeArticles(BaseSchema):

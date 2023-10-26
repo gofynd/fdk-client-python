@@ -388,15 +388,15 @@ class MerchnatPaymentModeRequest(BaseSchema):
     pass
 
 
+class OrderDetail(BaseSchema):
+    pass
+
+
 class AddressDetail(BaseSchema):
     pass
 
 
 class PaymentSessionDetail(BaseSchema):
-    pass
-
-
-class OrderDetail(BaseSchema):
     pass
 
 
@@ -1913,47 +1913,65 @@ class MerchnatPaymentModeRequest(BaseSchema):
     
 
 
+class OrderDetail(BaseSchema):
+    # Payment swagger.json
+
+    
+    gid = fields.Str(required=False)
+    
+    amount = fields.Int(required=False)
+    
+    status = fields.Str(required=False)
+    
+    currency = fields.Str(required=False)
+    
+    aggregator_order_details = fields.Dict(required=False)
+    
+    aggregator = fields.Str(required=False)
+    
+
+
 class AddressDetail(BaseSchema):
     # Payment swagger.json
 
     
-    country_iso_code = fields.Str(required=False)
-    
     google_map_point = fields.Dict(required=False)
-    
-    country = fields.Str(required=False)
-    
-    email = fields.Str(required=False)
-    
-    area_code = fields.Str(required=False)
-    
-    city = fields.Str(required=False)
-    
-    phone = fields.Str(required=False)
-    
-    expire_at = fields.Str(required=False)
-    
-    address = fields.Str(required=False)
-    
-    g_address_id = fields.Str(required=False)
-    
-    tags = fields.List(fields.Dict(required=False), required=False)
-    
-    name = fields.Str(required=False)
-    
-    state = fields.Str(required=False)
     
     landmark = fields.Str(required=False)
     
+    phone = fields.Str(required=False)
+    
+    country_iso_code = fields.Str(required=False)
+    
+    area_code = fields.Str(required=False)
+    
+    country = fields.Str(required=False)
+    
+    expire_at = fields.Str(required=False)
+    
+    geo_location = fields.Dict(required=False)
+    
+    state = fields.Str(required=False)
+    
     area = fields.Str(required=False)
+    
+    g_address_id = fields.Str(required=False)
     
     area_code_slug = fields.Str(required=False)
     
-    address_type = fields.Str(required=False)
-    
     country_phone_code = fields.Str(required=False)
     
-    geo_location = fields.Dict(required=False)
+    name = fields.Str(required=False)
+    
+    address_type = fields.Str(required=False)
+    
+    address = fields.Str(required=False)
+    
+    email = fields.Str(required=False)
+    
+    city = fields.Str(required=False)
+    
+    tags = fields.List(fields.Dict(required=False), required=False)
     
 
 
@@ -1961,65 +1979,47 @@ class PaymentSessionDetail(BaseSchema):
     # Payment swagger.json
 
     
-    aggregator_order_id = fields.Str(required=False)
-    
-    shipping_address = fields.Nested(AddressDetail, required=False)
-    
-    amount_captured = fields.Int(required=False)
-    
-    amount_refunded = fields.Int(required=False)
-    
-    aggregator_customer_id = fields.Str(required=False)
-    
-    cancel_url = fields.Str(required=False)
-    
     payment_id = fields.Str(required=False)
     
-    payment_methods = fields.List(fields.Dict(required=False), required=False)
+    mode = fields.Str(required=False)
     
-    created = fields.Str(required=False)
+    amount = fields.Int(required=False)
+    
+    success_url = fields.Str(required=False)
+    
+    shipping_address = fields.Nested(AddressDetail, required=False)
     
     g_user_id = fields.Str(required=False)
     
     currency = fields.Str(required=False)
     
+    merchant_locale = fields.Str(required=False)
+    
     locale = fields.Str(required=False)
+    
+    aggregator_order_id = fields.Str(required=False)
     
     gid = fields.Str(required=False)
     
-    amount = fields.Int(required=False)
+    cancel_url = fields.Str(required=False)
     
-    billing_address = fields.Nested(AddressDetail, required=False)
-    
-    success_url = fields.Str(required=False)
-    
-    kind = fields.Str(required=False)
-    
-    mode = fields.Str(required=False)
-    
-    status = fields.Str(required=False)
-    
-    merchant_locale = fields.Str(required=False)
+    amount_refunded = fields.Int(required=False)
     
     captured = fields.Boolean(required=False)
     
-
-
-class OrderDetail(BaseSchema):
-    # Payment swagger.json
-
-    
-    gid = fields.Str(required=False)
-    
-    aggregator = fields.Str(required=False)
-    
-    amount = fields.Int(required=False)
-    
-    aggregator_order_details = fields.Dict(required=False)
+    created = fields.Str(required=False)
     
     status = fields.Str(required=False)
     
-    currency = fields.Str(required=False)
+    kind = fields.Str(required=False)
+    
+    aggregator_customer_id = fields.Str(required=False)
+    
+    payment_methods = fields.List(fields.Dict(required=False), required=False)
+    
+    billing_address = fields.Nested(AddressDetail, required=False)
+    
+    amount_captured = fields.Int(required=False)
     
 
 
@@ -2027,17 +2027,19 @@ class PaymentSessionRequestSerializer(BaseSchema):
     # Payment swagger.json
 
     
+    meta = fields.Dict(required=False)
+    
     gid = fields.Str(required=False)
+    
+    order_details = fields.Nested(OrderDetail, required=False)
+    
+    status = fields.Str(required=False)
+    
+    currency = fields.Str(required=False)
     
     payment_details = fields.List(fields.Nested(PaymentSessionDetail, required=False), required=False)
     
     total_amount = fields.Int(required=False)
-    
-    status = fields.Str(required=False)
-    
-    order_details = fields.Nested(OrderDetail, required=False)
-    
-    currency = fields.Str(required=False)
     
 
 
@@ -2049,11 +2051,11 @@ class PaymentSessionResponseSerializer(BaseSchema):
     
     platform_transaction_details = fields.List(fields.Dict(required=False), required=False)
     
-    total_amount = fields.Int(required=False)
-    
     status = fields.Str(required=False)
     
     currency = fields.Str(required=False)
+    
+    total_amount = fields.Int(required=False)
     
 
 
@@ -2063,27 +2065,27 @@ class RefundSessionDetail(BaseSchema):
     
     refund_utr = fields.Str(required=False)
     
-    receipt_number = fields.Str(required=False)
-    
-    balance_transaction = fields.Str(required=False)
+    request_id = fields.Str(required=False)
     
     payment_id = fields.Str(required=False)
     
-    created = fields.Str(required=False)
-    
-    request_id = fields.Str(required=False)
-    
-    transfer_reversal = fields.Str(required=False)
-    
     amount = fields.Int(required=False)
+    
+    reason = fields.Str(required=False)
     
     status = fields.Str(required=False)
     
+    created = fields.Str(required=False)
+    
     source_transfer_reversal = fields.Str(required=False)
+    
+    receipt_number = fields.Str(required=False)
     
     currency = fields.Str(required=False)
     
-    reason = fields.Str(required=False)
+    transfer_reversal = fields.Str(required=False)
+    
+    balance_transaction = fields.Str(required=False)
     
 
 
@@ -2091,17 +2093,19 @@ class RefundSessionRequestSerializer(BaseSchema):
     # Payment swagger.json
 
     
+    meta = fields.Dict(required=False)
+    
     gid = fields.Str(required=False)
-    
-    payment_details = fields.Nested(PaymentSessionDetail, required=False)
-    
-    total_amount = fields.Int(required=False)
-    
-    refund_details = fields.List(fields.Nested(RefundSessionDetail, required=False), required=False)
     
     status = fields.Str(required=False)
     
     currency = fields.Str(required=False)
+    
+    payment_details = fields.Nested(PaymentSessionDetail, required=False)
+    
+    refund_details = fields.List(fields.Nested(RefundSessionDetail, required=False), required=False)
+    
+    total_amount = fields.Int(required=False)
     
 
 
@@ -2109,15 +2113,15 @@ class RefundSessionResponseSerializer(BaseSchema):
     # Payment swagger.json
 
     
-    total_refund_amount = fields.Int(required=False)
-    
     gid = fields.Str(required=False)
-    
-    platform_refund_details = fields.List(fields.Dict(required=False), required=False)
     
     status = fields.Str(required=False)
     
     currency = fields.Str(required=False)
+    
+    platform_refund_details = fields.List(fields.Dict(required=False), required=False)
+    
+    total_refund_amount = fields.Int(required=False)
     
 
 

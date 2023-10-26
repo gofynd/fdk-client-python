@@ -3755,6 +3755,8 @@ class PickupStoreDetail(BaseSchema):
     
     id = fields.Int(required=False)
     
+    store_manager_name = fields.Str(required=False)
+    
     name = fields.Str(required=False)
     
     store_code = fields.Str(required=False)

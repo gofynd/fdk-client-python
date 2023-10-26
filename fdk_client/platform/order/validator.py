@@ -169,6 +169,7 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
     
     
         
@@ -624,6 +625,8 @@ class OrderValidator:
         company_id = fields.Int(required=False)
         
         order_id = fields.Str(required=False)
+        
+        my_orders = fields.Boolean(required=False)
          
         
     

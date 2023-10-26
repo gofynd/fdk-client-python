@@ -52,6 +52,10 @@ class SessionDeleteResponseSchema(BaseSchema):
     pass
 
 
+class SessionsDeleteResponseSchema(BaseSchema):
+    pass
+
+
 class AuthenticationApiErrorSchema(BaseSchema):
     pass
 
@@ -305,7 +309,19 @@ class SessionDeleteResponseSchema(BaseSchema):
     # User swagger.json
 
     
-    items = fields.List(fields.Str(required=False), required=False)
+    user_id = fields.Str(required=False)
+    
+    session_id = fields.Str(required=False)
+    
+
+
+class SessionsDeleteResponseSchema(BaseSchema):
+    # User swagger.json
+
+    
+    user_id = fields.Str(required=False)
+    
+    session_ids = fields.List(fields.Str(required=False), required=False)
     
 
 
@@ -398,6 +414,8 @@ class CreateUserRequestSchema(BaseSchema):
     username = fields.Str(required=False)
     
     meta = fields.Dict(required=False)
+    
+    external_id = fields.Str(required=False)
     
 
 
@@ -802,6 +820,8 @@ class UserSchema(BaseSchema):
     created_at = fields.Str(required=False)
     
     updated_at = fields.Str(required=False)
+    
+    external_id = fields.Str(required=False)
     
 
 

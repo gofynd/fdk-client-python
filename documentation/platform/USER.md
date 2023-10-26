@@ -729,10 +729,8 @@ Success. Refer `SessionDeleteResponseSchema` for more details.
 ```json
 {
   "value": {
-    "items": [
-      "sess:123",
-      "sess:456"
-    ]
+    "user_id": "61f02c3dcc701256044ed6c0",
+    "session_id": "sess:123"
   }
 }
 ```
@@ -865,9 +863,9 @@ Use this API to Delete a list of session of customers who have registered in the
 
 
 
-[SessionDeleteResponseSchema](#SessionDeleteResponseSchema)
+[SessionsDeleteResponseSchema](#SessionsDeleteResponseSchema)
 
-Success. Refer `SessionDeleteResponseSchema` for more details.
+Success. Refer `SessionsDeleteResponseSchema` for more details.
 
 
 
@@ -882,7 +880,8 @@ Success. Refer `SessionDeleteResponseSchema` for more details.
 ```json
 {
   "value": {
-    "items": [
+    "user_id": "61f02c3dcc701256044ed6c0",
+    "session_ids": [
       "sess:123",
       "sess:456"
     ]
@@ -1674,7 +1673,20 @@ Success. returns updated User Group. `UserGroupResponseSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | items | ArrayList<String>? |  yes  |  |
+ | userId | String? |  yes  |  |
+ | sessionId | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [SessionsDeleteResponseSchema](#SessionsDeleteResponseSchema)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | userId | String? |  yes  |  |
+ | sessionIds | ArrayList<String>? |  yes  |  |
 
 ---
 
@@ -1763,6 +1775,7 @@ Success. returns updated User Group. `UserGroupResponseSchema` for more details.
  | gender | String? |  yes  |  |
  | username | String |  no  |  |
  | meta | HashMap<String,Any>? |  yes  |  |
+ | externalId | String? |  yes  |  |
 
 ---
 
@@ -2168,6 +2181,7 @@ Success. returns updated User Group. `UserGroupResponseSchema` for more details.
  | id | String? |  yes  |  |
  | createdAt | String? |  yes  |  |
  | updatedAt | String? |  yes  |  |
+ | externalId | String? |  yes  |  |
 
 ---
 
