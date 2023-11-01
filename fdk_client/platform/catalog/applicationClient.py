@@ -1492,6 +1492,299 @@ class Catalog:
 
         return response
     
+    async def getAppReturnConfiguration(self, request_headers:Dict={}):
+        """Get Product Return configuration set at an application level
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = CatalogValidator.getAppReturnConfiguration()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/return-config", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", )
+        query_string = await create_query_string()
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/return-config", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AppReturnConfigResponse
+            schema = AppReturnConfigResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAppReturnConfiguration")
+                print(e)
+
+        return response
+    
+    async def createAppReturnConfiguration(self, body="", request_headers:Dict={}):
+        """Create Return configuration level set for an application.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = CatalogValidator.createAppReturnConfiguration()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import CreateUpdateAppReturnConfig
+        schema = CreateUpdateAppReturnConfig()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/return-config", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", )
+        query_string = await create_query_string()
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/return-config", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse1
+            schema = SuccessResponse1()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createAppReturnConfiguration")
+                print(e)
+
+        return response
+    
+    async def updateAppReturnConfiguration(self, body="", request_headers:Dict={}):
+        """Update Return configuration level set for an application.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = CatalogValidator.updateAppReturnConfiguration()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import CreateUpdateAppReturnConfig
+        schema = CreateUpdateAppReturnConfig()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/return-config", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", )
+        query_string = await create_query_string()
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/return-config", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse1
+            schema = SuccessResponse1()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateAppReturnConfiguration")
+                print(e)
+
+        return response
+    
+    async def deleteAppCategoryReturnConfiguration(self, body="", request_headers:Dict={}):
+        """Delete Category level Application Return Configuration setttings
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = CatalogValidator.deleteAppCategoryReturnConfiguration()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import DeleteAppCategoryReturnConfig
+        schema = DeleteAppCategoryReturnConfig()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/return-config/categories", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", )
+        query_string = await create_query_string()
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/return-config/categories", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse
+            schema = SuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteAppCategoryReturnConfiguration")
+                print(e)
+
+        return response
+    
+    async def getAppCategoryReturnConfig(self, request_headers:Dict={}):
+        """Get all category level configuration level set for an application.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = CatalogValidator.getAppCategoryReturnConfig()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/return-config/categories", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", )
+        query_string = await create_query_string()
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/return-config/categories", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BaseAppCategoryReturnConfigResponse
+            schema = BaseAppCategoryReturnConfigResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAppCategoryReturnConfig")
+                print(e)
+
+        return response
+    
+    async def createAppCategoryReturnConfiguration(self, body="", request_headers:Dict={}):
+        """Create Category level Application Return Configuration setttings
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = CatalogValidator.createAppCategoryReturnConfiguration()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import BaseAppCategoryReturnConfig
+        schema = BaseAppCategoryReturnConfig()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/return-config/categories", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", )
+        query_string = await create_query_string()
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/return-config/categories", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse1
+            schema = SuccessResponse1()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createAppCategoryReturnConfiguration")
+                print(e)
+
+        return response
+    
+    async def updateAppCategoryReturnConfiguration(self, body="", request_headers:Dict={}):
+        """Update Category level Application Return Configuration setttings
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = CatalogValidator.updateAppCategoryReturnConfiguration()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import BaseAppCategoryReturnConfig
+        schema = BaseAppCategoryReturnConfig()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/return-config/categories", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", )
+        query_string = await create_query_string()
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/return-config/categories", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse
+            schema = SuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateAppCategoryReturnConfiguration")
+                print(e)
+
+        return response
+    
     async def getAutocompleteConfig(self, request_headers:Dict={}):
         """Custom Autocomplete Keyword allows you to map conditions with keywords to give you the ultimate results
         """

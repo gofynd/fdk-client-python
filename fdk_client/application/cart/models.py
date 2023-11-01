@@ -84,6 +84,14 @@ class ProductPriceInfo(BaseSchema):
     pass
 
 
+class ProductPricePerUnit(BaseSchema):
+    pass
+
+
+class ProductPricePerUnitInfo(BaseSchema):
+    pass
+
+
 class ProductAvailabilitySize(BaseSchema):
     pass
 
@@ -657,6 +665,34 @@ class ProductPriceInfo(BaseSchema):
     
 
 
+class ProductPricePerUnit(BaseSchema):
+    # Cart swagger.json
+
+    
+    currency_symbol = fields.Str(required=False)
+    
+    selling_price = fields.Float(required=False)
+    
+    currency_code = fields.Str(required=False)
+    
+    add_on = fields.Float(required=False)
+    
+    effective = fields.Float(required=False)
+    
+    marked = fields.Float(required=False)
+    
+
+
+class ProductPricePerUnitInfo(BaseSchema):
+    # Cart swagger.json
+
+    
+    base = fields.Nested(ProductPricePerUnit, required=False)
+    
+    converted = fields.Nested(ProductPricePerUnit, required=False)
+    
+
+
 class ProductAvailabilitySize(BaseSchema):
     # Cart swagger.json
 
@@ -819,7 +855,7 @@ class CartProductInfo(BaseSchema):
     
     is_set = fields.Boolean(required=False)
     
-    price_per_unit = fields.Nested(ProductPriceInfo, required=False)
+    price_per_unit = fields.Nested(ProductPricePerUnitInfo, required=False)
     
     promotions_applied = fields.List(fields.Nested(AppliedPromotion, required=False), required=False)
     

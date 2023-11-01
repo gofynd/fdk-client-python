@@ -6206,7 +6206,7 @@ We are processing the request!
  | taxInfo | [TaxInfo](#TaxInfo)? |  yes  |  |
  | config | HashMap<String,Any>? |  yes  |  |
  | paymentInfo | [PaymentInfo](#PaymentInfo) |  no  |  |
- | userInfo | [UserInfo](#UserInfo) |  no  |  |
+ | userInfo | [UserInfo](#UserInfo)? |  yes  |  |
 
 ---
 
@@ -6809,6 +6809,8 @@ We are processing the request!
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | uid | Int? |  yes  |  |
+ | userOid | String? |  yes  |  |
+ | externalCustomerId | String? |  yes  |  |
  | firstName | String? |  yes  |  |
  | lastName | String? |  yes  |  |
  | mobile | String? |  yes  |  |
@@ -7384,7 +7386,7 @@ We are processing the request!
  | displayName | String? |  yes  |  |
  | bags | ArrayList<[BagUnit](#BagUnit)>? |  yes  |  |
  | fulfillingStore | [ShipmentItemFulFillingStore](#ShipmentItemFulFillingStore)? |  yes  |  |
- | meta | [ShipmentItemMeta](#ShipmentItemMeta)? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
  | paymentMode | String? |  yes  |  |
  | canProcess | Boolean? |  yes  |  |
  | prices | [Prices](#Prices)? |  yes  |  |
@@ -7470,6 +7472,7 @@ We are processing the request!
  | externalInvoiceId | String? |  yes  |  |
  | labelUrl | String? |  yes  |  |
  | creditNoteId | String? |  yes  |  |
+ | links | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -7489,7 +7492,7 @@ We are processing the request!
  | orderingChannelLogo | HashMap<String,Any>? |  yes  |  |
  | orderValue | String? |  yes  |  |
  | orderingChannel | String? |  yes  |  |
- | meta | [OrderMeta](#OrderMeta)? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -7992,7 +7995,7 @@ We are processing the request!
  | canCancel | Boolean? |  yes  |  |
  | displayName | String? |  yes  |  |
  | lineNumber | Int? |  yes  |  |
- | meta | [BagMeta](#BagMeta)? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
  | appliedPromos | ArrayList<[AppliedPromos](#AppliedPromos)>? |  yes  |  |
  | prices | [Prices](#Prices)? |  yes  |  |
  | currentStatus | [CurrentStatus](#CurrentStatus)? |  yes  |  |
@@ -8099,7 +8102,7 @@ We are processing the request!
  | dpAssignment | Boolean? |  yes  |  |
  | totalItems | Int? |  yes  |  |
  | fulfillingStore | [FulfillingStore](#FulfillingStore)? |  yes  |  |
- | meta | [ShipmentMeta](#ShipmentMeta)? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
  | pdfLinks | HashMap<String,Any>? |  yes  |  |
  | paymentMode | String? |  yes  |  |
  | packagingType | String? |  yes  |  |
@@ -8232,7 +8235,7 @@ We are processing the request!
  | ---------- | ---- | -------- | ----------- |
  | orderDate | String |  no  |  |
  | taxDetails | [TaxDetails](#TaxDetails)? |  yes  |  |
- | meta | [OrderMeta](#OrderMeta)? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
  | fyndOrderId | String |  no  |  |
  | prices | [Prices](#Prices)? |  yes  |  |
  | paymentMethods | HashMap<String,Any>? |  yes  |  |
@@ -8877,7 +8880,7 @@ We are processing the request!
  | type | String? |  yes  |  |
  | lineNumber | Int? |  yes  |  |
  | restoreCoupon | Boolean? |  yes  |  |
- | meta | [BagMeta](#BagMeta)? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
  | noOfBagsOrder | Int? |  yes  |  |
  | appliedPromos | ArrayList<HashMap<String,Any>>? |  yes  |  |
  | journeyType | String? |  yes  |  |

@@ -30,6 +30,14 @@ class AppCatalogConfiguration(BaseSchema):
     pass
 
 
+class AppCategoryReturnConfig(BaseSchema):
+    pass
+
+
+class AppCategoryReturnConfigResponse(BaseSchema):
+    pass
+
+
 class AppConfiguration(BaseSchema):
     pass
 
@@ -79,6 +87,10 @@ class ApplicationProductListingResponse(BaseSchema):
 
 
 class ApplicationStoreJson(BaseSchema):
+    pass
+
+
+class AppReturnConfigResponse(BaseSchema):
     pass
 
 
@@ -155,6 +167,14 @@ class AutocompleteResult(BaseSchema):
 
 
 class BannerImage(BaseSchema):
+    pass
+
+
+class BaseAppCategoryReturnConfig(BaseSchema):
+    pass
+
+
+class BaseAppCategoryReturnConfigResponse(BaseSchema):
     pass
 
 
@@ -410,6 +430,10 @@ class CreateSearchKeyword(BaseSchema):
     pass
 
 
+class CreateUpdateAppReturnConfig(BaseSchema):
+    pass
+
+
 class CrossSellingData(BaseSchema):
     pass
 
@@ -427,6 +451,10 @@ class DateMeta(BaseSchema):
 
 
 class DefaultKeyRequest(BaseSchema):
+    pass
+
+
+class DeleteAppCategoryReturnConfig(BaseSchema):
     pass
 
 
@@ -942,6 +970,10 @@ class PageResponse(BaseSchema):
     pass
 
 
+class PageResponse1(BaseSchema):
+    pass
+
+
 class PageResponseType(BaseSchema):
     pass
 
@@ -1067,6 +1099,10 @@ class ProductPublished(BaseSchema):
 
 
 class ProductReturnConfigSerializer(BaseSchema):
+    pass
+
+
+class ProductReturnConfigBaseSerializer(BaseSchema):
     pass
 
 
@@ -1457,6 +1493,32 @@ class AppCatalogConfiguration(BaseSchema):
     
 
 
+class AppCategoryReturnConfig(BaseSchema):
+    # Catalog swagger.json
+
+    
+    category_id = fields.Int(required=False)
+    
+    return_config = fields.Nested(ProductReturnConfigBaseSerializer, required=False)
+    
+
+
+class AppCategoryReturnConfigResponse(BaseSchema):
+    # Catalog swagger.json
+
+    
+    app_id = fields.Str(required=False)
+    
+    category_id = fields.Int(required=False)
+    
+    logo = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    return_config = fields.Nested(ProductReturnConfigBaseSerializer, required=False)
+    
+
+
 class AppConfiguration(BaseSchema):
     # Catalog swagger.json
 
@@ -1646,6 +1708,26 @@ class ApplicationStoreJson(BaseSchema):
 
     
     _custom_json = fields.Dict(required=False)
+    
+
+
+class AppReturnConfigResponse(BaseSchema):
+    # Catalog swagger.json
+
+    
+    app_id = fields.Str(required=False)
+    
+    category_count = fields.Int(required=False)
+    
+    company_id = fields.Int(required=False)
+    
+    created_by = fields.Dict(required=False)
+    
+    modified_by = fields.Dict(required=False)
+    
+    modified_on = fields.Str(required=False)
+    
+    return_config_level = fields.Str(required=False)
     
 
 
@@ -1924,6 +2006,28 @@ class BannerImage(BaseSchema):
     type = fields.Str(required=False)
     
     url = fields.Str(required=False)
+    
+
+
+class BaseAppCategoryReturnConfig(BaseSchema):
+    # Catalog swagger.json
+
+    
+    app_id = fields.Str(required=False)
+    
+    company_id = fields.Int(required=False)
+    
+    data = fields.List(fields.Nested(AppCategoryReturnConfig, required=False), required=False)
+    
+
+
+class BaseAppCategoryReturnConfigResponse(BaseSchema):
+    # Catalog swagger.json
+
+    
+    data = fields.List(fields.Nested(AppCategoryReturnConfigResponse, required=False), required=False)
+    
+    page = fields.Nested(PageResponse, required=False)
     
 
 
@@ -2941,6 +3045,18 @@ class CreateSearchKeyword(BaseSchema):
     
 
 
+class CreateUpdateAppReturnConfig(BaseSchema):
+    # Catalog swagger.json
+
+    
+    app_id = fields.Str(required=False)
+    
+    company_id = fields.Int(required=False)
+    
+    return_config_level = fields.Str(required=False)
+    
+
+
 class CrossSellingData(BaseSchema):
     # Catalog swagger.json
 
@@ -2992,6 +3108,18 @@ class DefaultKeyRequest(BaseSchema):
 
     
     default_key = fields.Str(required=False)
+    
+
+
+class DeleteAppCategoryReturnConfig(BaseSchema):
+    # Catalog swagger.json
+
+    
+    app_id = fields.Str(required=False)
+    
+    category_ids = fields.List(fields.Int(required=False), required=False)
+    
+    company_id = fields.Int(required=False)
     
 
 
@@ -5225,6 +5353,24 @@ class PageResponse(BaseSchema):
     
 
 
+class PageResponse1(BaseSchema):
+    # Catalog swagger.json
+
+    
+    current = fields.Int(required=False)
+    
+    has_next = fields.Boolean(required=False)
+    
+    has_previous = fields.Boolean(required=False)
+    
+    item_total = fields.Int(required=False)
+    
+    size = fields.Int(required=False)
+    
+    type = fields.Str(required=False)
+    
+
+
 class PageResponseType(BaseSchema):
     # Catalog swagger.json
 
@@ -5972,6 +6118,18 @@ class ProductReturnConfigSerializer(BaseSchema):
     on_same_store = fields.Boolean(required=False)
     
     store_uid = fields.Int(required=False)
+    
+
+
+class ProductReturnConfigBaseSerializer(BaseSchema):
+    # Catalog swagger.json
+
+    
+    returnable = fields.Boolean(required=False)
+    
+    time = fields.Int(required=False)
+    
+    unit = fields.Str(required=False)
     
 
 

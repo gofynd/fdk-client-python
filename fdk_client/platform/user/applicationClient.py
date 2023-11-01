@@ -492,8 +492,8 @@ class User:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/sessions", id=id, reason=reason), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SessionDeleteResponseSchema
-            schema = SessionDeleteResponseSchema()
+            from .models import SessionsDeleteResponseSchema
+            schema = SessionsDeleteResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:

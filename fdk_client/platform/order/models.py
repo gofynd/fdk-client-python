@@ -3069,6 +3069,10 @@ class UserDataInfo(BaseSchema):
     
     uid = fields.Int(required=False, allow_none=True)
     
+    user_oid = fields.Str(required=False, allow_none=True)
+    
+    external_customer_id = fields.Str(required=False, allow_none=True)
+    
     first_name = fields.Str(required=False, allow_none=True)
     
     last_name = fields.Str(required=False, allow_none=True)
@@ -3827,7 +3831,7 @@ class ShipmentItem(BaseSchema):
     
     fulfilling_store = fields.Nested(ShipmentItemFulFillingStore, required=False)
     
-    meta = fields.Nested(ShipmentItemMeta, required=False)
+    meta = fields.Dict(required=False)
     
     payment_mode = fields.Str(required=False, allow_none=True)
     
@@ -3931,6 +3935,8 @@ class InvoiceInfo(BaseSchema):
     
     credit_note_id = fields.Str(required=False, allow_none=True)
     
+    links = fields.Dict(required=False)
+    
 
 
 class OrderDetailsData(BaseSchema):
@@ -3955,7 +3961,7 @@ class OrderDetailsData(BaseSchema):
     
     ordering_channel = fields.Str(required=False, allow_none=True)
     
-    meta = fields.Nested(OrderMeta, required=False)
+    meta = fields.Dict(required=False)
     
 
 
@@ -4569,7 +4575,7 @@ class OrderBags(BaseSchema):
     
     line_number = fields.Int(required=False, allow_none=True)
     
-    meta = fields.Nested(BagMeta, required=False)
+    meta = fields.Dict(required=False)
     
     applied_promos = fields.List(fields.Nested(AppliedPromos, required=False), required=False)
     
@@ -4727,7 +4733,7 @@ class PlatformShipment(BaseSchema):
     
     fulfilling_store = fields.Nested(FulfillingStore, required=False)
     
-    meta = fields.Nested(ShipmentMeta, required=False)
+    meta = fields.Dict(required=False)
     
     pdf_links = fields.Dict(required=False)
     
@@ -4895,7 +4901,7 @@ class OrderData(BaseSchema):
     
     tax_details = fields.Nested(TaxDetails, required=False)
     
-    meta = fields.Nested(OrderMeta, required=False)
+    meta = fields.Dict(required=False)
     
     fynd_order_id = fields.Str(required=False)
     
@@ -5653,7 +5659,7 @@ class BagDetailsPlatformResponse(BaseSchema):
     
     restore_coupon = fields.Boolean(required=False, allow_none=True)
     
-    meta = fields.Nested(BagMeta, required=False)
+    meta = fields.Dict(required=False)
     
     no_of_bags_order = fields.Int(required=False, allow_none=True)
     
