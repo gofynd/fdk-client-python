@@ -134,6 +134,11 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+        
         
         
         
@@ -542,6 +547,17 @@ class OrderValidator:
         
         
         company_id = fields.Int(required=False)
+         
+        
+    
+    class getShipmentBagReasons(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        shipment_id = fields.Str(required=False)
+        
+        line_number = fields.Int(required=False)
          
         
     

@@ -1388,6 +1388,51 @@ class Order:
 
         return response
     
+    async def getShipmentBagReasons(self, shipment_id=None, line_number=None, request_headers:Dict={}):
+        """Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
+        :param shipment_id : ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
+        :param line_number : line number of bag. : type integer
+        """
+        payload = {}
+        
+        if shipment_id is not None:
+            payload["shipment_id"] = shipment_id
+        if line_number is not None:
+            payload["line_number"] = line_number
+
+        # Parameter validation
+        schema = OrderValidator.getShipmentBagReasons()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/application/<application_id>/orders/shipments/<shipment_id>/line_number/<line_number>/reasons", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer","example":37}},{"in":"path","description":"ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}},{"in":"path","description":"line number of bag.","name":"line_number","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer","example":37}},{"in":"path","description":"ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}},{"in":"path","description":"line number of bag.","name":"line_number","required":true,"schema":{"type":"integer"}}]}""", shipment_id=shipment_id, line_number=line_number)
+        query_string = await create_query_string(shipment_id=shipment_id, line_number=line_number)
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/application/<application_id>/orders/shipments/<shipment_id>/line_number/<line_number>/reasons", shipment_id=shipment_id, line_number=line_number), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ShipmentBagReasons
+            schema = ShipmentBagReasons()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getShipmentBagReasons")
+                print(e)
+
+        return response
+    
     async def getShipments(self, lane=None, bag_status=None, status_override_lane=None, time_to_dispatch=None, search_type=None, search_value=None, from_date=None, to_date=None, dp_ids=None, stores=None, sales_channels=None, page_no=None, page_size=None, fetch_active_shipment=None, exclude_locked_shipments=None, payment_methods=None, channel_shipment_id=None, channel_order_id=None, custom_meta=None, ordering_channel=None, company_affiliate_tag=None, my_orders=None, platform_user_id=None, sort_type=None, show_cross_company_data=None, tags=None, customer_id=None, order_type=None, request_headers:Dict={}):
         """Get Shipments Listing for the company id
         :param lane : Name of lane for which data is to be fetched : type string
