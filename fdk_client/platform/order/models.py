@@ -560,6 +560,22 @@ class EInvoiceRetryResponse(BaseSchema):
     pass
 
 
+class BagReasonMeta(BaseSchema):
+    pass
+
+
+class QuestionSet(BaseSchema):
+    pass
+
+
+class BagReasons(BaseSchema):
+    pass
+
+
+class ShipmentBagReasons(BaseSchema):
+    pass
+
+
 class ShipmentStatus(BaseSchema):
     pass
 
@@ -929,10 +945,6 @@ class BulkActionTemplate(BaseSchema):
 
 
 class BulkActionTemplateResponse(BaseSchema):
-    pass
-
-
-class QuestionSet(BaseSchema):
     pass
 
 
@@ -2413,7 +2425,7 @@ class UserInfo(BaseSchema):
     
     user_type = fields.Str(required=False)
     
-    email = fields.Str(required=False)
+    primary_email = fields.Str(required=False)
     
     gender = fields.Str(required=False)
     
@@ -2421,7 +2433,7 @@ class UserInfo(BaseSchema):
     
     last_name = fields.Str(required=False)
     
-    mobile = fields.Str(required=False)
+    primary_mobile_number = fields.Str(required=False)
     
 
 
@@ -3036,6 +3048,52 @@ class EInvoiceRetryResponse(BaseSchema):
     message = fields.Str(required=False)
     
     response_data = fields.List(fields.Nested(EInvoiceResponseData, required=False), required=False)
+    
+
+
+class BagReasonMeta(BaseSchema):
+    # Order swagger.json
+
+    
+    show_text_area = fields.Boolean(required=False)
+    
+
+
+class QuestionSet(BaseSchema):
+    # Order swagger.json
+
+    
+    id = fields.Int(required=False)
+    
+    display_name = fields.Str(required=False)
+    
+
+
+class BagReasons(BaseSchema):
+    # Order swagger.json
+
+    
+    qc_type = fields.List(fields.Str(required=False), required=False)
+    
+    id = fields.Int(required=False)
+    
+    display_name = fields.Str(required=False)
+    
+    meta = fields.Nested(BagReasonMeta, required=False)
+    
+    question_set = fields.List(fields.Nested(QuestionSet, required=False), required=False)
+    
+    reasons = fields.List(fields.Nested(lambda: BagReasons(exclude=('reasons')), required=False), required=False)
+    
+
+
+class ShipmentBagReasons(BaseSchema):
+    # Order swagger.json
+
+    
+    reasons = fields.List(fields.Nested(BagReasons, required=False), required=False)
+    
+    success = fields.Boolean(required=False)
     
 
 
@@ -3831,7 +3889,7 @@ class ShipmentItem(BaseSchema):
     
     fulfilling_store = fields.Nested(ShipmentItemFulFillingStore, required=False)
     
-    meta = fields.Nested(ShipmentItemMeta, required=False)
+    meta = fields.Dict(required=False)
     
     payment_mode = fields.Str(required=False, allow_none=True)
     
@@ -3934,6 +3992,8 @@ class InvoiceInfo(BaseSchema):
     label_url = fields.Str(required=False, allow_none=True)
     
     credit_note_id = fields.Str(required=False, allow_none=True)
+    
+    links = fields.Dict(required=False)
     
 
 
@@ -4573,7 +4633,7 @@ class OrderBags(BaseSchema):
     
     line_number = fields.Int(required=False, allow_none=True)
     
-    meta = fields.Nested(BagMeta, required=False)
+    meta = fields.Dict(required=False)
     
     applied_promos = fields.List(fields.Nested(AppliedPromos, required=False), required=False)
     
@@ -4899,7 +4959,7 @@ class OrderData(BaseSchema):
     
     tax_details = fields.Nested(TaxDetails, required=False)
     
-    meta = fields.Nested(OrderMeta, required=False)
+    meta = fields.Dict(required=False)
     
     fynd_order_id = fields.Str(required=False)
     
@@ -5160,16 +5220,6 @@ class BulkActionTemplateResponse(BaseSchema):
 
     
     template_x_slug = fields.List(fields.Nested(BulkActionTemplate, required=False), required=False)
-    
-
-
-class QuestionSet(BaseSchema):
-    # Order swagger.json
-
-    
-    id = fields.Int(required=False)
-    
-    display_name = fields.Str(required=False)
     
 
 

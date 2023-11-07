@@ -304,6 +304,10 @@ class SendOtpSmsCommsProvider(BaseSchema):
     pass
 
 
+class SendOtpEmailCommsProvider(BaseSchema):
+    pass
+
+
 class SendOtpEmailCommsTemplate(BaseSchema):
     pass
 
@@ -1479,6 +1483,16 @@ class SendOtpSmsCommsProvider(BaseSchema):
     
 
 
+class SendOtpEmailCommsProvider(BaseSchema):
+    # Communication swagger.json
+
+    
+    slug = fields.Str(required=False)
+    
+    _id = fields.Str(required=False)
+    
+
+
 class SendOtpEmailCommsTemplate(BaseSchema):
     # Communication swagger.json
 
@@ -1526,6 +1540,8 @@ class SendOtpCommsReqEmail(BaseSchema):
     expiry = fields.Int(required=False)
     
     template = fields.Nested(SendOtpEmailCommsTemplate, required=False)
+    
+    provider = fields.Nested(SendOtpEmailCommsProvider, required=False)
     
 
 

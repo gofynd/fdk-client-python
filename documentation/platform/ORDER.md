@@ -37,11 +37,13 @@ Handles all platform order and shipment api(s)
 * [eInvoiceRetry](#einvoiceretry)
 * [trackShipment](#trackshipment)
 * [updateShipmentTracking](#updateshipmenttracking)
+* [getShipmentBagReasons](#getshipmentbagreasons)
 * [getShipments](#getshipments)
 * [getShipmentById](#getshipmentbyid)
 * [getOrderById](#getorderbyid)
 * [getLaneConfig](#getlaneconfig)
 * [getOrders](#getorders)
+* [getApplicationShipments](#getapplicationshipments)
 * [trackShipmentPlatform](#trackshipmentplatform)
 * [getfilters](#getfilters)
 * [getBulkShipmentExcelFile](#getbulkshipmentexcelfile)
@@ -2295,6 +2297,106 @@ Shipment Tracking updated successfully
 ---
 
 
+### getShipmentBagReasons
+Get reasons behind full or partial cancellation of a shipment
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").order.getShipmentBagReasons(shipmentId=shipmentId, lineNumber=lineNumber)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| shipmentId | String | yes | ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. |   
+| lineNumber | Int | yes | line number of bag. |  
+
+
+
+Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
+
+*Returned Response:*
+
+
+
+
+[ShipmentBagReasons](#ShipmentBagReasons)
+
+Success. Check the example shown below or refer `ShipmentBagReasons` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true,
+  "reasons": [
+    {
+      "id": 1,
+      "display_name": "Not available",
+      "qc_type": [],
+      "question_set": []
+    },
+    {
+      "reasons": [
+        {
+          "id": 2,
+          "display_name": "Processing other orders",
+          "qc_type": [],
+          "question_set": []
+        },
+        {
+          "id": 3,
+          "display_name": "Printer not working",
+          "qc_type": [],
+          "question_set": []
+        },
+        {
+          "reasons": [
+            {
+              "id": 4,
+              "display_name": "Card issues",
+              "qc_type": [],
+              "question_set": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "display_name": "Card issues",
+      "qc_type": [],
+      "question_set": []
+    }
+  ]
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
 ### getShipments
 
 
@@ -3761,6 +3863,77 @@ Get Orders Listing
 
 
 [OrderListingResponse](#OrderListingResponse)
+
+We are processing the report!
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getApplicationShipments
+
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").order.getApplicationShipments(lane=lane, searchType=searchType, searchId=searchId, fromDate=fromDate, toDate=toDate, dpIds=dpIds, orderingCompanyId=orderingCompanyId, stores=stores, salesChannel=salesChannel, requestByExt=requestByExt, pageNo=pageNo, pageSize=pageSize, customerId=customerId, isPrioritySort=isPrioritySort, excludeLockedShipments=excludeLockedShipments)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| lane | String? | no |  |   
+| searchType | String? | no |  |   
+| searchId | String? | no |  |   
+| fromDate | String? | no |  |   
+| toDate | String? | no |  |   
+| dpIds | String? | no |  |   
+| orderingCompanyId | String? | no |  |   
+| stores | String? | no |  |   
+| salesChannel | String? | no |  |   
+| requestByExt | String? | no |  |   
+| pageNo | Int? | no |  |   
+| pageSize | Int? | no |  |   
+| customerId | String? | no |  |   
+| isPrioritySort | Boolean? | no |  |   
+| excludeLockedShipments | Boolean? | no |  |  
+
+
+
+
+
+*Returned Response:*
+
+
+
+
+[ShipmentInternalPlatformViewResponse](#ShipmentInternalPlatformViewResponse)
 
 We are processing the report!
 
@@ -6138,11 +6311,11 @@ We are processing the request!
  | ---------- | ---- | -------- | ----------- |
  | userId | String? |  yes  |  |
  | userType | String? |  yes  |  |
- | email | String |  no  |  |
+ | primaryEmail | String |  no  |  |
  | gender | String? |  yes  |  |
  | firstName | String |  no  |  |
  | lastName | String? |  yes  |  |
- | mobile | String |  no  |  |
+ | primaryMobileNumber | String |  no  |  |
 
 ---
 
@@ -6785,6 +6958,57 @@ We are processing the request!
 
  
  
+ #### [BagReasonMeta](#BagReasonMeta)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | showTextArea | Boolean? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [QuestionSet](#QuestionSet)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | id | Int? |  yes  |  |
+ | displayName | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [BagReasons](#BagReasons)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | qcType | ArrayList<String>? |  yes  |  |
+ | id | Int? |  yes  |  |
+ | displayName | String? |  yes  |  |
+ | meta | [BagReasonMeta](#BagReasonMeta)? |  yes  |  |
+ | questionSet | ArrayList<[QuestionSet](#QuestionSet)>? |  yes  |  |
+ | reasons | ArrayList<[BagReasons](#BagReasons)>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [ShipmentBagReasons](#ShipmentBagReasons)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | reasons | ArrayList<[BagReasons](#BagReasons)>? |  yes  |  |
+ | success | Boolean? |  yes  |  |
+
+---
+
+
+ 
+ 
  #### [ShipmentStatus](#ShipmentStatus)
 
  | Properties | Type | Nullable | Description |
@@ -7386,7 +7610,7 @@ We are processing the request!
  | displayName | String? |  yes  |  |
  | bags | ArrayList<[BagUnit](#BagUnit)>? |  yes  |  |
  | fulfillingStore | [ShipmentItemFulFillingStore](#ShipmentItemFulFillingStore)? |  yes  |  |
- | meta | [ShipmentItemMeta](#ShipmentItemMeta)? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
  | paymentMode | String? |  yes  |  |
  | canProcess | Boolean? |  yes  |  |
  | prices | [Prices](#Prices)? |  yes  |  |
@@ -7472,6 +7696,7 @@ We are processing the request!
  | externalInvoiceId | String? |  yes  |  |
  | labelUrl | String? |  yes  |  |
  | creditNoteId | String? |  yes  |  |
+ | links | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -7994,7 +8219,7 @@ We are processing the request!
  | canCancel | Boolean? |  yes  |  |
  | displayName | String? |  yes  |  |
  | lineNumber | Int? |  yes  |  |
- | meta | [BagMeta](#BagMeta)? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
  | appliedPromos | ArrayList<[AppliedPromos](#AppliedPromos)>? |  yes  |  |
  | prices | [Prices](#Prices)? |  yes  |  |
  | currentStatus | [CurrentStatus](#CurrentStatus)? |  yes  |  |
@@ -8234,7 +8459,7 @@ We are processing the request!
  | ---------- | ---- | -------- | ----------- |
  | orderDate | String |  no  |  |
  | taxDetails | [TaxDetails](#TaxDetails)? |  yes  |  |
- | meta | [OrderMeta](#OrderMeta)? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
  | fyndOrderId | String |  no  |  |
  | prices | [Prices](#Prices)? |  yes  |  |
  | paymentMethods | HashMap<String,Any>? |  yes  |  |
@@ -8491,18 +8716,6 @@ We are processing the request!
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | templateXSlug | ArrayList<[BulkActionTemplate](#BulkActionTemplate)>? |  yes  | Allowed bulk action template slugs |
-
----
-
-
- 
- 
- #### [QuestionSet](#QuestionSet)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | id | Int? |  yes  |  |
- | displayName | String? |  yes  |  |
 
 ---
 

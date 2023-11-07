@@ -223,6 +223,34 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
         
     
     
@@ -779,6 +807,69 @@ class CatalogValidator:
         page_size = fields.Int(required=False)
         
         q = fields.Str(required=False)
+         
+        
+    
+    class getAppReturnConfiguration(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class createAppReturnConfiguration(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class updateAppReturnConfiguration(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class deleteAppCategoryReturnConfiguration(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getAppCategoryReturnConfig(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class createAppCategoryReturnConfiguration(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class updateAppCategoryReturnConfiguration(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
          
         
     
