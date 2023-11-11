@@ -134,7 +134,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
     
     
         
@@ -644,8 +643,6 @@ class CartValidator:
         i = fields.Boolean(required=False)
         
         b = fields.Boolean(required=False)
-        
-        c = fields.Boolean(required=False)
          
         
     

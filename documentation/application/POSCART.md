@@ -47,7 +47,7 @@ Fetch all items added to the cart
 
 ```python
 try:
-    result = await applicationClient.poscart.getCart(id=id, i=i, b=b, c=c, assignCardId=assignCardId, areaCode=areaCode, buyNow=buyNow)
+    result = await applicationClient.poscart.getCart(id=id, i=i, b=b, assignCardId=assignCardId, areaCode=areaCode, buyNow=buyNow)
     # use result
 except Exception as e:
     print(e)
@@ -62,7 +62,6 @@ except Exception as e:
 | id | String? | no |  |   
 | i | Boolean? | no |  |   
 | b | Boolean? | no |  |   
-| c | Boolean? | no |  |   
 | assignCardId | Int? | no |  |   
 | areaCode | String? | no |  |   
 | buyNow | Boolean? | no |  |  
