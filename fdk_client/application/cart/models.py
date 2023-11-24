@@ -156,6 +156,22 @@ class CartCurrency(BaseSchema):
     pass
 
 
+class CartDetailCoupon(BaseSchema):
+    pass
+
+
+class ChargesThreshold(BaseSchema):
+    pass
+
+
+class DeliveryChargesConfig(BaseSchema):
+    pass
+
+
+class CartCommonConfig(BaseSchema):
+    pass
+
+
 class CartDetailResponse(BaseSchema):
     pass
 
@@ -983,9 +999,79 @@ class CartCurrency(BaseSchema):
     
 
 
+class CartDetailCoupon(BaseSchema):
+    # Cart swagger.json
+
+    
+    cashback_amount = fields.Float(required=False)
+    
+    cashback_message_primary = fields.Str(required=False)
+    
+    cashback_message_secondary = fields.Str(required=False)
+    
+    coupon_code = fields.Str(required=False)
+    
+    coupon_description = fields.Str(required=False)
+    
+    coupon_id = fields.Str(required=False)
+    
+    coupon_subtitle = fields.Str(required=False)
+    
+    coupon_title = fields.Str(required=False)
+    
+    coupon_type = fields.Str(required=False)
+    
+    coupon_value = fields.Float(required=False)
+    
+    discount = fields.Float(required=False)
+    
+    is_applied = fields.Boolean(required=False)
+    
+    is_valid = fields.Boolean(required=False)
+    
+    maximum_discount_value = fields.Float(required=False)
+    
+    message = fields.Str(required=False)
+    
+    minimum_cart_value = fields.Float(required=False)
+    
+
+
+class ChargesThreshold(BaseSchema):
+    # Cart swagger.json
+
+    
+    charges = fields.Float(required=False)
+    
+    threshold = fields.Float(required=False)
+    
+
+
+class DeliveryChargesConfig(BaseSchema):
+    # Cart swagger.json
+
+    
+    enabled = fields.Boolean(required=False)
+    
+    charges = fields.List(fields.Nested(ChargesThreshold, required=False), required=False)
+    
+
+
+class CartCommonConfig(BaseSchema):
+    # Cart swagger.json
+
+    
+    delivery_charges_config = fields.Nested(DeliveryChargesConfig, required=False)
+    
+
+
 class CartDetailResponse(BaseSchema):
     # Cart swagger.json
 
+    
+    cart_id = fields.Int(required=False)
+    
+    uid = fields.Str(required=False)
     
     applied_promo_details = fields.List(fields.Nested(AppliedPromotion, required=False), required=False)
     
@@ -1007,7 +1093,17 @@ class CartDetailResponse(BaseSchema):
     
     delivery_charge_info = fields.Str(required=False)
     
+    common_config = fields.Nested(CartCommonConfig, required=False)
+    
+    coupon = fields.Nested(CartDetailCoupon, required=False)
+    
     message = fields.Str(required=False)
+    
+    notification = fields.Dict(required=False)
+    
+    staff_user_id = fields.Str(required=False)
+    
+    success = fields.Boolean(required=False)
     
     gstin = fields.Str(required=False)
     

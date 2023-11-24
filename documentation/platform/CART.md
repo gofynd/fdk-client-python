@@ -3089,7 +3089,7 @@ Fetch all items added to the cart
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.getAbandonedCartDetails(id=id, i=i, b=b)
+    result = await platformClient.application("<APPLICATION_ID>").cart.getAbandonedCartDetails(id=id, i=i, b=b, c=c)
     # use result
 except Exception as e:
     print(e)
@@ -3103,7 +3103,8 @@ except Exception as e:
 | --------- | -----  | -------- | ----------- | 
 | id | String? | no |  |   
 | i | Boolean? | no |  |   
-| b | Boolean? | no |  |  
+| b | Boolean? | no |  |   
+| c | Boolean? | no |  |  
 
 
 

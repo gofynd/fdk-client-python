@@ -134,10 +134,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
-        
         
         
         
@@ -550,17 +546,6 @@ class OrderValidator:
          
         
     
-    class getShipmentBagReasons(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        shipment_id = fields.Str(required=False)
-        
-        line_number = fields.Int(required=False)
-         
-        
-    
     class getShipments(BaseSchema):
         
         
@@ -593,6 +578,8 @@ class OrderValidator:
         page_size = fields.Int(required=False)
         
         fetch_active_shipment = fields.Boolean(required=False)
+        
+        allow_inactive = fields.Boolean(required=False)
         
         exclude_locked_shipments = fields.Boolean(required=False)
         
