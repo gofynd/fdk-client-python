@@ -1823,6 +1823,8 @@ class Store(BaseSchema):
     
     name = fields.Str(required=False)
     
+    tags = fields.List(fields.Str(required=False), required=False)
+    
 
 
 class StoreListingResponse(BaseSchema):

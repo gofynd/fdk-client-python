@@ -3515,6 +3515,12 @@ class AffiliateMeta(BaseSchema):
     
     is_priority = fields.Boolean(required=False, allow_none=True)
     
+    is_serial_number_required = fields.Boolean(required=False, allow_none=True)
+    
+    fulfilment_priority = fields.Int(required=False, allow_none=True)
+    
+    customer_selling_price = fields.Float(required=False, allow_none=True)
+    
 
 
 class AffiliateBagDetails(BaseSchema):

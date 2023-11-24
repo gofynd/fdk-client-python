@@ -2487,6 +2487,8 @@ class CollectionCreateResponse(BaseSchema):
     # Catalog swagger.json
 
     
+    uid = fields.Str(required=False)
+    
     _schedule = fields.Dict(required=False)
     
     allow_facets = fields.Boolean(required=False)
