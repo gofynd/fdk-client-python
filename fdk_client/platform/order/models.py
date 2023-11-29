@@ -4451,6 +4451,8 @@ class AffiliateBagsDetails(BaseSchema):
     
     coupon_code = fields.Str(required=False, allow_none=True)
     
+    affiliate_meta = fields.Nested(AffiliateMeta, required=False)
+    
 
 
 class BagPaymentMethods(BaseSchema):
