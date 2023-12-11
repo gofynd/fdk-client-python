@@ -9119,6 +9119,7 @@ Success. Returns the status of cart checkout. Refer `CartCheckoutResponseSchema`
  | categories | ArrayList<[CategoryInfo](#CategoryInfo)>? |  yes  |  |
  | tags | ArrayList<String>? |  yes  |  |
  | type | String? |  yes  |  |
+ | attributes | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -9152,6 +9153,7 @@ Success. Returns the status of cart checkout. Refer `CartCheckoutResponseSchema`
  | availability | [ProductAvailability](#ProductAvailability)? |  yes  |  |
  | deliveryPromise | [ShipmentPromise](#ShipmentPromise)? |  yes  |  |
  | product | [CartProduct](#CartProduct)? |  yes  |  |
+ | productEanId | String? |  yes  |  |
  | bulkOffer | HashMap<String,Any>? |  yes  |  |
  | parentItemIdentifiers | HashMap<String,Any>? |  yes  |  |
  | coupon | [CouponDetails](#CouponDetails)? |  yes  |  |

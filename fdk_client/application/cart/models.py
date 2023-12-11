@@ -817,6 +817,8 @@ class CartProduct(BaseSchema):
     
     type = fields.Str(required=False)
     
+    attributes = fields.Dict(required=False)
+    
 
 
 class CouponDetails(BaseSchema):
@@ -854,6 +856,8 @@ class CartProductInfo(BaseSchema):
     delivery_promise = fields.Nested(ShipmentPromise, required=False)
     
     product = fields.Nested(CartProduct, required=False)
+    
+    product_ean_id = fields.Str(required=False)
     
     bulk_offer = fields.Dict(required=False)
     
