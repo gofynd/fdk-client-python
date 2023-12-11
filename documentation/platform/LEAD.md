@@ -6,6 +6,8 @@
 
 ## Lead Methods
 Handles communication between Administrator
+
+Default
 * [getPlatformTickets](#getplatformtickets)
 * [createTicket](#createticket)
 * [getTickets](#gettickets)
@@ -33,7 +35,9 @@ Handles communication between Administrator
 
 
 
+
 ## Methods with example and description
+
 
 
 ### getPlatformTickets
@@ -3987,6 +3991,7 @@ Success
 
 
 ---
+
 
 
 

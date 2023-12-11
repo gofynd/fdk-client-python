@@ -6,6 +6,8 @@
 
 ## User Methods
 Authentication Service
+
+Default
 * [getCustomers](#getcustomers)
 * [searchUsers](#searchusers)
 * [createUser](#createuser)
@@ -27,7 +29,9 @@ Authentication Service
 
 
 
+
 ## Methods with example and description
+
 
 
 ### getCustomers
@@ -1543,6 +1547,7 @@ Success. returns updated User Group. `UserGroupResponseSchema` for more details.
 
 
 ---
+
 
 
 

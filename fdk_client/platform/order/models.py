@@ -3729,7 +3729,7 @@ class ShipmentItemFulFillingStore(BaseSchema):
     
     phone = fields.Str(required=False, allow_none=True)
     
-    brand_store_tags = fields.Str(required=False, allow_none=True)
+    brand_store_tags = fields.List(fields.Str(required=False), required=False)
     
     pincode = fields.Str(required=False, allow_none=True)
     
@@ -4606,6 +4606,8 @@ class OrderBags(BaseSchema):
 
     
     gst_details = fields.Nested(GSTDetailsData, required=False)
+    
+    bag_status = fields.List(fields.Nested(BagStatusHistory, required=False), required=False)
     
     parent_promo_bags = fields.Dict(required=False, allow_none=True)
     

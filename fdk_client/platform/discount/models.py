@@ -105,6 +105,8 @@ class CreateUpdateDiscount(BaseSchema):
     
     store_ids = fields.List(fields.Int(required=False), required=False)
     
+    zone_ids = fields.List(fields.Str(required=False), required=False)
+    
     validity = fields.Nested(ValidityObject, required=False)
     
     discount_meta = fields.Nested(DiscountMeta, required=False)

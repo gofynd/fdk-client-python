@@ -6,6 +6,8 @@
 
 ## Content Methods
 Content System
+
+Default
 * [getAnnouncementsList](#getannouncementslist)
 * [createAnnouncement](#createannouncement)
 * [getAnnouncementById](#getannouncementbyid)
@@ -78,7 +80,9 @@ Content System
 
 
 
+
 ## Methods with example and description
+
 
 
 ### getAnnouncementsList
@@ -7591,6 +7595,7 @@ Success. Returns a JSON object of components. Refer `PageSchema` for more detail
 
 
 ---
+
 
 
 

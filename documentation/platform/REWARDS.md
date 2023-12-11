@@ -6,6 +6,8 @@
 
 ## Rewards Methods
 Earn and redeem reward points
+
+Default
 * [showGiveaways](#showgiveaways)
 * [saveGiveAway](#savegiveaway)
 * [getGiveawayById](#getgiveawaybyid)
@@ -21,7 +23,9 @@ Earn and redeem reward points
 
 
 
+
 ## Methods with example and description
+
 
 
 ### showGiveaways
@@ -1303,6 +1307,7 @@ ok
 
 
 ---
+
 
 
 
