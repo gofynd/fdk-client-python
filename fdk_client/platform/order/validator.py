@@ -133,6 +133,10 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
+        
         
         
         
@@ -543,6 +547,15 @@ class OrderValidator:
         
         
         company_id = fields.Int(required=False)
+         
+        
+    
+    class generateInvoiceID(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        invoice_type = fields.Str(required=False)
          
         
     

@@ -560,6 +560,26 @@ class EInvoiceRetryResponse(BaseSchema):
     pass
 
 
+class GenerateInvoiceIDResponseData(BaseSchema):
+    pass
+
+
+class GenerateInvoiceIDErrorResponseData(BaseSchema):
+    pass
+
+
+class GenerateInvoiceIDRequest(BaseSchema):
+    pass
+
+
+class GenerateInvoiceIDResponse(BaseSchema):
+    pass
+
+
+class GenerateInvoiceIDErrorResponse(BaseSchema):
+    pass
+
+
 class BagReasonMeta(BaseSchema):
     pass
 
@@ -3048,6 +3068,58 @@ class EInvoiceRetryResponse(BaseSchema):
     message = fields.Str(required=False)
     
     response_data = fields.List(fields.Nested(EInvoiceResponseData, required=False), required=False)
+    
+
+
+class GenerateInvoiceIDResponseData(BaseSchema):
+    # Order swagger.json
+
+    
+    shipment_id = fields.Str(required=False)
+    
+    success = fields.Boolean(required=False)
+    
+    invoice_id = fields.Str(required=False)
+    
+    error_message = fields.Boolean(required=False)
+    
+
+
+class GenerateInvoiceIDErrorResponseData(BaseSchema):
+    # Order swagger.json
+
+    
+    shipment_id = fields.Str(required=False)
+    
+    success = fields.Boolean(required=False)
+    
+    invoice_id = fields.Boolean(required=False)
+    
+    error_message = fields.Str(required=False)
+    
+
+
+class GenerateInvoiceIDRequest(BaseSchema):
+    # Order swagger.json
+
+    
+    shipment_ids = fields.List(fields.Str(required=False), required=False)
+    
+
+
+class GenerateInvoiceIDResponse(BaseSchema):
+    # Order swagger.json
+
+    
+    items = fields.Nested(GenerateInvoiceIDResponseData, required=False)
+    
+
+
+class GenerateInvoiceIDErrorResponse(BaseSchema):
+    # Order swagger.json
+
+    
+    items = fields.Nested(GenerateInvoiceIDErrorResponseData, required=False)
     
 
 
