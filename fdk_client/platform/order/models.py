@@ -3079,9 +3079,9 @@ class GenerateInvoiceIDResponseData(BaseSchema):
     
     success = fields.Boolean(required=False)
     
-    invoice_id = fields.Str(required=False)
+    invoice_id = fields.Str(required=False, allow_none=True)
     
-    error_message = fields.Boolean(required=False)
+    error_message = fields.Boolean(required=False, allow_none=True)
     
 
 
@@ -3093,9 +3093,9 @@ class GenerateInvoiceIDErrorResponseData(BaseSchema):
     
     success = fields.Boolean(required=False)
     
-    invoice_id = fields.Boolean(required=False)
+    invoice_id = fields.Boolean(required=False, allow_none=True)
     
-    error_message = fields.Str(required=False)
+    error_message = fields.Str(required=False, allow_none=True)
     
 
 
@@ -3111,7 +3111,7 @@ class GenerateInvoiceIDResponse(BaseSchema):
     # Order swagger.json
 
     
-    items = fields.Nested(GenerateInvoiceIDResponseData, required=False)
+    items = fields.List(fields.Nested(GenerateInvoiceIDResponseData, required=False), required=False)
     
 
 
@@ -3119,7 +3119,7 @@ class GenerateInvoiceIDErrorResponse(BaseSchema):
     # Order swagger.json
 
     
-    items = fields.Nested(GenerateInvoiceIDErrorResponseData, required=False)
+    items = fields.List(fields.Nested(GenerateInvoiceIDErrorResponseData, required=False), required=False)
     
 
 
