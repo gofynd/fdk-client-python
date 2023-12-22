@@ -3801,7 +3801,7 @@ class ShipmentItemFulFillingStore(BaseSchema):
     
     phone = fields.Str(required=False, allow_none=True)
     
-    brand_store_tags = fields.List(fields.Str(required=False), required=False)
+    brand_store_tags = fields.Str(required=False, allow_none=True)
     
     pincode = fields.Str(required=False, allow_none=True)
     
