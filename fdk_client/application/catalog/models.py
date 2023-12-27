@@ -1643,7 +1643,7 @@ class GetCollectionDetailNest(BaseSchema):
     
     priority = fields.Int(required=False)
     
-    tag = fields.List(fields.Str(required=False), required=False)
+    tags = fields.List(fields.Str(required=False), required=False)
     
     app_id = fields.Str(required=False)
     

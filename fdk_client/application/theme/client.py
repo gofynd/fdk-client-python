@@ -72,10 +72,12 @@ class Theme:
 
         return response
     
-    async def getPage(self, theme_id=None, page_value=None, body="", request_headers:Dict={}):
+    async def getPage(self, theme_id=None, page_value=None, filters=None, company=None, body="", request_headers:Dict={}):
         """Use this API to retrieve a page of a theme.
         :param theme_id : ID of the theme to be retrieved : type string
         :param page_value : Value of the page to be retrieved : type string
+        :param filters : Filters on sections to be applied or not : type string
+        :param company : Company id of the application : type integer
         """
         payload = {}
         
@@ -83,14 +85,18 @@ class Theme:
             payload["theme_id"] = theme_id
         if page_value is not None:
             payload["page_value"] = page_value
+        if filters is not None:
+            payload["filters"] = filters
+        if company is not None:
+            payload["company"] = company
 
         # Parameter validation
         schema = ThemeValidator.getPage()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getPage"], proccessed_params="""{"required":[{"name":"theme_id","in":"path","description":"ID of the theme to be retrieved","required":true,"schema":{"type":"string"}},{"name":"page_value","in":"path","description":"Value of the page to be retrieved","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"theme_id","in":"path","description":"ID of the theme to be retrieved","required":true,"schema":{"type":"string"}},{"name":"page_value","in":"path","description":"Value of the page to be retrieved","required":true,"schema":{"type":"string"}}]}""", theme_id=theme_id, page_value=page_value)
-        query_string = await create_query_string(theme_id=theme_id, page_value=page_value)
+        url_with_params = await create_url_with_params(api_url=self._urls["getPage"], proccessed_params="""{"required":[{"name":"theme_id","in":"path","description":"ID of the theme to be retrieved","required":true,"schema":{"type":"string"}},{"name":"page_value","in":"path","description":"Value of the page to be retrieved","required":true,"schema":{"type":"string"}}],"optional":[{"name":"filters","in":"query","description":"Filters on sections to be applied or not","required":false,"schema":{"type":"string"}},{"name":"company","in":"query","description":"Company id of the application","required":false,"schema":{"type":"integer"}}],"query":[{"name":"filters","in":"query","description":"Filters on sections to be applied or not","required":false,"schema":{"type":"string"}},{"name":"company","in":"query","description":"Company id of the application","required":false,"schema":{"type":"integer"}}],"headers":[],"path":[{"name":"theme_id","in":"path","description":"ID of the theme to be retrieved","required":true,"schema":{"type":"string"}},{"name":"page_value","in":"path","description":"Value of the page to be retrieved","required":true,"schema":{"type":"string"}}]}""", theme_id=theme_id, page_value=page_value, filters=filters, company=company)
+        query_string = await create_query_string(theme_id=theme_id, page_value=page_value, filters=filters, company=company)
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -106,7 +112,7 @@ class Theme:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPage"]).netloc, "get", await create_url_without_domain("/service/application/theme/v1.0/{theme_id}/{page_value}", theme_id=theme_id, page_value=page_value), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPage"]).netloc, "get", await create_url_without_domain("/service/application/theme/v1.0/{theme_id}/{page_value}", theme_id=theme_id, page_value=page_value, filters=filters, company=company), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import AvailablePageSchema

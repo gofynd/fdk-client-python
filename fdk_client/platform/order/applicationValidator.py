@@ -15,6 +15,20 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
     
     
         
@@ -47,6 +61,36 @@ from ..PlatformModel import BaseSchema
 
 class OrderValidator:
     
+    
+    class failedOrderLogs(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        search_type = fields.Str(required=False)
+        
+        search_value = fields.Str(required=False)
+         
+        
+    
+    class getStateManagerStates(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+         
+        
     
     class getShipmentBagReasons(BaseSchema):
         

@@ -474,8 +474,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/query-options/", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GetCollectionQueryOptionResponse
-            schema = GetCollectionQueryOptionResponse()
+            from .models import GetQueryFiltersResponse
+            schema = GetQueryFiltersResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -516,8 +516,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import DeleteResponse
-            schema = DeleteResponse()
+            from .models import CommonResponseSchemaCollection
+            schema = CommonResponseSchemaCollection()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -701,8 +701,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/{slug}/", slug=slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CollectionDetailResponse
-            schema = CollectionDetailResponse()
+            from .models import GetCollectionDetailResponse
+            schema = GetCollectionDetailResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -904,7 +904,7 @@ class Catalog:
 
         return response
     
-    async def getAppLocations(self, store_type=None, uid=None, q=None, stage=None, page_no=None, page_size=None, request_headers:Dict={}):
+    async def getAppLocations(self, store_type=None, uid=None, q=None, stage=None, page_no=None, page_size=None, tags=None, store_types=None, request_headers:Dict={}):
         """This API allows to view all the locations asscoiated to a application.
         :param store_type : Helps to sort the location list on the basis of location type. : type string
         :param uid : Helps to sort the location list on the basis of uid list. : type array
@@ -912,6 +912,8 @@ class Catalog:
         :param stage : to filter companies on basis of verified or unverified companies. : type string
         :param page_no : The page number to navigate through the given set of results : type integer
         :param page_size : Number of items to retrieve in each page. Default is 20. : type integer
+        :param tags : Get locations filtered by tags. : type array
+        :param store_types : Get locations filtered by store types. : type array
         """
         payload = {}
         
@@ -927,14 +929,18 @@ class Catalog:
             payload["page_no"] = page_no
         if page_size is not None:
             payload["page_size"] = page_size
+        if tags is not None:
+            payload["tags"] = tags
+        if store_types is not None:
+            payload["store_types"] = store_types
 
         # Parameter validation
         schema = CatalogValidator.getAppLocations()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/locations", """{"required":[{"description":"Id of the company whose locations are to fetched","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Id of the application whose locations are to fetched","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"Helps to sort the location list on the basis of location type.","in":"query","name":"store_type","required":false,"schema":{"type":"string"}},{"description":"Helps to sort the location list on the basis of uid list.","in":"query","name":"uid","required":false,"schema":{"items":{"type":"integer"},"type":"array"}},{"description":"Query that is to be searched.","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"to filter companies on basis of verified or unverified companies.","in":"query","name":"stage","required":false,"schema":{"type":"string"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"default":1,"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 20.","in":"query","name":"page_size","required":false,"schema":{"default":20,"type":"integer"}}],"query":[{"description":"Helps to sort the location list on the basis of location type.","in":"query","name":"store_type","required":false,"schema":{"type":"string"}},{"description":"Helps to sort the location list on the basis of uid list.","in":"query","name":"uid","required":false,"schema":{"items":{"type":"integer"},"type":"array"}},{"description":"Query that is to be searched.","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"to filter companies on basis of verified or unverified companies.","in":"query","name":"stage","required":false,"schema":{"type":"string"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"default":1,"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 20.","in":"query","name":"page_size","required":false,"schema":{"default":20,"type":"integer"}}],"headers":[],"path":[{"description":"Id of the company whose locations are to fetched","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Id of the application whose locations are to fetched","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", store_type=store_type, uid=uid, q=q, stage=stage, page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(store_type=store_type, uid=uid, q=q, stage=stage, page_no=page_no, page_size=page_size)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/locations", """{"required":[{"description":"Id of the company whose locations are to fetched","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Id of the application whose locations are to fetched","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"Helps to sort the location list on the basis of location type.","in":"query","name":"store_type","required":false,"schema":{"type":"string"}},{"description":"Helps to sort the location list on the basis of uid list.","in":"query","name":"uid","required":false,"schema":{"items":{"type":"integer"},"type":"array"}},{"description":"Query that is to be searched.","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"to filter companies on basis of verified or unverified companies.","in":"query","name":"stage","required":false,"schema":{"type":"string"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"default":1,"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 20.","in":"query","name":"page_size","required":false,"schema":{"default":20,"type":"integer"}},{"description":"Get locations filtered by tags.","in":"query","name":"tags","required":false,"schema":{"items":{"type":"string"},"type":"array"}},{"description":"Get locations filtered by store types.","in":"query","name":"store_types","required":false,"schema":{"items":{"type":"string"},"type":"array"}}],"query":[{"description":"Helps to sort the location list on the basis of location type.","in":"query","name":"store_type","required":false,"schema":{"type":"string"}},{"description":"Helps to sort the location list on the basis of uid list.","in":"query","name":"uid","required":false,"schema":{"items":{"type":"integer"},"type":"array"}},{"description":"Query that is to be searched.","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"to filter companies on basis of verified or unverified companies.","in":"query","name":"stage","required":false,"schema":{"type":"string"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"default":1,"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 20.","in":"query","name":"page_size","required":false,"schema":{"default":20,"type":"integer"}},{"description":"Get locations filtered by tags.","in":"query","name":"tags","required":false,"schema":{"items":{"type":"string"},"type":"array"}},{"description":"Get locations filtered by store types.","in":"query","name":"store_types","required":false,"schema":{"items":{"type":"string"},"type":"array"}}],"headers":[],"path":[{"description":"Id of the company whose locations are to fetched","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Id of the application whose locations are to fetched","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", store_type=store_type, uid=uid, q=q, stage=stage, page_no=page_no, page_size=page_size, tags=tags, store_types=store_types)
+        query_string = await create_query_string(store_type=store_type, uid=uid, q=q, stage=stage, page_no=page_no, page_size=page_size, tags=tags, store_types=store_types)
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -948,7 +954,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/locations", store_type=store_type, uid=uid, q=q, stage=stage, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/locations", store_type=store_type, uid=uid, q=q, stage=stage, page_no=page_no, page_size=page_size, tags=tags, store_types=store_types), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import LocationListSerializer
@@ -2890,10 +2896,13 @@ class Catalog:
 
         return response
     
-    async def getConfigurationMetadata(self, config_type=None, template_slug=None, request_headers:Dict={}):
+    async def getConfigurationMetadata(self, config_type=None, template_slug=None, page_no=None, page_size=None, q=None, request_headers:Dict={}):
         """Get the configuraion metadata details for catalog.
         :param config_type : A `config_type` is an identifier that defines a specific type of configuration. : type string
         :param template_slug : Get configuration list filtered by `template_slug` string. This is for the details and comparision groups. : type string
+        :param page_no : The page number to navigate through the given set of results. : type integer
+        :param page_size : Number of items to retrieve in each page. : type integer
+        :param q : Get configuration list filtered by `q` string. : type string
         """
         payload = {}
         
@@ -2901,14 +2910,20 @@ class Catalog:
             payload["config_type"] = config_type
         if template_slug is not None:
             payload["template_slug"] = template_slug
+        if page_no is not None:
+            payload["page_no"] = page_no
+        if page_size is not None:
+            payload["page_size"] = page_size
+        if q is not None:
+            payload["q"] = q
 
         # Parameter validation
         schema = CatalogValidator.getConfigurationMetadata()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/metadata/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"A `config_type` is an identifier that defines a specific type of configuration.","in":"path","name":"config_type","required":true,"schema":{"enum":["filter","sort","details_groups","comparisons_groups","variant","similar","brands","categories","seller_groups"],"type":"string"}}],"optional":[{"description":"Get configuration list filtered by `template_slug` string. This is for the details and comparision groups.","in":"query","name":"template_slug","required":false,"schema":{"type":"string"}}],"query":[{"description":"Get configuration list filtered by `template_slug` string. This is for the details and comparision groups.","in":"query","name":"template_slug","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"A `config_type` is an identifier that defines a specific type of configuration.","in":"path","name":"config_type","required":true,"schema":{"enum":["filter","sort","details_groups","comparisons_groups","variant","similar","brands","categories","seller_groups"],"type":"string"}}]}""", config_type=config_type, template_slug=template_slug)
-        query_string = await create_query_string(config_type=config_type, template_slug=template_slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/metadata/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"A `config_type` is an identifier that defines a specific type of configuration.","in":"path","name":"config_type","required":true,"schema":{"enum":["filter","sort","details_groups","comparisons_groups","variant","similar","brands","categories","seller_groups"],"type":"string"}}],"optional":[{"description":"Get configuration list filtered by `template_slug` string. This is for the details and comparision groups.","in":"query","name":"template_slug","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results.","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page.","schema":{"type":"integer"},"required":false},{"in":"query","name":"q","description":"Get configuration list filtered by `q` string.","schema":{"type":"string"},"required":false}],"query":[{"description":"Get configuration list filtered by `template_slug` string. This is for the details and comparision groups.","in":"query","name":"template_slug","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results.","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page.","schema":{"type":"integer"},"required":false},{"in":"query","name":"q","description":"Get configuration list filtered by `q` string.","schema":{"type":"string"},"required":false}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"A `config_type` is an identifier that defines a specific type of configuration.","in":"path","name":"config_type","required":true,"schema":{"enum":["filter","sort","details_groups","comparisons_groups","variant","similar","brands","categories","seller_groups"],"type":"string"}}]}""", config_type=config_type, template_slug=template_slug, page_no=page_no, page_size=page_size, q=q)
+        query_string = await create_query_string(config_type=config_type, template_slug=template_slug, page_no=page_no, page_size=page_size, q=q)
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -2922,7 +2937,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/metadata/", config_type=config_type, template_slug=template_slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/metadata/", config_type=config_type, template_slug=template_slug, page_no=page_no, page_size=page_size, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import GetConfigMetadataResponse

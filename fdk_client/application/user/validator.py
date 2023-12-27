@@ -108,6 +108,13 @@ from ..ApplicationModel import BaseSchema
     
     
         
+    
+    
+        
+    
+    
+        
+    
 
 class UserValidator:
     
@@ -378,6 +385,25 @@ class UserValidator:
         
         platform = fields.Str(required=False)
          
+        
+    
+    class userExists(BaseSchema):
+        
+        
+        q = fields.Str(required=False)
+         
+        
+    
+    class getUserAttributes(BaseSchema):
+        
+        
+        slug = fields.Str(required=False)
+         
+        
+    
+    class updateUserAttributes(BaseSchema):
+        
+        pass 
         
     
     

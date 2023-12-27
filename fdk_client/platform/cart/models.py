@@ -236,6 +236,10 @@ class Article(BaseSchema):
     pass
 
 
+class PriceAdjustmentRestrictions(BaseSchema):
+    pass
+
+
 class Collection(BaseSchema):
     pass
 
@@ -353,6 +357,10 @@ class AppliedPromotion(BaseSchema):
 
 
 class PromiseFormatted(BaseSchema):
+    pass
+
+
+class PromiseISOFormat(BaseSchema):
     pass
 
 
@@ -1349,9 +1357,9 @@ class Restrictions1(BaseSchema):
     # Cart swagger.json
 
     
-    payments = fields.List(fields.Nested(PromotionPaymentModes, required=False), required=False)
+    payments = fields.Dict(required=False)
     
-    user_registered = fields.Dict(required=False, allow_none=True)
+    user_registered = fields.Nested(UserRegistered, required=False)
     
     platforms = fields.List(fields.Str(required=False), required=False)
     
@@ -1709,6 +1717,14 @@ class Article(BaseSchema):
     
 
 
+class PriceAdjustmentRestrictions(BaseSchema):
+    # Cart swagger.json
+
+    
+    post_order = fields.Dict(required=False)
+    
+
+
 class Collection(BaseSchema):
     # Cart swagger.json
 
@@ -1730,6 +1746,8 @@ class PriceAdjustmentUpdate(BaseSchema):
     message = fields.Str(required=False)
     
     apply_expiry = fields.Str(required=False)
+    
+    restrictions = fields.Nested(PriceAdjustmentRestrictions, required=False)
     
     article_level_distribution = fields.Boolean(required=False)
     
@@ -1758,6 +1776,8 @@ class PriceAdjustment(BaseSchema):
     message = fields.Str(required=False)
     
     apply_expiry = fields.Str(required=False)
+    
+    restrictions = fields.Nested(PriceAdjustmentRestrictions, required=False)
     
     article_level_distribution = fields.Boolean(required=False)
     
@@ -1796,6 +1816,8 @@ class PriceAdjustmentAdd(BaseSchema):
     message = fields.Str(required=False)
     
     apply_expiry = fields.Str(required=False)
+    
+    restrictions = fields.Nested(PriceAdjustmentRestrictions, required=False)
     
     created_by = fields.Str(required=False)
     
@@ -2115,6 +2137,8 @@ class ProductArticle(BaseSchema):
     
     store = fields.Nested(StoreInfo, required=False)
     
+    tags = fields.List(fields.Str(required=False), required=False)
+    
 
 
 class Ownership2(BaseSchema):
@@ -2191,6 +2215,8 @@ class AppliedPromotion(BaseSchema):
     
     ownership = fields.Nested(Ownership2, required=False)
     
+    currency = fields.Nested(CartCurrency, required=False)
+    
     discount_rules = fields.List(fields.Nested(DiscountRulesApp, required=False), required=False)
     
     applied_free_articles = fields.List(fields.Nested(AppliedFreeArticles, required=False), required=False)
@@ -2223,6 +2249,16 @@ class PromiseFormatted(BaseSchema):
     
 
 
+class PromiseISOFormat(BaseSchema):
+    # Cart swagger.json
+
+    
+    max = fields.Str(required=False)
+    
+    min = fields.Str(required=False)
+    
+
+
 class PromiseTimestamp(BaseSchema):
     # Cart swagger.json
 
@@ -2240,6 +2276,8 @@ class ShipmentPromise(BaseSchema):
     formatted = fields.Nested(PromiseFormatted, required=False)
     
     timestamp = fields.Nested(PromiseTimestamp, required=False)
+    
+    iso = fields.Nested(PromiseISOFormat, required=False)
     
 
 
@@ -2885,6 +2923,8 @@ class AddProductCart(BaseSchema):
     
     pos = fields.Boolean(required=False)
     
+    seller_identifier = fields.Str(required=False)
+    
 
 
 class AddCartRequest(BaseSchema):
@@ -2972,6 +3012,8 @@ class OverrideCartItemPromo(BaseSchema):
     rwrd_tndr = fields.Str(required=False)
     
     item_list = fields.List(fields.Dict(required=False, allow_none=True), required=False)
+    
+    parent_promo_id = fields.Str(required=False)
     
 
 
@@ -3149,6 +3191,8 @@ class CartList(BaseSchema):
     
     user_id = fields.Str(required=False)
     
+    currency_code = fields.Str(required=False)
+    
     item_counts = fields.Int(required=False)
     
 
@@ -3319,6 +3363,12 @@ class Coupon(BaseSchema):
     
     description = fields.Str(required=False, allow_none=True)
     
+    start_date = fields.Str(required=False, allow_none=True)
+    
+    end_date = fields.Str(required=False, allow_none=True)
+    
+    coupon_applicable_message = fields.Str(required=False)
+    
 
 
 class PageCoupon(BaseSchema):
@@ -3409,6 +3459,10 @@ class PlatformAddress(BaseSchema):
     
     city = fields.Str(required=False)
     
+    sector = fields.Str(required=False)
+    
+    state_code = fields.Str(required=False)
+    
     area = fields.Str(required=False)
     
     user_id = fields.Str(required=False)
@@ -3416,6 +3470,12 @@ class PlatformAddress(BaseSchema):
     address_type = fields.Str(required=False)
     
     address = fields.Str(required=False)
+    
+    country_phone_code = fields.Str(required=False)
+    
+    country_iso_code = fields.Str(required=False)
+    
+    _custom_json = fields.Dict(required=False)
     
 
 
@@ -3771,7 +3831,7 @@ class CheckCart(BaseSchema):
     
     breakup_values = fields.Nested(CartBreakup, required=False)
     
-    cod_charges = fields.Int(required=False)
+    cod_charges = fields.Float(required=False)
     
     is_valid = fields.Boolean(required=False)
     
@@ -3795,7 +3855,7 @@ class CheckCart(BaseSchema):
     
     cod_available = fields.Boolean(required=False)
     
-    delivery_charges = fields.Int(required=False)
+    delivery_charges = fields.Float(required=False)
     
 
 
