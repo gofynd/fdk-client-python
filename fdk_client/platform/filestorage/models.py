@@ -24,10 +24,6 @@ class StartResponse(BaseSchema):
     pass
 
 
-class Params(BaseSchema):
-    pass
-
-
 class StartRequest(BaseSchema):
     pass
 
@@ -339,14 +335,6 @@ class StartResponse(BaseSchema):
     
 
 
-class Params(BaseSchema):
-    # FileStorage swagger.json
-
-    
-    subpath = fields.Str(required=False)
-    
-
-
 class StartRequest(BaseSchema):
     # FileStorage swagger.json
 
@@ -359,7 +347,7 @@ class StartRequest(BaseSchema):
     
     tags = fields.List(fields.Str(required=False), required=False)
     
-    params = fields.Nested(Params, required=False)
+    params = fields.Dict(required=False)
     
 
 

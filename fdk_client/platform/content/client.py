@@ -674,19 +674,28 @@ class Content:
 
         return response
     
-    async def getCustomObjects(self, request_headers:Dict={}):
+    async def getCustomObjects(self, definition_id=None, page_no=None, page_size=None, request_headers:Dict={}):
         """Use this API to retrieve the custom objects.
+        :param definition_id :  : type string
+        :param page_no :  : type string
+        :param page_size :  : type string
         """
         payload = {}
         
+        if definition_id is not None:
+            payload["definition_id"] = definition_id
+        if page_no is not None:
+            payload["page_no"] = page_no
+        if page_size is not None:
+            payload["page_size"] = page_size
 
         # Parameter validation
         schema = ContentValidator.getCustomObjects()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/metaobjects", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"},"examples":{"success":{"value":1},"failure":{"value":10},"success1":{"value":1},"success2":{"value":2},"duplicateFieldExample":{"value":11},"validationErrorExample":{"value":12},"failure2":{"value":10}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"},"examples":{"success":{"value":1},"failure":{"value":10},"success1":{"value":1},"success2":{"value":2},"duplicateFieldExample":{"value":11},"validationErrorExample":{"value":12},"failure2":{"value":10}}}]}""", )
-        query_string = await create_query_string()
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/metaobjects", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"},"examples":{"success":{"value":1},"failure":{"value":10},"success1":{"value":1},"success2":{"value":2},"duplicateFieldExample":{"value":11},"validationErrorExample":{"value":12},"failure2":{"value":10}}},{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"},"examples":{"success":{"value":1},"failure":{"value":1}}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"},"examples":{"success":{"value":10},"failure":{"value":10}}}],"optional":[{"name":"definition_id","in":"query","required":false,"schema":{"type":"string","description":"This is definition id"},"examples":{"success":{"value":"65369afad436ae0e54147e86"},"failure":{"value":"5eda528b97457fe43a733acd"}}}],"query":[{"name":"definition_id","in":"query","required":false,"schema":{"type":"string","description":"This is definition id"},"examples":{"success":{"value":"65369afad436ae0e54147e86"},"failure":{"value":"5eda528b97457fe43a733acd"}}},{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"},"examples":{"success":{"value":1},"failure":{"value":1}}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"},"examples":{"success":{"value":10},"failure":{"value":10}}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"},"examples":{"success":{"value":1},"failure":{"value":10},"success1":{"value":1},"success2":{"value":2},"duplicateFieldExample":{"value":11},"validationErrorExample":{"value":12},"failure2":{"value":10}}}]}""", definition_id=definition_id, page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(definition_id=definition_id, page_no=page_no, page_size=page_size)
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -700,7 +709,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/metaobjects", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/metaobjects", definition_id=definition_id, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CustomObjectsSchema

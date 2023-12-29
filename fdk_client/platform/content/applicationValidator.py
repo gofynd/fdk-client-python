@@ -466,6 +466,9 @@ from .models import GenerationEntityType
     
         
         
+        
+        
+        
     
     
         
@@ -1510,6 +1513,12 @@ class ContentValidator:
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
+        
+        definition_id = fields.Str(required=False)
+        
+        page_no = fields.Str(required=False)
+        
+        page_size = fields.Str(required=False)
          
         
     

@@ -803,6 +803,8 @@ class SEOSchemaMarkupTemplate(BaseSchema):
     
     application = fields.Str(required=False)
     
+    target_json = fields.Dict(required=False)
+    
 
 
 class SEOSchemaMarkupTemplateRequestBody(BaseSchema):
@@ -816,6 +818,8 @@ class SEOSchemaMarkupTemplateRequestBody(BaseSchema):
     schema = fields.Str(required=False)
     
     description = fields.Str(required=False)
+    
+    target_json = fields.Dict(required=False)
     
     active = fields.Boolean(required=False)
     
@@ -902,6 +906,8 @@ class DefaultSEOSchemaMarkupTemplate(BaseSchema):
     page_type = fields.Str(required=False)
     
     schema = fields.Str(required=False)
+    
+    target_json = fields.Dict(required=False)
     
 
 

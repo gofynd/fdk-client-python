@@ -6364,7 +6364,7 @@ except Exception as e:
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
 | id | String | yes | Alphanumeric ID allotted to a SEO Markup Schema Template created within a business. |  
-| body | [SEOSchemaMarkupTemplate](#SEOSchemaMarkupTemplate) | yes | Request body |
+| body | [SEOSchemaMarkupTemplateRequestBody](#SEOSchemaMarkupTemplateRequestBody) | yes | Request body |
 
 
 Use this API to edit an existing SEO Markup schema an application
@@ -10046,7 +10046,7 @@ Get list of custom objects
 
 ```python
 try:
-    result = await platformClient.content.getCustomObjects()
+    result = await platformClient.content.getCustomObjects(definitionId=definitionId, pageNo=pageNo, pageSize=pageSize)
     # use result
 except Exception as e:
     print(e)
@@ -10054,6 +10054,13 @@ except Exception as e:
 
 
 
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| definitionId | String? | no |  |   
+| pageNo | String | yes |  |   
+| pageSize | String | yes |  |  
 
 
 
@@ -12821,7 +12828,7 @@ Get list of custom objects
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").content.getAppCustomObjects()
+    result = await platformClient.application("<APPLICATION_ID>").content.getAppCustomObjects(definitionId=definitionId, pageNo=pageNo, pageSize=pageSize)
     # use result
 except Exception as e:
     print(e)
@@ -12829,6 +12836,13 @@ except Exception as e:
 
 
 
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| definitionId | String? | no |  |   
+| pageNo | String | yes |  |   
+| pageSize | String | yes |  |  
 
 
 
@@ -13810,6 +13824,7 @@ Success. Get headers of custom object definition
  | createdAt | String? |  yes  |  |
  | updatedAt | String? |  yes  |  |
  | application | String? |  yes  |  |
+ | targetJson | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -13824,6 +13839,7 @@ Success. Get headers of custom object definition
  | pageType | String? |  yes  |  |
  | schema | String? |  yes  |  |
  | description | String? |  yes  |  |
+ | targetJson | HashMap<String,Any>? |  yes  |  |
  | active | Boolean? |  yes  |  |
  | createdAt | String? |  yes  |  |
  | updatedAt | String? |  yes  |  |
@@ -13909,6 +13925,7 @@ Success. Get headers of custom object definition
  | ---------- | ---- | -------- | ----------- |
  | pageType | String? |  yes  |  |
  | schema | String? |  yes  |  |
+ | targetJson | HashMap<String,Any>? |  yes  |  |
 
 ---
 
