@@ -172,10 +172,6 @@ class CommonFeature(BaseSchema):
     pass
 
 
-class InternationalShipping(BaseSchema):
-    pass
-
-
 class CommunicationOptinDialogFeature(BaseSchema):
     pass
 
@@ -185,10 +181,6 @@ class DeploymentStoreSelectionFeature(BaseSchema):
 
 
 class ListingPriceFeature(BaseSchema):
-    pass
-
-
-class ListingPageFeature(BaseSchema):
     pass
 
 
@@ -264,15 +256,7 @@ class Application(BaseSchema):
     pass
 
 
-class TokenSchema(BaseSchema):
-    pass
-
-
 class NotFound(BaseSchema):
-    pass
-
-
-class InvalidPayloadRequest(BaseSchema):
     pass
 
 
@@ -309,18 +293,6 @@ class InformationAddress(BaseSchema):
 
 
 class InformationPhone(BaseSchema):
-    pass
-
-
-class InformationSupportPhone(BaseSchema):
-    pass
-
-
-class InformationSupportEmail(BaseSchema):
-    pass
-
-
-class InformationLoc(BaseSchema):
     pass
 
 
@@ -417,15 +389,15 @@ class ApplicationAboutResponse(BaseSchema):
     
     application_info = fields.Nested(ApplicationInfo, required=False)
     
+    company_info = fields.Nested(CompanyInfo, required=False)
+    
+    owner_info = fields.Nested(OwnerInfo, required=False)
+    
 
 
 class ApplicationInfo(BaseSchema):
     # Configuration swagger.json
 
-    
-    company_info = fields.Nested(CompanyInfo, required=False)
-    
-    owner_info = fields.Nested(OwnerInfo, required=False)
     
     _id = fields.Str(required=False)
     
@@ -439,7 +411,7 @@ class ApplicationInfo(BaseSchema):
     
     name = fields.Str(required=False)
     
-    meta = fields.List(fields.Nested(ApplicationMeta, required=False), required=False)
+    meta = fields.Nested(ApplicationMeta, required=False)
     
     token = fields.Str(required=False)
     
@@ -452,18 +424,6 @@ class ApplicationInfo(BaseSchema):
     logo = fields.Nested(SecureUrl, required=False)
     
     is_active = fields.Boolean(required=False)
-    
-    mode = fields.Str(required=False)
-    
-    tokens = fields.List(fields.Nested(TokenSchema, required=False), required=False)
-    
-    domains = fields.List(fields.Nested(Domain, required=False), required=False)
-    
-    favicon = fields.Nested(SecureUrl, required=False)
-    
-    mobile_logo = fields.Nested(SecureUrl, required=False)
-    
-    slug = fields.Str(required=False)
     
 
 
@@ -595,7 +555,7 @@ class AppTokenResponse(BaseSchema):
     
     created_at = fields.Str(required=False)
     
-    modified_at = fields.Str(required=False)
+    updated_at = fields.Str(required=False)
     
     __v = fields.Int(required=False)
     
@@ -905,7 +865,7 @@ class AppFeature(BaseSchema):
     
     created_at = fields.Str(required=False)
     
-    modified_at = fields.Str(required=False)
+    updated_at = fields.Str(required=False)
     
     __v = fields.Int(required=False)
     
@@ -939,18 +899,6 @@ class CommonFeature(BaseSchema):
     
     reward_points = fields.Nested(RewardPointsConfig, required=False)
     
-    listing_page = fields.Nested(ListingPageFeature, required=False)
-    
-    international_shipping = fields.Nested(InternationalShipping, required=False)
-    
-
-
-class InternationalShipping(BaseSchema):
-    # Configuration swagger.json
-
-    
-    enabled = fields.Boolean(required=False)
-    
 
 
 class CommunicationOptinDialogFeature(BaseSchema):
@@ -978,14 +926,6 @@ class ListingPriceFeature(BaseSchema):
     value = fields.Str(required=False)
     
     sort = fields.Str(required=False)
-    
-
-
-class ListingPageFeature(BaseSchema):
-    # Configuration swagger.json
-
-    
-    sort_on = fields.Str(required=False)
     
 
 
@@ -1091,15 +1031,11 @@ class Currency(BaseSchema):
     
     created_at = fields.Str(required=False)
     
-    modified_at = fields.Str(required=False)
+    updated_at = fields.Str(required=False)
     
     decimal_digits = fields.Int(required=False)
     
     symbol = fields.Str(required=False)
-    
-    country_name = fields.Str(required=False)
-    
-    country_code = fields.Str(required=False)
     
 
 
@@ -1213,7 +1149,7 @@ class Application(BaseSchema):
     
     created_at = fields.Str(required=False)
     
-    modified_at = fields.Str(required=False)
+    updated_at = fields.Str(required=False)
     
     __v = fields.Int(required=False)
     
@@ -1231,37 +1167,9 @@ class Application(BaseSchema):
     
     domain = fields.Nested(Domain, required=False)
     
-    slug = fields.Str(required=False)
-    
-    mode = fields.Str(required=False)
-    
-    status = fields.Str(required=False)
-    
-    tokens = fields.List(fields.Nested(TokenSchema, required=False), required=False)
-    
-
-
-class TokenSchema(BaseSchema):
-    # Configuration swagger.json
-
-    
-    token = fields.Str(required=False)
-    
-    created_by = fields.Dict(required=False)
-    
-    created_at = fields.Str(required=False)
-    
 
 
 class NotFound(BaseSchema):
-    # Configuration swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-
-
-class InvalidPayloadRequest(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1365,19 +1273,19 @@ class ApplicationInformation(BaseSchema):
     
     social_links = fields.Nested(SocialLinks, required=False)
     
-    links = fields.List(fields.Nested(Links, required=False), required=False)
+    links = fields.Nested(Links, required=False)
     
     copyright_text = fields.Str(required=False)
     
     _id = fields.Str(required=False)
     
-    business_highlights = fields.List(fields.Nested(BusinessHighlights, required=False), required=False)
+    business_highlights = fields.Nested(BusinessHighlights, required=False)
     
     application = fields.Str(required=False)
     
     created_at = fields.Str(required=False)
     
-    modified_at = fields.Str(required=False)
+    updated_at = fields.Str(required=False)
     
     __v = fields.Int(required=False)
     
@@ -1387,11 +1295,11 @@ class InformationAddress(BaseSchema):
     # Configuration swagger.json
 
     
-    loc = fields.Nested(InformationLoc, required=False)
+    loc = fields.Str(required=False)
     
     address_line = fields.List(fields.Str(required=False), required=False)
     
-    phone = fields.List(fields.Nested(InformationPhone, required=False), required=False)
+    phone = fields.Nested(InformationPhone, required=False)
     
     city = fields.Str(required=False)
     
@@ -1411,45 +1319,13 @@ class InformationPhone(BaseSchema):
     
 
 
-class InformationSupportPhone(BaseSchema):
-    # Configuration swagger.json
-
-    
-    code = fields.Str(required=False)
-    
-    number = fields.Str(required=False)
-    
-    key = fields.Str(required=False)
-    
-
-
-class InformationSupportEmail(BaseSchema):
-    # Configuration swagger.json
-
-    
-    value = fields.Str(required=False)
-    
-    key = fields.Str(required=False)
-    
-
-
-class InformationLoc(BaseSchema):
-    # Configuration swagger.json
-
-    
-    type = fields.Str(required=False)
-    
-    coordinates = fields.List(fields.Int(required=False), required=False)
-    
-
-
 class InformationSupport(BaseSchema):
     # Configuration swagger.json
 
     
-    phone = fields.List(fields.Nested(InformationSupportPhone, required=False), required=False)
+    phone = fields.List(fields.Str(required=False), required=False)
     
-    email = fields.List(fields.Nested(InformationSupportEmail, required=False), required=False)
+    email = fields.List(fields.Str(required=False), required=False)
     
     timing = fields.Str(required=False)
     
@@ -1633,10 +1509,6 @@ class ApplicationDetail(BaseSchema):
     
     _id = fields.Str(required=False)
     
-    slug = fields.Str(required=False)
-    
-    company_id = fields.Int(required=False)
-    
 
 
 class CurrenciesResponse(BaseSchema):
@@ -1666,12 +1538,6 @@ class AppCurrencyResponse(BaseSchema):
     default_currency = fields.Nested(DefaultCurrency, required=False)
     
     supported_currency = fields.List(fields.Nested(Currency, required=False), required=False)
-    
-    _id = fields.Str(required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    modified_at = fields.Str(required=False)
     
 
 

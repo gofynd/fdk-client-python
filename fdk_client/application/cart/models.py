@@ -40,10 +40,6 @@ class PromiseFormatted(BaseSchema):
     pass
 
 
-class PromiseISOFormat(BaseSchema):
-    pass
-
-
 class PromiseTimestamp(BaseSchema):
     pass
 
@@ -77,14 +73,6 @@ class CartProductIdentifer(BaseSchema):
 
 
 class PromoMeta(BaseSchema):
-    pass
-
-
-class ChargesAmount(BaseSchema):
-    pass
-
-
-class Charges(BaseSchema):
     pass
 
 
@@ -517,6 +505,10 @@ class AppliedPromotion(BaseSchema):
     
     promotion_type = fields.Str(required=False)
     
+    meta = fields.Dict(required=False)
+    
+    code = fields.Str(required=False, allow_none=True)
+    
 
 
 class PaymentSelectionLock(BaseSchema):
@@ -532,16 +524,6 @@ class PaymentSelectionLock(BaseSchema):
 
 
 class PromiseFormatted(BaseSchema):
-    # Cart swagger.json
-
-    
-    max = fields.Str(required=False)
-    
-    min = fields.Str(required=False)
-    
-
-
-class PromiseISOFormat(BaseSchema):
     # Cart swagger.json
 
     
@@ -568,8 +550,6 @@ class ShipmentPromise(BaseSchema):
     formatted = fields.Nested(PromiseFormatted, required=False)
     
     timestamp = fields.Nested(PromiseTimestamp, required=False)
-    
-    iso = fields.Nested(PromiseISOFormat, required=False)
     
 
 
@@ -659,8 +639,6 @@ class ProductArticle(BaseSchema):
     
     type = fields.Str(required=False)
     
-    tags = fields.List(fields.Str(required=False), required=False)
-    
 
 
 class CartProductIdentifer(BaseSchema):
@@ -676,34 +654,6 @@ class PromoMeta(BaseSchema):
 
     
     message = fields.Str(required=False)
-    
-
-
-class ChargesAmount(BaseSchema):
-    # Cart swagger.json
-
-    
-    value = fields.Float(required=False)
-    
-    currency = fields.Str(required=False)
-    
-
-
-class Charges(BaseSchema):
-    # Cart swagger.json
-
-    
-    meta = fields.Dict(required=False)
-    
-    amount = fields.Nested(ChargesAmount, required=False)
-    
-    name = fields.Str(required=False)
-    
-    allow_refund = fields.Boolean(required=False)
-    
-    code = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
     
 
 
@@ -903,8 +853,6 @@ class CartProductInfo(BaseSchema):
     
     quantity = fields.Int(required=False)
     
-    charges = fields.List(fields.Nested(Charges, required=False), required=False)
-    
     discount = fields.Str(required=False)
     
     availability = fields.Nested(ProductAvailability, required=False)
@@ -976,8 +924,6 @@ class RawBreakup(BaseSchema):
     mrp_total = fields.Float(required=False)
     
     mop_total = fields.Float(required=False)
-    
-    total_charge = fields.Float(required=False)
     
     coupon = fields.Float(required=False)
     
@@ -1217,8 +1163,6 @@ class AddProductCart(BaseSchema):
     
     meta = fields.Dict(required=False)
     
-    seller_identifier = fields.Str(required=False)
-    
 
 
 class AddCartRequest(BaseSchema):
@@ -1331,8 +1275,6 @@ class Coupon(BaseSchema):
     # Cart swagger.json
 
     
-    coupon_amount = fields.Float(required=False)
-    
     coupon_value = fields.Float(required=False)
     
     title = fields.Str(required=False)
@@ -1356,12 +1298,6 @@ class Coupon(BaseSchema):
     description = fields.Str(required=False, allow_none=True)
     
     is_applied = fields.Boolean(required=False)
-    
-    start_date = fields.Str(required=False, allow_none=True)
-    
-    end_date = fields.Str(required=False, allow_none=True)
-    
-    coupon_applicable_message = fields.Str(required=False)
     
 
 
@@ -1490,10 +1426,6 @@ class Address(BaseSchema):
     _custom_json = fields.Dict(required=False)
     
     city = fields.Str(required=False)
-    
-    sector = fields.Str(required=False)
-    
-    state_code = fields.Str(required=False)
     
     created_by_user_id = fields.Str(required=False)
     
@@ -1801,7 +1733,7 @@ class CheckCart(BaseSchema):
     
     is_valid = fields.Boolean(required=False)
     
-    delivery_charges = fields.Float(required=False)
+    delivery_charges = fields.Int(required=False)
     
     id = fields.Str(required=False)
     
@@ -1847,7 +1779,7 @@ class CheckCart(BaseSchema):
     
     buy_now = fields.Boolean(required=False)
     
-    cod_charges = fields.Float(required=False)
+    cod_charges = fields.Int(required=False)
     
 
 

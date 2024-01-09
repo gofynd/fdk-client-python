@@ -86,7 +86,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
     
     
         
@@ -94,70 +93,6 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
         
         
         
@@ -177,7 +112,7 @@ class UserValidator:
         
         application_id = fields.Str(required=False)
         
-        q = fields.Str(required=False)
+        q = fields.Dict(required=False)
         
         page_size = fields.Int(required=False)
         
@@ -333,8 +268,6 @@ class UserValidator:
         
         name = fields.Str(required=False)
         
-        type = fields.Str(required=False)
-        
         status = fields.Str(required=False)
         
         group_uid = fields.Int(required=False)
@@ -371,144 +304,6 @@ class UserValidator:
         application_id = fields.Str(required=False)
         
         group_id = fields.Str(required=False)
-         
-        
-    
-    class createUserAttributeDefinition(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getUserAttributeDefinitions(BaseSchema):
-        
-        
-        excluding_ids = fields.Str(required=False)
-        
-        slug = fields.Str(required=False)
-        
-        type = fields.Str(required=False)
-        
-        customer_editable = fields.Boolean(required=False)
-        
-        encrypted = fields.Boolean(required=False)
-        
-        pinned = fields.Boolean(required=False)
-        
-        pin_order = fields.Int(required=False)
-        
-        is_locked = fields.Boolean(required=False)
-        
-        name = fields.Str(required=False)
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        page_no = fields.Int(required=False)
-         
-        
-    
-    class updateUserAttributeDefinition(BaseSchema):
-        
-        
-        attribute_def_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        company_id = fields.Str(required=False)
-         
-        
-    
-    class deleteUserAttributeDefinitionById(BaseSchema):
-        
-        
-        attribute_def_id = fields.Str(required=False)
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getUserAttributeDefinitionById(BaseSchema):
-        
-        
-        attribute_def_id = fields.Str(required=False)
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class updateUserAttribute(BaseSchema):
-        
-        
-        attribute_def_id = fields.Str(required=False)
-        
-        user_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        company_id = fields.Str(required=False)
-         
-        
-    
-    class getUserAttribute(BaseSchema):
-        
-        
-        attribute_def_id = fields.Str(required=False)
-        
-        user_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        company_id = fields.Str(required=False)
-         
-        
-    
-    class deleteUserAttribute(BaseSchema):
-        
-        
-        attribute_def_id = fields.Str(required=False)
-        
-        user_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        company_id = fields.Str(required=False)
-         
-        
-    
-    class getUserAttributesForUser(BaseSchema):
-        
-        
-        user_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        company_id = fields.Str(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        page_no = fields.Int(required=False)
-         
-        
-    
-    class getUserAttributeById(BaseSchema):
-        
-        
-        attribute_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        company_id = fields.Str(required=False)
          
         
     

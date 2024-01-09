@@ -13,102 +13,6 @@ class Order:
         self.applicationId = applicationId
 
     
-    async def failedOrderLogs(self, page_no=None, page_size=None, search_type=None, search_value=None, request_headers:Dict={}):
-        """This endpoint allows users to get failed order logs listing for filters based on order id, user contact number, user email id and sales channel id.
-        :param page_no : Page Number : type integer
-        :param page_size : Page Size : type integer
-        :param search_type : Search type for filter : type string
-        :param search_value : Search value for filter : type string
-        """
-        payload = {}
-        
-        if page_no is not None:
-            payload["page_no"] = page_no
-        if page_size is not None:
-            payload["page_size"] = page_size
-        if search_type is not None:
-            payload["search_type"] = search_type
-        if search_value is not None:
-            payload["search_value"] = search_value
-
-        # Parameter validation
-        schema = OrderValidator.failedOrderLogs()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/orders/failed", """{"required":[{"in":"path","name":"company_id","description":"Company ID","required":true,"schema":{"type":"integer","example":2}}],"optional":[{"in":"query","name":"application_id","description":"Application ID","required":false,"schema":{"type":"string","example":"64aed475db2cfb5b8a9f623d"}},{"in":"query","name":"page_no","required":false,"description":"Page Number","schema":{"type":"integer","example":1}},{"in":"query","name":"page_size","required":false,"description":"Page Size","schema":{"type":"integer","example":10}},{"in":"query","name":"search_type","required":false,"description":"Search type for filter","schema":{"type":"string","example":"email_id"}},{"in":"query","name":"search_value","required":false,"description":"Search value for filter","schema":{"type":"string","example":"employee@gofynd.com"}}],"query":[{"in":"query","name":"application_id","description":"Application ID","required":false,"schema":{"type":"string","example":"64aed475db2cfb5b8a9f623d"}},{"in":"query","name":"page_no","required":false,"description":"Page Number","schema":{"type":"integer","example":1}},{"in":"query","name":"page_size","required":false,"description":"Page Size","schema":{"type":"integer","example":10}},{"in":"query","name":"search_type","required":false,"description":"Search type for filter","schema":{"type":"string","example":"email_id"}},{"in":"query","name":"search_value","required":false,"description":"Search value for filter","schema":{"type":"string","example":"employee@gofynd.com"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID","required":true,"schema":{"type":"integer","example":2}}]}""", page_no=page_no, page_size=page_size, search_type=search_type, search_value=search_value)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, search_type=search_type, search_value=search_value)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/orders/failed", page_no=page_no, page_size=page_size, search_type=search_type, search_value=search_value), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import FailedOrderLogs
-            schema = FailedOrderLogs()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for failedOrderLogs")
-                print(e)
-
-        return response
-    
-    async def getStateManagerStates(self, page_no=None, page_size=None, request_headers:Dict={}):
-        """
-        :param page_no :  : type integer
-        :param page_size :  : type integer
-        """
-        payload = {}
-        
-        if page_no is not None:
-            payload["page_no"] = page_no
-        if page_size is not None:
-            payload["page_size"] = page_size
-
-        # Parameter validation
-        schema = OrderValidator.getStateManagerStates()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/states", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":20}}],"query":[{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":20}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/states", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import PaginatedStates
-            schema = PaginatedStates()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getStateManagerStates")
-                print(e)
-
-        return response
-    
     async def getShipmentBagReasons(self, shipment_id=None, line_number=None, request_headers:Dict={}):
         """Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
         :param shipment_id : ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
@@ -155,7 +59,7 @@ class Order:
         return response
     
     async def getApplicationShipments(self, lane=None, search_type=None, search_id=None, from_date=None, to_date=None, dp_ids=None, ordering_company_id=None, stores=None, sales_channel=None, request_by_ext=None, page_no=None, page_size=None, customer_id=None, is_priority_sort=None, exclude_locked_shipments=None, request_headers:Dict={}):
-        """Get cross selling platform shipments
+        """
         :param lane :  : type string
         :param search_type :  : type string
         :param search_id :  : type string

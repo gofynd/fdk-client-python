@@ -25,8 +25,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
-        
     
     
         
@@ -94,26 +92,14 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
-        
-        
-        
         
         
         
         
         
         
-        
-        
-        
-        
-    
-    
         
         
-    
-    
         
         
     
@@ -126,40 +112,26 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
         
         
-        
-        
     
     
-        
         
         
     
     
         
         
-    
-    
-        
         
-    
-    
         
         
     
     
-        
-        
         
-    
-    
         
         
     
     
-        
         
         
     
@@ -179,7 +151,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
     
     
         
@@ -189,17 +160,14 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
     
     
         
         
     
     
-        
         
         
-        
     
     
         
@@ -207,12 +175,8 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
-        
         
         
-    
-    
         
         
     
@@ -221,18 +185,13 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
         
         
-        
-        
     
     
         
         
         
-    
-    
         
         
     
@@ -244,22 +203,13 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
     
     
-        
         
         
-    
-    
-        
         
     
     
-        
-        
-        
-        
         
         
         
@@ -304,10 +254,6 @@ class PaymentValidator:
         refresh = fields.Boolean(required=False)
         
         request_type = fields.Str(required=False)
-        
-        order_id = fields.Str(required=False)
-        
-        shipment_id = fields.Str(required=False)
          
         
     
@@ -471,19 +417,11 @@ class PaymentValidator:
         
         refresh = fields.Boolean(required=False)
         
-        order_id = fields.Str(required=False)
-        
         card_reference = fields.Str(required=False)
         
         order_type = fields.Str(required=False)
         
         user_details = fields.Str(required=False)
-        
-        display_split = fields.Boolean(required=False)
-        
-        advance_payment = fields.Boolean(required=False)
-        
-        shipment_id = fields.Str(required=False)
          
         
     
@@ -625,69 +563,12 @@ class PaymentValidator:
          
         
     
-    class getPaymentModeControlRoutes(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        mode = fields.Str(required=False)
-         
-        
-    
-    class setMerchantModeControlRoutes(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        mode = fields.Str(required=False)
-         
-        
-    
-    class getPaymentModeCustomConfig(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        mode = fields.Str(required=False)
-         
-        
-    
-    class setPaymentModeCustomConfig(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        mode = fields.Str(required=False)
-         
-        
-    
     class getPaymentCodeOption(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
-         
-        
-    
-    class getPaymentSession(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        gid = fields.Str(required=False)
-        
-        line__item = fields.Boolean(required=False)
          
         
     
@@ -798,45 +679,6 @@ class PaymentValidator:
         application_id = fields.Str(required=False)
         
         config_type = fields.Str(required=False)
-         
-        
-    
-    class createPaymentOrder(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getMerchantAggregatorAppVersion(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        aggregator_id = fields.Int(required=False)
-        
-        business_unit = fields.Str(required=False)
-        
-        device = fields.Str(required=False)
-        
-        payment_mode_id = fields.Int(required=False)
-        
-        sub_payment_mode = fields.Str(required=False)
-         
-        
-    
-    class patchMerchantPaymentOptionVersion(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        aggregator_id = fields.Int(required=False)
          
         
     

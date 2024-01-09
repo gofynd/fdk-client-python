@@ -8,14 +8,6 @@ from ..ApplicationModel import BaseSchema
 
 
 
-class UpdateUserAttributesRequest(BaseSchema):
-    pass
-
-
-class UserAttributes(BaseSchema):
-    pass
-
-
 class DeleteApplicationUserRequestSchema(BaseSchema):
     pass
 
@@ -121,10 +113,6 @@ class UserObjectSchema(BaseSchema):
 
 
 class AuthSuccess(BaseSchema):
-    pass
-
-
-class UserExistsResponse(BaseSchema):
     pass
 
 
@@ -327,22 +315,6 @@ class Email(BaseSchema):
 
 
 
-class UpdateUserAttributesRequest(BaseSchema):
-    # User swagger.json
-
-    
-    attributes = fields.Dict(required=False)
-    
-
-
-class UserAttributes(BaseSchema):
-    # User swagger.json
-
-    
-    attributes = fields.Dict(required=False)
-    
-
-
 class DeleteApplicationUserRequestSchema(BaseSchema):
     # User swagger.json
 
@@ -443,6 +415,8 @@ class SendEmailOtpRequestSchema(BaseSchema):
     
     register_token = fields.Str(required=False)
     
+    captcha_code = fields.Str(required=False)
+    
 
 
 class SendEmailForgotOtpRequestSchema(BaseSchema):
@@ -518,6 +492,8 @@ class SendMobileOtpRequestSchema(BaseSchema):
     android_hash = fields.Str(required=False)
     
     force = fields.Str(required=False)
+    
+    captcha_code = fields.Str(required=False)
     
 
 
@@ -599,6 +575,8 @@ class SendResetPasswordEmailRequestSchema(BaseSchema):
     
     email = fields.Str(required=False)
     
+    captcha_code = fields.Str(required=False)
+    
 
 
 class SendResetPasswordMobileRequestSchema(BaseSchema):
@@ -609,11 +587,15 @@ class SendResetPasswordMobileRequestSchema(BaseSchema):
     
     mobile = fields.Str(required=False)
     
+    captcha_code = fields.Str(required=False)
+    
 
 
 class PasswordLoginRequestSchema(BaseSchema):
     # User swagger.json
 
+    
+    captcha_code = fields.Str(required=False)
     
     password = fields.Str(required=False)
     
@@ -626,6 +608,8 @@ class SendOtpRequestSchema(BaseSchema):
 
     
     country_code = fields.Str(required=False)
+    
+    captcha_code = fields.Str(required=False)
     
     mobile = fields.Str(required=False)
     
@@ -674,14 +658,6 @@ class AuthSuccess(BaseSchema):
     user_exists = fields.Boolean(required=False)
     
     user = fields.Nested(UserSchema, required=False)
-    
-
-
-class UserExistsResponse(BaseSchema):
-    # User swagger.json
-
-    
-    user_exists = fields.Boolean(required=False)
     
 
 

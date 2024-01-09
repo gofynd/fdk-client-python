@@ -355,6 +355,92 @@ class Order:
 
         return response
     
+    async def processManifest(self, body="", request_headers:Dict={}):
+        """Process Manifest
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = OrderValidator.processManifest()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import CreateOrderPayload
+        schema = CreateOrderPayload()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/process-manifest", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
+        query_string = await create_query_string()
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/process-manifest", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateOrderResponse
+            schema = CreateOrderResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for processManifest")
+                print(e)
+
+        return response
+    
+    async def dispatchManifest(self, body="", request_headers:Dict={}):
+        """Dispatch Manifest
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = OrderValidator.dispatchManifest()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import DispatchManifest
+        schema = DispatchManifest()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifest/dispatch", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
+        query_string = await create_query_string()
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifest/dispatch", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse
+            schema = SuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for dispatchManifest")
+                print(e)
+
+        return response
+    
     async def getRoleBasedActions(self, request_headers:Dict={}):
         """Get Role Based Actions
         """
@@ -689,6 +775,49 @@ class Order:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for createChannelConfig")
+                print(e)
+
+        return response
+    
+    async def uploadConsent(self, body="", request_headers:Dict={}):
+        """Upload Consent
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = OrderValidator.uploadConsent()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import UploadConsent
+        schema = UploadConsent()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifest/uploadConsent", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
+        query_string = await create_query_string()
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifest/uploadConsent", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse
+            schema = SuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for uploadConsent")
                 print(e)
 
         return response
@@ -1122,557 +1251,6 @@ class Order:
 
         return response
     
-    async def bulkStateTransistion(self, body="", request_headers:Dict={}):
-        """Performs State Transisiton in Bulk for the given shipments in the excel/csv file url.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = OrderValidator.bulkStateTransistion()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import BulkStateTransistionRequest
-        schema = BulkStateTransistionRequest()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/jobs/state-transition", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
-        query_string = await create_query_string()
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/jobs/state-transition", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import BulkStateTransistionResponse
-            schema = BulkStateTransistionResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for bulkStateTransistion")
-                print(e)
-
-        return response
-    
-    async def bulkListing(self, page_size=None, page_no=None, start_date=None, end_date=None, status=None, bulk_action_type=None, search_key=None, request_headers:Dict={}):
-        """Fetches of previous or running  bulk jobs.
-
-        :param page_size : page size : type integer
-        :param page_no : page number : type integer
-        :param start_date : UTC start date in ISO format : type string
-        :param end_date : UTC end date in ISO format : type string
-        :param status : status for which to fetch the jobs. : type string
-        :param bulk_action_type : job type. : type string
-        :param search_key : search_key. : type string
-        """
-        payload = {}
-        
-        if page_size is not None:
-            payload["page_size"] = page_size
-        if page_no is not None:
-            payload["page_no"] = page_no
-        if start_date is not None:
-            payload["start_date"] = start_date
-        if end_date is not None:
-            payload["end_date"] = end_date
-        if status is not None:
-            payload["status"] = status
-        if bulk_action_type is not None:
-            payload["bulk_action_type"] = bulk_action_type
-        if search_key is not None:
-            payload["search_key"] = search_key
-
-        # Parameter validation
-        schema = OrderValidator.bulkListing()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/jobs", """{"required":[{"in":"path","name":"company_id","description":"Company ID","required":true,"schema":{"type":"integer"}},{"in":"query","name":"page_size","description":"page size","required":true,"schema":{"type":"integer"}},{"in":"query","name":"page_no","description":"page number","required":true,"schema":{"type":"integer"}},{"in":"query","name":"start_date","description":"UTC start date in ISO format","required":true,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"end_date","description":"UTC end date in ISO format","required":true,"schema":{"type":"string","format":"date-time"}}],"optional":[{"in":"query","name":"status","description":"status for which to fetch the jobs.","required":false,"schema":{"type":"string"}},{"in":"query","name":"bulk_action_type","description":"job type.","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_key","description":"search_key.","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","name":"page_size","description":"page size","required":true,"schema":{"type":"integer"}},{"in":"query","name":"page_no","description":"page number","required":true,"schema":{"type":"integer"}},{"in":"query","name":"start_date","description":"UTC start date in ISO format","required":true,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"end_date","description":"UTC end date in ISO format","required":true,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"status","description":"status for which to fetch the jobs.","required":false,"schema":{"type":"string"}},{"in":"query","name":"bulk_action_type","description":"job type.","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_key","description":"search_key.","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID","required":true,"schema":{"type":"integer"}}]}""", page_size=page_size, page_no=page_no, start_date=start_date, end_date=end_date, status=status, bulk_action_type=bulk_action_type, search_key=search_key)
-        query_string = await create_query_string(page_size=page_size, page_no=page_no, start_date=start_date, end_date=end_date, status=status, bulk_action_type=bulk_action_type, search_key=search_key)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/jobs", page_size=page_size, page_no=page_no, start_date=start_date, end_date=end_date, status=status, bulk_action_type=bulk_action_type, search_key=search_key), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import BulkListingResponse
-            schema = BulkListingResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for bulkListing")
-                print(e)
-
-        return response
-    
-    async def jobDetails(self, batch_id=None, request_headers:Dict={}):
-        """Fetches details for the job of the provided batch_id
-        :param batch_id :  : type string
-        """
-        payload = {}
-        
-        if batch_id is not None:
-            payload["batch_id"] = batch_id
-
-        # Parameter validation
-        schema = OrderValidator.jobDetails()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/jobs/{batch_id}", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"batch_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"batch_id","required":true,"schema":{"type":"string"}}]}""", batch_id=batch_id)
-        query_string = await create_query_string(batch_id=batch_id)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/jobs/{batch_id}", batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import JobDetailsResponse
-            schema = JobDetailsResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for jobDetails")
-                print(e)
-
-        return response
-    
-    async def getFileByStatus(self, batch_id=None, status=None, file_type=None, report_type=None, request_headers:Dict={}):
-        """Get the file URL consisting Records of the provided status.
-        :param batch_id :  : type string
-        :param status :  : type string
-        :param file_type :  : type string
-        :param report_type :  : type string
-        """
-        payload = {}
-        
-        if batch_id is not None:
-            payload["batch_id"] = batch_id
-        if status is not None:
-            payload["status"] = status
-        if file_type is not None:
-            payload["file_type"] = file_type
-        if report_type is not None:
-            payload["report_type"] = report_type
-
-        # Parameter validation
-        schema = OrderValidator.getFileByStatus()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/jobs/{batch_id}/file", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"batch_id","required":true,"schema":{"type":"string"}},{"in":"query","name":"status","required":true,"schema":{"type":"string"}},{"in":"query","name":"file_type","required":true,"schema":{"type":"string","default":"xlsx","enum":["xlsx","csv"]}}],"optional":[{"in":"query","name":"report_type","schema":{"type":"string","default":"generation_report","enum":["generation_report","invoice_report"]}}],"query":[{"in":"query","name":"status","required":true,"schema":{"type":"string"}},{"in":"query","name":"file_type","required":true,"schema":{"type":"string","default":"xlsx","enum":["xlsx","csv"]}},{"in":"query","name":"report_type","schema":{"type":"string","default":"generation_report","enum":["generation_report","invoice_report"]}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"batch_id","required":true,"schema":{"type":"string"}}]}""", batch_id=batch_id, status=status, file_type=file_type, report_type=report_type)
-        query_string = await create_query_string(batch_id=batch_id, status=status, file_type=file_type, report_type=report_type)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/jobs/{batch_id}/file", batch_id=batch_id, status=status, file_type=file_type, report_type=report_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import JobFailedResponse
-            schema = JobFailedResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getFileByStatus")
-                print(e)
-
-        return response
-    
-    async def getManifestShipments(self, dp_ids=None, stores=None, to_date=None, from_date=None, dp_name=None, sales_channels=None, search_type=None, search_value=None, page_no=None, page_size=None, request_headers:Dict={}):
-        """get Manifest Shipments.
-        :param dp_ids :  : type integer
-        :param stores :  : type string
-        :param to_date :  : type string
-        :param from_date :  : type string
-        :param dp_name :  : type string
-        :param sales_channels :  : type string
-        :param search_type :  : type string
-        :param search_value :  : type string
-        :param page_no :  : type string
-        :param page_size :  : type string
-        """
-        payload = {}
-        
-        if dp_ids is not None:
-            payload["dp_ids"] = dp_ids
-        if stores is not None:
-            payload["stores"] = stores
-        if to_date is not None:
-            payload["to_date"] = to_date
-        if from_date is not None:
-            payload["from_date"] = from_date
-        if dp_name is not None:
-            payload["dp_name"] = dp_name
-        if sales_channels is not None:
-            payload["sales_channels"] = sales_channels
-        if search_type is not None:
-            payload["search_type"] = search_type
-        if search_value is not None:
-            payload["search_value"] = search_value
-        if page_no is not None:
-            payload["page_no"] = page_no
-        if page_size is not None:
-            payload["page_size"] = page_size
-
-        # Parameter validation
-        schema = OrderValidator.getManifestShipments()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifests/shipments", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"query","name":"dp_ids","required":true,"schema":{"type":"integer"}},{"in":"query","name":"stores","required":true,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":true,"schema":{"type":"string"}},{"in":"query","name":"from_date","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"dp_name","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channels","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_value","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","name":"dp_ids","required":true,"schema":{"type":"integer"}},{"in":"query","name":"stores","required":true,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":true,"schema":{"type":"string"}},{"in":"query","name":"from_date","required":true,"schema":{"type":"string"}},{"in":"query","name":"dp_name","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channels","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_value","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", dp_ids=dp_ids, stores=stores, to_date=to_date, from_date=from_date, dp_name=dp_name, sales_channels=sales_channels, search_type=search_type, search_value=search_value, page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(dp_ids=dp_ids, stores=stores, to_date=to_date, from_date=from_date, dp_name=dp_name, sales_channels=sales_channels, search_type=search_type, search_value=search_value, page_no=page_no, page_size=page_size)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifests/shipments", dp_ids=dp_ids, stores=stores, to_date=to_date, from_date=from_date, dp_name=dp_name, sales_channels=sales_channels, search_type=search_type, search_value=search_value, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ManifestShipmentListing
-            schema = ManifestShipmentListing()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getManifestShipments")
-                print(e)
-
-        return response
-    
-    async def getManifests(self, status=None, start_date=None, end_date=None, search_type=None, store_id=None, search_value=None, dp_ids=None, page_no=None, page_size=None, request_headers:Dict={}):
-        """Fetch Manifests
-        :param status : Possible Status [ active, closed ] : type string
-        :param start_date : UTC Start Date in ISO format : type string
-        :param end_date : UTC End Date in ISO format : type string
-        :param search_type : Search type options [ fynd_order_id, shipment_id, manifest_id, dp_name, awb_no ] : type string
-        :param store_id : Fetch manifests for a Store. : type integer
-        :param search_value : Search value for selected search type : type string
-        :param dp_ids : DP Ids separated by ',' (comma) : type string
-        :param page_no :  : type integer
-        :param page_size :  : type integer
-        """
-        payload = {}
-        
-        if status is not None:
-            payload["status"] = status
-        if start_date is not None:
-            payload["start_date"] = start_date
-        if end_date is not None:
-            payload["end_date"] = end_date
-        if search_type is not None:
-            payload["search_type"] = search_type
-        if store_id is not None:
-            payload["store_id"] = store_id
-        if search_value is not None:
-            payload["search_value"] = search_value
-        if dp_ids is not None:
-            payload["dp_ids"] = dp_ids
-        if page_no is not None:
-            payload["page_no"] = page_no
-        if page_size is not None:
-            payload["page_size"] = page_size
-
-        # Parameter validation
-        schema = OrderValidator.getManifests()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifests", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"status","required":false,"description":"Possible Status [ active, closed ]","schema":{"type":"string","enum":["active","closed"],"default":"active"}},{"in":"query","name":"start_date","description":"UTC Start Date in ISO format","required":false,"schema":{"type":"string"}},{"in":"query","name":"end_date","description":"UTC End Date in ISO format","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","required":false,"description":"Search type options [ fynd_order_id, shipment_id, manifest_id, dp_name, awb_no ]","schema":{"type":"string","enum":["fynd_order_id","shipment_id","manifest_id","dp_name","awb_no"]}},{"in":"query","name":"store_id","required":false,"description":"Fetch manifests for a Store.","schema":{"type":"integer"}},{"in":"query","name":"search_value","required":false,"description":"Search value for selected search type","schema":{"type":"string"}},{"in":"query","name":"dp_ids","required":false,"description":"DP Ids separated by ',' (comma)","schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}}],"query":[{"in":"query","name":"status","required":false,"description":"Possible Status [ active, closed ]","schema":{"type":"string","enum":["active","closed"],"default":"active"}},{"in":"query","name":"start_date","description":"UTC Start Date in ISO format","required":false,"schema":{"type":"string"}},{"in":"query","name":"end_date","description":"UTC End Date in ISO format","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","required":false,"description":"Search type options [ fynd_order_id, shipment_id, manifest_id, dp_name, awb_no ]","schema":{"type":"string","enum":["fynd_order_id","shipment_id","manifest_id","dp_name","awb_no"]}},{"in":"query","name":"store_id","required":false,"description":"Fetch manifests for a Store.","schema":{"type":"integer"}},{"in":"query","name":"search_value","required":false,"description":"Search value for selected search type","schema":{"type":"string"}},{"in":"query","name":"dp_ids","required":false,"description":"DP Ids separated by ',' (comma)","schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", status=status, start_date=start_date, end_date=end_date, search_type=search_type, store_id=store_id, search_value=search_value, dp_ids=dp_ids, page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(status=status, start_date=start_date, end_date=end_date, search_type=search_type, store_id=store_id, search_value=search_value, dp_ids=dp_ids, page_no=page_no, page_size=page_size)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifests", status=status, start_date=start_date, end_date=end_date, search_type=search_type, store_id=store_id, search_value=search_value, dp_ids=dp_ids, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ManifestList
-            schema = ManifestList()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getManifests")
-                print(e)
-
-        return response
-    
-    async def processManifests(self, body="", request_headers:Dict={}):
-        """Process Manifest.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = OrderValidator.processManifests()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import ProcessManifest
-        schema = ProcessManifest()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifests", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
-        query_string = await create_query_string()
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifests", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ProcessManifestItemResponse
-            schema = ProcessManifestItemResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for processManifests")
-                print(e)
-
-        return response
-    
-    async def getManifestDetails(self, manifest_id=None, request_headers:Dict={}):
-        """get Manifest Details.
-        :param manifest_id :  : type string
-        """
-        payload = {}
-        
-        if manifest_id is not None:
-            payload["manifest_id"] = manifest_id
-
-        # Parameter validation
-        schema = OrderValidator.getManifestDetails()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifests/{manifest_id}", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"manifest_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"manifest_id","required":true,"schema":{"type":"string"}}]}""", manifest_id=manifest_id)
-        query_string = await create_query_string(manifest_id=manifest_id)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifests/{manifest_id}", manifest_id=manifest_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ManifestDetails
-            schema = ManifestDetails()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getManifestDetails")
-                print(e)
-
-        return response
-    
-    async def dispatchManifests(self, manifest_id=None, body="", request_headers:Dict={}):
-        """Dispatch Manifest
-        :param manifest_id :  : type string
-        """
-        payload = {}
-        
-        if manifest_id is not None:
-            payload["manifest_id"] = manifest_id
-
-        # Parameter validation
-        schema = OrderValidator.dispatchManifests()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import DispatchManifest
-        schema = DispatchManifest()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifest/{manifest_id}/dispatch", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"manifest_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"manifest_id","required":true,"schema":{"type":"string"}}]}""", manifest_id=manifest_id)
-        query_string = await create_query_string(manifest_id=manifest_id)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifest/{manifest_id}/dispatch", manifest_id=manifest_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SuccessResponse
-            schema = SuccessResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for dispatchManifests")
-                print(e)
-
-        return response
-    
-    async def uploadConsents(self, manifest_id=None, body="", request_headers:Dict={}):
-        """Upload Consent
-        :param manifest_id :  : type string
-        """
-        payload = {}
-        
-        if manifest_id is not None:
-            payload["manifest_id"] = manifest_id
-
-        # Parameter validation
-        schema = OrderValidator.uploadConsents()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import UploadConsent
-        schema = UploadConsent()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifest/{manifest_id}/upload-consent", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"manifest_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"manifest_id","required":true,"schema":{"type":"string"}}]}""", manifest_id=manifest_id)
-        query_string = await create_query_string(manifest_id=manifest_id)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifest/{manifest_id}/upload-consent", manifest_id=manifest_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SuccessResponse
-            schema = SuccessResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for uploadConsents")
-                print(e)
-
-        return response
-    
-    async def getManifestfilters(self, view=None, request_headers:Dict={}):
-        """get Manifest Filters.
-        :param view : Name of View : type string
-        """
-        payload = {}
-        
-        if view is not None:
-            payload["view"] = view
-
-        # Parameter validation
-        schema = OrderValidator.getManifestfilters()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/filter/listing", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}},{"in":"query","name":"view","description":"Name of View","required":true,"schema":{"type":"string","default":"manifest","enum":["my_orders","bulk_action","manifest","bulk_invoice"]}}],"optional":[],"query":[{"in":"query","name":"view","description":"Name of View","required":true,"schema":{"type":"string","default":"manifest","enum":["my_orders","bulk_action","manifest","bulk_invoice"]}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}]}""", view=view)
-        query_string = await create_query_string(view=view)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/filter/listing", view=view), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ManifestFiltersResponse
-            schema = ManifestFiltersResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getManifestfilters")
-                print(e)
-
-        return response
-    
     async def eInvoiceRetry(self, body="", request_headers:Dict={}):
         """Retry e-invoice after failure
         """
@@ -1739,7 +1317,7 @@ class Order:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/tracking", """{"required":[{"description":"Company ID","example":"1","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"Shipment ID","example":"16908065964581066182","in":"query","name":"shipment_id","required":false,"schema":{"type":"string"}},{"description":"AWB number","example":"581066182","in":"query","name":"awb","required":false,"schema":{"type":"string"}},{"description":"Page number","example":1,"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Page size","example":10,"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}}],"query":[{"description":"Shipment ID","example":"16908065964581066182","in":"query","name":"shipment_id","required":false,"schema":{"type":"string"}},{"description":"AWB number","example":"581066182","in":"query","name":"awb","required":false,"schema":{"type":"string"}},{"description":"Page number","example":1,"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Page size","example":10,"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}}],"headers":[],"path":[{"description":"Company ID","example":"1","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", shipment_id=shipment_id, awb=awb, page_no=page_no, page_size=page_size)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/tracking", """{"required":[{"in":"path","name":"company_id","description":"Company ID","required":true,"schema":{"type":"string"},"example":"1"}],"optional":[{"in":"query","name":"shipment_id","description":"Shipment ID","required":false,"schema":{"type":"string"},"example":"16908065964581066182"},{"in":"query","name":"awb","required":false,"description":"AWB number","schema":{"type":"string"},"example":"581066182"},{"in":"query","name":"page_no","required":false,"description":"Page number","schema":{"type":"integer"},"example":1},{"in":"query","name":"page_size","required":false,"description":"Page size","schema":{"type":"integer"},"example":10}],"query":[{"in":"query","name":"shipment_id","description":"Shipment ID","required":false,"schema":{"type":"string"},"example":"16908065964581066182"},{"in":"query","name":"awb","required":false,"description":"AWB number","schema":{"type":"string"},"example":"581066182"},{"in":"query","name":"page_no","required":false,"description":"Page number","schema":{"type":"integer"},"example":1},{"in":"query","name":"page_size","required":false,"description":"Page size","schema":{"type":"integer"},"example":10}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID","required":true,"schema":{"type":"string"},"example":"1"}]}""", shipment_id=shipment_id, awb=awb, page_no=page_no, page_size=page_size)
         query_string = await create_query_string(shipment_id=shipment_id, awb=awb, page_no=page_no, page_size=page_size)
 
         headers = {}
@@ -1810,22 +1388,26 @@ class Order:
 
         return response
     
-    async def failedOrderLogDetails(self, log_id=None, request_headers:Dict={}):
-        """This endpoint allows users to get the exact error trace from the log id provided
-        :param log_id : Log Error ID : type string
+    async def generateInvoiceID(self, invoice_type=None, body="", request_headers:Dict={}):
+        """This API is used to manually generate Invoice ID against shipments.
+        :param invoice_type : mention the type of invoice id to generate : type string
         """
         payload = {}
         
-        if log_id is not None:
-            payload["log_id"] = log_id
+        if invoice_type is not None:
+            payload["invoice_type"] = invoice_type
 
         # Parameter validation
-        schema = OrderValidator.failedOrderLogDetails()
+        schema = OrderValidator.generateInvoiceID()
         schema.dump(schema.load(payload))
         
+        # Body validation
+        from .models import GenerateInvoiceIDRequest
+        schema = GenerateInvoiceIDRequest()
+        schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/orders/failed/logs/{log_id}", """{"required":[{"in":"path","name":"company_id","description":"Company ID","required":true,"schema":{"type":"integer","example":2}},{"in":"path","name":"log_id","description":"Log Error ID","required":true,"schema":{"type":"string","example":"a3b6b771-38e6-4014-9b05-b8e4df5a3a89"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID","required":true,"schema":{"type":"integer","example":2}},{"in":"path","name":"log_id","description":"Log Error ID","required":true,"schema":{"type":"string","example":"a3b6b771-38e6-4014-9b05-b8e4df5a3a89"}}]}""", log_id=log_id)
-        query_string = await create_query_string(log_id=log_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/{invoice_type}/id/generate", """{"required":[{"in":"path","name":"company_id","description":"company id from where are transitioning the shipment state or data","required":true,"schema":{"type":"integer"}},{"in":"path","name":"invoice_type","description":"mention the type of invoice id to generate","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"company id from where are transitioning the shipment state or data","required":true,"schema":{"type":"integer"}},{"in":"path","name":"invoice_type","description":"mention the type of invoice id to generate","required":true,"schema":{"type":"string"}}]}""", invoice_type=invoice_type)
+        query_string = await create_query_string(invoice_type=invoice_type)
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -1839,227 +1421,20 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/orders/failed/logs/{log_id}", log_id=log_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/{invoice_type}/id/generate", invoice_type=invoice_type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import FailedOrderLogDetails
-            schema = FailedOrderLogDetails()
+            from .models import GenerateInvoiceIDResponse
+            schema = GenerateInvoiceIDResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for failedOrderLogDetails")
+                print("Response Validation failed for generateInvoiceID")
                 print(e)
 
         return response
     
-    async def getStateTransitionFlags(self, page_no=None, page_size=None, request_headers:Dict={}):
-        """Fetch all state transition flags for a company.
-        :param page_no : The page number for pagination. : type integer
-        :param page_size : The number of items to be returned per page for pagination. : type integer
-        """
-        payload = {}
-        
-        if page_no is not None:
-            payload["page_no"] = page_no
-        if page_size is not None:
-            payload["page_size"] = page_size
-
-        # Parameter validation
-        schema = OrderValidator.getStateTransitionFlags()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/state/transition/flags", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1},"description":"The page number for pagination."},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":50},"description":"The number of items to be returned per page for pagination."}],"query":[{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1},"description":"The page number for pagination."},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":50},"description":"The number of items to be returned per page for pagination."}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/state/transition/flags", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        return response
-    
-    async def getStateTransitionFlagsById(self, flag_id=None, request_headers:Dict={}):
-        """Fetch a specific state transition flag for a company.
-        :param flag_id :  : type integer
-        """
-        payload = {}
-        
-        if flag_id is not None:
-            payload["flag_id"] = flag_id
-
-        # Parameter validation
-        schema = OrderValidator.getStateTransitionFlagsById()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/state/transition/flags/{flag_id}", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"flag_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"flag_id","required":true,"schema":{"type":"integer"}}]}""", flag_id=flag_id)
-        query_string = await create_query_string(flag_id=flag_id)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/state/transition/flags/{flag_id}", flag_id=flag_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        return response
-    
-    async def getStateTransitionFilters(self, page_no=None, page_size=None, request_headers:Dict={}):
-        """
-        :param page_no :  : type integer
-        :param page_size :  : type integer
-        """
-        payload = {}
-        
-        if page_no is not None:
-            payload["page_no"] = page_no
-        if page_size is not None:
-            payload["page_size"] = page_size
-
-        # Parameter validation
-        schema = OrderValidator.getStateTransitionFilters()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/state/transition/filters", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":10}}],"query":[{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":10}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/state/transition/filters", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        return response
-    
-    async def getStateTransitionFiltersById(self, filter_id=None, request_headers:Dict={}):
-        """
-        :param filter_id :  : type integer
-        """
-        payload = {}
-        
-        if filter_id is not None:
-            payload["filter_id"] = filter_id
-
-        # Parameter validation
-        schema = OrderValidator.getStateTransitionFiltersById()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/state/transition/filters/{filter_id}", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"filter_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"filter_id","required":true,"schema":{"type":"integer"}}]}""", filter_id=filter_id)
-        query_string = await create_query_string(filter_id=filter_id)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/state/transition/filters/{filter_id}", filter_id=filter_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        return response
-    
-    async def getStateManagerTasks(self, page_no=None, page_size=None, request_headers:Dict={}):
-        """
-        :param page_no :  : type integer
-        :param page_size :  : type integer
-        """
-        payload = {}
-        
-        if page_no is not None:
-            payload["page_no"] = page_no
-        if page_size is not None:
-            payload["page_size"] = page_size
-
-        # Parameter validation
-        schema = OrderValidator.getStateManagerTasks()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/state/transition/tasks", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":50}}],"query":[{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":50}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/state/transition/tasks", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        return response
-    
-    async def getStateManagerTaskById(self, task_id=None, request_headers:Dict={}):
-        """
-        :param task_id :  : type integer
-        """
-        payload = {}
-        
-        if task_id is not None:
-            payload["task_id"] = task_id
-
-        # Parameter validation
-        schema = OrderValidator.getStateManagerTaskById()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/state/transition/tasks/{task_id}", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"task_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"task_id","required":true,"schema":{"type":"integer"}}]}""", task_id=task_id)
-        query_string = await create_query_string(task_id=task_id)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/state/transition/tasks/{task_id}", task_id=task_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        return response
-    
-    async def getShipments(self, lane=None, bag_status=None, status_override_lane=None, time_to_dispatch=None, search_type=None, search_value=None, from_date=None, to_date=None, start_date=None, end_date=None, dp_ids=None, stores=None, sales_channels=None, page_no=None, page_size=None, fetch_active_shipment=None, allow_inactive=None, exclude_locked_shipments=None, payment_methods=None, channel_shipment_id=None, channel_order_id=None, custom_meta=None, ordering_channel=None, company_affiliate_tag=None, my_orders=None, platform_user_id=None, sort_type=None, show_cross_company_data=None, tags=None, customer_id=None, order_type=None, request_headers:Dict={}):
+    async def getShipments(self, lane=None, bag_status=None, status_override_lane=None, time_to_dispatch=None, search_type=None, search_value=None, from_date=None, to_date=None, dp_ids=None, stores=None, sales_channels=None, page_no=None, page_size=None, fetch_active_shipment=None, allow_inactive=None, exclude_locked_shipments=None, payment_methods=None, channel_shipment_id=None, channel_order_id=None, custom_meta=None, ordering_channel=None, company_affiliate_tag=None, my_orders=None, platform_user_id=None, sort_type=None, show_cross_company_data=None, tags=None, customer_id=None, order_type=None, request_headers:Dict={}):
         """Get Shipments Listing for the company id
         :param lane : Name of lane for which data is to be fetched : type string
         :param bag_status : Comma separated values of bag statuses : type string
@@ -2069,8 +1444,6 @@ class Order:
         :param search_value : Search type value : type string
         :param from_date : Start Date in DD-MM-YYYY format : type string
         :param to_date : End Date in DD-MM-YYYY format : type string
-        :param start_date : UTC Start Date in ISO format : type string
-        :param end_date : UTC End Date in ISO format : type string
         :param dp_ids : Comma separated values of delivery partner ids : type string
         :param stores : Comma separated values of store ids : type string
         :param sales_channels : Comma separated values of sales channel ids : type string
@@ -2111,10 +1484,6 @@ class Order:
             payload["from_date"] = from_date
         if to_date is not None:
             payload["to_date"] = to_date
-        if start_date is not None:
-            payload["start_date"] = start_date
-        if end_date is not None:
-            payload["end_date"] = end_date
         if dp_ids is not None:
             payload["dp_ids"] = dp_ids
         if stores is not None:
@@ -2163,8 +1532,8 @@ class Order:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/shipments-listing", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer","example":37}}],"optional":[{"in":"query","name":"lane","description":"Name of lane for which data is to be fetched","required":false,"schema":{"type":"string","enum":["new","confirmed","to_be_packed","ready_for_dispatch","in_transit","handed_over_to_customer","delivered","cancelled","return_initiated","return_in_transit","return_delivered","return_accepted"],"example":"new"}},{"in":"query","name":"bag_status","description":"Comma separated values of bag statuses","required":false,"schema":{"type":"string","example":"placed, bag_confirmed, bag_invoiced"}},{"in":"query","name":"status_override_lane","description":"Use this flag to fetch by bag_status and override lane","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"time_to_dispatch","required":false,"schema":{"type":"integer","example":1,"enum":[1,-1]}},{"in":"query","name":"search_type","description":"Search type key","required":false,"schema":{"type":"string","example":"shipment_id"}},{"in":"query","name":"search_value","description":"Search type value","required":false,"schema":{"type":"string","example":"16578901076461551493K"}},{"in":"query","name":"from_date","description":"Start Date in DD-MM-YYYY format","required":false,"schema":{"type":"string","format":"date","example":"2023-05-10"}},{"in":"query","name":"to_date","description":"End Date in DD-MM-YYYY format","required":false,"schema":{"type":"string","format":"date","example":"2023-05-13"}},{"in":"query","name":"start_date","description":"UTC Start Date in ISO format","required":false,"schema":{"type":"string","format":"date-time","example":"2023-08-21T09:48:40Z"}},{"in":"query","name":"end_date","description":"UTC End Date in ISO format","required":false,"schema":{"type":"string","format":"date-time","example":"2023-08-21T09:48:40Z"}},{"in":"query","name":"dp_ids","description":"Comma separated values of delivery partner ids","required":false,"schema":{"type":"string","example":"19,26"}},{"in":"query","name":"stores","description":"Comma separated values of store ids","required":false,"schema":{"type":"string","example":"12,34"}},{"in":"query","name":"sales_channels","description":"Comma separated values of sales channel ids","required":false,"schema":{"type":"string","example":"000000000000000000000001,614b42d1ea943427b5f46d1e"}},{"in":"query","name":"page_no","description":"Page number for paginated data","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","description":"Page size of data received per page","required":false,"schema":{"type":"integer","default":10}},{"in":"query","name":"fetch_active_shipment","description":"flag to fetch active shipments","required":false,"schema":{"type":"boolean","default":true}},{"in":"query","name":"allow_inactive","description":"Flag to allow inactive shipments","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"exclude_locked_shipments","description":"flag to fetch locked shipments","required":false,"schema":{"type":"boolean","default":true}},{"in":"query","name":"payment_methods","description":"Comma separated values of payment methods","required":false,"schema":{"type":"string","example":"COD,PREPAID"}},{"in":"query","name":"channel_shipment_id","description":"App Shipment Id","required":false,"schema":{"type":"string","example":"16731535496121004000"}},{"in":"query","name":"channel_order_id","description":"App Order Id","required":false,"schema":{"type":"string","example":"FY63BA4C0D0125F8A075"}},{"in":"query","name":"custom_meta","required":false,"schema":{"type":"string"}},{"in":"query","name":"ordering_channel","required":false,"schema":{"type":"string"}},{"in":"query","name":"company_affiliate_tag","required":false,"schema":{"type":"string"}},{"in":"query","name":"my_orders","required":false,"schema":{"type":"boolean"}},{"in":"query","name":"platform_user_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"sort_type","description":"Sort the result data on basis of input","required":false,"schema":{"type":"string","enum":["sla_asc","created_date_asc","created_date_desc"],"default":"sla_asc"}},{"in":"query","name":"show_cross_company_data","description":"Flag to view cross & non-cross company order","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"tags","description":"Comma separated values of tags","required":false,"schema":{"type":"string","example":"gifting,international"}},{"in":"query","name":"customer_id","required":false,"schema":{"type":"string","example":"63a2ce177e9f59d3166dd700"}},{"in":"query","name":"order_type","required":false,"schema":{"type":"string","example":"HomeDelivery"}}],"query":[{"in":"query","name":"lane","description":"Name of lane for which data is to be fetched","required":false,"schema":{"type":"string","enum":["new","confirmed","to_be_packed","ready_for_dispatch","in_transit","handed_over_to_customer","delivered","cancelled","return_initiated","return_in_transit","return_delivered","return_accepted"],"example":"new"}},{"in":"query","name":"bag_status","description":"Comma separated values of bag statuses","required":false,"schema":{"type":"string","example":"placed, bag_confirmed, bag_invoiced"}},{"in":"query","name":"status_override_lane","description":"Use this flag to fetch by bag_status and override lane","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"time_to_dispatch","required":false,"schema":{"type":"integer","example":1,"enum":[1,-1]}},{"in":"query","name":"search_type","description":"Search type key","required":false,"schema":{"type":"string","example":"shipment_id"}},{"in":"query","name":"search_value","description":"Search type value","required":false,"schema":{"type":"string","example":"16578901076461551493K"}},{"in":"query","name":"from_date","description":"Start Date in DD-MM-YYYY format","required":false,"schema":{"type":"string","format":"date","example":"2023-05-10"}},{"in":"query","name":"to_date","description":"End Date in DD-MM-YYYY format","required":false,"schema":{"type":"string","format":"date","example":"2023-05-13"}},{"in":"query","name":"start_date","description":"UTC Start Date in ISO format","required":false,"schema":{"type":"string","format":"date-time","example":"2023-08-21T09:48:40Z"}},{"in":"query","name":"end_date","description":"UTC End Date in ISO format","required":false,"schema":{"type":"string","format":"date-time","example":"2023-08-21T09:48:40Z"}},{"in":"query","name":"dp_ids","description":"Comma separated values of delivery partner ids","required":false,"schema":{"type":"string","example":"19,26"}},{"in":"query","name":"stores","description":"Comma separated values of store ids","required":false,"schema":{"type":"string","example":"12,34"}},{"in":"query","name":"sales_channels","description":"Comma separated values of sales channel ids","required":false,"schema":{"type":"string","example":"000000000000000000000001,614b42d1ea943427b5f46d1e"}},{"in":"query","name":"page_no","description":"Page number for paginated data","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","description":"Page size of data received per page","required":false,"schema":{"type":"integer","default":10}},{"in":"query","name":"fetch_active_shipment","description":"flag to fetch active shipments","required":false,"schema":{"type":"boolean","default":true}},{"in":"query","name":"allow_inactive","description":"Flag to allow inactive shipments","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"exclude_locked_shipments","description":"flag to fetch locked shipments","required":false,"schema":{"type":"boolean","default":true}},{"in":"query","name":"payment_methods","description":"Comma separated values of payment methods","required":false,"schema":{"type":"string","example":"COD,PREPAID"}},{"in":"query","name":"channel_shipment_id","description":"App Shipment Id","required":false,"schema":{"type":"string","example":"16731535496121004000"}},{"in":"query","name":"channel_order_id","description":"App Order Id","required":false,"schema":{"type":"string","example":"FY63BA4C0D0125F8A075"}},{"in":"query","name":"custom_meta","required":false,"schema":{"type":"string"}},{"in":"query","name":"ordering_channel","required":false,"schema":{"type":"string"}},{"in":"query","name":"company_affiliate_tag","required":false,"schema":{"type":"string"}},{"in":"query","name":"my_orders","required":false,"schema":{"type":"boolean"}},{"in":"query","name":"platform_user_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"sort_type","description":"Sort the result data on basis of input","required":false,"schema":{"type":"string","enum":["sla_asc","created_date_asc","created_date_desc"],"default":"sla_asc"}},{"in":"query","name":"show_cross_company_data","description":"Flag to view cross & non-cross company order","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"tags","description":"Comma separated values of tags","required":false,"schema":{"type":"string","example":"gifting,international"}},{"in":"query","name":"customer_id","required":false,"schema":{"type":"string","example":"63a2ce177e9f59d3166dd700"}},{"in":"query","name":"order_type","required":false,"schema":{"type":"string","example":"HomeDelivery"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer","example":37}}]}""", lane=lane, bag_status=bag_status, status_override_lane=status_override_lane, time_to_dispatch=time_to_dispatch, search_type=search_type, search_value=search_value, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, dp_ids=dp_ids, stores=stores, sales_channels=sales_channels, page_no=page_no, page_size=page_size, fetch_active_shipment=fetch_active_shipment, allow_inactive=allow_inactive, exclude_locked_shipments=exclude_locked_shipments, payment_methods=payment_methods, channel_shipment_id=channel_shipment_id, channel_order_id=channel_order_id, custom_meta=custom_meta, ordering_channel=ordering_channel, company_affiliate_tag=company_affiliate_tag, my_orders=my_orders, platform_user_id=platform_user_id, sort_type=sort_type, show_cross_company_data=show_cross_company_data, tags=tags, customer_id=customer_id, order_type=order_type)
-        query_string = await create_query_string(lane=lane, bag_status=bag_status, status_override_lane=status_override_lane, time_to_dispatch=time_to_dispatch, search_type=search_type, search_value=search_value, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, dp_ids=dp_ids, stores=stores, sales_channels=sales_channels, page_no=page_no, page_size=page_size, fetch_active_shipment=fetch_active_shipment, allow_inactive=allow_inactive, exclude_locked_shipments=exclude_locked_shipments, payment_methods=payment_methods, channel_shipment_id=channel_shipment_id, channel_order_id=channel_order_id, custom_meta=custom_meta, ordering_channel=ordering_channel, company_affiliate_tag=company_affiliate_tag, my_orders=my_orders, platform_user_id=platform_user_id, sort_type=sort_type, show_cross_company_data=show_cross_company_data, tags=tags, customer_id=customer_id, order_type=order_type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/shipments-listing", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer","example":37}}],"optional":[{"in":"query","name":"lane","description":"Name of lane for which data is to be fetched","required":false,"schema":{"type":"string","enum":["new","confirmed","to_be_packed","ready_for_dispatch","in_transit","handed_over_to_customer","delivered","cancelled","return_initiated","return_in_transit","return_delivered","return_accepted"],"example":"new"}},{"in":"query","name":"bag_status","description":"Comma separated values of bag statuses","required":false,"schema":{"type":"string","example":"placed, bag_confirmed, bag_invoiced"}},{"in":"query","name":"status_override_lane","description":"Use this flag to fetch by bag_status and override lane","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"time_to_dispatch","required":false,"schema":{"type":"integer","example":1,"enum":[1,-1]}},{"in":"query","name":"search_type","description":"Search type key","required":false,"schema":{"type":"string","example":"shipment_id"}},{"in":"query","name":"search_value","description":"Search type value","required":false,"schema":{"type":"string","example":"16578901076461551493K"}},{"in":"query","name":"from_date","description":"Start Date in DD-MM-YYYY format","required":false,"schema":{"type":"string","format":"date","example":"2023-05-10"}},{"in":"query","name":"to_date","description":"End Date in DD-MM-YYYY format","required":false,"schema":{"type":"string","format":"date","example":"2023-05-13"}},{"in":"query","name":"dp_ids","description":"Comma separated values of delivery partner ids","required":false,"schema":{"type":"string","example":"19,26"}},{"in":"query","name":"stores","description":"Comma separated values of store ids","required":false,"schema":{"type":"string","example":"12,34"}},{"in":"query","name":"sales_channels","description":"Comma separated values of sales channel ids","required":false,"schema":{"type":"string","example":"000000000000000000000001,614b42d1ea943427b5f46d1e"}},{"in":"query","name":"page_no","description":"Page number for paginated data","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","description":"Page size of data received per page","required":false,"schema":{"type":"integer","default":10}},{"in":"query","name":"fetch_active_shipment","description":"flag to fetch active shipments","required":false,"schema":{"type":"boolean","default":true}},{"in":"query","name":"allow_inactive","description":"Flag to allow inactive shipments","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"exclude_locked_shipments","description":"flag to fetch locked shipments","required":false,"schema":{"type":"boolean","default":true}},{"in":"query","name":"payment_methods","description":"Comma separated values of payment methods","required":false,"schema":{"type":"string","example":"COD,PREPAID"}},{"in":"query","name":"channel_shipment_id","description":"App Shipment Id","required":false,"schema":{"type":"string","example":"16731535496121004000"}},{"in":"query","name":"channel_order_id","description":"App Order Id","required":false,"schema":{"type":"string","example":"FY63BA4C0D0125F8A075"}},{"in":"query","name":"custom_meta","required":false,"schema":{"type":"string"}},{"in":"query","name":"ordering_channel","required":false,"schema":{"type":"string"}},{"in":"query","name":"company_affiliate_tag","required":false,"schema":{"type":"string"}},{"in":"query","name":"my_orders","required":false,"schema":{"type":"boolean"}},{"in":"query","name":"platform_user_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"sort_type","description":"Sort the result data on basis of input","required":false,"schema":{"type":"string","enum":["sla_asc","created_date_asc","created_date_desc"],"default":"sla_asc"}},{"in":"query","name":"show_cross_company_data","description":"Flag to view cross & non-cross company order","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"tags","description":"Comma separated values of tags","required":false,"schema":{"type":"string","example":"gifting,international"}},{"in":"query","name":"customer_id","required":false,"schema":{"type":"string","example":"63a2ce177e9f59d3166dd700"}},{"in":"query","name":"order_type","required":false,"schema":{"type":"string","example":"HomeDelivery"}}],"query":[{"in":"query","name":"lane","description":"Name of lane for which data is to be fetched","required":false,"schema":{"type":"string","enum":["new","confirmed","to_be_packed","ready_for_dispatch","in_transit","handed_over_to_customer","delivered","cancelled","return_initiated","return_in_transit","return_delivered","return_accepted"],"example":"new"}},{"in":"query","name":"bag_status","description":"Comma separated values of bag statuses","required":false,"schema":{"type":"string","example":"placed, bag_confirmed, bag_invoiced"}},{"in":"query","name":"status_override_lane","description":"Use this flag to fetch by bag_status and override lane","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"time_to_dispatch","required":false,"schema":{"type":"integer","example":1,"enum":[1,-1]}},{"in":"query","name":"search_type","description":"Search type key","required":false,"schema":{"type":"string","example":"shipment_id"}},{"in":"query","name":"search_value","description":"Search type value","required":false,"schema":{"type":"string","example":"16578901076461551493K"}},{"in":"query","name":"from_date","description":"Start Date in DD-MM-YYYY format","required":false,"schema":{"type":"string","format":"date","example":"2023-05-10"}},{"in":"query","name":"to_date","description":"End Date in DD-MM-YYYY format","required":false,"schema":{"type":"string","format":"date","example":"2023-05-13"}},{"in":"query","name":"dp_ids","description":"Comma separated values of delivery partner ids","required":false,"schema":{"type":"string","example":"19,26"}},{"in":"query","name":"stores","description":"Comma separated values of store ids","required":false,"schema":{"type":"string","example":"12,34"}},{"in":"query","name":"sales_channels","description":"Comma separated values of sales channel ids","required":false,"schema":{"type":"string","example":"000000000000000000000001,614b42d1ea943427b5f46d1e"}},{"in":"query","name":"page_no","description":"Page number for paginated data","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","description":"Page size of data received per page","required":false,"schema":{"type":"integer","default":10}},{"in":"query","name":"fetch_active_shipment","description":"flag to fetch active shipments","required":false,"schema":{"type":"boolean","default":true}},{"in":"query","name":"allow_inactive","description":"Flag to allow inactive shipments","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"exclude_locked_shipments","description":"flag to fetch locked shipments","required":false,"schema":{"type":"boolean","default":true}},{"in":"query","name":"payment_methods","description":"Comma separated values of payment methods","required":false,"schema":{"type":"string","example":"COD,PREPAID"}},{"in":"query","name":"channel_shipment_id","description":"App Shipment Id","required":false,"schema":{"type":"string","example":"16731535496121004000"}},{"in":"query","name":"channel_order_id","description":"App Order Id","required":false,"schema":{"type":"string","example":"FY63BA4C0D0125F8A075"}},{"in":"query","name":"custom_meta","required":false,"schema":{"type":"string"}},{"in":"query","name":"ordering_channel","required":false,"schema":{"type":"string"}},{"in":"query","name":"company_affiliate_tag","required":false,"schema":{"type":"string"}},{"in":"query","name":"my_orders","required":false,"schema":{"type":"boolean"}},{"in":"query","name":"platform_user_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"sort_type","description":"Sort the result data on basis of input","required":false,"schema":{"type":"string","enum":["sla_asc","created_date_asc","created_date_desc"],"default":"sla_asc"}},{"in":"query","name":"show_cross_company_data","description":"Flag to view cross & non-cross company order","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"tags","description":"Comma separated values of tags","required":false,"schema":{"type":"string","example":"gifting,international"}},{"in":"query","name":"customer_id","required":false,"schema":{"type":"string","example":"63a2ce177e9f59d3166dd700"}},{"in":"query","name":"order_type","required":false,"schema":{"type":"string","example":"HomeDelivery"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer","example":37}}]}""", lane=lane, bag_status=bag_status, status_override_lane=status_override_lane, time_to_dispatch=time_to_dispatch, search_type=search_type, search_value=search_value, from_date=from_date, to_date=to_date, dp_ids=dp_ids, stores=stores, sales_channels=sales_channels, page_no=page_no, page_size=page_size, fetch_active_shipment=fetch_active_shipment, allow_inactive=allow_inactive, exclude_locked_shipments=exclude_locked_shipments, payment_methods=payment_methods, channel_shipment_id=channel_shipment_id, channel_order_id=channel_order_id, custom_meta=custom_meta, ordering_channel=ordering_channel, company_affiliate_tag=company_affiliate_tag, my_orders=my_orders, platform_user_id=platform_user_id, sort_type=sort_type, show_cross_company_data=show_cross_company_data, tags=tags, customer_id=customer_id, order_type=order_type)
+        query_string = await create_query_string(lane=lane, bag_status=bag_status, status_override_lane=status_override_lane, time_to_dispatch=time_to_dispatch, search_type=search_type, search_value=search_value, from_date=from_date, to_date=to_date, dp_ids=dp_ids, stores=stores, sales_channels=sales_channels, page_no=page_no, page_size=page_size, fetch_active_shipment=fetch_active_shipment, allow_inactive=allow_inactive, exclude_locked_shipments=exclude_locked_shipments, payment_methods=payment_methods, channel_shipment_id=channel_shipment_id, channel_order_id=channel_order_id, custom_meta=custom_meta, ordering_channel=ordering_channel, company_affiliate_tag=company_affiliate_tag, my_orders=my_orders, platform_user_id=platform_user_id, sort_type=sort_type, show_cross_company_data=show_cross_company_data, tags=tags, customer_id=customer_id, order_type=order_type)
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -2178,7 +1547,7 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/shipments-listing", lane=lane, bag_status=bag_status, status_override_lane=status_override_lane, time_to_dispatch=time_to_dispatch, search_type=search_type, search_value=search_value, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, dp_ids=dp_ids, stores=stores, sales_channels=sales_channels, page_no=page_no, page_size=page_size, fetch_active_shipment=fetch_active_shipment, allow_inactive=allow_inactive, exclude_locked_shipments=exclude_locked_shipments, payment_methods=payment_methods, channel_shipment_id=channel_shipment_id, channel_order_id=channel_order_id, custom_meta=custom_meta, ordering_channel=ordering_channel, company_affiliate_tag=company_affiliate_tag, my_orders=my_orders, platform_user_id=platform_user_id, sort_type=sort_type, show_cross_company_data=show_cross_company_data, tags=tags, customer_id=customer_id, order_type=order_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/shipments-listing", lane=lane, bag_status=bag_status, status_override_lane=status_override_lane, time_to_dispatch=time_to_dispatch, search_type=search_type, search_value=search_value, from_date=from_date, to_date=to_date, dp_ids=dp_ids, stores=stores, sales_channels=sales_channels, page_no=page_no, page_size=page_size, fetch_active_shipment=fetch_active_shipment, allow_inactive=allow_inactive, exclude_locked_shipments=exclude_locked_shipments, payment_methods=payment_methods, channel_shipment_id=channel_shipment_id, channel_order_id=channel_order_id, custom_meta=custom_meta, ordering_channel=ordering_channel, company_affiliate_tag=company_affiliate_tag, my_orders=my_orders, platform_user_id=platform_user_id, sort_type=sort_type, show_cross_company_data=show_cross_company_data, tags=tags, customer_id=customer_id, order_type=order_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ShipmentInternalPlatformViewResponse
@@ -2236,11 +1605,10 @@ class Order:
 
         return response
     
-    async def getOrderById(self, order_id=None, my_orders=None, allow_inactive=None, request_headers:Dict={}):
+    async def getOrderById(self, order_id=None, my_orders=None, request_headers:Dict={}):
         """Get Order Details by ID
         :param order_id :  : type string
         :param my_orders :  : type boolean
-        :param allow_inactive : Flag to allow inactive shipments : type boolean
         """
         payload = {}
         
@@ -2248,16 +1616,14 @@ class Order:
             payload["order_id"] = order_id
         if my_orders is not None:
             payload["my_orders"] = my_orders
-        if allow_inactive is not None:
-            payload["allow_inactive"] = allow_inactive
 
         # Parameter validation
         schema = OrderValidator.getOrderById()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/order-details", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}},{"in":"query","name":"order_id","required":true,"schema":{"type":"string","default":"FY6299E19701B4EAEFC2"}}],"optional":[{"in":"query","name":"my_orders","required":false,"schema":{"type":"boolean"}},{"in":"query","name":"allow_inactive","description":"Flag to allow inactive shipments","required":false,"schema":{"type":"boolean","default":false}}],"query":[{"in":"query","name":"order_id","required":true,"schema":{"type":"string","default":"FY6299E19701B4EAEFC2"}},{"in":"query","name":"my_orders","required":false,"schema":{"type":"boolean"}},{"in":"query","name":"allow_inactive","description":"Flag to allow inactive shipments","required":false,"schema":{"type":"boolean","default":false}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}]}""", order_id=order_id, my_orders=my_orders, allow_inactive=allow_inactive)
-        query_string = await create_query_string(order_id=order_id, my_orders=my_orders, allow_inactive=allow_inactive)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/order-details", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}},{"in":"query","name":"order_id","required":true,"schema":{"type":"string","default":"FY6299E19701B4EAEFC2"}}],"optional":[{"in":"query","name":"my_orders","required":false,"schema":{"type":"boolean"}}],"query":[{"in":"query","name":"order_id","required":true,"schema":{"type":"string","default":"FY6299E19701B4EAEFC2"}},{"in":"query","name":"my_orders","required":false,"schema":{"type":"boolean"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}]}""", order_id=order_id, my_orders=my_orders)
+        query_string = await create_query_string(order_id=order_id, my_orders=my_orders)
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -2271,7 +1637,7 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/order-details", order_id=order_id, my_orders=my_orders, allow_inactive=allow_inactive), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/order-details", order_id=order_id, my_orders=my_orders), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import OrderDetailsResponse
@@ -2284,14 +1650,12 @@ class Order:
 
         return response
     
-    async def getLaneConfig(self, super_lane=None, group_entity=None, from_date=None, to_date=None, start_date=None, end_date=None, dp_ids=None, stores=None, sales_channels=None, payment_mode=None, bag_status=None, search_type=None, search_value=None, tags=None, time_to_dispatch=None, payment_methods=None, my_orders=None, show_cross_company_data=None, order_type=None, request_headers:Dict={}):
+    async def getLaneConfig(self, super_lane=None, group_entity=None, from_date=None, to_date=None, dp_ids=None, stores=None, sales_channels=None, payment_mode=None, bag_status=None, search_type=None, search_value=None, tags=None, time_to_dispatch=None, payment_methods=None, my_orders=None, show_cross_company_data=None, order_type=None, request_headers:Dict={}):
         """Get lane config for the order
         :param super_lane : Name of lane for which data is to be fetched : type string
         :param group_entity : Name of group entity : type string
         :param from_date : Start Date in DD-MM-YYYY format : type string
         :param to_date : End Date in DD-MM-YYYY format : type string
-        :param start_date : UTC Start Date in ISO format : type string
-        :param end_date : UTC End Date in ISO format : type string
         :param dp_ids : Comma separated values of delivery partner ids : type string
         :param stores : Comma separated values of store ids : type string
         :param sales_channels :  : type string
@@ -2316,10 +1680,6 @@ class Order:
             payload["from_date"] = from_date
         if to_date is not None:
             payload["to_date"] = to_date
-        if start_date is not None:
-            payload["start_date"] = start_date
-        if end_date is not None:
-            payload["end_date"] = end_date
         if dp_ids is not None:
             payload["dp_ids"] = dp_ids
         if stores is not None:
@@ -2352,8 +1712,8 @@ class Order:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/lane-config/", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"super_lane","description":"Name of lane for which data is to be fetched","required":false,"schema":{"type":"string","enum":["unfulfilled","processed","returns","action_centre"],"default":"unfulfilled"}},{"in":"query","name":"group_entity","description":"Name of group entity","required":false,"schema":{"type":"string","enum":["shipments","orders","bags"],"default":"shipments"}},{"in":"query","name":"from_date","description":"Start Date in DD-MM-YYYY format","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","description":"End Date in DD-MM-YYYY format","required":false,"schema":{"type":"string"}},{"in":"query","name":"start_date","description":"UTC Start Date in ISO format","required":false,"schema":{"type":"string"}},{"in":"query","name":"end_date","description":"UTC End Date in ISO format","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","description":"Comma separated values of delivery partner ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"stores","description":"Comma separated values of store ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channels","required":false,"schema":{"type":"string"}},{"in":"query","name":"payment_mode","description":"Comma separated values of payment modes","required":false,"schema":{"type":"string"}},{"in":"query","name":"bag_status","description":"Comma separated values of bag statuses","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_value","required":false,"schema":{"type":"string"}},{"in":"query","name":"tags","required":false,"schema":{"type":"string"}},{"in":"query","name":"time_to_dispatch","required":false,"schema":{"type":"integer","example":1,"enum":[1,-1]}},{"in":"query","name":"payment_methods","required":false,"schema":{"type":"string"}},{"in":"query","name":"my_orders","required":false,"schema":{"type":"boolean"}},{"in":"query","name":"show_cross_company_data","description":"Flag to view cross & non-cross company order","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"order_type","required":false,"schema":{"type":"string","example":"HomeDelivery"}}],"query":[{"in":"query","name":"super_lane","description":"Name of lane for which data is to be fetched","required":false,"schema":{"type":"string","enum":["unfulfilled","processed","returns","action_centre"],"default":"unfulfilled"}},{"in":"query","name":"group_entity","description":"Name of group entity","required":false,"schema":{"type":"string","enum":["shipments","orders","bags"],"default":"shipments"}},{"in":"query","name":"from_date","description":"Start Date in DD-MM-YYYY format","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","description":"End Date in DD-MM-YYYY format","required":false,"schema":{"type":"string"}},{"in":"query","name":"start_date","description":"UTC Start Date in ISO format","required":false,"schema":{"type":"string"}},{"in":"query","name":"end_date","description":"UTC End Date in ISO format","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","description":"Comma separated values of delivery partner ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"stores","description":"Comma separated values of store ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channels","required":false,"schema":{"type":"string"}},{"in":"query","name":"payment_mode","description":"Comma separated values of payment modes","required":false,"schema":{"type":"string"}},{"in":"query","name":"bag_status","description":"Comma separated values of bag statuses","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_value","required":false,"schema":{"type":"string"}},{"in":"query","name":"tags","required":false,"schema":{"type":"string"}},{"in":"query","name":"time_to_dispatch","required":false,"schema":{"type":"integer","example":1,"enum":[1,-1]}},{"in":"query","name":"payment_methods","required":false,"schema":{"type":"string"}},{"in":"query","name":"my_orders","required":false,"schema":{"type":"boolean"}},{"in":"query","name":"show_cross_company_data","description":"Flag to view cross & non-cross company order","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"order_type","required":false,"schema":{"type":"string","example":"HomeDelivery"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}]}""", super_lane=super_lane, group_entity=group_entity, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, dp_ids=dp_ids, stores=stores, sales_channels=sales_channels, payment_mode=payment_mode, bag_status=bag_status, search_type=search_type, search_value=search_value, tags=tags, time_to_dispatch=time_to_dispatch, payment_methods=payment_methods, my_orders=my_orders, show_cross_company_data=show_cross_company_data, order_type=order_type)
-        query_string = await create_query_string(super_lane=super_lane, group_entity=group_entity, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, dp_ids=dp_ids, stores=stores, sales_channels=sales_channels, payment_mode=payment_mode, bag_status=bag_status, search_type=search_type, search_value=search_value, tags=tags, time_to_dispatch=time_to_dispatch, payment_methods=payment_methods, my_orders=my_orders, show_cross_company_data=show_cross_company_data, order_type=order_type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/lane-config/", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"super_lane","description":"Name of lane for which data is to be fetched","required":false,"schema":{"type":"string","enum":["unfulfilled","processed","returns","action_centre"],"default":"unfulfilled"}},{"in":"query","name":"group_entity","description":"Name of group entity","required":false,"schema":{"type":"string","enum":["shipments","orders","bags"],"default":"shipments"}},{"in":"query","name":"from_date","description":"Start Date in DD-MM-YYYY format","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","description":"End Date in DD-MM-YYYY format","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","description":"Comma separated values of delivery partner ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"stores","description":"Comma separated values of store ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channels","required":false,"schema":{"type":"string"}},{"in":"query","name":"payment_mode","description":"Comma separated values of payment modes","required":false,"schema":{"type":"string"}},{"in":"query","name":"bag_status","description":"Comma separated values of bag statuses","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_value","required":false,"schema":{"type":"string"}},{"in":"query","name":"tags","required":false,"schema":{"type":"string"}},{"in":"query","name":"time_to_dispatch","required":false,"schema":{"type":"integer","example":1,"enum":[1,-1]}},{"in":"query","name":"payment_methods","required":false,"schema":{"type":"string"}},{"in":"query","name":"my_orders","required":false,"schema":{"type":"boolean"}},{"in":"query","name":"show_cross_company_data","description":"Flag to view cross & non-cross company order","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"order_type","required":false,"schema":{"type":"string","example":"HomeDelivery"}}],"query":[{"in":"query","name":"super_lane","description":"Name of lane for which data is to be fetched","required":false,"schema":{"type":"string","enum":["unfulfilled","processed","returns","action_centre"],"default":"unfulfilled"}},{"in":"query","name":"group_entity","description":"Name of group entity","required":false,"schema":{"type":"string","enum":["shipments","orders","bags"],"default":"shipments"}},{"in":"query","name":"from_date","description":"Start Date in DD-MM-YYYY format","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","description":"End Date in DD-MM-YYYY format","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","description":"Comma separated values of delivery partner ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"stores","description":"Comma separated values of store ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channels","required":false,"schema":{"type":"string"}},{"in":"query","name":"payment_mode","description":"Comma separated values of payment modes","required":false,"schema":{"type":"string"}},{"in":"query","name":"bag_status","description":"Comma separated values of bag statuses","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_value","required":false,"schema":{"type":"string"}},{"in":"query","name":"tags","required":false,"schema":{"type":"string"}},{"in":"query","name":"time_to_dispatch","required":false,"schema":{"type":"integer","example":1,"enum":[1,-1]}},{"in":"query","name":"payment_methods","required":false,"schema":{"type":"string"}},{"in":"query","name":"my_orders","required":false,"schema":{"type":"boolean"}},{"in":"query","name":"show_cross_company_data","description":"Flag to view cross & non-cross company order","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"order_type","required":false,"schema":{"type":"string","example":"HomeDelivery"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}]}""", super_lane=super_lane, group_entity=group_entity, from_date=from_date, to_date=to_date, dp_ids=dp_ids, stores=stores, sales_channels=sales_channels, payment_mode=payment_mode, bag_status=bag_status, search_type=search_type, search_value=search_value, tags=tags, time_to_dispatch=time_to_dispatch, payment_methods=payment_methods, my_orders=my_orders, show_cross_company_data=show_cross_company_data, order_type=order_type)
+        query_string = await create_query_string(super_lane=super_lane, group_entity=group_entity, from_date=from_date, to_date=to_date, dp_ids=dp_ids, stores=stores, sales_channels=sales_channels, payment_mode=payment_mode, bag_status=bag_status, search_type=search_type, search_value=search_value, tags=tags, time_to_dispatch=time_to_dispatch, payment_methods=payment_methods, my_orders=my_orders, show_cross_company_data=show_cross_company_data, order_type=order_type)
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -2367,7 +1727,7 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/lane-config/", super_lane=super_lane, group_entity=group_entity, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, dp_ids=dp_ids, stores=stores, sales_channels=sales_channels, payment_mode=payment_mode, bag_status=bag_status, search_type=search_type, search_value=search_value, tags=tags, time_to_dispatch=time_to_dispatch, payment_methods=payment_methods, my_orders=my_orders, show_cross_company_data=show_cross_company_data, order_type=order_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/lane-config/", super_lane=super_lane, group_entity=group_entity, from_date=from_date, to_date=to_date, dp_ids=dp_ids, stores=stores, sales_channels=sales_channels, payment_mode=payment_mode, bag_status=bag_status, search_type=search_type, search_value=search_value, tags=tags, time_to_dispatch=time_to_dispatch, payment_methods=payment_methods, my_orders=my_orders, show_cross_company_data=show_cross_company_data, order_type=order_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import LaneConfigResponse
@@ -2380,7 +1740,7 @@ class Order:
 
         return response
     
-    async def getOrders(self, lane=None, search_type=None, bag_status=None, time_to_dispatch=None, payment_methods=None, tags=None, search_value=None, from_date=None, to_date=None, start_date=None, end_date=None, dp_ids=None, stores=None, sales_channels=None, page_no=None, page_size=None, is_priority_sort=None, custom_meta=None, my_orders=None, show_cross_company_data=None, customer_id=None, order_type=None, request_headers:Dict={}):
+    async def getOrders(self, lane=None, search_type=None, bag_status=None, time_to_dispatch=None, payment_methods=None, tags=None, search_value=None, from_date=None, to_date=None, dp_ids=None, stores=None, sales_channels=None, page_no=None, page_size=None, is_priority_sort=None, custom_meta=None, my_orders=None, show_cross_company_data=None, customer_id=None, order_type=None, request_headers:Dict={}):
         """Get Orders Listing
         :param lane : lane refers to a section where orders are assigned, indicating its grouping : type string
         :param search_type : search_type refers to the field that will be used as the target for the search operation : type string
@@ -2391,8 +1751,6 @@ class Order:
         :param search_value : search_value is matched against the field specified by the search_type : type string
         :param from_date :  : type string
         :param to_date :  : type string
-        :param start_date :  : type string
-        :param end_date :  : type string
         :param dp_ids : Delivery Partner IDs to which shipments are assigned. : type string
         :param stores :  : type string
         :param sales_channels :  : type string
@@ -2425,10 +1783,6 @@ class Order:
             payload["from_date"] = from_date
         if to_date is not None:
             payload["to_date"] = to_date
-        if start_date is not None:
-            payload["start_date"] = start_date
-        if end_date is not None:
-            payload["end_date"] = end_date
         if dp_ids is not None:
             payload["dp_ids"] = dp_ids
         if stores is not None:
@@ -2457,8 +1811,8 @@ class Order:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/orders-listing", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer","default":37}}],"optional":[{"in":"query","name":"lane","description":"lane refers to a section where orders are assigned, indicating its grouping","required":false,"schema":{"type":"string","default":"new"}},{"in":"query","name":"search_type","description":"search_type refers to the field that will be used as the target for the search operation","required":false,"schema":{"type":"string","default":"shipment_id"}},{"in":"query","name":"bag_status","description":"bag_status refers to status of the entity. Filters orders based on the status.","required":false,"schema":{"type":"string"}},{"in":"query","name":"time_to_dispatch","description":"time_to_dispatch refers to estimated SLA time.","required":false,"schema":{"type":"integer","example":1,"enum":[1,-1]}},{"in":"query","name":"payment_methods","required":false,"schema":{"type":"string"}},{"in":"query","name":"tags","description":"tags refers to additional descriptive labels associated with the order","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_value","description":"search_value is matched against the field specified by the search_type","required":false,"schema":{"type":"string","default":"16854460524441037000"}},{"in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"start_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"end_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","description":"Delivery Partner IDs to which shipments are assigned.","required":false,"schema":{"type":"string"}},{"in":"query","name":"stores","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channels","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","name":"is_priority_sort","required":false,"schema":{"type":"boolean","default":true}},{"in":"query","name":"custom_meta","required":false,"schema":{"type":"string","default":"6388422a5ebd6a6cf4a8ede6"}},{"in":"query","name":"my_orders","required":false,"schema":{"type":"boolean"}},{"in":"query","name":"show_cross_company_data","description":"Flag to view cross & non-cross company order","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"customer_id","required":false,"schema":{"type":"string","example":"63a2ce177e9f59d3166dd700"}},{"in":"query","name":"order_type","required":false,"schema":{"type":"string","example":"HomeDelivery"}}],"query":[{"in":"query","name":"lane","description":"lane refers to a section where orders are assigned, indicating its grouping","required":false,"schema":{"type":"string","default":"new"}},{"in":"query","name":"search_type","description":"search_type refers to the field that will be used as the target for the search operation","required":false,"schema":{"type":"string","default":"shipment_id"}},{"in":"query","name":"bag_status","description":"bag_status refers to status of the entity. Filters orders based on the status.","required":false,"schema":{"type":"string"}},{"in":"query","name":"time_to_dispatch","description":"time_to_dispatch refers to estimated SLA time.","required":false,"schema":{"type":"integer","example":1,"enum":[1,-1]}},{"in":"query","name":"payment_methods","required":false,"schema":{"type":"string"}},{"in":"query","name":"tags","description":"tags refers to additional descriptive labels associated with the order","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_value","description":"search_value is matched against the field specified by the search_type","required":false,"schema":{"type":"string","default":"16854460524441037000"}},{"in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"start_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"end_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","description":"Delivery Partner IDs to which shipments are assigned.","required":false,"schema":{"type":"string"}},{"in":"query","name":"stores","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channels","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","name":"is_priority_sort","required":false,"schema":{"type":"boolean","default":true}},{"in":"query","name":"custom_meta","required":false,"schema":{"type":"string","default":"6388422a5ebd6a6cf4a8ede6"}},{"in":"query","name":"my_orders","required":false,"schema":{"type":"boolean"}},{"in":"query","name":"show_cross_company_data","description":"Flag to view cross & non-cross company order","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"customer_id","required":false,"schema":{"type":"string","example":"63a2ce177e9f59d3166dd700"}},{"in":"query","name":"order_type","required":false,"schema":{"type":"string","example":"HomeDelivery"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer","default":37}}]}""", lane=lane, search_type=search_type, bag_status=bag_status, time_to_dispatch=time_to_dispatch, payment_methods=payment_methods, tags=tags, search_value=search_value, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, dp_ids=dp_ids, stores=stores, sales_channels=sales_channels, page_no=page_no, page_size=page_size, is_priority_sort=is_priority_sort, custom_meta=custom_meta, my_orders=my_orders, show_cross_company_data=show_cross_company_data, customer_id=customer_id, order_type=order_type)
-        query_string = await create_query_string(lane=lane, search_type=search_type, bag_status=bag_status, time_to_dispatch=time_to_dispatch, payment_methods=payment_methods, tags=tags, search_value=search_value, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, dp_ids=dp_ids, stores=stores, sales_channels=sales_channels, page_no=page_no, page_size=page_size, is_priority_sort=is_priority_sort, custom_meta=custom_meta, my_orders=my_orders, show_cross_company_data=show_cross_company_data, customer_id=customer_id, order_type=order_type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/orders-listing", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer","default":37}}],"optional":[{"in":"query","name":"lane","description":"lane refers to a section where orders are assigned, indicating its grouping","required":false,"schema":{"type":"string","default":"new"}},{"in":"query","name":"search_type","description":"search_type refers to the field that will be used as the target for the search operation","required":false,"schema":{"type":"string","default":"shipment_id"}},{"in":"query","name":"bag_status","description":"bag_status refers to status of the entity. Filters orders based on the status.","required":false,"schema":{"type":"string"}},{"in":"query","name":"time_to_dispatch","description":"time_to_dispatch refers to estimated SLA time.","required":false,"schema":{"type":"integer","example":1,"enum":[1,-1]}},{"in":"query","name":"payment_methods","required":false,"schema":{"type":"string"}},{"in":"query","name":"tags","description":"tags refers to additional descriptive labels associated with the order","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_value","description":"search_value is matched against the field specified by the search_type","required":false,"schema":{"type":"string","default":"16854460524441037000"}},{"in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","description":"Delivery Partner IDs to which shipments are assigned.","required":false,"schema":{"type":"string"}},{"in":"query","name":"stores","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channels","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","name":"is_priority_sort","required":false,"schema":{"type":"boolean","default":true}},{"in":"query","name":"custom_meta","required":false,"schema":{"type":"string","default":"6388422a5ebd6a6cf4a8ede6"}},{"in":"query","name":"my_orders","required":false,"schema":{"type":"boolean"}},{"in":"query","name":"show_cross_company_data","description":"Flag to view cross & non-cross company order","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"customer_id","required":false,"schema":{"type":"string","example":"63a2ce177e9f59d3166dd700"}},{"in":"query","name":"order_type","required":false,"schema":{"type":"string","example":"HomeDelivery"}}],"query":[{"in":"query","name":"lane","description":"lane refers to a section where orders are assigned, indicating its grouping","required":false,"schema":{"type":"string","default":"new"}},{"in":"query","name":"search_type","description":"search_type refers to the field that will be used as the target for the search operation","required":false,"schema":{"type":"string","default":"shipment_id"}},{"in":"query","name":"bag_status","description":"bag_status refers to status of the entity. Filters orders based on the status.","required":false,"schema":{"type":"string"}},{"in":"query","name":"time_to_dispatch","description":"time_to_dispatch refers to estimated SLA time.","required":false,"schema":{"type":"integer","example":1,"enum":[1,-1]}},{"in":"query","name":"payment_methods","required":false,"schema":{"type":"string"}},{"in":"query","name":"tags","description":"tags refers to additional descriptive labels associated with the order","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_value","description":"search_value is matched against the field specified by the search_type","required":false,"schema":{"type":"string","default":"16854460524441037000"}},{"in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","description":"Delivery Partner IDs to which shipments are assigned.","required":false,"schema":{"type":"string"}},{"in":"query","name":"stores","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channels","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","name":"is_priority_sort","required":false,"schema":{"type":"boolean","default":true}},{"in":"query","name":"custom_meta","required":false,"schema":{"type":"string","default":"6388422a5ebd6a6cf4a8ede6"}},{"in":"query","name":"my_orders","required":false,"schema":{"type":"boolean"}},{"in":"query","name":"show_cross_company_data","description":"Flag to view cross & non-cross company order","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"customer_id","required":false,"schema":{"type":"string","example":"63a2ce177e9f59d3166dd700"}},{"in":"query","name":"order_type","required":false,"schema":{"type":"string","example":"HomeDelivery"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer","default":37}}]}""", lane=lane, search_type=search_type, bag_status=bag_status, time_to_dispatch=time_to_dispatch, payment_methods=payment_methods, tags=tags, search_value=search_value, from_date=from_date, to_date=to_date, dp_ids=dp_ids, stores=stores, sales_channels=sales_channels, page_no=page_no, page_size=page_size, is_priority_sort=is_priority_sort, custom_meta=custom_meta, my_orders=my_orders, show_cross_company_data=show_cross_company_data, customer_id=customer_id, order_type=order_type)
+        query_string = await create_query_string(lane=lane, search_type=search_type, bag_status=bag_status, time_to_dispatch=time_to_dispatch, payment_methods=payment_methods, tags=tags, search_value=search_value, from_date=from_date, to_date=to_date, dp_ids=dp_ids, stores=stores, sales_channels=sales_channels, page_no=page_no, page_size=page_size, is_priority_sort=is_priority_sort, custom_meta=custom_meta, my_orders=my_orders, show_cross_company_data=show_cross_company_data, customer_id=customer_id, order_type=order_type)
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -2472,7 +1826,7 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/orders-listing", lane=lane, search_type=search_type, bag_status=bag_status, time_to_dispatch=time_to_dispatch, payment_methods=payment_methods, tags=tags, search_value=search_value, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, dp_ids=dp_ids, stores=stores, sales_channels=sales_channels, page_no=page_no, page_size=page_size, is_priority_sort=is_priority_sort, custom_meta=custom_meta, my_orders=my_orders, show_cross_company_data=show_cross_company_data, customer_id=customer_id, order_type=order_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/orders-listing", lane=lane, search_type=search_type, bag_status=bag_status, time_to_dispatch=time_to_dispatch, payment_methods=payment_methods, tags=tags, search_value=search_value, from_date=from_date, to_date=to_date, dp_ids=dp_ids, stores=stores, sales_channels=sales_channels, page_no=page_no, page_size=page_size, is_priority_sort=is_priority_sort, custom_meta=custom_meta, my_orders=my_orders, show_cross_company_data=show_cross_company_data, customer_id=customer_id, order_type=order_type), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import OrderListingResponse
@@ -2530,12 +1884,12 @@ class Order:
 
         return response
     
-    async def getBulkShipmentExcelFile(self, sales_channels=None, dp_ids=None, start_date=None, end_date=None, stores=None, tags=None, bag_status=None, payment_methods=None, file_type=None, time_to_dispatch=None, page_no=None, page_size=None, request_headers:Dict={}):
+    async def getBulkShipmentExcelFile(self, sales_channels=None, dp_ids=None, from_date=None, to_date=None, stores=None, tags=None, bag_status=None, payment_methods=None, file_type=None, time_to_dispatch=None, page_no=None, page_size=None, request_headers:Dict={}):
         """Generate Bulk Shipment Excel Report.
         :param sales_channels : Comma separated values of sales channel ids : type string
         :param dp_ids : Comma separated values of delivery partner ids : type string
-        :param start_date : UTC start date in ISO format : type string
-        :param end_date : UTC end date in ISO format : type string
+        :param from_date : Start Date in DD-MM-YYYY format : type string
+        :param to_date : End Date in DD-MM-YYYY format : type string
         :param stores : Comma separated values of store ids : type string
         :param tags : Comma separated values of tags : type string
         :param bag_status : Comma separated values of bag statuses : type string
@@ -2551,10 +1905,10 @@ class Order:
             payload["sales_channels"] = sales_channels
         if dp_ids is not None:
             payload["dp_ids"] = dp_ids
-        if start_date is not None:
-            payload["start_date"] = start_date
-        if end_date is not None:
-            payload["end_date"] = end_date
+        if from_date is not None:
+            payload["from_date"] = from_date
+        if to_date is not None:
+            payload["to_date"] = to_date
         if stores is not None:
             payload["stores"] = stores
         if tags is not None:
@@ -2577,8 +1931,8 @@ class Order:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/generate/file", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"sales_channels","description":"Comma separated values of sales channel ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","description":"Comma separated values of delivery partner ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"start_date","description":"UTC start date in ISO format","required":false,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"end_date","description":"UTC end date in ISO format","required":false,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"stores","description":"Comma separated values of store ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"tags","description":"Comma separated values of tags","required":false,"schema":{"type":"string"}},{"in":"query","name":"bag_status","description":"Comma separated values of bag statuses","required":false,"schema":{"type":"string"}},{"in":"query","name":"payment_methods","description":"Comma separated values of payment methods","required":false,"schema":{"type":"string"}},{"in":"query","name":"file_type","description":"File type to be downloaded","required":false,"schema":{"type":"string"}},{"in":"query","name":"time_to_dispatch","description":"Sla breached or not breached","required":false,"schema":{"type":"integer","example":1,"enum":[1,-1]}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":10}}],"query":[{"in":"query","name":"sales_channels","description":"Comma separated values of sales channel ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","description":"Comma separated values of delivery partner ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"start_date","description":"UTC start date in ISO format","required":false,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"end_date","description":"UTC end date in ISO format","required":false,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"stores","description":"Comma separated values of store ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"tags","description":"Comma separated values of tags","required":false,"schema":{"type":"string"}},{"in":"query","name":"bag_status","description":"Comma separated values of bag statuses","required":false,"schema":{"type":"string"}},{"in":"query","name":"payment_methods","description":"Comma separated values of payment methods","required":false,"schema":{"type":"string"}},{"in":"query","name":"file_type","description":"File type to be downloaded","required":false,"schema":{"type":"string"}},{"in":"query","name":"time_to_dispatch","description":"Sla breached or not breached","required":false,"schema":{"type":"integer","example":1,"enum":[1,-1]}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":10}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}]}""", sales_channels=sales_channels, dp_ids=dp_ids, start_date=start_date, end_date=end_date, stores=stores, tags=tags, bag_status=bag_status, payment_methods=payment_methods, file_type=file_type, time_to_dispatch=time_to_dispatch, page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(sales_channels=sales_channels, dp_ids=dp_ids, start_date=start_date, end_date=end_date, stores=stores, tags=tags, bag_status=bag_status, payment_methods=payment_methods, file_type=file_type, time_to_dispatch=time_to_dispatch, page_no=page_no, page_size=page_size)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/generate/file", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"sales_channels","description":"Comma separated values of sales channel ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","description":"Comma separated values of delivery partner ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"from_date","description":"Start Date in DD-MM-YYYY format","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","description":"End Date in DD-MM-YYYY format","required":false,"schema":{"type":"string"}},{"in":"query","name":"stores","description":"Comma separated values of store ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"tags","description":"Comma separated values of tags","required":false,"schema":{"type":"string"}},{"in":"query","name":"bag_status","description":"Comma separated values of bag statuses","required":false,"schema":{"type":"string"}},{"in":"query","name":"payment_methods","description":"Comma separated values of payment methods","required":false,"schema":{"type":"string"}},{"in":"query","name":"file_type","description":"File type to be downloaded","required":false,"schema":{"type":"string"}},{"in":"query","name":"time_to_dispatch","description":"Sla breached or not breached","required":false,"schema":{"type":"integer","example":1,"enum":[1,-1]}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":10}}],"query":[{"in":"query","name":"sales_channels","description":"Comma separated values of sales channel ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","description":"Comma separated values of delivery partner ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"from_date","description":"Start Date in DD-MM-YYYY format","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","description":"End Date in DD-MM-YYYY format","required":false,"schema":{"type":"string"}},{"in":"query","name":"stores","description":"Comma separated values of store ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"tags","description":"Comma separated values of tags","required":false,"schema":{"type":"string"}},{"in":"query","name":"bag_status","description":"Comma separated values of bag statuses","required":false,"schema":{"type":"string"}},{"in":"query","name":"payment_methods","description":"Comma separated values of payment methods","required":false,"schema":{"type":"string"}},{"in":"query","name":"file_type","description":"File type to be downloaded","required":false,"schema":{"type":"string"}},{"in":"query","name":"time_to_dispatch","description":"Sla breached or not breached","required":false,"schema":{"type":"integer","example":1,"enum":[1,-1]}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":10}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}]}""", sales_channels=sales_channels, dp_ids=dp_ids, from_date=from_date, to_date=to_date, stores=stores, tags=tags, bag_status=bag_status, payment_methods=payment_methods, file_type=file_type, time_to_dispatch=time_to_dispatch, page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(sales_channels=sales_channels, dp_ids=dp_ids, from_date=from_date, to_date=to_date, stores=stores, tags=tags, bag_status=bag_status, payment_methods=payment_methods, file_type=file_type, time_to_dispatch=time_to_dispatch, page_no=page_no, page_size=page_size)
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -2592,7 +1946,7 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/generate/file", sales_channels=sales_channels, dp_ids=dp_ids, start_date=start_date, end_date=end_date, stores=stores, tags=tags, bag_status=bag_status, payment_methods=payment_methods, file_type=file_type, time_to_dispatch=time_to_dispatch, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/generate/file", sales_channels=sales_channels, dp_ids=dp_ids, from_date=from_date, to_date=to_date, stores=stores, tags=tags, bag_status=bag_status, payment_methods=payment_methods, file_type=file_type, time_to_dispatch=time_to_dispatch, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import FileResponse
@@ -2892,87 +2246,6 @@ class Order:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for generatePOSReceiptByOrderId")
-                print(e)
-
-        return response
-    
-    async def getAllowedTemplatesForBulk(self, request_headers:Dict={}):
-        """Gets All the allowed Templates to perform Bulk Operations.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = OrderValidator.getAllowedTemplatesForBulk()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/jobs/templates", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
-        query_string = await create_query_string()
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/jobs/templates", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import AllowedTemplatesResponse
-            schema = AllowedTemplatesResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getAllowedTemplatesForBulk")
-                print(e)
-
-        return response
-    
-    async def getTemplate(self, template_name=None, request_headers:Dict={}):
-        """Get the Excel file URL for the Template.
-        :param template_name :  : type string
-        """
-        payload = {}
-        
-        if template_name is not None:
-            payload["template_name"] = template_name
-
-        # Parameter validation
-        schema = OrderValidator.getTemplate()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/jobs/templates/{template_name}", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"template_name","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"template_name","required":true,"schema":{"type":"string"}}]}""", template_name=template_name)
-        query_string = await create_query_string(template_name=template_name)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/jobs/templates/{template_name}", template_name=template_name), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import TemplateDownloadResponse
-            schema = TemplateDownloadResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getTemplate")
                 print(e)
 
         return response

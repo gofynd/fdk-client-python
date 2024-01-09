@@ -55,11 +55,6 @@ from .models import PriorityEnum
     
         
         
-        
-    
-    
-        
-        
     
     
         
@@ -87,7 +82,7 @@ from .models import PriorityEnum
 class LeadValidator:
     
     
-    class getNewTickets(BaseSchema):
+    class getTickets(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -108,7 +103,7 @@ class LeadValidator:
          
         
     
-    class getNewTicket(BaseSchema):
+    class getTicket(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -119,7 +114,7 @@ class LeadValidator:
          
         
     
-    class editNewTicket(BaseSchema):
+    class editTicket(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -130,7 +125,7 @@ class LeadValidator:
          
         
     
-    class createNewHistory(BaseSchema):
+    class createHistory(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -141,7 +136,7 @@ class LeadValidator:
          
         
     
-    class getNewTicketHistory(BaseSchema):
+    class getTicketHistory(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -174,17 +169,6 @@ class LeadValidator:
          
         
     
-    class deleteCustomForm(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        slug = fields.Str(required=False)
-         
-        
-    
     class getCustomForms(BaseSchema):
         
         
@@ -203,7 +187,7 @@ class LeadValidator:
          
         
     
-    class getNewTokenForVideoRoom(BaseSchema):
+    class getTokenForVideoRoom(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -214,7 +198,7 @@ class LeadValidator:
          
         
     
-    class getNewVideoParticipants(BaseSchema):
+    class getVideoParticipants(BaseSchema):
         
         
         company_id = fields.Str(required=False)

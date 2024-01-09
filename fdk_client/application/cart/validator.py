@@ -46,8 +46,6 @@ from ..ApplicationModel import BaseSchema
     
         
         
-        
-        
     
     
         
@@ -238,10 +236,6 @@ class CartValidator:
         id = fields.Str(required=False)
         
         buy_now = fields.Boolean(required=False)
-        
-        slug = fields.Str(required=False)
-        
-        store_id = fields.Str(required=False)
          
         
     

@@ -13,9 +13,8 @@ from ..PlatformModel import BaseSchema
     
     
         
-        
-        
-        
+    
+    
         
         
         
@@ -25,29 +24,6 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
-    
-    
-        
-        
-    
-    
-        
-        
-    
-    
-        
-    
-    
-        
-    
-    
-        
-    
-    
-        
-        
-        
         
         
         
@@ -65,17 +41,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-        
         
         
         
@@ -88,32 +53,11 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
     
     
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     
     
-        
-        
-        
-        
-    
-    
-        
-        
-        
         
     
     
@@ -129,11 +73,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
-        
-        
-        
         
     
     
@@ -142,14 +81,16 @@ from ..PlatformModel import BaseSchema
     
     
         
-        
     
     
         
         
+        
     
     
         
+    
+    
         
 
 
@@ -157,30 +98,58 @@ from ..PlatformModel import BaseSchema
 class ServiceabilityValidator:
     
     
-    class getZones(BaseSchema):
+    class getEntityRegionView(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class getListView(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
-        page_no = fields.Int(required=False)
+        page_number = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
         
+        name = fields.Str(required=False)
+        
         is_active = fields.Boolean(required=False)
         
-        channel_id = fields.Str(required=False)
+        channel_ids = fields.Str(required=False)
         
         q = fields.Str(required=False)
+         
         
-        country = fields.Str(required=False)
+    
+    class getCompanyStoreView(BaseSchema):
         
-        state = fields.Str(required=False)
         
-        city = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
-        pincode = fields.Str(required=False)
+        page_number = fields.Int(required=False)
         
-        sector = fields.Str(required=False)
+        page_size = fields.Int(required=False)
+         
+        
+    
+    class updateZoneControllerView(BaseSchema):
+        
+        
+        zone_id = fields.Str(required=False)
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class getZoneDataView(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        zone_id = fields.Str(required=False)
          
         
     
@@ -191,21 +160,35 @@ class ServiceabilityValidator:
          
         
     
-    class updateZoneById(BaseSchema):
+    class getZoneListView(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
-        zone_id = fields.Str(required=False)
+        page_number = fields.Int(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        name = fields.Str(required=False)
+        
+        is_active = fields.Boolean(required=False)
+        
+        channel_ids = fields.Str(required=False)
+        
+        q = fields.Str(required=False)
+        
+        zone_id = fields.List(fields.Str(required=False), required=False)
          
         
     
-    class getZoneById(BaseSchema):
+    class getStore(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
-        zone_id = fields.Str(required=False)
+        store_uid = fields.Int(required=False)
          
         
     
@@ -223,19 +206,19 @@ class ServiceabilityValidator:
          
         
     
-    class createCourierPartnerAccount(BaseSchema):
+    class upsertDpAccount(BaseSchema):
         
         
         company_id = fields.Int(required=False)
          
         
     
-    class getCourierPartnerAccounts(BaseSchema):
+    class getDpAccount(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
-        page_no = fields.Int(required=False)
+        page_number = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
         
@@ -247,221 +230,53 @@ class ServiceabilityValidator:
          
         
     
-    class updateCourierPartnerAccount(BaseSchema):
+    class updateDpRule(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
-        account_id = fields.Str(required=False)
+        rule_uid = fields.Str(required=False)
          
         
     
-    class getCourierPartnerAccount(BaseSchema):
+    class getDpRules(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
-        account_id = fields.Str(required=False)
+        rule_uid = fields.Str(required=False)
          
         
     
-    class updateCompanyConfiguration(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class getCompanyConfiguration(BaseSchema):
+    class upsertDpRules(BaseSchema):
         
         
         company_id = fields.Int(required=False)
          
         
     
-    class bulkTat(BaseSchema):
+    class getDpRuleInsert(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
-        extension_id = fields.Str(required=False)
-        
-        scheme_id = fields.Str(required=False)
-         
-        
-    
-    class getBulkTat(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        extension_id = fields.Str(required=False)
-        
-        scheme_id = fields.Str(required=False)
-        
-        page_no = fields.Int(required=False)
+        page_number = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
-        
-        batch_id = fields.Str(required=False)
-        
-        action = fields.Str(required=False)
-        
-        status = fields.Str(required=False)
-        
-        country = fields.Str(required=False)
-        
-        region = fields.Str(required=False)
-        
-        start_date = fields.Str(required=False)
-        
-        end_date = fields.Str(required=False)
          
         
     
-    class bulkServiceability(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        extension_id = fields.Str(required=False)
-        
-        scheme_id = fields.Str(required=False)
-         
-        
-    
-    class getBulkServiceability(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        extension_id = fields.Str(required=False)
-        
-        scheme_id = fields.Str(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        batch_id = fields.Str(required=False)
-        
-        action = fields.Str(required=False)
-        
-        status = fields.Str(required=False)
-        
-        country = fields.Str(required=False)
-        
-        region = fields.Str(required=False)
-        
-        start_date = fields.Str(required=False)
-        
-        end_date = fields.Str(required=False)
-         
-        
-    
-    class getServiceability(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        extension_id = fields.Str(required=False)
-        
-        scheme_id = fields.Str(required=False)
-        
-        region_id = fields.Str(required=False)
-         
-        
-    
-    class updateServiceability(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        extension_id = fields.Str(required=False)
-        
-        scheme_id = fields.Str(required=False)
-        
-        region_id = fields.Str(required=False)
-         
-        
-    
-    class createPackageMaterial(BaseSchema):
+    class upsertDpCompanyRules(BaseSchema):
         
         
         company_id = fields.Int(required=False)
          
         
     
-    class getPackageMaterialList(BaseSchema):
+    class getDpCompanyRules(BaseSchema):
         
         
         company_id = fields.Int(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        q = fields.Str(required=False)
-        
-        size = fields.Str(required=False)
-        
-        package_type = fields.Str(required=False)
-         
-        
-    
-    class createPackageMaterialRule(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class getPackageMaterialRules(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        is_active = fields.Str(required=False)
-         
-        
-    
-    class updatePackageMaterialRule(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        rule_id = fields.Str(required=False)
-         
-        
-    
-    class getPackageMaterialRule(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        rule_id = fields.Str(required=False)
-         
-        
-    
-    class updatePackageMaterials(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        package_material_id = fields.Str(required=False)
-         
-        
-    
-    class getPackageMaterials(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        package_material_id = fields.Str(required=False)
          
         
     

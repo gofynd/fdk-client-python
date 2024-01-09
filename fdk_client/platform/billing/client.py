@@ -487,25 +487,19 @@ class Billing:
 
         return response
     
-    async def getFeatureLimitConfig(self, product_suite=None, type=None, request_headers:Dict={}):
+    async def getFeatureLimitConfig(self, request_headers:Dict={}):
         """Get subscription subscription limits.
-        :param product_suite :  : type string
-        :param type :  : type string
         """
         payload = {}
         
-        if product_suite is not None:
-            payload["product_suite"] = product_suite
-        if type is not None:
-            payload["type"] = type
 
         # Parameter validation
         schema = BillingValidator.getFeatureLimitConfig()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/current-limit", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}],"optional":[{"in":"query","name":"product_suite","schema":{"type":"string"}},{"in":"query","name":"type","schema":{"type":"string"}}],"query":[{"in":"query","name":"product_suite","schema":{"type":"string"}},{"in":"query","name":"type","schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}]}""", product_suite=product_suite, type=type)
-        query_string = await create_query_string(product_suite=product_suite, type=type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/current-limit", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}]}""", )
+        query_string = await create_query_string()
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -519,7 +513,7 @@ class Billing:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/current-limit", product_suite=product_suite, type=type), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/current-limit", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SubscriptionLimit
@@ -731,60 +725,6 @@ class Billing:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for subscripePlan")
-                print(e)
-
-        return response
-    
-    async def getentityDetail(self, entity_name=None, entity_id=None, channel=None, component=None, component_name=None, request_headers:Dict={}):
-        """Generic api to get the entity detail
-        :param entity_name : Entity name. : type string
-        :param entity_id : Entity unique id. : type string
-        :param channel : Ordering channel. : type string
-        :param component : The coponents the user would like to know. : type string
-        :param component_name : The name of component the preferred to be fetched. : type string
-        """
-        payload = {}
-        
-        if entity_name is not None:
-            payload["entity_name"] = entity_name
-        if entity_id is not None:
-            payload["entity_id"] = entity_id
-        if channel is not None:
-            payload["channel"] = channel
-        if component is not None:
-            payload["component"] = component
-        if component_name is not None:
-            payload["component_name"] = component_name
-
-        # Parameter validation
-        schema = BillingValidator.getentityDetail()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/entity/detail", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}},{"in":"query","name":"entity_name","description":"Entity name.","required":true,"schema":{"type":"string","example":"plan/subscription"}},{"in":"query","name":"channel","description":"Ordering channel.","required":true,"schema":{"type":"string","example":"ecomm"}}],"optional":[{"in":"query","name":"entity_id","description":"Entity unique id.","required":false,"schema":{"type":"string","example":"1"}},{"in":"query","name":"component","description":"The coponents the user would like to know.","required":false,"schema":{"type":"string","example":"fee/feature"}},{"in":"query","name":"component_name","description":"The name of component the preferred to be fetched.","required":false,"schema":{"type":"string","example":"logistic_fee"}}],"query":[{"in":"query","name":"entity_name","description":"Entity name.","required":true,"schema":{"type":"string","example":"plan/subscription"}},{"in":"query","name":"entity_id","description":"Entity unique id.","required":false,"schema":{"type":"string","example":"1"}},{"in":"query","name":"channel","description":"Ordering channel.","required":true,"schema":{"type":"string","example":"ecomm"}},{"in":"query","name":"component","description":"The coponents the user would like to know.","required":false,"schema":{"type":"string","example":"fee/feature"}},{"in":"query","name":"component_name","description":"The name of component the preferred to be fetched.","required":false,"schema":{"type":"string","example":"logistic_fee"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}]}""", entity_name=entity_name, entity_id=entity_id, channel=channel, component=component, component_name=component_name)
-        query_string = await create_query_string(entity_name=entity_name, entity_id=entity_id, channel=channel, component=component, component_name=component_name)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/entity/detail", entity_name=entity_name, entity_id=entity_id, channel=channel, component=component, component_name=component_name), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import EntityResponse
-            schema = EntityResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getentityDetail")
                 print(e)
 
         return response

@@ -3,11 +3,7 @@
 from ..common.exceptions import FDKClientValidationError
 
 
-from .billing.client import Billing
-
 from .configuration.client import Configuration
-
-from .content.client import Content
 
 from .inventory.client import Inventory
 
@@ -20,11 +16,7 @@ class PublicClient:
     def __init__(self, config):
         self.config = config
         
-        self.billing = Billing(config)
-        
         self.configuration = Configuration(config)
-        
-        self.content = Content(config)
         
         self.inventory = Inventory(config)
         

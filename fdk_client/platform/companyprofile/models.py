@@ -32,10 +32,6 @@ class ContactDetails(BaseSchema):
     pass
 
 
-class CountryCurrencyInfo(BaseSchema):
-    pass
-
-
 class BusinessCountryInfo(BaseSchema):
     pass
 
@@ -247,18 +243,6 @@ class ContactDetails(BaseSchema):
     
 
 
-class CountryCurrencyInfo(BaseSchema):
-    # CompanyProfile swagger.json
-
-    
-    code = fields.Str(required=False)
-    
-    symbol = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-
-
 class BusinessCountryInfo(BaseSchema):
     # CompanyProfile swagger.json
 
@@ -266,10 +250,6 @@ class BusinessCountryInfo(BaseSchema):
     country_code = fields.Str(required=False)
     
     country = fields.Str(required=False)
-    
-    currency = fields.Nested(CountryCurrencyInfo, required=False)
-    
-    timezone = fields.Str(required=False)
     
 
 
@@ -308,10 +288,6 @@ class GetAddressSerializer(BaseSchema):
     address2 = fields.Str(required=False)
     
     state = fields.Str(required=False)
-    
-    state_code = fields.Str(required=False)
-    
-    sector = fields.Str(required=False)
     
     address1 = fields.Str(required=False)
     
@@ -907,8 +883,6 @@ class GetLocationSerializer(BaseSchema):
     
     bulk_shipment = fields.Boolean(required=False)
     
-    auto_assign_courier_partner = fields.Boolean(required=False)
-    
 
 
 class LocationListSerializer(BaseSchema):
@@ -940,10 +914,6 @@ class AddressSerializer(BaseSchema):
     address2 = fields.Str(required=False)
     
     state = fields.Str(required=False)
-    
-    sector = fields.Str(required=False)
-    
-    state_code = fields.Str(required=False)
     
     address1 = fields.Str(required=False)
     
@@ -1006,8 +976,6 @@ class LocationSerializer(BaseSchema):
     avg_order_processing_time = fields.Nested(AverageOrderProcessingTime, required=False)
     
     bulk_shipment = fields.Boolean(required=False)
-    
-    auto_assign_courier_partner = fields.Boolean(required=False)
     
 
 

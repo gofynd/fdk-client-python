@@ -248,22 +248,6 @@ class SubscribePlanRes(BaseSchema):
     pass
 
 
-class Features(BaseSchema):
-    pass
-
-
-class FeeComponents(BaseSchema):
-    pass
-
-
-class Details(BaseSchema):
-    pass
-
-
-class EntityResponse(BaseSchema):
-    pass
-
-
 
 
 
@@ -1252,68 +1236,6 @@ class SubscribePlanRes(BaseSchema):
     current_status = fields.Str(required=False)
     
     meta = fields.Nested(Meta, required=False)
-    
-
-
-class Features(BaseSchema):
-    # Billing swagger.json
-
-    
-    name = fields.Str(required=False)
-    
-    slug = fields.Str(required=False)
-    
-    description = fields.Str(required=False)
-    
-    group = fields.Str(required=False)
-    
-    enabled = fields.Boolean(required=False)
-    
-    display_text = fields.Str(required=False)
-    
-
-
-class FeeComponents(BaseSchema):
-    # Billing swagger.json
-
-    
-    brand = fields.List(fields.Str(required=False), required=False)
-    
-    location = fields.List(fields.Str(required=False), required=False)
-    
-    channel = fields.List(fields.Dict(required=False), required=False)
-    
-    business_lead = fields.Str(required=False)
-    
-    settlement_type = fields.Str(required=False)
-    
-    settle_cycle_period = fields.Dict(required=False)
-    
-    components = fields.List(fields.Dict(required=False), required=False)
-    
-
-
-class Details(BaseSchema):
-    # Billing swagger.json
-
-    
-    fee_components = fields.List(fields.Nested(FeeComponents, required=False), required=False)
-    
-    features = fields.List(fields.Nested(Features, required=False), required=False)
-    
-
-
-class EntityResponse(BaseSchema):
-    # Billing swagger.json
-
-    
-    success = fields.Boolean(required=False)
-    
-    page = fields.Int(required=False)
-    
-    page_size = fields.Int(required=False)
-    
-    items = fields.List(fields.Nested(Details, required=False), required=False)
     
 
 

@@ -145,8 +145,10 @@ from ..ApplicationModel import BaseSchema
         
         
         
+        
     
     
+        
         
         
         
@@ -455,6 +457,8 @@ class CatalogValidator:
         
         store_id = fields.Int(required=False)
         
+        pincode = fields.Str(required=False)
+        
         moq = fields.Int(required=False)
          
         
@@ -465,6 +469,8 @@ class CatalogValidator:
         slug = fields.Str(required=False)
         
         size = fields.Str(required=False)
+        
+        pincode = fields.Str(required=False)
         
         strategy = fields.Str(required=False)
         

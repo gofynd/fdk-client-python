@@ -24,10 +24,6 @@ class DiscountJob(BaseSchema):
     pass
 
 
-class FileJobBody(BaseSchema):
-    pass
-
-
 class ListOrCalender(BaseSchema):
     pass
 
@@ -65,14 +61,6 @@ class UserDetails(BaseSchema):
 
 
 class BadRequestObject(BaseSchema):
-    pass
-
-
-class BadRequestData(BaseSchema):
-    pass
-
-
-class BadRequestObjectGet(BaseSchema):
     pass
 
 
@@ -116,6 +104,8 @@ class CreateUpdateDiscount(BaseSchema):
     brand_ids = fields.List(fields.Int(required=False), required=False)
     
     store_ids = fields.List(fields.Int(required=False), required=False)
+    
+    zone_ids = fields.List(fields.Str(required=False), required=False)
     
     validity = fields.Nested(ValidityObject, required=False)
     
@@ -163,54 +153,6 @@ class DiscountJob(BaseSchema):
     
     store_ids = fields.List(fields.Int(required=False), required=False)
     
-    zone_ids = fields.List(fields.Str(required=False), required=False)
-    
-    discount_meta = fields.Nested(DiscountMeta, required=False)
-    
-    validity = fields.Nested(ValidityObject, required=False)
-    
-    created_on = fields.Str(required=False)
-    
-    modified_on = fields.Str(required=False)
-    
-    created_by = fields.Nested(UserDetails, required=False)
-    
-    modified_by = fields.Nested(UserDetails, required=False)
-    
-    meta = fields.Dict(required=False)
-    
-
-
-class FileJobBody(BaseSchema):
-    # Discount swagger.json
-
-    
-    name = fields.Str(required=False)
-    
-    company_id = fields.Int(required=False)
-    
-    is_active = fields.Boolean(required=False)
-    
-    app_ids = fields.List(fields.Str(required=False), required=False)
-    
-    job_type = fields.Str(required=False)
-    
-    discount_type = fields.Str(required=False)
-    
-    discount_level = fields.Str(required=False)
-    
-    value = fields.Int(required=False)
-    
-    file_path = fields.Str(required=False)
-    
-    brand_ids = fields.List(fields.Int(required=False), required=False)
-    
-    store_ids = fields.List(fields.Int(required=False), required=False)
-    
-    extension_ids = fields.List(fields.Str(required=False), required=False)
-    
-    zone_ids = fields.List(fields.Str(required=False), required=False)
-    
     discount_meta = fields.Nested(DiscountMeta, required=False)
     
     validity = fields.Nested(ValidityObject, required=False)
@@ -243,7 +185,7 @@ class DiscountItems(BaseSchema):
     
     item_code = fields.Str(required=False)
     
-    brand_name = fields.Str(required=False)
+    brand_uid = fields.Int(required=False)
     
     seller_identifier = fields.Str(required=False)
     
@@ -277,7 +219,7 @@ class FileJobResponse(BaseSchema):
     
     company_id = fields.Int(required=False)
     
-    body = fields.Nested(FileJobBody, required=False)
+    body = fields.Dict(required=False)
     
     type = fields.Str(required=False)
     
@@ -286,18 +228,6 @@ class FileJobResponse(BaseSchema):
     _id = fields.Str(required=False)
     
     file_path = fields.Str(required=False)
-    
-    progress = fields.Int(required=False)
-    
-    extension_ids = fields.List(fields.Str(required=False), required=False)
-    
-    zone_ids = fields.List(fields.Str(required=False), required=False)
-    
-    created_on = fields.Str(required=False)
-    
-    modified_on = fields.Str(required=False)
-    
-    created_by = fields.Nested(UserDetails, required=False)
     
 
 
@@ -308,8 +238,6 @@ class FileJobRequest(BaseSchema):
     name = fields.Str(required=False)
     
     is_active = fields.Boolean(required=False)
-    
-    company_id = fields.Int(required=False)
     
     app_ids = fields.List(fields.Str(required=False), required=False)
     
@@ -384,26 +312,6 @@ class BadRequestObject(BaseSchema):
 
     
     message = fields.Str(required=False)
-    
-
-
-class BadRequestData(BaseSchema):
-    # Discount swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-
-
-class BadRequestObjectGet(BaseSchema):
-    # Discount swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-    error = fields.Str(required=False)
-    
-    data = fields.Nested(BadRequestData, required=False)
     
 
 

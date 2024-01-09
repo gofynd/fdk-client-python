@@ -26,9 +26,6 @@ class Payment:
             "checkAndUpdatePaymentStatus": "/service/application/payment/v1.0/payment/confirm/polling",
             "getPaymentModeRoutes": "/service/application/payment/v1.0/payment/options",
             "getPosPaymentModeRoutes": "/service/application/payment/v1.0/payment/options/pos",
-            "walletLinkInitate": "/service/application/payment/v1.0/payment/options/wallet/link",
-            "linkWallet": "/service/application/payment/v1.0/payment/options/wallet/verify",
-            "delinkWallet": "/service/application/payment/v1.0/payment/options/wallet/delink",
             "getRupifiBannerDetails": "/service/application/payment/v1.0/rupifi/banner",
             "getEpaylaterBannerDetails": "/service/application/payment/v1.0/epaylater/banner",
             "resendOrCancelPayment": "/service/application/payment/v1.0/payment/resend_or_cancel",
@@ -59,8 +56,7 @@ class Payment:
             "checkCredit": "/service/application/payment/v1.0/check-credits/",
             "customerOnboard": "/service/application/payment/v1.0/credit-onboard/",
             "outstandingOrderDetails": "/service/application/payment/v1.0/payment/outstanding-orders/",
-            "paidOrderDetails": "/service/application/payment/v1.0/payment/paid-orders/",
-            "createPaymentOrder": "/service/application/payment/v1.0/payment-orders/"
+            "paidOrderDetails": "/service/application/payment/v1.0/payment/paid-orders/"
             
         }
         self._urls = {
@@ -475,18 +471,15 @@ class Payment:
 
         return response
     
-    async def getPaymentModeRoutes(self, amount=None, cart_id=None, checkout_mode=None, refresh=None, order_id=None, card_reference=None, user_details=None, display_split=None, advance_payment=None, shipment_id=None, body="", request_headers:Dict={}):
+    async def getPaymentModeRoutes(self, amount=None, cart_id=None, pincode=None, checkout_mode=None, refresh=None, card_reference=None, user_details=None, body="", request_headers:Dict={}):
         """Use this API to get all valid payment options for doing a payment.
         :param amount : Payable amount. : type integer
         :param cart_id : Identifier of the cart. : type string
+        :param pincode : The PIN Code of the destination address, e.g. 400059 : type string
         :param checkout_mode : Option to checkout for self or for others. : type string
         :param refresh : This is a boolean value. Select `true` to remove temporary cache files on payment gateway and replace with the latest one. : type boolean
-        :param order_id :  : type string
         :param card_reference : Card reference id of user's debit or credit card. : type string
         :param user_details : URIencoded JSON containing details of an anonymous user. : type string
-        :param display_split : Display Split Payment Option or not : type boolean
-        :param advance_payment : Display Advance Payment Options or Normal : type boolean
-        :param shipment_id :  : type string
         """
         payload = {}
         
@@ -494,30 +487,24 @@ class Payment:
             payload["amount"] = amount
         if cart_id is not None:
             payload["cart_id"] = cart_id
+        if pincode is not None:
+            payload["pincode"] = pincode
         if checkout_mode is not None:
             payload["checkout_mode"] = checkout_mode
         if refresh is not None:
             payload["refresh"] = refresh
-        if order_id is not None:
-            payload["order_id"] = order_id
         if card_reference is not None:
             payload["card_reference"] = card_reference
         if user_details is not None:
             payload["user_details"] = user_details
-        if display_split is not None:
-            payload["display_split"] = display_split
-        if advance_payment is not None:
-            payload["advance_payment"] = advance_payment
-        if shipment_id is not None:
-            payload["shipment_id"] = shipment_id
 
         # Parameter validation
         schema = PaymentValidator.getPaymentModeRoutes()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getPaymentModeRoutes"], proccessed_params="""{"required":[{"name":"amount","in":"query","description":"Payable amount.","required":true,"schema":{"type":"integer"}}],"optional":[{"name":"cart_id","in":"query","description":"Identifier of the cart.","required":false,"schema":{"type":"string"}},{"name":"checkout_mode","in":"query","description":"Option to checkout for self or for others.","required":false,"schema":{"type":"string"}},{"name":"refresh","in":"query","description":"This is a boolean value. Select `true` to remove temporary cache files on payment gateway and replace with the latest one.","schema":{"type":"boolean"}},{"name":"order_id","in":"query","required":false,"schema":{"type":"string"}},{"name":"card_reference","in":"query","description":"Card reference id of user's debit or credit card.","schema":{"type":"string"}},{"name":"user_details","in":"query","description":"URIencoded JSON containing details of an anonymous user.","example":"%7B%22first_name%22:%22Fynd%22,%22last_name%22:%22Dummy%22,%22mobile%22:%229999999999%22,%22email%22:%22paymentsdummy@gofynd.com%22%7D","schema":{"type":"string"}},{"name":"display_split","in":"query","description":"Display Split Payment Option or not","schema":{"type":"boolean"}},{"name":"advance_payment","in":"query","description":"Display Advance Payment Options or Normal","schema":{"type":"boolean"}},{"name":"shipment_id","in":"query","required":false,"schema":{"type":"string"}}],"query":[{"name":"amount","in":"query","description":"Payable amount.","required":true,"schema":{"type":"integer"}},{"name":"cart_id","in":"query","description":"Identifier of the cart.","required":false,"schema":{"type":"string"}},{"name":"checkout_mode","in":"query","description":"Option to checkout for self or for others.","required":false,"schema":{"type":"string"}},{"name":"refresh","in":"query","description":"This is a boolean value. Select `true` to remove temporary cache files on payment gateway and replace with the latest one.","schema":{"type":"boolean"}},{"name":"order_id","in":"query","required":false,"schema":{"type":"string"}},{"name":"card_reference","in":"query","description":"Card reference id of user's debit or credit card.","schema":{"type":"string"}},{"name":"user_details","in":"query","description":"URIencoded JSON containing details of an anonymous user.","example":"%7B%22first_name%22:%22Fynd%22,%22last_name%22:%22Dummy%22,%22mobile%22:%229999999999%22,%22email%22:%22paymentsdummy@gofynd.com%22%7D","schema":{"type":"string"}},{"name":"display_split","in":"query","description":"Display Split Payment Option or not","schema":{"type":"boolean"}},{"name":"advance_payment","in":"query","description":"Display Advance Payment Options or Normal","schema":{"type":"boolean"}},{"name":"shipment_id","in":"query","required":false,"schema":{"type":"string"}}],"headers":[],"path":[]}""", amount=amount, cart_id=cart_id, checkout_mode=checkout_mode, refresh=refresh, order_id=order_id, card_reference=card_reference, user_details=user_details, display_split=display_split, advance_payment=advance_payment, shipment_id=shipment_id)
-        query_string = await create_query_string(amount=amount, cart_id=cart_id, checkout_mode=checkout_mode, refresh=refresh, order_id=order_id, card_reference=card_reference, user_details=user_details, display_split=display_split, advance_payment=advance_payment, shipment_id=shipment_id)
+        url_with_params = await create_url_with_params(api_url=self._urls["getPaymentModeRoutes"], proccessed_params="""{"required":[{"name":"amount","in":"query","description":"Payable amount.","required":true,"schema":{"type":"integer"}},{"name":"cart_id","in":"query","description":"Identifier of the cart.","required":true,"schema":{"type":"string"}},{"name":"pincode","in":"query","description":"The PIN Code of the destination address, e.g. 400059","required":true,"schema":{"type":"string"}},{"name":"checkout_mode","in":"query","description":"Option to checkout for self or for others.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"refresh","in":"query","description":"This is a boolean value. Select `true` to remove temporary cache files on payment gateway and replace with the latest one.","schema":{"type":"boolean"}},{"name":"card_reference","in":"query","description":"Card reference id of user's debit or credit card.","schema":{"type":"string"}},{"name":"user_details","in":"query","description":"URIencoded JSON containing details of an anonymous user.","example":"%7B%22first_name%22:%22Fynd%22,%22last_name%22:%22Dummy%22,%22mobile%22:%229999999999%22,%22email%22:%22paymentsdummy@gofynd.com%22%7D","schema":{"type":"string"}}],"query":[{"name":"amount","in":"query","description":"Payable amount.","required":true,"schema":{"type":"integer"}},{"name":"cart_id","in":"query","description":"Identifier of the cart.","required":true,"schema":{"type":"string"}},{"name":"pincode","in":"query","description":"The PIN Code of the destination address, e.g. 400059","required":true,"schema":{"type":"string"}},{"name":"checkout_mode","in":"query","description":"Option to checkout for self or for others.","required":true,"schema":{"type":"string"}},{"name":"refresh","in":"query","description":"This is a boolean value. Select `true` to remove temporary cache files on payment gateway and replace with the latest one.","schema":{"type":"boolean"}},{"name":"card_reference","in":"query","description":"Card reference id of user's debit or credit card.","schema":{"type":"string"}},{"name":"user_details","in":"query","description":"URIencoded JSON containing details of an anonymous user.","example":"%7B%22first_name%22:%22Fynd%22,%22last_name%22:%22Dummy%22,%22mobile%22:%229999999999%22,%22email%22:%22paymentsdummy@gofynd.com%22%7D","schema":{"type":"string"}}],"headers":[],"path":[]}""", amount=amount, cart_id=cart_id, pincode=pincode, checkout_mode=checkout_mode, refresh=refresh, card_reference=card_reference, user_details=user_details)
+        query_string = await create_query_string(amount=amount, cart_id=cart_id, pincode=pincode, checkout_mode=checkout_mode, refresh=refresh, card_reference=card_reference, user_details=user_details)
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -533,7 +520,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPaymentModeRoutes"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/payment/options", amount=amount, cart_id=cart_id, checkout_mode=checkout_mode, refresh=refresh, order_id=order_id, card_reference=card_reference, user_details=user_details, display_split=display_split, advance_payment=advance_payment, shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPaymentModeRoutes"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/payment/options", amount=amount, cart_id=cart_id, pincode=pincode, checkout_mode=checkout_mode, refresh=refresh, card_reference=card_reference, user_details=user_details), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import PaymentModeRouteResponse
@@ -581,7 +568,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getPosPaymentModeRoutes"], proccessed_params="""{"required":[{"name":"amount","in":"query","description":"Payable amount.","required":true,"schema":{"type":"integer"}},{"name":"pincode","in":"query","description":"The PIN Code of the destination address, e.g. 400059","required":true,"schema":{"type":"string"}},{"name":"order_type","in":"query","required":true,"description":"The order type of shipment * HomeDelivery - If the customer wants the order home-delivered * PickAtStore - If the customer wants the handover of an order at the store itself.","schema":{"type":"string"}}],"optional":[{"name":"cart_id","in":"query","description":"Identifier of the cart.","required":false,"schema":{"type":"string"}},{"name":"checkout_mode","in":"query","description":"Option to checkout for self or for others.","required":false,"schema":{"type":"string"}},{"name":"refresh","in":"query","description":"This is a boolean value. Select `true` to remove temporary cache files on payment gateway and replace with the latest one.","schema":{"type":"boolean"}},{"name":"card_reference","in":"query","description":"Card reference id of user's debit or credit card.","schema":{"type":"string"}},{"name":"user_details","in":"query","description":"URIencoded JSON containing details of an anonymous user.","example":"%7B%22first_name%22:%22Fynd%22,%22last_name%22:%22Dummy%22,%22mobile%22:%229999999999%22,%22email%22:%22paymentsdummy@gofynd.com%22%7D","schema":{"type":"string"}}],"query":[{"name":"amount","in":"query","description":"Payable amount.","required":true,"schema":{"type":"integer"}},{"name":"cart_id","in":"query","description":"Identifier of the cart.","required":false,"schema":{"type":"string"}},{"name":"pincode","in":"query","description":"The PIN Code of the destination address, e.g. 400059","required":true,"schema":{"type":"string"}},{"name":"checkout_mode","in":"query","description":"Option to checkout for self or for others.","required":false,"schema":{"type":"string"}},{"name":"refresh","in":"query","description":"This is a boolean value. Select `true` to remove temporary cache files on payment gateway and replace with the latest one.","schema":{"type":"boolean"}},{"name":"card_reference","in":"query","description":"Card reference id of user's debit or credit card.","schema":{"type":"string"}},{"name":"order_type","in":"query","required":true,"description":"The order type of shipment * HomeDelivery - If the customer wants the order home-delivered * PickAtStore - If the customer wants the handover of an order at the store itself.","schema":{"type":"string"}},{"name":"user_details","in":"query","description":"URIencoded JSON containing details of an anonymous user.","example":"%7B%22first_name%22:%22Fynd%22,%22last_name%22:%22Dummy%22,%22mobile%22:%229999999999%22,%22email%22:%22paymentsdummy@gofynd.com%22%7D","schema":{"type":"string"}}],"headers":[],"path":[]}""", amount=amount, cart_id=cart_id, pincode=pincode, checkout_mode=checkout_mode, refresh=refresh, card_reference=card_reference, order_type=order_type, user_details=user_details)
+        url_with_params = await create_url_with_params(api_url=self._urls["getPosPaymentModeRoutes"], proccessed_params="""{"required":[{"name":"amount","in":"query","description":"Payable amount.","required":true,"schema":{"type":"integer"}},{"name":"cart_id","in":"query","description":"Identifier of the cart.","required":true,"schema":{"type":"string"}},{"name":"pincode","in":"query","description":"The PIN Code of the destination address, e.g. 400059","required":true,"schema":{"type":"string"}},{"name":"checkout_mode","in":"query","description":"Option to checkout for self or for others.","required":true,"schema":{"type":"string"}},{"name":"order_type","in":"query","required":true,"description":"The order type of shipment * HomeDelivery - If the customer wants the order home-delivered * PickAtStore - If the customer wants the handover of an order at the store itself.","schema":{"type":"string"}}],"optional":[{"name":"refresh","in":"query","description":"This is a boolean value. Select `true` to remove temporary cache files on payment gateway and replace with the latest one.","schema":{"type":"boolean"}},{"name":"card_reference","in":"query","description":"Card reference id of user's debit or credit card.","schema":{"type":"string"}},{"name":"user_details","in":"query","description":"URIencoded JSON containing details of an anonymous user.","example":"%7B%22first_name%22:%22Fynd%22,%22last_name%22:%22Dummy%22,%22mobile%22:%229999999999%22,%22email%22:%22paymentsdummy@gofynd.com%22%7D","schema":{"type":"string"}}],"query":[{"name":"amount","in":"query","description":"Payable amount.","required":true,"schema":{"type":"integer"}},{"name":"cart_id","in":"query","description":"Identifier of the cart.","required":true,"schema":{"type":"string"}},{"name":"pincode","in":"query","description":"The PIN Code of the destination address, e.g. 400059","required":true,"schema":{"type":"string"}},{"name":"checkout_mode","in":"query","description":"Option to checkout for self or for others.","required":true,"schema":{"type":"string"}},{"name":"refresh","in":"query","description":"This is a boolean value. Select `true` to remove temporary cache files on payment gateway and replace with the latest one.","schema":{"type":"boolean"}},{"name":"card_reference","in":"query","description":"Card reference id of user's debit or credit card.","schema":{"type":"string"}},{"name":"order_type","in":"query","required":true,"description":"The order type of shipment * HomeDelivery - If the customer wants the order home-delivered * PickAtStore - If the customer wants the handover of an order at the store itself.","schema":{"type":"string"}},{"name":"user_details","in":"query","description":"URIencoded JSON containing details of an anonymous user.","example":"%7B%22first_name%22:%22Fynd%22,%22last_name%22:%22Dummy%22,%22mobile%22:%229999999999%22,%22email%22:%22paymentsdummy@gofynd.com%22%7D","schema":{"type":"string"}}],"headers":[],"path":[]}""", amount=amount, cart_id=cart_id, pincode=pincode, checkout_mode=checkout_mode, refresh=refresh, card_reference=card_reference, order_type=order_type, user_details=user_details)
         query_string = await create_query_string(amount=amount, cart_id=cart_id, pincode=pincode, checkout_mode=checkout_mode, refresh=refresh, card_reference=card_reference, order_type=order_type, user_details=user_details)
 
         headers={}
@@ -607,141 +594,6 @@ class Payment:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getPosPaymentModeRoutes")
-                print(e)
-
-        return response
-    
-    async def walletLinkInitate(self, body="", request_headers:Dict={}):
-        """It will initiate linking of wallet for the aggregator.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = PaymentValidator.walletLinkInitate()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import WalletLinkRequestSchema
-        schema = WalletLinkRequestSchema()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(api_url=self._urls["walletLinkInitate"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
-        query_string = await create_query_string()
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["walletLinkInitate"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/options/wallet/link", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import WalletResponseSchema
-            schema = WalletResponseSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for walletLinkInitate")
-                print(e)
-
-        return response
-    
-    async def linkWallet(self, body="", request_headers:Dict={}):
-        """It Verifies the linking of wallet using OTP
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = PaymentValidator.linkWallet()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import WalletVerifyRequestSchema
-        schema = WalletVerifyRequestSchema()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(api_url=self._urls["linkWallet"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
-        query_string = await create_query_string()
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["linkWallet"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/options/wallet/verify", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import WalletResponseSchema
-            schema = WalletResponseSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for linkWallet")
-                print(e)
-
-        return response
-    
-    async def delinkWallet(self, body="", request_headers:Dict={}):
-        """It Removes already linked wallet
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = PaymentValidator.delinkWallet()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import WalletDelinkRequestSchema
-        schema = WalletDelinkRequestSchema()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(api_url=self._urls["delinkWallet"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
-        query_string = await create_query_string()
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["delinkWallet"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/options/wallet/delink", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import WalletResponseSchema
-            schema = WalletResponseSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for delinkWallet")
                 print(e)
 
         return response
@@ -2119,51 +1971,6 @@ class Payment:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for paidOrderDetails")
-                print(e)
-
-        return response
-    
-    async def createPaymentOrder(self, body="", request_headers:Dict={}):
-        """Use this API to create a order and payment on aggregator side
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = PaymentValidator.createPaymentOrder()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import PaymentOrderRequest
-        schema = PaymentOrderRequest()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(api_url=self._urls["createPaymentOrder"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
-        query_string = await create_query_string()
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["createPaymentOrder"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment-orders/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import PaymentOrderResponse
-            schema = PaymentOrderResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for createPaymentOrder")
                 print(e)
 
         return response

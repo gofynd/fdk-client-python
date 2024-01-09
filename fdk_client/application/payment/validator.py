@@ -34,9 +34,6 @@ from ..ApplicationModel import BaseSchema
         
         
         
-        
-        
-        
     
     
         
@@ -47,9 +44,6 @@ from ..ApplicationModel import BaseSchema
         
         
         
-    
-    
-    
     
     
     
@@ -107,7 +101,6 @@ from ..ApplicationModel import BaseSchema
     
     
         
-    
 
 class PaymentValidator:
     
@@ -172,21 +165,15 @@ class PaymentValidator:
         
         cart_id = fields.Str(required=False)
         
+        pincode = fields.Str(required=False)
+        
         checkout_mode = fields.Str(required=False)
         
         refresh = fields.Boolean(required=False)
         
-        order_id = fields.Str(required=False)
-        
         card_reference = fields.Str(required=False)
         
         user_details = fields.Str(required=False)
-        
-        display_split = fields.Boolean(required=False)
-        
-        advance_payment = fields.Boolean(required=False)
-        
-        shipment_id = fields.Str(required=False)
          
         
     
@@ -209,21 +196,6 @@ class PaymentValidator:
         
         user_details = fields.Str(required=False)
          
-        
-    
-    class walletLinkInitate(BaseSchema):
-        
-        pass 
-        
-    
-    class linkWallet(BaseSchema):
-        
-        pass 
-        
-    
-    class delinkWallet(BaseSchema):
-        
-        pass 
         
     
     class getRupifiBannerDetails(BaseSchema):
@@ -407,11 +379,6 @@ class PaymentValidator:
         
         aggregator = fields.Str(required=False)
          
-        
-    
-    class createPaymentOrder(BaseSchema):
-        
-        pass 
         
     
     

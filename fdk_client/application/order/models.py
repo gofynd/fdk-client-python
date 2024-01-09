@@ -421,8 +421,6 @@ class TrackingDetails(BaseSchema):
     
     time = fields.Str(required=False)
     
-    created_ts = fields.Str(required=False)
-    
     tracking_details = fields.List(fields.Nested(NestedTrackingDetails, required=False), required=False)
     
 
@@ -817,8 +815,6 @@ class Shipments(BaseSchema):
     
     shipment_created_at = fields.Str(required=False)
     
-    shipment_created_ts = fields.Str(required=False)
-    
     size_info = fields.Dict(required=False)
     
     bags = fields.List(fields.Nested(Bags, required=False), required=False)
@@ -886,8 +882,6 @@ class OrderSchema(BaseSchema):
     breakup_values = fields.List(fields.Nested(BreakupValues, required=False), required=False)
     
     order_created_time = fields.Str(required=False)
-    
-    order_created_ts = fields.Str(required=False)
     
     order_id = fields.Str(required=False)
     

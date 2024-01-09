@@ -85,17 +85,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
-        
-    
-    
-        
-        
-    
-    
-        
 
 
 
@@ -273,31 +262,6 @@ class FinanceValidator:
         filter_key = fields.Str(required=False)
         
         affiliate_id = fields.Str(required=False)
-         
-        
-    
-    class invoicePaymentDetails(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        invoice_number = fields.Str(required=False)
-         
-        
-    
-    class invoiceActivityLogs(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        invoice_number = fields.Str(required=False)
-         
-        
-    
-    class unlockCreditNote(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
          
         
     

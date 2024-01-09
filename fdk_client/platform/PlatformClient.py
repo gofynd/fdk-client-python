@@ -18,8 +18,6 @@ from .companyprofile.client import CompanyProfile
 
 from .configuration.client import Configuration
 
-from .content.client import Content
-
 from .discount.client import Discount
 
 from .filestorage.client import FileStorage
@@ -30,11 +28,11 @@ from .inventory.client import Inventory
 
 from .lead.client import Lead
 
-from .serviceability.client import Serviceability
-
 from .order.client import Order
 
 from .payment.client import Payment
+
+from .serviceability.client import Serviceability
 
 from .theme.client import Theme
 
@@ -59,8 +57,6 @@ class PlatformClient:
         
         self.configuration = Configuration(config)
         
-        self.content = Content(config)
-        
         self.discount = Discount(config)
         
         self.fileStorage = FileStorage(config)
@@ -71,11 +67,11 @@ class PlatformClient:
         
         self.lead = Lead(config)
         
-        self.serviceability = Serviceability(config)
-        
         self.order = Order(config)
         
         self.payment = Payment(config)
+        
+        self.serviceability = Serviceability(config)
         
         self.theme = Theme(config)
         

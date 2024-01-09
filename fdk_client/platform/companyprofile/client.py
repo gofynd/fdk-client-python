@@ -355,7 +355,7 @@ class CompanyProfile:
 
         return response
     
-    async def getLocations(self, store_type=None, q=None, stage=None, page_no=None, page_size=None, location_ids=None, types=None, tags=None, request_headers:Dict={}):
+    async def getLocations(self, store_type=None, q=None, stage=None, page_no=None, page_size=None, location_ids=None, request_headers:Dict={}):
         """This API allows to view all the locations associated to a company.
         :param store_type : Helps to sort the location list on the basis of location type. : type string
         :param q : Query that is to be searched. : type string
@@ -363,8 +363,6 @@ class CompanyProfile:
         :param page_no : The page number to navigate through the given set of results : type integer
         :param page_size : Number of items to retrieve in each page. Default is 10. : type integer
         :param location_ids : Helps to filter stores on the basis of uids. : type array
-        :param types : Helps to get the location list on the basis of multiple location type. : type array
-        :param tags : Helps to get the location list on the basis of multiple location tag. : type array
         """
         payload = {}
         
@@ -380,18 +378,14 @@ class CompanyProfile:
             payload["page_size"] = page_size
         if location_ids is not None:
             payload["location_ids"] = location_ids
-        if types is not None:
-            payload["types"] = types
-        if tags is not None:
-            payload["tags"] = tags
 
         # Parameter validation
         schema = CompanyProfileValidator.getLocations()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/location", """{"required":[{"in":"path","name":"company_id","description":"Id of the company whose locations are to fetched","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"store_type","description":"Helps to sort the location list on the basis of location type.","schema":{"type":"string"},"required":false},{"in":"query","name":"q","description":"Query that is to be searched.","schema":{"type":"string"},"required":false},{"in":"query","name":"stage","description":"to filter companies on basis of verified or unverified companies.","schema":{"type":"string"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer","default":20},"required":false},{"in":"query","name":"location_ids","description":"Helps to filter stores on the basis of uids.","schema":{"type":"array","items":{"type":"integer"}},"required":false},{"in":"query","name":"types","description":"Helps to get the location list on the basis of multiple location type.","schema":{"type":"array","items":{"type":"string"}},"required":false},{"in":"query","name":"tags","description":"Helps to get the location list on the basis of multiple location tag.","schema":{"type":"array","items":{"type":"string"}},"required":false}],"query":[{"in":"query","name":"store_type","description":"Helps to sort the location list on the basis of location type.","schema":{"type":"string"},"required":false},{"in":"query","name":"q","description":"Query that is to be searched.","schema":{"type":"string"},"required":false},{"in":"query","name":"stage","description":"to filter companies on basis of verified or unverified companies.","schema":{"type":"string"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer","default":20},"required":false},{"in":"query","name":"location_ids","description":"Helps to filter stores on the basis of uids.","schema":{"type":"array","items":{"type":"integer"}},"required":false},{"in":"query","name":"types","description":"Helps to get the location list on the basis of multiple location type.","schema":{"type":"array","items":{"type":"string"}},"required":false},{"in":"query","name":"tags","description":"Helps to get the location list on the basis of multiple location tag.","schema":{"type":"array","items":{"type":"string"}},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company whose locations are to fetched","schema":{"type":"string"},"required":true}]}""", store_type=store_type, q=q, stage=stage, page_no=page_no, page_size=page_size, location_ids=location_ids, types=types, tags=tags)
-        query_string = await create_query_string(store_type=store_type, q=q, stage=stage, page_no=page_no, page_size=page_size, location_ids=location_ids, types=types, tags=tags)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/location", """{"required":[{"in":"path","name":"company_id","description":"Id of the company whose locations are to fetched","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"store_type","description":"Helps to sort the location list on the basis of location type.","schema":{"type":"string"},"required":false},{"in":"query","name":"q","description":"Query that is to be searched.","schema":{"type":"string"},"required":false},{"in":"query","name":"stage","description":"to filter companies on basis of verified or unverified companies.","schema":{"type":"string"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer","default":20},"required":false},{"in":"query","name":"location_ids","description":"Helps to filter stores on the basis of uids.","schema":{"type":"array","items":{"type":"integer"}},"required":false}],"query":[{"in":"query","name":"store_type","description":"Helps to sort the location list on the basis of location type.","schema":{"type":"string"},"required":false},{"in":"query","name":"q","description":"Query that is to be searched.","schema":{"type":"string"},"required":false},{"in":"query","name":"stage","description":"to filter companies on basis of verified or unverified companies.","schema":{"type":"string"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer","default":20},"required":false},{"in":"query","name":"location_ids","description":"Helps to filter stores on the basis of uids.","schema":{"type":"array","items":{"type":"integer"}},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company whose locations are to fetched","schema":{"type":"string"},"required":true}]}""", store_type=store_type, q=q, stage=stage, page_no=page_no, page_size=page_size, location_ids=location_ids)
+        query_string = await create_query_string(store_type=store_type, q=q, stage=stage, page_no=page_no, page_size=page_size, location_ids=location_ids)
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -405,7 +399,7 @@ class CompanyProfile:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/location", store_type=store_type, q=q, stage=stage, page_no=page_no, page_size=page_size, location_ids=location_ids, types=types, tags=tags), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/location", store_type=store_type, q=q, stage=stage, page_no=page_no, page_size=page_size, location_ids=location_ids), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import LocationListSerializer

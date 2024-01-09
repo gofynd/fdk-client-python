@@ -28,15 +28,12 @@ class Content:
             "getLegalInformation": "/service/application/content/v1.0/legal",
             "getNavigations": "/service/application/content/v1.0/navigations/",
             "getSEOConfiguration": "/service/application/content/v1.0/seo",
-            "getSEOMarkupSchemas": "/service/application/content/v1.0/seo/schema",
             "getSlideshows": "/service/application/content/v1.0/slideshow/",
             "getSlideshow": "/service/application/content/v1.0/slideshow/{slug}",
             "getSupportInformation": "/service/application/content/v1.0/support",
             "getTags": "/service/application/content/v1.0/tags",
             "getPage": "/service/application/content/v2.0/pages/{slug}",
-            "getPages": "/service/application/content/v2.0/pages/",
-            "getCustomObject": "/service/application/content/v1.0/metaobjects/{metaobject_id}",
-            "getCustomFields": "/service/application/content/v1.0/metafields/{resource}/{resource_id}"
+            "getPages": "/service/application/content/v2.0/pages/"
             
         }
         self._urls = {
@@ -606,53 +603,6 @@ class Content:
 
         return response
     
-    async def getSEOMarkupSchemas(self, page_type=None, active=None, body="", request_headers:Dict={}):
-        """Use this API to get all SEO Markup schema Templates setup for an application
-        :param page_type : The type of page against which schema template was created : type string
-        :param active : Boolean value for fetching seo schema. : type boolean
-        """
-        payload = {}
-        
-        if page_type is not None:
-            payload["page_type"] = page_type
-        if active is not None:
-            payload["active"] = active
-
-        # Parameter validation
-        schema = ContentValidator.getSEOMarkupSchemas()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getSEOMarkupSchemas"], proccessed_params="""{"required":[],"optional":[{"name":"page_type","in":"query","description":"The type of page against which schema template was created","required":false,"schema":{"type":"string"}},{"name":"active","in":"query","description":"Boolean value for fetching seo schema.","required":false,"schema":{"type":"boolean","default":true}}],"query":[{"name":"page_type","in":"query","description":"The type of page against which schema template was created","required":false,"schema":{"type":"string"}},{"name":"active","in":"query","description":"Boolean value for fetching seo schema.","required":false,"schema":{"type":"boolean","default":true}}],"headers":[],"path":[]}""", page_type=page_type, active=active)
-        query_string = await create_query_string(page_type=page_type, active=active)
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getSEOMarkupSchemas"]).netloc, "get", await create_url_without_domain("/service/application/content/v1.0/seo/schema", page_type=page_type, active=active), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SeoSchemaComponent
-            schema = SeoSchemaComponent()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getSEOMarkupSchemas")
-                print(e)
-
-        return response
-    
     async def getSlideshows(self, page_no=None, page_size=None, body="", request_headers:Dict={}):
         """Use this API to get a list of slideshows along with their details.
         :param page_no : The page number to navigate through the given set of results. Default value is 1.  : type integer
@@ -916,97 +866,6 @@ class Content:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getPages")
-                print(e)
-
-        return response
-    
-    async def getCustomObject(self, metaobject_id=None, body="", request_headers:Dict={}):
-        """Use this API to retrieve the custom object details, their fields details with definitions and references.
-        :param metaobject_id :  : type string
-        """
-        payload = {}
-        
-        if metaobject_id is not None:
-            payload["metaobject_id"] = metaobject_id
-
-        # Parameter validation
-        schema = ContentValidator.getCustomObject()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getCustomObject"], proccessed_params="""{"required":[{"name":"metaobject_id","in":"path","required":true,"schema":{"type":"string","description":"This is meta object id"},"examples":{"success":{"value":"65392bd912376081aafa90ff"},"failure":{"value":"5eda528b97457fe43a733acd"}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"metaobject_id","in":"path","required":true,"schema":{"type":"string","description":"This is meta object id"},"examples":{"success":{"value":"65392bd912376081aafa90ff"},"failure":{"value":"5eda528b97457fe43a733acd"}}}]}""", metaobject_id=metaobject_id)
-        query_string = await create_query_string(metaobject_id=metaobject_id)
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCustomObject"]).netloc, "get", await create_url_without_domain("/service/application/content/v1.0/metaobjects/{metaobject_id}", metaobject_id=metaobject_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import CustomObjectByIdSchema
-            schema = CustomObjectByIdSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getCustomObject")
-                print(e)
-
-        return response
-    
-    async def getCustomFields(self, resource=None, resource_id=None, body="", request_headers:Dict={}):
-        """Use this API to retrieve the custom fields for given resource and resource_id in param.
-        :param resource :  : type string
-        :param resource_id :  : type string
-        """
-        payload = {}
-        
-        if resource is not None:
-            payload["resource"] = resource
-        if resource_id is not None:
-            payload["resource_id"] = resource_id
-
-        # Parameter validation
-        schema = ContentValidator.getCustomFields()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getCustomFields"], proccessed_params="""{"required":[{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the name of resource for which you want to fetch custom fields eg. product, collection, customer etc."},"examples":{"success":{"value":"product"},"failure":{"value":"inventory"}}},{"name":"resource_id","in":"path","required":true,"schema":{"type":"string","description":"This is the resource id for which custom fields created"},"examples":{"success":{"value":"64bb987e9a3c4b6c29d676bc"},"failure":{"value":"64bb987e9a3c4b6c29d67eee"}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the name of resource for which you want to fetch custom fields eg. product, collection, customer etc."},"examples":{"success":{"value":"product"},"failure":{"value":"inventory"}}},{"name":"resource_id","in":"path","required":true,"schema":{"type":"string","description":"This is the resource id for which custom fields created"},"examples":{"success":{"value":"64bb987e9a3c4b6c29d676bc"},"failure":{"value":"64bb987e9a3c4b6c29d67eee"}}}]}""", resource=resource, resource_id=resource_id)
-        query_string = await create_query_string(resource=resource, resource_id=resource_id)
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCustomFields"]).netloc, "get", await create_url_without_domain("/service/application/content/v1.0/metafields/{resource}/{resource_id}", resource=resource, resource_id=resource_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import CustomFieldsResponseByResourceIdSchema
-            schema = CustomFieldsResponseByResourceIdSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getCustomFields")
                 print(e)
 
         return response

@@ -5,7 +5,7 @@
 ##### [Back to Application docs](./README.md)
 
 ## Order Methods
-The Order and Shipment module is designed for retrieving application-specific orders, accessing order details, and obtaining shipment and invoice information. This module facilitates shipment tracking, allows customization of shipment details, and provides reasons for cancellations and returns. Additionally, it offers real-time shipment status updates.
+Handles all Application order and shipment api(s)
 
 Default
 * [getOrders](#getorders)
@@ -36,7 +36,7 @@ Get all orders
 
 ```python
 try:
-    result = await applicationClient.order.getOrders(status=status, pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, startDate=startDate, endDate=endDate, customMeta=customMeta)
+    result = await applicationClient.order.getOrders(status=status, pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, customMeta=customMeta)
     # use result
 except Exception as e:
     print(e)
@@ -53,8 +53,6 @@ except Exception as e:
 | pageSize | Int? | no | The number of items to retrieve in each page. Default value is 10. |   
 | fromDate | String? | no | The date from which the orders should be retrieved. |   
 | toDate | String? | no | The date till which the orders should be retrieved. |   
-| startDate | String? | no | UTC Start Date in ISO format |   
-| endDate | String? | no | UTC Start Date in ISO format |   
 | customMeta | String? | no | A filter and retrieve data using special fields included for special use-cases |  
 
 
@@ -100,7 +98,7 @@ Get details of an order
 
 ```python
 try:
-    result = await applicationClient.order.getOrderById(orderId=orderId, allowInactive=allowInactive)
+    result = await applicationClient.order.getOrderById(orderId=orderId)
     # use result
 except Exception as e:
     print(e)
@@ -112,8 +110,7 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| orderId | String | yes | A unique number used for identifying and tracking your orders. |   
-| allowInactive | Boolean? | no | Flag to allow inactive shipments |  
+| orderId | String | yes | A unique number used for identifying and tracking your orders. |  
 
 
 
@@ -1437,7 +1434,7 @@ Get details of a shipment
 
 ```python
 try:
-    result = await applicationClient.order.getShipmentById(shipmentId=shipmentId, allowInactive=allowInactive)
+    result = await applicationClient.order.getShipmentById(shipmentId=shipmentId)
     # use result
 except Exception as e:
     print(e)
@@ -1449,8 +1446,7 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| shipmentId | String | yes | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. |   
-| allowInactive | Boolean? | no | Flag to allow inactive shipments |  
+| shipmentId | String | yes | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. |  
 
 
 
@@ -1707,10 +1703,7 @@ Success. Check the example shown below or refer `ShipmentById` for more details.
       "name": "Jio-market-store3",
       "company_id": 33,
       "id": 50,
-      "code": "store3",
-      "tags": [
-        "infibeam"
-      ]
+      "code": "store3"
     },
     "fulfilling_company": {
       "id": 33,
@@ -2628,7 +2621,6 @@ Successfully updateShipmentStatus!
  | isPassed | Boolean? |  yes  |  |
  | status | String? |  yes  |  |
  | time | String? |  yes  |  |
- | createdTs | String? |  yes  |  |
  | trackingDetails | ArrayList<[NestedTrackingDetails](#NestedTrackingDetails)>? |  yes  |  |
 
 ---
@@ -2931,7 +2923,6 @@ Successfully updateShipmentStatus!
  | prices | [Prices](#Prices)? |  yes  |  |
  | returnableDate | String? |  yes  |  |
  | shipmentCreatedAt | String? |  yes  |  |
- | shipmentCreatedTs | String? |  yes  |  |
  | sizeInfo | HashMap<String,Any>? |  yes  |  |
  | bags | ArrayList<[Bags](#Bags)>? |  yes  |  |
  | dpName | String? |  yes  |  |
@@ -2987,7 +2978,6 @@ Successfully updateShipmentStatus!
  | userInfo | [UserInfo](#UserInfo)? |  yes  |  |
  | breakupValues | ArrayList<[BreakupValues](#BreakupValues)>? |  yes  |  |
  | orderCreatedTime | String? |  yes  |  |
- | orderCreatedTs | String? |  yes  |  |
  | orderId | String? |  yes  |  |
  | shipments | ArrayList<[Shipments](#Shipments)>? |  yes  |  |
  | bagsForReorder | ArrayList<[BagsForReorder](#BagsForReorder)>? |  yes  |  |

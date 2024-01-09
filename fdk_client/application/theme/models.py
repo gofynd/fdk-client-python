@@ -6,8 +6,6 @@ from marshmallow.validate import OneOf
 from ..ApplicationModel import BaseSchema
 
 
-from .enums import *
-
 
 
 class AllAvailablePageSchema(BaseSchema):
@@ -19,30 +17,6 @@ class AvailablePageSchema(BaseSchema):
 
 
 class AvailablePageSectionMetaAttributes(BaseSchema):
-    pass
-
-
-class SEOMetaItem(BaseSchema):
-    pass
-
-
-class SEOMetaItems(BaseSchema):
-    pass
-
-
-class SEOSitemap(BaseSchema):
-    pass
-
-
-class SEObreadcrumb(BaseSchema):
-    pass
-
-
-class Action(BaseSchema):
-    pass
-
-
-class ActionPage(BaseSchema):
     pass
 
 
@@ -67,10 +41,6 @@ class AvailablePageUserPredicate(BaseSchema):
 
 
 class AvailablePageRoutePredicate(BaseSchema):
-    pass
-
-
-class AvailablePageSchedulePredicate(BaseSchema):
     pass
 
 
@@ -174,7 +144,7 @@ class PaletteConfig(BaseSchema):
     pass
 
 
-class ThemeMeta(BaseSchema):
+class Meta(BaseSchema):
     pass
 
 
@@ -282,10 +252,6 @@ class Route(BaseSchema):
     pass
 
 
-class AvailablePagePlatformPredicate(BaseSchema):
-    pass
-
-
 class BlitzkriegInternalServerErrorSchema(BaseSchema):
     pass
 
@@ -339,72 +305,6 @@ class AvailablePageSectionMetaAttributes(BaseSchema):
     
 
 
-class SEOMetaItem(BaseSchema):
-    # Theme swagger.json
-
-    
-    title = fields.Str(required=False)
-    
-    items = fields.List(fields.Nested(SEOMetaItems, required=False), required=False)
-    
-
-
-class SEOMetaItems(BaseSchema):
-    # Theme swagger.json
-
-    
-    key = fields.Str(required=False)
-    
-    value = fields.Str(required=False)
-    
-
-
-class SEOSitemap(BaseSchema):
-    # Theme swagger.json
-
-    
-    priority = fields.Float(required=False)
-    
-    frequency = fields.Str(required=False)
-    
-
-
-class SEObreadcrumb(BaseSchema):
-    # Theme swagger.json
-
-    
-    url = fields.Str(required=False)
-    
-    action = fields.Nested(Action, required=False)
-    
-
-
-class Action(BaseSchema):
-    # Theme swagger.json
-
-    
-    page = fields.Nested(ActionPage, required=False)
-    
-    popup = fields.Nested(ActionPage, required=False)
-    
-    type = fields.Str(required=False)
-    
-
-
-class ActionPage(BaseSchema):
-    # Theme swagger.json
-
-    
-    params = fields.Dict(required=False)
-    
-    query = fields.Dict(required=False)
-    
-    url = fields.Str(required=False)
-    
-    type = fields.Str(required=False, validate=OneOf([val.value for val in PageType.__members__.values()]))
-    
-
-
 class AvailablePageSeo(BaseSchema):
     # Theme swagger.json
 
@@ -412,14 +312,6 @@ class AvailablePageSeo(BaseSchema):
     title = fields.Str(required=False)
     
     description = fields.Str(required=False)
-    
-    canonical_url = fields.Str(required=False)
-    
-    meta_tags = fields.List(fields.Nested(SEOMetaItem, required=False), required=False)
-    
-    sitemap = fields.Nested(SEOSitemap, required=False)
-    
-    breadcrumb = fields.List(fields.Nested(SEObreadcrumb, required=False), required=False)
     
     _id = fields.Str(required=False)
     
@@ -452,12 +344,6 @@ class AvailablePagePredicate(BaseSchema):
     user = fields.Nested(AvailablePageUserPredicate, required=False)
     
     route = fields.Nested(AvailablePageRoutePredicate, required=False)
-    
-    schedule = fields.Nested(AvailablePageSchedulePredicate, required=False)
-    
-    platform = fields.Nested(AvailablePagePlatformPredicate, required=False)
-    
-    zones = fields.List(fields.Str(required=False), required=False)
     
 
 
@@ -495,18 +381,6 @@ class AvailablePageRoutePredicate(BaseSchema):
     
 
 
-class AvailablePageSchedulePredicate(BaseSchema):
-    # Theme swagger.json
-
-    
-    cron = fields.Str(required=False)
-    
-    start = fields.Str(required=False)
-    
-    end = fields.Str(required=False)
-    
-
-
 class ThemesSchema(BaseSchema):
     # Theme swagger.json
 
@@ -527,7 +401,7 @@ class ThemesSchema(BaseSchema):
     
     marketplace_theme_id = fields.Str(required=False)
     
-    meta = fields.Nested(ThemeMeta, required=False)
+    meta = fields.Nested(Meta, required=False)
     
     name = fields.Str(required=False)
     
@@ -544,10 +418,6 @@ class ThemesSchema(BaseSchema):
     assets = fields.Nested(Assets, required=False)
     
     available_sections = fields.List(fields.Nested(SectionItem, required=False), required=False)
-    
-    theme_type = fields.Str(required=False)
-    
-    company_id = fields.Float(required=False)
     
 
 
@@ -901,7 +771,7 @@ class PaletteConfig(BaseSchema):
     
 
 
-class ThemeMeta(BaseSchema):
+class Meta(BaseSchema):
     # Theme swagger.json
 
     
@@ -1204,18 +1074,6 @@ class Route(BaseSchema):
     selected = fields.Str(required=False)
     
     exact_url = fields.Str(required=False)
-    
-
-
-class AvailablePagePlatformPredicate(BaseSchema):
-    # Theme swagger.json
-
-    
-    ios = fields.Boolean(required=False)
-    
-    android = fields.Boolean(required=False)
-    
-    web = fields.Boolean(required=False)
     
 
 

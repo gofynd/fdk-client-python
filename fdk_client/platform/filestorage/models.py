@@ -24,6 +24,10 @@ class StartResponse(BaseSchema):
     pass
 
 
+class Params(BaseSchema):
+    pass
+
+
 class StartRequest(BaseSchema):
     pass
 
@@ -272,10 +276,6 @@ class PaymentReceiptMeta(BaseSchema):
     pass
 
 
-class ExtensionSlug(BaseSchema):
-    pass
-
-
 
 
 
@@ -335,6 +335,14 @@ class StartResponse(BaseSchema):
     
 
 
+class Params(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    subpath = fields.Str(required=False)
+    
+
+
 class StartRequest(BaseSchema):
     # FileStorage swagger.json
 
@@ -347,7 +355,7 @@ class StartRequest(BaseSchema):
     
     tags = fields.List(fields.Str(required=False), required=False)
     
-    params = fields.Dict(required=False)
+    params = fields.Nested(Params, required=False)
     
 
 
@@ -967,7 +975,7 @@ class DummyTemplateDataPayload(BaseSchema):
     # FileStorage swagger.json
 
     
-    is_export = fields.Boolean(required=False)
+    is_international = fields.Boolean(required=False)
     
     app_domain_name = fields.Str(required=False)
     
@@ -1048,8 +1056,6 @@ class DummyTemplateData(BaseSchema):
     pdf_type_id = fields.Float(required=False)
     
     payload = fields.Nested(DummyTemplateDataPayload, required=False)
-    
-    country_code = fields.Str(required=False)
     
     __v = fields.Int(required=False)
     
@@ -1294,14 +1300,6 @@ class PaymentReceiptMeta(BaseSchema):
     event_trace_info = fields.Dict(required=False)
     
     trace = fields.Str(required=False)
-    
-
-
-class ExtensionSlug(BaseSchema):
-    # FileStorage swagger.json
-
-    
-    extension_slug = fields.Str(required=False)
     
 
 

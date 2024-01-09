@@ -1759,12 +1759,10 @@ class Cart:
 
         return response
     
-    async def getAppCoupons(self, id=None, buy_now=None, slug=None, store_id=None, request_headers:Dict={}):
+    async def getAppCoupons(self, id=None, buy_now=None, request_headers:Dict={}):
         """Use this API to get a list of available coupons along with their details.
         :param id :  : type string
         :param buy_now :  : type boolean
-        :param slug :  : type string
-        :param store_id :  : type string
         """
         payload = {}
         
@@ -1772,18 +1770,14 @@ class Cart:
             payload["id"] = id
         if buy_now is not None:
             payload["buy_now"] = buy_now
-        if slug is not None:
-            payload["slug"] = slug
-        if store_id is not None:
-            payload["store_id"] = store_id
 
         # Parameter validation
         schema = CartValidator.getAppCoupons()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/platform-pos-coupon", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart."}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"slug","schema":{"type":"string","description":"Product slug to fetch the available coupons"}},{"in":"query","name":"store_id","schema":{"type":"string","description":"Store id"}}],"query":[{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart."}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"slug","schema":{"type":"string","description":"Product slug to fetch the available coupons"}},{"in":"query","name":"store_id","schema":{"type":"string","description":"Store id"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", id=id, buy_now=buy_now, slug=slug, store_id=store_id)
-        query_string = await create_query_string(id=id, buy_now=buy_now, slug=slug, store_id=store_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/platform-pos-coupon", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart."}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}}],"query":[{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart."}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", id=id, buy_now=buy_now)
+        query_string = await create_query_string(id=id, buy_now=buy_now)
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -1797,7 +1791,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/platform-pos-coupon", id=id, buy_now=buy_now, slug=slug, store_id=store_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/platform-pos-coupon", id=id, buy_now=buy_now), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import GetCouponResponse

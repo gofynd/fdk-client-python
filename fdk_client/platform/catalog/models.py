@@ -646,42 +646,6 @@ class GetProducts(BaseSchema):
     pass
 
 
-class GetCollectionDetailResponse(BaseSchema):
-    pass
-
-
-class CommonResponseSchemaCollection(BaseSchema):
-    pass
-
-
-class GetQueryFiltersResponse(BaseSchema):
-    pass
-
-
-class GetCollectionItemsResponseSchemaV2(BaseSchema):
-    pass
-
-
-class Page1(BaseSchema):
-    pass
-
-
-class CollectionItemSchemaV2(BaseSchema):
-    pass
-
-
-class CollectionItemUpdateSchemaV2(BaseSchema):
-    pass
-
-
-class CollectionQuerySchemaV2(BaseSchema):
-    pass
-
-
-class ProductDetailV2(BaseSchema):
-    pass
-
-
 class GetSearchConfigurationResponse(BaseSchema):
     pass
 
@@ -1439,26 +1403,6 @@ class WeightResponse(BaseSchema):
 
 
 class WeightResponse1(BaseSchema):
-    pass
-
-
-class CreatedBy(BaseSchema):
-    pass
-
-
-class Marketplaces(BaseSchema):
-    pass
-
-
-class GetAllMarketplaces(BaseSchema):
-    pass
-
-
-class UpdateMarketplaceOptinRequest(BaseSchema):
-    pass
-
-
-class UpdateMarketplaceOptinResponse(BaseSchema):
     pass
 
 
@@ -3863,8 +3807,6 @@ class GetConfigMetadataResponse(BaseSchema):
     
     data = fields.List(fields.Dict(required=False), required=False)
     
-    page = fields.Nested(Page, required=False)
-    
     values = fields.List(fields.Dict(required=False), required=False)
     
 
@@ -4150,186 +4092,6 @@ class GetProducts(BaseSchema):
     product_uid = fields.Int(required=False)
     
     sizes = fields.List(fields.Nested(Size, required=False), required=False)
-    
-
-
-class GetCollectionDetailResponse(BaseSchema):
-    # Catalog swagger.json
-
-    
-    _custom_json = fields.Dict(required=False)
-    
-    _locale_language = fields.Dict(required=False)
-    
-    _schedule = fields.Nested(CollectionSchedule, required=False)
-    
-    action = fields.Dict(required=False)
-    
-    allow_facets = fields.Boolean(required=False)
-    
-    allow_sort = fields.Boolean(required=False)
-    
-    app_id = fields.Str(required=False)
-    
-    badge = fields.Nested(CollectionBadge, required=False)
-    
-    banners = fields.Nested(ImageUrls, required=False)
-    
-    description = fields.Str(required=False)
-    
-    is_active = fields.Boolean(required=False)
-    
-    is_visible = fields.Boolean(required=False)
-    
-    logo = fields.Nested(Media, required=False)
-    
-    meta = fields.Dict(required=False)
-    
-    name = fields.Str(required=False)
-    
-    priority = fields.Int(required=False)
-    
-    published = fields.Boolean(required=False)
-    
-    query = fields.List(fields.Nested(CollectionQuery, required=False), required=False)
-    
-    seo = fields.Nested(SeoDetail, required=False)
-    
-    slug = fields.Str(required=False)
-    
-    sort_on = fields.Str(required=False)
-    
-    tags = fields.List(fields.Str(required=False), required=False)
-    
-    type = fields.Str(required=False)
-    
-    uid = fields.Str(required=False)
-    
-    visible_facets_keys = fields.List(fields.Str(required=False), required=False)
-    
-
-
-class CommonResponseSchemaCollection(BaseSchema):
-    # Catalog swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-
-
-class GetQueryFiltersResponse(BaseSchema):
-    # Catalog swagger.json
-
-    
-    filters = fields.List(fields.Nested(ProductFilters, required=False), required=False)
-    
-    operators = fields.Dict(required=False)
-    
-    sort_on = fields.List(fields.Nested(ProductSortOn, required=False), required=False)
-    
-
-
-class GetCollectionItemsResponseSchemaV2(BaseSchema):
-    # Catalog swagger.json
-
-    
-    items = fields.List(fields.Nested(ProductDetailV2, required=False), required=False)
-    
-    page = fields.Nested(Page1, required=False)
-    
-
-
-class Page1(BaseSchema):
-    # Catalog swagger.json
-
-    
-    ca = fields.Boolean(required=False)
-    
-    department = fields.Str(required=False)
-    
-    page_no = fields.Int(required=False)
-    
-    page_size = fields.Int(required=False)
-    
-    q = fields.Str(required=False)
-    
-    sort = fields.Str(required=False)
-    
-    sort_on = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
-    
-    variant = fields.Str(required=False)
-    
-
-
-class CollectionItemSchemaV2(BaseSchema):
-    # Catalog swagger.json
-
-    
-    action = fields.Str(required=False)
-    
-    item_id = fields.Int(required=False)
-    
-    priority = fields.Int(required=False)
-    
-
-
-class CollectionItemUpdateSchemaV2(BaseSchema):
-    # Catalog swagger.json
-
-    
-    allow_facets = fields.Boolean(required=False)
-    
-    allow_sort = fields.Boolean(required=False)
-    
-    items = fields.List(fields.Nested(CollectionItemSchemaV2, required=False), required=False)
-    
-    query = fields.List(fields.Nested(CollectionQuerySchemaV2, required=False), required=False)
-    
-    type = fields.Str(required=False)
-    
-    visible_facets_keys = fields.List(fields.Str(required=False), required=False)
-    
-
-
-class CollectionQuerySchemaV2(BaseSchema):
-    # Catalog swagger.json
-
-    
-    attribute = fields.Str(required=False)
-    
-    op = fields.Str(required=False)
-    
-    value = fields.List(fields.Raw(required=False), required=False)
-    
-
-
-class ProductDetailV2(BaseSchema):
-    # Catalog swagger.json
-
-    
-    brand = fields.Nested(ProductBrand, required=False)
-    
-    is_excluded = fields.Boolean(required=False)
-    
-    is_pinned = fields.Boolean(required=False)
-    
-    item_code = fields.Str(required=False)
-    
-    item_type = fields.Str(required=False)
-    
-    medias = fields.List(fields.Nested(Media, required=False), required=False)
-    
-    name = fields.Str(required=False)
-    
-    priority = fields.Int(required=False)
-    
-    short_description = fields.Str(required=False)
-    
-    slug = fields.Str(required=False)
-    
-    uid = fields.Int(required=False)
     
 
 
@@ -6917,8 +6679,6 @@ class SEOData(BaseSchema):
     
     meta_tags = fields.List(fields.Nested(Metatags, required=False), required=False)
     
-    canonical_url = fields.Str(required=False)
-    
 
 
 class SearchKeywordResult(BaseSchema):
@@ -6986,8 +6746,6 @@ class SeoDetail(BaseSchema):
     breadcrumbs = fields.List(fields.Nested(ApplicationItemSeoBreadcrumbs, required=False), required=False)
     
     meta_tags = fields.List(fields.Nested(Metatags, required=False), required=False)
-    
-    canonical_url = fields.Str(required=False)
     
 
 
@@ -7620,98 +7378,6 @@ class WeightResponse1(BaseSchema):
     shipping = fields.Float(required=False)
     
     unit = fields.Str(required=False)
-    
-
-
-class CreatedBy(BaseSchema):
-    # Catalog swagger.json
-
-    
-    username = fields.Str(required=False)
-    
-    user_id = fields.Str(required=False)
-    
-
-
-class Marketplaces(BaseSchema):
-    # Catalog swagger.json
-
-    
-    brand_ids = fields.List(fields.Int(required=False), required=False)
-    
-    app_id = fields.Str(required=False)
-    
-    enabled = fields.Boolean(required=False)
-    
-    created_by = fields.Nested(CreatedBy, required=False)
-    
-    created_on = fields.Raw(required=False)
-    
-    opt_level = fields.Str(required=False)
-    
-    company_id = fields.Int(required=False)
-    
-    modified_by = fields.Nested(CreatedBy, required=False)
-    
-    store_ids = fields.List(fields.Int(required=False), required=False)
-    
-    modified_on = fields.Raw(required=False)
-    
-    platforms = fields.Str(required=False)
-    
-    _id = fields.Str(required=False)
-    
-
-
-class GetAllMarketplaces(BaseSchema):
-    # Catalog swagger.json
-
-    
-    items = fields.List(fields.Nested(Marketplaces, required=False), required=False)
-    
-    page = fields.Nested(Page, required=False)
-    
-
-
-class UpdateMarketplaceOptinRequest(BaseSchema):
-    # Catalog swagger.json
-
-    
-    brand_ids = fields.List(fields.Int(required=False), required=False)
-    
-    company_id = fields.Int(required=False)
-    
-    enabled = fields.Boolean(required=False)
-    
-    opt_level = fields.Str(required=False)
-    
-    platform = fields.Str(required=False)
-    
-    store_ids = fields.List(fields.Int(required=False), required=False)
-    
-
-
-class UpdateMarketplaceOptinResponse(BaseSchema):
-    # Catalog swagger.json
-
-    
-    brand_ids = fields.List(fields.Int(required=False), required=False)
-    
-    company_id = fields.Int(required=False)
-    
-    app_id = fields.Str(required=False)
-    
-    enabled = fields.Boolean(required=False)
-    
-    opt_level = fields.Str(required=False)
-    
-    platform = fields.Str(required=False)
-    
-    store_ids = fields.List(fields.Int(required=False), required=False)
-    
-    created_by = fields.Nested(CreatedBy, required=False)
-    
-    modified_by = fields.Nested(CreatedBy, required=False)
     
 
 
