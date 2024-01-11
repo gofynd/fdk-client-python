@@ -17,6 +17,8 @@ from .filestorage.applicationClient import FileStorage
 
 from .lead.applicationClient import Lead
 
+from .serviceability.applicationClient import Serviceability
+
 from .order.applicationClient import Order
 
 from .partner.applicationClient import Partner
@@ -24,8 +26,6 @@ from .partner.applicationClient import Partner
 from .payment.applicationClient import Payment
 
 from .rewards.applicationClient import Rewards
-
-from .serviceability.applicationClient import Serviceability
 
 from .share.applicationClient import Share
 
@@ -52,6 +52,8 @@ class PlatformApplicationClient:
         
         self.lead = Lead(config, applicationId)
         
+        self.serviceability = Serviceability(config, applicationId)
+        
         self.order = Order(config, applicationId)
         
         self.partner = Partner(config, applicationId)
@@ -59,8 +61,6 @@ class PlatformApplicationClient:
         self.payment = Payment(config, applicationId)
         
         self.rewards = Rewards(config, applicationId)
-        
-        self.serviceability = Serviceability(config, applicationId)
         
         self.share = Share(config, applicationId)
         

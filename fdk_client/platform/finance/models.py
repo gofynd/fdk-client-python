@@ -28,6 +28,10 @@ class Page(BaseSchema):
     pass
 
 
+class Currency(BaseSchema):
+    pass
+
+
 class GenerateReportJson(BaseSchema):
     pass
 
@@ -376,6 +380,50 @@ class GetReportingFiltersResponse(BaseSchema):
     pass
 
 
+class PaymentDetail(BaseSchema):
+    pass
+
+
+class PaidInvoicePaymentDetail(BaseSchema):
+    pass
+
+
+class InvoicePaymentDetailsResponseData(BaseSchema):
+    pass
+
+
+class InvoicePaymentDetailsResponse(BaseSchema):
+    pass
+
+
+class InvoiceActivityLogsResponseData(BaseSchema):
+    pass
+
+
+class InvoiceActivityLogsResponse(BaseSchema):
+    pass
+
+
+class InvoiceActivityLogError(BaseSchema):
+    pass
+
+
+class UnlockCreditNoteRequestData(BaseSchema):
+    pass
+
+
+class UnlockCreditNoteRequest(BaseSchema):
+    pass
+
+
+class UnlockCreditNoteResponseData(BaseSchema):
+    pass
+
+
+class UnlockCreditNoteResponse(BaseSchema):
+    pass
+
+
 
 
 
@@ -444,6 +492,18 @@ class Page(BaseSchema):
     type = fields.Str(required=False)
     
     size = fields.Int(required=False)
+    
+
+
+class Currency(BaseSchema):
+    # Finance swagger.json
+
+    
+    code = fields.Str(required=False)
+    
+    symbol = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
     
 
 
@@ -785,7 +845,7 @@ class CreditlineDataPlatformResponse(BaseSchema):
     
     show_mr = fields.Boolean(required=False)
     
-    page = fields.Dict(required=False)
+    page = fields.Nested(Page, required=False)
     
     message = fields.Str(required=False)
     
@@ -932,6 +992,8 @@ class InvoiceListingResponseItems(BaseSchema):
     is_downloadable = fields.Boolean(required=False)
     
     invoice_id = fields.Str(required=False)
+    
+    currency = fields.Nested(Currency, required=False)
     
 
 
@@ -1215,7 +1277,7 @@ class CreditNoteDetails(BaseSchema):
     
     cn_reference_number = fields.Str(required=False)
     
-    cn_details = fields.Dict(required=False)
+    cn_details = fields.Nested(CnDetails, required=False)
     
     redemption_details = fields.List(fields.Nested(RedemptionDetails, required=False), required=False)
     
@@ -1546,6 +1608,126 @@ class GetReportingFiltersResponse(BaseSchema):
     filters = fields.List(fields.Nested(GetReportingNestedFilters, required=False), required=False)
     
     status = fields.Nested(GetReportingFilters, required=False)
+    
+
+
+class PaymentDetail(BaseSchema):
+    # Finance swagger.json
+
+    
+    display_name = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
+    
+
+
+class PaidInvoicePaymentDetail(BaseSchema):
+    # Finance swagger.json
+
+    
+    payment_details = fields.List(fields.Nested(PaymentDetail, required=False), required=False)
+    
+    date_of_payment = fields.Str(required=False)
+    
+    amount = fields.Float(required=False)
+    
+
+
+class InvoicePaymentDetailsResponseData(BaseSchema):
+    # Finance swagger.json
+
+    
+    paid_invoice_payment_details = fields.List(fields.Nested(PaidInvoicePaymentDetail, required=False), required=False)
+    
+    failed_attempts_details = fields.List(fields.Dict(required=False), required=False)
+    
+
+
+class InvoicePaymentDetailsResponse(BaseSchema):
+    # Finance swagger.json
+
+    
+    data = fields.Nested(InvoicePaymentDetailsResponseData, required=False)
+    
+    success = fields.Boolean(required=False)
+    
+    payment_details_visible = fields.Boolean(required=False)
+    
+
+
+class InvoiceActivityLogsResponseData(BaseSchema):
+    # Finance swagger.json
+
+    
+    performed_by = fields.Str(required=False)
+    
+    status = fields.Str(required=False)
+    
+    reason = fields.Str(required=False)
+    
+    is_resolved = fields.Boolean(required=False)
+    
+    retry_attempts = fields.Float(required=False)
+    
+    max_retry_attempts = fields.Float(required=False)
+    
+
+
+class InvoiceActivityLogsResponse(BaseSchema):
+    # Finance swagger.json
+
+    
+    data = fields.List(fields.Nested(InvoiceActivityLogsResponseData, required=False), required=False)
+    
+
+
+class InvoiceActivityLogError(BaseSchema):
+    # Finance swagger.json
+
+    
+    reason = fields.Str(required=False)
+    
+
+
+class UnlockCreditNoteRequestData(BaseSchema):
+    # Finance swagger.json
+
+    
+    seller_id = fields.Str(required=False)
+    
+    locked_credit_notes = fields.List(fields.Str(required=False), required=False)
+    
+    unlock_reason = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+
+
+class UnlockCreditNoteRequest(BaseSchema):
+    # Finance swagger.json
+
+    
+    data = fields.Nested(UnlockCreditNoteRequestData, required=False)
+    
+
+
+class UnlockCreditNoteResponseData(BaseSchema):
+    # Finance swagger.json
+
+    
+    is_cn_unlocked = fields.Boolean(required=False)
+    
+    status = fields.Str(required=False)
+    
+
+
+class UnlockCreditNoteResponse(BaseSchema):
+    # Finance swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+    data = fields.Nested(UnlockCreditNoteResponseData, required=False)
     
 
 

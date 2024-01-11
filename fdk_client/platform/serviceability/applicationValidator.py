@@ -25,6 +25,58 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
         
         
         
@@ -41,29 +93,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-        
-    
-    
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-    
-    
         
         
     
@@ -73,70 +102,6 @@ from ..PlatformModel import BaseSchema
 
 class ServiceabilityValidator:
     
-    
-    class getApplicationServiceability(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class updateApplicationServiceability(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getZoneFromPincodeView(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getZonesFromApplicationIdView(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        zone_id = fields.List(fields.Str(required=False), required=False)
-        
-        q = fields.Str(required=False)
-         
-        
-    
-    class addAppDp(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class deleteAppDp(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        courier_partner_id = fields.Int(required=False)
-         
-        
     
     class updatePincodeMopView(BaseSchema):
         
@@ -174,7 +139,29 @@ class ServiceabilityValidator:
          
         
     
-    class upsertDpApplicationRules(BaseSchema):
+    class updateCourierRule(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        rule_id = fields.Str(required=False)
+         
+        
+    
+    class getCourierPartnerRule(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        rule_id = fields.Str(required=False)
+         
+        
+    
+    class createCourierPartnerRule(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -183,7 +170,22 @@ class ServiceabilityValidator:
          
         
     
-    class getDpApplicationRules(BaseSchema):
+    class getCourierPartnerRules(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        status = fields.Str(required=False)
+         
+        
+    
+    class updateApplicationConfiguration(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -192,7 +194,16 @@ class ServiceabilityValidator:
          
         
     
-    class updateSelfShip(BaseSchema):
+    class getApplicationConfiguration(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class patchApplicationServiceabilitySelfShipment(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -201,10 +212,92 @@ class ServiceabilityValidator:
          
         
     
-    class getSelfShip(BaseSchema):
+    class getApplicationServiceabilitySelfShipment(BaseSchema):
         
         
         company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getApplicationConfig(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class insertApplicationConfig(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class updateStoreRulesConfig(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getStoreRules(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        status = fields.Str(required=False)
+         
+        
+    
+    class createStoreRules(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getStoreRule(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        rule_uid = fields.Str(required=False)
+         
+        
+    
+    class updateStoreRules(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        rule_uid = fields.Str(required=False)
+         
+        
+    
+    class updateCourierPartnerRulePriority(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
          

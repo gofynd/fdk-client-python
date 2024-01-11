@@ -401,7 +401,7 @@ class Payment:
         return response
     
     async def verifyIfscCode(self, ifsc_code=None, request_headers:Dict={}):
-        """Get True/False for correct IFSC Code for adding bank details for refund
+        """Get True or False for correct IFSC Code for adding bank details for refund
         :param ifsc_code :  : type string
         """
         payload = {}
