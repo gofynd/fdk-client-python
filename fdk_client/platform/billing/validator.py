@@ -57,8 +57,7 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
+        
         
     
     
@@ -71,6 +70,17 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
+    
+    
+        
+    
+    
+        
+        
+        
+        
+        
         
 
 
@@ -181,6 +191,10 @@ class BillingValidator:
         
         
         company_id = fields.Str(required=False)
+        
+        product_suite = fields.Str(required=False)
+        
+        type = fields.Str(required=False)
          
         
     
@@ -216,6 +230,23 @@ class BillingValidator:
         
         
         company_id = fields.Str(required=False)
+         
+        
+    
+    class getentityDetail(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        entity_name = fields.Str(required=False)
+        
+        entity_id = fields.Str(required=False)
+        
+        channel = fields.Str(required=False)
+        
+        component = fields.Str(required=False)
+        
+        component_name = fields.Str(required=False)
          
         
     

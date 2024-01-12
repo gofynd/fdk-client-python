@@ -360,10 +360,12 @@ class Cart:
 
         return response
     
-    async def getCoupons(self, id=None, buy_now=None, body="", request_headers:Dict={}):
+    async def getCoupons(self, id=None, buy_now=None, slug=None, store_id=None, body="", request_headers:Dict={}):
         """Use this API to get a list of available coupons along with their details.
         :param id :  : type string
         :param buy_now :  : type boolean
+        :param slug :  : type string
+        :param store_id :  : type string
         """
         payload = {}
         
@@ -371,14 +373,18 @@ class Cart:
             payload["id"] = id
         if buy_now is not None:
             payload["buy_now"] = buy_now
+        if slug is not None:
+            payload["slug"] = slug
+        if store_id is not None:
+            payload["store_id"] = store_id
 
         # Parameter validation
         schema = CartValidator.getCoupons()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getCoupons"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart."}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}}],"query":[{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart."}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}}],"headers":[],"path":[]}""", id=id, buy_now=buy_now)
-        query_string = await create_query_string(id=id, buy_now=buy_now)
+        url_with_params = await create_url_with_params(api_url=self._urls["getCoupons"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart."}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"slug","schema":{"type":"string","description":"Product slug to fetch the available coupons"}},{"in":"query","name":"store_id","schema":{"type":"string","description":"Store id"}}],"query":[{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart."}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"slug","schema":{"type":"string","description":"Product slug to fetch the available coupons"}},{"in":"query","name":"store_id","schema":{"type":"string","description":"Store id"}}],"headers":[],"path":[]}""", id=id, buy_now=buy_now, slug=slug, store_id=store_id)
+        query_string = await create_query_string(id=id, buy_now=buy_now, slug=slug, store_id=store_id)
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -394,7 +400,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCoupons"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/coupon", id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCoupons"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/coupon", id=id, buy_now=buy_now, slug=slug, store_id=store_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import GetCouponResponse

@@ -31,17 +31,12 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
         
     
     
         
         
         
-    
-    
         
         
         
@@ -50,6 +45,23 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+        
         
     
     
@@ -57,6 +69,7 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
         
         
         
@@ -114,6 +127,25 @@ class FileStorageValidator:
         page = fields.Int(required=False)
         
         limit = fields.Int(required=False)
+        
+        search = fields.Str(required=False)
+         
+        
+    
+    class browsefiles(BaseSchema):
+        
+        
+        namespace = fields.Str(required=False)
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        page = fields.Int(required=False)
+        
+        limit = fields.Int(required=False)
+        
+        search = fields.Str(required=False)
          
         
     
@@ -123,6 +155,8 @@ class FileStorageValidator:
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
+        
+        country_code = fields.Str(required=False)
          
         
     
@@ -134,6 +168,8 @@ class FileStorageValidator:
         application_id = fields.Str(required=False)
         
         pdf_type_id = fields.Int(required=False)
+        
+        country_code = fields.Str(required=False)
          
         
     
@@ -158,6 +194,8 @@ class FileStorageValidator:
         pdf_type_id = fields.Int(required=False)
         
         format = fields.Str(required=False)
+        
+        country_code = fields.Str(required=False)
          
         
     
@@ -180,6 +218,8 @@ class FileStorageValidator:
         pdf_type_id = fields.Int(required=False)
         
         format = fields.Str(required=False)
+        
+        country_code = fields.Str(required=False)
          
         
     

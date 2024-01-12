@@ -13,7 +13,7 @@ class Lead:
         self.applicationId = applicationId
 
     
-    async def getTickets(self, items=None, filters=None, q=None, status=None, priority=None, category=None, request_headers:Dict={}):
+    async def getNewTickets(self, items=None, filters=None, q=None, status=None, priority=None, category=None, request_headers:Dict={}):
         """Gets the list of Application level Tickets and/or ticket filters
         :param items : Decides that the reponse will contain the list of tickets : type boolean
         :param filters : Decides that the reponse will contain the ticket filters : type boolean
@@ -38,7 +38,7 @@ class Lead:
             payload["category"] = category
 
         # Parameter validation
-        schema = LeadValidator.getTickets()
+        schema = LeadValidator.getNewTickets()
         schema.dump(schema.load(payload))
         
 
@@ -65,12 +65,12 @@ class Lead:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getTickets")
+                print("Response Validation failed for getNewTickets")
                 print(e)
 
         return response
     
-    async def getTicket(self, id=None, request_headers:Dict={}):
+    async def getNewTicket(self, id=None, request_headers:Dict={}):
         """Retreives ticket details of a application level ticket with ticket ID
         :param id : Tiket ID of the ticket to be fetched : type string
         """
@@ -80,7 +80,7 @@ class Lead:
             payload["id"] = id
 
         # Parameter validation
-        schema = LeadValidator.getTicket()
+        schema = LeadValidator.getNewTicket()
         schema.dump(schema.load(payload))
         
 
@@ -107,12 +107,12 @@ class Lead:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getTicket")
+                print("Response Validation failed for getNewTicket")
                 print(e)
 
         return response
     
-    async def editTicket(self, id=None, body="", request_headers:Dict={}):
+    async def editNewTicket(self, id=None, body="", request_headers:Dict={}):
         """Edits ticket details of a application level ticket such as status, priority, category, tags, attachments, assigne & ticket content changes
         :param id : Ticket ID of ticket to be edited : type string
         """
@@ -122,7 +122,7 @@ class Lead:
             payload["id"] = id
 
         # Parameter validation
-        schema = LeadValidator.editTicket()
+        schema = LeadValidator.editNewTicket()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -153,12 +153,12 @@ class Lead:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for editTicket")
+                print("Response Validation failed for editNewTicket")
                 print(e)
 
         return response
     
-    async def createHistory(self, id=None, body="", request_headers:Dict={}):
+    async def createNewHistory(self, id=None, body="", request_headers:Dict={}):
         """Create history for specific application level ticket, this history is seen on ticket detail page, this can be comment, log or rating.
         :param id : Ticket ID for which history is created : type string
         """
@@ -168,7 +168,7 @@ class Lead:
             payload["id"] = id
 
         # Parameter validation
-        schema = LeadValidator.createHistory()
+        schema = LeadValidator.createNewHistory()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -199,12 +199,12 @@ class Lead:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for createHistory")
+                print("Response Validation failed for createNewHistory")
                 print(e)
 
         return response
     
-    async def getTicketHistory(self, id=None, request_headers:Dict={}):
+    async def getNewTicketHistory(self, id=None, request_headers:Dict={}):
         """Gets history list for specific application level ticket, this history is seen on ticket detail page, this can be comment, log or rating.
         :param id : Ticket ID for which history is to be fetched : type string
         """
@@ -214,7 +214,7 @@ class Lead:
             payload["id"] = id
 
         # Parameter validation
-        schema = LeadValidator.getTicketHistory()
+        schema = LeadValidator.getNewTicketHistory()
         schema.dump(schema.load(payload))
         
 
@@ -241,7 +241,7 @@ class Lead:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getTicketHistory")
+                print("Response Validation failed for getNewTicketHistory")
                 print(e)
 
         return response
@@ -334,6 +334,48 @@ class Lead:
 
         return response
     
+    async def deleteCustomForm(self, slug=None, request_headers:Dict={}):
+        """Delete a custom form using it's slug
+        :param slug : Slug of form whose response is getting submitted : type string
+        """
+        payload = {}
+        
+        if slug is not None:
+            payload["slug"] = slug
+
+        # Parameter validation
+        schema = LeadValidator.deleteCustomForm()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/form/{slug}", """{"required":[{"name":"company_id","in":"path","description":"Company ID of the application","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID for the form","required":true,"schema":{"type":"string"}},{"name":"slug","in":"path","description":"Slug of form whose response is getting submitted","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company ID of the application","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID for the form","required":true,"schema":{"type":"string"}},{"name":"slug","in":"path","description":"Slug of form whose response is getting submitted","required":true,"schema":{"type":"string"}}]}""", slug=slug)
+        query_string = await create_query_string(slug=slug)
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/form/{slug}", slug=slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CustomForm
+            schema = CustomForm()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteCustomForm")
+                print(e)
+
+        return response
+    
     async def getCustomForms(self, request_headers:Dict={}):
         """Get list of custom form for given application
         """
@@ -416,7 +458,7 @@ class Lead:
 
         return response
     
-    async def getTokenForVideoRoom(self, unique_name=None, request_headers:Dict={}):
+    async def getNewTokenForVideoRoom(self, unique_name=None, request_headers:Dict={}):
         """Get Token to join a specific Video Room using it's unqiue name, this Token is your ticket to Room and also creates your identity there.
         :param unique_name : Unique name of video room : type string
         """
@@ -426,7 +468,7 @@ class Lead:
             payload["unique_name"] = unique_name
 
         # Parameter validation
-        schema = LeadValidator.getTokenForVideoRoom()
+        schema = LeadValidator.getNewTokenForVideoRoom()
         schema.dump(schema.load(payload))
         
 
@@ -453,12 +495,12 @@ class Lead:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getTokenForVideoRoom")
+                print("Response Validation failed for getNewTokenForVideoRoom")
                 print(e)
 
         return response
     
-    async def getVideoParticipants(self, unique_name=None, request_headers:Dict={}):
+    async def getNewVideoParticipants(self, unique_name=None, request_headers:Dict={}):
         """Get participants of a specific Video Room using it's unique name, this can be used to check if people are already there in the room and also to show their names.
         :param unique_name : Unique name of Video Room : type string
         """
@@ -468,7 +510,7 @@ class Lead:
             payload["unique_name"] = unique_name
 
         # Parameter validation
-        schema = LeadValidator.getVideoParticipants()
+        schema = LeadValidator.getNewVideoParticipants()
         schema.dump(schema.load(payload))
         
 
@@ -495,7 +537,7 @@ class Lead:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getVideoParticipants")
+                print("Response Validation failed for getNewVideoParticipants")
                 print(e)
 
         return response

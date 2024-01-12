@@ -134,11 +134,12 @@ class Communication:
 
         return response
     
-    async def getEmailProviders(self, page_no=None, page_size=None, sort=None, request_headers:Dict={}):
+    async def getEmailProviders(self, page_no=None, page_size=None, sort=None, query=None, request_headers:Dict={}):
         """Get email providers
         :param page_no : Current page no : type integer
         :param page_size : Current request items count : type integer
         :param sort : To sort based on created_at : type object
+        :param query : To search based on plain text : type object
         """
         payload = {}
         
@@ -148,14 +149,16 @@ class Communication:
             payload["page_size"] = page_size
         if sort is not None:
             payload["sort"] = sort
+        if query is not None:
+            payload["query"] = query
 
         # Parameter validation
         schema = CommunicationValidator.getEmailProviders()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/providers", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}},{"in":"query","name":"sort","description":"To sort based on created_at","required":false,"schema":{"type":"object","example":{"created_at":-1}}}],"query":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}},{"in":"query","name":"sort","description":"To sort based on created_at","required":false,"schema":{"type":"object","example":{"created_at":-1}}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", page_no=page_no, page_size=page_size, sort=sort)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, sort=sort)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/providers", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}},{"in":"query","name":"sort","description":"To sort based on created_at","required":false,"schema":{"type":"object","example":{"created_at":-1}}},{"in":"query","name":"query","description":"To search based on plain text","required":false,"schema":{"type":"object","example":{"$or":[{"name":{"$regex":"mk","$options":"i"}},{"tags":{"$regex":"mk","$options":"i"}}]}}}],"query":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}},{"in":"query","name":"sort","description":"To sort based on created_at","required":false,"schema":{"type":"object","example":{"created_at":-1}}},{"in":"query","name":"query","description":"To search based on plain text","required":false,"schema":{"type":"object","example":{"$or":[{"name":{"$regex":"mk","$options":"i"}},{"tags":{"$regex":"mk","$options":"i"}}]}}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", page_no=page_no, page_size=page_size, sort=sort, query=query)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, sort=sort, query=query)
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -169,7 +172,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/providers", page_no=page_no, page_size=page_size, sort=sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/providers", page_no=page_no, page_size=page_size, sort=sort, query=query), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import EmailProviders
@@ -355,11 +358,12 @@ class Communication:
 
         return response
     
-    async def getSmsProviders(self, page_no=None, page_size=None, sort=None, request_headers:Dict={}):
+    async def getSmsProviders(self, page_no=None, page_size=None, sort=None, query=None, request_headers:Dict={}):
         """Get sms providers
         :param page_no : Current page no : type integer
         :param page_size : Current request items count : type integer
         :param sort : To sort based on created_at : type object
+        :param query : To search based on plain text : type object
         """
         payload = {}
         
@@ -369,14 +373,16 @@ class Communication:
             payload["page_size"] = page_size
         if sort is not None:
             payload["sort"] = sort
+        if query is not None:
+            payload["query"] = query
 
         # Parameter validation
         schema = CommunicationValidator.getSmsProviders()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/providers", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}},{"in":"query","name":"sort","description":"To sort based on created_at","required":false,"schema":{"type":"object","example":{"created_at":-1}}}],"query":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}},{"in":"query","name":"sort","description":"To sort based on created_at","required":false,"schema":{"type":"object","example":{"created_at":-1}}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", page_no=page_no, page_size=page_size, sort=sort)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, sort=sort)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/providers", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}},{"in":"query","name":"sort","description":"To sort based on created_at","required":false,"schema":{"type":"object","example":{"created_at":-1}}},{"in":"query","name":"query","description":"To search based on plain text","required":false,"schema":{"type":"object","example":{"$or":[{"name":{"$regex":"mk","$options":"i"}},{"tags":{"$regex":"mk","$options":"i"}}]}}}],"query":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}},{"in":"query","name":"sort","description":"To sort based on created_at","required":false,"schema":{"type":"object","example":{"created_at":-1}}},{"in":"query","name":"query","description":"To search based on plain text","required":false,"schema":{"type":"object","example":{"$or":[{"name":{"$regex":"mk","$options":"i"}},{"tags":{"$regex":"mk","$options":"i"}}]}}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", page_no=page_no, page_size=page_size, sort=sort, query=query)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, sort=sort, query=query)
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -390,7 +396,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/providers", page_no=page_no, page_size=page_size, sort=sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/providers", page_no=page_no, page_size=page_size, sort=sort, query=query), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         return response
     
@@ -570,14 +576,17 @@ class Communication:
 
         return response
     
-    async def getCampaigns(self, page_no=None, page_size=None, sort=None, request_headers:Dict={}):
+    async def getCampaigns(self, query=None, page_no=None, page_size=None, sort=None, request_headers:Dict={}):
         """Get campaigns
+        :param query : To search based on plain text : type object
         :param page_no : Current page no : type integer
         :param page_size : Current request items count : type integer
         :param sort : To sort based on created_at : type object
         """
         payload = {}
         
+        if query is not None:
+            payload["query"] = query
         if page_no is not None:
             payload["page_no"] = page_no
         if page_size is not None:
@@ -590,8 +599,8 @@ class Communication:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/campaigns/campaigns", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"Current page no"},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"Current request items count"},{"name":"sort","in":"query","schema":{"type":"object","properties":{"created_at":{"type":"integer"}}},"description":"To sort based on created_at"}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"Current page no"},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"Current request items count"},{"name":"sort","in":"query","schema":{"type":"object","properties":{"created_at":{"type":"integer"}}},"description":"To sort based on created_at"}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", page_no=page_no, page_size=page_size, sort=sort)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, sort=sort)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/campaigns/campaigns", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[{"in":"query","name":"query","description":"To search based on plain text","required":false,"schema":{"type":"object","example":{"$or":[{"name":{"$regex":"mk","$options":"i"}},{"tags":{"$regex":"mk","$options":"i"}}]}}},{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"Current page no"},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"Current request items count"},{"name":"sort","in":"query","schema":{"type":"object","properties":{"created_at":{"type":"integer"}}},"description":"To sort based on created_at"}],"query":[{"in":"query","name":"query","description":"To search based on plain text","required":false,"schema":{"type":"object","example":{"$or":[{"name":{"$regex":"mk","$options":"i"}},{"tags":{"$regex":"mk","$options":"i"}}]}}},{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"Current page no"},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"Current request items count"},{"name":"sort","in":"query","schema":{"type":"object","properties":{"created_at":{"type":"integer"}}},"description":"To sort based on created_at"}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", query=query, page_no=page_no, page_size=page_size, sort=sort)
+        query_string = await create_query_string(query=query, page_no=page_no, page_size=page_size, sort=sort)
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -605,7 +614,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/campaigns/campaigns", page_no=page_no, page_size=page_size, sort=sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/campaigns/campaigns", query=query, page_no=page_no, page_size=page_size, sort=sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import Campaigns
@@ -977,11 +986,12 @@ class Communication:
 
         return response
     
-    async def getAudiences(self, page_no=None, page_size=None, sort=None, request_headers:Dict={}):
+    async def getAudiences(self, page_no=None, page_size=None, sort=None, query=None, request_headers:Dict={}):
         """Audience is used to import CSV files containing emails, phone numbers, and other variables in order to populate email/SMS templates for bulk delivery via a Campaign. Use this API to get audiences.
         :param page_no : Current page no : type integer
         :param page_size : Current request items count : type integer
         :param sort : To sort based on created_at : type object
+        :param query : To search based on plain text : type object
         """
         payload = {}
         
@@ -991,14 +1001,16 @@ class Communication:
             payload["page_size"] = page_size
         if sort is not None:
             payload["sort"] = sort
+        if query is not None:
+            payload["query"] = query
 
         # Parameter validation
         schema = CommunicationValidator.getAudiences()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sources/datasources", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}},{"in":"query","name":"sort","description":"To sort based on created_at","required":false,"schema":{"type":"object","example":{"created_at":-1}}}],"query":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}},{"in":"query","name":"sort","description":"To sort based on created_at","required":false,"schema":{"type":"object","example":{"created_at":-1}}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", page_no=page_no, page_size=page_size, sort=sort)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, sort=sort)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sources/datasources", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}},{"in":"query","name":"sort","description":"To sort based on created_at","required":false,"schema":{"type":"object","example":{"created_at":-1}}},{"in":"query","name":"query","description":"To search based on plain text","required":false,"schema":{"type":"object","example":{"$or":[{"name":{"$regex":"mk","$options":"i"}},{"tags":{"$regex":"mk","$options":"i"}}]}}}],"query":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}},{"in":"query","name":"sort","description":"To sort based on created_at","required":false,"schema":{"type":"object","example":{"created_at":-1}}},{"in":"query","name":"query","description":"To search based on plain text","required":false,"schema":{"type":"object","example":{"$or":[{"name":{"$regex":"mk","$options":"i"}},{"tags":{"$regex":"mk","$options":"i"}}]}}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", page_no=page_no, page_size=page_size, sort=sort, query=query)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, sort=sort, query=query)
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -1012,7 +1024,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sources/datasources", page_no=page_no, page_size=page_size, sort=sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sources/datasources", page_no=page_no, page_size=page_size, sort=sort, query=query), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import Audiences
@@ -1156,7 +1168,7 @@ class Communication:
 
         return response
     
-    async def deleteAudienceById(self, id=None, request_headers:Dict={}):
+    async def deleteAudienceById(self, id=None, body="", request_headers:Dict={}):
         """Audience is used to import CSV files containing emails, phone numbers, and other variables in order to populate email/SMS templates for bulk delivery via a Campaign. Use this API to delete audience by id.
         :param id : Audience id : type string
         """
@@ -1169,6 +1181,10 @@ class Communication:
         schema = CommunicationValidator.deleteAudienceById()
         schema.dump(schema.load(payload))
         
+        # Body validation
+        from .models import AudienceReq
+        schema = AudienceReq()
+        schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sources/datasources/{id}", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}},{"in":"path","name":"id","description":"Audience id","required":true,"schema":{"type":"string","example":"5fb6675c09fd901023917a5f"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}},{"in":"path","name":"id","description":"Audience id","required":true,"schema":{"type":"string","example":"5fb6675c09fd901023917a5f"}}]}""", id=id)
         query_string = await create_query_string(id=id)
@@ -1185,11 +1201,11 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sources/datasources/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sources/datasources/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GenericDelete
-            schema = GenericDelete()
+            from .models import Audience
+            schema = Audience()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1352,11 +1368,12 @@ class Communication:
 
         return response
     
-    async def getEmailTemplates(self, page_no=None, page_size=None, sort=None, request_headers:Dict={}):
+    async def getEmailTemplates(self, page_no=None, page_size=None, sort=None, query=None, request_headers:Dict={}):
         """Email templates are predefined formats linked to various events for delivering messages to users. Use this API to get all email templates.
         :param page_no : Current page no : type integer
         :param page_size : Current request items count : type integer
         :param sort : To sort based on created_at : type object
+        :param query : To search based on plain text : type object
         """
         payload = {}
         
@@ -1366,14 +1383,16 @@ class Communication:
             payload["page_size"] = page_size
         if sort is not None:
             payload["sort"] = sort
+        if query is not None:
+            payload["query"] = query
 
         # Parameter validation
         schema = CommunicationValidator.getEmailTemplates()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/templates", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}},{"in":"query","name":"sort","description":"To sort based on created_at","required":false,"schema":{"type":"object","example":{"created_at":-1}}}],"query":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}},{"in":"query","name":"sort","description":"To sort based on created_at","required":false,"schema":{"type":"object","example":{"created_at":-1}}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", page_no=page_no, page_size=page_size, sort=sort)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, sort=sort)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/templates", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}},{"in":"query","name":"sort","description":"To sort based on created_at","required":false,"schema":{"type":"object","example":{"created_at":-1}}},{"in":"query","name":"query","description":"To search based on plain text","required":false,"schema":{"type":"object","example":{"$or":[{"name":{"$regex":"mk","$options":"i"}},{"tags":{"$regex":"mk","$options":"i"}}]}}}],"query":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}},{"in":"query","name":"sort","description":"To sort based on created_at","required":false,"schema":{"type":"object","example":{"created_at":-1}}},{"in":"query","name":"query","description":"To search based on plain text","required":false,"schema":{"type":"object","example":{"$or":[{"name":{"$regex":"mk","$options":"i"}},{"tags":{"$regex":"mk","$options":"i"}}]}}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", page_no=page_no, page_size=page_size, sort=sort, query=query)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, sort=sort, query=query)
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -1387,7 +1406,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/templates", page_no=page_no, page_size=page_size, sort=sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/templates", page_no=page_no, page_size=page_size, sort=sort, query=query), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import EmailTemplates
@@ -1612,10 +1631,11 @@ class Communication:
 
         return response
     
-    async def getSubscribedEmailTemplates(self, page_no=None, page_size=None, request_headers:Dict={}):
+    async def getSubscribedEmailTemplates(self, page_no=None, page_size=None, query=None, request_headers:Dict={}):
         """Email templates are predefined formats linked to various events for delivering messages to users. Use this API to get all subscribed email templates.
         :param page_no : Current page no : type integer
         :param page_size : Current request items count : type integer
+        :param query : To search based on plain text : type object
         """
         payload = {}
         
@@ -1623,14 +1643,16 @@ class Communication:
             payload["page_no"] = page_no
         if page_size is not None:
             payload["page_size"] = page_size
+        if query is not None:
+            payload["query"] = query
 
         # Parameter validation
         schema = CommunicationValidator.getSubscribedEmailTemplates()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/subscribedTemplates", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}}],"query":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/subscribedTemplates", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}},{"in":"query","name":"query","description":"To search based on plain text","required":false,"schema":{"type":"object","example":{"$or":[{"name":{"$regex":"mk","$options":"i"}},{"tags":{"$regex":"mk","$options":"i"}}]}}}],"query":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}},{"in":"query","name":"query","description":"To search based on plain text","required":false,"schema":{"type":"object","example":{"$or":[{"name":{"$regex":"mk","$options":"i"}},{"tags":{"$regex":"mk","$options":"i"}}]}}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", page_no=page_no, page_size=page_size, query=query)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, query=query)
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -1644,7 +1666,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/subscribedTemplates", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/subscribedTemplates", page_no=page_no, page_size=page_size, query=query), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import EmailTemplates
@@ -1657,11 +1679,12 @@ class Communication:
 
         return response
     
-    async def getSmsTemplates(self, page_no=None, page_size=None, sort=None, request_headers:Dict={}):
+    async def getSmsTemplates(self, page_no=None, page_size=None, sort=None, query=None, request_headers:Dict={}):
         """SMS templates are predefined message formats linked to various events for delivering messages to users. Use this API to get all sms templates.
         :param page_no : Current page no : type integer
         :param page_size : Current request items count : type integer
         :param sort : To sort based on created_at : type object
+        :param query : To search based on plain text : type object
         """
         payload = {}
         
@@ -1671,14 +1694,16 @@ class Communication:
             payload["page_size"] = page_size
         if sort is not None:
             payload["sort"] = sort
+        if query is not None:
+            payload["query"] = query
 
         # Parameter validation
         schema = CommunicationValidator.getSmsTemplates()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/templates", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}},{"in":"query","name":"sort","description":"To sort based on created_at","required":false,"schema":{"type":"object","example":{"created_at":-1}}}],"query":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}},{"in":"query","name":"sort","description":"To sort based on created_at","required":false,"schema":{"type":"object","example":{"created_at":-1}}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", page_no=page_no, page_size=page_size, sort=sort)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, sort=sort)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/templates", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}},{"in":"query","name":"sort","description":"To sort based on created_at","required":false,"schema":{"type":"object","example":{"created_at":-1}}},{"in":"query","name":"query","description":"To search based on plain text","required":false,"schema":{"type":"object","example":{"$or":[{"name":{"$regex":"mk","$options":"i"}},{"tags":{"$regex":"mk","$options":"i"}}]}}}],"query":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}},{"in":"query","name":"sort","description":"To sort based on created_at","required":false,"schema":{"type":"object","example":{"created_at":-1}}},{"in":"query","name":"query","description":"To search based on plain text","required":false,"schema":{"type":"object","example":{"$or":[{"name":{"$regex":"mk","$options":"i"}},{"tags":{"$regex":"mk","$options":"i"}}]}}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", page_no=page_no, page_size=page_size, sort=sort, query=query)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, sort=sort, query=query)
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -1692,7 +1717,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/templates", page_no=page_no, page_size=page_size, sort=sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/templates", page_no=page_no, page_size=page_size, sort=sort, query=query), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SmsTemplates
@@ -1908,10 +1933,11 @@ class Communication:
 
         return response
     
-    async def getSubscribedSmsTemplates(self, page_no=None, page_size=None, request_headers:Dict={}):
+    async def getSubscribedSmsTemplates(self, page_no=None, page_size=None, query=None, request_headers:Dict={}):
         """SMS templates are predefined message formats linked to various events for delivering messages to users. Use this API to get all subscribed sms templates.
         :param page_no : Current page no : type integer
         :param page_size : Current request items count : type integer
+        :param query : To search based on plain text : type object
         """
         payload = {}
         
@@ -1919,14 +1945,16 @@ class Communication:
             payload["page_no"] = page_no
         if page_size is not None:
             payload["page_size"] = page_size
+        if query is not None:
+            payload["query"] = query
 
         # Parameter validation
         schema = CommunicationValidator.getSubscribedSmsTemplates()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/subscribedTemplates", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}}],"query":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/subscribedTemplates", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}},{"in":"query","name":"query","description":"To search based on plain text","required":false,"schema":{"type":"object","example":{"$or":[{"name":{"$regex":"mk","$options":"i"}},{"tags":{"$regex":"mk","$options":"i"}}]}}}],"query":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}},{"in":"query","name":"query","description":"To search based on plain text","required":false,"schema":{"type":"object","example":{"$or":[{"name":{"$regex":"mk","$options":"i"}},{"tags":{"$regex":"mk","$options":"i"}}]}}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", page_no=page_no, page_size=page_size, query=query)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, query=query)
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -1940,7 +1968,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/subscribedTemplates", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/subscribedTemplates", page_no=page_no, page_size=page_size, query=query), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SmsTemplates
@@ -2043,7 +2071,7 @@ class Communication:
         """Get event subscriptions
         :param page_no : Current page no : type integer
         :param page_size : Current request items count : type integer
-        :param populate : populate fields : type string
+        :param populate : Populate Fields : type string
         """
         payload = {}
         
@@ -2059,7 +2087,7 @@ class Communication:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/event/event-subscriptions", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"Current page no"},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"Current request items count"},{"name":"populate","in":"query","schema":{"type":"string"},"description":"populate fields"}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"Current page no"},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"Current request items count"},{"name":"populate","in":"query","schema":{"type":"string"},"description":"populate fields"}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", page_no=page_no, page_size=page_size, populate=populate)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/event/event-subscriptions", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}},{"in":"query","name":"populate","description":"Populate Fields","required":false,"schema":{"type":"string","example":"template.sms.template"}}],"query":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}},{"in":"query","name":"populate","description":"Populate Fields","required":false,"schema":{"type":"string","example":"template.sms.template"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", page_no=page_no, page_size=page_size, populate=populate)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, populate=populate)
 
         headers = {}
@@ -2084,6 +2112,216 @@ class Communication:
             except Exception as e:
                 print("Response Validation failed for getEventSubscriptions")
                 print(e)
+
+        return response
+    
+    async def createEventSubscriptions(self, body="", request_headers:Dict={}):
+        """Create event subscriptions
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = CommunicationValidator.createEventSubscriptions()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import SubscriptionsObject
+        schema = SubscriptionsObject()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/event/event-subscriptions", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", )
+        query_string = await create_query_string()
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/event/event-subscriptions", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EventSubscriptionsBulkUpdateResponse
+            schema = EventSubscriptionsBulkUpdateResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createEventSubscriptions")
+                print(e)
+
+        return response
+    
+    async def getEventSubscriptionsById(self, id=None, populate=None, request_headers:Dict={}):
+        """Get event subscriptions by id
+        :param id : Event subscription id : type string
+        :param populate : Populate Fields : type string
+        """
+        payload = {}
+        
+        if id is not None:
+            payload["id"] = id
+        if populate is not None:
+            payload["populate"] = populate
+
+        # Parameter validation
+        schema = CommunicationValidator.getEventSubscriptionsById()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/event/event-subscriptions/{id}", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}},{"in":"path","name":"id","description":"Event subscription id","required":true,"schema":{"type":"string","example":"5fd9fd44c474a7e3d5d376d6"}}],"optional":[{"in":"query","name":"populate","description":"Populate Fields","required":false,"schema":{"type":"string","example":"template.sms.template"}}],"query":[{"in":"query","name":"populate","description":"Populate Fields","required":false,"schema":{"type":"string","example":"template.sms.template"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}},{"in":"path","name":"id","description":"Event subscription id","required":true,"schema":{"type":"string","example":"5fd9fd44c474a7e3d5d376d6"}}]}""", id=id, populate=populate)
+        query_string = await create_query_string(id=id, populate=populate)
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/event/event-subscriptions/{id}", id=id, populate=populate), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EventSubscription
+            schema = EventSubscription()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getEventSubscriptionsById")
+                print(e)
+
+        return response
+    
+    async def editEventSubscriptions(self, id=None, body="", request_headers:Dict={}):
+        """Create event subscriptions
+        :param id : Event subscription id : type string
+        """
+        payload = {}
+        
+        if id is not None:
+            payload["id"] = id
+
+        # Parameter validation
+        schema = CommunicationValidator.editEventSubscriptions()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import SubscriptionsObject
+        schema = SubscriptionsObject()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/event/event-subscriptions/{id}", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}},{"in":"path","name":"id","description":"Event subscription id","required":true,"schema":{"type":"string","example":"5fd9fd44c474a7e3d5d376d6"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}},{"in":"path","name":"id","description":"Event subscription id","required":true,"schema":{"type":"string","example":"5fd9fd44c474a7e3d5d376d6"}}]}""", id=id)
+        query_string = await create_query_string(id=id)
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/event/event-subscriptions/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EventSubscriptionsBulkUpdateResponse
+            schema = EventSubscriptionsBulkUpdateResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for editEventSubscriptions")
+                print(e)
+
+        return response
+    
+    async def deleteEventSubscriptionsById(self, id=None, request_headers:Dict={}):
+        """Create event subscriptions
+        :param id : Event subscription id : type string
+        """
+        payload = {}
+        
+        if id is not None:
+            payload["id"] = id
+
+        # Parameter validation
+        schema = CommunicationValidator.deleteEventSubscriptionsById()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/event/event-subscriptions/{id}", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}},{"in":"path","name":"id","description":"Event subscription id","required":true,"schema":{"type":"string","example":"5fd9fd44c474a7e3d5d376d6"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}},{"in":"path","name":"id","description":"Event subscription id","required":true,"schema":{"type":"string","example":"5fd9fd44c474a7e3d5d376d6"}}]}""", id=id)
+        query_string = await create_query_string(id=id)
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/event/event-subscriptions/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GenericDelete
+            schema = GenericDelete()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteEventSubscriptionsById")
+                print(e)
+
+        return response
+    
+    async def createEventSubscriptionsByBulk(self, body="", request_headers:Dict={}):
+        """Create event subscriptions by bulk
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = CommunicationValidator.createEventSubscriptionsByBulk()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import EventSubscriptionsBulkUpdateRequest
+        schema = EventSubscriptionsBulkUpdateRequest()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/event/event-subscriptions/bulkUpdate", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", )
+        query_string = await create_query_string()
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/event/event-subscriptions/bulkUpdate", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         return response
     
@@ -2169,11 +2407,12 @@ class Communication:
 
         return response
     
-    async def getJobs(self, page_no=None, page_size=None, sort=None, request_headers:Dict={}):
+    async def getJobs(self, page_no=None, page_size=None, sort=None, query=None, request_headers:Dict={}):
         """Get jobs
         :param page_no : Current page no : type integer
         :param page_size : Current request items count : type integer
         :param sort : To sort based on created_at : type object
+        :param query : To search based on plain text : type object
         """
         payload = {}
         
@@ -2183,14 +2422,16 @@ class Communication:
             payload["page_size"] = page_size
         if sort is not None:
             payload["sort"] = sort
+        if query is not None:
+            payload["query"] = query
 
         # Parameter validation
         schema = CommunicationValidator.getJobs()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/jobs/jobs", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"Current page no"},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"Current request items count"},{"name":"sort","in":"query","schema":{"type":"object","properties":{"created_at":{"type":"integer"}}},"description":"To sort based on created_at"}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"Current page no"},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"Current request items count"},{"name":"sort","in":"query","schema":{"type":"object","properties":{"created_at":{"type":"integer"}}},"description":"To sort based on created_at"}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", page_no=page_no, page_size=page_size, sort=sort)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, sort=sort)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/jobs/jobs", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}},{"in":"query","name":"sort","description":"To sort based on created_at","required":false,"schema":{"type":"object","example":{"created_at":-1}}},{"in":"query","name":"query","description":"To search based on plain text","required":false,"schema":{"type":"object","example":{"$or":[{"name":{"$regex":"mk","$options":"i"}},{"tags":{"$regex":"mk","$options":"i"}}]}}}],"query":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}},{"in":"query","name":"sort","description":"To sort based on created_at","required":false,"schema":{"type":"object","example":{"created_at":-1}}},{"in":"query","name":"query","description":"To search based on plain text","required":false,"schema":{"type":"object","example":{"$or":[{"name":{"$regex":"mk","$options":"i"}},{"tags":{"$regex":"mk","$options":"i"}}]}}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", page_no=page_no, page_size=page_size, sort=sort, query=query)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, sort=sort, query=query)
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -2204,7 +2445,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/jobs/jobs", page_no=page_no, page_size=page_size, sort=sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/jobs/jobs", page_no=page_no, page_size=page_size, sort=sort, query=query), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import Jobs
@@ -2213,6 +2454,49 @@ class Communication:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getJobs")
+                print(e)
+
+        return response
+    
+    async def createJobs(self, body="", request_headers:Dict={}):
+        """Create jobs
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = CommunicationValidator.createJobs()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import CreateJobsReq
+        schema = CreateJobsReq()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/jobs/jobs", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", )
+        query_string = await create_query_string()
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/jobs/jobs", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateJobsRes
+            schema = CreateJobsRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createJobs")
                 print(e)
 
         return response
@@ -2260,11 +2544,12 @@ class Communication:
 
         return response
     
-    async def getJobLogs(self, page_no=None, page_size=None, sort=None, request_headers:Dict={}):
+    async def getJobLogs(self, page_no=None, page_size=None, sort=None, query=None, request_headers:Dict={}):
         """Get job logs
         :param page_no : Current page no : type integer
         :param page_size : Current request items count : type integer
         :param sort : To sort based on created_at : type object
+        :param query : To search based on plain text : type object
         """
         payload = {}
         
@@ -2274,14 +2559,16 @@ class Communication:
             payload["page_size"] = page_size
         if sort is not None:
             payload["sort"] = sort
+        if query is not None:
+            payload["query"] = query
 
         # Parameter validation
         schema = CommunicationValidator.getJobLogs()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/jobs/logs", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"Current page no"},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"Current request items count"},{"name":"sort","in":"query","schema":{"type":"object","properties":{"created_at":{"type":"integer"}}},"description":"To sort based on created_at"}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"Current page no"},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"Current request items count"},{"name":"sort","in":"query","schema":{"type":"object","properties":{"created_at":{"type":"integer"}}},"description":"To sort based on created_at"}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", page_no=page_no, page_size=page_size, sort=sort)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, sort=sort)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/jobs/logs", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}},{"in":"query","name":"sort","description":"To sort based on created_at","required":false,"schema":{"type":"object","example":{"created_at":-1}}},{"in":"query","name":"query","description":"To search based on plain text","required":false,"schema":{"type":"object","example":{"$or":[{"name":{"$regex":"mk","$options":"i"}},{"tags":{"$regex":"mk","$options":"i"}}]}}}],"query":[{"in":"query","name":"page_no","description":"Current page no","required":false,"schema":{"type":"integer","minimum":1,"exclusiveMinimum":false,"example":1}},{"in":"query","name":"page_size","description":"Current request items count","required":false,"schema":{"type":"integer","example":10}},{"in":"query","name":"sort","description":"To sort based on created_at","required":false,"schema":{"type":"object","example":{"created_at":-1}}},{"in":"query","name":"query","description":"To search based on plain text","required":false,"schema":{"type":"object","example":{"$or":[{"name":{"$regex":"mk","$options":"i"}},{"tags":{"$regex":"mk","$options":"i"}}]}}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", page_no=page_no, page_size=page_size, sort=sort, query=query)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, sort=sort, query=query)
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -2295,7 +2582,7 @@ class Communication:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/jobs/logs", page_no=page_no, page_size=page_size, sort=sort), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/jobs/logs", page_no=page_no, page_size=page_size, sort=sort, query=query), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import JobLogs
@@ -2441,6 +2728,84 @@ class Communication:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for verfiyOtp")
+                print(e)
+
+        return response
+    
+    async def getOtpConfiguration(self, request_headers:Dict={}):
+        """Get otp-configuration
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = CommunicationValidator.getOtpConfiguration()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/otp/otp-configuration", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", )
+        query_string = await create_query_string()
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/otp/otp-configuration", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OtpConfiguration
+            schema = OtpConfiguration()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getOtpConfiguration")
+                print(e)
+
+        return response
+    
+    async def updateOtpConfiguration(self, request_headers:Dict={}):
+        """Update otp-configuration
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = CommunicationValidator.updateOtpConfiguration()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/otp/otp-configuration", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", )
+        query_string = await create_query_string()
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/otp/otp-configuration", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OtpConfiguration
+            schema = OtpConfiguration()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateOtpConfiguration")
                 print(e)
 
         return response

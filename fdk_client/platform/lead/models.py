@@ -166,6 +166,10 @@ class Ticket(BaseSchema):
     pass
 
 
+class ErrorMessage(BaseSchema):
+    pass
+
+
 
 
 
@@ -750,6 +754,14 @@ class Ticket(BaseSchema):
     updated_at = fields.Str(required=False)
     
     created_at = fields.Str(required=False)
+    
+
+
+class ErrorMessage(BaseSchema):
+    # Lead swagger.json
+
+    
+    message = fields.Str(required=False)
     
 
 
