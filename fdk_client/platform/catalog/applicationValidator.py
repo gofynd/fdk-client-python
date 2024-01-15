@@ -137,6 +137,8 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+        
     
     
         
@@ -367,6 +369,9 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
+        
+        
         
         
         
@@ -648,6 +653,10 @@ class CatalogValidator:
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
+        
+        tags = fields.List(fields.Str(required=False), required=False)
+        
+        store_types = fields.List(fields.Str(required=False), required=False)
          
         
     
@@ -1160,6 +1169,12 @@ class CatalogValidator:
         config_type = fields.Str(required=False)
         
         template_slug = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        q = fields.Str(required=False)
          
         
     

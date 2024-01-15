@@ -6,6 +6,8 @@
 
 ## Billing Methods
 Handle platform subscription
+
+Default
 * [checkCouponValidity](#checkcouponvalidity)
 * [createSubscriptionCharge](#createsubscriptioncharge)
 * [getSubscriptionCharge](#getsubscriptioncharge)
@@ -23,10 +25,13 @@ Handle platform subscription
 * [getEnterprisePlans](#getenterpriseplans)
 * [planStatusUpdate](#planstatusupdate)
 * [subscripePlan](#subscripeplan)
+* [getentityDetail](#getentitydetail)
+
 
 
 
 ## Methods with example and description
+
 
 
 ### checkCouponValidity
@@ -1685,7 +1690,7 @@ Get subscription subscription limits
 
 ```python
 try:
-    result = await platformClient.billing.getFeatureLimitConfig()
+    result = await platformClient.billing.getFeatureLimitConfig(productSuite=productSuite, type=type)
     # use result
 except Exception as e:
     print(e)
@@ -1693,6 +1698,12 @@ except Exception as e:
 
 
 
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| productSuite | String? | no |  |   
+| type | String? | no |  |  
 
 
 
@@ -2510,6 +2521,68 @@ Success
 
 
 ---
+
+
+### getentityDetail
+Generic api to get the entity detail
+
+
+
+
+```python
+try:
+    result = await platformClient.billing.getentityDetail(entityName=entityName, entityId=entityId, channel=channel, component=component, componentName=componentName)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| entityName | String | yes | Entity name. |   
+| entityId | String? | no | Entity unique id. |   
+| channel | String | yes | Ordering channel. |   
+| component | String? | no | The coponents the user would like to know. |   
+| componentName | String? | no | The name of component the preferred to be fetched. |  
+
+
+
+Generic api to get the entity detail
+
+*Returned Response:*
+
+
+
+
+[EntityResponse](#EntityResponse)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
 
 
 
@@ -3425,6 +3498,65 @@ Success
  | transactionId | String? |  yes  |  |
  | currentStatus | String? |  yes  |  |
  | meta | [Meta](#Meta)? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [Features](#Features)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | name | String? |  yes  |  |
+ | slug | String? |  yes  |  |
+ | description | String? |  yes  |  |
+ | group | String? |  yes  |  |
+ | enabled | Boolean? |  yes  |  |
+ | displayText | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [FeeComponents](#FeeComponents)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | brand | ArrayList<String>? |  yes  |  |
+ | location | ArrayList<String>? |  yes  |  |
+ | channel | ArrayList<HashMap<String,Any>>? |  yes  |  |
+ | businessLead | String? |  yes  |  |
+ | settlementType | String? |  yes  |  |
+ | settleCyclePeriod | HashMap<String,Any>? |  yes  |  |
+ | components | ArrayList<HashMap<String,Any>>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [Details](#Details)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | feeComponents | ArrayList<[FeeComponents](#FeeComponents)>? |  yes  |  |
+ | features | ArrayList<[Features](#Features)>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [EntityResponse](#EntityResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | success | Boolean? |  yes  |  |
+ | page | Int? |  yes  |  |
+ | pageSize | Int? |  yes  |  |
+ | items | ArrayList<[Details](#Details)>? |  yes  |  |
 
 ---
 

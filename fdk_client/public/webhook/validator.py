@@ -11,6 +11,9 @@ from ..PublicModel import BaseSchema
 
     
     
+    
+    
+    
 
 class WebhookValidator:
     
@@ -21,6 +24,21 @@ class WebhookValidator:
         
     
     class queryWebhookEventDetails(BaseSchema):
+        
+        pass 
+        
+    
+    class notifyDepricatedEvent(BaseSchema):
+        
+        pass 
+        
+    
+    class testHandlerTransformation(BaseSchema):
+        
+        pass 
+        
+    
+    class validateSchema(BaseSchema):
         
         pass 
         

@@ -44,11 +44,22 @@ from ..ApplicationModel import BaseSchema
     
     
         
+        
+    
+    
+        
     
     
     
     
         
+        
+    
+    
+        
+        
+    
+    
         
     
     
@@ -141,6 +152,15 @@ class ContentValidator:
         pass 
         
     
+    class getSEOMarkupSchemas(BaseSchema):
+        
+        
+        page_type = fields.Str(required=False)
+        
+        active = fields.Boolean(required=False)
+         
+        
+    
     class getSlideshows(BaseSchema):
         
         
@@ -182,6 +202,22 @@ class ContentValidator:
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
+         
+        
+    
+    class getCustomObject(BaseSchema):
+        
+        
+        metaobject_id = fields.Str(required=False)
+         
+        
+    
+    class getCustomFields(BaseSchema):
+        
+        
+        resource = fields.Str(required=False)
+        
+        resource_id = fields.Str(required=False)
          
         
     
