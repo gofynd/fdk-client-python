@@ -517,6 +517,10 @@ class AppliedPromotion(BaseSchema):
     
     promotion_type = fields.Str(required=False)
     
+    meta = fields.Dict(required=False)
+    
+    code = fields.Str(required=False, allow_none=True)
+    
 
 
 class PaymentSelectionLock(BaseSchema):

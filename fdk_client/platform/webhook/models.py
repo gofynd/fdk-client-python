@@ -134,18 +134,6 @@ class AuthMeta(BaseSchema):
     pass
 
 
-class SubscriberFailureResponse(BaseSchema):
-    pass
-
-
-class EventConfigs(BaseSchema):
-    pass
-
-
-class SubscriberEventMapping(BaseSchema):
-    pass
-
-
 class SubscriberResponse(BaseSchema):
     pass
 
@@ -561,60 +549,6 @@ class AuthMeta(BaseSchema):
     
 
 
-class SubscriberFailureResponse(BaseSchema):
-    # Webhook swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-    code = fields.Str(required=False)
-    
-    stack = fields.Str(required=False)
-    
-
-
-class EventConfigs(BaseSchema):
-    # Webhook swagger.json
-
-    
-    id = fields.Int(required=False)
-    
-    event_name = fields.Str(required=False)
-    
-    event_type = fields.Str(required=False)
-    
-    event_category = fields.Str(required=False)
-    
-    event_schema = fields.Dict(required=False, allow_none=True)
-    
-    version = fields.Str(required=False)
-    
-    display_name = fields.Str(required=False)
-    
-    description = fields.Str(required=False)
-    
-    created_on = fields.Str(required=False)
-    
-    updated_on = fields.Str(required=False)
-    
-    subscriber_event_mapping = fields.Nested(SubscriberEventMapping, required=False)
-    
-
-
-class SubscriberEventMapping(BaseSchema):
-    # Webhook swagger.json
-
-    
-    id = fields.Int(required=False)
-    
-    event_id = fields.Int(required=False)
-    
-    subscriber_id = fields.Int(required=False)
-    
-    created_on = fields.Str(required=False)
-    
-
-
 class SubscriberResponse(BaseSchema):
     # Webhook swagger.json
 
@@ -643,7 +577,7 @@ class SubscriberResponse(BaseSchema):
     
     auth_meta = fields.Nested(AuthMeta, required=False)
     
-    event_configs = fields.List(fields.Nested(EventConfigs, required=False), required=False)
+    event_configs = fields.List(fields.Nested(EventConfig, required=False), required=False)
     
 
 

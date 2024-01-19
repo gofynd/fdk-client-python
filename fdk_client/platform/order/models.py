@@ -288,10 +288,6 @@ class PostHistoryData(BaseSchema):
     pass
 
 
-class PostActivityHistory(BaseSchema):
-    pass
-
-
 class PostHistoryDict(BaseSchema):
     pass
 
@@ -2261,21 +2257,13 @@ class PostHistoryData(BaseSchema):
     
 
 
-class PostActivityHistory(BaseSchema):
+class PostHistoryDict(BaseSchema):
     # Order swagger.json
 
     
     filters = fields.List(fields.Nested(PostHistoryFilters, required=False), required=False)
     
     data = fields.Nested(PostHistoryData, required=False)
-    
-
-
-class PostHistoryDict(BaseSchema):
-    # Order swagger.json
-
-    
-    activity_history = fields.Nested(PostActivityHistory, required=False)
     
 
 

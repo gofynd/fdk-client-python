@@ -709,7 +709,7 @@ class ListViewItems(BaseSchema):
     
     company_id = fields.Int(required=False)
     
-    channels = fields.Nested(ListViewChannels, required=False)
+    channels = fields.List(fields.Nested(ListViewChannels, required=False), required=False)
     
 
 

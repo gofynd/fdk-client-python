@@ -2237,6 +2237,10 @@ class AppliedPromotion(BaseSchema):
     
     promo_id = fields.Str(required=False)
     
+    meta = fields.Dict(required=False)
+    
+    code = fields.Str(required=False, allow_none=True)
+    
 
 
 class PromiseFormatted(BaseSchema):
