@@ -1347,6 +1347,8 @@ class UpdateShipmentLockPayload(BaseSchema):
     
     entities = fields.List(fields.Nested(Entities, required=False), required=False)
     
+    resume_tasks_after_unlock = fields.Boolean(required=False, allow_none=True)
+    
 
 
 class OriginalFilter(BaseSchema):
@@ -4981,6 +4983,8 @@ class OrderDetailsData(BaseSchema):
     
     affiliate_id = fields.Str(required=False, allow_none=True)
     
+    affiliate_order_id = fields.Str(required=False, allow_none=True)
+    
     ordering_channel_logo = fields.Dict(required=False, allow_none=True)
     
     order_value = fields.Str(required=False, allow_none=True)
@@ -6243,7 +6247,7 @@ class Store(BaseSchema):
     # Order swagger.json
 
     
-    phone = fields.Int(required=False)
+    phone = fields.Str(required=False)
     
     is_active = fields.Boolean(required=False, allow_none=True)
     
@@ -6343,7 +6347,7 @@ class Brand(BaseSchema):
     
     brand_id = fields.Int(required=False)
     
-    modified_on = fields.Int(required=False, allow_none=True)
+    modified_on = fields.Str(required=False, allow_none=True)
     
     id = fields.Int(required=False, allow_none=True)
     
@@ -6473,7 +6477,7 @@ class ShipmentGstDetails(BaseSchema):
     
     tax_collected_at_source = fields.Float(required=False, allow_none=True)
     
-    gstin_code = fields.Float(required=False, allow_none=True)
+    gstin_code = fields.Str(required=False, allow_none=True)
     
 
 

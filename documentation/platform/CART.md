@@ -15599,6 +15599,10 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | files | ArrayList<[Files](#Files)>? |  yes  | List of file url |
  | orderingStore | Int? |  yes  |  |
  | paymentExtraIdentifiers | HashMap<String,Any>? |  yes  |  |
+ | iin | String? |  yes  |  |
+ | network | String? |  yes  |  |
+ | type | String? |  yes  |  |
+ | cardId | String? |  yes  |  |
 
 ---
 
@@ -15818,6 +15822,10 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | orderType | String |  no  |  |
  | files | ArrayList<[Files](#Files)>? |  yes  | List of file url |
  | orderingStore | Int? |  yes  |  |
+ | iin | String? |  yes  |  |
+ | network | String? |  yes  |  |
+ | type | String? |  yes  |  |
+ | cardId | String? |  yes  |  |
 
 ---
 

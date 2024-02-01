@@ -211,7 +211,7 @@ class PaymentValidator:
          
         
     
-    class walletLinkInitate(BaseSchema):
+    class walletLinkInitiate(BaseSchema):
         
         pass 
         

@@ -3797,6 +3797,14 @@ class PlatformCartCheckoutDetailRequest(BaseSchema):
     
     payment_extra_identifiers = fields.Dict(required=False)
     
+    iin = fields.Str(required=False)
+    
+    network = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    card_id = fields.Str(required=False)
+    
 
 
 class CheckCart(BaseSchema):
@@ -4080,6 +4088,14 @@ class PlatformCartCheckoutDetailV2Request(BaseSchema):
     files = fields.List(fields.Nested(Files, required=False), required=False)
     
     ordering_store = fields.Int(required=False, allow_none=True)
+    
+    iin = fields.Str(required=False)
+    
+    network = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    card_id = fields.Str(required=False)
     
 
 

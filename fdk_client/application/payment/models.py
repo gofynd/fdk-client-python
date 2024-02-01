@@ -1235,6 +1235,8 @@ class ValidateVPARequest(BaseSchema):
     
     upi_vpa = fields.Str(required=False)
     
+    aggregator = fields.Str(required=False)
+    
 
 
 class ValidateUPI(BaseSchema):

@@ -26,7 +26,7 @@ class Payment:
             "checkAndUpdatePaymentStatus": "/service/application/payment/v1.0/payment/confirm/polling",
             "getPaymentModeRoutes": "/service/application/payment/v1.0/payment/options",
             "getPosPaymentModeRoutes": "/service/application/payment/v1.0/payment/options/pos",
-            "walletLinkInitate": "/service/application/payment/v1.0/payment/options/wallet/link",
+            "walletLinkInitiate": "/service/application/payment/v1.0/payment/options/wallet/link",
             "linkWallet": "/service/application/payment/v1.0/payment/options/wallet/verify",
             "delinkWallet": "/service/application/payment/v1.0/payment/options/wallet/delink",
             "getRupifiBannerDetails": "/service/application/payment/v1.0/rupifi/banner",
@@ -611,14 +611,14 @@ class Payment:
 
         return response
     
-    async def walletLinkInitate(self, body="", request_headers:Dict={}):
+    async def walletLinkInitiate(self, body="", request_headers:Dict={}):
         """It will initiate linking of wallet for the aggregator.
         """
         payload = {}
         
 
         # Parameter validation
-        schema = PaymentValidator.walletLinkInitate()
+        schema = PaymentValidator.walletLinkInitiate()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -626,7 +626,7 @@ class Payment:
         schema = WalletLinkRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["walletLinkInitate"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        url_with_params = await create_url_with_params(api_url=self._urls["walletLinkInitiate"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
         query_string = await create_query_string()
 
         headers={}
@@ -643,7 +643,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["walletLinkInitate"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/options/wallet/link", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["walletLinkInitiate"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/options/wallet/link", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import WalletResponseSchema
@@ -651,7 +651,7 @@ class Payment:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for walletLinkInitate")
+                print("Response Validation failed for walletLinkInitiate")
                 print(e)
 
         return response

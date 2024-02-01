@@ -19,7 +19,7 @@ Default
 * [checkAndUpdatePaymentStatus](#checkandupdatepaymentstatus)
 * [getPaymentModeRoutes](#getpaymentmoderoutes)
 * [getPosPaymentModeRoutes](#getpospaymentmoderoutes)
-* [walletLinkInitate](#walletlinkinitate)
+* [walletLinkInitiate](#walletlinkinitiate)
 * [linkWallet](#linkwallet)
 * [delinkWallet](#delinkwallet)
 * [getRupifiBannerDetails](#getrupifibannerdetails)
@@ -1163,10 +1163,6 @@ Success. Returns all available options for payment. Check the example shown belo
                 "redirect": false,
                 "callback_url": null,
                 "action_url": "https://api.fyndx0.de/platform/payment/v2/external/payments/confirm/charge/?app_id=000000000000000000000001"
-              },
-              "data": {
-                "user_phone": "9999632145",
-                "user_email": "app@fynd.com"
               }
             },
             "return_url": null
@@ -1523,10 +1519,6 @@ Success. Returns all available options for payment. Check the example shown belo
                 "redirect": false,
                 "callback_url": null,
                 "action_url": "https://api.fyndx0.de/platform/payment/v2/external/payments/confirm/charge/?app_id=000000000000000000000001"
-              },
-              "data": {
-                "user_phone": "9999632145",
-                "user_email": "app@fynd.com"
               }
             },
             "return_url": null
@@ -1609,7 +1601,7 @@ Success. Returns all available options for payment. Check the example shown belo
 ---
 
 
-### walletLinkInitate
+### walletLinkInitiate
 Initiate linking of wallet
 
 
@@ -1617,7 +1609,7 @@ Initiate linking of wallet
 
 ```python
 try:
-    result = await applicationClient.payment.walletLinkInitate(body=body)
+    result = await applicationClient.payment.walletLinkInitiate(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -3512,10 +3504,6 @@ Success. Returns all available options for payment. Check the example shown belo
                 "redirect": false,
                 "callback_url": null,
                 "action_url": "https://api.fyndx0.de/platform/payment/v2/external/payments/confirm/charge/?app_id=000000000000000000000001"
-              },
-              "data": {
-                "user_phone": "9999632145",
-                "user_email": "app@fynd.com"
               }
             },
             "return_url": null
@@ -5107,6 +5095,7 @@ Success. Check the example shown below
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | upiVpa | String |  no  | UPI ID |
+ | aggregator | String? |  yes  | aggregator slug |
 
 ---
 
