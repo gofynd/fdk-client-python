@@ -133,11 +133,7 @@ Zone List of application in descending order of their last modified date.
         ],
         "zone_id": "64c3a0926ea670363c8e2e3d",
         "stores_count": 2,
-        "regions_count": 4242,
-        "product": {
-          "count": 0,
-          "type": "all"
-        }
+        "regions_count": 4242
       }
     ],
     "page": {
@@ -3320,7 +3316,6 @@ Response status_code
  | slug | String |  no  |  |
  | storesCount | Int |  no  |  |
  | isActive | Boolean |  no  |  |
- | product | [ListViewProduct](#ListViewProduct) |  no  |  |
  | regionsCount | Int |  no  |  |
  | companyId | Int |  no  |  |
  | channels | ArrayList<[ListViewChannels](#ListViewChannels)> |  no  |  |
@@ -3334,7 +3329,7 @@ Response status_code
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | page | ArrayList<[ZoneDataItem](#ZoneDataItem)> |  no  |  |
+ | page | [ZoneDataItem](#ZoneDataItem) |  no  |  |
  | items | ArrayList<[ListViewItems](#ListViewItems)> |  no  |  |
 
 ---

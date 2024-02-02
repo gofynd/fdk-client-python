@@ -703,8 +703,6 @@ class ListViewItems(BaseSchema):
     
     is_active = fields.Boolean(required=False)
     
-    product = fields.Nested(ListViewProduct, required=False)
-    
     regions_count = fields.Int(required=False)
     
     company_id = fields.Int(required=False)
@@ -717,7 +715,7 @@ class ListViewResponse(BaseSchema):
     # Serviceability swagger.json
 
     
-    page = fields.List(fields.Nested(ZoneDataItem, required=False), required=False)
+    page = fields.Nested(ZoneDataItem, required=False)
     
     items = fields.List(fields.Nested(ListViewItems, required=False), required=False)
     

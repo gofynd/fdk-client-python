@@ -2303,6 +2303,8 @@ class PaymentSessionRequestSerializer(BaseSchema):
     
     total_amount = fields.Int(required=False)
     
+    checksum = fields.Str(required=False)
+    
 
 
 class PaymentSessionResponseSerializer(BaseSchema):
@@ -2372,6 +2374,8 @@ class RefundSessionRequestSerializer(BaseSchema):
     error = fields.Nested(ErrorDescription, required=False)
     
     message = fields.Str(required=False)
+    
+    checksum = fields.Str(required=False)
     
 
 
