@@ -14,6 +14,7 @@ Default
 * [updateCart](#updatecart)
 * [deleteCart](#deletecart)
 * [getItemCount](#getitemcount)
+* [getItemCountV2](#getitemcountv2)
 * [getCoupons](#getcoupons)
 * [applyCoupon](#applycoupon)
 * [removeCoupon](#removecoupon)
@@ -36,6 +37,8 @@ Default
 * [getPromotionOffers](#getpromotionoffers)
 * [getLadderOffers](#getladderoffers)
 * [checkoutCartV2](#checkoutcartv2)
+* [getCartMetaConfigs](#getcartmetaconfigs)
+* [getCartMetaConfig](#getcartmetaconfig)
 
 
 
@@ -52,7 +55,7 @@ Fetch all items added to the cart
 
 ```python
 try:
-    result = await applicationClient.cart.getCart(id=id, i=i, b=b, c=c, assignCardId=assignCardId, areaCode=areaCode, buyNow=buyNow)
+    result = await applicationClient.cart.getCart(id=id, i=i, b=b, c=c, assignCardId=assignCardId, areaCode=areaCode, buyNow=buyNow, cartType=cartType)
     # use result
 except Exception as e:
     print(e)
@@ -64,13 +67,14 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| id | String? | no |  |   
-| i | Boolean? | no |  |   
-| b | Boolean? | no |  |   
-| c | Boolean? | no |  |   
-| assignCardId | Int? | no |  |   
-| areaCode | String? | no |  |   
-| buyNow | Boolean? | no |  |  
+| id | String? | no | The unique identifier of the cart |   
+| i | Boolean? | no | This is a boolean value. Select `true` to retrieve all the items added in the cart. |   
+| b | Boolean? | no | This is a boolean value. Select `true` to retrieve the price breakup of cart items. |   
+| c | Boolean? | no | This is a boolean value. Select `true` to retrieve the cod charges in breakup of cart items. |   
+| assignCardId | Int? | no | Token of user's debit or credit card |   
+| areaCode | String? | no | Customer servicable area_code |   
+| buyNow | Boolean? | no | This is a boolen value. Select `true` to set/initialize buy now cart |   
+| cartType | String? | no | The type of cart |  
 
 
 
@@ -776,6 +780,7 @@ Success. Returns a Cart object. Check the example shown below or refer `CartDeta
           "name": "Gandhi Nagar"
         },
         "quantity": 108,
+        "product_name": "",
         "price": {
           "base": {
             "marked": 2999,
@@ -878,7 +883,8 @@ Success. Returns a Cart object. Check the example shown below or refer `CartDeta
         }
       },
       "message": "",
-      "quantity": 1
+      "quantity": 1,
+      "seller_count": 1
     }
   ],
   "buy_now": false,
@@ -941,6 +947,12 @@ Success. Returns a Cart object. Check the example shown below or refer `CartDeta
       "is_applied": false,
       "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
     }
+  },
+  "custom_cart": {
+    "cart_name": "Universal",
+    "cart_type": "universal",
+    "id": "659e3b6b33848a683efebf2c",
+    "is_universal": true
   },
   "delivery_charge_info": "",
   "coupon_text": "View all offers",
@@ -1010,7 +1022,7 @@ Add items to cart
 
 ```python
 try:
-    result = await applicationClient.cart.addItems(i=i, b=b, areaCode=areaCode, buyNow=buyNow, id=id, body=body)
+    result = await applicationClient.cart.addItems(i=i, b=b, areaCode=areaCode, buyNow=buyNow, id=id, cartType=cartType, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -1022,11 +1034,12 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| i | Boolean? | no |  |   
-| b | Boolean? | no |  |   
-| areaCode | String? | no |  |   
-| buyNow | Boolean? | no |  |   
-| id | String? | no |  |  
+| i | Boolean? | no | This is a boolean value. Select `true` to retrieve all the items added in the cart. |   
+| b | Boolean? | no | This is a boolean value. Select `true` to retrieve the price breakup of cart items. |   
+| areaCode | String? | no | Customer servicable area_code |   
+| buyNow | Boolean? | no | This is a boolen value. Select `true` to set/initialize buy now cart |   
+| id | String? | no | The unique identifier of the cart |   
+| cartType | String? | no | The type of cart |  
 | body | [AddCartRequest](#AddCartRequest) | yes | Request body |
 
 
@@ -1778,6 +1791,7 @@ Success. Returns a cart object as shown below. Refer `AddCartDetailResponse` for
           },
           "identifiers": {},
           "moq": {},
+          "seller_count": 1,
           "delivery_promise": {
             "timestamp": {
               "min": 1646257339,
@@ -1801,6 +1815,7 @@ Success. Returns a cart object as shown below. Refer `AddCartDetailResponse` for
               "name": "Motilal Nagar 1, Goregaon"
             },
             "quantity": 4,
+            "product_name": "",
             "price": {
               "base": {
                 "marked": 3999,
@@ -2282,6 +2297,12 @@ Success. Returns a cart object as shown below. Refer `AddCartDetailResponse` for
           "discount": "11% OFF"
         }
       ],
+      "custom_cart": {
+        "cart_name": "Universal",
+        "cart_type": "universal",
+        "id": "659e3b6b33848a683efebf2c",
+        "is_universal": true
+      },
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
       "buy_now": false,
@@ -2539,7 +2560,7 @@ Update items in the cart
 
 ```python
 try:
-    result = await applicationClient.cart.updateCart(id=id, i=i, b=b, areaCode=areaCode, buyNow=buyNow, body=body)
+    result = await applicationClient.cart.updateCart(id=id, i=i, b=b, areaCode=areaCode, buyNow=buyNow, cartType=cartType, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2551,11 +2572,12 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| id | String? | no |  |   
-| i | Boolean? | no |  |   
-| b | Boolean? | no |  |   
-| areaCode | String? | no |  |   
-| buyNow | Boolean? | no |  |  
+| id | String? | no | The unique identifier of the cart |   
+| i | Boolean? | no | This is a boolean value. Select `true` to retrieve all the items added in the cart. |   
+| b | Boolean? | no | This is a boolean value. Select `true` to retrieve the price breakup of cart items. |   
+| areaCode | String? | no | Customer servicable area_code |   
+| buyNow | Boolean? | no | This is a boolen value. Select `true` to set/initialize buy now cart |   
+| cartType | String? | no | The type of cart |  
 | body | [UpdateCartRequest](#UpdateCartRequest) | yes | Request body |
 
 
@@ -2679,6 +2701,7 @@ Success. Updates and returns a cart object as shown below. Refer `UpdateCartDeta
               "name": "Gandhi Nagar"
             },
             "quantity": 108,
+            "product_name": "",
             "price": {
               "base": {
                 "marked": 2999,
@@ -2774,7 +2797,8 @@ Success. Updates and returns a cart object as shown below. Refer `UpdateCartDeta
             }
           },
           "message": "",
-          "quantity": 101
+          "quantity": 101,
+          "seller_count": 1
         }
       ],
       "delivery_charge_info": "",
@@ -3518,6 +3542,7 @@ Success. Updates and returns a cart object as shown below. Refer `UpdateCartDeta
           "key": "437414_7",
           "message": "",
           "bulk_offer": {},
+          "seller_count": 1,
           "price": {
             "base": {
               "add_on": 5499,
@@ -3598,6 +3623,7 @@ Success. Updates and returns a cart object as shown below. Refer `UpdateCartDeta
               "name": "Colaba Causway"
             },
             "quantity": 5,
+            "product_name": "",
             "price": {
               "base": {
                 "marked": 5499,
@@ -3695,7 +3721,7 @@ Delete cart once user made successful checkout
 
 ```python
 try:
-    result = await applicationClient.cart.deleteCart(id=id)
+    result = await applicationClient.cart.deleteCart(id=id, cartType=cartType)
     # use result
 except Exception as e:
     print(e)
@@ -3707,7 +3733,8 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| id | String? | no | The unique identifier of the cart. |  
+| id | String? | no | The unique identifier of the cart. |   
+| cartType | String? | no | The type of cart |  
 
 
 
@@ -3792,6 +3819,77 @@ Success. Returns the total count of items in a user's cart.
 ```json
 {
   "user_cart_items_count": 0
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getItemCountV2
+Count items in the cart according to cart_type
+
+
+
+
+```python
+try:
+    result = await applicationClient.cart.getItemCountV2(id=id, buyNow=buyNow)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String? | no | The unique identifier of the cart |   
+| buyNow | Boolean? | no | Boolean value to get buy_now cart |  
+
+
+
+Use this API to get the total number of items present in cart.
+
+*Returned Response:*
+
+
+
+
+[CartItemCountResponseV2](#CartItemCountResponseV2)
+
+Success. Returns the total count of items in a user's cart.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "user_all_cart_articles_quantity_count": 7,
+  "user_all_cart_article_count": 2,
+  "custom_cart_count": {
+    "universal": {
+      "article_count": 1,
+      "article_quantity_count": 1
+    },
+    "fresh-cart": {
+      "article_count": 1,
+      "article_quantity_count": 6
+    }
+  }
 }
 ```
 </details>
@@ -3913,7 +4011,7 @@ Apply Coupon
 
 ```python
 try:
-    result = await applicationClient.cart.applyCoupon(i=i, b=b, p=p, id=id, buyNow=buyNow, body=body)
+    result = await applicationClient.cart.applyCoupon(i=i, b=b, p=p, id=id, buyNow=buyNow, cartType=cartType, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -3929,7 +4027,8 @@ except Exception as e:
 | b | Boolean? | no |  |   
 | p | Boolean? | no |  |   
 | id | String? | no |  |   
-| buyNow | Boolean? | no |  |  
+| buyNow | Boolean? | no |  |   
+| cartType | String? | no |  |  
 | body | [ApplyCouponRequest](#ApplyCouponRequest) | yes | Request body |
 
 
@@ -4600,7 +4699,7 @@ Remove Coupon Applied
 
 ```python
 try:
-    result = await applicationClient.cart.removeCoupon(id=id, buyNow=buyNow)
+    result = await applicationClient.cart.removeCoupon(id=id, buyNow=buyNow, cartType=cartType)
     # use result
 except Exception as e:
     print(e)
@@ -4612,8 +4711,9 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| id | String? | no |  |   
-| buyNow | Boolean? | no |  |  
+| id | String? | no | The unique identifier of the cart |   
+| buyNow | Boolean? | no | This is boolean to get buy_now cart |   
+| cartType | String? | no | The type of cart |  
 
 
 
@@ -4834,7 +4934,7 @@ Get discount offers based on quantity
 
 ```python
 try:
-    result = await applicationClient.cart.getBulkDiscountOffers(itemId=itemId, articleId=articleId, uid=uid, slug=slug)
+    result = await applicationClient.cart.getBulkDiscountOffers(itemId=itemId, articleId=articleId, uid=uid, slug=slug, cartType=cartType)
     # use result
 except Exception as e:
     print(e)
@@ -4849,7 +4949,8 @@ except Exception as e:
 | itemId | Int? | no | The Item ID of the product |   
 | articleId | String? | no | Article Mongo ID |   
 | uid | Int? | no | UID of the product |   
-| slug | String? | no | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ |  
+| slug | String? | no | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ |   
+| cartType | String? | no | type of the cart |  
 
 
 
@@ -4965,7 +5066,7 @@ Apply reward points at cart
 
 ```python
 try:
-    result = await applicationClient.cart.applyRewardPoints(id=id, i=i, b=b, buyNow=buyNow, body=body)
+    result = await applicationClient.cart.applyRewardPoints(id=id, i=i, b=b, buyNow=buyNow, cartType=cartType, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -4977,10 +5078,11 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| id | String? | no |  |   
-| i | Boolean? | no |  |   
-| b | Boolean? | no |  |   
-| buyNow | Boolean? | no |  |  
+| id | String? | no | The unique identifier of the cart |   
+| i | Boolean? | no | This is a boolean value. Select `true` to retrieve all the items added in the cart. |   
+| b | Boolean? | no | This is a boolean value. Select `true` to retrieve the price breakup of cart items. |   
+| buyNow | Boolean? | no | This is boolean to get buy_now cart |   
+| cartType | String? | no | type of the cart |  
 | body | [RewardPointRequest](#RewardPointRequest) | yes | Request body |
 
 
@@ -6336,7 +6438,7 @@ Verify the coupon eligibility against the payment mode
 
 ```python
 try:
-    result = await applicationClient.cart.validateCouponForPayment(id=id, buyNow=buyNow, addressId=addressId, paymentMode=paymentMode, paymentIdentifier=paymentIdentifier, aggregatorName=aggregatorName, merchantCode=merchantCode, iin=iin, network=network, type=type, cardId=cardId)
+    result = await applicationClient.cart.validateCouponForPayment(id=id, buyNow=buyNow, addressId=addressId, paymentMode=paymentMode, paymentIdentifier=paymentIdentifier, aggregatorName=aggregatorName, merchantCode=merchantCode, iin=iin, network=network, type=type, cardId=cardId, cartType=cartType)
     # use result
 except Exception as e:
     print(e)
@@ -6348,17 +6450,18 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| id | String? | no |  |   
-| buyNow | Boolean? | no |  |   
-| addressId | String? | no |  |   
-| paymentMode | String? | no |  |   
-| paymentIdentifier | String? | no |  |   
-| aggregatorName | String? | no |  |   
-| merchantCode | String? | no |  |   
-| iin | String? | no |  |   
-| network | String? | no |  |   
-| type | String? | no |  |   
-| cardId | String? | no |  |  
+| id | String? | no | The unique identifier of the cart |   
+| buyNow | Boolean? | no | This is boolean to get buy_now cart |   
+| addressId | String? | no | ID allotted to an address |   
+| paymentMode | String? | no | Payment mode selected by the customer |   
+| paymentIdentifier | String? | no | Identifier of payment like ICIC, PAYTM |   
+| aggregatorName | String? | no | Payment gateway identifier |   
+| merchantCode | String? | no | Identifier used by payment gateway for a given payment mode, e.g. NB_ICIC, PAYTM |   
+| iin | String? | no | Debit/Credit card prefix (first 6 digit) |   
+| network | String? | no | Credit/Debit card issuer, e.g. VISA, MASTERCARD, RUPAY |   
+| type | String? | no | card type, e.g. Credit, Debit |   
+| cardId | String? | no | saved card token reference id |   
+| cartType | String? | no | type of the cart |  
 
 
 
@@ -7144,7 +7247,7 @@ Checkout all items in the cart
 
 ```python
 try:
-    result = await applicationClient.cart.checkoutCart(buyNow=buyNow, body=body)
+    result = await applicationClient.cart.checkoutCart(buyNow=buyNow, cartType=cartType, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -7156,7 +7259,8 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| buyNow | Boolean? | no | This indicates the type of cart to checkout |  
+| buyNow | Boolean? | no | This indicates the type of cart to checkout |   
+| cartType | String? | no | The type of cart |  
 | body | [CartCheckoutDetailRequest](#CartCheckoutDetailRequest) | yes | Request body |
 
 
@@ -8468,7 +8572,7 @@ Fetch available promotions
 
 ```python
 try:
-    result = await applicationClient.cart.getPromotionOffers(slug=slug, pageSize=pageSize, promotionGroup=promotionGroup, storeId=storeId)
+    result = await applicationClient.cart.getPromotionOffers(slug=slug, pageSize=pageSize, promotionGroup=promotionGroup, storeId=storeId, cartType=cartType)
     # use result
 except Exception as e:
     print(e)
@@ -8483,7 +8587,8 @@ except Exception as e:
 | slug | String? | no | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ |   
 | pageSize | Int? | no | Number of offers to be fetched to show |   
 | promotionGroup | String? | no | Type of promotion groups |   
-| storeId | Int? | no | Store id |  
+| storeId | Int? | no | Store id |   
+| cartType | String? | no | The type of cart |  
 
 
 
@@ -8732,7 +8837,7 @@ Checkout all items in the cart
 
 ```python
 try:
-    result = await applicationClient.cart.checkoutCartV2(buyNow=buyNow, body=body)
+    result = await applicationClient.cart.checkoutCartV2(buyNow=buyNow, cartType=cartType, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -8744,7 +8849,8 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| buyNow | Boolean? | no | This indicates the type of cart to checkout |  
+| buyNow | Boolean? | no | This indicates the type of cart to checkout |   
+| cartType | String? | no | The type of cart |  
 | body | [CartCheckoutDetailV2Request](#CartCheckoutDetailV2Request) | yes | Request body |
 
 
@@ -9179,6 +9285,171 @@ Success. Returns the status of cart checkout. Refer `CartCheckoutResponseSchema`
 ---
 
 
+### getCartMetaConfigs
+Get cart configuration
+
+
+
+
+```python
+try:
+    result = await applicationClient.cart.getCartMetaConfigs()
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+
+Get cart configuration
+
+*Returned Response:*
+
+
+
+
+[CartConfigListResponse](#CartConfigListResponse)
+
+Cart Config fetched successfully
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": "6203cb1393506f8a75ecd56b",
+      "name": "Universal",
+      "slug": "universal",
+      "article_tags": [
+        "cloths"
+      ],
+      "created_on": "2023-12-21T12:17:12"
+    }
+  ]
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getCartMetaConfig
+Get cart configuration by id
+
+
+
+
+```python
+try:
+    result = await applicationClient.cart.getCartMetaConfig(cartMetaId=cartMetaId)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| cartMetaId | String | yes | CartMeta mongo id for fetching single cart meta data |  
+
+
+
+Get cart configuration by id
+
+*Returned Response:*
+
+
+
+
+[CartConfigDetailResponse](#CartConfigDetailResponse)
+
+Cart Config Fetched successfully
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true,
+  "data": {
+    "id": "645ba594d414eb0669e6ee14",
+    "app_id": "60792ded7826bd09330ed90d",
+    "company_id": 884,
+    "bulk_coupons": false,
+    "delivery_charges": {
+      "charges": [],
+      "enabled": false
+    },
+    "empty_cart": false,
+    "enabled": true,
+    "max_cart_items": 50,
+    "min_cart_value": 0,
+    "revenue_engine_coupon": false,
+    "gift_pricing": 50,
+    "gift_display_text": "",
+    "is_universal": false,
+    "is_active": true,
+    "order_placing": {
+      "enabled": true,
+      "message": ""
+    },
+    "name": "Universal",
+    "slug": "universal",
+    "article_tags": [
+      "sale",
+      "offer"
+    ],
+    "allow_coupon_with_rewards": false,
+    "gst_input": true,
+    "staff_selection": true,
+    "placing_for_customer": false,
+    "pan_card": {
+      "enabled": false,
+      "cod_threshold_amount": 0,
+      "online_threshold_amount": 0
+    },
+    "created_on": "2023-12-21T12:17:12",
+    "updated_on": "2023-12-21T12:17:12",
+    "last_modified_by": "5b84e9ffb02426353608c380"
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
 
 
 ### Schemas
@@ -9269,6 +9540,7 @@ Success. Returns the status of cart checkout. Refer `CartCheckoutResponseSchema`
  | articleQuantity | Int? |  yes  | Quantity of article on which promotion is applicable |
  | appliedFreeArticles | ArrayList<[AppliedFreeArticles](#AppliedFreeArticles)>? |  yes  | Applied free article for free gift item promotions |
  | promotionType | String? |  yes  | Promotion type of current promotion |
+ | customFieldMeta | ArrayList<HashMap<String,Any>>? |  yes  | custom field meta for promotion. |
  | meta | HashMap<String,Any>? |  yes  | Meta object for extra data |
  | code | String? |  yes  | Promotion code |
 
@@ -9403,6 +9675,7 @@ Success. Returns the status of cart checkout. Refer `CartCheckoutResponseSchema`
  | size | String? |  yes  |  |
  | mtoQuantity | Int? |  yes  |  |
  | seller | [BaseInfo](#BaseInfo)? |  yes  |  |
+ | productName | String? |  yes  |  |
  | sellerIdentifier | String? |  yes  |  |
  | parentItemIdentifiers | HashMap<String,Any>? |  yes  |  |
  | identifier | HashMap<String,Any>? |  yes  |  |
@@ -9674,6 +9947,7 @@ Success. Returns the status of cart checkout. Refer `CartCheckoutResponseSchema`
  | key | String? |  yes  |  |
  | message | String? |  yes  |  |
  | isSet | Boolean? |  yes  |  |
+ | sellerCount | Int? |  yes  |  |
  | pricePerUnit | [ProductPricePerUnitInfo](#ProductPricePerUnitInfo)? |  yes  |  |
  | promotionsApplied | ArrayList<[AppliedPromotion](#AppliedPromotion)>? |  yes  |  |
 
@@ -9848,6 +10122,20 @@ Success. Returns the status of cart checkout. Refer `CartCheckoutResponseSchema`
 
  
  
+ #### [CustomCart](#CustomCart)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | id | String? |  yes  | id of custom cart config |
+ | cartName | String? |  yes  | Name of custom cart |
+ | cartType | String? |  yes  | Type of custom cart |
+ | isUniversal | Boolean? |  yes  | By default all carts are universal, will be false for custom cart |
+
+---
+
+
+ 
+ 
  #### [CartDetailResponse](#CartDetailResponse)
 
  | Properties | Type | Nullable | Description |
@@ -9857,6 +10145,7 @@ Success. Returns the status of cart checkout. Refer `CartCheckoutResponseSchema`
  | appliedPromoDetails | ArrayList<[AppliedPromotion](#AppliedPromotion)>? |  yes  |  |
  | checkoutMode | String? |  yes  |  |
  | panNo | String? |  yes  |  |
+ | isPanReceived | Boolean? |  yes  |  |
  | isValid | Boolean? |  yes  |  |
  | id | String? |  yes  |  |
  | paymentSelectionLock | [PaymentSelectionLock](#PaymentSelectionLock)? |  yes  |  |
@@ -9878,6 +10167,7 @@ Success. Returns the status of cart checkout. Refer `CartCheckoutResponseSchema`
  | couponText | String? |  yes  |  |
  | buyNow | Boolean? |  yes  |  |
  | panConfig | HashMap<String,Any>? |  yes  |  |
+ | customCart | [CustomCart](#CustomCart)? |  yes  |  |
 
 ---
 
@@ -9897,6 +10187,7 @@ Success. Returns the status of cart checkout. Refer `CartCheckoutResponseSchema`
  | storeId | Int? |  yes  |  |
  | display | String? |  yes  |  |
  | articleId | String? |  yes  |  |
+ | priceFactoryTypeId | String? |  yes  |  |
  | parentItemIdentifiers | ArrayList<HashMap<String,String>>? |  yes  |  |
  | sellerId | Int? |  yes  |  |
  | pos | Boolean? |  yes  |  |
@@ -9947,6 +10238,7 @@ Success. Returns the status of cart checkout. Refer `CartCheckoutResponseSchema`
  | identifiers | [CartProductIdentifer](#CartProductIdentifer) |  no  |  |
  | articleId | String? |  yes  |  |
  | parentItemIdentifiers | HashMap<String,Any>? |  yes  |  |
+ | priceFactoryTypeId | String? |  yes  |  |
  | itemId | Int? |  yes  |  |
  | meta | HashMap<String,Any>? |  yes  |  |
 
@@ -9997,6 +10289,19 @@ Success. Returns the status of cart checkout. Refer `CartCheckoutResponseSchema`
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | userCartItemsCount | Int? |  yes  | Item count present in cart |
+
+---
+
+
+ 
+ 
+ #### [CartItemCountResponseV2](#CartItemCountResponseV2)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | userAllCartArticlesQuantityCount | Int? |  yes  |  |
+ | userAllCartArticleCount | Int? |  yes  |  |
+ | customCartCount | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -10460,6 +10765,7 @@ Success. Returns the status of cart checkout. Refer `CartCheckoutResponseSchema`
  | couponText | String? |  yes  |  |
  | buyNow | Boolean? |  yes  |  |
  | codCharges | Double? |  yes  |  |
+ | customCart | [CustomCart](#CustomCart)? |  yes  |  |
 
 ---
 
@@ -10816,6 +11122,104 @@ Success. Returns the status of cart checkout. Refer `CartCheckoutResponseSchema`
  | network | String? |  yes  |  |
  | type | String? |  yes  |  |
  | cardId | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [CartConfigListObj](#CartConfigListObj)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | id | String? |  yes  |  |
+ | name | String? |  yes  |  |
+ | slug | String? |  yes  |  |
+ | articleTags | ArrayList<String>? |  yes  |  |
+ | createdOn | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [CartConfigListResponse](#CartConfigListResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | success | Boolean? |  yes  |  |
+ | data | ArrayList<[CartConfigListObj](#CartConfigListObj)>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [OrderPlacing](#OrderPlacing)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | enabled | Boolean? |  yes  |  |
+ | message | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [PanCard](#PanCard)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | enabled | Boolean? |  yes  |  |
+ | codThresholdAmount | Int? |  yes  |  |
+ | onlineThresholdAmount | Int? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [CartConfigDetailObj](#CartConfigDetailObj)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | id | String? |  yes  |  |
+ | appId | String? |  yes  |  |
+ | companyId | Int? |  yes  |  |
+ | createdOn | String? |  yes  |  |
+ | updatedOn | String? |  yes  |  |
+ | lastModifiedBy | String? |  yes  |  |
+ | minCartValue | Int? |  yes  |  |
+ | maxCartValue | Int? |  yes  |  |
+ | bulkCoupons | Boolean? |  yes  |  |
+ | maxCartItems | Int? |  yes  |  |
+ | giftDisplayText | String? |  yes  |  |
+ | deliveryCharges | [DeliveryChargesConfig](#DeliveryChargesConfig)? |  yes  |  |
+ | revenueEngineCoupon | Boolean? |  yes  |  |
+ | giftPricing | Double? |  yes  |  |
+ | enabled | Boolean? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
+ | orderPlacing | [OrderPlacing](#OrderPlacing)? |  yes  |  |
+ | name | String? |  yes  |  |
+ | articleTags | ArrayList<String>? |  yes  |  |
+ | allowCouponWithRewards | Boolean? |  yes  |  |
+ | gstInput | Boolean? |  yes  |  |
+ | staffSelection | Boolean? |  yes  |  |
+ | placingForCustomer | Boolean? |  yes  |  |
+ | panCard | [PanCard](#PanCard)? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [CartConfigDetailResponse](#CartConfigDetailResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | success | Boolean? |  yes  |  |
+ | data | [CartConfigDetailObj](#CartConfigDetailObj)? |  yes  |  |
 
 ---
 

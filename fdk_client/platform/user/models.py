@@ -84,7 +84,7 @@ class SessionsDeleteResponseSchema(BaseSchema):
     pass
 
 
-class AuthenticationApiErrorSchema(BaseSchema):
+class APIError(BaseSchema):
     pass
 
 
@@ -233,6 +233,10 @@ class UserPhoneNumbers(BaseSchema):
 
 
 class UserSchema(BaseSchema):
+    pass
+
+
+class UserSearchSchema(BaseSchema):
     pass
 
 
@@ -463,7 +467,7 @@ class UserSearchResponseSchema(BaseSchema):
     # User swagger.json
 
     
-    users = fields.List(fields.Nested(UserSchema, required=False), required=False)
+    users = fields.List(fields.Nested(UserSearchSchema, required=False), required=False)
     
 
 
@@ -521,11 +525,23 @@ class SessionsDeleteResponseSchema(BaseSchema):
     
 
 
-class AuthenticationApiErrorSchema(BaseSchema):
+class APIError(BaseSchema):
     # User swagger.json
 
     
+    code = fields.Str(required=False)
+    
     message = fields.Str(required=False)
+    
+    info = fields.Str(required=False)
+    
+    request_id = fields.Str(required=False)
+    
+    error = fields.Str(required=False)
+    
+    meta = fields.Dict(required=False)
+    
+    authenticated = fields.Boolean(required=False)
     
 
 
@@ -542,6 +558,8 @@ class SessionListResponseInfo(BaseSchema):
     domain = fields.Str(required=False)
     
     expire_in = fields.Str(required=False)
+    
+    location = fields.Str(required=False)
     
 
 
@@ -741,17 +759,19 @@ class PlatformSchema(BaseSchema):
     
     register = fields.Boolean(required=False)
     
-    mobile_image = fields.Str(required=False)
+    mobile_image = fields.Str(required=False, allow_none=True)
     
-    desktop_image = fields.Str(required=False)
+    desktop_image = fields.Str(required=False, allow_none=True)
     
     delete_account_day = fields.Int(required=False)
     
     delete_account_reasons = fields.List(fields.Nested(DeleteAccountReasons, required=False), required=False)
     
-    delete_account_consent = fields.Dict(required=False)
+    delete_account_consent = fields.Nested(DeleteAccountConsent, required=False)
     
-    session_config = fields.Dict(required=False)
+    session_config = fields.Nested(SessionExpiry, required=False)
+    
+    __v = fields.Int(required=False)
     
 
 
@@ -875,7 +895,7 @@ class SocialTokens(BaseSchema):
     
     facebook = fields.Nested(Facebook, required=False)
     
-    account_kit = fields.Nested(Accountkit, required=False)
+    accountkit = fields.Nested(Accountkit, required=False)
     
     google = fields.Nested(Google, required=False)
     
@@ -907,6 +927,8 @@ class Facebook(BaseSchema):
     
     app_id = fields.Str(required=False)
     
+    app_secret = fields.Str(required=False)
+    
 
 
 class Accountkit(BaseSchema):
@@ -915,6 +937,8 @@ class Accountkit(BaseSchema):
     
     app_id = fields.Str(required=False)
     
+    app_secret = fields.Str(required=False)
+    
 
 
 class Google(BaseSchema):
@@ -922,6 +946,8 @@ class Google(BaseSchema):
 
     
     app_id = fields.Str(required=False)
+    
+    app_secret = fields.Str(required=False)
     
 
 
@@ -1051,7 +1077,7 @@ class UserSchema(BaseSchema):
     
     emails = fields.List(fields.Nested(Email, required=False), required=False)
     
-    gender = fields.Str(required=False)
+    gender = fields.Str(required=False, allow_none=True)
     
     dob = fields.Str(required=False)
     
@@ -1070,6 +1096,50 @@ class UserSchema(BaseSchema):
     updated_at = fields.Str(required=False)
     
     external_id = fields.Str(required=False)
+    
+
+
+class UserSearchSchema(BaseSchema):
+    # User swagger.json
+
+    
+    application_id = fields.Str(required=False)
+    
+    user_id = fields.Str(required=False)
+    
+    first_name = fields.Str(required=False)
+    
+    meta = fields.Dict(required=False)
+    
+    last_name = fields.Str(required=False)
+    
+    phone_numbers = fields.List(fields.Nested(PhoneNumber, required=False), required=False)
+    
+    emails = fields.List(fields.Nested(Email, required=False), required=False)
+    
+    gender = fields.Str(required=False, allow_none=True)
+    
+    dob = fields.Str(required=False)
+    
+    active = fields.Boolean(required=False)
+    
+    profile_pic_url = fields.Str(required=False)
+    
+    username = fields.Str(required=False)
+    
+    account_type = fields.Str(required=False)
+    
+    _id = fields.Str(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    updated_at = fields.Str(required=False)
+    
+    external_id = fields.Str(required=False)
+    
+    archive = fields.Boolean(required=False)
+    
+    status = fields.Str(required=False)
     
 
 

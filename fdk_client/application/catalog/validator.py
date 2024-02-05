@@ -73,18 +73,6 @@ from ..ApplicationModel import BaseSchema
     
     
         
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
         
         
         
@@ -93,8 +81,6 @@ from ..ApplicationModel import BaseSchema
     
     
         
-    
-    
         
         
         
@@ -102,29 +88,6 @@ from ..ApplicationModel import BaseSchema
     
         
         
-    
-    
-        
-        
-    
-    
-        
-        
-    
-    
-        
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
         
         
         
@@ -139,8 +102,52 @@ from ..ApplicationModel import BaseSchema
     
         
         
+        
     
     
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+    
+    
+        
+        
+    
+    
+        
+        
         
         
         
@@ -299,6 +306,16 @@ class CatalogValidator:
         
         
         q = fields.Str(required=False)
+        
+        category_suggestion = fields.Int(required=False)
+        
+        brand_suggestion = fields.Int(required=False)
+        
+        collection_suggestion = fields.Int(required=False)
+        
+        product_suggestion = fields.Int(required=False)
+        
+        query_suggestion = fields.Int(required=False)
          
         
     
@@ -455,7 +472,11 @@ class CatalogValidator:
         
         store_id = fields.Int(required=False)
         
+        exchange_seller_identifier = fields.Str(required=False)
+        
         moq = fields.Int(required=False)
+        
+        seller_id = fields.Int(required=False)
          
         
     

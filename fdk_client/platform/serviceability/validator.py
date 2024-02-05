@@ -51,6 +51,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -244,6 +245,8 @@ class ServiceabilityValidator:
         payment_mode = fields.Str(required=False)
         
         transport_type = fields.Str(required=False)
+        
+        account_ids = fields.List(fields.Str(required=False), required=False)
          
         
     

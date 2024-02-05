@@ -16,8 +16,27 @@ from ..PlatformModel import BaseSchema
     
     
         
+        
+    
+    
+        
+        
+    
+    
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
     
+        
     
+    
         
     
     
@@ -180,18 +199,14 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
         
         
         
         
-    
-    
         
     
     
         
-        
     
     
         
@@ -266,6 +281,13 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -282,10 +304,21 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+    
+    
         
+    
+    
         
+    
+    
         
         
+    
+    
         
         
         
@@ -363,6 +396,49 @@ class OrderValidator:
         
         
         company_id = fields.Int(required=False)
+         
+        
+    
+    class postRefundStateConfiguration(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        app_id = fields.Str(required=False)
+         
+        
+    
+    class getRefundStateConfiguration(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        app_id = fields.Str(required=False)
+         
+        
+    
+    class getRefundEnableStateList(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class postRefundConfiguration(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        app_id = fields.Str(required=False)
+         
+        
+    
+    class getRefundConfiguration(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        app_id = fields.Str(required=False)
          
         
     
@@ -754,15 +830,6 @@ class OrderValidator:
          
         
     
-    class generateInvoiceID(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        invoice_type = fields.Str(required=False)
-         
-        
-    
     class failedOrderLogDetails(BaseSchema):
         
         
@@ -960,6 +1027,47 @@ class OrderValidator:
         customer_id = fields.Str(required=False)
         
         order_type = fields.Str(required=False)
+         
+        
+    
+    class getuserviews(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class postuserviews(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class updateuserviews(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class deleteuserviews(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
+    class globalfilters(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        show_in = fields.Str(required=False)
+        
+        request_source = fields.Str(required=False)
          
         
     

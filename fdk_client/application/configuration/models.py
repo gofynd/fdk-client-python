@@ -224,6 +224,10 @@ class OrderFeature(BaseSchema):
     pass
 
 
+class BuyboxFeature(BaseSchema):
+    pass
+
+
 class AppFeatureResponse(BaseSchema):
     pass
 
@@ -899,6 +903,8 @@ class AppFeature(BaseSchema):
     
     order = fields.Nested(OrderFeature, required=False)
     
+    buybox = fields.Nested(BuyboxFeature, required=False)
+    
     _id = fields.Str(required=False)
     
     app = fields.Str(required=False)
@@ -1066,6 +1072,18 @@ class OrderFeature(BaseSchema):
 
     
     buy_again = fields.Boolean(required=False)
+    
+
+
+class BuyboxFeature(BaseSchema):
+    # Configuration swagger.json
+
+    
+    show_name = fields.Boolean(required=False)
+    
+    enable_selection = fields.Boolean(required=False)
+    
+    is_seller_buybox_enabled = fields.Boolean(required=False)
     
 
 

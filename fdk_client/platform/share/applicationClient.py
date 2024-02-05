@@ -56,13 +56,15 @@ class Share:
 
         return response
     
-    async def getShortLinks(self, page_no=None, page_size=None, created_by=None, active=None, q=None, request_headers:Dict={}):
+    async def getShortLinks(self, page_no=None, page_size=None, created_by=None, active=None, short_url=None, original_url=None, title=None, request_headers:Dict={}):
         """Get short links
         :param page_no : Current page number : type integer
         :param page_size : Current page size : type integer
         :param created_by : Short link creator : type string
         :param active : Short link active status : type string
-        :param q : Search text for original and short url : type string
+        :param short_url : Search for short url : type string
+        :param original_url : Search for original url : type string
+        :param title : Search text for title : type string
         """
         payload = {}
         
@@ -74,16 +76,20 @@ class Share:
             payload["created_by"] = created_by
         if active is not None:
             payload["active"] = active
-        if q is not None:
-            payload["q"] = q
+        if short_url is not None:
+            payload["short_url"] = short_url
+        if original_url is not None:
+            payload["original_url"] = original_url
+        if title is not None:
+            payload["title"] = title
 
         # Parameter validation
         schema = ShareValidator.getShortLinks()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/share/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/links/short-link/", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application Id","required":true,"schema":{"type":"string"}}],"optional":[{"name":"page_no","in":"query","description":"Current page number","required":false,"schema":{"default":1,"type":"integer"}},{"name":"page_size","in":"query","description":"Current page size","required":false,"schema":{"default":10,"type":"integer"}},{"name":"created_by","in":"query","description":"Short link creator","required":false,"schema":{"type":"string","enum":["team"]}},{"name":"active","in":"query","description":"Short link active status","required":false,"schema":{"type":"string","enum":["true","false"]}},{"name":"q","in":"query","description":"Search text for original and short url","required":false,"schema":{"type":"string"}}],"query":[{"name":"page_no","in":"query","description":"Current page number","required":false,"schema":{"default":1,"type":"integer"}},{"name":"page_size","in":"query","description":"Current page size","required":false,"schema":{"default":10,"type":"integer"}},{"name":"created_by","in":"query","description":"Short link creator","required":false,"schema":{"type":"string","enum":["team"]}},{"name":"active","in":"query","description":"Short link active status","required":false,"schema":{"type":"string","enum":["true","false"]}},{"name":"q","in":"query","description":"Search text for original and short url","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application Id","required":true,"schema":{"type":"string"}}]}""", page_no=page_no, page_size=page_size, created_by=created_by, active=active, q=q)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, created_by=created_by, active=active, q=q)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/share/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/links/short-link/", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application Id","required":true,"schema":{"type":"string"}}],"optional":[{"name":"page_no","in":"query","description":"Current page number","required":false,"schema":{"default":1,"type":"integer"}},{"name":"page_size","in":"query","description":"Current page size","required":false,"schema":{"default":10,"type":"integer"}},{"name":"created_by","in":"query","description":"Short link creator","required":false,"schema":{"type":"string","enum":["team"]}},{"name":"active","in":"query","description":"Short link active status","required":false,"schema":{"type":"string","enum":["true","false"]}},{"name":"short_url","in":"query","description":"Search for short url","required":false,"schema":{"type":"string"}},{"name":"original_url","in":"query","description":"Search for original url","required":false,"schema":{"type":"string"}},{"name":"title","in":"query","description":"Search text for title","required":false,"schema":{"type":"string"}}],"query":[{"name":"page_no","in":"query","description":"Current page number","required":false,"schema":{"default":1,"type":"integer"}},{"name":"page_size","in":"query","description":"Current page size","required":false,"schema":{"default":10,"type":"integer"}},{"name":"created_by","in":"query","description":"Short link creator","required":false,"schema":{"type":"string","enum":["team"]}},{"name":"active","in":"query","description":"Short link active status","required":false,"schema":{"type":"string","enum":["true","false"]}},{"name":"short_url","in":"query","description":"Search for short url","required":false,"schema":{"type":"string"}},{"name":"original_url","in":"query","description":"Search for original url","required":false,"schema":{"type":"string"}},{"name":"title","in":"query","description":"Search text for title","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application Id","required":true,"schema":{"type":"string"}}]}""", page_no=page_no, page_size=page_size, created_by=created_by, active=active, short_url=short_url, original_url=original_url, title=title)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, created_by=created_by, active=active, short_url=short_url, original_url=original_url, title=title)
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -97,7 +103,7 @@ class Share:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/share/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/links/short-link/", page_no=page_no, page_size=page_size, created_by=created_by, active=active, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/share/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/links/short-link/", page_no=page_no, page_size=page_size, created_by=created_by, active=active, short_url=short_url, original_url=original_url, title=title), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ShortLinkList

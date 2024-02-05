@@ -364,7 +364,43 @@ class ZoneConfig(BaseSchema):
     pass
 
 
+class BuyboxConfig(BaseSchema):
+    pass
+
+
+class BuyboxRuleConfig(BaseSchema):
+    pass
+
+
+class PromiseType(BaseSchema):
+    pass
+
+
+class StorePromiseAttributeConfig(BaseSchema):
+    pass
+
+
+class DeliveryServiceAttributeConfig(BaseSchema):
+    pass
+
+
+class BufferField(BaseSchema):
+    pass
+
+
+class PromiseConfig(BaseSchema):
+    pass
+
+
 class ApplicationConfig(BaseSchema):
+    pass
+
+
+class ApplicationConfigPatchRequest(BaseSchema):
+    pass
+
+
+class ApplicationConfigPatchResponse(BaseSchema):
     pass
 
 
@@ -1731,6 +1767,8 @@ class CourierPartnerRule(BaseSchema):
     
     conditions = fields.Nested(CourierPartnerRuleConditions, required=False)
     
+    manual_priority = fields.List(fields.Str(required=False), required=False)
+    
     sort = fields.List(fields.Str(required=False), required=False)
     
 
@@ -1775,6 +1813,96 @@ class ZoneConfig(BaseSchema):
     
 
 
+class BuyboxConfig(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    show_seller = fields.Boolean(required=False)
+    
+    enable_selection = fields.Boolean(required=False)
+    
+    is_seller_buybox_enabled = fields.Boolean(required=False)
+    
+
+
+class BuyboxRuleConfig(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    store_type_priority = fields.List(fields.Str(required=False), required=False)
+    
+    store_tag_priority = fields.List(fields.Str(required=False), required=False)
+    
+    sort = fields.List(fields.Str(required=False), required=False)
+    
+
+
+class PromiseType(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    display_name = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+    is_active = fields.Boolean(required=False)
+    
+    is_default = fields.Boolean(required=False)
+    
+
+
+class StorePromiseAttributeConfig(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    is_operational_timing_enabled = fields.Boolean(required=False)
+    
+    is_order_acceptance_timing_enabled = fields.Boolean(required=False)
+    
+    is_average_processing_time = fields.Boolean(required=False)
+    
+    is_holiday_enabled = fields.Boolean(required=False)
+    
+
+
+class DeliveryServiceAttributeConfig(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    is_pickup_cutoff_time_enabled = fields.Boolean(required=False)
+    
+    is_service_tat_enabled = fields.Boolean(required=False)
+    
+    is_holiday_enabled = fields.Boolean(required=False)
+    
+
+
+class BufferField(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    unit = fields.Str(required=False)
+    
+    value = fields.Int(required=False)
+    
+    enabled = fields.Boolean(required=False)
+    
+
+
+class PromiseConfig(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    store_attributes = fields.Nested(StorePromiseAttributeConfig, required=False)
+    
+    delivery_service_attributes = fields.Nested(DeliveryServiceAttributeConfig, required=False)
+    
+    buffer_field = fields.Nested(BufferField, required=False)
+    
+
+
 class ApplicationConfig(BaseSchema):
     # Serviceability swagger.json
 
@@ -1783,7 +1911,43 @@ class ApplicationConfig(BaseSchema):
     
     sort = fields.List(fields.Str(required=False), required=False)
     
+    application_id = fields.Str(required=False)
+    
+    company_id = fields.Int(required=False)
+    
+    manual_priority = fields.List(fields.Str(required=False), required=False)
+    
     zones = fields.Nested(ZoneConfig, required=False)
+    
+    buybox_config = fields.Nested(BuyboxConfig, required=False)
+    
+    buybox_rule_config = fields.Nested(BuyboxRuleConfig, required=False)
+    
+    promise_types = fields.List(fields.Nested(PromiseType, required=False), required=False)
+    
+    promise_config = fields.Nested(PromiseConfig, required=False)
+    
+
+
+class ApplicationConfigPatchRequest(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    buybox_config = fields.Nested(BuyboxConfig, required=False)
+    
+    buybox_rule_config = fields.Nested(BuyboxRuleConfig, required=False)
+    
+    promise_types = fields.List(fields.Nested(PromiseType, required=False), required=False)
+    
+    promise_config = fields.Nested(PromiseConfig, required=False)
+    
+
+
+class ApplicationConfigPatchResponse(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    success = fields.Boolean(required=False)
     
 
 
@@ -1883,6 +2047,8 @@ class StoreRuleConfigData(BaseSchema):
     
     sort = fields.List(fields.Str(required=False), required=False)
     
+    manual_priority = fields.List(fields.Str(required=False), required=False)
+    
 
 
 class CustomerRadiusSchema(BaseSchema):
@@ -1949,6 +2115,8 @@ class StoreRuleDataSchema(BaseSchema):
     
     sort = fields.List(fields.Str(required=False), required=False)
     
+    manual_priority = fields.List(fields.Str(required=False), required=False)
+    
     conditions = fields.Nested(StoreRuleConditionSchema, required=False)
     
     is_active = fields.Boolean(required=False)
@@ -1991,6 +2159,8 @@ class CreateStoreRuleRequestSchema(BaseSchema):
     
     store_priority = fields.List(fields.Nested(StorePrioritySchema, required=False), required=False)
     
+    manual_priority = fields.List(fields.Str(required=False), required=False)
+    
     sort = fields.List(fields.Str(required=False), required=False)
     
 
@@ -2012,6 +2182,8 @@ class StoreRuleResponseSchema(BaseSchema):
     store_priority = fields.List(fields.Nested(StorePrioritySchema, required=False), required=False)
     
     sort = fields.List(fields.Str(required=False), required=False)
+    
+    manual_priority = fields.List(fields.Str(required=False), required=False)
     
     conditions = fields.Nested(StoreRuleConditionSchema, required=False)
     
@@ -2036,6 +2208,8 @@ class StoreRuleUpdateResponseSchema(BaseSchema):
     store_priority = fields.List(fields.Nested(StorePrioritySchema, required=False), required=False)
     
     sort = fields.List(fields.Str(required=False), required=False)
+    
+    manual_priority = fields.List(fields.Str(required=False), required=False)
     
     conditions = fields.Nested(StoreRuleConditionSchema, required=False)
     

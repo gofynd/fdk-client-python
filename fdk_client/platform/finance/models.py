@@ -973,7 +973,7 @@ class InvoiceListingResponseItems(BaseSchema):
     # Finance swagger.json
 
     
-    amount = fields.Str(required=False)
+    amount = fields.Float(required=False)
     
     company = fields.Str(required=False)
     
@@ -1351,7 +1351,7 @@ class GetCnConfigResponseMeta(BaseSchema):
     # Finance swagger.json
 
     
-    reason = fields.Str(required=False)
+    reason = fields.Str(required=False, allow_none=True)
     
     source_channel = fields.List(fields.Str(required=False), required=False)
     
@@ -1659,17 +1659,17 @@ class InvoiceActivityLogsResponseData(BaseSchema):
     # Finance swagger.json
 
     
-    performed_by = fields.Str(required=False)
+    performed_by = fields.Str(required=False, allow_none=True)
     
     status = fields.Str(required=False)
     
-    reason = fields.Str(required=False)
+    reason = fields.Str(required=False, allow_none=True)
     
     is_resolved = fields.Boolean(required=False)
     
     retry_attempts = fields.Float(required=False)
     
-    max_retry_attempts = fields.Float(required=False)
+    max_retry_attempts = fields.Float(required=False, allow_none=True)
     
 
 

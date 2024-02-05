@@ -182,6 +182,10 @@ class NavigationReference(BaseSchema):
     pass
 
 
+class CronBasedScheduleSchema(BaseSchema):
+    pass
+
+
 class ConfigurationSchema(BaseSchema):
     pass
 
@@ -447,10 +451,6 @@ class CustomFieldDefinitionDetailResSchema(BaseSchema):
 
 
 class CustomDataDeleteSchema(BaseSchema):
-    pass
-
-
-class CustomFieldValue(BaseSchema):
     pass
 
 
@@ -1247,7 +1247,23 @@ class NavigationReference(BaseSchema):
     
     sort_order = fields.Int(required=False)
     
+    schedule = fields.Nested(CronBasedScheduleSchema, required=False)
+    
     sub_navigation = fields.List(fields.Nested(lambda: NavigationReference(exclude=('sub_navigation')), required=False), required=False)
+    
+
+
+class CronBasedScheduleSchema(BaseSchema):
+    # Content swagger.json
+
+    
+    enabled = fields.Boolean(required=False)
+    
+    cron = fields.Str(required=False)
+    
+    start = fields.Str(required=False)
+    
+    end = fields.Str(required=False)
     
 
 
@@ -2261,14 +2277,6 @@ class CustomDataDeleteSchema(BaseSchema):
     
 
 
-class CustomFieldValue(BaseSchema):
-    # Content swagger.json
-
-    
-    value = fields.Raw(required=False)
-    
-
-
 class CustomFieldSchema(BaseSchema):
     # Content swagger.json
 
@@ -2283,7 +2291,7 @@ class CustomFieldSchema(BaseSchema):
     
     creator = fields.Str(required=False)
     
-    value = fields.List(fields.Nested(CustomFieldValue, required=False), required=False)
+    value = fields.List(fields.Raw(required=False), required=False)
     
     resource_id = fields.Str(required=False)
     

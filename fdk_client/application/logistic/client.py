@@ -15,8 +15,6 @@ class Logistic:
     def __init__(self, config: ApplicationConfig):
         self._conf = config
         self._relativeUrls = {
-            "getPincodeCity": "/service/application/logistics/v1.0/pincode/{pincode}",
-            "getTatProduct": "/service/application/logistics/v1.0/",
             "getAllCountries": "/service/application/logistics/v1.0/country-list",
             "getPincodeZones": "/service/application/logistics/v1.0/pincode/zones",
             "getOptimalLocations": "/service/application/logistics/v1.0/reassign_stores",
@@ -34,95 +32,6 @@ class Logistic:
 
     async def updateUrls(self, urls):
         self._urls.update(urls)
-    
-    async def getPincodeCity(self, pincode=None, body="", request_headers:Dict={}):
-        """Get pincode data
-        :param pincode : A `pincode` contains a specific address of a location. : type string
-        """
-        payload = {}
-        
-        if pincode is not None:
-            payload["pincode"] = pincode
-
-        # Parameter validation
-        schema = LogisticValidator.getPincodeCity()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getPincodeCity"], proccessed_params="""{"required":[{"in":"path","name":"pincode","description":"A `pincode` contains a specific address of a location.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"pincode","description":"A `pincode` contains a specific address of a location.","schema":{"type":"string"},"required":true}]}""", pincode=pincode)
-        query_string = await create_query_string(pincode=pincode)
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPincodeCity"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/pincode/{pincode}", pincode=pincode), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import PincodeApiResponse
-            schema = PincodeApiResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getPincodeCity")
-                print(e)
-
-        return response
-    
-    async def getTatProduct(self, body="", request_headers:Dict={}):
-        """Get TAT data
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = LogisticValidator.getTatProduct()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import TATViewRequest
-        schema = TATViewRequest()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getTatProduct"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
-        query_string = await create_query_string()
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getTatProduct"]).netloc, "post", await create_url_without_domain("/service/application/logistics/v1.0/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import TATViewResponse
-            schema = TATViewResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getTatProduct")
-                print(e)
-
-        return response
     
     async def getAllCountries(self, body="", request_headers:Dict={}):
         """Get all countries

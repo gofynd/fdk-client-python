@@ -8513,7 +8513,7 @@ Get custom fields definitions
 
 ```python
 try:
-    result = await platformClient.content.getCustomFieldDefinitions(pageNo=pageNo, pageSize=pageSize, resource=resource, type=type, search=search)
+    result = await platformClient.content.getCustomFieldDefinitions(pageNo=pageNo, pageSize=pageSize, resources=resources, types=types, search=search)
     # use result
 except Exception as e:
     print(e)
@@ -8527,8 +8527,8 @@ except Exception as e:
 | --------- | -----  | -------- | ----------- | 
 | pageNo | String | yes |  |   
 | pageSize | String | yes |  |   
-| resource | String? | no |  |   
-| type | String? | no |  |   
+| resources | String? | no |  |   
+| types | String? | no |  |   
 | search | String? | no |  |  
 
 
@@ -11295,7 +11295,7 @@ Get custom fields definitions
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").content.getAppCustomFieldDefinitions(pageNo=pageNo, pageSize=pageSize, resource=resource, type=type, search=search)
+    result = await platformClient.application("<APPLICATION_ID>").content.getAppCustomFieldDefinitions(pageNo=pageNo, pageSize=pageSize, resources=resources, types=types, search=search)
     # use result
 except Exception as e:
     print(e)
@@ -11309,8 +11309,8 @@ except Exception as e:
 | --------- | -----  | -------- | ----------- | 
 | pageNo | String | yes |  |   
 | pageSize | String | yes |  |   
-| resource | String? | no |  |   
-| type | String? | no |  |   
+| resources | String? | no |  |   
+| types | String? | no |  |   
 | search | String? | no |  |  
 
 
@@ -14228,7 +14228,6 @@ Success. Get headers of custom object definition
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | page | [ActionPage](#ActionPage)? |  yes  |  |
- | popup | [ActionPage](#ActionPage)? |  yes  |  |
  | type | String? |  yes  |  |
 
 ---
@@ -14263,7 +14262,22 @@ Success. Get headers of custom object definition
  | active | Boolean? |  yes  |  |
  | display | String? |  yes  |  |
  | sortOrder | Int? |  yes  |  |
+ | schedule | [CronBasedScheduleSchema](#CronBasedScheduleSchema)? |  yes  |  |
  | subNavigation | ArrayList<[NavigationReference](#NavigationReference)>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [CronBasedScheduleSchema](#CronBasedScheduleSchema)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | enabled | Boolean? |  yes  |  |
+ | cron | String? |  yes  |  |
+ | start | String? |  yes  |  |
+ | end | String? |  yes  |  |
 
 ---
 
@@ -15244,17 +15258,6 @@ Success. Get headers of custom object definition
 
  
  
- #### [CustomFieldValue](#CustomFieldValue)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | value | Any? |  yes  |  |
-
----
-
-
- 
- 
  #### [CustomFieldSchema](#CustomFieldSchema)
 
  | Properties | Type | Nullable | Description |
@@ -15264,7 +15267,7 @@ Success. Get headers of custom object definition
  | key | String? |  yes  |  |
  | resource | String? |  yes  |  |
  | creator | String? |  yes  |  |
- | value | ArrayList<[CustomFieldValue](#CustomFieldValue)>? |  yes  |  |
+ | value | ArrayList<Any>? |  yes  |  |
  | resourceId | String? |  yes  |  |
  | type | String? |  yes  |  |
  | multiValue | Boolean? |  yes  |  |

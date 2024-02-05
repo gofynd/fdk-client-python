@@ -36,6 +36,10 @@ class CompleteResponse(BaseSchema):
     pass
 
 
+class ProxyResponse(BaseSchema):
+    pass
+
+
 class DestinationNamespace(BaseSchema):
     pass
 
@@ -387,6 +391,16 @@ class CompleteResponse(BaseSchema):
     
 
 
+class ProxyResponse(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    data = fields.Dict(required=False)
+    
+    support = fields.Dict(required=False)
+    
+
+
 class DestinationNamespace(BaseSchema):
     # FileStorage swagger.json
 
@@ -452,6 +466,8 @@ class InvoiceTypesDataResponse(BaseSchema):
     __v = fields.Int(required=False)
     
     visibility = fields.Boolean(required=False)
+    
+    store_os = fields.Boolean(required=False)
     
     country_code = fields.Str(required=False)
     

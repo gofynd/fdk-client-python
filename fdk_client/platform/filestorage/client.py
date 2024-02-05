@@ -273,7 +273,7 @@ This operation will return the url for the uploaded file.
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/assets/v1.0/company/{self._conf.companyId}/proxy", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"},"examples":{"success":{"value":2}}},{"name":"url","in":"query","description":"url","required":true,"schema":{"type":"string"},"examples":{"success":{"value":"https://hdn-1.fynd.com/platform/pictures/free-logo/original/7qdHNTFe--platform-logo.png"},"failure":{"value":"platform/pictures/free-logo/original/7qdHNTFe--platform-logo.png"}}}],"optional":[],"query":[{"name":"url","in":"query","description":"url","required":true,"schema":{"type":"string"},"examples":{"success":{"value":"https://hdn-1.fynd.com/platform/pictures/free-logo/original/7qdHNTFe--platform-logo.png"},"failure":{"value":"platform/pictures/free-logo/original/7qdHNTFe--platform-logo.png"}}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"},"examples":{"success":{"value":2}}}]}""", url=url)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/assets/v1.0/company/{self._conf.companyId}/proxy", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"},"examples":{"success":{"value":2}}},{"name":"url","in":"query","description":"url","required":true,"schema":{"type":"string"},"examples":{"success":{"value":"https://reqres.in/api/users/2"},"failure":{"value":"platform/pictures/free-logo/original/7qdHNTFe--platform-logo.png"}}}],"optional":[],"query":[{"name":"url","in":"query","description":"url","required":true,"schema":{"type":"string"},"examples":{"success":{"value":"https://reqres.in/api/users/2"},"failure":{"value":"platform/pictures/free-logo/original/7qdHNTFe--platform-logo.png"}}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"},"examples":{"success":{"value":2}}}]}""", url=url)
         query_string = await create_query_string(url=url)
 
         headers = {}
@@ -289,6 +289,15 @@ This operation will return the url for the uploaded file.
                 exclude_headers.append(key)
 
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/proxy", url=url), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProxyResponse
+            schema = ProxyResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for proxy")
+                print(e)
 
         return response
     

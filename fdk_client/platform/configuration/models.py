@@ -588,6 +588,10 @@ class OrderFeature(BaseSchema):
     pass
 
 
+class BuyboxFeature(BaseSchema):
+    pass
+
+
 class AppFeatureRequest(BaseSchema):
     pass
 
@@ -637,6 +641,10 @@ class InvalidPayloadRequest(BaseSchema):
 
 
 class InventoryBrandRule(BaseSchema):
+    pass
+
+
+class PricingStrategy(BaseSchema):
     pass
 
 
@@ -848,6 +856,8 @@ class AppInventoryConfig(BaseSchema):
     price = fields.Nested(InventoryPrice, required=False)
     
     discount = fields.Nested(InventoryDiscount, required=False)
+    
+    pricing_strategy = fields.Nested(PricingStrategy, required=False)
     
     out_of_stock = fields.Boolean(required=False)
     
@@ -1955,6 +1965,8 @@ class InventoryConfig(BaseSchema):
     
     only_verified_products = fields.Boolean(required=False)
     
+    pricing_strategy = fields.Nested(PricingStrategy, required=False)
+    
 
 
 class AppInventory(BaseSchema):
@@ -2541,6 +2553,8 @@ class AppFeature(BaseSchema):
     
     order = fields.Nested(OrderFeature, required=False)
     
+    buybox = fields.Nested(BuyboxFeature, required=False)
+    
     _id = fields.Str(required=False)
     
     app = fields.Str(required=False)
@@ -2700,6 +2714,18 @@ class OrderFeature(BaseSchema):
 
     
     buy_again = fields.Boolean(required=False)
+    
+
+
+class BuyboxFeature(BaseSchema):
+    # Configuration swagger.json
+
+    
+    show_name = fields.Boolean(required=False)
+    
+    enable_selection = fields.Boolean(required=False)
+    
+    is_seller_buybox_enabled = fields.Boolean(required=False)
     
 
 
@@ -2896,6 +2922,16 @@ class InventoryBrandRule(BaseSchema):
     criteria = fields.Str(required=False)
     
     brands = fields.List(fields.Int(required=False), required=False)
+    
+
+
+class PricingStrategy(BaseSchema):
+    # Configuration swagger.json
+
+    
+    is_active = fields.Boolean(required=False)
+    
+    value = fields.Str(required=False)
     
 
 

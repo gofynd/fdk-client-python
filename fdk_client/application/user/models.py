@@ -204,14 +204,6 @@ class SendEmailVerifyLinkSuccess(BaseSchema):
     pass
 
 
-class AuthenticationInternalServerErrorSchema(BaseSchema):
-    pass
-
-
-class AuthenticationApiErrorSchema(BaseSchema):
-    pass
-
-
 class APIError(BaseSchema):
     pass
 
@@ -397,6 +389,8 @@ class EditProfileRequestSchema(BaseSchema):
     # User swagger.json
 
     
+    ci = fields.Boolean(required=False)
+    
     first_name = fields.Str(required=False)
     
     last_name = fields.Str(required=False)
@@ -506,6 +500,8 @@ class VerifyMobileForgotOtpRequestSchema(BaseSchema):
 class SendMobileOtpRequestSchema(BaseSchema):
     # User swagger.json
 
+    
+    ci = fields.Boolean(required=False)
     
     mobile = fields.Str(required=False)
     
@@ -624,6 +620,8 @@ class PasswordLoginRequestSchema(BaseSchema):
 class SendOtpRequestSchema(BaseSchema):
     # User swagger.json
 
+    
+    ci = fields.Boolean(required=False)
     
     country_code = fields.Str(required=False)
     
@@ -847,7 +845,7 @@ class HasPasswordSuccess(BaseSchema):
     # User swagger.json
 
     
-    result = fields.Boolean(required=False)
+    result = fields.Int(required=False)
     
 
 
@@ -895,6 +893,8 @@ class EmailOtpSuccess(BaseSchema):
     
     success = fields.Boolean(required=False)
     
+    resend_email_token = fields.Str(required=False)
+    
 
 
 class SessionListSuccess(BaseSchema):
@@ -941,22 +941,6 @@ class SendEmailVerifyLinkSuccess(BaseSchema):
     
 
 
-class AuthenticationInternalServerErrorSchema(BaseSchema):
-    # User swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-
-
-class AuthenticationApiErrorSchema(BaseSchema):
-    # User swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-
-
 class APIError(BaseSchema):
     # User swagger.json
 
@@ -969,7 +953,11 @@ class APIError(BaseSchema):
     
     request_id = fields.Str(required=False)
     
+    error = fields.Str(required=False)
+    
     meta = fields.Dict(required=False)
+    
+    authenticated = fields.Boolean(required=False)
     
 
 
@@ -1075,17 +1063,19 @@ class PlatformSchema(BaseSchema):
     
     register = fields.Boolean(required=False)
     
-    mobile_image = fields.Str(required=False)
+    mobile_image = fields.Str(required=False, allow_none=True)
     
-    desktop_image = fields.Str(required=False)
+    desktop_image = fields.Str(required=False, allow_none=True)
     
     delete_account_day = fields.Int(required=False)
     
     delete_account_reasons = fields.List(fields.Nested(DeleteAccountReasons, required=False), required=False)
     
-    delete_account_consent = fields.Dict(required=False)
+    delete_account_consent = fields.Nested(DeleteAccountConsent, required=False)
     
-    session_config = fields.Dict(required=False)
+    session_config = fields.Nested(SessionExpiry, required=False)
+    
+    __v = fields.Int(required=False)
     
 
 
@@ -1209,7 +1199,7 @@ class SocialTokens(BaseSchema):
     
     facebook = fields.Nested(Facebook, required=False)
     
-    account_kit = fields.Nested(Accountkit, required=False)
+    accountkit = fields.Nested(Accountkit, required=False)
     
     google = fields.Nested(Google, required=False)
     
@@ -1289,7 +1279,7 @@ class UserSchema(BaseSchema):
     
     emails = fields.List(fields.Nested(Email, required=False), required=False)
     
-    gender = fields.Str(required=False)
+    gender = fields.Str(required=False, allow_none=True)
     
     dob = fields.Str(required=False)
     
