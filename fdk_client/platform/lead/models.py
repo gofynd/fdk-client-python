@@ -10,18 +10,6 @@ from .enums import *
 
 
 
-class GeneralConfigResponse(BaseSchema):
-    pass
-
-
-class SupportCommunicationSchema(BaseSchema):
-    pass
-
-
-class GeneralConfigIntegrationSchema(BaseSchema):
-    pass
-
-
 class TicketList(BaseSchema):
     pass
 
@@ -183,42 +171,6 @@ class ErrorMessage(BaseSchema):
 
 
 
-
-
-class GeneralConfigResponse(BaseSchema):
-    # Lead swagger.json
-
-    
-    support_communication = fields.List(fields.Nested(SupportCommunicationSchema, required=False), required=False)
-    
-    type = fields.Str(required=False)
-    
-    integration = fields.Nested(GeneralConfigIntegrationSchema, required=False)
-    
-    available_integration = fields.List(fields.Str(required=False), required=False)
-    
-
-
-class SupportCommunicationSchema(BaseSchema):
-    # Lead swagger.json
-
-    
-    type = fields.Str(required=False)
-    
-    title = fields.Str(required=False)
-    
-    description = fields.Str(required=False)
-    
-    enabled = fields.Boolean(required=False)
-    
-
-
-class GeneralConfigIntegrationSchema(BaseSchema):
-    # Lead swagger.json
-
-    
-    type = fields.Str(required=False)
-    
 
 
 class TicketList(BaseSchema):
@@ -457,7 +409,7 @@ class UserSchema(BaseSchema):
     
     emails = fields.List(fields.Nested(Email, required=False), required=False)
     
-    gender = fields.Str(required=False, allow_none=True)
+    gender = fields.Str(required=False)
     
     dob = fields.Str(required=False)
     
@@ -699,7 +651,7 @@ class TicketCategory(BaseSchema):
     
     key = fields.Str(required=False)
     
-    sub_categories = fields.List(fields.Nested(lambda: TicketCategory(exclude=('sub_categories')), required=False), required=False)
+    sub_categories = fields.Nested(lambda: TicketCategory(exclude=('sub_categories')), required=False)
     
     group_id = fields.Float(required=False)
     

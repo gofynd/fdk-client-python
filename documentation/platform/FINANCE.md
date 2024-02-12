@@ -3050,7 +3050,7 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | amount | Double? |  yes  |  |
+ | amount | String? |  yes  |  |
  | company | String? |  yes  |  |
  | status | String? |  yes  |  |
  | dueDate | String? |  yes  |  |

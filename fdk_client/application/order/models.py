@@ -100,10 +100,6 @@ class FulfillingCompany(BaseSchema):
     pass
 
 
-class Article(BaseSchema):
-    pass
-
-
 class DeliveryAddress(BaseSchema):
     pass
 
@@ -249,10 +245,6 @@ class ShipmentsRequest(BaseSchema):
 
 
 class StatuesRequest(BaseSchema):
-    pass
-
-
-class OrderRequest(BaseSchema):
     pass
 
 
@@ -717,8 +709,6 @@ class Bags(BaseSchema):
     
     current_status = fields.Nested(CurrentStatus, required=False)
     
-    article = fields.Nested(Article, required=False)
-    
 
 
 class FulfillingCompany(BaseSchema):
@@ -728,14 +718,6 @@ class FulfillingCompany(BaseSchema):
     id = fields.Int(required=False)
     
     name = fields.Str(required=False)
-    
-
-
-class Article(BaseSchema):
-    # Order swagger.json
-
-    
-    tags = fields.List(fields.Str(required=False), required=False)
     
 
 
@@ -870,8 +852,6 @@ class Shipments(BaseSchema):
     return_meta = fields.Dict(required=False)
     
     delivery_date = fields.Str(required=False, allow_none=True)
-    
-    order = fields.Nested(OrderRequest, required=False)
     
 
 
@@ -1284,14 +1264,6 @@ class StatuesRequest(BaseSchema):
     exclude_bags_next_state = fields.Str(required=False)
     
     status = fields.Str(required=False)
-    
-
-
-class OrderRequest(BaseSchema):
-    # Order swagger.json
-
-    
-    meta = fields.Dict(required=False)
     
 
 

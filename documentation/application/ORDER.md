@@ -219,13 +219,6 @@ Success. Check the example shown below or refer `OrderById` for more details.
     "shipments": [
       {
         "order_id": "FY632D541F01152493D0",
-        "order": {
-          "meta": {
-            "custom_cart_id": "652ce6972512f05477a32547",
-            "name": "Universal/Smart Bazar/Fresh Cart",
-            "slug": "universal/smart-bazar/fresh-cart"
-          }
-        },
         "breakup_values": [
           {
             "name": "mrp_total",
@@ -494,14 +487,7 @@ Success. Check the example shown below or refer `OrderById` for more details.
             "can_cancel": true,
             "can_return": false,
             "delivery_date": null,
-            "returnable_date": null,
-            "article": [
-              {
-                "tags": [
-                  "1P"
-                ]
-              }
-            ]
+            "returnable_date": null
           }
         ],
         "size_info": {
@@ -1526,13 +1512,6 @@ Success. Check the example shown below or refer `ShipmentById` for more details.
 {
   "shipment": {
     "order_id": "FY62F3B8290150D13E36",
-    "order": {
-      "meta": {
-        "custom_cart_id": "652ce6972512f05477a32547",
-        "name": "Universal/Smart Bazar/Fresh Cart",
-        "slug": "universal/smart-bazar/fresh-cart"
-      }
-    },
     "breakup_values": [
       {
         "name": "mrp_total",
@@ -1751,14 +1730,7 @@ Success. Check the example shown below or refer `ShipmentById` for more details.
           31
         ],
         "can_cancel": false,
-        "can_return": false,
-        "article": [
-          {
-            "tags": [
-              "1P"
-            ]
-          }
-        ]
+        "can_return": false
       }
     ],
     "size_info": {
@@ -2939,7 +2911,6 @@ Successfully updateShipmentStatus!
  | currencyCode | String? |  yes  |  |
  | sellerIdentifier | String? |  yes  |  |
  | currentStatus | [CurrentStatus](#CurrentStatus)? |  yes  |  |
- | article | [Article](#Article)? |  yes  |  |
 
 ---
 
@@ -2952,17 +2923,6 @@ Successfully updateShipmentStatus!
  | ---------- | ---- | -------- | ----------- |
  | id | Int? |  yes  |  |
  | name | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [Article](#Article)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | tags | ArrayList<String>? |  yes  |  |
 
 ---
 
@@ -3044,7 +3004,6 @@ Successfully updateShipmentStatus!
  | needHelpUrl | String? |  yes  |  |
  | returnMeta | HashMap<String,Any>? |  yes  |  |
  | deliveryDate | String? |  yes  |  |
- | order | [OrderRequest](#OrderRequest)? |  yes  |  |
 
 ---
 
@@ -3496,17 +3455,6 @@ Successfully updateShipmentStatus!
  | shipments | ArrayList<[ShipmentsRequest](#ShipmentsRequest)>? |  yes  |  |
  | excludeBagsNextState | String? |  yes  |  |
  | status | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [OrderRequest](#OrderRequest)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | meta | HashMap<String,Any>? |  yes  |  |
 
 ---
 

@@ -142,9 +142,9 @@ class ContentValidator:
         
         page_size = fields.Str(required=False)
         
-        resources = fields.Str(required=False)
+        resource = fields.Str(required=False)
         
-        types = fields.Str(required=False)
+        type = fields.Str(required=False)
         
         search = fields.Str(required=False)
          

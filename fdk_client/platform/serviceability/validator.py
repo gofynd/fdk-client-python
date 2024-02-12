@@ -43,10 +43,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
-        
-        
         
         
         
@@ -151,6 +147,9 @@ from ..PlatformModel import BaseSchema
     
     
         
+        
+    
+    
         
 
 
@@ -173,7 +172,7 @@ class ServiceabilityValidator:
         
         q = fields.Str(required=False)
         
-        country = fields.Str(required=False)
+        country_iso_code = fields.Str(required=False)
         
         state = fields.Str(required=False)
         
@@ -217,13 +216,6 @@ class ServiceabilityValidator:
          
         
     
-    class getOptimalLocations(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
     class createCourierPartnerAccount(BaseSchema):
         
         
@@ -245,8 +237,6 @@ class ServiceabilityValidator:
         payment_mode = fields.Str(required=False)
         
         transport_type = fields.Str(required=False)
-        
-        account_ids = fields.List(fields.Str(required=False), required=False)
          
         
     
@@ -465,6 +455,13 @@ class ServiceabilityValidator:
         company_id = fields.Int(required=False)
         
         package_material_id = fields.Str(required=False)
+         
+        
+    
+    class getOptimalLocations(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
          
         
     

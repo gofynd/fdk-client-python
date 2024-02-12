@@ -108,25 +108,6 @@ from ..ApplicationModel import BaseSchema
     
         
     
-    
-    
-        
-    
-    
-        
-        
-        
-    
-    
-    
-        
-        
-    
-    
-        
-        
-        
-    
 
 class PaymentValidator:
     
@@ -230,7 +211,7 @@ class PaymentValidator:
          
         
     
-    class walletLinkInitate(BaseSchema):
+    class walletLinkInitiate(BaseSchema):
         
         pass 
         
@@ -429,54 +410,6 @@ class PaymentValidator:
         
     
     class createPaymentOrder(BaseSchema):
-        
-        pass 
-        
-    
-    class deleteBeneficiaryDetails(BaseSchema):
-        
-        
-        beneficiary_id = fields.Str(required=False)
-         
-        
-    
-    class getRefundOptions(BaseSchema):
-        
-        
-        configuration = fields.Str(required=False)
-        
-        product_type = fields.Str(required=False)
-        
-        amount = fields.Str(required=False)
-         
-        
-    
-    class setRefundOptionforShipment(BaseSchema):
-        
-        pass 
-        
-    
-    class getSelectedRefundOption(BaseSchema):
-        
-        
-        shipment_id = fields.Str(required=False)
-        
-        order_id = fields.Str(required=False)
-         
-        
-    
-    class getUserBeneficiariesDetailV2(BaseSchema):
-        
-        
-        order_id = fields.Str(required=False)
-        
-        shipment_id = fields.Str(required=False)
-        
-        mop = fields.Str(required=False)
-         
-        
-    
-    class validateBeneficiaryAddress(BaseSchema):
         
         pass 
         

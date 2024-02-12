@@ -55,221 +55,6 @@ class Order:
 
         return response
     
-    async def postRefundStateConfiguration(self, app_id=None, body="", request_headers:Dict={}):
-        """Refund State Configuration
-        :param app_id :  : type string
-        """
-        payload = {}
-        
-        if app_id is not None:
-            payload["app_id"] = app_id
-
-        # Parameter validation
-        schema = OrderValidator.postRefundStateConfiguration()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import PostRefundStateConfiguration
-        schema = PostRefundStateConfiguration()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/refund/states/config", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"query","name":"app_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"in":"query","name":"app_id","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", app_id=app_id)
-        query_string = await create_query_string(app_id=app_id)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/refund/states/config", app_id=app_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import PostRefundStateConfigurationResponse
-            schema = PostRefundStateConfigurationResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for postRefundStateConfiguration")
-                print(e)
-
-        return response
-    
-    async def getRefundStateConfiguration(self, app_id=None, request_headers:Dict={}):
-        """Refund State Configuration
-        :param app_id :  : type string
-        """
-        payload = {}
-        
-        if app_id is not None:
-            payload["app_id"] = app_id
-
-        # Parameter validation
-        schema = OrderValidator.getRefundStateConfiguration()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/refund/states/config", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"query","name":"app_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"in":"query","name":"app_id","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", app_id=app_id)
-        query_string = await create_query_string(app_id=app_id)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/refund/states/config", app_id=app_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import GetRefundStateConfigurationResponse
-            schema = GetRefundStateConfigurationResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getRefundStateConfiguration")
-                print(e)
-
-        return response
-    
-    async def getRefundEnableStateList(self, request_headers:Dict={}):
-        """Refund State Configuration
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = OrderValidator.getRefundEnableStateList()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/refund/states", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", )
-        query_string = await create_query_string()
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/refund/states", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import GetRefundStates
-            schema = GetRefundStates()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getRefundEnableStateList")
-                print(e)
-
-        return response
-    
-    async def postRefundConfiguration(self, app_id=None, body="", request_headers:Dict={}):
-        """refund configuration.
-        :param app_id :  : type string
-        """
-        payload = {}
-        
-        if app_id is not None:
-            payload["app_id"] = app_id
-
-        # Parameter validation
-        schema = OrderValidator.postRefundConfiguration()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import RefundStateConfigurationManualSchema
-        schema = RefundStateConfigurationManualSchema()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/refund/config", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"query","name":"app_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"in":"query","name":"app_id","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", app_id=app_id)
-        query_string = await create_query_string(app_id=app_id)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/refund/config", app_id=app_id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import RefundStateConfigurationManualSchemaResponse
-            schema = RefundStateConfigurationManualSchemaResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for postRefundConfiguration")
-                print(e)
-
-        return response
-    
-    async def getRefundConfiguration(self, app_id=None, request_headers:Dict={}):
-        """refund configuration.
-        :param app_id :  : type string
-        """
-        payload = {}
-        
-        if app_id is not None:
-            payload["app_id"] = app_id
-
-        # Parameter validation
-        schema = OrderValidator.getRefundConfiguration()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/refund/config", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"query","name":"app_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"in":"query","name":"app_id","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", app_id=app_id)
-        query_string = await create_query_string(app_id=app_id)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/refund/config", app_id=app_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import RefundStateConfigurationManualSchemaResponse
-            schema = RefundStateConfigurationManualSchemaResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getRefundConfiguration")
-                print(e)
-
-        return response
-    
     async def reassignLocation(self, body="", request_headers:Dict={}):
         """Reassign Location
         """
@@ -2025,6 +1810,52 @@ class Order:
 
         return response
     
+    async def generateInvoiceID(self, invoice_type=None, body="", request_headers:Dict={}):
+        """This API is used to manually generate Invoice ID against shipments.
+        :param invoice_type : mention the type of invoice id to generate : type string
+        """
+        payload = {}
+        
+        if invoice_type is not None:
+            payload["invoice_type"] = invoice_type
+
+        # Parameter validation
+        schema = OrderValidator.generateInvoiceID()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import GenerateInvoiceIDRequest
+        schema = GenerateInvoiceIDRequest()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/{invoice_type}/id/generate", """{"required":[{"in":"path","name":"company_id","description":"company id from where are transitioning the shipment state or data","required":true,"schema":{"type":"integer"}},{"in":"path","name":"invoice_type","description":"mention the type of invoice id to generate","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"company id from where are transitioning the shipment state or data","required":true,"schema":{"type":"integer"}},{"in":"path","name":"invoice_type","description":"mention the type of invoice id to generate","required":true,"schema":{"type":"string"}}]}""", invoice_type=invoice_type)
+        query_string = await create_query_string(invoice_type=invoice_type)
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/{invoice_type}/id/generate", invoice_type=invoice_type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GenerateInvoiceIDResponse
+            schema = GenerateInvoiceIDResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for generateInvoiceID")
+                print(e)
+
+        return response
+    
     async def failedOrderLogDetails(self, log_id=None, request_headers:Dict={}):
         """This endpoint allows users to get the exact error trace from the log id provided
         :param log_id : Log Error ID : type string
@@ -2492,218 +2323,6 @@ class Order:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getOrders")
-                print(e)
-
-        return response
-    
-    async def getuserviews(self, request_headers:Dict={}):
-        """Get User views(User cross company views)
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = OrderValidator.getuserviews()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/views", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}]}""", )
-        query_string = await create_query_string()
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/views", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import UserViewsResponse
-            schema = UserViewsResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getuserviews")
-                print(e)
-
-        return response
-    
-    async def postuserviews(self, body="", request_headers:Dict={}):
-        """Add User views(User cross company views)
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = OrderValidator.postuserviews()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import UserViewsResponse
-        schema = UserViewsResponse()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/views", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}]}""", )
-        query_string = await create_query_string()
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/views", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import CreateUpdateDeleteResponse
-            schema = CreateUpdateDeleteResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for postuserviews")
-                print(e)
-
-        return response
-    
-    async def updateuserviews(self, body="", request_headers:Dict={}):
-        """Update User views(User cross company views)
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = OrderValidator.updateuserviews()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import UserViewsResponse
-        schema = UserViewsResponse()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/views", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}]}""", )
-        query_string = await create_query_string()
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/views", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import CreateUpdateDeleteResponse
-            schema = CreateUpdateDeleteResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updateuserviews")
-                print(e)
-
-        return response
-    
-    async def deleteuserviews(self, id=None, request_headers:Dict={}):
-        """Delete User views(User cross company views)
-        :param id : Id of view : type string
-        """
-        payload = {}
-        
-        if id is not None:
-            payload["id"] = id
-
-        # Parameter validation
-        schema = OrderValidator.deleteuserviews()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/views/{id}", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}},{"in":"path","name":"id","description":"Id of view","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}},{"in":"path","name":"id","description":"Id of view","required":true,"schema":{"type":"string"}}]}""", id=id)
-        query_string = await create_query_string(id=id)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/views/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import CreateUpdateDeleteResponse
-            schema = CreateUpdateDeleteResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for deleteuserviews")
-                print(e)
-
-        return response
-    
-    async def globalfilters(self, show_in=None, request_source=None, request_headers:Dict={}):
-        """Get Global Filters
-        :param show_in : Name of view to get filters for : type string
-        :param request_source : Name of site (Platform/Admin) : type string
-        """
-        payload = {}
-        
-        if show_in is not None:
-            payload["show_in"] = show_in
-        if request_source is not None:
-            payload["request_source"] = request_source
-
-        # Parameter validation
-        schema = OrderValidator.globalfilters()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/filters", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}},{"in":"query","name":"show_in","description":"Name of view to get filters for","required":true,"schema":{"type":"string","enum":["shipment_view","order_view","bulk_view","manifest_view"]}},{"in":"query","name":"request_source","description":"Name of site (Platform/Admin)","required":true,"schema":{"type":"string","enum":["platform","admin"]}}],"optional":[],"query":[{"in":"query","name":"show_in","description":"Name of view to get filters for","required":true,"schema":{"type":"string","enum":["shipment_view","order_view","bulk_view","manifest_view"]}},{"in":"query","name":"request_source","description":"Name of site (Platform/Admin)","required":true,"schema":{"type":"string","enum":["platform","admin"]}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}]}""", show_in=show_in, request_source=request_source)
-        query_string = await create_query_string(show_in=show_in, request_source=request_source)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/filters", show_in=show_in, request_source=request_source), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import GlobalFiltersResponse
-            schema = GlobalFiltersResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for globalfilters")
                 print(e)
 
         return response

@@ -485,15 +485,6 @@ class User:
 
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["sendResetPasswordMobile"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/login/password/mobile/reset", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ResetPasswordSuccess
-            schema = ResetPasswordSuccess()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for sendResetPasswordMobile")
-                print(e)
-
         return response
     
     async def sendResetToken(self, body="", request_headers:Dict={}):

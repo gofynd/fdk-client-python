@@ -29,14 +29,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
-        
-        
-    
-    
-        
-        
         
     
     
@@ -57,15 +49,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
-        
-        
-    
-    
-        
-        
-    
-    
         
         
         
@@ -73,7 +56,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
     
     
         
@@ -81,7 +63,6 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
         
         
         
@@ -92,11 +73,7 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
-        
         
-    
-    
         
         
         
@@ -121,15 +98,10 @@ from ..PlatformModel import BaseSchema
     
     
         
-        
-        
-    
-    
         
         
     
     
-        
         
         
     
@@ -231,10 +203,8 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
     
     
-        
         
         
         
@@ -249,10 +219,8 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
     
     
-        
         
         
         
@@ -262,7 +230,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
     
     
         
@@ -365,7 +332,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
     
     
         
@@ -397,7 +363,6 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
         
         
         
@@ -443,24 +408,6 @@ class CartValidator:
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
-         
-        
-    
-    class getCouponTags(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Int(required=False)
-         
-        
-    
-    class getPromotionTags(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Int(required=False)
          
         
     
@@ -577,17 +524,6 @@ class CartValidator:
          
         
     
-    class getCartMetaConfig(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        cart_meta_id = fields.Str(required=False)
-         
-        
-    
     class updateCartMetaConfig(BaseSchema):
         
         
@@ -599,29 +535,7 @@ class CartValidator:
          
         
     
-    class upateCartMetaActiveStatus(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        cart_meta_id = fields.Str(required=False)
-         
-        
-    
-    class deleteCartMetaConfig(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        cart_meta_id = fields.Str(required=False)
-         
-        
-    
-    class getCartMetaConfigs(BaseSchema):
+    class fetchCartMetaConfig(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -667,17 +581,6 @@ class CartValidator:
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
-         
-        
-    
-    class getPriceAdjustments(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        cart_id = fields.Str(required=False)
          
         
     
@@ -893,8 +796,6 @@ class CartValidator:
         assign_card_id = fields.Int(required=False)
         
         buy_now = fields.Boolean(required=False)
-        
-        cart_type = fields.Str(required=False)
          
         
     
@@ -912,8 +813,6 @@ class CartValidator:
         buy_now = fields.Boolean(required=False)
         
         id = fields.Str(required=False)
-        
-        cart_type = fields.Str(required=False)
          
         
     
@@ -931,8 +830,6 @@ class CartValidator:
         b = fields.Boolean(required=False)
         
         buy_now = fields.Boolean(required=False)
-        
-        cart_type = fields.Str(required=False)
          
         
     
@@ -944,8 +841,6 @@ class CartValidator:
         application_id = fields.Str(required=False)
         
         id = fields.Str(required=False)
-        
-        cart_type = fields.Str(required=False)
          
         
     
@@ -959,8 +854,6 @@ class CartValidator:
         id = fields.Str(required=False)
         
         buy_now = fields.Boolean(required=False)
-        
-        cart_type = fields.Str(required=False)
          
         
     
@@ -1178,8 +1071,6 @@ class CartValidator:
         application_id = fields.Str(required=False)
         
         id = fields.Str(required=False)
-        
-        cart_type = fields.Str(required=False)
          
         
     
@@ -1253,8 +1144,6 @@ class CartValidator:
         application_id = fields.Str(required=False)
         
         id = fields.Str(required=False)
-        
-        cart_type = fields.Str(required=False)
          
         
     

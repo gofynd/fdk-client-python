@@ -3382,12 +3382,12 @@ class Content:
 
         return response
     
-    async def getAppCustomFieldDefinitions(self, page_no=None, page_size=None, resources=None, types=None, search=None, request_headers:Dict={}):
+    async def getAppCustomFieldDefinitions(self, page_no=None, page_size=None, resource=None, type=None, search=None, request_headers:Dict={}):
         """Use this API to retrieve the definitions of custom fields.
         :param page_no :  : type string
         :param page_size :  : type string
-        :param resources :  : type string
-        :param types :  : type string
+        :param resource :  : type string
+        :param type :  : type string
         :param search :  : type string
         """
         payload = {}
@@ -3396,10 +3396,10 @@ class Content:
             payload["page_no"] = page_no
         if page_size is not None:
             payload["page_size"] = page_size
-        if resources is not None:
-            payload["resources"] = resources
-        if types is not None:
-            payload["types"] = types
+        if resource is not None:
+            payload["resource"] = resource
+        if type is not None:
+            payload["type"] = type
         if search is not None:
             payload["search"] = search
 
@@ -3408,8 +3408,8 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/metafields/definitions", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"},"examples":{"success":{"value":1},"failure":{"value":10},"success1":{"value":1},"success2":{"value":2},"duplicateFieldExample":{"value":11},"validationErrorExample":{"value":12},"failure2":{"value":10}}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"},"examples":{"success":{"value":"5eda528b97457fe43a733ace"},"failure":{"value":"5eda528b97457fe43a733acd"}}},{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"},"examples":{"success":{"value":1},"failure":{"value":1}}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"},"examples":{"success":{"value":10},"failure":{"value":10}}}],"optional":[{"name":"resources","in":"query","required":false,"schema":{"type":"string","description":"This is the resource for which we are fetching definitions"},"examples":{"success":{"value":"product"},"failure":{"value":"some"}}},{"name":"types","in":"query","required":false,"schema":{"type":"string","description":"This is the type of the custom fields definitions"},"examples":{"success":{"value":"string_single_line"},"failure":{"value":"string_single"}}},{"name":"search","in":"query","required":false,"schema":{"type":"string","description":"This is the search text to filter custom fields definitions"},"examples":{"success":{"value":"sometext"},"failure":{"value":"sometext"}}}],"query":[{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"},"examples":{"success":{"value":1},"failure":{"value":1}}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"},"examples":{"success":{"value":10},"failure":{"value":10}}},{"name":"resources","in":"query","required":false,"schema":{"type":"string","description":"This is the resource for which we are fetching definitions"},"examples":{"success":{"value":"product"},"failure":{"value":"some"}}},{"name":"types","in":"query","required":false,"schema":{"type":"string","description":"This is the type of the custom fields definitions"},"examples":{"success":{"value":"string_single_line"},"failure":{"value":"string_single"}}},{"name":"search","in":"query","required":false,"schema":{"type":"string","description":"This is the search text to filter custom fields definitions"},"examples":{"success":{"value":"sometext"},"failure":{"value":"sometext"}}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"},"examples":{"success":{"value":1},"failure":{"value":10},"success1":{"value":1},"success2":{"value":2},"duplicateFieldExample":{"value":11},"validationErrorExample":{"value":12},"failure2":{"value":10}}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"},"examples":{"success":{"value":"5eda528b97457fe43a733ace"},"failure":{"value":"5eda528b97457fe43a733acd"}}}]}""", page_no=page_no, page_size=page_size, resources=resources, types=types, search=search)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, resources=resources, types=types, search=search)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/metafields/definitions", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"},"examples":{"success":{"value":1},"failure":{"value":10},"success1":{"value":1},"success2":{"value":2},"duplicateFieldExample":{"value":11},"validationErrorExample":{"value":12},"failure2":{"value":10}}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"},"examples":{"success":{"value":"5eda528b97457fe43a733ace"},"failure":{"value":"5eda528b97457fe43a733acd"}}},{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"},"examples":{"success":{"value":1},"failure":{"value":1}}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"},"examples":{"success":{"value":10},"failure":{"value":10}}}],"optional":[{"name":"resource","in":"query","required":false,"schema":{"type":"string","description":"This is the resource for which we are fetching definitions"},"examples":{"success":{"value":"product"},"failure":{"value":"some"}}},{"name":"type","in":"query","required":false,"schema":{"type":"string","description":"This is the type of the custom fields definitions"},"examples":{"success":{"value":"string_single_line"},"failure":{"value":"string_single"}}},{"name":"search","in":"query","required":false,"schema":{"type":"string","description":"This is the search text to filter custom fields definitions"},"examples":{"success":{"value":"sometext"},"failure":{"value":"sometext"}}}],"query":[{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"},"examples":{"success":{"value":1},"failure":{"value":1}}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"},"examples":{"success":{"value":10},"failure":{"value":10}}},{"name":"resource","in":"query","required":false,"schema":{"type":"string","description":"This is the resource for which we are fetching definitions"},"examples":{"success":{"value":"product"},"failure":{"value":"some"}}},{"name":"type","in":"query","required":false,"schema":{"type":"string","description":"This is the type of the custom fields definitions"},"examples":{"success":{"value":"string_single_line"},"failure":{"value":"string_single"}}},{"name":"search","in":"query","required":false,"schema":{"type":"string","description":"This is the search text to filter custom fields definitions"},"examples":{"success":{"value":"sometext"},"failure":{"value":"sometext"}}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"},"examples":{"success":{"value":1},"failure":{"value":10},"success1":{"value":1},"success2":{"value":2},"duplicateFieldExample":{"value":11},"validationErrorExample":{"value":12},"failure2":{"value":10}}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"},"examples":{"success":{"value":"5eda528b97457fe43a733ace"},"failure":{"value":"5eda528b97457fe43a733acd"}}}]}""", page_no=page_no, page_size=page_size, resource=resource, type=type, search=search)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, resource=resource, type=type, search=search)
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -3423,7 +3423,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/metafields/definitions", page_no=page_no, page_size=page_size, resources=resources, types=types, search=search), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/metafields/definitions", page_no=page_no, page_size=page_size, resource=resource, type=type, search=search), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CustomFieldDefinitionsSchema

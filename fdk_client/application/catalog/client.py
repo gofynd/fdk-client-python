@@ -765,37 +765,22 @@ class Catalog:
 
         return response
     
-    async def getSearchResults(self, q=None, category_suggestion=None, brand_suggestion=None, collection_suggestion=None, product_suggestion=None, query_suggestion=None, body="", request_headers:Dict={}):
+    async def getSearchResults(self, q=None, body="", request_headers:Dict={}):
         """Retrieves a list of suggestions for a given search query. Each suggestion is a valid search term that's generated on the basis of query. This is particularly useful to enhance the user experience while using the search tool.
         :param q : The search query for entering partial or full name of a product, brand or category. For example, if the given search query `q` is _ski_, the relevant search suggestions could be _skirt_, _ski shoes_, __skin cream_ etc. : type string
-        :param category_suggestion : For getting related category suggestions. : type integer
-        :param brand_suggestion : For getting related brand suggestions. : type integer
-        :param collection_suggestion : For getting related collection suggestions. : type integer
-        :param product_suggestion : For getting related product suggestions. : type integer
-        :param query_suggestion : For getting related query suggestions. : type integer
         """
         payload = {}
         
         if q is not None:
             payload["q"] = q
-        if category_suggestion is not None:
-            payload["category_suggestion"] = category_suggestion
-        if brand_suggestion is not None:
-            payload["brand_suggestion"] = brand_suggestion
-        if collection_suggestion is not None:
-            payload["collection_suggestion"] = collection_suggestion
-        if product_suggestion is not None:
-            payload["product_suggestion"] = product_suggestion
-        if query_suggestion is not None:
-            payload["query_suggestion"] = query_suggestion
 
         # Parameter validation
         schema = CatalogValidator.getSearchResults()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getSearchResults"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"q","description":"The search query for entering partial or full name of a product, brand or category. For example, if the given search query `q` is _ski_, the relevant search suggestions could be _skirt_, _ski shoes_, __skin cream_ etc.","schema":{"type":"string"},"required":false},{"name":"category_suggestion","description":"For getting related category suggestions.","in":"query","required":false,"schema":{"type":"integer"}},{"name":"brand_suggestion","description":"For getting related brand suggestions.","in":"query","required":false,"schema":{"type":"integer"}},{"name":"collection_suggestion","description":"For getting related collection suggestions.","in":"query","required":false,"schema":{"type":"integer"}},{"name":"product_suggestion","description":"For getting related product suggestions.","in":"query","required":false,"schema":{"type":"integer"}},{"name":"query_suggestion","description":"For getting related query suggestions.","in":"query","required":false,"schema":{"type":"integer"}}],"query":[{"in":"query","name":"q","description":"The search query for entering partial or full name of a product, brand or category. For example, if the given search query `q` is _ski_, the relevant search suggestions could be _skirt_, _ski shoes_, __skin cream_ etc.","schema":{"type":"string"},"required":false},{"name":"category_suggestion","description":"For getting related category suggestions.","in":"query","required":false,"schema":{"type":"integer"}},{"name":"brand_suggestion","description":"For getting related brand suggestions.","in":"query","required":false,"schema":{"type":"integer"}},{"name":"collection_suggestion","description":"For getting related collection suggestions.","in":"query","required":false,"schema":{"type":"integer"}},{"name":"product_suggestion","description":"For getting related product suggestions.","in":"query","required":false,"schema":{"type":"integer"}},{"name":"query_suggestion","description":"For getting related query suggestions.","in":"query","required":false,"schema":{"type":"integer"}}],"headers":[],"path":[]}""", q=q, category_suggestion=category_suggestion, brand_suggestion=brand_suggestion, collection_suggestion=collection_suggestion, product_suggestion=product_suggestion, query_suggestion=query_suggestion)
-        query_string = await create_query_string(q=q, category_suggestion=category_suggestion, brand_suggestion=brand_suggestion, collection_suggestion=collection_suggestion, product_suggestion=product_suggestion, query_suggestion=query_suggestion)
+        url_with_params = await create_url_with_params(api_url=self._urls["getSearchResults"], proccessed_params="""{"required":[{"in":"query","name":"q","description":"The search query for entering partial or full name of a product, brand or category. For example, if the given search query `q` is _ski_, the relevant search suggestions could be _skirt_, _ski shoes_, __skin cream_ etc.","schema":{"type":"string"},"required":true}],"optional":[],"query":[{"in":"query","name":"q","description":"The search query for entering partial or full name of a product, brand or category. For example, if the given search query `q` is _ski_, the relevant search suggestions could be _skirt_, _ski shoes_, __skin cream_ etc.","schema":{"type":"string"},"required":true}],"headers":[],"path":[]}""", q=q)
+        query_string = await create_query_string(q=q)
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -811,7 +796,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getSearchResults"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/auto-complete/", q=q, category_suggestion=category_suggestion, brand_suggestion=brand_suggestion, collection_suggestion=collection_suggestion, product_suggestion=product_suggestion, query_suggestion=query_suggestion), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getSearchResults"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/auto-complete/", q=q), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import AutoCompleteResponse
@@ -1442,14 +1427,12 @@ class Catalog:
 
         return response
     
-    async def getProductPriceBySlug(self, slug=None, size=None, store_id=None, exchange_seller_identifier=None, moq=None, seller_id=None, body="", request_headers:Dict={}):
+    async def getProductPriceBySlug(self, slug=None, size=None, store_id=None, moq=None, body="", request_headers:Dict={}):
         """Prices may vary for different sizes of a product. Use this API to retrieve the price of a product size at all the selling locations near to a PIN Code.
         :param slug : A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ : type string
         :param size : A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes : type string
         :param store_id : The ID of the store that is selling the product, e.g. 1,2,3. : type integer
-        :param exchange_seller_identifier : The seller identifier of the exchange product. : type string
         :param moq : An Integer indication the Minimum Order Quantity of a product, e.g. 100. : type integer
-        :param seller_id : The ID of the seller that is selling the product, e.g. 1,2,3. : type integer
         """
         payload = {}
         
@@ -1459,20 +1442,16 @@ class Catalog:
             payload["size"] = size
         if store_id is not None:
             payload["store_id"] = store_id
-        if exchange_seller_identifier is not None:
-            payload["exchange_seller_identifier"] = exchange_seller_identifier
         if moq is not None:
             payload["moq"] = moq
-        if seller_id is not None:
-            payload["seller_id"] = seller_id
 
         # Parameter validation
         schema = CatalogValidator.getProductPriceBySlug()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getProductPriceBySlug"], proccessed_params="""{"required":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/","schema":{"type":"string"},"required":true},{"in":"path","name":"size","description":"A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"store_id","description":"The ID of the store that is selling the product, e.g. 1,2,3.","schema":{"type":"integer"},"required":false},{"in":"query","name":"exchange_seller_identifier","description":"The seller identifier of the exchange product.","schema":{"type":"string"},"required":false},{"in":"query","name":"moq","description":"An Integer indication the Minimum Order Quantity of a product, e.g. 100.","schema":{"type":"integer"},"required":false},{"in":"query","name":"seller_id","description":"The ID of the seller that is selling the product, e.g. 1,2,3.","schema":{"type":"integer"},"required":false}],"query":[{"in":"query","name":"store_id","description":"The ID of the store that is selling the product, e.g. 1,2,3.","schema":{"type":"integer"},"required":false},{"in":"query","name":"exchange_seller_identifier","description":"The seller identifier of the exchange product.","schema":{"type":"string"},"required":false},{"in":"query","name":"moq","description":"An Integer indication the Minimum Order Quantity of a product, e.g. 100.","schema":{"type":"integer"},"required":false},{"in":"query","name":"seller_id","description":"The ID of the seller that is selling the product, e.g. 1,2,3.","schema":{"type":"integer"},"required":false}],"headers":[],"path":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/","schema":{"type":"string"},"required":true},{"in":"path","name":"size","description":"A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes","schema":{"type":"string"},"required":true}]}""", slug=slug, size=size, store_id=store_id, exchange_seller_identifier=exchange_seller_identifier, moq=moq, seller_id=seller_id)
-        query_string = await create_query_string(slug=slug, size=size, store_id=store_id, exchange_seller_identifier=exchange_seller_identifier, moq=moq, seller_id=seller_id)
+        url_with_params = await create_url_with_params(api_url=self._urls["getProductPriceBySlug"], proccessed_params="""{"required":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/","schema":{"type":"string"},"required":true},{"in":"path","name":"size","description":"A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"store_id","description":"The ID of the store that is selling the product, e.g. 1,2,3.","schema":{"type":"integer"},"required":false},{"in":"query","name":"moq","description":"An Integer indication the Minimum Order Quantity of a product, e.g. 100.","schema":{"type":"integer"},"required":false}],"query":[{"in":"query","name":"store_id","description":"The ID of the store that is selling the product, e.g. 1,2,3.","schema":{"type":"integer"},"required":false},{"in":"query","name":"moq","description":"An Integer indication the Minimum Order Quantity of a product, e.g. 100.","schema":{"type":"integer"},"required":false}],"headers":[],"path":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/","schema":{"type":"string"},"required":true},{"in":"path","name":"size","description":"A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes","schema":{"type":"string"},"required":true}]}""", slug=slug, size=size, store_id=store_id, moq=moq)
+        query_string = await create_query_string(slug=slug, size=size, store_id=store_id, moq=moq)
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1488,7 +1467,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductPriceBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v3.0/products/{slug}/sizes/{size}/price/", slug=slug, size=size, store_id=store_id, exchange_seller_identifier=exchange_seller_identifier, moq=moq, seller_id=seller_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductPriceBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v3.0/products/{slug}/sizes/{size}/price/", slug=slug, size=size, store_id=store_id, moq=moq), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ProductSizePriceResponseV3

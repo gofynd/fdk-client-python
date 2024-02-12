@@ -26,7 +26,7 @@ class Payment:
             "checkAndUpdatePaymentStatus": "/service/application/payment/v1.0/payment/confirm/polling",
             "getPaymentModeRoutes": "/service/application/payment/v1.0/payment/options",
             "getPosPaymentModeRoutes": "/service/application/payment/v1.0/payment/options/pos",
-            "walletLinkInitate": "/service/application/payment/v1.0/payment/options/wallet/link",
+            "walletLinkInitiate": "/service/application/payment/v1.0/payment/options/wallet/link",
             "linkWallet": "/service/application/payment/v1.0/payment/options/wallet/verify",
             "delinkWallet": "/service/application/payment/v1.0/payment/options/wallet/delink",
             "getRupifiBannerDetails": "/service/application/payment/v1.0/rupifi/banner",
@@ -60,13 +60,7 @@ class Payment:
             "customerOnboard": "/service/application/payment/v1.0/credit-onboard/",
             "outstandingOrderDetails": "/service/application/payment/v1.0/payment/outstanding-orders/",
             "paidOrderDetails": "/service/application/payment/v1.0/payment/paid-orders/",
-            "createPaymentOrder": "/service/application/payment/v1.0/payment-orders/",
-            "deleteBeneficiaryDetails": "/service/application/payment/v1.0/refund/account/{beneficiary_id}",
-            "getRefundOptions": "/service/application/payment/v1.0/payment/refundoptions/",
-            "setRefundOptionforShipment": "/service/application/payment/v1.0/payment/refundoptions/",
-            "getSelectedRefundOption": "/service/application/payment/v1.0/payment/selected_refund_options",
-            "getUserBeneficiariesDetailV2": "/service/application/payment/v2.0/refund/user/beneficiary",
-            "validateBeneficiaryAddress": "/service/application/payment/v1.0/validate/beneficiary-address"
+            "createPaymentOrder": "/service/application/payment/v1.0/payment-orders/"
             
         }
         self._urls = {
@@ -617,14 +611,14 @@ class Payment:
 
         return response
     
-    async def walletLinkInitate(self, body="", request_headers:Dict={}):
+    async def walletLinkInitiate(self, body="", request_headers:Dict={}):
         """It will initiate linking of wallet for the aggregator.
         """
         payload = {}
         
 
         # Parameter validation
-        schema = PaymentValidator.walletLinkInitate()
+        schema = PaymentValidator.walletLinkInitiate()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -632,7 +626,7 @@ class Payment:
         schema = WalletLinkRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["walletLinkInitate"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        url_with_params = await create_url_with_params(api_url=self._urls["walletLinkInitiate"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
         query_string = await create_query_string()
 
         headers={}
@@ -649,7 +643,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["walletLinkInitate"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/options/wallet/link", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["walletLinkInitiate"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/options/wallet/link", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import WalletResponseSchema
@@ -657,7 +651,7 @@ class Payment:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for walletLinkInitate")
+                print("Response Validation failed for walletLinkInitiate")
                 print(e)
 
         return response
@@ -2170,287 +2164,6 @@ class Payment:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for createPaymentOrder")
-                print(e)
-
-        return response
-    
-    async def deleteBeneficiaryDetails(self, beneficiary_id=None, body="", request_headers:Dict={}):
-        """Use this API to delete the saved beneficiary details provided beneficiary Id.
-        :param beneficiary_id : This is a String value that contains beneficiary_id as value. : type string
-        """
-        payload = {}
-        
-        if beneficiary_id is not None:
-            payload["beneficiary_id"] = beneficiary_id
-
-        # Parameter validation
-        schema = PaymentValidator.deleteBeneficiaryDetails()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["deleteBeneficiaryDetails"], proccessed_params="""{"required":[{"name":"beneficiary_id","in":"path","description":"This is a String value that contains beneficiary_id as value.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"beneficiary_id","in":"path","description":"This is a String value that contains beneficiary_id as value.","schema":{"type":"string"},"required":true}]}""", beneficiary_id=beneficiary_id)
-        query_string = await create_query_string(beneficiary_id=beneficiary_id)
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["deleteBeneficiaryDetails"]).netloc, "delete", await create_url_without_domain("/service/application/payment/v1.0/refund/account/{beneficiary_id}", beneficiary_id=beneficiary_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import DeleteRefundAccountResponse
-            schema = DeleteRefundAccountResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for deleteBeneficiaryDetails")
-                print(e)
-
-        return response
-    
-    async def getRefundOptions(self, configuration=None, product_type=None, amount=None, body="", request_headers:Dict={}):
-        """Refund Options Handler to fetch available refund options
-        :param configuration : config type : type string
-        :param product_type : Product Type either 1P and 3P : type string
-        :param amount : refunded amount : type string
-        """
-        payload = {}
-        
-        if configuration is not None:
-            payload["configuration"] = configuration
-        if product_type is not None:
-            payload["product_type"] = product_type
-        if amount is not None:
-            payload["amount"] = amount
-
-        # Parameter validation
-        schema = PaymentValidator.getRefundOptions()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getRefundOptions"], proccessed_params="""{"required":[{"name":"configuration","in":"query","description":"config type","schema":{"type":"string"},"required":true}],"optional":[{"name":"product_type","in":"query","description":"Product Type either 1P and 3P","schema":{"type":"string"}},{"name":"amount","in":"query","description":"refunded amount","schema":{"type":"string"}}],"query":[{"name":"configuration","in":"query","description":"config type","schema":{"type":"string"},"required":true},{"name":"product_type","in":"query","description":"Product Type either 1P and 3P","schema":{"type":"string"}},{"name":"amount","in":"query","description":"refunded amount","schema":{"type":"string"}}],"headers":[],"path":[]}""", configuration=configuration, product_type=product_type, amount=amount)
-        query_string = await create_query_string(configuration=configuration, product_type=product_type, amount=amount)
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getRefundOptions"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/payment/refundoptions/", configuration=configuration, product_type=product_type, amount=amount), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import RefundOptionResponse
-            schema = RefundOptionResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getRefundOptions")
-                print(e)
-
-        return response
-    
-    async def setRefundOptionforShipment(self, body="", request_headers:Dict={}):
-        """Save refund source against shipment and order
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = PaymentValidator.setRefundOptionforShipment()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import ShipmentRefundRequest
-        schema = ShipmentRefundRequest()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(api_url=self._urls["setRefundOptionforShipment"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
-        query_string = await create_query_string()
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["setRefundOptionforShipment"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/refundoptions/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ShipmentRefundResponse
-            schema = ShipmentRefundResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for setRefundOptionforShipment")
-                print(e)
-
-        return response
-    
-    async def getSelectedRefundOption(self, shipment_id=None, order_id=None, body="", request_headers:Dict={}):
-        """API to get the selected refund options for shipment id
-        :param shipment_id : shipment Id : type string
-        :param order_id : Order Id : type string
-        """
-        payload = {}
-        
-        if shipment_id is not None:
-            payload["shipment_id"] = shipment_id
-        if order_id is not None:
-            payload["order_id"] = order_id
-
-        # Parameter validation
-        schema = PaymentValidator.getSelectedRefundOption()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getSelectedRefundOption"], proccessed_params="""{"required":[{"name":"shipment_id","in":"query","description":"shipment Id","required":true,"schema":{"type":"string"}},{"name":"order_id","in":"query","description":"Order Id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"name":"shipment_id","in":"query","description":"shipment Id","required":true,"schema":{"type":"string"}},{"name":"order_id","in":"query","description":"Order Id","required":true,"schema":{"type":"string"}}],"headers":[],"path":[]}""", shipment_id=shipment_id, order_id=order_id)
-        query_string = await create_query_string(shipment_id=shipment_id, order_id=order_id)
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getSelectedRefundOption"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/payment/selected_refund_options", shipment_id=shipment_id, order_id=order_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SelectedRefundOptionResponse
-            schema = SelectedRefundOptionResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getSelectedRefundOption")
-                print(e)
-
-        return response
-    
-    async def getUserBeneficiariesDetailV2(self, order_id=None, shipment_id=None, mop=None, body="", request_headers:Dict={}):
-        """Use this API to get the details of all active beneficiary added by a user for refund.
-        :param order_id : A unique number used for identifying and tracking your orders. : type string
-        :param shipment_id : A unique number used for identifying and tracking your orders. : type string
-        :param mop : Mode of payment for which beneficiary data required : type string
-        """
-        payload = {}
-        
-        if order_id is not None:
-            payload["order_id"] = order_id
-        if shipment_id is not None:
-            payload["shipment_id"] = shipment_id
-        if mop is not None:
-            payload["mop"] = mop
-
-        # Parameter validation
-        schema = PaymentValidator.getUserBeneficiariesDetailV2()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getUserBeneficiariesDetailV2"], proccessed_params="""{"required":[],"optional":[{"in":"query","description":"A unique number used for identifying and tracking your orders.","name":"order_id","required":false,"schema":{"type":"string"}},{"in":"query","description":"A unique number used for identifying and tracking your orders.","name":"shipment_id","required":false,"schema":{"type":"string"}},{"in":"query","description":"Mode of payment for which beneficiary data required","name":"mop","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","description":"A unique number used for identifying and tracking your orders.","name":"order_id","required":false,"schema":{"type":"string"}},{"in":"query","description":"A unique number used for identifying and tracking your orders.","name":"shipment_id","required":false,"schema":{"type":"string"}},{"in":"query","description":"Mode of payment for which beneficiary data required","name":"mop","required":false,"schema":{"type":"string"}}],"headers":[],"path":[]}""", order_id=order_id, shipment_id=shipment_id, mop=mop)
-        query_string = await create_query_string(order_id=order_id, shipment_id=shipment_id, mop=mop)
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getUserBeneficiariesDetailV2"]).netloc, "get", await create_url_without_domain("/service/application/payment/v2.0/refund/user/beneficiary", order_id=order_id, shipment_id=shipment_id, mop=mop), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import OrderBeneficiaryResponseSchemaV2
-            schema = OrderBeneficiaryResponseSchemaV2()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getUserBeneficiariesDetailV2")
-                print(e)
-
-        return response
-    
-    async def validateBeneficiaryAddress(self, body="", request_headers:Dict={}):
-        """API to Validate UPI ID and IFSC code
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = PaymentValidator.validateBeneficiaryAddress()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import ValidateValidateAddressRequest
-        schema = ValidateValidateAddressRequest()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(api_url=self._urls["validateBeneficiaryAddress"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
-        query_string = await create_query_string()
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["validateBeneficiaryAddress"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/validate/beneficiary-address", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ValidateValidateAddressResponse
-            schema = ValidateValidateAddressResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for validateBeneficiaryAddress")
                 print(e)
 
         return response

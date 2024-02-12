@@ -311,39 +311,6 @@ This operation will return the url for the uploaded file.
 
         return response
     
-    async def deletePdfType(self, id=None, request_headers:Dict={}):
-        """delete Pdf Type for invoice such as Invoice, Label, Deliver challan
-        :param id :  : type string
-        """
-        payload = {}
-        
-        if id is not None:
-            payload["id"] = id
-
-        # Parameter validation
-        schema = FileStorageValidator.deletePdfType()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/assets/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pdf/types/{id}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"},"examples":{"success":{"value":2}}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"},"examples":{"success":{"value":"5eda528b97457fe43a733ace"},"failure":{"value":"5eda528b97457fe43a733acd"}}},{"name":"id","in":"path","required":true,"schema":{"type":"string","description":"This is mongo id"},"examples":{"success":{"value":"64dfd8fc8f3b8b5ae5beb72c"},"failure":{"value":"64dfd8fc8f3b8b5a"}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"},"examples":{"success":{"value":2}}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"},"examples":{"success":{"value":"5eda528b97457fe43a733ace"},"failure":{"value":"5eda528b97457fe43a733acd"}}},{"name":"id","in":"path","required":true,"schema":{"type":"string","description":"This is mongo id"},"examples":{"success":{"value":"64dfd8fc8f3b8b5ae5beb72c"},"failure":{"value":"64dfd8fc8f3b8b5a"}}}]}""", id=id)
-        query_string = await create_query_string(id=id)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pdf/types/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        return response
-    
     async def getDefaultPdfData(self, pdf_type_id=None, country_code=None, request_headers:Dict={}):
         """Get Dummy pdf data for invoice or label
         :param pdf_type_id :  : type integer
@@ -432,39 +399,6 @@ This operation will return the url for the uploaded file.
             except Exception as e:
                 print("Response Validation failed for updateHtmlTemplate")
                 print(e)
-
-        return response
-    
-    async def deletePdfConfigTemplate(self, id=None, request_headers:Dict={}):
-        """delete html template for invoice such as Invoice, Label, Deliver challan
-        :param id :  : type string
-        """
-        payload = {}
-        
-        if id is not None:
-            payload["id"] = id
-
-        # Parameter validation
-        schema = FileStorageValidator.deletePdfConfigTemplate()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/assets/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pdf/config/{id}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"},"examples":{"success":{"value":2}}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"},"examples":{"success":{"value":"5eda528b97457fe43a733ace"},"failure":{"value":"5eda528b97457fe43a733acd"}}},{"name":"id","in":"path","required":true,"schema":{"type":"string","description":"This is mongo id"},"examples":{"success":{"value":"64dfd8fc8f3b8b5ae5beb72c"},"failure":{"value":"64dfd8fc8f3b8b5a"}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"},"examples":{"success":{"value":2}}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"},"examples":{"success":{"value":"5eda528b97457fe43a733ace"},"failure":{"value":"5eda528b97457fe43a733acd"}}},{"name":"id","in":"path","required":true,"schema":{"type":"string","description":"This is mongo id"},"examples":{"success":{"value":"64dfd8fc8f3b8b5ae5beb72c"},"failure":{"value":"64dfd8fc8f3b8b5a"}}}]}""", id=id)
-        query_string = await create_query_string(id=id)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pdf/config/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         return response
     

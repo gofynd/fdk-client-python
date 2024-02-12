@@ -10,8 +10,6 @@ Cart APIs
 Default
 * [getCoupons](#getcoupons)
 * [createCoupon](#createcoupon)
-* [getCouponTags](#getcoupontags)
-* [getPromotionTags](#getpromotiontags)
 * [getCouponById](#getcouponbyid)
 * [updateCoupon](#updatecoupon)
 * [updateCouponPartially](#updatecouponpartially)
@@ -21,16 +19,12 @@ Default
 * [updatePromotion](#updatepromotion)
 * [updatePromotionPartially](#updatepromotionpartially)
 * [getPromosCouponConfig](#getpromoscouponconfig)
-* [getCartMetaConfig](#getcartmetaconfig)
 * [updateCartMetaConfig](#updatecartmetaconfig)
-* [upateCartMetaActiveStatus](#upatecartmetaactivestatus)
-* [deleteCartMetaConfig](#deletecartmetaconfig)
-* [getCartMetaConfigs](#getcartmetaconfigs)
+* [fetchCartMetaConfig](#fetchcartmetaconfig)
 * [createCartMetaConfig](#createcartmetaconfig)
 * [updatePriceAdjustment](#updatepriceadjustment)
 * [removePriceAdjustment](#removepriceadjustment)
 * [addPriceAdjustment](#addpriceadjustment)
-* [getPriceAdjustments](#getpriceadjustments)
 * [fetchAndvalidateCartItems](#fetchandvalidatecartitems)
 * [checkCartServiceability](#checkcartserviceability)
 * [checkoutCart](#checkoutcart)
@@ -250,136 +244,6 @@ Coupon Created successfully
   "message": "Coupon Created"
 }
 ```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getCouponTags
-Get a list of all coupon tags associated with a application.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.getCouponTags()
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-
-This API helps to get coupon tags data associated to a particular application.
-
-*Returned Response:*
-
-
-
-
-[TagsViewResponse](#TagsViewResponse)
-
-Tag List. See example below for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Tags list for sent</i></summary>
-
-```json
-{
-  "value": {
-    "items": [
-      "platform",
-      "custom"
-    ]
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getPromotionTags
-Get a list of all Promotion tags associated with a application.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.getPromotionTags()
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-
-This API helps to get Promotion tags data associated to a particular application.
-
-*Returned Response:*
-
-
-
-
-[TagsViewResponse](#TagsViewResponse)
-
-Tag List. See example below for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Tags list for sent</i></summary>
-
-```json
-{
-  "value": {
-    "items": [
-      "platform",
-      "custom"
-    ]
-  }
-}
-```
-</details>
-
 </details>
 
 
@@ -1549,110 +1413,6 @@ Success. Returns a list of all the curently active coupons/promos
 ---
 
 
-### getCartMetaConfig
-Get cart meta configuration by id
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.getCartMetaConfig(cartMetaId=cartMetaId)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| cartMetaId | String | yes | CartMeta mongo _id for fetching single cart meta data for editing |  
-
-
-
-Get cart meta configuration by id
-
-*Returned Response:*
-
-
-
-
-[CartMetaConfigDetailResponse](#CartMetaConfigDetailResponse)
-
-Cart Meta Config Fetched successfully
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "success": true,
-  "data": {
-    "id": "645ba594d414eb0669e6ee14",
-    "app_id": "60792ded7826bd09330ed90d",
-    "company_id": 884,
-    "bulk_coupons": false,
-    "delivery_charges": {
-      "charges": [],
-      "enabled": false
-    },
-    "international_delivery_charges": {
-      "charges": [],
-      "enabled": false
-    },
-    "empty_cart": false,
-    "enabled": true,
-    "max_cart_items": 50,
-    "min_cart_value": 0,
-    "revenue_engine_coupon": false,
-    "gift_pricing": 50,
-    "gift_display_text": "",
-    "is_universal": false,
-    "is_active": true,
-    "order_placing": {
-      "enabled": true,
-      "message": ""
-    },
-    "name": "Universal",
-    "slug": "universal",
-    "article_tags": [
-      "sale",
-      "offer"
-    ],
-    "allow_coupon_with_rewards": false,
-    "gst_input": true,
-    "staff_selection": true,
-    "placing_for_customer": false,
-    "pan_card": {
-      "enabled": false,
-      "cod_threshold_amount": 0,
-      "online_threshold_amount": 0
-    },
-    "created_on": "2023-12-21T12:17:12",
-    "updated_on": "2023-12-21T12:17:12",
-    "last_modified_by": "5b84e9ffb02426353608c380"
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
 ### updateCartMetaConfig
 Update cart meta configuration
 
@@ -1673,7 +1433,7 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| cartMetaId | String | yes | CartMeta mongo _id for fetching single cart meta data for editing |  
+| cartMetaId | String | yes |  |  
 | body | [CartMetaConfigUpdate](#CartMetaConfigUpdate) | yes | Request body |
 
 
@@ -1684,9 +1444,9 @@ Update cart meta configuration
 
 
 
-[CartMetaConfigDetailResponse](#CartMetaConfigDetailResponse)
+[CartMetaConfigUpdate](#CartMetaConfigUpdate)
 
-Cart Meta Config updated successfully
+Cart Meta Config Created successfully
 
 
 
@@ -1696,48 +1456,21 @@ Cart Meta Config updated successfully
 
 ```json
 {
-  "success": true,
-  "data": {
-    "id": "645ba594d414eb0669e6ee14",
-    "app_id": "60792ded7826bd09330ed90d",
-    "company_id": 884,
-    "bulk_coupons": false,
-    "delivery_charges": {
-      "charges": [],
-      "enabled": false
-    },
-    "empty_cart": false,
-    "enabled": true,
-    "max_cart_items": 50,
-    "min_cart_value": 0,
-    "revenue_engine_coupon": false,
-    "gift_pricing": 50,
-    "gift_display_text": "",
-    "is_universal": false,
-    "is_active": true,
-    "order_placing": {
-      "enabled": true,
-      "message": ""
-    },
-    "name": "Universal",
-    "slug": "universal",
-    "article_tags": [
-      "sale",
-      "offer"
-    ],
-    "allow_coupon_with_rewards": false,
-    "gst_input": true,
-    "staff_selection": true,
-    "placing_for_customer": false,
-    "pan_card": {
-      "enabled": false,
-      "cod_threshold_amount": 0,
-      "online_threshold_amount": 0
-    },
-    "created_on": "2023-12-21T12:17:12",
-    "updated_on": "2023-12-21T12:17:12",
-    "last_modified_by": "5b84e9ffb02426353608c380"
-  }
+  "_id": "645ba594d414eb0669e6ee14",
+  "app_id": "60792ded7826bd09330ed90d",
+  "company_id": 884,
+  "bulk_coupons": false,
+  "delivery_charges": {
+    "charges": [],
+    "enabled": false
+  },
+  "empty_cart": false,
+  "enabled": true,
+  "max_cart_items": 50,
+  "min_cart_value": 0,
+  "revenue_engine_coupon": false,
+  "gift_pricing": 50,
+  "gift_display_text": ""
 }
 ```
 </details>
@@ -1753,179 +1486,15 @@ Cart Meta Config updated successfully
 ---
 
 
-### upateCartMetaActiveStatus
-Update cart meta configuration
+### fetchCartMetaConfig
+Fetch cart meta configuration
 
 
 
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.upateCartMetaActiveStatus(cartMetaId=cartMetaId, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| cartMetaId | String | yes | CartMeta mongo _id for fetching single cart meta data for editing |  
-| body | [CartMetaConfigUpdate](#CartMetaConfigUpdate) | yes | Request body |
-
-
-Update cart meta configuration
-
-*Returned Response:*
-
-
-
-
-[CartMetaConfigDetailResponse](#CartMetaConfigDetailResponse)
-
-Cart Meta Config updated successfully
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "success": true,
-  "data": {
-    "id": "645ba594d414eb0669e6ee14",
-    "app_id": "60792ded7826bd09330ed90d",
-    "company_id": 884,
-    "bulk_coupons": false,
-    "delivery_charges": {
-      "charges": [],
-      "enabled": false
-    },
-    "international_delivery_charges": {
-      "charges": [],
-      "enabled": false
-    },
-    "empty_cart": false,
-    "enabled": true,
-    "max_cart_items": 50,
-    "min_cart_value": 0,
-    "revenue_engine_coupon": false,
-    "gift_pricing": 50,
-    "gift_display_text": "",
-    "is_universal": false,
-    "is_active": true,
-    "order_placing": {
-      "enabled": true,
-      "message": ""
-    },
-    "name": "Universal",
-    "slug": "universal",
-    "article_tags": [
-      "sale",
-      "offer"
-    ],
-    "allow_coupon_with_rewards": false,
-    "gst_input": true,
-    "staff_selection": true,
-    "placing_for_customer": false,
-    "pan_card": {
-      "enabled": false,
-      "cod_threshold_amount": 0,
-      "online_threshold_amount": 0
-    },
-    "created_on": "2023-12-21T12:17:12",
-    "updated_on": "2023-12-21T12:17:12",
-    "last_modified_by": "5b84e9ffb02426353608c380"
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### deleteCartMetaConfig
-Delete cart meta configuration
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.deleteCartMetaConfig(cartMetaId=cartMetaId)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| cartMetaId | String | yes | CartMeta mongo _id for fetching single cart meta data for editing |  
-
-
-
-Delete cart meta configuration
-
-*Returned Response:*
-
-
-
-
-[SuccessMessage](#SuccessMessage)
-
-Cart Meta Config deleted successfully
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "success": true,
-  "message": ""
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getCartMetaConfigs
-Get cart meta configuration
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.getCartMetaConfigs()
+    result = await platformClient.application("<APPLICATION_ID>").cart.fetchCartMetaConfig()
     # use result
 except Exception as e:
     print(e)
@@ -1936,16 +1505,16 @@ except Exception as e:
 
 
 
-Get cart meta configuration
+Fetch cart meta configuration
 
 *Returned Response:*
 
 
 
 
-[CartMetaConfigListResponse](#CartMetaConfigListResponse)
+[CartMetaConfigAdd](#CartMetaConfigAdd)
 
-Cart Meta Configs fetched successfully
+Cart Meta Config Fetched successfully
 
 
 
@@ -1955,16 +1524,21 @@ Cart Meta Configs fetched successfully
 
 ```json
 {
-  "success": true,
-  "data": [
-    {
-      "id": "645ba594d414eb0669e6ee14",
-      "is_active": true,
-      "name": "Universal",
-      "slug": "universal",
-      "created_on": "2023-12-21T12:17:12"
-    }
-  ]
+  "_id": "645ba594d414eb0669e6ee14",
+  "app_id": "60792ded7826bd09330ed90d",
+  "company_id": 884,
+  "bulk_coupons": false,
+  "delivery_charges": {
+    "charges": [],
+    "enabled": false
+  },
+  "empty_cart": false,
+  "enabled": true,
+  "max_cart_items": 50,
+  "min_cart_value": 0,
+  "revenue_engine_coupon": false,
+  "gift_pricing": 50,
+  "gift_display_text": ""
 }
 ```
 </details>
@@ -2010,7 +1584,7 @@ Create new cart meta configuration
 
 
 
-[CartMetaConfigDetailResponse](#CartMetaConfigDetailResponse)
+[CartMetaConfigAdd](#CartMetaConfigAdd)
 
 Cart Meta Config Created successfully
 
@@ -2022,7 +1596,7 @@ Cart Meta Config Created successfully
 
 ```json
 {
-  "id": "645ba594d414eb0669e6ee14",
+  "_id": "645ba594d414eb0669e6ee14",
   "app_id": "60792ded7826bd09330ed90d",
   "company_id": 884,
   "bulk_coupons": false,
@@ -2036,31 +1610,7 @@ Cart Meta Config Created successfully
   "min_cart_value": 0,
   "revenue_engine_coupon": false,
   "gift_pricing": 50,
-  "gift_display_text": "",
-  "is_universal": false,
-  "is_active": true,
-  "order_placing": {
-    "enabled": true,
-    "message": ""
-  },
-  "name": "Universal",
-  "slug": "universal",
-  "article_tags": [
-    "sale",
-    "offer"
-  ],
-  "allow_coupon_with_rewards": false,
-  "gst_input": true,
-  "staff_selection": true,
-  "placing_for_customer": false,
-  "pan_card": {
-    "enabled": false,
-    "cod_threshold_amount": 0,
-    "online_threshold_amount": 0
-  },
-  "created_on": "2023-12-21T12:17:12",
-  "updated_on": "2023-12-21T12:17:12",
-  "last_modified_by": "5b84e9ffb02426353608c380"
+  "gift_display_text": ""
 }
 ```
 </details>
@@ -2148,9 +1698,7 @@ Price Adjustment Updated successfully
         "cancellation_allowed": false,
         "return_allowed": false
       }
-    },
-    "remove_articles": false,
-    "auto_remove": true
+    }
   }
 }
 ```
@@ -2298,100 +1846,7 @@ Price Adjustment Created successfully
         "cancellation_allowed": false,
         "return_allowed": false
       }
-    },
-    "remove_articles": false,
-    "auto_remove": true
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getPriceAdjustments
-Get a list of all price adjustments associated with a cart
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.getPriceAdjustments(cartId=cartId)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| cartId | String | yes | Cart Id |  
-
-
-
-This API helps to get price adjustments data associated to a particular cart
-
-*Returned Response:*
-
-
-
-
-[PriceAdjustmentResponse](#PriceAdjustmentResponse)
-
-Price Adjustments List. See example below for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "success": true,
-  "data": {
-    "id": "cc8154592ccb42c88b481ce4c21ab602",
-    "cart_id": "fa45f5cbd3764a6297bfa79d6bedf71c",
-    "is_authenticated": true,
-    "article_ids": [
-      {
-        "article_id": "f322167ce70f4dca8f8ac0efdc496abe",
-        "value": 100,
-        "code": "abs120",
-        "meta": {},
-        "quantity": 2
-      }
-    ],
-    "type": "discount",
-    "message": "Fynd Campaign 100 Rs off",
-    "value": 100,
-    "article_level_distribution": true,
-    "allow_refund": true,
-    "meta": {},
-    "collection": {
-      "collected_by": "FYND",
-      "refund_by": "FYND"
-    },
-    "restrictions": {
-      "post_order": {
-        "cancellation_allowed": false,
-        "return_allowed": false
-      }
-    },
-    "remove_articles": false,
-    "auto_remove": true
+    }
   }
 }
 ```
@@ -7013,7 +6468,7 @@ Fetch all items added to the customer cart using cart id
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.getCart(id=id, userId=userId, i=i, b=b, assignCardId=assignCardId, buyNow=buyNow, cartType=cartType)
+    result = await platformClient.application("<APPLICATION_ID>").cart.getCart(id=id, userId=userId, i=i, b=b, assignCardId=assignCardId, buyNow=buyNow)
     # use result
 except Exception as e:
     print(e)
@@ -7025,13 +6480,12 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| id | String? | no | The unique identifier of the cart |   
-| userId | String? | no | Option to fetch cart for the provided user_id. |   
-| i | Boolean? | no | This is a boolean value. Select `true` to retrieve all the items added in the cart. |   
-| b | Boolean? | no | This is a boolean value. Select `true` to retrieve the price breakup of cart items. |   
-| assignCardId | Int? | no | Token of user's debit or credit card |   
-| buyNow | Boolean? | no | This is a boolen value. Select `true` to set/initialize buy now cart |   
-| cartType | String? | no | The type of cart |  
+| id | String? | no |  |   
+| userId | String? | no |  |   
+| i | Boolean? | no |  |   
+| b | Boolean? | no |  |   
+| assignCardId | Int? | no |  |   
+| buyNow | Boolean? | no |  |  
 
 
 
@@ -7075,7 +6529,6 @@ Success. Returns a Cart object. Check the example shown below or refer `CartDeta
           "name": "Gandhi Nagar"
         },
         "quantity": 108,
-        "product_name": "",
         "price": {
           "base": {
             "marked": 2999,
@@ -7156,8 +6609,7 @@ Success. Returns a Cart object. Check the example shown below or refer `CartDeta
         }
       },
       "message": "",
-      "quantity": 1,
-      "seller_count": 1
+      "quantity": 1
     }
   ],
   "buy_now": false,
@@ -7249,7 +6701,7 @@ Add items to cart
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.platformAddItems(i=i, b=b, buyNow=buyNow, id=id, cartType=cartType, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").cart.platformAddItems(i=i, b=b, buyNow=buyNow, id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -7261,11 +6713,10 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| i | Boolean? | no | This is a boolean value. Select `true` to retrieve all the items added in the cart. |   
-| b | Boolean? | no | This is a boolean value. Select `true` to retrieve the price breakup of cart items. |   
-| buyNow | Boolean? | no | This is a boolen value. Select `true` to set/initialize buy now cart |   
-| id | String? | no | The unique identifier of the cart |   
-| cartType | String? | no | The type of cart |  
+| i | Boolean? | no |  |   
+| b | Boolean? | no |  |   
+| buyNow | Boolean? | no |  |   
+| id | String? | no |  |  
 | body | [PlatformAddCartRequest](#PlatformAddCartRequest) | yes | Request body |
 
 
@@ -7363,12 +6814,10 @@ Success. Returns a cart object as shown below. Refer `AddCartDetailResponse` for
             "parent_item_id": 7501190,
             "parent_item_size": "OS"
           },
-          "seller_count": 1,
           "article": {
             "type": "article",
             "uid": "612_9_SE61201_19100302_10",
             "size": "10",
-            "product_name": "",
             "seller": {
               "uid": 612,
               "name": "SSR ENTERPRISE"
@@ -7833,7 +7282,6 @@ Success. Returns a cart object as shown below. Refer `AddCartDetailResponse` for
             "identifier": "5mPyy88URXuh3Lo35uaTg"
           },
           "discount": "67% OFF",
-          "seller_count": 1,
           "parent_item_identifiers": {
             "identifier": "ZASFF",
             "parent_item_id": 7501190,
@@ -7852,7 +7300,6 @@ Success. Returns a cart object as shown below. Refer `AddCartDetailResponse` for
               "name": "Gandhi Nagar"
             },
             "quantity": 108,
-            "product_name": "",
             "price": {
               "base": {
                 "marked": 2999,
@@ -7974,7 +7421,7 @@ Update items in the customer 's cart using cart id
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.platformUpdateCart(id=id, i=i, b=b, buyNow=buyNow, cartType=cartType, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").cart.platformUpdateCart(id=id, i=i, b=b, buyNow=buyNow, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -7986,11 +7433,10 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| id | String? | no | The unique identifier of the cart |   
-| i | Boolean? | no | This is a boolean value. Select `true` to retrieve all the items added in the cart. |   
-| b | Boolean? | no | This is a boolean value. Select `true` to retrieve the price breakup of cart items. |   
-| buyNow | Boolean? | no | This is a boolen value. Select `true` to set/initialize buy now cart |   
-| cartType | String? | no | The type of cart |  
+| id | String? | no |  |   
+| i | Boolean? | no |  |   
+| b | Boolean? | no |  |   
+| buyNow | Boolean? | no |  |  
 | body | [PlatformUpdateCartRequest](#PlatformUpdateCartRequest) | yes | Request body |
 
 
@@ -8082,7 +7528,6 @@ Success. Updates and returns a cart object as shown below. Refer `UpdateCartDeta
             "identifier": "5mPyy88URXuh3Lo35uaTg"
           },
           "discount": "67% OFF",
-          "seller_count": 1,
           "parent_item_identifiers": {
             "identifier": "ZASFF",
             "parent_item_id": 7501190,
@@ -8101,7 +7546,6 @@ Success. Updates and returns a cart object as shown below. Refer `UpdateCartDeta
               "name": "Gandhi Nagar"
             },
             "quantity": 108,
-            "product_name": "",
             "price": {
               "base": {
                 "marked": 2999,
@@ -8273,7 +7717,6 @@ Success. Updates and returns a cart object as shown below. Refer `UpdateCartDeta
             "identifier": "5mPyy88URXuh3Lo35uaTg"
           },
           "message": "",
-          "seller_count": 1,
           "bulk_offer": {},
           "price": {
             "base": {
@@ -8343,7 +7786,6 @@ Success. Updates and returns a cart object as shown below. Refer `UpdateCartDeta
               "name": "Colaba Causway"
             },
             "quantity": 5,
-            "product_name": "",
             "price": {
               "base": {
                 "marked": 5499,
@@ -8419,7 +7861,7 @@ Delete cart once user made successful checkout
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.deleteCart(id=id, cartType=cartType, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").cart.deleteCart(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -8431,8 +7873,7 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| id | String? | no | The unique identifier of the cart. |   
-| cartType | String? | no | The type of cart |  
+| id | String? | no | The unique identifier of the cart. |  
 | body | [DeleteCartRequest](#DeleteCartRequest) | yes | Request body |
 
 
@@ -8480,7 +7921,7 @@ Count items in the customer's cart
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.getItemCount(id=id, buyNow=buyNow, cartType=cartType)
+    result = await platformClient.application("<APPLICATION_ID>").cart.getItemCount(id=id, buyNow=buyNow)
     # use result
 except Exception as e:
     print(e)
@@ -8493,8 +7934,7 @@ except Exception as e:
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
 | id | String? | no | The unique identifier of the cart. |   
-| buyNow | Boolean? | no | Boolean value to get buy_now cart. |   
-| cartType | String? | no | The type of cart |  
+| buyNow | Boolean? | no |  |  
 
 
 
@@ -11683,7 +11123,7 @@ Checkout all items in the cart
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.platformCheckoutCart(id=id, cartType=cartType, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").cart.platformCheckoutCart(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -11695,8 +11135,7 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| id | String? | no | The unique identifier of the cart |   
-| cartType | String? | no | The type of cart |  
+| id | String? | no |  |  
 | body | [PlatformCartCheckoutDetailRequest](#PlatformCartCheckoutDetailRequest) | yes | Request body |
 
 
@@ -12678,7 +12117,7 @@ Checkout all items in the cart
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.platformCheckoutCartV2(id=id, cartType=cartType, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").cart.platformCheckoutCartV2(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -12690,8 +12129,7 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| id | String? | no | The unique identifier of the cart |   
-| cartType | String? | no | The type of cart |  
+| id | String? | no |  |  
 | body | [PlatformCartCheckoutDetailV2Request](#PlatformCartCheckoutDetailV2Request) | yes | Request body |
 
 
@@ -13795,18 +13233,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
 
  
  
- #### [TagsViewResponse](#TagsViewResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | success | Boolean? |  yes  |  |
- | items | ArrayList<String>? |  yes  |  |
-
----
-
-
- 
- 
  #### [SuccessMessage](#SuccessMessage)
 
  | Properties | Type | Nullable | Description |
@@ -13825,7 +13251,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | ---------- | ---- | -------- | ----------- |
  | success | Boolean? |  yes  |  |
  | message | String? |  yes  |  |
- | error | String? |  yes  |  |
 
 ---
 
@@ -14165,8 +13590,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | customJson | HashMap<String,Any>? |  yes  | custom data stored in promotion |
  | dateMeta | [PromotionDateMeta](#PromotionDateMeta)? |  yes  |  |
  | id | String? |  yes  | Promotion id |
- | tags | ArrayList<String>? |  yes  |  |
- | customFieldMeta | ArrayList<HashMap<String,Any>>? |  yes  | custom field meta for promotion. |
 
 ---
 
@@ -14211,7 +13634,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | buyRules | HashMap<String,[ItemCriteria](#ItemCriteria)> |  no  |  |
  | customJson | HashMap<String,Any>? |  yes  |  |
  | dateMeta | [PromotionDateMeta](#PromotionDateMeta)? |  yes  |  |
- | tags | ArrayList<String>? |  yes  |  |
 
 ---
 
@@ -14244,8 +13666,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | buyRules | HashMap<String,[ItemCriteria](#ItemCriteria)> |  no  |  |
  | customJson | HashMap<String,Any>? |  yes  |  |
  | dateMeta | [PromotionDateMeta](#PromotionDateMeta)? |  yes  |  |
- | tags | ArrayList<String>? |  yes  |  |
- | customFieldMeta | ArrayList<HashMap<String,Any>>? |  yes  | custom field meta for promotion. |
 
 ---
 
@@ -14308,109 +13728,18 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
 
  
  
- #### [OrderPlacing](#OrderPlacing)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | enabled | Boolean? |  yes  |  |
- | message | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [PanCard](#PanCard)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | enabled | Boolean? |  yes  |  |
- | codThresholdAmount | Int? |  yes  |  |
- | onlineThresholdAmount | Int? |  yes  |  |
-
----
-
-
- 
- 
  #### [CartMetaConfigUpdate](#CartMetaConfigUpdate)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | minCartValue | Int? |  yes  |  |
- | maxCartValue | Int? |  yes  |  |
  | bulkCoupons | Boolean? |  yes  |  |
  | maxCartItems | Int? |  yes  |  |
  | giftDisplayText | String? |  yes  |  |
  | deliveryCharges | [DeliveryCharges](#DeliveryCharges)? |  yes  |  |
- | internationalDeliveryCharges | [DeliveryCharges](#DeliveryCharges)? |  yes  |  |
  | revenueEngineCoupon | Boolean? |  yes  |  |
  | giftPricing | Double? |  yes  |  |
  | enabled | Boolean? |  yes  |  |
- | isActive | Boolean? |  yes  |  |
- | orderPlacing | [OrderPlacing](#OrderPlacing)? |  yes  |  |
- | name | String? |  yes  |  |
- | articleTags | ArrayList<String>? |  yes  |  |
- | allowCouponWithRewards | Boolean? |  yes  |  |
- | gstInput | Boolean? |  yes  |  |
- | staffSelection | Boolean? |  yes  |  |
- | placingForCustomer | Boolean? |  yes  |  |
- | panCard | [PanCard](#PanCard)? |  yes  |  |
-
----
-
-
- 
- 
- #### [TimeStampIDResponse](#TimeStampIDResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | id | String? |  yes  |  |
- | appId | String? |  yes  |  |
- | companyId | Int? |  yes  |  |
- | createdOn | String? |  yes  |  |
- | updatedOn | String? |  yes  |  |
- | lastModifiedBy | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [CartMetaConfigDetailResponse](#CartMetaConfigDetailResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | success | Boolean? |  yes  |  |
- | data | HashMap<String,Any>? |  yes  |  |
-
----
-
-
- 
- 
- #### [CartMetaConfigListObj](#CartMetaConfigListObj)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | id | String? |  yes  |  |
- | name | String? |  yes  |  |
- | slug | String? |  yes  |  |
- | isActive | Boolean? |  yes  |  |
- | createdOn | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [CartMetaConfigListResponse](#CartMetaConfigListResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | success | Boolean? |  yes  |  |
- | data | ArrayList<[CartMetaConfigListObj](#CartMetaConfigListObj)>? |  yes  |  |
 
 ---
 
@@ -14422,25 +13751,13 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | minCartValue | Int? |  yes  |  |
- | maxCartValue | Int? |  yes  |  |
  | bulkCoupons | Boolean? |  yes  |  |
  | maxCartItems | Int? |  yes  |  |
  | giftDisplayText | String? |  yes  |  |
  | deliveryCharges | [DeliveryCharges](#DeliveryCharges)? |  yes  |  |
- | internationalDeliveryCharges | [DeliveryCharges](#DeliveryCharges)? |  yes  |  |
  | revenueEngineCoupon | Boolean? |  yes  |  |
  | giftPricing | Double? |  yes  |  |
  | enabled | Boolean? |  yes  |  |
- | isActive | Boolean? |  yes  |  |
- | orderPlacing | [OrderPlacing](#OrderPlacing)? |  yes  |  |
- | name | String |  no  |  |
- | slug | String |  no  |  |
- | articleTags | ArrayList<String>? |  yes  |  |
- | allowCouponWithRewards | Boolean? |  yes  |  |
- | gstInput | Boolean? |  yes  |  |
- | staffSelection | Boolean? |  yes  |  |
- | placingForCustomer | Boolean? |  yes  |  |
- | panCard | [PanCard](#PanCard)? |  yes  |  |
 
 ---
 
@@ -14501,8 +13818,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | allowedRefund | Boolean? |  yes  | Flag indicating whether refunds are allowed (default: False) |
  | isAuthenticated | Boolean |  no  | Flag indicating whether the user is authenticated |
  | articleIds | ArrayList<[Article](#Article)> |  no  | The list of article object in the price adjustment |
- | removeArticles | Boolean? |  yes  | This field if set true will remove all articles in price adjustment if article_ids are present |
- | autoRemove | Boolean? |  yes  | This field if set true will remove mop type price adjustment. |
  | meta | HashMap<String,Any>? |  yes  |  |
  | cartId | String |  no  | The ID of the cart |
 
@@ -14528,10 +13843,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | articleIds | ArrayList<[Article](#Article)> |  no  | The list of article object in the price adjustment |
  | meta | HashMap<String,Any>? |  yes  |  |
  | cartId | String |  no  | The ID of the cart |
- | removeArticles | Boolean? |  yes  | This field if set true will remove all articles in price adjustment if article_ids are present |
- | autoRemove | Boolean? |  yes  | This field if set true will remove mop type price adjustment. |
- | distributionLevel | String? |  yes  | distribution level of price adjusment |
- | distributionType | String? |  yes  | distribution type of price adjusment in case of shipment distribution level |
 
 ---
 
@@ -14566,10 +13877,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | articleIds | ArrayList<[Article](#Article)> |  no  | The list of article object in the price adjustment |
  | meta | HashMap<String,Any>? |  yes  |  |
  | cartId | String |  no  | The ID of the cart |
- | removeArticles | Boolean? |  yes  | This field if set true will remove all articles in price adjustment if article_ids are present |
- | autoRemove | Boolean? |  yes  | This field if set true will remove mop type price adjustment. |
- | distributionLevel | String? |  yes  | distribution level of price adjusment |
- | distributionType | String? |  yes  | distribution type of price adjusment in case of shipment distribution level |
 
 ---
 
@@ -14831,7 +14138,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | sellerIdentifier | String? |  yes  |  |
  | quantity | Int? |  yes  |  |
  | seller | [BaseInfo](#BaseInfo)? |  yes  |  |
- | productName | String? |  yes  |  |
  | cartItemMeta | HashMap<String,Any>? |  yes  |  |
  | parentItemIdentifiers | HashMap<String,Any>? |  yes  |  |
  | isGiftVisible | Boolean? |  yes  |  |
@@ -14941,7 +14247,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | promoId | String? |  yes  | Promotion id |
  | meta | HashMap<String,Any>? |  yes  | Meta object for extra data |
  | code | String? |  yes  | Promotion code |
- | customFieldMeta | ArrayList<HashMap<String,Any>>? |  yes  | custom field meta for promotion. |
 
 ---
 
@@ -15101,7 +14406,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | article | [ProductArticle](#ProductArticle)? |  yes  |  |
  | promotionsApplied | ArrayList<[AppliedPromotion](#AppliedPromotion)>? |  yes  |  |
  | deliveryPromise | [ShipmentPromise](#ShipmentPromise)? |  yes  |  |
- | sellerCount | Int? |  yes  |  |
  | key | String? |  yes  |  |
  | coupon | [CouponDetails](#CouponDetails)? |  yes  |  |
  | bulkOffer | HashMap<String,Any>? |  yes  |  |
@@ -15470,20 +14774,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
 
  
  
- #### [CustomCart](#CustomCart)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | id | String? |  yes  | id of custom cart config |
- | cartName | String? |  yes  | Name of custom cart |
- | cartType | String? |  yes  | Type of custom cart |
- | isUniversal | Boolean? |  yes  | By default all carts are universal, will be false for custom cart |
-
----
-
-
- 
- 
  #### [CartDetailResponse](#CartDetailResponse)
 
  | Properties | Type | Nullable | Description |
@@ -15514,8 +14804,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | gstin | String? |  yes  |  |
  | appliedPromoDetails | ArrayList<[AppliedPromotion](#AppliedPromotion)>? |  yes  |  |
  | panNo | String? |  yes  |  |
- | isPanReceived | Boolean? |  yes  |  |
- | customCart | [CustomCart](#CustomCart)? |  yes  |  |
 
 ---
 
@@ -15530,7 +14818,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | itemSize | String? |  yes  |  |
  | sellerId | Int? |  yes  |  |
  | parentItemIdentifiers | ArrayList<HashMap<String,String>>? |  yes  |  |
- | priceFactoryTypeId | String? |  yes  |  |
  | productGroupTags | ArrayList<String>? |  yes  |  |
  | articleId | String? |  yes  |  |
  | articleAssignment | HashMap<String,Any>? |  yes  |  |
@@ -15584,7 +14871,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | meta | HashMap<String,Any>? |  yes  |  |
  | extraMeta | HashMap<String,Any>? |  yes  |  |
  | customJson | HashMap<String,Any>? |  yes  |  |
- | priceFactoryTypeId | String? |  yes  |  |
  | itemId | Int? |  yes  |  |
  | itemIndex | Int? |  yes  |  |
  | identifiers | [CartProductIdentifer](#CartProductIdentifer) |  no  |  |
@@ -15855,7 +15141,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | gstin | String? |  yes  |  |
  | appliedPromoDetails | ArrayList<[AppliedPromotion](#AppliedPromotion)>? |  yes  |  |
  | panNo | String? |  yes  |  |
- | isPanReceived | Boolean? |  yes  |  |
 
 ---
 
@@ -16161,7 +15446,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | appliedPromoDetails | ArrayList<[AppliedPromotion](#AppliedPromotion)>? |  yes  |  |
  | error | Boolean? |  yes  |  |
  | panNo | String? |  yes  |  |
- | isPanReceived | Boolean? |  yes  |  |
 
 ---
 
@@ -16201,7 +15485,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | checkoutMode | String? |  yes  |  |
  | giftDetails | HashMap<String,Any>? |  yes  |  |
  | panNo | String? |  yes  |  |
- | isPanReceived | Boolean? |  yes  |  |
  | comment | String? |  yes  |  |
  | staffUserId | String? |  yes  | staff user id |
 
@@ -16310,7 +15593,7 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | employeeCode | String? |  yes  |  |
  | billingAddress | HashMap<String,Any>? |  yes  |  |
  | callbackUrl | String? |  yes  |  |
- | userId | String? |  yes  |  |
+ | userId | String |  no  |  |
  | extraMeta | HashMap<String,Any>? |  yes  |  |
  | orderType | String |  no  |  |
  | files | ArrayList<[Files](#Files)>? |  yes  | List of file url |
@@ -16359,7 +15642,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | gstin | String? |  yes  |  |
  | codAvailable | Boolean? |  yes  |  |
  | deliveryCharges | Double? |  yes  |  |
- | customCart | [CustomCart](#CustomCart)? |  yes  |  |
 
 ---
 
@@ -16535,7 +15817,7 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | employeeCode | String? |  yes  |  |
  | billingAddress | HashMap<String,Any>? |  yes  |  |
  | callbackUrl | String? |  yes  |  |
- | userId | String? |  yes  |  |
+ | userId | String |  no  |  |
  | extraMeta | HashMap<String,Any>? |  yes  |  |
  | orderType | String |  no  |  |
  | files | ArrayList<[Files](#Files)>? |  yes  | List of file url |

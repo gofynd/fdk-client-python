@@ -138,14 +138,6 @@ class SubscriberResponse(BaseSchema):
     pass
 
 
-class Events(BaseSchema):
-    pass
-
-
-class SubscriberConfigRequestV2(BaseSchema):
-    pass
-
-
 class SubscriberConfig(BaseSchema):
     pass
 
@@ -567,8 +559,6 @@ class SubscriberResponse(BaseSchema):
     
     name = fields.Str(required=False)
     
-    provider = fields.Str(required=False)
-    
     webhook_url = fields.Str(required=False)
     
     association = fields.Nested(Association, required=False)
@@ -588,42 +578,6 @@ class SubscriberResponse(BaseSchema):
     auth_meta = fields.Nested(AuthMeta, required=False)
     
     event_configs = fields.List(fields.Nested(EventConfig, required=False), required=False)
-    
-
-
-class Events(BaseSchema):
-    # Webhook swagger.json
-
-    
-    slug = fields.Str(required=False)
-    
-    topic = fields.Str(required=False)
-    
-
-
-class SubscriberConfigRequestV2(BaseSchema):
-    # Webhook swagger.json
-
-    
-    id = fields.Int(required=False)
-    
-    name = fields.Str(required=False)
-    
-    webhook_url = fields.Str(required=False)
-    
-    provider = fields.Str(required=False)
-    
-    association = fields.Nested(Association, required=False)
-    
-    custom_headers = fields.Dict(required=False)
-    
-    status = fields.Str(required=False)
-    
-    email_id = fields.Str(required=False)
-    
-    auth_meta = fields.Nested(AuthMeta, required=False)
-    
-    events = fields.List(fields.Nested(Events, required=False), required=False)
     
 
 
@@ -662,8 +616,6 @@ class SubscriberConfigResponse(BaseSchema):
     name = fields.Str(required=False)
     
     webhook_url = fields.Str(required=False)
-    
-    provider = fields.Str(required=False)
     
     association = fields.Nested(Association, required=False)
     

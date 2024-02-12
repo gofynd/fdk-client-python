@@ -6186,7 +6186,7 @@ Send OTP using email and sms
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").communication.sendOtp(ci=ci, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").communication.sendOtp(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -6197,8 +6197,7 @@ except Exception as e:
 
 
 | Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| ci | Boolean? | no | Common Information |  
+| --------- | -----  | -------- | ----------- |
 | body | [SendOtpCommsReq](#SendOtpCommsReq) | yes | Request body |
 
 
