@@ -14,7 +14,7 @@ class Share:
 
     
     async def createShortLink(self, body="", request_headers:Dict={}):
-        """Create short link
+        """Generate a shortened URL link for sharing.
         """
         payload = {}
         
@@ -57,7 +57,7 @@ class Share:
         return response
     
     async def getShortLinks(self, page_no=None, page_size=None, created_by=None, active=None, short_url=None, original_url=None, title=None, request_headers:Dict={}):
-        """Get short links
+        """Retrieve a list of all generated short links.
         :param page_no : Current page number : type integer
         :param page_size : Current page size : type integer
         :param created_by : Short link creator : type string
@@ -117,7 +117,7 @@ class Share:
         return response
     
     async def getShortLinkByHash(self, hash=None, request_headers:Dict={}):
-        """Get short link by hash
+        """Retrieve a specific short link by its unique hash.
         :param hash : Hash of short url : type string
         """
         payload = {}
@@ -159,7 +159,7 @@ class Share:
         return response
     
     async def updateShortLinkById(self, id=None, body="", request_headers:Dict={}):
-        """Update short link by id
+        """Update details of a specific short link by its ID.
         :param id : Short link document identifier : type string
         """
         payload = {}
@@ -205,7 +205,7 @@ class Share:
         return response
     
     async def getShortLinkClickStats(self, surl_id=None, request_headers:Dict={}):
-        """Retrieve click statistics for a given short link ID.
+        """Retrieve statistics and analytics for clicks on a short link.
         :param surl_id : Short link ID for which click statistics are to be retrieved. : type string
         """
         payload = {}

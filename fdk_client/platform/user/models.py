@@ -895,7 +895,7 @@ class SocialTokens(BaseSchema):
     
     facebook = fields.Nested(Facebook, required=False)
     
-    accountkit = fields.Nested(Accountkit, required=False)
+    account_kit = fields.Nested(Accountkit, required=False)
     
     google = fields.Nested(Google, required=False)
     

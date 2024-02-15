@@ -32,7 +32,7 @@ class Share:
         self._urls.update(urls)
     
     async def getApplicationQRCode(self, body="", request_headers:Dict={}):
-        """Use this API to create a QR code of an app for sharing it with users who want to use the app.
+        """Generates a QR code for the application for easy sharing.
         """
         payload = {}
         
@@ -73,7 +73,7 @@ class Share:
         return response
     
     async def getProductQRCodeBySlug(self, slug=None, body="", request_headers:Dict={}):
-        """Use this API to create a QR code of a product for sharing it with users who want to view/purchase the product.
+        """Creates a QR code for a specific product identified by its slug.
         :param slug : A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint. : type string
         """
         payload = {}
@@ -117,7 +117,7 @@ class Share:
         return response
     
     async def getCollectionQRCodeBySlug(self, slug=None, body="", request_headers:Dict={}):
-        """Use this API to create a QR code of a collection of products for sharing it with users who want to view/purchase the collection.
+        """Generates a QR code for a specific product collection using its slug.
         :param slug : A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint. : type string
         """
         payload = {}
@@ -161,7 +161,7 @@ class Share:
         return response
     
     async def getUrlQRCode(self, url=None, body="", request_headers:Dict={}):
-        """Use this API to create a QR code of a URL for sharing it with users who want to visit the link.
+        """Converts a given URL into a scannable QR code.
         :param url : A link or a web address : type string
         """
         payload = {}
@@ -205,7 +205,7 @@ class Share:
         return response
     
     async def createShortLink(self, body="", request_headers:Dict={}):
-        """Use this API to create a short link that is easy to write/share/read as compared to long URLs.
+        """Creates a shortened version of a given URL for easier sharing.
         """
         payload = {}
         
@@ -250,7 +250,7 @@ class Share:
         return response
     
     async def getShortLinkByHash(self, hash=None, body="", request_headers:Dict={}):
-        """Use this API to get a short link by using a hash value.
+        """Retrieves a previously created short link using its hash identifier.
         :param hash : A string value used for converting long URL to short URL and vice-versa. : type string
         """
         payload = {}
@@ -294,7 +294,7 @@ class Share:
         return response
     
     async def getOriginalShortLinkByHash(self, hash=None, body="", request_headers:Dict={}):
-        """Use this API to retrieve the original link from a short-link by using a hash value.
+        """Retrieve the original link from a short-link by using a hash value.
         :param hash : A string value used for converting long URL to short URL and vice-versa. : type string
         """
         payload = {}

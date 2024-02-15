@@ -7,8 +7,11 @@
 ## Common Methods
 Application configuration apis
 
-Default
+Application search
 * [searchApplication](#searchapplication)
+
+
+Location Information
 * [getLocations](#getlocations)
 
 
@@ -19,7 +22,7 @@ Default
 
 
 ### searchApplication
-Search Application
+Searches through applications.
 
 
 
@@ -43,7 +46,7 @@ except Exception as e:
 
 
 
-Provide application name or domain url
+Provide application name or domain url. 
 
 *Returned Response:*
 
@@ -137,8 +140,10 @@ Success
 ---
 
 
+
+
 ### getLocations
-Get countries, states, cities
+Fetches available locations.
 
 
 
@@ -162,7 +167,7 @@ except Exception as e:
 
 
 
-Get countries, states, cities
+Retrieves a list of all locations of countries, states, cities. 
 
 *Returned Response:*
 

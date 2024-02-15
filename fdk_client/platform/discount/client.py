@@ -13,7 +13,7 @@ class Discount:
 
     
     async def getDiscounts(self, view=None, q=None, page_no=None, page_size=None, archived=None, month=None, year=None, type=None, app_ids=None, request_headers:Dict={}):
-        """Fetch discount list.
+        """Retrieve a list of available discounts.
         :param view : listing or calender.  Default is listing. : type string
         :param q : The search query. This can be a partial or complete name of a discount. : type string
         :param page_no : page number. Default is 1. : type integer
@@ -79,7 +79,7 @@ class Discount:
         return response
     
     async def createDiscount(self, body="", request_headers:Dict={}):
-        """Create Discount.
+        """Create discount.
         """
         payload = {}
         
@@ -122,7 +122,7 @@ class Discount:
         return response
     
     async def getDiscount(self, id=None, request_headers:Dict={}):
-        """Fetch discount.
+        """Retrieve detailed information about a specific discount.
         :param id : unique id. : type string
         """
         payload = {}
@@ -164,7 +164,7 @@ class Discount:
         return response
     
     async def updateDiscount(self, id=None, body="", request_headers:Dict={}):
-        """Update Discount.
+        """Create discount.
         :param id : id : type string
         """
         payload = {}
@@ -210,7 +210,7 @@ class Discount:
         return response
     
     async def upsertDiscountItems(self, id=None, body="", request_headers:Dict={}):
-        """Create custom discounts through API.
+        """Create custom discounts.
         :param id : Job ID of the discount. : type string
         """
         payload = {}
@@ -247,7 +247,7 @@ class Discount:
         return response
     
     async def validateDiscountFile(self, discount=None, body="", request_headers:Dict={}):
-        """Validate File.
+        """Validate file.
         :param discount : discount : type string
         """
         payload = {}
@@ -293,7 +293,7 @@ class Discount:
         return response
     
     async def downloadDiscountFile(self, type=None, body="", request_headers:Dict={}):
-        """Validate File.
+        """Validate file.
         :param type : type : type string
         """
         payload = {}
@@ -339,7 +339,7 @@ class Discount:
         return response
     
     async def getValidationJob(self, id=None, request_headers:Dict={}):
-        """Validate File Job.
+        """Validate file.
         :param id : id : type string
         """
         payload = {}
@@ -381,7 +381,7 @@ class Discount:
         return response
     
     async def cancelValidationJob(self, id=None, request_headers:Dict={}):
-        """Cancel Validation Job.
+        """Validate file.
         :param id : id : type string
         """
         payload = {}
@@ -423,7 +423,7 @@ class Discount:
         return response
     
     async def getDownloadJob(self, id=None, request_headers:Dict={}):
-        """Download File Job.
+        """Download file Job.
         :param id : id : type string
         """
         payload = {}
@@ -465,7 +465,7 @@ class Discount:
         return response
     
     async def cancelDownloadJob(self, id=None, request_headers:Dict={}):
-        """Cancel Download Job.
+        """Cancel download Job.
         :param id : id : type string
         """
         payload = {}

@@ -14,7 +14,7 @@ class Content:
 
     
     async def getAnnouncementsList(self, page_no=None, page_size=None, request_headers:Dict={}):
-        """Announcements are useful to highlight a message or information on top of a webpage. Use this API to retrieve a list of announcements.	
+        """Retrieve a list of announcements.
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         """
@@ -59,7 +59,7 @@ class Content:
         return response
     
     async def createAnnouncement(self, body="", request_headers:Dict={}):
-        """Announcements are useful to highlight a message or information on top of a webpage. Use this API to create an announcement.
+        """Generate and add a new announcement.
         """
         payload = {}
         
@@ -102,7 +102,7 @@ class Content:
         return response
     
     async def getAnnouncementById(self, announcement_id=None, request_headers:Dict={}):
-        """Use this API to retrieve an announcement and its details such as the target platform and pages on which it's applicable
+        """Retrieve detailed information about a specific announcement.
         :param announcement_id : ID allotted to the announcement. : type string
         """
         payload = {}
@@ -144,7 +144,7 @@ class Content:
         return response
     
     async def updateAnnouncement(self, announcement_id=None, body="", request_headers:Dict={}):
-        """Use this API to edit an existing announcement and its details such as the target platform and pages on which it's applicable
+        """Modify the content and settings of a specific announcement.
         :param announcement_id : ID allotted to the announcement. : type string
         """
         payload = {}
@@ -190,7 +190,7 @@ class Content:
         return response
     
     async def updateAnnouncementSchedule(self, announcement_id=None, body="", request_headers:Dict={}):
-        """Use this API to edit the duration, i.e. start date-time and end date-time of an announcement. Moreover, you can enable/disable an announcement using this API.
+        """Modify the scheduling of a specific announcement.
         :param announcement_id : ID allotted to the announcement. : type string
         """
         payload = {}
@@ -236,7 +236,7 @@ class Content:
         return response
     
     async def deleteAnnouncement(self, announcement_id=None, request_headers:Dict={}):
-        """Use this API to delete an existing announcement.
+        """Remove a specific announcement.
         :param announcement_id : ID allotted to the announcement. : type string
         """
         payload = {}
@@ -278,7 +278,7 @@ class Content:
         return response
     
     async def createBlog(self, body="", request_headers:Dict={}):
-        """Use this API to create a blog.
+        """Generate and add a new blog.
         """
         payload = {}
         
@@ -321,7 +321,7 @@ class Content:
         return response
     
     async def getBlogs(self, page_no=None, page_size=None, request_headers:Dict={}):
-        """Use this API to get a list of blogs along with their details, such as the title, reading time, publish status, feature image, tags, author, etc.
+        """Retrieve a list of available blogs.
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         """
@@ -366,7 +366,7 @@ class Content:
         return response
     
     async def updateBlog(self, id=None, body="", request_headers:Dict={}):
-        """Use this API to update the details of an existing blog which includes title, feature image, content, SEO details, expiry, etc.
+        """Modify the content and settings of a specific blog.
         :param id : ID allotted to the blog. : type string
         """
         payload = {}
@@ -412,7 +412,7 @@ class Content:
         return response
     
     async def deleteBlog(self, id=None, request_headers:Dict={}):
-        """Use this API to delete a blog.
+        """Remove a specific blog.
         :param id : ID allotted to the blog. : type string
         """
         payload = {}
@@ -454,7 +454,7 @@ class Content:
         return response
     
     async def getComponentById(self, slug=None, request_headers:Dict={}):
-        """Use this API to retrieve the components of a blog, such as title, slug, feature image, content, schedule, publish status, author, etc.
+        """Retrieve detailed information about a specific component.
         :param slug : A short, human-readable, URL-friendly identifier of a blog page. You can get slug value of a blog from `getBlogs` API. : type string
         """
         payload = {}
@@ -496,7 +496,7 @@ class Content:
         return response
     
     async def addDataLoader(self, body="", request_headers:Dict={}):
-        """Use this API to add data loader. This includes the data loader name, operationId, service name and its type (url/function) with corresponding value.
+        """Create and add a new data loader.
         """
         payload = {}
         
@@ -539,7 +539,7 @@ class Content:
         return response
     
     async def getDataLoaders(self, request_headers:Dict={}):
-        """Use this to get all data loaders of an application
+        """Retrieve a list of data loaders.
         """
         payload = {}
         
@@ -578,7 +578,7 @@ class Content:
         return response
     
     async def deleteDataLoader(self, data_loader_id=None, request_headers:Dict={}):
-        """Use this API to delete data loader.
+        """Remove a specific data loader.
         :param data_loader_id : ID allotted to the data loader. : type string
         """
         payload = {}
@@ -620,7 +620,7 @@ class Content:
         return response
     
     async def editDataLoader(self, data_loader_id=None, body="", request_headers:Dict={}):
-        """Use this API to edit the details of an existing data loader by its ID.
+        """Modify the settings of a specific data loader.
         :param data_loader_id : ID allotted to the data loader. : type string
         """
         payload = {}
@@ -708,7 +708,7 @@ class Content:
         return response
     
     async def selectDataLoader(self, data_loader_id=None, request_headers:Dict={}):
-        """Use this API to select a data loader to be used in applications.
+        """Choose and set a data loader for use.
         :param data_loader_id : ID allotted to the data loader. : type string
         """
         payload = {}
@@ -750,7 +750,7 @@ class Content:
         return response
     
     async def resetDataLoader(self, service=None, operation_id=None, request_headers:Dict={}):
-        """Use this API to reselect a data loader.
+        """Clear and reset data loader settings.
         :param service : Name of service. : type string
         :param operation_id : Name of operation id of the service. : type string
         """
@@ -795,7 +795,7 @@ class Content:
         return response
     
     async def getFaqCategories(self, request_headers:Dict={}):
-        """FAQs can be divided into categories. Use this API to get a list of FAQ categories.
+        """Retrieve a list of FAQ categories.
         """
         payload = {}
         
@@ -834,7 +834,7 @@ class Content:
         return response
     
     async def getFaqCategoryBySlugOrId(self, id_or_slug=None, request_headers:Dict={}):
-        """FAQs can be divided into categories. Use this API to get an FAQ categories using its slug or ID.
+        """Retrieve detailed information about a specific FAQ category.
         :param id_or_slug : ID or the slug allotted to an FAQ category. Slug is a short, human-readable, URL-friendly identifier of an object. You can get slug value of an FAQ category from `getFaqCategories` API. : type string
         """
         payload = {}
@@ -876,7 +876,7 @@ class Content:
         return response
     
     async def createFaqCategory(self, body="", request_headers:Dict={}):
-        """FAQs help users to solve an issue or know more about a process. FAQs can be categorized separately, for e.g. some questions can be related to payment, some could be related to purchase, shipping, navigating, etc. Use this API to create an FAQ category.
+        """Generate and add a new FAQ category.
         """
         payload = {}
         
@@ -919,7 +919,7 @@ class Content:
         return response
     
     async def updateFaqCategory(self, id=None, body="", request_headers:Dict={}):
-        """Use this API to edit an existing FAQ category.
+        """Modify the content and settings of a specific FAQ category.
         :param id : ID allotted to an FAQ category. : type string
         """
         payload = {}
@@ -965,7 +965,7 @@ class Content:
         return response
     
     async def deleteFaqCategory(self, id=None, request_headers:Dict={}):
-        """Use this API to delete an FAQ category.
+        """Remove a specific FAQ category.
         :param id : ID allotted to an FAQ category. : type string
         """
         payload = {}
@@ -1007,7 +1007,7 @@ class Content:
         return response
     
     async def getFaqsByCategoryIdOrSlug(self, id_or_slug=None, request_headers:Dict={}):
-        """Use this API to retrieve all the commonly asked question and answers belonging to an FAQ category.
+        """Retrieve a list of FAQs within a specific category.
         :param id_or_slug : ID or the slug allotted to an FAQ category. Slug is a short, human-readable, URL-friendly identifier of an object. You can get slug value of an FAQ category from `getFaqCategories` API. : type string
         """
         payload = {}
@@ -1049,7 +1049,7 @@ class Content:
         return response
     
     async def addFaq(self, category_id=None, body="", request_headers:Dict={}):
-        """FAQs help users to solve an issue or know more about a process. Use this API to create an FAQ for a given FAQ category.
+        """Create and add a new FAQ.
         :param category_id : ID allotted to an FAQ category. : type string
         """
         payload = {}
@@ -1095,7 +1095,7 @@ class Content:
         return response
     
     async def updateFaq(self, category_id=None, faq_id=None, body="", request_headers:Dict={}):
-        """Use this API to edit an existing FAQ.
+        """Modify the content and settings of a specific FAQ.
         :param category_id : ID allotted to an FAQ category. : type string
         :param faq_id : ID allotted to an FAQ. : type string
         """
@@ -1144,7 +1144,7 @@ class Content:
         return response
     
     async def deleteFaq(self, category_id=None, faq_id=None, request_headers:Dict={}):
-        """Use this API to delete an existing FAQ.
+        """Remove a specific FAQ.
         :param category_id : ID allotted to an FAQ category. : type string
         :param faq_id : ID allotted to an FAQ. : type string
         """
@@ -1189,7 +1189,7 @@ class Content:
         return response
     
     async def getFaqByIdOrSlug(self, id_or_slug=None, request_headers:Dict={}):
-        """Use this API to retrieve a specific FAQ. You will get the question and answer of that FAQ.
+        """Retrieve detailed information about a specific FAQ.
         :param id_or_slug : ID or the slug allotted to an FAQ category. Slug is a short, human-readable, URL-friendly identifier of an object. You can get slug value of an FAQ category from `getFaqCategories` API. : type string
         """
         payload = {}
@@ -1231,7 +1231,7 @@ class Content:
         return response
     
     async def generateSEOTitle(self, type=None, body="", request_headers:Dict={}):
-        """Use this API to get GPT3 generated SEO meta tag title for content
+        """Create an SEO-friendly title for content.
         :param type : String representing the type of SEO content to be generated. Possible values are: title, description : type 
         """
         payload = {}
@@ -1277,7 +1277,7 @@ class Content:
         return response
     
     async def getLandingPages(self, page_no=None, page_size=None, request_headers:Dict={}):
-        """Landing page is the first page that a prospect lands upon while visiting a website. Use this API to fetch a list of landing pages.
+        """Retrieve a list of landing pages.
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         """
@@ -1322,7 +1322,7 @@ class Content:
         return response
     
     async def createLandingPage(self, body="", request_headers:Dict={}):
-        """Landing page is the first page that a prospect lands upon while visiting a website. Use this API to create a landing page.
+        """Generate and add a new landing page.
         """
         payload = {}
         
@@ -1365,7 +1365,7 @@ class Content:
         return response
     
     async def updateLandingPage(self, id=None, body="", request_headers:Dict={}):
-        """Use this API to edit the details of an existing landing page.
+        """Modify the content and settings of a specific landing page.
         :param id : ID allotted to a landing page. : type string
         """
         payload = {}
@@ -1411,7 +1411,7 @@ class Content:
         return response
     
     async def deleteLandingPage(self, id=None, request_headers:Dict={}):
-        """Use this API to delete an existing landing page.
+        """Remove a specific landing page.
         :param id : ID allotted to a landing page. : type string
         """
         payload = {}
@@ -1453,7 +1453,7 @@ class Content:
         return response
     
     async def getLegalInformation(self, request_headers:Dict={}):
-        """Use this API to get the legal information of an application, which includes Policy, Terms and Conditions, Shipping Policy and FAQ regarding the application.
+        """Retrieve legal information and terms.
         """
         payload = {}
         
@@ -1492,7 +1492,7 @@ class Content:
         return response
     
     async def updateLegalInformation(self, body="", request_headers:Dict={}):
-        """Use this API to edit, update and save the legal information of an application, which includes Policy, Terms and Conditions, Shipping Policy and FAQ regarding the application.
+        """Modify legal information and terms.
         """
         payload = {}
         
@@ -1535,7 +1535,7 @@ class Content:
         return response
     
     async def getNavigations(self, device_platform=None, page_no=None, page_size=None, request_headers:Dict={}):
-        """Use this API to fetch the navigations details which includes the items of the navigation pane. It also shows the orientation, links, sub-navigations, etc.
+        """Retrieve a list of navigational elements.
         :param device_platform : Filter navigations by platform. Acceptable values are: web, android, ios, all : type string
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
@@ -1583,7 +1583,7 @@ class Content:
         return response
     
     async def createNavigation(self, body="", request_headers:Dict={}):
-        """Navigation is the arrangement of navigational items to ease the accessibility of resources for users on a website. Use this API to create a navigation.
+        """Generate and add a new navigation element.
         """
         payload = {}
         
@@ -1626,7 +1626,7 @@ class Content:
         return response
     
     async def getDefaultNavigations(self, request_headers:Dict={}):
-        """On any website (application), there are navigations that are present by default. Use this API to retrieve those default navigations.
+        """Retrieve default navigation elements.
         """
         payload = {}
         
@@ -1665,7 +1665,7 @@ class Content:
         return response
     
     async def getNavigationBySlug(self, slug=None, device_platform=None, request_headers:Dict={}):
-        """Use this API to retrieve a navigation by its slug.
+        """Retrieve detailed information about a specific navigation element.
         :param slug : A short, human-readable, URL-friendly identifier of a navigation. You can get slug value of a navigation from `getNavigations` API. : type string
         :param device_platform : Filter navigations by platform. Acceptable values are: web, android, ios, all : type string
         """
@@ -1710,7 +1710,7 @@ class Content:
         return response
     
     async def updateNavigation(self, id=None, body="", request_headers:Dict={}):
-        """Use this API to edit the details of an existing navigation.
+        """Modify the content and settings of a specific navigation element.
         :param id : ID allotted to the navigation. : type string
         """
         payload = {}
@@ -1756,7 +1756,7 @@ class Content:
         return response
     
     async def deleteNavigation(self, id=None, request_headers:Dict={}):
-        """Use this API to delete an existing navigation.
+        """Remove a specific navigation element.
         :param id : ID allotted to the navigation. : type string
         """
         payload = {}
@@ -1798,7 +1798,7 @@ class Content:
         return response
     
     async def getPageMeta(self, request_headers:Dict={}):
-        """Use this API to get the meta of custom pages (blog, page) and default system pages (e.g. home/brand/category/collection).
+        """Retrieve metadata for a specific page.
         """
         payload = {}
         
@@ -1837,7 +1837,7 @@ class Content:
         return response
     
     async def getPageSpec(self, request_headers:Dict={}):
-        """Use this API to get the specifications of a page, such as page type, display name, params and query.
+        """Retrieve specifications and details for a specific page.
         """
         payload = {}
         
@@ -1876,7 +1876,7 @@ class Content:
         return response
     
     async def createPagePreview(self, body="", request_headers:Dict={}):
-        """Use this API to create a page preview to check the appearance of a custom page.
+        """Generate and add a new page preview.
         """
         payload = {}
         
@@ -1919,7 +1919,7 @@ class Content:
         return response
     
     async def updatePagePreview(self, slug=None, body="", request_headers:Dict={}):
-        """Use this API to change the publish status of an existing page. Allows you to publish and unpublish the page.
+        """Modify the content and settings of a specific page preview.
         :param slug : A short, human-readable, URL-friendly identifier of a page. You can get slug value of a page from `getPages` API. : type string
         """
         payload = {}
@@ -1965,7 +1965,7 @@ class Content:
         return response
     
     async def deletePage(self, id=None, request_headers:Dict={}):
-        """Use this API to delete an existing page.
+        """Remove a page from the platform.
         :param id : ID allotted to the page. : type string
         """
         payload = {}
@@ -2007,7 +2007,7 @@ class Content:
         return response
     
     async def addPathRedirectionRules(self, body="", request_headers:Dict={}):
-        """Use this API to add redirection rules
+        """Create and add rules for path redirection.
         """
         payload = {}
         
@@ -2050,7 +2050,7 @@ class Content:
         return response
     
     async def getPathRedirectionRules(self, page_size=None, page_no=None, request_headers:Dict={}):
-        """Use this API to get path based redirection rules.
+        """Retrieve a list of path redirection rules.
         :param page_size : The number of items to retrieve in each page. Default value is 5.  : type integer
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         """
@@ -2095,7 +2095,7 @@ class Content:
         return response
     
     async def getPathRedirectionRule(self, path_id=None, request_headers:Dict={}):
-        """Use this API to get path based redirection rule.
+        """Retrieve detailed information about a specific path redirection rule.
         :param path_id : ID allotted to the path redirection rule. : type string
         """
         payload = {}
@@ -2137,7 +2137,7 @@ class Content:
         return response
     
     async def updatePathRedirectionRules(self, path_id=None, body="", request_headers:Dict={}):
-        """Use this API to update redirection rules
+        """Modify settings for path redirection rules.
         :param path_id : ID allotted to the path redirection rule. : type string
         """
         payload = {}
@@ -2183,7 +2183,7 @@ class Content:
         return response
     
     async def deletePathRedirectionRules(self, path_id=None, request_headers:Dict={}):
-        """Use this API to delete redirection rules
+        """Remove specific path redirection rules.
         :param path_id : ID allotted to the path redirection rule. : type string
         """
         payload = {}
@@ -2216,7 +2216,7 @@ class Content:
         return response
     
     async def getSEOConfiguration(self, request_headers:Dict={}):
-        """Use this API to know how the SEO is configured in the application. This includes the sitemap, robot.txt, custom meta tags, etc.
+        """Retrieve configuration settings for SEO.
         """
         payload = {}
         
@@ -2255,7 +2255,7 @@ class Content:
         return response
     
     async def updateSEOConfiguration(self, body="", request_headers:Dict={}):
-        """Use this API to edit the SEO details of an application. This includes the sitemap, robot.txt, custom meta tags, etc.
+        """Modify configuration settings for SEO.
         """
         payload = {}
         
@@ -2788,7 +2788,7 @@ class Content:
         return response
     
     async def getSupportInformation(self, request_headers:Dict={}):
-        """Use this API to get the contact details for customer support, including emails and phone numbers.
+        """Retrieve information related to customer support.
         """
         payload = {}
         
@@ -2827,7 +2827,7 @@ class Content:
         return response
     
     async def updateSupportInformation(self, body="", request_headers:Dict={}):
-        """Use this API to edit the existing contact details for customer support, including emails and phone numbers.
+        """Modify information related to customer support.
         """
         payload = {}
         
@@ -2870,7 +2870,7 @@ class Content:
         return response
     
     async def updateInjectableTag(self, body="", request_headers:Dict={}):
-        """Use this API to edit and override all existing tags. All existing tags will be replaced by the new tags provided in body. 
+        """Modify settings for an injectable tag.
         """
         payload = {}
         
@@ -2913,7 +2913,7 @@ class Content:
         return response
     
     async def getInjectableTags(self, all=None, request_headers:Dict={}):
-        """Use this API to get the CSS and JS injected in the application in the form of tags.
+        """Retrieve a list of injectable tags.
         :param all : Get all tags irrespective of the creator of tags : type boolean
         """
         payload = {}
@@ -2955,7 +2955,7 @@ class Content:
         return response
     
     async def addInjectableTag(self, body="", request_headers:Dict={}):
-        """CSS and JS can be injected in the application (website) with the help of tags. Use this API to create such tags by entering the tag name, tag type (css/js), url and position of the tag.
+        """Create and add a new injectable tag.
         """
         payload = {}
         
@@ -2998,7 +2998,7 @@ class Content:
         return response
     
     async def removeInjectableTag(self, body="", request_headers:Dict={}):
-        """Use this API to delete an existing tag.
+        """Delete a specific injectable tag.
         """
         payload = {}
         
@@ -3041,7 +3041,7 @@ class Content:
         return response
     
     async def editInjectableTag(self, tag_id=None, body="", request_headers:Dict={}):
-        """Use this API to edit the details of an existing tag by its ID.
+        """Modify settings for an injectable tag.
         :param tag_id : ID allotted to the tag. : type string
         """
         payload = {}
@@ -3087,7 +3087,7 @@ class Content:
         return response
     
     async def getBlogBySlug(self, slug=None, request_headers:Dict={}):
-        """Use this API to retrieve the components of a blog, such as title, slug, feature image, content, schedule, publish status, author, etc.
+        """Retrieve detailed information about a specific blog using its slug.
         :param slug : A short, human-readable, URL-friendly identifier of a blog page. You can get slug value of a blog from `getBlogs` API. : type string
         """
         payload = {}
@@ -3129,7 +3129,7 @@ class Content:
         return response
     
     async def createPage(self, body="", request_headers:Dict={}):
-        """Use this API to create a custom page using a title, seo, publish status, feature image, tags, meta, etc.
+        """Generate and add a new page to the platform.
         """
         payload = {}
         
@@ -3172,7 +3172,7 @@ class Content:
         return response
     
     async def getPages(self, page_no=None, page_size=None, request_headers:Dict={}):
-        """Use this API to retrieve a list of pages.
+        """Retrieve a list of available pages.
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         """
@@ -3217,7 +3217,7 @@ class Content:
         return response
     
     async def updatePage(self, id=None, body="", request_headers:Dict={}):
-        """Use this API to edit the details of an existing page, such as its title, seo, publish status, feature image, tags, schedule, etc.
+        """Modify and update the content of a page.
         :param id : ID allotted to the page. : type string
         """
         payload = {}
@@ -3263,7 +3263,7 @@ class Content:
         return response
     
     async def getPageBySlug(self, slug=None, request_headers:Dict={}):
-        """Use this API to retrieve the components of a page, such as its title, seo, publish status, feature image, tags, schedule, etc.
+        """Retrieve detailed information about a specific page using its slug.
         :param slug : A short, human-readable, URL-friendly identifier of a page. You can get slug value of a page from `getPages` API. : type string
         """
         payload = {}
@@ -3382,12 +3382,12 @@ class Content:
 
         return response
     
-    async def getAppCustomFieldDefinitions(self, page_no=None, page_size=None, resource=None, type=None, search=None, request_headers:Dict={}):
+    async def getAppCustomFieldDefinitions(self, page_no=None, page_size=None, resources=None, types=None, search=None, request_headers:Dict={}):
         """Use this API to retrieve the definitions of custom fields.
         :param page_no :  : type string
         :param page_size :  : type string
-        :param resource :  : type string
-        :param type :  : type string
+        :param resources :  : type string
+        :param types :  : type string
         :param search :  : type string
         """
         payload = {}
@@ -3396,10 +3396,10 @@ class Content:
             payload["page_no"] = page_no
         if page_size is not None:
             payload["page_size"] = page_size
-        if resource is not None:
-            payload["resource"] = resource
-        if type is not None:
-            payload["type"] = type
+        if resources is not None:
+            payload["resources"] = resources
+        if types is not None:
+            payload["types"] = types
         if search is not None:
             payload["search"] = search
 
@@ -3408,8 +3408,8 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/metafields/definitions", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"},"examples":{"success":{"value":1},"failure":{"value":10},"success1":{"value":1},"success2":{"value":2},"duplicateFieldExample":{"value":11},"validationErrorExample":{"value":12},"failure2":{"value":10}}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"},"examples":{"success":{"value":"5eda528b97457fe43a733ace"},"failure":{"value":"5eda528b97457fe43a733acd"}}},{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"},"examples":{"success":{"value":1},"failure":{"value":1}}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"},"examples":{"success":{"value":10},"failure":{"value":10}}}],"optional":[{"name":"resource","in":"query","required":false,"schema":{"type":"string","description":"This is the resource for which we are fetching definitions"},"examples":{"success":{"value":"product"},"failure":{"value":"some"}}},{"name":"type","in":"query","required":false,"schema":{"type":"string","description":"This is the type of the custom fields definitions"},"examples":{"success":{"value":"string_single_line"},"failure":{"value":"string_single"}}},{"name":"search","in":"query","required":false,"schema":{"type":"string","description":"This is the search text to filter custom fields definitions"},"examples":{"success":{"value":"sometext"},"failure":{"value":"sometext"}}}],"query":[{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"},"examples":{"success":{"value":1},"failure":{"value":1}}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"},"examples":{"success":{"value":10},"failure":{"value":10}}},{"name":"resource","in":"query","required":false,"schema":{"type":"string","description":"This is the resource for which we are fetching definitions"},"examples":{"success":{"value":"product"},"failure":{"value":"some"}}},{"name":"type","in":"query","required":false,"schema":{"type":"string","description":"This is the type of the custom fields definitions"},"examples":{"success":{"value":"string_single_line"},"failure":{"value":"string_single"}}},{"name":"search","in":"query","required":false,"schema":{"type":"string","description":"This is the search text to filter custom fields definitions"},"examples":{"success":{"value":"sometext"},"failure":{"value":"sometext"}}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"},"examples":{"success":{"value":1},"failure":{"value":10},"success1":{"value":1},"success2":{"value":2},"duplicateFieldExample":{"value":11},"validationErrorExample":{"value":12},"failure2":{"value":10}}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"},"examples":{"success":{"value":"5eda528b97457fe43a733ace"},"failure":{"value":"5eda528b97457fe43a733acd"}}}]}""", page_no=page_no, page_size=page_size, resource=resource, type=type, search=search)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, resource=resource, type=type, search=search)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/metafields/definitions", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"},"examples":{"success":{"value":1},"failure":{"value":10},"success1":{"value":1},"success2":{"value":2},"duplicateFieldExample":{"value":11},"validationErrorExample":{"value":12},"failure2":{"value":10}}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"},"examples":{"success":{"value":"5eda528b97457fe43a733ace"},"failure":{"value":"5eda528b97457fe43a733acd"}}},{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"},"examples":{"success":{"value":1},"failure":{"value":1}}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"},"examples":{"success":{"value":10},"failure":{"value":10}}}],"optional":[{"name":"resources","in":"query","required":false,"schema":{"type":"string","description":"This is the resource for which we are fetching definitions"},"examples":{"success":{"value":"product"},"failure":{"value":"some"}}},{"name":"types","in":"query","required":false,"schema":{"type":"string","description":"This is the type of the custom fields definitions"},"examples":{"success":{"value":"string_single_line"},"failure":{"value":"string_single"}}},{"name":"search","in":"query","required":false,"schema":{"type":"string","description":"This is the search text to filter custom fields definitions"},"examples":{"success":{"value":"sometext"},"failure":{"value":"sometext"}}}],"query":[{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"},"examples":{"success":{"value":1},"failure":{"value":1}}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"},"examples":{"success":{"value":10},"failure":{"value":10}}},{"name":"resources","in":"query","required":false,"schema":{"type":"string","description":"This is the resource for which we are fetching definitions"},"examples":{"success":{"value":"product"},"failure":{"value":"some"}}},{"name":"types","in":"query","required":false,"schema":{"type":"string","description":"This is the type of the custom fields definitions"},"examples":{"success":{"value":"string_single_line"},"failure":{"value":"string_single"}}},{"name":"search","in":"query","required":false,"schema":{"type":"string","description":"This is the search text to filter custom fields definitions"},"examples":{"success":{"value":"sometext"},"failure":{"value":"sometext"}}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"},"examples":{"success":{"value":1},"failure":{"value":10},"success1":{"value":1},"success2":{"value":2},"duplicateFieldExample":{"value":11},"validationErrorExample":{"value":12},"failure2":{"value":10}}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"},"examples":{"success":{"value":"5eda528b97457fe43a733ace"},"failure":{"value":"5eda528b97457fe43a733acd"}}}]}""", page_no=page_no, page_size=page_size, resources=resources, types=types, search=search)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, resources=resources, types=types, search=search)
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -3423,7 +3423,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/metafields/definitions", page_no=page_no, page_size=page_size, resource=resource, type=type, search=search), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/metafields/definitions", page_no=page_no, page_size=page_size, resources=resources, types=types, search=search), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CustomFieldDefinitionsSchema

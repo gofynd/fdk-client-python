@@ -13,7 +13,7 @@ class Catalog:
 
     
     async def listCategories(self, level=None, department=None, q=None, page_no=None, page_size=None, uids=None, slug=None, request_headers:Dict={}):
-        """This API gets meta associated to product categories.
+        """Retrieve a list of meta associated available product categories in the catalog.
         :param level : Get category for multiple levels : type string
         :param department : Get category for multiple departments filtered : type integer
         :param q : Get multiple categories filtered by search string : type string
@@ -73,7 +73,7 @@ class Catalog:
         return response
     
     async def createCategories(self, body="", request_headers:Dict={}):
-        """This API lets user create product categories
+        """Lets user create product categories on for the seller on the platform.
         """
         payload = {}
         
@@ -116,7 +116,7 @@ class Catalog:
         return response
     
     async def getCategoryData(self, uid=None, request_headers:Dict={}):
-        """This API gets meta associated to product categories.
+        """Retrieve detailed information about a specific category with the associated meta.
         :param uid : Category unique id : type string
         """
         payload = {}
@@ -158,7 +158,7 @@ class Catalog:
         return response
     
     async def updateCategory(self, uid=None, body="", request_headers:Dict={}):
-        """Update a product category using this api
+        """Modify data for an existing category in the catalog.
         :param uid : Category unique id : type string
         """
         payload = {}
@@ -204,7 +204,7 @@ class Catalog:
         return response
     
     async def getSellerInsights(self, seller_app_id=None, request_headers:Dict={}):
-        """Analytics data of catalog and inventory that are being cross-selled.
+        """Retrieve insights and analytics related to sellers within the catalog.
         :param seller_app_id : Id of the seller application which is serving the invetory/catalog of the company : type string
         """
         payload = {}
@@ -306,7 +306,7 @@ class Catalog:
         return response
     
     async def createDepartments(self, body="", request_headers:Dict={}):
-        """Create departments using the API.
+        """Create departments with this resource.
         """
         payload = {}
         
@@ -349,7 +349,7 @@ class Catalog:
         return response
     
     async def getDepartmentData(self, uid=None, request_headers:Dict={}):
-        """Allows you to get department data, by uid.
+        """Retrieve detailed information about a specific department by UID.
         :param uid : A `uid` is a unique identifier of a department. : type string
         """
         payload = {}
@@ -391,7 +391,7 @@ class Catalog:
         return response
     
     async def updateDepartment(self, uid=None, body="", request_headers:Dict={}):
-        """Update the department by their uid using this API.
+        """Modify the department by their uid using this API.
         :param uid : A `uid` is a unique identifier of a department. : type string
         """
         payload = {}
@@ -437,7 +437,7 @@ class Catalog:
         return response
     
     async def listTemplateBrandTypeValues(self, filter=None, template_tag=None, item_type=None, request_headers:Dict={}):
-        """The filter type query parameter defines what type of data to return. The type of query returns the valid values for the same
+        """Retrieve values related to template brand types. The filter type query parameter defines what type of data to return. The type of query returns the valid values for the same
         :param filter : A `filter` is the unique identifier of the type of value required. : type string
         :param template_tag : A `template_tag` is the identifier of the type of template required. : type string
         :param item_type : A `item_type` is the identifier of the type of template required. : type string
@@ -485,7 +485,7 @@ class Catalog:
         return response
     
     async def bulkHsnCode(self, body="", request_headers:Dict={}):
-        """Bulk Create or Update Hsn Code.
+        """Perform bulk updates of HSN codes for products.
         """
         payload = {}
         
@@ -528,7 +528,7 @@ class Catalog:
         return response
     
     async def getHsnCode(self, id=None, request_headers:Dict={}):
-        """Fetch Hsn Code.
+        """Retrieve the HSN code for a product.
         :param id : Unique id : type string
         """
         payload = {}
@@ -570,7 +570,7 @@ class Catalog:
         return response
     
     async def updateHsnCode(self, id=None, body="", request_headers:Dict={}):
-        """Update Hsn Code.
+        """Modify the HSN code associated with a product.
         :param id : Unique id : type string
         """
         payload = {}
@@ -616,7 +616,7 @@ class Catalog:
         return response
     
     async def getInventories(self, item_id=None, size=None, page_no=None, page_size=None, q=None, sellable=None, store_ids=None, size_identifier=None, request_headers:Dict={}):
-        """This API allows get Inventories data for particular company.
+        """Allows to get Inventories data for particular company.
         :param item_id : Item code of the product of which size is to be get. : type string
         :param size : Size of which inventory is to get. : type string
         :param page_no : The page number to navigate through the given set of results : type integer
@@ -679,7 +679,7 @@ class Catalog:
         return response
     
     async def getInventoryBulkUploadHistory(self, page_no=None, page_size=None, request_headers:Dict={}):
-        """This API helps to get bulk Inventory upload jobs data.
+        """Helps to get bulk Inventory upload jobs data.
         :param page_no : The page number to navigate through the given set of results : type integer
         :param page_size : Number of items to retrieve in each page. Default is 12. : type integer
         """
@@ -724,7 +724,7 @@ class Catalog:
         return response
     
     async def createBulkInventoryJob(self, body="", request_headers:Dict={}):
-        """This API helps to create a bulk Inventory upload job.
+        """Helps to create a bulk Inventory upload job.
         """
         payload = {}
         
@@ -767,7 +767,7 @@ class Catalog:
         return response
     
     async def deleteBulkInventoryJob(self, batch_id=None, request_headers:Dict={}):
-        """This API allows to delete bulk Inventory job associated with company.
+        """Allows to delete bulk Inventory job associated with company.
         :param batch_id : Batch Id of the bulk delete job. : type string
         """
         payload = {}
@@ -809,7 +809,7 @@ class Catalog:
         return response
     
     async def createBulkInventory(self, batch_id=None, body="", request_headers:Dict={}):
-        """This API helps to create products in bulk push to kafka for approval/creation.
+        """Helps to create products in bulk push to kafka for approval/creation.
         :param batch_id : Batch Id of the bulk create job. : type string
         """
         payload = {}
@@ -855,7 +855,7 @@ class Catalog:
         return response
     
     async def getInventoryExport(self, request_headers:Dict={}):
-        """This API helps to get Inventory export history.
+        """Helps to retrieve Inventory export history.
         """
         payload = {}
         
@@ -894,7 +894,7 @@ class Catalog:
         return response
     
     async def createInventoryExportJob(self, body="", request_headers:Dict={}):
-        """This API helps to create a Inventory export job.
+        """Helps to create a Inventory export job.
         """
         payload = {}
         
@@ -937,7 +937,7 @@ class Catalog:
         return response
     
     async def exportInventoryConfig(self, filter_type=None, request_headers:Dict={}):
-        """This API allows get List of different filters like brand, store, and type for inventory export.
+        """Retrieve List of different filters like brand, store, and type for inventory export.
         :param filter_type : filter type from any one of ['brand', 'store', 'type'] : type string
         """
         payload = {}
@@ -979,7 +979,7 @@ class Catalog:
         return response
     
     async def downloadInventoryTemplateView(self, item_type=None, request_headers:Dict={}):
-        """Allows you to download product template data
+        """Allows you to download product template data.
         :param item_type : An `item_type` defines the type of item. : type string
         """
         payload = {}
@@ -1012,7 +1012,7 @@ class Catalog:
         return response
     
     async def validateProductTemplateSchema(self, item_type=None, request_headers:Dict={}):
-        """Allows you to list all product templates validation values for all the fields present in the database
+        """Allows you to list all product templates validation values for all the fields present in the database.
         :param item_type : An `item_type` defines the type of item. The default value is standard. : type string
         """
         payload = {}
@@ -1054,7 +1054,7 @@ class Catalog:
         return response
     
     async def getOptimalLocations(self, body="", request_headers:Dict={}):
-        """
+        """Retrieve the most suitable locations based on certain criteria.
         """
         payload = {}
         
@@ -1229,7 +1229,7 @@ class Catalog:
         return response
     
     async def getCompanyMetrics(self, request_headers:Dict={}):
-        """Get the Company metrics associated with the company ID passed.
+        """Allows to view the company metrics, i.e. the status of its brand and stores. Also its allows to view the number of products, company documents & store documents which are verified and unverified.
         """
         payload = {}
         
@@ -1268,7 +1268,7 @@ class Catalog:
         return response
     
     async def getStoreDetail(self, q=None, page_no=None, page_size=None, request_headers:Dict={}):
-        """Get the details of the store associated with the company ID passed.
+        """Retrieve the details of the store associated with the company ID passed.
         :param q : The search related the store for the company id. : type string
         :param page_no : The number of page for the company id. : type integer
         :param page_size : Number of records that can be seen on the page for the company id. : type integer
@@ -1362,7 +1362,7 @@ class Catalog:
         return response
     
     async def getProductAttributes(self, category=None, filter=None, request_headers:Dict={}):
-        """This API allows to list all the attributes by their l3_categories.
+        """List all the attributes by their L3 categories.
         :param category : It is the name of the l3 cateogry : type string
         :param filter : If true, returns filtered values, else returns all the attributes : type boolean
         """
@@ -1407,7 +1407,7 @@ class Catalog:
         return response
     
     async def getGenderAttribute(self, attribute_slug=None, request_headers:Dict={}):
-        """This API allows to view the gender attribute details.
+        """Retrieve the gender attribute for catalog listings.
         :param attribute_slug : slug of the attribute for which you want to view the genders : type string
         """
         payload = {}
@@ -1449,7 +1449,7 @@ class Catalog:
         return response
     
     async def getProductBundle(self, q=None, slug=None, request_headers:Dict={}):
-        """Get all product bundles for a particular company
+        """Retrieve a list of product bundles available in the catalog.
         :param q : A search string that is searched with product bundle name. : type string
         :param slug : slugs of bundles to be retrieved. : type array
         """
@@ -1494,7 +1494,7 @@ class Catalog:
         return response
     
     async def createProductBundle(self, body="", request_headers:Dict={}):
-        """Create Product Bundle. See `ProductBundleRequest` for the request body parameter need to create a product bundle. On successful request, returns in `ProductBundleRequest` with id
+        """Create product bundle in the catalog.
         """
         payload = {}
         
@@ -1537,7 +1537,7 @@ class Catalog:
         return response
     
     async def getProductBundleDetail(self, id=None, request_headers:Dict={}):
-        """Get a particular Bundle details by its `id`. If successful, returns a Product bundle resource in the response body specified in `GetProductBundleResponse`
+        """Retrieve detailed information about a specific product bundle.
         :param id : A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. : type string
         """
         payload = {}
@@ -1579,7 +1579,7 @@ class Catalog:
         return response
     
     async def updateProductBundle(self, id=None, body="", request_headers:Dict={}):
-        """Update a Product Bundle by its id. On successful request, returns the updated product bundle
+        """Modify the details of an existing product bundle.
         :param id : A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. : type string
         """
         payload = {}
@@ -1625,7 +1625,7 @@ class Catalog:
         return response
     
     async def getProductAssetsInBulk(self, page_no=None, page_size=None, request_headers:Dict={}):
-        """This API helps to get bulk asset jobs data associated to a particular company.
+        """Helps to retrieve bulk asset jobs data associated to a particular company.
         :param page_no : The page number to navigate through the given set of results : type integer
         :param page_size : Number of items to retrieve in each page. Default is 12. : type integer
         """
@@ -1670,7 +1670,7 @@ class Catalog:
         return response
     
     async def createProductAssetsInBulk(self, body="", request_headers:Dict={}):
-        """This API helps to create a bulk asset upload job.
+        """Helps to create a bulk asset upload job.
         """
         payload = {}
         
@@ -1713,7 +1713,7 @@ class Catalog:
         return response
     
     async def getProductBulkUploadHistory(self, search=None, page_no=None, page_size=None, request_headers:Dict={}):
-        """This API helps to get bulk product upload jobs data.
+        """Helps to get bulk product upload jobs data.
         :param search : Search string to filter the results by batch id : type string
         :param page_no : The page number to navigate through the given set of results : type integer
         :param page_size : Number of items to retrieve in each page. Default is 12. : type integer
@@ -1804,7 +1804,7 @@ class Catalog:
         return response
     
     async def deleteProductBulkJob(self, batch_id=None, request_headers:Dict={}):
-        """This API allows to delete bulk product job associated with company.
+        """Allows to delete bulk product job associated with company.
         :param batch_id : Batch Id of the bulk product job to be deleted. : type integer
         """
         payload = {}
@@ -1846,7 +1846,7 @@ class Catalog:
         return response
     
     async def createProductsInBulk(self, batch_id=None, body="", request_headers:Dict={}):
-        """This API helps to create products in bulk push to kafka for approval/creation.
+        """Helps to create products in bulk push to kafka for approval/creation.
         :param batch_id : Batch Id in which assets to be uploaded. : type string
         """
         payload = {}
@@ -1892,7 +1892,7 @@ class Catalog:
         return response
     
     async def listProductTemplateExportDetails(self, request_headers:Dict={}):
-        """Can view details including trigger data, task id , etc.
+        """Retrieve export details related to product templates. Can view details including trigger data, task id , etc.
         """
         payload = {}
         
@@ -1931,7 +1931,7 @@ class Catalog:
         return response
     
     async def listHSNCodes(self, request_headers:Dict={}):
-        """Allows you to list all hsn Codes
+        """Retrieve a list of Harmonized System Nomenclature (HSN) codes.
         """
         payload = {}
         
@@ -1970,7 +1970,7 @@ class Catalog:
         return response
     
     async def getProductTags(self, request_headers:Dict={}):
-        """This API helps to get tags data associated to a particular company.
+        """Retrieve tags data associated to a particular company.
         """
         payload = {}
         
@@ -2009,7 +2009,7 @@ class Catalog:
         return response
     
     async def listProductTemplate(self, department=None, request_headers:Dict={}):
-        """Allows you to list all product templates, also can filter by department
+        """Allows you to list all product templates, also can filter by department.
         :param department : A `department` is the name of a particular department. : type string
         """
         payload = {}
@@ -2051,7 +2051,7 @@ class Catalog:
         return response
     
     async def listProductTemplateCategories(self, departments=None, item_type=None, request_headers:Dict={}):
-        """Allows you to list all product categories values for the departments specified
+        """Allows you to list all product categories values for the departments specified.
         :param departments : A `department` is name of a departments whose category needs to be listed. Can specify multiple departments. : type string
         :param item_type : An `item_type` is the type of item, it can be `set`, `standard`, `digital`, etc. : type string
         """
@@ -2096,7 +2096,7 @@ class Catalog:
         return response
     
     async def downloadProductTemplateViews(self, slug=None, item_type=None, type=None, request_headers:Dict={}):
-        """Allows you to download product template data
+        """Allows you to download product template data.
         :param slug : A `slug` is a unique identifier for a particular template. : type string
         :param item_type : An `item_type` defines the type of item. The default value is standard. : type string
         :param type : Format type of the sample file. The default value is excel. : type string
@@ -2135,7 +2135,7 @@ class Catalog:
         return response
     
     async def validateProductTemplate(self, slug=None, item_type=None, bulk=None, request_headers:Dict={}):
-        """Allows you to list all product templates validation values for all the fields present in the database
+        """Allows you to list all product templates validation values for all the fields present in the database.
         :param slug : A `slug` is a unique identifier for a particular template. : type string
         :param item_type : An `item_type` defines the type of item. The default value is standard. : type string
         :param bulk : This specification determines the schema type to be retrieved. When set to true, it will return the schema for bulk data; when set to false, it will provide the schema for a single product. The default value is false. : type boolean
@@ -2183,7 +2183,7 @@ class Catalog:
         return response
     
     async def getProductValidation(self, request_headers:Dict={}):
-        """This API validates product data.
+        """Retrieve validation data for a specific product.
         """
         payload = {}
         
@@ -2222,7 +2222,7 @@ class Catalog:
         return response
     
     async def getInventoryBySizeIdentifier(self, item_id=None, size_identifier=None, page_no=None, page_size=None, q=None, location_ids=None, request_headers:Dict={}):
-        """This API allows get Inventory data for particular company grouped by size and store.
+        """Allows to retrieve Inventory data for particular company grouped by size and store.
         :param item_id : Item code of the product of which size is to be get. : type integer
         :param size_identifier : Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get. : type string
         :param page_no : The page number to navigate through the given set of results : type integer
@@ -2279,7 +2279,7 @@ class Catalog:
         return response
     
     async def getProductSize(self, item_code=None, item_id=None, brand_uid=None, uid=None, request_headers:Dict={}):
-        """This API helps to get data associated to a particular product size.
+        """Retrieve data associated to a particular product size.
         :param item_code : Item code of the product size. : type string
         :param item_id : Item Id of the product size. : type integer
         :param brand_uid : Brand Id of the product size. : type integer
@@ -2330,7 +2330,7 @@ class Catalog:
         return response
     
     async def deleteSize(self, item_id=None, size=None, request_headers:Dict={}):
-        """This API allows to delete size associated with product.
+        """Allows to delete size associated with product.
         :param item_id : Item Id of the product associated with size to be deleted. : type integer
         :param size : size to be deleted. : type string
         """
@@ -2375,7 +2375,7 @@ class Catalog:
         return response
     
     async def getInventoryBySize(self, item_id=None, size=None, page_no=None, page_size=None, q=None, sellable=None, request_headers:Dict={}):
-        """This API allows get Inventory data for particular company grouped by size and store.
+        """Allows to retrieve Inventory data for particular company grouped by size and store.
         :param item_id : Item code of the product of which size is to be get. : type integer
         :param size : Size of which inventory is to get. : type string
         :param page_no : The page number to navigate through the given set of results : type integer
@@ -2432,7 +2432,7 @@ class Catalog:
         return response
     
     async def addInventory(self, item_id=None, size=None, body="", request_headers:Dict={}):
-        """This API allows add Inventory for particular size and store.
+        """Allows add Inventory for particular size and store.
         :param item_id : Item code of the product of which size is to be get. : type integer
         :param size : Size in which inventory is to be added. : type string
         """
@@ -2481,7 +2481,7 @@ class Catalog:
         return response
     
     async def getVariantsOfProducts(self, item_id=None, variant_type=None, page_no=None, page_size=None, request_headers:Dict={}):
-        """This API gets meta associated to products.
+        """Retrieve variants of a specific product.
         :param item_id : Get list of variants of item Id : type integer
         :param variant_type : Get multiple products filtered by variant type : type string
         :param page_no : The page number to navigate through the given set of results : type integer
@@ -2532,7 +2532,7 @@ class Catalog:
         return response
     
     async def getSizeGuides(self, active=None, q=None, tag=None, page_no=None, page_size=None, brand_id=None, request_headers:Dict={}):
-        """This API allows to view all the size guides associated to the seller.
+        """Allows to view all the size guides associated to the seller.
         :param active : filter size guide on basis of active, in-active : type boolean
         :param q : Query that is to be searched. : type string
         :param tag : to filter size guide on basis of tag. : type string
@@ -2589,7 +2589,7 @@ class Catalog:
         return response
     
     async def createSizeGuide(self, body="", request_headers:Dict={}):
-        """This API allows to create a size guide associated to a brand.
+        """Allows to create a size guide associated to a brand.
         """
         payload = {}
         
@@ -2632,7 +2632,7 @@ class Catalog:
         return response
     
     async def getSizeGuide(self, id=None, request_headers:Dict={}):
-        """This API helps to get data associated to a size guide.
+        """Retrieve data associated about a specific size guide.
         :param id : Id of the size guide to be viewed. : type string
         """
         payload = {}
@@ -2674,7 +2674,7 @@ class Catalog:
         return response
     
     async def updateSizeGuide(self, id=None, body="", request_headers:Dict={}):
-        """This API allows to edit a size guide.
+        """Allows to edit a size guide.
         :param id : Mongo id of the size guide to be edited : type string
         """
         payload = {}
@@ -2720,7 +2720,7 @@ class Catalog:
         return response
     
     async def getAllProductHsnCodes(self, page_no=None, page_size=None, q=None, type=None, request_headers:Dict={}):
-        """Hsn Code List.
+        """Retrieve all HSN codes associated with products.
         :param page_no : page no : type integer
         :param page_size : page size : type integer
         :param q : search using hsn code, description, reporting_hsn : type string
@@ -2771,7 +2771,7 @@ class Catalog:
         return response
     
     async def getSingleProductHSNCode(self, reporting_hsn=None, request_headers:Dict={}):
-        """Hsn Code List.
+        """Retrieve the HSN code for a single product.
         :param reporting_hsn : reporting_hsn : type string
         """
         payload = {}
@@ -2813,7 +2813,7 @@ class Catalog:
         return response
     
     async def updateInventories(self, body="", request_headers:Dict={}):
-        """This API allows add Inventory for particular size and store.
+        """Allows to add Inventory for particular size and store.
         """
         payload = {}
         
@@ -2856,7 +2856,7 @@ class Catalog:
         return response
     
     async def listInventoryExport(self, status=None, from_date=None, to_date=None, q=None, request_headers:Dict={}):
-        """This API helps you the get the history of inventory jobs depending on the filtered criteria.
+        """Helps you the retrieve the history of inventory jobs depending on the filtered criteria.
         :param status : Status of the export job. : type string
         :param from_date : Inventory export history filtered according to from_date. : type string
         :param to_date : Inventory export history filtered according to from_date. : type string
@@ -2907,7 +2907,7 @@ class Catalog:
         return response
     
     async def createInventoryExport(self, body="", request_headers:Dict={}):
-        """This API helps to create a Inventory export job.
+        """Helps to create a Inventory export job.
         """
         payload = {}
         
@@ -2950,7 +2950,7 @@ class Catalog:
         return response
     
     async def getProducts(self, brand_ids=None, category_ids=None, item_ids=None, department_ids=None, item_code=None, q=None, tags=None, page_no=None, page_size=None, request_headers:Dict={}):
-        """This API gets meta associated to products.
+        """Retrieve a list of products available
         :param brand_ids : Get multiple products filtered by Brand Ids : type array
         :param category_ids : Get multiple products filtered by Category Ids : type array
         :param item_ids : Get multiple products filtered by Item Ids : type array
@@ -3016,7 +3016,7 @@ class Catalog:
         return response
     
     async def createProduct(self, body="", request_headers:Dict={}):
-        """This API allows to create product.
+        """Allows to create product.
         """
         payload = {}
         
@@ -3059,7 +3059,7 @@ class Catalog:
         return response
     
     async def uploadBulkProducts(self, department=None, product_type=None, body="", request_headers:Dict={}):
-        """This API helps to create a bulk products upload job.
+        """Helps to create a bulk products upload job.
         :param department : Department of the product to be uploaded. : type string
         :param product_type : Product type of the product to be uploaded i.e. set, standard , digital. : type string
         """
@@ -3108,7 +3108,7 @@ class Catalog:
         return response
     
     async def getProductExportJobs(self, status=None, from_date=None, to_date=None, q=None, request_headers:Dict={}):
-        """Can view details including trigger data, task id , etc.
+        """View details including trigger data, task id , etc.
         :param status : This is a parameter used to find all the jobs with the specified status. : type string
         :param from_date : This is a parameter used to find the job from the date specified to the current date. : type string
         :param to_date : This is a parameter used to find the job from the from_date specified to the to_date. : type string
@@ -3159,7 +3159,7 @@ class Catalog:
         return response
     
     async def createProductExportJob(self, body="", request_headers:Dict={}):
-        """This API helps to create a Inventory export job.
+        """Helps to create a Inventory export job.
         """
         payload = {}
         
@@ -3202,7 +3202,7 @@ class Catalog:
         return response
     
     async def deleteProduct(self, item_id=None, request_headers:Dict={}):
-        """This API allows to delete product.
+        """Remove a specific product in the catalog
         :param item_id : Id of the product to be updated. : type integer
         """
         payload = {}
@@ -3244,7 +3244,7 @@ class Catalog:
         return response
     
     async def getProduct(self, item_id=None, brand_uid=None, item_code=None, request_headers:Dict={}):
-        """This API helps to get data associated to a particular product.
+        """Retrieve data associated to a particular product.
         :param item_id : Item Id of the product. : type integer
         :param brand_uid : Brand Id of the product. : type integer
         :param item_code : Item code of the product. : type string
@@ -3292,7 +3292,7 @@ class Catalog:
         return response
     
     async def editProduct(self, item_id=None, body="", request_headers:Dict={}):
-        """This API allows to edit product.
+        """Modify the details and settings of an existing product in the catalog.
         :param item_id : Id of the product to be updated. : type integer
         """
         payload = {}
@@ -3338,7 +3338,7 @@ class Catalog:
         return response
     
     async def allSizes(self, item_id=None, request_headers:Dict={}):
-        """This API allows to get  All Sizes for a given Product.
+        """Retrieve all available sizes for a product.
         :param item_id : Id of the product to be updated. : type integer
         """
         payload = {}
@@ -3380,7 +3380,7 @@ class Catalog:
         return response
     
     async def deleteRealtimeInventory(self, item_id=None, seller_identifier=None, body="", request_headers:Dict={}):
-        """This API allows add Inventory for particular size and store.
+        """Remove specific realtime inventory data.
         :param item_id : Item code of the product of which size is to be get. : type integer
         :param seller_identifier : Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get. : type string
         """
@@ -3429,7 +3429,7 @@ class Catalog:
         return response
     
     async def updateRealtimeInventory(self, item_id=None, seller_identifier=None, body="", request_headers:Dict={}):
-        """This API allows add Inventory for particular size and store.
+        """Allows to add Inventory for particular size and store.
         :param item_id : Item code of the product of which size is to be get. : type integer
         :param seller_identifier : Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get. : type string
         """

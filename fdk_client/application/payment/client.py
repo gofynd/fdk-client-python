@@ -26,7 +26,7 @@ class Payment:
             "checkAndUpdatePaymentStatus": "/service/application/payment/v1.0/payment/confirm/polling",
             "getPaymentModeRoutes": "/service/application/payment/v1.0/payment/options",
             "getPosPaymentModeRoutes": "/service/application/payment/v1.0/payment/options/pos",
-            "walletLinkInitiate": "/service/application/payment/v1.0/payment/options/wallet/link",
+            "walletLinkInitate": "/service/application/payment/v1.0/payment/options/wallet/link",
             "linkWallet": "/service/application/payment/v1.0/payment/options/wallet/verify",
             "delinkWallet": "/service/application/payment/v1.0/payment/options/wallet/delink",
             "getRupifiBannerDetails": "/service/application/payment/v1.0/rupifi/banner",
@@ -71,7 +71,7 @@ class Payment:
         self._urls.update(urls)
     
     async def getAggregatorsConfig(self, x_api_token=None, refresh=None, body="", request_headers:Dict={}):
-        """Use this API to retrieve the payment gateway key, secrets, merchant, SDK/API details to complete a payment at front-end.
+        """Retrieves configuration details for available payment aggregators.
         :param x-api-token : Used for basic authentication. : type string
         :param refresh : This is a boolean value. Select `true` to remove temporary cache files on payment gateway and replace with the latest one. : type boolean
         """
@@ -118,7 +118,7 @@ class Payment:
         return response
     
     async def attachCardToCustomer(self, body="", request_headers:Dict={}):
-        """Use this API to attach a customer's saved card at the payment gateway, such as Stripe, Juspay.
+        """Links a payment card to a customer's account.
         """
         payload = {}
         
@@ -163,7 +163,7 @@ class Payment:
         return response
     
     async def getActiveCardAggregator(self, refresh=None, body="", request_headers:Dict={}):
-        """Use this API to retrieve an active payment aggregator along with the Customer ID. This is applicable for cards payments only.
+        """Gets the active card aggregator for the user.
         :param refresh :  : type boolean
         """
         payload = {}
@@ -207,7 +207,7 @@ class Payment:
         return response
     
     async def getActiveUserCards(self, force_refresh=None, body="", request_headers:Dict={}):
-        """Use this API to retrieve a list of cards stored by user from an active payment gateway.
+        """Retrieves all active cards linked to a user.
         :param force_refresh :  : type boolean
         """
         payload = {}
@@ -251,7 +251,7 @@ class Payment:
         return response
     
     async def deleteUserCard(self, body="", request_headers:Dict={}):
-        """Use this API to delete a card added by a user on the payment gateway and clear the cache.
+        """Deletes a payment card from the user's account.
         """
         payload = {}
         
@@ -296,7 +296,7 @@ class Payment:
         return response
     
     async def verifyCustomerForPayment(self, body="", request_headers:Dict={}):
-        """Use this API to check if the customer is eligible to use credit-line facilities such as Simpl Pay Later and Rupifi.
+        """Checks the user's validity for proceeding with payment.
         """
         payload = {}
         
@@ -341,7 +341,7 @@ class Payment:
         return response
     
     async def verifyAndChargePayment(self, body="", request_headers:Dict={}):
-        """Use this API to verify and check the status of a payment transaction (server-to-server) made through aggregators like Simpl and Mswipe.
+        """Validates and processes a payment transaction.
         """
         payload = {}
         
@@ -386,7 +386,7 @@ class Payment:
         return response
     
     async def initialisePayment(self, body="", request_headers:Dict={}):
-        """PUse this API to inititate payment using UPI, BharatQR, wherein the UPI requests are send to the app and QR code is displayed on the screen.
+        """Initializes the payment procedure for an order.
         """
         payload = {}
         
@@ -431,7 +431,7 @@ class Payment:
         return response
     
     async def checkAndUpdatePaymentStatus(self, body="", request_headers:Dict={}):
-        """Use this API to perform continuous polling at intervals to check the status of payment until timeout.
+        """Checks and updates the current status of a payment.
         """
         payload = {}
         
@@ -476,7 +476,7 @@ class Payment:
         return response
     
     async def getPaymentModeRoutes(self, amount=None, cart_id=None, checkout_mode=None, refresh=None, order_id=None, card_reference=None, user_details=None, display_split=None, advance_payment=None, shipment_id=None, body="", request_headers:Dict={}):
-        """Use this API to get all valid payment options for doing a payment.
+        """Lists the payment mode options and their routing details.
         :param amount : Payable amount. : type integer
         :param cart_id : Identifier of the cart. : type string
         :param checkout_mode : Option to checkout for self or for others. : type string
@@ -547,7 +547,7 @@ class Payment:
         return response
     
     async def getPosPaymentModeRoutes(self, amount=None, cart_id=None, pincode=None, checkout_mode=None, refresh=None, card_reference=None, order_type=None, user_details=None, body="", request_headers:Dict={}):
-        """Use this API to get all valid payment options for doing a payment in POS.
+        """Lists payment modes available for Point-of-Sale (POS).
         :param amount : Payable amount. : type integer
         :param cart_id : Identifier of the cart. : type string
         :param pincode : The PIN Code of the destination address, e.g. 400059 : type string
@@ -611,14 +611,14 @@ class Payment:
 
         return response
     
-    async def walletLinkInitiate(self, body="", request_headers:Dict={}):
+    async def walletLinkInitate(self, body="", request_headers:Dict={}):
         """It will initiate linking of wallet for the aggregator.
         """
         payload = {}
         
 
         # Parameter validation
-        schema = PaymentValidator.walletLinkInitiate()
+        schema = PaymentValidator.walletLinkInitate()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -626,7 +626,7 @@ class Payment:
         schema = WalletLinkRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["walletLinkInitiate"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        url_with_params = await create_url_with_params(api_url=self._urls["walletLinkInitate"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
         query_string = await create_query_string()
 
         headers={}
@@ -643,7 +643,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["walletLinkInitiate"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/options/wallet/link", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["walletLinkInitate"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/options/wallet/link", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import WalletResponseSchema
@@ -651,7 +651,7 @@ class Payment:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for walletLinkInitiate")
+                print("Response Validation failed for walletLinkInitate")
                 print(e)
 
         return response
@@ -747,7 +747,7 @@ class Payment:
         return response
     
     async def getRupifiBannerDetails(self, body="", request_headers:Dict={}):
-        """Get CreditLine Offer if user is tentatively approved by rupifi
+        """Retrieve details for displaying the Rupifi payment banner.
         """
         payload = {}
         
@@ -788,7 +788,7 @@ class Payment:
         return response
     
     async def getEpaylaterBannerDetails(self, body="", request_headers:Dict={}):
-        """Get Epaylater Enabled if user is tentatively approved by epaylater
+        """Gets details for displaying the Epaylater payment banner.
         """
         payload = {}
         
@@ -829,7 +829,7 @@ class Payment:
         return response
     
     async def resendOrCancelPayment(self, body="", request_headers:Dict={}):
-        """Use this API to perform resend or cancel a payment link based on request payload.
+        """Resends or cancels a pending payment transaction.
         """
         payload = {}
         
@@ -874,7 +874,7 @@ class Payment:
         return response
     
     async def renderHTML(self, body="", request_headers:Dict={}):
-        """Use this API to decode base64 html form to plain HTML string.
+        """Generates HTML for payment-related interfaces.
         """
         payload = {}
         
@@ -919,7 +919,7 @@ class Payment:
         return response
     
     async def validateVPA(self, body="", request_headers:Dict={}):
-        """API to Validate UPI ID
+        """Checks the validity of a Virtual Payment Address (VPA).
         """
         payload = {}
         
@@ -964,7 +964,7 @@ class Payment:
         return response
     
     async def cardDetails(self, card_info=None, aggregator=None, body="", request_headers:Dict={}):
-        """API to get Card info from PG
+        """Gets the details of a specified payment card.
         :param card_info : Card first 6 digit IIN(prefix) number. : type string
         :param aggregator :  : type string
         """
@@ -1011,7 +1011,7 @@ class Payment:
         return response
     
     async def getActiveRefundTransferModes(self, body="", request_headers:Dict={}):
-        """Use this API to retrieve eligible refund modes (such as Netbanking) and add the beneficiary details.
+        """Lists the active transfer modes for refunds.
         """
         payload = {}
         
@@ -1052,7 +1052,7 @@ class Payment:
         return response
     
     async def enableOrDisableRefundTransferMode(self, body="", request_headers:Dict={}):
-        """Activate or Deactivate Transfer Mode to collect Beneficiary Details for Refund
+        """Enables or disables a particular refund transfer mode.
         """
         payload = {}
         
@@ -1097,7 +1097,7 @@ class Payment:
         return response
     
     async def getUserBeneficiariesDetail(self, order_id=None, body="", request_headers:Dict={}):
-        """Use this API to get the details of all active beneficiary added by a user for refund.
+        """Retrieves details of beneficiaries linked to the user.
         :param order_id : A unique number used for identifying and tracking your orders. : type string
         """
         payload = {}
@@ -1141,7 +1141,7 @@ class Payment:
         return response
     
     async def verifyIfscCode(self, ifsc_code=None, body="", request_headers:Dict={}):
-        """Use this API to check whether the 11-digit IFSC code is valid and to fetch the bank details for refund.
+        """Checks the validity of an IFSC code for bank transactions.
         :param ifsc_code : A 11-digit alphanumeric code that uniquely identifies a bank branch. : type string
         """
         payload = {}
@@ -1185,7 +1185,7 @@ class Payment:
         return response
     
     async def getOrderBeneficiariesDetail(self, order_id=None, body="", request_headers:Dict={}):
-        """Use this API to get the details of all active beneficiary added by a user for refund.
+        """Retrieve the beneficiary details related to an order.
         :param order_id : A unique number used for identifying and tracking your orders. : type string
         """
         payload = {}
@@ -1229,7 +1229,7 @@ class Payment:
         return response
     
     async def verifyOtpAndAddBeneficiaryForBank(self, body="", request_headers:Dict={}):
-        """Use this API to perform an OTP validation before saving the beneficiary details added for a refund.
+        """Confirms OTP and adds a bank beneficiary.
         """
         payload = {}
         
@@ -1274,7 +1274,7 @@ class Payment:
         return response
     
     async def addBeneficiaryDetails(self, body="", request_headers:Dict={}):
-        """Use this API to save the bank details for a returned or cancelled order to refund the amount.
+        """Adds beneficiary details for future transactions.
         """
         payload = {}
         
@@ -1319,7 +1319,7 @@ class Payment:
         return response
     
     async def addRefundBankAccountUsingOTP(self, body="", request_headers:Dict={}):
-        """Use this API to save bank details for returned/cancelled order to refund amount in his account.
+        """Adds a bank account for refunds using OTP verification.
         """
         payload = {}
         
@@ -1364,7 +1364,7 @@ class Payment:
         return response
     
     async def verifyOtpAndAddBeneficiaryForWallet(self, body="", request_headers:Dict={}):
-        """Use this API to send an OTP while adding a wallet beneficiary by mobile no. verification.
+        """Confirms OTP and adds a wallet beneficiary.
         """
         payload = {}
         
@@ -1409,7 +1409,7 @@ class Payment:
         return response
     
     async def updateDefaultBeneficiary(self, body="", request_headers:Dict={}):
-        """Use this API to set a default beneficiary for getting a refund.
+        """Updates the default beneficiary for the user.
         """
         payload = {}
         
@@ -1454,7 +1454,7 @@ class Payment:
         return response
     
     async def getPaymentLink(self, payment_link_id=None, body="", request_headers:Dict={}):
-        """Use this API to get a payment link
+        """Retrieves a generated payment link.
         :param payment_link_id :  : type string
         """
         payload = {}
@@ -1498,7 +1498,7 @@ class Payment:
         return response
     
     async def createPaymentLink(self, body="", request_headers:Dict={}):
-        """Use this API to create a payment link for the customer
+        """Generates a new payment link for transactions.
         """
         payload = {}
         
@@ -1543,7 +1543,7 @@ class Payment:
         return response
     
     async def resendPaymentLink(self, body="", request_headers:Dict={}):
-        """Use this API to resend a payment link for the customer
+        """Resends an existing payment link to the user.
         """
         payload = {}
         
@@ -1588,7 +1588,7 @@ class Payment:
         return response
     
     async def cancelPaymentLink(self, body="", request_headers:Dict={}):
-        """Use this API to cancel a payment link for the customer
+        """Cancels a previously generated payment link.
         """
         payload = {}
         
@@ -1633,7 +1633,7 @@ class Payment:
         return response
     
     async def getPaymentModeRoutesPaymentLink(self, payment_link_id=None, body="", request_headers:Dict={}):
-        """Use this API to get all valid payment options for doing a payment through payment link
+        """Lists payment modes available for a given payment link.
         :param payment_link_id : Payment link id : type string
         """
         payload = {}
@@ -1677,7 +1677,7 @@ class Payment:
         return response
     
     async def pollingPaymentLink(self, payment_link_id=None, body="", request_headers:Dict={}):
-        """Use this API to poll if payment through payment was successful or not
+        """Polls the status of a payment link for updates.
         :param payment_link_id :  : type string
         """
         payload = {}
@@ -1721,7 +1721,7 @@ class Payment:
         return response
     
     async def createOrderHandlerPaymentLink(self, body="", request_headers:Dict={}):
-        """Use this API to create a order and payment on aggregator side
+        """Creates an order handler for payment through a link.
         """
         payload = {}
         
@@ -1766,7 +1766,7 @@ class Payment:
         return response
     
     async def initialisePaymentPaymentLink(self, body="", request_headers:Dict={}):
-        """Use this API to inititate payment using UPI, BharatQR, wherein the UPI requests are send to the app and QR code is displayed on the screen.
+        """Initializes payment for an order via a payment link.
         """
         payload = {}
         
@@ -1811,7 +1811,7 @@ class Payment:
         return response
     
     async def checkAndUpdatePaymentStatusPaymentLink(self, body="", request_headers:Dict={}):
-        """Use this API to perform continuous polling at intervals to check the status of payment until timeout.
+        """Checks and updates the status of payment via a link.
         """
         payload = {}
         
@@ -1856,7 +1856,7 @@ class Payment:
         return response
     
     async def customerCreditSummary(self, aggregator=None, body="", request_headers:Dict={}):
-        """Use this API to fetch the customer credit summary.
+        """Retrieves a summary of the customer's credit details.
         :param aggregator :  : type string
         """
         payload = {}
@@ -1900,7 +1900,7 @@ class Payment:
         return response
     
     async def redirectToAggregator(self, source=None, aggregator=None, body="", request_headers:Dict={}):
-        """Use this API to get the redirect url to redirect the user to aggregator's page
+        """Redirects the user to the payment aggregator's interface.
         :param source : This is a String value that contains callback URL as value. : type string
         :param aggregator : This is a String value that contains aggregator name as value. : type string
         """
@@ -1947,7 +1947,7 @@ class Payment:
         return response
     
     async def checkCredit(self, aggregator=None, body="", request_headers:Dict={}):
-        """Use this API to fetch the customer credit summary.
+        """Checks the availability and status of customer credit.
         :param aggregator :  : type string
         """
         payload = {}
@@ -1991,7 +1991,7 @@ class Payment:
         return response
     
     async def customerOnboard(self, body="", request_headers:Dict={}):
-        """Use this API to fetch the customer credit summary.
+        """Initiates the onboarding process for payment services.
         """
         payload = {}
         
@@ -2036,7 +2036,7 @@ class Payment:
         return response
     
     async def outstandingOrderDetails(self, aggregator=None, body="", request_headers:Dict={}):
-        """Use this API to fetch the outstanding order details.
+        """Lists details of orders with outstanding payments.
         :param aggregator :  : type string
         """
         payload = {}
@@ -2080,7 +2080,7 @@ class Payment:
         return response
     
     async def paidOrderDetails(self, aggregator=None, body="", request_headers:Dict={}):
-        """Use this API to fetch the paid order details.
+        """Retrieves details of orders that have been paid for.
         :param aggregator :  : type string
         """
         payload = {}

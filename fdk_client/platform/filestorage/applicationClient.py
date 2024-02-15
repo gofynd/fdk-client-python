@@ -14,25 +14,7 @@ class FileStorage:
 
     
     async def appStartUpload(self, namespace=None, body="", request_headers:Dict={}):
-        """Uploads an arbitrarily sized buffer or blob.
-
-It has three Major Steps:
-* Start
-* Upload
-* Complete
-
-### Start
-Initiates the assets upload using `appStartUpload`.
-It returns the storage link in response.
-
-### Upload
-Use the storage link to upload a file (Buffer or Blob) to the File Storage.
-Make a `PUT` request on storage link received from `appStartUpload` api with file (Buffer or Blob) as a request body.
-
-### Complete
-After successfully upload, call `appCompleteUpload` api to complete the upload process.
-This operation will return the url for the uploaded file.
-
+        """Start uploading a file from an application and returns a storage link in response.
         :param namespace : Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. : type string
         """
         payload = {}
@@ -78,25 +60,7 @@ This operation will return the url for the uploaded file.
         return response
     
     async def appCompleteUpload(self, namespace=None, body="", request_headers:Dict={}):
-        """Uploads an arbitrarily sized buffer or blob.
-
-It has three Major Steps:
-* Start
-* Upload
-* Complete
-
-### Start
-Initiates the assets upload using `appStartUpload`.
-It returns the storage link in response.
-
-### Upload
-Use the storage link to upload a file (Buffer or Blob) to the File Storage.
-Make a `PUT` request on storage link received from `appStartUpload` api with file (Buffer or Blob) as a request body.
-
-### Complete
-After successfully upload, call `appCompleteUpload` api to complete the upload process.
-This operation will return the url for the uploaded file.
-
+        """Finish uploading a file from an application.
         :param namespace : Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. : type string
         """
         payload = {}
@@ -142,7 +106,7 @@ This operation will return the url for the uploaded file.
         return response
     
     async def appCopyFiles(self, sync=None, body="", request_headers:Dict={}):
-        """Copy Files
+        """Copy files from an application to another location.
         :param sync : sync : type boolean
         """
         payload = {}
@@ -179,7 +143,7 @@ This operation will return the url for the uploaded file.
         return response
     
     async def appbrowse(self, namespace=None, page=None, limit=None, search=None, request_headers:Dict={}):
-        """Browse Files
+        """Browse files within an application.
         :param namespace : Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. : type string
         :param page : page no : type integer
         :param limit : Limit : type integer
@@ -267,7 +231,7 @@ This operation will return the url for the uploaded file.
         return response
     
     async def getPdfTypes(self, country_code=None, store_os=None, request_headers:Dict={}):
-        """Get all the supported invoice pdf types such as Invoice, Label, Delivery challan
+        """Retrieve a list of available PDF types.
         :param country_code :  : type string
         :param store_os :  : type boolean
         """
@@ -312,7 +276,7 @@ This operation will return the url for the uploaded file.
         return response
     
     async def getDefaultPdfData(self, pdf_type_id=None, country_code=None, request_headers:Dict={}):
-        """Get Dummy pdf data for invoice or label
+        """Retrieve default data for PDF generation.
         :param pdf_type_id :  : type integer
         :param country_code :  : type string
         """
@@ -357,7 +321,7 @@ This operation will return the url for the uploaded file.
         return response
     
     async def updateHtmlTemplate(self, id=None, body="", request_headers:Dict={}):
-        """Update html template for invoice such as Invoice, Label, Deliver challan
+        """Update the HTML Template.
         :param id :  : type string
         """
         payload = {}
@@ -451,7 +415,7 @@ This operation will return the url for the uploaded file.
         return response
     
     async def saveHtmlTemplate(self, body="", request_headers:Dict={}):
-        """Update html template for invoice such as Invoice, Label, Deliver challan
+        """Store an HTML template.
         """
         payload = {}
         
@@ -494,7 +458,7 @@ This operation will return the url for the uploaded file.
         return response
     
     async def getDefaultPdfTemplate(self, pdf_type_id=None, format=None, country_code=None, request_headers:Dict={}):
-        """Get default html template data for invoice or label
+        """Retrieve the default PDF template.
         :param pdf_type_id :  : type integer
         :param format :  : type string
         :param country_code :  : type string

@@ -194,7 +194,7 @@ class Order:
         return response
     
     async def trackShipmentPlatform(self, shipment_id=None, request_headers:Dict={}):
-        """Track Shipment by shipment id, for application based on application Id
+        """Track shipment by Shipment ID for application based on application Id
         :param shipment_id : Shipment Id : type string
         """
         payload = {}
@@ -236,7 +236,7 @@ class Order:
         return response
     
     async def getPlatformShipmentReasons(self, action=None, request_headers:Dict={}):
-        """Using action, get reasons behind full or partial cancellation of a shipment
+        """Retrieve reasons behind full or partial cancellation of a shipment
         :param action :  : type string
         """
         payload = {}

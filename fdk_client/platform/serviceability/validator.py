@@ -172,7 +172,7 @@ class ServiceabilityValidator:
         
         q = fields.Str(required=False)
         
-        country_iso_code = fields.Str(required=False)
+        country = fields.Str(required=False)
         
         state = fields.Str(required=False)
         

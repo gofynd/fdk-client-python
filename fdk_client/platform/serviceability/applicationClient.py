@@ -14,7 +14,7 @@ class Serviceability:
 
     
     async def updatePincodeMopView(self, body="", request_headers:Dict={}):
-        """This API updates Pincode method of payment.
+        """Modify and update views related to pincode MOP.
         """
         payload = {}
         
@@ -57,7 +57,7 @@ class Serviceability:
         return response
     
     async def updatePincodeBulkView(self, body="", request_headers:Dict={}):
-        """This API constructs bulk write operations to update the MOP data for each pincode in the payload.
+        """Modify and update views related to bulk operations on pincode.
         """
         payload = {}
         
@@ -100,7 +100,7 @@ class Serviceability:
         return response
     
     async def updatePincodeCoDListing(self, body="", request_headers:Dict={}):
-        """This API returns count of active pincode.
+        """Modify and update listings for CoD based on pincode.
         """
         payload = {}
         
@@ -143,7 +143,7 @@ class Serviceability:
         return response
     
     async def updatePincodeAuditHistory(self, body="", request_headers:Dict={}):
-        """This API returns Audit logs of Pincode.
+        """Modify and update audit history records for pincode-related activities.
         """
         payload = {}
         

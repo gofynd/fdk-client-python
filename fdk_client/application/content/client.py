@@ -47,7 +47,7 @@ class Content:
         self._urls.update(urls)
     
     async def getAnnouncements(self, body="", request_headers:Dict={}):
-        """Announcements are useful to highlight a message or information on top of a webpage. Use this API to retrieve live announcements. Get announcements on individual pages or for all pages.
+        """Retrieves all current announcements in the application.
         """
         payload = {}
         
@@ -88,7 +88,7 @@ class Content:
         return response
     
     async def getBlog(self, slug=None, root_id=None, body="", request_headers:Dict={}):
-        """Use this API to get the details of a blog using its slug. Details include the title, reading time, publish status, feature image, tags, author, etc.
+        """Retrieves all information relate to a specific blog such as it's contents, author, publish date, SEO related information.
         :param slug : A short, human-readable, URL-friendly identifier of a blog. You can get slug value from the endpoint /service/application/content/v1.0/blogs/. : type string
         :param root_id : ID given to the HTML element : type string
         """
@@ -135,7 +135,7 @@ class Content:
         return response
     
     async def getBlogs(self, page_no=None, page_size=None, body="", request_headers:Dict={}):
-        """Use this API to get all the blogs.
+        """Retrieve all the blogs which are present in the application.
         :param page_no : The page number to navigate through the given set of results. Default value is 1.  : type integer
         :param page_size : The number of items to retrieve in each page. : type integer
         """
@@ -182,7 +182,7 @@ class Content:
         return response
     
     async def getDataLoaders(self, body="", request_headers:Dict={}):
-        """Use this API to get all selected data loaders of the application in the form of tags.
+        """Retrieves all the data loaders that are added and enabled for an application.
         """
         payload = {}
         
@@ -223,7 +223,7 @@ class Content:
         return response
     
     async def getFaqs(self, body="", request_headers:Dict={}):
-        """Use this API to get a list of frequently asked questions. Users will benefit from it when facing any issue with the website.
+        """Retrieves a list of frequently asked questions.
         """
         payload = {}
         
@@ -264,7 +264,7 @@ class Content:
         return response
     
     async def getFaqCategories(self, body="", request_headers:Dict={}):
-        """FAQs can be divided into categories. Use this API to get a list of FAQ categories.
+        """Retrieve categories for organizing FAQs.
         """
         payload = {}
         
@@ -305,7 +305,7 @@ class Content:
         return response
     
     async def getFaqBySlug(self, slug=None, body="", request_headers:Dict={}):
-        """Use this API to get a particular FAQ by its slug.
+        """Retrieves a specific FAQ using its slug identifier.
         :param slug : A short, human-readable, URL-friendly identifier of an FAQ. You can get slug value from the endpoint /service/application/content/v1.0/faq. : type string
         """
         payload = {}
@@ -349,7 +349,7 @@ class Content:
         return response
     
     async def getFaqCategoryBySlug(self, slug=None, body="", request_headers:Dict={}):
-        """FAQs can be divided into categories. Use this API to get the category to which an FAQ belongs.
+        """Retrieve a specific FAQ category using its slug.
         :param slug : A short, human-readable, URL-friendly identifier of an FAQ category. You can get slug value from the endpoint /service/application/content/v1.0/faq/categories. : type string
         """
         payload = {}
@@ -393,7 +393,7 @@ class Content:
         return response
     
     async def getFaqsByCategorySlug(self, slug=None, body="", request_headers:Dict={}):
-        """FAQs can be divided into categories. Use this API to get all the FAQs belonging to a category by using the category slug.
+        """Retrieves FAQs belonging to a specific category slug.
         :param slug : A short, human-readable, URL-friendly identifier of an FAQ category. You can get slug value from the endpoint /service/application/content/v1.0/faq/categories. : type string
         """
         payload = {}
@@ -437,7 +437,7 @@ class Content:
         return response
     
     async def getLandingPage(self, body="", request_headers:Dict={}):
-        """Landing page is the first page that a prospect lands upon while visiting a website. Use this API to fetch the details of a landing page.
+        """Gets the content of the application's landing page.
         """
         payload = {}
         
@@ -478,7 +478,7 @@ class Content:
         return response
     
     async def getLegalInformation(self, body="", request_headers:Dict={}):
-        """Use this API to get the legal information of an application, which includes Privacy Policy, Terms and Conditions, Shipping Policy and FAQs regarding the usage of the application.
+        """Retrieve legal policies for an application which includes Terms and conditions, return policy, shipping policy and privacy policy.
         """
         payload = {}
         
@@ -519,7 +519,7 @@ class Content:
         return response
     
     async def getNavigations(self, page_no=None, page_size=None, body="", request_headers:Dict={}):
-        """Use this API to fetch the navigations details which includes the items of the navigation panel. It also shows the links and sub-navigations.
+        """Retrieves the navigation link items which can be powered to genreate menus on application's website or equivalent mobile apps
         :param page_no : The page number to navigate through the given set of results. Default value is 1.  : type integer
         :param page_size : The number of items to retrieve in each page. : type integer
         """
@@ -566,7 +566,7 @@ class Content:
         return response
     
     async def getSEOConfiguration(self, body="", request_headers:Dict={}):
-        """Use this API to get the SEO details of an application, which includes a robot.txt, meta-tags and sitemap.
+        """Retrieve search engine optimization configurations of an application. Details include the title, description and an image
         """
         payload = {}
         
@@ -745,7 +745,7 @@ class Content:
         return response
     
     async def getSupportInformation(self, body="", request_headers:Dict={}):
-        """Use this API to get contact details for customer support including emails and phone numbers.
+        """Retrieves customer support contact details. Contact Details can be either phone number or email-id or both.
         """
         payload = {}
         
@@ -786,7 +786,7 @@ class Content:
         return response
     
     async def getTags(self, body="", request_headers:Dict={}):
-        """Use this API to get all the CSS and JS injected in the application in the form of tags.
+        """Retrieve any HTML tags to power additional functionalities within an application.
         """
         payload = {}
         
@@ -827,7 +827,7 @@ class Content:
         return response
     
     async def getPage(self, slug=None, root_id=None, body="", request_headers:Dict={}):
-        """Use this API to get the details of a page using its slug. Details include the title, seo, publish status, feature image, tags, meta, etc.
+        """Retrieve detailed information for a specific page within the theme.
         :param slug : A short, human-readable, URL-friendly identifier of a page. You can get slug value from the endpoint /service/application/content/v2.0/pages/. : type string
         :param root_id : ID given to the HTML element : type string
         """
@@ -874,7 +874,7 @@ class Content:
         return response
     
     async def getPages(self, page_no=None, page_size=None, body="", request_headers:Dict={}):
-        """Use this API to get a list of pages.
+        """Retrieve all available content pages in the app.
         :param page_no : The page number to navigate through the given set of results. Default value is 1.  : type integer
         :param page_size : The number of items to retrieve in each page. : type integer
         """

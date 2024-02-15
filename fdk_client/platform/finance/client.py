@@ -13,7 +13,7 @@ class Finance:
 
     
     async def generateReport(self, body="", request_headers:Dict={}):
-        """Generate finance reports.
+        """Create a financial report with relevant data.
         """
         payload = {}
         
@@ -56,7 +56,7 @@ class Finance:
         return response
     
     async def downloadReport(self, body="", request_headers:Dict={}):
-        """Gives list of all downloaded reports.
+        """Retrieve and save a financial report.
         """
         payload = {}
         
@@ -99,7 +99,7 @@ class Finance:
         return response
     
     async def getData(self, body="", request_headers:Dict={}):
-        """Gives list of columns for table provided.
+        """Retrieve financial data for analysis.
         """
         payload = {}
         
@@ -142,7 +142,7 @@ class Finance:
         return response
     
     async def getReason(self, body="", request_headers:Dict={}):
-        """Gives list of the reasons.
+        """Retrieve the reason behind a transaction.
         """
         payload = {}
         
@@ -185,7 +185,7 @@ class Finance:
         return response
     
     async def getReportList(self, body="", request_headers:Dict={}):
-        """Gives list of reports.
+        """Retrieve a list of available financial reports.
         """
         payload = {}
         
@@ -228,7 +228,7 @@ class Finance:
         return response
     
     async def getAffiliate(self, body="", request_headers:Dict={}):
-        """Gives list of affiliates for company.
+        """Retrieve information about an affiliate.
         """
         payload = {}
         
@@ -271,7 +271,7 @@ class Finance:
         return response
     
     async def downloadCreditDebitNote(self, body="", request_headers:Dict={}):
-        """Download credit debit note pdf.
+        """Retrieve and save credit/debit notes.
         """
         payload = {}
         
@@ -314,7 +314,7 @@ class Finance:
         return response
     
     async def paymentProcess(self, body="", request_headers:Dict={}):
-        """Payment Processing API.
+        """Initiate and manage payment processes.
         """
         payload = {}
         
@@ -357,7 +357,7 @@ class Finance:
         return response
     
     async def creditlineDataplatform(self, body="", request_headers:Dict={}):
-        """Used to fetch creditline data.
+        """Connect to the credit line data platform.
         """
         payload = {}
         
@@ -400,7 +400,7 @@ class Finance:
         return response
     
     async def isCreditlinePlatform(self, body="", request_headers:Dict={}):
-        """Checks if seller has opted for creditline or not.
+        """Determine if the credit line platform is operational.
         """
         payload = {}
         
@@ -443,7 +443,7 @@ class Finance:
         return response
     
     async def invoiceType(self, body="", request_headers:Dict={}):
-        """Gives list of active invoice type.
+        """Retrieve a list of available invoice types.
         """
         payload = {}
         
@@ -529,7 +529,7 @@ class Finance:
         return response
     
     async def invoicePDF(self, body="", request_headers:Dict={}):
-        """Gives pdf view of invoice.
+        """Retrieve the PDF version of an invoice.
         """
         payload = {}
         
@@ -572,7 +572,7 @@ class Finance:
         return response
     
     async def isCnRefundMethod(self, body="", request_headers:Dict={}):
-        """Checks if seller has obtained cn as refund method or not.
+        """Verify the refund method for credit notes.
         """
         payload = {}
         
@@ -615,7 +615,7 @@ class Finance:
         return response
     
     async def createSellerCreditNoteConfig(self, body="", request_headers:Dict={}):
-        """Creates credit note config.
+        """Set up configuration for seller credit notes.
         """
         payload = {}
         
@@ -701,7 +701,7 @@ class Finance:
         return response
     
     async def channelDisplayName(self, filter_key=None, request_headers:Dict={}):
-        """Provide channel display name dict.
+        """Retrieve the display name for a channel.
         :param filter_key : gives display name for channel. : type string
         """
         payload = {}
@@ -743,7 +743,7 @@ class Finance:
         return response
     
     async def getPdfUrlView(self, body="", request_headers:Dict={}):
-        """Gives cn pdf url.
+        """Retrieve a URL to view a PDF document.
         """
         payload = {}
         
@@ -786,7 +786,7 @@ class Finance:
         return response
     
     async def creditNoteDetails(self, body="", request_headers:Dict={}):
-        """Gives credit note details.
+        """Retrieve detailed information about a credit note.
         """
         payload = {}
         
@@ -829,7 +829,7 @@ class Finance:
         return response
     
     async def getCustomerCreditBalance(self, body="", request_headers:Dict={}):
-        """Gives customer credit balance.
+        """Retrieve the credit balance of a customer.
         """
         payload = {}
         
@@ -872,7 +872,7 @@ class Finance:
         return response
     
     async def getCnConfig(self, body="", request_headers:Dict={}):
-        """Gives credit note config.
+        """Retrieve configuration settings for credit notes.
         """
         payload = {}
         
@@ -915,7 +915,7 @@ class Finance:
         return response
     
     async def generateReportCustomerCn(self, body="", request_headers:Dict={}):
-        """Generate Credit Note report and gives Note details.
+        """Create a report specifically for customer credit notes.
         """
         payload = {}
         
@@ -958,7 +958,7 @@ class Finance:
         return response
     
     async def downloadReportCustomerCn(self, body="", request_headers:Dict={}):
-        """Gives list of downloaded reports.
+        """Retrieve and save a report for customer credit notes.
         """
         payload = {}
         
@@ -1001,7 +1001,7 @@ class Finance:
         return response
     
     async def getReportingFilters(self, filter_key=None, affiliate_id=None, request_headers:Dict={}):
-        """Gets all customer Cn filters and search.
+        """Retrieve available filters for financial reporting.
         :param filter_key : filter type. : type string
         :param affiliate_id : affiliate id. : type string
         """

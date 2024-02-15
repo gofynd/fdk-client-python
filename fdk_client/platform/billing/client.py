@@ -13,7 +13,7 @@ class Billing:
 
     
     async def checkCouponValidity(self, plan=None, coupon_code=None, request_headers:Dict={}):
-        """Check coupon validity.
+        """Checks whether a coupon code is valid for discounts while billing.
         :param plan : ID of the plan. : type string
         :param coupon_code : Coupon code. : type string
         """
@@ -58,7 +58,7 @@ class Billing:
         return response
     
     async def createSubscriptionCharge(self, extension_id=None, body="", request_headers:Dict={}):
-        """Register subscription charge for a seller of your extension.
+        """Register a subscription charge for a seller using your extension.
         :param extension_id : Extension _id : type string
         """
         payload = {}
@@ -104,7 +104,7 @@ class Billing:
         return response
     
     async def getSubscriptionCharge(self, extension_id=None, subscription_id=None, request_headers:Dict={}):
-        """Get created subscription charge details
+        """Retrieve detailed information about subscription charges using this API.
         :param extension_id : Extension _id : type string
         :param subscription_id : Subscription charge _id : type string
         """
@@ -149,7 +149,7 @@ class Billing:
         return response
     
     async def cancelSubscriptionCharge(self, extension_id=None, subscription_id=None, request_headers:Dict={}):
-        """Cancel subscription and attached charges.
+        """Cancel an ongoing subscription charge for a customer.
         :param extension_id : Extension _id : type string
         :param subscription_id : Subscription charge _id : type string
         """
@@ -194,7 +194,7 @@ class Billing:
         return response
     
     async def createOneTimeCharge(self, extension_id=None, body="", request_headers:Dict={}):
-        """Register one time subscription charge for a seller of your extension.
+        """Generate a one-time charge for specific services or products.
         :param extension_id : Extension _id : type string
         """
         payload = {}
@@ -240,7 +240,7 @@ class Billing:
         return response
     
     async def getChargeDetails(self, extension_id=None, charge_id=None, request_headers:Dict={}):
-        """Get created subscription charge details
+        """Retrieve comprehensive details about a specific billing charge.
         :param extension_id : Extension _id : type string
         :param charge_id : Standalone charge _id : type string
         """
@@ -285,7 +285,7 @@ class Billing:
         return response
     
     async def getInvoices(self, request_headers:Dict={}):
-        """Get invoices.
+        """Retrieve invoices for billing and payment tracking.
         """
         payload = {}
         
@@ -324,7 +324,7 @@ class Billing:
         return response
     
     async def getInvoiceById(self, invoice_id=None, request_headers:Dict={}):
-        """Get invoice by id.
+        """Retrieve a particular invoice's details by providing its unique ID.
         :param invoice_id : Invoice id : type string
         """
         payload = {}
@@ -366,7 +366,7 @@ class Billing:
         return response
     
     async def getCustomerDetail(self, request_headers:Dict={}):
-        """Get subscription customer detail.
+        """Obtain customer-related billing information.
         """
         payload = {}
         
@@ -405,7 +405,7 @@ class Billing:
         return response
     
     async def upsertCustomerDetail(self, body="", request_headers:Dict={}):
-        """Upsert subscription customer detail.
+        """Allows you to modify or insert customer information in the billing system.
         """
         payload = {}
         
@@ -448,8 +448,7 @@ class Billing:
         return response
     
     async def getSubscription(self, request_headers:Dict={}):
-        """If subscription is active then it will return is_enabled true and return subscription object. If subscription is not active then is_enabled false and message.
-
+        """Retrieve details of a customer's subscription information.
         """
         payload = {}
         
@@ -488,7 +487,7 @@ class Billing:
         return response
     
     async def getFeatureLimitConfig(self, product_suite=None, type=None, request_headers:Dict={}):
-        """Get subscription subscription limits.
+        """Retrieve configuration settings for feature limits in subscription plans.
         :param product_suite :  : type string
         :param type :  : type string
         """
@@ -533,7 +532,7 @@ class Billing:
         return response
     
     async def activateSubscriptionPlan(self, body="", request_headers:Dict={}):
-        """It will activate subscription plan for customer
+        """Activate a specific subscription plan for a customer.
         """
         payload = {}
         
@@ -576,7 +575,7 @@ class Billing:
         return response
     
     async def cancelSubscriptionPlan(self, body="", request_headers:Dict={}):
-        """It will cancel current active subscription.
+        """Cancel an active subscription plan for a customer
         """
         payload = {}
         
@@ -619,8 +618,7 @@ class Billing:
         return response
     
     async def getEnterprisePlans(self, request_headers:Dict={}):
-        """Get Enterprise Plans.
-
+        """Retrieve available enterprise-level subscription plans.
         """
         payload = {}
         
@@ -650,7 +648,7 @@ class Billing:
         return response
     
     async def planStatusUpdate(self, body="", request_headers:Dict={}):
-        """It will update the status of the plan
+        """Modify the status of a subscription plan.
         """
         payload = {}
         
@@ -693,7 +691,7 @@ class Billing:
         return response
     
     async def subscripePlan(self, body="", request_headers:Dict={}):
-        """It will subscribe a plan.
+        """Subscribe to a specific billing plan.
         """
         payload = {}
         

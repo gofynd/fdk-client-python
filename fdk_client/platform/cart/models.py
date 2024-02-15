@@ -1103,6 +1103,8 @@ class OperationErrorResponse(BaseSchema):
     
     message = fields.Str(required=False)
     
+    error = fields.Str(required=False)
+    
 
 
 class CouponUpdate(BaseSchema):
@@ -1487,6 +1489,8 @@ class PromotionListItem(BaseSchema):
     
     _id = fields.Str(required=False)
     
+    tags = fields.List(fields.Str(required=False), required=False)
+    
 
 
 class PromotionsResponse(BaseSchema):
@@ -1547,6 +1551,8 @@ class PromotionAdd(BaseSchema):
     
     date_meta = fields.Nested(PromotionDateMeta, required=False)
     
+    tags = fields.List(fields.Str(required=False), required=False)
+    
 
 
 class PromotionUpdate(BaseSchema):
@@ -1596,6 +1602,8 @@ class PromotionUpdate(BaseSchema):
     _custom_json = fields.Dict(required=False)
     
     date_meta = fields.Nested(PromotionDateMeta, required=False)
+    
+    tags = fields.List(fields.Str(required=False), required=False)
     
 
 
@@ -1661,6 +1669,8 @@ class CartMetaConfigUpdate(BaseSchema):
     
     min_cart_value = fields.Int(required=False)
     
+    max_cart_value = fields.Int(required=False)
+    
     bulk_coupons = fields.Boolean(required=False)
     
     max_cart_items = fields.Int(required=False)
@@ -1682,6 +1692,8 @@ class CartMetaConfigAdd(BaseSchema):
 
     
     min_cart_value = fields.Int(required=False)
+    
+    max_cart_value = fields.Int(required=False)
     
     bulk_coupons = fields.Boolean(required=False)
     

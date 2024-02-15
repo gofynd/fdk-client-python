@@ -674,7 +674,7 @@ class CollectionItemSchemaV2(BaseSchema):
     pass
 
 
-class CollectionItemUpdateSchemaV2(BaseSchema):
+class CollectionItemUpdateSchema(BaseSchema):
     pass
 
 
@@ -4299,7 +4299,7 @@ class CollectionItemSchemaV2(BaseSchema):
     
 
 
-class CollectionItemUpdateSchemaV2(BaseSchema):
+class CollectionItemUpdateSchema(BaseSchema):
     # Catalog swagger.json
 
     

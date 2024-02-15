@@ -36,7 +36,7 @@ class Logistic:
         self._urls.update(urls)
     
     async def getPincodeCity(self, pincode=None, body="", request_headers:Dict={}):
-        """Get pincode data
+        """Retrieve the name of the city associated with a given pincode.
         :param pincode : A `pincode` contains a specific address of a location. : type string
         """
         payload = {}
@@ -80,7 +80,7 @@ class Logistic:
         return response
     
     async def getTatProduct(self, body="", request_headers:Dict={}):
-        """Get TAT data
+        """Retrieve the estimated delivery time for a specific product.
         """
         payload = {}
         
@@ -125,7 +125,7 @@ class Logistic:
         return response
     
     async def getAllCountries(self, body="", request_headers:Dict={}):
-        """Get all countries
+        """Retrieve a list of all countries supported by the system.
         """
         payload = {}
         
@@ -166,7 +166,7 @@ class Logistic:
         return response
     
     async def getPincodeZones(self, body="", request_headers:Dict={}):
-        """This API returns zone from the Pincode View.
+        """Retreive the logistical zones corresponding to a given pincode.
         """
         payload = {}
         
@@ -211,7 +211,7 @@ class Logistic:
         return response
     
     async def getOptimalLocations(self, body="", request_headers:Dict={}):
-        """This API returns zone from the Pincode View.
+        """Retrieve the most efficient locations for logistics purposes.
         """
         payload = {}
         
@@ -256,7 +256,7 @@ class Logistic:
         return response
     
     async def getLocations(self, x_application_id=None, x_application_data=None, country=None, state=None, city=None, pincode=None, sector=None, page_no=None, page_size=None, body="", request_headers:Dict={}):
-        """This API returns store from the Pincode View.
+        """Retrieves a list of all locations of countries, states, cities. 
         :param x-application-id : A `x-application-id` is a unique identifier for a particular sale channel. : type string
         :param x-application-data : A `x-application-data` is a unique identifier for a particular sale channel. : type string
         :param country : A `country` contains a specific value of the country `iso2` code. : type string

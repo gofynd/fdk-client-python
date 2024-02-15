@@ -68,7 +68,7 @@ class User:
         self._urls.update(urls)
     
     async def loginWithFacebook(self, platform=None, body="", request_headers:Dict={}):
-        """Use this API to login or register using Facebook credentials.
+        """Enables login through Facebook accounts.
         :param platform : ID of the application : type string
         """
         payload = {}
@@ -116,7 +116,7 @@ class User:
         return response
     
     async def loginWithGoogle(self, platform=None, body="", request_headers:Dict={}):
-        """Use this API to login or register using Google Account credentials.
+        """Enables login through Google accounts.
         :param platform : ID of the application : type string
         """
         payload = {}
@@ -164,7 +164,7 @@ class User:
         return response
     
     async def loginWithGoogleAndroid(self, platform=None, body="", request_headers:Dict={}):
-        """Use this API to login or register in Android app using Google Account credentials.
+        """Facilitates Google login specifically for Android users.
         :param platform : ID of the application : type string
         """
         payload = {}
@@ -212,7 +212,7 @@ class User:
         return response
     
     async def loginWithGoogleIOS(self, platform=None, body="", request_headers:Dict={}):
-        """Use this API to login or register in iOS app using Google Account credentials.
+        """Facilitates Google login specifically for iOS users.
         :param platform : ID of the application : type string
         """
         payload = {}
@@ -260,7 +260,7 @@ class User:
         return response
     
     async def loginWithAppleIOS(self, platform=None, body="", request_headers:Dict={}):
-        """Use this API to login or register in iOS app using Apple Account credentials.
+        """Enables login through Apple ID specifically for iOS users.
         :param platform : ID of the application : type string
         """
         payload = {}
@@ -308,7 +308,7 @@ class User:
         return response
     
     async def loginWithOTP(self, platform=None, body="", request_headers:Dict={}):
-        """Use this API to login or register with a One-time Password (OTP) sent via Email or SMS.
+        """Allows users to log in using a one-time password.
         :param platform : ID of the application : type string
         """
         payload = {}
@@ -356,7 +356,7 @@ class User:
         return response
     
     async def loginWithEmailAndPassword(self, body="", request_headers:Dict={}):
-        """Use this API to login or register using an email address and password.
+        """Enables login using an email and password combination.
         """
         payload = {}
         
@@ -401,7 +401,7 @@ class User:
         return response
     
     async def sendResetPasswordEmail(self, platform=None, body="", request_headers:Dict={}):
-        """Use this API to reset a password using the link sent on email.
+        """Sends a password reset link to the user's email.
         :param platform : ID of the application : type string
         """
         payload = {}
@@ -449,7 +449,7 @@ class User:
         return response
     
     async def sendResetPasswordMobile(self, platform=None, body="", request_headers:Dict={}):
-        """Use this API to reset a password using the link sent on mobile.
+        """Sends a password reset OTP to the user's mobile number.
         :param platform : ID of the application : type string
         """
         payload = {}
@@ -533,7 +533,7 @@ class User:
         return response
     
     async def forgotPassword(self, body="", request_headers:Dict={}):
-        """Use this API to reset a password using the code sent on email or SMS.
+        """Initiates the password recovery process for the user.
         """
         payload = {}
         
@@ -578,7 +578,7 @@ class User:
         return response
     
     async def resetForgotPassword(self, body="", request_headers:Dict={}):
-        """Use this API to reset a password using the code sent on email or SMS.
+        """Initiates the password recovery process for the user.
         """
         payload = {}
         
@@ -668,7 +668,7 @@ class User:
         return response
     
     async def registerWithForm(self, platform=None, body="", request_headers:Dict={}):
-        """Use this API to perform user registration by sending form data in the request body.
+        """Enables new users to register using a form.
         :param platform : ID of the application : type string
         """
         payload = {}
@@ -716,7 +716,7 @@ class User:
         return response
     
     async def verifyEmail(self, body="", request_headers:Dict={}):
-        """Use this API to send a verification code to verify an email.
+        """Verifies the user's email address.
         """
         payload = {}
         
@@ -761,7 +761,7 @@ class User:
         return response
     
     async def verifyMobile(self, body="", request_headers:Dict={}):
-        """Use this API to send a verification code to verify a mobile number.
+        """Verifies the user's mobile number.
         """
         payload = {}
         
@@ -806,7 +806,7 @@ class User:
         return response
     
     async def hasPassword(self, body="", request_headers:Dict={}):
-        """Use this API to check if user has created a password for login.
+        """Checks if the user has set a password for the account.
         """
         payload = {}
         
@@ -847,7 +847,7 @@ class User:
         return response
     
     async def updatePassword(self, body="", request_headers:Dict={}):
-        """Use this API to update the password.
+        """Allows users to update their existing password.
         """
         payload = {}
         
@@ -892,7 +892,7 @@ class User:
         return response
     
     async def sendOTPOnMobile(self, platform=None, body="", request_headers:Dict={}):
-        """Use this API to send an OTP to a mobile number.
+        """Sends a one-time password to the user's mobile for verification.
         :param platform : ID of the application : type string
         """
         payload = {}
@@ -940,7 +940,7 @@ class User:
         return response
     
     async def sendForgotOTPOnMobile(self, platform=None, body="", request_headers:Dict={}):
-        """Use this API to send an Forgot OTP to a mobile number.
+        """Sends a one-time password to the user's forgot mobile for verification request.
         :param platform : ID of the application : type string
         """
         payload = {}
@@ -988,7 +988,7 @@ class User:
         return response
     
     async def verifyMobileOTP(self, platform=None, body="", request_headers:Dict={}):
-        """Use this API to verify the OTP received on a mobile number.
+        """Validates the OTP sent to the user's mobile.
         :param platform : ID of the application : type string
         """
         payload = {}
@@ -1084,7 +1084,7 @@ class User:
         return response
     
     async def sendOTPOnEmail(self, platform=None, body="", request_headers:Dict={}):
-        """Use this API to send an OTP to an email ID.
+        """Sends a one-time password to the user's email for verification.
         :param platform : ID of the application : type string
         """
         payload = {}
@@ -1132,7 +1132,7 @@ class User:
         return response
     
     async def sendForgotOTPOnEmail(self, platform=None, body="", request_headers:Dict={}):
-        """Use this API to send an Forgot OTP to an email ID.
+        """Sends a one-time password to the user's forgot email for verification request.
         :param platform : ID of the application : type string
         """
         payload = {}
@@ -1180,7 +1180,7 @@ class User:
         return response
     
     async def verifyEmailOTP(self, platform=None, body="", request_headers:Dict={}):
-        """Use this API to verify the OTP received on an email ID.
+        """Validates the OTP sent to the user's email address request.
         :param platform : ID of the application : type string
         """
         payload = {}
@@ -1228,7 +1228,7 @@ class User:
         return response
     
     async def verifyEmailForgotOTP(self, platform=None, body="", request_headers:Dict={}):
-        """Use this API to verify the Forgot OTP received on an email ID.
+        """Validates the OTP sent to the user's forgot email address request.
         :param platform : ID of the application : type string
         """
         payload = {}
@@ -1276,7 +1276,7 @@ class User:
         return response
     
     async def getLoggedInUser(self, body="", request_headers:Dict={}):
-        """Use this API  to get the details of a logged in user.
+        """Retrieve information about the currently logged-in user.
         """
         payload = {}
         
@@ -1358,7 +1358,7 @@ class User:
         return response
     
     async def getPlatformConfig(self, name=None, body="", request_headers:Dict={}):
-        """Use this API to get all the platform configurations such as mobile image, desktop image, social logins, and all other text.
+        """Retrieve configuration settings related to the user platform.
         :param name : Name of the application, e.g. Fynd : type string
         """
         payload = {}
@@ -1450,7 +1450,7 @@ class User:
         return response
     
     async def addMobileNumber(self, platform=None, body="", request_headers:Dict={}):
-        """Use this API to add a new mobile number to a profile.
+        """Adds a new mobile number to the user's profile.
         :param platform : ID of the application : type string
         """
         payload = {}
@@ -1557,7 +1557,7 @@ class User:
         return response
     
     async def setMobileNumberAsPrimary(self, body="", request_headers:Dict={}):
-        """Use this API to set a mobile number as primary. Primary number is a verified number used for all future communications.
+        """Sets a mobile number as the primary contact for the user.
         """
         payload = {}
         
@@ -1602,7 +1602,7 @@ class User:
         return response
     
     async def sendVerificationLinkToMobile(self, platform=None, body="", request_headers:Dict={}):
-        """Use this API to send a verification link to a mobile number
+        """Sends a verification link to a newly added mobile number.
         :param platform : ID of the application : type string
         """
         payload = {}
@@ -1650,7 +1650,7 @@ class User:
         return response
     
     async def addEmail(self, platform=None, body="", request_headers:Dict={}):
-        """Use this API to add a new email address to a profile
+        """Adds a new email address to the user's profile.
         :param platform : ID of the application : type string
         """
         payload = {}
@@ -1698,7 +1698,7 @@ class User:
         return response
     
     async def deleteEmail(self, platform=None, active=None, primary=None, verified=None, email=None, body="", request_headers:Dict={}):
-        """Use this API to delete an email address from a profile
+        """Removes an email address from the user's profile.
         :param platform : ID of the application : type string
         :param active : This is a boolean value to check if email ID is active 1. True - Email ID is active 2.False - Email ID is inactive : type boolean
         :param primary : This is a boolean value to check if email ID is primary (main email ID) 1. True - Email ID is primary 2.False - Email ID is not primary : type boolean
@@ -1754,7 +1754,7 @@ class User:
         return response
     
     async def setEmailAsPrimary(self, body="", request_headers:Dict={}):
-        """Use this API to set an email address as primary. Primary email ID is a email address used for all future communications.
+        """Sets an email address as the primary contact for the user.
         """
         payload = {}
         
@@ -1799,7 +1799,7 @@ class User:
         return response
     
     async def sendVerificationLinkToEmail(self, platform=None, body="", request_headers:Dict={}):
-        """Use this API to send verification link to an email address.
+        """Sends a verification link to a newly added email address.
         :param platform : ID of the application : type string
         """
         payload = {}

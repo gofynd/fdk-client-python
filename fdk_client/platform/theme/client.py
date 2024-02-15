@@ -13,7 +13,7 @@ class Theme:
 
     
     async def getCompanyLevelThemes(self, search_text=None, request_headers:Dict={}):
-        """Retrieve a list of themes available for a specific company.
+        """Retrieve themes specific to a company.
         :param search_text : Search Text to match the Theme Names and return the response. : type string
         """
         payload = {}
@@ -79,7 +79,7 @@ class Theme:
         return response
     
     async def addMarketplaceThemeToCompany(self, body="", request_headers:Dict={}):
-        """Add a marketplace theme to a company by providing the theme ID and company ID.
+        """Incorporate a marketplace theme into a company's profile.
         """
         payload = {}
         
@@ -122,7 +122,7 @@ class Theme:
         return response
     
     async def deleteCompanyTheme(self, theme_id=None, request_headers:Dict={}):
-        """Delete a specific theme for a company by providing the company ID and theme ID.
+        """Remove a theme associated with a company.
         :param theme_id : The ID of the theme. : type string
         """
         payload = {}

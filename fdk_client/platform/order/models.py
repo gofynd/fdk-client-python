@@ -1028,6 +1028,10 @@ class TaxDetails(BaseSchema):
     pass
 
 
+class PaymentInfoData(BaseSchema):
+    pass
+
+
 class OrderData(BaseSchema):
     pass
 
@@ -4549,6 +4553,8 @@ class Article(BaseSchema):
     
     is_set = fields.Boolean(required=False, allow_none=True)
     
+    tags = fields.List(fields.Str(required=False), required=False)
+    
 
 
 class ShipmentListingBrand(BaseSchema):
@@ -5401,6 +5407,8 @@ class OrderBagArticle(BaseSchema):
     
     size = fields.Str(required=False, allow_none=True)
     
+    tags = fields.List(fields.Str(required=False), required=False)
+    
 
 
 class OrderBrandName(BaseSchema):
@@ -5821,6 +5829,30 @@ class TaxDetails(BaseSchema):
     
 
 
+class PaymentInfoData(BaseSchema):
+    # Order swagger.json
+
+    
+    meta = fields.Dict(required=False)
+    
+    mode = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    amount = fields.Float(required=False)
+    
+    collected = fields.Boolean(required=False)
+    
+    refund_by = fields.Str(required=False)
+    
+    collect_by = fields.Str(required=False)
+    
+    display_name = fields.Str(required=False)
+    
+    merchant_transaction_id = fields.Str(required=False)
+    
+
+
 class OrderData(BaseSchema):
     # Order swagger.json
 
@@ -5839,7 +5871,7 @@ class OrderData(BaseSchema):
     
     payment_methods = fields.Dict(required=False, allow_none=True)
     
-    payment_info = fields.List(fields.Dict(required=False), required=False)
+    payment_info = fields.List(fields.Nested(PaymentInfoData, required=False), required=False)
     
 
 

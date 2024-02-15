@@ -12,14 +12,14 @@ class Serviceability:
         self._conf = config
 
     
-    async def getZones(self, page_no=None, page_size=None, is_active=None, channel_id=None, q=None, country_iso_code=None, state=None, city=None, pincode=None, sector=None, request_headers:Dict={}):
+    async def getZones(self, page_no=None, page_size=None, is_active=None, channel_id=None, q=None, country=None, state=None, city=None, pincode=None, sector=None, request_headers:Dict={}):
         """Return the list of zones that are defined at the company level.
         :param page_no : index of the item to start returning with : type integer
         :param page_size : determines the items to be displayed in a page : type integer
         :param is_active : Status of Zone (either active or inactive) : type boolean
         :param channel_id : Zones filtered by an application : type string
         :param q : search with name as a free text : type string
-        :param country_iso_code : ISO2 code of the country : type string
+        :param country : ISO2 code of the country : type string
         :param state : State name : type string
         :param city : City name : type string
         :param pincode : Pincode value to search zones : type string
@@ -37,8 +37,8 @@ class Serviceability:
             payload["channel_id"] = channel_id
         if q is not None:
             payload["q"] = q
-        if country_iso_code is not None:
-            payload["country_iso_code"] = country_iso_code
+        if country is not None:
+            payload["country"] = country
         if state is not None:
             payload["state"] = state
         if city is not None:
@@ -53,8 +53,8 @@ class Serviceability:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/zones", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true,"examples":{"Test Company":{"value":1}}}],"optional":[{"in":"query","name":"page_no","description":"index of the item to start returning with","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"is_active","description":"Status of Zone (either active or inactive)","schema":{"type":"boolean"},"examples":{"Active Zones":{"value":true}}},{"in":"query","name":"channel_id","description":"Zones filtered by an application","schema":{"type":"string"},"examples":{"Single application filter":{"value":"64fee4b354c2c22a822de54f"},"Multiple application filters":{"value":"64fee4b354c2c22a822de54f,6502e3b460c34d2d0fb705c8"}}},{"in":"query","name":"q","description":"search with name as a free text","schema":{"type":"string"},"examples":{"Sample query":{"value":"zone"}}},{"in":"query","name":"country_iso_code","description":"ISO2 code of the country","schema":{"type":"string"},"examples":{"India":{"value":"IN"}}},{"in":"query","name":"state","description":"State name","schema":{"type":"string"},"examples":{"Indian State":{"value":"Maharashtra"}}},{"in":"query","name":"city","description":"City name","schema":{"type":"string"},"examples":{"Indian City":{"value":"Mumbai"}}},{"in":"query","name":"pincode","description":"Pincode value to search zones","schema":{"type":"string"},"examples":{"Pincode":{"value":"400603"}}},{"in":"query","name":"sector","description":"Sector value to search zones","schema":{"type":"string"},"examples":{"Sector":{"value":"Abu Dhabi"}}}],"query":[{"in":"query","name":"page_no","description":"index of the item to start returning with","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"is_active","description":"Status of Zone (either active or inactive)","schema":{"type":"boolean"},"examples":{"Active Zones":{"value":true}}},{"in":"query","name":"channel_id","description":"Zones filtered by an application","schema":{"type":"string"},"examples":{"Single application filter":{"value":"64fee4b354c2c22a822de54f"},"Multiple application filters":{"value":"64fee4b354c2c22a822de54f,6502e3b460c34d2d0fb705c8"}}},{"in":"query","name":"q","description":"search with name as a free text","schema":{"type":"string"},"examples":{"Sample query":{"value":"zone"}}},{"in":"query","name":"country_iso_code","description":"ISO2 code of the country","schema":{"type":"string"},"examples":{"India":{"value":"IN"}}},{"in":"query","name":"state","description":"State name","schema":{"type":"string"},"examples":{"Indian State":{"value":"Maharashtra"}}},{"in":"query","name":"city","description":"City name","schema":{"type":"string"},"examples":{"Indian City":{"value":"Mumbai"}}},{"in":"query","name":"pincode","description":"Pincode value to search zones","schema":{"type":"string"},"examples":{"Pincode":{"value":"400603"}}},{"in":"query","name":"sector","description":"Sector value to search zones","schema":{"type":"string"},"examples":{"Sector":{"value":"Abu Dhabi"}}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true,"examples":{"Test Company":{"value":1}}}]}""", page_no=page_no, page_size=page_size, is_active=is_active, channel_id=channel_id, q=q, country_iso_code=country_iso_code, state=state, city=city, pincode=pincode, sector=sector)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, is_active=is_active, channel_id=channel_id, q=q, country_iso_code=country_iso_code, state=state, city=city, pincode=pincode, sector=sector)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/zones", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true,"examples":{"Test Company":{"value":1}}}],"optional":[{"in":"query","name":"page_no","description":"index of the item to start returning with","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"is_active","description":"Status of Zone (either active or inactive)","schema":{"type":"boolean"},"examples":{"Active Zones":{"value":true}}},{"in":"query","name":"channel_id","description":"Zones filtered by an application","schema":{"type":"string"},"examples":{"Single application filter":{"value":"64fee4b354c2c22a822de54f"},"Multiple application filters":{"value":"64fee4b354c2c22a822de54f,6502e3b460c34d2d0fb705c8"}}},{"in":"query","name":"q","description":"search with name as a free text","schema":{"type":"string"},"examples":{"Sample query":{"value":"zone"}}},{"in":"query","name":"country","description":"ISO2 code of the country","schema":{"type":"string"},"examples":{"India":{"value":"India"}}},{"in":"query","name":"state","description":"State name","schema":{"type":"string"},"examples":{"Indian State":{"value":"Maharashtra"}}},{"in":"query","name":"city","description":"City name","schema":{"type":"string"},"examples":{"Indian City":{"value":"Mumbai"}}},{"in":"query","name":"pincode","description":"Pincode value to search zones","schema":{"type":"string"},"examples":{"Pincode":{"value":"400603"}}},{"in":"query","name":"sector","description":"Sector value to search zones","schema":{"type":"string"},"examples":{"Sector":{"value":"Abu Dhabi"}}}],"query":[{"in":"query","name":"page_no","description":"index of the item to start returning with","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"is_active","description":"Status of Zone (either active or inactive)","schema":{"type":"boolean"},"examples":{"Active Zones":{"value":true}}},{"in":"query","name":"channel_id","description":"Zones filtered by an application","schema":{"type":"string"},"examples":{"Single application filter":{"value":"64fee4b354c2c22a822de54f"},"Multiple application filters":{"value":"64fee4b354c2c22a822de54f,6502e3b460c34d2d0fb705c8"}}},{"in":"query","name":"q","description":"search with name as a free text","schema":{"type":"string"},"examples":{"Sample query":{"value":"zone"}}},{"in":"query","name":"country","description":"ISO2 code of the country","schema":{"type":"string"},"examples":{"India":{"value":"India"}}},{"in":"query","name":"state","description":"State name","schema":{"type":"string"},"examples":{"Indian State":{"value":"Maharashtra"}}},{"in":"query","name":"city","description":"City name","schema":{"type":"string"},"examples":{"Indian City":{"value":"Mumbai"}}},{"in":"query","name":"pincode","description":"Pincode value to search zones","schema":{"type":"string"},"examples":{"Pincode":{"value":"400603"}}},{"in":"query","name":"sector","description":"Sector value to search zones","schema":{"type":"string"},"examples":{"Sector":{"value":"Abu Dhabi"}}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true,"examples":{"Test Company":{"value":1}}}]}""", page_no=page_no, page_size=page_size, is_active=is_active, channel_id=channel_id, q=q, country=country, state=state, city=city, pincode=pincode, sector=sector)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, is_active=is_active, channel_id=channel_id, q=q, country=country, state=state, city=city, pincode=pincode, sector=sector)
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -68,7 +68,7 @@ class Serviceability:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/zones", page_no=page_no, page_size=page_size, is_active=is_active, channel_id=channel_id, q=q, country_iso_code=country_iso_code, state=state, city=city, pincode=pincode, sector=sector), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/zones", page_no=page_no, page_size=page_size, is_active=is_active, channel_id=channel_id, q=q, country=country, state=state, city=city, pincode=pincode, sector=sector), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ListViewResponse
@@ -82,7 +82,7 @@ class Serviceability:
         return response
     
     async def createZone(self, body="", request_headers:Dict={}):
-        """Creates a new zone with the specified mapping. A zone enables serviceability based on given regions. By creating a zone and including specific regions, you can ensure that the stores associated with the zone are serviceable for those added regions. This functionality is particularly useful when you need to ensure serviceability for multiple regions by grouping them into a single zone.
+        """Generate and add a new zone.
         """
         payload = {}
         
@@ -142,7 +142,7 @@ class Serviceability:
         schema = UpdateZoneData()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/zones/{zone_id}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true,"examples":{"Test Company":{"value":"1"}}},{"in":"path","name":"zone_id","description":"A `zone_id` is a unique identifier for a particular zone.","schema":{"type":"string"},"examples":{"Test Zone":{"value":"64d22858f8aafe61d79f07ea"}},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true,"examples":{"Test Company":{"value":"1"}}},{"in":"path","name":"zone_id","description":"A `zone_id` is a unique identifier for a particular zone.","schema":{"type":"string"},"examples":{"Test Zone":{"value":"64d22858f8aafe61d79f07ea"}},"required":true}]}""", zone_id=zone_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/zones/{zone_id}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true,"examples":{"Test Company":{"value":1}}},{"in":"path","name":"zone_id","description":"A `zone_id` is a unique identifier for a particular zone.","schema":{"type":"string"},"examples":{"Test Zone":{"value":"64d22858f8aafe61d79f07ea"}},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true,"examples":{"Test Company":{"value":1}}},{"in":"path","name":"zone_id","description":"A `zone_id` is a unique identifier for a particular zone.","schema":{"type":"string"},"examples":{"Test Zone":{"value":"64d22858f8aafe61d79f07ea"}},"required":true}]}""", zone_id=zone_id)
         query_string = await create_query_string(zone_id=zone_id)
 
         headers = {}
@@ -213,7 +213,7 @@ class Serviceability:
         return response
     
     async def getAllStores(self, request_headers:Dict={}):
-        """This API returns stores data.
+        """Retrieve a list of all available stores data.
         """
         payload = {}
         

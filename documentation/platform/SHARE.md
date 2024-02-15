@@ -7,7 +7,7 @@
 ## Share Methods
 Short link and QR Code
 
-Default
+URL Shortner
 * [createShortLink](#createshortlink)
 * [getShortLinks](#getshortlinks)
 * [getShortLinkByHash](#getshortlinkbyhash)
@@ -22,7 +22,7 @@ Default
 
 
 ### createShortLink
-Create short link
+Create short link.
 
 
 
@@ -44,7 +44,7 @@ except Exception as e:
 | body | [ShortLinkReq](#ShortLinkReq) | yes | Request body |
 
 
-Create short link
+Generate a shortened URL link for sharing.
 
 *Returned Response:*
 
@@ -118,7 +118,7 @@ Success
 
 
 ### getShortLinks
-Get short links
+Get short links.
 
 
 
@@ -147,7 +147,7 @@ except Exception as e:
 
 
 
-Get short links
+Retrieve a list of all generated short links.
 
 *Returned Response:*
 
@@ -232,7 +232,7 @@ Success
 
 
 ### getShortLinkByHash
-Get short link by hash
+Get short link by hash.
 
 
 
@@ -255,7 +255,7 @@ except Exception as e:
 
 
 
-Get short link by hash
+Retrieve a specific short link by its unique hash.
 
 *Returned Response:*
 
@@ -329,7 +329,7 @@ Success
 
 
 ### updateShortLinkById
-Update short link by id
+Update short link by ID.
 
 
 
@@ -352,7 +352,7 @@ except Exception as e:
 | body | [ShortLinkReq](#ShortLinkReq) | yes | Request body |
 
 
-Update short link by id
+Update details of a specific short link by its ID.
 
 *Returned Response:*
 
@@ -426,7 +426,7 @@ Success
 
 
 ### getShortLinkClickStats
-Get click statistics for a short link
+Get short link click statistics.
 
 
 
@@ -449,7 +449,7 @@ except Exception as e:
 
 
 
-Retrieve click statistics for a given short link ID.
+Retrieve statistics and analytics for clicks on a short link.
 
 *Returned Response:*
 

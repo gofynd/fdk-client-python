@@ -52,7 +52,7 @@ class PosCart:
         self._urls.update(urls)
     
     async def getCart(self, id=None, i=None, b=None, c=None, assign_card_id=None, area_code=None, buy_now=None, body="", request_headers:Dict={}):
-        """Use this API to get details of all the items added to a cart.
+        """Retrieve the current state and items in the shopping cart.
         :param id :  : type string
         :param i :  : type boolean
         :param b :  : type boolean
@@ -114,7 +114,7 @@ class PosCart:
         return response
     
     async def getCartLastModified(self, id=None, body="", request_headers:Dict={}):
-        """Use this API to fetch Last-Modified timestamp in header metadata.
+        """Gets the last modified timestamp for the cart.
         :param id :  : type string
         """
         payload = {}
@@ -149,7 +149,7 @@ class PosCart:
         return response
     
     async def addItems(self, i=None, b=None, area_code=None, buy_now=None, id=None, body="", request_headers:Dict={}):
-        """Use this API to add items to the cart.
+        """Adds selected items to the shopping cart.
         :param i :  : type boolean
         :param b :  : type boolean
         :param area_code :  : type string
@@ -209,7 +209,7 @@ class PosCart:
         return response
     
     async def updateCart(self, id=None, i=None, b=None, area_code=None, buy_now=None, body="", request_headers:Dict={}):
-        """Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size.
+        """Modifies items and quantities in the existing cart.
         :param id :  : type string
         :param i :  : type boolean
         :param b :  : type boolean
@@ -269,7 +269,7 @@ class PosCart:
         return response
     
     async def getItemCount(self, id=None, buy_now=None, body="", request_headers:Dict={}):
-        """Use this API to get the total number of items present in cart.
+        """Gets the total number of items in the cart.
         :param id : The unique identifier of the cart. : type string
         :param buy_now :  : type boolean
         """
@@ -316,7 +316,7 @@ class PosCart:
         return response
     
     async def getCoupons(self, id=None, buy_now=None, body="", request_headers:Dict={}):
-        """Use this API to get a list of available coupons along with their details.
+        """Retrieve coupons that can be applied to the cart.
         :param id :  : type string
         :param buy_now :  : type boolean
         """
@@ -363,7 +363,7 @@ class PosCart:
         return response
     
     async def applyCoupon(self, i=None, b=None, p=None, id=None, buy_now=None, body="", request_headers:Dict={}):
-        """Use this API to apply coupons on items in the cart.
+        """Applies a coupon code to get discounts on cart items.
         :param i :  : type boolean
         :param b :  : type boolean
         :param p :  : type boolean
@@ -423,7 +423,7 @@ class PosCart:
         return response
     
     async def removeCoupon(self, id=None, buy_now=None, body="", request_headers:Dict={}):
-        """Remove Coupon applied on the cart by passing uid in request body.
+        """Removes an applied coupon from the cart.
         :param id :  : type string
         :param buy_now :  : type boolean
         """
@@ -470,7 +470,7 @@ class PosCart:
         return response
     
     async def getBulkDiscountOffers(self, item_id=None, article_id=None, uid=None, slug=None, body="", request_headers:Dict={}):
-        """Use this API to get a list of applicable offers along with current, next and best offer for given product. Either one of uid, item_id, slug should be present.
+        """Lists available bulk discount offers for cart items.
         :param item_id : The Item ID of the product : type integer
         :param article_id : Article Mongo ID : type string
         :param uid : UID of the product : type integer
@@ -523,7 +523,7 @@ class PosCart:
         return response
     
     async def applyRewardPoints(self, id=None, i=None, b=None, buy_now=None, body="", request_headers:Dict={}):
-        """Use this API to redeem a fixed no. of reward points by applying it to the cart.
+        """Applies user’s reward points to the cart.
         :param id :  : type string
         :param i :  : type boolean
         :param b :  : type boolean
@@ -580,7 +580,7 @@ class PosCart:
         return response
     
     async def getAddresses(self, cart_id=None, buy_now=None, mobile_no=None, checkout_mode=None, tags=None, is_default=None, body="", request_headers:Dict={}):
-        """Use this API to get all the addresses associated with an account. If successful, returns a Address resource in the response body specified in GetAddressesResponse.attibutes listed below are optional 
+        """Retrieve all saved addresses for the user.
         :param cart_id :  : type string
         :param buy_now :  : type boolean
         :param mobile_no :  : type string
@@ -639,7 +639,7 @@ class PosCart:
         return response
     
     async def addAddress(self, body="", request_headers:Dict={}):
-        """Use this API to add an address to an account.
+        """Saves a new address for the user.
         """
         payload = {}
         
@@ -684,7 +684,7 @@ class PosCart:
         return response
     
     async def getAddressById(self, id=None, cart_id=None, buy_now=None, mobile_no=None, checkout_mode=None, tags=None, is_default=None, body="", request_headers:Dict={}):
-        """Use this API to get an addresses using its ID. If successful, returns a Address resource in the response body specified in `Address`. Attibutes listed below are optional 
+        """Retrieves a saved address using its ID.
         :param id :  : type string
         :param cart_id :  : type string
         :param buy_now :  : type boolean
@@ -746,7 +746,7 @@ class PosCart:
         return response
     
     async def updateAddress(self, id=None, body="", request_headers:Dict={}):
-        """Use this API to update an existing address in the account. Request object should contain attributes mentioned in Address  can be updated.
+        """Modifies a saved address.
         :param id : ID allotted to the selected address : type string
         """
         payload = {}
@@ -794,7 +794,7 @@ class PosCart:
         return response
     
     async def removeAddress(self, id=None, body="", request_headers:Dict={}):
-        """Use this API to delete an address by its ID. This will returns an object that will indicate whether the address was deleted successfully or not.
+        """Removes a saved address from the user's profile.
         :param id : ID allotted to the selected address : type string
         """
         payload = {}
@@ -838,7 +838,7 @@ class PosCart:
         return response
     
     async def selectAddress(self, cart_id=None, buy_now=None, i=None, b=None, body="", request_headers:Dict={}):
-        """Select Address from all addresses associated with the account in order to ship the cart items to that address, otherwise default address will be selected implicitly. See `SelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, this API returns a Cart object. 
+        """Selects an address for the cart's delivery.
         :param cart_id :  : type string
         :param buy_now :  : type boolean
         :param i :  : type boolean
@@ -895,7 +895,7 @@ class PosCart:
         return response
     
     async def selectPaymentMode(self, id=None, buy_now=None, body="", request_headers:Dict={}):
-        """Use this API to update cart payment.
+        """Chooses a payment mode for the checkout process.
         :param id :  : type string
         :param buy_now :  : type boolean
         """
@@ -946,7 +946,7 @@ class PosCart:
         return response
     
     async def validateCouponForPayment(self, id=None, buy_now=None, address_id=None, payment_mode=None, payment_identifier=None, aggregator_name=None, merchant_code=None, iin=None, network=None, type=None, card_id=None, body="", request_headers:Dict={}):
-        """Use this API to validate a coupon against the payment mode such as NetBanking, Wallet, UPI etc.
+        """Checks if a coupon is valid for the selected payment mode.
         :param id :  : type string
         :param buy_now :  : type boolean
         :param address_id :  : type string
@@ -1020,7 +1020,7 @@ class PosCart:
         return response
     
     async def getShipments(self, pick_at_store_uid=None, ordering_store_id=None, p=None, id=None, address_id=None, area_code=None, order_type=None, body="", request_headers:Dict={}):
-        """Use this API to get shipment details, expected delivery date, items and price breakup of the shipment.
+        """Retrieve shipment details for items in the cart.
         :param pick_at_store_uid :  : type integer
         :param ordering_store_id :  : type integer
         :param p : This is a boolean value. Select `true` for getting a payment option in response. : type boolean
@@ -1082,7 +1082,7 @@ class PosCart:
         return response
     
     async def updateShipments(self, i=None, p=None, id=None, address_id=None, area_code=None, order_type=None, body="", request_headers:Dict={}):
-        """Use this API to update the delivery type and quantity as per customer's preference for either store pick-up or home-delivery.
+        """Modifies shipment details for items in the cart.
         :param i : This is a boolean value. Select `true` to retrieve all the items added in the cart. : type boolean
         :param p : This is a boolean value. Select `true` for getting a payment option in response. : type boolean
         :param id : The unique identifier of the cart : type string
@@ -1145,7 +1145,7 @@ class PosCart:
         return response
     
     async def checkoutCart(self, id=None, body="", request_headers:Dict={}):
-        """Use this API to checkout all items in the cart for payment and order generation. For COD, order will be generated directly, whereas for other checkout modes, user will be redirected to a payment gateway.
+        """Initiates the checkout process for the cart.
         :param id :  : type string
         """
         payload = {}
@@ -1193,7 +1193,7 @@ class PosCart:
         return response
     
     async def updateCartMeta(self, id=None, buy_now=None, body="", request_headers:Dict={}):
-        """Use this API to update cart meta like checkout_mode and gstin.
+        """Adds or modifies metadata for the cart.
         :param id :  : type string
         :param buy_now :  : type boolean
         """
@@ -1244,7 +1244,7 @@ class PosCart:
         return response
     
     async def getAvailableDeliveryModes(self, area_code=None, id=None, body="", request_headers:Dict={}):
-        """Use this API to get the delivery modes (home-delivery/store-pickup) along with a list of pickup stores available for a given cart at a given PIN Code. User can then view the address of a pickup store with the help of store-address API.
+        """Lists available delivery modes for the cart.
         :param area_code :  : type string
         :param id :  : type string
         """
@@ -1291,7 +1291,7 @@ class PosCart:
         return response
     
     async def getStoreAddressByUid(self, store_uid=None, body="", request_headers:Dict={}):
-        """Use this API to get the store details by entering the unique identifier of the pickup stores shown in the response of available-delivery-mode API.
+        """Gets the address of the store by its UID.
         :param store_uid :  : type integer
         """
         payload = {}
@@ -1335,7 +1335,7 @@ class PosCart:
         return response
     
     async def getCartShareLink(self, body="", request_headers:Dict={}):
-        """Use this API to generate a shared cart snapshot and return a shortlink token. The link can be shared with other users for getting the same items in their cart.
+        """Generates a shareable link for the current cart.
         """
         payload = {}
         
@@ -1380,7 +1380,7 @@ class PosCart:
         return response
     
     async def getCartSharedItems(self, token=None, body="", request_headers:Dict={}):
-        """Use this API to get the shared cart details as per the token generated using the share-cart API.
+        """Retrieves items from a shared cart link.
         :param token : Token of the shared short link : type string
         """
         payload = {}
@@ -1424,7 +1424,7 @@ class PosCart:
         return response
     
     async def updateCartWithSharedItems(self, token=None, action=None, body="", request_headers:Dict={}):
-        """Use this API to merge the shared cart with existing cart, or replace the existing cart with the shared cart. The `action` parameter is used to indicate the operation Merge or Replace.
+        """Updates the cart with items from a shared link.
         :param token : Token of the shared short link : type string
         :param action : Operation to perform on the existing cart merge or replace. : type string
         """

@@ -28,7 +28,7 @@ class Communication:
         self._urls.update(urls)
     
     async def getCommunicationConsent(self, body="", request_headers:Dict={}):
-        """Use this API to retrieve the consent provided by the user for receiving communication messages over Email/SMS/WhatsApp.
+        """Retrieve the consent provided by the user for receiving communication messages over Email/SMS/WhatsApp. 
         """
         payload = {}
         
@@ -69,7 +69,7 @@ class Communication:
         return response
     
     async def upsertCommunicationConsent(self, body="", request_headers:Dict={}):
-        """Use this API to update and insert the consent provided by the user for receiving communication messages over Email/SMS/WhatsApp.
+        """Update and insert the consent provided by the user for receiving communication messages over Email/SMS/WhatsApp. 
         """
         payload = {}
         
@@ -114,7 +114,7 @@ class Communication:
         return response
     
     async def upsertAppPushtoken(self, body="", request_headers:Dict={}):
-        """Use this API to update and insert the push token of the user.
+        """Update the push token of the user. 
         """
         payload = {}
         

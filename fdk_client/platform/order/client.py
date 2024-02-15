@@ -13,7 +13,7 @@ class Order:
 
     
     async def invalidateShipmentCache(self, body="", request_headers:Dict={}):
-        """Invalidate shipment Cache
+        """Invalidate shipment Cache.
         """
         payload = {}
         
@@ -56,7 +56,7 @@ class Order:
         return response
     
     async def reassignLocation(self, body="", request_headers:Dict={}):
-        """Reassign Location
+        """Change the assigned location for an order or shipment.
         """
         payload = {}
         
@@ -99,7 +99,7 @@ class Order:
         return response
     
     async def updateShipmentLock(self, body="", request_headers:Dict={}):
-        """update shipment/bag lock and check status
+        """Modify shipment/bag lock and check status.
         """
         payload = {}
         
@@ -142,7 +142,7 @@ class Order:
         return response
     
     async def getAnnouncements(self, date=None, request_headers:Dict={}):
-        """Get Announcements
+        """Retrieve announcements related to orders or shipments.
         :param date : Date On which the announcement is Active (Date should in ISO Datetime format IST Time) : type string
         """
         payload = {}
@@ -184,7 +184,7 @@ class Order:
         return response
     
     async def updateAddress(self, shipment_id=None, name=None, address=None, address_type=None, pincode=None, phone=None, email=None, landmark=None, address_category=None, city=None, state=None, country=None, request_headers:Dict={}):
-        """Update Address for the order
+        """Modify the shipping address for an order.
         :param shipment_id :  : type string
         :param name :  : type string
         :param address :  : type string
@@ -259,7 +259,7 @@ class Order:
         return response
     
     async def click2Call(self, caller=None, receiver=None, bag_id=None, caller_id=None, method=None, request_headers:Dict={}):
-        """Click to Call
+        """Click to call. 
         :param caller : Call Number : type string
         :param receiver : Receiver Number : type string
         :param bag_id : Bag Id for the query : type string
@@ -313,7 +313,7 @@ class Order:
         return response
     
     async def updateShipmentStatus(self, body="", request_headers:Dict={}):
-        """This API is for Shipment State transition or Shipment data update or both below example is for partial state transition with data update
+        """Shipment state transition or Shipment data update or both.
         """
         payload = {}
         
@@ -356,7 +356,7 @@ class Order:
         return response
     
     async def getRoleBasedActions(self, request_headers:Dict={}):
-        """Get Role Based Actions
+        """Retrieve role based actions.
         """
         payload = {}
         
@@ -395,7 +395,7 @@ class Order:
         return response
     
     async def getShipmentHistory(self, shipment_id=None, bag_id=None, request_headers:Dict={}):
-        """Get Shipment History
+        """Retrieve the shipment history.
         :param shipment_id : Shipment Id : type string
         :param bag_id : Bag/Product Id : type integer
         """
@@ -440,7 +440,7 @@ class Order:
         return response
     
     async def postShipmentHistory(self, body="", request_headers:Dict={}):
-        """Post shipment history
+        """Add history records for a shipment.
         """
         payload = {}
         
@@ -483,7 +483,7 @@ class Order:
         return response
     
     async def sendSmsNinja(self, body="", request_headers:Dict={}):
-        """Send SMS Ninja Panel
+        """Send SMS Ninja Panel.
         """
         payload = {}
         
@@ -526,7 +526,7 @@ class Order:
         return response
     
     async def updatePackagingDimensions(self, body="", request_headers:Dict={}):
-        """Update Packaging Dimensions
+        """Modify the dimensions of packaging.
         """
         payload = {}
         
@@ -569,7 +569,7 @@ class Order:
         return response
     
     async def createOrder(self, body="", request_headers:Dict={}):
-        """Create Order
+        """Create order.
         """
         payload = {}
         
@@ -612,7 +612,7 @@ class Order:
         return response
     
     async def getChannelConfig(self, request_headers:Dict={}):
-        """getChannelConfig
+        """Retrieve configuration settings for a channel.
         """
         payload = {}
         
@@ -651,7 +651,7 @@ class Order:
         return response
     
     async def createChannelConfig(self, body="", request_headers:Dict={}):
-        """createChannelConfig
+        """Set up configuration for a channel.
         """
         payload = {}
         
@@ -694,7 +694,7 @@ class Order:
         return response
     
     async def orderUpdate(self, body="", request_headers:Dict={}):
-        """Update Order
+        """Modify the details and status of an order. 
         """
         payload = {}
         
@@ -737,7 +737,7 @@ class Order:
         return response
     
     async def checkOrderStatus(self, body="", request_headers:Dict={}):
-        """Check order status
+        """Verify the current status of an order.
         """
         payload = {}
         
@@ -780,7 +780,7 @@ class Order:
         return response
     
     async def getStateTransitionMap(self, request_headers:Dict={}):
-        """Get State Transition Map
+        """Retrieve a map of state transitions for orders.
         """
         payload = {}
         
@@ -819,8 +819,7 @@ class Order:
         return response
     
     async def getAllowedStateTransition(self, ordering_channel=None, status=None, request_headers:Dict={}):
-        """This endpoint will fetch next possible states based on logged in user
-
+        """Retrieve next possible states based on logged in user.
         :param ordering_channel : Ordering channel : type string
         :param status : current status of a shipment : type string
         """
@@ -865,7 +864,7 @@ class Order:
         return response
     
     async def fetchCreditBalanceDetail(self, body="", request_headers:Dict={}):
-        """Fetch Credit Balance Detail
+        """Retrieve details about credit balance.
         """
         payload = {}
         
@@ -908,7 +907,7 @@ class Order:
         return response
     
     async def fetchRefundModeConfig(self, body="", request_headers:Dict={}):
-        """Fetch Refund Mode Config
+        """Retrieve configuration for refund modes.
         """
         payload = {}
         
@@ -951,7 +950,7 @@ class Order:
         return response
     
     async def attachOrderUser(self, body="", request_headers:Dict={}):
-        """Attach Order User
+        """Attach order User
         """
         payload = {}
         
@@ -994,7 +993,7 @@ class Order:
         return response
     
     async def sendUserMobileOTP(self, body="", request_headers:Dict={}):
-        """Send User Mobile OTP
+        """Send a one-time OTP to a users mobile device.
         """
         payload = {}
         
@@ -1080,7 +1079,7 @@ class Order:
         return response
     
     async def downloadLanesReport(self, body="", request_headers:Dict={}):
-        """downloads lanes shipment/orders.
+        """Downloads lanes shipment/orders.
         """
         payload = {}
         
@@ -1717,7 +1716,7 @@ class Order:
         return response
     
     async def trackShipment(self, shipment_id=None, awb=None, page_no=None, page_size=None, request_headers:Dict={}):
-        """This endpoint allows users to get courier partner tracking details for a given shipment id or awb no. The service will fetch courier partner statuses that are pushed to oms.
+        """Retrieve courier partner tracking details for a given shipment id or awb no.
         :param shipment_id : Shipment ID : type string
         :param awb : AWB number : type string
         :param page_no : Page number : type integer
@@ -1768,7 +1767,7 @@ class Order:
         return response
     
     async def updateShipmentTracking(self, body="", request_headers:Dict={}):
-        """This endpoint allows users to post courier partner tracking details for a given shipment id or awb no. The service will add entry for courier partner statuses and will be saved to oms.
+        """Modify courier partner tracking details for a given shipment id or awb no.
         """
         payload = {}
         
@@ -1899,7 +1898,7 @@ class Order:
         return response
     
     async def getShipments(self, lane=None, bag_status=None, status_override_lane=None, time_to_dispatch=None, search_type=None, search_value=None, from_date=None, to_date=None, start_date=None, end_date=None, dp_ids=None, stores=None, sales_channels=None, page_no=None, page_size=None, fetch_active_shipment=None, allow_inactive=None, exclude_locked_shipments=None, payment_methods=None, channel_shipment_id=None, channel_order_id=None, custom_meta=None, ordering_channel=None, company_affiliate_tag=None, my_orders=None, platform_user_id=None, sort_type=None, show_cross_company_data=None, tags=None, customer_id=None, order_type=None, request_headers:Dict={}):
-        """Get Shipments Listing for the company id
+        """Retrieve a list of available shipments.
         :param lane : Name of lane for which data is to be fetched : type string
         :param bag_status : Comma separated values of bag statuses : type string
         :param status_override_lane : Use this flag to fetch by bag_status and override lane : type boolean
@@ -2031,7 +2030,7 @@ class Order:
         return response
     
     async def getShipmentById(self, channel_shipment_id=None, shipment_id=None, fetch_active_shipment=None, request_headers:Dict={}):
-        """Get shipment details for the given shipment.
+        """Retrieve detailed information about a specific shipment.
         :param channel_shipment_id : App Shipment Id : type string
         :param shipment_id : Shipment Id : type string
         :param fetch_active_shipment : flag to fetch active or deactivated shipments : type boolean
@@ -2079,7 +2078,7 @@ class Order:
         return response
     
     async def getOrderById(self, order_id=None, my_orders=None, allow_inactive=None, request_headers:Dict={}):
-        """Get Order Details by ID
+        """Retrieve detailed information about a specific order.
         :param order_id :  : type string
         :param my_orders :  : type boolean
         :param allow_inactive : Flag to allow inactive shipments : type boolean
@@ -2127,7 +2126,7 @@ class Order:
         return response
     
     async def getLaneConfig(self, super_lane=None, group_entity=None, from_date=None, to_date=None, start_date=None, end_date=None, dp_ids=None, stores=None, sales_channels=None, payment_mode=None, bag_status=None, search_type=None, search_value=None, tags=None, time_to_dispatch=None, payment_methods=None, my_orders=None, show_cross_company_data=None, order_type=None, request_headers:Dict={}):
-        """Get lane config for the order
+        """Retrieve configuration settings for lanes.
         :param super_lane : Name of lane for which data is to be fetched : type string
         :param group_entity : Name of group entity : type string
         :param from_date : Start Date in DD-MM-YYYY format : type string
@@ -2223,7 +2222,7 @@ class Order:
         return response
     
     async def getOrders(self, lane=None, search_type=None, bag_status=None, time_to_dispatch=None, payment_methods=None, tags=None, search_value=None, from_date=None, to_date=None, start_date=None, end_date=None, dp_ids=None, stores=None, sales_channels=None, page_no=None, page_size=None, is_priority_sort=None, custom_meta=None, my_orders=None, show_cross_company_data=None, customer_id=None, order_type=None, request_headers:Dict={}):
-        """Get Orders Listing
+        """Retrieve a list of available orders.
         :param lane : lane refers to a section where orders are assigned, indicating its grouping : type string
         :param search_type : search_type refers to the field that will be used as the target for the search operation : type string
         :param bag_status : bag_status refers to status of the entity. Filters orders based on the status. : type string
@@ -2328,7 +2327,7 @@ class Order:
         return response
     
     async def getfilters(self, view=None, group_entity=None, request_headers:Dict={}):
-        """Get Listing Filters
+        """Retrieve listing filters.
         :param view : Name of view : type string
         :param group_entity : Name of group entity : type string
         """
@@ -2373,7 +2372,7 @@ class Order:
         return response
     
     async def getBulkShipmentExcelFile(self, sales_channels=None, dp_ids=None, start_date=None, end_date=None, stores=None, tags=None, bag_status=None, payment_methods=None, file_type=None, time_to_dispatch=None, page_no=None, page_size=None, request_headers:Dict={}):
-        """Generate Bulk Shipment Excel Report.
+        """Retrieve a bulk shipment Excel report.
         :param sales_channels : Comma separated values of sales channel ids : type string
         :param dp_ids : Comma separated values of delivery partner ids : type string
         :param start_date : UTC start date in ISO format : type string
@@ -2448,7 +2447,7 @@ class Order:
         return response
     
     async def getBulkActionTemplate(self, request_headers:Dict={}):
-        """Get Bulk Action seller templates.
+        """Retrieve bulk action seller templates.
         """
         payload = {}
         
@@ -2529,7 +2528,7 @@ class Order:
         return response
     
     async def getShipmentReasons(self, shipment_id=None, bag_id=None, state=None, request_headers:Dict={}):
-        """Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
+        """Retrieve the issues that led to the cancellation of bags within a shipment.
         :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
         :param bag_id : ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
         :param state : State for which reasons are required. : type string
@@ -2577,7 +2576,7 @@ class Order:
         return response
     
     async def getBagById(self, bag_id=None, channel_bag_id=None, channel_id=None, request_headers:Dict={}):
-        """Get Order Bag Details.
+        """Retrieve detailed information about a specific bag.
         :param bag_id : Id of bag : type string
         :param channel_bag_id : Id of application bag : type string
         :param channel_id : Id of application : type string
@@ -2625,7 +2624,7 @@ class Order:
         return response
     
     async def getBags(self, bag_ids=None, shipment_ids=None, order_ids=None, channel_bag_ids=None, channel_shipment_ids=None, channel_order_ids=None, channel_id=None, page_no=None, page_size=None, request_headers:Dict={}):
-        """Get Bags for the order
+        """Retrieve Bags for the order.
         :param bag_ids : Comma separated values of bag ids : type string
         :param shipment_ids : Comma separated values of shipment ids : type string
         :param order_ids : Comma separated values of order ids : type string
@@ -2691,7 +2690,7 @@ class Order:
         return response
     
     async def generatePOSReceiptByOrderId(self, order_id=None, shipment_id=None, document_type=None, request_headers:Dict={}):
-        """Generate POS recipt by order id.
+        """Create a point-of-sale (POS) receipt for a specific order by order ID.
         :param order_id :  : type string
         :param shipment_id :  : type string
         :param document_type :  : type string

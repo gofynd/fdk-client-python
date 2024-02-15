@@ -7,7 +7,7 @@
 ## AuditTrail Methods
 Audit Logging Service that logs the crucial updates on the Platform
 
-Default
+Audit Logs Management
 * [getAuditLogs](#getauditlogs)
 * [createAuditLog](#createauditlog)
 * [getAuditLog](#getauditlog)
@@ -21,7 +21,7 @@ Default
 
 
 ### getAuditLogs
-Get paginated audit logs
+Retrieve audit logs.
 
 
 
@@ -46,7 +46,7 @@ except Exception as e:
 
 
 
-Get a paginated set of logs that can be filtered using the available set of parameters and get the relevant group of logs
+Retrieve audit logs for system events and actions.
 
 *Returned Response:*
 
@@ -113,7 +113,7 @@ Success
 
 
 ### createAuditLog
-Create logs for auditing later on
+Create an audit log.
 
 
 
@@ -135,7 +135,7 @@ except Exception as e:
 | body | [RequestBodyAuditLog](#RequestBodyAuditLog) | yes | Request body |
 
 
-Create a log instance that stores all the relevant info to be logged
+Generate and record an audit log entry for a specific event or action.
 
 *Returned Response:*
 
@@ -180,7 +180,7 @@ Success
 
 
 ### getAuditLog
-Get audit log
+Get an audit log entry.
 
 
 
@@ -203,7 +203,7 @@ except Exception as e:
 
 
 
-Get detailed log information by their id
+Retrieve a specific audit log entry
 
 *Returned Response:*
 
@@ -315,7 +315,7 @@ Success
 
 
 ### getEntityTypes
-Get entity types
+Obtain entity types for auditing.
 
 
 
@@ -333,7 +333,7 @@ except Exception as e:
 
 
 
-Get a consolidated list of entity types from all the logs stored on the db, which further helps to filter the logs better
+List of entity types that can be audited within the platform's
 
 *Returned Response:*
 
