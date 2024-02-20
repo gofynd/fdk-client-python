@@ -55,7 +55,7 @@ class Catalog:
         self._urls.update(urls)
     
     async def getProductDetailBySlug(self, slug=None, body="", request_headers:Dict={}):
-        """Retrieve a product by its slug value.
+        """Use this API to retrieve a product by its slug value.
         :param slug : A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ : type string
         """
         payload = {}
@@ -99,7 +99,7 @@ class Catalog:
         return response
     
     async def getProductSizesBySlug(self, slug=None, store_id=None, body="", request_headers:Dict={}):
-        """Retrieve the size options available for a specific product based on its slug.
+        """A product can have multiple sizes. Use this API to fetch all the available sizes of a product.
         :param slug : A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ : type string
         :param store_id : The ID of the store that is selling the product, e.g. 1,2,3. : type integer
         """
@@ -146,7 +146,7 @@ class Catalog:
         return response
     
     async def getProductComparisonBySlugs(self, slug=None, body="", request_headers:Dict={}):
-        """Retrieves side-by-side comparisons of multiple products identified by their slugs.
+        """Use this API to compare the features of products belonging to the same category. Note that at least one slug is mandatory in the request query.
         :param slug : A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/. : type array
         """
         payload = {}
@@ -190,7 +190,7 @@ class Catalog:
         return response
     
     async def getSimilarComparisonProductBySlug(self, slug=None, body="", request_headers:Dict={}):
-        """Gets products similar to the one identified by the given slug for comparison.
+        """Use this API to compare a given product automatically with similar products. Only one slug is needed.
         :param slug : A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ : type string
         """
         payload = {}
@@ -234,7 +234,7 @@ class Catalog:
         return response
     
     async def getComparedFrequentlyProductBySlug(self, slug=None, body="", request_headers:Dict={}):
-        """Retrieve products that are often compared to the product specified by its slug.
+        """Use this API to compare a given product automatically with products that are frequently compared with it. Only one slug is needed.
         :param slug : A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ : type string
         """
         payload = {}
@@ -278,7 +278,7 @@ class Catalog:
         return response
     
     async def getProductVariantsBySlug(self, slug=None, body="", request_headers:Dict={}):
-        """Retrieves all available variants of a specific product identified by its slug.
+        """A product can have a different type of variants such as colour, shade, memory. Use this API to fetch all the available variants of a product using its slug.
         :param slug : A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ : type string
         """
         payload = {}
@@ -322,7 +322,7 @@ class Catalog:
         return response
     
     async def getProductStockByIds(self, item_id=None, alu=None, sku_code=None, ean=None, upc=None, body="", request_headers:Dict={}):
-        """Retrieves the current stock status for products identified by their IDs.
+        """Retrieve the available stock of the products. Use this API to retrieve stock of multiple products (up to 50) at a time.
         :param item_id : The Item ID of the product (Max. 50 allowed) : type string
         :param alu : ALU of the product (limited upto 50 ALU identifier in a single request) : type string
         :param sku_code : Stock-keeping Unit of the product (limited upto 50 SKU Code in a single request) : type string
@@ -378,7 +378,7 @@ class Catalog:
         return response
     
     async def getProductStockForTimeByIds(self, timestamp=None, page_size=None, page_id=None, body="", request_headers:Dict={}):
-        """Retrieves projected stock levels for specified products at a future time.
+        """Retrieve the available stock of the products. Use this API to get the stock status of products whose inventory is updated at the specified time
         :param timestamp : Timestamp in UTC format (2020-07-23T10:27:50Z) : type string
         :param page_size : The number of items to retrieve in each page. : type integer
         :param page_id : Page ID to retrieve next set of results. : type string
@@ -428,7 +428,7 @@ class Catalog:
         return response
     
     async def getProducts(self, q=None, f=None, filters=None, sort_on=None, page_id=None, page_size=None, page_no=None, page_type=None, body="", request_headers:Dict={}):
-        """Retrieves a list of all products in the catalog. Choose a sort order or make arbitrary search queries by entering the product name, brand, category or collection.
+        """Use this API to list all the products. You may choose a sort order or make arbitrary search queries by entering the product name, brand, category or collection.
         :param q : The search query for entering partial or full name of product, brand, category, or collection. : type string
         :param f : The search filter parameters. Filter parameters will be passed in f parameter as shown in the example below. Double Pipe (||) denotes the OR condition, whereas Triple-colon (:::) indicates a new filter paramater applied as an AND condition. : type string
         :param filters : This is a boolean value, True for fetching all filter parameters and False for disabling the filter parameters. : type boolean
@@ -493,7 +493,7 @@ class Catalog:
         return response
     
     async def getBrands(self, department=None, page_no=None, page_size=None, body="", request_headers:Dict={}):
-        """Retrieves a comprehensive list of all brands in the catalog under which a product is sold.
+        """A brand is the name under which a product is sold. Use this API to list all the brands. You can also filter the brands by department.
         :param department : The name of the department. Use this parameter to filter products by a particular department. See the list of available departments below. Also, you can get available departments from the endpoint /service/application/catalog/v1.0/departments/ : type string
         :param page_no : The page number to navigate through the given set of results. : type integer
         :param page_size : The number of items to retrieve in each page. : type integer
@@ -543,7 +543,7 @@ class Catalog:
         return response
     
     async def getBrandDetailBySlug(self, slug=None, body="", request_headers:Dict={}):
-        """Retrieve metadata of a brand such as name, information, logo, banner, etc.
+        """Fetch metadata of a brand such as name, information, logo, banner, etc.
         :param slug : A short, human-readable, URL-friendly identifier of a brand. You can get slug value from the endpoint /service/application/catalog/v1.0/brands/. : type string
         """
         payload = {}
@@ -587,7 +587,7 @@ class Catalog:
         return response
     
     async def getCategories(self, department=None, body="", request_headers:Dict={}):
-        """Retrieves a list of all available product categories. Also filter the categories by department.
+        """Use this API to list all the categories. You can also filter the categories by department.
         :param department : The name of the department. Use this parameter to filter products by a particular department. See the list of available departments below. Also, you can get available departments from the endpoint /service/application/catalog/v1.0/departments/ : type string
         """
         payload = {}
@@ -631,7 +631,7 @@ class Catalog:
         return response
     
     async def getCategoryDetailBySlug(self, slug=None, body="", request_headers:Dict={}):
-        """Retrieve detailed information about a specific product category using its slug and Retrieve metadata of a category such as name, information, logo, banner, etc.
+        """Fetch metadata of a category such as name, information, logo, banner, etc.
         :param slug : A short, human-readable, URL-friendly identifier of a brand. You can get slug value from the endpoint /service/application/catalog/v1.0/brands/. : type string
         """
         payload = {}
@@ -725,7 +725,7 @@ class Catalog:
         return response
     
     async def getDepartments(self, body="", request_headers:Dict={}):
-        """Retrieves a list of all available product departments. Departments are a way to categorise similar products.
+        """Departments are a way to categorise similar products. A product can lie in multiple departments. For example, a skirt can below to the 'Women's Fashion' Department while a handbag can lie in 'Women's Accessories' Department. Use this API to list all the departments. If successful, returns the list of departments specified in `DepartmentResponse`
         """
         payload = {}
         
@@ -765,22 +765,37 @@ class Catalog:
 
         return response
     
-    async def getSearchResults(self, q=None, body="", request_headers:Dict={}):
-        """Retrieves products that match the user's search criteria.
+    async def getSearchResults(self, q=None, category_suggestion=None, brand_suggestion=None, collection_suggestion=None, product_suggestion=None, query_suggestion=None, body="", request_headers:Dict={}):
+        """Retrieves a list of suggestions for a given search query. Each suggestion is a valid search term that's generated on the basis of query. This is particularly useful to enhance the user experience while using the search tool.
         :param q : The search query for entering partial or full name of a product, brand or category. For example, if the given search query `q` is _ski_, the relevant search suggestions could be _skirt_, _ski shoes_, __skin cream_ etc. : type string
+        :param category_suggestion : For getting related category suggestions. : type integer
+        :param brand_suggestion : For getting related brand suggestions. : type integer
+        :param collection_suggestion : For getting related collection suggestions. : type integer
+        :param product_suggestion : For getting related product suggestions. : type integer
+        :param query_suggestion : For getting related query suggestions. : type integer
         """
         payload = {}
         
         if q is not None:
             payload["q"] = q
+        if category_suggestion is not None:
+            payload["category_suggestion"] = category_suggestion
+        if brand_suggestion is not None:
+            payload["brand_suggestion"] = brand_suggestion
+        if collection_suggestion is not None:
+            payload["collection_suggestion"] = collection_suggestion
+        if product_suggestion is not None:
+            payload["product_suggestion"] = product_suggestion
+        if query_suggestion is not None:
+            payload["query_suggestion"] = query_suggestion
 
         # Parameter validation
         schema = CatalogValidator.getSearchResults()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getSearchResults"], proccessed_params="""{"required":[{"in":"query","name":"q","description":"The search query for entering partial or full name of a product, brand or category. For example, if the given search query `q` is _ski_, the relevant search suggestions could be _skirt_, _ski shoes_, __skin cream_ etc.","schema":{"type":"string"},"required":true}],"optional":[],"query":[{"in":"query","name":"q","description":"The search query for entering partial or full name of a product, brand or category. For example, if the given search query `q` is _ski_, the relevant search suggestions could be _skirt_, _ski shoes_, __skin cream_ etc.","schema":{"type":"string"},"required":true}],"headers":[],"path":[]}""", q=q)
-        query_string = await create_query_string(q=q)
+        url_with_params = await create_url_with_params(api_url=self._urls["getSearchResults"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"q","description":"The search query for entering partial or full name of a product, brand or category. For example, if the given search query `q` is _ski_, the relevant search suggestions could be _skirt_, _ski shoes_, __skin cream_ etc.","schema":{"type":"string"},"required":false},{"name":"category_suggestion","description":"For getting related category suggestions.","in":"query","required":false,"schema":{"type":"integer"}},{"name":"brand_suggestion","description":"For getting related brand suggestions.","in":"query","required":false,"schema":{"type":"integer"}},{"name":"collection_suggestion","description":"For getting related collection suggestions.","in":"query","required":false,"schema":{"type":"integer"}},{"name":"product_suggestion","description":"For getting related product suggestions.","in":"query","required":false,"schema":{"type":"integer"}},{"name":"query_suggestion","description":"For getting related query suggestions.","in":"query","required":false,"schema":{"type":"integer"}}],"query":[{"in":"query","name":"q","description":"The search query for entering partial or full name of a product, brand or category. For example, if the given search query `q` is _ski_, the relevant search suggestions could be _skirt_, _ski shoes_, __skin cream_ etc.","schema":{"type":"string"},"required":false},{"name":"category_suggestion","description":"For getting related category suggestions.","in":"query","required":false,"schema":{"type":"integer"}},{"name":"brand_suggestion","description":"For getting related brand suggestions.","in":"query","required":false,"schema":{"type":"integer"}},{"name":"collection_suggestion","description":"For getting related collection suggestions.","in":"query","required":false,"schema":{"type":"integer"}},{"name":"product_suggestion","description":"For getting related product suggestions.","in":"query","required":false,"schema":{"type":"integer"}},{"name":"query_suggestion","description":"For getting related query suggestions.","in":"query","required":false,"schema":{"type":"integer"}}],"headers":[],"path":[]}""", q=q, category_suggestion=category_suggestion, brand_suggestion=brand_suggestion, collection_suggestion=collection_suggestion, product_suggestion=product_suggestion, query_suggestion=query_suggestion)
+        query_string = await create_query_string(q=q, category_suggestion=category_suggestion, brand_suggestion=brand_suggestion, collection_suggestion=collection_suggestion, product_suggestion=product_suggestion, query_suggestion=query_suggestion)
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -796,7 +811,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getSearchResults"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/auto-complete/", q=q), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getSearchResults"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/auto-complete/", q=q, category_suggestion=category_suggestion, brand_suggestion=brand_suggestion, collection_suggestion=collection_suggestion, product_suggestion=product_suggestion, query_suggestion=query_suggestion), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import AutoCompleteResponse
@@ -810,7 +825,7 @@ class Catalog:
         return response
     
     async def getCollections(self, page_no=None, page_size=None, tag=None, q=None, body="", request_headers:Dict={}):
-        """Retrieves a list of curated product collections.
+        """Collections are a great way to organize your products and can improve the ability for customers to find items quickly and efficiently.
         :param page_no : The page number to navigate through the given set of results. : type integer
         :param page_size : The number of items to retrieve in each page. : type integer
         :param tag : List of tags  to filter collections : type array
@@ -863,7 +878,7 @@ class Catalog:
         return response
     
     async def getCollectionItemsBySlug(self, slug=None, f=None, q=None, filters=None, sort_on=None, page_id=None, page_size=None, page_no=None, page_type=None, body="", request_headers:Dict={}):
-        """Retrieve items in a specific collection identified by its slug.
+        """Get items in a collection specified by its `slug`.
         :param slug : A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint /service/application/catalog/v1.0/collections/. : type string
         :param f : The search filter parameters. Filter parameters will be passed in f parameter as shown in the example below. Double Pipe (||) denotes the OR condition, whereas Triple-colon (:::) indicates a new filter paramater applied as an AND condition. : type string
         :param q : The search query for entering partial or full name of product, brand, category, or collection. : type string
@@ -931,7 +946,7 @@ class Catalog:
         return response
     
     async def getCollectionDetailBySlug(self, slug=None, body="", request_headers:Dict={}):
-        """Retrieve detailed information about a specific collection using its slug.
+        """Get the details of a collection by its `slug`.
         :param slug : A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint /service/application/catalog/v1.0/collections/. : type string
         """
         payload = {}
@@ -975,7 +990,7 @@ class Catalog:
         return response
     
     async def getFollowedListing(self, collection_type=None, page_id=None, page_size=None, body="", request_headers:Dict={}):
-        """Retrieve a list of products or brands the user is following.
+        """Users can follow a product they like. This API retrieves the products the user have followed.
         :param collection_type : Type of collection followed, i.e. products, brands, or collections. : type string
         :param page_id : Page ID to retrieve next set of results. : type string
         :param page_size : Page ID to retrieve next set of results. : type integer
@@ -1025,7 +1040,7 @@ class Catalog:
         return response
     
     async def unfollowById(self, collection_type=None, collection_id=None, body="", request_headers:Dict={}):
-        """Removes a followed item, brand, or product based on its ID.
+        """You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
         :param collection_type : Type of collection followed, i.e. products, brands, or collections. : type string
         :param collection_id : The ID of the collection type. : type string
         """
@@ -1072,7 +1087,7 @@ class Catalog:
         return response
     
     async def followById(self, collection_type=None, collection_id=None, body="", request_headers:Dict={}):
-        """Adds a product, brand, or item to the user's followed list by its ID.
+        """Follow a particular entity such as product, brand, collection specified by its ID.
         :param collection_type : Type of collection followed, i.e. products, brands, or collections. : type string
         :param collection_id : The ID of the collection type. : type string
         """
@@ -1119,7 +1134,7 @@ class Catalog:
         return response
     
     async def getFollowerCountById(self, collection_type=None, collection_id=None, body="", request_headers:Dict={}):
-        """Retrieves the total number of followers for a specific item by its ID.
+        """Get the total count of followers for a given collection type and collection ID.
         :param collection_type : Type of collection, i.e. products, brands, or collections. : type string
         :param collection_id : The ID of the collection type. : type string
         """
@@ -1166,7 +1181,7 @@ class Catalog:
         return response
     
     async def getFollowIds(self, collection_type=None, body="", request_headers:Dict={}):
-        """Retrieves the IDs of all items the user is currently following like Products, Brands and Collections.
+        """You can get the IDs of all the followed Products, Brands and Collections. Pass collection_type as query parameter to fetch specific Ids
         :param collection_type : Type of collection, i.e. products, brands, collections. : type string
         """
         payload = {}
@@ -1210,7 +1225,7 @@ class Catalog:
         return response
     
     async def getStores(self, page_no=None, page_size=None, q=None, city=None, range=None, latitude=None, longitude=None, tags=None, body="", request_headers:Dict={}):
-        """Retrieves a list of all physical or online stores.
+        """Use this API to get a list of stores in a specific application.
         :param page_no : The page number to navigate through the given set of results. : type integer
         :param page_size : Number of items to retrieve in each page. : type integer
         :param q : Search a store by its name or store_code. : type string
@@ -1275,7 +1290,7 @@ class Catalog:
         return response
     
     async def getInStockLocations(self, page_no=None, page_size=None, q=None, city=None, range=None, latitude=None, longitude=None, body="", request_headers:Dict={}):
-        """Lists locations where specified products are currently in stock.
+        """Use this API to get a list of stores in a specific application.
         :param page_no : The page number to navigate through the given set of results. : type integer
         :param page_size : Number of items to retrieve in each page. : type integer
         :param q : Search a store by its name or store_code. : type string
@@ -1337,7 +1352,7 @@ class Catalog:
         return response
     
     async def getLocationDetailsById(self, location_id=None, body="", request_headers:Dict={}):
-        """Retrieves detailed information about a specific location using its ID.
+        """Use this API to get meta details for a store.
         :param location_id : Unique Location ID. : type integer
         """
         payload = {}
@@ -1381,7 +1396,7 @@ class Catalog:
         return response
     
     async def getProductBundlesBySlug(self, slug=None, id=None, body="", request_headers:Dict={}):
-        """Retrieve products bundles to the one specified by its slug.
+        """Use this API to retrieve products bundles to the one specified by its slug.
         :param slug : Product slug for which bundles need to be fetched. : type string
         :param id : Product uid : type string
         """
@@ -1427,12 +1442,14 @@ class Catalog:
 
         return response
     
-    async def getProductPriceBySlug(self, slug=None, size=None, store_id=None, moq=None, body="", request_headers:Dict={}):
-        """Retrieve the price of a product size at all the selling locations near to a PIN Code.
+    async def getProductPriceBySlug(self, slug=None, size=None, store_id=None, exchange_seller_identifier=None, moq=None, seller_id=None, body="", request_headers:Dict={}):
+        """Prices may vary for different sizes of a product. Use this API to retrieve the price of a product size at all the selling locations near to a PIN Code.
         :param slug : A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ : type string
         :param size : A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes : type string
         :param store_id : The ID of the store that is selling the product, e.g. 1,2,3. : type integer
+        :param exchange_seller_identifier : The seller identifier of the exchange product. : type string
         :param moq : An Integer indication the Minimum Order Quantity of a product, e.g. 100. : type integer
+        :param seller_id : The ID of the seller that is selling the product, e.g. 1,2,3. : type integer
         """
         payload = {}
         
@@ -1442,16 +1459,20 @@ class Catalog:
             payload["size"] = size
         if store_id is not None:
             payload["store_id"] = store_id
+        if exchange_seller_identifier is not None:
+            payload["exchange_seller_identifier"] = exchange_seller_identifier
         if moq is not None:
             payload["moq"] = moq
+        if seller_id is not None:
+            payload["seller_id"] = seller_id
 
         # Parameter validation
         schema = CatalogValidator.getProductPriceBySlug()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getProductPriceBySlug"], proccessed_params="""{"required":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/","schema":{"type":"string"},"required":true},{"in":"path","name":"size","description":"A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"store_id","description":"The ID of the store that is selling the product, e.g. 1,2,3.","schema":{"type":"integer"},"required":false},{"in":"query","name":"moq","description":"An Integer indication the Minimum Order Quantity of a product, e.g. 100.","schema":{"type":"integer"},"required":false}],"query":[{"in":"query","name":"store_id","description":"The ID of the store that is selling the product, e.g. 1,2,3.","schema":{"type":"integer"},"required":false},{"in":"query","name":"moq","description":"An Integer indication the Minimum Order Quantity of a product, e.g. 100.","schema":{"type":"integer"},"required":false}],"headers":[],"path":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/","schema":{"type":"string"},"required":true},{"in":"path","name":"size","description":"A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes","schema":{"type":"string"},"required":true}]}""", slug=slug, size=size, store_id=store_id, moq=moq)
-        query_string = await create_query_string(slug=slug, size=size, store_id=store_id, moq=moq)
+        url_with_params = await create_url_with_params(api_url=self._urls["getProductPriceBySlug"], proccessed_params="""{"required":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/","schema":{"type":"string"},"required":true},{"in":"path","name":"size","description":"A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"store_id","description":"The ID of the store that is selling the product, e.g. 1,2,3.","schema":{"type":"integer"},"required":false},{"in":"query","name":"exchange_seller_identifier","description":"The seller identifier of the exchange product.","schema":{"type":"string"},"required":false},{"in":"query","name":"moq","description":"An Integer indication the Minimum Order Quantity of a product, e.g. 100.","schema":{"type":"integer"},"required":false},{"in":"query","name":"seller_id","description":"The ID of the seller that is selling the product, e.g. 1,2,3.","schema":{"type":"integer"},"required":false}],"query":[{"in":"query","name":"store_id","description":"The ID of the store that is selling the product, e.g. 1,2,3.","schema":{"type":"integer"},"required":false},{"in":"query","name":"exchange_seller_identifier","description":"The seller identifier of the exchange product.","schema":{"type":"string"},"required":false},{"in":"query","name":"moq","description":"An Integer indication the Minimum Order Quantity of a product, e.g. 100.","schema":{"type":"integer"},"required":false},{"in":"query","name":"seller_id","description":"The ID of the seller that is selling the product, e.g. 1,2,3.","schema":{"type":"integer"},"required":false}],"headers":[],"path":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/","schema":{"type":"string"},"required":true},{"in":"path","name":"size","description":"A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes","schema":{"type":"string"},"required":true}]}""", slug=slug, size=size, store_id=store_id, exchange_seller_identifier=exchange_seller_identifier, moq=moq, seller_id=seller_id)
+        query_string = await create_query_string(slug=slug, size=size, store_id=store_id, exchange_seller_identifier=exchange_seller_identifier, moq=moq, seller_id=seller_id)
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1467,7 +1488,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductPriceBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v3.0/products/{slug}/sizes/{size}/price/", slug=slug, size=size, store_id=store_id, moq=moq), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductPriceBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v3.0/products/{slug}/sizes/{size}/price/", slug=slug, size=size, store_id=store_id, exchange_seller_identifier=exchange_seller_identifier, moq=moq, seller_id=seller_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ProductSizePriceResponseV3
@@ -1481,7 +1502,7 @@ class Catalog:
         return response
     
     async def getProductSellersBySlug(self, slug=None, size=None, strategy=None, page_no=None, page_size=None, body="", request_headers:Dict={}):
-        """Retrieve a list of all sellers offering a specific product identified by its slug. 
+        """A product of a particular size may be sold by multiple sellers. Use this API to fetch the sellers having the stock of a particular size at a given PIN Code.
         :param slug : A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ : type string
         :param size : A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes : type string
         :param strategy : Sort stores on the basis of strategy. eg, fast-delivery, low-price, optimal. : type string

@@ -112,10 +112,6 @@ class AggregatorRoute(BaseSchema):
     pass
 
 
-class PaymentDefaultSelection(BaseSchema):
-    pass
-
-
 class PaymentFlow(BaseSchema):
     pass
 
@@ -1043,18 +1039,6 @@ class AggregatorRoute(BaseSchema):
     
 
 
-class PaymentDefaultSelection(BaseSchema):
-    # Payment swagger.json
-
-    
-    mode = fields.Str(required=False, allow_none=True)
-    
-    identifier = fields.Str(required=False, allow_none=True)
-    
-    skip = fields.Boolean(required=False, allow_none=True)
-    
-
-
 class PaymentFlow(BaseSchema):
     # Payment swagger.json
 
@@ -1093,11 +1077,9 @@ class PaymentOptionAndFlow(BaseSchema):
     # Payment swagger.json
 
     
-    payment_option = fields.Nested(RootPaymentMode, required=False)
+    payment_option = fields.List(fields.Nested(RootPaymentMode, required=False), required=False)
     
     payment_flows = fields.Nested(PaymentFlow, required=False)
-    
-    payment_default_selection = fields.Nested(PaymentDefaultSelection, required=False)
     
 
 
@@ -1316,8 +1298,6 @@ class ValidateVPARequest(BaseSchema):
 
     
     upi_vpa = fields.Str(required=False)
-    
-    aggregator = fields.Str(required=False)
     
 
 
@@ -1686,6 +1666,8 @@ class SetDefaultBeneficiaryRequest(BaseSchema):
     order_id = fields.Str(required=False)
     
     beneficiary_id = fields.Str(required=False)
+    
+    shipment_id = fields.Str(required=False)
     
 
 

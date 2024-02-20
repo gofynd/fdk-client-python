@@ -13,7 +13,8 @@ class Webhook:
 
     
     async def manualRetryOfFailedEvent(self, body="", request_headers:Dict={}):
-        """Trigger a manual retry for an event that failed to deliver.
+        """Initiates a manual retry for event processing for a specific company. This endpoint allows the user to specify the date range (start_date and end_date) within which the events should be retried.
+
         """
         payload = {}
         
@@ -56,7 +57,8 @@ class Webhook:
         return response
     
     async def getEventCounts(self, body="", request_headers:Dict={}):
-        """Retrieve the counts of events based on their status.
+        """Retrieves the count of failed events for a specific company within the specified date range. The user can filter the count based on specific event types if provided.
+
         """
         payload = {}
         
@@ -99,7 +101,8 @@ class Webhook:
         return response
     
     async def getManualRetryStatus(self, request_headers:Dict={}):
-        """Check the status of a manual retry operation.
+        """Retrieves the status of retry for a specific company's failed events. This endpoint returns the total number of events, the count of successfully retried events, the count of failed retry attempts, and the overall status of the retry process.
+
         """
         payload = {}
         
@@ -138,7 +141,8 @@ class Webhook:
         return response
     
     async def manualRetryCancel(self, request_headers:Dict={}):
-        """Cancel a manual retry operation for a failed event.
+        """Cancels the active manual retry for a specific company's failed events. If a manual retry is currently in progress, it will be cancelled.
+
         """
         payload = {}
         
@@ -168,7 +172,8 @@ class Webhook:
         return response
     
     async def downloadDeliveryReport(self, body="", request_headers:Dict={}):
-        """Download detailed delivery reports for events.
+        """Download reports for a specific company based on the provided filters.
+
         """
         payload = {}
         
@@ -211,7 +216,8 @@ class Webhook:
         return response
     
     async def pingWebhook(self, body="", request_headers:Dict={}):
-        """Send a test ping to a webhook for verification.
+        """Ping and validate webhook url.
+
         """
         payload = {}
         
@@ -254,7 +260,8 @@ class Webhook:
         return response
     
     async def getReportFilters(self, body="", request_headers:Dict={}):
-        """Retrieve filters used for generating reports.
+        """Retrieve filters for a specific company based on the provided subscriber IDs.
+
         """
         payload = {}
         
@@ -288,7 +295,8 @@ class Webhook:
         return response
     
     async def getHistoricalReports(self, body="", request_headers:Dict={}):
-        """Retrieve historical reports of webhook events.
+        """Retrieve history reports for a specific company based on the provided filters.
+
         """
         payload = {}
         
@@ -331,7 +339,8 @@ class Webhook:
         return response
     
     async def cancelJobByName(self, filename=None, request_headers:Dict={}):
-        """Cancel a specific job by its name.
+        """Cancel the export of a specific report for a company.
+
         :param filename :  : type string
         """
         payload = {}
@@ -373,7 +382,8 @@ class Webhook:
         return response
     
     async def getDeliveryReports(self, body="", request_headers:Dict={}):
-        """Retrieve reports on the delivery status of events.
+        """Retrieve a list of processed events for a specific company based on the provided filters.
+
         """
         payload = {}
         
@@ -416,7 +426,8 @@ class Webhook:
         return response
     
     async def fetchAllEventConfigurations(self, request_headers:Dict={}):
-        """Retrieve all configurations for event handling.
+        """To fetch all webhook events.
+
         """
         payload = {}
         
@@ -454,8 +465,53 @@ class Webhook:
 
         return response
     
+    async def registerSubscriberToEventV2(self, body="", request_headers:Dict={}):
+        """Register Subscriber.
+
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = WebhookValidator.registerSubscriberToEventV2()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import SubscriberConfigRequestV2
+        schema = SubscriberConfigRequestV2()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v2.0/company/{self._conf.companyId}/subscriber/", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}]}""", )
+        query_string = await create_query_string()
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/webhook/v2.0/company/{self._conf.companyId}/subscriber/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SubscriberConfigResponse
+            schema = SubscriberConfigResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for registerSubscriberToEventV2")
+                print(e)
+
+        return response
+    
     async def registerSubscriberToEvent(self, body="", request_headers:Dict={}):
-        """Add a subscriber to receive events of a specific type.
+        """Register Subscriber.
+
         """
         payload = {}
         
@@ -498,7 +554,8 @@ class Webhook:
         return response
     
     async def getSubscribersByCompany(self, page_no=None, page_size=None, extension_id=None, request_headers:Dict={}):
-        """Retrieve subscribers associated with a company.
+        """Get Subscribers By Company ID.
+
         :param page_no : Page Number : type integer
         :param page_size : Page Size : type integer
         :param extension_id : extension_id : type string
@@ -546,7 +603,7 @@ class Webhook:
         return response
     
     async def updateSubscriberConfig(self, body="", request_headers:Dict={}):
-        """Modify and update subscriber configuration settings.
+        """Update Subscriber
         """
         payload = {}
         
@@ -589,7 +646,7 @@ class Webhook:
         return response
     
     async def getSubscriberById(self, subscriber_id=None, request_headers:Dict={}):
-        """Retrieve a subscriber's details by their unique identifier.
+        """Get Subscriber By Subscriber ID
         :param subscriber_id : subscriber id : type integer
         """
         payload = {}
@@ -631,7 +688,7 @@ class Webhook:
         return response
     
     async def getSubscribersByExtensionId(self, page_no=None, page_size=None, extension_id=None, request_headers:Dict={}):
-        """Retrieve subscribers associated with a specific extension.
+        """Get Subscribers By ExtensionID
         :param page_no : Page Number : type integer
         :param page_size : Page Size : type integer
         :param extension_id : extension_id : type string

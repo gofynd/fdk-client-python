@@ -247,7 +247,7 @@ class Lead:
         return response
     
     async def getCustomForm(self, slug=None, request_headers:Dict={}):
-        """Retrieve information about a custom form which includes corresponding field details and any validation regex required against that field or not
+        """Get specific custom form using it's slug, this is used to view the form.
         :param slug : Slug of form whose response is getting submitted : type string
         """
         payload = {}
@@ -289,7 +289,7 @@ class Lead:
         return response
     
     async def editCustomForm(self, slug=None, body="", request_headers:Dict={}):
-        """Modify the content and assosciated settings of a custom form.
+        """Edit the given custom form field such as adding or deleting input, assignee, title, decription, notification and polling information.
         :param slug : Slug of form whose response is getting submitted : type string
         """
         payload = {}
@@ -377,7 +377,7 @@ class Lead:
         return response
     
     async def getCustomForms(self, request_headers:Dict={}):
-        """Retrieve a list of available custom forms.
+        """Get list of custom form for given application
         """
         payload = {}
         
@@ -416,7 +416,7 @@ class Lead:
         return response
     
     async def createCustomForm(self, body="", request_headers:Dict={}):
-        """Create a new custom form for application users to fill
+        """Creates a new custom form for given application
         """
         payload = {}
         
@@ -543,7 +543,7 @@ class Lead:
         return response
     
     async def openVideoRoom(self, body="", request_headers:Dict={}):
-        """Initiate and open a video room.
+        """Open a video room.
         """
         payload = {}
         
@@ -586,7 +586,7 @@ class Lead:
         return response
     
     async def closeVideoRoom(self, unique_name=None, request_headers:Dict={}):
-        """Terminate and close an active video room.
+        """Close the video room and force all participants to leave.
         :param unique_name : Unique name of Video Room : type string
         """
         payload = {}

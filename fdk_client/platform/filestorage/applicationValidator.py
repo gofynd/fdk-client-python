@@ -51,6 +51,16 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
         
     
     
@@ -163,6 +173,17 @@ class FileStorageValidator:
          
         
     
+    class deletePdfType(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
     class getDefaultPdfData(BaseSchema):
         
         
@@ -177,6 +198,17 @@ class FileStorageValidator:
         
     
     class updateHtmlTemplate(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
+    class deletePdfConfigTemplate(BaseSchema):
         
         
         company_id = fields.Int(required=False)

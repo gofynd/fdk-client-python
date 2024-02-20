@@ -224,6 +224,14 @@ class GetStoresViewResponse(BaseSchema):
     pass
 
 
+class ReAssignStoreRequest(BaseSchema):
+    pass
+
+
+class ReAssignStoreResponse(BaseSchema):
+    pass
+
+
 class PincodeMopData(BaseSchema):
     pass
 
@@ -356,7 +364,43 @@ class ZoneConfig(BaseSchema):
     pass
 
 
+class BuyboxConfig(BaseSchema):
+    pass
+
+
+class BuyboxRuleConfig(BaseSchema):
+    pass
+
+
+class PromiseType(BaseSchema):
+    pass
+
+
+class StorePromiseAttributeConfig(BaseSchema):
+    pass
+
+
+class DeliveryServiceAttributeConfig(BaseSchema):
+    pass
+
+
+class BufferField(BaseSchema):
+    pass
+
+
+class PromiseConfig(BaseSchema):
+    pass
+
+
 class ApplicationConfig(BaseSchema):
+    pass
+
+
+class ApplicationConfigPatchRequest(BaseSchema):
+    pass
+
+
+class ApplicationConfigPatchResponse(BaseSchema):
     pass
 
 
@@ -493,38 +537,6 @@ class RulePriorityRequest(BaseSchema):
 
 
 class RulePriorityResponse(BaseSchema):
-    pass
-
-
-class ArticleAssignment(BaseSchema):
-    pass
-
-
-class ServiceabilityLocation(BaseSchema):
-    pass
-
-
-class LocationDetailsServiceability(BaseSchema):
-    pass
-
-
-class OptimalLocationsArticles(BaseSchema):
-    pass
-
-
-class OptimlLocationsRequestSchema(BaseSchema):
-    pass
-
-
-class OptimalLocationArticlesResponse(BaseSchema):
-    pass
-
-
-class OptimalLocationAssignedStoresResponse(BaseSchema):
-    pass
-
-
-class OptimalLocationsResponse(BaseSchema):
     pass
 
 
@@ -1297,6 +1309,36 @@ class GetStoresViewResponse(BaseSchema):
     
 
 
+class ReAssignStoreRequest(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    to_pincode = fields.Str(required=False)
+    
+    identifier = fields.Str(required=False)
+    
+    configuration = fields.Dict(required=False)
+    
+    ignored_locations = fields.List(fields.Str(required=False), required=False)
+    
+    articles = fields.List(fields.Dict(required=False), required=False)
+    
+
+
+class ReAssignStoreResponse(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    to_pincode = fields.Str(required=False)
+    
+    success = fields.Boolean(required=False)
+    
+    error = fields.Dict(required=False)
+    
+    articles = fields.List(fields.Dict(required=False), required=False)
+    
+
+
 class PincodeMopData(BaseSchema):
     # Serviceability swagger.json
 
@@ -1725,6 +1767,8 @@ class CourierPartnerRule(BaseSchema):
     
     conditions = fields.Nested(CourierPartnerRuleConditions, required=False)
     
+    manual_priority = fields.List(fields.Str(required=False), required=False)
+    
     sort = fields.List(fields.Str(required=False), required=False)
     
 
@@ -1769,6 +1813,96 @@ class ZoneConfig(BaseSchema):
     
 
 
+class BuyboxConfig(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    show_seller = fields.Boolean(required=False)
+    
+    enable_selection = fields.Boolean(required=False)
+    
+    is_seller_buybox_enabled = fields.Boolean(required=False)
+    
+
+
+class BuyboxRuleConfig(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    store_type_priority = fields.List(fields.Str(required=False), required=False)
+    
+    store_tag_priority = fields.List(fields.Str(required=False), required=False)
+    
+    sort = fields.List(fields.Str(required=False), required=False)
+    
+
+
+class PromiseType(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    display_name = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+    is_active = fields.Boolean(required=False)
+    
+    is_default = fields.Boolean(required=False)
+    
+
+
+class StorePromiseAttributeConfig(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    is_operational_timing_enabled = fields.Boolean(required=False)
+    
+    is_order_acceptance_timing_enabled = fields.Boolean(required=False)
+    
+    is_average_processing_time = fields.Boolean(required=False)
+    
+    is_holiday_enabled = fields.Boolean(required=False)
+    
+
+
+class DeliveryServiceAttributeConfig(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    is_pickup_cutoff_time_enabled = fields.Boolean(required=False)
+    
+    is_service_tat_enabled = fields.Boolean(required=False)
+    
+    is_holiday_enabled = fields.Boolean(required=False)
+    
+
+
+class BufferField(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    unit = fields.Str(required=False)
+    
+    value = fields.Int(required=False)
+    
+    enabled = fields.Boolean(required=False)
+    
+
+
+class PromiseConfig(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    store_attributes = fields.Nested(StorePromiseAttributeConfig, required=False)
+    
+    delivery_service_attributes = fields.Nested(DeliveryServiceAttributeConfig, required=False)
+    
+    buffer_field = fields.Nested(BufferField, required=False)
+    
+
+
 class ApplicationConfig(BaseSchema):
     # Serviceability swagger.json
 
@@ -1777,7 +1911,43 @@ class ApplicationConfig(BaseSchema):
     
     sort = fields.List(fields.Str(required=False), required=False)
     
+    application_id = fields.Str(required=False)
+    
+    company_id = fields.Int(required=False)
+    
+    manual_priority = fields.List(fields.Str(required=False), required=False)
+    
     zones = fields.Nested(ZoneConfig, required=False)
+    
+    buybox_config = fields.Nested(BuyboxConfig, required=False)
+    
+    buybox_rule_config = fields.Nested(BuyboxRuleConfig, required=False)
+    
+    promise_types = fields.List(fields.Nested(PromiseType, required=False), required=False)
+    
+    promise_config = fields.Nested(PromiseConfig, required=False)
+    
+
+
+class ApplicationConfigPatchRequest(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    buybox_config = fields.Nested(BuyboxConfig, required=False)
+    
+    buybox_rule_config = fields.Nested(BuyboxRuleConfig, required=False)
+    
+    promise_types = fields.List(fields.Nested(PromiseType, required=False), required=False)
+    
+    promise_config = fields.Nested(PromiseConfig, required=False)
+    
+
+
+class ApplicationConfigPatchResponse(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    success = fields.Boolean(required=False)
     
 
 
@@ -1877,6 +2047,8 @@ class StoreRuleConfigData(BaseSchema):
     
     sort = fields.List(fields.Str(required=False), required=False)
     
+    manual_priority = fields.List(fields.Str(required=False), required=False)
+    
 
 
 class CustomerRadiusSchema(BaseSchema):
@@ -1943,6 +2115,8 @@ class StoreRuleDataSchema(BaseSchema):
     
     sort = fields.List(fields.Str(required=False), required=False)
     
+    manual_priority = fields.List(fields.Str(required=False), required=False)
+    
     conditions = fields.Nested(StoreRuleConditionSchema, required=False)
     
     is_active = fields.Boolean(required=False)
@@ -1985,6 +2159,8 @@ class CreateStoreRuleRequestSchema(BaseSchema):
     
     store_priority = fields.List(fields.Nested(StorePrioritySchema, required=False), required=False)
     
+    manual_priority = fields.List(fields.Str(required=False), required=False)
+    
     sort = fields.List(fields.Str(required=False), required=False)
     
 
@@ -2006,6 +2182,8 @@ class StoreRuleResponseSchema(BaseSchema):
     store_priority = fields.List(fields.Nested(StorePrioritySchema, required=False), required=False)
     
     sort = fields.List(fields.Str(required=False), required=False)
+    
+    manual_priority = fields.List(fields.Str(required=False), required=False)
     
     conditions = fields.Nested(StoreRuleConditionSchema, required=False)
     
@@ -2030,6 +2208,8 @@ class StoreRuleUpdateResponseSchema(BaseSchema):
     store_priority = fields.List(fields.Nested(StorePrioritySchema, required=False), required=False)
     
     sort = fields.List(fields.Str(required=False), required=False)
+    
+    manual_priority = fields.List(fields.Str(required=False), required=False)
     
     conditions = fields.Nested(StoreRuleConditionSchema, required=False)
     
@@ -2374,138 +2554,6 @@ class RulePriorityResponse(BaseSchema):
 
     
     success = fields.Boolean(required=False)
-    
-
-
-class ArticleAssignment(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    level = fields.Str(required=False)
-    
-    strategy = fields.Str(required=False)
-    
-
-
-class ServiceabilityLocation(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    longitude = fields.Str(required=False)
-    
-    latitude = fields.Str(required=False)
-    
-
-
-class LocationDetailsServiceability(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    pincode = fields.Str(required=False)
-    
-    sector = fields.Str(required=False)
-    
-    state = fields.Str(required=False)
-    
-    country = fields.Str(required=False)
-    
-    city = fields.Str(required=False)
-    
-    country_iso_code = fields.Str(required=False)
-    
-    location = fields.Nested(ServiceabilityLocation, required=False)
-    
-
-
-class OptimalLocationsArticles(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    item_id = fields.Int(required=False)
-    
-    size = fields.Str(required=False)
-    
-    quantity = fields.Str(required=False)
-    
-    group_id = fields.Str(required=False)
-    
-    is_primary_item = fields.Boolean(required=False)
-    
-    meta = fields.Dict(required=False)
-    
-    article_assignment = fields.Nested(ArticleAssignment, required=False)
-    
-    ignore_locations = fields.List(fields.Int(required=False), required=False)
-    
-    assign_locations = fields.List(fields.Int(required=False), required=False)
-    
-    seller_id = fields.Int(required=False)
-    
-
-
-class OptimlLocationsRequestSchema(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    channel_id = fields.Str(required=False)
-    
-    channel_type = fields.Str(required=False)
-    
-    to_serviceability = fields.Nested(LocationDetailsServiceability, required=False)
-    
-    article = fields.Nested(OptimalLocationsArticles, required=False)
-    
-
-
-class OptimalLocationArticlesResponse(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    item_id = fields.Int(required=False)
-    
-    size = fields.Str(required=False)
-    
-    quantity = fields.Int(required=False)
-    
-    group_id = fields.Str(required=False)
-    
-    is_primary_item = fields.Boolean(required=False)
-    
-    meta = fields.Dict(required=False)
-    
-    article_assignment = fields.Nested(ArticleAssignment, required=False)
-    
-    seller_id = fields.Int(required=False)
-    
-    ignore_locations = fields.List(fields.Int(required=False), required=False)
-    
-    assign_locations = fields.List(fields.Int(required=False), required=False)
-    
-    price_effective = fields.Float(required=False)
-    
-    mto_quantity = fields.Int(required=False)
-    
-    _id = fields.Str(required=False)
-    
-    uid = fields.Str(required=False)
-    
-
-
-class OptimalLocationAssignedStoresResponse(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    store_id = fields.Int(required=False)
-    
-    articles = fields.List(fields.Nested(OptimalLocationArticlesResponse, required=False), required=False)
-    
-
-
-class OptimalLocationsResponse(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    assigned_stores = fields.List(fields.Nested(OptimalLocationAssignedStoresResponse, required=False), required=False)
     
 
 

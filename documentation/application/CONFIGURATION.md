@@ -7,33 +7,21 @@
 ## Configuration Methods
 The Application Configuration module simplifies tasks related to configuring the app. You can use it to retrieve information about sales channels, ownership details, app-specific settings, and integration tokens. This module also offers insights into store performance, ordering options, and available modules. It allows you to access currency information, support multiple languages, and customize store cookies for a personalized user experience. Additionally, the module can retrieve the staff list.
 
-Application Information
+Default
 * [getApplication](#getapplication)
 * [getOwnerInfo](#getownerinfo)
 * [getBasicDetails](#getbasicdetails)
 * [getIntegrationTokens](#getintegrationtokens)
-* [getFeatures](#getfeatures)
-* [getContactInfo](#getcontactinfo)
-
-
-Store Information
 * [getOrderingStores](#getorderingstores)
 * [getStoreDetailById](#getstoredetailbyid)
-* [getOrderingStoreCookie](#getorderingstorecookie)
-* [removeOrderingStoreCookie](#removeorderingstorecookie)
-
-
-Currency Management
+* [getFeatures](#getfeatures)
+* [getContactInfo](#getcontactinfo)
 * [getCurrencies](#getcurrencies)
 * [getCurrencyById](#getcurrencybyid)
 * [getAppCurrencies](#getappcurrencies)
-
-
-Language Information
 * [getLanguages](#getlanguages)
-
-
-Staff and User Management
+* [getOrderingStoreCookie](#getorderingstorecookie)
+* [removeOrderingStoreCookie](#removeorderingstorecookie)
 * [getAppStaffList](#getappstafflist)
 * [getAppStaffs](#getappstaffs)
 
@@ -45,7 +33,7 @@ Staff and User Management
 
 
 ### getApplication
-Fetches application details.
+Get current sales channel details
 
 
 
@@ -63,7 +51,7 @@ except Exception as e:
 
 
 
-Retrieve the current sales channel details which includes configurations that indicate the status of the website, domain, ID, tokens, images, etc.
+Use this API to get the current sales channel details which includes configurations that indicate the status of the website, domain, ID, tokens, images, etc.
 
 *Returned Response:*
 
@@ -167,7 +155,7 @@ Success. Check the example shown below or refer `Application` for more details.
 
 
 ### getOwnerInfo
-Retrieves application owner details.
+Get sales channel, owner and seller information
 
 
 
@@ -185,7 +173,7 @@ except Exception as e:
 
 
 
-Retrieve the current sales channel details which includes channel name, description, banner, logo, favicon, domain details, etc. Also retrieves the seller and owner information such as address, email address, and phone number.
+Use this API to get the current sales channel details which includes channel name, description, banner, logo, favicon, domain details, etc. This API also retrieves the seller and owner information such as address, email address, and phone number.
 
 *Returned Response:*
 
@@ -327,7 +315,7 @@ Success. Check the example shown below or refer `ApplicationAboutResponse` for m
 
 
 ### getBasicDetails
-Retrieves basic app info.
+Get basic details of the application
 
 
 
@@ -345,7 +333,7 @@ except Exception as e:
 
 
 
-Retrieve only the basic details of the application which includes channel name, description, banner, logo, favicon, domain details, etc.
+Use this API to retrieve only the basic details of the application which includes channel name, description, banner, logo, favicon, domain details, etc.
 
 *Returned Response:*
 
@@ -427,7 +415,7 @@ Success. Check the example shown below or refer `ApplicationDetail` for more det
 
 
 ### getIntegrationTokens
-Fetches API tokens.
+Get integration tokens
 
 
 
@@ -445,7 +433,7 @@ except Exception as e:
 
 
 
-Retrieve the tokens used while integrating Firebase, MoEngage, Segment, GTM, Freshchat, Safetynet, Google Map and Facebook.
+Use this API to retrieve the tokens used while integrating Firebase, MoEngage, Segment, GTM, Freshchat, Safetynet, Google Map and Facebook. **Note** - Token values are encrypted with AES encryption using a secret key. Kindly reach out to the developers for obtaining the secret key.
 
 *Returned Response:*
 
@@ -555,8 +543,154 @@ Success. Check the example shown below or refer `AppTokenResponse` for more deta
 ---
 
 
+### getOrderingStores
+Get all deployment stores
+
+
+
+
+```python
+try:
+    result = await applicationClient.configuration.getOrderingStores(pageNo=pageNo, pageSize=pageSize, q=q)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| pageNo | Int? | no | The page number to navigate through the given set of results. Default value is 1. |   
+| pageSize | Int? | no | The number of items to retrieve in each page. Default value is 10. |   
+| q | String? | no | Store code or name of the ordering store. |  
+
+
+
+Use this API to retrieve the details of all the deployment stores (the selling locations where the application will be utilized for placing orders).
+
+*Returned Response:*
+
+
+
+
+[OrderingStores](#OrderingStores)
+
+Success. Check the example shown below or refer `OrderingStores` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; success</i></summary>
+
+```json
+{
+  "value": {
+    "items": [
+      {
+        "uid": 1
+      }
+    ]
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getStoreDetailById
+Get ordering store details
+
+
+
+
+```python
+try:
+    result = await applicationClient.configuration.getStoreDetailById(storeId=storeId)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| storeId | Int | yes | Store uid |  
+
+
+
+Use this API to retrieve the details of given stores uid (the selling locations where the application will be utilized for placing orders).
+
+*Returned Response:*
+
+
+
+
+[OrderingStore](#OrderingStore)
+
+Success. Check the example shown below or refer `OrderingStore` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; success</i></summary>
+
+```json
+{
+  "value": {
+    "uid": 1,
+    "name": "THE MANDHANA PARK KAMLANAGAR DELHI",
+    "pincode": 110007,
+    "store_code": "MRVLB22",
+    "code": "MRVLB22",
+    "display_name": "Kamla Nagar",
+    "store_type": "mall"
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
 ### getFeatures
-Fetches app features.
+Get features of application
 
 
 
@@ -574,7 +708,7 @@ except Exception as e:
 
 
 
-Retrieve the configuration of features such as product detail, landing page, options in the login/registration screen, communication opt-in, cart options and many more.
+Use this API to retrieve the configuration of features such as product detail, landing page, options in the login/registration screen, communication opt-in, cart options and many more.
 
 *Returned Response:*
 
@@ -686,6 +820,11 @@ Success. Check the example shown below or refer `AppFeatureResponse` for more de
       "order": {
         "buy_again": true
       },
+      "buybox": {
+        "show_name": true,
+        "enable_selection": true,
+        "is_seller_buybox_enabled": false
+      },
       "_id": "5e57643c986e4119c973df7d",
       "app": "000000000000000000000004",
       "created_at": "2020-02-27T06:39:56.088Z",
@@ -711,7 +850,7 @@ Success. Check the example shown below or refer `AppFeatureResponse` for more de
 
 
 ### getContactInfo
-Retrieves contact details.
+Get application information
 
 
 
@@ -729,7 +868,7 @@ except Exception as e:
 
 
 
-Retrieve information about the social links, address and contact information of the company/seller/brand operating the application.
+Use this API to retrieve information about the social links, address and contact information of the company/seller/brand operating the application.
 
 *Returned Response:*
 
@@ -883,286 +1022,8 @@ Success. Check the example shown below or refer `ApplicationAboutResponse` for m
 ---
 
 
-
-
-### getOrderingStores
-Lists order-enabled stores.
-
-
-
-
-```python
-try:
-    result = await applicationClient.configuration.getOrderingStores(pageNo=pageNo, pageSize=pageSize, q=q)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| pageNo | Int? | no | The page number to navigate through the given set of results. Default value is 1. |   
-| pageSize | Int? | no | The number of items to retrieve in each page. Default value is 10. |   
-| q | String? | no | Store code or name of the ordering store. |  
-
-
-
-Retrieve the details of all the deployment stores (the selling locations where the application will be utilized for placing orders).
-
-*Returned Response:*
-
-
-
-
-[OrderingStores](#OrderingStores)
-
-Success. Check the example shown below or refer `OrderingStores` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "items": [
-      {
-        "uid": 1
-      }
-    ]
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getStoreDetailById
-Retrieves store details by ID.
-
-
-
-
-```python
-try:
-    result = await applicationClient.configuration.getStoreDetailById(storeId=storeId)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| storeId | Int | yes | Store uid |  
-
-
-
-Retrieve the details of given stores uid (the selling locations where the application will be utilized for placing orders). 
-
-*Returned Response:*
-
-
-
-
-[OrderingStore](#OrderingStore)
-
-Success. Check the example shown below or refer `OrderingStore` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "uid": 1,
-    "name": "THE MANDHANA PARK KAMLANAGAR DELHI",
-    "pincode": 110007,
-    "store_code": "MRVLB22",
-    "code": "MRVLB22",
-    "display_name": "Kamla Nagar",
-    "store_type": "mall"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getOrderingStoreCookie
-Retrieves store selection cookie.
-
-
-
-
-```python
-try:
-    result = await applicationClient.configuration.getOrderingStoreCookie(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [OrderingStoreSelectRequest](#OrderingStoreSelectRequest) | yes | Request body |
-
-
-Retrieve an Ordering Store signed cookie upon selecting an ordering store. This will be used by the cart service to verify a coupon against the selected ordering store in cart. 
-
-*Returned Response:*
-
-
-
-
-[SuccessMessageResponse](#SuccessMessageResponse)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "message": "success"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### removeOrderingStoreCookie
-Deletes store cookie.
-
-
-
-
-```python
-try:
-    result = await applicationClient.configuration.removeOrderingStoreCookie()
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-
-Unset the Ordering Store cookie upon changing the sales channel, by its domain URL, in the Universal Fynd Store app.
-
-*Returned Response:*
-
-
-
-
-[SuccessMessageResponse](#SuccessMessageResponse)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "message": "success"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
 ### getCurrencies
-Lists supported currencies.
+Get all currencies list
 
 
 
@@ -1180,7 +1041,7 @@ except Exception as e:
 
 
 
-Retrieve a list of currencies available. Also get the name, code, symbol, and the decimal digits of the currencies. 
+Use this API to get a list of currencies available. Moreover, get the name, code, symbol, and the decimal digits of the currencies.
 
 *Returned Response:*
 
@@ -1235,7 +1096,7 @@ Success. Check the example shown below or refer `CurrenciesResponse` for more de
 
 
 ### getCurrencyById
-Fetches currency by ID.
+Get currency by its ID
 
 
 
@@ -1258,7 +1119,7 @@ except Exception as e:
 
 
 
-Retrieve details of a specific currency using its ID. 
+Use this API to retrieve a currency using its ID.
 
 *Returned Response:*
 
@@ -1309,7 +1170,7 @@ Success. Check the example shown below or refer `Currency` for more details.
 
 
 ### getAppCurrencies
-Retrieves app-specific currencies.
+Get currencies enabled in the application
 
 
 
@@ -1327,7 +1188,7 @@ except Exception as e:
 
 
 
-Retrieve a list of currencies allowed in the current application. Moreover, get the name, code, symbol, and the decimal digits of the currencies.
+Use this API to get a list of currencies allowed in the current application. Moreover, get the name, code, symbol, and the decimal digits of the currencies.
 
 *Returned Response:*
 
@@ -1386,10 +1247,8 @@ Success. Check the example shown below or refer `AppCurrencyResponse` for more d
 ---
 
 
-
-
 ### getLanguages
-Lists available languages.
+Get list of languages
 
 
 
@@ -1407,7 +1266,7 @@ except Exception as e:
 
 
 
-Retrieves all languages supported by the app.
+Use this API to get a list of languages supported in the application
 
 *Returned Response:*
 
@@ -1463,10 +1322,136 @@ Success. Check the example shown below or refer `LanguageResponse` for more deta
 ---
 
 
+### getOrderingStoreCookie
+Get an Ordering Store signed cookie on selection of ordering store.
+
+
+
+
+```python
+try:
+    result = await applicationClient.configuration.getOrderingStoreCookie(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [OrderingStoreSelectRequest](#OrderingStoreSelectRequest) | yes | Request body |
+
+
+Use this API to get an Ordering Store signed cookie upon selecting an ordering store. This will be used by the cart service to verify a coupon against the selected ordering store in cart.
+
+*Returned Response:*
+
+
+
+
+[SuccessMessageResponse](#SuccessMessageResponse)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; success</i></summary>
+
+```json
+{
+  "value": {
+    "message": "success"
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### removeOrderingStoreCookie
+Unset the Ordering Store signed cookie.
+
+
+
+
+```python
+try:
+    result = await applicationClient.configuration.removeOrderingStoreCookie()
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+
+Use this API to unset the Ordering Store cookie upon changing the sales channel, by its domain URL, in the Universal Fynd Store app.
+
+*Returned Response:*
+
+
+
+
+[SuccessMessageResponse](#SuccessMessageResponse)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; success</i></summary>
+
+```json
+{
+  "value": {
+    "message": "success"
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
 
 
 ### getAppStaffList
-Lists app staff members.
+Get a list of staff.
 
 
 
@@ -1494,7 +1479,7 @@ except Exception as e:
 
 
 
-Retrieve a list of staff including the names, employee code, incentive status, assigned ordering stores, and title of each staff added to the application.
+Use this API to get a list of staff including the names, employee code, incentive status, assigned ordering stores, and title of each staff added to the application.
 
 *Returned Response:*
 
@@ -1542,7 +1527,7 @@ Success. Check the example shown below or refer `AppStaffListResponse` for more 
 
 
 ### getAppStaffs
-Fetches detailed staff info.
+Get a list of staff.
 
 
 
@@ -1567,7 +1552,7 @@ except Exception as e:
 
 
 
-Retrieve a list of staff including the names, employee code, incentive status, assigned ordering stores, and title of each staff added to the application.
+Use this API to get a list of staff including the names, employee code, incentive status, assigned ordering stores, and title of each staff added to the application.
 
 *Returned Response:*
 
@@ -2132,6 +2117,7 @@ Success. Check the example shown below or refer `AppStaffResponse` for more deta
  | qr | [QrFeature](#QrFeature)? |  yes  |  |
  | pcr | [PcrFeature](#PcrFeature)? |  yes  |  |
  | order | [OrderFeature](#OrderFeature)? |  yes  |  |
+ | buybox | [BuyboxFeature](#BuyboxFeature)? |  yes  |  |
  | id | String? |  yes  | The unique identifier (24-digit Mongo Object ID) for the sales channel features |
  | app | String? |  yes  | Application ID of the sales channel |
  | createdAt | String? |  yes  | ISO 8601 timestamp showing the date when the features were configured |
@@ -2321,6 +2307,19 @@ Success. Check the example shown below or refer `AppStaffResponse` for more deta
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | buyAgain | Boolean? |  yes  | Allow buy again option for order. Default value is false. |
+
+---
+
+
+ 
+ 
+ #### [BuyboxFeature](#BuyboxFeature)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | showName | Boolean? |  yes  | Allow users to see seller/stores name on PDP (product detail page). |
+ | enableSelection | Boolean? |  yes  | Allow selection of sellers/stores on PDP (product detail page). |
+ | isSellerBuyboxEnabled | Boolean? |  yes  | Toggle buybox listing between sellers and stores. True indicates seller listing, while False indicates store listing. |
 
 ---
 

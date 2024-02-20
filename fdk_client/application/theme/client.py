@@ -29,7 +29,7 @@ class Theme:
         self._urls.update(urls)
     
     async def getAllPages(self, theme_id=None, body="", request_headers:Dict={}):
-        """Retrieves a list of all the pages available within the applied theme.
+        """Use this API to retrieve all the available pages of a theme by its ID.
         :param theme_id : ID of the theme to be retrieved : type string
         """
         payload = {}
@@ -73,7 +73,7 @@ class Theme:
         return response
     
     async def getPage(self, theme_id=None, page_value=None, filters=None, company=None, body="", request_headers:Dict={}):
-        """Retrieve detailed information for a specific page within the theme.
+        """Use this API to retrieve a page of a theme.
         :param theme_id : ID of the theme to be retrieved : type string
         :param page_value : Value of the page to be retrieved : type string
         :param filters : Filters on sections to be applied or not : type string
@@ -126,7 +126,7 @@ class Theme:
         return response
     
     async def getAppliedTheme(self, body="", request_headers:Dict={}):
-        """Gets the theme currently applied to the application.
+        """An application has multiple themes, but only one theme can be applied at a time. Use this API to retrieve the theme currently applied to the application.
         """
         payload = {}
         
@@ -167,7 +167,7 @@ class Theme:
         return response
     
     async def getThemeForPreview(self, theme_id=None, body="", request_headers:Dict={}):
-        """Retrieves a theme for previewing before applying it to the application.
+        """A theme can be previewed before applying it. Use this API to retrieve the preview of a theme by its ID.
         :param theme_id : ID of the theme to be retrieved : type string
         """
         payload = {}

@@ -14,7 +14,25 @@ class FileStorage:
 
     
     async def appStartUpload(self, namespace=None, body="", request_headers:Dict={}):
-        """Start uploading a file from an application and returns a storage link in response.
+        """Uploads an arbitrarily sized buffer or blob.
+
+It has three Major Steps:
+* Start
+* Upload
+* Complete
+
+### Start
+Initiates the assets upload using `appStartUpload`.
+It returns the storage link in response.
+
+### Upload
+Use the storage link to upload a file (Buffer or Blob) to the File Storage.
+Make a `PUT` request on storage link received from `appStartUpload` api with file (Buffer or Blob) as a request body.
+
+### Complete
+After successfully upload, call `appCompleteUpload` api to complete the upload process.
+This operation will return the url for the uploaded file.
+
         :param namespace : Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. : type string
         """
         payload = {}
@@ -60,7 +78,25 @@ class FileStorage:
         return response
     
     async def appCompleteUpload(self, namespace=None, body="", request_headers:Dict={}):
-        """Finish uploading a file from an application.
+        """Uploads an arbitrarily sized buffer or blob.
+
+It has three Major Steps:
+* Start
+* Upload
+* Complete
+
+### Start
+Initiates the assets upload using `appStartUpload`.
+It returns the storage link in response.
+
+### Upload
+Use the storage link to upload a file (Buffer or Blob) to the File Storage.
+Make a `PUT` request on storage link received from `appStartUpload` api with file (Buffer or Blob) as a request body.
+
+### Complete
+After successfully upload, call `appCompleteUpload` api to complete the upload process.
+This operation will return the url for the uploaded file.
+
         :param namespace : Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. : type string
         """
         payload = {}
@@ -106,7 +142,7 @@ class FileStorage:
         return response
     
     async def appCopyFiles(self, sync=None, body="", request_headers:Dict={}):
-        """Copy files from an application to another location.
+        """Copy Files
         :param sync : sync : type boolean
         """
         payload = {}
@@ -143,7 +179,7 @@ class FileStorage:
         return response
     
     async def appbrowse(self, namespace=None, page=None, limit=None, search=None, request_headers:Dict={}):
-        """Browse files within an application.
+        """Browse Files
         :param namespace : Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. : type string
         :param page : page no : type integer
         :param limit : Limit : type integer
@@ -231,7 +267,7 @@ class FileStorage:
         return response
     
     async def getPdfTypes(self, country_code=None, store_os=None, request_headers:Dict={}):
-        """Retrieve a list of available PDF types.
+        """Get all the supported invoice pdf types such as Invoice, Label, Delivery challan
         :param country_code :  : type string
         :param store_os :  : type boolean
         """
@@ -275,8 +311,41 @@ class FileStorage:
 
         return response
     
+    async def deletePdfType(self, id=None, request_headers:Dict={}):
+        """delete Pdf Type for invoice such as Invoice, Label, Deliver challan
+        :param id :  : type string
+        """
+        payload = {}
+        
+        if id is not None:
+            payload["id"] = id
+
+        # Parameter validation
+        schema = FileStorageValidator.deletePdfType()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/assets/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pdf/types/{id}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"},"examples":{"success":{"value":2}}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"},"examples":{"success":{"value":"5eda528b97457fe43a733ace"},"failure":{"value":"5eda528b97457fe43a733acd"}}},{"name":"id","in":"path","required":true,"schema":{"type":"string","description":"This is mongo id"},"examples":{"success":{"value":"64dfd8fc8f3b8b5ae5beb72c"},"failure":{"value":"64dfd8fc8f3b8b5a"}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"},"examples":{"success":{"value":2}}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"},"examples":{"success":{"value":"5eda528b97457fe43a733ace"},"failure":{"value":"5eda528b97457fe43a733acd"}}},{"name":"id","in":"path","required":true,"schema":{"type":"string","description":"This is mongo id"},"examples":{"success":{"value":"64dfd8fc8f3b8b5ae5beb72c"},"failure":{"value":"64dfd8fc8f3b8b5a"}}}]}""", id=id)
+        query_string = await create_query_string(id=id)
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pdf/types/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        return response
+    
     async def getDefaultPdfData(self, pdf_type_id=None, country_code=None, request_headers:Dict={}):
-        """Retrieve default data for PDF generation.
+        """Get Dummy pdf data for invoice or label
         :param pdf_type_id :  : type integer
         :param country_code :  : type string
         """
@@ -321,7 +390,7 @@ class FileStorage:
         return response
     
     async def updateHtmlTemplate(self, id=None, body="", request_headers:Dict={}):
-        """Update the HTML Template.
+        """Update html template for invoice such as Invoice, Label, Deliver challan
         :param id :  : type string
         """
         payload = {}
@@ -363,6 +432,39 @@ class FileStorage:
             except Exception as e:
                 print("Response Validation failed for updateHtmlTemplate")
                 print(e)
+
+        return response
+    
+    async def deletePdfConfigTemplate(self, id=None, request_headers:Dict={}):
+        """delete html template for invoice such as Invoice, Label, Deliver challan
+        :param id :  : type string
+        """
+        payload = {}
+        
+        if id is not None:
+            payload["id"] = id
+
+        # Parameter validation
+        schema = FileStorageValidator.deletePdfConfigTemplate()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/assets/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pdf/config/{id}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"},"examples":{"success":{"value":2}}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"},"examples":{"success":{"value":"5eda528b97457fe43a733ace"},"failure":{"value":"5eda528b97457fe43a733acd"}}},{"name":"id","in":"path","required":true,"schema":{"type":"string","description":"This is mongo id"},"examples":{"success":{"value":"64dfd8fc8f3b8b5ae5beb72c"},"failure":{"value":"64dfd8fc8f3b8b5a"}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"},"examples":{"success":{"value":2}}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"},"examples":{"success":{"value":"5eda528b97457fe43a733ace"},"failure":{"value":"5eda528b97457fe43a733acd"}}},{"name":"id","in":"path","required":true,"schema":{"type":"string","description":"This is mongo id"},"examples":{"success":{"value":"64dfd8fc8f3b8b5ae5beb72c"},"failure":{"value":"64dfd8fc8f3b8b5a"}}}]}""", id=id)
+        query_string = await create_query_string(id=id)
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pdf/config/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         return response
     
@@ -415,7 +517,7 @@ class FileStorage:
         return response
     
     async def saveHtmlTemplate(self, body="", request_headers:Dict={}):
-        """Store an HTML template.
+        """Update html template for invoice such as Invoice, Label, Deliver challan
         """
         payload = {}
         
@@ -458,7 +560,7 @@ class FileStorage:
         return response
     
     async def getDefaultPdfTemplate(self, pdf_type_id=None, format=None, country_code=None, request_headers:Dict={}):
-        """Retrieve the default PDF template.
+        """Get default html template data for invoice or label
         :param pdf_type_id :  : type integer
         :param format :  : type string
         :param country_code :  : type string

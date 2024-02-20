@@ -18,103 +18,12 @@ from ..ApplicationModel import BaseSchema
         
         
         
-    
-    
-        
-    
-    
-        
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-        
         
     
     
         
     
     
-        
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-        
-        
-    
-    
-    
-        
-        
-        
-        
-        
-        
-        
-    
-    
-        
-    
-    
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
-        
-        
-        
         
         
         
@@ -139,6 +48,107 @@ from ..ApplicationModel import BaseSchema
         
     
     
+        
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+    
+    
+    
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
     
         
     
@@ -161,6 +171,10 @@ from ..ApplicationModel import BaseSchema
     
     
         
+        
+    
+    
+    
         
 
 class CartValidator:
@@ -182,6 +196,8 @@ class CartValidator:
         area_code = fields.Str(required=False)
         
         buy_now = fields.Boolean(required=False)
+        
+        cart_type = fields.Str(required=False)
          
         
     
@@ -204,6 +220,8 @@ class CartValidator:
         buy_now = fields.Boolean(required=False)
         
         id = fields.Str(required=False)
+        
+        cart_type = fields.Str(required=False)
          
         
     
@@ -228,10 +246,21 @@ class CartValidator:
         
         
         id = fields.Str(required=False)
+        
+        cart_type = fields.Str(required=False)
          
         
     
     class getItemCount(BaseSchema):
+        
+        
+        id = fields.Str(required=False)
+        
+        buy_now = fields.Boolean(required=False)
+         
+        
+    
+    class getItemCountV2(BaseSchema):
         
         
         id = fields.Str(required=False)
@@ -276,6 +305,8 @@ class CartValidator:
         id = fields.Str(required=False)
         
         buy_now = fields.Boolean(required=False)
+        
+        cart_type = fields.Str(required=False)
          
         
     
@@ -289,6 +320,8 @@ class CartValidator:
         uid = fields.Int(required=False)
         
         slug = fields.Str(required=False)
+        
+        cart_type = fields.Str(required=False)
          
         
     
@@ -302,6 +335,8 @@ class CartValidator:
         b = fields.Boolean(required=False)
         
         buy_now = fields.Boolean(required=False)
+        
+        cart_type = fields.Str(required=False)
          
         
     
@@ -501,6 +536,18 @@ class CartValidator:
         buy_now = fields.Boolean(required=False)
         
         cart_type = fields.Str(required=False)
+         
+        
+    
+    class getCartMetaConfigs(BaseSchema):
+        
+        pass 
+        
+    
+    class getCartMetaConfig(BaseSchema):
+        
+        
+        cart_meta_id = fields.Str(required=False)
          
         
     

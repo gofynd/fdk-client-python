@@ -28,7 +28,7 @@ class Webhook:
         self._urls.update(urls)
     
     async def fetchAllWebhookEvents(self, body="", request_headers:Dict={}):
-        """Retrieve a list of all webhook events in the public server setup.
+        """Get All Webhook Events
         """
         payload = {}
         
@@ -70,7 +70,7 @@ class Webhook:
         return response
     
     async def queryWebhookEventDetails(self, body="", request_headers:Dict={}):
-        """Query and obtain detailed information about webhook events in the public server configurations.
+        """Get Webhook Event Details for provided events
         """
         payload = {}
         

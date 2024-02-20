@@ -588,6 +588,10 @@ class OrderFeature(BaseSchema):
     pass
 
 
+class BuyboxFeature(BaseSchema):
+    pass
+
+
 class AppFeatureRequest(BaseSchema):
     pass
 
@@ -628,14 +632,6 @@ class Application(BaseSchema):
     pass
 
 
-class ApplicationById(BaseSchema):
-    pass
-
-
-class TokenSchemaID(BaseSchema):
-    pass
-
-
 class TokenSchema(BaseSchema):
     pass
 
@@ -645,6 +641,10 @@ class InvalidPayloadRequest(BaseSchema):
 
 
 class InventoryBrandRule(BaseSchema):
+    pass
+
+
+class PricingStrategy(BaseSchema):
     pass
 
 
@@ -856,6 +856,8 @@ class AppInventoryConfig(BaseSchema):
     price = fields.Nested(InventoryPrice, required=False)
     
     discount = fields.Nested(InventoryDiscount, required=False)
+    
+    pricing_strategy = fields.Nested(PricingStrategy, required=False)
     
     out_of_stock = fields.Boolean(required=False)
     
@@ -1963,6 +1965,8 @@ class InventoryConfig(BaseSchema):
     
     only_verified_products = fields.Boolean(required=False)
     
+    pricing_strategy = fields.Nested(PricingStrategy, required=False)
+    
 
 
 class AppInventory(BaseSchema):
@@ -2549,6 +2553,8 @@ class AppFeature(BaseSchema):
     
     order = fields.Nested(OrderFeature, required=False)
     
+    buybox = fields.Nested(BuyboxFeature, required=False)
+    
     _id = fields.Str(required=False)
     
     app = fields.Str(required=False)
@@ -2708,6 +2714,18 @@ class OrderFeature(BaseSchema):
 
     
     buy_again = fields.Boolean(required=False)
+    
+
+
+class BuyboxFeature(BaseSchema):
+    # Configuration swagger.json
+
+    
+    show_name = fields.Boolean(required=False)
+    
+    enable_selection = fields.Boolean(required=False)
+    
+    is_seller_buybox_enabled = fields.Boolean(required=False)
     
 
 
@@ -2875,84 +2893,6 @@ class Application(BaseSchema):
     
 
 
-class ApplicationById(BaseSchema):
-    # Configuration swagger.json
-
-    
-    website = fields.Nested(ApplicationWebsite, required=False)
-    
-    cors = fields.Nested(ApplicationCors, required=False)
-    
-    auth = fields.Nested(ApplicationAuth, required=False)
-    
-    description = fields.Str(required=False)
-    
-    channel_type = fields.Str(required=False)
-    
-    cache_ttl = fields.Int(required=False)
-    
-    is_internal = fields.Boolean(required=False)
-    
-    is_active = fields.Boolean(required=False)
-    
-    _id = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    owner = fields.Str(required=False)
-    
-    company_id = fields.Int(required=False)
-    
-    token = fields.Str(required=False)
-    
-    redirections = fields.List(fields.Nested(ApplicationRedirections, required=False), required=False)
-    
-    meta = fields.List(fields.Nested(ApplicationMeta, required=False), required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    modified_at = fields.Str(required=False)
-    
-    __v = fields.Int(required=False)
-    
-    banner = fields.Nested(SecureUrl, required=False)
-    
-    logo = fields.Nested(SecureUrl, required=False)
-    
-    favicon = fields.Nested(SecureUrl, required=False)
-    
-    domains = fields.List(fields.Nested(Domain, required=False), required=False)
-    
-    app_type = fields.Str(required=False)
-    
-    mobile_logo = fields.Nested(SecureUrl, required=False)
-    
-    domain = fields.Nested(Domain, required=False)
-    
-    slug = fields.Str(required=False)
-    
-    mode = fields.Str(required=False)
-    
-    status = fields.Str(required=False)
-    
-    tokens = fields.List(fields.Nested(TokenSchemaID, required=False), required=False)
-    
-    secret = fields.Str(required=False)
-    
-
-
-class TokenSchemaID(BaseSchema):
-    # Configuration swagger.json
-
-    
-    token = fields.Str(required=False)
-    
-    created_by = fields.Str(required=False)
-    
-    created_at = fields.Str(required=False)
-    
-
-
 class TokenSchema(BaseSchema):
     # Configuration swagger.json
 
@@ -2982,6 +2922,16 @@ class InventoryBrandRule(BaseSchema):
     criteria = fields.Str(required=False)
     
     brands = fields.List(fields.Int(required=False), required=False)
+    
+
+
+class PricingStrategy(BaseSchema):
+    # Configuration swagger.json
+
+    
+    is_active = fields.Boolean(required=False)
+    
+    value = fields.Str(required=False)
     
 
 

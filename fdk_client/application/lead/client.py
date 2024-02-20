@@ -32,7 +32,7 @@ class Lead:
         self._urls.update(urls)
     
     async def getTicket(self, id=None, body="", request_headers:Dict={}):
-        """Retrieve details of a specific customer support ticket.
+        """Get Ticket with the specific id, this is used to view the ticket details
         :param id : ID of ticket to be retrieved : type string
         """
         payload = {}
@@ -76,7 +76,7 @@ class Lead:
         return response
     
     async def createHistory(self, id=None, body="", request_headers:Dict={}):
-        """Adds a history entry for a specific support ticket.
+        """Create history for specific Ticket, this history is seen on ticket detail page, this can be comment, log or rating.
         :param id : Ticket ID for which history is created : type string
         """
         payload = {}
@@ -124,7 +124,7 @@ class Lead:
         return response
     
     async def createTicket(self, body="", request_headers:Dict={}):
-        """Generates a new customer support ticket for a user query.
+        """This is used to Create Ticket.
         """
         payload = {}
         
@@ -169,7 +169,7 @@ class Lead:
         return response
     
     async def getCustomForm(self, slug=None, body="", request_headers:Dict={}):
-        """Retrieves a customizable form template for data collection.
+        """Get specific Custom Form using it's slug, this is used to view the form.
         :param slug : Slug of form whose response is getting submitted : type string
         """
         payload = {}
@@ -213,7 +213,7 @@ class Lead:
         return response
     
     async def submitCustomForm(self, slug=None, body="", request_headers:Dict={}):
-        """Sends user-entered data from a custom form for processing.
+        """Submit Response for a specific Custom Form using it's slug, this response is then used to create a ticket on behalf of the user.
         :param slug : Slug of form whose response is getting submitted : type string
         """
         payload = {}
@@ -261,7 +261,7 @@ class Lead:
         return response
     
     async def getParticipantsInsideVideoRoom(self, unique_name=None, body="", request_headers:Dict={}):
-        """Gets the current participants inside a specific video room.
+        """Get participants of a specific Video Room using it's unique name, this can be used to check if people are already there in the room and also to show their names.
         :param unique_name : Unique name of Video Room : type string
         """
         payload = {}
@@ -305,7 +305,7 @@ class Lead:
         return response
     
     async def getTokenForVideoRoom(self, unique_name=None, body="", request_headers:Dict={}):
-        """Retrieves a secure token for accessing a video chat room.
+        """Get Token to join a specific Video Room using it's unqiue name, this Token is your ticket to Room and also creates your identity there.
         :param unique_name : Unique name of Video Room : type string
         """
         payload = {}

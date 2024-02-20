@@ -671,6 +671,8 @@ class ProductListingPrice(BaseSchema):
     
     marked = fields.Nested(Price, required=False)
     
+    selling = fields.Nested(Price, required=False)
+    
 
 
 class ProductSizesPrice(BaseSchema):
@@ -1184,6 +1186,8 @@ class ProductListingDetail(BaseSchema):
     tags = fields.List(fields.Str(required=False), required=False)
     
     seo = fields.Nested(ApplicationItemSEO, required=False)
+    
+    discount_meta = fields.Nested(DiscountMeta, required=False)
     
     image_nature = fields.Str(required=False)
     

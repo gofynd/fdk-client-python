@@ -7,11 +7,8 @@
 ## Common Methods
 Application configuration apis
 
-Application Information
+Default
 * [searchApplication](#searchapplication)
-
-
-Location Management
 * [getLocations](#getlocations)
 
 
@@ -22,7 +19,7 @@ Location Management
 
 
 ### searchApplication
-Search for applications.
+Search Application
 
 
 
@@ -140,10 +137,8 @@ Success
 ---
 
 
-
-
 ### getLocations
-Get company locations.
+Get countries, states, cities
 
 
 
@@ -167,7 +162,7 @@ except Exception as e:
 
 
 
-Retrieve a list of locations associated with the company.
+Retrieve a list of countries, states, or cities based on the provided location_type and id parameters.
 
 *Returned Response:*
 

@@ -78,6 +78,10 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
+        
         
         
         
@@ -195,6 +199,15 @@ class ServiceabilityValidator:
         
     
     class getApplicationConfiguration(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class patchApplicationConfiguration(BaseSchema):
         
         
         company_id = fields.Int(required=False)

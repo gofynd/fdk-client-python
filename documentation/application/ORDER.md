@@ -7,19 +7,13 @@
 ## Order Methods
 The Order and Shipment module is designed for retrieving application-specific orders, accessing order details, and obtaining shipment and invoice information. This module facilitates shipment tracking, allows customization of shipment details, and provides reasons for cancellations and returns. Additionally, it offers real-time shipment status updates.
 
-Order Details
+Default
 * [getOrders](#getorders)
 * [getOrderById](#getorderbyid)
 * [getPosOrderById](#getposorderbyid)
 * [getShipmentById](#getshipmentbyid)
-* [trackShipment](#trackshipment)
-
-
-Receipt, Label and Invoice Download 
 * [getInvoiceByShipmentId](#getinvoicebyshipmentid)
-
-
-Default
+* [trackShipment](#trackshipment)
 * [getCustomerDetailsByShipmentId](#getcustomerdetailsbyshipmentid)
 * [sendOtpToShipmentCustomer](#sendotptoshipmentcustomer)
 * [verifyOtpShipmentCustomer](#verifyotpshipmentcustomer)
@@ -35,7 +29,7 @@ Default
 
 
 ### getOrders
-Lists customer orders.
+Get all orders
 
 
 
@@ -65,7 +59,7 @@ except Exception as e:
 
 
 
-Retrieves all orders associated with a customer account.
+Use this API to retrieve all the orders.
 
 *Returned Response:*
 
@@ -99,7 +93,7 @@ Success. Returns all the orders. Check the example shown below or refer `OrderLi
 
 
 ### getOrderById
-Fetches order by ID.
+Get details of an order
 
 
 
@@ -123,7 +117,7 @@ except Exception as e:
 
 
 
-Retrieve order details such as tracking details, shipment, store information using Fynd Order ID.
+Use this API to retrieve order details such as tracking details, shipment, store information using Fynd Order ID.
 
 *Returned Response:*
 
@@ -1143,7 +1137,7 @@ Success. Check the example shown below or refer `OrderById` for more details.
 
 
 ### getPosOrderById
-Retrieves POS order details.
+Get POS Order
 
 
 
@@ -1166,7 +1160,7 @@ except Exception as e:
 
 
 
-Retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
+Use this API to retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
 
 *Returned Response:*
 
@@ -1487,7 +1481,7 @@ Success. Check the example shown below or refer `PosOrderById` for more details.
 
 
 ### getShipmentById
-Fetches shipment by ID.
+Get details of a shipment
 
 
 
@@ -1511,7 +1505,7 @@ except Exception as e:
 
 
 
-Retrieve shipment details such as price breakup, tracking details, store information, etc. using Shipment ID.
+Use this API to retrieve shipment details such as price breakup, tracking details, store information, etc. using Shipment ID.
 
 *Returned Response:*
 
@@ -1940,8 +1934,65 @@ Success. Check the example shown below or refer `ShipmentById` for more details.
 ---
 
 
+### getInvoiceByShipmentId
+Get Invoice of a shipment
+
+
+
+
+```python
+try:
+    result = await applicationClient.order.getInvoiceByShipmentId(shipmentId=shipmentId)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| shipmentId | String | yes | ID of the shipment. |  
+
+
+
+Use this API to retrieve shipment invoice.
+
+*Returned Response:*
+
+
+
+
+[ResponseGetInvoiceShipment](#ResponseGetInvoiceShipment)
+
+Success. Check the example shown below or refer `ShipmentById` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
 ### trackShipment
-Tracks shipment status.
+Track shipment
 
 
 
@@ -1964,7 +2015,7 @@ except Exception as e:
 
 
 
-Track Shipment by shipment id, for application based on application Id.
+Track Shipment by shipment id, for application based on application Id
 
 *Returned Response:*
 
@@ -2010,69 +2061,8 @@ Success. Check the example shown below or refer `ShipmentTrack` for more details
 ---
 
 
-
-
-### getInvoiceByShipmentId
-Retrieves invoice for shipment.
-
-
-
-
-```python
-try:
-    result = await applicationClient.order.getInvoiceByShipmentId(shipmentId=shipmentId)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| shipmentId | String | yes | ID of the shipment. |  
-
-
-
-Retrieve the invoice corresponding to a specific shipment ID.
-
-*Returned Response:*
-
-
-
-
-[ResponseGetInvoiceShipment](#ResponseGetInvoiceShipment)
-
-Success. Check the example shown below or refer `ShipmentById` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
 ### getCustomerDetailsByShipmentId
-Retrieves shipment customer.
+Get Customer Details by Shipment Id
 
 
 
@@ -2096,7 +2086,7 @@ except Exception as e:
 
 
 
-Retrieve customer details such as mobile number using Shipment ID.
+Use this API to retrieve customer details such as mobileno using Shipment ID.
 
 *Returned Response:*
 
@@ -2136,7 +2126,7 @@ Success. Check the example shown below or refer `CustomerDetailsByShipmentId` fo
 
 
 ### sendOtpToShipmentCustomer
-Sends OTP to customer.
+Send and Resend Otp code to Order-Shipment customer
 
 
 
@@ -2160,7 +2150,7 @@ except Exception as e:
 
 
 
-Sends a one-time password (OTP) to the customer for shipment verification.
+Use this API to send OTP to the customer of the mapped Shipment.
 
 *Returned Response:*
 
@@ -2199,7 +2189,7 @@ Success to acknowledge the service was notified
 
 
 ### verifyOtpShipmentCustomer
-Verifies OTP.
+Verify Otp code
 
 
 
@@ -2223,7 +2213,7 @@ except Exception as e:
 | body | [VerifyOtp](#VerifyOtp) | yes | Request body |
 
 
-Confirms the OTP sent to the shipment customer for verification.
+Use this API to verify OTP and create a session token with custom payload.
 
 *Returned Response:*
 
@@ -2259,7 +2249,7 @@ Success, the code is valid and returns a session token
 
 
 ### getShipmentBagReasons
-Lists bag reasons.
+Get reasons behind full or partial cancellation of a shipment
 
 
 
@@ -2283,7 +2273,7 @@ except Exception as e:
 
 
 
-Retrieves reasons that led to the cancellation for the status of shipment bags.
+Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
 
 *Returned Response:*
 
@@ -2359,7 +2349,7 @@ Success. Check the example shown below or refer `ShipmentBagReasons` for more de
 
 
 ### getShipmentReasons
-Lists shipment reasons.
+Get reasons behind full or partial cancellation of a shipment
 
 
 
@@ -2382,7 +2372,7 @@ except Exception as e:
 
 
 
-Retrieve reasons explaining various shipment statuses.
+Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
 
 *Returned Response:*
 
@@ -2499,7 +2489,7 @@ Success. Check the example shown below or refer `ShipmentBagReasons` for more de
 
 
 ### updateShipmentStatus
-Updates shipment status.
+Update the shipment status
 
 
 
@@ -2522,7 +2512,7 @@ except Exception as e:
 | body | [UpdateShipmentStatusRequest](#UpdateShipmentStatusRequest) | yes | Request body |
 
 
-Modifies the current status of a specific shipment using its shipment ID.
+Use this API to update the status of a shipment using its shipment ID.
 
 *Returned Response:*
 

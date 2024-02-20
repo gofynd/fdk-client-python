@@ -759,9 +759,9 @@ class PlatformSchema(BaseSchema):
     
     register = fields.Boolean(required=False)
     
-    mobile_image = fields.Str(required=False)
+    mobile_image = fields.Str(required=False, allow_none=True)
     
-    desktop_image = fields.Str(required=False)
+    desktop_image = fields.Str(required=False, allow_none=True)
     
     delete_account_day = fields.Int(required=False)
     
@@ -895,7 +895,7 @@ class SocialTokens(BaseSchema):
     
     facebook = fields.Nested(Facebook, required=False)
     
-    account_kit = fields.Nested(Accountkit, required=False)
+    accountkit = fields.Nested(Accountkit, required=False)
     
     google = fields.Nested(Google, required=False)
     
@@ -1077,7 +1077,7 @@ class UserSchema(BaseSchema):
     
     emails = fields.List(fields.Nested(Email, required=False), required=False)
     
-    gender = fields.Str(required=False)
+    gender = fields.Str(required=False, allow_none=True)
     
     dob = fields.Str(required=False)
     
@@ -1117,7 +1117,7 @@ class UserSearchSchema(BaseSchema):
     
     emails = fields.List(fields.Nested(Email, required=False), required=False)
     
-    gender = fields.Str(required=False)
+    gender = fields.Str(required=False, allow_none=True)
     
     dob = fields.Str(required=False)
     

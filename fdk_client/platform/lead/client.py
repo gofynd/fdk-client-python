@@ -13,7 +13,7 @@ class Lead:
 
     
     async def getPlatformTickets(self, items=None, filters=None, q=None, status=None, priority=None, category=None, page_no=None, page_size=None, request_headers:Dict={}):
-        """Retrieve a list of tickets created within the platform at company level
+        """Gets the list of company level tickets and/or ticket filters
         :param items : Decides that the reponse will contain the list of tickets : type boolean
         :param filters : Decides that the reponse will contain the ticket filters : type boolean
         :param q : Search through ticket titles and description : type string
@@ -76,7 +76,7 @@ class Lead:
         return response
     
     async def createTicket(self, body="", request_headers:Dict={}):
-        """Create a new ticket at application level
+        """Creates a company level ticket
         """
         payload = {}
         
@@ -119,7 +119,7 @@ class Lead:
         return response
     
     async def getPlatformTicket(self, id=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific ticket which is raised at company level
+        """Retreives ticket details of a company level ticket
         :param id : Tiket ID of the ticket to be fetched : type string
         """
         payload = {}
@@ -161,7 +161,7 @@ class Lead:
         return response
     
     async def editPlatformTicket(self, id=None, body="", request_headers:Dict={}):
-        """Modify the content and settings of a specific company level ticket.
+        """Edits ticket details of a company level ticket such as status, priority, category, tags, attachments, assigne & ticket content changes
         :param id : Ticket ID of ticket to be edited : type string
         """
         payload = {}
@@ -207,7 +207,7 @@ class Lead:
         return response
     
     async def createPlatformTicketHistory(self, id=None, body="", request_headers:Dict={}):
-        """Create futher interactions on a company level ticket such as changing it's status, priority or replying to a ticket via a thread.
+        """Create history for specific company level ticket, this history is seen on ticket detail page, this can be comment, log or rating.
         :param id : Ticket ID for which history is created : type string
         """
         payload = {}
@@ -253,7 +253,7 @@ class Lead:
         return response
     
     async def getPlatformTicketHistory(self, id=None, request_headers:Dict={}):
-        """Retrieve a list of history records for a company level ticket.
+        """Gets history list for specific company level ticket, this history is seen on ticket detail page, this can be comment, log or rating.
         :param id : Ticket ID for which history is to be fetched : type string
         """
         payload = {}
@@ -295,7 +295,7 @@ class Lead:
         return response
     
     async def getFeedbacks(self, id=None, request_headers:Dict={}):
-        """Retrieve feedback information related to a ticket.
+        """Gets a list of feedback submitted against that ticket
         :param id : Ticket ID for which feedbacks are to be fetched : type string
         """
         payload = {}
@@ -337,7 +337,7 @@ class Lead:
         return response
     
     async def submitFeedback(self, id=None, body="", request_headers:Dict={}):
-        """Provide feedback on a ticket and it's resolution.
+        """Submit a response for feeback form against that ticket
         :param id : Ticket ID for which feedback is to be submitted : type string
         """
         payload = {}
@@ -383,7 +383,7 @@ class Lead:
         return response
     
     async def getTokenForPlatformVideoRoom(self, unique_name=None, request_headers:Dict={}):
-        """Retrieve an access token for a platform video room.
+        """Get Token to join a specific Video Room using it's unqiue name, this Token is your ticket to Room and also creates your identity there.
         :param unique_name : Unique name of video room : type string
         """
         payload = {}
@@ -425,7 +425,7 @@ class Lead:
         return response
     
     async def getPlatformVideoParticipants(self, unique_name=None, request_headers:Dict={}):
-        """Retrieve a list of participants in a platform video room.
+        """Get participants of a specific Video Room using it's unique name, this can be used to check if people are already there in the room and also to show their names.
         :param unique_name : Unique name of Video Room : type string
         """
         payload = {}
@@ -467,7 +467,7 @@ class Lead:
         return response
     
     async def getGeneralConfig(self, request_headers:Dict={}):
-        """Retrieve general configuration settings related to support system for company tickets
+        """Get general support configuration.
         """
         payload = {}
         
@@ -495,8 +495,8 @@ class Lead:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/lead/v1.0/company/{self._conf.companyId}/general-config", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CloseVideoRoomResponse
-            schema = CloseVideoRoomResponse()
+            from .models import GeneralConfigResponse
+            schema = GeneralConfigResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:

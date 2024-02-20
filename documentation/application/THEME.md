@@ -7,12 +7,9 @@
 ## Theme Methods
 The Theme module makes theme management more efficient and effective. It allows you to view all theme pages, obtain details about specific theme pages, check the current app theme, and preview and test themes before applying them live.
 
-Page information
+Default
 * [getAllPages](#getallpages)
 * [getPage](#getpage)
-
-
-Theme information
 * [getAppliedTheme](#getappliedtheme)
 * [getThemeForPreview](#getthemeforpreview)
 
@@ -24,7 +21,7 @@ Theme information
 
 
 ### getAllPages
-Fetch all pages.
+Get all pages of a theme
 
 
 
@@ -47,7 +44,7 @@ except Exception as e:
 
 
 
-Retrieves a list of all the pages available within the applied theme.
+Use this API to retrieve all the available pages of a theme by its ID.
 
 *Returned Response:*
 
@@ -510,7 +507,7 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
 
 
 ### getPage
-Single page details.
+Get page of a theme
 
 
 
@@ -536,7 +533,7 @@ except Exception as e:
 
 
 
-Retrieve detailed information for a specific page within the theme.
+Use this API to retrieve a page of a theme.
 
 *Returned Response:*
 
@@ -944,10 +941,8 @@ Success. Returns an object of the pages.  Refer `AvailablePageSchema` for more d
 ---
 
 
-
-
 ### getAppliedTheme
-Current theme.
+Get the theme currently applied to an application
 
 
 
@@ -965,7 +960,7 @@ except Exception as e:
 
 
 
-Gets the theme currently applied to the application.
+An application has multiple themes, but only one theme can be applied at a time. Use this API to retrieve the theme currently applied to the application.
 
 *Returned Response:*
 
@@ -2989,7 +2984,7 @@ Success. Returns a JSON object of the theme. Check the example shown below or   
 
 
 ### getThemeForPreview
-Preview theme.
+Get a theme for a preview
 
 
 
@@ -3012,7 +3007,7 @@ except Exception as e:
 
 
 
-Retrieves a theme for previewing before applying it to the application.
+A theme can be previewed before applying it. Use this API to retrieve the preview of a theme by its ID.
 
 *Returned Response:*
 

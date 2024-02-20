@@ -389,7 +389,7 @@ class EditProfileRequestSchema(BaseSchema):
     # User swagger.json
 
     
-    encrypt_otp = fields.Boolean(required=False)
+    ci = fields.Boolean(required=False)
     
     first_name = fields.Str(required=False)
     
@@ -501,7 +501,7 @@ class SendMobileOtpRequestSchema(BaseSchema):
     # User swagger.json
 
     
-    encrypt_otp = fields.Boolean(required=False)
+    ci = fields.Boolean(required=False)
     
     mobile = fields.Str(required=False)
     
@@ -621,7 +621,7 @@ class SendOtpRequestSchema(BaseSchema):
     # User swagger.json
 
     
-    encrypt_otp = fields.Boolean(required=False)
+    ci = fields.Boolean(required=False)
     
     country_code = fields.Str(required=False)
     
@@ -1063,9 +1063,9 @@ class PlatformSchema(BaseSchema):
     
     register = fields.Boolean(required=False)
     
-    mobile_image = fields.Str(required=False)
+    mobile_image = fields.Str(required=False, allow_none=True)
     
-    desktop_image = fields.Str(required=False)
+    desktop_image = fields.Str(required=False, allow_none=True)
     
     delete_account_day = fields.Int(required=False)
     
@@ -1279,7 +1279,7 @@ class UserSchema(BaseSchema):
     
     emails = fields.List(fields.Nested(Email, required=False), required=False)
     
-    gender = fields.Str(required=False)
+    gender = fields.Str(required=False, allow_none=True)
     
     dob = fields.Str(required=False)
     

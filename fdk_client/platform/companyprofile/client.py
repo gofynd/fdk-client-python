@@ -13,7 +13,7 @@ class CompanyProfile:
 
     
     async def cbsOnboardGet(self, request_headers:Dict={}):
-        """View the company profile of the seller account.
+        """This API allows to view the company profile of the seller account.
         """
         payload = {}
         
@@ -52,7 +52,7 @@ class CompanyProfile:
         return response
     
     async def updateCompany(self, body="", request_headers:Dict={}):
-        """Allows to edit the company profile of the seller account.
+        """This API allows to edit the company profile of the seller account.
         """
         payload = {}
         
@@ -95,7 +95,7 @@ class CompanyProfile:
         return response
     
     async def getCompanyMetrics(self, request_headers:Dict={}):
-        """Allows to view the company metrics, i.e. the status of its brand and stores. Also its allows to view the number of products, company documents & store documents which are verified and unverified.
+        """This API allows to view the company metrics, i.e. the status of its brand and stores. Also its allows to view the number of products, company documents & store documents which are verified and unverified.
         """
         payload = {}
         
@@ -134,7 +134,7 @@ class CompanyProfile:
         return response
     
     async def getBrand(self, brand_id=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific brand. Get data associated to a particular company brand.
+        """This API helps to get data associated to a particular company brand.
         :param brand_id : Id of the brand to be viewed. : type string
         """
         payload = {}
@@ -176,7 +176,7 @@ class CompanyProfile:
         return response
     
     async def editBrand(self, brand_id=None, body="", request_headers:Dict={}):
-        """Modify details and settings of a specific brand. Allows to edit meta of a brand.
+        """This API allows to edit meta of a brand.
         :param brand_id : Id of the brand to be viewed. : type string
         """
         payload = {}
@@ -222,7 +222,7 @@ class CompanyProfile:
         return response
     
     async def createBrand(self, body="", request_headers:Dict={}):
-        """Allows to create a brand associated to a company.
+        """This API allows to create a brand associated to a company.
         """
         payload = {}
         
@@ -265,7 +265,7 @@ class CompanyProfile:
         return response
     
     async def getBrands(self, page_no=None, page_size=None, q=None, request_headers:Dict={}):
-        """Retrieve a list of available brands.
+        """This API helps to get view brands associated to a particular company.
         :param page_no : The page number to navigate through the given set of results : type integer
         :param page_size : Number of items to retrieve in each page. Default is 10. : type integer
         :param q : Search term for name. : type string
@@ -313,7 +313,7 @@ class CompanyProfile:
         return response
     
     async def createCompanyBrandMapping(self, body="", request_headers:Dict={}):
-        """Establish a mapping between a company and a brand.
+        """This API allows to create a company brand mapping, for a already existing brand in the system.
         """
         payload = {}
         
@@ -356,7 +356,7 @@ class CompanyProfile:
         return response
     
     async def getLocations(self, store_type=None, q=None, stage=None, page_no=None, page_size=None, location_ids=None, types=None, tags=None, request_headers:Dict={}):
-        """Retrieve a list of locations associated with the company.
+        """This API allows to view all the locations associated to a company.
         :param store_type : Helps to sort the location list on the basis of location type. : type string
         :param q : Query that is to be searched. : type string
         :param stage : to filter companies on basis of verified or unverified companies. : type string
@@ -419,7 +419,7 @@ class CompanyProfile:
         return response
     
     async def createLocation(self, body="", request_headers:Dict={}):
-        """Create a new location. Allows to edit a location associated to a company.
+        """This API allows to edit a location associated to a company.
         """
         payload = {}
         
@@ -462,7 +462,7 @@ class CompanyProfile:
         return response
     
     async def getLocationDetail(self, location_id=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific location. Get data associated to a specific location.
+        """This API helps to get data associated to a specific location.
         :param location_id : Id of the location which you want to view. : type string
         """
         payload = {}
@@ -504,7 +504,7 @@ class CompanyProfile:
         return response
     
     async def updateLocation(self, location_id=None, body="", request_headers:Dict={}):
-        """Allows to edit a location associated to a company.
+        """This API allows to edit a location associated to a company.
         :param location_id : Id of the location which you want to edit. : type string
         """
         payload = {}
@@ -550,7 +550,7 @@ class CompanyProfile:
         return response
     
     async def createLocationBulk(self, body="", request_headers:Dict={}):
-        """Allows to create a location associated to a company.
+        """This API allows to create a location associated to a company.
         """
         payload = {}
         
@@ -593,7 +593,7 @@ class CompanyProfile:
         return response
     
     async def getLocationTags(self, request_headers:Dict={}):
-        """Retrieve all the tags associated to a company.
+        """This API fetches all the tags associated to a company.
         """
         payload = {}
         

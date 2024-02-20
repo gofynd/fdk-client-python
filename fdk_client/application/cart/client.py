@@ -21,6 +21,7 @@ class Cart:
             "updateCart": "/service/application/cart/v1.0/detail",
             "deleteCart": "/service/application/cart/v1.0/cart_archive",
             "getItemCount": "/service/application/cart/v1.0/basic",
+            "getItemCountV2": "/service/application/cart/v2.0/basic",
             "getCoupons": "/service/application/cart/v1.0/coupon",
             "applyCoupon": "/service/application/cart/v1.0/coupon",
             "removeCoupon": "/service/application/cart/v1.0/coupon",
@@ -42,7 +43,9 @@ class Cart:
             "updateCartWithSharedItems": "/service/application/cart/v1.0/share-cart/{token}/{action}",
             "getPromotionOffers": "/service/application/cart/v1.0/available-promotions",
             "getLadderOffers": "/service/application/cart/v1.0/available-ladder-prices",
-            "checkoutCartV2": "/service/application/cart/v2.0/checkout"
+            "checkoutCartV2": "/service/application/cart/v2.0/checkout",
+            "getCartMetaConfigs": "/service/application/cart/v1.0/cart/configuration",
+            "getCartMetaConfig": "/service/application/cart/v1.0/cart/configuration/{cart_meta_id}"
             
         }
         self._urls = {
@@ -52,8 +55,8 @@ class Cart:
     async def updateUrls(self, urls):
         self._urls.update(urls)
     
-    async def getCart(self, id=None, i=None, b=None, c=None, assign_card_id=None, area_code=None, buy_now=None, body="", request_headers:Dict={}):
-        """Retrieve the current state and items in the shopping cart.
+    async def getCart(self, id=None, i=None, b=None, c=None, assign_card_id=None, area_code=None, buy_now=None, cart_type=None, body="", request_headers:Dict={}):
+        """Use this API to get details of all the items added to a cart.
         :param id : The unique identifier of the cart : type string
         :param i : This is a boolean value. Select `true` to retrieve all the items added in the cart. : type boolean
         :param b : This is a boolean value. Select `true` to retrieve the price breakup of cart items. : type boolean
@@ -61,6 +64,7 @@ class Cart:
         :param assign_card_id : Token of user's debit or credit card : type integer
         :param area_code : Customer servicable area_code : type string
         :param buy_now : This is a boolen value. Select `true` to set/initialize buy now cart : type boolean
+        :param cart_type : The type of cart : type string
         """
         payload = {}
         
@@ -78,14 +82,16 @@ class Cart:
             payload["area_code"] = area_code
         if buy_now is not None:
             payload["buy_now"] = buy_now
+        if cart_type is not None:
+            payload["cart_type"] = cart_type
 
         # Parameter validation
         schema = CartValidator.getCart()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getCart"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"c","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the cod charges in breakup of cart items."},{"in":"query","name":"assign_card_id","schema":{"type":"integer"},"description":"Token of user's debit or credit card"},{"in":"query","name":"area_code","schema":{"type":"string"},"description":"Customer servicable area_code"},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is a boolen value. Select `true` to set/initialize buy now cart"}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"c","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the cod charges in breakup of cart items."},{"in":"query","name":"assign_card_id","schema":{"type":"integer"},"description":"Token of user's debit or credit card"},{"in":"query","name":"area_code","schema":{"type":"string"},"description":"Customer servicable area_code"},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is a boolen value. Select `true` to set/initialize buy now cart"}],"headers":[],"path":[]}""", id=id, i=i, b=b, c=c, assign_card_id=assign_card_id, area_code=area_code, buy_now=buy_now)
-        query_string = await create_query_string(id=id, i=i, b=b, c=c, assign_card_id=assign_card_id, area_code=area_code, buy_now=buy_now)
+        url_with_params = await create_url_with_params(api_url=self._urls["getCart"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"c","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the cod charges in breakup of cart items."},{"in":"query","name":"assign_card_id","schema":{"type":"integer"},"description":"Token of user's debit or credit card"},{"in":"query","name":"area_code","schema":{"type":"string"},"description":"Customer servicable area_code"},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is a boolen value. Select `true` to set/initialize buy now cart"},{"in":"query","name":"cart_type","schema":{"type":"string"},"description":"The type of cart"}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"c","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the cod charges in breakup of cart items."},{"in":"query","name":"assign_card_id","schema":{"type":"integer"},"description":"Token of user's debit or credit card"},{"in":"query","name":"area_code","schema":{"type":"string"},"description":"Customer servicable area_code"},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is a boolen value. Select `true` to set/initialize buy now cart"},{"in":"query","name":"cart_type","schema":{"type":"string"},"description":"The type of cart"}],"headers":[],"path":[]}""", id=id, i=i, b=b, c=c, assign_card_id=assign_card_id, area_code=area_code, buy_now=buy_now, cart_type=cart_type)
+        query_string = await create_query_string(id=id, i=i, b=b, c=c, assign_card_id=assign_card_id, area_code=area_code, buy_now=buy_now, cart_type=cart_type)
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -101,7 +107,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCart"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/detail", id=id, i=i, b=b, c=c, assign_card_id=assign_card_id, area_code=area_code, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCart"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/detail", id=id, i=i, b=b, c=c, assign_card_id=assign_card_id, area_code=area_code, buy_now=buy_now, cart_type=cart_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CartDetailResponse
@@ -115,7 +121,7 @@ class Cart:
         return response
     
     async def getCartLastModified(self, id=None, body="", request_headers:Dict={}):
-        """Gets the last modified timestamp for the cart.
+        """Use this API to fetch Last-Modified timestamp in header metadata.
         :param id :  : type string
         """
         payload = {}
@@ -149,13 +155,14 @@ class Cart:
 
         return response
     
-    async def addItems(self, i=None, b=None, area_code=None, buy_now=None, id=None, body="", request_headers:Dict={}):
-        """Adds selected items to the shopping cart.
+    async def addItems(self, i=None, b=None, area_code=None, buy_now=None, id=None, cart_type=None, body="", request_headers:Dict={}):
+        """Use this API to add items to the cart.
         :param i : This is a boolean value. Select `true` to retrieve all the items added in the cart. : type boolean
         :param b : This is a boolean value. Select `true` to retrieve the price breakup of cart items. : type boolean
         :param area_code : Customer servicable area_code : type string
         :param buy_now : This is a boolen value. Select `true` to set/initialize buy now cart : type boolean
         :param id : The unique identifier of the cart : type string
+        :param cart_type : The type of cart : type string
         """
         payload = {}
         
@@ -169,6 +176,8 @@ class Cart:
             payload["buy_now"] = buy_now
         if id is not None:
             payload["id"] = id
+        if cart_type is not None:
+            payload["cart_type"] = cart_type
 
         # Parameter validation
         schema = CartValidator.addItems()
@@ -179,8 +188,8 @@ class Cart:
         schema = AddCartRequest()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["addItems"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"area_code","schema":{"type":"string"},"description":"Customer servicable area_code"},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is a boolen value. Select `true` to set/initialize buy now cart"},{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"}],"query":[{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"area_code","schema":{"type":"string"},"description":"Customer servicable area_code"},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is a boolen value. Select `true` to set/initialize buy now cart"},{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"}],"headers":[],"path":[]}""", i=i, b=b, area_code=area_code, buy_now=buy_now, id=id)
-        query_string = await create_query_string(i=i, b=b, area_code=area_code, buy_now=buy_now, id=id)
+        url_with_params = await create_url_with_params(api_url=self._urls["addItems"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"area_code","schema":{"type":"string"},"description":"Customer servicable area_code"},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is a boolen value. Select `true` to set/initialize buy now cart"},{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"cart_type","schema":{"type":"string"},"description":"The type of cart"}],"query":[{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"area_code","schema":{"type":"string"},"description":"Customer servicable area_code"},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is a boolen value. Select `true` to set/initialize buy now cart"},{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"cart_type","schema":{"type":"string"},"description":"The type of cart"}],"headers":[],"path":[]}""", i=i, b=b, area_code=area_code, buy_now=buy_now, id=id, cart_type=cart_type)
+        query_string = await create_query_string(i=i, b=b, area_code=area_code, buy_now=buy_now, id=id, cart_type=cart_type)
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -196,7 +205,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["addItems"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/detail", i=i, b=b, area_code=area_code, buy_now=buy_now, id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["addItems"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/detail", i=i, b=b, area_code=area_code, buy_now=buy_now, id=id, cart_type=cart_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import AddCartDetailResponse
@@ -210,7 +219,7 @@ class Cart:
         return response
     
     async def updateCart(self, id=None, i=None, b=None, area_code=None, buy_now=None, cart_type=None, body="", request_headers:Dict={}):
-        """Modifies items and quantities in the existing cart.
+        """Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size. These attributes will be fetched from the following APIs operation:  Operation for current api call. update_item for update items. remove_item for removing items. item_id "/platform/content/v1/products/" item_size "/platform/content/v1/products/:slug/sizes/" quantity item quantity (must be greater than or equal to 1) article_id "/content​/v1​/products​/:identifier​/sizes​/price​/" item_index item position in the cart (must be greater than or equal to 0)
         :param id : The unique identifier of the cart : type string
         :param i : This is a boolean value. Select `true` to retrieve all the items added in the cart. : type boolean
         :param b : This is a boolean value. Select `true` to retrieve the price breakup of cart items. : type boolean
@@ -272,22 +281,25 @@ class Cart:
 
         return response
     
-    async def deleteCart(self, id=None, body="", request_headers:Dict={}):
-        """Removes all items and resets the user's cart.
+    async def deleteCart(self, id=None, cart_type=None, body="", request_headers:Dict={}):
+        """Use this API to delete the cart.
         :param id : The unique identifier of the cart. : type string
+        :param cart_type : The type of cart : type string
         """
         payload = {}
         
         if id is not None:
             payload["id"] = id
+        if cart_type is not None:
+            payload["cart_type"] = cart_type
 
         # Parameter validation
         schema = CartValidator.deleteCart()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["deleteCart"], proccessed_params="""{"required":[],"optional":[{"name":"id","in":"query","description":"The unique identifier of the cart.","schema":{"type":"string"}}],"query":[{"name":"id","in":"query","description":"The unique identifier of the cart.","schema":{"type":"string"}}],"headers":[],"path":[]}""", id=id)
-        query_string = await create_query_string(id=id)
+        url_with_params = await create_url_with_params(api_url=self._urls["deleteCart"], proccessed_params="""{"required":[],"optional":[{"name":"id","in":"query","description":"The unique identifier of the cart.","schema":{"type":"string"}},{"in":"query","name":"cart_type","schema":{"type":"string"},"description":"The type of cart"}],"query":[{"name":"id","in":"query","description":"The unique identifier of the cart.","schema":{"type":"string"}},{"in":"query","name":"cart_type","schema":{"type":"string"},"description":"The type of cart"}],"headers":[],"path":[]}""", id=id, cart_type=cart_type)
+        query_string = await create_query_string(id=id, cart_type=cart_type)
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -303,7 +315,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["deleteCart"]).netloc, "put", await create_url_without_domain("/service/application/cart/v1.0/cart_archive", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["deleteCart"]).netloc, "put", await create_url_without_domain("/service/application/cart/v1.0/cart_archive", id=id, cart_type=cart_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import DeleteCartDetailResponse
@@ -317,7 +329,7 @@ class Cart:
         return response
     
     async def getItemCount(self, id=None, buy_now=None, body="", request_headers:Dict={}):
-        """Gets the total number of items in the cart.
+        """Use this API to get the total number of items present in cart.
         :param id : The unique identifier of the cart. : type string
         :param buy_now :  : type boolean
         """
@@ -363,8 +375,55 @@ class Cart:
 
         return response
     
+    async def getItemCountV2(self, id=None, buy_now=None, body="", request_headers:Dict={}):
+        """Use this API to get the total number of items present in cart.
+        :param id : The unique identifier of the cart : type string
+        :param buy_now : Boolean value to get buy_now cart : type boolean
+        """
+        payload = {}
+        
+        if id is not None:
+            payload["id"] = id
+        if buy_now is not None:
+            payload["buy_now"] = buy_now
+
+        # Parameter validation
+        schema = CartValidator.getItemCountV2()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getItemCountV2"], proccessed_params="""{"required":[],"optional":[{"name":"id","in":"query","description":"The unique identifier of the cart","schema":{"type":"string"}},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Boolean value to get buy_now cart"}],"query":[{"name":"id","in":"query","description":"The unique identifier of the cart","schema":{"type":"string"}},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Boolean value to get buy_now cart"}],"headers":[],"path":[]}""", id=id, buy_now=buy_now)
+        query_string = await create_query_string(id=id, buy_now=buy_now)
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getItemCountV2"]).netloc, "get", await create_url_without_domain("/service/application/cart/v2.0/basic", id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CartItemCountResponseV2
+            schema = CartItemCountResponseV2()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getItemCountV2")
+                print(e)
+
+        return response
+    
     async def getCoupons(self, id=None, buy_now=None, slug=None, store_id=None, body="", request_headers:Dict={}):
-        """Retrieve coupons that can be applied to the cart.
+        """Use this API to get a list of available coupons along with their details.
         :param id :  : type string
         :param buy_now :  : type boolean
         :param slug :  : type string
@@ -417,7 +476,7 @@ class Cart:
         return response
     
     async def applyCoupon(self, i=None, b=None, p=None, id=None, buy_now=None, cart_type=None, body="", request_headers:Dict={}):
-        """Applies a coupon code to get discounts on cart items.
+        """Use this API to apply coupons on items in the cart.
         :param i :  : type boolean
         :param b :  : type boolean
         :param p :  : type boolean
@@ -479,10 +538,11 @@ class Cart:
 
         return response
     
-    async def removeCoupon(self, id=None, buy_now=None, body="", request_headers:Dict={}):
-        """Removes an applied coupon from the cart.
+    async def removeCoupon(self, id=None, buy_now=None, cart_type=None, body="", request_headers:Dict={}):
+        """Remove Coupon applied on the cart by passing uid in request body.
         :param id : The unique identifier of the cart : type string
         :param buy_now : This is boolean to get buy_now cart : type boolean
+        :param cart_type : The type of cart : type string
         """
         payload = {}
         
@@ -490,14 +550,16 @@ class Cart:
             payload["id"] = id
         if buy_now is not None:
             payload["buy_now"] = buy_now
+        if cart_type is not None:
+            payload["cart_type"] = cart_type
 
         # Parameter validation
         schema = CartValidator.removeCoupon()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["removeCoupon"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart"}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart"}],"headers":[],"path":[]}""", id=id, buy_now=buy_now)
-        query_string = await create_query_string(id=id, buy_now=buy_now)
+        url_with_params = await create_url_with_params(api_url=self._urls["removeCoupon"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart"},{"in":"query","name":"cart_type","schema":{"type":"string"},"description":"The type of cart"}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart"},{"in":"query","name":"cart_type","schema":{"type":"string"},"description":"The type of cart"}],"headers":[],"path":[]}""", id=id, buy_now=buy_now, cart_type=cart_type)
+        query_string = await create_query_string(id=id, buy_now=buy_now, cart_type=cart_type)
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -513,7 +575,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["removeCoupon"]).netloc, "delete", await create_url_without_domain("/service/application/cart/v1.0/coupon", id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["removeCoupon"]).netloc, "delete", await create_url_without_domain("/service/application/cart/v1.0/coupon", id=id, buy_now=buy_now, cart_type=cart_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CartDetailResponse
@@ -526,12 +588,13 @@ class Cart:
 
         return response
     
-    async def getBulkDiscountOffers(self, item_id=None, article_id=None, uid=None, slug=None, body="", request_headers:Dict={}):
-        """Lists available bulk discount offers for cart items.
+    async def getBulkDiscountOffers(self, item_id=None, article_id=None, uid=None, slug=None, cart_type=None, body="", request_headers:Dict={}):
+        """Use this API to get a list of applicable offers along with current, next and best offer for given product. Either one of uid, item_id, slug should be present.
         :param item_id : The Item ID of the product : type integer
         :param article_id : Article Mongo ID : type string
         :param uid : UID of the product : type integer
         :param slug : A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ : type string
+        :param cart_type : type of the cart : type string
         """
         payload = {}
         
@@ -543,14 +606,16 @@ class Cart:
             payload["uid"] = uid
         if slug is not None:
             payload["slug"] = slug
+        if cart_type is not None:
+            payload["cart_type"] = cart_type
 
         # Parameter validation
         schema = CartValidator.getBulkDiscountOffers()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getBulkDiscountOffers"], proccessed_params="""{"required":[],"optional":[{"name":"item_id","description":"The Item ID of the product","in":"query","schema":{"type":"integer"}},{"name":"article_id","description":"Article Mongo ID","in":"query","schema":{"type":"string"}},{"name":"uid","description":"UID of the product","in":"query","schema":{"type":"integer"}},{"name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/","in":"query","schema":{"type":"string"}}],"query":[{"name":"item_id","description":"The Item ID of the product","in":"query","schema":{"type":"integer"}},{"name":"article_id","description":"Article Mongo ID","in":"query","schema":{"type":"string"}},{"name":"uid","description":"UID of the product","in":"query","schema":{"type":"integer"}},{"name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/","in":"query","schema":{"type":"string"}}],"headers":[],"path":[]}""", item_id=item_id, article_id=article_id, uid=uid, slug=slug)
-        query_string = await create_query_string(item_id=item_id, article_id=article_id, uid=uid, slug=slug)
+        url_with_params = await create_url_with_params(api_url=self._urls["getBulkDiscountOffers"], proccessed_params="""{"required":[],"optional":[{"name":"item_id","description":"The Item ID of the product","in":"query","schema":{"type":"integer"}},{"name":"article_id","description":"Article Mongo ID","in":"query","schema":{"type":"string"}},{"name":"uid","description":"UID of the product","in":"query","schema":{"type":"integer"}},{"name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/","in":"query","schema":{"type":"string"}},{"name":"cart_type","description":"type of the cart","in":"query","schema":{"type":"string"}}],"query":[{"name":"item_id","description":"The Item ID of the product","in":"query","schema":{"type":"integer"}},{"name":"article_id","description":"Article Mongo ID","in":"query","schema":{"type":"string"}},{"name":"uid","description":"UID of the product","in":"query","schema":{"type":"integer"}},{"name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/","in":"query","schema":{"type":"string"}},{"name":"cart_type","description":"type of the cart","in":"query","schema":{"type":"string"}}],"headers":[],"path":[]}""", item_id=item_id, article_id=article_id, uid=uid, slug=slug, cart_type=cart_type)
+        query_string = await create_query_string(item_id=item_id, article_id=article_id, uid=uid, slug=slug, cart_type=cart_type)
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -566,7 +631,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getBulkDiscountOffers"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/bulk-price", item_id=item_id, article_id=article_id, uid=uid, slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getBulkDiscountOffers"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/bulk-price", item_id=item_id, article_id=article_id, uid=uid, slug=slug, cart_type=cart_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import BulkPriceResponse
@@ -579,12 +644,13 @@ class Cart:
 
         return response
     
-    async def applyRewardPoints(self, id=None, i=None, b=None, buy_now=None, body="", request_headers:Dict={}):
-        """Applies user’s reward points to the cart.
+    async def applyRewardPoints(self, id=None, i=None, b=None, buy_now=None, cart_type=None, body="", request_headers:Dict={}):
+        """Use this API to redeem a fixed no. of reward points by applying it to the cart.
         :param id : The unique identifier of the cart : type string
         :param i : This is a boolean value. Select `true` to retrieve all the items added in the cart. : type boolean
         :param b : This is a boolean value. Select `true` to retrieve the price breakup of cart items. : type boolean
         :param buy_now : This is boolean to get buy_now cart : type boolean
+        :param cart_type : type of the cart : type string
         """
         payload = {}
         
@@ -596,6 +662,8 @@ class Cart:
             payload["b"] = b
         if buy_now is not None:
             payload["buy_now"] = buy_now
+        if cart_type is not None:
+            payload["cart_type"] = cart_type
 
         # Parameter validation
         schema = CartValidator.applyRewardPoints()
@@ -606,8 +674,8 @@ class Cart:
         schema = RewardPointRequest()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["applyRewardPoints"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart"}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart"}],"headers":[],"path":[]}""", id=id, i=i, b=b, buy_now=buy_now)
-        query_string = await create_query_string(id=id, i=i, b=b, buy_now=buy_now)
+        url_with_params = await create_url_with_params(api_url=self._urls["applyRewardPoints"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart"},{"name":"cart_type","description":"type of the cart","in":"query","schema":{"type":"string"}}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart"},{"name":"cart_type","description":"type of the cart","in":"query","schema":{"type":"string"}}],"headers":[],"path":[]}""", id=id, i=i, b=b, buy_now=buy_now, cart_type=cart_type)
+        query_string = await create_query_string(id=id, i=i, b=b, buy_now=buy_now, cart_type=cart_type)
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -623,7 +691,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["applyRewardPoints"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/redeem/points/", id=id, i=i, b=b, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["applyRewardPoints"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/redeem/points/", id=id, i=i, b=b, buy_now=buy_now, cart_type=cart_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CartDetailResponse
@@ -637,7 +705,7 @@ class Cart:
         return response
     
     async def getAddresses(self, cart_id=None, buy_now=None, mobile_no=None, checkout_mode=None, tags=None, is_default=None, body="", request_headers:Dict={}):
-        """Retrieve all saved addresses for the user.
+        """Use this API to get all the addresses associated with an account. If successful, returns a Address resource in the response body specified in GetAddressesResponse.attibutes listed below are optional uid address_id mobile_no checkout_mode tags default
         :param cart_id :  : type string
         :param buy_now :  : type boolean
         :param mobile_no :  : type string
@@ -696,7 +764,7 @@ class Cart:
         return response
     
     async def addAddress(self, body="", request_headers:Dict={}):
-        """Saves a new address for the user.
+        """Use this API to add an address to an account.
         """
         payload = {}
         
@@ -741,7 +809,7 @@ class Cart:
         return response
     
     async def getAddressById(self, id=None, cart_id=None, buy_now=None, mobile_no=None, checkout_mode=None, tags=None, is_default=None, body="", request_headers:Dict={}):
-        """Retrieves a saved address using its ID.
+        """Use this API to get an addresses using its ID. If successful, returns a Address resource in the response body specified in `Address`. Attibutes listed below are optional mobile_no checkout_mode tags default
         :param id :  : type string
         :param cart_id :  : type string
         :param buy_now :  : type boolean
@@ -803,7 +871,7 @@ class Cart:
         return response
     
     async def updateAddress(self, id=None, body="", request_headers:Dict={}):
-        """Modifies a saved address.
+        """Use this API to update an existing address in the account. Request object should contain attributes mentioned in Address can be updated. These attributes are: is_default_address landmark area pincode email address_type name address_id address
         :param id : ID allotted to the selected address : type string
         """
         payload = {}
@@ -851,7 +919,7 @@ class Cart:
         return response
     
     async def removeAddress(self, id=None, body="", request_headers:Dict={}):
-        """Removes a saved address from the user's profile.
+        """Use this API to delete an address by its ID. This will returns an object that will indicate whether the address was deleted successfully or not.
         :param id : ID allotted to the selected address : type string
         """
         payload = {}
@@ -895,7 +963,7 @@ class Cart:
         return response
     
     async def selectAddress(self, cart_id=None, buy_now=None, i=None, b=None, body="", request_headers:Dict={}):
-        """Selects an address for the cart's delivery.
+        """Select Address from all addresses associated with the account in order to ship the cart items to that address, otherwise default address will be selected implicitly. See `SelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, this API returns a Cart object. Below address attributes are required. address_id billing_address_id uid
         :param cart_id :  : type string
         :param buy_now :  : type boolean
         :param i :  : type boolean
@@ -952,7 +1020,7 @@ class Cart:
         return response
     
     async def selectPaymentMode(self, id=None, buy_now=None, body="", request_headers:Dict={}):
-        """Chooses a payment mode for the checkout process.
+        """Use this API to update cart payment.
         :param id :  : type string
         :param buy_now :  : type boolean
         """
@@ -1003,7 +1071,7 @@ class Cart:
         return response
     
     async def validateCouponForPayment(self, id=None, buy_now=None, address_id=None, payment_mode=None, payment_identifier=None, aggregator_name=None, merchant_code=None, iin=None, network=None, type=None, card_id=None, cart_type=None, body="", request_headers:Dict={}):
-        """Checks if a coupon is valid for the selected payment mode.
+        """Use this API to validate a coupon against the payment mode such as NetBanking, Wallet, UPI etc.
         :param id : The unique identifier of the cart : type string
         :param buy_now : This is boolean to get buy_now cart : type boolean
         :param address_id : ID allotted to an address : type string
@@ -1080,7 +1148,7 @@ class Cart:
         return response
     
     async def getShipments(self, p=None, id=None, buy_now=None, address_id=None, area_code=None, order_type=None, body="", request_headers:Dict={}):
-        """Retrieve shipment details for items in the cart.
+        """Use this API to get shipment details, expected delivery date, items and price breakup of the shipment.
         :param p : This is a boolean value. Select `true` for getting a payment option in response. : type boolean
         :param id : The unique identifier of the cart : type string
         :param buy_now :  : type boolean
@@ -1139,7 +1207,7 @@ class Cart:
         return response
     
     async def checkoutCart(self, buy_now=None, cart_type=None, body="", request_headers:Dict={}):
-        """Initiates the checkout process for the cart.
+        """Use this API to checkout all items in the cart for payment and order generation. For COD, order will be directly generated, whereas for other checkout modes, user will be redirected to a payment gateway.
         :param buy_now : This indicates the type of cart to checkout : type boolean
         :param cart_type : The type of cart : type string
         """
@@ -1190,7 +1258,7 @@ class Cart:
         return response
     
     async def updateCartMeta(self, id=None, buy_now=None, body="", request_headers:Dict={}):
-        """Adds or modifies metadata for the cart.
+        """Use this API to update cart meta like checkout_mode and gstin.
         :param id :  : type string
         :param buy_now :  : type boolean
         """
@@ -1241,7 +1309,7 @@ class Cart:
         return response
     
     async def getCartShareLink(self, body="", request_headers:Dict={}):
-        """Generates a shareable link for the current cart.
+        """Use this API to generate a shared cart snapshot and return a shortlink token. The link can be shared with other users for getting the same items in their cart.
         """
         payload = {}
         
@@ -1286,7 +1354,7 @@ class Cart:
         return response
     
     async def getCartSharedItems(self, token=None, body="", request_headers:Dict={}):
-        """Retrieves items from a shared cart link.
+        """Use this API to get the shared cart details as per the token generated using the share-cart API.
         :param token : Token of the shared short link : type string
         """
         payload = {}
@@ -1330,7 +1398,7 @@ class Cart:
         return response
     
     async def updateCartWithSharedItems(self, token=None, action=None, body="", request_headers:Dict={}):
-        """Updates the cart with items from a shared link.
+        """Use this API to merge the shared cart with existing cart, or replace the existing cart with the shared cart. The `action` parameter is used to indicate the operation Merge or Replace.
         :param token : Token of the shared short link : type string
         :param action : Operation to perform on the existing cart merge or replace. : type string
         """
@@ -1377,7 +1445,7 @@ class Cart:
         return response
     
     async def getPromotionOffers(self, slug=None, page_size=None, promotion_group=None, store_id=None, cart_type=None, body="", request_headers:Dict={}):
-        """Lists all available promotional offers for the cart.
+        """Use this API to get top 5 offers available for current product
         :param slug : A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ : type string
         :param page_size : Number of offers to be fetched to show : type integer
         :param promotion_group : Type of promotion groups : type string
@@ -1433,7 +1501,7 @@ class Cart:
         return response
     
     async def getLadderOffers(self, slug=None, store_id=None, promotion_id=None, page_size=None, body="", request_headers:Dict={}):
-        """Gets tiered discounts based on cart value.
+        """Use this API to get applicable ladder price promotion for current product
         :param slug : A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ : type string
         :param store_id : Store uid of assigned store on PDP page. If not passed default first created ladder will be returned : type string
         :param promotion_id : Get ladder information of given promotion id explicitely : type string
@@ -1486,7 +1554,7 @@ class Cart:
         return response
     
     async def checkoutCartV2(self, buy_now=None, cart_type=None, body="", request_headers:Dict={}):
-        """Initiates a more secure and detailed checkout process.
+        """Use this API to checkout all items in the cart for payment and order generation. For COD, order will be directly generated, whereas for other checkout modes, user will be redirected to a payment gateway.
         :param buy_now : This indicates the type of cart to checkout : type boolean
         :param cart_type : The type of cart : type string
         """
@@ -1532,6 +1600,91 @@ class Cart:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for checkoutCartV2")
+                print(e)
+
+        return response
+    
+    async def getCartMetaConfigs(self, body="", request_headers:Dict={}):
+        """Get cart configuration
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = CartValidator.getCartMetaConfigs()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getCartMetaConfigs"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        query_string = await create_query_string()
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCartMetaConfigs"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/cart/configuration", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CartConfigListResponse
+            schema = CartConfigListResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCartMetaConfigs")
+                print(e)
+
+        return response
+    
+    async def getCartMetaConfig(self, cart_meta_id=None, body="", request_headers:Dict={}):
+        """Get cart configuration by id
+        :param cart_meta_id : CartMeta mongo id for fetching single cart meta data : type string
+        """
+        payload = {}
+        
+        if cart_meta_id is not None:
+            payload["cart_meta_id"] = cart_meta_id
+
+        # Parameter validation
+        schema = CartValidator.getCartMetaConfig()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getCartMetaConfig"], proccessed_params="""{"required":[{"name":"cart_meta_id","in":"path","schema":{"type":"string"},"description":"CartMeta mongo id for fetching single cart meta data","required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"cart_meta_id","in":"path","schema":{"type":"string"},"description":"CartMeta mongo id for fetching single cart meta data","required":true}]}""", cart_meta_id=cart_meta_id)
+        query_string = await create_query_string(cart_meta_id=cart_meta_id)
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCartMetaConfig"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/cart/configuration/{cart_meta_id}", cart_meta_id=cart_meta_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CartConfigDetailResponse
+            schema = CartConfigDetailResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCartMetaConfig")
                 print(e)
 
         return response

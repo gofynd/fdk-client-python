@@ -14,7 +14,7 @@ class Rewards:
 
     
     async def showGiveaways(self, page_id=None, page_size=None, request_headers:Dict={}):
-        """Retrieve and display available giveaways.
+        """Fetch the detailed compilation of live, completed, and scheduled point-based giveaways created.
         :param page_id : pagination page id : type string
         :param page_size : pagination page size : type integer
         """
@@ -59,7 +59,7 @@ class Rewards:
         return response
     
     async def saveGiveAway(self, body="", request_headers:Dict={}):
-        """Store and manage details of a giveaway.
+        """Creates a new giveaway in the current application, specifying the target audience, points allocation, as well as the name and display name of the giveaway.
         """
         payload = {}
         
@@ -102,7 +102,7 @@ class Rewards:
         return response
     
     async def getGiveawayById(self, id=None, request_headers:Dict={}):
-        """Retrieve specific giveaway details by its unique identifier.
+        """Retrieve the specific giveaway by giveaway ID. It will show all the details of the requested giveaway.
         :param id : Giveaway ID : type string
         """
         payload = {}
@@ -144,7 +144,7 @@ class Rewards:
         return response
     
     async def updateGiveAway(self, id=None, body="", request_headers:Dict={}):
-        """Modify and update information about a giveaway.
+        """Make the necessary updates to the giveaway based on its giveaway ID.
         :param id : Giveaway ID : type string
         """
         payload = {}
@@ -190,7 +190,7 @@ class Rewards:
         return response
     
     async def showOffers(self, request_headers:Dict={}):
-        """Display available offers for users.
+        """Retrieve the list of offers within the current application, including order_discount, order, sign_up, and referral, along with their respective details.
         """
         payload = {}
         
@@ -220,7 +220,7 @@ class Rewards:
         return response
     
     async def getOfferByName(self, name=None, request_headers:Dict={}):
-        """Retrieve an offer by its name.
+        """Fetch the specific offer details and configuration by the name of the offer.
         :param name : The name given to the offer. : type string
         """
         payload = {}
@@ -262,7 +262,7 @@ class Rewards:
         return response
     
     async def updateOfferByName(self, name=None, body="", request_headers:Dict={}):
-        """Modify and manage an offer using its name.
+        """Update the specific offer details and its configuration by offer name.
         :param name : The name given to the offer. : type string
         """
         payload = {}
@@ -308,7 +308,7 @@ class Rewards:
         return response
     
     async def updateUserStatus(self, user_id=None, body="", request_headers:Dict={}):
-        """Change and update the status of a user in the rewards system.
+        """Update the user status by marking them as a block or unblock. It can be done by changing the active flag in request body.
         :param user_id : user id : type string
         """
         payload = {}
@@ -354,7 +354,7 @@ class Rewards:
         return response
     
     async def getUserDetails(self, user_id=None, request_headers:Dict={}):
-        """Retrieve comprehensive details about a user in the rewards program.
+        """Fetches the user details and the user reward details with their current reward points for the specific user.
         :param user_id : user id : type string
         """
         payload = {}
@@ -396,7 +396,7 @@ class Rewards:
         return response
     
     async def getUserPointsHistory(self, user_id=None, page_id=None, page_size=None, request_headers:Dict={}):
-        """Retrieve the history of points earned and redeemed by a user.
+        """Fetches a list of points transactions like giveaway points, signup points, referral points, order earn points, redeem points and expired points.
         :param user_id : user id : type string
         :param page_id : PageID is the ID of the requested page. For first request it should be kept empty. : type string
         :param page_size : The number of items to retrieve in each page. : type integer
@@ -444,7 +444,7 @@ class Rewards:
         return response
     
     async def getRewardsConfiguration(self, request_headers:Dict={}):
-        """Retrieve the configuration settings for the rewards program.
+        """Use this API to get a list of valid android paths required by the Rewards INIT API to validate a fraudulent device.
         """
         payload = {}
         
@@ -483,7 +483,7 @@ class Rewards:
         return response
     
     async def setRewardsConfiguration(self, body="", request_headers:Dict={}):
-        """Configure and modify the settings for the rewards program.
+        """Updates the configuration or inserts new records with the given android paths.
         """
         payload = {}
         

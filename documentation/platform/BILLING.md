@@ -7,7 +7,7 @@
 ## Billing Methods
 Handle platform subscription
 
-Billing & Subscription
+Default
 * [checkCouponValidity](#checkcouponvalidity)
 * [createSubscriptionCharge](#createsubscriptioncharge)
 * [getSubscriptionCharge](#getsubscriptioncharge)
@@ -25,10 +25,15 @@ Billing & Subscription
 * [getEnterprisePlans](#getenterpriseplans)
 * [planStatusUpdate](#planstatusupdate)
 * [subscripePlan](#subscripeplan)
-
-
-Default
 * [getentityDetail](#getentitydetail)
+* [paymentOptions](#paymentoptions)
+* [verifyPayment](#verifypayment)
+* [globalSettings](#globalsettings)
+* [subscriptionMethods](#subscriptionmethods)
+* [subscriptionConfigs](#subscriptionconfigs)
+* [subscriptionPlanChange](#subscriptionplanchange)
+* [getPaymentTransaction](#getpaymenttransaction)
+* [getPaymentOptions](#getpaymentoptions)
 
 
 
@@ -38,7 +43,7 @@ Default
 
 
 ### checkCouponValidity
-Verify coupon validity.
+Check coupon validity
 
 
 
@@ -62,7 +67,7 @@ except Exception as e:
 
 
 
-Checks whether a coupon code is valid for discounts while billing.
+Check coupon validity.
 
 *Returned Response:*
 
@@ -96,7 +101,7 @@ Success
 
 
 ### createSubscriptionCharge
-Initiate subscription billing.
+Create subscription charge
 
 
 
@@ -119,7 +124,7 @@ except Exception as e:
 | body | [CreateSubscriptionCharge](#CreateSubscriptionCharge) | yes | Request body |
 
 
-Register a subscription charge for a seller using your extension.
+Register subscription charge for a seller of your extension.
 
 *Returned Response:*
 
@@ -153,7 +158,7 @@ Success
 
 
 ### getSubscriptionCharge
-Retrieve subscription charge details.
+Get subscription charge details
 
 
 
@@ -177,7 +182,7 @@ except Exception as e:
 
 
 
-Retrieve detailed information about subscription charges using this API.
+Get created subscription charge details
 
 *Returned Response:*
 
@@ -211,7 +216,7 @@ Success
 
 
 ### cancelSubscriptionCharge
-Cancel a subscription charge.
+Cancel subscription charge
 
 
 
@@ -235,7 +240,7 @@ except Exception as e:
 
 
 
-Cancel an ongoing subscription charge for a customer.
+Cancel subscription and attached charges.
 
 *Returned Response:*
 
@@ -269,7 +274,7 @@ Success
 
 
 ### createOneTimeCharge
-Generate a one-time charge.
+Create one time subscription charge
 
 
 
@@ -292,7 +297,7 @@ except Exception as e:
 | body | [CreateOneTimeCharge](#CreateOneTimeCharge) | yes | Request body |
 
 
-Generate a one-time charge for specific services or products.
+Register one time subscription charge for a seller of your extension.
 
 *Returned Response:*
 
@@ -326,7 +331,7 @@ Success
 
 
 ### getChargeDetails
-Obtain charge details.
+Get subscription charge details
 
 
 
@@ -350,7 +355,7 @@ except Exception as e:
 
 
 
-Retrieve comprehensive details about a specific billing charge.
+Get created subscription charge details
 
 *Returned Response:*
 
@@ -384,7 +389,7 @@ Success
 
 
 ### getInvoices
-Retrieve invoices.
+Get invoices
 
 
 
@@ -402,7 +407,7 @@ except Exception as e:
 
 
 
-Retrieve invoices for billing and payment tracking.
+Get invoices.
 
 *Returned Response:*
 
@@ -675,7 +680,7 @@ Success
 
 
 ### getInvoiceById
-Get a specific invoice.
+Get invoice by id
 
 
 
@@ -698,7 +703,7 @@ except Exception as e:
 
 
 
-Retrieve a particular invoice's details by providing its unique ID.
+Get invoice by id.
 
 *Returned Response:*
 
@@ -965,7 +970,7 @@ Success
 
 
 ### getCustomerDetail
-Fetch customer details.
+Get subscription customer detail
 
 
 
@@ -983,7 +988,7 @@ except Exception as e:
 
 
 
-Obtain customer-related billing information.
+Get subscription customer detail.
 
 *Returned Response:*
 
@@ -1049,7 +1054,7 @@ Success
 
 
 ### upsertCustomerDetail
-Update or insert customer details.
+Upsert subscription customer detail
 
 
 
@@ -1071,7 +1076,7 @@ except Exception as e:
 | body | [SubscriptionCustomerCreate](#SubscriptionCustomerCreate) | yes | Request body |
 
 
-Allows you to modify or insert customer information in the billing system.
+Upsert subscription customer detail.
 
 *Returned Response:*
 
@@ -1137,7 +1142,7 @@ Success
 
 
 ### getSubscription
-Retrieve subscription details.
+Get current subscription detail
 
 
 
@@ -1155,7 +1160,8 @@ except Exception as e:
 
 
 
-Retrieve details of a customer's subscription information.
+If subscription is active then it will return is_enabled true and return subscription object. If subscription is not active then is_enabled false and message.
+
 
 *Returned Response:*
 
@@ -1486,7 +1492,7 @@ Success
       "hash_identifier": "987abf78c61bfef585242bbbeaab1b59",
       "pdf_url": "https://cdn.pixelbin.io/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/company/13781/self/subscription/documents/invoices/original/U6ffgNlo_-PS-P-A00515-FY24-paid.pdf"
     },
-    "mandate_amount": "630000",
+    "mandate_amount": 630000,
     "current_subscriptions": [
       {
         "current_period": {
@@ -1685,7 +1691,7 @@ Success
 
 
 ### getFeatureLimitConfig
-Obtain feature limit configurations.
+Get subscription subscription limits
 
 
 
@@ -1709,7 +1715,7 @@ except Exception as e:
 
 
 
-Retrieve configuration settings for feature limits in subscription plans.
+Get subscription subscription limits.
 
 *Returned Response:*
 
@@ -1779,7 +1785,7 @@ Success
 
 
 ### activateSubscriptionPlan
-Activate a subscription plan.
+Activate subscription
 
 
 
@@ -1801,7 +1807,7 @@ except Exception as e:
 | body | [SubscriptionActivateReq](#SubscriptionActivateReq) | yes | Request body |
 
 
-Activate a specific subscription plan for a customer.
+It will activate subscription plan for customer
 
 *Returned Response:*
 
@@ -1891,7 +1897,7 @@ Success
 
 
 ### cancelSubscriptionPlan
-Cancel a subscription plan.
+Cancel subscription
 
 
 
@@ -1913,7 +1919,7 @@ except Exception as e:
 | body | [CancelSubscriptionReq](#CancelSubscriptionReq) | yes | Request body |
 
 
-Cancel an active subscription plan for a customer
+It will cancel current active subscription.
 
 *Returned Response:*
 
@@ -2005,7 +2011,7 @@ Success
 
 
 ### getEnterprisePlans
-Retrieve enterprise-level plans.
+Get Enterprise Plans
 
 
 
@@ -2023,7 +2029,8 @@ except Exception as e:
 
 
 
-Retrieve available enterprise-level subscription plans.
+Get Enterprise Plans.
+
 
 *Returned Response:*
 
@@ -2193,7 +2200,7 @@ Success
 
 
 ### planStatusUpdate
-Update subscription plan status.
+Update Status of The plan
 
 
 
@@ -2215,7 +2222,7 @@ except Exception as e:
 | body | [PlanStatusUpdateReq](#PlanStatusUpdateReq) | yes | Request body |
 
 
-Modify the status of a subscription plan.
+It will update the status of the plan
 
 *Returned Response:*
 
@@ -2452,7 +2459,7 @@ Success
 
 
 ### subscripePlan
-Subscribe to a plan.
+Subscribe plan.
 
 
 
@@ -2474,7 +2481,7 @@ except Exception as e:
 | body | [SunscribePlan](#SunscribePlan) | yes | Request body |
 
 
-Subscribe to a specific billing plan.
+It will subscribe a plan.
 
 *Returned Response:*
 
@@ -2524,8 +2531,6 @@ Success
 ---
 
 
-
-
 ### getentityDetail
 Generic api to get the entity detail
 
@@ -2562,6 +2567,460 @@ Generic api to get the entity detail
 
 
 [EntityResponse](#EntityResponse)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### paymentOptions
+API to get payment details of requested payment options
+
+
+
+
+```python
+try:
+    result = await platformClient.billing.paymentOptions(code=code)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| code | String | yes | Payment options unique code. |  
+
+
+
+API to get payment details of requested payment options.
+
+*Returned Response:*
+
+
+
+
+[PaymentOptions](#PaymentOptions)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### verifyPayment
+API to verify subscription payment
+
+
+
+
+```python
+try:
+    result = await platformClient.billing.verifyPayment(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [VerifyPaymentReq](#VerifyPaymentReq) | yes | Request body |
+
+
+API to verify subscription payment.
+
+*Returned Response:*
+
+
+
+
+[VerifyPaymentRes](#VerifyPaymentRes)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### globalSettings
+API to get global settings details
+
+
+
+
+```python
+try:
+    result = await platformClient.billing.globalSettings(pageNo=pageNo, pageSize=pageSize, query=query)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| pageNo | Int | yes | number of pages needed |   
+| pageSize | Int | yes | number of items to be there in page |   
+| query | HashMap<String,Any> | yes | field which will be used in db query |  
+
+
+
+API to get global settings details.
+
+*Returned Response:*
+
+
+
+
+[GlobalSettings](#GlobalSettings)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### subscriptionMethods
+API to get subscription methods
+
+
+
+
+```python
+try:
+    result = await platformClient.billing.subscriptionMethods(uniqueExternalId=uniqueExternalId)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| uniqueExternalId | HashMap<String,Any> | yes | unique id for external company |  
+
+
+
+API to get subscription methods.
+
+*Returned Response:*
+
+
+
+
+[SubscriptionMethods](#SubscriptionMethods)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### subscriptionConfigs
+API to get subscription config details
+
+
+
+
+```python
+try:
+    result = await platformClient.billing.subscriptionConfigs()
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+
+API to get subscription config details.
+
+*Returned Response:*
+
+
+
+
+[ConfigRes](#ConfigRes)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### subscriptionPlanChange
+API to get plan change details of subscription
+
+
+
+
+```python
+try:
+    result = await platformClient.billing.subscriptionPlanChange(productSuite=productSuite, uniqueId=uniqueId, platform=platform)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| productSuite | String? | no |  |   
+| uniqueId | Int? | no |  |   
+| platform | String? | no |  |  
+
+
+
+API to get plan change details of subscription.
+
+*Returned Response:*
+
+
+
+
+[PlanChangeDetails](#PlanChangeDetails)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getPaymentTransaction
+API to get payment transaction details
+
+
+
+
+```python
+try:
+    result = await platformClient.billing.getPaymentTransaction(transactionId=transactionId)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| transactionId | String | yes | Payment Transaction unique id. |  
+
+
+
+API to get payment transaction details.
+
+*Returned Response:*
+
+
+
+
+[PaymentTransactionDetails](#PaymentTransactionDetails)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getPaymentOptions
+API to get payment options
+
+
+
+
+```python
+try:
+    result = await platformClient.billing.getPaymentOptions(transactionId=transactionId)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| transactionId | String | yes | ID of the payment transaction. |  
+
+
+
+API to get payment options.
+
+*Returned Response:*
+
+
+
+
+[GetPaymentOptions](#GetPaymentOptions)
 
 Success
 
@@ -3292,7 +3751,7 @@ Success
  | latestInvoice | [InvoicesData](#InvoicesData)? |  yes  |  |
  | nextPlan | [Plan](#Plan)? |  yes  |  |
  | currentSubscriptions | ArrayList<[Subscription](#Subscription)>? |  yes  |  |
- | mandateAmount | String? |  yes  |  |
+ | mandateAmount | Double? |  yes  |  |
 
 ---
 
@@ -3560,6 +4019,375 @@ Success
  | page | Int? |  yes  |  |
  | pageSize | Int? |  yes  |  |
  | items | ArrayList<[Details](#Details)>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [PaymentOptions](#PaymentOptions)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | id | String? |  yes  |  |
+ | name | String? |  yes  |  |
+ | description | String? |  yes  |  |
+ | logo | String? |  yes  |  |
+ | aggregatorId | String? |  yes  |  |
+ | aggregator | String? |  yes  |  |
+ | createdAt | String? |  yes  |  |
+ | modifiedAt | String? |  yes  |  |
+ | v | Int? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [VerifyPaymentReq](#VerifyPaymentReq)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | razorpayPaymentId | String? |  yes  |  |
+ | razorpayOrderId | String? |  yes  |  |
+ | razorpaySignature | String? |  yes  |  |
+ | statusCode | Int? |  yes  |  |
+ | providerType | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [Documents](#Documents)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | pan | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [BillingAddress](#BillingAddress)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | country | String? |  yes  |  |
+ | state | String? |  yes  |  |
+ | city | String? |  yes  |  |
+ | line1 | String? |  yes  |  |
+ | line2 | String? |  yes  |  |
+ | postalCode | String? |  yes  |  |
+ | countryCode | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [Currency](#Currency)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | code | String? |  yes  |  |
+ | symbol | String? |  yes  |  |
+ | name | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [BusinessCountryInfo](#BusinessCountryInfo)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | country | String? |  yes  |  |
+ | countryCode | String? |  yes  |  |
+ | currency | [Currency](#Currency)? |  yes  |  |
+ | timezone | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [SubscriberData](#SubscriberData)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | pgUserExists | Boolean? |  yes  |  |
+ | id | String? |  yes  |  |
+ | pgCustomerId | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [Subscriber](#Subscriber)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | documents | [Documents](#Documents)? |  yes  |  |
+ | phone | HashMap<String,Any>? |  yes  |  |
+ | billingAddress | [BillingAddress](#BillingAddress)? |  yes  |  |
+ | consent | Boolean? |  yes  |  |
+ | comms | Boolean? |  yes  |  |
+ | id | String? |  yes  |  |
+ | type | String? |  yes  |  |
+ | uniqueId | String? |  yes  |  |
+ | name | String? |  yes  |  |
+ | email | String? |  yes  |  |
+ | businessCountryInfo | [BusinessCountryInfo](#BusinessCountryInfo)? |  yes  |  |
+ | createdAt | String? |  yes  |  |
+ | modifiedAt | String? |  yes  |  |
+ | creditBalance | Int? |  yes  |  |
+ | data | [SubscriberData](#SubscriberData)? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [Author](#Author)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | modifiedByDetails | HashMap<String,Any>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [EndingBalance](#EndingBalance)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | amount | Int? |  yes  |  |
+ | oldEntryRef | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [PaymentData](#PaymentData)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | transactionId | String? |  yes  |  |
+ | aggregator | String? |  yes  |  |
+ | aggregatorOrderId | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [CreditTransaction](#CreditTransaction)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | entity | HashMap<String,Any>? |  yes  |  |
+ | author | [Author](#Author)? |  yes  |  |
+ | id | String? |  yes  |  |
+ | amount | Int? |  yes  |  |
+ | currency | String? |  yes  |  |
+ | subscriberId | String? |  yes  |  |
+ | description | String? |  yes  |  |
+ | isTest | Boolean? |  yes  |  |
+ | endingBalance | [EndingBalance](#EndingBalance)? |  yes  |  |
+ | payment | [PaymentData](#PaymentData)? |  yes  |  |
+ | type | String? |  yes  |  |
+ | createdAt | String? |  yes  |  |
+ | modifiedAt | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [VerifyPaymentData](#VerifyPaymentData)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | success | Boolean? |  yes  |  |
+ | subscriber | [Subscriber](#Subscriber)? |  yes  |  |
+ | creditTransaction | [CreditTransaction](#CreditTransaction)? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [VerifyPaymentRes](#VerifyPaymentRes)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | status | String? |  yes  |  |
+ | data | [VerifyPaymentData](#VerifyPaymentData)? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [DefaultMerchants](#DefaultMerchants)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | stripe | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [GlobalSettingsPayment](#GlobalSettingsPayment)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | defaultMerchants | [DefaultMerchants](#DefaultMerchants)? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [GlobalSettingsData](#GlobalSettingsData)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | payment | [GlobalSettingsPayment](#GlobalSettingsPayment)? |  yes  |  |
+ | freezePanel | Boolean? |  yes  |  |
+ | id | String? |  yes  |  |
+ | createdAt | String? |  yes  |  |
+ | modifiedAt | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [GlobalSettings](#GlobalSettings)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | status | String? |  yes  |  |
+ | data | [GlobalSettingsData](#GlobalSettingsData)? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [SubscriptionMethods](#SubscriptionMethods)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | success | Boolean? |  yes  |  |
+ | data | ArrayList<String>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [ConfigPublicKey](#ConfigPublicKey)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | publicKey | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [ConfigRes](#ConfigRes)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | success | Boolean? |  yes  |  |
+ | aggregator | String? |  yes  |  |
+ | config | [ConfigPublicKey](#ConfigPublicKey)? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [PlanChangeData](#PlanChangeData)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | total | Int? |  yes  |  |
+ | creditNoteAmount | Int? |  yes  |  |
+ | taxableAmount | Int? |  yes  |  |
+ | gstAmount | Int? |  yes  |  |
+ | grossTotal | Int? |  yes  |  |
+ | gst | Int? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [PlanChangeDetails](#PlanChangeDetails)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | success | Boolean? |  yes  |  |
+ | data | [PlanChangeData](#PlanChangeData)? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [PaymentTransactionDetails](#PaymentTransactionDetails)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | aggregator | HashMap<String,Any>? |  yes  |  |
+ | currency | String? |  yes  |  |
+ | currentStatus | String? |  yes  |  |
+ | id | String? |  yes  |  |
+ | subscriberId | String? |  yes  |  |
+ | amount | Double? |  yes  |  |
+ | entityType | String? |  yes  |  |
+ | collectionType | String? |  yes  |  |
+ | meta | [Meta](#Meta)? |  yes  |  |
+ | createdAt | String? |  yes  |  |
+ | modifiedAt | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [PaymentItems](#PaymentItems)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | name | String? |  yes  |  |
+ | code | String? |  yes  |  |
+ | aggregator | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [GetPaymentOptions](#GetPaymentOptions)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | paymentOptions | ArrayList<[PaymentItems](#PaymentItems)>? |  yes  |  |
 
 ---
 

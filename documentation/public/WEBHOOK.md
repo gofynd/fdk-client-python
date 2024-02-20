@@ -7,12 +7,9 @@
 ## Webhook Methods
 Webhook dispatcher with retry and one event to many subscriber vice versa
 
-Webhook event management
+Default
 * [fetchAllWebhookEvents](#fetchallwebhookevents)
 * [queryWebhookEventDetails](#querywebhookeventdetails)
-
-
-Default
 * [notifyDepricatedEvent](#notifydepricatedevent)
 * [testHandlerTransformation](#testhandlertransformation)
 * [validateSchema](#validateschema)
@@ -25,7 +22,7 @@ Default
 
 
 ### fetchAllWebhookEvents
-Fetch all webhook events.
+Get All Webhook Events
 
 
 
@@ -43,7 +40,7 @@ except Exception as e:
 
 
 
-Retrieve a list of all webhook events in the public server setup.
+Get All Webhook Events
 
 *Returned Response:*
 
@@ -100,7 +97,7 @@ Success
 
 
 ### queryWebhookEventDetails
-Query webhook event details.
+Send webhook event name, type, version, category in request body to get complete details of event from server
 
 
 
@@ -122,7 +119,7 @@ except Exception as e:
 | body | [ArrayList<EventConfigBase>](#ArrayList<EventConfigBase>) | yes | Request body |
 
 
-Query and obtain detailed information about webhook events in the public server configurations.
+Get Webhook Event Details for provided events
 
 *Returned Response:*
 
@@ -176,8 +173,6 @@ Success
 
 
 ---
-
-
 
 
 ### notifyDepricatedEvent

@@ -24,10 +24,6 @@ class StartResponse(BaseSchema):
     pass
 
 
-class Params(BaseSchema):
-    pass
-
-
 class StartRequest(BaseSchema):
     pass
 
@@ -37,6 +33,10 @@ class CreatedBy(BaseSchema):
 
 
 class CompleteResponse(BaseSchema):
+    pass
+
+
+class ProxyResponse(BaseSchema):
     pass
 
 
@@ -331,14 +331,6 @@ class StartResponse(BaseSchema):
     
 
 
-class Params(BaseSchema):
-    # FileStorage swagger.json
-
-    
-    subpath = fields.Str(required=False)
-    
-
-
 class StartRequest(BaseSchema):
     # FileStorage swagger.json
 
@@ -396,6 +388,16 @@ class CompleteResponse(BaseSchema):
     modified_on = fields.Str(required=False)
     
     created_by = fields.Nested(CreatedBy, required=False)
+    
+
+
+class ProxyResponse(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    data = fields.Dict(required=False)
+    
+    support = fields.Dict(required=False)
     
 
 

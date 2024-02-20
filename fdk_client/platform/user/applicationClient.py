@@ -14,7 +14,7 @@ class User:
 
     
     async def getCustomers(self, q=None, page_size=None, page_no=None, request_headers:Dict={}):
-        """Retrieve a list of customer profiles.
+        """Use this API to retrieve a list of customers who have registered in the application.
         :param q : The search query. Mobile number or email ID of a customer. : type string
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         :param page_no : The page number to navigate through the given set of results. Default value is 1.  : type integer
@@ -62,7 +62,7 @@ class User:
         return response
     
     async def searchUsers(self, q=None, query=None, request_headers:Dict={}):
-        """Search and filter user profiles.
+        """Use this API to retrieve an existing user from a list.
         :param q : The search query. Mobile number or email ID of a customer. : type string
         :param query : The search queries. Mobile numbers or email IDs of customers. : type array
         """
@@ -107,7 +107,7 @@ class User:
         return response
     
     async def createUser(self, body="", request_headers:Dict={}):
-        """Register and add a new user to the platform.
+        """Create user
         """
         payload = {}
         
@@ -150,7 +150,7 @@ class User:
         return response
     
     async def blockOrUnblockUsers(self, body="", request_headers:Dict={}):
-        """Control user access by blocking or unblocking their accounts.
+        """Block/Unblock user
         """
         payload = {}
         
@@ -193,7 +193,7 @@ class User:
         return response
     
     async def unDeleteUser(self, body="", request_headers:Dict={}):
-        """Restore a previously deleted user account.
+        """undelete user who deleted from application and have not elapsed the platform configured delete days
         """
         payload = {}
         
@@ -236,7 +236,7 @@ class User:
         return response
     
     async def updateUser(self, user_id=None, body="", request_headers:Dict={}):
-        """Modify and update user profile information.
+        """Use this API to update user details, Note: Existing emails and phone numbers of user will be replaced directly if phone_numbers or emails field sent in request data.
         :param user_id : User ID : type string
         """
         payload = {}
@@ -282,7 +282,7 @@ class User:
         return response
     
     async def createUserSession(self, body="", request_headers:Dict={}):
-        """Establish a session for user interactions.
+        """Create user session
         """
         payload = {}
         
@@ -325,7 +325,7 @@ class User:
         return response
     
     async def deleteSession(self, id=None, session_id=None, reason=None, request_headers:Dict={}):
-        """Terminate an active user session.
+        """Use this API to Delete a session of customers who have registered in the application.
         :param id : ID of a customer. : type string
         :param session_id : Session ID of a customer. : type string
         :param reason : Reason for deleting session. : type string
@@ -373,7 +373,7 @@ class User:
         return response
     
     async def getActiveSessions(self, id=None, request_headers:Dict={}):
-        """Retrieve a list of currently active user sessions.
+        """Use this API to retrieve a list of session with info of customers who have registered in the application.
         :param id : ID of a customer. : type string
         """
         payload = {}
@@ -415,7 +415,7 @@ class User:
         return response
     
     async def deleteActiveSessions(self, id=None, reason=None, request_headers:Dict={}):
-        """End multiple active user sessions.
+        """Use this API to Delete a list of session of customers who have registered in the application.
         :param id : ID of a customer. : type string
         :param reason : Reason to delete sessions. : type string
         """
@@ -503,7 +503,7 @@ class User:
         return response
     
     async def getPlatformConfig(self, request_headers:Dict={}):
-        """Retrieve configuration settings for the platform.
+        """Use this API to get all the platform configurations such as mobile image, desktop image, social logins, and all other text.
         """
         payload = {}
         
@@ -542,7 +542,7 @@ class User:
         return response
     
     async def updatePlatformConfig(self, body="", request_headers:Dict={}):
-        """Modify and update platform configuration settings.
+        """Use this API to edit the existing platform configurations such as mobile image, desktop image, social logins, and all other text.
         """
         payload = {}
         
@@ -585,7 +585,7 @@ class User:
         return response
     
     async def createUserGroup(self, body="", request_headers:Dict={}):
-        """Form and add a new user group.
+        """Use this API to create new user Group
         """
         payload = {}
         
@@ -628,7 +628,7 @@ class User:
         return response
     
     async def getUserGroups(self, page_no=None, page_size=None, name=None, type=None, status=None, group_uid=None, request_headers:Dict={}):
-        """Retrieve a list of user groups.
+        """Use this API to get User Groups mathing criteria passed in query
         :param page_no : page number for pagination result : type string
         :param page_size : page size for pagination result : type string
         :param name : to search for User Groups which contains given string in their name : type string
@@ -685,7 +685,7 @@ class User:
         return response
     
     async def updateUserGroup(self, group_id=None, body="", request_headers:Dict={}):
-        """Modify and update user group details.
+        """Use this API to update an existing user Group
         :param group_id : Numeric ID allotted to a User Group : type string
         """
         payload = {}
@@ -731,7 +731,7 @@ class User:
         return response
     
     async def getUserGroupById(self, group_id=None, request_headers:Dict={}):
-        """Retrieve a user group by its unique identifier.
+        """Use this API to get details of an existing user Group
         :param group_id : Numeric ID allotted to a User Group : type string
         """
         payload = {}
@@ -773,7 +773,7 @@ class User:
         return response
     
     async def updateUserGroupPartially(self, group_id=None, body="", request_headers:Dict={}):
-        """Update user group partially on the platform.
+        """Use this API to update user group details and add or remove an user to the user group.
         :param group_id : Numeric ID allotted to a User Group : type string
         """
         payload = {}

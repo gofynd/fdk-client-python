@@ -37,7 +37,7 @@ class Order:
         self._urls.update(urls)
     
     async def getOrders(self, status=None, page_no=None, page_size=None, from_date=None, to_date=None, start_date=None, end_date=None, custom_meta=None, body="", request_headers:Dict={}):
-        """Retrieves all orders associated with a customer account.
+        """Use this API to retrieve all the orders.
         :param status : A filter to retrieve orders by their current status such as _placed_, _delivered_, etc. : type integer
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
@@ -102,7 +102,7 @@ class Order:
         return response
     
     async def getOrderById(self, order_id=None, allow_inactive=None, body="", request_headers:Dict={}):
-        """Retrieve order details such as tracking details, shipment, store information using Fynd Order ID.
+        """Use this API to retrieve order details such as tracking details, shipment, store information using Fynd Order ID.
         :param order_id : A unique number used for identifying and tracking your orders. : type string
         :param allow_inactive : Flag to allow inactive shipments : type boolean
         """
@@ -149,7 +149,7 @@ class Order:
         return response
     
     async def getPosOrderById(self, order_id=None, body="", request_headers:Dict={}):
-        """Retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
+        """Use this API to retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
         :param order_id : A unique number used for identifying and tracking your orders. : type string
         """
         payload = {}
@@ -193,7 +193,7 @@ class Order:
         return response
     
     async def getShipmentById(self, shipment_id=None, allow_inactive=None, body="", request_headers:Dict={}):
-        """Retrieve shipment details such as price breakup, tracking details, store information, etc. using Shipment ID.
+        """Use this API to retrieve shipment details such as price breakup, tracking details, store information, etc. using Shipment ID.
         :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
         :param allow_inactive : Flag to allow inactive shipments : type boolean
         """
@@ -240,7 +240,7 @@ class Order:
         return response
     
     async def getInvoiceByShipmentId(self, shipment_id=None, body="", request_headers:Dict={}):
-        """Retrieve the invoice corresponding to a specific shipment ID.
+        """Use this API to retrieve shipment invoice.
         :param shipment_id : ID of the shipment. : type string
         """
         payload = {}
@@ -284,7 +284,7 @@ class Order:
         return response
     
     async def trackShipment(self, shipment_id=None, body="", request_headers:Dict={}):
-        """Track Shipment by shipment id, for application based on application Id.
+        """Track Shipment by shipment id, for application based on application Id
         :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
         """
         payload = {}
@@ -328,7 +328,7 @@ class Order:
         return response
     
     async def getCustomerDetailsByShipmentId(self, order_id=None, shipment_id=None, body="", request_headers:Dict={}):
-        """Retrieve customer details such as mobile number using Shipment ID.
+        """Use this API to retrieve customer details such as mobileno using Shipment ID.
         :param order_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
         :param shipment_id : A unique number used for identifying and tracking your orders. : type string
         """
@@ -375,7 +375,7 @@ class Order:
         return response
     
     async def sendOtpToShipmentCustomer(self, order_id=None, shipment_id=None, body="", request_headers:Dict={}):
-        """Sends a one-time password (OTP) to the customer for shipment verification.
+        """Use this API to send OTP to the customer of the mapped Shipment.
         :param order_id : A unique number used for identifying and tracking your orders. : type string
         :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
         """
@@ -422,7 +422,7 @@ class Order:
         return response
     
     async def verifyOtpShipmentCustomer(self, order_id=None, shipment_id=None, body="", request_headers:Dict={}):
-        """Confirms the OTP sent to the shipment customer for verification.
+        """Use this API to verify OTP and create a session token with custom payload.
         :param order_id : A unique number used for identifying and tracking your orders. : type string
         :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
         """
@@ -473,7 +473,7 @@ class Order:
         return response
     
     async def getShipmentBagReasons(self, shipment_id=None, bag_id=None, body="", request_headers:Dict={}):
-        """Retrieves reasons that led to the cancellation for the status of shipment bags.
+        """Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
         :param shipment_id : ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
         :param bag_id : ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
         """
@@ -520,7 +520,7 @@ class Order:
         return response
     
     async def getShipmentReasons(self, shipment_id=None, body="", request_headers:Dict={}):
-        """Retrieve reasons explaining various shipment statuses.
+        """Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
         :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
         """
         payload = {}
@@ -564,7 +564,7 @@ class Order:
         return response
     
     async def updateShipmentStatus(self, shipment_id=None, body="", request_headers:Dict={}):
-        """Modifies the current status of a specific shipment using its shipment ID.
+        """Use this API to update the status of a shipment using its shipment ID.
         :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
         """
         payload = {}

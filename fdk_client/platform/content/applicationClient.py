@@ -14,7 +14,7 @@ class Content:
 
     
     async def getAnnouncementsList(self, page_no=None, page_size=None, request_headers:Dict={}):
-        """Retrieve a list of announcements.
+        """Announcements are useful to highlight a message or information on top of a webpage. Use this API to retrieve a list of announcements.	
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         """
@@ -59,7 +59,7 @@ class Content:
         return response
     
     async def createAnnouncement(self, body="", request_headers:Dict={}):
-        """Generate and add a new announcement.
+        """Announcements are useful to highlight a message or information on top of a webpage. Use this API to create an announcement.
         """
         payload = {}
         
@@ -102,7 +102,7 @@ class Content:
         return response
     
     async def getAnnouncementById(self, announcement_id=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific announcement.
+        """Use this API to retrieve an announcement and its details such as the target platform and pages on which it's applicable
         :param announcement_id : ID allotted to the announcement. : type string
         """
         payload = {}
@@ -144,7 +144,7 @@ class Content:
         return response
     
     async def updateAnnouncement(self, announcement_id=None, body="", request_headers:Dict={}):
-        """Modify the content and settings of a specific announcement.
+        """Use this API to edit an existing announcement and its details such as the target platform and pages on which it's applicable
         :param announcement_id : ID allotted to the announcement. : type string
         """
         payload = {}
@@ -190,7 +190,7 @@ class Content:
         return response
     
     async def updateAnnouncementSchedule(self, announcement_id=None, body="", request_headers:Dict={}):
-        """Modify the scheduling of a specific announcement.
+        """Use this API to edit the duration, i.e. start date-time and end date-time of an announcement. Moreover, you can enable/disable an announcement using this API.
         :param announcement_id : ID allotted to the announcement. : type string
         """
         payload = {}
@@ -236,7 +236,7 @@ class Content:
         return response
     
     async def deleteAnnouncement(self, announcement_id=None, request_headers:Dict={}):
-        """Remove a specific announcement.
+        """Use this API to delete an existing announcement.
         :param announcement_id : ID allotted to the announcement. : type string
         """
         payload = {}
@@ -278,7 +278,7 @@ class Content:
         return response
     
     async def createBlog(self, body="", request_headers:Dict={}):
-        """Generate and add a new blog.
+        """Use this API to create a blog.
         """
         payload = {}
         
@@ -321,7 +321,7 @@ class Content:
         return response
     
     async def getBlogs(self, page_no=None, page_size=None, request_headers:Dict={}):
-        """Retrieve a list of available blogs.
+        """Use this API to get a list of blogs along with their details, such as the title, reading time, publish status, feature image, tags, author, etc.
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         """
@@ -366,7 +366,7 @@ class Content:
         return response
     
     async def updateBlog(self, id=None, body="", request_headers:Dict={}):
-        """Modify the content and settings of a specific blog.
+        """Use this API to update the details of an existing blog which includes title, feature image, content, SEO details, expiry, etc.
         :param id : ID allotted to the blog. : type string
         """
         payload = {}
@@ -412,7 +412,7 @@ class Content:
         return response
     
     async def deleteBlog(self, id=None, request_headers:Dict={}):
-        """Remove a specific blog.
+        """Use this API to delete a blog.
         :param id : ID allotted to the blog. : type string
         """
         payload = {}
@@ -454,7 +454,7 @@ class Content:
         return response
     
     async def getComponentById(self, slug=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific component.
+        """Use this API to retrieve the components of a blog, such as title, slug, feature image, content, schedule, publish status, author, etc.
         :param slug : A short, human-readable, URL-friendly identifier of a blog page. You can get slug value of a blog from `getBlogs` API. : type string
         """
         payload = {}
@@ -496,7 +496,7 @@ class Content:
         return response
     
     async def addDataLoader(self, body="", request_headers:Dict={}):
-        """Create and add a new data loader.
+        """Use this API to add data loader. This includes the data loader name, operationId, service name and its type (url/function) with corresponding value.
         """
         payload = {}
         
@@ -539,7 +539,7 @@ class Content:
         return response
     
     async def getDataLoaders(self, request_headers:Dict={}):
-        """Retrieve a list of data loaders.
+        """Use this to get all data loaders of an application
         """
         payload = {}
         
@@ -578,7 +578,7 @@ class Content:
         return response
     
     async def deleteDataLoader(self, data_loader_id=None, request_headers:Dict={}):
-        """Remove a specific data loader.
+        """Use this API to delete data loader.
         :param data_loader_id : ID allotted to the data loader. : type string
         """
         payload = {}
@@ -620,7 +620,7 @@ class Content:
         return response
     
     async def editDataLoader(self, data_loader_id=None, body="", request_headers:Dict={}):
-        """Modify the settings of a specific data loader.
+        """Use this API to edit the details of an existing data loader by its ID.
         :param data_loader_id : ID allotted to the data loader. : type string
         """
         payload = {}
@@ -708,7 +708,7 @@ class Content:
         return response
     
     async def selectDataLoader(self, data_loader_id=None, request_headers:Dict={}):
-        """Choose and set a data loader for use.
+        """Use this API to select a data loader to be used in applications.
         :param data_loader_id : ID allotted to the data loader. : type string
         """
         payload = {}
@@ -750,7 +750,7 @@ class Content:
         return response
     
     async def resetDataLoader(self, service=None, operation_id=None, request_headers:Dict={}):
-        """Clear and reset data loader settings.
+        """Use this API to reselect a data loader.
         :param service : Name of service. : type string
         :param operation_id : Name of operation id of the service. : type string
         """
@@ -795,7 +795,7 @@ class Content:
         return response
     
     async def getFaqCategories(self, request_headers:Dict={}):
-        """Retrieve a list of FAQ categories.
+        """FAQs can be divided into categories. Use this API to get a list of FAQ categories.
         """
         payload = {}
         
@@ -834,7 +834,7 @@ class Content:
         return response
     
     async def getFaqCategoryBySlugOrId(self, id_or_slug=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific FAQ category.
+        """FAQs can be divided into categories. Use this API to get an FAQ categories using its slug or ID.
         :param id_or_slug : ID or the slug allotted to an FAQ category. Slug is a short, human-readable, URL-friendly identifier of an object. You can get slug value of an FAQ category from `getFaqCategories` API. : type string
         """
         payload = {}
@@ -876,7 +876,7 @@ class Content:
         return response
     
     async def createFaqCategory(self, body="", request_headers:Dict={}):
-        """Generate and add a new FAQ category.
+        """FAQs help users to solve an issue or know more about a process. FAQs can be categorized separately, for e.g. some questions can be related to payment, some could be related to purchase, shipping, navigating, etc. Use this API to create an FAQ category.
         """
         payload = {}
         
@@ -919,7 +919,7 @@ class Content:
         return response
     
     async def updateFaqCategory(self, id=None, body="", request_headers:Dict={}):
-        """Modify the content and settings of a specific FAQ category.
+        """Use this API to edit an existing FAQ category.
         :param id : ID allotted to an FAQ category. : type string
         """
         payload = {}
@@ -965,7 +965,7 @@ class Content:
         return response
     
     async def deleteFaqCategory(self, id=None, request_headers:Dict={}):
-        """Remove a specific FAQ category.
+        """Use this API to delete an FAQ category.
         :param id : ID allotted to an FAQ category. : type string
         """
         payload = {}
@@ -1007,7 +1007,7 @@ class Content:
         return response
     
     async def getFaqsByCategoryIdOrSlug(self, id_or_slug=None, request_headers:Dict={}):
-        """Retrieve a list of FAQs within a specific category.
+        """Use this API to retrieve all the commonly asked question and answers belonging to an FAQ category.
         :param id_or_slug : ID or the slug allotted to an FAQ category. Slug is a short, human-readable, URL-friendly identifier of an object. You can get slug value of an FAQ category from `getFaqCategories` API. : type string
         """
         payload = {}
@@ -1049,7 +1049,7 @@ class Content:
         return response
     
     async def addFaq(self, category_id=None, body="", request_headers:Dict={}):
-        """Create and add a new FAQ.
+        """FAQs help users to solve an issue or know more about a process. Use this API to create an FAQ for a given FAQ category.
         :param category_id : ID allotted to an FAQ category. : type string
         """
         payload = {}
@@ -1095,7 +1095,7 @@ class Content:
         return response
     
     async def updateFaq(self, category_id=None, faq_id=None, body="", request_headers:Dict={}):
-        """Modify the content and settings of a specific FAQ.
+        """Use this API to edit an existing FAQ.
         :param category_id : ID allotted to an FAQ category. : type string
         :param faq_id : ID allotted to an FAQ. : type string
         """
@@ -1144,7 +1144,7 @@ class Content:
         return response
     
     async def deleteFaq(self, category_id=None, faq_id=None, request_headers:Dict={}):
-        """Remove a specific FAQ.
+        """Use this API to delete an existing FAQ.
         :param category_id : ID allotted to an FAQ category. : type string
         :param faq_id : ID allotted to an FAQ. : type string
         """
@@ -1189,7 +1189,7 @@ class Content:
         return response
     
     async def getFaqByIdOrSlug(self, id_or_slug=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific FAQ.
+        """Use this API to retrieve a specific FAQ. You will get the question and answer of that FAQ.
         :param id_or_slug : ID or the slug allotted to an FAQ category. Slug is a short, human-readable, URL-friendly identifier of an object. You can get slug value of an FAQ category from `getFaqCategories` API. : type string
         """
         payload = {}
@@ -1231,7 +1231,7 @@ class Content:
         return response
     
     async def generateSEOTitle(self, type=None, body="", request_headers:Dict={}):
-        """Create an SEO-friendly title for content.
+        """Use this API to get GPT3 generated SEO meta tag title for content
         :param type : String representing the type of SEO content to be generated. Possible values are: title, description : type 
         """
         payload = {}
@@ -1277,7 +1277,7 @@ class Content:
         return response
     
     async def getLandingPages(self, page_no=None, page_size=None, request_headers:Dict={}):
-        """Retrieve a list of landing pages.
+        """Landing page is the first page that a prospect lands upon while visiting a website. Use this API to fetch a list of landing pages.
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         """
@@ -1322,7 +1322,7 @@ class Content:
         return response
     
     async def createLandingPage(self, body="", request_headers:Dict={}):
-        """Generate and add a new landing page.
+        """Landing page is the first page that a prospect lands upon while visiting a website. Use this API to create a landing page.
         """
         payload = {}
         
@@ -1365,7 +1365,7 @@ class Content:
         return response
     
     async def updateLandingPage(self, id=None, body="", request_headers:Dict={}):
-        """Modify the content and settings of a specific landing page.
+        """Use this API to edit the details of an existing landing page.
         :param id : ID allotted to a landing page. : type string
         """
         payload = {}
@@ -1411,7 +1411,7 @@ class Content:
         return response
     
     async def deleteLandingPage(self, id=None, request_headers:Dict={}):
-        """Remove a specific landing page.
+        """Use this API to delete an existing landing page.
         :param id : ID allotted to a landing page. : type string
         """
         payload = {}
@@ -1453,7 +1453,7 @@ class Content:
         return response
     
     async def getLegalInformation(self, request_headers:Dict={}):
-        """Retrieve legal information and terms.
+        """Use this API to get the legal information of an application, which includes Policy, Terms and Conditions, Shipping Policy and FAQ regarding the application.
         """
         payload = {}
         
@@ -1492,7 +1492,7 @@ class Content:
         return response
     
     async def updateLegalInformation(self, body="", request_headers:Dict={}):
-        """Modify legal information and terms.
+        """Use this API to edit, update and save the legal information of an application, which includes Policy, Terms and Conditions, Shipping Policy and FAQ regarding the application.
         """
         payload = {}
         
@@ -1535,7 +1535,7 @@ class Content:
         return response
     
     async def getNavigations(self, device_platform=None, page_no=None, page_size=None, request_headers:Dict={}):
-        """Retrieve a list of navigational elements.
+        """Use this API to fetch the navigations details which includes the items of the navigation pane. It also shows the orientation, links, sub-navigations, etc.
         :param device_platform : Filter navigations by platform. Acceptable values are: web, android, ios, all : type string
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
@@ -1583,7 +1583,7 @@ class Content:
         return response
     
     async def createNavigation(self, body="", request_headers:Dict={}):
-        """Generate and add a new navigation element.
+        """Navigation is the arrangement of navigational items to ease the accessibility of resources for users on a website. Use this API to create a navigation.
         """
         payload = {}
         
@@ -1626,7 +1626,7 @@ class Content:
         return response
     
     async def getDefaultNavigations(self, request_headers:Dict={}):
-        """Retrieve default navigation elements.
+        """On any website (application), there are navigations that are present by default. Use this API to retrieve those default navigations.
         """
         payload = {}
         
@@ -1665,7 +1665,7 @@ class Content:
         return response
     
     async def getNavigationBySlug(self, slug=None, device_platform=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific navigation element.
+        """Use this API to retrieve a navigation by its slug.
         :param slug : A short, human-readable, URL-friendly identifier of a navigation. You can get slug value of a navigation from `getNavigations` API. : type string
         :param device_platform : Filter navigations by platform. Acceptable values are: web, android, ios, all : type string
         """
@@ -1710,7 +1710,7 @@ class Content:
         return response
     
     async def updateNavigation(self, id=None, body="", request_headers:Dict={}):
-        """Modify the content and settings of a specific navigation element.
+        """Use this API to edit the details of an existing navigation.
         :param id : ID allotted to the navigation. : type string
         """
         payload = {}
@@ -1756,7 +1756,7 @@ class Content:
         return response
     
     async def deleteNavigation(self, id=None, request_headers:Dict={}):
-        """Remove a specific navigation element.
+        """Use this API to delete an existing navigation.
         :param id : ID allotted to the navigation. : type string
         """
         payload = {}
@@ -1798,7 +1798,7 @@ class Content:
         return response
     
     async def getPageMeta(self, request_headers:Dict={}):
-        """Retrieve metadata for a specific page.
+        """Use this API to get the meta of custom pages (blog, page) and default system pages (e.g. home/brand/category/collection).
         """
         payload = {}
         
@@ -1837,7 +1837,7 @@ class Content:
         return response
     
     async def getPageSpec(self, request_headers:Dict={}):
-        """Retrieve specifications and details for a specific page.
+        """Use this API to get the specifications of a page, such as page type, display name, params and query.
         """
         payload = {}
         
@@ -1876,7 +1876,7 @@ class Content:
         return response
     
     async def createPagePreview(self, body="", request_headers:Dict={}):
-        """Generate and add a new page preview.
+        """Use this API to create a page preview to check the appearance of a custom page.
         """
         payload = {}
         
@@ -1919,7 +1919,7 @@ class Content:
         return response
     
     async def updatePagePreview(self, slug=None, body="", request_headers:Dict={}):
-        """Modify the content and settings of a specific page preview.
+        """Use this API to change the publish status of an existing page. Allows you to publish and unpublish the page.
         :param slug : A short, human-readable, URL-friendly identifier of a page. You can get slug value of a page from `getPages` API. : type string
         """
         payload = {}
@@ -1965,7 +1965,7 @@ class Content:
         return response
     
     async def deletePage(self, id=None, request_headers:Dict={}):
-        """Remove a page from the platform.
+        """Use this API to delete an existing page.
         :param id : ID allotted to the page. : type string
         """
         payload = {}
@@ -2007,7 +2007,7 @@ class Content:
         return response
     
     async def addPathRedirectionRules(self, body="", request_headers:Dict={}):
-        """Create and add rules for path redirection.
+        """Use this API to add redirection rules
         """
         payload = {}
         
@@ -2050,7 +2050,7 @@ class Content:
         return response
     
     async def getPathRedirectionRules(self, page_size=None, page_no=None, request_headers:Dict={}):
-        """Retrieve a list of path redirection rules.
+        """Use this API to get path based redirection rules.
         :param page_size : The number of items to retrieve in each page. Default value is 5.  : type integer
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         """
@@ -2095,7 +2095,7 @@ class Content:
         return response
     
     async def getPathRedirectionRule(self, path_id=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific path redirection rule.
+        """Use this API to get path based redirection rule.
         :param path_id : ID allotted to the path redirection rule. : type string
         """
         payload = {}
@@ -2137,7 +2137,7 @@ class Content:
         return response
     
     async def updatePathRedirectionRules(self, path_id=None, body="", request_headers:Dict={}):
-        """Modify settings for path redirection rules.
+        """Use this API to update redirection rules
         :param path_id : ID allotted to the path redirection rule. : type string
         """
         payload = {}
@@ -2183,7 +2183,7 @@ class Content:
         return response
     
     async def deletePathRedirectionRules(self, path_id=None, request_headers:Dict={}):
-        """Remove specific path redirection rules.
+        """Use this API to delete redirection rules
         :param path_id : ID allotted to the path redirection rule. : type string
         """
         payload = {}
@@ -2216,7 +2216,7 @@ class Content:
         return response
     
     async def getSEOConfiguration(self, request_headers:Dict={}):
-        """Retrieve configuration settings for SEO.
+        """Use this API to know how the SEO is configured in the application. This includes the sitemap, robot.txt, custom meta tags, etc.
         """
         payload = {}
         
@@ -2255,7 +2255,7 @@ class Content:
         return response
     
     async def updateSEOConfiguration(self, body="", request_headers:Dict={}):
-        """Modify configuration settings for SEO.
+        """Use this API to edit the SEO details of an application. This includes the sitemap, robot.txt, custom meta tags, etc.
         """
         payload = {}
         
@@ -2788,7 +2788,7 @@ class Content:
         return response
     
     async def getSupportInformation(self, request_headers:Dict={}):
-        """Retrieve information related to customer support.
+        """Use this API to get the contact details for customer support, including emails and phone numbers.
         """
         payload = {}
         
@@ -2827,7 +2827,7 @@ class Content:
         return response
     
     async def updateSupportInformation(self, body="", request_headers:Dict={}):
-        """Modify information related to customer support.
+        """Use this API to edit the existing contact details for customer support, including emails and phone numbers.
         """
         payload = {}
         
@@ -2870,7 +2870,7 @@ class Content:
         return response
     
     async def updateInjectableTag(self, body="", request_headers:Dict={}):
-        """Modify settings for an injectable tag.
+        """Use this API to edit and override all existing tags. All existing tags will be replaced by the new tags provided in body. 
         """
         payload = {}
         
@@ -2913,7 +2913,7 @@ class Content:
         return response
     
     async def getInjectableTags(self, all=None, request_headers:Dict={}):
-        """Retrieve a list of injectable tags.
+        """Use this API to get the CSS and JS injected in the application in the form of tags.
         :param all : Get all tags irrespective of the creator of tags : type boolean
         """
         payload = {}
@@ -2955,7 +2955,7 @@ class Content:
         return response
     
     async def addInjectableTag(self, body="", request_headers:Dict={}):
-        """Create and add a new injectable tag.
+        """CSS and JS can be injected in the application (website) with the help of tags. Use this API to create such tags by entering the tag name, tag type (css/js), url and position of the tag.
         """
         payload = {}
         
@@ -2998,7 +2998,7 @@ class Content:
         return response
     
     async def removeInjectableTag(self, body="", request_headers:Dict={}):
-        """Delete a specific injectable tag.
+        """Use this API to delete an existing tag.
         """
         payload = {}
         
@@ -3041,7 +3041,7 @@ class Content:
         return response
     
     async def editInjectableTag(self, tag_id=None, body="", request_headers:Dict={}):
-        """Modify settings for an injectable tag.
+        """Use this API to edit the details of an existing tag by its ID.
         :param tag_id : ID allotted to the tag. : type string
         """
         payload = {}
@@ -3087,7 +3087,7 @@ class Content:
         return response
     
     async def getBlogBySlug(self, slug=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific blog using its slug.
+        """Use this API to retrieve the components of a blog, such as title, slug, feature image, content, schedule, publish status, author, etc.
         :param slug : A short, human-readable, URL-friendly identifier of a blog page. You can get slug value of a blog from `getBlogs` API. : type string
         """
         payload = {}
@@ -3129,7 +3129,7 @@ class Content:
         return response
     
     async def createPage(self, body="", request_headers:Dict={}):
-        """Generate and add a new page to the platform.
+        """Use this API to create a custom page using a title, seo, publish status, feature image, tags, meta, etc.
         """
         payload = {}
         
@@ -3172,7 +3172,7 @@ class Content:
         return response
     
     async def getPages(self, page_no=None, page_size=None, request_headers:Dict={}):
-        """Retrieve a list of available pages.
+        """Use this API to retrieve a list of pages.
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         """
@@ -3217,7 +3217,7 @@ class Content:
         return response
     
     async def updatePage(self, id=None, body="", request_headers:Dict={}):
-        """Modify and update the content of a page.
+        """Use this API to edit the details of an existing page, such as its title, seo, publish status, feature image, tags, schedule, etc.
         :param id : ID allotted to the page. : type string
         """
         payload = {}
@@ -3263,7 +3263,7 @@ class Content:
         return response
     
     async def getPageBySlug(self, slug=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific page using its slug.
+        """Use this API to retrieve the components of a page, such as its title, seo, publish status, feature image, tags, schedule, etc.
         :param slug : A short, human-readable, URL-friendly identifier of a page. You can get slug value of a page from `getPages` API. : type string
         """
         payload = {}

@@ -14,7 +14,7 @@ Get started with the python Development SDK for Fynd Platform
 ### Usage
 
 ```bash
-pip install "git+https://github.com/gofynd/fdk-client-python.git@1.4.2-beta.5#egg=fdk_client"
+pip install "git+https://github.com/gofynd/fdk-client-python.git@1.4.2-beta.1#egg=fdk_client"
 ```
 
 Using this method, you can `import` fdk-client-python like so:

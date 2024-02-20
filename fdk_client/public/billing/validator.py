@@ -12,6 +12,9 @@ from ..PublicModel import BaseSchema
     
     
         
+    
+    
+        
 
 class BillingValidator:
     
@@ -20,6 +23,13 @@ class BillingValidator:
         
         
         platform_type = fields.Str(required=False)
+         
+        
+    
+    class getPlanDetails(BaseSchema):
+        
+        
+        planId = fields.Str(required=False)
          
         
     
