@@ -13,7 +13,7 @@ class Billing:
 
     
     async def checkCouponValidity(self, plan=None, coupon_code=None, request_headers:Dict={}):
-        """Check coupon validity.
+        """Checks whether a coupon code is valid for discounts while billing.
         :param plan : ID of the plan. : type string
         :param coupon_code : Coupon code. : type string
         """
@@ -58,7 +58,7 @@ class Billing:
         return response
     
     async def createSubscriptionCharge(self, extension_id=None, body="", request_headers:Dict={}):
-        """Register subscription charge for a seller of your extension.
+        """Register a subscription charge for a seller using your extension.
         :param extension_id : Extension _id : type string
         """
         payload = {}
@@ -104,7 +104,7 @@ class Billing:
         return response
     
     async def getSubscriptionCharge(self, extension_id=None, subscription_id=None, request_headers:Dict={}):
-        """Get created subscription charge details
+        """Retrieve detailed information about subscription charges using this API.
         :param extension_id : Extension _id : type string
         :param subscription_id : Subscription charge _id : type string
         """
@@ -149,7 +149,7 @@ class Billing:
         return response
     
     async def cancelSubscriptionCharge(self, extension_id=None, subscription_id=None, request_headers:Dict={}):
-        """Cancel subscription and attached charges.
+        """Cancel an ongoing subscription charge for a customer.
         :param extension_id : Extension _id : type string
         :param subscription_id : Subscription charge _id : type string
         """
@@ -194,7 +194,7 @@ class Billing:
         return response
     
     async def createOneTimeCharge(self, extension_id=None, body="", request_headers:Dict={}):
-        """Register one time subscription charge for a seller of your extension.
+        """Generate a one-time charge for specific services or products.
         :param extension_id : Extension _id : type string
         """
         payload = {}
@@ -240,7 +240,7 @@ class Billing:
         return response
     
     async def getChargeDetails(self, extension_id=None, charge_id=None, request_headers:Dict={}):
-        """Get created subscription charge details
+        """Retrieve comprehensive details about a specific billing charge.
         :param extension_id : Extension _id : type string
         :param charge_id : Standalone charge _id : type string
         """
@@ -285,7 +285,7 @@ class Billing:
         return response
     
     async def getInvoices(self, request_headers:Dict={}):
-        """Get invoices.
+        """Retrieve invoices for billing and payment tracking.
         """
         payload = {}
         
@@ -324,7 +324,7 @@ class Billing:
         return response
     
     async def getInvoiceById(self, invoice_id=None, request_headers:Dict={}):
-        """Get invoice by id.
+        """Retrieve a particular invoice's details by providing its unique ID.
         :param invoice_id : Invoice id : type string
         """
         payload = {}
@@ -366,7 +366,7 @@ class Billing:
         return response
     
     async def getCustomerDetail(self, request_headers:Dict={}):
-        """Get subscription customer detail.
+        """Obtain customer-related billing information.
         """
         payload = {}
         
@@ -405,7 +405,7 @@ class Billing:
         return response
     
     async def upsertCustomerDetail(self, body="", request_headers:Dict={}):
-        """Upsert subscription customer detail.
+        """Allows you to modify or insert customer information in the billing system.
         """
         payload = {}
         
@@ -448,8 +448,7 @@ class Billing:
         return response
     
     async def getSubscription(self, request_headers:Dict={}):
-        """If subscription is active then it will return is_enabled true and return subscription object. If subscription is not active then is_enabled false and message.
-
+        """Retrieve details of a customer's subscription information.
         """
         payload = {}
         
@@ -488,7 +487,7 @@ class Billing:
         return response
     
     async def getFeatureLimitConfig(self, product_suite=None, type=None, request_headers:Dict={}):
-        """Get subscription subscription limits.
+        """Retrieve configuration settings for feature limits in subscription plans.
         :param product_suite :  : type string
         :param type :  : type string
         """
@@ -533,7 +532,7 @@ class Billing:
         return response
     
     async def activateSubscriptionPlan(self, body="", request_headers:Dict={}):
-        """It will activate subscription plan for customer
+        """Activate a specific subscription plan for a customer.
         """
         payload = {}
         
@@ -576,7 +575,7 @@ class Billing:
         return response
     
     async def cancelSubscriptionPlan(self, body="", request_headers:Dict={}):
-        """It will cancel current active subscription.
+        """Cancel an active subscription plan for a customer
         """
         payload = {}
         
@@ -619,8 +618,7 @@ class Billing:
         return response
     
     async def getEnterprisePlans(self, request_headers:Dict={}):
-        """Get Enterprise Plans.
-
+        """Retrieve available enterprise-level subscription plans.
         """
         payload = {}
         
@@ -650,7 +648,7 @@ class Billing:
         return response
     
     async def planStatusUpdate(self, body="", request_headers:Dict={}):
-        """It will update the status of the plan
+        """Modify the status of a subscription plan.
         """
         payload = {}
         
@@ -693,7 +691,7 @@ class Billing:
         return response
     
     async def subscripePlan(self, body="", request_headers:Dict={}):
-        """It will subscribe a plan.
+        """Subscribe to a specific billing plan.
         """
         payload = {}
         
@@ -785,352 +783,6 @@ class Billing:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getentityDetail")
-                print(e)
-
-        return response
-    
-    async def paymentOptions(self, code=None, request_headers:Dict={}):
-        """API to get payment details of requested payment options.
-        :param code : Payment options unique code. : type string
-        """
-        payload = {}
-        
-        if code is not None:
-            payload["code"] = code
-
-        # Parameter validation
-        schema = BillingValidator.paymentOptions()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/payment-options", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}},{"in":"query","name":"code","description":"Payment options unique code.","required":true,"schema":{"type":"string","example":"razorPay"}}],"optional":[],"query":[{"in":"query","name":"code","description":"Payment options unique code.","required":true,"schema":{"type":"string","example":"razorPay"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}]}""", code=code)
-        query_string = await create_query_string(code=code)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/payment-options", code=code), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import PaymentOptions
-            schema = PaymentOptions()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for paymentOptions")
-                print(e)
-
-        return response
-    
-    async def verifyPayment(self, body="", request_headers:Dict={}):
-        """API to verify subscription payment.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = BillingValidator.verifyPayment()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import VerifyPaymentReq
-        schema = VerifyPaymentReq()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/verify-payment", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}]}""", )
-        query_string = await create_query_string()
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/verify-payment", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import VerifyPaymentRes
-            schema = VerifyPaymentRes()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for verifyPayment")
-                print(e)
-
-        return response
-    
-    async def globalSettings(self, page_no=None, page_size=None, query=None, request_headers:Dict={}):
-        """API to get global settings details.
-        :param page_no : number of pages needed : type integer
-        :param page_size : number of items to be there in page : type integer
-        :param query : field which will be used in db query : type object
-        """
-        payload = {}
-        
-        if page_no is not None:
-            payload["page_no"] = page_no
-        if page_size is not None:
-            payload["page_size"] = page_size
-        if query is not None:
-            payload["query"] = query
-
-        # Parameter validation
-        schema = BillingValidator.globalSettings()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/global-settings", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}},{"in":"query","name":"page_no","description":"number of pages needed","required":true,"schema":{"type":"integer","example":1}},{"in":"query","name":"page_size","description":"number of items to be there in page","required":true,"schema":{"type":"integer","example":10}},{"in":"query","name":"query","description":"field which will be used in db query","required":true,"schema":{"type":"object"}}],"optional":[],"query":[{"in":"query","name":"page_no","description":"number of pages needed","required":true,"schema":{"type":"integer","example":1}},{"in":"query","name":"page_size","description":"number of items to be there in page","required":true,"schema":{"type":"integer","example":10}},{"in":"query","name":"query","description":"field which will be used in db query","required":true,"schema":{"type":"object"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}]}""", page_no=page_no, page_size=page_size, query=query)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, query=query)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/global-settings", page_no=page_no, page_size=page_size, query=query), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import GlobalSettings
-            schema = GlobalSettings()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for globalSettings")
-                print(e)
-
-        return response
-    
-    async def subscriptionMethods(self, unique_external_id=None, request_headers:Dict={}):
-        """API to get subscription methods.
-        :param unique_external_id : unique id for external company : type object
-        """
-        payload = {}
-        
-        if unique_external_id is not None:
-            payload["unique_external_id"] = unique_external_id
-
-        # Parameter validation
-        schema = BillingValidator.subscriptionMethods()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/methods", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}},{"in":"query","name":"unique_external_id","description":"unique id for external company","required":true,"schema":{"type":"object"}}],"optional":[],"query":[{"in":"query","name":"unique_external_id","description":"unique id for external company","required":true,"schema":{"type":"object"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}]}""", unique_external_id=unique_external_id)
-        query_string = await create_query_string(unique_external_id=unique_external_id)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/methods", unique_external_id=unique_external_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SubscriptionMethods
-            schema = SubscriptionMethods()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for subscriptionMethods")
-                print(e)
-
-        return response
-    
-    async def subscriptionConfigs(self, request_headers:Dict={}):
-        """API to get subscription config details.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = BillingValidator.subscriptionConfigs()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/configs", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}]}""", )
-        query_string = await create_query_string()
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/configs", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ConfigRes
-            schema = ConfigRes()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for subscriptionConfigs")
-                print(e)
-
-        return response
-    
-    async def subscriptionPlanChange(self, product_suite=None, unique_id=None, platform=None, request_headers:Dict={}):
-        """API to get plan change details of subscription.
-        :param product_suite :  : type string
-        :param unique_id :  : type integer
-        :param platform :  : type string
-        """
-        payload = {}
-        
-        if product_suite is not None:
-            payload["product_suite"] = product_suite
-        if unique_id is not None:
-            payload["unique_id"] = unique_id
-        if platform is not None:
-            payload["platform"] = platform
-
-        # Parameter validation
-        schema = BillingValidator.subscriptionPlanChange()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/plan-change", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}],"optional":[{"in":"query","name":"product_suite","schema":{"type":"string"}},{"in":"query","name":"unique_id","schema":{"type":"integer"}},{"in":"query","name":"platform","schema":{"type":"string"}}],"query":[{"in":"query","name":"product_suite","schema":{"type":"string"}},{"in":"query","name":"unique_id","schema":{"type":"integer"}},{"in":"query","name":"platform","schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}]}""", product_suite=product_suite, unique_id=unique_id, platform=platform)
-        query_string = await create_query_string(product_suite=product_suite, unique_id=unique_id, platform=platform)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/plan-change", product_suite=product_suite, unique_id=unique_id, platform=platform), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import PlanChangeDetails
-            schema = PlanChangeDetails()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for subscriptionPlanChange")
-                print(e)
-
-        return response
-    
-    async def getPaymentTransaction(self, transactionId=None, request_headers:Dict={}):
-        """API to get payment transaction details.
-        :param transactionId : Payment Transaction unique id. : type string
-        """
-        payload = {}
-        
-        if transactionId is not None:
-            payload["transactionId"] = transactionId
-
-        # Parameter validation
-        schema = BillingValidator.getPaymentTransaction()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/payment/transaction/{transactionId}", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}},{"in":"path","name":"transactionId","description":"Payment Transaction unique id.","required":true,"schema":{"type":"string","example":"1"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}},{"in":"path","name":"transactionId","description":"Payment Transaction unique id.","required":true,"schema":{"type":"string","example":"1"}}]}""", transactionId=transactionId)
-        query_string = await create_query_string(transactionId=transactionId)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/payment/transaction/{transactionId}", transactionId=transactionId), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import PaymentTransactionDetails
-            schema = PaymentTransactionDetails()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getPaymentTransaction")
-                print(e)
-
-        return response
-    
-    async def getPaymentOptions(self, transaction_id=None, request_headers:Dict={}):
-        """API to get payment options.
-        :param transaction_id : ID of the payment transaction. : type string
-        """
-        payload = {}
-        
-        if transaction_id is not None:
-            payload["transaction_id"] = transaction_id
-
-        # Parameter validation
-        schema = BillingValidator.getPaymentOptions()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/payment/options", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}},{"in":"query","name":"transaction_id","description":"ID of the payment transaction.","required":true,"schema":{"type":"string","example":"61a5d6ea3e8c230f3aa2c507"}}],"optional":[],"query":[{"in":"query","name":"transaction_id","description":"ID of the payment transaction.","required":true,"schema":{"type":"string","example":"61a5d6ea3e8c230f3aa2c507"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}]}""", transaction_id=transaction_id)
-        query_string = await create_query_string(transaction_id=transaction_id)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/payment/options", transaction_id=transaction_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import GetPaymentOptions
-            schema = GetPaymentOptions()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getPaymentOptions")
                 print(e)
 
         return response

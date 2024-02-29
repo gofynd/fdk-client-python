@@ -82,40 +82,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
-        
-    
-    
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-    
-    
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
 
 
 
@@ -281,82 +247,6 @@ class BillingValidator:
         component = fields.Str(required=False)
         
         component_name = fields.Str(required=False)
-         
-        
-    
-    class paymentOptions(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        code = fields.Str(required=False)
-         
-        
-    
-    class verifyPayment(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-         
-        
-    
-    class globalSettings(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        query = fields.Dict(required=False)
-         
-        
-    
-    class subscriptionMethods(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        unique_external_id = fields.Dict(required=False)
-         
-        
-    
-    class subscriptionConfigs(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-         
-        
-    
-    class subscriptionPlanChange(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        product_suite = fields.Str(required=False)
-        
-        unique_id = fields.Int(required=False)
-        
-        platform = fields.Str(required=False)
-         
-        
-    
-    class getPaymentTransaction(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        transactionId = fields.Str(required=False)
-         
-        
-    
-    class getPaymentOptions(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        transaction_id = fields.Str(required=False)
          
         
     

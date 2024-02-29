@@ -14,7 +14,7 @@ class Configuration:
 
     
     async def getBuildConfig(self, platform_type=None, request_headers:Dict={}):
-        """Fetch latest build configuration, such as app name, landing page image, splash image used in a mobile build.
+        """Retrieve latest build configuration, such as app name, landing page image, splash image used in a mobile build.
         :param platform_type : The device platform for which the mobile app is built, e.g. android, ios. : type string
         """
         payload = {}
@@ -102,7 +102,7 @@ class Configuration:
         return response
     
     async def getPreviousVersions(self, platform_type=None, request_headers:Dict={}):
-        """Fetch version details of the app, this includes the build status, build date, version name, latest version, and a lot more.
+        """Retrieve version details of the app, this includes the build status, build date, version name, latest version, and a lot more.
         :param platform_type : The device platform for which the mobile app is built, e.g. android, ios. : type string
         """
         payload = {}
@@ -433,7 +433,7 @@ class Configuration:
         return response
     
     async def getAppApiTokens(self, request_headers:Dict={}):
-        """Use this API to retrieve the tokens used for integrating Firebase, MoEngage, Segment, GTM, Freshchat, Safetynet, Google Map, Google, and Facebook auth. **Note** - Token values are encrypted with AES encryption using a secret key.
+        """Retrieve the tokens used for integrating Firebase, MoEngage, Segment, GTM, Freshchat, Safetynet, Google Map, Google, and Facebook auth. 
         """
         payload = {}
         
@@ -472,7 +472,7 @@ class Configuration:
         return response
     
     async def updateAppApiTokens(self, body="", request_headers:Dict={}):
-        """Use this API to add or edit the tokens used for integrating Firebase, MoEngage, Segment, GTM, Freshchat, Safetynet, Google Map, Google and Facebook auth.
+        """Add or edit the tokens used for integrating Firebase, MoEngage, Segment, GTM, Freshchat, Safetynet, Google Map, Google and Facebook auth.
         """
         payload = {}
         
@@ -515,7 +515,7 @@ class Configuration:
         return response
     
     async def getAppCompanies(self, uid=None, page_no=None, page_size=None, request_headers:Dict={}):
-        """Fetch info of all the companies (e.g. name, uid, and company type) whose inventory is fetched into the current sales channel application
+        """Retrieve info of all the companies (e.g. name, uid, and company type) whose inventory is fetched into the current sales channel application
         :param uid : UID of companies to be fetched : type integer
         :param page_no : The current page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
@@ -563,7 +563,7 @@ class Configuration:
         return response
     
     async def getAppStores(self, page_no=None, page_size=None, request_headers:Dict={}):
-        """Fetch info of all the companies (e.g. uid, name, display name, store type, store code and company id) whose inventory is fetched into the current sales channel application
+        """Retrieve information of all the companies (e.g. uid, name, display name, store type, store code and company id) whose inventory is fetched into the current sales channel application
         :param page_no : The current page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         """
@@ -608,7 +608,7 @@ class Configuration:
         return response
     
     async def getInventoryConfig(self, request_headers:Dict={}):
-        """Use this API to fetch configuration details of authentication, inventory, article assignment rules, reward points, cart, payment, order, logistics, etc.
+        """Retrieve configuration details of authentication, inventory, article assignment rules, reward points, cart, payment, order, logistics, etc.
         """
         payload = {}
         
@@ -733,7 +733,7 @@ class Configuration:
         return response
     
     async def getAppCurrencyConfig(self, request_headers:Dict={}):
-        """Get a list of currencies supported in the current sales channel. Moreover, get the cuurency that is set as the default one in the application.
+        """Retrieve a list of currencies supported in the current sales channel. Moreover, get the cuurency that is set as the default one in the application.
         """
         payload = {}
         
@@ -772,7 +772,7 @@ class Configuration:
         return response
     
     async def updateAppCurrencyConfig(self, body="", request_headers:Dict={}):
-        """Use this API to add and edit the currencies supported in the application. Initially, INR will be enabled by default.
+        """Modify currency configuration settings for the application. Add and edit the currencies supported in the application. Initially, INR will be enabled by default.
         """
         payload = {}
         
@@ -815,7 +815,7 @@ class Configuration:
         return response
     
     async def getAppSupportedCurrency(self, request_headers:Dict={}):
-        """Use this API to get a list of currencies allowed in the current application. Moreover, get the name, code, symbol, and the decimal digits of the currencies.
+        """Retrieve a list of supported currencies for the application. A list of currencies allowed in the current application. Moreover, get the name, code, symbol, and the decimal digits of the currencies.
         """
         payload = {}
         
@@ -854,7 +854,7 @@ class Configuration:
         return response
     
     async def getOrderingStoresByFilter(self, page_no=None, page_size=None, body="", request_headers:Dict={}):
-        """Use this API to use filters and retrieve the details of the deployment stores (the selling locations where the application will be utilised for placing orders).
+        """Retrieve ordering stores based on specified filters. Use filters and retrieve the details of the deployment stores (the selling locations where the application will be utilised for placing orders).
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         """
@@ -903,7 +903,7 @@ class Configuration:
         return response
     
     async def updateOrderingStoreConfig(self, body="", request_headers:Dict={}):
-        """Use this API to edit the details of the deployment stores (the selling locations where the application will be utilised for placing orders)
+        """Modify configuration settings for ordering stores. Edit the details of the deployment stores (the selling locations where the application will be utilised for placing orders)
         """
         payload = {}
         
@@ -946,7 +946,7 @@ class Configuration:
         return response
     
     async def getOrderingStoreConfig(self, request_headers:Dict={}):
-        """Fetch the details of the deployment stores (the selling locations where the application will be utilised for placing orders).
+        """Retrieve configuration settings for ordering stores. Retrieve the details of the deployment stores (the selling locations where the application will be utilised for placing orders).
         """
         payload = {}
         
@@ -985,7 +985,7 @@ class Configuration:
         return response
     
     async def getStaffOrderingStores(self, page_no=None, page_size=None, q=None, request_headers:Dict={}):
-        """Use this API to retrieve the details of all stores access given to the staff member (the selling locations where the application will be utilized for placing orders).
+        """Retrieve ordering stores accessible to staff members. Retrieve the details of all stores access given to the staff member (the selling locations where the application will be utilized for placing orders).
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         :param q : Store code or name of the ordering store. : type string
@@ -1115,7 +1115,7 @@ class Configuration:
         return response
     
     async def getDomains(self, request_headers:Dict={}):
-        """Get list of domains
+        """Get list of domains. 
         """
         payload = {}
         
@@ -1154,7 +1154,7 @@ class Configuration:
         return response
     
     async def addDomain(self, body="", request_headers:Dict={}):
-        """Add a new domain to current sales channel, including pre-defined domain (free domain) or custom domain (owned by the brand)
+        """Add a new domain. Add a new domain to current sales channel, including pre-defined domain (free domain) or custom domain (owned by the brand)
         """
         payload = {}
         
@@ -1197,7 +1197,7 @@ class Configuration:
         return response
     
     async def removeDomainById(self, id=None, request_headers:Dict={}):
-        """Delete a domain (secondary or shortlink domain) added to a sales channel. It will disable user's access to website, shared links, and other features associated with this domain.
+        """Delete a specific domain from the application. Delete a domain (secondary or shortlink domain) added to a sales channel. It will disable user's access to website, shared links, and other features associated with this domain.
         :param id : The unique identifier (24-digit Mongo Object ID) of the domain : type string
         """
         payload = {}
@@ -1239,7 +1239,7 @@ class Configuration:
         return response
     
     async def changeDomainType(self, body="", request_headers:Dict={}):
-        """Primary domain is used as the URL of your website. Short link domain is comparatively smaller and used while generating short links. Use this API to change a domain to either Primary or a Shortlink domain.
+        """Modify the type of a specific domain. Primary domain is used as the URL of your website. Short link domain is comparatively smaller and used while generating short links.
         """
         payload = {}
         
@@ -1282,7 +1282,7 @@ class Configuration:
         return response
     
     async def getDomainStatus(self, body="", request_headers:Dict={}):
-        """Shows if the A records and TXT records of the domain correctly points to appropriate IP on Fynd Servers.
+        """Retrieve the status of a specific domain. Shows if the A records and TXT records of the domain correctly points to appropriate IP on Fynd Servers.
         """
         payload = {}
         
@@ -1325,7 +1325,7 @@ class Configuration:
         return response
     
     async def getApplicationById(self, request_headers:Dict={}):
-        """Use application ID to get the current sales channel details which includes channel name, description, banner, logo, favicon, domain details, token, etc.
+        """Retrieve detailed information about a specific application. Use application ID to get the current sales channel details which includes channel name, description, banner, logo, favicon, domain details, token, etc.
         """
         payload = {}
         
@@ -1353,8 +1353,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import Application
-            schema = Application()
+            from .models import ApplicationById
+            schema = ApplicationById()
             try:
                 schema.load(response["json"])
             except Exception as e:

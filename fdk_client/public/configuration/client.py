@@ -25,7 +25,7 @@ class Configuration:
         self._urls.update(urls)
     
     async def searchApplication(self, authorization=None, query=None, body="", request_headers:Dict={}):
-        """Provide application name or domain url
+        """Provide application name or domain url.
         :param authorization :  : type string
         :param query : Provide application name : type string
         """

@@ -335,7 +335,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
     
     
         
@@ -1065,8 +1064,6 @@ class CommunicationValidator:
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
-        
-        ci = fields.Boolean(required=False)
          
         
     

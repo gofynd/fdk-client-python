@@ -7,25 +7,37 @@
 ## User Methods
 Authentication Service
 
-Default
+User Management
 * [getCustomers](#getcustomers)
 * [searchUsers](#searchusers)
 * [createUser](#createuser)
 * [blockOrUnblockUsers](#blockorunblockusers)
 * [unDeleteUser](#undeleteuser)
 * [updateUser](#updateuser)
+* [archiveUser](#archiveuser)
+
+
+Session Management
 * [createUserSession](#createusersession)
 * [deleteSession](#deletesession)
 * [getActiveSessions](#getactivesessions)
 * [deleteActiveSessions](#deleteactivesessions)
-* [archiveUser](#archiveuser)
+
+
+Website Configuration Management
 * [getPlatformConfig](#getplatformconfig)
 * [updatePlatformConfig](#updateplatformconfig)
+
+
+User Group Management
 * [createUserGroup](#createusergroup)
 * [getUserGroups](#getusergroups)
 * [updateUserGroup](#updateusergroup)
 * [getUserGroupById](#getusergroupbyid)
 * [updateUserGroupPartially](#updateusergrouppartially)
+
+
+User Attributes Definition
 * [createUserAttributeDefinition](#createuserattributedefinition)
 * [getUserAttributeDefinitions](#getuserattributedefinitions)
 * [updateUserAttributeDefinition](#updateuserattributedefinition)
@@ -45,7 +57,7 @@ Default
 
 
 ### getCustomers
-Get a list of customers
+Get customers.
 
 
 
@@ -70,7 +82,7 @@ except Exception as e:
 
 
 
-Use this API to retrieve a list of customers who have registered in the application.
+Retrieve a list of customer profiles.
 
 *Returned Response:*
 
@@ -159,7 +171,7 @@ Success. Refer `CustomerListResponseSchema` for more details.
 
 
 ### searchUsers
-Search an existing user.
+Search users.
 
 
 
@@ -183,7 +195,7 @@ except Exception as e:
 
 
 
-Use this API to retrieve an existing user from a list.
+Search and filter user profiles.
 
 *Returned Response:*
 
@@ -267,7 +279,7 @@ Success. Returns first name, last name, emails, phone number and gender of the u
 
 
 ### createUser
-Create user
+Create user.
 
 
 
@@ -289,7 +301,7 @@ except Exception as e:
 | body | [CreateUserRequestSchema](#CreateUserRequestSchema) | yes | Request body |
 
 
-Create user
+Register and add a new user to the platform.
 
 *Returned Response:*
 
@@ -373,7 +385,7 @@ User create
 
 
 ### blockOrUnblockUsers
-Block/Unblock user
+Block/unblock users.
 
 
 
@@ -395,7 +407,7 @@ except Exception as e:
 | body | [BlockUserRequestSchema](#BlockUserRequestSchema) | yes | Request body |
 
 
-Block/Unblock user
+Control user access by blocking or unblocking their accounts.
 
 *Returned Response:*
 
@@ -439,7 +451,7 @@ Success
 
 
 ### unDeleteUser
-undelete user who deleted from application and have not elapsed the platform configured delete days
+Undelete user.
 
 
 
@@ -461,7 +473,7 @@ except Exception as e:
 | body | [UnDeleteUserRequestSchema](#UnDeleteUserRequestSchema) | yes | Request body |
 
 
-undelete user who deleted from application and have not elapsed the platform configured delete days
+Restore a previously deleted user account.
 
 *Returned Response:*
 
@@ -505,7 +517,7 @@ Success
 
 
 ### updateUser
-Update user
+Update user.
 
 
 
@@ -528,7 +540,7 @@ except Exception as e:
 | body | [UpdateUserRequestSchema](#UpdateUserRequestSchema) | yes | Request body |
 
 
-Use this API to update user details, Note: Existing emails and phone numbers of user will be replaced directly if phone_numbers or emails field sent in request data.
+Modify and update user profile information.
 
 *Returned Response:*
 
@@ -593,302 +605,6 @@ User update
       "created_at": "2020-03-11T09:28:41.982Z",
       "updated_at": "2020-03-11T09:28:41.982Z"
     }
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### createUserSession
-Create user session
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").user.createUserSession(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [CreateUserSessionRequestSchema](#CreateUserSessionRequestSchema) | yes | Request body |
-
-
-Create user session
-
-*Returned Response:*
-
-
-
-
-[CreateUserSessionResponseSchema](#CreateUserSessionResponseSchema)
-
-Create user session
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; create user session success</i></summary>
-
-```json
-{
-  "value": {
-    "domain": "vinit.com",
-    "max_age": 4555555,
-    "secure": true,
-    "http_only": true,
-    "cookie": {
-      "f.session": "s%3A-LrEF5FVR8jrT5DCtCHSbAy7JFyX-f9T.uXOQwzje8nOfx4ODANrLi4yNX5fW2W5kLQ2rkBdO2xE"
-    }
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### deleteSession
-Delete a session for a user
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").user.deleteSession(id=id, sessionId=sessionId, reason=reason)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String | yes | ID of a customer. |   
-| sessionId | String | yes | Session ID of a customer. |   
-| reason | String | yes | Reason for deleting session. |  
-
-
-
-Use this API to Delete a session of customers who have registered in the application.
-
-*Returned Response:*
-
-
-
-
-[SessionDeleteResponseSchema](#SessionDeleteResponseSchema)
-
-Success. Refer `SessionDeleteResponseSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; delete user session success</i></summary>
-
-```json
-{
-  "value": {
-    "user_id": "61f02c3dcc701256044ed6c0",
-    "session_id": "sess:123"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getActiveSessions
-Get a list of all session with info for a user
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").user.getActiveSessions(id=id)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String | yes | ID of a customer. |  
-
-
-
-Use this API to retrieve a list of session with info of customers who have registered in the application.
-
-*Returned Response:*
-
-
-
-
-[SessionListResponseSchema](#SessionListResponseSchema)
-
-Success. Refer `SessionListResponseSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; get user sessions success</i></summary>
-
-```json
-{
-  "value": {
-    "items": [
-      {
-        "session_id": "134",
-        "user_agent": "134",
-        "ip": "134",
-        "domain": "134",
-        "expire_in": "134"
-      },
-      {
-        "session_id": "134",
-        "user_agent": "134",
-        "ip": "134",
-        "domain": "134",
-        "expire_in": "134"
-      }
-    ]
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### deleteActiveSessions
-Delete a list of all session for a user
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").user.deleteActiveSessions(id=id, reason=reason)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String | yes | ID of a customer. |   
-| reason | String | yes | Reason to delete sessions. |  
-
-
-
-Use this API to Delete a list of session of customers who have registered in the application.
-
-*Returned Response:*
-
-
-
-
-[SessionsDeleteResponseSchema](#SessionsDeleteResponseSchema)
-
-Success. Refer `SessionsDeleteResponseSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; delete user sessions success</i></summary>
-
-```json
-{
-  "value": {
-    "user_id": "61f02c3dcc701256044ed6c0",
-    "session_ids": [
-      "sess:123",
-      "sess:456"
-    ]
   }
 }
 ```
@@ -973,8 +689,308 @@ Success
 ---
 
 
+
+
+### createUserSession
+Create user session.
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").user.createUserSession(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [CreateUserSessionRequestSchema](#CreateUserSessionRequestSchema) | yes | Request body |
+
+
+Establish a session for user interactions.
+
+*Returned Response:*
+
+
+
+
+[CreateUserSessionResponseSchema](#CreateUserSessionResponseSchema)
+
+Create user session
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; create user session success</i></summary>
+
+```json
+{
+  "value": {
+    "domain": "vinit.com",
+    "max_age": 4555555,
+    "secure": true,
+    "http_only": true,
+    "cookie": {
+      "f.session": "s%3A-LrEF5FVR8jrT5DCtCHSbAy7JFyX-f9T.uXOQwzje8nOfx4ODANrLi4yNX5fW2W5kLQ2rkBdO2xE"
+    }
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### deleteSession
+Delete session.
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").user.deleteSession(id=id, sessionId=sessionId, reason=reason)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | ID of a customer. |   
+| sessionId | String | yes | Session ID of a customer. |   
+| reason | String | yes | Reason for deleting session. |  
+
+
+
+Terminate an active user session.
+
+*Returned Response:*
+
+
+
+
+[SessionDeleteResponseSchema](#SessionDeleteResponseSchema)
+
+Success. Refer `SessionDeleteResponseSchema` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; delete user session success</i></summary>
+
+```json
+{
+  "value": {
+    "user_id": "61f02c3dcc701256044ed6c0",
+    "session_id": "sess:123"
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getActiveSessions
+Get active sessions.
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").user.getActiveSessions(id=id)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | ID of a customer. |  
+
+
+
+Retrieve a list of currently active user sessions.
+
+*Returned Response:*
+
+
+
+
+[SessionListResponseSchema](#SessionListResponseSchema)
+
+Success. Refer `SessionListResponseSchema` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; get user sessions success</i></summary>
+
+```json
+{
+  "value": {
+    "items": [
+      {
+        "session_id": "134",
+        "user_agent": "134",
+        "ip": "134",
+        "domain": "134",
+        "expire_in": "134"
+      },
+      {
+        "session_id": "134",
+        "user_agent": "134",
+        "ip": "134",
+        "domain": "134",
+        "expire_in": "134"
+      }
+    ]
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### deleteActiveSessions
+Delete active sessions.
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").user.deleteActiveSessions(id=id, reason=reason)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | ID of a customer. |   
+| reason | String | yes | Reason to delete sessions. |  
+
+
+
+End multiple active user sessions.
+
+*Returned Response:*
+
+
+
+
+[SessionsDeleteResponseSchema](#SessionsDeleteResponseSchema)
+
+Success. Refer `SessionsDeleteResponseSchema` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; delete user sessions success</i></summary>
+
+```json
+{
+  "value": {
+    "user_id": "61f02c3dcc701256044ed6c0",
+    "session_ids": [
+      "sess:123",
+      "sess:456"
+    ]
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+
+
 ### getPlatformConfig
-Get platform configurations
+Get platform config.
 
 
 
@@ -992,7 +1008,7 @@ except Exception as e:
 
 
 
-Use this API to get all the platform configurations such as mobile image, desktop image, social logins, and all other text.
+Retrieve configuration settings for the platform.
 
 *Returned Response:*
 
@@ -1115,7 +1131,7 @@ Success. Returns a JSON object containing the all the platform configurations. R
 
 
 ### updatePlatformConfig
-Update platform configurations
+Update platform config.
 
 
 
@@ -1137,7 +1153,7 @@ except Exception as e:
 | body | [PlatformSchema](#PlatformSchema) | yes | Request body |
 
 
-Use this API to edit the existing platform configurations such as mobile image, desktop image, social logins, and all other text.
+Modify and update platform configuration settings.
 
 *Returned Response:*
 
@@ -1259,8 +1275,10 @@ Success. Returns a JSON object with the updated platform configurations. Refer `
 ---
 
 
+
+
 ### createUserGroup
-Create an User Group
+Create user group.
 
 
 
@@ -1282,7 +1300,7 @@ except Exception as e:
 | body | [CreateUserGroup](#CreateUserGroup) | yes | Request body |
 
 
-Use this API to create new user Group
+Form and add a new user group.
 
 *Returned Response:*
 
@@ -1336,7 +1354,7 @@ Success. returns created User Group. `UserGroupResponseSchema` for more details.
 
 
 ### getUserGroups
-Get User Groups mathcing criteria
+Get user groups.
 
 
 
@@ -1364,7 +1382,7 @@ except Exception as e:
 
 
 
-Use this API to get User Groups mathing criteria passed in query
+Retrieve a list of user groups.
 
 *Returned Response:*
 
@@ -1442,7 +1460,7 @@ Success. User Group details. `UserGroupListResponseSchema` for more details.
 
 
 ### updateUserGroup
-Update an User Group
+Update user group.
 
 
 
@@ -1465,7 +1483,7 @@ except Exception as e:
 | body | [UpdateUserGroupSchema](#UpdateUserGroupSchema) | yes | Request body |
 
 
-Use this API to update an existing user Group
+Modify and update user group details.
 
 *Returned Response:*
 
@@ -1519,7 +1537,7 @@ Success. returns updated User Group. `UserGroupResponseSchema` for more details.
 
 
 ### getUserGroupById
-Get an User Group by Id
+Get user group by ID.
 
 
 
@@ -1542,7 +1560,7 @@ except Exception as e:
 
 
 
-Use this API to get details of an existing user Group
+Retrieve a user group by its unique identifier.
 
 *Returned Response:*
 
@@ -1619,7 +1637,7 @@ except Exception as e:
 | body | [PartialUserGroupUpdateSchema](#PartialUserGroupUpdateSchema) | yes | Request body |
 
 
-Use this API to update user group details and add or remove an user to the user group.
+Update user group partially on the platform.
 
 *Returned Response:*
 
@@ -1670,6 +1688,8 @@ Success. returns updated User Group. `UserGroupResponseSchema` for more details.
 
 
 ---
+
+
 
 
 ### createUserAttributeDefinition
@@ -2497,7 +2517,7 @@ Successful update
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | items | ArrayList<[UserSchema](#UserSchema)>? |  yes  |  |
+ | items | ArrayList<[UserSearchSchema](#UserSearchSchema)>? |  yes  |  |
  | page | [PaginationSchema](#PaginationSchema)? |  yes  |  |
 
 ---
@@ -2910,7 +2930,7 @@ Successful update
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | facebook | [Facebook](#Facebook)? |  yes  |  |
- | accountkit | [Accountkit](#Accountkit)? |  yes  |  |
+ | accountKit | [Accountkit](#Accountkit)? |  yes  |  |
  | google | [Google](#Google)? |  yes  |  |
 
 ---

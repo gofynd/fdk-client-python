@@ -454,6 +454,10 @@ class CustomDataDeleteSchema(BaseSchema):
     pass
 
 
+class CustomFieldValue(BaseSchema):
+    pass
+
+
 class CustomFieldSchema(BaseSchema):
     pass
 
@@ -2277,6 +2281,14 @@ class CustomDataDeleteSchema(BaseSchema):
     
 
 
+class CustomFieldValue(BaseSchema):
+    # Content swagger.json
+
+    
+    value = fields.Raw(required=False)
+    
+
+
 class CustomFieldSchema(BaseSchema):
     # Content swagger.json
 
@@ -2291,7 +2303,7 @@ class CustomFieldSchema(BaseSchema):
     
     creator = fields.Str(required=False)
     
-    value = fields.List(fields.Raw(required=False), required=False)
+    value = fields.List(fields.Nested(CustomFieldValue, required=False), required=False)
     
     resource_id = fields.Str(required=False)
     

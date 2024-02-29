@@ -50,9 +50,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
-        
         
         
         
@@ -148,13 +145,6 @@ class WebhookValidator:
         
     
     class fetchAllEventConfigurations(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class registerSubscriberToEventV2(BaseSchema):
         
         
         company_id = fields.Int(required=False)

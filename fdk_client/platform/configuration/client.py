@@ -13,7 +13,7 @@ class Configuration:
 
     
     async def createApplication(self, body="", request_headers:Dict={}):
-        """Applications are sales channel websites which can be configured, personalized and customized. Use this API to create a new application in the current company.
+        """Generate and add a new application. Applications are sales channel websites which can be configured, personalized and customized. Use this API to create a new application in the current company.
         """
         payload = {}
         
@@ -56,7 +56,7 @@ class Configuration:
         return response
     
     async def getApplications(self, page_no=None, page_size=None, q=None, request_headers:Dict={}):
-        """Applications are sales channel websites which can be configured, personalized and customised. Use this API to fetch a list of applications created within a company.
+        """Retrieve a list of available applications. Applications are sales channel websites which can be configured, personalized and customised. Use this API to fetch a list of applications created within a company.
         :param page_no :  : type integer
         :param page_size :  : type integer
         :param q : Search param by name or domain : type string
@@ -104,7 +104,7 @@ class Configuration:
         return response
     
     async def getCurrencies(self, request_headers:Dict={}):
-        """Use this API to get a list of currencies allowed in the company. Moreover, get the name, code, symbol, and the decimal digits of the currencies.
+        """Retrieve a list of available currencies. Use this API to get a list of currencies allowed in the company. Moreover, get the name, code, symbol, and the decimal digits of the currencies.
         """
         payload = {}
         
@@ -143,7 +143,7 @@ class Configuration:
         return response
     
     async def getDomainAvailibility(self, body="", request_headers:Dict={}):
-        """Use this API to check the domain availability before linking it to application. Also sends domain suggestions that are similar to the queried domain. Note - Custom domain search is currently powered by GoDaddy provider.
+        """Check the availability of a specific domain. Use this API to check the domain availability before linking it to application. Also sends domain suggestions that are similar to the queried domain. Note - Custom domain search is currently powered by GoDaddy provider.
         """
         payload = {}
         
@@ -186,7 +186,7 @@ class Configuration:
         return response
     
     async def getIntegrationById(self, id=None, request_headers:Dict={}):
-        """Use this API to fetch the details of an integration (such as Ginesys, SAP, etc.) using its ID
+        """Retrieve detailed information about a specific integration. Retrieve the details of an integration (such as Ginesys, SAP, etc.) using its ID.
         :param id : Integration id : type string
         """
         payload = {}
@@ -228,7 +228,7 @@ class Configuration:
         return response
     
     async def getAvailableOptIns(self, page_no=None, page_size=None, request_headers:Dict={}):
-        """Use this API to get a list of all available integrations in a company
+        """Retrieve a list of available opt-ins.  Retrieve a list of all available integrations in a company. 
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         """
@@ -273,7 +273,7 @@ class Configuration:
         return response
     
     async def getSelectedOptIns(self, level=None, uid=None, page_no=None, page_size=None, request_headers:Dict={}):
-        """Use this API to get the store-level/company-level integrations configured in a company
+        """Retrieve a list of selected opt-ins. Retrieve the store-level/company-level integrations configured in a company
         :param level : store or company : type string
         :param uid : Unique identifier of the selected integration level. : type integer
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
@@ -324,7 +324,7 @@ class Configuration:
         return response
     
     async def getIntegrationLevelConfig(self, id=None, level=None, opted=None, check_permission=None, request_headers:Dict={}):
-        """Use this API to get the configuration details of an integration such as token, permissions, level, opted value, uid, meta, location ID, etc.
+        """Retrieve configuration settings for integration levels. Retrieve the configuration details of an integration such as token, permissions, level, opted value, uid, meta, location ID, etc.
         :param id : Integration ID (24-digit Mongo Object ID) : type string
         :param level : store or company : type string
         :param opted : True means get the opted stores. False means get the stores that aren't opted. : type boolean
@@ -375,7 +375,7 @@ class Configuration:
         return response
     
     async def updateLevelIntegration(self, id=None, level=None, body="", request_headers:Dict={}):
-        """Use this API to update the configuration details of an integration such as token, permissions, level, opted value, uid, meta, location ID, etc. at a particular level (store/company).
+        """Modify level integration. Update the configuration details of an integration such as token, permissions, level, opted value, uid, meta, location ID, etc. at a particular level (store/company).
         :param id : Integration ID (24-digit Mongo Object ID) : type string
         :param level : Integration level, `store` or `company` : type string
         """
@@ -424,7 +424,7 @@ class Configuration:
         return response
     
     async def getIntegrationByLevelId(self, id=None, level=None, uid=None, request_headers:Dict={}):
-        """Use this API to get the configuration details of an integration such as token, permissions, level, opted value, uid, meta, location ID, etc. at a particular level (store/company).
+        """Retrieve integration details for a specific level. Retrieve the configuration details of an integration such as token, permissions, level, opted value, uid, meta, location ID, etc. at a particular level (store/company).
         :param id : Integration ID (24-digit Mongo Object ID) : type string
         :param level : Integration level, `store` or `company` : type string
         :param uid : Unique identifier of integration level (store/company) : type integer
@@ -472,7 +472,7 @@ class Configuration:
         return response
     
     async def updateLevelUidIntegration(self, id=None, level=None, uid=None, body="", request_headers:Dict={}):
-        """Update the level of integration by store UID
+        """Modify UID-based integration. Update the level of integration by store UID
         :param id : Integration ID (24-digit Mongo Object ID) : type string
         :param level : Integration level, `store` or `company` : type string
         :param uid : Unique identifier of integration level (store/company) : type integer
@@ -524,7 +524,7 @@ class Configuration:
         return response
     
     async def getLevelActiveIntegrations(self, id=None, level=None, uid=None, request_headers:Dict={}):
-        """Use this API to check if a store is already opted-in for any integration
+        """Check if a store is already opted-in for any integration
         :param id : Integration ID (24-digit Mongo Object ID) : type string
         :param level : Integration level, `store` or `company` : type string
         :param uid : Unique identifier of integration level (store/company) : type integer
@@ -572,7 +572,7 @@ class Configuration:
         return response
     
     async def getBrandsByCompany(self, q=None, request_headers:Dict={}):
-        """Use this API to get all the brands added in a company. Get all the brand names, along with URLs of their logo, banner, and portrait image.
+        """Retrieve all the brands added in a company. Get all the brand names, along with URLs of their logo, banner, and portrait image.
         :param q : Search text for brand name : type string
         """
         payload = {}
@@ -614,7 +614,7 @@ class Configuration:
         return response
     
     async def getCompanyByBrands(self, page_no=None, page_size=None, body="", request_headers:Dict={}):
-        """Use this API to get a list of companies by the brands they deal
+        """Retrieve companies associated with specific brands. Retrieve a list of companies by the brands they deal.
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         """
@@ -663,7 +663,7 @@ class Configuration:
         return response
     
     async def getStoreByBrands(self, page_no=None, page_size=None, body="", request_headers:Dict={}):
-        """Use this API to get a list of selling locations (stores) by the brands they deal. Store has information about store name, store type, store code, store address, and company detail.
+        """Retrieve stores associated with specific brands. Retrieve a list of selling locations (stores) by the brands they deal. Store has information about store name, store type, store code, store address, and company detail.
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         """
@@ -712,7 +712,7 @@ class Configuration:
         return response
     
     async def getOtherSellerApplications(self, page_no=None, page_size=None, request_headers:Dict={}):
-        """Use this API to fetch all other seller applications that were not created within the current company. but have opted for the current company's inventory
+        """Retrieve applications from other sellers. Retrieve all other seller applications that were not created within the current company. but have opted for the current company's inventory.
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         """
@@ -757,7 +757,7 @@ class Configuration:
         return response
     
     async def getOtherSellerApplicationById(self, id=None, request_headers:Dict={}):
-        """Use application ID to fetch details of a seller application that was not created within the current company. but has opted for the current company's inventory
+        """Retrieve details of a seller application that was not created within the current company. but has opted for the current company's inventory
         :param id : Application Id : type string
         """
         payload = {}
@@ -799,7 +799,7 @@ class Configuration:
         return response
     
     async def optOutFromApplication(self, id=None, body="", request_headers:Dict={}):
-        """Use this API to opt-out your company or store from other seller application. The specific seller application will no longer fetch inventory from your company or store.
+        """Choose to opt-out your company or store from other seller application. The specific seller application will no longer fetch inventory from your company or store.
         :param id : Alphanumeric ID allotted to an application (sales channel website) created within a business account. : type string
         """
         payload = {}

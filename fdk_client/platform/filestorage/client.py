@@ -13,25 +13,7 @@ class FileStorage:
 
     
     async def startUpload(self, namespace=None, body="", request_headers:Dict={}):
-        """Uploads an arbitrarily sized buffer or blob.
-
-It has three Major Steps:
-* Start
-* Upload
-* Complete
-
-### Start
-Initiates the assets upload using `startUpload`.
-It returns the storage link in response.
-
-### Upload
-Use the storage link to upload a file (Buffer or Blob) to the File Storage.
-Make a `PUT` request on storage link received from `startUpload` api with file (Buffer or Blob) as a request body.
-
-### Complete
-After successfully upload, call `completeUpload` api to complete the upload process.
-This operation will return the url for the uploaded file.
-
+        """Inititates the process of uploading a file to storage location, and returns a storage link in response.
         :param namespace : Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. : type string
         """
         payload = {}
@@ -77,25 +59,7 @@ This operation will return the url for the uploaded file.
         return response
     
     async def completeUpload(self, namespace=None, body="", request_headers:Dict={}):
-        """Uploads an arbitrarily sized buffer or blob.
-
-It has three Major Steps:
-* Start
-* Upload
-* Complete
-
-### Start
-Initiates the assets upload using `startUpload`.
-It returns the storage link in response.
-
-### Upload
-Use the storage link to upload a file (Buffer or Blob) to the File Storage.
-Make a `PUT` request on storage link received from `startUpload` api with file (Buffer or Blob) as a request body.
-
-### Complete
-After successfully upload, call `completeUpload` api to complete the upload process.
-This operation will return the url for the uploaded file.
-
+        """Starts the process of uploading a file to storage location, and returns a storage link in response.
         :param namespace : Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. : type string
         """
         payload = {}
@@ -141,7 +105,7 @@ This operation will return the url for the uploaded file.
         return response
     
     async def getSignUrls(self, body="", request_headers:Dict={}):
-        """Describe here
+        """Retrieve signed URLs for file access.
         """
         payload = {}
         
@@ -184,7 +148,7 @@ This operation will return the url for the uploaded file.
         return response
     
     async def copyFiles(self, sync=None, body="", request_headers:Dict={}):
-        """Copy Files
+        """Duplicate files to another location.
         :param sync :  : type boolean
         """
         payload = {}
@@ -221,7 +185,7 @@ This operation will return the url for the uploaded file.
         return response
     
     async def browse(self, namespace=None, page=None, limit=None, request_headers:Dict={}):
-        """Browse Files
+        """View and navigate through available files.
         :param namespace : Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. : type string
         :param page : page no : type integer
         :param limit : Limit : type integer
@@ -260,7 +224,7 @@ This operation will return the url for the uploaded file.
         return response
     
     async def proxy(self, url=None, request_headers:Dict={}):
-        """Proxy
+        """Access files through a proxy.
         :param url : url : type string
         """
         payload = {}
@@ -273,7 +237,7 @@ This operation will return the url for the uploaded file.
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/assets/v1.0/company/{self._conf.companyId}/proxy", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"},"examples":{"success":{"value":2}}},{"name":"url","in":"query","description":"url","required":true,"schema":{"type":"string"},"examples":{"success":{"value":"https://reqres.in/api/users/2"},"failure":{"value":"platform/pictures/free-logo/original/7qdHNTFe--platform-logo.png"}}}],"optional":[],"query":[{"name":"url","in":"query","description":"url","required":true,"schema":{"type":"string"},"examples":{"success":{"value":"https://reqres.in/api/users/2"},"failure":{"value":"platform/pictures/free-logo/original/7qdHNTFe--platform-logo.png"}}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"},"examples":{"success":{"value":2}}}]}""", url=url)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/assets/v1.0/company/{self._conf.companyId}/proxy", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"},"examples":{"success":{"value":2}}},{"name":"url","in":"query","description":"url","required":true,"schema":{"type":"string"},"examples":{"success":{"value":"https://hdn-1.fynd.com/platform/pictures/free-logo/original/7qdHNTFe--platform-logo.png"},"failure":{"value":"platform/pictures/free-logo/original/7qdHNTFe--platform-logo.png"}}}],"optional":[],"query":[{"name":"url","in":"query","description":"url","required":true,"schema":{"type":"string"},"examples":{"success":{"value":"https://hdn-1.fynd.com/platform/pictures/free-logo/original/7qdHNTFe--platform-logo.png"},"failure":{"value":"platform/pictures/free-logo/original/7qdHNTFe--platform-logo.png"}}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"},"examples":{"success":{"value":2}}}]}""", url=url)
         query_string = await create_query_string(url=url)
 
         headers = {}
@@ -289,15 +253,6 @@ This operation will return the url for the uploaded file.
                 exclude_headers.append(key)
 
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/proxy", url=url), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ProxyResponse
-            schema = ProxyResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for proxy")
-                print(e)
 
         return response
     

@@ -175,7 +175,7 @@ class UserSchema(BaseSchema):
     
     emails = fields.List(fields.Nested(Email, required=False), required=False)
     
-    gender = fields.Str(required=False, allow_none=True)
+    gender = fields.Str(required=False)
     
     dob = fields.Str(required=False)
     
@@ -411,7 +411,7 @@ class TicketCategory(BaseSchema):
     
     key = fields.Str(required=False)
     
-    sub_categories = fields.List(fields.Nested(lambda: TicketCategory(exclude=('sub_categories')), required=False), required=False)
+    sub_categories = fields.Nested(lambda: TicketCategory(exclude=('sub_categories')), required=False)
     
     group_id = fields.Float(required=False)
     

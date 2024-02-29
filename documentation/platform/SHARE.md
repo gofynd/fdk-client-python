@@ -7,7 +7,7 @@
 ## Share Methods
 Short link and QR Code
 
-Default
+URL Shortner
 * [createShortLink](#createshortlink)
 * [getShortLinks](#getshortlinks)
 * [getShortLinkByHash](#getshortlinkbyhash)
@@ -22,7 +22,7 @@ Default
 
 
 ### createShortLink
-Create short link
+Create short link.
 
 
 
@@ -44,7 +44,7 @@ except Exception as e:
 | body | [ShortLinkReq](#ShortLinkReq) | yes | Request body |
 
 
-Create short link
+Generate a shortened URL link for sharing.
 
 *Returned Response:*
 
@@ -64,8 +64,6 @@ Success
 ```json
 {
   "url": {
-    "original": "https://0icof6vvsf.hostx0.de/products/?brand=ruosh",
-    "short": "https://0icof6vvsf.hostx0.de/l/3qKlnsq-x",
     "hash": "3qKlnsq-x"
   },
   "redirects": {
@@ -118,7 +116,7 @@ Success
 
 
 ### getShortLinks
-Get short links
+Get short links.
 
 
 
@@ -147,7 +145,7 @@ except Exception as e:
 
 
 
-Get short links
+Retrieve a list of all generated short links.
 
 *Returned Response:*
 
@@ -169,8 +167,6 @@ Success
   "items": [
     {
       "url": {
-        "original": "https://0icof6vvsf.hostx0.de/products/?brand=ruosh",
-        "short": "https://0icof6vvsf.hostx0.de/l/3qKlnsq-x",
         "hash": "3qKlnsq-x"
       },
       "redirects": {
@@ -232,7 +228,7 @@ Success
 
 
 ### getShortLinkByHash
-Get short link by hash
+Get short link by hash.
 
 
 
@@ -255,7 +251,7 @@ except Exception as e:
 
 
 
-Get short link by hash
+Retrieve a specific short link by its unique hash.
 
 *Returned Response:*
 
@@ -275,8 +271,6 @@ Success
 ```json
 {
   "url": {
-    "original": "https://0icof6vvsf.hostx0.de/products/?brand=ruosh",
-    "short": "https://0icof6vvsf.hostx0.de/l/3qKlnsq-x",
     "hash": "3qKlnsq-x"
   },
   "redirects": {
@@ -329,7 +323,7 @@ Success
 
 
 ### updateShortLinkById
-Update short link by id
+Update short link by ID.
 
 
 
@@ -352,7 +346,7 @@ except Exception as e:
 | body | [ShortLinkReq](#ShortLinkReq) | yes | Request body |
 
 
-Update short link by id
+Update details of a specific short link by its ID.
 
 *Returned Response:*
 
@@ -372,8 +366,6 @@ Success
 ```json
 {
   "url": {
-    "original": "https://0icof6vvsf.hostx0.de/products/?brand=ruosh",
-    "short": "https://0icof6vvsf.hostx0.de/l/3qKlnsq-x",
     "hash": "3qKlnsq-x"
   },
   "redirects": {
@@ -426,7 +418,7 @@ Success
 
 
 ### getShortLinkClickStats
-Get click statistics for a short link
+Get short link click statistics.
 
 
 
@@ -449,7 +441,7 @@ except Exception as e:
 
 
 
-Retrieve click statistics for a given short link ID.
+Retrieve statistics and analytics for clicks on a short link.
 
 *Returned Response:*
 
@@ -611,8 +603,6 @@ Successful retrieval of click statistics.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | original | String? |  yes  |  |
- | short | String? |  yes  |  |
  | hash | String? |  yes  |  |
 
 ---

@@ -215,7 +215,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
     
     
         
@@ -267,51 +266,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-    
-    
         
         
 
@@ -767,8 +721,6 @@ class PaymentValidator:
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
-        
-        payment_option_type = fields.Str(required=False)
          
         
     
@@ -885,105 +837,6 @@ class PaymentValidator:
         application_id = fields.Str(required=False)
         
         aggregator_id = fields.Int(required=False)
-         
-        
-    
-    class deleteBeneficiaryDetails(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        beneficiary_id = fields.Str(required=False)
-         
-        
-    
-    class getRefundOptions(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        configuration = fields.Str(required=False)
-        
-        product_type = fields.Str(required=False)
-        
-        amount = fields.Str(required=False)
-         
-        
-    
-    class setRefundOptionforShipment(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getSelectedRefundOption(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        shipment_id = fields.Str(required=False)
-        
-        order_id = fields.Str(required=False)
-         
-        
-    
-    class getUserBeneficiariesDetailV2(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        order_id = fields.Str(required=False)
-        
-        shipment_id = fields.Str(required=False)
-        
-        mop = fields.Str(required=False)
-         
-        
-    
-    class validateBeneficiaryAddress(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class updateDefaultBeneficiary(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getPennyDropValidation(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class updatePennyDropValidation(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
          
         
     

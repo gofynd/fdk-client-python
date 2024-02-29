@@ -13,7 +13,7 @@ class AuditTrail:
 
     
     async def getAuditLogs(self, qs=None, limit=None, sort=None, request_headers:Dict={}):
-        """Get a paginated set of logs that can be filtered using the available set of parameters and get the relevant group of logs
+        """Retrieve audit logs for system events and actions.
         :param qs : Logs Query : type string
         :param limit : Current request items count : type integer
         :param sort : To sort based on _id : type object
@@ -61,7 +61,7 @@ class AuditTrail:
         return response
     
     async def createAuditLog(self, body="", request_headers:Dict={}):
-        """Create a log instance that stores all the relevant info to be logged
+        """Generate and record an audit log entry for a specific event or action.
         """
         payload = {}
         
@@ -104,7 +104,7 @@ class AuditTrail:
         return response
     
     async def getAuditLog(self, id=None, request_headers:Dict={}):
-        """Get detailed log information by their id
+        """Retrieve a specific audit log entry
         :param id : log uuid : type string
         """
         payload = {}
@@ -146,7 +146,7 @@ class AuditTrail:
         return response
     
     async def getEntityTypes(self, request_headers:Dict={}):
-        """Get a consolidated list of entity types from all the logs stored on the db, which further helps to filter the logs better
+        """List of entity types that can be audited within the platform's
         """
         payload = {}
         

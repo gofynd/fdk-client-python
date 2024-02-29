@@ -60,13 +60,7 @@ class Payment:
             "customerOnboard": "/service/application/payment/v1.0/credit-onboard/",
             "outstandingOrderDetails": "/service/application/payment/v1.0/payment/outstanding-orders/",
             "paidOrderDetails": "/service/application/payment/v1.0/payment/paid-orders/",
-            "createPaymentOrder": "/service/application/payment/v1.0/payment-orders/",
-            "deleteBeneficiaryDetails": "/service/application/payment/v1.0/refund/account/{beneficiary_id}",
-            "getRefundOptions": "/service/application/payment/v1.0/payment/refundoptions/",
-            "setRefundOptionforShipment": "/service/application/payment/v1.0/payment/refundoptions/",
-            "getSelectedRefundOption": "/service/application/payment/v1.0/payment/selected_refund_options",
-            "getUserBeneficiariesDetailV2": "/service/application/payment/v2.0/refund/user/beneficiary",
-            "validateBeneficiaryAddress": "/service/application/payment/v1.0/validate/beneficiary-address"
+            "createPaymentOrder": "/service/application/payment/v1.0/payment-orders/"
             
         }
         self._urls = {
@@ -77,7 +71,7 @@ class Payment:
         self._urls.update(urls)
     
     async def getAggregatorsConfig(self, x_api_token=None, refresh=None, body="", request_headers:Dict={}):
-        """Use this API to retrieve the payment gateway key, secrets, merchant, SDK/API details to complete a payment at front-end.
+        """Retrieves configuration details for available payment aggregators.
         :param x-api-token : Used for basic authentication. : type string
         :param refresh : This is a boolean value. Select `true` to remove temporary cache files on payment gateway and replace with the latest one. : type boolean
         """
@@ -124,7 +118,7 @@ class Payment:
         return response
     
     async def attachCardToCustomer(self, body="", request_headers:Dict={}):
-        """Use this API to attach a customer's saved card at the payment gateway, such as Stripe, Juspay.
+        """Links a payment card to a customer's account.
         """
         payload = {}
         
@@ -169,7 +163,7 @@ class Payment:
         return response
     
     async def getActiveCardAggregator(self, refresh=None, body="", request_headers:Dict={}):
-        """Use this API to retrieve an active payment aggregator along with the Customer ID. This is applicable for cards payments only.
+        """Gets the active card aggregator for the user.
         :param refresh :  : type boolean
         """
         payload = {}
@@ -213,7 +207,7 @@ class Payment:
         return response
     
     async def getActiveUserCards(self, force_refresh=None, body="", request_headers:Dict={}):
-        """Use this API to retrieve a list of cards stored by user from an active payment gateway.
+        """Retrieves all active cards linked to a user.
         :param force_refresh :  : type boolean
         """
         payload = {}
@@ -257,7 +251,7 @@ class Payment:
         return response
     
     async def deleteUserCard(self, body="", request_headers:Dict={}):
-        """Use this API to delete a card added by a user on the payment gateway and clear the cache.
+        """Deletes a payment card from the user's account.
         """
         payload = {}
         
@@ -302,7 +296,7 @@ class Payment:
         return response
     
     async def verifyCustomerForPayment(self, body="", request_headers:Dict={}):
-        """Use this API to check if the customer is eligible to use credit-line facilities such as Simpl Pay Later and Rupifi.
+        """Checks the user's validity for proceeding with payment.
         """
         payload = {}
         
@@ -347,7 +341,7 @@ class Payment:
         return response
     
     async def verifyAndChargePayment(self, body="", request_headers:Dict={}):
-        """Use this API to verify and check the status of a payment transaction (server-to-server) made through aggregators like Simpl and Mswipe.
+        """Validates and processes a payment transaction.
         """
         payload = {}
         
@@ -392,7 +386,7 @@ class Payment:
         return response
     
     async def initialisePayment(self, body="", request_headers:Dict={}):
-        """PUse this API to inititate payment using UPI, BharatQR, wherein the UPI requests are send to the app and QR code is displayed on the screen.
+        """Initializes the payment procedure for an order.
         """
         payload = {}
         
@@ -437,7 +431,7 @@ class Payment:
         return response
     
     async def checkAndUpdatePaymentStatus(self, body="", request_headers:Dict={}):
-        """Use this API to perform continuous polling at intervals to check the status of payment until timeout.
+        """Checks and updates the current status of a payment.
         """
         payload = {}
         
@@ -482,7 +476,7 @@ class Payment:
         return response
     
     async def getPaymentModeRoutes(self, amount=None, cart_id=None, checkout_mode=None, refresh=None, order_id=None, card_reference=None, user_details=None, display_split=None, advance_payment=None, shipment_id=None, body="", request_headers:Dict={}):
-        """Use this API to get all valid payment options for doing a payment.
+        """Lists the payment mode options and their routing details.
         :param amount : Payable amount. : type integer
         :param cart_id : Identifier of the cart. : type string
         :param checkout_mode : Option to checkout for self or for others. : type string
@@ -553,7 +547,7 @@ class Payment:
         return response
     
     async def getPosPaymentModeRoutes(self, amount=None, cart_id=None, pincode=None, checkout_mode=None, refresh=None, card_reference=None, order_type=None, user_details=None, body="", request_headers:Dict={}):
-        """Use this API to get all valid payment options for doing a payment in POS.
+        """Lists payment modes available for Point-of-Sale (POS).
         :param amount : Payable amount. : type integer
         :param cart_id : Identifier of the cart. : type string
         :param pincode : The PIN Code of the destination address, e.g. 400059 : type string
@@ -753,7 +747,7 @@ class Payment:
         return response
     
     async def getRupifiBannerDetails(self, body="", request_headers:Dict={}):
-        """Get CreditLine Offer if user is tentatively approved by rupifi
+        """Retrieve details for displaying the Rupifi payment banner.
         """
         payload = {}
         
@@ -794,7 +788,7 @@ class Payment:
         return response
     
     async def getEpaylaterBannerDetails(self, body="", request_headers:Dict={}):
-        """Get Epaylater Enabled if user is tentatively approved by epaylater
+        """Gets details for displaying the Epaylater payment banner.
         """
         payload = {}
         
@@ -835,7 +829,7 @@ class Payment:
         return response
     
     async def resendOrCancelPayment(self, body="", request_headers:Dict={}):
-        """Use this API to perform resend or cancel a payment link based on request payload.
+        """Resends or cancels a pending payment transaction.
         """
         payload = {}
         
@@ -880,7 +874,7 @@ class Payment:
         return response
     
     async def renderHTML(self, body="", request_headers:Dict={}):
-        """Use this API to decode base64 html form to plain HTML string.
+        """Generates HTML for payment-related interfaces.
         """
         payload = {}
         
@@ -925,7 +919,7 @@ class Payment:
         return response
     
     async def validateVPA(self, body="", request_headers:Dict={}):
-        """API to Validate UPI ID
+        """Checks the validity of a Virtual Payment Address (VPA).
         """
         payload = {}
         
@@ -970,7 +964,7 @@ class Payment:
         return response
     
     async def cardDetails(self, card_info=None, aggregator=None, body="", request_headers:Dict={}):
-        """API to get Card info from PG
+        """Gets the details of a specified payment card.
         :param card_info : Card first 6 digit IIN(prefix) number. : type string
         :param aggregator :  : type string
         """
@@ -1017,7 +1011,7 @@ class Payment:
         return response
     
     async def getActiveRefundTransferModes(self, body="", request_headers:Dict={}):
-        """Use this API to retrieve eligible refund modes (such as Netbanking) and add the beneficiary details.
+        """Lists the active transfer modes for refunds.
         """
         payload = {}
         
@@ -1058,7 +1052,7 @@ class Payment:
         return response
     
     async def enableOrDisableRefundTransferMode(self, body="", request_headers:Dict={}):
-        """Activate or Deactivate Transfer Mode to collect Beneficiary Details for Refund
+        """Enables or disables a particular refund transfer mode.
         """
         payload = {}
         
@@ -1103,7 +1097,7 @@ class Payment:
         return response
     
     async def getUserBeneficiariesDetail(self, order_id=None, body="", request_headers:Dict={}):
-        """Use this API to get the details of all active beneficiary added by a user for refund.
+        """Retrieves details of beneficiaries linked to the user.
         :param order_id : A unique number used for identifying and tracking your orders. : type string
         """
         payload = {}
@@ -1147,7 +1141,7 @@ class Payment:
         return response
     
     async def verifyIfscCode(self, ifsc_code=None, body="", request_headers:Dict={}):
-        """Use this API to check whether the 11-digit IFSC code is valid and to fetch the bank details for refund.
+        """Checks the validity of an IFSC code for bank transactions.
         :param ifsc_code : A 11-digit alphanumeric code that uniquely identifies a bank branch. : type string
         """
         payload = {}
@@ -1191,7 +1185,7 @@ class Payment:
         return response
     
     async def getOrderBeneficiariesDetail(self, order_id=None, body="", request_headers:Dict={}):
-        """Use this API to get the details of all active beneficiary added by a user for refund.
+        """Retrieve the beneficiary details related to an order.
         :param order_id : A unique number used for identifying and tracking your orders. : type string
         """
         payload = {}
@@ -1235,7 +1229,7 @@ class Payment:
         return response
     
     async def verifyOtpAndAddBeneficiaryForBank(self, body="", request_headers:Dict={}):
-        """Use this API to perform an OTP validation before saving the beneficiary details added for a refund.
+        """Confirms OTP and adds a bank beneficiary.
         """
         payload = {}
         
@@ -1280,7 +1274,7 @@ class Payment:
         return response
     
     async def addBeneficiaryDetails(self, body="", request_headers:Dict={}):
-        """Use this API to save the bank details for a returned or cancelled order to refund the amount.
+        """Adds beneficiary details for future transactions.
         """
         payload = {}
         
@@ -1325,7 +1319,7 @@ class Payment:
         return response
     
     async def addRefundBankAccountUsingOTP(self, body="", request_headers:Dict={}):
-        """Use this API to save bank details for returned/cancelled order to refund amount in his account.
+        """Adds a bank account for refunds using OTP verification.
         """
         payload = {}
         
@@ -1370,7 +1364,7 @@ class Payment:
         return response
     
     async def verifyOtpAndAddBeneficiaryForWallet(self, body="", request_headers:Dict={}):
-        """Use this API to send an OTP while adding a wallet beneficiary by mobile no. verification.
+        """Confirms OTP and adds a wallet beneficiary.
         """
         payload = {}
         
@@ -1415,7 +1409,7 @@ class Payment:
         return response
     
     async def updateDefaultBeneficiary(self, body="", request_headers:Dict={}):
-        """Use this API to set a default beneficiary for getting a refund.
+        """Updates the default beneficiary for the user.
         """
         payload = {}
         
@@ -1460,7 +1454,7 @@ class Payment:
         return response
     
     async def getPaymentLink(self, payment_link_id=None, body="", request_headers:Dict={}):
-        """Use this API to get a payment link
+        """Retrieves a generated payment link.
         :param payment_link_id :  : type string
         """
         payload = {}
@@ -1504,7 +1498,7 @@ class Payment:
         return response
     
     async def createPaymentLink(self, body="", request_headers:Dict={}):
-        """Use this API to create a payment link for the customer
+        """Generates a new payment link for transactions.
         """
         payload = {}
         
@@ -1549,7 +1543,7 @@ class Payment:
         return response
     
     async def resendPaymentLink(self, body="", request_headers:Dict={}):
-        """Use this API to resend a payment link for the customer
+        """Resends an existing payment link to the user.
         """
         payload = {}
         
@@ -1594,7 +1588,7 @@ class Payment:
         return response
     
     async def cancelPaymentLink(self, body="", request_headers:Dict={}):
-        """Use this API to cancel a payment link for the customer
+        """Cancels a previously generated payment link.
         """
         payload = {}
         
@@ -1639,7 +1633,7 @@ class Payment:
         return response
     
     async def getPaymentModeRoutesPaymentLink(self, payment_link_id=None, body="", request_headers:Dict={}):
-        """Use this API to get all valid payment options for doing a payment through payment link
+        """Lists payment modes available for a given payment link.
         :param payment_link_id : Payment link id : type string
         """
         payload = {}
@@ -1683,7 +1677,7 @@ class Payment:
         return response
     
     async def pollingPaymentLink(self, payment_link_id=None, body="", request_headers:Dict={}):
-        """Use this API to poll if payment through payment was successful or not
+        """Polls the status of a payment link for updates.
         :param payment_link_id :  : type string
         """
         payload = {}
@@ -1727,7 +1721,7 @@ class Payment:
         return response
     
     async def createOrderHandlerPaymentLink(self, body="", request_headers:Dict={}):
-        """Use this API to create a order and payment on aggregator side
+        """Creates an order handler for payment through a link.
         """
         payload = {}
         
@@ -1772,7 +1766,7 @@ class Payment:
         return response
     
     async def initialisePaymentPaymentLink(self, body="", request_headers:Dict={}):
-        """Use this API to inititate payment using UPI, BharatQR, wherein the UPI requests are send to the app and QR code is displayed on the screen.
+        """Initializes payment for an order via a payment link.
         """
         payload = {}
         
@@ -1817,7 +1811,7 @@ class Payment:
         return response
     
     async def checkAndUpdatePaymentStatusPaymentLink(self, body="", request_headers:Dict={}):
-        """Use this API to perform continuous polling at intervals to check the status of payment until timeout.
+        """Checks and updates the status of payment via a link.
         """
         payload = {}
         
@@ -1862,7 +1856,7 @@ class Payment:
         return response
     
     async def customerCreditSummary(self, aggregator=None, body="", request_headers:Dict={}):
-        """Use this API to fetch the customer credit summary.
+        """Retrieves a summary of the customer's credit details.
         :param aggregator :  : type string
         """
         payload = {}
@@ -1906,7 +1900,7 @@ class Payment:
         return response
     
     async def redirectToAggregator(self, source=None, aggregator=None, body="", request_headers:Dict={}):
-        """Use this API to get the redirect url to redirect the user to aggregator's page
+        """Redirects the user to the payment aggregator's interface.
         :param source : This is a String value that contains callback URL as value. : type string
         :param aggregator : This is a String value that contains aggregator name as value. : type string
         """
@@ -1953,7 +1947,7 @@ class Payment:
         return response
     
     async def checkCredit(self, aggregator=None, body="", request_headers:Dict={}):
-        """Use this API to fetch the customer credit summary.
+        """Checks the availability and status of customer credit.
         :param aggregator :  : type string
         """
         payload = {}
@@ -1997,7 +1991,7 @@ class Payment:
         return response
     
     async def customerOnboard(self, body="", request_headers:Dict={}):
-        """Use this API to fetch the customer credit summary.
+        """Initiates the onboarding process for payment services.
         """
         payload = {}
         
@@ -2042,7 +2036,7 @@ class Payment:
         return response
     
     async def outstandingOrderDetails(self, aggregator=None, body="", request_headers:Dict={}):
-        """Use this API to fetch the outstanding order details.
+        """Lists details of orders with outstanding payments.
         :param aggregator :  : type string
         """
         payload = {}
@@ -2086,7 +2080,7 @@ class Payment:
         return response
     
     async def paidOrderDetails(self, aggregator=None, body="", request_headers:Dict={}):
-        """Use this API to fetch the paid order details.
+        """Retrieves details of orders that have been paid for.
         :param aggregator :  : type string
         """
         payload = {}
@@ -2170,287 +2164,6 @@ class Payment:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for createPaymentOrder")
-                print(e)
-
-        return response
-    
-    async def deleteBeneficiaryDetails(self, beneficiary_id=None, body="", request_headers:Dict={}):
-        """Use this API to delete the saved beneficiary details provided beneficiary Id.
-        :param beneficiary_id : This is a String value that contains beneficiary_id as value. : type string
-        """
-        payload = {}
-        
-        if beneficiary_id is not None:
-            payload["beneficiary_id"] = beneficiary_id
-
-        # Parameter validation
-        schema = PaymentValidator.deleteBeneficiaryDetails()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["deleteBeneficiaryDetails"], proccessed_params="""{"required":[{"name":"beneficiary_id","in":"path","description":"This is a String value that contains beneficiary_id as value.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"beneficiary_id","in":"path","description":"This is a String value that contains beneficiary_id as value.","schema":{"type":"string"},"required":true}]}""", beneficiary_id=beneficiary_id)
-        query_string = await create_query_string(beneficiary_id=beneficiary_id)
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["deleteBeneficiaryDetails"]).netloc, "delete", await create_url_without_domain("/service/application/payment/v1.0/refund/account/{beneficiary_id}", beneficiary_id=beneficiary_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import DeleteRefundAccountResponse
-            schema = DeleteRefundAccountResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for deleteBeneficiaryDetails")
-                print(e)
-
-        return response
-    
-    async def getRefundOptions(self, configuration=None, product_type=None, amount=None, body="", request_headers:Dict={}):
-        """Refund Options Handler to fetch available refund options
-        :param configuration : config type : type string
-        :param product_type : Product Type either 1P and 3P : type string
-        :param amount : refunded amount : type string
-        """
-        payload = {}
-        
-        if configuration is not None:
-            payload["configuration"] = configuration
-        if product_type is not None:
-            payload["product_type"] = product_type
-        if amount is not None:
-            payload["amount"] = amount
-
-        # Parameter validation
-        schema = PaymentValidator.getRefundOptions()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getRefundOptions"], proccessed_params="""{"required":[{"name":"configuration","in":"query","description":"config type","schema":{"type":"string"},"required":true}],"optional":[{"name":"product_type","in":"query","description":"Product Type either 1P and 3P","schema":{"type":"string"}},{"name":"amount","in":"query","description":"refunded amount","schema":{"type":"string"}}],"query":[{"name":"configuration","in":"query","description":"config type","schema":{"type":"string"},"required":true},{"name":"product_type","in":"query","description":"Product Type either 1P and 3P","schema":{"type":"string"}},{"name":"amount","in":"query","description":"refunded amount","schema":{"type":"string"}}],"headers":[],"path":[]}""", configuration=configuration, product_type=product_type, amount=amount)
-        query_string = await create_query_string(configuration=configuration, product_type=product_type, amount=amount)
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getRefundOptions"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/payment/refundoptions/", configuration=configuration, product_type=product_type, amount=amount), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import RefundOptionResponse
-            schema = RefundOptionResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getRefundOptions")
-                print(e)
-
-        return response
-    
-    async def setRefundOptionforShipment(self, body="", request_headers:Dict={}):
-        """Save refund source against shipment and order
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = PaymentValidator.setRefundOptionforShipment()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import ShipmentRefundRequest
-        schema = ShipmentRefundRequest()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(api_url=self._urls["setRefundOptionforShipment"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
-        query_string = await create_query_string()
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["setRefundOptionforShipment"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/refundoptions/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ShipmentRefundResponse
-            schema = ShipmentRefundResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for setRefundOptionforShipment")
-                print(e)
-
-        return response
-    
-    async def getSelectedRefundOption(self, shipment_id=None, order_id=None, body="", request_headers:Dict={}):
-        """API to get the selected refund options for shipment id
-        :param shipment_id : shipment Id : type string
-        :param order_id : Order Id : type string
-        """
-        payload = {}
-        
-        if shipment_id is not None:
-            payload["shipment_id"] = shipment_id
-        if order_id is not None:
-            payload["order_id"] = order_id
-
-        # Parameter validation
-        schema = PaymentValidator.getSelectedRefundOption()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getSelectedRefundOption"], proccessed_params="""{"required":[{"name":"shipment_id","in":"query","description":"shipment Id","required":true,"schema":{"type":"string"}},{"name":"order_id","in":"query","description":"Order Id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"name":"shipment_id","in":"query","description":"shipment Id","required":true,"schema":{"type":"string"}},{"name":"order_id","in":"query","description":"Order Id","required":true,"schema":{"type":"string"}}],"headers":[],"path":[]}""", shipment_id=shipment_id, order_id=order_id)
-        query_string = await create_query_string(shipment_id=shipment_id, order_id=order_id)
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getSelectedRefundOption"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/payment/selected_refund_options", shipment_id=shipment_id, order_id=order_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SelectedRefundOptionResponse
-            schema = SelectedRefundOptionResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getSelectedRefundOption")
-                print(e)
-
-        return response
-    
-    async def getUserBeneficiariesDetailV2(self, order_id=None, shipment_id=None, mop=None, body="", request_headers:Dict={}):
-        """Use this API to get the details of all active beneficiary added by a user for refund.
-        :param order_id : A unique number used for identifying and tracking your orders. : type string
-        :param shipment_id : A unique number used for identifying and tracking your orders. : type string
-        :param mop : Mode of payment for which beneficiary data required : type string
-        """
-        payload = {}
-        
-        if order_id is not None:
-            payload["order_id"] = order_id
-        if shipment_id is not None:
-            payload["shipment_id"] = shipment_id
-        if mop is not None:
-            payload["mop"] = mop
-
-        # Parameter validation
-        schema = PaymentValidator.getUserBeneficiariesDetailV2()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getUserBeneficiariesDetailV2"], proccessed_params="""{"required":[],"optional":[{"in":"query","description":"A unique number used for identifying and tracking your orders.","name":"order_id","required":false,"schema":{"type":"string"}},{"in":"query","description":"A unique number used for identifying and tracking your orders.","name":"shipment_id","required":false,"schema":{"type":"string"}},{"in":"query","description":"Mode of payment for which beneficiary data required","name":"mop","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","description":"A unique number used for identifying and tracking your orders.","name":"order_id","required":false,"schema":{"type":"string"}},{"in":"query","description":"A unique number used for identifying and tracking your orders.","name":"shipment_id","required":false,"schema":{"type":"string"}},{"in":"query","description":"Mode of payment for which beneficiary data required","name":"mop","required":false,"schema":{"type":"string"}}],"headers":[],"path":[]}""", order_id=order_id, shipment_id=shipment_id, mop=mop)
-        query_string = await create_query_string(order_id=order_id, shipment_id=shipment_id, mop=mop)
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getUserBeneficiariesDetailV2"]).netloc, "get", await create_url_without_domain("/service/application/payment/v2.0/refund/user/beneficiary", order_id=order_id, shipment_id=shipment_id, mop=mop), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import OrderBeneficiaryResponseSchemaV2
-            schema = OrderBeneficiaryResponseSchemaV2()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getUserBeneficiariesDetailV2")
-                print(e)
-
-        return response
-    
-    async def validateBeneficiaryAddress(self, body="", request_headers:Dict={}):
-        """API to Validate UPI ID and IFSC code
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = PaymentValidator.validateBeneficiaryAddress()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import ValidateValidateAddressRequest
-        schema = ValidateValidateAddressRequest()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(api_url=self._urls["validateBeneficiaryAddress"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
-        query_string = await create_query_string()
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["validateBeneficiaryAddress"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/validate/beneficiary-address", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ValidateValidateAddressResponse
-            schema = ValidateValidateAddressResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for validateBeneficiaryAddress")
                 print(e)
 
         return response
