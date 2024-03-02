@@ -236,11 +236,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
-        
-        
         
     
     
@@ -248,6 +243,12 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+        
+        
         
         
         
@@ -266,6 +267,7 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
         
         
         
@@ -851,6 +853,8 @@ class OrderValidator:
         shipment_id = fields.Str(required=False)
         
         fetch_active_shipment = fields.Boolean(required=False)
+        
+        allow_inactive = fields.Boolean(required=False)
          
         
     
@@ -960,6 +964,8 @@ class OrderValidator:
         customer_id = fields.Str(required=False)
         
         order_type = fields.Str(required=False)
+        
+        allow_inactive = fields.Boolean(required=False)
          
         
     

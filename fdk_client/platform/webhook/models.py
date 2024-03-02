@@ -134,14 +134,6 @@ class AuthMeta(BaseSchema):
     pass
 
 
-class SubscriberFailureResponse(BaseSchema):
-    pass
-
-
-class EventConfigs(BaseSchema):
-    pass
-
-
 class SubscriberEventMapping(BaseSchema):
     pass
 
@@ -313,7 +305,7 @@ class EventProcessReportObject(BaseSchema):
     
     response_message = fields.Str(required=False)
     
-    data = fields.Dict(required=False)
+    data = fields.Str(required=False)
     
     attempt = fields.Int(required=False)
     
@@ -388,6 +380,8 @@ class EventConfig(BaseSchema):
     event_type = fields.Str(required=False)
     
     event_category = fields.Str(required=False)
+    
+    subscriber_event_mapping = fields.Nested(SubscriberEventMapping, required=False)
     
     event_schema = fields.Dict(required=False, allow_none=True)
     
@@ -558,46 +552,6 @@ class AuthMeta(BaseSchema):
     type = fields.Str(required=False)
     
     secret = fields.Str(required=False)
-    
-
-
-class SubscriberFailureResponse(BaseSchema):
-    # Webhook swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-    code = fields.Str(required=False)
-    
-    stack = fields.Str(required=False)
-    
-
-
-class EventConfigs(BaseSchema):
-    # Webhook swagger.json
-
-    
-    id = fields.Int(required=False)
-    
-    event_name = fields.Str(required=False)
-    
-    event_type = fields.Str(required=False)
-    
-    event_category = fields.Str(required=False)
-    
-    event_schema = fields.Dict(required=False, allow_none=True)
-    
-    version = fields.Str(required=False)
-    
-    display_name = fields.Str(required=False)
-    
-    description = fields.Str(required=False)
-    
-    created_on = fields.Str(required=False)
-    
-    updated_on = fields.Str(required=False)
-    
-    subscriber_event_mapping = fields.Nested(SubscriberEventMapping, required=False)
     
 
 
