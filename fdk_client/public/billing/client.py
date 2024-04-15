@@ -23,23 +23,23 @@ class Billing:
     async def updateUrls(self, urls):
         self._urls.update(urls)
     
-    async def getStandardPlans(self, platform_type=None, body="", request_headers:Dict={}):
+    async def getStandardPlans(self, platform=None, body="", request_headers:Dict={}):
         """Get Standard/Public Plans.
 
-        :param platform_type : The type of platform for which plans are requested. : type string
+        :param platform : The type of platform for which plans are requested. : type string
         """
         payload = {}
         
-        if platform_type is not None:
-            payload["platform_type"] = platform_type
+        if platform is not None:
+            payload["platform"] = platform
 
         # Parameter validation
         schema = BillingValidator.getStandardPlans()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getStandardPlans"], proccessed_params="""{"required":[{"name":"platform_type","in":"query","description":"The type of platform for which plans are requested.","required":true,"schema":{"type":"string","example":"app/web/both"}}],"optional":[],"query":[{"name":"platform_type","in":"query","description":"The type of platform for which plans are requested.","required":true,"schema":{"type":"string","example":"app/web/both"}}],"headers":[],"path":[]}""", platform_type=platform_type)
-        query_string = await create_query_string(platform_type=platform_type)
+        url_with_params = await create_url_with_params(api_url=self._urls["getStandardPlans"], proccessed_params="""{"required":[{"name":"platform","in":"query","description":"The type of platform for which plans are requested.","required":true,"schema":{"type":"string","example":"mobile/web/both"}}],"optional":[],"query":[{"name":"platform","in":"query","description":"The type of platform for which plans are requested.","required":true,"schema":{"type":"string","example":"mobile/web/both"}}],"headers":[],"path":[]}""", serverType="public", platform=platform)
+        query_string = await create_query_string(platform=platform)
 
         headers = {
             "User-Agent": self._conf.userAgent,
@@ -56,7 +56,7 @@ class Billing:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getStandardPlans"]).netloc, "get", await create_url_without_domain("/service/public/billing/v1.0/plan/detailed-list", platform_type=platform_type), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getStandardPlans"]).netloc, "get", await create_url_without_domain("/service/public/billing/v1.0/plan/detailed-list", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import DetailList

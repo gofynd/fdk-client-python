@@ -84,7 +84,7 @@ class SessionsDeleteResponseSchema(BaseSchema):
     pass
 
 
-class AuthenticationApiErrorSchema(BaseSchema):
+class APIError(BaseSchema):
     pass
 
 
@@ -233,6 +233,10 @@ class UserPhoneNumbers(BaseSchema):
 
 
 class UserSchema(BaseSchema):
+    pass
+
+
+class UserSearchSchema(BaseSchema):
     pass
 
 
@@ -463,7 +467,7 @@ class UserSearchResponseSchema(BaseSchema):
     # User swagger.json
 
     
-    users = fields.List(fields.Nested(UserSchema, required=False), required=False)
+    users = fields.List(fields.Nested(UserSearchSchema, required=False), required=False)
     
 
 
@@ -471,7 +475,7 @@ class CustomerListResponseSchema(BaseSchema):
     # User swagger.json
 
     
-    items = fields.List(fields.Nested(UserSchema, required=False), required=False)
+    items = fields.List(fields.Nested(UserSearchSchema, required=False), required=False)
     
     page = fields.Nested(PaginationSchema, required=False)
     
@@ -521,11 +525,23 @@ class SessionsDeleteResponseSchema(BaseSchema):
     
 
 
-class AuthenticationApiErrorSchema(BaseSchema):
+class APIError(BaseSchema):
     # User swagger.json
 
     
+    code = fields.Str(required=False)
+    
     message = fields.Str(required=False)
+    
+    info = fields.Str(required=False)
+    
+    request_id = fields.Str(required=False)
+    
+    error = fields.Str(required=False)
+    
+    meta = fields.Dict(required=False)
+    
+    authenticated = fields.Boolean(required=False)
     
 
 
@@ -542,6 +558,8 @@ class SessionListResponseInfo(BaseSchema):
     domain = fields.Str(required=False)
     
     expire_in = fields.Str(required=False)
+    
+    location = fields.Str(required=False)
     
 
 
@@ -661,6 +679,8 @@ class CreateUserRequestSchema(BaseSchema):
     
     external_id = fields.Str(required=False)
     
+    rr_id = fields.Str(required=False)
+    
 
 
 class CreateUserResponseSchema(BaseSchema):
@@ -749,9 +769,11 @@ class PlatformSchema(BaseSchema):
     
     delete_account_reasons = fields.List(fields.Nested(DeleteAccountReasons, required=False), required=False)
     
-    delete_account_consent = fields.Dict(required=False)
+    delete_account_consent = fields.Nested(DeleteAccountConsent, required=False)
     
-    session_config = fields.Dict(required=False)
+    session_config = fields.Nested(SessionExpiry, required=False)
+    
+    __v = fields.Int(required=False)
     
 
 
@@ -907,6 +929,8 @@ class Facebook(BaseSchema):
     
     app_id = fields.Str(required=False)
     
+    app_secret = fields.Str(required=False)
+    
 
 
 class Accountkit(BaseSchema):
@@ -915,6 +939,8 @@ class Accountkit(BaseSchema):
     
     app_id = fields.Str(required=False)
     
+    app_secret = fields.Str(required=False)
+    
 
 
 class Google(BaseSchema):
@@ -922,6 +948,8 @@ class Google(BaseSchema):
 
     
     app_id = fields.Str(required=False)
+    
+    app_secret = fields.Str(required=False)
     
 
 
@@ -994,6 +1022,8 @@ class UpdateUserRequestSchema(BaseSchema):
     gender = fields.Str(required=False)
     
     external_id = fields.Str(required=False)
+    
+    rr_id = fields.Str(required=False)
     
     meta = fields.Dict(required=False)
     
@@ -1071,21 +1101,69 @@ class UserSchema(BaseSchema):
     
     external_id = fields.Str(required=False)
     
+    rr_id = fields.Str(required=False)
+    
+
+
+class UserSearchSchema(BaseSchema):
+    # User swagger.json
+
+    
+    application_id = fields.Str(required=False)
+    
+    user_id = fields.Str(required=False)
+    
+    first_name = fields.Str(required=False)
+    
+    meta = fields.Dict(required=False)
+    
+    last_name = fields.Str(required=False)
+    
+    phone_numbers = fields.List(fields.Nested(PhoneNumber, required=False), required=False)
+    
+    emails = fields.List(fields.Nested(Email, required=False), required=False)
+    
+    gender = fields.Str(required=False)
+    
+    dob = fields.Str(required=False)
+    
+    active = fields.Boolean(required=False)
+    
+    profile_pic_url = fields.Str(required=False)
+    
+    username = fields.Str(required=False)
+    
+    account_type = fields.Str(required=False)
+    
+    _id = fields.Str(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    updated_at = fields.Str(required=False)
+    
+    external_id = fields.Str(required=False)
+    
+    rr_id = fields.Str(required=False)
+    
+    archive = fields.Boolean(required=False)
+    
+    status = fields.Str(required=False)
+    
 
 
 class PhoneNumber(BaseSchema):
     # User swagger.json
 
     
+    phone = fields.Str(required=False)
+    
+    country_code = fields.Int(required=False)
+    
     active = fields.Boolean(required=False)
     
     primary = fields.Boolean(required=False)
     
     verified = fields.Boolean(required=False)
-    
-    phone = fields.Str(required=False)
-    
-    country_code = fields.Int(required=False)
     
 
 
@@ -1093,13 +1171,13 @@ class Email(BaseSchema):
     # User swagger.json
 
     
-    primary = fields.Boolean(required=False)
-    
-    verified = fields.Boolean(required=False)
-    
     email = fields.Str(required=False)
     
     active = fields.Boolean(required=False)
+    
+    primary = fields.Boolean(required=False)
+    
+    verified = fields.Boolean(required=False)
     
 
 

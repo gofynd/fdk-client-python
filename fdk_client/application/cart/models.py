@@ -1791,6 +1791,14 @@ class CartCheckoutDetailRequest(BaseSchema):
     
     payment_extra_identifiers = fields.Dict(required=False)
     
+    iin = fields.Str(required=False)
+    
+    network = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    card_id = fields.Str(required=False)
+    
 
 
 class CheckCart(BaseSchema):
@@ -2236,6 +2244,14 @@ class CartCheckoutDetailV2Request(BaseSchema):
     billing_address_id = fields.Str(required=False)
     
     meta = fields.Dict(required=False)
+    
+    iin = fields.Str(required=False)
+    
+    network = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    card_id = fields.Str(required=False)
     
 
 

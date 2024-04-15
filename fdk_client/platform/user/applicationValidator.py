@@ -38,10 +38,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
-        
-        
         
     
     
@@ -63,6 +59,10 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
+        
+    
+    
         
         
     
@@ -216,15 +216,6 @@ class UserValidator:
          
         
     
-    class archiveUser(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
     class unDeleteUser(BaseSchema):
         
         
@@ -290,6 +281,15 @@ class UserValidator:
         id = fields.Str(required=False)
         
         reason = fields.Str(required=False)
+         
+        
+    
+    class archiveUser(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
          
         
     

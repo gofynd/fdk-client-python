@@ -72,6 +72,21 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
     
     
         
@@ -504,6 +519,38 @@ class CatalogValidator:
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
+         
+        
+    
+    class getApplicationFilterValues(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        filter_key = fields.Str(required=False)
+        
+        c = fields.Str(required=False)
+        
+        collection_id = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        q = fields.Str(required=False)
+         
+        
+    
+    class getApplicationFilterKeys(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        c = fields.Str(required=False)
          
         
     

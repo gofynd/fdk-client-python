@@ -8,6 +8,10 @@ from ..PlatformModel import BaseSchema
 
 
 
+class ProxyResponse(BaseSchema):
+    pass
+
+
 class FailedResponse(BaseSchema):
     pass
 
@@ -21,6 +25,10 @@ class Upload(BaseSchema):
 
 
 class StartResponse(BaseSchema):
+    pass
+
+
+class Params(BaseSchema):
     pass
 
 
@@ -271,6 +279,16 @@ class ExtensionSlug(BaseSchema):
 
 
 
+class ProxyResponse(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    data = fields.Dict(required=False)
+    
+    support = fields.Dict(required=False)
+    
+
+
 class FailedResponse(BaseSchema):
     # FileStorage swagger.json
 
@@ -324,6 +342,14 @@ class StartResponse(BaseSchema):
     cdn = fields.Nested(CDN, required=False)
     
     tags = fields.List(fields.Str(required=False), required=False)
+    
+
+
+class Params(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    subpath = fields.Str(required=False)
     
 
 

@@ -8,6 +8,7 @@ import ujson
 
 from .constants import HTTP_TIMEOUT
 from .date_helper import get_ist_now
+from .curl_helper import create_curl
 
 
 class AiohttpHelper:
@@ -36,7 +37,8 @@ class AiohttpHelper:
             verify_ssl=True,
             protocol="HTTP",
             timeout_allowed=HTTP_TIMEOUT,
-            http_file_config=None):
+            http_file_config=None,
+            debug=False):
         """Asynchronous HTTP Request Method.
 
         :param protocol: HTTP or HTTPS
@@ -139,7 +141,10 @@ class AiohttpHelper:
                             response["text"] = response["content"].decode()  # converting to str
                         except UnicodeDecodeError as err:
                             response["error_message"] = f"Error occurred while converting bytes to string - {err}"
-
+            
+                        if debug == True:
+                            print(await create_curl(resp, data))
+                            
                 elif protocol == "SOAP":
                     pass
                 else:

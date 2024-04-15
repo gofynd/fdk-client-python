@@ -118,10 +118,6 @@ class Action(BaseSchema):
     pass
 
 
-class ActionPage(BaseSchema):
-    pass
-
-
 class NavigationReference(BaseSchema):
     pass
 
@@ -295,6 +291,10 @@ class CustomFieldSchema(BaseSchema):
 
 
 class CustomFieldsResponseByResourceIdSchema(BaseSchema):
+    pass
+
+
+class ActionPage(BaseSchema):
     pass
 
 
@@ -653,25 +653,11 @@ class Action(BaseSchema):
     # Content swagger.json
 
     
+    type = fields.Str(required=False)
+    
     page = fields.Nested(ActionPage, required=False)
     
     popup = fields.Nested(ActionPage, required=False)
-    
-    type = fields.Str(required=False)
-    
-
-
-class ActionPage(BaseSchema):
-    # Content swagger.json
-
-    
-    params = fields.Dict(required=False)
-    
-    query = fields.Dict(required=False)
-    
-    url = fields.Str(required=False)
-    
-    type = fields.Str(required=False, validate=OneOf([val.value for val in PageType.__members__.values()]))
     
 
 
@@ -1368,6 +1354,20 @@ class CustomFieldsResponseByResourceIdSchema(BaseSchema):
 
     
     items = fields.List(fields.Nested(CustomFieldSchema, required=False), required=False)
+    
+
+
+class ActionPage(BaseSchema):
+    # Content swagger.json
+
+    
+    params = fields.Dict(required=False)
+    
+    query = fields.Dict(required=False)
+    
+    url = fields.Str(required=False)
+    
+    type = fields.Str(required=False, validate=OneOf([val.value for val in PageType.__members__.values()]))
     
 
 

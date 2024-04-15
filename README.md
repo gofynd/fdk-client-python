@@ -14,7 +14,7 @@ Get started with the python Development SDK for Fynd Platform
 ### Usage
 
 ```bash
-pip install fdk-client-python
+pip install "git+https://github.com/gofynd/fdk-client-python.git@1.4.3#egg=fdk_client"
 ```
 
 Using this method, you can `import` fdk-client-python like so:
@@ -22,6 +22,40 @@ Using this method, you can `import` fdk-client-python like so:
 ```python
 from fdk_client.application.ApplicationClient import ApplicationClient
 from fdk_client.application.ApplicationConfig import ApplicationConfig
+```
+
+---
+
+### Log Curl
+
+To print the curl command in the console for all network calls made using `applicationClient` or `platformClient`, set the logger level to `"DEBUG"`.
+
+```python
+config = ApplicationConfig({
+    "applicationID": "YOUR_APPLICATION_ID",
+    "applicationToken": "YOUR_APPLICATION_TOKEN",
+    "logLevel": "DEBUG"
+})
+
+applicationClient = ApplicationClient(config)
+
+async def apiCall():
+    try:
+        response = await applicationClient.user.loginWithEmailAndPassword(body = {
+              "password": "value",
+              "username": "value"
+            })
+        print(response)
+    except Exception as e:
+        print(e)
+
+apiCall()
+```
+
+The above code will log the curl command in the console
+
+```bash
+curl --request POST 'https://api.fynd.com/service/application/user/authentication/v1.0/login/password' --header 'x-fp-date: 20240308T171355Z' --header 'x-fp-signature: v1.1:aad5df1ad58fc87e74b040f5b0394be6cdd2d687ec7681b200bb3e20d48a458a' --header 'Authorization: Bearer <authorization-token>' --header 'Content-Type: application/json' --data-raw '{"password": "value", "username": "value"}'
 ```
 
 ---

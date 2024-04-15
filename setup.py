@@ -11,7 +11,7 @@ with open('README.md', 'r') as fh:
 
 setup(
     name='fdk_client',
-    version='1.4.1',
+    version='1.4.3',
     author='Manish Magnani',
     description=description,
     long_description=long_description,
@@ -21,7 +21,7 @@ setup(
         exclude=('tests*', 'documentation', '_macros')),
     license='',
     install_requires=[
-        "aiohttp>=3.7.4",
+        "aiohttp>=3.9.2",
         "marshmallow>=3.12.2",
         "pytz>=2020.1",
         "ujson>=1.35",

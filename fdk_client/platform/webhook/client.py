@@ -13,8 +13,7 @@ class Webhook:
 
     
     async def manualRetryOfFailedEvent(self, body="", request_headers:Dict={}):
-        """Initiates a manual retry for event processing for a specific company. This endpoint allows the user to specify the date range (start_date and end_date) within which the events should be retried.
-
+        """Trigger a manual retry for an event that failed to deliver.
         """
         payload = {}
         
@@ -28,7 +27,7 @@ class Webhook:
         schema = RetryEventRequest()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/retry", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/retry", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -43,7 +42,7 @@ class Webhook:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/retry", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/retry", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import RetrySuccessResponse
@@ -57,8 +56,7 @@ class Webhook:
         return response
     
     async def getEventCounts(self, body="", request_headers:Dict={}):
-        """Retrieves the count of failed events for a specific company within the specified date range. The user can filter the count based on specific event types if provided.
-
+        """Retrieve the counts of events based on their status.
         """
         payload = {}
         
@@ -72,7 +70,7 @@ class Webhook:
         schema = RetryEventRequest()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/retry/events/counts", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/retry/events/counts", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -87,7 +85,7 @@ class Webhook:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/retry/events/counts", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/retry/events/counts", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import RetryCountResponse
@@ -101,8 +99,7 @@ class Webhook:
         return response
     
     async def getManualRetryStatus(self, request_headers:Dict={}):
-        """Retrieves the status of retry for a specific company's failed events. This endpoint returns the total number of events, the count of successfully retried events, the count of failed retry attempts, and the overall status of the retry process.
-
+        """Check the status of a manual retry operation.
         """
         payload = {}
         
@@ -112,7 +109,7 @@ class Webhook:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/retry/status", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/retry/status", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -127,7 +124,7 @@ class Webhook:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/retry/status", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/retry/status", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import RetryStatusResponse
@@ -141,8 +138,7 @@ class Webhook:
         return response
     
     async def manualRetryCancel(self, request_headers:Dict={}):
-        """Cancels the active manual retry for a specific company's failed events. If a manual retry is currently in progress, it will be cancelled.
-
+        """Cancel a manual retry operation for a failed event.
         """
         payload = {}
         
@@ -152,7 +148,7 @@ class Webhook:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/retry/cancel", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/retry/cancel", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -167,13 +163,12 @@ class Webhook:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/retry/cancel", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/retry/cancel", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         return response
     
     async def downloadDeliveryReport(self, body="", request_headers:Dict={}):
-        """Download reports for a specific company based on the provided filters.
-
+        """Download detailed delivery reports for events.
         """
         payload = {}
         
@@ -187,7 +182,7 @@ class Webhook:
         schema = EventProcessRequest()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/reports/download", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/reports/download", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -202,7 +197,7 @@ class Webhook:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/reports/download", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/reports/download", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import DownloadReportResponse
@@ -216,8 +211,7 @@ class Webhook:
         return response
     
     async def pingWebhook(self, body="", request_headers:Dict={}):
-        """Ping and validate webhook url.
-
+        """Send a test ping to a webhook for verification.
         """
         payload = {}
         
@@ -231,7 +225,7 @@ class Webhook:
         schema = PingWebhook()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber/ping", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber/ping", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -246,7 +240,7 @@ class Webhook:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber/ping", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber/ping", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import PingWebhookResponse
@@ -260,8 +254,7 @@ class Webhook:
         return response
     
     async def getReportFilters(self, body="", request_headers:Dict={}):
-        """Retrieve filters for a specific company based on the provided subscriber IDs.
-
+        """Retrieve filters used for generating reports.
         """
         payload = {}
         
@@ -275,7 +268,7 @@ class Webhook:
         schema = ReportFiltersPayload()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/filters", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/filters", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -290,13 +283,12 @@ class Webhook:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/filters", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/filters", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         return response
     
     async def getHistoricalReports(self, body="", request_headers:Dict={}):
-        """Retrieve history reports for a specific company based on the provided filters.
-
+        """Retrieve historical reports of webhook events.
         """
         payload = {}
         
@@ -310,7 +302,7 @@ class Webhook:
         schema = HistoryPayload()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/reports/history", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/reports/history", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -325,7 +317,7 @@ class Webhook:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/reports/history", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/reports/history", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import HistoryResponse
@@ -339,8 +331,7 @@ class Webhook:
         return response
     
     async def cancelJobByName(self, filename=None, request_headers:Dict={}):
-        """Cancel the export of a specific report for a company.
-
+        """Cancel a specific job by its name.
         :param filename :  : type string
         """
         payload = {}
@@ -353,7 +344,7 @@ class Webhook:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/reports/cancel/file/{filename}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}},{"name":"filename","in":"path","required":true,"schema":{"type":"string","description":"This is filename that will be used for export operation"},"examples":{"success":{"value":"test_file"}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}},{"name":"filename","in":"path","required":true,"schema":{"type":"string","description":"This is filename that will be used for export operation"},"examples":{"success":{"value":"test_file"}}}]}""", filename=filename)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/reports/cancel/file/{filename}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}},{"name":"filename","in":"path","required":true,"schema":{"type":"string","description":"This is filename that will be used for export operation"},"examples":{"success":{"value":"test_file"}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}},{"name":"filename","in":"path","required":true,"schema":{"type":"string","description":"This is filename that will be used for export operation"},"examples":{"success":{"value":"test_file"}}}]}""", serverType="platform", filename=filename)
         query_string = await create_query_string(filename=filename)
 
         headers = {}
@@ -368,7 +359,7 @@ class Webhook:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/reports/cancel/file/{filename}", filename=filename), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/reports/cancel/file/{filename}", filename=filename), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CancelResponse
@@ -382,8 +373,7 @@ class Webhook:
         return response
     
     async def getDeliveryReports(self, body="", request_headers:Dict={}):
-        """Retrieve a list of processed events for a specific company based on the provided filters.
-
+        """Retrieve reports on the delivery status of events.
         """
         payload = {}
         
@@ -397,7 +387,7 @@ class Webhook:
         schema = EventProcessRequest()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/reports/event_processed", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/reports/event_processed", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -412,7 +402,7 @@ class Webhook:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/reports/event_processed", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/reports/event_processed", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import EventProcessReports
@@ -426,8 +416,7 @@ class Webhook:
         return response
     
     async def fetchAllEventConfigurations(self, request_headers:Dict={}):
-        """To fetch all webhook events.
-
+        """Retrieve all configurations for event handling.
         """
         payload = {}
         
@@ -437,7 +426,7 @@ class Webhook:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/events", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/events", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -452,7 +441,7 @@ class Webhook:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/events", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/events", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import EventConfigResponse
@@ -466,8 +455,7 @@ class Webhook:
         return response
     
     async def registerSubscriberToEvent(self, body="", request_headers:Dict={}):
-        """Register Subscriber.
-
+        """Add a subscriber to receive events of a specific type.
         """
         payload = {}
         
@@ -481,7 +469,7 @@ class Webhook:
         schema = SubscriberConfig()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber/", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber/", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -496,7 +484,7 @@ class Webhook:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SubscriberConfigResponse
@@ -510,8 +498,7 @@ class Webhook:
         return response
     
     async def getSubscribersByCompany(self, page_no=None, page_size=None, extension_id=None, request_headers:Dict={}):
-        """Get Subscribers By Company ID.
-
+        """Retrieve subscribers associated with a company.
         :param page_no : Page Number : type integer
         :param page_size : Page Size : type integer
         :param extension_id : extension_id : type string
@@ -530,7 +517,7 @@ class Webhook:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber/", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}],"optional":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer"},"examples":{"success":{"value":1}}},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32"},"examples":{"success":{"value":10}}},{"name":"extension_id","in":"query","description":"extension_id","required":false,"schema":{"type":"string"},"examples":{"success":{"value":"64affd97cbddb85348ca8f93"}}}],"query":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer"},"examples":{"success":{"value":1}}},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32"},"examples":{"success":{"value":10}}},{"name":"extension_id","in":"query","description":"extension_id","required":false,"schema":{"type":"string"},"examples":{"success":{"value":"64affd97cbddb85348ca8f93"}}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}]}""", page_no=page_no, page_size=page_size, extension_id=extension_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber/", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}],"optional":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer"},"examples":{"success":{"value":1}}},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32"},"examples":{"success":{"value":10}}},{"name":"extension_id","in":"query","description":"extension_id","required":false,"schema":{"type":"string"},"examples":{"success":{"value":"64affd97cbddb85348ca8f93"}}}],"query":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer"},"examples":{"success":{"value":1}}},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32"},"examples":{"success":{"value":10}}},{"name":"extension_id","in":"query","description":"extension_id","required":false,"schema":{"type":"string"},"examples":{"success":{"value":"64affd97cbddb85348ca8f93"}}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}]}""", serverType="platform", page_no=page_no, page_size=page_size, extension_id=extension_id)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, extension_id=extension_id)
 
         headers = {}
@@ -545,7 +532,7 @@ class Webhook:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber/", page_no=page_no, page_size=page_size, extension_id=extension_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber/", page_no=page_no, page_size=page_size, extension_id=extension_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SubscriberConfigList
@@ -559,7 +546,7 @@ class Webhook:
         return response
     
     async def updateSubscriberConfig(self, body="", request_headers:Dict={}):
-        """Update Subscriber
+        """Modify and update subscriber configuration settings.
         """
         payload = {}
         
@@ -573,7 +560,7 @@ class Webhook:
         schema = SubscriberConfig()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber/", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber/", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -588,7 +575,7 @@ class Webhook:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SubscriberConfigResponse
@@ -602,7 +589,7 @@ class Webhook:
         return response
     
     async def getSubscriberById(self, subscriber_id=None, request_headers:Dict={}):
-        """Get Subscriber By Subscriber ID
+        """Retrieve a subscriber's details by their unique identifier.
         :param subscriber_id : subscriber id : type integer
         """
         payload = {}
@@ -615,7 +602,7 @@ class Webhook:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber/{subscriber_id}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}},{"name":"subscriber_id","in":"path","description":"subscriber id","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}},{"name":"subscriber_id","in":"path","description":"subscriber id","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}]}""", subscriber_id=subscriber_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber/{subscriber_id}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}},{"name":"subscriber_id","in":"path","description":"subscriber id","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}},{"name":"subscriber_id","in":"path","description":"subscriber id","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}}]}""", serverType="platform", subscriber_id=subscriber_id)
         query_string = await create_query_string(subscriber_id=subscriber_id)
 
         headers = {}
@@ -630,7 +617,7 @@ class Webhook:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber/{subscriber_id}", subscriber_id=subscriber_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber/{subscriber_id}", subscriber_id=subscriber_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SubscriberResponse
@@ -644,7 +631,7 @@ class Webhook:
         return response
     
     async def getSubscribersByExtensionId(self, page_no=None, page_size=None, extension_id=None, request_headers:Dict={}):
-        """Get Subscribers By ExtensionID
+        """Retrieve subscribers associated with a specific extension.
         :param page_no : Page Number : type integer
         :param page_size : Page Size : type integer
         :param extension_id : extension_id : type string
@@ -663,7 +650,7 @@ class Webhook:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/extension/{extension_id}/subscriber/", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"},"examples":{"success":{"value":"64affd97cbddb85348ca8f93"}}}],"optional":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer"},"examples":{"success":{"value":1}}},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32"},"examples":{"success":{"value":10}}}],"query":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer"},"examples":{"success":{"value":1}}},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32"},"examples":{"success":{"value":10}}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"},"examples":{"success":{"value":"64affd97cbddb85348ca8f93"}}}]}""", page_no=page_no, page_size=page_size, extension_id=extension_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/extension/{extension_id}/subscriber/", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"},"examples":{"success":{"value":"64affd97cbddb85348ca8f93"}}}],"optional":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer"},"examples":{"success":{"value":1}}},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32"},"examples":{"success":{"value":10}}}],"query":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer"},"examples":{"success":{"value":1}}},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32"},"examples":{"success":{"value":10}}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":1}}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"},"examples":{"success":{"value":"64affd97cbddb85348ca8f93"}}}]}""", serverType="platform", page_no=page_no, page_size=page_size, extension_id=extension_id)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, extension_id=extension_id)
 
         headers = {}
@@ -678,7 +665,7 @@ class Webhook:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/extension/{extension_id}/subscriber/", page_no=page_no, page_size=page_size, extension_id=extension_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/extension/{extension_id}/subscriber/", page_no=page_no, page_size=page_size, extension_id=extension_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SubscriberConfigList

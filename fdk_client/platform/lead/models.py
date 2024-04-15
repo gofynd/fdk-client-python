@@ -82,18 +82,6 @@ class UserSchema(BaseSchema):
     pass
 
 
-class PhoneNumber(BaseSchema):
-    pass
-
-
-class Email(BaseSchema):
-    pass
-
-
-class Debug(BaseSchema):
-    pass
-
-
 class TicketContext(BaseSchema):
     pass
 
@@ -167,6 +155,14 @@ class Ticket(BaseSchema):
 
 
 class ErrorMessage(BaseSchema):
+    pass
+
+
+class PhoneNumber(BaseSchema):
+    pass
+
+
+class Email(BaseSchema):
     pass
 
 
@@ -429,45 +425,7 @@ class UserSchema(BaseSchema):
     
     external_id = fields.Str(required=False)
     
-
-
-class PhoneNumber(BaseSchema):
-    # Lead swagger.json
-
-    
-    active = fields.Boolean(required=False)
-    
-    primary = fields.Boolean(required=False)
-    
-    verified = fields.Boolean(required=False)
-    
-    phone = fields.Str(required=False)
-    
-    country_code = fields.Int(required=False)
-    
-
-
-class Email(BaseSchema):
-    # Lead swagger.json
-
-    
-    primary = fields.Boolean(required=False)
-    
-    verified = fields.Boolean(required=False)
-    
-    email = fields.Str(required=False)
-    
-    active = fields.Boolean(required=False)
-    
-
-
-class Debug(BaseSchema):
-    # Lead swagger.json
-
-    
-    source = fields.Str(required=False)
-    
-    platform = fields.Str(required=False)
+    rr_id = fields.Str(required=False)
     
 
 
@@ -762,6 +720,36 @@ class ErrorMessage(BaseSchema):
 
     
     message = fields.Str(required=False)
+    
+
+
+class PhoneNumber(BaseSchema):
+    # Lead swagger.json
+
+    
+    phone = fields.Str(required=False)
+    
+    country_code = fields.Int(required=False)
+    
+    active = fields.Boolean(required=False)
+    
+    primary = fields.Boolean(required=False)
+    
+    verified = fields.Boolean(required=False)
+    
+
+
+class Email(BaseSchema):
+    # Lead swagger.json
+
+    
+    email = fields.Str(required=False)
+    
+    active = fields.Boolean(required=False)
+    
+    primary = fields.Boolean(required=False)
+    
+    verified = fields.Boolean(required=False)
     
 
 

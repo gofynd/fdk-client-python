@@ -19,6 +19,7 @@ from ..ApplicationModel import BaseSchema
         
         
         
+        
     
     
         
@@ -80,6 +81,8 @@ class OrderValidator:
         end_date = fields.Str(required=False)
         
         custom_meta = fields.Str(required=False)
+        
+        allow_inactive = fields.Boolean(required=False)
          
         
     

@@ -13,6 +13,7 @@ class PlatformConfig:
         self.useAutoRenewTimer = config.get("useAutoRenewTimer", True)
         self.oauthClient = OAuthClient(self)
         self.extraHeaders = []
+        self.logLevel=config.get("logLevel", "ERROR")
 
     async def getAccessToken(self) -> str:
         return await self.oauthClient.getAccessToken()

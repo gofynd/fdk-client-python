@@ -1757,6 +1757,8 @@ class VerifyOtpCommsSuccessRes(BaseSchema):
     
     message = fields.Str(required=False)
     
+    email = fields.Str(required=False)
+    
 
 
 class VerifyOtpCommsErrorRes(BaseSchema):
@@ -1774,6 +1776,8 @@ class SmsProviderReq(BaseSchema):
 
     
     name = fields.Str(required=False)
+    
+    token = fields.Str(required=False)
     
     description = fields.Str(required=False)
     
@@ -1816,6 +1820,14 @@ class SmsProviderReq(BaseSchema):
 class SmsProvider(BaseSchema):
     # Communication swagger.json
 
+    
+    token = fields.Str(required=False)
+    
+    sender_id = fields.Str(required=False)
+    
+    api_key = fields.Str(required=False)
+    
+    expiry_date = fields.Int(required=False)
     
     rpt = fields.Int(required=False)
     

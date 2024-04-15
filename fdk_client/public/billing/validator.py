@@ -19,7 +19,7 @@ class BillingValidator:
     class getStandardPlans(BaseSchema):
         
         
-        platform_type = fields.Str(required=False)
+        platform = fields.Str(required=False)
          
         
     

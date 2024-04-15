@@ -174,11 +174,11 @@ class Action(BaseSchema):
     pass
 
 
-class ActionPage(BaseSchema):
+class NavigationReference(BaseSchema):
     pass
 
 
-class NavigationReference(BaseSchema):
+class CronBasedScheduleSchema(BaseSchema):
     pass
 
 
@@ -619,6 +619,10 @@ class CustomObjectRequestSchema(BaseSchema):
 
 
 class CustomObjectBulkSchema(BaseSchema):
+    pass
+
+
+class ActionPage(BaseSchema):
     pass
 
 
@@ -1203,25 +1207,11 @@ class Action(BaseSchema):
     # Content swagger.json
 
     
+    type = fields.Str(required=False)
+    
     page = fields.Nested(ActionPage, required=False)
     
     popup = fields.Nested(ActionPage, required=False)
-    
-    type = fields.Str(required=False)
-    
-
-
-class ActionPage(BaseSchema):
-    # Content swagger.json
-
-    
-    params = fields.Dict(required=False)
-    
-    query = fields.Dict(required=False)
-    
-    url = fields.Str(required=False)
-    
-    type = fields.Str(required=False, validate=OneOf([val.value for val in PageType.__members__.values()]))
     
 
 
@@ -1247,7 +1237,23 @@ class NavigationReference(BaseSchema):
     
     sort_order = fields.Int(required=False)
     
+    schedule = fields.Nested(CronBasedScheduleSchema, required=False)
+    
     sub_navigation = fields.List(fields.Nested(lambda: NavigationReference(exclude=('sub_navigation')), required=False), required=False)
+    
+
+
+class CronBasedScheduleSchema(BaseSchema):
+    # Content swagger.json
+
+    
+    enabled = fields.Boolean(required=False)
+    
+    cron = fields.Str(required=False)
+    
+    start = fields.Str(required=False)
+    
+    end = fields.Str(required=False)
     
 
 
@@ -2958,6 +2964,20 @@ class CustomObjectBulkSchema(BaseSchema):
     url = fields.Str(required=False)
     
     total_records = fields.Int(required=False)
+    
+
+
+class ActionPage(BaseSchema):
+    # Content swagger.json
+
+    
+    params = fields.Dict(required=False)
+    
+    query = fields.Dict(required=False)
+    
+    url = fields.Str(required=False)
+    
+    type = fields.Str(required=False, validate=OneOf([val.value for val in PageType.__members__.values()]))
     
 
 

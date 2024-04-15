@@ -134,6 +134,10 @@ class AuthMeta(BaseSchema):
     pass
 
 
+class SubscriberEventMapping(BaseSchema):
+    pass
+
+
 class SubscriberResponse(BaseSchema):
     pass
 
@@ -301,11 +305,11 @@ class EventProcessReportObject(BaseSchema):
     
     response_message = fields.Str(required=False)
     
-    data = fields.Dict(required=False)
+    data = fields.Str(required=False)
     
     attempt = fields.Int(required=False)
     
-    last_attempted_on = fields.Int(required=False)
+    last_attempted_on = fields.Float(required=False)
     
     status = fields.Str(required=False)
     
@@ -376,6 +380,8 @@ class EventConfig(BaseSchema):
     event_type = fields.Str(required=False)
     
     event_category = fields.Str(required=False)
+    
+    subscriber_event_mapping = fields.Nested(SubscriberEventMapping, required=False)
     
     event_schema = fields.Dict(required=False, allow_none=True)
     
@@ -546,6 +552,20 @@ class AuthMeta(BaseSchema):
     type = fields.Str(required=False)
     
     secret = fields.Str(required=False)
+    
+
+
+class SubscriberEventMapping(BaseSchema):
+    # Webhook swagger.json
+
+    
+    id = fields.Int(required=False)
+    
+    event_id = fields.Int(required=False)
+    
+    subscriber_id = fields.Int(required=False)
+    
+    created_on = fields.Str(required=False)
     
 
 

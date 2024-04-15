@@ -43,16 +43,9 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
         
         
         
-        
-        
-        
-    
-    
         
         
     
@@ -62,27 +55,12 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
         
     
     
         
-        
-        
     
     
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
     
     
@@ -108,6 +86,19 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
     
     
@@ -118,11 +109,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
-        
-        
-        
         
         
         
@@ -135,8 +121,15 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+        
     
     
+        
+    
+    
+        
+        
         
         
     
@@ -150,6 +143,13 @@ from ..PlatformModel import BaseSchema
     
     
         
+        
+    
+    
+        
+        
+    
+    
         
 
 
@@ -210,13 +210,6 @@ class ServiceabilityValidator:
         
     
     class getAllStores(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class getOptimalLocations(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -462,6 +455,13 @@ class ServiceabilityValidator:
         company_id = fields.Int(required=False)
         
         package_material_id = fields.Str(required=False)
+         
+        
+    
+    class getOptimalLocations(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
          
         
     

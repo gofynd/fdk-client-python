@@ -37,7 +37,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getCredentialsByEntity"], proccessed_params="""{"required":[],"optional":[{"in":"path","name":"entity","description":"Server Type","schema":{"type":"string"}}],"query":[],"headers":[],"path":[{"in":"path","name":"entity","description":"Server Type","schema":{"type":"string"}}]}""", entity=entity)
+        url_with_params = await create_url_with_params(api_url=self._urls["getCredentialsByEntity"], proccessed_params="""{"required":[{"in":"path","name":"entity","description":"Server Type","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"entity","description":"Server Type","required":true,"schema":{"type":"string"}}]}""", serverType="public", entity=entity)
         query_string = await create_query_string(entity=entity)
 
         headers = {
@@ -55,7 +55,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCredentialsByEntity"]).netloc, "get", await create_url_without_domain("/service/public/content/credentials/{entity}", entity=entity), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCredentialsByEntity"]).netloc, "get", await create_url_without_domain("/service/public/content/credentials/{entity}", entity=entity), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CredentialsSchema

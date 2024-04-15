@@ -62,10 +62,6 @@ class Action(BaseSchema):
     pass
 
 
-class ActionPage(BaseSchema):
-    pass
-
-
 class AvailablePageSeo(BaseSchema):
     pass
 
@@ -314,6 +310,10 @@ class CompanyPrivateTheme(BaseSchema):
     pass
 
 
+class ActionPage(BaseSchema):
+    pass
+
+
 
 
 
@@ -481,25 +481,11 @@ class Action(BaseSchema):
     # Theme swagger.json
 
     
+    type = fields.Str(required=False)
+    
     page = fields.Nested(ActionPage, required=False)
     
     popup = fields.Nested(ActionPage, required=False)
-    
-    type = fields.Str(required=False)
-    
-
-
-class ActionPage(BaseSchema):
-    # Theme swagger.json
-
-    
-    params = fields.Dict(required=False)
-    
-    query = fields.Dict(required=False)
-    
-    url = fields.Str(required=False)
-    
-    type = fields.Str(required=False, validate=OneOf([val.value for val in PageType.__members__.values()]))
     
 
 
@@ -1103,19 +1089,9 @@ class Page(BaseSchema):
     # Theme swagger.json
 
     
-    item_total = fields.Int(required=False)
+    sections = fields.List(fields.Nested(Section, required=False), required=False)
     
-    next_id = fields.Str(required=False)
-    
-    has_previous = fields.Boolean(required=False)
-    
-    has_next = fields.Boolean(required=False)
-    
-    current = fields.Int(required=False)
-    
-    type = fields.Str(required=False)
-    
-    size = fields.Int(required=False)
+    value = fields.Str(required=False)
     
 
 
@@ -1324,6 +1300,20 @@ class CompanyPrivateTheme(BaseSchema):
     is_private = fields.Boolean(required=False)
     
     meta = fields.Nested(CompanyThemeMeta, required=False)
+    
+
+
+class ActionPage(BaseSchema):
+    # Theme swagger.json
+
+    
+    params = fields.Dict(required=False)
+    
+    query = fields.Dict(required=False)
+    
+    url = fields.Str(required=False)
+    
+    type = fields.Str(required=False, validate=OneOf([val.value for val in PageType.__members__.values()]))
     
 
 

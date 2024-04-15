@@ -10,15 +10,23 @@ from datetime import datetime
 from .exceptions import RequiredParametersError
 
 
-async def validate_required_query_params(proccessed_params: Dict, params: Dict):
+async def validate_required_query_params(proccessed_params: Dict, params: Dict, serverType: Text):
     """Checks if required params are present or not."""
+    params_to_skip = []
+    if serverType == "platform":
+        params_to_skip.extend(["company_id", "application_id"])
+    elif serverType == "partner":
+        params_to_skip.append("organization_id")
+
     for r_param in proccessed_params["required"]:
         r_param_name = r_param["name"]
-        if ((r_param_name not in params) or not params[r_param_name]) and r_param_name != "company_id" and r_param_name != "application_id":
+        if r_param_name in params_to_skip:
+            continue
+        if (r_param_name not in params) or not params[r_param_name]:
             raise RequiredParametersError(message="{} missing".format(r_param["name"]))
 
 
-async def create_url_with_params(domain: Text = "", api_url: Text = "", proccessed_params: Text = "", **kwargs):
+async def create_url_with_params(domain: Text = "", api_url: Text = "", proccessed_params: Text = "", serverType: Text = "", **kwargs):
     """Creates url with params"""
     params = {}
     final_url = domain + api_url
@@ -28,7 +36,7 @@ async def create_url_with_params(domain: Text = "", api_url: Text = "", proccess
             params[new_key] = value
             if new_key in final_url:
                 final_url.replace(new_key, key)
-    await validate_required_query_params(json.loads(proccessed_params), params)
+    await validate_required_query_params(json.loads(proccessed_params), params, serverType)
     final_url = final_url.format(**params)
     query_string = parse.urlencode(params)
     if query_string:

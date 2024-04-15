@@ -581,6 +581,8 @@ class CreateUpdateBrandRequestSerializer(BaseSchema):
     
     name = fields.Str(required=False)
     
+    slug = fields.Str(required=False)
+    
 
 
 class CompanySocialAccounts(BaseSchema):

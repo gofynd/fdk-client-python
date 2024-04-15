@@ -10,4 +10,5 @@ class PublicConfig:
         self.userAgent = _conf.get("userAgent", "")
         self.language = _conf.get("language")
         self.currency = _conf.get("currency")
+        self.logLevel=_conf.get("logLevel", "ERROR")
         self.extraHeaders = []
